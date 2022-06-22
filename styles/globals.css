@@ -1278,9 +1278,7 @@ div3 {
   font-size: 18px;
   margin-top: 15px;
 }
-#header-flex {
-  height: 60px;
-}
+
 #img-modal {
   height: 30px;
   width: 30px;
@@ -1297,8 +1295,9 @@ div3 {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   display: flex;
-  justify-content: start;
+  height: 60px;
 }
+
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -1327,19 +1326,13 @@ div3 {
   color: #fff;
 }
 
-#header-flex {
-  background-color: #f2e8de;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  justify-content: start;
-}
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
+
 #model-heading {
   font-size: 20px;
 }
@@ -1349,13 +1342,6 @@ div3 {
   border: none;
 }
 
-#header-flex {
-  background-color: #f2e8de;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  justify-content: start;
-}
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -1384,14 +1370,6 @@ div3 {
   color: #cecece;
 }
 
-#header-flex {
-  background-color: #f2e8de;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  justify-content: start;
-  height: 60px;
-}
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -1918,13 +1896,6 @@ div3 {
   color: #7d8a97;
 }
 
-#header-flex {
-  background-color: #f2e8de;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  justify-content: start;
-}
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;

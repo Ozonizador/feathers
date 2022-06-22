@@ -1,13 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Icon1 from "../../Assets/images/icons8_resume.svg";
-import Icon2 from "../../Assets/images/icons8_hostel.svg";
-import Icon3 from "../../Assets/images/icons8_settings_3.svg";
-import TriangleUp from "../../Assets/images/icons8-sort-up-30.png";
-import TriangleDown from "../../Assets/images/icons8-sort-down-30.png";
-import { Link } from "react-router-dom";
-
-import { useNavigate  as navigate} from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 
 
 export default function ComponentX() {
@@ -17,7 +11,7 @@ export default function ComponentX() {
 
   const textRouteChange = () => {
     let path = `/22`;
-    navigate(path);
+    // navigate(path);
   };
   return (
     <article className="componentx">
@@ -29,18 +23,18 @@ export default function ComponentX() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div className="summary-icon">
-              <img src={Icon1} alt="" />
+              <Image src="/images/icons8_resume.svg"  alt="" />
             </div>
             <p>Conta</p>
           </div>
-          <img src={summary1 ? TriangleDown : TriangleUp} alt="" />
+          <Image src={summary1 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} height={32} width={32} alt="" />
         </summary>
         <ul>
           <li>
-            <Link to="/15">Informações pessoais</Link>
+            <Link href="/15">Informações pessoais</Link>
           </li>
           <li>
-            <Link to="/16">Métodos de pagamento</Link>
+            <Link href="/16">Métodos de pagamento</Link>
           </li>
           <li>
             <a href="">Informações contratuais</a>
@@ -55,24 +49,24 @@ export default function ComponentX() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div className="summary-icon">
-              <img src={Icon2} alt="" />
+              <Image src="/images/icons8_hostel.svg" height={32} width={32} alt="" />
             </div>
             <p>Minha estadia</p>
           </div>
-          <img src={summary2 ? TriangleDown : TriangleUp} alt="" />
+          <Image src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} height={32} width={32} alt="" />
         </summary>
         <ul>
           <li>
-            <Link to="/18">Informações gerais</Link>
+            <Link href="/18">Informações gerais</Link>
           </li>
           <li>
             <a href="">Renda</a>
           </li>
           <li>
-            <Link to="/20">Reparações</Link>
+            <Link href="/20">Reparações</Link>
           </li>
           <li>
-            <Link to="/21">Despesas</Link>
+            <Link href="/21">Despesas</Link>
           </li>
         </ul>
       </details>
@@ -84,11 +78,11 @@ export default function ComponentX() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div className="summary-icon">
-              <img src={Icon3} alt="" />
+              <Image src="/images/icons8_settings_3.svg" alt="" />
             </div>
             <p>Conta</p>
           </div>
-          <img src={summary3 ? TriangleDown : TriangleUp} alt="" />
+          <Image src={summary3 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} alt="" />
         </summary>
         <ul>
           <li>

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import Profile1 from "../../assets/images/icons8_male_user_2.svg";
-import Exchange from "../../assets/images/icons8_card_exchange_1.svg";
-import Cheque from "../../assets/images/icons8_paycheque.svg";
-import Maintenance from "../../assets/images/icons8_maintenance_1.svg";
-import { Link } from "react-router-dom";
+import Image from "next/image";
+import Link from "next/link";
 
 const ComponentY = () => {
   const [link1, setLink1] = useState(false);
@@ -48,21 +45,21 @@ const ComponentY = () => {
   return (
     <section className="componenty">
       <div className={`links ${link1 ? "links-active" : ""}`}>
-        <img src={Profile1} alt="" />
+        <Image src="/images/icons8_male_user_2.svg" alt="" />
         <a onClick={() => linkFunc(1)} className="fs-400 bold clr-black-main">
           Hóspedes
         </a>
       </div>
       <div className={`links ${link2 ? "links-active" : ""}`}>
-        <img src={Exchange} alt="" />
+        <Image src="/images/icons8_card_exchange_1.svg" alt="" />
         <a onClick={() => linkFunc(2)} className="fs-400 bold clr-black-main">
           Transações
         </a>
       </div>
       <div className={`links ${link3 ? "links-active" : ""}`}>
-        <img src={Cheque} alt="" />
+        <Image src="/images/icons8_paycheque.svg" alt="" />
         <Link
-          to="/47"
+          href="/47"
           onClick={() => linkFunc(3)}
           className="fs-400 bold clr-black-main"
         >
@@ -70,7 +67,7 @@ const ComponentY = () => {
         </Link>
       </div>
       <div className={`links ${link4 ? "links-active" : ""}`}>
-        <img src={Maintenance} alt="" />
+        <Image src="/images/icons8_maintenance_1.svg" alt="" />
         <a onClick={() => linkFunc(4)} className="fs-400 bold clr-black-main">
           Reparações
         </a>

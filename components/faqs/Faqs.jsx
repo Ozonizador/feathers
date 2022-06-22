@@ -1,5 +1,4 @@
 import React from "react";
-import "./Faqs.css";
 function Faqs(props) {
   return (
     <div>

@@ -14,11 +14,10 @@ export const Navbar = (props) => {
       //  navigate(path);
     };
     const [toggle, setToggle] = useState(props.profile);
-    console.log(toggle);
-    console.log(typeof toggle);
+
     return (
-        <header style={{ marginBottom: "0" }}>
-            <div className="container-fluid ">
+        <header>
+            <div className="container mx-auto">
                 <div className="ycontainer-md">
                     <div className="top" onClick={() => console.log("clickedHere")}>
                         <div
@@ -46,7 +45,7 @@ export const Navbar = (props) => {
                             />
                             <div className="right-line"></div>
                             <div className="right-dropdown flex">
-                                <img src="../../public/images/icon-uk.jpg" alt="" />
+                                <Image src="/images/icon-uk.jpg" height={32} width={32} alt="" />
                                 <select name="" id="">
                                     <option
                                         value=""
@@ -161,9 +160,11 @@ export const Navbar = (props) => {
                         >
                             <Link
                                 href="/12"
-                                className="btn-outline transition btn-shadow"
+                                className="btn-outline transition btn-shadow "
                             >
-                                Registar
+                                <a>
+                                    <div className="border-[#C48B60] border-2 px-6 py-3 rounded-sm text-[#C48B60]">Registar</div>
+                                </a>
                             </Link>
                             <Link
                                 href="/11"
@@ -196,7 +197,7 @@ export const Navbar = (props) => {
                                     gap: "10px",
                                 }}
                             >
-                                <img src="../../public/images/man7.png" alt="" />
+                                <Image src="/images/man7.png" height={32} width={32} alt="" />
                                 <ul style={{ margin: "0", padding: "0" }}>
                                     <li className="profile-dropdown">
                                         <div
