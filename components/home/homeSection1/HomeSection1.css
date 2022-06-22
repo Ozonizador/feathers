@@ -1,0 +1,147 @@
+/* =============================== SECTION1 ========================== */
+.header {
+    background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.45) 55%,
+            rgba(0, 0, 0, 0)
+        ),
+        url(../../../Assets/images/furniture5.jpg) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 13.5rem;
+    padding-bottom: 13.125rem;
+}
+.header img {
+    display: inline-block;
+}
+h1 {
+    margin-bottom: 2.625rem;
+}
+h1 img {
+    margin-inline: 1.25rem;
+}
+.input-feild {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.625rem;
+}
+.input-feild > * {
+    height: 4.75rem; /*76px*/
+}
+.input {
+    background-color: #f8f8f8;
+    outline: none;
+    height: auto;
+    padding: 1.5rem 1.25rem;
+    border: none;
+    border-radius: 0.75rem;
+    -webkit-border-radius: 0.75rem;
+    -moz-border-radius: 0.75rem;
+    -ms-border-radius: 0.75rem;
+    -o-border-radius: 0.75rem;
+}
+.input1 {
+    width: 18.5rem; /*296px*/
+}
+.input2,
+.input3 {
+    width: 12.5rem; /*200px*/
+}
+.input-feild p {
+    color: #262e36;
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    /*flexgap*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.325rem;
+}
+div1,
+div2,
+div3 {
+    position: relative;
+}
+.div1:hover .p1 {
+    display: none;
+}
+.div2:hover .p2 {
+    display: none;
+}
+.div3:hover .p3 {
+    display: none;
+}
+.header button {
+    width: 6.25rem;
+    border: none;
+    border-radius: 0.75rem;
+    -webkit-border-radius: 0.75rem;
+    -moz-border-radius: 0.75rem;
+    -ms-border-radius: 0.75rem;
+    -o-border-radius: 0.75rem;
+    cursor: pointer;
+    /*layout*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Media Querries */
+@media (max-width: 1280px) {
+    .header {
+        padding-top: 12.5rem;
+        padding-bottom: 12.125rem;
+    }
+    .input-feild {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    .input {
+        width: 30vw;
+    }
+}
+@media (max-width: 1024px) {
+    .header {
+        padding-top: 10.5rem;
+        padding-bottom: 10.125rem;
+    }
+    .input {
+        width: 40vw;
+    }
+}
+@media (max-width: 860px) {
+    .header {
+        padding-top: 8.5rem;
+        padding-bottom: 8.125rem;
+    }
+    .input {
+        width: 45vw;
+    }
+}
+@media (max-width: 600px) {
+    .header {
+        padding-top: 6.5rem;
+        padding-bottom: 6.125rem;
+    }
+    .input {
+        height: 3.75rem;
+
+        width: 55vw;
+    }
+    .input-feild {
+        gap: 0.625rem;
+    }
+    .header button {
+        height: 3.75rem;
+    }
+}
+/* Made by @yousaf_ustav on twitter */

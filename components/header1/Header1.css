@@ -1,0 +1,9 @@
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 4.5rem; /*72px*/
+}
+header p {
+  margin-bottom: 0; /* this fucking margin bottom due to bootstrap. I have to manually remove it every fucking time when I use <p> */
+}

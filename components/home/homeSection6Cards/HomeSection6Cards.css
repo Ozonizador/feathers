@@ -1,0 +1,48 @@
+.sec6-article {
+    min-height: 480px;
+    background-color: #fff;
+    text-align: left;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.lead-para {
+    margin-top: 2.25rem;
+}
+.profile {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.825rem;
+}
+@media (max-width: 1024px) {
+    .sec6-article > p {
+        margin-top: 2rem;
+        margin-bottom: 4.25rem;
+    }
+}
+@media (max-width: 860px) {
+    .sec6-article {
+        min-height: 420px;
+        padding: 2rem;
+    }
+    .lead-para > p {
+        margin-top: 1.5rem;
+    }
+}
+@media (max-width: 400px) {
+    .sec6-article {
+        padding: 1.5rem;
+    }
+    .sec6-article > p {
+        margin-top: 2rem;
+        margin-bottom: 3.75rem;
+    }
+}
+/* Made by @yousaf_ustav on twitter */

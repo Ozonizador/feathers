@@ -1,0 +1,44 @@
+.cards.shadow-lg {
+width: 100% !important; 
+
+}
+
+
+@media (max-width: 1024px) {
+  .container {
+    margin-top: 10rem;
+  }
+}
+@media (max-width: 860px) {
+  .container {
+    margin-top: 10rem;
+  }
+}
+#button-select {
+  width: 6.25rem;
+  border: none;
+  height: 3.5rem;
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+  cursor: pointer;
+  /*layout*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#btn-destaques{
+  color: #fff;
+  height: 56px;
+  border-radius: 12px;
+}
+
+
+.select-destaques{
+  height: 56px;
+  border-radius: 12px;
+}

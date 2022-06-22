@@ -1,6 +1,19 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import React from 'react'
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import styles from '../styles/Home.module.css'
+
+import HomeSection1 from '../components/home/homeSection1/HomeSection1';
+import HomeSection2 from '../components/home/homeSection2/HomeSection2';
+import HomeSection3 from '../components/home/homeSection3/HomeSection3';
+import HomeSection4 from '../components/home/homeSection4/HomeSection4';
+import HomeSection5 from '../components/home/homeSection5/HomeSection5';
+import HomeSection6 from '../components/home/homeSection6/HomeSection6';
+import HomeSection7 from '../components/home/homeSection7/HomeSection7';
+import HomeSection8 from '../components/home/homeSection8/HomeSection8';
+import HomeSection9 from '../components/home/homeSection9/HomeSection9';
+
 
 export default function Home() {
   return (
@@ -11,59 +24,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+    <div>
+      <HomeSection1 />      
+      <HomeSection2 />
+      <HomeSection3 />
+      <HomeSection4 />
+      <HomeSection5 />
+      <HomeSection6 />
+      <HomeSection7 />
+      <HomeSection8 />
+      <HomeSection9 />
+      </div>
+      </div>
   )
 }
+
+
+
+
+
+
+

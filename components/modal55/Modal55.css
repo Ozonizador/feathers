@@ -1,0 +1,21 @@
+#header-flex {
+  background-color: #f2e8de;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: flex;
+  justify-content: start;
+}
+#model-radius {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+#model-heading {
+  font-size: 20px;
+}
+#modal-btn {
+  background-color: #c48b60;
+  color: #fff;
+  border: none;
+}

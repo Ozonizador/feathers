@@ -1,0 +1,36 @@
+.section9 {
+    text-align: center;
+}
+.section9 > h2 {
+    margin-bottom: 3.5rem;
+}
+.brands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    place-items: center;
+    gap: 1rem;
+    margin-bottom: 6.75rem;
+}
+.emptydiv1,
+.emptydiv2 {
+    display: none;
+}
+@media (max-width: 1342px) {
+    .emptydiv1 {
+        display: block;
+    }
+}
+@media (max-width: 1115px) {
+    .emptydiv1 {
+        display: none;
+    }
+    .emptydiv2 {
+        display: block;
+    }
+}
+@media (max-width: 887px) {
+    .emptydiv1,
+    .emptydiv2 {
+        display: none;
+    }
+}

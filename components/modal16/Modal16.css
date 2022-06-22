@@ -1,0 +1,17 @@
+#model-heading-text {
+  font-size: 18px;
+  margin-top: 15px;
+}
+#header-flex {
+  height: 60px;
+}
+#img-modal {
+  height: 30px;
+  width: 30px;
+  margin-left: 30px !important;
+}
+#btn-modal {
+  background-color: #c48b60;
+  color: white;
+  border: none;
+}

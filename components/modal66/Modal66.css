@@ -1,0 +1,42 @@
+#header-flex {
+  background-color: #f2e8de;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: flex;
+  justify-content: start;
+  height: 60px;
+}
+#model-radius {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+#model-heading {
+  font-size: 20px;
+}
+#input-modal {
+  width: 100%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  font-size: 12px;
+}
+#input-modal :hover {
+  width: 100%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  font-size: 12px;
+}
+#modal-btn {
+  background-color: #c48b60;
+  color: #fff;
+}
+#modal-img {
+  height: 30px;
+  width: 30px;
+}
+#link-modal {
+  color: #c48b60;
+}

@@ -1,0 +1,19 @@
+.section6 {
+  padding: 5.375rem 0;
+}
+.section6 > h2 {
+  margin-bottom: 4.75rem;
+}
+.sec6-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+/* media queries */
+@media (max-width: 1024px) {
+  .sec6-card-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+/* Made by @yousaf_ustav on twitter */

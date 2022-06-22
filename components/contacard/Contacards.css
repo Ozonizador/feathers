@@ -1,0 +1,10 @@
+.cardcont-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+.cardcont-text {
+  color: grey;
+  font-size: 1rem;
+}

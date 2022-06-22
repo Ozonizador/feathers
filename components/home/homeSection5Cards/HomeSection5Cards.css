@@ -1,0 +1,21 @@
+.sec5-article {
+  padding: 2.25rem;
+  border: 1px solid #dedede;
+  border-radius: 18px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+}
+.sec5-article img {
+  margin-bottom: 2rem;
+}
+.sec5-article h3 {
+  margin-bottom: 1rem;
+}
+@media (max-width: 600px) {
+  .sec5-article {
+    padding: 1.5rem;
+  }
+}
+/* Made by @yousaf_ustav on twitter */

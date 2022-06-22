@@ -1,0 +1,40 @@
+#maps {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#form {
+  background-color: #f2e8de;
+  height: 55vh;
+}
+.Headingn {
+  color: #0d152e;
+  margin-left: 20px;
+  font-weight: bold;
+}
+.textn {
+  color: #2e4832;
+  margin-left: 20px;
+}
+#buttont {
+  width: 30%;
+  font-size: 15px;
+  background-color: #d6b592 !important;
+  border-style: none;
+  border-radius: 5px solid;
+  height: 30px;
+  color: white;
+}
+#buttont:hover {
+  width: 30%;
+  border: #885825 1px solid;
+  border-radius: 5px solid;
+  color: #d6b592;
+  background-color: white;
+}
+#search {
+  width: 70%;
+  background-color: white;
+  border-radius: 80px solid;
+  margin-left: 20px;
+}

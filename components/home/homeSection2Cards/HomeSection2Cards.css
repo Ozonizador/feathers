@@ -1,0 +1,9 @@
+.ycard {
+    width: 21.25rem; /*340px*/
+    padding: 0.5rem;
+    display: flex;
+    gap: 1.125rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+/* Made by @yousaf_ustav on twitter */

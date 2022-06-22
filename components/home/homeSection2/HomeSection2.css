@@ -1,0 +1,16 @@
+.section2 {
+  padding: 6.25rem 0;
+  /* layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+/* media Querries */
+@media (max-width: 1024px) {
+  .section2 {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+/* Made by @yousaf_ustav on twitter */

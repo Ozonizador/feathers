@@ -1,0 +1,11 @@
+#toggle-div {
+  background-color: #f2e8de;
+  border: 1px solid #f2e8de;
+  border-radius: 50px;
+  height: 60px;
+  padding: 10px;
+}
+#btn-toogle {
+  background-color: #d6b592;
+  border-radius: 50px;
+}
