@@ -1,3 +1,5 @@
+// todo estes estilos tem de ser postos.
+
 const style = {
     mainContainer: {
         width: "386px",

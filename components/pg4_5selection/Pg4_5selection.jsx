@@ -1,22 +1,16 @@
 import React from "react";
-import "./Pg4_5selection.css";
+import Image from "next/image";
+// import "../../styles/Pg4_5selection.Module.css";
 
 
 
-import homemap from "../../Assets/images/homemap.png";
+
 import Pg4_5homecard from "../../components/pg4_5homecard/Pg4_5homecard";
-import home1 from "../../Assets/images/home1.png";
-import home2 from "../../Assets/images/home2.png";
-import home3 from "../../Assets/images/home3.png";
-import home4 from "../../Assets/images/home4.png";
-import home5 from "../../Assets/images/home5.png";
-import home6 from "../../Assets/images/home6.png";
 
 
 
 
-
-function Pg4_5selection() {
+export default function Pg4_5selection() {
     return (
         <div>
             <div className="ycontainer-md">
@@ -69,27 +63,27 @@ function Pg4_5selection() {
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home1} />
+                            <Pg4_5homecard img="/images/home1.png" />
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home2} />
+                            <Pg4_5homecard img="/images/home2.png" />
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home3} />
+                            <Pg4_5homecard img="/images/home3.png" />
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home4} />
+                            <Pg4_5homecard img="/images/home4.png" />
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home5} />
+                            <Pg4_5homecard img="/images/home5.png" />
                         </div>
 
                         <div className="row">
-                            <Pg4_5homecard img={home6} />
+                            <Pg4_5homecard img="/images/home6.png" />
                         </div>
 
                         <div className="row mb-5">
@@ -130,12 +124,10 @@ function Pg4_5selection() {
                         </div>
                     </div>
                     <div className="col-5 d-none d-lg-block ">
-                        <img src={homemap} alt="" />
+                        <Image src="/images/homemap.png" height={32} width={32} alt="" />
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
-export default Pg4_5selection;

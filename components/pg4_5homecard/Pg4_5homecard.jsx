@@ -1,9 +1,6 @@
 import React from "react";
-import "./Pg4_5homecard.css";
-import stars from "../../Assets/images/stars.png";
-import { useNavigate as navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import '../../app.scss'
+// import "./Pg4_5homecard.css";
+import Image from "next/image";
 import { RiUserLine } from 'react-icons/ri';
 import { BiBed } from 'react-icons/bi';
 import { TbBed } from 'react-icons/tb'
@@ -13,7 +10,7 @@ import { GrRestroom } from 'react-icons/gr'
 function Pg4_5homecard(props) {
     const routeChange = () => {
         let path = `/4_5`;
-        navigate(path);
+        // navigate(path);
     };
 
 
@@ -29,7 +26,7 @@ function Pg4_5homecard(props) {
                         
                         <div className="row ">
                             <div className="col-3 col-xs-4 ">
-                                <img src={props.img} className="card-img" alt="..."/>
+                                <Image src={props.img} className="card-img" alt="..." height={32} width={32} />
                             </div>
                             <div onClick={routeChange} className="col-8 col-xs-8 ">
                                 <div className="hotel-card_info m-1 ">
@@ -38,7 +35,7 @@ function Pg4_5homecard(props) {
                                             Quarto Privado em T3 - Peniche
                                         </h6>
                                         <div className="m-1">
-                                            <img src={stars} alt="" />
+                                            <Image src="/images/stars.png" alt=""  height={32} width={32}  />
                                         </div>
                                     </div>
                                     {/* icon with images */}

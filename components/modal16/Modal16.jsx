@@ -1,6 +1,6 @@
 import React from "react";
+import Image from "next/image";
 import "./Modal16.css";
-import keyboard from "../../assets/images/keyboard.png";
 function Modal16() {
   return (
     <div>
@@ -22,14 +22,14 @@ function Modal16() {
             <div
               className="modal  fade modal-dialog modal-dialog-centered"
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img id="img-modal" className="m-2" src={keyboard} alt="" />
+                    <Image id="img-modal" className="m-2" src="/images/keyboard.png" alt="" />
                     <div id="model-heading" className="p-2">
                       <p id="model-heading-text">
                         Adicionar detalhes do cartão
@@ -74,7 +74,7 @@ function Modal16() {
                           </div>
 
                           <div className="col">
-                            <label for="inputState" className="form-label">
+                            <label htmlFor="inputState" className="form-label">
                               País / regiáo
                             </label>
                             <select id="inputState" className="form-select">

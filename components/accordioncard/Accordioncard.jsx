@@ -1,9 +1,6 @@
 import React from "react";
-import "./Accordioncard.css";
-import crousel1 from "../../Assets/images/crousel1.png";
-import crousel2 from "../../Assets/images/crousel2.png";
-import crousel3 from "../../Assets/images/crousel3.png";
-import crousel4 from "../../Assets/images/crousel4.png";
+import '../styles/Accordioncard.css';
+import Image from "next/image"
 
 function Accordioncard() {
   return (
@@ -27,7 +24,7 @@ function Accordioncard() {
                     aria-expanded="false"
                     aria-controls="flush-collapseOne"
                   >
-                    <i class="fa-solid fa-home m-2"></i> É senhoria unihosts
+                    <i className="fa-solid fa-home m-2"></i> É senhoria unihosts
                     desde 2022
                   </button>
                 </h2>
@@ -40,16 +37,16 @@ function Accordioncard() {
                   <div className="accordion-body">
                     <div className="row">
                       <div className="col">
-                        <img src={crousel1} alt="" />
+                        <Image src="/images/crousel1.png" alt="" height={4} width={4} />
                       </div>
                       <div className="col">
-                        <img src={crousel2} alt="" />
+                        <Image src="/images/crousel2.png" alt="" height={4} width={4} />
                       </div>{" "}
                       <div className="col">
-                        <img src={crousel3} alt="" />
+                        <Image src="/images/crousel3.png" alt="" height={4} width={4} />
                       </div>{" "}
                       <div className="col">
-                        <img src={crousel4} alt="" />
+                        <Image src="/images/crousel4.png" alt="" height={4} width={4} />
                       </div>
                     </div>
                   </div>
@@ -67,7 +64,7 @@ function Accordioncard() {
                     aria-expanded="false"
                     aria-controls="flush-collapseTwo"
                   >
-                    <i class="fa-solid fa-bed m-2"></i>É estudante unihosts
+                    <i className="fa-solid fa-bed m-2"></i>É estudante unihosts
                     desde 2021
                   </button>
                 </h2>
@@ -78,10 +75,10 @@ function Accordioncard() {
                   data-bs-parent="#accordionFlushExample"
                 >
                   <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
+                    {`Placeholder content for this accordion, which is intended to
                     demonstrate the <code>.accordion-flush</code> class. This is
                     the second item's accordion body. Let's imagine this being
-                    filled with some actual content.
+                    filled with some actual content.`}
                   </div>
                 </div>
               </div>

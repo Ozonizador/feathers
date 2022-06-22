@@ -18,7 +18,7 @@ function Togglebtn() {
               <a
                 id="btn-toogle"
                 href="#"
-                class="btn active"
+                className="btn active"
                 role="button"
                 data-bs-toggle="button"
               >
@@ -27,7 +27,7 @@ function Togglebtn() {
               <a
                 id="btn-toogle2"
                 href="#"
-                class="btn  active"
+                className="btn  active"
                 role="button"
                 data-bs-toggle="button"
                 aria-pressed="true"
