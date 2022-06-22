@@ -1,5 +1,4 @@
 import React from "react";
-import "./Modal57.css";
 import comment from "../../assets/images/comments.png";
 function Modal57() {
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Profileinput.css";
 import user from "../../Assets/images/user.png";
 function Profileinput() {
   return (

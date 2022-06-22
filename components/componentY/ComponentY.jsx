@@ -5,7 +5,6 @@ import Cheque from "../../assets/images/icons8_paycheque.svg";
 import Maintenance from "../../assets/images/icons8_maintenance_1.svg";
 import { Link } from "react-router-dom";
 
-import "./ComponentY.css";
 const ComponentY = () => {
   const [link1, setLink1] = useState(false);
   const [link2, setLink2] = useState(false);

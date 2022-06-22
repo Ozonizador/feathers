@@ -1,5 +1,4 @@
 import React from "react";
-import "./Notification.css";
 import notification from "../../Assets/images/notification.png";
 
 function Notification() {

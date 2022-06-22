@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import "./ProgressBar.css";
 
 export default function ProgressBar(props) {
     const [index, setIndex] = useState(props.idx);

@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Pg4_5homecard.css";
 import Image from "next/image";
 import { RiUserLine } from 'react-icons/ri';
 import { BiBed } from 'react-icons/bi';

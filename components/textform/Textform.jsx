@@ -1,5 +1,4 @@
 import React from "react";
-import "./Textform.css";
 import location from "../../assets/images/locationicon.png";
 import map from "../../assets/images/mapicon.png";
 function Textform() {

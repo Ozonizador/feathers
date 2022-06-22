@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ImPhone } from "react-icons/im";
 import { GrMail } from "react-icons/gr";
 import { VscTriangleDown } from "react-icons/vsc";
-// import "./Navbar.css";
 import Socials from "../socials/Socials";
 import Link from "next/link";
 import Image from "next/image";

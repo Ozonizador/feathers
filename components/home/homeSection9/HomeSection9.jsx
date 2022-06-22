@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-// import "./HomeSection9.css";
 
 export default function HomeSection9() {
     return (

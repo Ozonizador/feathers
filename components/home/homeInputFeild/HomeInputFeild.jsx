@@ -1,10 +1,9 @@
 import React from "react";
 
 
-// import "./HomeInputFeild.css";
 import Image from "next/image";
 
-const HomeInputFeild = () => {
+export const HomeInputFeild = () => {
   // let navigate = useNavigate();
   const routeChange = () => {
     let path = `/4_5`;

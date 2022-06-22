@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-// import "./HomeSection2Cards.css";
 
 const HomeSection2Cards = ({ img, heading, text}) => {
     return (

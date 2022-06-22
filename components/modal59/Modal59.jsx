@@ -1,6 +1,6 @@
 import React from "react";
-import "./Modal59.css";
-import feedback from "../../assets/images/feeedback.png";
+import Image from "next/image";
+
 function Modal59() {
   return (
     <div>
@@ -22,16 +22,16 @@ function Modal59() {
             <div
               className="modal  fade modal-dialog modal-dialog-centered"
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img
+                    <Image
                       className="m-2"
-                      src={feedback}
+                      src="/images/feeedback.png"
                       alt=""
                       width="30px"
                       height="30px"

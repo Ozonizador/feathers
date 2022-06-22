@@ -1,7 +1,6 @@
 import React from "react";
 
-import HomeSection2Cards from '../homeSection2Cards/HomeSection2Cards'
-// import "./HomeSection2.css";
+import HomeSection2Cards from '../homeSection2Cards/HomeSection2Cards';
 
 export default function HomeSection2() {
     return (

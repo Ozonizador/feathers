@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 import { useNavigate  as navigate} from "react-router-dom";
 
-import "./ComponentX.css";
 
 export default function ComponentX() {
   const [summary1, setSummary1] = useState(true);

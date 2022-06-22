@@ -1,6 +1,5 @@
 import React from "react";
 import { BsArrowRightShort } from "react-icons/bs";
-// import "./HomeSection3.css";
 import Link from "next/link";
 
 export default function HomeSection3() {

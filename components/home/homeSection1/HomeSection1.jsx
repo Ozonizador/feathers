@@ -1,13 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-// import NavBarbr from "../../components/navbar/Navbar";
-// import "./HomeSection1.css";
 
 import HomeInputFeild from "../homeInputFeild/HomeInputFeild";
-
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
 
 export default function HomeSection1() {
     return (

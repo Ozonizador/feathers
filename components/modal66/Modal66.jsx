@@ -1,6 +1,6 @@
 import React from "react";
-import "./Modal66.css";
-import doublearrow from "../../assets/images/doublearrow.png";
+import Image from "next/image";
+
 function Modal66() {
   return (
     <div>
@@ -22,17 +22,17 @@ function Modal66() {
             <div
               className="modal modal-lg fade modal-dialog modal-dialog-scrollable   "
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img
+                    <Image
                       id="modal-img"
                       className="m-2"
-                      src={doublearrow}
+                      src="/images/doublearrow.png"
                       alt=""
                       width="10%"
                       height="10%"
@@ -50,7 +50,7 @@ function Modal66() {
                         <textarea
                           className="form-control"
                           id="exampleFormControlTextarea1"
-                          rows="1"
+                          rows={1}
                         ></textarea>
                       </div>
                       <p>Reserva Original</p>

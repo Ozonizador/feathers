@@ -1,7 +1,6 @@
 import React from "react";
 import location from "../../Assets/images/location.png";
 import SimpleMap from "./SimpleMap.jsx";
-import "./Maps.css";
 
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";

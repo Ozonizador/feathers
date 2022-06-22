@@ -3,7 +3,6 @@ import HomeSection5Cards from "../homeSection5Cards/HomeSection5Cards";
 import Link from "next/link";
 
 import { CgHome } from "react-icons/cg";
-// import "./HomeSection5.css";
 
 export default function HomeSection5() {
     return (

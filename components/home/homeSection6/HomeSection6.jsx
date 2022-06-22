@@ -1,10 +1,6 @@
 import React from "react";
 import HomeSection6Cards from "../homeSection6Cards/HomeSection6Cards";
 
-
-
-
-// import "./HomeSection6.css";
 export default function HomeSection6() {
     return (
         <section>

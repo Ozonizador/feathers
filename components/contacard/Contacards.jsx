@@ -1,5 +1,4 @@
 import React from "react";
-import "./Contacards.css";
 
 function Contacards(props) {
   return (

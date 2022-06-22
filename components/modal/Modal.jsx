@@ -1,5 +1,4 @@
 import React from "react";
-import "./Modal.css";
 import flag from "../../Assets/images/flag.png";
 function Modal() {
   return (

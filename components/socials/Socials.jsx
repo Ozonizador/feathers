@@ -2,7 +2,6 @@ import React from "react";
 import { RiFacebookFill } from "react-icons/ri";
 import { RiInstagramLine } from "react-icons/ri";
 import { RiTwitterFill } from "react-icons/ri";
-// import "./Socials.css";
 
 export default function Socials(props) {
   return (

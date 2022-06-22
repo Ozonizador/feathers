@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import "./Modal16.css";
 function Modal16() {
   return (
     <div>

@@ -3,7 +3,6 @@ import React from "react";
 import Socials from '../socials/Socials'
 import Image from 'next/image';
 import Link  from "next/link";
-// import "./Footer.css";
 
 export default function Footer() {
     return (

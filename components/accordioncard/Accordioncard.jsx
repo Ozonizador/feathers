@@ -1,5 +1,4 @@
 import React from "react";
-import '../styles/Accordioncard.css';
 import Image from "next/image"
 
 function Accordioncard() {

@@ -1,5 +1,4 @@
 import React from "react";
-// import "./HomeSection6Cards.css";
 import Image from "next/image"
 
 export default function HomeSection6Cards(props) {

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Togglebtn.css";
 
 function Togglebtn() {
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 import Link  from "next/link";
 
-// import "./HomeSection7.css";
 
 export default function HomeSection7() {
     return (
