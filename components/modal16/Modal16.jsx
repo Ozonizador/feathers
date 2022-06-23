@@ -28,7 +28,7 @@ function Modal16() {
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <Image id="img-modal" className="m-2" src="/images/keyboard.png" alt="" />
+                    <Image id="img-modal" className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
                     <div id="model-heading" className="p-2">
                       <p id="model-heading-text">
                         Adicionar detalhes do cartão
