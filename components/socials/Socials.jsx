@@ -18,7 +18,7 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiFacebookFill className="my-auto mx-auto" style={{ color: props.clr }} />
+        <RiFacebookFill className="mx-auto my-auto text-white" />
       </a>
       <a
         href="/"
@@ -32,7 +32,7 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiInstagramLine className="my-auto mx-auto" style={{ color: props.clr }} />
+        <RiInstagramLine className="mx-auto my-auto text-white" />
       </a>
       <a
         href="/"
@@ -46,7 +46,7 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiTwitterFill className="my-auto mx-auto" style={{ color: props.clr }} />
+        <RiTwitterFill className="mx-auto my-auto text-white" />
       </a>
     </div>
   );

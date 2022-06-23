@@ -1,5 +1,5 @@
 import React from "react";
-import flag from "../../assets/images/flag.png";
+
 function Modal55() {
   return (
     <div>
@@ -30,7 +30,7 @@ function Modal55() {
                   <div id="header-flex" className="modal-header ">
                     <img
                       className="m-2"
-                      src={flag}
+                      src="/images/flag.png"
                       alt=""
                       width="30px"
                       height="30px"
