@@ -1,6 +1,7 @@
 import React from "react";
-import user from "../../Assets/images/user.png";
-function Profileinput() {
+import Image from "next/image";
+
+const ProfileInput = () => {
   return (
     <div>
       <div className="container mt-4 mb-4">
@@ -18,8 +19,8 @@ function Profileinput() {
           <div className="col-lg-2">
             {/* Avator */}
             <div>
-              <img
-                src={user}
+              <Image
+                src="/images/user.png"
                 className="rounded-circle mb-4"
                 style={{ width: "100px" }}
                 alt="Avatar"
@@ -32,7 +33,7 @@ function Profileinput() {
                 placeholder="Sobre mim..."
                 className="form-control"
                 id="exampleFormControlTextarea1"
-                rows="3"
+                rows={3}
               ></textarea>
             </div>
           </div>
@@ -43,4 +44,4 @@ function Profileinput() {
   );
 }
 
-export default Profileinput;
+export default ProfileInput;
