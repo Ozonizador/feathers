@@ -31,8 +31,8 @@ export const Navbar = (props) => {
               </div>
             </div>
 
-            <div className="top-right flex ">
-              <Socials bgClr="#c48b60" clr="#fff" width="24px" fSize="16px" />
+            <div className="top-right flex">
+              <Socials type="primary" />
               <div className="right-line"></div>
               <div className="right-dropdown flex">
                 <Image src="/images/icon-uk.jpg" height={16} width={32} alt="" />

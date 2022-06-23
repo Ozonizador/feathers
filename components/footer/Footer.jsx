@@ -91,7 +91,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex flex-1 justify-center py-5 text-neutral-100">
-            <Socials bgClr="#fff" clr="#c48b60" width="38px" fSize="24px" />
+            <Socials type="secondary" size="md" />
           </div>
         </div>
         <div className="bg-secondary-300 px-20">
