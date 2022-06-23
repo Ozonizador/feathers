@@ -8,7 +8,7 @@ export default function Socials(props) {
     <div className="flex" style={{ gap: "0.75rem" }}>
       <a
         href="/"
-        className="right-icons flex transition btn-shadow"
+        className="right-icons btn-shadow flex transition"
         style={{
           backgroundColor: props.bgClr,
           fontSize: props.fSize,
@@ -18,11 +18,11 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiFacebookFill style={{ color: props.clr }} />
+        <RiFacebookFill className="my-auto mx-auto" style={{ color: props.clr }} />
       </a>
       <a
         href="/"
-        className="right-icons  flex transition btn-shadow"
+        className="right-icons  btn-shadow flex transition"
         style={{
           backgroundColor: props.bgClr,
           fontSize: props.fSize,
@@ -32,11 +32,11 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiInstagramLine style={{ color: props.clr }} />
+        <RiInstagramLine className="my-auto mx-auto" style={{ color: props.clr }} />
       </a>
       <a
         href="/"
-        className="right-icons  flex transition btn-shadow"
+        className="right-icons btn-shadow flex transition"
         style={{
           backgroundColor: props.bgClr,
           fontSize: props.fSize,
@@ -46,7 +46,7 @@ export default function Socials(props) {
         target="_blank"
         rel="noreferrer noopener"
       >
-        <RiTwitterFill style={{ color: props.clr }} />
+        <RiTwitterFill className="my-auto mx-auto" style={{ color: props.clr }} />
       </a>
     </div>
   );
