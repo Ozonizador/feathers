@@ -18,20 +18,15 @@ export const Navbar = (props) => {
     return (
         <header>
             <div className="container mx-auto">
-                <div className="ycontainer-md">
-                    <div className="top" onClick={() => console.log("clickedHere")}>
-                        <div
-                            className="top-left flex"
-                            onClick={() => {
-                               // navigate(`/10`);
-                            }}
-                        >
-                            <div className="flex contact-mail">
-                                <ImPhone />
-                                <p>+351 914 626 616</p>
+                <div className="container-md">
+                    <div className="flex justify-between align-middle py-2">
+                        <div className="flex">
+                            <div className="flex">
+                                <ImPhone className="my-auto mr-1" />
+                                <p className="mr-3">+351 914 626 616</p>
                             </div>
-                            <div className="flex contact-mail">
-                                <GrMail />
+                            <div className="flex">
+                                <GrMail className="my-auto mr-1" />
                                 <p>info@unihost.pt</p>
                             </div>
                         </div>
@@ -45,12 +40,9 @@ export const Navbar = (props) => {
                             />
                             <div className="right-line"></div>
                             <div className="right-dropdown flex">
-                                <Image src="/images/icon-uk.jpg" height={32} width={32} alt="" />
+                                <Image src="/images/icon-uk.jpg" height={16} width={32} alt="" />
                                 <select name="" id="">
-                                    <option
-                                        value=""
-                                        disabled
-                                    >
+                                    <option value="" disabled>
                                         EN
                                     </option>
                                     <option value="">PT</option>
@@ -59,39 +51,20 @@ export const Navbar = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid hr"></div>
-                <div className="ycontainer-md">
-                    <div className="bottom">
-                        <Image
-                            onClick={handleNavClick}
-                            src="/images/logo1.png"
-                            alt=""
-                            className="logo"
-                            height={32} width={32}
-                        ></Image>
+                <div className="container-md hr"></div>
+                <div className="container-md ">
+                    <div className="flex align-middle justify-between mt-5">
+                        <Image src="/images/logo1.png" alt="" className="logo" height={55} width={208}></Image>
 
                         <nav>
-                            <ul className="fs-200 bottom-nav">
-                                <li className="nav-padding">
-                                    <Link
-                                        href="/"
-                                        className={
-                                            activeNav === "home" ? "bold" : ""
-                                        }
-                                        onClick={() => {
-                                            setActiveNav("/");
-                                        }}
-                                    >
-                                        Home
-                                    </Link>
+                            <ul className="bottom-nav text-base">
+                                <li className="pt-3.5 pb-4 px-3.5 hover:text-secondary-300 ease-in duration-300">
+                                    <Link a href="/">Home</Link>
                                 </li>
-                                <li className="nav-padding dropdown">
-                                    <div
-                                        className="flex"
-                                        style={{ gap: "0.25rem" }}
-                                    >
+                                <li className="pt-3.5 pb-4 px-3.5 hover:text-secondary-300 ease-in duration-300">
+                                    <div className="flex">
                                         <p>Anuncie a sua propriedade</p>
-                                        <VscTriangleDown />
+                                        <VscTriangleDown className="mt-1.5" />
                                     </div>
                                     <ul className="sub-menu">
                                         <li>
@@ -102,76 +75,37 @@ export const Navbar = (props) => {
                                         </li>
                                     </ul>
                                 </li>
-                                <li className="nav-padding">
-                                    <Link
-                                        href="/8"
-                                        className={
-                                            activeNav === "blog" ? "bold" : ""
-                                        }
-                                        onClick={() => {
-                                            setActiveNav("blog");
-                                        }}
-                                    >
+                                <li className="pt-3.5 pb-4 px-3.5 hover:text-secondary-300 ease-in duration-300">
+                                    <Link href="/8">
                                         Blog
                                     </Link>
                                 </li>
-                                <li className="nav-padding">
-                                    <Link
-                                        href="/53"
-                                        className={
-                                            activeNav === "contactos"
-                                                ? "bold"
-                                                : ""
-                                        }
-                                        onClick={() => {
-                                            setActiveNav("contactos");
-                                        }}
-                                    >
+                                <li className="pt-3.5 pb-4 px-3.5 hover:text-secondary-300 ease-in duration-300">
+                                    <Link href="/53">
                                         Contactos
                                     </Link>
                                 </li>
-                                <li
-                                    className={
-                                        activeNav === "home"
-                                            ? "bottom-line"
-                                            : ""
-                                    }
-                                ></li>
+                                <li className={activeNav === "home"? "bottom-line": ""}></li>
                                 <li></li>
-                                <li
-                                    className={
-                                        activeNav === "blog"
-                                            ? "bottom-line"
-                                            : ""
-                                    }
-                                ></li>
-                                <li
-                                    className={
-                                        activeNav === "contactos"
-                                            ? "bottom-line"
-                                            : ""
-                                    }
-                                ></li>
+                                <li className={activeNav === "blog"? "bottom-line": ""}></li>
+                                <li className={activeNav === "contactos"? "bottom-line": ""}></li>
                             </ul>
                         </nav>
 
-                        <div
-                            className={`buttons ${toggle ? "buttonsHide" : ""}`}
-                        >
-                            <Link
-                                href="/12"
-                                className="btn-outline transition btn-shadow "
-                            >
-                                <a>
-                                    <div className="border-[#C48B60] border-2 px-6 py-3 rounded-sm text-[#C48B60]">Registar</div>
+                        <div className= "flex">
+                            <Link href="/12">
+                                <a p-0>
+                                    <div className="border-[#C48B60] border-2 text-[#C48B60] text-center px-6 py-3 rounded text-sm mr-2 hover:bg-primary-500 hover:text-white hover:drop-shadow-xl ease-in duration-200" >Registar</div>
                                 </a>
                             </Link>
-                            <Link
-                                href="/11"
-                                className="btn-contain transition btn-shadow"
-                            >
-                                Iniciar sessao
+
+
+                            <Link href="/11">
+                                <a p-0>
+                                    <div className=" bg-primary-500 border-[#C48B60] border-2 text-white text-center px-6 py-3 rounded text-sm mr-2 hover:drop-shadow-xl ease-in duration-200">Iniciar sessão</div>
+                                </a>
                             </Link>
+
                         </div>
                         <div
                             className={`nav-profile ${toggle ? "" : "profileHide"
