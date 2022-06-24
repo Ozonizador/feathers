@@ -1,16 +1,15 @@
-import Head from 'next/head'
-import React from 'react'
+import Head from "next/head";
+import React from "react";
 
-import HomeSection1 from '../components/home/homeSection1/HomeSection1';
-import HomeSection2 from '../components/home/homeSection2/HomeSection2';
-import HomeSection3 from '../components/home/homeSection3/HomeSection3';
-import HomeSection4 from '../components/home/homeSection4/HomeSection4';
-import HomeSection5 from '../components/home/homeSection5/HomeSection5';
-import HomeSection6 from '../components/home/homeSection6/HomeSection6';
-import HomeSection7 from '../components/home/homeSection7/HomeSection7';
-import HomeSection8 from '../components/home/homeSection8/HomeSection8';
-import HomeSection9 from '../components/home/homeSection9/HomeSection9';
-
+import HomeSection1 from "../components/home/homeSection1/HomeSection1";
+import HomeSection2 from "../components/home/homeSection2/HomeSection2";
+import HomeSection3 from "../components/home/homeSection3/HomeSection3";
+import HomeSection4 from "../components/home/homeSection4/HomeSection4";
+import HomeSection5 from "../components/home/homeSection5/HomeSection5";
+import HomeSection6 from "../components/home/homeSection6/HomeSection6";
+import HomeSection7 from "../components/home/homeSection7/HomeSection7";
+import HomeSection8 from "../components/home/homeSection8/HomeSection8";
+import HomeParceiros from "../components/home/homeParceiros/HomeParceiros";
 
 export default function Home() {
   return (
@@ -21,24 +20,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <div>
-      <HomeSection1 />      
-      <HomeSection2 />
-      <HomeSection3 />
-      <HomeSection4 />
-      <HomeSection5 />
-      <HomeSection6 />
-      <HomeSection7 />
-      <HomeSection8 />
-      <HomeSection9 />
+      <div>
+        <HomeSection1 />
+        <HomeSection2 />
+        <HomeSection3 />
+        <HomeSection4 />
+        <HomeSection5 />
+        <HomeSection6 />
+        <HomeSection7 />
+        <HomeSection8 />
+        <HomeParceiros />
       </div>
-      </div>
-  )
+    </div>
+  );
 }
-
-
-
-
-
-
-
