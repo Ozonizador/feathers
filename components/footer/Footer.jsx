@@ -90,7 +90,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="py-5">
+          <div className="flex flex-1 justify-center py-5">
             <Socials type="secondary" size="md" />
           </div>
         </div>
