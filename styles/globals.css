@@ -740,12 +740,6 @@ header p {
 
 /* home section 8 */
 
-.section8 {
-  margin-bottom: 6.75rem;
-}
-.section8 > h2 {
-  margin-bottom: 2.875rem;
-}
 .sec8-card-container {
   width: 100%;
   display: grid;
