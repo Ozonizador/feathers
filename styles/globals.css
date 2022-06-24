@@ -418,20 +418,6 @@ div3 {
 .circle.active {
   color: #c48b60;
 }
-.bg-white {
-  background-color: #fff !important;
-  position: absolute;
-  left: 50%;
-  top: 0.5rem;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  width: 1rem;
-  height: 1rem;
-  z-index: -1;
-}
 
 .pg4_5-inputfeild {
   display: flex;
@@ -497,15 +483,7 @@ a:hover {
 .contact-mail p {
   margin-bottom: 0;
 }
-.top-right {
-  gap: 0.75rem;
-}
 
-.right-line {
-  width: 1px;
-  background-color: #ecf0f1;
-  height: 1.5rem;
-}
 .right-dropdown {
   gap: 0.5rem;
 }
@@ -713,16 +691,6 @@ select option {
   }
   .buttons a + a {
     margin-left: 1rem;
-  }
-}
-@media (max-width: 600px) {
-  .top-right,
-  .top-left {
-    flex-direction: column;
-    gap: 0.325rem;
-  }
-  .right-line {
-    display: none;
   }
 }
 

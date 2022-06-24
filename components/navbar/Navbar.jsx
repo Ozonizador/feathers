@@ -19,7 +19,7 @@ export const Navbar = (props) => {
     <header>
       <div className="container mx-auto">
         <div className="container-md">
-          <div className="flex justify-between py-2 align-middle">
+          <div className="flex py-2">
             <div className="flex">
               <div className="flex">
                 <ImPhone className="my-auto mr-1" />
@@ -31,9 +31,8 @@ export const Navbar = (props) => {
               </div>
             </div>
 
-            <div className="top-right flex">
+            <div className="ml-auto flex">
               <Socials type="primary" />
-              <div className="right-line"></div>
               <div className="right-dropdown flex">
                 <Image src="/images/icon-uk.jpg" height={16} width={32} alt="" />
                 <select name="" id="">
@@ -85,7 +84,7 @@ export const Navbar = (props) => {
 
             <div className="flex">
               <Link href="/12">
-                <a p-0>
+                <a className="p-0">
                   <div className="mr-2 rounded border-2 border-[#C48B60] px-6 py-3 text-center text-sm text-[#C48B60] duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                     Registar
                   </div>
@@ -93,7 +92,7 @@ export const Navbar = (props) => {
               </Link>
 
               <Link href="/11">
-                <a p-0>
+                <a className="p-0">
                   <div className=" mr-2 rounded border-2 border-[#C48B60] bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                     Iniciar sessão
                   </div>
