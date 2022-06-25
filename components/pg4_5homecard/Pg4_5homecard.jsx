@@ -58,8 +58,8 @@ export default function RoomInformation(props) {
                   </div>
 
                   <div className="mt-4 flex flex-1">
-                    <div className="border-2 border-primary-300 text-xs hover:border-primary-500">
-                      <button className="border">
+                    <div className="my-auto">
+                      <button className="rounded-md border-2 border-neutral-300 p-1 text-xs hover:border-primary-500">
                         <CgHeart className="inline" />
                         <span className="my-auto ml-2">Favoritos</span>
                       </button>
