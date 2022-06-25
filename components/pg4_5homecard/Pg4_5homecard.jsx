@@ -3,6 +3,7 @@ import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
 import { TbBed } from "react-icons/tb";
+import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 
 export default function RoomInformation(props) {
@@ -22,10 +23,10 @@ export default function RoomInformation(props) {
               </div>
               <div onClick={routeChange} className="p-3">
                 <div className="m-1">
-                  <div className="">
+                  <div className="flex flex-1">
                     <h6 className="mb-0 ">Quarto Privado em T3 - Peniche</h6>
                     <div className="m-1">
-                      <Image src="/images/stars.png" alt="" height={32} width={32} />
+                      <Image src="/images/stars.png" alt="" height={16} width={16} />
                     </div>
                   </div>
                   {/* icon with images */}
@@ -47,34 +48,27 @@ export default function RoomInformation(props) {
                       <span className="my-auto ml-1 text-xs">1 Casa De Banho</span>
                     </div>
                   </div>
-                  <div className="d-flex mb-1 mt-2" style={{ fontSize: "12px" }}>
-                    <ul
-                      id="classlist"
-                      className="d-flex space-between flex-row"
-                      style={{ gap: "20px" }}
-                    >
-                      <li>Wifi</li>
+                  <div className="mb-1 mt-2 flex text-xs">
+                    <ul id="classlist" className="flex gap-5 px-3">
+                      <li className="list-none">Wifi</li>
                       <li>Cozinha</li>
                       <li>Secretária</li>
                       <li>Varanda</li>
                     </ul>
                   </div>
 
-                  <div className="row">
-                    <div className="col-6 mt-4">
-                      <button id="cardbtn">Favoritos</button>
+                  <div className="mt-4 flex flex-1">
+                    <div className="border-2 border-primary-300 text-xs hover:border-primary-500">
+                      <button className="border">
+                        <CgHeart className="inline" />
+                        <span className="my-auto ml-2">Favoritos</span>
+                      </button>
                     </div>
-                    <div className="col-6">
-                      <div className="hotel-card_pricing text-center">
-                        <h3 style={{ color: "#C48B60" }}>300€/mês</h3>
+                    <div className="ml-auto">
+                      <div className="text-center">
+                        <h3 className="text-primary-500">300€/mês</h3>
                         <div className="d-flex">
-                          <p
-                            style={{
-                              fontSize: "12px",
-                            }}
-                          >
-                            Despesas incluídas
-                          </p>
+                          <p className="text-xs">Despesas incluídas</p>
                           <i className="fa-solid fa-circle-info m-1"></i>
                         </div>
                       </div>
