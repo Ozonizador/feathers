@@ -11,7 +11,7 @@ export default function HomeSection7() {
             <p className="fs-600 clr-black-light">
               Comece já a anunciar e rentabilize o seu imóvel!
             </p>
-            <Link href="/" className="fs-300 btn-contain transition">
+            <Link href="/" className="fs-300 transition">
               Anunciar
             </Link>
           </div>

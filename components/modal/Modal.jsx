@@ -1,5 +1,5 @@
 import React from "react";
-import flag from "../../Assets/images/flag.png";
+import Image from "next/image";
 function Modal() {
   return (
     <div>
@@ -21,16 +21,16 @@ function Modal() {
             <div
               className="modal  fade modal-dialog modal-dialog-centered"
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl ">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img
+                    <Image
                       className="m-2"
-                      src={flag}
+                      src="/images/flag.png"
                       alt=""
                       width="30px"
                       height="30px"
@@ -40,68 +40,37 @@ function Modal() {
                     </div>
                   </div>
                   <div className="modal-body m-2">
-                    <h5 className="mt-2">
-                      Porque estás a denunciar esta conta?
-                    </h5>
+                    <h5 className="mt-2">Porque estás a denunciar esta conta?</h5>
                     <p className="mt-4">
-                      A tua denúncia é anónima e deves ter em conta que pode
-                      prejudicar outros caso não seja verdadeira. Se este
-                      anúncio é impróprio ou não condiz com a realidade por
-                      favor reporta.{" "}
+                      A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso
+                      não seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade
+                      por favor reporta.{" "}
                     </p>
                     <div className="radio mt-3">
                       <label>
-                        <input
-                          className="m-2"
-                          type="radio"
-                          name="optradio"
-                          checked
-                        />
-                        É impreciso ou incorreto
+                        <input className="m-2" type="radio" name="optradio" checked />É impreciso ou
+                        incorreto
                       </label>
                     </div>
                     <div className="radio">
                       <label>
-                        <input
-                          className="m-2"
-                          type="radio"
-                          name="optradio"
-                          checked
-                        />
+                        <input className="m-2" type="radio" name="optradio" checked />
                         Não corresponde à realidade
                       </label>
                     </div>
                     <div className="radio">
                       <label>
-                        <input
-                          className="m-2"
-                          type="radio"
-                          name="optradio"
-                          checked
-                        />
-                        É um esquema
+                        <input className="m-2" type="radio" name="optradio" checked />É um esquema
                       </label>
                     </div>
                     <div className="radio">
                       <label>
-                        <input
-                          className="m-2"
-                          type="radio"
-                          name="optradio"
-                          checked
-                        />
-                        É ofensivo
+                        <input className="m-2" type="radio" name="optradio" checked />É ofensivo
                       </label>
                     </div>
                     <div className="radio">
                       <label>
-                        <input
-                          className="m-2"
-                          type="radio"
-                          name="optradio"
-                          checked
-                        />
-                        É outra coisa
+                        <input className="m-2" type="radio" name="optradio" checked />É outra coisa
                       </label>
                     </div>
                     <div className="">

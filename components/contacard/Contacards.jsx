@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 function Contacards(props) {
   return (
@@ -10,7 +11,13 @@ function Contacards(props) {
             <div className="cardcont mb-3 rounded shadow-lg" style={{ width: "840px" }}>
               <div className="row g-0">
                 <div className="col-md-4 p-4">
-                  <img src={props.img} className="img-fluid rounded-start" alt="..." />
+                  <Image
+                    src={props.img}
+                    height={64}
+                    width={64}
+                    className="img-fluid rounded-start"
+                    alt="..."
+                  />
                 </div>
                 <div className="col-md-8 mt-4 pt-4">
                   <div className="cardcont-body">

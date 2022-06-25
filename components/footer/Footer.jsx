@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="ml-5 py-5 text-center text-neutral-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
-              <Link href="/10" className="fs-300 clr-white">
+              <Link href="/aboutus" className="fs-300 clr-white">
                 Sobre nós
               </Link>
             </div>
@@ -84,11 +84,13 @@ export default function Footer() {
                 Iniciar sessão/ Registar
               </Link>
             </div>
-            <div className="py-1">
-              <Link href="/4_5" className="fs-100 btn-contain footer-last transition">
-                Anuncie a sua propriedade
-              </Link>
-            </div>
+            <Link href="/4_5" className="transition">
+              <a>
+                <div className="my-3">
+                  <span className="rounded-full bg-primary-500 p-3">Anuncie a sua propriedade</span>
+                </div>
+              </a>
+            </Link>
           </div>
           <div className="flex flex-1 justify-center py-5">
             <Socials type="secondary" size="md" />

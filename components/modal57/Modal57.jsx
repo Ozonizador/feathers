@@ -1,5 +1,6 @@
 import React from "react";
-import comment from "../../assets/images/comments.png";
+import Image from "next/image";
+
 function Modal57() {
   return (
     <div>
@@ -21,16 +22,16 @@ function Modal57() {
             <div
               className="modal  fade modal-dialog modal-dialog-centered"
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img
+                    <Image
                       className="m-2"
-                      src={comment}
+                      src="/images/comments.png"
                       alt=""
                       width="10%"
                       height="10%"

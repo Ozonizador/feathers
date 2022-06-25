@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 function Modal55() {
   return (
@@ -21,14 +22,14 @@ function Modal55() {
             <div
               className="modal  fade modal-dialog modal-dialog-centered"
               id="exampleModal"
-              tabIndex="-1"
+              tabIndex={-1}
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content" id="model-radius">
                   <div id="header-flex" className="modal-header ">
-                    <img
+                    <Image
                       className="m-2"
                       src="/images/flag.png"
                       alt=""
@@ -40,20 +41,14 @@ function Modal55() {
                     </div>
                   </div>
                   <div className="modal-body m-4 p-4">
-                    <div className="jumbotron text-center m-4 p-4">
+                    <div className="jumbotron m-4 p-4 text-center">
                       <h5>A UniHosts agradece!</h5>
                       <p>
-                        Vamos averiguar a situação. Obrigada por teres
-                        denunciado e tornado a nosssa comunidade unihosts num
-                        lugar melhor!
+                        Vamos averiguar a situação. Obrigada por teres denunciado e tornado a nosssa
+                        comunidade unihosts num lugar melhor!
                       </p>
                       <p className="lead">
-                        <a
-                          className="btn btn-primary btn-lg"
-                          href="#"
-                          role="button"
-                          id="modal-btn"
-                        >
+                        <a className="btn btn-primary btn-lg" href="#" role="button" id="modal-btn">
                           Learn more
                         </a>
                       </p>
