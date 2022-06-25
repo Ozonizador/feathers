@@ -14,39 +14,38 @@ export default function RoomInformation(props) {
   return (
     <div>
       <div className="container mb-4">
-        <div className="col-12">
+        <div>
           <div className="cards">
             <div className="flex flex-1">
               <div>
-                <Image src={props.img} className="card-img" alt="..." height={32} width={32} />
+                <Image src={props.img} className="card-img" alt="..." height={256} width={256} />
               </div>
-              <div onClick={routeChange} className="col-8 col-xs-8 ">
-                <div className="hotel-card_info m-1 ">
-                  <div className="d-flex align-items-center">
+              <div onClick={routeChange} className="p-3">
+                <div className="m-1">
+                  <div className="">
                     <h6 className="mb-0 ">Quarto Privado em T3 - Peniche</h6>
                     <div className="m-1">
                       <Image src="/images/stars.png" alt="" height={32} width={32} />
                     </div>
                   </div>
                   {/* icon with images */}
-                  <div className="amnities d-flex mb-2 mt-3">
-                    <RiUserLine />
-                    <span className="m-1" style={{ fontSize: "12px" }}>
-                      2 Hóspedes
-                    </span>
-                    <i className="fa-solid fa-bed m-1"></i>
-                    <span className="m-1" style={{ fontSize: "12px" }}>
-                      <BiBed />1 Cama
-                    </span>
-
-                    <span className="m-1" style={{ fontSize: "12px" }}>
-                      <TbBed />1 Quarto
-                    </span>
-
-                    <i className="fa-solid fa-toilet m-1"></i>
-                    <span className="m-1" style={{ fontSize: "12px" }}>
-                      <GrRestroom />1 Casa De Banho
-                    </span>
+                  <div className="mb-2 mt-3 flex flex-1 justify-around">
+                    <div>
+                      <RiUserLine className="my-auto inline" />
+                      <span className="my-auto ml-1 text-xs">2 Hóspedes</span>
+                    </div>
+                    <div className="ml-2">
+                      <BiBed className="my-auto inline" />
+                      <span className="my-auto ml-1 text-xs">1 Cama</span>
+                    </div>
+                    <div className="ml-2">
+                      <TbBed className="my-auto inline" />
+                      <span className="my-auto ml-1 text-xs">1 Quarto</span>
+                    </div>
+                    <div className="ml-2">
+                      <GrRestroom className="my-auto inline" />
+                      <span className="my-auto ml-1 text-xs">1 Casa De Banho</span>
+                    </div>
                   </div>
                   <div className="d-flex mb-1 mt-2" style={{ fontSize: "12px" }}>
                     <ul

@@ -162,7 +162,6 @@ a {
   -o-transition: all 0.5s ease;
 }
 
-/* CONTACARDS */
 .cardcont-title {
   font-size: 1.5rem;
   font-weight: bold;
@@ -257,13 +256,6 @@ a {
   .header button {
     height: 3.75rem;
   }
-}
-/* Made by @yousaf_ustav on twitter */
-
-/* PG4_5 SELECTION */
-
-.cards.shadow-lg {
-  width: 100% !important;
 }
 
 @media (max-width: 1024px) {
@@ -398,10 +390,6 @@ a {
   background-color: #000000;
   color: #ffffff;
 }
-
-/* .hotel-card_info{
-  padding:  1rem 0;
-} */
 
 /* navbar */
 
