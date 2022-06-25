@@ -6,7 +6,7 @@ import Pg4_5homecard from "../../components/pg4_5homecard/Pg4_5homecard";
 export default function Pg4_5selection() {
   return (
     <div>
-      <div className="ycontainer-md">
+      <div className="">
         <div className="row">
           <div className="col-7">
             <div className="row ">

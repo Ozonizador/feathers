@@ -27,7 +27,7 @@ export default function HomeSection5() {
               text="O primeiro pagamento só será transferido após verificares a casa, estamos aqui para qualquer questão. Boa estadia!"
             />
           </div>
-          <Link href="/4_5" className="btn-contain btn-shadow fs-300 clr-white transition">
+          <Link href="/4_5" className="btn-contain fs-300 clr-white transition">
             <a>
               Encontrar <CgHome /> um...
             </a>

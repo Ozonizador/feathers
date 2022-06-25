@@ -85,7 +85,7 @@ export default function Footer() {
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/4_5" className="fs-100 btn-contain footer-last btn-shadow transition">
+              <Link href="/4_5" className="fs-100 btn-contain footer-last transition">
                 Anuncie a sua propriedade
               </Link>
             </div>

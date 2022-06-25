@@ -9,7 +9,7 @@ export default function HomeSection3() {
         <div className="ycontainer-sm section3">
           <header className="sec3-header">
             <h2 className="clr-black-main">Os quartos em destaque na tua área</h2>
-            <Link href="/4_5" className="button btn-shadow fs-200 clr-black-light transition">
+            <Link href="/4_5" className="button fs-200 clr-black-light transition">
               <a>
                 Ver Mais{" "}
                 <div className="arrow">
