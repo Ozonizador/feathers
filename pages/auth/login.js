@@ -5,12 +5,12 @@ import { SiFacebook, SiGmail } from "react-icons/si";
 const Login = () => {
   return (
     <div className="my-10 flex justify-center">
-      <div className="my-5 w-6/12 rounded-lg border p-3">
-        <div className="grid grid-cols-2 justify-around border-b border-neutral-400 p-3">
-          <div className="text-center text-primary-500">Iniciar sessão</div>
+      <div className="my-5 w-6/12 rounded-lg border border-neutral-100">
+        <div className="grid grid-cols-2 justify-around border-b border-neutral-100">
+          <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
 
           <Link href="/auth/register">
-            <a className="border-l border-neutral-400 text-center">Register</a>
+            <a className="border-l border-neutral-100 p-3 text-center">Register</a>
           </Link>
         </div>
         <div className="p-3">
@@ -18,13 +18,13 @@ const Login = () => {
           <div className="mt-3">
             <div>Email</div>
             <div className="mt-2">
-              <input className="w-full rounded-sm border border-neutral-300"></input>
+              <input className="w-full rounded-sm border border-neutral-300 py-1"></input>
             </div>
           </div>
           <div className="mt-3">
             <div>Palavra-passe</div>
             <div className="mt-2">
-              <input className="w-full rounded-sm border border-neutral-300"></input>
+              <input className="w-full rounded-sm border border-neutral-300 py-1"></input>
             </div>
           </div>
           <div className="mt-3 text-center text-primary-500">Esqueci-me da palavra-passe</div>

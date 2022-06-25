@@ -5,45 +5,39 @@ import { SiFacebook, SiGmail } from "react-icons/si";
 const Register = () => {
   return (
     <div className="my-10 flex justify-center">
-      <div className="my-5 w-6/12 rounded-lg border p-3">
-        <div className="grid grid-cols-2 justify-around border-b border-neutral-400 p-3">
-          <Link href="/auth/login">
-            <a className="text-center">Iniciar sessão</a>
+      <div className="my-5 w-6/12 rounded-lg border border-neutral-100">
+        <div className="grid grid-cols-2 justify-around border-b border-neutral-100">
+          <Link href="/auth/Login">
+            <a className="p-3 text-center">Iniciar Sessão</a>
           </Link>
-
-          <div className="border-l border-neutral-400 text-center text-primary-500">Register</div>
+          <div className="border-l border-neutral-100 p-3 text-center text-primary-500">
+            Register
+          </div>
         </div>
         <div className="p-3">
-          <div className="font-bold">Bem-vindo de novo!</div>
-          <div className="mt-3">
-            <div>Email</div>
-            <div className="mt-2">
-              <input className="w-full rounded-sm border border-neutral-300"></input>
-            </div>
+          <div className="text-xl font-bold">
+            Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
           </div>
-          <div className="mt-3">
-            <div>Palavra-passe</div>
-            <div className="mt-2">
-              <input className="w-full rounded-sm border border-neutral-300"></input>
+          <div className="mt-6">
+            <div className="cursor-pointer border border-primary-500 p-5 text-center text-primary-500 ">
+              Registar com e-mail
             </div>
-          </div>
-          <div className="mt-3 text-center text-primary-500">Esqueci-me da palavra-passe</div>
-          <div className="my-5">
-            <button className="w-full rounded-lg bg-primary-500 py-2">Iniciar sessão</button>
           </div>
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
-            <span className="mx-4 flex-shrink text-gray-400">ou</span>
+            <span className="mx-4 flex-shrink text-2xl font-bold text-black">ou</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="flex flex-1 justify-around gap-5">
-            <button className="h-16 bg-socials-facebook px-8 text-center">
+          <div className="my-3 flex flex-1">
+            <button className="h-16 w-full bg-socials-facebook px-8 text-center">
               <SiFacebook className="inline" color="blue" />
-              <span className="my-auto ml-3 inline">Facebook</span>
+              <span className="my-auto ml-3 inline">Continuar com o Facebook</span>
             </button>
-            <button className="h-16 bg-socials-gmail px-8 text-center">
+          </div>
+          <div>
+            <button className="h-16 w-full bg-socials-gmail px-8 text-center">
               <SiGmail color="red" className="inline" />
-              <span className="my-auto ml-3 inline">Gmail</span>
+              <span className="my-auto ml-3 inline">Continuar com o Google</span>
             </button>
           </div>
         </div>
