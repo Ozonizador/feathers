@@ -1,18 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import Modal16 from '../components/modal16/Modal16'
-import Modal55 from '../components/modal55/Modal55'
-
-
-
+import ModalDenuncia from "../components/modals/ModalDenuncia";
 
 const rodrigo = () => {
   return (
     <>
-    <Modal16 />
-    <Modal55 />
+      <ModalDenuncia />
     </>
-  )
-}
+  );
+};
 
-export default rodrigo
+export default rodrigo;

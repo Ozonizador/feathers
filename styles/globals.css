@@ -720,28 +720,17 @@ h1 img {
     padding-top: 10.5rem;
     padding-bottom: 10.125rem;
   }
-  .input {
-    width: 40vw;
-  }
 }
 @media (max-width: 860px) {
   .header {
     padding-top: 8.5rem;
     padding-bottom: 8.125rem;
   }
-  .input {
-    width: 45vw;
-  }
 }
 @media (max-width: 600px) {
   .header {
     padding-top: 6.5rem;
     padding-bottom: 6.125rem;
-  }
-  .input {
-    height: 3.75rem;
-
-    width: 55vw;
   }
   .header button {
     height: 3.75rem;
@@ -764,10 +753,6 @@ h1 img {
     gap: 3rem;
   }
 }
-#model-heading-text {
-  font-size: 18px;
-  margin-top: 15px;
-}
 
 #img-modal {
   height: 30px;
@@ -780,42 +765,12 @@ h1 img {
   border: none;
 }
 
-#header-flex {
-  background-color: #f2e8de;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  height: 60px;
-}
-
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
-#model-heading {
-  font-size: 20px;
-}
-#input-modal {
-  width: 100%;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  font-size: 12px;
-}
-#input-modal :hover {
-  width: 100%;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  font-size: 12px;
-}
-#modal-btn {
-  background-color: #c48b60;
-  color: #fff;
-}
-
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -823,28 +778,11 @@ h1 img {
   border-bottom-right-radius: 30px;
 }
 
-#model-heading {
-  font-size: 20px;
-}
-#modal-btn {
-  background-color: #c48b60;
-  color: #fff;
-  border: none;
-}
-
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-}
-#model-heading {
-  font-size: 20px;
-}
-#modal-btn {
-  background-color: #c48b60;
-  color: #fff;
-  border: none;
 }
 #modal-label {
   font-size: 10px;
@@ -865,27 +803,6 @@ h1 img {
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-}
-#model-heading {
-  font-size: 20px;
-}
-#input-modal {
-  width: 100%;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  font-size: 12px;
-}
-#input-modal :hover {
-  width: 100%;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  font-size: 12px;
-}
-#modal-btn {
-  background-color: #c48b60;
-  color: #fff;
 }
 #modal-img {
   height: 30px;
@@ -1383,14 +1300,6 @@ h1 img {
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-}
-#model-heading {
-  font-size: 20px;
-}
-#modal-btn {
-  background-color: #c48b60;
-  color: #fff;
-  border: none;
 }
 #modal-label {
   font-size: 10px;
