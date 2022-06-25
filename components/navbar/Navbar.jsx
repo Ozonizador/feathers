@@ -48,8 +48,15 @@ export const Navbar = (props) => {
         <div className="container-md hr"></div>
         <div className="container-md ">
           <div className="mt-5 flex justify-between align-middle">
-            <Image src="/images/logo1.png" alt="" className="logo" height={55} width={208}></Image>
-
+            <Link href="/">
+              <Image
+                src="/images/logo1.png"
+                alt=""
+                className="logo cursor-pointer"
+                height={55}
+                width={208}
+              ></Image>
+            </Link>
             <nav>
               <ul className="bottom-nav text-base">
                 <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
@@ -83,7 +90,7 @@ export const Navbar = (props) => {
             </nav>
 
             <div className="flex">
-              <Link href="/12">
+              <Link href="/auth/register">
                 <a className="p-0">
                   <div className="mr-2 rounded border-2 border-[#C48B60] px-6 py-3 text-center text-sm text-[#C48B60] duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                     Registar
@@ -91,7 +98,7 @@ export const Navbar = (props) => {
                 </a>
               </Link>
 
-              <Link href="/11">
+              <Link href="/auth/login">
                 <a className="p-0">
                   <div className=" mr-2 rounded border-2 border-[#C48B60] bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                     Iniciar sessão
