@@ -2,11 +2,7 @@ import React from "react";
 import MainMenu from "../components/admin/MainMenu";
 
 const rodrigo = () => {
-  return (
-    <>
-      <MainMenu />
-    </>
-  );
+  return <></>;
 };
 
 export default rodrigo;

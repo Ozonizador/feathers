@@ -7,7 +7,7 @@ const Register = () => {
     <div className="my-10 flex justify-center">
       <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <Link href="/auth/Login">
+          <Link href="/auth/login">
             <a className="p-3 text-center">Iniciar Sessão</a>
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">
@@ -39,6 +39,10 @@ const Register = () => {
               <SiGmail color="red" className="inline" />
               <span className="my-auto ml-3 inline">Continuar com o Google</span>
             </button>
+          </div>
+          <div>
+            Ao registar-se está a concordar com os nossos termos e condições e política de
+            privacidade.
           </div>
         </div>
       </div>

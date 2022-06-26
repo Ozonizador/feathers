@@ -18,13 +18,13 @@ const Login = () => {
           <div className="mt-3">
             <div>Email</div>
             <div className="mt-2">
-              <input className="w-full rounded-sm border border-terciary-300 py-1"></input>
+              <input className="w-full rounded-sm border border-terciary-100 py-1"></input>
             </div>
           </div>
           <div className="mt-3">
             <div>Palavra-passe</div>
             <div className="mt-2">
-              <input className="w-full rounded-sm border border-terciary-300 py-1"></input>
+              <input className="w-full rounded-sm border border-terciary-100 py-1"></input>
             </div>
           </div>
           <div className="mt-3 text-center text-primary-500">Esqueci-me da palavra-passe</div>
