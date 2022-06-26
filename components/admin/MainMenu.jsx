@@ -6,6 +6,10 @@ import paymentsImage from "../../public/images/mainmenu_2.png";
 import configurationsImage from "../../public/images/mainmenu_3.png";
 import Link from "next/link";
 
+/*
+    pagina 31 do XD
+*/
+
 const MainMenu = () => {
   return (
     <>
@@ -15,7 +19,7 @@ const MainMenu = () => {
       <Link href="/admin/general">
         <a>
           <div className="my-5 flex cursor-pointer justify-center">
-            <div className="p-2x flex w-6/12">
+            <div className="p-2x flex">
               <div>
                 <Image
                   src={personalInformationImage}
@@ -35,7 +39,7 @@ const MainMenu = () => {
       <Link href="/admin/general">
         <a>
           <div className="my-5 flex cursor-pointer justify-center">
-            <div className="p-2x flex w-6/12">
+            <div className="p-2x flex">
               <div>
                 <Image src={paymentsImage} alt="Informações pessoais" height={96} width={96} />
               </div>
@@ -50,7 +54,7 @@ const MainMenu = () => {
       <Link href="/admin/general">
         <a>
           <div className="my-5 flex cursor-pointer justify-center">
-            <div className="p-2x flex w-6/12">
+            <div className="p-2x flex">
               <div>
                 <Image
                   src={configurationsImage}
