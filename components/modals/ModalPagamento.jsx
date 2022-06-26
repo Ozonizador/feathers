@@ -139,9 +139,8 @@ export default function ModalPagamento() {
                                   <div className="col-6">
                                     <button
                                       style={{ float: "left" }}
-                                      id="btn-modal"
                                       type="submit"
-                                      className="btn  btn-primary btn-block"
+                                      className="bg-primary-500 text-white "
                                     >
                                       Concluido
                                     </button>

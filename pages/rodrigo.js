@@ -1,11 +1,10 @@
 import React from "react";
-
-import ModalDenuncia from "../components/modals/ModalDenuncia";
+import MainMenu from "../components/admin/MainMenu";
 
 const rodrigo = () => {
   return (
     <>
-      <ModalDenuncia />
+      <MainMenu />
     </>
   );
 };

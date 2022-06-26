@@ -230,16 +230,6 @@ a {
   }
 }
 
-@media (max-width: 1024px) {
-  .container {
-    margin-top: 10rem;
-  }
-}
-@media (max-width: 860px) {
-  .container {
-    margin-top: 10rem;
-  }
-}
 #button-select {
   width: 6.25rem;
   border: none;
@@ -759,31 +749,7 @@ h1 img {
   width: 30px;
   margin-left: 30px !important;
 }
-#btn-modal {
-  background-color: #c48b60;
-  color: white;
-  border: none;
-}
 
-#model-radius {
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
-#model-radius {
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
-
-#model-radius {
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
 #modal-label {
   font-size: 10px;
 }
@@ -798,12 +764,6 @@ h1 img {
   color: #cecece;
 }
 
-#model-radius {
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
 #modal-img {
   height: 30px;
   width: 30px;
@@ -1006,32 +966,7 @@ h1 img {
   align-items: center;
   margin-bottom: 3rem;
 }
-.button {
-  background-color: #d6b592;
-  padding: 0.625rem 0.875rem;
-  border-radius: 1.5rem;
-  -webkit-border-radius: 1.5rem;
-  -moz-border-radius: 1.5rem;
-  -ms-border-radius: 1.5rem;
-  -o-border-radius: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-}
-.arrow {
-  background-color: #fff;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .sec3-card-container {
   width: 100%;
   display: grid;

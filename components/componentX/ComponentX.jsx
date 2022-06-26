@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-
 export default function ComponentX() {
   const [summary1, setSummary1] = useState(true);
   const [summary2, setSummary2] = useState(true);
@@ -23,11 +22,16 @@ export default function ComponentX() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div className="summary-icon">
-              <Image src="/images/icons8_resume.svg"  alt="" />
+              <Image src="/images/icons8_resume.svg" height={32} width={32} alt="" />
             </div>
             <p>Conta</p>
           </div>
-          <Image src={summary1 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} height={32} width={32} alt="" />
+          <Image
+            src={summary1 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+            height={32}
+            width={32}
+            alt=""
+          />
         </summary>
         <ul>
           <li>
@@ -53,7 +57,12 @@ export default function ComponentX() {
             </div>
             <p>Minha estadia</p>
           </div>
-          <Image src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} height={32} width={32} alt="" />
+          <Image
+            src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+            height={32}
+            width={32}
+            alt=""
+          />
         </summary>
         <ul>
           <li>
@@ -78,11 +87,16 @@ export default function ComponentX() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div className="summary-icon">
-              <Image src="/images/icons8_settings_3.svg" alt="" />
+              <Image src="/images/icons8_settings_3.svg" height={32} width={32} alt="" />
             </div>
             <p>Conta</p>
           </div>
-          <Image src={summary3 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"} alt="" />
+          <Image
+            src={summary3 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+            height={32}
+            width={32}
+            alt=""
+          />
         </summary>
         <ul>
           <li>

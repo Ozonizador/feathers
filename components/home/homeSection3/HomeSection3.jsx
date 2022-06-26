@@ -11,8 +11,8 @@ export default function HomeSection3() {
             <h2 className="clr-black-main">Os quartos em destaque na tua área</h2>
             <Link href="/4_5" className="button fs-200 clr-black-light transition">
               <a>
-                Ver Mais{" "}
-                <div className="arrow">
+                Ver Mais
+                <div>
                   <BsArrowRightShort className="clr-acc" />
                 </div>
               </a>
