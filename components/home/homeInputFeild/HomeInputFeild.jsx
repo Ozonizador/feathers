@@ -31,7 +31,7 @@ export const SearchHomeInput = () => {
           <Image height={32} width={32} src="/images/icon-arrow-left.svg" alt="" /> Saida
         </p>
       </div>
-      <button onClick={routeChange} className="bg-primary-500 transition rounded-lg">
+      <button onClick={routeChange} className="bg-primary-500 transition rounded-lg px-6">
         <Image height={32} width={32} src="/images/icon-search.svg" alt="" />
       </button>
     </>

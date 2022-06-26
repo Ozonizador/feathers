@@ -661,12 +661,12 @@ header p {
 /* =============================== SECTION1 ========================== */
 .header {
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0)),
-    url(/images/furniture5.jpg) !important;
-  background-repeat: no-repeat;
+    /* url(/images/furniture5.jpg) !important; */
+  /* background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   padding-top: 13.5rem;
-  padding-bottom: 13.125rem;
+  padding-bottom: 13.125rem; */
 }
 .header img {
   display: inline-block;

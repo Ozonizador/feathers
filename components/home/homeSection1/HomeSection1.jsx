@@ -1,7 +1,5 @@
 import React from "react";
-import { useState } from "react";
 import Image from "next/image";
-
 import HomeInputFeild from "../homeInputFeild/HomeInputFeild";
 
 export default function HomeSection1() {
