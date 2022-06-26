@@ -8,8 +8,9 @@ module.exports = {
           300: "#D6B592",
           500: "#C48B60",
         },
-        neutral: {
+        terciary: {
           100: "#E8E8E8",
+          300: "#F9F9F9",
         },
         secondary: {
           300: "#908A88",

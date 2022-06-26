@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="my-auto mx-auto flex">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
-          <div className="ml-5 py-5 text-center text-neutral-100 lg:text-left">
+          <div className="ml-5 py-5 text-center text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
               <Link href="/aboutus" className="fs-300 clr-white">
@@ -45,7 +45,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="py-5 text-center text-neutral-100 lg:text-left">
+          <div className="py-5 text-center text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Estudantes</h3>
             <div className="py-1">
               <Link href="/" className="fs-300 clr-white">
@@ -65,7 +65,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="py-5 text-center text-neutral-100 lg:text-left">
+          <div className="py-5 text-center text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Senhorios</h3>
 
             <div className="py-1">
@@ -97,7 +97,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="bg-secondary-300 px-20">
-          <p className="mb-1 border-t border-neutral-100 pt-8 pb-7 text-center text-neutral-100">
+          <p className="mb-1 border-t border-terciary-100 pt-8 pb-7 text-center text-terciary-100">
             Unihosts
           </p>
         </div>

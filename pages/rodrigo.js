@@ -1,18 +1,12 @@
-import React from 'react'
-
-import Modal16 from '../components/modal16/Modal16'
-import Modal55 from '../components/modal55/Modal55'
-
-
-
+import React from "react";
+import MainMenu from "../components/admin/MainMenu";
 
 const rodrigo = () => {
   return (
     <>
-    <Modal16 />
-    <Modal55 />
+      <MainMenu />
     </>
-  )
-}
+  );
+};
 
-export default rodrigo
+export default rodrigo;
