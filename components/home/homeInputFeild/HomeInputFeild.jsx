@@ -14,19 +14,19 @@ export const SearchHomeInput = () => {
   return (
     <>
       <div className="div1 relative mx-2">
-        <input type="text" className="w-72 rounded-xl bg-neutral-50 p-6" />
+        <input type="text" className="bg-terciary-50 w-72 rounded-xl p-6" />
         <p className="absolute top-1/4 px-2">
           Encontrar <Image height={32} width={32} src="/images/icon-home1.svg" alt="" /> em...
         </p>
       </div>
       <div className="div2 relative mx-2">
-        <input type="text" className="w-52 rounded-xl bg-neutral-50 p-6" />
+        <input type="text" className="bg-terciary-50 w-52 rounded-xl p-6" />
         <p className="absolute top-1/4 px-2">
           <Image height={32} width={32} src="/images/icon-arrow-right.svg" alt="" /> Entrada
         </p>
       </div>
       <div className="div3 relative mx-2">
-        <input type="text" className="w-52 rounded-xl bg-neutral-50 p-6" />
+        <input type="text" className="bg-terciary-50 w-52 rounded-xl p-6" />
         <p className="absolute top-1/4 px-2">
           <Image height={32} width={32} src="/images/icon-arrow-left.svg" alt="" /> Saida
         </p>

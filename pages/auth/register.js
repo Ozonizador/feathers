@@ -5,12 +5,12 @@ import { SiFacebook, SiGmail } from "react-icons/si";
 const Register = () => {
   return (
     <div className="my-10 flex justify-center">
-      <div className="my-5 w-6/12 rounded-lg border border-neutral-100">
-        <div className="grid grid-cols-2 justify-around border-b border-neutral-100">
+      <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
+        <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <Link href="/auth/Login">
             <a className="p-3 text-center">Iniciar Sessão</a>
           </Link>
-          <div className="border-l border-neutral-100 p-3 text-center text-primary-500">
+          <div className="border-l border-terciary-100 p-3 text-center text-primary-500">
             Register
           </div>
         </div>
