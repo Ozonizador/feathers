@@ -1,8 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
+import { loginWithGoogle } from "../../services/userService";
 
 const Register = () => {
+  const registerWithGoogle = (event) => {
+    event.preventDefault();
+    loginWithGoogle();
+  };
+
   return (
     <div className="my-10 flex justify-center">
       <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
@@ -35,7 +41,10 @@ const Register = () => {
             </button>
           </div>
           <div>
-            <button className="h-16 w-full bg-socials-gmail px-8 text-center">
+            <button
+              className="h-16 w-full bg-socials-gmail px-8 text-center"
+              onClick={(event) => registerWithGoogle(event)}
+            >
               <SiGmail color="red" className="inline" />
               <span className="my-auto ml-3 inline">Continuar com o Google</span>
             </button>
