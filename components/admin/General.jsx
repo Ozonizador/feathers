@@ -11,7 +11,7 @@ const MainMenu = () => {
     <div className="px-36">
       <div className="mb-10">
         <Link href="/admin">Conta</Link>
-        {"> Informações pessoais"}
+        {" > Informações pessoais"}
       </div>
       <div className="w-9/12 bg-terciary-300 p-10">
         <div>Informações pessoais</div>

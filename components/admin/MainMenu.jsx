@@ -36,12 +36,12 @@ const MainMenu = () => {
           </div>
         </a>
       </Link>
-      <Link href="/admin/general">
+      <Link href="/admin/payments">
         <a>
           <div className="my-5 flex cursor-pointer justify-center">
             <div className="p-2x flex">
               <div>
-                <Image src={paymentsImage} alt="Informações pessoais" height={96} width={96} />
+                <Image src={paymentsImage} alt="Pagamentos" height={96} width={96} />
               </div>
               <div className="ml-5 mt-6">
                 <div>Pagamentos e recebimentos</div>
@@ -51,17 +51,12 @@ const MainMenu = () => {
           </div>
         </a>
       </Link>
-      <Link href="/admin/general">
+      <Link href="/admin/configurations">
         <a>
           <div className="my-5 flex cursor-pointer justify-center">
             <div className="p-2x flex">
               <div>
-                <Image
-                  src={configurationsImage}
-                  alt="Informações pessoais"
-                  height={96}
-                  width={96}
-                />
+                <Image src={configurationsImage} alt="Configurações" height={96} width={96} />
               </div>
               <div className="ml-5 mt-6">
                 <div>Configurações</div>
