@@ -1,12 +1,15 @@
 import React from "react";
-
+import Image from "next/image";
 import HomeSection2Cards from '../homeSection2Cards/HomeSection2Cards';
 
 export default function HomeSection2() {
     return (
         <section>
-            <div className="ycontainer-sm section2">
+            <div className="container flex justify-between px-20 mx-auto py-20">
                 <HomeSection2Cards
+
+
+
                     img="/images/homeSection2-1.svg"
                     heading="Seguro e Verificado"
                     text="Valorizamos e protegemos a integridade das listas"

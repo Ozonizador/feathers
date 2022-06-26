@@ -9,33 +9,33 @@ export default function HomeSection4() {
 
   return (
     <section>
-      <div onClick={routeChange} className="container-fluid bg-light">
-        <div className="ycontainer-sm section4">
-          <h2 className="clr-black-light">Explore as nossas cidades + populares!</h2>
-          <div className="sec4-card-container">
-            <article className="uplift sec4-article sec4-card1 flex transition">
-              <h3 className="fs-800 clr-white">Tomar</h3>
+      <div onClick={routeChange} className="container-fluid bg-terciary-300">
+        <div className="container mx-auto pt-16 pb-20 text-center">
+          <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>
+          <div className="grid grid-cols-4 gap-8">
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Tomar</h3>
             </article>
-            <article className="uplift sec4-article sec4-card2 flex transition">
-              <h3 className="fs-800 clr-white">Peniche</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Peniche</h3>
             </article>
-            <article className="uplift sec4-article sec4-card3 flex transition">
-              <h3 className="fs-800 clr-white">Rio</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Rio</h3>
             </article>
-            <article className="uplift sec4-article sec4-card4 flex transition">
-              <h3 className="fs-800 clr-white">Santarem</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Santarem</h3>
             </article>
-            <article className="uplift sec4-article sec4-card5 flex transition">
-              <h3 className="fs-800 clr-white">Abrantes</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Abrantes</h3>
             </article>
-            <article className="uplift sec4-article sec4-card6 flex transition">
-              <h3 className="fs-800 clr-white">Leira</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Leira</h3>
             </article>
-            <article className="uplift sec4-article sec4-card7 flex transition">
-              <h3 className="fs-800 clr-white">Braga</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Braga</h3>
             </article>
-            <article className="uplift sec4-article sec4-card8 flex transition">
-              <h3 className="fs-800 clr-white">Setubal</h3>
+            <article className="py-32 px-16  rounded-2xl bg-cover bg-no-repeat bg-gray-300 flex justify-center align-middle">
+              <h3 className="text-white text-5xl font-bold">Setubal</h3>
             </article>
           </div>
         </div>
