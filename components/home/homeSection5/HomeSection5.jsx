@@ -1,16 +1,16 @@
 import React from "react";
 import HomeSection5Cards from "../homeSection5Cards/HomeSection5Cards";
 import Link from "next/link";
+// import Image from "next-image"
 
 import { CgHome } from "react-icons/cg";
 
 export default function HomeSection5() {
   return (
     <section>
-      <div className="container-fluid">
-        <div className="ycontainer-sm section5">
-          <h2 className="bold">Como Funciona?</h2>
-          <div className="sec5-card-container">
+        <div className="container mx-auto pt-24 pb-36">
+          <h2 className="text-5xl font-bold mb-12">Como Funciona?</h2>
+          <div className="grid grid-cols-3 gap-10 mb-24">
             <HomeSection5Cards
               img="/images/homeSection2-3.svg"
               heading="Pesquisa"
@@ -27,13 +27,14 @@ export default function HomeSection5() {
               text="O primeiro pagamento só será transferido após verificares a casa, estamos aqui para qualquer questão. Boa estadia!"
             />
           </div>
-          <Link href="/4_5" className="fs-300 clr-white transition">
-            <a>
-              Encontrar <CgHome /> um...
+          <span className="flex justify-center">
+          <Link href="/4_5">
+            <a className="bg-primary-500 p-5 text-white flex justify-center  items-center w-1/5 rounded-xl duration-200 ease-in hover: hover:text-white hover:drop-shadow-xl">
+              Encontrar <span className="px-1">< CgHome /></span> um...
             </a>
           </Link>
+          </span>
         </div>
-      </div>
     </section>
   );
 }

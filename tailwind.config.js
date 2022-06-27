@@ -10,12 +10,16 @@ module.exports = {
         },
         terciary: {
           100: "#E8E8E8",
+          200: "#DEDEDE",
           300: "#F9F9F9",
+          400: "#262E36",
           500: "#DFDFDF",
         },
         secondary: {
           300: "#908A88",
+          400: "#7D8A97",
           500: "#505046",
+          600: "#262E36",
         },
         socials: {
           facebook: "#F2F8FF",
