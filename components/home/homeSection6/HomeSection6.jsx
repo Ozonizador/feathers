@@ -1,13 +1,16 @@
 import React from "react";
 import HomeSection6Cards from "../homeSection6Cards/HomeSection6Cards";
 
+
+                                  // ATENÇÃO - FALTA carousel
+
 export default function HomeSection6() {
   return (
     <section>
-      <div className="container-fluid bg-light">
-        <div className="ycontainer-sm section6" style={{ textAlign: "center" }}>
-          <h2 className="bold">Testemunhos</h2>
-          <div className="sec6-card-container">
+      <div className="container-fluid bg-terciary-300">
+        <div className="container mx-auto py-20 text-center">
+          <h2 className="text-5xl font-bold mb-20">Testemunhos</h2>
+          <div className="grid grid-cols-3 gap-8">
             <HomeSection6Cards
               testimonial="Com a UniHosts foi tudo mais fácil! Sempre tive alguma dificuldade para encontrar inquilinos para o respetivo Ano Lectivo, contudo com este serviço digital especializado consigo de forma eficiente e eficaz encher a minha casa!"
               img="/images/sec6-person1.jpg"

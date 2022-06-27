@@ -1,37 +1,23 @@
 import React from "react";
 import Image from "next/image";
 
-export default function HomeSection6Cards(props) {
+export default function HomeSection6Cards({img, testimonial, name, desc}) {
   return (
     <article className="sec6-article">
       <div>
-        <Image
-          height={32}
-          width={32}
-          src="/images/icon-quotest.svg"
-          alt=""
+        <Image  height={32} width={32} src="/images/icon-quotest.svg" alt=""
           style={{ width: "42px" }}
         />
-        <p className="fs-400 lead-para">{props.testimonial}</p>
+        <p className="text-xl">{testimonial}</p>
       </div>
       <div className="profile">
-        <Image
-          height={32}
-          width={32}
-          src={props.img}
-          alt=""
-          style={{
-            width: "60px",
-            height: "60px",
-            borderRadius: "20px",
-          }}
-        />
+        <Image height={64} width={64} src={img} alt="" />
         <div>
-          <p className="fs-400 bold" style={{ marginBottom: "0" }}>
-            {props.name}
+          <p className="text-xl font-bold mb-0">
+            {name}
           </p>
-          <p className="fs-200" style={{ marginBottom: "0" }}>
-            {props.desc}
+          <p className="mb-0">
+            {desc}
           </p>
         </div>
       </div>
