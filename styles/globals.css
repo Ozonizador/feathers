@@ -391,13 +391,6 @@ select option {
 .bottom .logo {
   width: 12.5rem; /*200px*/
 }
-.bottom-nav {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: auto 0.25rem;
-}
 .nav-padding {
   padding: 0.875rem 0.875rem 1rem 0.875rem;
 }

@@ -21,16 +21,18 @@ export default function FuncionaSection4() {
                 height="25"
                 width="25"
               ></Image>
-              <p className="ml-4 mt-5 text-xl">{option.text}</p>
+              <p className="my-auto ml-4 py-2 text-xl">{option.text}</p>
             </div>
           );
         })}
         <hr className="my-6" />
         <h1 className="mb-5 text-center text-2xl font-bold">Preço Sob Consulta</h1>
 
-        <Link href=" ">
-          <a className="rounded-md bg-primary-300 py-2 px-7 text-center text-white">Saber mais</a>
-        </Link>
+        <div className="flex flex-1 justify-center">
+          <Link href=" ">
+            <a className="rounded-md bg-primary-300 py-2 px-7 text-center text-white">Saber mais</a>
+          </Link>
+        </div>
       </div>
 
       <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-1/2">
@@ -42,7 +44,7 @@ export default function FuncionaSection4() {
           </div>
           {optionsCard2.map((option, index) => {
             return (
-              <div key={index} className="flex flex-row items-baseline ">
+              <div key={index} className="flex flex-row">
                 <Image
                   className="object-scale-down"
                   src="/images/tick.png"
@@ -50,7 +52,7 @@ export default function FuncionaSection4() {
                   height="25"
                   width="25"
                 ></Image>
-                <p className="ml-4 mt-5 text-xl">{option.text}</p>
+                <p className="my-auto ml-4 py-2 text-xl">{option.text}</p>
               </div>
             );
           })}
