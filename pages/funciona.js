@@ -5,7 +5,7 @@ import React from "react";
 import FuncionaSection1 from "../components/funciona/FuncionaSection1";
 import FuncionaSection2 from "../components/funciona/funcionaSection2/FuncionaSection2";
 import FuncionaSection3 from "../components/funciona/funcionaSection3/FuncionaSection3";
-
+import FuncionaSection4 from "../components/funciona/funcionaSection4/FuncionaSection4";
 export default function Home() {
   return (
     <div>
@@ -20,6 +20,7 @@ export default function Home() {
         <FuncionaSection1 />
         <FuncionaSection2 />
         <FuncionaSection3 />
+        <FuncionaSection4 />
       </div>
     </div>
   );
