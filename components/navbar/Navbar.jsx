@@ -17,8 +17,8 @@ export const Navbar = (props) => {
 
   return (
     <header>
-      <div className="container mx-auto">
-        <div className="container-md">
+      <div className="mx-auto">
+        <div>
           <div className="flex py-2">
             <div className="flex">
               <div className="flex">
@@ -45,8 +45,7 @@ export const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <div className="container-md hr"></div>
-        <div className="container-md ">
+        <div className="">
           <div className="mt-5 flex justify-between align-middle">
             <Link href="/">
               <Image
@@ -57,7 +56,7 @@ export const Navbar = (props) => {
                 width={208}
               ></Image>
             </Link>
-            <nav>
+            <nav className="mx-10">
               <ul className="bottom-nav text-base">
                 <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <Link href="/">Home</Link>
@@ -69,10 +68,10 @@ export const Navbar = (props) => {
                   </div>
                   <ul className="sub-menu">
                     <li>
-                      <Link href="/7">Como funciona?</Link>
+                      <Link href="/funciona">Como funciona?</Link>
                     </li>
                     <li>
-                      <Link href="/23">Announciar!</Link>
+                      <Link href="/">Announciar!</Link>
                     </li>
                   </ul>
                 </li>

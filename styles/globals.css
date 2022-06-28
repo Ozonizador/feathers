@@ -381,10 +381,7 @@ select option {
   background-color: #fff;
   border-color: #ecf0f1;
 }
-.hr {
-  background-color: #ecf0f1;
-  height: 1px;
-}
+
 .bottom {
   display: flex;
   align-items: baseline;
@@ -660,8 +657,8 @@ header p {
 /* home section 1 */
 /* =============================== SECTION1 ========================== */
 .header {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0)),
-    /* url(/images/furniture5.jpg) !important; */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0));
+  /* url(/images/furniture5.jpg) !important; */
   /* background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
