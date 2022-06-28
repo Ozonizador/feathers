@@ -49,22 +49,24 @@ export const Navbar = (props) => {
           <div className="mt-5 flex flex-1 justify-between align-middle">
             <div className="hidden lg:block">
               <Link href="/">
-                <Image
-                  src="/images/logo1.png"
-                  alt=""
-                  className="logo cursor-pointer"
-                  height={55}
-                  width={208}
-                ></Image>
+                <a>
+                  <Image
+                    src="/images/logo1.png"
+                    alt=""
+                    className="logo cursor-pointer"
+                    height={55}
+                    width={208}
+                  ></Image>
+                </a>
               </Link>
             </div>
             <nav className="mx-10">
-              <ul className="flex pt-3.5 text-base">
+              <ul className="flex flex-wrap pt-3.5 text-base">
                 <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <Link href="/">Home</Link>
                 </li>
                 <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
-                  <div className="flex flex-wrap">
+                  <div className="flex">
                     <p>Anuncie a sua propriedade</p>
                     <VscTriangleDown className="mt-1.5" />
                   </div>
@@ -81,7 +83,7 @@ export const Navbar = (props) => {
                   <Link href="/8">Blog</Link>
                 </li>
                 <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
-                  <Link href="/53">Contactos</Link>
+                  <Link href="/contactos">Contactos</Link>
                 </li>
                 <li className={activeNav === "home" ? "bottom-line" : ""}></li>
                 <li></li>

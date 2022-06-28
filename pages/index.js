@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import { useRouter } from "next/router";
 
 import HomeSection1 from "../components/home/homeSection1/HomeSection1";
 import HomeSection2 from "../components/home/homeSection2/HomeSection2";
@@ -12,6 +13,14 @@ import Blog from "../components/home/Blog/Blog";
 import HomeParceiros from "../components/home/homeParceiros/HomeParceiros";
 
 export default function Home() {
+  const router = useRouter();
+
+  const urlSearchParams = new URLSearchParams(router.asPath.split("#")[1]);
+  const params = Object.fromEntries(urlSearchParams.entries());
+  {
+    /* acabar aqui */
+  }
+
   return (
     <div>
       <Head>

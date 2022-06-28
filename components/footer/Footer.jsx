@@ -40,7 +40,7 @@ export default function Footer() {
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/53" className="fs-300 clr-white">
+              <Link href="/contactos" className="fs-300 clr-white">
                 Fale connosco
               </Link>
             </div>

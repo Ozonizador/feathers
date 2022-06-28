@@ -8,7 +8,7 @@ export async function register(email, password) {
       password,
     },
     {
-      redirectTo: `${window.location.origin}/auth/welcome`,
+      redirectTo: `${window.location.origin}`,
     }
   );
 }
@@ -20,7 +20,7 @@ export async function login(email, password) {
       password,
     },
     {
-      redirectTo: `${window.location.origin}/auth/welcome`,
+      redirectTo: `${window.location.origin}`,
     }
   );
 
@@ -33,7 +33,7 @@ export async function loginWithMagicLink(email) {
       email,
     },
     {
-      redirectTo: `${window.location.origin}/auth/welcome`,
+      redirectTo: `${window.location.origin}`,
     }
   );
 
@@ -46,7 +46,7 @@ export async function loginWithFacebook() {
       provider: "facebook",
     },
     {
-      redirectTo: `${window.location.origin}/auth/welcome`,
+      redirectTo: `${window.location.origin}`,
     }
   );
 
@@ -59,7 +59,7 @@ export async function loginWithGoogle() {
       provider: "google",
     },
     {
-      redirectTo: `${window.location.origin}/auth/welcome`,
+      redirectTo: `${window.location.origin}`,
     }
   );
 

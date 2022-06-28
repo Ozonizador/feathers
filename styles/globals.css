@@ -1034,14 +1034,6 @@ h1 img {
     margin-bottom: 10.5rem;
   }
 }
-.ycard {
-  width: 21.25rem; /*340px*/
-  padding: 0.5rem;
-  display: flex;
-  gap: 1.125rem;
-  justify-content: center;
-  align-items: flex-start;
-}
 
 .section4 {
   text-align: center;
