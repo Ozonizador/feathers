@@ -8,7 +8,7 @@ export default function FuncionaSection2() {
         <section className="container mx-auto my-20">
             <div className="container flex flex-row justify-between mx-auto  ">
                 <FuncionaSection2Card className="w-11"
-                    img="/images/img1.png" icon="/images/2.png" heading="Criar o anúncio"
+                    img="/images/img1.png" icon="/images/img11.png" heading="Criar o anúncio"
                     text="Elabore o seu anúncio o mais completo possível - ter uma descrição simples e conciso é importante. Defina as duas regras e detalhes da propriedade para que os inquilinos saibam exatamente o que esperar."
                 />
             </div>
