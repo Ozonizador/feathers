@@ -1,26 +1,21 @@
-
 import React from "react";
-
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 
-export default function UnideskHero() {
-    return (
+const UnideskHero = () => {
+  return (
+    <section>
+    <div className="flex justify-center bg-hero-unidesk  py-52 ">
+        <div className="flex flex-col px-10 align-middle md:container">
+            <h1 className="text-7xl text-center font-normal leading-snug text-white tracking-widest mb-0">
+                Uni - Desk
+            </h1>
+            <h2 className="text-4xl font-normal text-white text-center">Estudante</h2>
 
-        <section>
-            <div className="flex justify-center  bg-[url('/images//bed14.jpg')] bg-cover py-52 ">
-                <div className="flex flex-col px-10 align-middle md:container">
-                    <h1 className="text-7xl text-center font-normal leading-snug text-white tracking-widest">
-                        Uni - Desk
-                    <h2 className="text-4xl font-normal ">Estudante</h2>
-                    </h1>
+        </div>
+    </div>
+</section>
+  );
+};
 
-                </div>
-            </div>
-        </section>
-
-
-
-
-    );
-}
+export default UnideskHero;

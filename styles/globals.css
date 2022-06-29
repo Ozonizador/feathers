@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CÓDIGO RODRIGO */
+.bg-hero-unidesk{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed14.jpg);
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+/* FINAL CÓDIGO RODRIGO */
+
+
+
 html,
 body {
   padding: 0;
