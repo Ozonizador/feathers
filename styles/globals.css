@@ -381,10 +381,7 @@ select option {
   background-color: #fff;
   border-color: #ecf0f1;
 }
-.hr {
-  background-color: #ecf0f1;
-  height: 1px;
-}
+
 .bottom {
   display: flex;
   align-items: baseline;
@@ -393,13 +390,6 @@ select option {
 }
 .bottom .logo {
   width: 12.5rem; /*200px*/
-}
-.bottom-nav {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: auto 0.25rem;
 }
 .nav-padding {
   padding: 0.875rem 0.875rem 1rem 0.875rem;
@@ -660,8 +650,8 @@ header p {
 /* home section 1 */
 /* =============================== SECTION1 ========================== */
 .header {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0)),
-    /* url(/images/furniture5.jpg) !important; */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0));
+  /* url(/images/furniture5.jpg) !important; */
   /* background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1044,14 +1034,6 @@ h1 img {
     margin-bottom: 10.5rem;
   }
 }
-.ycard {
-  width: 21.25rem; /*340px*/
-  padding: 0.5rem;
-  display: flex;
-  gap: 1.125rem;
-  justify-content: center;
-  align-items: flex-start;
-}
 
 .section4 {
   text-align: center;
@@ -1075,38 +1057,7 @@ h1 img {
   -ms-border-radius: 1.125rem;
   -o-border-radius: 1.125rem;
 }
-.sec4-card1 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-tomar.jpg);
-}
-.sec4-card2 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-peniche.JPG);
-}
-.sec4-card3 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-brazil.png);
-}
-.sec4-card4 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-santarem.jpg);
-}
-.sec4-card5 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-abrantes.jpg);
-}
-.sec4-card6 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-leiria.jpg);
-}
-.sec4-card7 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-braga.jpg);
-}
-.sec4-card8 {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url(/images/place-setubal.jpg);
-}
+
 .sec4-article {
   background-size: cover;
   background-position: center;

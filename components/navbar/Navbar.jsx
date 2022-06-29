@@ -17,8 +17,8 @@ export const Navbar = (props) => {
 
   return (
     <header>
-      <div className="container mx-auto">
-        <div className="container-md">
+      <div className="mx-auto">
+        <div>
           <div className="flex py-2">
             <div className="flex">
               <div className="flex">
@@ -45,42 +45,45 @@ export const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <div className="container-md hr"></div>
-        <div className="container-md ">
-          <div className="mt-5 flex justify-between align-middle">
-            <Link href="/">
-              <Image
-                src="/images/logo1.png"
-                alt=""
-                className="logo cursor-pointer"
-                height={55}
-                width={208}
-              ></Image>
-            </Link>
-            <nav>
-              <ul className="bottom-nav text-base">
-                <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
+        <div className="">
+          <div className="mt-5 flex flex-1 justify-between align-middle">
+            <div className="hidden lg:block">
+              <Link href="/">
+                <a>
+                  <Image
+                    src="/images/logo1.png"
+                    alt=""
+                    className="logo cursor-pointer"
+                    height={55}
+                    width={208}
+                  ></Image>
+                </a>
+              </Link>
+            </div>
+            <nav className="mx-10">
+              <ul className="flex flex-wrap pt-3.5 text-base">
+                <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <Link href="/">Home</Link>
                 </li>
-                <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
+                <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <div className="flex">
                     <p>Anuncie a sua propriedade</p>
                     <VscTriangleDown className="mt-1.5" />
                   </div>
                   <ul className="sub-menu">
                     <li>
-                      <Link href="/7">Como funciona?</Link>
+                      <Link href="/funciona">Como funciona?</Link>
                     </li>
                     <li>
-                      <Link href="/23">Announciar!</Link>
+                      <Link href="/">Anunciar!</Link>
                     </li>
                   </ul>
                 </li>
-                <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
+                <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <Link href="/8">Blog</Link>
                 </li>
-                <li className="px-3.5 pt-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
-                  <Link href="/53">Contactos</Link>
+                <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
+                  <Link href="/contactos">Contactos</Link>
                 </li>
                 <li className={activeNav === "home" ? "bottom-line" : ""}></li>
                 <li></li>
@@ -92,7 +95,7 @@ export const Navbar = (props) => {
             <div className="flex">
               <Link href="/auth/register">
                 <a className="p-0">
-                  <div className="mr-2 rounded border-2 border-[#C48B60] px-6 py-3 text-center text-sm text-[#C48B60] duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                  <div className="mr-2 rounded border-2 border-primary-500 px-6 py-3 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                     Registar
                   </div>
                 </a>
@@ -100,7 +103,7 @@ export const Navbar = (props) => {
 
               <Link href="/auth/login">
                 <a className="p-0">
-                  <div className=" mr-2 rounded border-2 border-[#C48B60] bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                  <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                     Iniciar sessão
                   </div>
                 </a>
