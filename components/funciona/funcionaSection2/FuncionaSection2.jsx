@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import FuncionaSection2Card from "../funcionaSection2/FuncionaSection2Card";
 
-export default function FuncionaSection2() {
+const FuncionaSection2 = () => {
   return (
     <section className="container my-20 mx-10 lg:mx-auto">
       <div className="container mx-auto flex flex-row justify-between  ">
@@ -78,4 +78,6 @@ export default function FuncionaSection2() {
       </Link>
     </section>
   );
-}
+};
+
+export default FuncionaSection2;

@@ -3,9 +3,9 @@ import React from "react";
 
 import FuncionaSection1 from "../components/funciona/FuncionaSection1";
 import FuncionaSection2 from "../components/funciona/funcionaSection2/FuncionaSection2";
-import FuncionaSection3 from "../components/funciona/funcionaSection3/FuncionaSection3";
+import FuncionaUniPackages from "../components/funciona/FuncionaSection3/FuncionaUniPackages";
 import FuncionaSection4 from "../components/funciona/funcionaSection4/FuncionaSection4";
-import FuncionaSection5 from "../components/funciona/funcionaSection5/FuncionaSection5";
+import FuncionaOndeEstamos from "../components/funciona/funcionaSection5/FuncionaSection5";
 
 export default function Home() {
   return (
@@ -19,9 +19,9 @@ export default function Home() {
       <div>
         <FuncionaSection1 />
         <FuncionaSection2 />
-        <FuncionaSection3 />
+        <FuncionaUniPackages />
         <FuncionaSection4 />
-        <FuncionaSection5 />
+        <FuncionaOndeEstamos />
       </div>
     </div>
   );

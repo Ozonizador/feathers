@@ -3,7 +3,6 @@ import { optionsCard1 } from "./Section4.config";
 import { optionsCard2 } from "./FuncionaCard2.config";
 import Link from "next/link";
 
-import FuncionaSection4Card from "./FuncionaSection4Card";
 import Image from "next/image";
 
 export default function FuncionaSection4() {

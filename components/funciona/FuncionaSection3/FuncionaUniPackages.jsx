@@ -1,10 +1,8 @@
 import React from "react";
 
-// import Link from "next/link"
-import FuncionaSection3Card from "./FuncionaSection3Cards";
-// import Image from "next/image"
+import FuncionaSection3Card from "./FuncionaSection3Card";
 
-export default function FuncionaSection3() {
+const FuncionaUniPackages = () => {
   return (
     <section className="container-fluid bg-terciary-300 py-20">
       <div className="container mx-auto mt-14 mb-14 text-center">
@@ -35,4 +33,6 @@ export default function FuncionaSection3() {
       </div>
     </section>
   );
-}
+};
+
+export default FuncionaUniPackages;
