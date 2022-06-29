@@ -14,7 +14,7 @@ export const Navbar = (props) => {
     <header>
       <div className="mx-auto">
         <div>
-          <div className="flex py-2">
+          <div className="flex flex-wrap py-2">
             <div className="flex">
               <div className="flex">
                 <ImPhone className="my-auto mr-1" />
@@ -26,7 +26,7 @@ export const Navbar = (props) => {
               </div>
             </div>
 
-            <div className="ml-auto flex">
+            <div className="flex lg:ml-auto">
               <Socials type="primary" />
               <div className="right-dropdown flex">
                 <Image src="/images/icon-uk.jpg" height={16} width={32} alt="" />
@@ -40,8 +40,8 @@ export const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <div className="">
-          <div className="mt-5 flex flex-1 justify-between align-middle">
+        <div>
+          <div className="mt-5 lg:flex lg:flex-1 lg:justify-between lg:align-middle">
             <div className="hidden lg:block">
               <Link href="/">
                 <a>
@@ -107,13 +107,7 @@ export const Navbar = (props) => {
               </div>
             )}
             {user && (
-              <div
-                className={`nav-profile`}
-                style={{
-                  alignItems: "center",
-                  gap: "22px",
-                }}
-              >
+              <div>
                 <div className="profile-toggle">
                   <span className="student">Estudante</span>
                   <button>
@@ -141,9 +135,7 @@ export const Navbar = (props) => {
                           cursor: "pointer",
                         }}
                       >
-                        <p className="fs-100 bold clr-black-light" style={{ marginBottom: "0" }}>
-                          Jessica
-                        </p>
+                        <p className="fs-100 bold clr-black-light mb-0">Jessica</p>
                         <VscTriangleDown style={{ width: "8px" }} />
                       </div>
                       <ul className="profile-submenu">
