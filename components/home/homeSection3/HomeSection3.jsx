@@ -9,7 +9,7 @@ export default function HomeSection3() {
       <div className="container mx-auto mb-28">
         <div className="mb-12 flex justify-between align-middle">
           <h2 className="text-5xl font-bold text-black">Os quartos em destaque na tua área</h2>
-          <Link href="/4_5">
+          <Link href="/destaques">
             <a className="flex items-center rounded-full bg-primary-300 px-4 align-middle">
               Ver Mais
               <div>

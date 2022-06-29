@@ -3,14 +3,12 @@
 @tailwind utilities;
 
 /* CÓDIGO RODRIGO */
-.bg-hero-unidesk{
+.bg-hero-unidesk {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed14.jpg);
-  background-size:cover;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 /* FINAL CÓDIGO RODRIGO */
-
-
 
 html,
 body {
@@ -27,27 +25,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-/* FEATHERS */
-
-#Button {
-  border-radius: 3px;
-  background-color: #c48b60;
-  color: white;
-  text-align: center;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-bottom: 20px;
-}
-#Button:hover {
-  border-radius: 3px;
-  background-color: #ffffff;
-  color: #c48b60;
-  text-align: center;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-bottom: 20px;
 }
 
 /* COMPONENT X */

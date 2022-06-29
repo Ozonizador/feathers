@@ -1,34 +1,42 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../utils/supabaseClient";
 
 const initialValues = {
   session: null,
   user: null,
+  signOut: null,
 };
 
-export const UserContext = createContext(null);
-export const SetUserContext = createContext(null);
-
-// session
-export const SessionContext = createContext(null);
-export const SetSessionContext = createContext(null);
+export const AuthContext = createContext(initialValues);
 
 export const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const activeSession = supabase.auth.session();
+    setSession(activeSession);
+    setUser(activeSession?.user ?? null);
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, currentSession) => {
+      setSession(currentSession);
+      setUser(currentSession?.user ?? null);
+    });
+
+    return () => {
+      authListener?.unsubscribe();
+    };
+  }, []);
+
   return (
-    <UserContext.Provider value={user}>
-      <SetUserContext.Provider value={setUser}>
-        <SessionContext.Provider value={session}>
-          <SetSessionContext.Provider value={setSession}>{children}</SetSessionContext.Provider>
-        </SessionContext.Provider>
-      </SetUserContext.Provider>
-    </UserContext.Provider>
+    <AuthContext.Provider
+      value={{ user: user, session: session, signOut: () => supabase.auth.signOut() }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 
-export const setUser = () => {};
-export const getUser = () => {};
-
-export const setSession = () => {};
-export const getSession = () => {};
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

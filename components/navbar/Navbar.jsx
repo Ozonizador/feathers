@@ -5,15 +5,10 @@ import { VscTriangleDown } from "react-icons/vsc";
 import Socials from "../socials/Socials";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "../../context/AuthContext";
 
 export const Navbar = (props) => {
-  const [activeNav, setActiveNav] = useState("home");
-  //let navigate = useNavigate();
-  const handleNavClick = () => {
-    let path = "/";
-    //  navigate(path);
-  };
-  const [toggle, setToggle] = useState(props.profile);
+  const { user } = useAuth();
 
   return (
     <header>
@@ -85,93 +80,96 @@ export const Navbar = (props) => {
                 <li className="px-3.5 pb-4 duration-300 ease-in hover:text-secondary-300">
                   <Link href="/contactos">Contactos</Link>
                 </li>
-                <li className={activeNav === "home" ? "bottom-line" : ""}></li>
+                <li className="bottom-line"></li>
                 <li></li>
-                <li className={activeNav === "blog" ? "bottom-line" : ""}></li>
-                <li className={activeNav === "contactos" ? "bottom-line" : ""}></li>
+                <li className="blog"></li>
+                <li className="contactos"></li>
               </ul>
             </nav>
 
-            <div className="flex">
-              <Link href="/auth/register">
-                <a className="p-0">
-                  <div className="mr-2 rounded border-2 border-primary-500 px-6 py-3 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                    Registar
-                  </div>
-                </a>
-              </Link>
+            {!user && (
+              <div className="flex">
+                <Link href="/auth/register">
+                  <a className="p-0">
+                    <div className="mr-2 rounded border-2 border-primary-500 px-6 py-3 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                      Registar
+                    </div>
+                  </a>
+                </Link>
 
-              <Link href="/auth/login">
-                <a className="p-0">
-                  <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
-                    Iniciar sessão
-                  </div>
-                </a>
-              </Link>
-            </div>
-            <div
-              className={`nav-profile ${toggle ? "" : "profileHide"}`}
-              style={{
-                display: "none",
-                alignItems: "center",
-                gap: "22px",
-              }}
-            >
-              <div className="profile-toggle">
-                <span className="student">Estudante</span>
-                <button>
-                  <div className="button-div"></div>
-                </button>
-                <span className="landlord">Senhorio</span>
+                <Link href="/auth/login">
+                  <a className="p-0">
+                    <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                      Iniciar sessão
+                    </div>
+                  </a>
+                </Link>
               </div>
+            )}
+            {user && (
               <div
-                className="profile"
+                className={`nav-profile`}
                 style={{
-                  display: "flex",
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "22px",
                 }}
               >
-                <Image src="/images/man7.png" height={32} width={32} alt="" />
-                <ul style={{ margin: "0", padding: "0" }}>
-                  <li className="profile-dropdown">
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        padding: "6px 0",
-                        gap: "4px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <p className="fs-100 bold clr-black-light" style={{ marginBottom: "0" }}>
-                        Jessica
-                      </p>
-                      <VscTriangleDown style={{ width: "8px" }} />
-                    </div>
-                    <ul className="profile-submenu">
-                      <li className="upper-items bold fs-200 clr-black-main">Uni-Desk</li>
-                      <li className="upper-items bold fs-200 clr-black-main">Minha Estadia</li>
-                      <li className="upper-items bold fs-200 clr-black-main">Favoritos</li>
-                      <li className="upper-items bold fs-200 clr-black-main">
-                        Caixa de Entrada (5)
-                      </li>
-                      <li className="upper-items bold fs-200 clr-black-main">Notificações (3)</li>
-                      <li
+                <div className="profile-toggle">
+                  <span className="student">Estudante</span>
+                  <button>
+                    <div className="button-div"></div>
+                  </button>
+                  <span className="landlord">Senhorio</span>
+                </div>
+                <div
+                  className="profile"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <Image src="/images/man7.png" height={32} width={32} alt="" />
+                  <ul style={{ margin: "0", padding: "0" }}>
+                    <li className="profile-dropdown">
+                      <div
                         style={{
-                          width: "100%",
-                          height: "1px",
-                          backgroundColor: "#505046",
+                          display: "flex",
+                          alignItems: "center",
+                          padding: "6px 0",
+                          gap: "4px",
+                          cursor: "pointer",
                         }}
-                      ></li>
-                      <li className="fs-100 clr-black-extralight">Conta</li>
-                      <li className="fs-100 clr-black-extralight">Ajuda</li>
-                      <li className="fs-100 clr-black-extralight">Sair</li>
-                    </ul>
-                  </li>
-                </ul>
+                      >
+                        <p className="fs-100 bold clr-black-light" style={{ marginBottom: "0" }}>
+                          Jessica
+                        </p>
+                        <VscTriangleDown style={{ width: "8px" }} />
+                      </div>
+                      <ul className="profile-submenu">
+                        <li className="upper-items bold fs-200 clr-black-main">Uni-Desk</li>
+                        <li className="upper-items bold fs-200 clr-black-main">Minha Estadia</li>
+                        <li className="upper-items bold fs-200 clr-black-main">Favoritos</li>
+                        <li className="upper-items bold fs-200 clr-black-main">
+                          Caixa de Entrada (5)
+                        </li>
+                        <li className="upper-items bold fs-200 clr-black-main">Notificações (3)</li>
+                        <li
+                          style={{
+                            width: "100%",
+                            height: "1px",
+                            backgroundColor: "#505046",
+                          }}
+                        ></li>
+                        <li className="fs-100 clr-black-extralight">Conta</li>
+                        <li className="fs-100 clr-black-extralight">Ajuda</li>
+                        <li className="fs-100 clr-black-extralight">Sair</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

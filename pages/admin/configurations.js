@@ -1,5 +1,11 @@
+import Configurations from "../../components/admin/Configurations";
+
 const Index = () => {
-  return <></>;
+  return (
+    <>
+      <Configurations />
+    </>
+  );
 };
 
 export default Index;
