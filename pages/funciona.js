@@ -6,6 +6,7 @@ import FuncionaSection1 from "../components/funciona/FuncionaSection1";
 import FuncionaSection2 from "../components/funciona/funcionaSection2/FuncionaSection2";
 import FuncionaSection3 from "../components/funciona/funcionaSection3/FuncionaSection3";
 import FuncionaSection4 from "../components/funciona/funcionaSection4/FuncionaSection4";
+import FuncionaSection5 from "../components/funciona/funcionaSection5/FuncionaSection5";
 export default function Home() {
   return (
     <div>
@@ -21,6 +22,7 @@ export default function Home() {
         <FuncionaSection2 />
         <FuncionaSection3 />
         <FuncionaSection4 />
+        <FuncionaSection5 />
       </div>
     </div>
   );
