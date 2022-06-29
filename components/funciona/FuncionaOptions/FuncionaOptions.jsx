@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 
-export default function FuncionaSection4() {
+const FuncionaOptions = () => {
   return (
     <section className="my-20 mx-10 flex flex-col justify-center gap-5 lg:mx-32 lg:flex-1 lg:flex-row">
       <div className="flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-1/2">
@@ -67,4 +67,6 @@ export default function FuncionaSection4() {
       </div>
     </section>
   );
-}
+};
+
+export default FuncionaOptions;
