@@ -2,11 +2,11 @@ import React from "react";
 
 function Button({ text, onClick }) {
   return (
-    <div>
-      <div className="text-center" onClick={onClick}>
-        <div>{text}</div>
-      </div>
-    </div>
+    <>
+      <button className="rounded-xl bg-primary-500 p-4 text-center text-white" onClick={onClick}>
+        {text}
+      </button>
+    </>
   );
 }
 
