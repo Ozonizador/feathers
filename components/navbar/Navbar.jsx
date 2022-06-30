@@ -64,7 +64,7 @@ export const Navbar = (props) => {
                   <Link href="/">Home</Link>
                 </li>
                 <div className="relative w-72">
-                  <Menu as="div" className="absolute ml-5 w-56">
+                  <Menu as="div" className="absolute ml-5 w-full">
                     <Menu.Button className="flex flex-1">
                       <div>Anuncie a sua propriedade</div>
                       <div className="my-auto ml-auto">
