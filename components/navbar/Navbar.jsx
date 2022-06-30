@@ -1,17 +1,18 @@
-import React, { Fragment, useState, useSyncExternalStore } from "react";
+import React, { Fragment, useState } from "react";
 import { ImPhone } from "react-icons/im";
 import { GrMail } from "react-icons/gr";
 import { VscTriangleDown } from "react-icons/vsc";
 import Socials from "../socials/Socials";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth } from "../../context/AuthContext";
 import { Menu, Switch, Transition } from "@headlessui/react";
 import MyLink from "../utils/MyLink";
+import { useUser } from "@supabase/auth-helpers-react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
-export const Navbar = (props) => {
+export const Navbar = () => {
   const [enabled, setEnabled] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, error } = useUser();
 
   return (
     <header>
@@ -82,7 +83,7 @@ export const Navbar = (props) => {
                     >
                       <Menu.Items className="flex w-3/4 flex-col bg-white p-2 shadow-md">
                         <Menu.Item>
-                          <MyLink customClass="py-1" href="/unidesk">
+                          <MyLink customClass="py-1" href="/funciona">
                             Como funciona?
                           </MyLink>
                         </Menu.Item>
@@ -193,7 +194,7 @@ export const Navbar = (props) => {
                         </Menu.Item>
                         <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                         <Menu.Item>
-                          <MyLink customClass="py-1" href="/notifications">
+                          <MyLink customClass="py-1" href="/admin">
                             Conta
                           </MyLink>
                         </Menu.Item>
@@ -203,7 +204,7 @@ export const Navbar = (props) => {
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <div className="py-1" onClick={() => signOut()}>
+                          <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
                             Sair
                           </div>
                         </Menu.Item>

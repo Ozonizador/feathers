@@ -1,20 +1,21 @@
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
-import { AuthProvider } from "../context/AuthContext";
+import { UserProvider } from "@supabase/auth-helpers-react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <AuthProvider>
+      <UserProvider supabaseClient={supabaseClient}>
         <Head>
           <title>Unihosts</title>
         </Head>
         <Navbar />
         <Component {...pageProps} />
         <Footer />
-      </AuthProvider>
+      </UserProvider>
     </>
   );
 }
