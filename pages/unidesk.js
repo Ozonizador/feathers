@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 
 import UnideskHero from "../components/unidesk/unideskHero/UnideskHero"
+import UnideskOptions from "../components/unidesk/unideskOptions/UnideskOptions"
 
 
 export default function Unidesk() {
@@ -15,6 +16,7 @@ export default function Unidesk() {
 
       <div>
         <UnideskHero />
+        <UnideskOptions />
       </div>
     </div>
   );
