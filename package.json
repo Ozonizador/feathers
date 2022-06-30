@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:pull": "dotenv -e .env.local -- yarn prisma db pull",
-    "db:migrate": "dotenv -e .env.local -- yarn prisma db pull"
+    "db:migrate:dev": "dotenv -e .env.local -- yarn prisma db push"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
