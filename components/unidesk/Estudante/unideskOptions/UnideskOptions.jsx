@@ -8,10 +8,10 @@ import Link from "next/link"
 
 const UnideskOptions = () => {
     return (
-<section className="container mx-auto flex gap-7 my-24">
+<section className="container mx-auto flex gap-7 my-32">
 
     {/* OPTION1 */}
-        <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-1/2">
+        <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-2/6">
           <div className="flex flex-1 flex-col items-center align-middle pt-12">
           <Image
                 //   className="object-scale-down"
@@ -26,7 +26,7 @@ const UnideskOptions = () => {
                 <div  className="flex flex-row">
                 <Image
                   className="object-scale-down"
-                  src="/images/tick.png"
+                  src="/images/icon-pg14-5.svg"
                   alt=""
                   height="25"
                   width="25"
@@ -38,7 +38,7 @@ const UnideskOptions = () => {
               <div  className="flex flex-row">
                 <Image
                   className="object-scale-down"
-                  src="/images/tick.png"
+                  src="/images/icon-pg14-5.svg"
                   alt=""
                   height="25"
                   width="25"
@@ -50,7 +50,7 @@ const UnideskOptions = () => {
               <div  className="flex flex-row">
                 <Image
                   className="object-scale-down"
-                  src="/images/tick.png"
+                  src="/images/icon-pg14-5.svg"
                   alt=""
                   height="25"
                   width="25"
@@ -61,7 +61,7 @@ const UnideskOptions = () => {
               <div  className="flex flex-row">
                 <Image
                   className="object-scale-down"
-                  src="/images/tick.png"
+                  src="/images/icon-pg14-5.svg"
                   alt=""
                   height="25"
                   width="25"
@@ -76,7 +76,7 @@ const UnideskOptions = () => {
        
 
     {/* OPTION2 */}
-    <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-1/2">
+    <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-2/6">
         <div>
           <div className="flex flex-1 flex-col items-center align-middle pt-12">
             <Image
@@ -93,7 +93,7 @@ const UnideskOptions = () => {
 
 
    {/* OPTION3 */}
-   <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-1/2">
+   <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-2/6">
         <div className="pt-12 flex flex-col justify-center">
             <Image
                     src="/images/icon-pg14-3.svg"
@@ -113,7 +113,7 @@ const UnideskOptions = () => {
 
 
     {/* OPTION4 */}
-    <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-1/2">
+    <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl pb-10 lg:w-2/6">
             <div>
             <div className="flex flex-1 flex-col items-center align-middle pt-12">
                 <Image
