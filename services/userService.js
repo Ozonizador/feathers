@@ -70,3 +70,9 @@ export async function signout() {
   const { error } = await supabase.auth.signOut();
   return error;
 }
+
+/* check session */
+export async function checkUserLoggedIn() {
+  const session = await supabase.auth.session();
+  return session;
+}

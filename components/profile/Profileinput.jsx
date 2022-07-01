@@ -8,9 +8,7 @@ const ProfileInput = () => {
         <div className="row">
           <div className="col-lg-2"></div>
           <div className="col">
-            <p id="profile-heading" className="mb-4">
-              Perfil da Maria
-            </p>
+            <p className="mb-4">Perfil da Maria</p>
           </div>
           <div className="col-lg-2"></div>
         </div>
@@ -42,6 +40,6 @@ const ProfileInput = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ProfileInput;

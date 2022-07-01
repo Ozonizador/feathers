@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import Configurations from "../../components/admin/Configurations";
 
 const Index = () => {
@@ -9,3 +10,5 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
