@@ -11,11 +11,13 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
+
                         <div className="rounded-full  h-12 w-12 py-3 text-center bg-primary-500 border-teal-60">
                             &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-primary-500">Passo 1</div>
                     </div>
+                    {/* <div className="absolute top-6 -ml-14  border-t-2 border-blue-700 w-20"></div> */}
                     <div className="flex-auto border-t-2  border-primary-500"></div>
 
 

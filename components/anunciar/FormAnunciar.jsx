@@ -27,10 +27,22 @@ const FormAnunciar = () => {
                 <Input label="Andar" labelText="Andar" />
 
 
-                <div className="mt-10">
+
+                <div className="mt-1">
                     <Link href="/">
-                        <a className="  mt-10 rounded-md py-4 px-9 text-center bg-primary-500  text-white">Seguinte</a>
+                        <a>
+                            <div className="flex">
+                                <button type="button" className="mt-10 rounded-md py-4 px-9 text-center bg-primary-500  text-white leading-tight uppercase  shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex items-center ">
+                                    Seguinte
+                                    &#8594;
+                                </button>
+                            </div>
+
+                        </a>
                     </Link>
+
+
+
                 </div>
             </div>
 
