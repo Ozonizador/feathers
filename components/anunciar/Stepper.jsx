@@ -11,8 +11,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-primary-500 border-teal-60">
-                            1
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-primary-500 border-teal-60">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-primary-500">Passo 1</div>
                     </div>
@@ -21,18 +21,18 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-primary-500 border-teal-60">
-                            2
+                        <div className="rounded-full h-12 w-12 py-3 text-center bg-primary-500 border-teal-60">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-primary-500">Passo 2</div>
                     </div>
 
-                    <div className="flex-auto border-t-2  border-terciary-200"></div>
+                    <div className="flex-auto border-t-2  border-primary-500"></div>
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200 ">
-                            3
+                        <div className="rounded-full h-12 w-12 py-3 text-center bg-terciary-200 ">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 3</div>
                     </div>
@@ -42,8 +42,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200 border-teal-60">
-                            4
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-terciary-200 border-teal-60">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 4</div>
                     </div>
@@ -53,8 +53,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200">
-                            5
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-terciary-200">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 5</div>
                     </div>
@@ -64,8 +64,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200 border-teal-6">
-                            6
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-terciary-200 border-teal-6">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 6</div>
                     </div>
@@ -75,8 +75,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200">
-                            7
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-terciary-200">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 7</div>
                     </div>
@@ -86,8 +86,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200">
-                            8
+                        <div className="rounded-full  h-12 w-12 py-3 text-center bg-terciary-200">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 8</div>
                     </div>
@@ -97,8 +97,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 text-center bg-terciary-200">
-                            9
+                        <div className="rounded-full h-12 w-12 py-3 text-center bg-terciary-200">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 9</div>
                     </div>
@@ -110,8 +110,8 @@ export default function Stepper() {
 
                     {/* PASSO */}
                     <div className="flex items-center text-white relative">
-                        <div className="rounded-full text-center transition duration-500 ease-in-out h-12 w-12 py-3  bg-terciary-200 ">
-                            10
+                        <div className="rounded-full text-center h-12 w-12 py-3  bg-terciary-200 ">
+                            &#10004;
                         </div>
                         <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-terciary-200">Passo 10</div>
                     </div>
