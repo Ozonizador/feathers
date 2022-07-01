@@ -1,13 +1,13 @@
 import React from "react";
-
+import Link from "next/link"
 import Input from "../../components/utils/Input"
 
 const FormAnunciar = () => {
     return (
-        <section className="my-20 mx-auto flex flex-row justify-around gap-8 lg:mx-32 lg:flex-1 lg:flex-row">
+        <section className="my-20 mx-auto grid grid-cols-2 gap-4  justify-items-center">
 
 
-            <div className="w-2/4">
+            <div className="w-3/4">
                 <div className="mt-2">
                     <label className="block ">
                         Qual o seu tipo de espaço?
@@ -25,11 +25,18 @@ const FormAnunciar = () => {
                     <Input label="Rua" labelText="Rua" />
                 </div>
                 <Input label="Andar" labelText="Andar" />
+
+
+                <div className="mt-10">
+                    <Link href="/">
+                        <a className="  mt-10 rounded-md py-4 px-9 text-center bg-primary-500  text-white">Seguinte</a>
+                    </Link>
+                </div>
             </div>
 
 
 
-            <div className="w-2/4">
+            <div className="w-3/4">
                 <Input label="Localidade" labelText="Localidade" customCss="icon" />
                 <div className="my-8">
                     <Input label="Número" labelText="Número" />
