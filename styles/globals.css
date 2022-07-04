@@ -7,15 +7,12 @@
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed14.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 17px 7px
+  background-position: 17px 7px;
 }
-
-
 
 .icon {
   background: url(/images/location.png) no-repeat 6px;
   background-size: 10px;
-
 }
 
 /* FINAL CÓDIGO RODRIGO */
@@ -212,68 +209,6 @@ a {
 #btn-toogle {
   background-color: #d6b592;
   border-radius: 50px;
-}
-
-/* progress bar */
-
-.progress-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-inline: 7%;
-  position: relative;
-  margin-block: 3rem;
-}
-.progress-container::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 6px;
-  top: 20.5%;
-  left: 0;
-  background-color: #d9d9d9;
-  transform: translateY(-20.5%);
-  -webkit-transform: translateY(-20.5%);
-  -moz-transform: translateY(-20.5%);
-  -ms-transform: translateY(-20.5%);
-  -o-transform: translateY(-20.5%);
-  z-index: -3;
-}
-.progress-line {
-  position: absolute;
-  /* width: 50%; */
-  height: 6px;
-  top: 20.5%;
-  left: 0;
-  background-color: #c48b60;
-  transform: translateY(-20.5%);
-  -webkit-transform: translateY(-20.5%);
-  -moz-transform: translateY(-20.5%);
-  -ms-transform: translateY(-20.5%);
-  -o-transform: translateY(-20.5%);
-  z-index: -2;
-  transition: 0.4s ease;
-  -webkit-transition: 0.4s ease;
-  -moz-transition: 0.4s ease;
-  -ms-transition: 0.4s ease;
-  -o-transition: 0.4s ease;
-}
-.circle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  color: #d9d9d9;
-  position: relative;
-  transition: 0.4s ease;
-  -webkit-transition: 0.4s ease;
-  -moz-transition: 0.4s ease;
-  -ms-transition: 0.4s ease;
-  -o-transition: 0.4s ease;
-}
-.circle.active {
-  color: #c48b60;
 }
 
 .pg4_5-inputfeild {

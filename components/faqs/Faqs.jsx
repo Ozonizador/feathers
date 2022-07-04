@@ -1,4 +1,6 @@
 import React from "react";
+
+// não sei o que e isto.
 function Faqs(props) {
   return (
     <div>
@@ -52,10 +54,7 @@ function Faqs(props) {
                 </div>
               </div>
               <div className="accordion-item mt-2 mb-2">
-                <h2
-                  className="accordion-header"
-                  id="panelsStayOpen-headingThree"
-                >
+                <h2 className="accordion-header" id="panelsStayOpen-headingThree">
                   <button
                     style={{ backgroundColor: "white", color: "black" }}
                     className="accordion-button collapsed"
@@ -77,10 +76,7 @@ function Faqs(props) {
                 </div>
               </div>
               <div className="accordion-item mt-2 mb-2">
-                <h2
-                  className="accordion-header"
-                  id="panelsStayOpen-headingFour"
-                >
+                <h2 className="accordion-header" id="panelsStayOpen-headingFour">
                   <button
                     style={{ backgroundColor: "white", color: "black" }}
                     className="accordion-button collapsed"
@@ -102,10 +98,7 @@ function Faqs(props) {
                 </div>
               </div>
               <div className="accordion-item mt-2 mb-2">
-                <h2
-                  className="accordion-header"
-                  id="panelsStayOpen-headingFive"
-                >
+                <h2 className="accordion-header" id="panelsStayOpen-headingFive">
                   <button
                     style={{ backgroundColor: "white", color: "black" }}
                     className="accordion-button collapsed"
