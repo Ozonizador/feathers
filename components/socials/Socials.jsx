@@ -15,7 +15,7 @@ export default function Socials({ type, size = "sm" }) {
           "bg-white text-primary-500": type !== "primary",
         })}
       >
-        <a href="/" target="_blank" rel="noreferrer noopener">
+        <a href="https://www.facebook.com/UniHosts/" target="_blank" rel="noreferrer noopener">
           <RiFacebookFill
             className={classNames("mx-auto my-auto h-full", {
               "text-lg": size === "sm",
@@ -33,7 +33,7 @@ export default function Socials({ type, size = "sm" }) {
           "bg-white text-primary-500": type !== "primary",
         })}
       >
-        <a href="/" target="_blank" rel="noreferrer noopener">
+        <a href="https://www.instagram.com/uni_hosts/" target="_blank" rel="noreferrer noopener">
           <RiInstagramLine
             className={classNames("mx-auto my-auto h-full", {
               "text-lg": size === "sm",

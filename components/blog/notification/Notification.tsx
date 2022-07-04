@@ -1,5 +1,5 @@
 import React from "react";
-import notification from "../../public/images/notification.png";
+import notification from "../../../public/images/notification.png";
 import Image from "next/image";
 
 const Notification = () => {

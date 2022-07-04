@@ -88,7 +88,7 @@ export const Navbar = () => {
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <MyLink customClass="py-1" href="/estadia">
+                          <MyLink customClass="py-1" href="/anunciar">
                             Anunciar!
                           </MyLink>
                         </Menu.Item>
@@ -97,7 +97,7 @@ export const Navbar = () => {
                   </Menu>
                 </div>
                 <li className="px-5">
-                  <Link href="/8">Blog</Link>
+                  <Link href="/blog">Blog</Link>
                 </li>
                 <li className="px-5">
                   <Link href="/contactos">Contactos</Link>
