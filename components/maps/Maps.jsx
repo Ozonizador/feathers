@@ -2,13 +2,7 @@ import React from "react";
 import Image from "next/image";
 import SimpleMap from "./SimpleMap.jsx";
 
-import { Link } from "react-router-dom";
 function Maps() {
-  // let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/53`;
-    // navigate(path);
-  };
   return (
     <div>
       <div className="container mb-4">
@@ -38,8 +32,8 @@ function Maps() {
             <p className="textn">
               Pode anunciar o seu espaço de forma gratuita em todo o território nacional.
             </p>
-            <button onClick={routeChange} id="buttont" type="button" className="btn mb-4">
-              Sober Mais
+            <button id="buttont" type="button" className="btn mb-4">
+              Saber Mais
             </button>
           </div>
         </div>

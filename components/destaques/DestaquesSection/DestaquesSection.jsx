@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-import Pg4_5homecard from "../../components/pg4_5homecard/Pg4_5homecard";
+import RoomInformation from "../RoomInformation/RoomInformation";
 
-export default function Rooms() {
+export default function DestaquesSection() {
   return (
     <>
       <div className="mt-5 flex flex-1 px-10">
@@ -27,21 +27,18 @@ export default function Rooms() {
             <div className="mr-auto w-64">
               <select className="w-32">
                 <option>Tipo De Espaço</option>
-                <option>...</option>
               </select>
             </div>
 
             <div>
               <select className="w-32">
                 <option>Preço</option>
-                <option>...</option>
               </select>
             </div>
 
             <div>
               <select className="w-32">
                 <option>Comodidades</option>
-                <option>...</option>
               </select>
             </div>
 
@@ -56,27 +53,27 @@ export default function Rooms() {
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home1.png" />
+            <RoomInformation img="/images/home1.png" />
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home2.png" />
+            <RoomInformation img="/images/home2.png" />
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home3.png" />
+            <RoomInformation img="/images/home3.png" />
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home4.png" />
+            <RoomInformation img="/images/home4.png" />
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home5.png" />
+            <RoomInformation img="/images/home5.png" />
           </div>
 
           <div>
-            <Pg4_5homecard img="/images/home6.png" />
+            <RoomInformation img="/images/home6.png" />
           </div>
 
           <div className="row mb-5">

@@ -1,6 +1,8 @@
 import React from "react";
-import location from "../../assets/images/locationicon.png";
-import map from "../../assets/images/mapicon.png";
+import location from "../../public/images/locationicon.png";
+import map from "../../public/images/mapicon.png";
+import Image from "next/image";
+
 function Textform() {
   return (
     <div>
@@ -16,7 +18,7 @@ function Textform() {
               </div>
 
               <div className="col">
-                <img style={{ height: "30px" }} src={location} alt="" />
+                <Image style={{ height: "30px" }} src={location} alt="" />
               </div>
             </div>
             <div className="row d-flex">
@@ -26,7 +28,7 @@ function Textform() {
               </div>
               <div className="col">
                 {" "}
-                <img style={{ height: "30px" }} src={map} alt="" />
+                <Image style={{ height: "30px" }} src={map} alt="" />
               </div>
             </div>
           </div>

@@ -211,12 +211,6 @@ a {
   border-radius: 50px;
 }
 
-.pg4_5-inputfeild {
-  display: flex;
-  justify-content: center;
-  margin-block: 18px;
-}
-
 #classlist {
   list-style-type: circle;
 }

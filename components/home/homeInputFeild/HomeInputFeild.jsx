@@ -5,12 +5,6 @@ import Image from "next/image";
   /* AINDA PRECISA DE MUDANÇAS */
 }
 export const SearchHomeInput = () => {
-  // let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/4_5`;
-    // navigate(path);
-  };
-
   return (
     <>
       <div className="div1 relative my-2 lg:mx-2">
@@ -31,7 +25,7 @@ export const SearchHomeInput = () => {
           <Image height={32} width={32} src="/images/icon-arrow-left.svg" alt="" /> Saida
         </p>
       </div>
-      <button onClick={routeChange} className="h-16 w-32 rounded-lg bg-primary-500 px-6 transition">
+      <button className="h-16 w-32 rounded-lg bg-primary-500 px-6 transition">
         <Image height={32} width={32} src="/images/icon-search.svg" alt="" />
       </button>
     </>
