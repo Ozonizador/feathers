@@ -16,12 +16,12 @@ const QuantityInput = () => {
   };
 
   return (
-    <div className="flex flex-1 border border-neutral-500">
-      <div className="flex flex-1 cursor-pointer justify-center" onClick={decreaseInput}>
+    <div className="flex flex-1 border border-terciary-300 px-6 py-1 items-center rounded-lg">
+      <div className="flex flex-1 cursor-pointer justify-center border-r border-terciary-300" onClick={decreaseInput}>
         <CgMathMinus />
       </div>
-      <div>{value}</div>
-      <div className="flex flex-1 cursor-pointer justify-center" onClick={increaseInput}>
+      <div className="px-5">{value}</div>
+      <div className="flex flex-1 cursor-pointer justify-center border-l border-terciary-300 " onClick={increaseInput}>
         <CgMathPlus />
       </div>
     </div>
