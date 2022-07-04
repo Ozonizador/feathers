@@ -1,7 +1,8 @@
 import React from "react";
-import notification from "../../Assets/images/notification.png";
+import notification from "../../public/images/notification.png";
+import Image from "next/image";
 
-function Notification() {
+const Notification = () => {
   return (
     <div>
       <div className="container mt-4 mb-4">
@@ -9,7 +10,7 @@ function Notification() {
           <div className="col-lg-3"></div>
           <div className="col-lg-6 col-sm-12 ">
             <div className="alert alert-warning con " role="alert">
-              <img style={{ height: "5vh" }} src={notification} alt="" />
+              <Image style={{ height: "5vh" }} src={notification} alt="" />
               Receba notificações sempre que houver novidades por aqui
             </div>
           </div>
@@ -18,6 +19,6 @@ function Notification() {
       </div>
     </div>
   );
-}
+};
 
 export default Notification;

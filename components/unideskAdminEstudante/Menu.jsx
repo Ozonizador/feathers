@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ComponentX() {
+export default function Menu() {
   const [summary1, setSummary1] = useState(true);
   const [summary2, setSummary2] = useState(true);
   const [summary3, setSummary3] = useState(true);
