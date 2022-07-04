@@ -2,6 +2,10 @@ import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvide
 import Input from "../utils/Input";
 import Image from "next/image"
 import QuantityInput from "../utils/QuantityInput"
+import { BiBed } from 'react-icons/bi';
+import { MdPeopleOutline } from 'react-icons/md';
+import { MdOutlineBathtub } from 'react-icons/md';
+
 
 const FormPasso2 = () => {
   const currentStep = useCurrentStep();
@@ -15,14 +19,15 @@ const FormPasso2 = () => {
 
   return (
     <section className="my-20 px-40  w-1/2 ">
-      <div className="flex my-8">
-        <div>
-          <Image
+      <div className="flex items-center my-8">
+        <div className="flex items-center">
+          <MdPeopleOutline className="text-2xl" />
+          {/* <Image
             src="/images/anunciar_capacidade.jpg"
             alt=""
             height="25"
             width="25"
-          ></Image>
+          ></Image> */}
         </div>
         <div className="w-3/5">
           <h2 className="font-bold text-base ml-2  align-middle">Capacidade</h2>
@@ -34,25 +39,26 @@ const FormPasso2 = () => {
 
 
       <div className="flex my-8">
-        <div >
-          <Image
+        <div className="flex items-center">
+          <BiBed className="text-2xl" />
+          {/* <Image
             src="/images/anunciar_camas.jpg"
             alt=""
             height="25"
             width="25"
-          ></Image>
+          ></Image> */}
         </div>
         <div className="w-3/5">
           <h2 className="font-bold text-base ml-2  align-middle">Camas</h2>
         </div>
-        <div className="">
-          compo
+        <div>
+          <QuantityInput />
         </div>
       </div>
 
 
       <div className="flex my-8">
-        <div>
+        <div className="flex items-center">
           <Image
             src="/images/anunciar_quartos.jpg"
             alt=""
@@ -63,27 +69,28 @@ const FormPasso2 = () => {
         <div className="w-3/5">
           <h2 className="font-bold text-base ml-2  align-middle">Quartos</h2>
         </div>
-        <div className="">
-          compo
+        <div>
+          <QuantityInput />
         </div>
       </div>
 
 
 
       <div className="flex my-8">
-        <div>
-          <Image
+        <div className="flex items-center">
+          <MdOutlineBathtub className="text-2xl" />
+          {/* <Image
             src="/images/anunciar_casas_de_banho.jpg"
             alt=""
             height="25"
             width="25"
-          ></Image>
+          ></Image> */}
         </div>
         <div className="w-3/5">
           <h2 className="font-bold text-base ml-2  align-middle">Casas de Banho</h2>
         </div>
-        <div className="">
-          compo
+        <div>
+          <QuantityInput />
         </div>
       </div>
 

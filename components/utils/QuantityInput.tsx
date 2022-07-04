@@ -20,8 +20,8 @@ const QuantityInput = () => {
       <div className="flex flex-1 cursor-pointer justify-center border-r border-terciary-300" onClick={decreaseInput}>
         <CgMathMinus />
       </div>
-      <div className="px-2">{value}</div>
-      <div className="flex flex-1 cursor-pointer justify-center border-l border-terciary-300" onClick={increaseInput}>
+      <div className="px-5">{value}</div>
+      <div className="flex flex-1 cursor-pointer justify-center border-l border-terciary-300 " onClick={increaseInput}>
         <CgMathPlus />
       </div>
     </div>
