@@ -7,11 +7,6 @@ import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 
 export default function RoomInformation(props) {
-  const routeChange = () => {
-    let path = `/4_5`;
-    // navigate(path);
-  };
-
   return (
     <div>
       <div className="container mb-4">
@@ -21,7 +16,7 @@ export default function RoomInformation(props) {
               <div>
                 {/* <Image src={props.img} className="card-img" alt="..." height={256} width={256} /> */}
               </div>
-              <div onClick={routeChange} className="p-3">
+              <div className="p-3">
                 <div className="m-1">
                   <div className="flex flex-1">
                     <h6 className="mb-0 ">Quarto Privado em T3 - Peniche</h6>

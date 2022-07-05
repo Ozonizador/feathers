@@ -1,9 +1,9 @@
-import RoomInformation from "../components/Pg4_5homecard/Pg4_5homecard";
+import Maps from "../components/maps/Maps";
 
 const Index = (): JSX.Element => {
   return (
     <div className="flex flex-1 justify-center p-10">
-      <RoomInformation />
+      <Maps />
     </div>
   );
 };
