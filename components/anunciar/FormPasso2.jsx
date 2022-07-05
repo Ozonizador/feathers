@@ -58,7 +58,7 @@ const FormPasso2 = () => {
 
 
       <div className="flex my-8">
-        <div className="flex">
+        <div className="flex items-center">
           <GiPersonInBed className="text-2xl" />
           {/* <Image
             src="/images/anunciar_quartos.jpg"
