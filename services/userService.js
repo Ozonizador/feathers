@@ -76,3 +76,9 @@ export async function checkUserLoggedIn() {
   const session = await supabase.auth.session();
   return session;
 }
+
+/* recover email */
+export async function recoverPasswordViaEmail(email) {
+  const { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
+  return { data, error };
+}
