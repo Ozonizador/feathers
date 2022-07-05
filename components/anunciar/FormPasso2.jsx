@@ -5,7 +5,7 @@ import QuantityInput from "../utils/QuantityInput"
 import { BiBed } from 'react-icons/bi';
 import { MdPeopleOutline } from 'react-icons/md';
 import { MdOutlineBathtub } from 'react-icons/md';
-
+import { GiPersonInBed } from 'react-icons/gi';
 
 const FormPasso2 = () => {
   const currentStep = useCurrentStep();
@@ -58,13 +58,14 @@ const FormPasso2 = () => {
 
 
       <div className="flex my-8">
-        <div className="flex items-center">
-          <Image
+        <div className="flex">
+          <GiPersonInBed className="text-2xl" />
+          {/* <Image
             src="/images/anunciar_quartos.jpg"
             alt=""
             height="25"
             width="25"
-          ></Image>
+          ></Image> */}
         </div>
         <div className="w-3/5">
           <h2 className="font-bold text-base ml-2  align-middle">Quartos</h2>
