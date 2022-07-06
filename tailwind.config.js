@@ -1,5 +1,10 @@
 module.exports = {
-  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", './node_modules/tw-elements/dist/js/**/*.js'],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js",
+    "./node_modules/flowbite-react/**/*.js",
+  ],
   theme: {
     extend: {
       colors: {
@@ -15,7 +20,7 @@ module.exports = {
           400: "#262E36",
           500: "#DFDFDF",
           600: "#F2E8DE",
-          700: "#DBDBDB"
+          700: "#DBDBDB",
         },
         secondary: {
           300: "#908A88",
@@ -33,8 +38,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require('tw-elements/dist/plugin')
-  ],
+  plugins: [require("flowbite/plugin")],
 };
-
