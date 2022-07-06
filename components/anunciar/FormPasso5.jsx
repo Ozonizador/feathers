@@ -44,7 +44,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const FormPasso5 = () => {
             </div>
             <div>
               <div className="flex items-center h-5">
-                <input type="checkbox" className=" h-4 w-12 border border-terciary-500 rounded" />
+                <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
               </div>
             </div>
           </div>
