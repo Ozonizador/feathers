@@ -32,7 +32,8 @@ const Register = () => {
 
   const normalRegister = async (event) => {
     event.preventDefault();
-    await register(email, password);
+    const { user, session, error } = await register(email, password);
+    debugger;
   };
 
   return (

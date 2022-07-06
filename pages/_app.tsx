@@ -4,6 +4,7 @@ import Navbar from "../components/navbar/Navbar";
 import { UserProvider } from "@supabase/auth-helpers-react";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import "../styles/globals.css";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   return (

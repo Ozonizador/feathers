@@ -175,13 +175,6 @@ a {
   border: none;
 }
 
-.div2:hover .p2 {
-  display: none;
-}
-.div3:hover .p3 {
-  display: none;
-}
-
 #button-select {
   width: 6.25rem;
   border: none;
@@ -415,15 +408,6 @@ select option {
     margin-top: 8rem !important;
   }
 }
-/* Made by @yousaf_ustav */
-
-.div2:hover .p2 {
-  display: none;
-}
-.div3:hover .p3 {
-  display: none;
-}
-
 h1 {
   margin-bottom: 2.625rem;
 }
