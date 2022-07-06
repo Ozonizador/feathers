@@ -11,6 +11,7 @@ export async function register(email, password) {
       redirectTo: `${window.location.origin}`,
     }
   );
+  return { user, session, error };
 }
 
 export async function login(email, password) {

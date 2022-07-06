@@ -6,6 +6,7 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import "../styles/globals.css";
 // import 'tw-elements';
 
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   return (

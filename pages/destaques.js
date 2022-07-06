@@ -1,12 +1,14 @@
 import React from "react";
 
 import DestaquesSection from "../components/destaques/DestaquesSection/DestaquesSection";
-import SearchHomeInput from "../components/destaques/SearchHomeInput";
+import SearchInputField from "../components/search/SearchInputField";
 
 const Destaques = () => {
   return (
     <>
-      <SearchHomeInput />
+      <div className="flex flex-1 justify-center">
+        <SearchInputField />
+      </div>
       <DestaquesSection />
     </>
   );

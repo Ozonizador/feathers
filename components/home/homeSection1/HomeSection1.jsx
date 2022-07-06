@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import HomeInputFeild from "../homeInputFeild/HomeInputFeild";
+import SearchInputField from "../../search/SearchInputField";
 
 export default function HomeSection1() {
   return (
@@ -22,7 +22,7 @@ export default function HomeSection1() {
             click!
           </h1>
           <div className="flex flex-col lg:flex-row">
-            <HomeInputFeild />
+            <SearchInputField />
           </div>
         </div>
       </div>
