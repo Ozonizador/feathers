@@ -15,6 +15,13 @@
   background-size: 10px;
 }
 
+
+.euro {
+  background: url(/images/euro.png) no-repeat;
+  background-size: 10px;
+  background-position: 95% ;
+
+}
 /* FINAL CÓDIGO RODRIGO */
 
 html,
