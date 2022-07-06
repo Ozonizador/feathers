@@ -82,18 +82,7 @@ export default function Stepper() {
             })}
           ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={9} text="Passo 9" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 9,
-              "border-primary-500": currentStep >= 9,
-            })}
-          ></div>
-
-          {/* PASSO */}
-          <StepIcon stepNumber={10} text="Passo 10" />
-          <div className="flex-auto border-t-2  border-terciary-500"></div>
+        
         </div>
       </div>
     </div>
