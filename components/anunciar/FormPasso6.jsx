@@ -1,6 +1,6 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 
-const FormPasso2 = () => {
+const FormPasso6 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -11,18 +11,25 @@ const FormPasso2 = () => {
   };
 
   return (
-    <div className="mt-1">
-      <div className="flex">
-        <button
-          type="button"
-          className="mt-10 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
-          onClick={(e) => nextStep(e)}
-        >
-          Seguinte &#8594;
-        </button>
+
+    <section className="container mx-auto w-5/6 my-20">
+      <div className="w-full">
+
+
+
+
+
+        <div className="text-2xl text-gray-700 font-bold mb-28">
+          Sobre a sua casa
+        </div>
       </div>
-    </div>
+
+
+
+
+
+    </section>
   );
 };
 
-export default FormPasso2;
+export default FormPasso6;

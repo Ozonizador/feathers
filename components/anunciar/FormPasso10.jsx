@@ -11,17 +11,47 @@ const FormPasso2 = () => {
   };
 
   return (
-    <div className="mt-1">
-      <div className="flex">
-        <button
-          type="button"
-          className="mt-10 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
-          onClick={(e) => nextStep(e)}
-        >
-          Seguinte &#8594;
-        </button>
+    <section className="container mx-auto w-5/6 my-20">
+      <div className="text-2xl text-gray-700 font-bold mb-10">
+        Está quase pronto! Leia e aceite os seguintes documentos.
       </div>
-    </div>
+
+
+      <div className="flex flex-col  mt-20">
+        <div className="flex flex-row items-center align-middle my-5">
+          <div className="flex flex-row items-center">
+            <input type="checkbox" className="h-4 w-4 border border-gray-300 rounded-sm" />
+          </div>
+          <div className="ml-4  text-xl">Termos e condições</div>
+        </div>
+
+        <div className="flex flex-row items-center align-middle my-5">
+          <div className="flex flex-row items-center">
+            <input type="checkbox" className="h-4 w-4 border border-gray-300 rounded-sm" />
+
+          </div>
+          <div className="ml-4  text-xl">Política de privacidade</div>
+        </div>
+
+        <div className="flex flex-row items-center align-middle my-5">
+          <div className="flex flex-row items-center">
+            <input type="checkbox" className="h-4 w-4 border border-gray-300 rounded-sm" />
+          </div>
+          <div className="ml-4  text-xl">Acordo em manter o meu calendário atualizado</div>
+        </div>
+
+
+        <div className="flex flex-row items-center align-middle my-5">
+          <div className="flex flex-row items-center">
+            <input type="checkbox" className="h-4 w-4 border border-gray-300 rounded-sm" />
+          </div>
+          <div className="ml-4  text-xl">As informações que providencio são verdadeiras</div>
+        </div>
+
+
+      </div>
+
+    </section>
   );
 };
 
