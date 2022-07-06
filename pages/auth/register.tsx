@@ -1,9 +1,18 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
-import { loginWithFacebook, loginWithGoogle, loginWithMagicLink } from "../../services/userService";
+import Input from "../../components/utils/Input";
+import {
+  loginWithFacebook,
+  loginWithGoogle,
+  loginWithMagicLink,
+  register,
+} from "../../services/userService";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   /** registar com google */
   const registerWithGoogle = async (event) => {
     event.preventDefault();
@@ -21,6 +30,11 @@ const Register = () => {
     await loginWithFacebook();
   };
 
+  const normalRegister = async (event) => {
+    event.preventDefault();
+    await register(email, password);
+  };
+
   return (
     <div className="my-10 flex justify-center">
       <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
@@ -29,21 +43,37 @@ const Register = () => {
             <a className="p-3 text-center">Iniciar Sessão</a>
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">
-            Register
+            Registar
           </div>
         </div>
         <div className="p-3">
           <div className="text-xl font-bold">
             Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
           </div>
-          <div className="mt-6">
-            <div
-              className="cursor-pointer border border-primary-500 p-5 text-center text-primary-500"
-              onClick={(event) => registerMagicLink(event)}
-            >
-              Registar com e-mail
+          <form onSubmit={normalRegister}>
+            <div className="mt-3">
+              <div>Email</div>
+              <div className="mt-2">
+                <Input value={email} onChange={(e) => setEmail(e.target.value)}></Input>
+              </div>
             </div>
-          </div>
+            <div className="mt-3">
+              <div>Palavra-passe</div>
+              <div className="mt-2">
+                <Input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                ></Input>
+              </div>
+            </div>
+            <div className="my-5">
+              <button type="submit" className="w-full rounded-lg bg-primary-500 py-2">
+                Registar
+              </button>
+            </div>
+          </form>
+
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
             <span className="mx-4 flex-shrink text-2xl font-bold text-black">ou</span>
