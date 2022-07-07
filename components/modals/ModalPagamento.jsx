@@ -3,6 +3,9 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 
+{
+  /* Pagina 34 XD */
+}
 export default function ModalPagamento() {
   let [isOpen, setIsOpen] = useState(true);
 
