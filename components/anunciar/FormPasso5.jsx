@@ -141,14 +141,14 @@ const FormPasso5 = () => {
             <p className="font-bold text-base w-40">Limpeza</p>
           </div>
 
-          <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
+          <div className=" w-3/4 flex flex-row items-center justify-between ml-6">
 
             <div>
               <div className="flex items-center h-5">
-                <select className="w-full py-2 px-3 ">
+                <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 ">
                   <option>Selecione</option>
-                  <option>Sim</option>
-                  <option>Não</option>
+                  <option>Casa</option>
+                  <option>Apartamento</option>
                 </select>
               </div>
             </div>
