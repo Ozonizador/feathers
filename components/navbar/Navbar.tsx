@@ -21,7 +21,7 @@ export const Navbar = () => {
     <header>
       <div className="mx-32 mb-5">
         <div>
-          <div className="flex flex-wrap py-2">
+          <div className="hidden flex-wrap py-2 lg:flex">
             <div className="flex">
               <div className="flex">
                 <ImPhone className="my-auto mr-1" />
@@ -49,7 +49,7 @@ export const Navbar = () => {
         </div>
         <div>
           <div className="mt-5 lg:flex lg:flex-1 lg:justify-center lg:gap-5 lg:align-middle">
-            <div className="hidden lg:block">
+            <div className="lg:block">
               <Link href="/">
                 <a>
                   <Image
