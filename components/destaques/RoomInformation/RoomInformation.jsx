@@ -14,7 +14,7 @@ export default function RoomInformation(props) {
           <div className="cards">
             <div className="flex flex-1">
               <div>
-                {/* <Image src={props.img} className="card-img" alt="..." height={256} width={256} /> */}
+                <Image src={props.img} alt="..." height={256} width={256} />
               </div>
               <div className="p-3">
                 <div className="m-1">

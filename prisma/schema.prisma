@@ -11,35 +11,100 @@ datasource db {
 }
 
 model Profile {
-  id          Int      @id @default(autoincrement())
-  name        String
-  surname     String
-  nationality String
-  town        String
-  birthDate   DateTime
-  gender      Int
-  description String?
-  languages   String[]
-  phone       String
-  avatarUrl   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  name           String
+  surname        String
+  nationality    String
+  town           String
+  birthDate      DateTime
+  gender         Int
+  description    String?
+  languages      String[]
+  phone          String
+  avatarUrl      String
+  favouriteRooms Int[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("profiles")
 }
 
-model House {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Advertisement {
+  id                Int          @id @default(autoincrement())
+  type              TypeRoom
+  place             String
+  street            String
+  streetNumber      String
+  floor             String?
+  postalCode        String
+  rooms             Int
+  beds              Int
+  tenantNumber      Int
+  bathrooms         Int
+  title             String
+  description       String
+  typeFlexHost      HostFlexType
+  typeHost          TypeHost
+  photos            String[]
+  houseRules        Json
+  aboutHouse        Json
+  monthRent         Int
+  extraPerHost      Int
+  guaranteeValue    Int
+  expenses          Json
+  hostLivesProperty Boolean
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@map("advertisements")
+}
+
+enum HostFlexType {
+  SUPER_FLEX
+  FLEX
+  MODERATE
+  RIGID
+}
+
+enum TypeRoom {
+  ENTIRE_SPACE
+  SHARED_ROOM
+  PRIVATE_ROOM
+}
+
+enum TypeHost {
+  PROFISSIONAL
+  PARTICULAR
 }
 
 model Reservations {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("reservations")
 }
 
 model Review {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("notifications")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("messages")
 }

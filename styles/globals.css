@@ -15,12 +15,10 @@
   background-size: 10px;
 }
 
-
 .euro {
   background: url(/images/euro.png) no-repeat;
   background-size: 10px;
-  background-position: 95% ;
-
+  background-position: 95%;
 }
 /* FINAL CÓDIGO RODRIGO */
 
@@ -245,109 +243,14 @@ a:hover {
   margin-bottom: 0;
 }
 
-.right-dropdown {
-  gap: 0.5rem;
-}
-.right-dropdown img {
-  width: 1rem;
-}
-select {
-  color: #2c3e50;
-  border: none;
-  background-color: transparent;
-  width: 3rem;
-}
-select:focus,
-select:focus-within {
-  cursor: pointer;
-}
-select option {
-  background-color: #fff;
-  border-color: #ecf0f1;
-}
-
-.bottom {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-top: 2rem;
-}
-.bottom .logo {
-  width: 12.5rem; /*200px*/
-}
-.nav-padding {
-  padding: 0.875rem 0.875rem 1rem 0.875rem;
-}
 .dropdown {
   position: relative;
 }
 .dropdown:hover {
   cursor: pointer;
 }
-.sub-menu {
-  display: none;
-  /*positioning*/
-  position: absolute;
-  z-index: 100;
-  left: 18%;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-}
-.sub-menu li a {
-  display: block;
-}
 .dropdown:hover .sub-menu {
   display: block;
-}
-.sub-menu li + li {
-  margin-top: 0.75rem;
-}
-/* Bottom nav Buttons */
-.buttons a {
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-}
-.buttons a + a {
-  margin-left: 1.25rem;
-}
-.buttonsHide {
-  display: none;
-}
-
-/* ------------------ */
-/* Media Querries */
-@media (max-width: 1280px) {
-  .bottom {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-  .bottom .logo {
-    width: 11rem; /*176px*/
-  }
-  .nav-padding {
-    padding: 0.75rem 0.75rem 1rem 0.75rem;
-  }
-  .buttons a {
-    padding: 0.625rem 1.25rem;
-  }
-  .buttons a + a {
-    margin-left: 1rem;
-  }
 }
 
 /* home section 9 */
@@ -415,12 +318,6 @@ select option {
     margin-top: 8rem !important;
   }
 }
-h1 {
-  margin-bottom: 2.625rem;
-}
-h1 img {
-  margin-inline: 1.25rem;
-}
 
 .div2:hover .p2 {
   display: none;
@@ -444,12 +341,6 @@ h1 img {
     align-items: center;
     gap: 3rem;
   }
-}
-
-#img-modal {
-  height: 30px;
-  width: 30px;
-  margin-left: 30px !important;
 }
 
 #modal-label {
@@ -864,14 +755,6 @@ h1 img {
   justify-content: space-between;
 }
 
-#img11 {
-  display: block;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
 .card-titless {
   font-weight: bold;
   color: #0d152e;

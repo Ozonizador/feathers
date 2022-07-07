@@ -45,14 +45,7 @@ export default function ModalPagamento() {
                   as="h3"
                   className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
-                  <Image
-                    id="img-modal"
-                    className="m-2"
-                    src="/images/keyboard.png"
-                    height={32}
-                    width={32}
-                    alt=""
-                  />
+                  <Image className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
                   <span>Adicionar detalhes do cartão</span>
                 </Dialog.Title>
 
@@ -68,7 +61,6 @@ export default function ModalPagamento() {
                     <div className="" id="model-radius">
                       <div id="" className="modal-header ">
                         <Image
-                          id="img-modal"
                           className="m-2"
                           src="/images/keyboard.png"
                           height={32}

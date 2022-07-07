@@ -12,6 +12,7 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
 /* import person image */
 import person from "../../public/images/person.png";
+import ukFlag from "../../public/images/icon-uk.jpg";
 
 export const Navbar = () => {
   const [enabled, setEnabled] = useState(false);
@@ -19,51 +20,54 @@ export const Navbar = () => {
 
   return (
     <header>
-      <div className="mx-32 mb-5">
+      <nav className="mx-28 mb-5">
         <div>
-          <div className="hidden flex-wrap py-2 lg:flex">
+          <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
+            {/* CONTACTS */}
             <div className="flex">
-              <div className="flex">
-                <ImPhone className="my-auto mr-1" />
-                <p className="mr-3">+351 914 626 616</p>
+              <div className="my-auto mr-3 flex">
+                <ImPhone className="mr-1 self-center" />
+                <p>+351 914 626 616</p>
               </div>
-              <div className="flex">
-                <GrMail className="my-auto mr-1" />
+              <div className="my-auto flex">
+                <GrMail className="mr-1 self-center" />
                 <p>info@unihost.pt</p>
               </div>
             </div>
 
+            {/* SOCIAL MEDIA + FLAG */}
             <div className="flex lg:ml-auto">
-              <Socials type="primary" />
-              <div className="right-dropdown flex">
-                <Image src="/images/icon-uk.jpg" height={16} width={32} alt="" />
-                <select name="" id="">
-                  <option value="" disabled>
+              <div className="my-auto">
+                <Socials type="primary" />
+              </div>
+              <div className="flex h-10">
+                <Image src={ukFlag} alt="" />
+                <select className="ml-2 border-none">
+                  <option value="eng" disabled>
                     EN
                   </option>
-                  <option value="">PT</option>
+                  <option value="pt">PT</option>
                 </select>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="mt-5 lg:flex lg:flex-1 lg:justify-center lg:gap-5 lg:align-middle">
+          <div className="my-5 lg:flex lg:flex-1 lg:gap-5">
             <div className="lg:block">
               <Link href="/">
                 <a>
                   <Image
                     src="/images/logo1.png"
                     alt=""
-                    className="logo cursor-pointer"
+                    className="cursor-pointer"
                     height={55}
                     width={208}
                   ></Image>
                 </a>
               </Link>
             </div>
-            <nav className="mx-10 my-auto">
-              <div className="flex flex-wrap">
+
+            <div className="mx-auto my-auto hidden lg:block">
+              <div className="flex">
                 <div className="relative w-72">
                   <Menu as="div" className="absolute z-50 ml-5 w-full">
                     <Menu.Button className="flex flex-1">
@@ -102,6 +106,10 @@ export const Navbar = () => {
                 <div className="px-5">
                   <Link href="/contactos">Contactos</Link>
                 </div>
+              </div>
+            </div>
+            <div className="ml-auto hidden lg:block">
+              <div>
                 {!user && (
                   <div className="my-auto flex">
                     <Link href="/auth/register">
@@ -212,10 +220,10 @@ export const Navbar = () => {
                   </div>
                 )}
               </div>
-            </nav>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };

@@ -1,3 +1,5 @@
+import { supabase } from "../utils/supabaseClient";
+
 export const addFavouriteToUser = () => {};
 
-export const getFavouritesFromUser = () => {};
+export const getFavouritesFromUser = async () => {};

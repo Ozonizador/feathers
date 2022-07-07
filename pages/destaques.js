@@ -9,7 +9,9 @@ const Destaques = () => {
       <div className="flex flex-1 justify-center">
         <SearchInputField />
       </div>
-      <DestaquesSection />
+      <div className="mt-10">
+        <DestaquesSection />
+      </div>
     </>
   );
 };
