@@ -2,8 +2,9 @@ import { JSONValue } from "./utils";
 
 export interface Advertisement {
     id?: number, 
-    type: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
+    typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
     place: String,
+    street: String,
     streetNumber: String,
     floor?: String,
     postalCode:        String,
@@ -13,7 +14,7 @@ export interface Advertisement {
     bathrooms:         number,
     title:             String,
     description:       String,
-    typeFlexHost:      "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM",
+    type:      "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM",
     typeHost:          "PROFISSIONAL" | "PARTICULAR",
     photos?:            String[],
     houseRules:        JSONValue,
@@ -30,6 +31,11 @@ export interface Advertisement {
 
   
 
+const typeRoom = {
+    entireSpace: "ENTIRE_SPACE",
+    sharedRoom: "SHARED_ROOM",
+    privateRoom: "PRIVATE_ROOM"
+}
 
 
 

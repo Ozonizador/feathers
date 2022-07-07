@@ -1,22 +1,24 @@
 import classNames from "classnames";
 import Link from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, LegacyRef } from "react";
 
 interface MyLinkProps {
-  children: any;
-  customClass: string;
   href: string;
-  ref: string;
+  customClass: string;
+  children: any;
 }
-const MyLink = forwardRef(({ children, customClass = "", href, ref }: MyLinkProps) => {
-  return (
-    <Link href={href}>
-      <a ref={ref} className={classNames(`${customClass}`)}>
-        {children}
-      </a>
-    </Link>
-  );
-});
+
+const MyLink = forwardRef(
+  ({ href, customClass, children }: MyLinkProps, ref: LegacyRef<HTMLAnchorElement>) => {
+    return (
+      <Link href={href}>
+        <a ref={ref} className={classNames(`${customClass}`)}>
+          {children}
+        </a>
+      </Link>
+    );
+  }
+);
 
 MyLink.displayName = "MyLink";
 export default MyLink;

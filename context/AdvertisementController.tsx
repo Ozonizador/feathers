@@ -3,8 +3,9 @@ import { createContext, Dispatch, SetStateAction, useContext, useState } from "r
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
-  type: "SUPER_FLEX",
+  type: "ENTIRE_SPACE",
   place: "",
+  street: "",
   streetNumber: "",
   floor: "",
   postalCode: "",
@@ -14,7 +15,7 @@ const defaultAdvertisement = {
   bathrooms: 1,
   title: "",
   description: "",
-  typeFlexHost: "ENTIRE_SPACE",
+  typeFlexHost: "SUPER_FLEX",
   typeHost: "PARTICULAR",
   houseRules: "",
   aboutHouse: "",
@@ -30,11 +31,9 @@ const SetAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisem
 
 export const AdvertisementController = ({ children }): JSX.Element => {
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
-
   return (
     <AdvertisementContext.Provider value={advertisement}>
       <SetAdvertisementContext.Provider value={setAdvertisement}>
-        {" "}
         {children}
       </SetAdvertisementContext.Provider>
     </AdvertisementContext.Provider>
@@ -49,5 +48,13 @@ export const useSetAdvertisement = () => {
   const setAdvertisement = useContext(SetAdvertisementContext);
   return (advertisement: Advertisement) => {
     setAdvertisement(advertisement);
+  };
+};
+
+export const useSetAdvertisementProperty = () => {
+  const setAdvertisement = useContext(SetAdvertisementContext);
+  const advertisement = useContext(AdvertisementContext);
+  return (property: string, value: any) => {
+    setAdvertisement({ ...advertisement, [property]: value });
   };
 };

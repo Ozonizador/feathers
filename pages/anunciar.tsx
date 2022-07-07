@@ -13,20 +13,23 @@ import FormPasso10 from "../components/anunciar/FormPasso10";
 
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
+import { AdvertisementController } from "../context/AdvertisementController";
 
 export default function Anunciar() {
   return (
     <>
       <AnunciarProvider>
-        <div className="container mx-auto my-20 rounded-2xl border border-terciary-700 py-20">
-          <h1 className="text-center  text-6xl font-bold leading-snug ">
-            Anunciar a sua propriedade é rápido e fácil!
-          </h1>
-          <Stepper />
-          <div>
-            <ZonaFormulario></ZonaFormulario>
+        <AdvertisementController>
+          <div className="container mx-auto my-20 rounded-2xl border border-terciary-700 py-20">
+            <h1 className="text-center  text-6xl font-bold leading-snug ">
+              Anunciar a sua propriedade é rápido e fácil!
+            </h1>
+            <Stepper />
+            <div>
+              <ZonaFormulario></ZonaFormulario>
+            </div>
           </div>
-        </div>
+        </AdvertisementController>
       </AnunciarProvider>
     </>
   );
