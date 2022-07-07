@@ -185,11 +185,10 @@ const MainMenu = () => {
           {/* LÍNGUAS FALADAS */}
           <div className="mb-1">Línguas faladas</div>
           <div className="flex flex-row">
-            <div className="flex items-center py-2 px-3 bg-primary-300 text-primary-500 rounded-xl">+ Adicionar iínguas</div>
+            <div className="flex items-center py-2 px-3 bg-socials-gmail text-primary-500 rounded-xl  mr-3">+ Adicionar línguas</div>
             <div className="flex flex-col w-1/6 mr-5">
               <Toast>
-
-                <div className="ml-3 text-sm font-normal">
+                <div className="ml-3 text-base font-normal">
                   Inglês
                 </div>
                 <Toast.Toggle />
@@ -198,15 +197,13 @@ const MainMenu = () => {
 
             <div className="flex flex-col gap-0 w-1/6">
               <Toast>
-                <div className="ml-3 text-sm font-normal">
+                <div className="ml-3 text-base font-normal">
                   Portugês
                 </div>
                 <Toast.Toggle />
               </Toast>
             </div>
           </div>
-
-
 
           {/* CONTATO TELEFONICO */}
           <div className="my-8">
@@ -295,13 +292,8 @@ const MainMenu = () => {
 
           </div>
         </div>
-
-
-
       </div>
     </div>
-
-
   );
 };
 
