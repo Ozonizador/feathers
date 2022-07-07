@@ -185,6 +185,7 @@ const MainMenu = () => {
           {/* LÍNGUAS FALADAS */}
           <div className="mb-1">Línguas faladas</div>
           <div className="flex flex-row">
+            <div className="flex items-center py-2 px-3 bg-primary-300 text-primary-500 rounded-xl">+ Adicionar iínguas</div>
             <div className="flex flex-col w-1/6 mr-5">
               <Toast>
 
