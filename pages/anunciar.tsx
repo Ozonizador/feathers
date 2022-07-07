@@ -8,7 +8,7 @@ import FormPasso5 from "../components/anunciar/FormPasso5";
 import FormPasso6 from "../components/anunciar/FormPasso6";
 import FormPasso7 from "../components/anunciar/FormPasso7";
 import FormPasso8 from "../components/anunciar/FormPasso8";
-import FormPasso9 from "../components/anunciar/FormPasso9";
+
 import FormPasso10 from "../components/anunciar/FormPasso10";
 
 import Stepper from "../components/anunciar/Stepper";
