@@ -13,7 +13,6 @@ function Textform() {
           <div className="col ">
             <div className="row d-flex ">
               <div className="col text-end">
-                {" "}
                 <p>É de Lisboa, Portugal</p>
               </div>
 
@@ -23,11 +22,9 @@ function Textform() {
             </div>
             <div className="row d-flex">
               <div className="col text-end">
-                {" "}
                 <p>Fala portuguêss, inglês e espanhol</p>
               </div>
               <div className="col">
-                {" "}
                 <Image style={{ height: "30px" }} src={map} alt="" />
               </div>
             </div>
