@@ -5,6 +5,7 @@ import {
   useAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
+import { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 
 const FormPasso1 = () => {
   const currentStep = useCurrentStep();
@@ -25,10 +26,19 @@ const FormPasso1 = () => {
       <div className="w-3/4">
         <div className="mt-2">
           <label className="block ">Qual o seu tipo de espaço?</label>
-          <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3">
-            <option>Selecione</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
+          <select
+            onChange={(e) =>
+              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE, e.target.value)
+            }
+            className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
+          >
+            {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
+              return (
+                <option key={index} value={TYPE_ADVERTISEMENT[type]}>
+                  {type}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="my-8">
@@ -36,10 +46,19 @@ const FormPasso1 = () => {
             label="street"
             labelText="Rua"
             value={advertisement.street}
-            onChange={(e) => changeAdvertisementProperty("street", e.target.value)}
+            onChange={(e) =>
+              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)
+            }
           />
         </div>
-        <Input label="Andar" labelText="Andar" value={advertisement.floor} />
+        <Input
+          label="floor"
+          labelText="Andar"
+          value={advertisement.floor}
+          onChange={(e) =>
+            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.FLOOR, e.target.value)
+          }
+        />
 
         <div className="mt-1">
           <div className="flex">
@@ -56,15 +75,32 @@ const FormPasso1 = () => {
 
       <div className="w-3/4">
         <Input
-          label="Localidade"
+          label="place"
           labelText="Localidade"
           customCss="icon"
           value={advertisement.place}
+          onChange={(e) =>
+            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)
+          }
         />
         <div className="my-8">
-          <Input label="Número" labelText="Número" value={advertisement.streetNumber} />
+          <Input
+            label="street_number"
+            labelText="Número"
+            value={advertisement.streetNumber}
+            onChange={(e) =>
+              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)
+            }
+          />
         </div>
-        <Input label="Código Postal" labelText="Código Postal" value={advertisement.postalCode} />
+        <Input
+          label="postal_code"
+          labelText="Código Postal"
+          value={advertisement.postalCode}
+          onChange={(e) =>
+            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)
+          }
+        />
       </div>
     </section>
   );
