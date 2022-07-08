@@ -16,18 +16,9 @@ const Configurations = () => {
           {" > Configurações"}
         </div>
 
-
-
-
-
         <div className="flex flex-1 justify-center">
           <div className="w-full bg-terciary-300 p-10 border border-terciary-700 rounded-2xl px-32">
             <div className="mx-auto w-1/3">
-
-
-
-
-
               <div className="text-3xl font-bold">Configurações</div>
               {/* password */}
               <div>
@@ -65,9 +56,6 @@ const Configurations = () => {
               </div>
 
               {/* Notificações */}
-
-
-
               <div className="mt-10">
                 <div className="my-4 text-2xl font-bold">Notificações</div>
                 <h6>Receber notificações de unihosts</h6>
@@ -101,11 +89,8 @@ const Configurations = () => {
                     </div>
                   </div>
 
-
-
                   <div className="flex items-center my-8">
                     <div className="flex items-center">
-
                       <p className="font-bold text-base w-32">Por mensagem</p>
                     </div>
 
@@ -131,21 +116,8 @@ const Configurations = () => {
                       </div>
                     </div>
                   </div>
-
-
-
-
-
-
-
                 </div>
-
               </div>
-
-
-
-
-
 
 
               {/* Localização */}
@@ -168,12 +140,7 @@ const Configurations = () => {
                     <option>Apartamento</option>
                   </select>
                 </div>
-
-
-
-
               </div>
-
             </div>
           </div>
         </div>
