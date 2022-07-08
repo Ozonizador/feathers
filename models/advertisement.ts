@@ -1,7 +1,8 @@
 import { JSONValue } from "./utils";
 
+export const ADVERTISEMENT_TABLE_NAME = "adverstisements"
 /* MODEL */
-export interface Advertisement {
+export default interface Advertisement {
     id?: number, 
     typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
     place: String,
@@ -17,7 +18,7 @@ export interface Advertisement {
     description:       String,
     type:      "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM",
     typeHost:          "PROFISSIONAL" | "PARTICULAR",
-    photos?:            String[],
+    photos?:           String[],
     houseRules:        JSONValue,
     aboutHouse:        JSONValue,
     monthRent:         number,
@@ -25,9 +26,9 @@ export interface Advertisement {
     guaranteeValue:    number,
     expenses:          JSONValue,
     hostLivesProperty: Boolean,
-    host?:              number,
-    createdAt?:         Date,     
-    updatedAt?:         Date    
+    host?:             number,
+    createdAt?:        Date,     
+    updatedAt?:        Date    
 }   
 
 /* VALUES FOR DB */
@@ -59,13 +60,24 @@ export const ADVERTISEMENT_PROPERTIES = {
 }  
 
 
-/* SELECTS */
+/* ENUMS */
 export const TYPE_ADVERTISEMENT = {
     "Apartamento Inteiro": "ENTIRE_SPACE",
     "Quarto Partilhado": "SHARED_ROOM",
     "Quarto Privado": "PRIVATE_ROOM"
 }
 
+export enum HOST_TYPE {
+    PROFISSIONAL = "PROFISSIONAL",
+    PARTICULAR = "PARTICULAR" 
+}
+
+export enum FLEX_HOST_TYPE {
+    SUPER_FLEX = "SUPER_FLEX",
+    FLEX = "FLEX",
+    MODERATE = "MODERATE",
+    RIGID = "RIGID"
+}
 
 
 
