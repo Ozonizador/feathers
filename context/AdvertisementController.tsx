@@ -40,7 +40,7 @@ export const AdvertisementController = ({ children }): JSX.Element => {
   );
 };
 
-export const useAdvertisement = () => {
+export const useAdvertisement = (): Advertisement => {
   return useContext(AdvertisementContext);
 };
 

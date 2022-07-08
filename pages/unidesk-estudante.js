@@ -1,8 +1,7 @@
 import Head from "next/head";
 import React from "react";
 
-
-import UnideskHero from "../components/unidesk/Estudante/unideskHero/UnideskHero"
+import UnideskHero from "../components/unidesk/Estudante/unideskHero/UnideskHero";
 import UnideskOptions from "../components/unidesk/Estudante/unideskOptions/UnideskOptions";
 
 export default function Unidesk() {
@@ -12,9 +11,7 @@ export default function Unidesk() {
         {/* é igual para o senhorio . pensar onde colocar isto para o senhorio tambem */}
         <UnideskHero title="Estudante" />
         <UnideskOptions />
-
       </div>
     </div>
   );
 }
-
