@@ -1,4 +1,4 @@
-import { Advertisement } from "../models/advertisement";
+import Advertisement from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 /* ADVERTISEMENT */

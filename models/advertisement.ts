@@ -1,7 +1,8 @@
 import { JSONValue } from "./utils";
 
+export const ADVERTISEMENT_TABLE_NAME = "adverstisements"
 /* MODEL */
-export interface Advertisement {
+export default interface Advertisement {
     id?: number, 
     typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
     place: String,
