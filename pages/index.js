@@ -1,6 +1,4 @@
-import Head from "next/head";
 import React from "react";
-import { useRouter } from "next/router";
 
 import HomeSection1 from "../components/home/homeSection1/HomeSection1";
 import HomeSection2 from "../components/home/homeSection2/HomeSection2";
