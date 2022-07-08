@@ -1,5 +1,6 @@
 import { JSONValue } from "./utils";
 
+/* MODEL */
 export interface Advertisement {
     id?: number, 
     typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
@@ -29,12 +30,40 @@ export interface Advertisement {
     updatedAt?:         Date    
 }   
 
-  
+/* VALUES FOR DB */
 
-const typeRoom = {
-    entireSpace: "ENTIRE_SPACE",
-    sharedRoom: "SHARED_ROOM",
-    privateRoom: "PRIVATE_ROOM"
+export const ADVERTISEMENT_PROPERTIES = {
+    TYPE_FLEX_HOST: "typeFlexHost",
+    TYPE: "type",
+    TYPE_HOST: "typeHost",
+    PLACE: "place",
+    STREET: "street",
+    STREET_NUMBER: "streetNumber",
+    FLOOR: "floor",
+    POSTAL_CODE: "postalCode",
+    ROOMS: "rooms",
+    BEDS: "beds",
+    NUMBER_TENANT: "tenantNumber",
+    BATHROOMS: "bathrooms",
+    TITLE: "title",
+    DESCRIPTION: "description",
+    PHOTOS: "photos",
+    HOUSE_RULES: "houseRules",
+    ABOUT_HOUSE: "aboutHouse",
+    MONTH_RENT: "monthRent",
+    EXTRA_PER_HOST: "extraPerHost",
+    GUARANTEE_VALUE:"guaranteeValue",
+    EXPENSES:"expenses",
+    HOST_LIVES_PROPERTY: "hostLivesProperty",
+    HOST: "host"
+}  
+
+
+/* SELECTS */
+export const TYPE_ADVERTISEMENT = {
+    "Apartamento Inteiro": "ENTIRE_SPACE",
+    "Quarto Partilhado": "SHARED_ROOM",
+    "Quarto Privado": "PRIVATE_ROOM"
 }
 
 
