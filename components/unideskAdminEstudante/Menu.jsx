@@ -20,7 +20,7 @@ export default function Menu() {
             setSummary1(!summary1);
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="flex items-center align-middle gap-4">
             <div className="summary-icon">
               <Image src="/images/icons8_resume.svg" height={32} width={32} alt="" />
             </div>
@@ -33,17 +33,26 @@ export default function Menu() {
             alt=""
           />
         </summary>
-        <ul>
-          <li>
+        <div className="flex justify-start items-center align-middle">
+          <div className="flex flex-col ml-20 gap-4  text-xl my-4">
             <Link href="/15">Informações pessoais</Link>
-          </li>
-          <li>
             <Link href="/16">Métodos de pagamento</Link>
-          </li>
-          <li>
-            <a href="">Informações contratuais</a>
-          </li>
-        </ul>
+            <Link href="/16">Métodos de pagamento</Link>
+          </div>
+          {/* PAULO
+          
+          <ul>
+            <li>
+              <Link href="/15">Informações pessoais</Link>
+            </li>
+            <li>
+              <Link href="/16">Métodos de pagamento</Link>
+            </li>
+            <li>
+              <a href="">Informações contratuais</a>
+            </li>
+          </ul> */}
+        </div>
       </details>
       <details>
         <summary
@@ -51,11 +60,12 @@ export default function Menu() {
             setSummary2(!summary2);
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+
+          <div className="flex items-center align-middle gap-4">
             <div className="summary-icon">
               <Image src="/images/icons8_hostel.svg" height={32} width={32} alt="" />
             </div>
-            <p>Minha estadia</p>
+            <p className="text-xl font-bold">Minha estadia</p>
           </div>
           <Image
             src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
@@ -64,7 +74,17 @@ export default function Menu() {
             alt=""
           />
         </summary>
-        <ul>
+
+
+        <div className="flex justify-start items-center align-middle">
+          <div className="flex flex-col ml-20 gap-4  text-xl my-4">
+            <Link href="/18">Informações gerais</Link>
+            <Link href="/20">Reparações</Link>
+            <Link href="/21">Despesas</Link>
+          </div>
+        </div>
+
+        {/* <ul>
           <li>
             <Link href="/18">Informações gerais</Link>
           </li>
@@ -77,7 +97,7 @@ export default function Menu() {
           <li>
             <Link href="/21">Despesas</Link>
           </li>
-        </ul>
+        </ul> */}
       </details>
       <details onClick={textRouteChange}>
         <summary
@@ -85,7 +105,7 @@ export default function Menu() {
             setSummary3(!summary3);
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="flex items-center align-middle gap-4">
             <div className="summary-icon">
               <Image src="/images/icons8_settings_3.svg" height={32} width={32} alt="" />
             </div>
@@ -98,6 +118,16 @@ export default function Menu() {
             alt=""
           />
         </summary>
+
+
+        <div className="flex flex-col ml-20 gap-4  text-xl my-4">
+
+          <Link href="/">link</Link>
+          <Link href="/">link</Link>
+          <Link className="mb-4" href="/">link</Link>
+        </div>
+        {/*
+          PAULO
         <ul>
           <li>
             <a href=""></a>
@@ -111,7 +141,8 @@ export default function Menu() {
           <li>
             <a href=""></a>
           </li>
-        </ul>
+        </ul> */}
+        <div className="h-2"></div>
       </details>
     </article>
   );
