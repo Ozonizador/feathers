@@ -1,7 +1,6 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import Input from "../utils/Input";
-
-
+import Image from "next/image";
+import { FLEX_HOST_TYPE } from "../../models/advertisement";
 
 const FormPasso7 = () => {
   const currentStep = useCurrentStep();
@@ -14,184 +13,139 @@ const FormPasso7 = () => {
   };
 
   return (
-    <section className="container mx-auto w-5/6 my-20">
-      <div className="text-2xl text-gray-700 font-bold mb-28">
-        Vamos a valores!
+    <section className="container mx-auto my-20 w-5/6">
+      <div className="my-28 text-4xl font-bold text-gray-700">
+        Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.
       </div>
 
-
-
-      <div className="flex flex-col">
-        <div className="flex items-center align-middle">
-          <p className="font-bold text-base w-60">Valor Mensal</p>
-          <div className=" flex flex-row items-center ml-6">
-            <div className="text-base  w-full"><Input label="" labelText="" customCss="euro" /></div>
-            <div className="ml-2 font-bold text-base">/mês</div>
+      <div className="my-6 flex flex-row items-baseline">
+        <div>
+          <div className="my-5 flex flex-row items-center align-middle">
+            <div>
+              <input
+                type="radio"
+                name="flex_host_type"
+                value={FLEX_HOST_TYPE.SUPER_FLEX}
+                onChange={(e) =>
+                  changeAdvertisementProperty(
+                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div className="mx-5">
+              <Image src="/images/green.png" alt="" height={16} width={32} />
+            </div>
           </div>
         </div>
 
-
-        <div className="flex items-center align-middle">
-          <p className="font-bold text-base w-60">Preço por pessoa extra</p>
-          <div className=" flex flex-row items-center ml-6">
-            <div className="text-base  w-full"><Input label="" labelText="" customCss="euro" /></div>
-            <div className="ml-2 font-bold text-base">/mês</div>
-          </div>
-        </div>
-
-
-        <div className="flex items-center align-middle">
-          <p className="font-bold text-base w-60">Caução</p>
-          <div className=" flex flex-row items-center ml-6 ">
-            <div className="text-base  w-full"><Input label="" labelText="" customCss="euro" /></div>
-
-          </div>
-        </div>
-
-
-        <div className="flex flex-col  mt-20">
-          <div className="flex flex-row items-center align-middle my-5">
-            <div>
-              <input type="radio" />
-            </div>
-            <div className="ml-4 font-bold text-xl">Despesas incluídas</div>
-          </div>
-
-          <div className="flex flex-row items-center align-middle">
-            <div>
-              <input type="radio" />
-            </div>
-            <div className="ml-4 font-bold text-xl">Despesas parcialmente incluídas</div>
-          </div>
-
-
-          <div className="flex items-center my-8 mt-20">
-            <div className="flex items-center">
-
-              <p className="font-bold text-base w-24">Gás</p>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Sim
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Não
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center my-8 mt-4">
-            <div className="flex items-center">
-
-              <p className="font-bold text-base w-24">Internet</p>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Sim
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Não
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center my-8 mt-4">
-            <div className="flex items-center">
-
-              <p className="font-bold text-base w-24">Agua</p>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Sim
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Não
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div className="flex items-center my-8 mt-4">
-            <div className="flex items-center">
-
-              <p className="font-bold text-base w-24">Luz</p>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Sim
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
-              <div className="text-base mr-16">
-                Não
-              </div>
-              <div>
-                <div className="flex items-center h-5">
-                  <input type="checkbox" className=" h-4 w-4 border border-terciary-500 rounded" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-row items-center align-middle mt-8">
-            <div>
-              <input type="radio" />
-            </div>
-            <div className="ml-4 font-bold text-xl">Despesas excluídas</div>
+        <div className="flex flex-col">
+          <div className="text-xl font-bold">Host Super Flex</div>
+          <div className="mt-2 text-base text-secondary-300">
+            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
+            período e até 2 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento
+            é integral.
           </div>
         </div>
       </div>
 
+      <div className="my-6 flex flex-row items-baseline">
+        <div>
+          <div className="my-5 flex flex-row items-center align-middle">
+            <div>
+              <input type="radio" name="flex_host_type" value={FLEX_HOST_TYPE.FLEX} />
+            </div>
+            <div className="mx-5">
+              <Image
+                src="/images/yellow.png"
+                alt=""
+                height={16}
+                width={32}
+                onChange={(e) =>
+                  changeAdvertisementProperty(
+                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+          </div>
+        </div>
 
+        <div className="flex flex-col">
+          <div className="text-xl font-bold">Host Flex</div>
+          <div className="mt-2 text-base text-secondary-300">
+            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
+            período e até 7 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento
+            é integral.
+          </div>
+        </div>
+      </div>
+
+      <div className="my-6 flex flex-row items-baseline">
+        <div>
+          <div className="my-5 flex flex-row items-center align-middle">
+            <div>
+              <input
+                type="radio"
+                name="flex_host_type"
+                value={FLEX_HOST_TYPE.MODERATE}
+                onChange={(e) =>
+                  changeAdvertisementProperty(
+                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div className="mx-5">
+              <Image src="/images/orange.png" alt="" height={16} width={32} />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <div className="text-xl font-bold">Host Moderado</div>
+          <div className="mt-2 text-base text-secondary-300">
+            Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
+            período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o
+            pagamento é integral.
+          </div>
+        </div>
+      </div>
+
+      <div className="my-6 flex flex-row items-baseline">
+        <div>
+          <div className="my-5 flex flex-row items-center align-middle">
+            <div>
+              <input
+                type="radio"
+                name="flex_host_type"
+                value={FLEX_HOST_TYPE.RIGID}
+                onChange={(e) =>
+                  changeAdvertisementProperty(
+                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
+                    e.target.value
+                  )
+                }
+              />
+            </div>
+            <div className="mx-5">
+              <Image src="/images/red.png" alt="" height={16} width={32} />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <div className="text-xl font-bold">Host Rígido</div>
+          <div className="mt-2 text-base text-secondary-300">
+            Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
+            período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o
+            pagamento é integral.
+          </div>
+        </div>
+      </div>
 
       <button
         type="button"

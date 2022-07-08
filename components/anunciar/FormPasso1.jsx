@@ -1,19 +1,21 @@
-import React from "react";
-import Input from "../utils/Input";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import QuantityInput from "../utils/QuantityInput";
+import { BiBed } from "react-icons/bi";
+import { MdPeopleOutline } from "react-icons/md";
+import { MdOutlineBathtub } from "react-icons/md";
+import { GiPersonInBed } from "react-icons/gi";
 import {
-  useAdvertisement,
   useSetAdvertisementProperty,
+  useAdvertisement,
 } from "../../context/AdvertisementController";
-import { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
 const FormPasso1 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
-  /* ADVERTISEMENT */
   const advertisement = useAdvertisement();
-  const changeAdvertisementProperty = useSetAdvertisementProperty();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
 
   const nextStep = (e) => {
     e.preventDefault();
@@ -21,87 +23,83 @@ const FormPasso1 = () => {
     setCurrentStep(nextStep);
   };
 
+  const changeAdvertisementProperty = (property, value) => {
+    setAdvertisementProperty(property, value);
+  };
+
   return (
-    <section className="my-20 mx-auto grid grid-cols-2 justify-items-center  gap-4">
-      <div className="w-3/4">
-        <div className="mt-2">
-          <label className="block ">Qual o seu tipo de espaço?</label>
-          <select
-            onChange={(e) =>
-              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE, e.target.value)
-            }
-            className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
-          >
-            {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
-              return (
-                <option key={index} value={TYPE_ADVERTISEMENT[type]}>
-                  {type}
-                </option>
-              );
-            })}
-          </select>
+    <section className="my-20 w-full  px-40 xl:w-1/2 ">
+      <div className="my-8 flex items-center">
+        <div className="flex items-center">
+          <MdPeopleOutline className="text-2xl" />
         </div>
-        <div className="my-8">
-          <Input
-            label="street"
-            labelText="Rua"
-            value={advertisement.street}
-            onChange={(e) =>
-              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)
-            }
+        <div className="w-3/5">
+          <h2 className="ml-2 align-middle text-base  font-bold">Capacidade</h2>
+        </div>
+        <div>
+          <QuantityInput
+            initValue={advertisement.tenantNumber}
+            onChange={changeAdvertisementProperty}
+            property={ADVERTISEMENT_PROPERTIES.NUMBER_TENANT}
           />
-        </div>
-        <Input
-          label="floor"
-          labelText="Andar"
-          value={advertisement.floor}
-          onChange={(e) =>
-            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.FLOOR, e.target.value)
-          }
-        />
-
-        <div className="mt-1">
-          <div className="flex">
-            <button
-              type="button"
-              className="mt-10 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
-              onClick={(e) => nextStep(e)}
-            >
-              Seguinte &#8594;
-            </button>
-          </div>
         </div>
       </div>
 
-      <div className="w-3/4">
-        <Input
-          label="place"
-          labelText="Localidade"
-          customCss="icon"
-          value={advertisement.place}
-          onChange={(e) =>
-            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)
-          }
-        />
-        <div className="my-8">
-          <Input
-            label="street_number"
-            labelText="Número"
-            value={advertisement.streetNumber}
-            onChange={(e) =>
-              changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)
-            }
+      <div className="my-8 flex">
+        <div className="flex items-center">
+          <BiBed className="text-2xl" />
+        </div>
+        <div className="w-3/5">
+          <h2 className="ml-2 align-middle text-base font-bold">Camas</h2>
+        </div>
+        <div>
+          <QuantityInput
+            property={ADVERTISEMENT_PROPERTIES.BEDS}
+            initValue={advertisement.beds}
+            onChange={changeAdvertisementProperty}
           />
         </div>
-        <Input
-          label="postal_code"
-          labelText="Código Postal"
-          value={advertisement.postalCode}
-          onChange={(e) =>
-            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)
-          }
-        />
       </div>
+
+      <div className="my-8 flex">
+        <div className="flex items-center">
+          <GiPersonInBed className="text-2xl" />
+        </div>
+        <div className="w-3/5">
+          <h2 className="ml-2 align-middle text-base font-bold">Quartos</h2>
+        </div>
+        <div>
+          <QuantityInput
+            property={ADVERTISEMENT_PROPERTIES.ROOMS}
+            initValue={advertisement.rooms}
+            onChange={changeAdvertisementProperty}
+          />
+        </div>
+      </div>
+
+      <div className="my-8 flex">
+        <div className="flex items-center">
+          <MdOutlineBathtub className="text-2xl" />
+        </div>
+        <div className="w-3/5">
+          <h2 className="ml-2 align-middle text-base  font-bold">Casas de Banho</h2>
+        </div>
+        <div>
+          <QuantityInput
+            property={ADVERTISEMENT_PROPERTIES.BATHROOMS}
+            initValue={advertisement.bathrooms}
+            onChange={changeAdvertisementProperty}
+          />
+        </div>
+      </div>
+
+      <button
+        type="button"
+        className="mt-12 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+        onClick={(e) => nextStep(e)}
+      >
+        Seguinte &#8594;
+      </button>
     </section>
   );
 };
