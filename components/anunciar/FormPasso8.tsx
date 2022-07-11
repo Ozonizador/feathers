@@ -1,12 +1,18 @@
+import { useRouter } from "next/router";
 import { useAdvertisement } from "../../context/AdvertisementController";
+import { addAdvertisement } from "../../services/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();
+  const router = useRouter();
 
-  const saveAdvertisement = (event) => {
+  const saveAdvertisement = async (event) => {
     event.preventDefault();
-
+    const { error } = await addAdvertisement(advertisement);
     debugger;
+    if (!error) {
+      router.push("/");
+    }
   };
 
   return (

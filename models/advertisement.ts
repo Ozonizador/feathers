@@ -1,6 +1,7 @@
 import { JSONValue } from "./utils";
 
-export const ADVERTISEMENT_TABLE_NAME = "adverstisements"
+export const ADVERTISEMENT_TABLE_NAME = "advertisements";
+
 /* MODEL */
 export default interface Advertisement {
     id?: number, 
