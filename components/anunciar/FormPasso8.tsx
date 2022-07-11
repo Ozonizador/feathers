@@ -1,10 +1,13 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useAdvertisement } from "../../context/AdvertisementController";
 
 const FormPasso8 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+  const advertisement = useAdvertisement();
 
-  const saveAdvertisement = () => {};
+  const saveAdvertisement = (event) => {
+    event.preventDefault();
+
+    debugger;
+  };
 
   return (
     <section className="container mx-auto my-20 w-5/6">
@@ -41,6 +44,14 @@ const FormPasso8 = () => {
           <div className="ml-4  text-xl">As informações que providencio são verdadeiras</div>
         </div>
       </div>
+
+      <button
+        type="button"
+        className="mt-16 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+        onClick={(e) => saveAdvertisement(e)}
+      >
+        Gravar anúncio
+      </button>
     </section>
   );
 };

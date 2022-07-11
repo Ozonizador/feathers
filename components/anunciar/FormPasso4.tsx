@@ -5,15 +5,30 @@ import { BiDrink } from "react-icons/bi";
 import { MdChecklist } from "react-icons/md";
 import { GiBroom } from "react-icons/gi";
 import Input from "../utils/Input";
+import {
+  useAdvertisement,
+  useSetAdvertisementProperty,
+} from "../../context/AdvertisementController";
+import { HOUSE_RULES_NAMING } from "../../models/advertisement";
 
 const FormPasso4 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
+  const advertisement = useAdvertisement();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
+
   const nextStep = (e) => {
     e.preventDefault();
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
+  };
+
+  const changeHouseRulesProperty = (event) => {
+    const { houseRules } = advertisement;
+    houseRules[event.target.name] = event.target.value;
+
+    setAdvertisementProperty(event.target.name, { ...advertisement, houseRules });
   };
 
   return (
@@ -35,7 +50,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Sim</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
+                  type="radio"
+                  value="true"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -44,7 +65,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Não</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
+                  type="radio"
+                  value="false"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -62,7 +89,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Sim</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
+                  type="radio"
+                  value="true"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -71,7 +104,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Não</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
+                  type="radio"
+                  value="false"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -89,7 +128,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Sim</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  type="radio"
+                  name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
+                  value="true"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -98,7 +143,13 @@ const FormPasso4 = () => {
             <div className="mr-16 text-base">Não</div>
             <div>
               <div className="flex h-5 items-center">
-                <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                <input
+                  type="radio"
+                  value="false"
+                  name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
+                  className=" h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => changeHouseRulesProperty(e)}
+                />
               </div>
             </div>
           </div>
@@ -113,7 +164,12 @@ const FormPasso4 = () => {
           </div>
           <div className=" ml-6 flex flex-row  items-center ">
             <div className="w-3/4  text-base">
-              <Input label="" labelText="" />
+              <Input
+                label={HOUSE_RULES_NAMING.OTHER_RULES}
+                labelText=""
+                value=""
+                onChange={(e) => changeHouseRulesProperty(e)}
+              />
             </div>
             <div></div>
           </div>

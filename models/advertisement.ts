@@ -5,34 +5,51 @@ export const ADVERTISEMENT_TABLE_NAME = "adverstisements"
 export default interface Advertisement {
     id?: number, 
     typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
-    place: String,
-    street: String,
-    streetNumber: String,
-    floor?: String,
-    postalCode:        String,
+    place: string,
+    street: string,
+    streetNumber: string,
+    floor?: string,
+    postalCode:        string,
     rooms:             number,
     beds:              number,
     tenantNumber:      number,
     bathrooms:         number,
-    title:             String,
-    description:       String,
+    title:             string,
+    description:       string,
     type:      "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM",
     typeHost:          "PROFISSIONAL" | "PARTICULAR",
-    photos?:           String[],
-    houseRules:        JSONValue,
+    photos?:           string[],
+    houseRules:        HouseRules,
     aboutHouse:        JSONValue,
     monthRent:         number,
     extraPerHost:      number,
     guaranteeValue:    number,
-    expenses:          JSONValue,
+    expenses:          HouseExpenses,
     hostLivesProperty: Boolean,
     host?:             number,
     createdAt?:        Date,     
     updatedAt?:        Date    
 }   
 
-/* VALUES FOR DB */
 
+export interface HouseExpenses {
+    inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED",
+    servicesIncluded?: EXPENSES_TYPE[],
+    servicesExcluded?: EXPENSES_TYPE[]
+}
+
+export interface HouseRules {
+    smokeAllowed?: boolean,
+    animalsAllowed?: boolean,
+    eventsAllowed?: boolean,
+    otherRules?: string,
+    cleaning?: string
+}
+
+
+/* ------ STRING ------ */
+
+/* VALUES FOR DB */
 export const ADVERTISEMENT_PROPERTIES = {
     TYPE_FLEX_HOST: "typeFlexHost",
     TYPE: "type",
@@ -60,6 +77,14 @@ export const ADVERTISEMENT_PROPERTIES = {
 }  
 
 
+export const HOUSE_RULES_NAMING = {
+    SMOKE_ALLOWED: "smokeAllowed",
+    ANIMALS_ALLOWED: "animalsAllowed",
+    EVENTS_ALLOWED: "eventsAllowed",
+    OTHER_RULES: "otherRules",
+    CLEANING: "cleaning"
+}
+
 /* ENUMS */
 export const TYPE_ADVERTISEMENT = {
     "Apartamento Inteiro": "ENTIRE_SPACE",
@@ -79,5 +104,15 @@ export enum FLEX_HOST_TYPE {
     RIGID = "RIGID"
 }
 
+export enum INCLUSIVE_EXPENSES {
+    INCLUDED = "INCLUDED",
+    PARTIALLY = "PARTIALLY",
+    EXCLUDED = "EXCLUDED"
+}
 
-
+export enum EXPENSES_TYPE {
+    GAS = "GAS",
+    LIGHTS = "LIGHTS",
+    WATER = "WATER",
+    INTERNET = "INTERNET"
+}

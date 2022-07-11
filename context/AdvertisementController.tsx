@@ -1,4 +1,4 @@
-import Advertisement from "../models/advertisement";
+import Advertisement, { HouseExpenses } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 /* ADVERTISEMENT */
@@ -22,7 +22,7 @@ const defaultAdvertisement = {
   monthRent: 0,
   extraPerHost: 0,
   guaranteeValue: 0,
-  expenses: "",
+  expenses: {} as HouseExpenses,
   hostLivesProperty: false,
 } as Advertisement;
 

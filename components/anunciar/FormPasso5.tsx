@@ -1,6 +1,8 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { Accordion } from "flowbite-react";
 
+/* TODO MISSING LOGIC */
+
 const FormPasso5 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
