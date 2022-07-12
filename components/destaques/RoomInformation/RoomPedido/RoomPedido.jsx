@@ -6,8 +6,8 @@ export default function RoomPedido() {
         <section className="w-full mt-8">
             <div className="w-full border border-terciary-700 rounded-2xl px-4 py-4 bg-green-100">
 
-                <div className="flex flex-col justify-center">
-                    <div className="flex justify-center align-middle h-24 w-24 bg-white rounded-full">
+                <div className="flex flex-col justify-center align-middle items-center">
+                    <div className="flex justify-center align-middle items-center h-24 w-24 bg-white rounded-full">
                         <HiOutlineBadgeCheck className="text-6xl text-lime-400" />
                     </div>
 
