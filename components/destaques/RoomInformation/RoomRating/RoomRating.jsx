@@ -1,5 +1,5 @@
 import React from "react";
-import { RatingStar } from "flowbite-react/lib/esm/components/Rating/RatingStar";
+
 import { Rating } from "flowbite-react/lib/esm/components";
 export default function RoomRating() {
     return (
