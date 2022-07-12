@@ -8,19 +8,28 @@ import RoomCard from "../components/destaques/RoomInformation/RoomCard/RoomCard"
 import RoomMap from "../components/destaques/RoomInformation/RoomMap/RoomMap";
 import RoomSenhorio from "../components/destaques/RoomInformation/RoomSenhorio/RoomSenhorio";
 import RoomSemelhantes from "../components/destaques/RoomInformation/RoomsSemelhantes/RoomsSemelhantes";
+import RoomPagamento from "../components/destaques/RoomInformation/RoomPagamento/RoomPagamento";
 
 export default function Room() {
     return (
         <div>
             <div className=" px-36 mx-auto md:container">
-                <RoomInformation />
-                <DescricaoCondicoes />
-                <RoomSlider />
-                <RoomRating />
-                <RoomCard />
-                <RoomMap />
-                <RoomSenhorio />
-                <RoomSemelhantes />
+                <div className="flex justify-between">
+                    <div className="w-3/4">
+                        <RoomInformation />
+                        <DescricaoCondicoes />
+                        <RoomSlider />
+                        <RoomRating />
+                        <RoomCard />
+                        <RoomMap />
+                        <RoomSenhorio />
+                        <RoomSemelhantes />
+                    </div>
+
+                    <div className="flex-initial w-64">
+                        <RoomPagamento />
+                    </div>
+                </div>
             </div>
         </div>
     );
