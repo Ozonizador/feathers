@@ -10,6 +10,7 @@ import RoomSenhorio from "../components/destaques/RoomInformation/RoomSenhorio/R
 import RoomSemelhantes from "../components/destaques/RoomInformation/RoomsSemelhantes/RoomsSemelhantes";
 import RoomPagamento from "../components/destaques/RoomInformation/RoomPagamento/RoomPagamento";
 import RoomSobreTi from "../components/destaques/RoomInformation/RoomSobreTi/RoomSobreTi";
+import RoomPedido from "../components/destaques/RoomInformation/RoomPedido/RoomPedido";
 
 export default function Room() {
     return (
@@ -30,6 +31,7 @@ export default function Room() {
                     <div className="flex-initial w-64">
                         <RoomPagamento />
                         <RoomSobreTi />
+                        <RoomPedido />
                     </div>
                 </div>
             </div>
