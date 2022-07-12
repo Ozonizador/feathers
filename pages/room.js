@@ -4,7 +4,11 @@ import RoomInformation from "../components/destaques/RoomInformation/RoomInforma
 import DescricaoCondicoes from "../components/destaques/RoomInformation/DescricaoCondicoes/DescricaoCondicoes";
 import RoomSlider from "../components/destaques/RoomInformation/Slider/RoomSlider"
 import RoomRating from "../components/destaques/RoomInformation/RoomRating/RoomRating";
-import RoomCard from "../components/destaques/RoomInformation/RoomCard";
+import RoomCard from "../components/destaques/RoomInformation/RoomCard/RoomCard";
+import RoomMap from "../components/destaques/RoomInformation/RoomMap/RoomMap";
+
+
+
 export default function Room() {
     return (
         <div>
@@ -14,6 +18,7 @@ export default function Room() {
                 <RoomSlider />
                 <RoomRating />
                 <RoomCard />
+                <RoomMap />
             </div>
         </div>
     );
