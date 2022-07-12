@@ -13,10 +13,26 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 /* import person image */
 import person from "../../public/images/person.png";
 import ukFlag from "../../public/images/icon-uk.jpg";
+import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 
 export const Navbar = () => {
-  const [enabled, setEnabled] = useState(false);
-  const { user, error } = useUser();
+  const { user } = useUser();
+
+  const { toggleUserType } = useGetUserType();
+  const toggleUserTypeContext = useToggleUserType();
+
+  /* Changing the toggle senhorio estudante */
+  const toggleSenhorioEstudante = () => {
+    if (!user) {
+      return;
+    }
+
+    if (toggleUserType === "ESTUDANTE") {
+      toggleUserTypeContext("SENHORIO");
+    } else {
+      toggleUserTypeContext("ESTUDANTE");
+    }
+  };
 
   return (
     <header>
@@ -134,13 +150,13 @@ export const Navbar = () => {
                     <div>
                       <span className="mr-2">Estudante</span>
                       <Switch
-                        checked={enabled}
-                        onChange={setEnabled}
+                        checked={true}
+                        onChange={toggleSenhorioEstudante}
                         className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500"
                       >
                         <span
                           className={`${
-                            enabled ? "translate-x-6" : "translate-x-1"
+                            toggleUserType === "SENHORIO" ? "translate-x-6" : "translate-x-1"
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>

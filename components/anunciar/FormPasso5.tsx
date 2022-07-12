@@ -1,5 +1,5 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { Accordion } from "flowbite-react";
+import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 
 /* TODO MISSING LOGIC */
 
