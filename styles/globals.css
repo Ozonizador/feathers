@@ -10,6 +10,20 @@
   background-position: 17px 7px;
 }
 
+.bg-destaques-slider1{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed2.jpg);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
+
+
+.bg-destaques-slider2{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed6.jpg);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
+
+
 .icon {
   background: url(/images/location.png) no-repeat 6px;
   background-size: 10px;
