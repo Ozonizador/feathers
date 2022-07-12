@@ -1,10 +1,17 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
-import { FLEX_HOST_TYPE } from "../../models/advertisement";
+import { ADVERTISEMENT_PROPERTIES, FLEX_HOST_TYPE } from "../../models/advertisement";
+import {
+  useAdvertisement,
+  useSetAdvertisementProperty,
+} from "../../context/AdvertisementController";
 
 const FormPasso7 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
+
+  const advertisement = useAdvertisement();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
 
   const nextStep = (e) => {
     e.preventDefault();
@@ -27,11 +34,9 @@ const FormPasso7 = () => {
                 name="flex_host_type"
                 value={FLEX_HOST_TYPE.SUPER_FLEX}
                 onChange={(e) =>
-                  changeAdvertisementProperty(
-                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
-                    e.target.value
-                  )
+                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)
                 }
+                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.SUPER_FLEX}
               />
             </div>
             <div className="mx-5">
@@ -54,21 +59,18 @@ const FormPasso7 = () => {
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
-              <input type="radio" name="flex_host_type" value={FLEX_HOST_TYPE.FLEX} />
+              <input
+                type="radio"
+                name="flex_host_type"
+                value={FLEX_HOST_TYPE.FLEX}
+                onChange={(e) =>
+                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)
+                }
+                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.FLEX}
+              />
             </div>
             <div className="mx-5">
-              <Image
-                src="/images/yellow.png"
-                alt=""
-                height={16}
-                width={32}
-                onChange={(e) =>
-                  changeAdvertisementProperty(
-                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
-                    e.target.value
-                  )
-                }
-              />
+              <Image src="/images/yellow.png" alt="" height={16} width={32} />
             </div>
           </div>
         </div>
@@ -92,11 +94,9 @@ const FormPasso7 = () => {
                 name="flex_host_type"
                 value={FLEX_HOST_TYPE.MODERATE}
                 onChange={(e) =>
-                  changeAdvertisementProperty(
-                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
-                    e.target.value
-                  )
+                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)
                 }
+                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.MODERATE}
               />
             </div>
             <div className="mx-5">
@@ -124,11 +124,9 @@ const FormPasso7 = () => {
                 name="flex_host_type"
                 value={FLEX_HOST_TYPE.RIGID}
                 onChange={(e) =>
-                  changeAdvertisementProperty(
-                    ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST,
-                    e.target.value
-                  )
+                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)
                 }
+                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.RIGID}
               />
             </div>
             <div className="mx-5">

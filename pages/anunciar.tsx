@@ -46,7 +46,7 @@ const ZonaFormulario = () => {
       {currentStep === 5 && <FormPasso5 />}
       {currentStep === 6 && <FormPasso6 />}
       {currentStep === 7 && <FormPasso7 />}
-      {currentStep === 9 && <FormPasso8 />}
+      {currentStep === 8 && <FormPasso8 />}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../utils/Input";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
@@ -8,6 +8,8 @@ import {
 import { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 
 const FormPasso0 = () => {
+  const [message, setMessage] = useState("");
+
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -17,12 +19,21 @@ const FormPasso0 = () => {
 
   const nextStep = (e) => {
     e.preventDefault();
+
+    // confirmar se esta tudo preenchido
+    const { type, street, floor, place, streetNumber, postalCode } = advertisement;
+
+    if (!type || !street || !floor || !place || !streetNumber || !postalCode) {
+      setMessage("Campos por preencher.");
+      return;
+    }
+
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
 
   return (
-    <section className="my-20 mx-auto grid grid-cols-2 justify-items-center  gap-4">
+    <section className="my-20 mx-auto grid grid-cols-2 justify-items-center gap-4">
       <div className="w-3/4">
         <div className="mt-2">
           <label className="block ">Qual o seu tipo de espaço?</label>
@@ -64,12 +75,13 @@ const FormPasso0 = () => {
           <div className="flex">
             <button
               type="button"
-              className="mt-10 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+              className="mt-10 flex items-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
               onClick={(e) => nextStep(e)}
             >
               Seguinte &#8594;
             </button>
           </div>
+          {message && <div className="text-red-600">{message}</div>}
         </div>
       </div>
 

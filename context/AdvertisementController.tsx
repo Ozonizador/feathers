@@ -1,28 +1,28 @@
-import Advertisement from "../models/advertisement";
+import Advertisement, { HouseExpenses, HouseRules } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
   type: "ENTIRE_SPACE",
+  typeFlexHost: "SUPER_FLEX",
+  typeHost: "PARTICULAR",
   place: "",
   street: "",
   streetNumber: "",
   floor: "",
   postalCode: "",
+  title: "",
+  description: "",
+  aboutHouse: "",
   rooms: 1,
   beds: 1,
   tenantNumber: 1,
   bathrooms: 1,
-  title: "",
-  description: "",
-  typeFlexHost: "SUPER_FLEX",
-  typeHost: "PARTICULAR",
-  houseRules: "",
-  aboutHouse: "",
   monthRent: 0,
   extraPerHost: 0,
   guaranteeValue: 0,
-  expenses: "",
+  houseRules: {} as HouseRules,
+  expenses: {} as HouseExpenses,
   hostLivesProperty: false,
 } as Advertisement;
 

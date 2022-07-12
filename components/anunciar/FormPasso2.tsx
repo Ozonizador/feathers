@@ -1,12 +1,32 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { ADVERTISEMENT_PROPERTIES, HOST_TYPE } from "../../models/advertisement";
+import {
+  useAdvertisement,
+  useSetAdvertisementProperty,
+} from "../../context/AdvertisementController";
+import { useState } from "react";
 
 const FormPasso2 = () => {
+  const [message, setMessage] = useState("");
+
+  // contexts
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
+  const advertisement = useAdvertisement();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
 
   const nextStep = (e) => {
     e.preventDefault();
+
+    // confirmar se esta tudo preenchido
+    const { title, description } = advertisement;
+
+    if (!title || !description) {
+      setMessage("Campos por preencher.");
+      return;
+    }
+
+    // proximo passo
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -19,9 +39,7 @@ const FormPasso2 = () => {
           className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
           placeholder="Máximo de 50 palavras"
           maxLength={50}
-          onChange={(e) =>
-            changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)
-          }
+          onChange={(e) => setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
         />
 
         <div className="mt-12">
@@ -36,7 +54,7 @@ const FormPasso2 = () => {
               maxLength={500}
               defaultValue={""}
               onChange={(e) =>
-                changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.DESCRIPTION, e.target.value)
+                setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.DESCRIPTION, e.target.value)
               }
             />
           </div>
@@ -55,10 +73,11 @@ const FormPasso2 = () => {
                 <input
                   name="host_lives_apartment"
                   type="radio"
-                  value={true}
-                  className=" h-4 w-4 rounded border border-terciary-500"
+                  value="true"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  checked={advertisement.hostLivesProperty === true}
                   onChange={(e) =>
-                    changeAdvertisementProperty(
+                    setAdvertisementProperty(
                       ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY,
                       e.target.value
                     )
@@ -76,10 +95,11 @@ const FormPasso2 = () => {
                 <input
                   name="host_lives_apartment"
                   type="radio"
-                  value={false}
-                  className=" h-4 w-4 rounded border border-terciary-500"
+                  value="false"
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  checked={advertisement.hostLivesProperty === false}
                   onChange={(e) =>
-                    changeAdvertisementProperty(
+                    setAdvertisementProperty(
                       ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY,
                       e.target.value
                     )
@@ -102,10 +122,11 @@ const FormPasso2 = () => {
                 <input
                   name="host_type"
                   type="radio"
-                  className=" h-4 w-4 rounded border border-terciary-500"
+                  className="h-4 w-4 rounded border border-terciary-500"
                   value={HOST_TYPE.PARTICULAR}
+                  checked={advertisement.typeHost === HOST_TYPE.PARTICULAR}
                   onChange={(e) =>
-                    changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.HOST_TYPE, e.target.value)
+                    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)
                   }
                 />
               </div>
@@ -119,10 +140,11 @@ const FormPasso2 = () => {
                 <input
                   name="host_type"
                   type="radio"
-                  className=" h-4 w-4 rounded border border-terciary-500"
+                  className="h-4 w-4 rounded border border-terciary-500"
                   value={HOST_TYPE.PROFISSIONAL}
+                  checked={advertisement.typeHost === HOST_TYPE.PROFISSIONAL}
                   onChange={(e) =>
-                    changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.HOST_TYPE, e.target.value)
+                    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)
                   }
                 />
               </div>
@@ -138,6 +160,7 @@ const FormPasso2 = () => {
       >
         Seguinte &#8594;
       </button>
+      {message && <div className="text-red-600">{message}</div>}
     </section>
   );
 };
