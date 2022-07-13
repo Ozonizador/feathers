@@ -1,14 +1,16 @@
 import React from "react";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
-
+import Link from "next/link"
+import { Modal } from "flowbite-react/lib/esm/components";
+import { Button } from "flowbite-react/lib/esm/components";
 import { BiInfoCircle } from "react-icons/bi"
 import { FaRegLightbulb } from "react-icons/fa"
 import { AiOutlineFire } from "react-icons/ai"
 import { AiOutlineWifi } from "react-icons/ai"
 import { BsWater } from "react-icons/bs"
 
-import Link from "next/link"
+
 
 export default function RoomPagamento() {
     return (
@@ -102,7 +104,10 @@ export default function RoomPagamento() {
                 </div>
 
                 <div className="flex flex-row justify-between">
-                    <div className="underline underline-offset-1 text-secondary-600 mb-7">Detalhes do Pagamento</div>
+                    <div className="underline underline-offset-1 text-secondary-600 mb-7">
+                        <Link href="/">Detalhes do Pagamento</Link>
+                    </div>
+
                 </div>
                 <hr />
 
@@ -118,9 +123,8 @@ export default function RoomPagamento() {
                         Enviar pedido de reserva
                     </a>
                 </Link>
+
             </div>
-
-
 
 
         </section >
