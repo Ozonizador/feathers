@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
@@ -7,6 +8,9 @@ import { login, loginWithFacebook, loginWithGoogle } from "../../services/userSe
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hasError, setHasError] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const loginFacebook = async (event) => {
     event.preventDefault();
@@ -19,8 +23,15 @@ const Login = () => {
     await loginWithGoogle();
   };
 
-  const normalLogin = async () => {
-    await login(email, password);
+  const normalLogin = async (event) => {
+    event.preventDefault();
+    setHasError(false);
+    const { user, session, error } = await login(email, password);
+    if (error) {
+      setHasError(true);
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -35,7 +46,7 @@ const Login = () => {
         </div>
         <div className="p-3">
           <div className="font-bold">Bem-vindo de novo!</div>
-          <form onSubmit={normalLogin}>
+          <form onSubmit={(e) => normalLogin(e)}>
             <div className="mt-3">
               <div>Email</div>
               <div className="mt-2">
@@ -55,6 +66,7 @@ const Login = () => {
             <div className="my-5">
               <button className="w-full rounded-lg bg-primary-500 py-2">Iniciar sessão</button>
             </div>
+            {hasError && <div>Username ou password errados</div>}
           </form>
           <Link href="/auth/recover">
             <a>

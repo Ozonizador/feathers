@@ -9,7 +9,6 @@ const FormPasso8 = () => {
   const saveAdvertisement = async (event) => {
     event.preventDefault();
     const { error } = await addAdvertisement(advertisement);
-    debugger;
     if (!error) {
       router.push("/");
     }

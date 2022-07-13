@@ -1,27 +1,20 @@
-import { supabase } from "../utils/supabaseClient";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
-// not sure if this exists
 export async function register(email, password) {
-  const { user, session, error } = await supabase.auth.signUp(
+  const { user, session, error } = await supabaseClient.auth.signUp(
     {
       email,
       password,
-    },
-    {
-      redirectTo: `${window.location.origin}`,
     }
   );
   return { user, session, error };
 }
 
 export async function login(email, password) {
-  const { user, session, error } = await supabase.auth.signIn(
+  const { user, session, error } = await supabaseClient.auth.signIn(
     {
       email,
       password,
-    },
-    {
-      redirectTo: `${window.location.origin}`,
     }
   );
 
@@ -29,7 +22,7 @@ export async function login(email, password) {
 }
 
 export async function loginWithMagicLink(email) {
-  const { user, session, error } = await supabase.auth.signIn(
+  const { user, session, error } = await supabaseClient.auth.signIn(
     {
       email,
     },
@@ -42,7 +35,7 @@ export async function loginWithMagicLink(email) {
 }
 
 export async function loginWithFacebook() {
-  const { user, session, error } = await supabase.auth.signIn(
+  const { user, session, error } = await supabaseClient.auth.signIn(
     {
       provider: "facebook",
     },
@@ -55,7 +48,7 @@ export async function loginWithFacebook() {
 }
 
 export async function loginWithGoogle() {
-  const { user, session, error } = await supabase.auth.signIn(
+  const { user, session, error } = await supabaseClient.auth.signIn(
     {
       provider: "google",
     },
@@ -68,18 +61,18 @@ export async function loginWithGoogle() {
 }
 
 export async function signout() {
-  const { error } = await supabase.auth.signOut();
+  const { error } = await supabaseClient.auth.signOut();
   return error;
 }
 
 /* check session */
 export async function checkUserLoggedIn() {
-  const session = await supabase.auth.session();
+  const session = await supabaseClient.auth.session();
   return session;
 }
 
 /* recover email */
 export async function recoverPasswordViaEmail(email) {
-  const { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
+  const { data, error } = await supabaseClient.auth.api.resetPasswordForEmail(email);
   return { data, error };
 }

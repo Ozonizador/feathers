@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 
 interface GeneralUnihostInformation {
