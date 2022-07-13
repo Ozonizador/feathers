@@ -27,7 +27,7 @@ export default interface Advertisement {
     guaranteeValue:    number,
     expenses:          HouseExpenses,
     hostLivesProperty: Boolean,
-    host?:             number,
+    host?:             string,
     createdAt?:        Date,     
     updatedAt?:        Date    
 }   
