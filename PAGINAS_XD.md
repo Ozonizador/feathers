@@ -29,6 +29,12 @@ pages => destaques.js
 
 Praticamente tudo por fazer. Confirmar na pasta modais se tem alguma modal para o pagamento. acho que nao
 
+Arrumar Grid com fotos
+
+Problema com Z-Index "Despesas incluídas"
+
+Como usar modal do https://flowbite-react.com/modal
+
 pages => anuncio/[slug].js
 
 ## Pagina 8 (/funciona)
