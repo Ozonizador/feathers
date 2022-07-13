@@ -11,11 +11,13 @@ import RoomSemelhantes from "../components/destaques/RoomInformation/RoomsSemelh
 import RoomPagamento from "../components/destaques/RoomInformation/RoomPagamento/RoomPagamento";
 import RoomSobreTi from "../components/destaques/RoomInformation/RoomSobreTi/RoomSobreTi";
 import RoomPedido from "../components/destaques/RoomInformation/RoomPedido/RoomPedido";
+import RoomGrid from "../components/destaques/RoomInformation/RoomGrid/RoomGrid";
 
 export default function Room() {
     return (
         <div>
-            <div className=" px-36 mx-auto md:container">
+            <div className="mx-auto md:container">
+                <RoomGrid />
                 <div className="flex justify-between">
                     <div className="w-3/4">
                         <RoomInformation />

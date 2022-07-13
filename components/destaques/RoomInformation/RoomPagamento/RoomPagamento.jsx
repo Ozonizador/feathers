@@ -1,6 +1,13 @@
 import React from "react";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
+
+import { BiInfoCircle } from "react-icons/bi"
+import { FaRegLightbulb } from "react-icons/fa"
+import { AiOutlineFire } from "react-icons/ai"
+import { AiOutlineWifi } from "react-icons/ai"
+import { BsWater } from "react-icons/bs"
+
 import Link from "next/link"
 
 export default function RoomPagamento() {
@@ -12,8 +19,46 @@ export default function RoomPagamento() {
                         320&euro;/mês
                     </div>
 
-                    <div className="text-base  text-center mb-2">
-                        Despesas incluídas
+                    <div className="text-base  text-center mb-2 relative">
+                        <div className="flex items-center align-middle gap-2 justify-center">
+                            Despesas incluídas
+                            <BiInfoCircle />
+                        </div>
+
+                        {/* PROBLEMA Z-INDEX */}
+                        <div className="absolute bottom-6 right-1 z-50">
+                            <div className="flex mb-2 mt-3 shadow-2xl rounded-lg p-4">
+                                <div className="flex flex-col items-center justify-center align-middle mx-4 text-secondary-500 px-4">
+                                    <FaRegLightbulb className=" w-12 h-12 p-2" />
+                                    <div className="mt-2 text-sm ">
+                                        Eletricidade<br />incluído
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col items-center justify-center align-middle mr-4 text-secondary-500 px-4">
+                                    <AiOutlineFire className="   w-12 h-12 p-2" />
+                                    <div className="mt-2 text-sm">
+                                        Gás<br />incluído
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col items-center justify-center align-middle mr-4 text-secondary-500 px-4">
+                                    <AiOutlineWifi className=" w-12 h-12 p-2" />
+                                    <div className="mt-2 text-sm ">
+                                        Internet<br />incluído
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col items-center justify-center align-middle mr-2  text-secondary-500 px-4">
+                                    <BsWater className=" w-12 h-12 p-2" />
+                                    <div className="mt-2 text-sm ">
+                                        Água<br />incluído
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                     <hr />
 
