@@ -10,6 +10,8 @@ const FormPasso3 = () => {
     setCurrentStep(nextStep);
   };
 
+  const addPictures = () => {};
+
   return (
     <section className="container mx-auto my-20 w-5/6">
       <div className="w-full">

@@ -1,6 +1,16 @@
 import Advertisement, { HouseExpenses, HouseRules } from "../models/advertisement";
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useUser } from "@supabase/auth-helpers-react";
+import { isErrored } from "stream";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
@@ -35,7 +45,11 @@ export const AdvertisementController = ({ children }): JSX.Element => {
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
 
   useEffect(() => {
-    setAdvertisement({ ...advertisement, host: user.id });
+    if (user) {
+      setAdvertisement((oldAdvert) => {
+        return { ...oldAdvert, host: user.id };
+      });
+    }
   }, [user]);
 
   return (

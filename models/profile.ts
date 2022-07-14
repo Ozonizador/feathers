@@ -12,10 +12,15 @@ export interface Profile {
     languages: string[],
     phone: string,
     avatarUrl: string,
-    favouriteRooms: string,
+    favouriteRooms: string[],
 }
 
 enum Gender {
     male= 1,
     female= 2
 }
+
+
+export const PROFILE_COLUMNS = {
+    ID: "id"
+} as const;
