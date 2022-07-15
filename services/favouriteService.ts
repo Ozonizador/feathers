@@ -1,4 +1,4 @@
-import { supabase } from "../utils/supabaseClient";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export const addFavouriteToUser = () => {};
 

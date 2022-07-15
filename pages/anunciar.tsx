@@ -13,6 +13,7 @@ import FormPasso8 from "../components/anunciar/FormPasso8";
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
 import { AdvertisementController } from "../context/AdvertisementController";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 export default function Anunciar() {
   return (
@@ -50,3 +51,5 @@ const ZonaFormulario = () => {
     </>
   );
 };
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

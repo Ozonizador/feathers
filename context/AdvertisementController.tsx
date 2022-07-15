@@ -1,5 +1,6 @@
 import Advertisement, { HouseExpenses, HouseRules } from "../models/advertisement";
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { useUser } from "@supabase/auth-helpers-react";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
@@ -30,7 +31,13 @@ const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);
 const SetAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
 
 export const AdvertisementController = ({ children }): JSX.Element => {
+  const { user } = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
+
+  useEffect(() => {
+    setAdvertisement({ ...advertisement, host: user.id });
+  }, [user]);
+
   return (
     <AdvertisementContext.Provider value={advertisement}>
       <SetAdvertisementContext.Provider value={setAdvertisement}>

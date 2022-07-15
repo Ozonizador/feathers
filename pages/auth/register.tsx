@@ -1,5 +1,6 @@
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
 import {
@@ -19,12 +20,6 @@ const Register = () => {
     await loginWithGoogle();
   };
 
-  /** registar com magic link */
-  const registerMagicLink = async (event) => {
-    event.preventDefault();
-    await loginWithMagicLink("pcardoso.lei@gmail.com");
-  };
-
   const registerWithFacebook = async (event) => {
     event.preventDefault();
     await loginWithFacebook();
@@ -32,6 +27,7 @@ const Register = () => {
 
   const normalRegister = async (event) => {
     event.preventDefault();
+
     const { user, session, error } = await register(email, password);
     debugger;
   };

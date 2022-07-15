@@ -1,19 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 
 interface GeneralUnihostInformation {
-  toggleUserType: "SENHORIO" | "ESTUDANTE" | null;
+  toggleUserType: "SENHORIO" | "ESTUDANTE";
 }
 
 /* Contexts */
-const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({ toggleUserType: null });
+const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
+  toggleUserType: "ESTUDANTE",
+});
 const SetUnihostsWebsiteContext = createContext<
   Dispatch<SetStateAction<GeneralUnihostInformation>>
 >(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
-    toggleUserType: null,
+    toggleUserType: "ESTUDANTE",
   });
 
   return (

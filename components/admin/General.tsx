@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Input from "../utils/Input";
 import { Avatar } from "flowbite-react";
 import { Toast } from "flowbite-react";
+import { Profile } from "../../models/profile";
+import { useUser } from "@supabase/auth-helpers-react";
+import { getUserProfile } from "../../services/profileService";
 /*
     pagina 32 do XD
 */
 
 const MainMenu = () => {
+  const [profile, setProfile] = useState<Profile>(null);
+
+  const { user } = useUser();
+
+  const getProfile = async () => {
+    if (user) {
+      const { data, error } = await getUserProfile(user.id);
+      if (!error && data) {
+        setProfile(data);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
-    <div className=" w-10/12 mx-auto mb-20 ">
-      <div className="my-10 text-xl font-b">
+    <div className=" mx-auto mb-20 w-10/12 ">
+      <div className="font-b my-10 text-xl">
         <Link href="/admin">Conta</Link>
         {" > Informações pessoais"}
       </div>
 
-
       <div className="flex flex-1 justify-center">
-        <div className="w-full bg-terciary-300 p-10 border border-terciary-700 rounded-2xl px-32">
-          <div className="font-bold text-3xl">Informações pessoais</div>
+        <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-32">
+          <div className="text-3xl font-bold">Informações pessoais</div>
           {/* <div className="mb-20">Avatar</div> */}
           <div className="mt-5 mb-16">
             <Avatar
@@ -30,17 +49,14 @@ const MainMenu = () => {
             />
           </div>
 
-
           {/* LEFT SIDE */}
           <div className="flex flex-row justify-between gap-12">
             <div className="w-1/2">
-
               <div className="mb-10">
-                <Input onChange={() => { }} label="nome" labelText="Nome" />
+                <Input value={profile.name} onChange={() => {}} label="nome" labelText="Nome" />
               </div>
               <div className="mb-1">Data de nascimento</div>
               <div className="flex flex-row gap-4">
-
                 <div className="flex-1">
                   <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3">
                     <option>Dia</option>
@@ -105,9 +121,8 @@ const MainMenu = () => {
                 </div>
               </div>
 
-
               <div className="my-10">
-                <label className="block mt-2">Nacionalidade</label>
+                <label className="mt-2 block">Nacionalidade</label>
                 <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3">
                   <option>Selecione</option>
                   <option>Casa</option>
@@ -116,14 +131,15 @@ const MainMenu = () => {
               </div>
             </div>
 
-
-
-
             {/* RIGHT SIDE */}
             <div className="w-1/2 ">
-
               <div className="mb-10">
-                <Input onChange={() => { }} label="Apelido" labelText="Apelido" />
+                <Input
+                  value={profile.surname}
+                  onChange={() => {}}
+                  label="Apelido"
+                  labelText="Apelido"
+                />
               </div>
 
               <div className="my-10">
@@ -168,38 +184,40 @@ const MainMenu = () => {
                 </div>
               </div>
 
-              <Input onChange={() => { }} label="Apelido" labelText="Localidade" />
+              <Input
+                onChange={() => {}}
+                value={profile.town}
+                label="localidade"
+                labelText="Localidade"
+              />
             </div>
           </div>
-
 
           <div className="mb-1">Sobre mim</div>
           <textarea
             rows={5}
-            className="mt-1 block w-full py-3 px-2 border-solid border border-terciary-500 bg-white rounded-md shadow-sm  mb-6"
+            className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
             placeholder="Escreva aqui..."
-            defaultValue={''}
+            defaultValue={""}
+            value={profile.description}
           />
-
 
           {/* LÍNGUAS FALADAS */}
           <div className="mb-1">Línguas faladas</div>
           <div className="flex flex-row">
-            <div className="flex items-center py-2 px-3 bg-socials-gmail text-primary-500 rounded-xl  mr-3">+ Adicionar línguas</div>
-            <div className="flex flex-col w-1/6 mr-5">
+            <div className="mr-3 flex items-center rounded-xl bg-socials-gmail py-2 px-3  text-primary-500">
+              + Adicionar línguas
+            </div>
+            <div className="mr-5 flex w-1/6 flex-col">
               <Toast>
-                <div className="ml-3 text-base font-normal">
-                  Inglês
-                </div>
+                <div className="ml-3 text-base font-normal">Inglês</div>
                 <Toast.Toggle />
               </Toast>
             </div>
 
-            <div className="flex flex-col gap-0 w-1/6">
+            <div className="flex w-1/6 flex-col gap-0">
               <Toast>
-                <div className="ml-3 text-base font-normal">
-                  Portugês
-                </div>
+                <div className="ml-3 text-base font-normal">Portugês</div>
                 <Toast.Toggle />
               </Toast>
             </div>
@@ -208,24 +226,21 @@ const MainMenu = () => {
           {/* CONTATO TELEFONICO */}
           <div className="my-8">
             <div>Contacto telefónico</div>
-            <div className="flex flex-row gap-4 w-full  items-center">
-
+            <div className="flex w-full flex-row items-center  gap-4">
               <div className="w-36">
                 <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white px-3">
                   <option>PT +351</option>
                 </select>
               </div>
               <div className="">
-                <Input onChange={() => { }} label="" labelText="" />
+                <Input value={profile.phone} onChange={() => {}} label="phone" labelText="" />
               </div>
             </div>
           </div>
 
-
           <div className="my-8">
             <div>Validade</div>
-            <div className="flex flex-row gap-4 w-full  items-center">
-
+            <div className="flex w-full flex-row items-center  gap-4">
               <div className="w-36">
                 <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white px-3">
                   <option>Dia</option>
@@ -263,7 +278,6 @@ const MainMenu = () => {
                 </select>
               </div>
 
-
               <div className="w-36">
                 <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white px-3">
                   <option>Mês</option>
@@ -287,9 +301,7 @@ const MainMenu = () => {
                   <option>Ano</option>
                 </select>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
