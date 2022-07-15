@@ -1,10 +1,10 @@
 import { JSONValue } from "./utils";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements";
-
+export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements";
 /* MODEL */
 export default interface Advertisement {
-    id?: number, 
+    id?: string, 
     typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID",
     place: string,
     street: string,
@@ -74,8 +74,9 @@ export const ADVERTISEMENT_PROPERTIES = {
     GUARANTEE_VALUE:"guaranteeValue",
     EXPENSES:"expenses",
     HOST_LIVES_PROPERTY: "hostLivesProperty",
-    HOST: "host"
-}  
+    HOST: "host",
+    ID: "id"
+}  as const;
 
 
 export const HOUSE_RULES_NAMING = {

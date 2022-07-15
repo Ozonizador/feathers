@@ -9,7 +9,12 @@ import {
   useAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
-import { HOUSE_RULES_NAMING } from "../../models/advertisement";
+import {
+  ADVERTISEMENT_PROPERTIES,
+  HouseRules,
+  HOUSE_RULES_NAMING,
+} from "../../models/advertisement";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso4 = () => {
   const currentStep = useCurrentStep();
@@ -18,17 +23,21 @@ const FormPasso4 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
+
+    await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
 
   const changeHouseRulesProperty = (event) => {
     const { houseRules } = advertisement;
-    houseRules[event.target.name] = event.target.value;
 
-    setAdvertisementProperty(event.target.name, { ...advertisement, houseRules });
+    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
+      ...houseRules,
+      [event.target.name]: event.target.value === "true",
+    });
   };
 
   return (
@@ -54,6 +63,7 @@ const FormPasso4 = () => {
                   name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
                   type="radio"
                   value="true"
+                  checked={advertisement.houseRules.animalsAllowed}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />
@@ -69,6 +79,7 @@ const FormPasso4 = () => {
                   name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
                   type="radio"
                   value="false"
+                  checked={!advertisement.houseRules.animalsAllowed}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />
@@ -93,6 +104,7 @@ const FormPasso4 = () => {
                   name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
                   type="radio"
                   value="true"
+                  checked={advertisement.houseRules.smokeAllowed}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />
@@ -108,6 +120,7 @@ const FormPasso4 = () => {
                   name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
                   type="radio"
                   value="false"
+                  checked={!advertisement.houseRules.smokeAllowed}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />
@@ -132,6 +145,7 @@ const FormPasso4 = () => {
                   type="radio"
                   name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
                   value="true"
+                  checked={advertisement.houseRules.eventsAllowed}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />
@@ -147,6 +161,7 @@ const FormPasso4 = () => {
                   type="radio"
                   value="false"
                   name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
+                  checked={!advertisement.houseRules.eventsAllowed}
                   className=" h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => changeHouseRulesProperty(e)}
                 />

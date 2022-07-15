@@ -1,14 +1,19 @@
 import { useRouter } from "next/router";
-import { useAdvertisement } from "../../context/AdvertisementController";
-import { addAdvertisement } from "../../services/advertisementService";
+import {
+  useAdvertisement,
+  useSetAdvertisementProperty,
+} from "../../context/AdvertisementController";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
   const router = useRouter();
 
-  const saveAdvertisement = async (event) => {
-    event.preventDefault();
-    const { error } = await addAdvertisement(advertisement);
+  const nextSteps = async (e) => {
+    e.preventDefault();
+    setAdvertisementProperty("aboutHouse", "testing");
+    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
       router.push("/");
     }
@@ -25,7 +30,7 @@ const FormPasso8 = () => {
           <div className="flex flex-row items-center">
             <input type="checkbox" className="h-4 w-4 rounded-sm border border-gray-300" />
           </div>
-          <div className="ml-4  text-xl">Termos e condições</div>
+          <div className="ml-4 text-xl">Termos e condições</div>
         </div>
 
         <div className="my-5 flex flex-row items-center align-middle">
@@ -53,7 +58,7 @@ const FormPasso8 = () => {
       <button
         type="button"
         className="mt-16 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
-        onClick={(e) => saveAdvertisement(e)}
+        onClick={(e) => nextSteps(e)}
       >
         Gravar anúncio
       </button>

@@ -8,6 +8,7 @@ interface InputProps {
   labelText?: string;
   label?: string;
   type?: "password" | "text";
+  defaultValue?: string;
 }
 
 export default function Input({
@@ -17,6 +18,7 @@ export default function Input({
   labelText = "",
   customCss = "",
   type = "text",
+  defaultValue,
 }: InputProps) {
   return (
     <div className="my-2">
@@ -31,6 +33,7 @@ export default function Input({
           name={label}
           value={value}
           type={type}
+          defaultValue={defaultValue}
         ></input>
       </div>
     </div>

@@ -53,7 +53,12 @@ const MainMenu = () => {
           <div className="flex flex-row justify-between gap-12">
             <div className="w-1/2">
               <div className="mb-10">
-                <Input value={profile.name} onChange={() => {}} label="nome" labelText="Nome" />
+                <Input
+                  value={profile?.name || ""}
+                  onChange={() => {}}
+                  label="nome"
+                  labelText="Nome"
+                />
               </div>
               <div className="mb-1">Data de nascimento</div>
               <div className="flex flex-row gap-4">
@@ -135,7 +140,7 @@ const MainMenu = () => {
             <div className="w-1/2 ">
               <div className="mb-10">
                 <Input
-                  value={profile.surname}
+                  value={profile?.surname || ""}
                   onChange={() => {}}
                   label="Apelido"
                   labelText="Apelido"
@@ -186,7 +191,7 @@ const MainMenu = () => {
 
               <Input
                 onChange={() => {}}
-                value={profile.town}
+                value={profile?.town}
                 label="localidade"
                 labelText="Localidade"
               />
@@ -199,7 +204,7 @@ const MainMenu = () => {
             className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
             placeholder="Escreva aqui..."
             defaultValue={""}
-            value={profile.description}
+            value={profile?.description}
           />
 
           {/* LÍNGUAS FALADAS */}
@@ -233,7 +238,7 @@ const MainMenu = () => {
                 </select>
               </div>
               <div className="">
-                <Input value={profile.phone} onChange={() => {}} label="phone" labelText="" />
+                <Input value={profile?.phone} onChange={() => {}} label="phone" labelText="" />
               </div>
             </div>
           </div>

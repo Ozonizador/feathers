@@ -10,6 +10,7 @@ import {
   useAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso6 = () => {
   const currentStep = useCurrentStep();
@@ -18,8 +19,10 @@ const FormPasso6 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
+
+    await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -27,7 +30,7 @@ const FormPasso6 = () => {
   // for the primary value.
   const defineExpensesTopLevel = (e) => {
     const { expenses } = advertisement;
-    const newExpense = { ...expenses, expenses: e.target.value };
+    const newExpense = { ...expenses, inclusive: e.target.value };
     setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.EXPENSES, newExpense);
   };
 
@@ -35,11 +38,38 @@ const FormPasso6 = () => {
   const defineTypeExpenses = (e) => {
     const { expenses } = advertisement;
 
-    const typeLabel = e.target.name;
-    const typeValue = e.target.value;
+    const typeLabel = e.target.name as EXPENSES_TYPE;
+    const typeValue = e.target.value === "true";
 
-    const newTypeExpense = { ...expenses, [typeLabel]: typeValue };
+    let excludedExpenses = expenses.servicesExcluded || [];
+    let includedExpenses = expenses.servicesIncluded || [];
+
+    if (typeValue) {
+      const index = includedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
+      if (index == -1) {
+        includedExpenses.push(typeLabel);
+      }
+      excludedExpenses = excludedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
+    } else {
+      const index = excludedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
+      if (index == -1) {
+        excludedExpenses.push(typeLabel);
+      }
+      includedExpenses = includedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
+    }
+
+    const newTypeExpense = {
+      ...expenses,
+      servicesExcluded: excludedExpenses,
+      servicesIncluded: includedExpenses,
+    };
+
     setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.EXPENSES, newTypeExpense);
+  };
+
+  const checkTypeExpenses = (typeExpense: INCLUSIVE_EXPENSES) => {
+    const { expenses } = advertisement;
+    return expenses.inclusive === typeExpense;
   };
 
   // check if expenses are partially selected
@@ -60,7 +90,7 @@ const FormPasso6 = () => {
                 label={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
                 labelText=""
                 customCss="euro"
-                value=""
+                value={String(advertisement.monthRent)}
                 onChange={(e) =>
                   setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)
                 }
@@ -78,7 +108,7 @@ const FormPasso6 = () => {
                 label={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
                 labelText=""
                 customCss="euro"
-                value=""
+                value={String(advertisement.extraPerHost)}
                 onChange={(e) =>
                   setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)
                 }
@@ -96,7 +126,7 @@ const FormPasso6 = () => {
                 label={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
                 labelText=""
                 customCss="euro"
-                value=""
+                value={String(advertisement.guaranteeValue)}
                 onChange={(e) =>
                   setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)
                 }
@@ -110,9 +140,10 @@ const FormPasso6 = () => {
             <div>
               <input
                 type="radio"
-                name="included_expenses"
+                name="inclusive"
                 value={INCLUSIVE_EXPENSES.INCLUDED}
                 onChange={(e) => defineExpensesTopLevel(e)}
+                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.INCLUDED)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas incluídas</div>
@@ -122,9 +153,10 @@ const FormPasso6 = () => {
             <div>
               <input
                 type="radio"
-                name="included_expenses"
+                name="inclusive"
                 value={INCLUSIVE_EXPENSES.PARTIALLY}
                 onChange={(e) => defineExpensesTopLevel(e)}
+                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.PARTIALLY)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas parcialmente incluídas</div>
@@ -279,9 +311,10 @@ const FormPasso6 = () => {
             <div>
               <input
                 type="radio"
-                name="included_expenses"
+                name="inclusive"
                 value={INCLUSIVE_EXPENSES.EXCLUDED}
                 onChange={(e) => defineExpensesTopLevel(e)}
+                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.EXCLUDED)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas excluídas</div>

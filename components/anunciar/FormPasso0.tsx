@@ -3,9 +3,11 @@ import Input from "../utils/Input";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
+  useSetAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
 import { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { addAdvertisement } from "../../services/advertisementService";
 
 const FormPasso0 = () => {
   const [message, setMessage] = useState("");
@@ -16,8 +18,9 @@ const FormPasso0 = () => {
   /* ADVERTISEMENT */
   const advertisement = useAdvertisement();
   const changeAdvertisementProperty = useSetAdvertisementProperty();
+  const setAdvertisement = useSetAdvertisement();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
@@ -28,6 +31,10 @@ const FormPasso0 = () => {
       return;
     }
 
+    const { data, error } = await addAdvertisement(advertisement);
+    if (data) {
+      setAdvertisement(data);
+    }
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

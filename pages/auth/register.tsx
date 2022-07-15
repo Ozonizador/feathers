@@ -29,7 +29,6 @@ const Register = () => {
     event.preventDefault();
 
     const { user, session, error } = await register(email, password);
-    debugger;
   };
 
   return (
