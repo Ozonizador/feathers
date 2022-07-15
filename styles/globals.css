@@ -4,7 +4,7 @@
 
 /* CÓDIGO RODRIGO */
 .bg-hero-unidesk {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/bed14.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 17px 7px;
@@ -22,6 +22,30 @@
   background-repeat:no-repeat ;
   background-size:cover;
 }
+
+
+.bg-about-1{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/card1.png);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
+
+
+.bg-about-2{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/card2.png);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
+
+.bg-about-3{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/card3.png);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
+
+
+
+
 
 .room-grid{
   display: grid;
@@ -56,9 +80,9 @@
 }
 
 
-
-
-
+.modal-w{
+  width: 100%;
+}
 
 
 

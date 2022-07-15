@@ -4,21 +4,22 @@ import Image from "next/image";
 
 const Notification = () => {
   return (
-    <div>
-      <div className="container mt-4 mb-4">
-        <div className="row">
-          <div className="col-lg-3"></div>
-          <div className="col-lg-6 col-sm-12 ">
-            <div className="alert alert-warning con " role="alert">
-              <Image style={{ height: "5vh" }} src={notification} alt="" />
-              Receba notificações sempre que houver novidades por aqui
-            </div>
-          </div>
-          <div className="col-lg-3"></div>
-        </div>
+    <div className="flex justify-center align-middle items-center bg-primary-100  py-4  w-2/6 rounded-2xl mx-auto mt-14  mb-44">
+      <div className="alert alert-warning con " role="alert">
+      <Image className="h-10" src={notification} alt="" />
       </div>
+
+      <div className="text-xl ml-6">Receba notificações sempre que houver novidades por aqui</div>
+
     </div>
   );
 };
 
 export default Notification;
+
+
+
+{/* <div className="alert alert-warning con " role="alert">
+<Image className="h-10" src={notification} alt="" />
+Receba notificações sempre que houver novidades por aqui
+</div> */}

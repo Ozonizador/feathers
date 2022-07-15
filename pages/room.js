@@ -12,10 +12,14 @@ import RoomPagamento from "../components/destaques/RoomInformation/RoomPagamento
 import RoomSobreTi from "../components/destaques/RoomInformation/RoomSobreTi/RoomSobreTi";
 import RoomPedido from "../components/destaques/RoomInformation/RoomPedido/RoomPedido";
 import RoomGrid from "../components/destaques/RoomInformation/RoomGrid/RoomGrid";
+import ModalDetalhesPagamento from "../components/modals/ModalDetalhesPagamentos"
+// import Pagamento from "../components/modals/ModalPagamento"
 
 export default function Room() {
     return (
         <div>
+            {/* MODAL duplicar*/}
+            <ModalDetalhesPagamento />
             <div className="mx-auto md:container">
                 <RoomGrid />
                 <div className="flex justify-between">
