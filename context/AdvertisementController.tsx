@@ -1,4 +1,8 @@
-import Advertisement, { HouseExpenses, HouseRules } from "../models/advertisement";
+import Advertisement, {
+  HouseExpenses,
+  HouseRules,
+  INCLUSIVE_EXPENSES,
+} from "../models/advertisement";
 import {
   createContext,
   Dispatch,
@@ -10,7 +14,6 @@ import {
   useState,
 } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
-import { isErrored } from "stream";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
@@ -24,7 +27,7 @@ const defaultAdvertisement = {
   postalCode: "",
   title: "",
   description: "",
-  aboutHouse: "",
+  aboutHouse: {},
   rooms: 1,
   beds: 1,
   tenantNumber: 1,
@@ -33,7 +36,11 @@ const defaultAdvertisement = {
   extraPerHost: 0,
   guaranteeValue: 0,
   houseRules: {} as HouseRules,
-  expenses: {} as HouseExpenses,
+  expenses: {
+    inclusive: INCLUSIVE_EXPENSES.INCLUDED,
+    servicesExcluded: [],
+    servicesIncluded: [],
+  } as HouseExpenses,
   hostLivesProperty: false,
 } as Advertisement;
 

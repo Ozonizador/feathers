@@ -5,6 +5,7 @@ import {
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
 import { useState } from "react";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso2 = () => {
   const [message, setMessage] = useState("");
@@ -15,7 +16,7 @@ const FormPasso2 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
@@ -27,6 +28,7 @@ const FormPasso2 = () => {
     }
 
     // proximo passo
+    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -39,6 +41,7 @@ const FormPasso2 = () => {
           className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
           placeholder="Máximo de 50 palavras"
           maxLength={50}
+          defaultValue={advertisement.title}
           onChange={(e) => setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
         />
 
@@ -52,7 +55,7 @@ const FormPasso2 = () => {
               className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
               placeholder="Descreva o seu espaço em 500 palavras"
               maxLength={500}
-              defaultValue={""}
+              defaultValue={advertisement.description}
               onChange={(e) =>
                 setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.DESCRIPTION, e.target.value)
               }
@@ -79,7 +82,7 @@ const FormPasso2 = () => {
                   onChange={(e) =>
                     setAdvertisementProperty(
                       ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY,
-                      e.target.value
+                      e.target.value === "true"
                     )
                   }
                 />
@@ -101,7 +104,7 @@ const FormPasso2 = () => {
                   onChange={(e) =>
                     setAdvertisementProperty(
                       ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY,
-                      e.target.value
+                      e.target.value === "true"
                     )
                   }
                 />

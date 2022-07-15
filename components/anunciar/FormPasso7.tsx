@@ -5,6 +5,7 @@ import {
   useAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso7 = () => {
   const currentStep = useCurrentStep();
@@ -13,8 +14,10 @@ const FormPasso7 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
+
+    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

@@ -9,6 +9,7 @@ import {
   useAdvertisement,
 } from "../../context/AdvertisementController";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso1 = () => {
   const currentStep = useCurrentStep();
@@ -17,8 +18,10 @@ const FormPasso1 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = (e) => {
+  const nextStep = async (e) => {
     e.preventDefault();
+
+    const { data, error } = await updateAdvertisement({ tenantNumber: advertisement.tenantNumber}, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

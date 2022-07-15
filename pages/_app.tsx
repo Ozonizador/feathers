@@ -10,7 +10,7 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <UserProvider supabaseClient={supabaseClient}>
+      <UserProvider autoRefreshToken={true} supabaseClient={supabaseClient}>
         <MainProvider>
           <Head>
             <title>Unihosts</title>

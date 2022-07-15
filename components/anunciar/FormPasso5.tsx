@@ -1,5 +1,7 @@
 import { Accordion } from "flowbite-react";
+import { useAdvertisement } from "../../context/AdvertisementController";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { updateAdvertisement } from "../../services/advertisementService";
 
 /* TODO MISSING LOGIC */
 
@@ -7,8 +9,12 @@ const FormPasso5 = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
-  const nextStep = (e) => {
+  const advertisement = useAdvertisement();
+
+  const nextStep = async (e) => {
     e.preventDefault();
+
+    await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
