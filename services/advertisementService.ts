@@ -12,6 +12,19 @@ export const updateAdvertisement = async (advertisement: Partial<Advertisement>,
   return { data, error };
 };
 
+export const getSingleAdvertisement = async (id: string) => {
+  const { data, error } = await supabaseClient.from<Advertisement>(ADVERTISEMENT_TABLE_NAME).select().eq(ADVERTISEMENT_PROPERTIES.ID, id).single();
+  return { data, error };
+}
+
+export const getAdvertisements = async () => {
+  const { data, error } = await supabaseClient.from<Advertisement>(ADVERTISEMENT_TABLE_NAME).select();
+  return { data, error };
+}
+
+
+/* IMAGE */
+
 export const saveImage = async (advertisementID: string, fileName: string, file: File) => {
   const { data, error } = await supabaseClient.storage.from(ADVERTISEMENT_STORAGE_BUCKET).upload(`${advertisementID}/${fileName}`, file, {cacheControl: '3600', upsert: false })
 
