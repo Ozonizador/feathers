@@ -44,8 +44,12 @@
 }
 
 
-
-
+/* CÓDIGO PARA ESCURECER BANNERS */
+.background-banner{
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/girlspic.png);
+  background-repeat:no-repeat ;
+  background-size:cover;
+}
 
 .room-grid{
   display: grid;

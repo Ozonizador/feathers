@@ -43,7 +43,7 @@ PAULO. Falta o mapa em baixo
 
 Ver so se o mobile esta ok.
 
-## Pagina 9 (/blog)
+## Pagina 9 (/blog) - FEITA!!!!
 
 So tem a notificação do sininho feita e não esta ok. de resto tudo para fazer
 
