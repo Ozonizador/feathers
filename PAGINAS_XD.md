@@ -49,7 +49,7 @@ So tem a notificação do sininho feita e não esta ok. de resto tudo para fazer
 
 # Pagina 10 ( nao fazer )
 
-# Pagina 11 ( nao fazer para ja )
+# Pagina 11 ( nao fazer para ja ) FEITA
 
 # Pagina 12 e 13
 
