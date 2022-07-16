@@ -1,10 +1,12 @@
-import HospedesMenu from "../../../components/unideskAdminSenhorio/HospedesMenu";
+import Menu from "../../../components/unidesk/Menus/MenuSenhorio";
 
 const Estadia = () => {
   return (
-    <>
-      <HospedesMenu activeLink="test" />
-    </>
+    <div className="my-10 px-32">
+      <div className="w-3/12">
+        <Menu />
+      </div>
+    </div>
   );
 };
 

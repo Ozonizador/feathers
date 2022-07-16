@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+/* MENU DE ESTUDANTE */
 export default function Menu() {
   const [summary1, setSummary1] = useState(true);
   const [summary2, setSummary2] = useState(true);
@@ -20,7 +21,7 @@ export default function Menu() {
             setSummary1(!summary1);
           }}
         >
-          <div className="flex items-center align-middle gap-4">
+          <div className="flex items-center gap-4 align-middle">
             <div className="summary-icon">
               <Image src="/images/icons8_resume.svg" height={32} width={32} alt="" />
             </div>
@@ -33,8 +34,8 @@ export default function Menu() {
             alt=""
           />
         </summary>
-        <div className="flex justify-start items-center align-middle">
-          <div className="flex flex-col ml-20 gap-4  text-xl my-4">
+        <div className="flex items-center justify-start align-middle">
+          <div className="my-4 ml-20 flex flex-col  gap-4 text-xl">
             <Link href="/15">Informações pessoais</Link>
             <Link href="/16">Métodos de pagamento</Link>
             <Link href="/16">Métodos de pagamento</Link>
@@ -60,8 +61,7 @@ export default function Menu() {
             setSummary2(!summary2);
           }}
         >
-
-          <div className="flex items-center align-middle gap-4">
+          <div className="flex items-center gap-4 align-middle">
             <div className="summary-icon">
               <Image src="/images/icons8_hostel.svg" height={32} width={32} alt="" />
             </div>
@@ -75,9 +75,8 @@ export default function Menu() {
           />
         </summary>
 
-
-        <div className="flex justify-start items-center align-middle">
-          <div className="flex flex-col ml-20 gap-4  text-xl my-4">
+        <div className="flex items-center justify-start align-middle">
+          <div className="my-4 ml-20 flex flex-col  gap-4 text-xl">
             <Link href="/18">Informações gerais</Link>
             <Link href="/20">Reparações</Link>
             <Link href="/21">Despesas</Link>
@@ -105,7 +104,7 @@ export default function Menu() {
             setSummary3(!summary3);
           }}
         >
-          <div className="flex items-center align-middle gap-4">
+          <div className="flex items-center gap-4 align-middle">
             <div className="summary-icon">
               <Image src="/images/icons8_settings_3.svg" height={32} width={32} alt="" />
             </div>
@@ -119,12 +118,12 @@ export default function Menu() {
           />
         </summary>
 
-
-        <div className="flex flex-col ml-20 gap-4  text-xl my-4">
-
+        <div className="my-4 ml-20 flex flex-col  gap-4 text-xl">
           <Link href="/">link</Link>
           <Link href="/">link</Link>
-          <Link className="mb-4" href="/">link</Link>
+          <Link className="mb-4" href="/">
+            link
+          </Link>
         </div>
         {/*
           PAULO

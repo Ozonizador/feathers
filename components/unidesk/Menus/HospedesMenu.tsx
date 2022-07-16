@@ -6,6 +6,8 @@ interface HospedesMenuProps {
   activeLink: string;
 }
 
+/* MENU HOSPEDES - PAGINA 60 XD */
+
 const HospedesMenu = ({ activeLink }) => {
   return (
     <div className="rounded-2xl bg-terciary-600 py-8 px-6">
