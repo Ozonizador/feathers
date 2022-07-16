@@ -188,47 +188,102 @@ export const Navbar = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute z-50 flex flex-col bg-white p-2 px-4 shadow-md">
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/unidesk">
-                                Uni-desk
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/estadia">
-                                Minha Estadia
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/favorites">
-                                Favoritos
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/caixa_entrada">
-                                Caixa de Entrada
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/notifications">
-                                Notificações
-                              </MyLink>
-                            </Menu.Item>
-                            <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/admin">
-                                Conta
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <MyLink customClass="py-1" href="/notifications">
-                                Ajuda
-                              </MyLink>
-                            </Menu.Item>
-                            <Menu.Item>
-                              <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
-                                Sair
-                              </div>
-                            </Menu.Item>
+                            {toggleUserType == "ESTUDANTE" && (
+                              <>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/unidesk">
+                                    Uni-desk
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/estadia">
+                                    Minha Estadia
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/favorites">
+                                    Favoritos
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/caixa_entrada">
+                                    Caixa de Entrada
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/notifications">
+                                    Notificações
+                                  </MyLink>
+                                </Menu.Item>
+                                <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/admin">
+                                    Conta
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/notifications">
+                                    Ajuda
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <div
+                                    className="py-1"
+                                    onClick={() => supabaseClient.auth.signOut()}
+                                  >
+                                    Sair
+                                  </div>
+                                </Menu.Item>
+                              </>
+                            )}
+                            {toggleUserType == "SENHORIO" && (
+                              <>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/unidesk">
+                                    Uni-desk
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/estadia">
+                                    Caixa de Entrada
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/favorites">
+                                    Anúncios
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/notifications">
+                                    Uni-controlo
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/notifications">
+                                    Notificações
+                                  </MyLink>
+                                </Menu.Item>
+                                <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/admin">
+                                    Conta
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1" href="/notifications">
+                                    Ajuda
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <div
+                                    className="py-1"
+                                    onClick={() => supabaseClient.auth.signOut()}
+                                  >
+                                    Sair
+                                  </div>
+                                </Menu.Item>
+                              </>
+                            )}
                           </Menu.Items>
                         </Transition>
                       </Menu>
