@@ -1,5 +1,11 @@
+import HospedesMenu from "../../../components/unideskAdminSenhorio/HospedesMenu";
+
 const Estadia = () => {
-  return <></>;
+  return (
+    <>
+      <HospedesMenu />
+    </>
+  );
 };
 
 export default Estadia;

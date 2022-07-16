@@ -193,14 +193,6 @@ a {
   cursor: pointer;
   margin-bottom: 0;
 }
-.links-active {
-  background-color: #d6b592;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-}
 
 .cardcont-title {
   font-size: 1.5rem;
