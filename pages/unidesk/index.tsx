@@ -1,10 +1,10 @@
 import React from "react";
 
-import UnideskHero from "../components/unidesk/Estudante/unideskHero/UnideskHero";
-import UnideskOptions from "../components/unidesk/Estudante/unideskOptions/UnideskOptions";
-import UnideskSenhorioHero from "../components/unidesk/Senhorio/UnideskSehorioHero/UnideskSenhorioHero";
-import UnideskSenhorioOptions from "../components/unidesk/Senhorio//UnideskOptionsSenhorio/UnideskSenhorioOptions";
-import { useGetUserType } from "../context/MainProvider";
+import UnideskHero from "../../components/unidesk/Estudante/unideskHero/UnideskHero";
+import UnideskOptions from "../../components/unidesk/Estudante/unideskOptions/UnideskOptions";
+import UnideskSenhorioHero from "../../components/unidesk/Senhorio/UnideskSehorioHero/UnideskSenhorioHero";
+import UnideskSenhorioOptions from "../../components/unidesk/Senhorio/UnideskOptionsSenhorio/UnideskSenhorioOptions";
+import { useGetUserType } from "../../context/MainProvider";
 
 export default function Unidesk() {
   const { toggleUserType } = useGetUserType();
