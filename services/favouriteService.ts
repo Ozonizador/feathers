@@ -1,21 +1,13 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { randomUUID } from "crypto";
-import { Favourites, FAVOURITES_COLUMNS, FAVOURITES_TABLE_NAME } from "../models/favourite";
+import { Profile, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 
-export const addFavouriteToUser = async (userId: string, advertId: string) => {
-    // check this random UUID
-    const { data, error } = await supabaseClient.from<Favourites>(FAVOURITES_TABLE_NAME).insert({ id: randomUUID(), userId, advertId});
+export const updateFavouriteFromUser = async (userId: string, favouriteRooms: string[]) => {
+    const { data, error } = await supabaseClient.from<Profile>(PROFILE_TABLE_NAME).update( { favouriteRooms: favouriteRooms}).eq(PROFILE_COLUMNS.ID, userId);
     return { data, error }
 };
 
 export const getFavouritesFromUser = async (userId: string) => {
-    const { data, error } = await supabaseClient.from<Favourites>(FAVOURITES_TABLE_NAME).select().eq(FAVOURITES_COLUMNS.USER_ID, userId);
+    const { data, error } = await supabaseClient.from<Profile>(PROFILE_TABLE_NAME).select().eq(PROFILE_COLUMNS.ID, userId);
     return { data, error }
 
 };
-
-
-export const removeFavouriteFromUser = async (id: string) => {
-    const { data, error } = await supabaseClient.from<Favourites>(FAVOURITES_TABLE_NAME).delete().eq(FAVOURITES_COLUMNS.ID, id);
-    return { data, error };
-}

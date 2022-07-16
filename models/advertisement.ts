@@ -118,3 +118,11 @@ export enum EXPENSES_TYPE {
     WATER = "WATER",
     INTERNET = "INTERNET"
 }
+
+
+/* Some namings */ 
+export const EXPENSES_TO_TEXT = {
+    "INCLUDED": "Despesas incluídas",
+    "PARTIALLY": "Despesas partialmente incluídas",
+    "EXCLUDED": "Despesas excluídas"
+}
