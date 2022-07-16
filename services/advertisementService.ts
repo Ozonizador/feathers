@@ -17,7 +17,7 @@ export const getSingleAdvertisement = async (id: string) => {
   return { data, error };
 }
 
-export const getAdvertisements = async () => {
+export const getAdvertisementsFromDB = async () => {
   const { data, error } = await supabaseClient.from<Advertisement>(ADVERTISEMENT_TABLE_NAME).select();
   return { data, error };
 }

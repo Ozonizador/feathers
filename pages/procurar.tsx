@@ -1,6 +1,5 @@
 import React from "react";
-
-import DestaquesSection from "../components/destaques/DestaquesSection/DestaquesSection";
+import DestaquesSection from "../components/destaques/ProcurarSection/DestaquesSection";
 import SearchInputField from "../components/search/SearchInputField";
 
 const Procurar = () => {

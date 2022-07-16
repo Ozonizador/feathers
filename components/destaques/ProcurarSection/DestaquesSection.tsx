@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
-import RoomInformation from "../RoomInformation/RoomInformation";
+import RoomCard from "./RoomCard";
+import { getAdvertisementsFromDB } from "../../../services/advertisementService";
+import Advertisement from "../../../models/advertisement";
+import { Pagination, Spinner } from "flowbite-react";
 
 export default function DestaquesSection() {
+  const [isloading, setIsLoading] = useState<boolean>(false);
+  const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
+
+  const getAdvertisements = async () => {
+    const { data, error } = await getAdvertisementsFromDB();
+    setAdvertisements(data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    getAdvertisements();
+  }, []);
+
   return (
     <>
       <div className="mt-5 flex flex-1 px-10">
@@ -52,48 +68,33 @@ export default function DestaquesSection() {
             </div>
           </div>
 
-          <div>
-            <RoomInformation img="/images/home1.png" />
-          </div>
-
-          <div>
-            <RoomInformation img="/images/home2.png" />
-          </div>
-
-          <div>
-            <RoomInformation img="/images/home3.png" />
-          </div>
-
-          <div>
-            <RoomInformation img="/images/home4.png" />
-          </div>
-
-          <div>
-            <RoomInformation img="/images/home5.png" />
-          </div>
-
-          <div>
-            <RoomInformation img="/images/home6.png" />
-          </div>
-
-          <div className="row mb-5">
-            <div className="col-md-2"></div>
-            <div className="flex flex-1 justify-around px-5">
-              <button className="btn w-auto shadow-none">
-                <i className="fa-solid fa-angle-left"></i>
-              </button>
-              <button className="bg-primary-500 p-2 text-white shadow-none">1</button>
-              <button className="p-2 shadow-none">2</button>
-              <button className="p-2 shadow-none">3</button>
-              <button className="p-2 shadow-none">4</button>
-              <button className="p-2 shadow-none">5</button>
-              <button className="p-2 shadow-none">6</button>
-              <button className="p-2 shadow-none">
-                <i className="fa-solid fa-angle-right"></i>
-              </button>
+          {isloading && (
+            <div className="mt-32 flex flex-1 justify-center">
+              <Spinner color="info" aria-label="loading" size="lg" />
             </div>
-            <div className="col-md-5"></div>
-          </div>
+          )}
+          {!isloading && (
+            <>
+              <div>
+                {advertisements.map((advertisement, index) => {
+                  return (
+                    <div key={index}>
+                      <RoomCard advertisement={advertisement} />
+                    </div>
+                  );
+                })}
+              </div>
+              <div></div>
+
+              <div className="row mb-5">
+                <div className="col-md-2"></div>
+                <div className="flex flex-1 justify-around px-5">
+                  <Pagination currentPage={1} totalPages={100} onPageChange={() => {}} />
+                </div>
+                <div className="col-md-5"></div>
+              </div>
+            </>
+          )}
         </div>
         <div className="w-1/2 px-5">
           <Image src="/images/homemap.png" layout="responsive" height="100%" width="100%" alt="" />

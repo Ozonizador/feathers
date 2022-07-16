@@ -84,8 +84,8 @@ export const Navbar = () => {
 
             <div className="mx-auto my-auto hidden lg:block">
               <div className="flex">
-                <div className="relative w-72">
-                  <Menu as="div" className="absolute z-50 ml-5 w-full">
+                <div className="w-fit">
+                  <Menu as="div" className="z-50 ml-5 w-full">
                     <Menu.Button className="flex flex-1">
                       <div>Anuncie a sua propriedade</div>
                       <div className="my-auto ml-auto">
@@ -101,14 +101,14 @@ export const Navbar = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="flex w-3/4 flex-col bg-white p-2 shadow-md">
+                      <Menu.Items className="absolute z-50 flex w-52 flex-col bg-white p-2 shadow-md">
                         <Menu.Item>
-                          <MyLink customClass="py-1" href="/funciona">
+                          <MyLink customClass="py-1 w-full" href="/funciona">
                             Como funciona?
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <MyLink customClass="py-1" href="/anunciar">
+                          <MyLink customClass="py-1 w-full" href="/anunciar">
                             Anunciar!
                           </MyLink>
                         </Menu.Item>
@@ -124,7 +124,7 @@ export const Navbar = () => {
                 </div>
               </div>
             </div>
-            <div className="ml-auto hidden lg:block">
+            <div className="my-auto ml-auto hidden lg:block ">
               <div>
                 {!user && (
                   <div className="my-auto flex">
@@ -146,7 +146,7 @@ export const Navbar = () => {
                   </div>
                 )}
                 {user && (
-                  <div className="ml-auto">
+                  <div className="flex flex-1">
                     <div>
                       <span className="mr-2">Estudante</span>
                       <Switch
@@ -162,8 +162,8 @@ export const Navbar = () => {
                       </Switch>
                       <span className="ml-2">Senhorio</span>
                     </div>
-                    <div className="relative w-56">
-                      <Menu as="div" className="absolute z-50 ml-5 w-56">
+                    <div>
+                      <Menu as="div" className="ml-5">
                         <Menu.Button className="flex flex-1">
                           <Image
                             unoptimized={true}
@@ -187,7 +187,7 @@ export const Navbar = () => {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="flex w-3/4 flex-col bg-white p-2 shadow-md">
+                          <Menu.Items className="absolute z-50 flex flex-col bg-white p-2 px-4 shadow-md">
                             <Menu.Item>
                               <MyLink customClass="py-1" href="/unidesk">
                                 Uni-desk
