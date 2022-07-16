@@ -17,7 +17,9 @@ const InfoPessoais = () => {
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-10">
             <div className="my-4 flex flex-row gap-7">
-              {/*<div className="w-2/6 "><Menu /></div>*/}
+              <div className="w-2/6 ">
+                <Menu />
+              </div>
 
               <div className="flex w-full flex-col  px-6">
                 <div className="mb-10 text-3xl font-bold">Renda</div>

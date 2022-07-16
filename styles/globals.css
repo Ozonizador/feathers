@@ -165,35 +165,6 @@ a {
   border-bottom: 1px solid #e2a676;
 }
 
-/* COMPONENT Y */
-
-.componenty {
-  width: 100%;
-  background-color: #f2e8de;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  padding: 42px 29px 20px 24px;
-}
-.componenty .links {
-  padding: 1.25rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-}
-.componenty .links a {
-  cursor: pointer;
-  margin-bottom: 0;
-}
-
 .cardcont-title {
   font-size: 1.5rem;
   font-weight: bold;

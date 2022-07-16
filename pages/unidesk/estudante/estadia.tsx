@@ -3,7 +3,7 @@ import HospedesMenu from "../../../components/unideskAdminSenhorio/HospedesMenu"
 const Estadia = () => {
   return (
     <>
-      <HospedesMenu />
+      <HospedesMenu activeLink="test" />
     </>
   );
 };
