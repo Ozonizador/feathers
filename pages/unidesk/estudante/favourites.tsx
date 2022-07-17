@@ -58,37 +58,36 @@ const UnideskFavoritos = () => {
             <div className="grid grid-cols-2 gap-5">
               {favourites.map((favourite, index) => {
                 return (
-                  <div
-                    className="mb-10 h-40 w-full rounded-lg border-2 border-gray-200  bg-white"
-                    key={index}
-                  >
-                    <div className="flex">
-                      <div className="">
-                        <Image
-                          src={img1}
-                          alt=""
-                          height="160"
-                          width="160"
-                          className="rounded-l-lg object-fill"
-                        ></Image>
-                      </div>
+                  <div className="mb-10 h-40 w-full bg-white" key={index}>
+                    <div className="flex rounded-lg border-2 border-gray-200">
+                      <Image
+                        src={img1}
+                        alt=""
+                        height="160"
+                        width="160"
+                        className="rounded-l-lg object-fill"
+                      ></Image>
 
-                      <div className="ml-6 flex w-10 flex-auto flex-col ">
-                        <div className="my-2 text-xl font-bold">{favourite.title}</div>
-                        <div className=" mb-1 text-xl font-bold text-primary-500">
+                      <div className="ml-3 flex flex-1 flex-col p-2">
+                        <div className="text-xl font-bold">{favourite.title}</div>
+                        <div className="mb-1 text-xl font-bold text-primary-500">
                           {favourite.monthRent}€/mês
                         </div>
 
-                        <div className="flex ">
-                          <div className="relative  mb-2 text-center text-base">
-                            <div className="flex items-center justify-center gap-2 align-middle text-base">
+                        <div className="mt-auto flex">
+                          <div className="relative mb-2 text-center text-base">
+                            <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                               Despesas incluídas
                               <BiInfoCircle />
                             </div>
-                            <RoomUtilitesPopover expenses={favourite.expenses} />
+                            {favourite.expenses &&
+                              favourite.expenses.inclusive !== undefined &&
+                              favourite.expenses.inclusive !== "EXCLUDED" && (
+                                <RoomUtilitesPopover expenses={favourite.expenses} />
+                              )}
                           </div>
                         </div>
-                        <Link href="">
+                        <Link href={`/anuncio/${favourite.id}`}>
                           <a className="mt-3 text-base text-gray-500">Ver mais</a>
                         </Link>
                       </div>
@@ -101,7 +100,7 @@ const UnideskFavoritos = () => {
         </div>
         <div className="mt-12 mb-20 flex justify-center">
           <Link href="/procurar">
-            <a className="hover: flex w-1/5 items-center justify-center  rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+            <a className="w-1/5 items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl">
               Encontrar{" "}
               <span className="px-1">
                 <CgHome />

@@ -12,34 +12,36 @@ import RoomSobreTi from "../../components/destaques/RoomInformation/RoomSobreTi/
 import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSemelhantes/RoomsSemelhantes";
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
-// import Pagamento from "../components/modals/ModalPagamento"
+import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
 
-export default function Room() {
+export const Anuncio = () => {
   return (
-    <div>
-      {/* MODAL duplicar*/}
-      <ModalDetalhesPagamento />
-      <div className="mx-auto md:container">
-        <RoomGrid />
-        <div className="flex justify-between">
-          <div className="w-3/4">
-            <RoomInformation />
-            <DescricaoCondicoes />
-            <RoomSlider />
-            <RoomRating />
-            <RoomInformation />
-            <RoomMap />
-            <RoomSenhorio />
-            <RoomSemelhantes />
-          </div>
+    <ShowingSingleAdvertisementProvider advertisement={null}>
+      <div>
+        {/* MODAL duplicar*/}
+        <ModalDetalhesPagamento />
+        <div className="mx-auto md:container">
+          <RoomGrid />
+          <div className="flex justify-between">
+            <div className="w-3/4">
+              <RoomInformation />
+              <DescricaoCondicoes />
+              <RoomSlider />
+              <RoomRating />
+              <RoomInformation />
+              <RoomMap />
+              <RoomSenhorio />
+              <RoomSemelhantes />
+            </div>
 
-          <div className="w-64 flex-initial">
-            <RoomPagamento />
-            <RoomSobreTi />
-            <RoomPedido />
+            <div className="w-64 flex-initial">
+              <RoomPagamento />
+              <RoomSobreTi />
+              <RoomPedido />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ShowingSingleAdvertisementProvider>
   );
-}
+};

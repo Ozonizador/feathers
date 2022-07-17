@@ -5,7 +5,7 @@ import { BiBed } from "react-icons/bi";
 import { TbBed } from "react-icons/tb";
 import { GrRestroom } from "react-icons/gr";
 
-export default function TitleInfo() {
+export const TitleInfo = () => {
   return (
     <div>
       <div className="mb-8 text-5xl font-bold">Quarto privado em Peniche</div>
@@ -33,4 +33,4 @@ export default function TitleInfo() {
       </div>
     </div>
   );
-}
+};
