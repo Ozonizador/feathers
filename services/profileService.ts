@@ -12,7 +12,7 @@ export const checkProfileAndCreate = async (userID: string) => {
 }
 
 async function createProfile(userID: string) {
-    const { data, error } = await supabaseClient.from<Profile>(PROFILE_TABLE_NAME).insert({id : userID, updatedAt: new Date()});
+    const { data, error } = await supabaseClient.from<Profile>(PROFILE_TABLE_NAME).insert({id : userID, updatedAt: new Date()}).single();
     return { data, error }
 }
 

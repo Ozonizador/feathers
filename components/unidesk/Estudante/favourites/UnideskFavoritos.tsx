@@ -3,13 +3,18 @@ import Link from "next/link";
 import iconfavorito from "../../../../public/images/icon-pg14-2.svg";
 import img1 from "../../../../public/images/bed3.jpeg";
 import { BiInfoCircle } from "react-icons/bi";
-import { FaRegLightbulb } from "react-icons/fa";
-import { AiOutlineFire } from "react-icons/ai";
-import { AiOutlineWifi } from "react-icons/ai";
-import { BsWater } from "react-icons/bs";
 import { CgHome } from "react-icons/cg";
+import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
+import { useEffect, useState } from "react";
 
 const UnideskFavoritos = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const getUserFavourites = async () => {};
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
+
   return (
     <section>
       <div className=" mx-auto mt-24 flex w-4/6 items-center align-middle">
@@ -53,46 +58,7 @@ const UnideskFavoritos = () => {
                         <BiInfoCircle />
                       </div>
 
-                      {/* PROBLEMA Z-INDEX */}
-                      <div className="absolute bottom-6 left-1 -z-30">
-                        <div className="mb-2 mt-3 flex rounded-lg p-4 shadow-2xl">
-                          <div className="mx-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                            <FaRegLightbulb className=" h-12 w-12 p-2" />
-                            <div className="mt-2 text-sm ">
-                              Eletricidade
-                              <br />
-                              incluído
-                            </div>
-                          </div>
-
-                          <div className="mr-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                            <AiOutlineFire className="   h-12 w-12 p-2" />
-                            <div className="mt-2 text-sm">
-                              Gás
-                              <br />
-                              incluído
-                            </div>
-                          </div>
-
-                          <div className="mr-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                            <AiOutlineWifi className=" h-12 w-12 p-2" />
-                            <div className="mt-2 text-sm ">
-                              Internet
-                              <br />
-                              incluído
-                            </div>
-                          </div>
-
-                          <div className="mr-2 flex flex-col items-center justify-center px-4  align-middle text-secondary-500">
-                            <BsWater className=" h-12 w-12 p-2" />
-                            <div className="mt-2 text-sm ">
-                              Água
-                              <br />
-                              incluído
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <RoomUtilitesPopover expenses={{}} />
                     </div>
                   </div>
                   <Link href="">
