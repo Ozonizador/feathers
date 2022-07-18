@@ -196,7 +196,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/estudante/estadia">
+                                  <MyLink customClass="py-1" href="/unidesk/estudante/stay">
                                     Minha Estadia
                                   </MyLink>
                                 </Menu.Item>
@@ -206,7 +206,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/inbox">
+                                  <MyLink customClass="py-1" href="/unidesk/inbox">
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>

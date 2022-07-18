@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Menu() {
+const MenuEstudante = () => {
   const [summary1, setSummary1] = useState(true);
   const [summary2, setSummary2] = useState(true);
   const [summary3, setSummary3] = useState(true);
@@ -39,19 +39,6 @@ export default function Menu() {
             <Link href="/16">Métodos de pagamento</Link>
             <Link href="/16">Métodos de pagamento</Link>
           </div>
-          {/* PAULO
-          
-          <ul>
-            <li>
-              <Link href="/15">Informações pessoais</Link>
-            </li>
-            <li>
-              <Link href="/16">Métodos de pagamento</Link>
-            </li>
-            <li>
-              <a href="">Informações contratuais</a>
-            </li>
-          </ul> */}
         </div>
       </details>
       <details>
@@ -144,4 +131,6 @@ export default function Menu() {
       </details>
     </article>
   );
-}
+};
+
+export default MenuEstudante;

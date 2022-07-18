@@ -77,17 +77,18 @@ export default function ProcurarSection() {
           {!isloading && (
             <>
               <div>
-                {advertisements.map((advertisement, index) => {
-                  return (
-                    <Link href={`/anuncio/${advertisement.id}`} key={index}>
-                      <a>
-                        <div>
-                          <RoomCard advertisement={advertisement} />
-                        </div>
-                      </a>
-                    </Link>
-                  );
-                })}
+                {advertisements &&
+                  advertisements.map((advertisement, index) => {
+                    return (
+                      <Link href={`/anuncio/${advertisement.id}`} key={index}>
+                        <a>
+                          <div>
+                            <RoomCard advertisement={advertisement} />
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                  })}
               </div>
               <div></div>
 
