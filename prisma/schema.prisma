@@ -30,8 +30,9 @@ model Profile {
   tenantReviews Review[]        @relation("tenantReviews")
   notifications Notification[]  @relation("notifications")
 
-  tenantMessages Message[] @relation("tenantMessages")
-  hostMessages   Message[] @relation("hostMessages")
+  tenantMessages Message[]      @relation("tenantMessages")
+  hostMessages   Message[]      @relation("hostMessages")
+  Reservations   Reservations[] @relation("tenantReservations")
   @@map("profiles")
 }
 
@@ -67,6 +68,7 @@ model Advertisement {
   Profile Profile? @relation(fields: [host], references: [id])
   Review  Review[] @relation("advertisementReviews")
 
+  Reservations Reservations[] @relation("advertisementReservations")
   @@map("advertisements")
 }
 
@@ -93,15 +95,22 @@ model Reservations {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  startDate       DateTime
+  endDate         DateTime
+  advertisement   Advertisement @relation("advertisementReservations", references: [id], fields: [advertisementId])
+  advertisementId String        @db.Uuid
+
+  tenant   Profile @relation("tenantReservations", references: [id], fields: [tenantId])
+  tenantId String  @db.Uuid
   @@map("reservations")
 }
 
 model Review {
-  id        String        @id @default(uuid()) @db.Uuid
-  host      Advertisement @relation("advertisementReviews", references: [id], fields: [advertisementId])
-  tenant    Profile       @relation("tenantReviews", references: [id], fields: [tenantId])
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id            String        @id @default(uuid()) @db.Uuid
+  advertisement Advertisement @relation("advertisementReviews", references: [id], fields: [advertisementId])
+  tenant        Profile       @relation("tenantReviews", references: [id], fields: [tenantId])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
   overallRating      Int
   locationRating     Int
