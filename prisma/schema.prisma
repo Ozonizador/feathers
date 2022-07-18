@@ -27,7 +27,11 @@ model Profile {
   updatedAt      DateTime  @updatedAt
 
   Advertisement Advertisement[]
+  tenantReviews Review[]        @relation("tenantReviews")
+  notifications Notification[]  @relation("notifications")
 
+  tenantMessages Message[] @relation("tenantMessages")
+  hostMessages   Message[] @relation("hostMessages")
   @@map("profiles")
 }
 
@@ -61,6 +65,8 @@ model Advertisement {
 
 
   Profile Profile? @relation(fields: [host], references: [id])
+  Review  Review[] @relation("advertisementReviews")
+
   @@map("advertisements")
 }
 
@@ -91,25 +97,47 @@ model Reservations {
 }
 
 model Review {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String        @id @default(uuid()) @db.Uuid
+  host      Advertisement @relation("advertisementReviews", references: [id], fields: [advertisementId])
+  tenant    Profile       @relation("tenantReviews", references: [id], fields: [tenantId])
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 
+  overallRating      Int
+  locationRating     Int
+  valueQualityRating Int
+  landLordRating     Int
+  comoditiesRating   Int
+  publicReview       String
+  privateReview      String
+  advertisementId    String @db.Uuid
+  tenantId           String @db.Uuid
   @@map("reviews")
 }
 
 model Notification {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+  url         String
+  profile     Profile  @relation("notifications", references: [id], fields: [profileId])
+  profileId   String   @db.Uuid
 
   @@map("notifications")
 }
 
 model Message {
   id        String   @id @default(uuid()) @db.Uuid
+  message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  host     Profile @relation("hostMessages", references: [id], fields: [hostId])
+  hostId   String  @db.Uuid
+  tenant   Profile @relation("tenantMessages", references: [id], fields: [tenantId])
+  tenantId String  @db.Uuid
 
   @@map("messages")
 }

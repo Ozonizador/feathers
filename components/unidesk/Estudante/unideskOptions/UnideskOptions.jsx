@@ -17,7 +17,7 @@ const UnideskOptions = () => {
           ></Image>
           <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Minha estadia</h1>
         </div>
-        <p className="text-xl">Informações gerais</p>
+        <p className="mt-2 text-xl">Informações gerais</p>
         <div className="flex flex-row">
           <Image
             className="object-scale-down"
@@ -65,7 +65,7 @@ const UnideskOptions = () => {
         <div></div>
       </div>
 
-      {/* OPTION2 */}
+      {/* Favourites */}
       <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
         <div>
           <Link href="/unidesk/estudante/favourites">
@@ -79,19 +79,19 @@ const UnideskOptions = () => {
         </div>
       </div>
 
-      {/* OPTION3 */}
+      {/* Inbox */}
       <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
         <div className="flex flex-col justify-center pt-12">
           <Image src="/images/icon-pg14-3.svg" alt="" height="80" width="80"></Image>
-          <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Favoritos</h1>
+          <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Caixa de Entrada</h1>
         </div>
-        <div className="flex flex-col justify-start">
+        <div className="mt-2 flex flex-col justify-start">
           <p className="text-xl">Pedidos de reserva</p>
           <p className="text-xl">Mensagens</p>
         </div>
       </div>
 
-      {/* OPTION4 */}
+      {/* Notifications */}
       <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
         <div>
           <div className="flex flex-1 flex-col items-center pt-12 align-middle">
