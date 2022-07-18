@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
@@ -10,13 +10,27 @@ import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
+import { useProfileInformation } from "../../../context/MainProvider";
+import classNames from "classnames";
 
 interface RoomCardProps {
   advertisement: Advertisement;
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
-  const toggleFavourite = async () => {};
+  const profile = useProfileInformation();
+  const toggleFavourite = async () => {
+    const { favouriteRooms } = profile;
+  };
+
+  const isFavourite = useCallback(() => {
+    if (profile) {
+      const { favouriteRooms } = profile;
+      const index = favouriteRooms.findIndex((room) => advertisement.id == room);
+      return index !== -1;
+    }
+    return false;
+  }, [advertisement.id, profile]);
 
   return (
     <div>
@@ -86,7 +100,11 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                         className="rounded-md border-2 border-terciary-300 p-1 text-xs hover:border-primary-500"
                         onClick={toggleFavourite}
                       >
-                        <CgHeart className="inline" />
+                        <CgHeart
+                          className={classNames("inline", {
+                            "fill-red-600 text-red-600": isFavourite(),
+                          })}
+                        />
                         <span className="my-auto ml-2">Favoritos</span>
                       </button>
                     </div>
