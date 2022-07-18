@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import classNames from "classnames";
 
 interface HospedesMenuProps {
   activeLink: string;
@@ -10,31 +11,31 @@ interface HospedesMenuProps {
 
 const HospedesMenu = ({ activeLink }) => {
   return (
-    <div className="rounded-2xl bg-terciary-600 py-8 px-6">
+    <div className="rounded-2xl bg-terciary-600 py-8 px-6 w-96">
       <Link href="">
-        <div className="flex rounded-2xl py-5 px-4">
-          <Image src="/images/icons8_male_user_2.svg" height={32} width={32} alt="" />
-          <span className="ml-2 self-center font-bold">Hóspedes</span>
+        <div className={classNames("flex rounded-2xl py-5 px-4", { "bg-primary-300": activeLink == "hospedes"})}>
+          <Image src="/images/icons8_male_user_2.svg" height={46} width={46} alt="" />
+          <span className="ml-2 self-center text-xl font-semibold">Hóspedes</span>
         </div>
       </Link>
       <Link href="">
         <div className="flex rounded-2xl py-5 px-4">
-          <Image src="/images/icons8_card_exchange_1.svg" height={32} width={32} alt="" />
-          <span className="ml-2 self-center font-bold">Transações</span>
+          <Image src="/images/icons8_card_exchange_1.svg" height={46} width={46} alt="" />
+          <span className="ml-2 self-center text-xl font-semibold">Transações</span>
         </div>
       </Link>
       <Link href="">
         <a>
           <div className="flex rounded-2xl py-5 px-4">
-            <Image src="/images/icons8_paycheque.svg" height={32} width={32} alt="" />
-            <span className="ml-2 self-center font-bold">Despesas</span>
+            <Image src="/images/icons8_paycheque.svg" height={46} width={46} alt="" />
+            <span className="ml-2 self-center text-xl font-semibold">Despesas</span>
           </div>
         </a>
       </Link>
       <Link href="">
         <div className="flex rounded-2xl py-5 px-4">
-          <Image src="/images/icons8_maintenance_1.svg" height={32} width={32} alt="" />
-          <span className="ml-2 self-center font-bold">Reparações</span>
+          <Image src="/images/icons8_maintenance_1.svg" height={46} width={46} alt="" />
+          <span className="ml-2 self-center text-xl font-semibold">Reparações</span>
         </div>
       </Link>
     </div>
