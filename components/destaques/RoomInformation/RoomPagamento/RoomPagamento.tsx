@@ -54,7 +54,7 @@ export default function RoomPagamento() {
 
         <div className="flex flex-row justify-between">
           <div>1ª Renda</div>
-          <div>€300</div>
+          <div>{`€${advertisement.monthRent}`}</div>
         </div>
 
         <div className="my-2 flex flex-row justify-between">
