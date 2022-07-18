@@ -413,9 +413,7 @@ const AnuncioCard = () => {
 
 
 
-            <div className="w-96 bg-black">
-                dsçlfklçdskfçdlfksdçld
-            </div>
+
 
 
         </section>
