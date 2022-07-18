@@ -3,18 +3,20 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 
-{
-  /* Pagina 34 XD */
+/* Pagina 34 XD
+  para chamar na pagina => <ModalPagamento defaultOpen={false} /> 
+  false nao mostra nada true mostra.
+*/
+
+interface ModalPagamentoProps {
+  defaultOpen: boolean;
 }
-export default function ModalPagamento() {
-  let [isOpen, setIsOpen] = useState(true);
+
+const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
+  let [isOpen, setIsOpen] = useState(defaultOpen);
 
   function closeModal() {
     setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
   }
 
   return (
@@ -156,4 +158,6 @@ export default function ModalPagamento() {
       </Dialog>
     </Transition>
   );
-}
+};
+
+export default ModalPagamento;

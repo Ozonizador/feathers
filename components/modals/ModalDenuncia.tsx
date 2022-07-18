@@ -5,13 +5,17 @@ import next from "next";
 
 /* PAGINA 21-22 DO XD 
 
-para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
+para chamar na pagina => <ModalDenuncia defaultOpen={false} /> 
 false nao mostra nada true mostra.
 */
 
-const ModalDenuncia = () => {
+interface ModalDenunciaProps {
+  defaultOpen: boolean;
+}
+
+const ModalDenuncia = ({ defaultOpen }: ModalDenunciaProps) => {
   const [step, setStep] = useState(1);
-  let [isOpen, setIsOpen] = useState(true);
+  let [isOpen, setIsOpen] = useState(defaultOpen);
 
   function closeModal() {
     setIsOpen(false);
