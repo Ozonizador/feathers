@@ -59,13 +59,13 @@ interface PassosModaisProps {
 
 const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
   return (
-    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
+    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
       <Dialog.Title
         as="h3"
         className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
       >
         <Image className="m-2" src="/images/flag.png" alt="" width="30px" height="30px" />
-        <span className="my-auto ml-5">Reportar anúncio</span>
+        <span className="my-auto ml-5 text-3xl font-bold">Reportar anúncio</span>
       </Dialog.Title>
       <div className="container p-6">
         <div>
@@ -73,30 +73,32 @@ const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
             <div className=" ">
               <div className="" id="model-radius">
                 <div className="m-2">
-                  <h5 className="mt-2">Porque estás a denunciar esta conta?</h5>
-                  <p className="mt-4">
+                  <h5 className="mt-2 text-2xl font-semibold">
+                    Porque estás a denunciar esta conta?
+                  </h5>
+                  <p className="mt-7 mb-10 text-xl">
                     A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso
                     não seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade
                     por favor reporta.{" "}
                   </p>
-                  <div className="radio mt-3">
+                  <div className="radio mb-4">
                     <label>
                       <input className="m-2" type="radio" name="optradio" checked />É impreciso ou
                       incorreto
                     </label>
                   </div>
-                  <div className="radio">
+                  <div className="radio mb-4">
                     <label>
                       <input className="m-2" type="radio" name="optradio" checked />
                       Não corresponde à realidade
                     </label>
                   </div>
-                  <div className="radio">
+                  <div className="radio mb-4">
                     <label>
                       <input className="m-2" type="radio" name="optradio" checked />É um esquema
                     </label>
                   </div>
-                  <div className="radio">
+                  <div className="radio mb-4">
                     <label>
                       <input className="m-2" type="radio" name="optradio" checked />É ofensivo
                     </label>
@@ -110,7 +112,7 @@ const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
                     <label>
                       <input
                         id="input-modal"
-                        className="m-4"
+                        className="m-4 border border-b-gray-400 p-2"
                         placeholder="Conta-nos mais sobre isso"
                       />
                     </label>
@@ -118,7 +120,7 @@ const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
                   <div className="flex flex-1 justify-end">
                     <button
                       type="button"
-                      className="rounded-lg bg-primary-500 p-2 text-white"
+                      className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
                       onClick={nextStep}
                     >
                       Seguinte
