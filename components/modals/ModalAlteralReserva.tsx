@@ -3,15 +3,20 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 
-export default function ModalAlterarReserva() {
-  let [isOpen, setIsOpen] = useState(true);
+/* PAGINA 23 DO XD 
+
+para chamar na pagina => <ModalAlterarReserva defaultOpen={false} /> 
+false nao mostra nada true mostra.
+*/
+interface ModalAlterarReservaProps {
+  defaultOpen: boolean;
+}
+
+const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   function closeModal() {
     setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
   }
 
   return (
@@ -200,4 +205,6 @@ export default function ModalAlterarReserva() {
       </Dialog>
     </Transition>
   );
-}
+};
+
+export default ModalAlterarReserva;

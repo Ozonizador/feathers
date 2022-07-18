@@ -1,14 +1,11 @@
-import HospedesMenu from "../components/unidesk/Menus/HospedesMenu";
-import Menu from "../components/unideskAdminEstudante/Menu"
+import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperiencia";
 
 const Index = (): JSX.Element => {
-  return <div className="flex flex-1 justify-center p-10">
-
-  <HospedesMenu activeLink="hospedes" />
-
-
-
-  </div>;
+  return (
+    <div className="flex flex-1 justify-center p-10">
+      <ModalAvaliarExperiencia defaultOpen={true} />
+    </div>
+  );
 };
 
 export default Index;
