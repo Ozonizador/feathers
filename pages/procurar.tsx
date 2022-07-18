@@ -1,5 +1,5 @@
 import React from "react";
-import DestaquesSection from "../components/destaques/ProcurarSection/DestaquesSection";
+import ProcurarSection from "../components/destaques/ProcurarSection/ProcurarSection";
 import SearchInputField from "../components/search/SearchInputField";
 
 const Procurar = () => {
@@ -9,7 +9,7 @@ const Procurar = () => {
         <SearchInputField />
       </div>
       <div className="mt-10">
-        <DestaquesSection />
+        <ProcurarSection />
       </div>
     </>
   );

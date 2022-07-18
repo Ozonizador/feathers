@@ -4,8 +4,9 @@ import RoomCard from "./RoomCard";
 import { getAdvertisementsFromDB } from "../../../services/advertisementService";
 import Advertisement from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
+import Link from "next/link";
 
-export default function DestaquesSection() {
+export default function ProcurarSection() {
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
@@ -78,9 +79,13 @@ export default function DestaquesSection() {
               <div>
                 {advertisements.map((advertisement, index) => {
                   return (
-                    <div key={index}>
-                      <RoomCard advertisement={advertisement} />
-                    </div>
+                    <Link href={`/anuncio/${advertisement.id}`} key={index}>
+                      <a>
+                        <div>
+                          <RoomCard advertisement={advertisement} />
+                        </div>
+                      </a>
+                    </Link>
                   );
                 })}
               </div>
