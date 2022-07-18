@@ -73,7 +73,8 @@ export const SingleRoomGrid = () => {
           </div>
         </div>
       )}
-      {!advertisement.photos.length && <Image src={NoPhotoAvailable} alt="no photo available" />}
+      {!advertisement.photos ||
+        (!advertisement.photos.length && <Image src={NoPhotoAvailable} alt="no photo available" />)}
     </section>
   );
 };
