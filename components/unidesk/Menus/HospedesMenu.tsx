@@ -11,7 +11,7 @@ interface HospedesMenuProps {
 
 const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
   return (
-    <div className="w-96 rounded-2xl bg-terciary-600 py-8 px-6">
+    <div className="w-80 rounded-2xl bg-terciary-600 py-8 px-6">
       <Link href="">
         <div
           className={classNames("flex rounded-2xl py-5 px-4", {
