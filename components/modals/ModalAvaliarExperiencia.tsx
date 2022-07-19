@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
-
+import { Rating } from "flowbite-react";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -41,7 +41,7 @@ const ModalAvaliarExperiencia = ({ defaultOpen }: ModalAvaliarExperienciaProps) 
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-center justify-center p-14 text-center">
             {step === 1 && <ModalAvaliarExperienciaPrimeiroPasso nextStep={nextStep} />}
             {step === 2 && <ModalAvaliarExperienciaSegundoPasso nextStep={nextStep} />}
             {step === 3 && <ModalAvaliarExperienciaTerceiroPasso nextStep={nextStep} />}
@@ -58,38 +58,47 @@ interface PassosModaisProps {
 
 const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) => {
   return (
-    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
+    <Dialog.Panel className="h-96 w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
       <Dialog.Title
         as="h3"
-        className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
+        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image className="m-2" src="/images/feeedback.png" alt="" width="30px" height="30px" />{" "}
-        Avaliar experiência
+        <Image
+          className=""
+          src="/images/feeedback.png"
+          alt="Avaliar experiência"
+          width="32px"
+          height="32px"
+        />{" "}
+        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
-      <div
-        className="modal  fade  -centered"
-        id="exampleModal"
-        tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className=" ">
-          <div className="" id="model-radius">
-            <div id="" className="modal-header "></div>
-            <div className=" m-4 p-4">
-              <div className="jumbotron m-4 p-4 text-center">
-                <h5>Obrigada pelo teu feedback!</h5>
-                <p>
-                  A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar
-                  outros estudantes.
-                </p>
-                <p className="lead" onClick={() => nextStep()}>
-                  <a className="btn btn-primary btn-lg" href="#" role="button" id="modal-btn">
-                    Fechar
-                  </a>
-                </p>
-              </div>
-            </div>
+      {/* <!-- Modal --> */}
+      <div className="flex h-full flex-col items-center justify-center text-center align-middle">
+        <div
+          className="modal  fade  -centered"
+          id="exampleModal"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div>
+            <h1 className="text-2xl font-semibold">Obrigada pelo teu feedback!</h1>
+            <p className="font-x1 mx-auto mt-7 mb-10 w-2/3 text-center">
+              A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar
+              outros estudantes.
+            </p>
+          </div>
+
+          <div className="px-8">
+            <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+              <a
+                className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                role="button"
+                id="modal-btn"
+              >
+                Fechar
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -97,15 +106,23 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
   );
 };
 
+// ------------------------------------------------------------------------------------------------------------------------------------
+
 const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) => {
   return (
-    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
+    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
       <Dialog.Title
         as="h3"
-        className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
+        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image className="m-2" src="/images/flag.png" alt="" width="30px" height="30px" />
-        <span className="my-auto ml-5">Reportar anúncio</span>
+        <Image
+          className=""
+          src="/images/feeedback.png"
+          alt="Avaliar experiência"
+          width="32px"
+          height="32px"
+        />{" "}
+        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
       {/* <!-- Modal --> */}
       <div
@@ -115,51 +132,38 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className=" ">
+        <div className="px-8">
           <div className="" id="model-radius">
-            <div id="" className="modal-header ">
-              <Image className="m-2" src="/images/comments.png" alt="" width="30px" height="30px" />
-              <div id="model-heading" className="p-2">
-                Avaliar experiência
-              </div>
-            </div>
+            <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T2 - Guarda</p>
+
             <div className=" m-4 ">
-              <div className="jumbotron">
-                <h5>A UniHosts agradece!</h5>
-                <div className="mb-3">
-                  <label
-                    id="modal-label"
-                    htmlFor="exampleFormControlTextarea1"
-                    className="form-label"
-                  >
-                    Deixa o teu feedback público
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows={3}
-                  ></textarea>
-                </div>
-                <div className="mb-3">
-                  <label
-                    id="modal-label"
-                    htmlFor="exampleFormControlTextarea1"
-                    className="form-label"
-                  >
-                    Deixa o teu feedback privado ao senhorio
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows={3}
-                  ></textarea>
-                </div>
-                <p className="lead" onClick={() => nextStep()}>
-                  <a className="btn btn-primary btn-lg " href="#" role="button" id="modal-btn">
-                    Enviar
-                  </a>
-                </p>
+              <p className="mb-3 text-base">Deixa o teu feedback público</p>
+              <div className="mb-3 bg-slate-200">
+                <textarea
+                  className="form-control w-full rounded-md border  border-terciary-500 bg-white"
+                  id="exampleFormControlTextarea1"
+                  rows={3}
+                ></textarea>
               </div>
+              <div className="mb-3 mt-10">
+                <p className="mb-3 text-base">Deixa o teu feedback privado ao senhorio</p>
+                <div className="mb-3 bg-slate-200">
+                  <textarea
+                    className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
+                    id="exampleFormControlTextarea1"
+                    rows={3}
+                  ></textarea>
+                </div>
+              </div>
+              <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+                <a
+                  className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                  role="button"
+                  id="modal-btn"
+                >
+                  Seguinte
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -168,15 +172,23 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
   );
 };
 
+// ------------------------------------------------------------------------------------------------------------------------------------
+
 const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
   return (
-    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
+    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white  text-left align-middle shadow-xl transition-all">
       <Dialog.Title
         as="h3"
-        className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
+        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image className="m-2" src="/images/comments.png" alt="" width="10%" height="10%" /> Avaliar
-        Experiencia
+        <Image
+          className=""
+          src="/images/feeedback.png"
+          alt="Avaliar experiência"
+          width="32px"
+          height="32px"
+        />{" "}
+        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
       <div
         className="modal fade -centered"
@@ -185,71 +197,76 @@ const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) =
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className=" ">
+        <div className="px-4 ">
           <div className="" id="model-radius">
             <div className=" m-4 ">
-              <div className="jumbotron">
-                <p>Quarto Privado em T3 - Peniche</p>
-                <div id="rating-flex">
-                  <div id="stars-text">Localização</div>
-                  <div id="stars">
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                  </div>
+              <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T3 - Peniche</p>
+              <div className="flex flex-col">
+                <div className="mb-8 flex w-2/5 flex-row justify-between">
+                  <div className="text-2xl text-secondary-300">Localização</div>
+                  <Rating>
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                  </Rating>
                 </div>
 
-                <div id="rating-flex" className="mb-2 mt-2">
-                  <div id="stars-text">Qualidade - preço</div>
-                  <div id="stars">
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                  </div>
+                <div className="mb-8 flex w-2/5 flex-row justify-between">
+                  <div className="text-2xl text-secondary-300">Qualidade - preço</div>
+                  <Rating>
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                  </Rating>
                 </div>
 
-                <div id="rating-flex" className="mb-2 mt-2">
-                  <div id="stars-text">Comodidades</div>
-                  <div id="stars">
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                  </div>
+                <div className="mb-8 flex w-2/5 flex-row justify-between">
+                  <div className="text-2xl text-secondary-300">Comodidades</div>
+                  <Rating>
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                  </Rating>
                 </div>
 
-                <div id="rating-flex" className="mb-2 mt-2">
-                  <div id="stars-text">Senhorio</div>
-                  <div id="stars">
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                  </div>
+                <div className="mb-8 flex w-2/5 flex-row justify-between">
+                  <div className="text-2xl text-secondary-300">Senhorio</div>
+                  <Rating>
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                  </Rating>
                 </div>
 
-                <div id="rating-flex" className="mb-4 mt-2">
-                  <div id="stars-text">Avaliação Geral</div>
-                  <div id="stars">
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1 "></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                    <span className="fa fa-star m-1"></span>
-                  </div>
+                <div className="mb-8 flex w-2/5 flex-row justify-between">
+                  <div className="text-2xl text-secondary-300">Avaliação Geral</div>
+                  <Rating>
+                    <Rating.Star />
+                    <Rating.Star />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                    <Rating.Star filled={false} />
+                  </Rating>
                 </div>
-                <p className="lead" onClick={() => nextStep()}>
-                  <a className="btn btn-primary btn-lg mt-2 " role="button" id="modal-btn">
-                    Seguinte
-                  </a>
-                </p>
               </div>
+
+              <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+                <a
+                  className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                  role="button"
+                  id="modal-btn"
+                >
+                  Seguinte
+                </a>
+              </p>
             </div>
           </div>
         </div>
