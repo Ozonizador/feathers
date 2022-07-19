@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import Menu from "../unideskAdminEstudante/Menu";
 import { IoWarningOutline } from "react-icons/io5";
 import { BsCheckCircle } from "react-icons/bs";
+import MenuEstudante from "../unidesk/Menus/MenuEstudante";
 
 const InfoPessoais = () => {
   return (
@@ -18,7 +17,7 @@ const InfoPessoais = () => {
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-10">
             <div className="my-4 flex flex-row gap-7">
               <div className="w-2/6 ">
-                <Menu />
+                <MenuEstudante />
               </div>
 
               <div className="flex w-full flex-col  px-6">

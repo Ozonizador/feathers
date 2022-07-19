@@ -18,7 +18,7 @@ const MenuSenhorio = () => {
           <div className="ml-1 mt-4 text-base font-bold">Painel</div>
           <div className="flex flex-col gap-2">
             <div
-              className="mt-2 flex flex-1 justify-between px-2"
+              className="mt-2 flex flex-1 items-center justify-between px-2"
               onClick={() => {
                 setSummary3(!summary3);
               }}
@@ -79,7 +79,7 @@ const MenuSenhorio = () => {
       <div className="mt-2 px-2">Caixa de entrada</div>
       <div className="mt-2 px-2">
         <div
-          className="flex flex-1 justify-between"
+          className="flex flex-1 items-center justify-between"
           onClick={() => {
             setSummary2(!summary2);
           }}

@@ -1,4 +1,4 @@
-import Menu from "../../../components/unidesk/Menus/MenuSenhorioAnuncio";
+import Menu from "../../../components/unidesk/Menus/MenuSenhorio";
 
 /* PAGINA 21 do xd */
 const Estadia = () => {
