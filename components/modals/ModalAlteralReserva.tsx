@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
+import { VscArrowRight } from "react-icons/vsc";
 
 /* PAGINA 23 DO XD 
 
@@ -35,7 +36,7 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-center justify-center p-4 text-center ">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -45,20 +46,20 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
+                  className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
                   <Image
                     id="modal-img"
                     className="m-2"
                     src="/images/doublearrow.png"
                     alt=""
-                    width="10%"
-                    height="10%"
+                    width="40"
+                    height="40"
                   />
-                  <span>Alterar reserva</span>
+                  <span className="ml-3 text-3xl font-bold">Alterar reserva</span>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -71,128 +72,136 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
                 >
                   <div className=" ">
                     <div className="" id="model-radius">
-                      <div id="" className="modal-header ">
-                        <Image
-                          id="modal-img"
-                          className="m-2"
-                          src="/images/doublearrow.png"
-                          alt=""
-                          width="10%"
-                          height="10%"
-                        />
-                        <div id="model-heading" className="p-2">
-                          Alterar reserva
-                        </div>
-                      </div>
-                      <div className=" m-4 ">
+                      <div className=" m-4 p-5">
                         <div className="jumbotron">
-                          <p>Diz ao teu senhorio porque queres alterar a tua reserva</p>
-                          <div className="mb-3">
+                          <p className="mb-8 text-xl font-semibold">
+                            Diz ao teu senhorio porque queres alterar a tua reserva
+                          </p>
+                          <div className="mb-3 bg-slate-200">
                             <textarea
-                              className="form-control"
+                              className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
                               id="exampleFormControlTextarea1"
-                              rows={1}
+                              rows={3}
                             ></textarea>
                           </div>
-                          <p>Reserva Original</p>
-                          <div className="row mb-4">
-                            {/* left */}
-                            <div className="col">
-                              {" "}
-                              <div className="input-group">
-                                <div>
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Entrada
-                                  </label>
-                                  <input
-                                    type="date"
-                                    aria-label="First name"
-                                    className="form-control m-1"
-                                  />
-                                </div>
-                                <div>
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Entrada
-                                  </label>
-                                  <input
-                                    type="date"
-                                    aria-label="Last name"
-                                    className="form-control m-1"
-                                  />
-                                </div>
+                          <p className="mt-8 mb-9 text-xl font-semibold">Reserva Original</p>
+                          {/* left */}
+                          {/* começa novo */}
+                          <div className="flex items-center justify-between gap-7 align-middle">
+                            <div>
+                              <label htmlFor="exampleInputEmail1" className="form-label  text-base">
+                                Entrada
+                              </label>
+                              <input
+                                type="date"
+                                aria-label="First name"
+                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
+                              />
+                            </div>
 
-                                <div className="mb-3 mt-3">
+                            <div>
+                              <label
+                                htmlFor="exampleInputEmail1"
+                                className="form-label mb-2 text-base"
+                              >
+                                Entrada
+                              </label>
+                              <input
+                                type="date"
+                                aria-label="First name"
+                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
+                              />
+                            </div>
+                            <div>
+                              <VscArrowRight className="mt-7 text-3xl" />
+                            </div>
+
+                            <div>
+                              <label
+                                htmlFor="exampleInputEmail1"
+                                className="form-label mb-2 text-base"
+                              >
+                                Entrada
+                              </label>
+                              <input
+                                type="date"
+                                aria-label="First name"
+                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
+                              />
+                            </div>
+
+                            <div>
+                              <label
+                                htmlFor="exampleInputEmail1"
+                                className="form-label mb-2 text-base"
+                              >
+                                Entrada
+                              </label>
+                              <input
+                                type="date"
+                                aria-label="First name"
+                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
+                              />
+                            </div>
+                          </div>{" "}
+                          <div className="input-group">
+                            {/* fim novo */}
+
+                            {/* HOSPEDES */}
+                            <div className="mt-7 flex flex-row justify-between gap-4">
+                              <div className="mb-3 mt-3 flex w-full flex-col">
+                                <label htmlFor="exampleInputEmail1" className="form-label">
+                                  Número de hóspedes
+                                </label>
+                                <select className="mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3">
+                                  <option>1 hóspede</option>
+                                </select>
+                              </div>
+
+                              {/* FIM */}
+                              <div>
+                                <VscArrowRight className="mt-12 text-3xl" />
+                              </div>
+
+                              <div className="mb-3  flex w-full flex-col">
+                                <div className="mb-3 mt-3 flex w-full flex-col">
                                   <label htmlFor="exampleInputEmail1" className="form-label">
                                     Número de hóspedes
                                   </label>
-                                  <input
-                                    placeholder="1 hóspede"
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputText"
-                                  />
-                                </div>
-                                <div className="text-center">
-                                  <h5>Pagamento Original</h5>
-                                  <a href="" id="link-modal">
-                                    Detalhes
-                                  </a>
+                                  <select className="mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3">
+                                    <option>1 hóspede</option>
+                                  </select>
                                 </div>
                               </div>
                             </div>
-                            <div className="col">
-                              <div className="input-group">
-                                <div>
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Entrada
-                                  </label>
-                                  <input
-                                    type="date"
-                                    aria-label="First name"
-                                    className="form-control m-1"
-                                  />
-                                </div>
-                                <div>
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Entrada
-                                  </label>
-                                  <input
-                                    type="date"
-                                    aria-label="Last name"
-                                    className="form-control m-1"
-                                  />
-                                </div>
+                            {/* HOSPEDES */}
 
-                                <div className="mb-3 mt-3">
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Número de hóspedes
-                                  </label>
-                                  <input
-                                    placeholder="1 hóspede"
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputText"
-                                  />
-                                </div>
-                                <div className="text-center">
-                                  <h5>Pagamento Original</h5>
-                                  <a href="" id="link-modal">
-                                    Detalhes
-                                  </a>
-                                </div>
+                            <div className="mx-auto flex w-8/12 justify-between ">
+                              <div className="text-center">
+                                <h5 className="mb-3 font-bold">Pagamento Original</h5>
+                                <a href="" id="link-modal" className="underline underline-offset-8">
+                                  Detalhes
+                                </a>
+                              </div>
+
+                              <div className="text-center">
+                                <h5 className="mb-3 font-bold">Novo Pagamento</h5>
+                                <a href="" id="link-modal" className="underline underline-offset-8">
+                                  Detalhes
+                                </a>
                               </div>
                             </div>
                           </div>
-                          <p className="row">
+                          <div className="flex justify-center">
                             <a
-                              className="btn btn-primary btn-block "
+                              className="mx-auto mt-10 mb-6 rounded-md bg-primary-300 py-3 px-6 text-white"
                               href="#"
                               role="button"
                               id="modal-btn"
                             >
                               Enviar pedido de alteração
                             </a>
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>

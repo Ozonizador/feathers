@@ -46,9 +46,9 @@ const ModalDenuncia = ({ defaultOpen }: ModalDenunciaProps) => {
               <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
+                  className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
-                  <Image className="m-2" src="/images/flag.png" alt="" width="30px" height="30px" />
+                  <Image className="m-2" src="/images/flag.png" alt="" width="40px" height="30px" />
                   <span className="my-auto ml-5 text-3xl font-bold">Reportar anúncio</span>
                 </Dialog.Title>
                 {step === 1 && <ModalDenunciaPrimeiroPasso nextStep={nextStep} />}
