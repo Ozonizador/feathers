@@ -2,61 +2,90 @@ import React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {AiFillLock} from "react-icons/ai"
+import { TiLockClosed } from "react-icons/ti";
 
-export default function Menu() {
-  const [summary1, setSummary1] = useState(true);
+const MenuSenhorio = () => {
   const [summary2, setSummary2] = useState(true);
   const [summary3, setSummary3] = useState(true);
 
-  const textRouteChange = () => {
-    let path = `/22`;
-    // navigate(path);
-  };
   return (
-    <article className="componentx">
-        <div className="font-bold text-xl mb-8 ml-4">Painel</div>
-      <details>
-        <summary className="w-80"
-          onClick={() => {
-            setSummary1(!summary1);
-          }}
-        >
-
-            
-          <div className="flex items-center gap-4 align-middle ">
-            
-            <h1 className="font-bold text-xl ">Anúncios</h1>
-          </div>
-          <Image
-            src={summary1 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
-            height={32}
-            width={32}
-            alt=""
-          />
-        </summary>
-        <div className="flex items-center justify-start align-middle">
-          <div className=" flex flex-col  gap-4 text-base ml-5">
-          <div className="ml-1 mt-4 font-bold text-base">Informações gerais</div>
-    
-            <Link href="/15">&#9679; Detalhes dos anúncios</Link>
-            <Link href="/16">&#9679; Fotos</Link>
-            <Link href="/16">&#9679; Condições e regras</Link>
-            <Link href="/16">&#9679; Preços</Link>
-            <Link href="/">
-            <a className=" flex items-center  flex-row mb-4"><AiFillLock className="mr-1" />Informações contratuais</a></Link>
+    <div className="rounded-2xl bg-terciary-600 p-2">
+      <div className="w-64">
+        <div className="flex justify-start border border-b-primary-500 px-2 align-middle">
+          <h1 className="text-xl font-bold ">Anúncios</h1>
+        </div>
+        <div className="flex flex-col justify-start px-2">
+          <div className="ml-1 mt-4 text-base font-bold">Painel</div>
+          <div className="flex flex-col gap-2">
+            <div
+              className="mt-2 flex flex-1 justify-between px-2"
+              onClick={() => {
+                setSummary3(!summary3);
+              }}
+            >
+              <div>
+                <p className="">Anúncios</p>
+              </div>
+              <Image
+                src={summary3 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+                height={32}
+                width={32}
+                alt=""
+              />
+            </div>
+            {summary3 && (
+              <>
+                <div className="flex">
+                  <Link href="">
+                    <a>
+                      <span className="ml-2">Detalhes dos anúncios</span>
+                    </a>
+                  </Link>
+                </div>
+                <div className="flex">
+                  <Link href="">
+                    <a>
+                      <span className="ml-2">Fotos</span>
+                    </a>
+                  </Link>
+                </div>
+                <div className="flex">
+                  <Link href="">
+                    <a>
+                      <span className="ml-2">Condições e regras</span>
+                    </a>
+                  </Link>
+                </div>
+                <div className="flex">
+                  <Link href="">
+                    <a>
+                      <span className="ml-2">Preços</span>
+                    </a>
+                  </Link>
+                </div>
+                <div className="flex">
+                  <Link href="/">
+                    <a className=" mb-4 flex flex-row items-center">
+                      <TiLockClosed className="my-auto" />
+                      Informações contratuais
+                    </a>
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
-      </details>
-      <details>
-        <summary
+      </div>
+      <div className="mt-2 px-2">Caixa de entrada</div>
+      <div className="mt-2 px-2">
+        <div
+          className="flex flex-1 justify-between"
           onClick={() => {
             setSummary2(!summary2);
           }}
         >
-          <div className="flex items-center gap-4 align-middle">
-           
-            <p className="text-xl font-bold">Calendário</p>
+          <div>
+            <p className="">Uni-controlo</p>
           </div>
           <Image
             src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
@@ -64,57 +93,35 @@ export default function Menu() {
             width={32}
             alt=""
           />
-        </summary>
-
-        <div className="flex items-center justify-start align-middle">
-          <div className=" flex flex-col  gap-4 text-base ml-5">
-          
-    
-            <Link href="/15">&#9679; Detalhes dos anúncios</Link>
-            <Link href="/16">&#9679; Fotos</Link>
-            <Link href="/16">&#9679; Condições e regras</Link>
-            <Link href="/16">&#9679; Preços</Link>
-            <Link href="/">
-            <a className=" flex items-center  flex-row mb-4"><AiFillLock className="mr-1" />Informações contratuais</a></Link>
-          </div>
         </div>
-
-
-      
-      </details>
-      <details onClick={textRouteChange}>
-        <summary
-          onClick={() => {
-            setSummary3(!summary3);
-          }}
-        >
-          <div className="flex items-center gap-4 align-middle">
-          <p className="text-xl font-bold">Reviews</p>
+        {summary2 && (
+          <div className="flex items-center justify-start align-middle">
+            <>
+              <div className=" ml-5 flex flex-col gap-2 text-base">
+                <div>
+                  <Link href="/unidesk/unicontrolo/hospedes">Hóspedes</Link>
+                </div>
+                <div className="flex">
+                  <TiLockClosed className="my-auto" /> <span className="ml-2">Transações</span>
+                </div>
+                <div className="flex">
+                  <TiLockClosed className="my-auto" /> <span className="ml-2">Despesas</span>
+                </div>
+                <div className="flex">
+                  <TiLockClosed className="my-auto" />
+                  <span className="ml-2">Reparações</span>
+                </div>
+              </div>
+            </>
           </div>
-          <Image
-            src={summary3 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
-            height={32}
-            width={32}
-            alt=""
-          />
-        </summary>
+        )}
+      </div>
 
-        <div className="flex items-center justify-start align-middle">
-          <div className=" flex flex-col  gap-4 text-base ml-5">
-          <div className="ml-1 mt-4 font-bold text-base">Informações gerais</div>
-    
-            <Link href="/15">&#9679; Detalhes dos anúncios</Link>
-            <Link href="/16">&#9679; Fotos</Link>
-            <Link href="/16">&#9679; Condições e regras</Link>
-            <Link href="/16">&#9679; Preços</Link>
-            <Link href="/">
-            <a className=" flex items-center  flex-row mb-4"><AiFillLock className="mr-1" />Informações contratuais</a></Link>
-          </div>
-        </div>
-
-    
-        <div className="h-2"></div>
-      </details>
-    </article>
+      <div className="mt-2 px-2">
+        <div className="flex items-center justify-start align-middle">Notificações</div>
+      </div>
+    </div>
   );
-}
+};
+
+export default MenuSenhorio;

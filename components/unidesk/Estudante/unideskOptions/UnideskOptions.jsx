@@ -80,26 +80,33 @@ const UnideskOptions = () => {
       </div>
 
       {/* Inbox */}
-      <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
-        <div className="flex flex-col justify-center pt-12">
-          <Image src="/images/icon-pg14-3.svg" alt="" height="80" width="80"></Image>
-          <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Caixa de Entrada</h1>
-        </div>
-        <div className="mt-2 flex flex-col justify-start">
-          <p className="text-xl">Pedidos de reserva</p>
-          <p className="text-xl">Mensagens</p>
-        </div>
-      </div>
-
-      {/* Notifications */}
-      <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
-        <div>
-          <div className="flex flex-1 flex-col items-center pt-12 align-middle">
-            <Image src="/images/icon-pg14-4.svg" alt="" height="80" width="80"></Image>
-            <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Notificações</h1>
+      <Link href="/unidesk/inbox">
+        <a>
+          <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
+            <div className="flex flex-col justify-center pt-12">
+              <Image src="/images/icon-pg14-3.svg" alt="" height="80" width="80"></Image>
+              <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">
+                Caixa de Entrada
+              </h1>
+            </div>
+            <div className="mt-2 flex flex-col justify-start">
+              <p className="text-xl">Pedidos de reserva</p>
+              <p className="text-xl">Mensagens</p>
+            </div>
+          </div>
+        </a>
+      </Link>
+      <Link href="/unidesk/notifications">
+        {/* Notifications */}
+        <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
+          <div>
+            <div className="flex flex-1 flex-col items-center pt-12 align-middle">
+              <Image src="/images/icon-pg14-4.svg" alt="" height="80" width="80"></Image>
+              <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Notificações</h1>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </section>
   );
 };

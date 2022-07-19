@@ -3,8 +3,9 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import img1 from "../../../public/images/bed3.jpeg";
 import { BiInfoCircle } from "react-icons/bi";
-import { AiFillCaretDown, AiOutlineFire } from "react-icons/ai";
 import { Menu, Transition } from "@headlessui/react";
+import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
+import { BsThreeDots } from "react-icons/bs";
 // import { Fragment } from 'react'
 
 function EditInactiveIcon(props) {
@@ -19,64 +20,6 @@ function EditActiveIcon(props) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function DuplicateInactiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 4H12V12H4V4Z" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M8 8H16V16H8V8Z" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function DuplicateActiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 4H12V12H4V4Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M8 8H16V16H8V8Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function ArchiveInactiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="8" width="10" height="8" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-      <rect x="4" y="4" width="12" height="4" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M8 12H12" stroke="#A78BFA" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function ArchiveActiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="8" width="10" height="8" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-      <rect x="4" y="4" width="12" height="4" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M8 12H12" stroke="#A78BFA" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function MoveInactiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 4H16V10" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M16 4L8 12" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M8 6H4V16H14V12" stroke="#A78BFA" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function MoveActiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 4H16V10" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M16 4L8 12" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M8 6H4V16H14V12" stroke="#C4B5FD" strokeWidth="2" />
     </svg>
   );
 }
@@ -120,15 +63,11 @@ const AnuncioCard = () => {
               <div className="text-xl font-bold ">Quarto privado em Porto</div>
 
               <div>
-                <div className="fixed top-16 w-56 text-right">
+                <div className="top-16 w-56 text-right">
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
                       <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        Options
-                        <AiFillCaretDown
-                          className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
-                          aria-hidden="true"
-                        />
+                        <BsThreeDots />
                       </Menu.Button>
                     </div>
                     <Transition
@@ -199,51 +138,11 @@ const AnuncioCard = () => {
               <div className="text-xl font-bold text-primary-500">250€/mês</div>
               <div className="flex ">
                 <div className="relative mb-3 mt-1 text-center text-base">
-                  <div className="flex items-center justify-center gap-2 align-middle text-base">
+                  <div className="peer flex items-center justify-center gap-2 align-middle text-base">
                     Despesas incluídas
                     <BiInfoCircle />
                   </div>
-
-                  {/* PROBLEMA Z-INDEX */}
-                  {/* <div className="absolute bottom-6 left-1 z-30 bg-white">
-                                        <div className="mb-2 mt-3 flex rounded-lg p-4 shadow-2xl">
-                                            <div className="mx-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                                                <FaRegLightbulb className=" h-12 w-12 p-2" />
-                                                <div className="mt-2 text-sm ">
-                                                    Eletricidade
-                                                    <br />
-                                                    incluído
-                                                </div>
-                                            </div>
-
-                                            <div className="mr-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                                                <AiOutlineFire className="   h-12 w-12 p-2" />
-                                                <div className="mt-2 text-sm">
-                                                    Gás
-                                                    <br />
-                                                    incluído
-                                                </div>
-                                            </div>
-
-                                            <div className="mr-4 flex flex-col items-center justify-center px-4 align-middle text-secondary-500">
-                                                <AiOutlineWifi className=" h-12 w-12 p-2" />
-                                                <div className="mt-2 text-sm ">
-                                                    Internet
-                                                    <br />
-                                                    incluído
-                                                </div>
-                                            </div>
-
-                                            <div className="mr-2 flex flex-col items-center justify-center px-4  align-middle text-secondary-500">
-                                                <BsWater className=" h-12 w-12 p-2" />
-                                                <div className="mt-2 text-sm ">
-                                                    Água
-                                                    <br />
-                                                    incluído
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
+                  <RoomUtilitesPopover expenses={{}} />
                 </div>
               </div>
             </div>
