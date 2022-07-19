@@ -74,44 +74,6 @@ body {
   box-sizing: border-box;
 }
 
-/* COMPONENT X */
-
-.componentx {
-  width: 100%;
-  background-color: #f2e8de;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  padding: 42px 29px 20px 24px;
-}
-.componentx details {
-  margin-bottom: 1.125rem;
-  min-height: 20px;
-  transition: min-height 0.3s ease-in-out;
-  -webkit-transition: min-height 0.3s ease-in-out;
-  -moz-transition: min-height 0.3s ease-in-out;
-  -ms-transition: min-height 0.3s ease-in-out;
-  -o-transition: min-height 0.3s ease-in-out;
-}
-.componentx details summary {
-  padding: 1.125rem;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-}
-.componentx details summary > img {
-  width: 20px;
-}
-.componentx details summary p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 32px;
-  font-weight: 600;
-  color: #505046;
-}
 .summary-icon {
   width: 46px;
   height: 46px;

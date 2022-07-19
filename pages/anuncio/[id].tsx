@@ -31,8 +31,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <div>
-        {/* MODAL duplicar*/}
-        <ModalDetalhesPagamento />
+        <ModalDetalhesPagamento defaultOpen={false} />
         <div className="mx-auto md:container">
           <SingleRoomGrid />
           <div className="flex justify-between">
@@ -41,7 +40,6 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
               <DescricaoCondicoes />
               <RoomSlider />
               <RoomRating />
-              <RoomInformation />
               <RoomMap />
               <RoomSenhorio />
               <RoomSemelhantes />

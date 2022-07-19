@@ -1,8 +1,9 @@
 /* PAGINA 51 DO XD */
-import Breadcrumb from "../../../components/senhorioanuncios/breadcrumb/breadcrumb";
+
 import AnuncioCard from "../../../components/senhorioanuncios/card/AnuncioCard";
-import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorioAnuncio";
+import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
 import MiniCard from "../../../components/senhorioanuncios/minicards/MiniCards";
+import Breadcrumb from "../../../components/senhorioanuncios/breadcrumb/Breadcrumb";
 
 const Anuncios = () => {
   return (

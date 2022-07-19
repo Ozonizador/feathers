@@ -9,11 +9,15 @@ interface HospedesMenuProps {
 
 /* MENU HOSPEDES - PAGINA 60 XD */
 
-const HospedesMenu = ({ activeLink }) => {
+const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
   return (
-    <div className="rounded-2xl bg-terciary-600 py-8 px-6 w-96">
+    <div className="w-96 rounded-2xl bg-terciary-600 py-8 px-6">
       <Link href="">
-        <div className={classNames("flex rounded-2xl py-5 px-4", { "bg-primary-300": activeLink == "hospedes"})}>
+        <div
+          className={classNames("flex rounded-2xl py-5 px-4", {
+            "bg-primary-300": activeLink == "hospedes",
+          })}
+        >
           <Image src="/images/icons8_male_user_2.svg" height={46} width={46} alt="" />
           <span className="ml-2 self-center text-xl font-semibold">Hóspedes</span>
         </div>

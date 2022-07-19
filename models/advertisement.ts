@@ -1,7 +1,8 @@
+import { Review } from "./review";
 import { JSONValue } from "./utils";
 
-export const ADVERTISEMENT_TABLE_NAME = "advertisements";
-export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements";
+export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
+export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
 export default interface Advertisement {
     id?: string, 
@@ -29,7 +30,10 @@ export default interface Advertisement {
     hostLivesProperty: Boolean,
     host?:             string,
     createdAt?:        Date,     
-    updatedAt?:        Date    
+    updatedAt?:        Date,
+
+    // foreign keys
+    reviews?: Review[]
 }   
 
 

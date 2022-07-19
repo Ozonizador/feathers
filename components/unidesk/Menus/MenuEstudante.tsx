@@ -111,22 +111,6 @@ const MenuEstudante = () => {
             link
           </Link>
         </div>
-        {/*
-          PAULO
-        <ul>
-          <li>
-            <a href=""></a>
-          </li>
-          <li>
-            <a href=""></a>
-          </li>
-          <li>
-            <a href=""></a>
-          </li>
-          <li>
-            <a href=""></a>
-          </li>
-        </ul> */}
         <div className="h-2"></div>
       </details>
     </article>
