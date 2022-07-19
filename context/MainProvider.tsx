@@ -2,6 +2,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile } from "../models/profile";
+import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
 interface GeneralUnihostInformation {
@@ -70,5 +71,17 @@ export const useSetProfileInformation = () => {
   const currentInfo = useContext(UnihostsWebsiteContext);
   return (profile: Profile): void => {
     setCurrentInfo({ ...currentInfo, profile });
+  };
+};
+
+export const useSetProfileFavouritesInformation = () => {
+  const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
+  const currentInfo = useContext(UnihostsWebsiteContext);
+
+  return async (favouriteRooms: string[]): Promise<void> => {
+    const { data, error } = await updateFavouriteFromUser(currentInfo.profile.id, favouriteRooms);
+    if (!error) {
+      setCurrentInfo({ ...currentInfo, profile: data });
+    }
   };
 };

@@ -7,8 +7,14 @@ import NoPhotoAvailable from "../../../../public/images/imageNotAvailable.png";
 
 export const SingleRoomGrid = () => {
   const advertisement = useGetSingleAdvertisement();
+  debugger;
   return (
     <section className="my-8 w-full">
+      {(advertisement.photos === null || advertisement.photos.length === 0) && (
+        <div className="flex flex-1 justify-center">
+          <Image src={NoPhotoAvailable} alt="no photo available" />
+        </div>
+      )}
       {advertisement.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
           <div className="col-span-6 row-span-2 bg-black">
@@ -73,8 +79,6 @@ export const SingleRoomGrid = () => {
           </div>
         </div>
       )}
-      {!advertisement.photos ||
-        (!advertisement.photos.length && <Image src={NoPhotoAvailable} alt="no photo available" />)}
     </section>
   );
 };

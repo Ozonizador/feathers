@@ -6,6 +6,8 @@ import { BiInfoCircle } from "react-icons/bi";
 import { Menu, Transition } from "@headlessui/react";
 import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
 import { BsThreeDots } from "react-icons/bs";
+import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
+import { useRouter } from "next/router";
 // import { Fragment } from 'react'
 
 function EditInactiveIcon(props) {
@@ -44,29 +46,33 @@ function DeleteActiveIcon(props) {
   );
 }
 
-const AnuncioCard = () => {
+interface AnuncioCardProps {
+  advertisement: Advertisement;
+}
+
+const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
+  const router = useRouter();
   return (
     <section className="w-full ">
       <div className="w-full rounded-lg border-2 border-terciary-200 bg-white">
         <div className="flex">
-          <div className="mr-4 h-40 w-32 ">
+          <div className="mr-4 min-h-full w-1/3">
             <Image
               src={img1}
               alt="Foto Quarto"
-              height={245}
-              width={140}
+              layout="intrinsic"
               className="rounded-l-lg object-cover"
             />
           </div>
-          <div className="w-11/12">
+          <div className="w-2/3">
             <div className="mt-3 flex w-full  flex-row justify-between pr-4">
-              <div className="text-xl font-bold ">Quarto privado em Porto</div>
+              <div className="text-xl font-bold ">{advertisement.title}</div>
 
               <div>
                 <div className="top-16 w-56 text-right">
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
-                      <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                      <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                         <BsThreeDots />
                       </Menu.Button>
                     </div>
@@ -97,7 +103,6 @@ const AnuncioCard = () => {
                               </button>
                             )}
                           </Menu.Item>
-                          <Menu.Item></Menu.Item>
                         </div>
                         <div className="px-1 py-1"></div>
                         <div className="px-1 py-1">
@@ -132,17 +137,15 @@ const AnuncioCard = () => {
             </div>
             <div className="w-5/6">
               <div className="mt-4 mb-1 text-base text-secondary-300">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                {advertisement.description}
               </div>
-              <div className="text-xl font-bold text-primary-500">250€/mês</div>
+              <div className="text-xl font-bold text-primary-500">{`${advertisement.monthRent}€/mês`}</div>
               <div className="flex ">
                 <div className="relative mb-3 mt-1 text-center text-base">
                   <div className="peer flex items-center justify-center gap-2 align-middle text-base">
-                    Despesas incluídas
-                    <BiInfoCircle />
+                    {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]} <BiInfoCircle />
                   </div>
-                  <RoomUtilitesPopover expenses={{}} />
+                  <RoomUtilitesPopover expenses={advertisement.expenses} />
                 </div>
               </div>
             </div>

@@ -79,6 +79,7 @@ export const ADVERTISEMENT_PROPERTIES = {
     EXPENSES:"expenses",
     HOST_LIVES_PROPERTY: "hostLivesProperty",
     HOST: "host",
+    HOST_ID: "hostId",
     ID: "id"
 }  as const;
 
