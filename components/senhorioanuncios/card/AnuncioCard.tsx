@@ -52,6 +52,9 @@ interface AnuncioCardProps {
 
 const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const router = useRouter();
+
+  const editAdvertisement = (event, id: string) => {};
+
   return (
     <section className="w-full ">
       <div className="w-full rounded-lg border-2 border-terciary-200 bg-white">
@@ -90,6 +93,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                           <Menu.Item>
                             {({ active }) => (
                               <button
+                                onClick={(e) => editAdvertisement(e, advertisement.id)}
                                 className={`${
                                   active ? "bg-violet-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

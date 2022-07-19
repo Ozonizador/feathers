@@ -18,7 +18,7 @@ export default function RoomPagamento() {
 
           <div className="relative  mb-2 text-center text-base">
             <div className="peer flex items-center justify-center gap-2 align-middle">
-              Despesas incluídas
+              <RoomUtilitesPopover expenses={advertisement.expenses} />
               <BiInfoCircle />
             </div>
 
