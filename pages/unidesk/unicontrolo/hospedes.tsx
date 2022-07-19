@@ -9,7 +9,7 @@ const UniControloHospedes = () => {
       <div className="container mx-auto my-16 w-4/6 rounded-2xl  bg-terciary-300 py-20 ">
         <div className="flex gap-10 px-12">
           <div>
-            <HospedesMenu activeLink="" />
+            <HospedesMenu activeLink="hospedes" />
           </div>
 
           <div className="ml-10">
