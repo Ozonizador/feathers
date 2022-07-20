@@ -4,7 +4,7 @@ import Link from "next/link";
 import classNames from "classnames";
 
 interface HospedesMenuProps {
-  activeLink: string;
+  activeLink: "guests" | "transactions" | "expenses" | "repairs";
 }
 
 /* MENU HOSPEDES - PAGINA 60 XD */
@@ -12,32 +12,42 @@ interface HospedesMenuProps {
 const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
   return (
     <div className="w-80 rounded-2xl bg-terciary-600 py-8 px-6">
-      <Link href="">
+      <Link href="/unidesk/unicontrolo/guests">
         <div
           className={classNames("flex rounded-2xl py-5 px-4", {
-            "bg-primary-300": activeLink == "hospedes",
+            "bg-primary-300": activeLink == "guests",
           })}
         >
           <Image src="/images/icons8_male_user_2.svg" height={46} width={46} alt="" />
           <span className="ml-2 self-center text-xl font-semibold">Hóspedes</span>
         </div>
       </Link>
-      <Link href="">
-        <div className="flex rounded-2xl py-5 px-4">
+      <Link href="/unidesk/unicontrolo/transactions">
+        <div
+          className={classNames("flex rounded-2xl py-5 px-4", {
+            "bg-primary-300": activeLink == "transactions",
+          })}
+        >
           <Image src="/images/icons8_card_exchange_1.svg" height={46} width={46} alt="" />
           <span className="ml-2 self-center text-xl font-semibold">Transações</span>
         </div>
       </Link>
-      <Link href="">
-        <a>
-          <div className="flex rounded-2xl py-5 px-4">
-            <Image src="/images/icons8_paycheque.svg" height={46} width={46} alt="" />
-            <span className="ml-2 self-center text-xl font-semibold">Despesas</span>
-          </div>
-        </a>
+      <Link href="/unidesk/unicontrolo/expenses">
+        <div
+          className={classNames("flex rounded-2xl py-5 px-4", {
+            "bg-primary-300": activeLink == "expenses",
+          })}
+        >
+          <Image src="/images/icons8_paycheque.svg" height={46} width={46} alt="" />
+          <span className="ml-2 self-center text-xl font-semibold">Despesas</span>
+        </div>
       </Link>
-      <Link href="">
-        <div className="flex rounded-2xl py-5 px-4">
+      <Link href="/unidesk/unicontrolo/repairs">
+        <div
+          className={classNames("flex rounded-2xl py-5 px-4", {
+            "bg-primary-300": activeLink == "repairs",
+          })}
+        >
           <Image src="/images/icons8_maintenance_1.svg" height={46} width={46} alt="" />
           <span className="ml-2 self-center text-xl font-semibold">Reparações</span>
         </div>

@@ -6,10 +6,21 @@ import { TiLockClosed } from "react-icons/ti";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 
-const MenuSenhorio = () => {
+interface MenuSenhorioProps {
+  activeLink?: string;
+}
+
+const MenuSenhorio = ({ activeLink }: MenuSenhorioProps) => {
   const router = useRouter();
   const [summary2, setSummary2] = useState(true);
   const [summary3, setSummary3] = useState(true);
+
+  // set advertId if it finds it.
+  const [advertId, setAdvertId] = useState<String>("");
+
+  const checkIfInEditMode = () => {
+    //c check path
+  };
 
   return (
     <div className="rounded-2xl bg-terciary-600 p-2">
@@ -20,8 +31,7 @@ const MenuSenhorio = () => {
         <div className="flex flex-col justify-start px-2">
           <div
             className={classNames("ml-1 mt-4 text-base font-bold", {
-              "rounded bg-primary-500 p-2 text-white":
-                router.asPath.includes("senhorio/advertisements"),
+              "rounded bg-primary-500 p-2 text-white": activeLink === "advertisements",
             })}
           >
             Painel
@@ -48,7 +58,7 @@ const MenuSenhorio = () => {
                 <div className="flex">
                   <Link href="">
                     <a>
-                      <span className="ml-2">Detalhes dos anúncios</span>
+                      <span className="ml-2">Detalhes do anúncio</span>
                     </a>
                   </Link>
                 </div>
