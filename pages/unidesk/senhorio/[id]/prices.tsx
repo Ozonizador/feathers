@@ -3,7 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement from "../../../../models/advertisement";
-import { getSingleAdvertisement } from "../../../../services/advertisementService";
+import {
+  getSingleAdvertisement,
+  updateAdvertisement,
+} from "../../../../services/advertisementService";
 
 interface PricesProps {
   id: string;
@@ -14,7 +17,7 @@ const Prices = ({ id }) => {
 
   const getAdvertisementInfo = useCallback(async () => {
     const { data, error } = await getSingleAdvertisement(id);
-    console.log(data);
+    debugger;
     if (!error) {
       setAdvertisement(data);
     }
@@ -24,13 +27,30 @@ const Prices = ({ id }) => {
     getAdvertisementInfo();
   }, [getAdvertisementInfo]);
 
+  const saveChanges = async () => {
+    const { data, error } = await updateAdvertisement(advertisement, id);
+    if (!error) {
+    }
+  };
+
+  const changeAdvertisementProperty = (property, value) => {
+    setAdvertisement({ ...advertisement, [property]: value });
+  };
+
   return (
     <div className="flex">
       <div className="w-1/5">
-        <MenuSenhorio />
+        <MenuSenhorio id={id} />
       </div>
       <div className="w-4/5">
-        {advertisement && <PricesComponent advertisement={advertisement} onChange={() => {}} />}
+        {advertisement && (
+          <PricesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+        )}
+        <div>
+          <button className="bg-primary-500 p-2" onClick={saveChanges}>
+            Guardar alterações
+          </button>
+        </div>
       </div>
     </div>
   );

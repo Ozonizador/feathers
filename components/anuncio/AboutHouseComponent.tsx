@@ -1,6 +1,12 @@
 import { Accordion } from "flowbite-react";
+import Advertisement from "../../models/advertisement";
 
-const AboutHouseComponent = () => {
+interface AboutHouseComponentProps {
+  advertisement?: Advertisement;
+  onChange: (property, value) => void;
+}
+
+const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
   return (
     <>
       <Accordion>

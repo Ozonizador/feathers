@@ -9,7 +9,7 @@ interface HouseCapacityComponentProps {
   onChange: (flexLabel, flexType) => void;
 }
 
-const HouseCapacityComponent = ({ advertisement, onChange }) => {
+const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityComponentProps) => {
   return (
     <>
       <div className="my-8 flex items-center">
