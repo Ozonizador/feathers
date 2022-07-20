@@ -31,7 +31,7 @@ Praticamente tudo por fazer. Confirmar na pasta modais se tem alguma modal para 
 
 Arrumar Grid com fotos
 
-Problema com Z-Index "Despesas incluídas"
+Problema com Z-Index "Despesas incluídas" (OK)
 
 Como usar modal do https://flowbite-react.com/modal
 

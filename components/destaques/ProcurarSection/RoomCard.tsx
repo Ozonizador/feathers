@@ -10,7 +10,10 @@ import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
-import { useProfileInformation } from "../../../context/MainProvider";
+import {
+  useProfileInformation,
+  useSetProfileFavouritesInformation,
+} from "../../../context/MainProvider";
 import classNames from "classnames";
 
 interface RoomCardProps {
@@ -19,8 +22,19 @@ interface RoomCardProps {
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
   const profile = useProfileInformation();
-  const toggleFavourite = async () => {
+  const setFavouriteProfile = useSetProfileFavouritesInformation();
+
+  const toggleFavourite = async (e, advertId: string, isFavourite: boolean) => {
+    e.stopPropagation();
     const { favouriteRooms } = profile;
+
+    if (isFavourite) {
+      const newFavRooms = favouriteRooms.filter((favourite) => advertId !== favourite);
+      await setFavouriteProfile(newFavRooms);
+    } else {
+      favouriteRooms.push(advertId);
+      await setFavouriteProfile(favouriteRooms);
+    }
   };
 
   const isFavourite = useCallback(() => {
@@ -98,7 +112,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <div className="my-auto">
                       <button
                         className="rounded-md border-2 border-terciary-300 p-1 text-xs hover:border-primary-500"
-                        onClick={toggleFavourite}
+                        onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                       >
                         <CgHeart
                           className={classNames("inline", {

@@ -3,8 +3,11 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { TiLockClosed } from "react-icons/ti";
+import classNames from "classnames";
+import { useRouter } from "next/router";
 
 const MenuSenhorio = () => {
+  const router = useRouter();
   const [summary2, setSummary2] = useState(true);
   const [summary3, setSummary3] = useState(true);
 
@@ -15,7 +18,14 @@ const MenuSenhorio = () => {
           <h1 className="text-xl font-bold ">Anúncios</h1>
         </div>
         <div className="flex flex-col justify-start px-2">
-          <div className="ml-1 mt-4 text-base font-bold">Painel</div>
+          <div
+            className={classNames("ml-1 mt-4 text-base font-bold", {
+              "rounded bg-primary-500 p-2 text-white":
+                router.asPath.includes("senhorio/advertisements"),
+            })}
+          >
+            Painel
+          </div>
           <div className="flex flex-col gap-2">
             <div
               className="mt-2 flex flex-1 items-center justify-between px-2"
@@ -76,7 +86,9 @@ const MenuSenhorio = () => {
           </div>
         </div>
       </div>
-      <div className="mt-2 px-2">Caixa de entrada</div>
+      <div className="mt-2 px-2">
+        <Link href="/unidesk/notifications">Caixa de entrada</Link>
+      </div>
       <div className="mt-2 px-2">
         <div
           className="flex flex-1 items-center justify-between"

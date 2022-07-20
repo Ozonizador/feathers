@@ -79,6 +79,7 @@ export const ADVERTISEMENT_PROPERTIES = {
     EXPENSES:"expenses",
     HOST_LIVES_PROPERTY: "hostLivesProperty",
     HOST: "host",
+    HOST_ID: "hostId",
     ID: "id"
 }  as const;
 
@@ -121,6 +122,17 @@ export enum EXPENSES_TYPE {
     LIGHTS = "LIGHTS",
     WATER = "WATER",
     INTERNET = "INTERNET"
+}
+
+/* CLEANING */
+export const TYPE_CLEANING_LABELS = {
+    "Limpeza Trimestral" : "TRIMESTRAL",
+    "Limpeza Semestral": "SEMESTRAL"
+}
+
+export enum CLEANING_TYPE {
+    TRIMESTRAL = "TRIMESTRAL",
+    SEMESTRAL = "SEMESTRAL"
 }
 
 

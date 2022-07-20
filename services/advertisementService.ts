@@ -28,6 +28,11 @@ export const getAdvertismentsFromMultipleId = async (ids: string[]) => {
   return { data, error }
 }
 
+export const getAdvertismentsFromUserId = async (userId: string) => {
+  const { data, error } = await supabaseClient.from<Advertisement>(ADVERTISEMENT_TABLE_NAME).select().eq(ADVERTISEMENT_PROPERTIES.HOST, userId);
+  return { data, error }
+}
+
 /* IMAGE */
 
 export const saveImage = async (advertisementID: string, fileName: string, file: File) => {

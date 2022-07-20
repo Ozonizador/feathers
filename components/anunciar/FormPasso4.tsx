@@ -13,6 +13,7 @@ import {
   ADVERTISEMENT_PROPERTIES,
   HouseRules,
   HOUSE_RULES_NAMING,
+  TYPE_CLEANING_LABELS,
 } from "../../models/advertisement";
 import { updateAdvertisement } from "../../services/advertisementService";
 
@@ -201,10 +202,14 @@ const FormPasso4 = () => {
           <div className=" ml-6 flex w-3/4 flex-row items-center justify-between">
             <div>
               <div className="flex h-5 items-center">
-                <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 ">
-                  <option>Selecione</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
+                <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3">
+                  {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {
+                    return (
+                      <option key={index} value={TYPE_CLEANING_LABELS[type]}>
+                        {type}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

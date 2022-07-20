@@ -6,18 +6,14 @@ const UnideskOptions = () => {
   return (
     <section className="container mx-auto my-32 flex gap-7">
       {/* OPTION1 */}
-      <div className="flex flex-col rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
+      <div className="flex flex-col gap-1 rounded-2xl bg-white p-5 pb-10 drop-shadow-2xl lg:w-2/6">
         <div className="flex flex-1 flex-col items-center pt-12 align-middle">
-          <Image
-            //   className="object-scale-down"
-            src="/images/icon-pg14-1.svg"
-            alt=""
-            height="80"
-            width="80"
-          ></Image>
-          <h1 className="mt-4 text-center text-2xl font-bold text-primary-500">Minha estadia</h1>
+          <Image src="/images/icon-pg14-1.svg" alt="" height="80" width="80"></Image>
+          <h1 className="my-4 text-center text-2xl font-bold text-primary-500">Minha estadia</h1>
         </div>
-        <p className="mt-2 text-xl">Informações gerais</p>
+        <Link href="/unidesk/estudante/stay">
+          <a className="text-xl">Informações gerais</a>
+        </Link>
         <div className="flex flex-row">
           <Image
             className="object-scale-down"

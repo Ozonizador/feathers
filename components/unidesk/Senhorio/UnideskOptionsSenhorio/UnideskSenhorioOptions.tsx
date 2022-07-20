@@ -19,7 +19,9 @@ const UnideskOptions = () => {
         </div>
 
         <div className="flex flex-col justify-start">
-          <p className="mb-5 text-xl font-bold">Painel</p>
+          <Link href="unidesk/senhorio/advertisements">
+            <a className="mb-5 text-xl font-bold">Painel</a>
+          </Link>
           <MyDropdown />
         </div>
         <div className="flex flex-row">
@@ -32,8 +34,12 @@ const UnideskOptions = () => {
           ></Image>
           <p className="my-auto ml-2 py-2 text-xl">Informações contratuais</p>
         </div>
-        <p className="my-5 text-xl font-bold">Calendário</p>
-        <p className="text-xl font-bold">Reviews</p>
+        <Link href="unidesk/senhorio/calendar">
+          <a className="my-5 text-xl font-bold">Calendário</a>
+        </Link>
+        <Link href="unidesk/senhorio/reviews">
+          <a className="text-xl font-bold">Reviews</a>
+        </Link>
       </div>
 
       {/* OPTION2 */}
