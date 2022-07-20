@@ -23,17 +23,17 @@ export default function DescricaoCondicoes() {
 
         <div className="mb-2 mt-3 flex rounded-lg shadow-2xl">
           <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
-            <RiUserLine className=" h-12 w-12 rounded-full bg-terciary-300 p-2" />
+            <RiUserLine className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
             <div className="mt-3 text-base ">2 Hóspedes</div>
           </div>
 
           <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
-            <GiBroom className="  h-12 w-12 rounded-full bg-terciary-300 p-2" />
+            <GiBroom className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
             <div className="mt-3 text-base">Limpeza trimestral</div>
           </div>
 
           <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
-            <MdSmokeFree className=" h-12 w-12 rounded-full bg-terciary-300 p-2" />
+            <MdSmokeFree className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
             <div className="mt-3 text-base ">Proibido Fumar</div>
           </div>
         </div>

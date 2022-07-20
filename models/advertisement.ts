@@ -124,6 +124,17 @@ export enum EXPENSES_TYPE {
     INTERNET = "INTERNET"
 }
 
+/* CLEANING */
+export const TYPE_CLEANING_LABELS = {
+    "Limpeza Trimestral" : "TRIMESTRAL",
+    "Limpeza Semestral": "SEMESTRAL"
+}
+
+export enum CLEANING_TYPE {
+    TRIMESTRAL = "TRIMESTRAL",
+    SEMESTRAL = "SEMESTRAL"
+}
+
 
 /* Some namings */ 
 export const EXPENSES_TO_TEXT = {

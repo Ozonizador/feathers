@@ -21,7 +21,10 @@ const FormPasso1 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await updateAdvertisement({ tenantNumber: advertisement.tenantNumber}, advertisement.id);
+    const { data, error } = await updateAdvertisement(
+      { tenantNumber: advertisement.tenantNumber },
+      advertisement.id
+    );
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -31,7 +34,7 @@ const FormPasso1 = () => {
   };
 
   return (
-    <section className="my-20 w-full  px-40 xl:w-1/2 ">
+    <section className="my-20 w-full px-40 xl:w-1/2 ">
       <div className="my-8 flex items-center">
         <div className="flex items-center">
           <MdPeopleOutline className="text-2xl" />
