@@ -1,3 +1,11 @@
-const Reviews = () => {};
+import BreadCrumbs from "../../../components/unidesk/Senhorio/Reviews/Breadcrumb/Breadcrumbs";
 
-export default Reviews;
+const reviews = () => {
+  return (
+    <>
+      <BreadCrumbs />
+    </>
+  );
+};
+
+export default reviews;
