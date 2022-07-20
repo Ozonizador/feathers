@@ -53,7 +53,10 @@ interface AnuncioCardProps {
 const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const router = useRouter();
 
-  const editAdvertisement = (event, id: string) => {};
+  const editAdvertisement = (event, id: string) => {
+    event.preventDefault();
+    router.push(`/unidesk/senhorio/${id}/details`);
+  };
 
   return (
     <section className="w-full ">

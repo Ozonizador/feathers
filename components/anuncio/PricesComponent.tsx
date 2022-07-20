@@ -8,9 +8,10 @@ import Input from "../utils/Input";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
+  onChange: (property, value) => void;
 }
 
-const PricesComponent = ({ advertisement }: PricesComponentProps) => {
+const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   const checkTypeExpenses = (typeExpense: INCLUSIVE_EXPENSES) => {
     const { expenses } = advertisement;
     return expenses.inclusive === typeExpense;
@@ -20,6 +21,46 @@ const PricesComponent = ({ advertisement }: PricesComponentProps) => {
   const isPartiallyIncluded = () => {
     const { expenses } = advertisement;
     return expenses?.inclusive === INCLUSIVE_EXPENSES.PARTIALLY;
+  };
+
+  // for the primary value.
+  const defineExpensesTopLevel = (e) => {
+    const { expenses } = advertisement;
+    const newExpense = { ...expenses, inclusive: e.target.value };
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newExpense);
+  };
+
+  // for the expenses.
+  const defineTypeExpenses = (e) => {
+    const { expenses } = advertisement;
+
+    const typeLabel = e.target.name as EXPENSES_TYPE;
+    const typeValue = e.target.value === "true";
+
+    let excludedExpenses = expenses.servicesExcluded || [];
+    let includedExpenses = expenses.servicesIncluded || [];
+
+    if (typeValue) {
+      const index = includedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
+      if (index == -1) {
+        includedExpenses.push(typeLabel);
+      }
+      excludedExpenses = excludedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
+    } else {
+      const index = excludedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
+      if (index == -1) {
+        excludedExpenses.push(typeLabel);
+      }
+      includedExpenses = includedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
+    }
+
+    const newTypeExpense = {
+      ...expenses,
+      servicesExcluded: excludedExpenses,
+      servicesIncluded: includedExpenses,
+    };
+
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newTypeExpense);
   };
 
   return (
@@ -34,9 +75,7 @@ const PricesComponent = ({ advertisement }: PricesComponentProps) => {
                 labelText=""
                 customCss="euro"
                 value={String(advertisement.monthRent)}
-                onChange={(e) =>
-                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)
-                }
+                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)}
               />
             </div>
             <div className="ml-2 text-base font-bold">/mês</div>
@@ -52,9 +91,7 @@ const PricesComponent = ({ advertisement }: PricesComponentProps) => {
                 labelText=""
                 customCss="euro"
                 value={String(advertisement.extraPerHost)}
-                onChange={(e) =>
-                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)
-                }
+                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)}
               />
             </div>
             <div className="ml-2 text-base font-bold">/mês</div>
@@ -70,9 +107,7 @@ const PricesComponent = ({ advertisement }: PricesComponentProps) => {
                 labelText=""
                 customCss="euro"
                 value={String(advertisement.guaranteeValue)}
-                onChange={(e) =>
-                  setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)
-                }
+                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)}
               />
             </div>
           </div>
