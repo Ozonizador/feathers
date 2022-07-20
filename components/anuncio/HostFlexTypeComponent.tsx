@@ -1,18 +1,19 @@
-import { FLEX_HOST_TYPE, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import Advertisement, {
+  FLEX_HOST_TYPE,
+  ADVERTISEMENT_PROPERTIES,
+} from "../../models/advertisement";
 import Image from "next/image";
-import { Advertisement } from "@prisma/client";
 
-interface HostFlexTypeProps {
+interface HostFlexTypeComponentProps {
   advertisement: Advertisement;
   onChange: (flexLabel, flexType) => void;
 }
 
 /* PARA UTILIZAR NOS EDITS */
 
-const HostFlexType = ({ advertisement, onChange }: HostFlexTypeProps) => {
+const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
   return (
     <>
-      {" "}
       <div className="my-6 flex flex-row items-baseline">
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
@@ -125,4 +126,4 @@ const HostFlexType = ({ advertisement, onChange }: HostFlexTypeProps) => {
   );
 };
 
-export default HostFlexType;
+export default HostFlexTypeComponent;
