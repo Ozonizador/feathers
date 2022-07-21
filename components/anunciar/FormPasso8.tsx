@@ -11,6 +11,7 @@ const FormPasso8 = () => {
 
   const nextSteps = async (e) => {
     e.preventDefault();
+    // setAdvertisementProperty("aboutHouse", "testing");
     const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
       router.push("/");
