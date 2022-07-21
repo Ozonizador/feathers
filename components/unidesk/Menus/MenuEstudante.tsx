@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { TiLockClosed } from "react-icons/ti";
 
 const MenuEstudante = () => {
@@ -8,13 +7,15 @@ const MenuEstudante = () => {
     <div>
       <div className="w-64">
         <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
-          <h1 className="text-xl font-bold ">Minha estadia</h1>
+          <Link href="/unidesk/estudante/stay">
+            <h1 className="text-xl font-bold ">Minha estadia</h1>
+          </Link>
         </div>
         <div className="flex flex-col justify-start px-2">
           <div className="flex flex-col gap-2">
             <>
               <div className="flex">
-                <Link href="">
+                <Link href="/unidesk/estudante/stay">
                   <a>
                     <span className="ml-2">Informações gerais</span>
                   </a>
