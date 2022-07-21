@@ -3,7 +3,8 @@ import Image from "next/image";
 const AnuncioDisponivel = () => {
   return (
     <>
-      <div className="flex flex-col">
+      <div className="my-20 flex flex-col">
+        <div className="mb-6 text-xl text-gray-600 ">Estado do anúncio</div>
         <div className="my-6 flex flex-row items-baseline">
           <div>
             <div className="my-5 flex flex-row items-center align-middle">

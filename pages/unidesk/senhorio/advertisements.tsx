@@ -10,7 +10,7 @@ import { useProfileInformation } from "../../../context/MainProvider";
 import { getAdvertismentsFromUserId } from "../../../services/advertisementService";
 
 const Anuncios = () => {
-  // const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
+  const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
   const profile = useProfileInformation();
 

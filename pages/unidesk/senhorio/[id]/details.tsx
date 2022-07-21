@@ -7,6 +7,7 @@ import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeCo
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement from "../../../../models/advertisement";
+import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 import {
   getSingleAdvertisement,
   updateAdvertisement,
@@ -59,6 +60,19 @@ const Details = ({ id }: DetailsProps) => {
                 onChange={changeAdvertisementProperty}
               />
             </div>
+
+            <div>
+              <h5 className="font-bold">{advertisement.title}</h5>
+              <AdvertisementInfoComponent
+                advertisement={advertisement}
+                onChange={changeAdvertisementProperty}
+              />
+              <AnuncioDisponivel
+                advertisement={advertisement}
+                onChange={changeAdvertisementProperty}
+              />
+            </div>
+
             <div>
               <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
               <AboutHouseComponent
