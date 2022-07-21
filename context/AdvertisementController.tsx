@@ -27,7 +27,7 @@ const defaultAdvertisement = {
   postalCode: "",
   title: "",
   description: "",
-  aboutHouse: {},
+  aboutHouse: { livingRoom: [], exterior: [], bedRoom: [], kitchen: [] },
   rooms: 1,
   beds: 1,
   tenantNumber: 1,

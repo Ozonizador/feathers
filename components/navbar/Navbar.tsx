@@ -211,7 +211,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/notifications">
+                                  <MyLink customClass="py-1" href="/unidesk/notifications">
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>
@@ -222,7 +222,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/notifications">
+                                  <MyLink customClass="py-1" href="/unidesk/help">
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
@@ -244,7 +244,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/mailbox">
+                                  <MyLink customClass="py-1" href="/unidesk/inbox">
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>
@@ -257,12 +257,12 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/notifications">
+                                  <MyLink customClass="py-1" href="/unidesk/unicontrolo/guests">
                                     Uni-controlo
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/notifications">
+                                  <MyLink customClass="py-1" href="/unidesk/notifications">
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>

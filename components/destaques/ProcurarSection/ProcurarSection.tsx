@@ -7,7 +7,7 @@ import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 
 export default function ProcurarSection() {
-  const [isloading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
   const getAdvertisements = async () => {
@@ -69,12 +69,12 @@ export default function ProcurarSection() {
             </div>
           </div>
 
-          {isloading && (
+          {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">
               <Spinner color="info" aria-label="loading" size="lg" />
             </div>
           )}
-          {!isloading && (
+          {!isLoading && (
             <>
               <div>
                 {advertisements &&

@@ -1,18 +1,61 @@
 import { Accordion } from "flowbite-react";
-import Advertisement from "../../models/advertisement";
+import Advertisement, {
+  AboutHouseSpace,
+  ADVERTISEMENT_PROPERTIES,
+  Amenity,
+  TypeAmenity,
+} from "../../models/advertisement";
 
 interface AboutHouseComponentProps {
   advertisement?: Advertisement;
   onChange: (property, value) => void;
 }
 
-
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
+  const changeAdvertityProperty = (event, space: AboutHouseSpace) => {
+    const property = event.target.name;
+    const value = event.target.value;
 
-  const changeAdvertityProperty = () => {
-    onChange()
-  }
+    const { aboutHouse } = advertisement;
+    let amenities = aboutHouse[space];
 
+    if (!amenities) {
+      amenities = [];
+    }
+    let foundAmenity = false;
+    for (let amenity of amenities) {
+      if (amenity.type == property) {
+        amenity.available = value === "true";
+        foundAmenity = true;
+      }
+    }
+
+    if (!foundAmenity) {
+      amenities.push({ type: property, available: value === "true" });
+    }
+
+    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...aboutHouse, [space]: amenities });
+  };
+
+  const checkIfAboutHousePropertyChecked = (
+    space: AboutHouseSpace,
+    toCheckAmenity: TypeAmenity,
+    expectedValue: boolean
+  ) => {
+    const { aboutHouse } = advertisement;
+    const amenities = aboutHouse[space];
+
+    if (!amenities) {
+      return false;
+    }
+    for (let amenity of amenities) {
+      if (amenity.type == toCheckAmenity) {
+        return amenity.available === expectedValue;
+      }
+    }
+
+    return false;
+  };
   return (
     <>
       <Accordion>
@@ -31,8 +74,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={true}
-                      onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.DESCRIPTION, e.target.value)}
+                      value="true"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.SOFA,
+                        true
+                      )}
+                      name={TypeAmenity.SOFA}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -46,7 +95,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={false}
+                      value="false"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.SOFA,
+                        false
+                      )}
+                      name={TypeAmenity.SOFA}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -65,7 +121,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                                            value={true}
+                      value="true"
+                      checked={checkIfAboutHousePropertyChecked("livingRoom", TypeAmenity.TV, true)}
+                      name={TypeAmenity.TV}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -79,7 +138,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={false}
+                      value="false"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.TV,
+                        false
+                      )}
+                      name={TypeAmenity.TV}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -98,6 +164,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value="true"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.FIREPLACE,
+                        true
+                      )}
+                      name={TypeAmenity.FIREPLACE}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -111,7 +185,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={false}
+                      value="false"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.FIREPLACE,
+                        false
+                      )}
+                      name={TypeAmenity.FIREPLACE}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -130,7 +211,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                                            value={true}
+                      value="true"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.TABLE,
+                        true
+                      )}
+                      name={TypeAmenity.TABLE}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -144,7 +232,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={false}
+                      value="false"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.TABLE,
+                        false
+                      )}
+                      name={TypeAmenity.TABLE}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -163,7 +258,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                                            value={true}
+                      value="true"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.CHAIRS,
+                        true
+                      )}
+                      name={TypeAmenity.CHAIRS}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
@@ -177,7 +279,14 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      value={false}
+                      value="false"
+                      checked={checkIfAboutHousePropertyChecked(
+                        "livingRoom",
+                        TypeAmenity.CHAIRS,
+                        false
+                      )}
+                      name={TypeAmenity.CHAIRS}
+                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
                     />
                   </div>
                 </div>
