@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Input from "../utils/Input";
 import { Avatar } from "flowbite-react";
 import { Toast } from "flowbite-react";
 import { Profile } from "../../models/profile";
 import { useUser } from "@supabase/auth-helpers-react";
-import { getUserProfile } from "../../services/profileService";
+import { getUserProfile, updateUserProfile } from "../../services/profileService";
 /*
     pagina 32 do XD
 */
@@ -15,18 +15,24 @@ const MainMenu = () => {
 
   const { user } = useUser();
 
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
     if (user) {
       const { data, error } = await getUserProfile(user.id);
       if (!error && data) {
         setProfile(data);
       }
     }
+  }, [user]);
+
+  const saveUserProfile = async () => {
+    const { data, error } = await updateUserProfile(user.id, profile);
+    if (!error) {
+    }
   };
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   return (
     <div className=" mx-auto mb-20 w-10/12 ">

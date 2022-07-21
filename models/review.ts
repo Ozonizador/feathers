@@ -2,7 +2,6 @@ export const REVIEWS_TABLE_NAME = "reviews" as const;
 
 export interface Review {
     id: string;
-    userId: string;
     advertisementId: string;
     tenantId: string;
     overallRating: number;

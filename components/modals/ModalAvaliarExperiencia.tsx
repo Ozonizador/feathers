@@ -3,6 +3,10 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Rating } from "flowbite-react";
+import { Review } from "../../models/review";
+import { addReview } from "../../services/reviewService";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useProfileInformation } from "../../context/MainProvider";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -13,9 +17,24 @@ interface ModalAvaliarExperienciaProps {
   defaultOpen: boolean;
 }
 
+const startingReview = {
+  advertisementId: "",
+  tenantId: "",
+  overallRating: 0,
+  locationRating: 0,
+  valueQualityRating: 0,
+  landLordRating: 0,
+  comoditiesRating: 0,
+  publicReview: "",
+  privateReview: "",
+} as Review;
+
 const ModalAvaliarExperiencia = ({ defaultOpen }: ModalAvaliarExperienciaProps) => {
+  const profile = useProfileInformation();
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  const [review, setReview] = useState<Review>(startingReview);
 
   function closeModal() {
     setIsOpen(false);
@@ -23,6 +42,13 @@ const ModalAvaliarExperiencia = ({ defaultOpen }: ModalAvaliarExperienciaProps) 
 
   const nextStep = () => {
     setStep((oldStep) => oldStep + 1);
+  };
+
+  const saveReview = async () => {
+    const { data, error } = await addReview(review, profile.id);
+    if (!error) {
+      nextStep();
+    }
   };
 
   return (
@@ -43,7 +69,7 @@ const ModalAvaliarExperiencia = ({ defaultOpen }: ModalAvaliarExperienciaProps) 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-14 text-center">
             {step === 1 && <ModalAvaliarExperienciaPrimeiroPasso nextStep={nextStep} />}
-            {step === 2 && <ModalAvaliarExperienciaSegundoPasso nextStep={nextStep} />}
+            {step === 2 && <ModalAvaliarExperienciaSegundoPasso nextStep={saveReview} />}
             {step === 3 && <ModalAvaliarExperienciaTerceiroPasso nextStep={nextStep} />}
           </div>
         </div>
