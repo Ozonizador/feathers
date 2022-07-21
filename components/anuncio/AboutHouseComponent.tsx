@@ -6,7 +6,13 @@ interface AboutHouseComponentProps {
   onChange: (property, value) => void;
 }
 
+
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
+
+  const changeAdvertityProperty = () => {
+    onChange()
+  }
+
   return (
     <>
       <Accordion>
@@ -15,7 +21,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           <Accordion.Content>
             <div className="mt-10 flex items-center">
               <div className="flex">
-                <p className="w-40 text-base font-bold">Sofá</p>{" "}
+                <p className="w-40 text-base font-bold">Sofá</p>
               </div>
               <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
                 <div className="mr-16 text-base">Sim</div>
@@ -25,6 +31,8 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={true}
+                      onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.DESCRIPTION, e.target.value)}
                     />
                   </div>
                 </div>
@@ -38,6 +46,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={false}
                     />
                   </div>
                 </div>
@@ -56,6 +65,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                                            value={true}
                     />
                   </div>
                 </div>
@@ -69,6 +79,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={false}
                     />
                   </div>
                 </div>
@@ -100,6 +111,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={false}
                     />
                   </div>
                 </div>
@@ -118,6 +130,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                                            value={true}
                     />
                   </div>
                 </div>
@@ -131,6 +144,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={false}
                     />
                   </div>
                 </div>
@@ -149,6 +163,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                                            value={true}
                     />
                   </div>
                 </div>
@@ -162,6 +177,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <input
                       type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
+                      value={false}
                     />
                   </div>
                 </div>

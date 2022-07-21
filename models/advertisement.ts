@@ -142,3 +142,23 @@ export const EXPENSES_TO_TEXT = {
     "PARTIALLY": "Despesas partialmente incluídas",
     "EXCLUDED": "Despesas excluídas"
 }
+
+/* About house */
+
+export interface AboutHouseSections {
+    LIVINGROOM: "LIVINGROOM",
+    BEDROOM: "BEDROOM",
+    KITCHEN: "KITCHEN"
+    EXTERIOR: "EXTERIOR"
+}
+
+export enum LIVING_ROOM_AMENITIES {
+    SOFA = "SOFA",
+    TV = "TV",
+    FIREPLACE = "FIREPLACE",
+    TABLE = "TABLE",
+    CHAIRS = "CHAIRS"
+}
+export enum BEDROOM_AMENITIES {}
+export enum KITCHEN_AMENITIES {}
+export enum EXTERIOR_AMENITIES {}
