@@ -7,7 +7,6 @@ import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();
-  const setAdvertisementProperty = useSetAdvertisementProperty();
   const router = useRouter();
 
   const nextSteps = async (e) => {
