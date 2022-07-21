@@ -11,3 +11,9 @@ export interface Notification {
     createdAt: Date,
     updatedAt: Date,
 }
+
+/* VALUES FOR DB */
+export const NOTIFICATION_PROPERTIES = { 
+    PROFILE_ID: "profileId",
+    ID: "id"
+}  as const;

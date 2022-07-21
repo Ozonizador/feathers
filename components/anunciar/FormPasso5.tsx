@@ -1,5 +1,7 @@
-import { Accordion } from "flowbite-react";
-import { useAdvertisement } from "../../context/AdvertisementController";
+import {
+  useAdvertisement,
+  useSetAdvertisementProperty,
+} from "../../context/AdvertisementController";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { updateAdvertisement } from "../../services/advertisementService";
 import AboutHouseComponent from "../anuncio/AboutHouseComponent";
@@ -11,6 +13,7 @@ const FormPasso5 = () => {
   const setCurrentStep = useSetCurrentStep();
 
   const advertisement = useAdvertisement();
+  const setAdvertisementProperty = useSetAdvertisementProperty();
 
   const nextStep = async (e) => {
     e.preventDefault();
@@ -20,11 +23,15 @@ const FormPasso5 = () => {
     setCurrentStep(nextStep);
   };
 
+  const changeAdvertisementProperty = (label, value) => {
+    setAdvertisementProperty(label, value);
+  };
+
   return (
     <section className="container mx-auto my-20 w-5/6">
       <div className="w-full">
         <div className="mb-28 text-2xl font-bold text-gray-700">Sobre a sua casa</div>
-        <AboutHouseComponent />
+        <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
       </div>
       <button
         type="button"

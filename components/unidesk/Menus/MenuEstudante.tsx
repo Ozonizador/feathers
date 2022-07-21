@@ -57,13 +57,13 @@ const MenuEstudante = () => {
         </div>
       </div>
       <div className="my-4 flex flex-col  gap-4 text-xl">
-        <Link href="unidesk/favourites">Favoritos</Link>
+        <Link href="/unidesk/estudante/favourites">Favoritos</Link>
       </div>
       <div className="my-4 flex flex-col  gap-4 text-xl">
-        <Link href="unidesk/inbox">Caixa de Entrada</Link>
+        <Link href="/unidesk/inbox">Caixa de Entrada</Link>
       </div>
       <div className="my-4 flex flex-col  gap-4 text-xl">
-        <Link href="unidesk/notifications">Notificações</Link>
+        <Link href="/unidesk/notifications">Notificações</Link>
       </div>
       <div className="h-2"></div>
     </div>

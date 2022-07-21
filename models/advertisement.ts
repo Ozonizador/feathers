@@ -22,7 +22,7 @@ export default interface Advertisement {
     typeHost:          "PROFISSIONAL" | "PARTICULAR",
     photos?:           string[],
     houseRules:        HouseRules,
-    aboutHouse:        JSONValue,
+    aboutHouse:        AboutHouseSections,
     monthRent:         number,
     extraPerHost:      number,
     guaranteeValue:    number,
@@ -146,19 +146,23 @@ export const EXPENSES_TO_TEXT = {
 /* About house */
 
 export interface AboutHouseSections {
-    LIVINGROOM: "LIVINGROOM",
-    BEDROOM: "BEDROOM",
-    KITCHEN: "KITCHEN"
-    EXTERIOR: "EXTERIOR"
+    livingRoom: Amenity[],
+    bedRoom: Amenity[],
+    kitchen: Amenity[],
+    exterior: Amenity[],
 }
 
-export enum LIVING_ROOM_AMENITIES {
+export interface Amenity {
+    available: boolean;
+    type: TypeAmenity
+}
+
+export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" |  "exterior"
+
+export enum TypeAmenity {
     SOFA = "SOFA",
     TV = "TV",
     FIREPLACE = "FIREPLACE",
     TABLE = "TABLE",
     CHAIRS = "CHAIRS"
 }
-export enum BEDROOM_AMENITIES {}
-export enum KITCHEN_AMENITIES {}
-export enum EXTERIOR_AMENITIES {}
