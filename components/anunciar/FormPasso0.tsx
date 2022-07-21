@@ -45,7 +45,7 @@ const FormPasso0 = () => {
 
   return (
     <>
-      <section className="my-20 mx-auto grid grid-cols-2 justify-items-center gap-4">
+      <section className="my-20 mx-auto  flex w-3/4 justify-center ">
         <GeneralAdvertComponent advertisement={advertisement} onChange={onChangeProperty} />
       </section>
       <div className="mt-1">
