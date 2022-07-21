@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }) {
             <title>Unihosts</title>
           </Head>
           <Navbar />
-          <Component {...pageProps} />
+          <div className="min-h-screen">
+            <Component {...pageProps} />
+          </div>
           <Footer />
         </MainProvider>
       </UserProvider>

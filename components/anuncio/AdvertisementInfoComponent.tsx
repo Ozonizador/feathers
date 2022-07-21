@@ -18,6 +18,15 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
         />
 
+        <label className="mb-4 block text-2xl font-bold text-gray-700">None Interno</label>
+        <input
+          className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
+          placeholder="Máximo de 50 palavras"
+          maxLength={50}
+          defaultValue={advertisement.title}
+          onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
+        />
+
         <div className="mt-12">
           <label htmlFor="about" className="text-2xl font-bold text-gray-700">
             Descreva o seu espaço de forma simples e concisa.
@@ -37,7 +46,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
         {/* missing here */}
         <div className="mt-24 flex items-center">
           <div className="flex">
-            <p className="w-40 text-base font-bold">Vive na propriedade?</p>{" "}
+            <p className="w-44 text-base font-bold">Vive na propriedade?</p>{" "}
           </div>
           <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
             <div className="mr-16 text-base">Sim</div>
@@ -86,7 +95,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
 
         <div className="my-8 flex items-center">
           <div className="flex">
-            <p className="w-40 text-base font-bold">Tipo de senhorio</p>{" "}
+            <p className="w-44 text-base font-bold">Tipo de senhorio</p>{" "}
           </div>
 
           <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">

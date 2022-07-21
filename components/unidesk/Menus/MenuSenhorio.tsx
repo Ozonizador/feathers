@@ -14,7 +14,7 @@ const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
   const [summary2, setSummary2] = useState(true);
 
   return (
-    <div className="rounded-2xl bg-terciary-600 p-2">
+    <div className="w-80  rounded-2xl bg-terciary-600 p-2">
       <div className="w-64">
         <div className="flex justify-start border border-b-primary-500 px-2 align-middle">
           <h1 className="text-xl font-bold ">Anúncios</h1>
