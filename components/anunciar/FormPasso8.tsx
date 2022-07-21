@@ -7,12 +7,10 @@ import { updateAdvertisement } from "../../services/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();
-  const setAdvertisementProperty = useSetAdvertisementProperty();
   const router = useRouter();
 
   const nextSteps = async (e) => {
     e.preventDefault();
-    setAdvertisementProperty("aboutHouse", "testing");
     const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
       router.push("/");
