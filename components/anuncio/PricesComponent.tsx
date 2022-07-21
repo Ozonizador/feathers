@@ -63,6 +63,14 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newTypeExpense);
   };
 
+  const checkPartiallyExpense = (label: EXPENSES_TYPE, included: boolean) => {
+    const { expenses } = advertisement;
+    if (included) {
+      return expenses.servicesIncluded && expenses.servicesIncluded.includes(label);
+    }
+    return expenses.servicesExcluded && expenses.servicesExcluded.includes(label);
+  };
+
   return (
     <>
       <div className="flex flex-col">
@@ -156,6 +164,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       name={EXPENSES_TYPE.GAS}
                       value="true"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.GAS, true)}
                     />
                   </div>
                 </div>
@@ -171,6 +180,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       name={EXPENSES_TYPE.GAS}
                       value="false"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.GAS, false)}
                     />
                   </div>
                 </div>
@@ -192,6 +202,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       name={EXPENSES_TYPE.INTERNET}
                       value="true"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.INTERNET, true)}
                     />
                   </div>
                 </div>
@@ -207,6 +218,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       name={EXPENSES_TYPE.INTERNET}
                       value="false"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.INTERNET, false)}
                     />
                   </div>
                 </div>
@@ -228,6 +240,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       name={EXPENSES_TYPE.WATER}
                       value="true"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.WATER, true)}
                     />
                   </div>
                 </div>
@@ -243,6 +256,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       className="h-4 w-4 rounded border border-terciary-500"
                       value="false"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.WATER, false)}
                     />
                   </div>
                 </div>
@@ -264,6 +278,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       className="h-4 w-4 rounded border border-terciary-500"
                       value="true"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.LIGHTS, true)}
                     />
                   </div>
                 </div>
@@ -279,6 +294,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                       className="h-4 w-4 rounded border border-terciary-500"
                       value="false"
                       onChange={(e) => defineTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSES_TYPE.LIGHTS, false)}
                     />
                   </div>
                 </div>

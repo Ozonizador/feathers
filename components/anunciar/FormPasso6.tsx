@@ -31,6 +31,7 @@ const FormPasso6 = () => {
   const changeTypeProperty = (label, value) => {
     setAdvertisementProperty(label, value);
   };
+
   return (
     <section className="container mx-auto my-20 w-5/6">
       <div className="mb-28 text-2xl font-bold text-gray-700">Vamos a valores!</div>

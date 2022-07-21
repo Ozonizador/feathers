@@ -10,6 +10,7 @@ import {
 } from "../../context/AdvertisementController";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { updateAdvertisement } from "../../services/advertisementService";
+import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 
 const FormPasso1 = () => {
   const currentStep = useCurrentStep();
@@ -35,69 +36,10 @@ const FormPasso1 = () => {
 
   return (
     <section className="my-20 w-full px-40 xl:w-1/2 ">
-      <div className="my-8 flex items-center">
-        <div className="flex items-center">
-          <MdPeopleOutline className="text-2xl" />
-        </div>
-        <div className="w-3/5">
-          <h2 className="ml-2 align-middle text-base  font-bold">Capacidade</h2>
-        </div>
-        <div>
-          <QuantityInput
-            initValue={advertisement.tenantNumber}
-            onChange={changeAdvertisementProperty}
-            property={ADVERTISEMENT_PROPERTIES.NUMBER_TENANT}
-          />
-        </div>
-      </div>
-
-      <div className="my-8 flex">
-        <div className="flex items-center">
-          <BiBed className="text-2xl" />
-        </div>
-        <div className="w-3/5">
-          <h2 className="ml-2 align-middle text-base font-bold">Camas</h2>
-        </div>
-        <div>
-          <QuantityInput
-            property={ADVERTISEMENT_PROPERTIES.BEDS}
-            initValue={advertisement.beds}
-            onChange={changeAdvertisementProperty}
-          />
-        </div>
-      </div>
-
-      <div className="my-8 flex">
-        <div className="flex items-center">
-          <GiPersonInBed className="text-2xl" />
-        </div>
-        <div className="w-3/5">
-          <h2 className="ml-2 align-middle text-base font-bold">Quartos</h2>
-        </div>
-        <div>
-          <QuantityInput
-            property={ADVERTISEMENT_PROPERTIES.ROOMS}
-            initValue={advertisement.rooms}
-            onChange={changeAdvertisementProperty}
-          />
-        </div>
-      </div>
-
-      <div className="my-8 flex">
-        <div className="flex items-center">
-          <MdOutlineBathtub className="text-2xl" />
-        </div>
-        <div className="w-3/5">
-          <h2 className="ml-2 align-middle text-base  font-bold">Casas de Banho</h2>
-        </div>
-        <div>
-          <QuantityInput
-            property={ADVERTISEMENT_PROPERTIES.BATHROOMS}
-            initValue={advertisement.bathrooms}
-            onChange={changeAdvertisementProperty}
-          />
-        </div>
-      </div>
+      <HouseCapacityComponent
+        advertisement={advertisement}
+        onChange={changeAdvertisementProperty}
+      />
 
       <button
         type="button"

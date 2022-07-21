@@ -1,9 +1,13 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
+import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement from "../../../../models/advertisement";
-import { getSingleAdvertisement } from "../../../../services/advertisementService";
+import {
+  getSingleAdvertisement,
+  updateAdvertisement,
+} from "../../../../services/advertisementService";
 
 interface ConditionsProps {
   id: string;
@@ -19,6 +23,16 @@ const Conditions = ({ id }: ConditionsProps) => {
     }
   }, [id]);
 
+  const saveChanges = async () => {
+    const { data, error } = await updateAdvertisement(advertisement, id);
+    if (!error) {
+    }
+  };
+
+  const changeAdvertisementProperty = (property, value) => {
+    setAdvertisement({ ...advertisement, [property]: value });
+  };
+
   useEffect(() => {
     getAdvertisementInfo();
   }, [getAdvertisementInfo]);
@@ -26,10 +40,20 @@ const Conditions = ({ id }: ConditionsProps) => {
   return (
     <div className="flex px-24">
       <div className="w-1/5">
-        <MenuSenhorio />
+        <MenuSenhorio id={id} />
       </div>
       <div className="w-4/5">
-        {advertisement && <PricesComponent advertisement={advertisement} onChange={() => {}} />}
+        {advertisement && (
+          <HouseRulesComponent
+            advertisement={advertisement}
+            onChange={changeAdvertisementProperty}
+          />
+        )}
+        <div>
+          <button className="bg-primary-500 p-2" onClick={saveChanges}>
+            Guardar alterações
+          </button>
+        </div>
       </div>
     </div>
   );
