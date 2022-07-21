@@ -41,11 +41,11 @@ const Details = ({ id }: DetailsProps) => {
   };
 
   return (
-    <div className="flex px-24">
+    <div className="mx-auto my-20 flex w-4/6 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
       <div className="w-1/5">
         <MenuSenhorio id={id} />
       </div>
-      <div className="w-4/5">
+      <div className="ml-36 w-full">
         {advertisement && (
           <>
             <div>
@@ -60,14 +60,14 @@ const Details = ({ id }: DetailsProps) => {
               />
             </div>
             <div>
-              <h5>Sobre a sua casa</h5>
+              <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
               <AboutHouseComponent
                 advertisement={advertisement}
                 onChange={changeAdvertisementProperty}
               />
             </div>
             <div>
-              <h5>Localização</h5>
+              <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
               <GeneralAdvertComponent
                 advertisement={advertisement}
                 onChange={changeAdvertisementProperty}
