@@ -14,7 +14,7 @@ interface HostFlexTypeComponentProps {
 const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
   return (
     <>
-      <div className="my-6 flex flex-row items-baseline">
+      <div className=" flex flex-row items-baseline">
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>

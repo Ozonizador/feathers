@@ -12,7 +12,7 @@ interface GeneralAdvertComponentProps {
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
   return (
     <>
-      <div className="flex w-full flex-row justify-between gap-5 ">
+      <div className="my-20 flex w-full flex-row justify-between gap-5">
         {/* col left */}
         <div className="mt-2 w-full">
           <div className="">

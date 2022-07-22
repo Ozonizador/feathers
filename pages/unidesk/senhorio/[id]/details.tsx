@@ -96,8 +96,11 @@ const Details = ({ id }: DetailsProps) => {
             </div>
           </>
         )}
-        <button className="bg-primary-500 p-2" onClick={saveChanges}>
-          Guardar alterações
+        <button
+          className="mt-10  rounded-md bg-primary-500 py-5 px-6 text-white"
+          onClick={saveChanges}
+        >
+          Guardar alterações &#10230;
         </button>
       </div>
     </div>
