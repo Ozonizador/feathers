@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
 import Link from "next/link";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
+import { EXPENSES_TO_TEXT } from "../../../../models/advertisement";
+import ModalPagamento from "../../../modals/ModalPagamento";
 
 export default function RoomPagamento() {
   const advertisement = useGetSingleAdvertisement();
+  const [modalPagamento, isModalPagamento] = useState<boolean>(false);
+
+  const openModal = (e) => {
+    e.preventDefault();
+    isModalPagamento(true);
+  };
   return (
     <section className="w-full">
+      <ModalPagamento defaultOpen={modalPagamento} />
       <div className="w-full rounded-2xl border border-terciary-700 px-4">
         <div className="flex flex-col justify-center gap-4 ">
           <div className="mt-2 text-center text-2xl font-bold text-primary-500">
@@ -17,12 +26,15 @@ export default function RoomPagamento() {
           </div>
 
           <div className="relative  mb-2 text-center text-base">
-            <div className="peer flex items-center justify-center gap-2 align-middle">
+            <div className="flex items-center justify-center gap-2 align-middle">
+              <div className="peer flex items-center">
+                {advertisement && advertisement.expenses && (
+                  <span>{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</span>
+                )}
+                <BiInfoCircle className="ml-2" />
+              </div>
               <RoomUtilitesPopover expenses={advertisement.expenses} />
-              <BiInfoCircle />
             </div>
-
-            <RoomUtilitesPopover expenses={advertisement.expenses} />
           </div>
           <hr />
 
@@ -63,8 +75,11 @@ export default function RoomPagamento() {
         </div>
 
         <div className="flex flex-row justify-between">
-          <div className="mb-7 text-secondary-600 underline underline-offset-1">
-            <Link href="/">Detalhes do Pagamento</Link>
+          <div
+            className="mb-7 cursor-pointer text-secondary-600 underline underline-offset-1"
+            onClick={(e) => openModal(e)}
+          >
+            Detalhes do Pagamento
           </div>
         </div>
         <hr />

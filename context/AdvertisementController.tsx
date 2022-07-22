@@ -1,18 +1,10 @@
 import Advertisement, {
+  AdvertisementStatus,
   HouseExpenses,
   HouseRules,
   INCLUSIVE_EXPENSES,
 } from "../models/advertisement";
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 
 /* ADVERTISEMENT */
@@ -42,6 +34,7 @@ const defaultAdvertisement = {
     servicesIncluded: [],
   } as HouseExpenses,
   hostLivesProperty: false,
+  available: AdvertisementStatus.AVAILABLE,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

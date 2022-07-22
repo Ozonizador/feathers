@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
-const AnuncioDisponivel = () => {
+const AnuncioDisponivel = ({ advertisement, onChange }) => {
   return (
     <>
       <div className="my-20 flex flex-col">
@@ -12,9 +13,9 @@ const AnuncioDisponivel = () => {
                 <input
                   type="radio"
                   name="flex_host_type"
-                  // value={FLEX_HOST_TYPE.SUPER_FLEX}
-                  // onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                  // checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.SUPER_FLEX}
+                  value={AdvertisementStatus.NOT_AVAILABLE}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
+                  checked={advertisement.available === AdvertisementStatus.NOT_AVAILABLE}
                 />
               </div>
               <div className="mx-5">
@@ -37,9 +38,9 @@ const AnuncioDisponivel = () => {
                 <input
                   type="radio"
                   name="flex_host_type"
-                  // value={FLEX_HOST_TYPE.FLEX}
-                  // onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                  // checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.FLEX}
+                  value={AdvertisementStatus.DISABLED}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
+                  checked={advertisement.available === AdvertisementStatus.DISABLED}
                 />
               </div>
               <div className="mx-5">
@@ -63,9 +64,9 @@ const AnuncioDisponivel = () => {
                 <input
                   type="radio"
                   name="flex_host_type"
-                  // value={FLEX_HOST_TYPE.RIGID}
-                  // onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                  // checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.RIGID}
+                  value={AdvertisementStatus.AVAILABLE}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
+                  checked={advertisement.available === AdvertisementStatus.AVAILABLE}
                 />
               </div>
               <div className="mx-5">

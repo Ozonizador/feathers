@@ -34,8 +34,8 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
         <ModalDetalhesPagamento defaultOpen={false} />
         <div className="mx-auto md:container">
           <SingleRoomGrid />
-          <div className="flex justify-between">
-            <div className="w-5/6 flex-1 px-5">
+          <div className="flex">
+            <div className="w-4/6 px-5">
               <RoomInformation />
               <DescricaoCondicoes />
               <RoomSlider />
@@ -45,7 +45,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
               <RoomSemelhantes />
             </div>
 
-            <div className="w-1/6 flex-1 px-5">
+            <div className="w-2/6 px-5">
               <RoomPagamento />
               <RoomSobreTi />
               <RoomPedido />

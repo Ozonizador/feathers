@@ -17,7 +17,6 @@ const Prices = ({ id }) => {
 
   const getAdvertisementInfo = useCallback(async () => {
     const { data, error } = await getSingleAdvertisement(id);
-    debugger;
     if (!error) {
       setAdvertisement(data);
     }

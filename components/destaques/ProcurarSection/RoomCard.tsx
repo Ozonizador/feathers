@@ -53,7 +53,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
           <div className="cards">
             <div className="flex flex-1">
               <div className="w-1/3">
-                {advertisement.photos ? (
+                {advertisement.photos && advertisement.photos[0] ? (
                   <Image src={advertisement.photos[0]} alt="..." height={256} width={256} />
                 ) : (
                   <Image src={NoPhotoAvailable} alt="no photo available" />

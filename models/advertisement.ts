@@ -31,6 +31,7 @@ export default interface Advertisement {
     host?:             string,
     createdAt?:        Date,     
     updatedAt?:        Date,
+    available: AdvertisementStatus
 
     // foreign keys
     reviews?: Review[]
@@ -80,6 +81,7 @@ export const ADVERTISEMENT_PROPERTIES = {
     HOST_LIVES_PROPERTY: "hostLivesProperty",
     HOST: "host",
     HOST_ID: "hostId",
+    AVAILABLE: "available",
     ID: "id"
 }  as const;
 
@@ -165,4 +167,12 @@ export enum TypeAmenity {
     FIREPLACE = "FIREPLACE",
     TABLE = "TABLE",
     CHAIRS = "CHAIRS"
+}
+
+/* ADVERT_STATUS */ 
+
+export enum AdvertisementStatus {
+    AVAILABLE = "AVAILABLE",
+    DISABLED = "DISABLED",
+    NOT_AVAILABLE = "NOT_AVAILABLE"
 }

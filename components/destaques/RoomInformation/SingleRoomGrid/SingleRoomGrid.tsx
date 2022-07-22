@@ -7,7 +7,6 @@ import NoPhotoAvailable from "../../../../public/images/imageNotAvailable.png";
 
 export const SingleRoomGrid = () => {
   const advertisement = useGetSingleAdvertisement();
-  debugger;
   return (
     <section className="my-8 w-full">
       {(advertisement.photos === null || advertisement.photos.length === 0) && (
