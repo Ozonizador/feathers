@@ -32,40 +32,63 @@ export default function ProcurarSection() {
               </h2>
 
               <div className="ml-auto">
-                <select className="w-32">
+                <select className="w-60 rounded-md  border border-solid border-terciary-500 bg-white py-2 px-3 text-base ">
+                  <option>Ordenar Por</option>
+                  <option>Casa</option>
+                  <option>Apartamento</option>
+                </select>
+
+                {/* <select className="w-32 rounded-sm border border-gray-500 ">
                   <option>Ordenar Por</option>
                   <option>...</option>
-                </select>
+                </select> */}
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-4 py-5">
-            <div className="mr-auto w-64">
+          <div className="grid grid-cols-4 items-center py-5 align-middle">
+            <div className="mr-auto w-52">
+              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
+                <option>Tipo De Espaço</option>
+                <option>Casa</option>
+                <option>Apartamento</option>
+              </select>
+              {/* 
               <select className="w-32">
                 <option>Tipo De Espaço</option>
-              </select>
+              </select> */}
             </div>
 
             <div>
-              <select className="w-32">
+              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
                 <option>Preço</option>
+                <option>Casa</option>
+                <option>Apartamento</option>
               </select>
+
+              {/* <select className="w-32">
+                <option>Preço</option>
+              </select> */}
             </div>
 
             <div>
-              <select className="w-32">
+              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
                 <option>Comodidades</option>
+                <option>Casa</option>
+                <option>Apartamento</option>
               </select>
+
+              {/* <select className="w-32">
+                <option>Comodidades</option>
+              </select> */}
             </div>
 
-            <div>
-              <button
-                className="bg-primary-500 p-2 text-white"
-                style={{ backgroundColor: "#c48b60" }}
-              >
-                Mais Filtros
-              </button>
+            <div className="text-end">
+              <Link href="/">
+                <a className="rounded-md bg-primary-500 py-4 px-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+                  Mais Filtros
+                </a>
+              </Link>
             </div>
           </div>
 
