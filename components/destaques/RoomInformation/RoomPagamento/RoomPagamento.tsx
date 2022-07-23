@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
-import Link from "next/link";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
@@ -10,16 +9,45 @@ import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowP
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { addReservation } from "../../../../services/reservationService";
+import { Reservation, ReservationStatus } from "../../../../models/reservations";
+import { useProfileInformation } from "../../../../context/MainProvider";
+import { addNotification } from "../../../../services/notificationsService";
+import { createNotification } from "../../../../helpers/notificationHelper";
+import {
+  NOTIFICATION_DESCRIPTION,
+  NOTIFICATION_LINKS,
+  NOTIFICATION_TITLES,
+} from "../../../../models/notification";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
 
   const advertisement = useGetSingleAdvertisement();
+  const profile = useProfileInformation();
   let setIsOpen = useSetModalDetalhesPagamentoOpen();
 
-  const openModal = (e) => {
-    e.preventDefault();
-    setIsOpen(true);
+  /* Reservation */
+  const [reservation, setReservation] = useState<Reservation>({
+    startDate: new Date(),
+    endDate: new Date(),
+    status: ReservationStatus.REQUESTED,
+    advertisementId: advertisement.id,
+  });
+
+  const makeReservation = async () => {
+    if (!profile) return;
+    // get the reservation
+    const { data, error } = await addReservation(reservation, profile.id);
+    if (!error) {
+      const notification = createNotification(
+        NOTIFICATION_TITLES.GOOD_NEWS,
+        NOTIFICATION_DESCRIPTION.ACCEPTED_RESERVATION,
+        NOTIFICATION_LINKS.STAY,
+        profile
+      );
+      await addNotification(notification);
+    }
   };
 
   return (
@@ -82,7 +110,7 @@ export default function RoomPagamento() {
         <div className="flex flex-row justify-between">
           <div
             className="mb-7 cursor-pointer text-secondary-600 underline underline-offset-1"
-            onClick={(e) => openModal(e)}
+            onClick={(e) => setIsOpen(true)}
           >
             Detalhes do Pagamento
           </div>
@@ -94,11 +122,11 @@ export default function RoomPagamento() {
           <div>€300</div>
         </div>
 
-        <Link href="/">
+        <div onClick={makeReservation}>
           <a className="mb-5 flex items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
             Enviar pedido de reserva
           </a>
-        </Link>
+        </div>
       </div>
     </section>
   );
