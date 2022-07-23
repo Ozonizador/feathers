@@ -7,7 +7,7 @@ import { Profile } from "../models/profile";
 export const createNotification = (title: String, description: string, url: String, profile: Profile) => {
     return { title: createNotificationTitle(profile,title), 
         description: createNotificationDescription(profile, description), 
-        tenantId: profile.id,
+        profileId: profile.id,
          url } as Notification;
 
 }

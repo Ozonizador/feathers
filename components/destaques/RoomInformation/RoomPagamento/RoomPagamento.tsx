@@ -33,6 +33,7 @@ export default function RoomPagamento() {
     endDate: new Date(),
     status: ReservationStatus.REQUESTED,
     advertisementId: advertisement.id,
+    tenantId: "",
   });
 
   const makeReservation = async () => {

@@ -7,7 +7,7 @@ export interface Notification {
     description: string,
     url: string,
 
-    tenantId: string,
+    profileId: string,
     createdAt?: Date,
     updatedAt?: Date,
 }

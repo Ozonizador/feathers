@@ -29,10 +29,12 @@ model Profile {
   advertisements Advertisement[]
   tenantReviews  Review[]        @relation("tenantReviews")
   notifications  Notification[]  @relation("notifications")
+  reservations   Reservations[]  @relation("tenantReservations")
 
-  reservations  Reservations[] @relation("tenantReservations")
-  conversations Conversation[] @relation("profileConversations")
-  messages      Message[]      @relation("profileMessages")
+  conversationsAsHost   Conversation[] @relation("conversationsAsHost")
+  conversationsAsTenant Conversation[] @relation("conversationsAsTenant")
+
+  messages Message[] @relation("profileMessages")
 
   @@map("profiles")
 }
@@ -148,9 +150,11 @@ model Notification {
 }
 
 model Conversation {
-  id        String  @id @default(uuid()) @db.Uuid
-  host      Profile @relation("profileConversations", references: [id], fields: [profileId])
-  profileId String  @db.Uuid
+  id       String  @id @default(uuid()) @db.Uuid
+  host     Profile @relation("conversationsAsHost", references: [id], fields: [hostId])
+  hostId   String  @db.Uuid
+  tenant   Profile @relation("conversationsAsTenant", references: [id], fields: [tenantId])
+  tenantId String  @db.Uuid
 
   Message Message[] @relation("conversationMessages")
 

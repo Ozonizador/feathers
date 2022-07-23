@@ -103,7 +103,7 @@ const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
             <>
               <div className=" ml-5 flex flex-col gap-2 text-base">
                 <div>
-                  <Link href="/unidesk/unicontrolo/hospedes">Hóspedes</Link>
+                  <Link href="/unidesk/unicontrolo/guests">Hóspedes</Link>
                 </div>
                 <div className="flex">
                   <TiLockClosed className="my-auto" /> <span className="ml-2">Transações</span>

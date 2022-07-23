@@ -9,16 +9,31 @@ import CaixaCardPedido from "../../components/CaixaEntrada/CaixaCard/CaixaCardPe
 import CaixaCardRecusada from "../../components/CaixaEntrada/CaixaCard/CaixaCardRecusada/CaixaCardRecusada";
 import MensagemEnviada from "../../components/CaixaEntrada/MensagemEnviada/MensagemEnviada";
 import MensagemRecebida from "../../components/CaixaEntrada/MensagemRecebida/MensagemRecebida";
+import { useProfileInformation } from "../../context/MainProvider";
+import { useCallback, useEffect, useState } from "react";
 
 {
   /* page 59 XD */
 }
 const CaixaEntrada = () => {
+  const [conversations, setConversations] = useState([]);
+  const profile = useProfileInformation();
+
+  const getUserConversations = useCallback(() => {
+    const { data, error } = 
+    if(!error) {
+      setConversations(data)
+    }
+
+  }, [])
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <Breadcrumb />
       <div className="container mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
-        <div className=" mb-6 flex h-20 w-full  items-center justify-between  border-b border-terciary-500 align-middle">
+        <div className="flex h-20 w-full items-center  justify-between border-b  border-terciary-500 py-6 align-middle">
           <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
           <div className="mr-8 flex w-4/5 items-center justify-end align-middle">
