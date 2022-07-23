@@ -50,7 +50,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
   return (
     <div>
-      <div className="container mb-4">
+      <div className="container mb-4 rounded-xl bg-white drop-shadow-2xl">
         <div>
           <div className="cards">
             <div className="flex flex-1">
@@ -64,12 +64,12 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
               <div className="p-3">
                 <div className="m-1">
                   <div className="flex flex-1">
-                    <h6 className="mb-0 ">{advertisement.title}</h6>
-                    <div className="ml-2 flex">
+                    <h6 className="mb-0 text-xl font-bold">{advertisement.title}</h6>
+                    <div className="ml-2 flex items-center align-middle">
                       <Rating className="">
                         <Rating.Star />
                       </Rating>
-                      <p>4.9</p>
+                      <p className="text-sm text-yellow-400">4.9</p>
                     </div>
                   </div>
                   {/* icon with images */}
@@ -101,8 +101,8 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       </span>
                     </div>
                   </div>
-                  <div className="mb-1 mt-2 flex text-xs">
-                    <ul id="classlist" className="flex gap-5 px-3">
+                  <div className="mb-1 mt-2 flex text-start text-xs">
+                    <ul id="classlist" className="pr-3-3 flex gap-5">
                       <li className="list-none">Wifi</li>
                       <li>Cozinha</li>
                       <li>Secretária</li>
@@ -110,10 +110,10 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </ul>
                   </div>
 
-                  <div className="mt-4 flex flex-1">
+                  <div className="mt-4 flex">
                     <div className="my-auto">
                       <button
-                        className="rounded-md border-2 border-terciary-300 p-1 text-xs hover:border-primary-500"
+                        className="rounded-md  border border-black  py-2 px-4 text-xs hover:border-primary-500"
                         onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                       >
                         <CgHeart
@@ -124,9 +124,11 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                         <span className="my-auto ml-2">Favoritos</span>
                       </button>
                     </div>
-                    <div className="ml-auto">
-                      <div className="text-center">
-                        <h3 className="text-primary-500">{advertisement.monthRent} €/mês</h3>
+                    <div className="relative left-full ">
+                      <div className="text-end">
+                        <h3 className="text-xl font-bold text-primary-500">
+                          {advertisement.monthRent} €/mês
+                        </h3>
                         <div className="d-flex">
                           <p className="text-xs">
                             {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}
