@@ -11,7 +11,7 @@ const Estadia = () => {
   return (
     <div>
       <Breadcrumbs />
-      <div className="mx-auto my-20  w-4/6 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
+      <div className="mx-auto my-20  w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
         <div className="flex">
           <div className="mr-12 w-1/5">
             <MenuEstudante />
