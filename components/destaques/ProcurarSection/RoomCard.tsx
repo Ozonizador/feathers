@@ -73,7 +73,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </div>
                   </div>
                   {/* icon with images */}
-                  <div className="mb-2 mt-3 flex flex-1 justify-around">
+                  <div className="mb-2 mt-3 flex flex-1 justify-around text-gray-500">
                     <div>
                       <RiUserLine className="my-auto inline" />
                       <span className="my-auto ml-1 text-xs">
@@ -93,7 +93,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                         {advertisement.rooms} {advertisement.rooms == 1 ? "Quarto" : "Quartos"}
                       </span>
                     </div>
-                    <div className="ml-2">
+                    <div className="text-gra ml-2">
                       <GrRestroom className="my-auto inline" />
                       <span className="my-auto ml-1 text-xs">
                         {advertisement.bathrooms}{" "}
@@ -102,7 +102,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </div>
                   </div>
                   <div className="mb-1 mt-2 flex text-start text-xs">
-                    <ul id="classlist" className="pr-3-3 flex gap-5">
+                    <ul id="classlist" className="pr-3-3 flex gap-5 text-gray-500">
                       <li className="list-none">Wifi</li>
                       <li>Cozinha</li>
                       <li>Secretária</li>
@@ -110,7 +110,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </ul>
                   </div>
 
-                  <div className="mt-4 flex">
+                  <div className="mt-4 flex bg-black">
                     <div className="my-auto">
                       <button
                         className="rounded-md  border border-black  py-2 px-4 text-xs hover:border-primary-500"
