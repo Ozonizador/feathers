@@ -42,7 +42,7 @@ const Details = ({ id }: DetailsProps) => {
   };
 
   return (
-    <div className="mx-auto my-20 flex w-4/6 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
+    <div className="mx-auto my-20 flex w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
       <div className="w-1/5">
         <MenuSenhorio id={id} />
       </div>
