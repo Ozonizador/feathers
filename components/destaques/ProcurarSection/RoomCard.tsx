@@ -124,7 +124,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                         <span className="my-auto ml-2">Favoritos</span>
                       </button>
                     </div>
-                    <div className="relative left-full ">
+                    <div className="relative left-36 ">
                       <div className="text-end">
                         <h3 className="text-xl font-bold text-primary-500">
                           {advertisement.monthRent} €/mês
