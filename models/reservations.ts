@@ -3,9 +3,8 @@ import { Profile } from "./profile";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 
-
 export interface Reservation {
-    id: string;
+    id?: string;
     startDate: Date,
     endDate: Date,
     status: ReservationStatus,
@@ -15,12 +14,18 @@ export interface Reservation {
     advertisement?: Advertisement,
     tenant?: Profile
 
-    createdAt: Date,
-    updatedAt: Date,
+    createdAt?: Date,
+    updatedAt?: Date,
 }
 
 export enum ReservationStatus {
-    REQUESTED,
-    ACCEPTED,
-    REJECTED
+    REQUESTED = "REQUESTED",
+    ACCEPTED = "ACCEPTED",
+    REJECTED = "REJECTED"
 }
+
+
+export const RESERVATION_TABLE = {
+    ID: "id",
+    ADVERT_ID: "advertisementId"
+} as const

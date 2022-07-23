@@ -37,8 +37,9 @@ const Notifications = () => {
           )}
           {!isLoading && (
             <>
-              <NotificationCard />
-              <NotificationCard />
+              {notifications.map((notification, index) => {
+                return <NotificationCard key={index} notification={notification} />;
+              })}
             </>
           )}
         </>
