@@ -27,11 +27,9 @@ export default function ProcurarSection() {
         <div className="w-1/2">
           <div className="row">
             <div className="flex flex-1">
-              <h2 className="heading text-bold" style={{ fontSize: "25px" }}>
-                Pertence Onde Tu Quiseres!
-              </h2>
+              <h2 className="heading text-bold text-2xl">Pertence Onde Tu Quiseres!</h2>
 
-              <div className="ml-auto">
+              <div className="ml-auto mb-2">
                 <select className="w-60 rounded-md  border border-solid border-terciary-500 bg-white py-2 px-3 text-base ">
                   <option>Ordenar Por</option>
                   <option>Casa</option>
@@ -46,7 +44,7 @@ export default function ProcurarSection() {
             </div>
           </div>
 
-          <div className="grid grid-cols-4 items-center py-5 align-middle">
+          <div className="mb-3 grid grid-cols-4 items-center py-5 align-middle">
             <div className="mr-auto w-52">
               <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
                 <option>Tipo De Espaço</option>
@@ -85,7 +83,7 @@ export default function ProcurarSection() {
 
             <div className="text-end">
               <Link href="/">
-                <a className="rounded-md bg-primary-500 py-4 px-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+                <a className="rounded-md bg-primary-500 py-4 px-7 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
                   Mais Filtros
                 </a>
               </Link>
