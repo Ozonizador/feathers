@@ -6,19 +6,24 @@ import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { EXPENSES_TO_TEXT } from "../../../../models/advertisement";
-import ModalPagamento from "../../../modals/ModalPagamento";
+import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function RoomPagamento() {
+  const [startDate, setStartDate] = useState(new Date());
+
   const advertisement = useGetSingleAdvertisement();
-  const [modalPagamento, isModalPagamento] = useState<boolean>(false);
+  let setIsOpen = useSetModalDetalhesPagamentoOpen();
 
   const openModal = (e) => {
     e.preventDefault();
-    isModalPagamento(true);
+    setIsOpen(true);
   };
+
   return (
     <section className="w-full">
-      <ModalPagamento defaultOpen={modalPagamento} />
       <div className="w-full rounded-2xl border border-terciary-700 px-4">
         <div className="flex flex-col justify-center gap-4 ">
           <div className="mt-2 text-center text-2xl font-bold text-primary-500">
@@ -43,14 +48,14 @@ export default function RoomPagamento() {
               <div className="mb-2 block">
                 <Label htmlFor="Entrada" value="Entrada" />
               </div>
-              <TextInput id="date" type="text" sizing="md" />
+              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>
 
             <div className="mb-2 block">
               <div className="mb-2 block">
                 <Label htmlFor="Saida" value="Saida" />
               </div>
-              <TextInput id="saida" type="text" sizing="md" />
+              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>
           </div>
 

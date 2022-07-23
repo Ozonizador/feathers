@@ -18,6 +18,7 @@ import Advertisement, {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../models/advertisement";
+import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 
 type PageParams = {
   id: string;
@@ -30,29 +31,31 @@ interface AnuncioProps {
 const Anuncio = ({ advertisement }: AnuncioProps) => {
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
-      <div>
-        <ModalDetalhesPagamento defaultOpen={false} />
-        <div className="mx-auto md:container">
-          <SingleRoomGrid />
-          <div className="flex">
-            <div className="w-4/6 px-5">
-              <RoomInformation />
-              <DescricaoCondicoes />
-              <RoomSlider />
-              <RoomRating />
-              <RoomMap />
-              <RoomSenhorio />
-              <RoomSemelhantes />
-            </div>
+      <ModalDetalhesPagamentoProvider>
+        <div>
+          <ModalDetalhesPagamento />
+          <div className="mx-auto md:container">
+            <SingleRoomGrid />
+            <div className="flex">
+              <div className="w-4/6 px-5">
+                <RoomInformation />
+                <DescricaoCondicoes />
+                <RoomSlider />
+                <RoomRating />
+                <RoomMap />
+                <RoomSenhorio />
+                <RoomSemelhantes />
+              </div>
 
-            <div className="w-2/6 px-5">
-              <RoomPagamento />
-              <RoomSobreTi />
-              <RoomPedido />
+              <div className="w-2/6 px-5">
+                <RoomPagamento />
+                <RoomSobreTi />
+                <RoomPedido />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ModalDetalhesPagamentoProvider>
     </ShowingSingleAdvertisementProvider>
   );
 };

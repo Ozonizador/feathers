@@ -98,13 +98,20 @@ model Reservations {
 
   startDate       DateTime
   endDate         DateTime
-  advertisement   Advertisement @relation("advertisementReservations", references: [id], fields: [advertisementId])
-  advertisementId String        @db.Uuid
+  advertisement   Advertisement     @relation("advertisementReservations", references: [id], fields: [advertisementId])
+  advertisementId String            @db.Uuid
+  status          ReservationStatus
 
   tenant   Profile @relation("tenantReservations", references: [id], fields: [tenantId])
   tenantId String  @db.Uuid
 
   @@map("reservations")
+}
+
+enum ReservationStatus {
+  REQUESTED
+  ACCEPTED
+  REJECTED
 }
 
 model Review {

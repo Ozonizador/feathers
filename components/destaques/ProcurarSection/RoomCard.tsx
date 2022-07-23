@@ -40,8 +40,10 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const isFavourite = useCallback(() => {
     if (profile) {
       const { favouriteRooms } = profile;
-      const index = favouriteRooms.findIndex((room) => advertisement.id == room);
-      return index !== -1;
+      if (favouriteRooms) {
+        const index = favouriteRooms.findIndex((room) => advertisement.id == room);
+        return index !== -1;
+      }
     }
     return false;
   }, [advertisement.id, profile]);

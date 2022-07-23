@@ -3,6 +3,10 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Accordion } from "flowbite-react";
+import {
+  useModalDetalhesPagamento,
+  useSetModalDetalhesPagamentoOpen,
+} from "../../context/ModalShowProvider";
 
 /* PAGINA 7 DO XD 
 
@@ -10,12 +14,9 @@ para chamar na pagina => <ModalDetalhesPagamento defaultOpen={false} />
 false nao mostra nada true mostra.
 */
 
-interface ModalDetalhesPagamentoProps {
-  defaultOpen: boolean;
-}
-
-const ModalDetalhesPagamento = ({ defaultOpen }: ModalDetalhesPagamentoProps) => {
-  let [isOpen, setIsOpen] = useState(defaultOpen);
+const ModalDetalhesPagamento = () => {
+  let isOpen = useModalDetalhesPagamento();
+  let setIsOpen = useSetModalDetalhesPagamentoOpen();
 
   function closeModal() {
     setIsOpen(false);
