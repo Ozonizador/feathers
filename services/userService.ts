@@ -1,22 +1,18 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export async function register(email, password) {
-  const { user, session, error } = await supabaseClient.auth.signUp(
-    {
-      email,
-      password,
-    }
-  );
+  const { user, session, error } = await supabaseClient.auth.signUp({
+    email,
+    password,
+  });
   return { user, session, error };
 }
 
 export async function login(email, password) {
-  const { user, session, error } = await supabaseClient.auth.signIn(
-    {
-      email,
-      password,
-    }
-  );
+  const { user, session, error } = await supabaseClient.auth.signIn({
+    email,
+    password,
+  });
 
   return { user, session, error };
 }
