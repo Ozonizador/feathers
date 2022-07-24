@@ -3,11 +3,8 @@ import { GoSearch } from "react-icons/go";
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import { getConversationsFromUser } from "../../services/conversationServicec";
-import {
-  getMessagesFromConversationId,
-  insertMessageOnConversation,
-} from "../../services/messageService";
+import { getConversationsFromUser } from "../../services/conversationService";
+import { getMessagesFromConversationId, insertMessageOnConversation } from "../../services/messageService";
 import { Message } from "../../models/message";
 import { Conversation } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
@@ -51,11 +48,7 @@ const CaixaEntrada = () => {
     event.preventDefault();
     if (!currentMessage || !currentConversation) return;
 
-    const { data, error } = await insertMessageOnConversation(
-      currentMessage,
-      currentConversation,
-      profile.id
-    );
+    const { data, error } = await insertMessageOnConversation(currentMessage, currentConversation, profile.id);
     if (!error) {
       setMessages([...messages, data]);
     }
@@ -64,6 +57,10 @@ const CaixaEntrada = () => {
   useEffect(() => {
     getUserConversations();
   }, [getUserConversations]);
+
+  const getOtherProfile = (conversation) => {
+    return conversation.host.id === profile.id ? conversation.tenant : conversation.host;
+  };
 
   return (
     <>
@@ -94,12 +91,8 @@ const CaixaEntrada = () => {
               <div className="p-1">
                 {conversations.map((conversation, index) => {
                   return (
-                    <div
-                      key={index}
-                      onClick={() => setCurrentConversation(conversation.id)}
-                      className="cursor-pointer"
-                    >
-                      <CaixaCard />
+                    <div key={index} onClick={() => setCurrentConversation(conversation.id)} className="cursor-pointer">
+                      <CaixaCard profile={getOtherProfile(conversation)} />
                     </div>
                   );
                 })}

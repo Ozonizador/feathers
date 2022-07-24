@@ -158,6 +158,9 @@ model Conversation {
 
   messages Message[] @relation("conversationMessages")
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
   @@map("conversations")
 }
 

@@ -9,12 +9,9 @@ import { VscArrowRight } from "react-icons/vsc";
 para chamar na pagina => <ModalAlterarReserva defaultOpen={false} /> 
 false nao mostra nada true mostra.
 */
-interface ModalAlterarReservaProps {
-  defaultOpen: boolean;
-}
 
-const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+const ModalAlterarReserva = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -51,14 +48,7 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
                   as="h3"
                   className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
-                  <Image
-                    id="modal-img"
-                    className="m-2"
-                    src="/images/doublearrow.png"
-                    alt=""
-                    width="40"
-                    height="40"
-                  />
+                  <Image id="modal-img" className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
                   <span className="ml-3 text-3xl font-bold">Alterar reserva</span>
                 </Dialog.Title>
 
@@ -100,10 +90,7 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
                             </div>
 
                             <div>
-                              <label
-                                htmlFor="exampleInputEmail1"
-                                className="form-label mb-2 text-base"
-                              >
+                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Entrada
                               </label>
                               <input
@@ -117,10 +104,7 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
                             </div>
 
                             <div>
-                              <label
-                                htmlFor="exampleInputEmail1"
-                                className="form-label mb-2 text-base"
-                              >
+                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Entrada
                               </label>
                               <input
@@ -131,10 +115,7 @@ const ModalAlterarReserva = ({ defaultOpen }: ModalAlterarReservaProps) => {
                             </div>
 
                             <div>
-                              <label
-                                htmlFor="exampleInputEmail1"
-                                className="form-label mb-2 text-base"
-                              >
+                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Entrada
                               </label>
                               <input
