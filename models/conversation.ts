@@ -20,6 +20,8 @@ export interface Conversation {
 export const CONVERSATION_PROPERTIES = { 
     TENANT_ID: "tenantId",
     HOST_ID: "hostId", 
-    ID: "id"
+    ID: "id",
+    UPDATED_ID: "updatedAt",
+    CREATED_ID: "createdAt"
 }  as const;
 
