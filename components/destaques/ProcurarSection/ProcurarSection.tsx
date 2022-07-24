@@ -44,10 +44,10 @@ export default function ProcurarSection() {
             </div>
           </div>
 
-          <div className="mb-3 grid grid-cols-4 items-center py-5 align-middle">
-            <div className="mr-auto w-52">
-              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
-                <option>Tipo De Espaço</option>
+          <div className="mb-3 grid grid-cols-4 items-center justify-between gap-2 py-5 align-middle">
+            <div className="">
+              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
+                <option>Tipo de espaço</option>
                 <option>Casa</option>
                 <option>Apartamento</option>
               </select>
@@ -58,7 +58,7 @@ export default function ProcurarSection() {
             </div>
 
             <div>
-              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
+              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
                 <option>Preço</option>
                 <option>Casa</option>
                 <option>Apartamento</option>
@@ -70,7 +70,7 @@ export default function ProcurarSection() {
             </div>
 
             <div>
-              <select className="w-52 rounded-md  border border-solid border-terciary-500 bg-white py-4 px-3 ">
+              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
                 <option>Comodidades</option>
                 <option>Casa</option>
                 <option>Apartamento</option>
