@@ -1,25 +1,28 @@
-import { AiOutlinePicture } from "react-icons/ai";
-import { FiPaperclip } from "react-icons/fi";
-import { BiSmile } from "react-icons/bi";
 import { BsFilterCircle } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { Breadcrumb } from "flowbite-react";
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
-import CaixaCardPedido from "../../components/CaixaEntrada/CaixaCard/CaixaCardPedido/CaixaCardPedido";
-import CaixaCardRecusada from "../../components/CaixaEntrada/CaixaCard/CaixaCardRecusada/CaixaCardRecusada";
-import MensagemEnviada from "../../components/CaixaEntrada/MensagemEnviada/MensagemEnviada";
-import MensagemRecebida from "../../components/CaixaEntrada/MensagemRecebida/MensagemRecebida";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
 import { getConversationsFromUser } from "../../services/conversationServicec";
-import { getMessagesFromConversationId } from "../../services/messageService";
+import {
+  getMessagesFromConversationId,
+  insertMessageOnConversation,
+} from "../../services/messageService";
+import { Message } from "../../models/message";
+import { Conversation } from "../../models/conversation";
+import Mensagem from "../../components/CaixaEntrada/MensagemEnviada/Mensagem";
 
 {
   /* page 59 XD */
 }
 const CaixaEntrada = () => {
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const profile = useProfileInformation();
+
+  const [currentMessage, setCurrentMessage] = useState<string>("");
+  const [currentConversation, setCurrentConversation] = useState<string>("");
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -30,9 +33,28 @@ const CaixaEntrada = () => {
     }
   }, [profile]);
 
-  const getMessagesFromConversation = async (conversationId: string) => {
-    if (conversationId) {
-      const { data, error } = await getMessagesFromConversationId(conversationId);
+  const getMessagesFromConversation = useCallback(async () => {
+    if (currentConversation) {
+      const { data, error } = await getMessagesFromConversationId(currentConversation);
+      setMessages(data);
+    }
+  }, [currentConversation]);
+
+  useEffect(() => {
+    getMessagesFromConversation();
+  }, [getMessagesFromConversation]);
+
+  const sendMessage = async (event) => {
+    event.preventDefault();
+    if (!currentMessage || !currentConversation) return;
+
+    const { data, error } = await insertMessageOnConversation(
+      currentMessage,
+      currentConversation,
+      profile.id
+    );
+    if (!error) {
+      setMessages([...messages, data]);
     }
   };
 
@@ -44,7 +66,7 @@ const CaixaEntrada = () => {
     <>
       <Breadcrumb />
       <div className="container mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
-        <div className="flex h-20 w-full items-center  justify-between border-b  border-terciary-500 py-6 align-middle">
+        <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 py-6 align-middle">
           <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
           <div className="mr-8 flex w-4/5 items-center justify-end align-middle">
@@ -64,35 +86,41 @@ const CaixaEntrada = () => {
         </div>
 
         <div className="flex flex-col">
-          <div className="flex flex-row gap-4">
-            <div className="flex w-1/5 flex-col justify-center border-r border-terciary-500 pr-5">
+          <div className="flex flex-row">
+            <div className="flex w-1/5 flex-col border-r border-terciary-500">
               <div className="p-1">
-                {/* <CaixaCard />
-                <CaixaCardPedido />
-                <CaixaCard />
-                <CaixaCard />
-                <CaixaCardRecusada />
-                <CaixaCard />
-                <CaixaCard /> */}
+                {conversations.map((conversation, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => setCurrentConversation(conversation.id)}
+                      className="cursor-pointer"
+                    >
+                      <CaixaCard />
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <div className="flex min-h-max flex-col gap-1">
-                <div className="w-2/5">
-                  <MensagemEnviada />
-                </div>
-                <div className="w-2/5 pr-4">
-                  <MensagemRecebida />
-                </div>
+            <div className="flex max-h-screen w-full flex-col gap-2">
+              <div className="flex flex-col gap-1 overflow-y-auto p-2">
+                {messages.map((message, index) => {
+                  return <Mensagem key={index} message={message} />;
+                })}
               </div>
-              <div className="bottom-5 left-0 flex w-full  flex-row  items-center justify-between border-t border-terciary-500  pr-4 align-middle">
+              <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
                 <div className="w-10/12">
-                  <input
-                    className=" mt-5  border-0 text-xs outline-0"
-                    placeholder="Type a message..."
-                    type="text"
-                  />
+                  <form onSubmit={(e) => sendMessage(e)}>
+                    <input
+                      className="w-full border-0 p-4 text-xs outline-0"
+                      placeholder="Type a message..."
+                      type="text"
+                      value={currentMessage}
+                      onChange={(e) => setCurrentMessage(e.target.value)}
+                    />
+                    <input type="submit" className="hidden" />
+                  </form>
                 </div>
 
                 {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}

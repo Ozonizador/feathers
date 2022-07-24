@@ -156,7 +156,7 @@ model Conversation {
   tenant   Profile @relation("conversationsAsTenant", references: [id], fields: [tenantId])
   tenantId String  @db.Uuid
 
-  Message Message[] @relation("conversationMessages")
+  messages Message[] @relation("conversationMessages")
 
   @@map("conversations")
 }

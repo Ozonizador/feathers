@@ -1,9 +1,10 @@
 import { Conversation } from "@prisma/client";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { v4 as uuidv4 } from 'uuid';
 import { CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../models/conversation";
 
 export const addConversation = async (conversation) => {
-    const { data, error } = await supabaseClient.from<Conversation>(CONVERSATION_TABLE_NAME).insert(conversation).single();
+    const { data, error } = await supabaseClient.from<Conversation>(CONVERSATION_TABLE_NAME).insert({ ...conversation, id: uuidv4()}).single();
     return { data, error }
 };
 

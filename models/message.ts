@@ -1,10 +1,13 @@
+import { Profile } from "./profile";
 
 export const MESSAGE_TABLE_NAME = "messages" as const;
 
 export interface Message {
     id: string,
     message: string,
+
     profileId: string,
+    profile?: Profile
     conversationId: string,
     createdAt?: Date,
     updatedAt?: Date

@@ -1,12 +1,16 @@
+import { Profile } from "@prisma/client";
 import { Message } from "./message";
 
-export const CONVERSATION_TABLE_NAME = "conversation" as const;
+export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
 export interface Conversation {
     id?: string,
     tenantId: string,
     hostId: string,
-    messages: Message[]
+
+    host?: Profile,
+    tenant?: Profile,
+    messages?: Message[]
 
     createdAt?: Date,
     updatedAt?: Date,
