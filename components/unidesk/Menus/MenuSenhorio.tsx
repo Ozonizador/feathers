@@ -122,7 +122,9 @@ const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
       </div>
 
       <div className="mt-2 px-2">
-        <div className="flex items-center justify-start align-middle">Notificações</div>
+        <div className="flex items-center justify-start align-middle">
+          <Link href="/unidesk/notifications">Notificações</Link>
+        </div>
       </div>
     </div>
   );

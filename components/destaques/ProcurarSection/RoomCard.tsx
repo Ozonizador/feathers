@@ -10,10 +10,7 @@ import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
-import {
-  useProfileInformation,
-  useSetProfileFavouritesInformation,
-} from "../../../context/MainProvider";
+import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
 
 interface RoomCardProps {
@@ -77,8 +74,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <div>
                       <RiUserLine className="my-auto inline" />
                       <span className="my-auto ml-1 text-xs">
-                        {advertisement.tenantNumber}{" "}
-                        {advertisement.tenantNumber == 1 ? "Hóspede" : "Hóspedes"}
+                        {advertisement.tenantNumber} {advertisement.tenantNumber == 1 ? "Hóspede" : "Hóspedes"}
                       </span>
                     </div>
                     <div className="ml-2">
@@ -96,8 +92,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <div className="text-gra ml-2">
                       <GrRestroom className="my-auto inline" />
                       <span className="my-auto ml-1 text-xs">
-                        {advertisement.bathrooms}{" "}
-                        {advertisement.bathrooms == 1 ? "Casa De Banho" : "Casas De Banho"}
+                        {advertisement.bathrooms} {advertisement.bathrooms == 1 ? "Casa De Banho" : "Casas De Banho"}
                       </span>
                     </div>
                   </div>
@@ -110,7 +105,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </ul>
                   </div>
 
-                  <div className="mt-4 flex bg-black">
+                  <div className="mt-4 flex">
                     <div className="my-auto">
                       <button
                         className="rounded-md  border border-black  py-2 px-4 text-xs hover:border-primary-500"
@@ -126,13 +121,9 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </div>
                     <div className="relative left-36 ">
                       <div className="text-end">
-                        <h3 className="text-xl font-bold text-primary-500">
-                          {advertisement.monthRent} €/mês
-                        </h3>
+                        <h3 className="text-xl font-bold text-primary-500">{advertisement.monthRent} €/mês</h3>
                         <div className="d-flex">
-                          <p className="text-xs">
-                            {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}
-                          </p>
+                          <p className="text-xs">{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</p>
                           <i className="fa-solid fa-circle-info m-1"></i>
                         </div>
                       </div>

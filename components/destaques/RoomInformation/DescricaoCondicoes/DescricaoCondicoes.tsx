@@ -8,13 +8,11 @@ export default function DescricaoCondicoes() {
   const advertisement = useGetSingleAdvertisement();
   return (
     <div className="my-20 flex flex-row items-center align-middle">
-      <div className="mr-5 flex flex-col">
+      <div className="mr-5 flex w-3/4 flex-col">
         <div className="mb-5 text-2xl font-bold">Descrição</div>
 
         <div>
-          <div className="text-justify text-base text-secondary-500">
-            {advertisement.description}
-          </div>
+          <div className="text-justify text-base text-secondary-500">{advertisement.description}</div>
         </div>
       </div>
 

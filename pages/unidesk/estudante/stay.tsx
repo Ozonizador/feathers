@@ -5,8 +5,8 @@ import Link from "next/link";
 import { CgHome } from "react-icons/cg";
 
 import {
+  ModalAlterarReservaProvider,
   ModalApplyShowProvider,
-  ModalDetalhesPagamentoProvider,
   ModalReportarAnuncioProvider,
 } from "../../../context/ModalShowProvider";
 import ModalAvaliarExperiencia from "../../../components/modals/ModalAvaliarExperiencia";

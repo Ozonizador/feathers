@@ -7,6 +7,7 @@ import { Review } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useProfileInformation } from "../../context/MainProvider";
+import { useModalAvaliarExperiencia, useSetModalAvaliarExperiencia } from "../../context/ModalShowProvider";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -28,8 +29,8 @@ const startingReview = {
 const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
   const [step, setStep] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const isOpen = useModalAvaliarExperiencia();
+  const setIsOpen = useSetModalAvaliarExperiencia();
   const [review, setReview] = useState<Review>(startingReview);
 
   function closeModal() {

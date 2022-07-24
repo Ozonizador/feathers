@@ -18,11 +18,12 @@ export default function RoomSenhorio() {
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
                   src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                   alt="Bonnie image"
+                  height={96}
+                  width={96}
+                  unoptimized={true}
                 />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Maria</h5>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  Senhoria desde 2020
-                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">Senhoria desde 2020</span>
                 <hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
@@ -42,8 +43,8 @@ export default function RoomSenhorio() {
             <div>
               <h1 className="mb-4 text-2xl font-bold">Olá, sou a Maria!</h1>
               <p className="text-secondary-400">
-                Tenho 4 casas em Peniche e já fui estudante também. Quero que os meus inquilinos se
-                sintam bem e estou sempre disponível para ajudar naquilo que for preciso.
+                Tenho 4 casas em Peniche e já fui estudante também. Quero que os meus inquilinos se sintam bem e estou
+                sempre disponível para ajudar naquilo que for preciso.
               </p>
             </div>
           </div>
@@ -58,9 +59,8 @@ export default function RoomSenhorio() {
                 <div className="flex flex-col">
                   <h2 className="text-base font-bold">Flexível</h2>
                   <p className="text-base text-secondary-400">
-                    Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois
-                    desse período e até 7 dias antes , o valor reembolsado é de 50%. Após esse
-                    período o pagamento é integral.
+                    Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7
+                    dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
                   </p>
                 </div>
               </div>

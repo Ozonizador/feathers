@@ -78,11 +78,9 @@ export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioPro
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   return (
-    <ModalAvaliarExperienciaContext.Provider value={modalOpen}>
-      <SetModalAvaliarExperienciaContext.Provider value={setModalOpen}>
-        {children}
-      </SetModalAvaliarExperienciaContext.Provider>
-    </ModalAvaliarExperienciaContext.Provider>
+    <ModalReportarAnuncioContext.Provider value={modalOpen}>
+      <SetModalReportarAnuncioContext.Provider value={setModalOpen}>{children}</SetModalReportarAnuncioContext.Provider>
+    </ModalReportarAnuncioContext.Provider>
   );
 };
 
@@ -111,11 +109,9 @@ export const ModalAlterarReservaProvider = ({ children }: ModalAlterarReversaPro
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   return (
-    <ModalAvaliarExperienciaContext.Provider value={modalOpen}>
-      <SetModalAvaliarExperienciaContext.Provider value={setModalOpen}>
-        {children}
-      </SetModalAvaliarExperienciaContext.Provider>
-    </ModalAvaliarExperienciaContext.Provider>
+    <ModalAlterarReservaContext.Provider value={modalOpen}>
+      <SetModalAlterarReservaContext.Provider value={setModalOpen}>{children}</SetModalAlterarReservaContext.Provider>
+    </ModalAlterarReservaContext.Provider>
   );
 };
 

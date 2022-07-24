@@ -14,10 +14,7 @@ import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSem
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
-import Advertisement, {
-  ADVERTISEMENT_PROPERTIES,
-  ADVERTISEMENT_TABLE_NAME,
-} from "../../models/advertisement";
+import Advertisement, { ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 
 type PageParams = {
@@ -49,8 +46,8 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
 
               <div className="w-2/6 px-5">
                 <RoomPagamento />
-                <RoomSobreTi />
-                <RoomPedido />
+                {/*<RoomSobreTi />
+                <RoomPedido />*/}
               </div>
             </div>
           </div>

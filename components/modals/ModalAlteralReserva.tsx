@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
-import { useState } from "react";
 import { VscArrowRight } from "react-icons/vsc";
+import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
 
 /* PAGINA 23 DO XD 
 
@@ -11,7 +11,8 @@ false nao mostra nada true mostra.
 */
 
 const ModalAlterarReserva = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useModalAlterarReserva();
+  const setIsOpen = useSetModalAlterarReserva();
 
   function closeModal() {
     setIsOpen(false);
