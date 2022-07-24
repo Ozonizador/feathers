@@ -2,20 +2,18 @@ import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import next from "next";
+import { useModalReportAdvertisement, useSetModalReportAdvertisement } from "../../context/ModalShowProvider";
 
 /* PAGINA 21-22 DO XD 
 
-para chamar na pagina => <ModalDenuncia defaultOpen={false} /> 
+para chamar na pagina => <ModalDenuncia /> 
 false nao mostra nada true mostra.
 */
 
-interface ModalDenunciaProps {
-  defaultOpen: boolean;
-}
-
-const ModalDenuncia = ({ defaultOpen }: ModalDenunciaProps) => {
+const ModalDenuncia = () => {
+  const isOpen = useModalReportAdvertisement();
+  const setIsOpen = useSetModalReportAdvertisement();
   const [step, setStep] = useState(1);
-  let [isOpen, setIsOpen] = useState(defaultOpen);
 
   function closeModal() {
     setIsOpen(false);
@@ -44,10 +42,7 @@ const ModalDenuncia = ({ defaultOpen }: ModalDenunciaProps) => {
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
-                >
+                <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image className="m-2" src="/images/flag.png" alt="" width="40px" height="30px" />
                   <span className="my-auto ml-5 text-3xl font-bold">Reportar anúncio</span>
                 </Dialog.Title>
@@ -74,18 +69,14 @@ const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
           <div className=" ">
             <div className="" id="model-radius">
               <div className="m-2">
-                <h5 className="mt-2 text-2xl font-semibold">
-                  Porque estás a denunciar esta conta?
-                </h5>
+                <h5 className="mt-2 text-2xl font-semibold">Porque estás a denunciar esta conta?</h5>
                 <p className="mt-7 mb-10 text-xl">
-                  A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não
-                  seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por
-                  favor reporta.{" "}
+                  A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja verdadeira. Se
+                  este anúncio é impróprio ou não condiz com a realidade por favor reporta.{" "}
                 </p>
                 <div className="radio mb-4">
                   <label>
-                    <input className="m-2" type="radio" name="optradio" checked />É impreciso ou
-                    incorreto
+                    <input className="m-2" type="radio" name="optradio" checked />É impreciso ou incorreto
                   </label>
                 </div>
                 <div className="radio mb-4">

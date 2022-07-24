@@ -2,12 +2,20 @@ import { BsFlag } from "react-icons/bs";
 import { RiMailSendLine } from "react-icons/ri";
 import { TbRefresh } from "react-icons/tb";
 import { AiOutlineStar } from "react-icons/ai";
+import { useModalAvaliarExperiencia, useSetModalReportAdvertisement } from "../../../context/ModalShowProvider";
 
 const StayInfo = () => {
+  const setModalReport = useSetModalReportAdvertisement();
+  const setModalAvaliar = useModalAvaliarExperiencia();
+
+  const openModalReport = () => {
+    setModalReport(true);
+  };
+
   return (
     <div>
       <div className="ml-8 flex w-96 flex-row gap-4">
-        <div className="flex flex-1 flex-col items-center">
+        <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={(e) => openModalReport()}>
           <div>
             <BsFlag className="mb-2 text-4xl text-red-500" />
           </div>

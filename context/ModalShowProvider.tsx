@@ -53,12 +53,12 @@ export const ModalApplyShowProvider = ({ children }: ModalAvaliarExperienciaProp
   );
 };
 
-export function useModalApplyOpen() {
+export function useModalAvaliarExperiencia() {
   const modalApplyOpen = useContext(ModalAvaliarExperienciaContext);
   return modalApplyOpen;
 }
 
-export function useSetModalApplyOpen() {
+export function useSetModalAvaliarExperiencia() {
   const setModalApplyOpen = useContext(SetModalAvaliarExperienciaContext);
   return (value: boolean) => {
     setModalApplyOpen(value);
@@ -86,13 +86,46 @@ export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioPro
   );
 };
 
-export function useModalAvaliarExperiencia() {
+export function useModalReportAdvertisement() {
   const modalApplyOpen = useContext(ModalReportarAnuncioContext);
   return modalApplyOpen;
 }
 
-export function useSetModalAvaliarExperiencia() {
+export function useSetModalReportAdvertisement() {
   const setModalApplyOpen = useContext(SetModalReportarAnuncioContext);
+  return (value: boolean) => {
+    setModalApplyOpen(value);
+  };
+}
+
+/* Modal Alterar Reserva */
+
+interface ModalAlterarReversaProps {
+  children: ReactElement;
+}
+
+const ModalAlterarReservaContext = createContext<boolean>(false);
+const SetModalAlterarReservaContext = createContext<Dispatch<SetStateAction<boolean>>>(() => {});
+
+export const ModalAlterarReservaProvider = ({ children }: ModalAlterarReversaProps): JSX.Element => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  return (
+    <ModalAvaliarExperienciaContext.Provider value={modalOpen}>
+      <SetModalAvaliarExperienciaContext.Provider value={setModalOpen}>
+        {children}
+      </SetModalAvaliarExperienciaContext.Provider>
+    </ModalAvaliarExperienciaContext.Provider>
+  );
+};
+
+export function useModalAlterarReserva() {
+  const modalApplyOpen = useContext(ModalAlterarReservaContext);
+  return modalApplyOpen;
+}
+
+export function useSetModalAlterarReserva() {
+  const setModalApplyOpen = useContext(SetModalAlterarReservaContext);
   return (value: boolean) => {
     setModalApplyOpen(value);
   };

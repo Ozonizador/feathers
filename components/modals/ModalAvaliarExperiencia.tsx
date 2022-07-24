@@ -13,10 +13,6 @@ para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} />
 false nao mostra nada true mostra.
 */
 
-interface ModalAvaliarExperienciaProps {
-  defaultOpen: boolean;
-}
-
 const startingReview = {
   advertisementId: "",
   tenantId: "",
@@ -29,10 +25,10 @@ const startingReview = {
   privateReview: "",
 } as Review;
 
-const ModalAvaliarExperiencia = ({ defaultOpen }: ModalAvaliarExperienciaProps) => {
+const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
   const [step, setStep] = useState(1);
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [review, setReview] = useState<Review>(startingReview);
 
@@ -89,13 +85,7 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
         as="h3"
         className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image
-          className=""
-          src="/images/feeedback.png"
-          alt="Avaliar experiência"
-          width="32px"
-          height="32px"
-        />{" "}
+        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
         <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
       {/* <!-- Modal --> */}
@@ -110,8 +100,7 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
           <div>
             <h1 className="text-2xl font-semibold">Obrigada pelo teu feedback!</h1>
             <p className="font-x1 mx-auto mt-7 mb-10 w-2/3 text-center">
-              A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar
-              outros estudantes.
+              A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes.
             </p>
           </div>
 
@@ -141,13 +130,7 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
         as="h3"
         className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image
-          className=""
-          src="/images/feeedback.png"
-          alt="Avaliar experiência"
-          width="32px"
-          height="32px"
-        />{" "}
+        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
         <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
       {/* <!-- Modal --> */}
@@ -207,13 +190,7 @@ const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) =
         as="h3"
         className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
       >
-        <Image
-          className=""
-          src="/images/feeedback.png"
-          alt="Avaliar experiência"
-          width="32px"
-          height="32px"
-        />{" "}
+        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
         <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
       </Dialog.Title>
       <div
