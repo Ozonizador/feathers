@@ -11,6 +11,8 @@ import MensagemEnviada from "../../components/CaixaEntrada/MensagemEnviada/Mensa
 import MensagemRecebida from "../../components/CaixaEntrada/MensagemRecebida/MensagemRecebida";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
+import { getConversationsFromUser } from "../../services/conversationServicec";
+import { getMessagesFromConversationId } from "../../services/messageService";
 
 {
   /* page 59 XD */
@@ -19,15 +21,24 @@ const CaixaEntrada = () => {
   const [conversations, setConversations] = useState([]);
   const profile = useProfileInformation();
 
-  const getUserConversations = useCallback(() => {
-    const { data, error } = 
-    if(!error) {
-      setConversations(data)
+  const getUserConversations = useCallback(async () => {
+    if (profile) {
+      const { data, error } = await getConversationsFromUser(profile.id);
+      if (!error) {
+        setConversations(data);
+      }
     }
+  }, [profile]);
 
-  }, [])
+  const getMessagesFromConversation = async (conversationId: string) => {
+    if (conversationId) {
+      const { data, error } = await getMessagesFromConversationId(conversationId);
+    }
+  };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getUserConversations();
+  }, [getUserConversations]);
 
   return (
     <>
@@ -56,18 +67,18 @@ const CaixaEntrada = () => {
           <div className="flex flex-row gap-4">
             <div className="flex w-1/5 flex-col justify-center border-r border-terciary-500 pr-5">
               <div className="p-1">
-                <CaixaCard />
+                {/* <CaixaCard />
                 <CaixaCardPedido />
                 <CaixaCard />
                 <CaixaCard />
                 <CaixaCardRecusada />
                 <CaixaCard />
-                <CaixaCard />
+                <CaixaCard /> */}
               </div>
             </div>
 
-            <div className="relative flex flex-col">
-              <div className="flex flex-row justify-between">
+            <div className="flex flex-col gap-2">
+              <div className="flex min-h-max flex-col gap-1">
                 <div className="w-2/5">
                   <MensagemEnviada />
                 </div>
@@ -75,7 +86,7 @@ const CaixaEntrada = () => {
                   <MensagemRecebida />
                 </div>
               </div>
-              <div className=" absolute bottom-5 left-0 flex w-full  flex-row  items-center  justify-between border-t border-terciary-500  pr-4 align-middle">
+              <div className="bottom-5 left-0 flex w-full  flex-row  items-center justify-between border-t border-terciary-500  pr-4 align-middle">
                 <div className="w-10/12">
                   <input
                     className=" mt-5  border-0 text-xs outline-0"
@@ -84,11 +95,12 @@ const CaixaEntrada = () => {
                   />
                 </div>
 
-                <div className="mt-5 flex gap-4">
+                {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}
+                {/* <div className="mt-5 flex gap-4">
                   <AiOutlinePicture className="text-xl text-slate-400" />
                   <FiPaperclip className="text-xl text-slate-400" />
                   <BiSmile className="text-xl text-slate-400" />
-                </div>
+                </div>*/}
               </div>
             </div>
           </div>

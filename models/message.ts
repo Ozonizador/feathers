@@ -4,8 +4,15 @@ export const MESSAGE_TABLE_NAME = "messages" as const;
 export interface Message {
     id: string,
     message: string,
-    hostId: string,
-    tenantId: string,
-    createdAt: Date,
-    updatedAt: Date
+    profileId: string,
+    conversationId: string,
+    createdAt?: Date,
+    updatedAt?: Date
 }
+
+export const MESSAGE_TABLE_PROPERTIES = {
+    ID: "id",
+    MESSAGE: "message",
+    CONVERSATION_ID: "conversationId",
+    PROFILE_ID: "profileId"
+} as const;
