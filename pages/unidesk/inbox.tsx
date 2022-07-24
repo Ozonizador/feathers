@@ -1,6 +1,5 @@
 import { BsFilterCircle } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
-import { Breadcrumb } from "flowbite-react";
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
@@ -11,7 +10,8 @@ import {
 } from "../../services/messageService";
 import { Message } from "../../models/message";
 import { Conversation } from "../../models/conversation";
-import Mensagem from "../../components/CaixaEntrada/MensagemEnviada/Mensagem";
+import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
+import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
 
 {
   /* page 59 XD */
@@ -29,6 +29,7 @@ const CaixaEntrada = () => {
       const { data, error } = await getConversationsFromUser(profile.id);
       if (!error) {
         setConversations(data);
+        setCurrentConversation(data[0].id);
       }
     }
   }, [profile]);
@@ -36,7 +37,9 @@ const CaixaEntrada = () => {
   const getMessagesFromConversation = useCallback(async () => {
     if (currentConversation) {
       const { data, error } = await getMessagesFromConversationId(currentConversation);
-      setMessages(data);
+      if (!error) {
+        setMessages(data);
+      }
     }
   }, [currentConversation]);
 
