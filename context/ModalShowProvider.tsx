@@ -8,9 +8,7 @@ interface ModalDetalhesPagamentoProps {
 const ModalDetalhesPagamentoContext = createContext<boolean>(false);
 const SetModalDetalhesPagamentoContext = createContext<Dispatch<SetStateAction<boolean>>>(() => {});
 
-export const ModalDetalhesPagamentoProvider = ({
-  children,
-}: ModalDetalhesPagamentoProps): JSX.Element => {
+export const ModalDetalhesPagamentoProvider = ({ children }: ModalDetalhesPagamentoProps): JSX.Element => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   return (
@@ -41,9 +39,7 @@ interface ModalAvaliarExperienciaProps {
 }
 
 const ModalAvaliarExperienciaContext = createContext<boolean>(false);
-const SetModalAvaliarExperienciaContext = createContext<Dispatch<SetStateAction<boolean>>>(
-  () => {}
-);
+const SetModalAvaliarExperienciaContext = createContext<Dispatch<SetStateAction<boolean>>>(() => {});
 
 export const ModalApplyShowProvider = ({ children }: ModalAvaliarExperienciaProps): JSX.Element => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -64,6 +60,39 @@ export function useModalApplyOpen() {
 
 export function useSetModalApplyOpen() {
   const setModalApplyOpen = useContext(SetModalAvaliarExperienciaContext);
+  return (value: boolean) => {
+    setModalApplyOpen(value);
+  };
+}
+
+/* Report Advertisement */
+
+interface ModalReportAnuncioProps {
+  children: ReactElement;
+}
+
+const ModalReportarAnuncioContext = createContext<boolean>(false);
+const SetModalReportarAnuncioContext = createContext<Dispatch<SetStateAction<boolean>>>(() => {});
+
+export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioProps): JSX.Element => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  return (
+    <ModalAvaliarExperienciaContext.Provider value={modalOpen}>
+      <SetModalAvaliarExperienciaContext.Provider value={setModalOpen}>
+        {children}
+      </SetModalAvaliarExperienciaContext.Provider>
+    </ModalAvaliarExperienciaContext.Provider>
+  );
+};
+
+export function useModalAvaliarExperiencia() {
+  const modalApplyOpen = useContext(ModalReportarAnuncioContext);
+  return modalApplyOpen;
+}
+
+export function useSetModalAvaliarExperiencia() {
+  const setModalApplyOpen = useContext(SetModalReportarAnuncioContext);
   return (value: boolean) => {
     setModalApplyOpen(value);
   };

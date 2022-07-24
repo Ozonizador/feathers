@@ -35,9 +35,7 @@ const Mensagem = ({ message }: MessageProps) => {
             </div>
           </div>
 
-          <div className="ml-4 mt-2 rounded-md bg-primary-500 p-4 text-xs text-white">
-            {message.message}
-          </div>
+          <div className="ml-4 mt-2 rounded-md bg-primary-500 p-4 text-xs text-white">{message.message}</div>
         </div>
       </div>
     </>
