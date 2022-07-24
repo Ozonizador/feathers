@@ -178,7 +178,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         <div className=" ml-6 flex w-3/4 flex-row items-center justify-between">
           <div>
             <div className="flex h-5 items-center">
-              <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3">
+              <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 ">
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {
                   return (
                     <option key={index} value={TYPE_CLEANING_LABELS[type]}>
