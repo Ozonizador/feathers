@@ -121,7 +121,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col">
+        <div className="mt-10 flex flex-col">
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
               <input
@@ -301,6 +301,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               </div>
             </div>
           </div>
+
           <div className="mt-8 flex flex-row items-center align-middle">
             <div>
               <input

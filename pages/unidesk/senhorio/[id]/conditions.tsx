@@ -1,13 +1,12 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
-// import HouseRulesComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
+import Advertisement from "../../../../models/advertisement";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import Advertisement from "../../../../models/advertisement";
 import {
   getSingleAdvertisement,
   updateAdvertisement,
@@ -48,7 +47,7 @@ const Conditions = ({ id }: ConditionsProps) => {
           <MenuSenhorio id={id} />
         </div>
         <div className="ml-20 w-4/5">
-          <div className="text-semibold mb-7 text-2xl">Condições e regras</div>
+          <div className="mb-7 text-2xl font-semibold">Condições e regras</div>
           <div className="text-xl text-gray-700">As suas regras</div>
 
           {advertisement && (
