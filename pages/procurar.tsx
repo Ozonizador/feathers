@@ -4,14 +4,14 @@ import SearchInputField from "../components/search/SearchInputField";
 
 const Procurar = () => {
   return (
-    <>
-      <div className="flex flex-1 justify-center">
+    <div className="">
+      <div className="flex flex-col justify-center  lg:flex-row">
         <SearchInputField />
       </div>
       <div className="mt-10">
         <ProcurarSection />
       </div>
-    </>
+    </div>
   );
 };
 
