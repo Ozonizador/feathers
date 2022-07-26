@@ -9,8 +9,8 @@ export interface Reservation {
   startDate: Date;
   endDate: Date;
   status: ReservationStatus;
-  advertisementId: String;
-  tenantId: String;
+  advertisementId: string;
+  tenantId: string;
 
   advertisement?: Advertisement;
   tenant?: Profile;
@@ -30,4 +30,7 @@ export const RESERVATION_TABLE = {
   ID: "id",
   ADVERT_ID: "advertisementId",
   TENANT_ID: "tenantId",
+  START_DATE: "startDate",
+  END_DATE: "endDate",
+  STATUS: "status",
 } as const;

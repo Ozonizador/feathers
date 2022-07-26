@@ -26,7 +26,11 @@ const startingReview = {
   privateReview: "",
 } as Review;
 
-const ModalAvaliarExperiencia = () => {
+interface ModalAvaliarExperienciaProps {
+  advertisementId: string;
+}
+
+const ModalAvaliarExperiencia = ({ advertisementId }: ModalAvaliarExperienciaProps) => {
   const profile = useProfileInformation();
   const [step, setStep] = useState(1);
   const isOpen = useModalAvaliarExperiencia();
