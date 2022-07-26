@@ -3,15 +3,9 @@ import Image from "next/image";
 
 export default function HomeSection6Cards({ img, testimonial, name, desc }) {
   return (
-    <article className="sec6-article">
+    <article>
       <div>
-        <Image
-          height={32}
-          width={32}
-          src="/images/icon-quotest.svg"
-          alt=""
-          style={{ width: "42px" }}
-        />
+        <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" style={{ width: "42px" }} />
         <p className="text-xl">{testimonial}</p>
       </div>
       <div>

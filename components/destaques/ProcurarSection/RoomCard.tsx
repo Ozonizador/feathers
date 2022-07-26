@@ -97,7 +97,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </div>
                   </div>
                   <div className="mb-1 mt-2 flex text-start text-xs">
-                    <ul id="classlist" className="pr-3-3 flex gap-5 text-gray-500">
+                    <ul className="pr-3-3 flex gap-5 text-gray-500">
                       <li className="list-none">Wifi</li>
                       <li>Cozinha</li>
                       <li>Secretária</li>

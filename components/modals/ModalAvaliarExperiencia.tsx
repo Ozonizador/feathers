@@ -185,6 +185,12 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
+  const [locationRating, setLocationRating] = useState<number>(1);
+  const [overallRating, setOverallRating] = useState<number>(1);
+  const [hostRating, setHostRating] = useState<number>(1);
+  const [comoditiesRating, setComoditiesRating] = useState<number>(1);
+  const [qualityValueRating, setQualityValueRating] = useState<number>(1);
+
   return (
     <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white  text-left align-middle shadow-xl transition-all">
       <Dialog.Title
@@ -209,55 +215,55 @@ const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) =
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Localização</div>
                   <Rating>
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star filled={false} />
+                    <Rating.Star filled={locationRating >= 1 ? true : false} />
+                    <Rating.Star filled={locationRating >= 2 ? true : false} />
+                    <Rating.Star filled={locationRating >= 3 ? true : false} />
+                    <Rating.Star filled={locationRating >= 4 ? true : false} />
+                    <Rating.Star filled={locationRating == 5 ? true : false} />
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Qualidade - preço</div>
                   <Rating>
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
+                    <Rating.Star filled={qualityValueRating >= 1 ? true : false} />
+                    <Rating.Star filled={qualityValueRating >= 2 ? true : false} />
+                    <Rating.Star filled={qualityValueRating >= 3 ? true : false} />
+                    <Rating.Star filled={qualityValueRating >= 4 ? true : false} />
+                    <Rating.Star filled={qualityValueRating == 5 ? true : false} />
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Comodidades</div>
                   <Rating>
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
+                    <Rating.Star filled={comoditiesRating >= 1 ? true : false} />
+                    <Rating.Star filled={comoditiesRating >= 2 ? true : false} />
+                    <Rating.Star filled={comoditiesRating >= 3 ? true : false} />
+                    <Rating.Star filled={comoditiesRating >= 4 ? true : false} />
+                    <Rating.Star filled={comoditiesRating == 5 ? true : false} />
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Senhorio</div>
                   <Rating>
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
+                    <Rating.Star filled={hostRating >= 1 ? true : false} />
+                    <Rating.Star filled={hostRating >= 2 ? true : false} />
+                    <Rating.Star filled={hostRating >= 3 ? true : false} />
+                    <Rating.Star filled={hostRating >= 4 ? true : false} />
+                    <Rating.Star filled={hostRating == 5 ? true : false} />
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Avaliação Geral</div>
                   <Rating>
-                    <Rating.Star />
-                    <Rating.Star />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
-                    <Rating.Star filled={false} />
+                    <Rating.Star filled={overallRating >= 1 ? true : false} />
+                    <Rating.Star filled={overallRating >= 2 ? true : false} />
+                    <Rating.Star filled={overallRating >= 3 ? true : false} />
+                    <Rating.Star filled={overallRating >= 4 ? true : false} />
+                    <Rating.Star filled={overallRating == 5 ? true : false} />
                   </Rating>
                 </div>
               </div>

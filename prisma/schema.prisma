@@ -34,7 +34,8 @@ model Profile {
   conversationsAsHost   Conversation[] @relation("conversationsAsHost")
   conversationsAsTenant Conversation[] @relation("conversationsAsTenant")
 
-  messages Message[] @relation("profileMessages")
+  messages    Message[] @relation("profileMessages")
+  reportsMade Report[]  @relation("tenantReports")
 
   @@map("profiles")
 }
@@ -71,6 +72,7 @@ model Advertisement {
   Review  Review[] @relation("advertisementReviews")
 
   Reservations Reservations[] @relation("advertisementReservations")
+  reports      Report[]       @relation("advertisementReports")
 
   @@map("advertisements")
 }
@@ -176,4 +178,17 @@ model Message {
   profileId      String       @db.Uuid
 
   @@map("messages")
+}
+
+model Report {
+  id String @id @default(uuid()) @db.Uuid
+
+  advertisement   Advertisement @relation("advertisementReports", references: [id], fields: [advertisementId])
+  advertisementId String        @db.Uuid
+  profile         Profile       @relation("tenantReports", references: [id], fields: [tenantId])
+  tenantId        String        @db.Uuid
+  description     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
