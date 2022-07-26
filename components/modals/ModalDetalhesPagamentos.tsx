@@ -3,10 +3,7 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Accordion } from "flowbite-react";
-import {
-  useModalDetalhesPagamento,
-  useSetModalDetalhesPagamentoOpen,
-} from "../../context/ModalShowProvider";
+import { useModalDetalhesPagamento, useSetModalDetalhesPagamentoOpen } from "../../context/ModalShowProvider";
 
 /* PAGINA 7 DO XD 
 
@@ -24,7 +21,7 @@ const ModalDetalhesPagamento = () => {
 
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={true} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -50,31 +47,28 @@ const ModalDetalhesPagamento = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="mb-16 mt-6 text-center text-5xl font-bold leading-6 text-gray-900"
-                  >
+                  <Dialog.Title as="h3" className="mb-16 mt-6 text-center text-5xl font-bold leading-6 text-gray-900">
                     Detalhes do Pagamento
                   </Dialog.Title>
 
                   <div className="mt-2">
                     <div className="px-8">
-                      <div className="text-3xl font-bold text-primary-500">Via Unihosts</div>
-                      <Accordion>
-                        <Accordion.Panel className="modal-w">
-                          <Accordion.Title className="modal-w">
-                            <div className="modal-w flex flex-row  justify-between bg-slate-800">
-                              <div>Primeira Renda</div>
-                              <div>300</div>
-                            </div>
-                          </Accordion.Title>
-                          <Accordion.Content>
-                            <p className="mb-2 text-gray-500 dark:text-gray-400">
-                              Pagamento antecipado respetivo ao mês de Fevereiro
-                            </p>
-                          </Accordion.Content>
-                        </Accordion.Panel>
-                      </Accordion>
+                      <div className="mb-12 text-3xl font-bold text-primary-500">Via Unihosts</div>
+                      <div className="w-full">
+                        <Accordion>
+                          <Accordion.Panel>
+                            <Accordion.Title className="modal-w flex w-full flex-row bg-black">
+                              <div className="flex-1">Primeira Renda</div>
+                              <div className="flex-1">300</div>
+                            </Accordion.Title>
+                            <Accordion.Content>
+                              <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                Pagamento antecipado respetivo ao mês de Fevereiro
+                              </p>
+                            </Accordion.Content>
+                          </Accordion.Panel>
+                        </Accordion>
+                      </div>
                     </div>
                   </div>
                 </Dialog.Panel>

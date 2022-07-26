@@ -3,6 +3,7 @@ import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperienci
 import ModalDenuncia from "../components/modals/ModalDenuncia";
 import MenuTest from "../components/unidesk/Senhorio/Reviews/MenuTest/MenuTest";
 import Disponivel from "../components/anuncio/AnuncioDisponivel";
+import ModalDetalhesPagamento from "../components/modals/ModalDetalhesPagamentos";
 
 // import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperiencia";
 
@@ -17,6 +18,9 @@ const Index = (): JSX.Element => {
       {/* <Menu /> */}
 
       {/* <MenuTest /> */}
+      {/* <Disponivel /> */}
+
+      {/* <ModalDetalhesPagamento /> */}
       {/* <ModalDenuncia defaultOpen={false} /> */}
       {/* <ModalAlterarReserva defaultOpen={true} /> */}
     </div>
