@@ -68,6 +68,20 @@ const ModalDenuncia = ({ advertisementId }) => {
     );
   };
 
+  const Description = () => {
+    return (
+      <textarea
+        rows={5}
+        key="description-textarea"
+        name="description"
+        className="m-4 w-full border border-b-gray-400 p-2"
+        placeholder="Conta-nos mais sobre isso"
+        onChange={(e) => setReport({ ...report, description: e.target.value })}
+        autoFocus
+      />
+    );
+  };
+
   const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
     const changeReportType = (event) => {
       const type = event.target.value;
@@ -162,14 +176,7 @@ const ModalDenuncia = ({ advertisementId }) => {
                     </label>
                   </div>
                   <div className="w-5/6">
-                    <textarea
-                      rows={5}
-                      name="description"
-                      className="m-4 w-full border border-b-gray-400 p-2"
-                      placeholder="Conta-nos mais sobre isso"
-                      value={report.description}
-                      onChange={(e) => setReport({ ...report, description: e.target.value })}
-                    />
+                    <Description />
                   </div>
                   <div className="flex flex-1 justify-end">
                     <button

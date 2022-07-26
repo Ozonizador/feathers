@@ -125,6 +125,8 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) => {
+  const [publicFeedback, setPublicFeedback] = useState<string>("");
+  const [privateFeedback, setPrivateFeedback] = useState<string>("");
   return (
     <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
       <Dialog.Title
@@ -150,9 +152,10 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
               <p className="mb-3 text-base">Deixa o teu feedback público</p>
               <div className="mb-3 bg-slate-200">
                 <textarea
-                  className="form-control w-full rounded-md border  border-terciary-500 bg-white"
+                  className="form-control w-full rounded-md border border-terciary-500 bg-white"
                   id="exampleFormControlTextarea1"
                   rows={3}
+                  onChange={(e) => setPublicFeedback(e.target.value)}
                 ></textarea>
               </div>
               <div className="mb-3 mt-10">
@@ -162,6 +165,7 @@ const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) =>
                     className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
                     id="exampleFormControlTextarea1"
                     rows={3}
+                    onChange={(e) => setPrivateFeedback(e.target.value)}
                   ></textarea>
                 </div>
               </div>
@@ -215,55 +219,105 @@ const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) =
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Localização</div>
                   <Rating>
-                    <Rating.Star filled={locationRating >= 1 ? true : false} />
-                    <Rating.Star filled={locationRating >= 2 ? true : false} />
-                    <Rating.Star filled={locationRating >= 3 ? true : false} />
-                    <Rating.Star filled={locationRating >= 4 ? true : false} />
-                    <Rating.Star filled={locationRating == 5 ? true : false} />
+                    <div onClick={(e) => setLocationRating(1)}>
+                      <Rating.Star filled={locationRating >= 1 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setLocationRating(2)}>
+                      <Rating.Star filled={locationRating >= 2 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setLocationRating(3)}>
+                      <Rating.Star filled={locationRating >= 3 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setLocationRating(4)}>
+                      <Rating.Star filled={locationRating >= 4 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setLocationRating(5)}>
+                      <Rating.Star filled={locationRating == 5 ? true : false} />
+                    </div>
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Qualidade - preço</div>
                   <Rating>
-                    <Rating.Star filled={qualityValueRating >= 1 ? true : false} />
-                    <Rating.Star filled={qualityValueRating >= 2 ? true : false} />
-                    <Rating.Star filled={qualityValueRating >= 3 ? true : false} />
-                    <Rating.Star filled={qualityValueRating >= 4 ? true : false} />
-                    <Rating.Star filled={qualityValueRating == 5 ? true : false} />
+                    <div onClick={(e) => setQualityValueRating(1)}>
+                      <Rating.Star filled={qualityValueRating >= 1 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setQualityValueRating(2)}>
+                      <Rating.Star filled={qualityValueRating >= 2 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setQualityValueRating(3)}>
+                      <Rating.Star filled={qualityValueRating >= 3 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setQualityValueRating(4)}>
+                      <Rating.Star filled={qualityValueRating >= 4 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setQualityValueRating(5)}>
+                      <Rating.Star filled={qualityValueRating == 5 ? true : false} />
+                    </div>
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Comodidades</div>
                   <Rating>
-                    <Rating.Star filled={comoditiesRating >= 1 ? true : false} />
-                    <Rating.Star filled={comoditiesRating >= 2 ? true : false} />
-                    <Rating.Star filled={comoditiesRating >= 3 ? true : false} />
-                    <Rating.Star filled={comoditiesRating >= 4 ? true : false} />
-                    <Rating.Star filled={comoditiesRating == 5 ? true : false} />
+                    <div onClick={(e) => setComoditiesRating(1)}>
+                      <Rating.Star filled={comoditiesRating >= 1 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setComoditiesRating(2)}>
+                      <Rating.Star filled={comoditiesRating >= 2 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setComoditiesRating(3)}>
+                      <Rating.Star filled={comoditiesRating >= 3 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setComoditiesRating(4)}>
+                      <Rating.Star filled={comoditiesRating >= 4 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setComoditiesRating(5)}>
+                      <Rating.Star filled={comoditiesRating == 5 ? true : false} />
+                    </div>
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Senhorio</div>
                   <Rating>
-                    <Rating.Star filled={hostRating >= 1 ? true : false} />
-                    <Rating.Star filled={hostRating >= 2 ? true : false} />
-                    <Rating.Star filled={hostRating >= 3 ? true : false} />
-                    <Rating.Star filled={hostRating >= 4 ? true : false} />
-                    <Rating.Star filled={hostRating == 5 ? true : false} />
+                    <div onClick={(e) => setHostRating(1)}>
+                      <Rating.Star filled={hostRating >= 1 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setHostRating(2)}>
+                      <Rating.Star filled={hostRating >= 2 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setHostRating(3)}>
+                      <Rating.Star filled={hostRating >= 3 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setHostRating(4)}>
+                      <Rating.Star filled={hostRating >= 4 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setHostRating(5)}>
+                      <Rating.Star filled={hostRating == 5 ? true : false} />
+                    </div>
                   </Rating>
                 </div>
 
                 <div className="mb-8 flex w-2/5 flex-row justify-between">
                   <div className="text-2xl text-secondary-300">Avaliação Geral</div>
                   <Rating>
-                    <Rating.Star filled={overallRating >= 1 ? true : false} />
-                    <Rating.Star filled={overallRating >= 2 ? true : false} />
-                    <Rating.Star filled={overallRating >= 3 ? true : false} />
-                    <Rating.Star filled={overallRating >= 4 ? true : false} />
-                    <Rating.Star filled={overallRating == 5 ? true : false} />
+                    <div onClick={(e) => setOverallRating(1)}>
+                      <Rating.Star filled={overallRating >= 1 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setOverallRating(2)}>
+                      <Rating.Star filled={overallRating >= 2 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setOverallRating(3)}>
+                      <Rating.Star filled={overallRating >= 3 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setOverallRating(4)}>
+                      <Rating.Star filled={overallRating >= 4 ? true : false} />
+                    </div>
+                    <div onClick={(e) => setOverallRating(5)}>
+                      <Rating.Star filled={overallRating == 5 ? true : false} />
+                    </div>
                   </Rating>
                 </div>
               </div>
