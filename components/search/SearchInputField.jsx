@@ -10,7 +10,7 @@ export const SearchInputField = () => {
     <>
       <div className="container lg:flex flex-row justify-center">
         <div className="relative my-2 lg:mx-2">
-          <input type="text" className="bg-terciary-50 peer w-full rounded-xl border  p-5 lg:w-72 border-primary-500" />
+          <input type="text" className="bg-terciary-50 peer w-full rounded-xl border  p-5 lg:w-72" />
           <p className="absolute top-1/4 px-2 peer-focus:hidden">
             Encontrar <Image height={32} width={32} src="/images/icon-home1.svg" alt="" /> em...
           </p>
