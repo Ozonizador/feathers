@@ -22,3 +22,10 @@ export const getReservationByAdvertId = async (advertId: string) => {
     .eq(RESERVATION_TABLE.ADVERT_ID, advertId);
   return { data, error };
 };
+
+export const getReservationByTenantId = async (tenantId: string) => {
+  const { data, error } = await supabaseClient
+    .from<Reservation>(RESERVATION_TABLE_NAME)
+    .select()
+    .eq(RESERVATION_TABLE.TENANT_ID, tenantId);
+};

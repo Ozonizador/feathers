@@ -29,7 +29,7 @@ model Profile {
   advertisements Advertisement[]
   tenantReviews  Review[]        @relation("tenantReviews")
   notifications  Notification[]  @relation("notifications")
-  reservations   Reservations[]  @relation("tenantReservations")
+  reservations   Reservation[]   @relation("tenantReservations")
 
   conversationsAsHost   Conversation[] @relation("conversationsAsHost")
   conversationsAsTenant Conversation[] @relation("conversationsAsTenant")
@@ -71,8 +71,8 @@ model Advertisement {
   Profile Profile? @relation(fields: [host], references: [id])
   Review  Review[] @relation("advertisementReviews")
 
-  Reservations Reservations[] @relation("advertisementReservations")
-  reports      Report[]       @relation("advertisementReports")
+  reservations Reservation[] @relation("advertisementReservations")
+  reports      Report[]      @relation("advertisementReports")
 
   @@map("advertisements")
 }
@@ -95,7 +95,7 @@ enum TypeHost {
   PARTICULAR
 }
 
-model Reservations {
+model Reservation {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -106,8 +106,10 @@ model Reservations {
   advertisementId String            @db.Uuid
   status          ReservationStatus
 
-  tenant   Profile @relation("tenantReservations", references: [id], fields: [tenantId])
-  tenantId String  @db.Uuid
+  tenant       Profile       @relation("tenantReservations", references: [id], fields: [tenantId])
+  tenantId     String        @db.Uuid
+  stay         Stay?         @relation("reservationOfStay")
+  Conversation Conversation? @relation("conversationOfReservation")
 
   @@map("reservations")
 }
@@ -152,11 +154,13 @@ model Notification {
 }
 
 model Conversation {
-  id       String  @id @default(uuid()) @db.Uuid
-  host     Profile @relation("conversationsAsHost", references: [id], fields: [hostId])
-  hostId   String  @db.Uuid
-  tenant   Profile @relation("conversationsAsTenant", references: [id], fields: [tenantId])
-  tenantId String  @db.Uuid
+  id            String      @id @default(uuid()) @db.Uuid
+  host          Profile     @relation("conversationsAsHost", references: [id], fields: [hostId])
+  hostId        String      @db.Uuid
+  tenant        Profile     @relation("conversationsAsTenant", references: [id], fields: [tenantId])
+  tenantId      String      @db.Uuid
+  reservation   Reservation @relation("conversationOfReservation", references: [id], fields: [reservationId])
+  reservationId String      @unique @db.Uuid
 
   messages Message[] @relation("conversationMessages")
 
@@ -191,4 +195,17 @@ model Report {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("reports")
+}
+
+model Stay {
+  id            String      @id @default(uuid()) @db.Uuid
+  reservation   Reservation @relation("reservationOfStay", references: [id], fields: [reservationId])
+  reservationId String      @unique @db.Uuid
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("stays")
 }

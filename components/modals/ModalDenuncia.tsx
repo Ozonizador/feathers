@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useModalReportAdvertisement, useSetModalReportAdvertisement } from "../../context/ModalShowProvider";
@@ -23,7 +23,6 @@ const ModalDenuncia = ({ advertisementId }) => {
 
   const [step, setStep] = useState(1);
   const [report, setReport] = useState<Report>({
-    description: "",
     type: ReportsType.IMPRECISE,
     advertisementId,
     tenantId: "",
@@ -68,21 +67,9 @@ const ModalDenuncia = ({ advertisementId }) => {
     );
   };
 
-  const Description = () => {
-    return (
-      <textarea
-        rows={5}
-        key="description-textarea"
-        name="description"
-        className="m-4 w-full border border-b-gray-400 p-2"
-        placeholder="Conta-nos mais sobre isso"
-        onChange={(e) => setReport({ ...report, description: e.target.value })}
-        autoFocus
-      />
-    );
-  };
-
   const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
+    const [description, setDescription] = useState<string>("");
+
     const changeReportType = (event) => {
       const type = event.target.value;
       setReport({ ...report, type });
@@ -91,6 +78,7 @@ const ModalDenuncia = ({ advertisementId }) => {
     const saveReport = async (event) => {
       event.preventDefault();
       if (profile) {
+        setReport({ ...report, description });
         const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
         if (data) {
           nextStep();
@@ -176,7 +164,14 @@ const ModalDenuncia = ({ advertisementId }) => {
                     </label>
                   </div>
                   <div className="w-5/6">
-                    <Description />
+                    <textarea
+                      className="form-control w-full rounded-md border border-terciary-500 bg-white"
+                      id="exampleFormControlTextarea1"
+                      rows={3}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Conta-nos mais sobre isso"
+                      defaultValue={description}
+                    ></textarea>
                   </div>
                   <div className="flex flex-1 justify-end">
                     <button

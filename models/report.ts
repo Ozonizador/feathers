@@ -4,7 +4,7 @@ export interface Report {
   id?: string;
   advertisementId: string;
   tenantId: string;
-  description: string;
+  description?: string;
   type: ReportsType;
 
   createdAt?: Date;

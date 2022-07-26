@@ -13,8 +13,23 @@ import ModalAvaliarExperiencia from "../../../components/modals/ModalAvaliarExpe
 import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva";
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
+import { useCallback, useEffect } from "react";
+import { useProfileInformation } from "../../../context/MainProvider";
+import { getReservationByTenantId } from "../../../services/reservationService";
 /* PAGINA 21 do xd */
 const Estadia = () => {
+  const profile = useProfileInformation();
+  const getProfileReservations = useCallback(async () => {
+    if (profile) {
+      const { data, error } = await getReservationByTenantId(profile.id);
+      if (!error) {
+      }
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    getProfileReservations();
+  }, [getProfileReservations]);
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
