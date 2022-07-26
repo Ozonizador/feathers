@@ -26,7 +26,7 @@ const CaixaEntrada = () => {
       const { data, error } = await getConversationsFromUser(profile.id);
       if (!error) {
         setConversations(data);
-        setCurrentConversation(data[0].id);
+        setCurrentConversation((data[0] && data[0].id) || null);
       }
     }
   }, [profile]);

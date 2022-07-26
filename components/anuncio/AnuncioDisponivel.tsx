@@ -1,7 +1,12 @@
 import Image from "next/image";
-import { AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import Advertisement, { AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
-const AnuncioDisponivel = ({ advertisement, onChange }) => {
+interface AnuncioDisponivelProps {
+  advertisement: Advertisement;
+  onChange: (property, value) => void;
+}
+
+const AnuncioDisponivel = ({ advertisement, onChange }: AnuncioDisponivelProps) => {
   return (
     <>
       <div className="my-20 flex flex-col">
@@ -12,7 +17,7 @@ const AnuncioDisponivel = ({ advertisement, onChange }) => {
               <div>
                 <input
                   type="radio"
-                  name="flex_host_type"
+                  name="availability"
                   value={AdvertisementStatus.NOT_AVAILABLE}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
                   checked={advertisement.available === AdvertisementStatus.NOT_AVAILABLE}
@@ -25,7 +30,7 @@ const AnuncioDisponivel = ({ advertisement, onChange }) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-xl font-bold">Disponível</div>
+            <div className="text-xl font-bold">Não publicado</div>
             <div className="mt-2 text-base text-secondary-300">
               O seu anúncio não pode ser reservado e não vai aparecer nos resultados de pesquisa.
             </div>
@@ -37,7 +42,7 @@ const AnuncioDisponivel = ({ advertisement, onChange }) => {
               <div>
                 <input
                   type="radio"
-                  name="flex_host_type"
+                  name="availability"
                   value={AdvertisementStatus.DISABLED}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
                   checked={advertisement.available === AdvertisementStatus.DISABLED}
@@ -63,7 +68,7 @@ const AnuncioDisponivel = ({ advertisement, onChange }) => {
               <div>
                 <input
                   type="radio"
-                  name="flex_host_type"
+                  name="availability"
                   value={AdvertisementStatus.AVAILABLE}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
                   checked={advertisement.available === AdvertisementStatus.AVAILABLE}
@@ -76,10 +81,8 @@ const AnuncioDisponivel = ({ advertisement, onChange }) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-xl font-bold">Não publicado</div>
-            <div className="mt-2 text-base text-secondary-300">
-              O seu anúncio está disponível para reserva.
-            </div>
+            <div className="text-xl font-bold">Disponível</div>
+            <div className="mt-2 text-base text-secondary-300">O seu anúncio está disponível para reserva.</div>
           </div>
         </div>
       </div>
