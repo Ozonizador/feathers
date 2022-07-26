@@ -27,11 +27,11 @@ export default function ProcurarSection() {
         <div className="w-full lg:w-1/2">
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
-              <div className="font-bold">
+              <div className="text-sm font-bold lg:text-2xl">
                 23 espaços <span className="font-normal text-gray-400">disponíveis para Peniche</span>{" "}
               </div>
               <div className="mb-2">
-                <select className="w-36 rounded-md  border border-solid border-terciary-500 bg-white py-2 px-3 text-base lg:w-60">
+                <select className="w-36 rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 text-sm  lg:w-60">
                   <option>Ordenar Por</option>
                   <option>Casa</option>
                   <option>Apartamento</option>
@@ -66,7 +66,7 @@ export default function ProcurarSection() {
               <div className="my-2 ml-auto mt-0">
                 <Link href="/procurar">
                   <a>
-                    <button className=" mt-5 mt-0 h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:w-full">
+                    <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">
                       Mais Filtros
                     </button>
                   </a>
