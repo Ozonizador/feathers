@@ -41,7 +41,7 @@ model Profile {
 }
 
 model Advertisement {
-  id                String       @id @default(uuid()) @db.Uuid
+  id                String              @id @default(uuid()) @db.Uuid
   type              TypeRoom
   place             String
   street            String
@@ -63,10 +63,11 @@ model Advertisement {
   extraPerHost      Int
   guaranteeValue    Int
   expenses          Json
+  available         AdvertisementStatus
   hostLivesProperty Boolean
-  host              String       @db.Uuid
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
+  host              String              @db.Uuid
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
 
   Profile Profile? @relation(fields: [host], references: [id])
   Review  Review[] @relation("advertisementReviews")
@@ -93,6 +94,12 @@ enum TypeRoom {
 enum TypeHost {
   PROFISSIONAL
   PARTICULAR
+}
+
+enum AdvertisementStatus {
+  AVAILABLE
+  DISABLED
+  NOT_AVAILABLE
 }
 
 model Reservation {

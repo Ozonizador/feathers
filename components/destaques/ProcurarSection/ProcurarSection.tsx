@@ -1,25 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import RoomCard from "./RoomCard";
-import { getAdvertisementsFromDB } from "../../../services/advertisementService";
+import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
 import Advertisement from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 
+interface ProcurarPagination {
+  advertisements: Advertisement[];
+  count: number;
+}
+
 export default function ProcurarSection() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [advertisementsInfo, setAdvertisementsInfo] = useState<ProcurarPagination>({ count: 0, advertisements: [] });
 
-  const getAdvertisements = async () => {
-    const { data, error } = await getAdvertisementsFromDB();
-    setAdvertisements(data);
+  const getAdvertisements = useCallback(async () => {
+    const { data, error, count } = await getFilteredAdvertisements(null, page);
+    if (!error) {
+      setAdvertisementsInfo({ advertisements: data, count });
+    }
     setIsLoading(false);
-  };
+  }, [page]);
 
   useEffect(() => {
     setIsLoading(true);
     getAdvertisements();
-  }, []);
+  }, [getAdvertisements]);
 
   return (
     <>
@@ -39,7 +47,7 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            <div className=" mr-0 flex-row  lg:flex">
+            <div className=" mr-0 flex-row lg:flex">
               <select className="mb-3 mr-4 w-full rounded-md border border-solid border-terciary-500 bg-white  py-4 text-sm lg:w-52">
                 <option>Tipo de espaço</option>
                 <option>Casa</option>
@@ -74,60 +82,6 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            {/* <div className="row">
-              <div className="flex flex-1">
-                <h2 className="heading text-bold text-base lg:text-2xl">Pertence Onde Tu Quiseres!</h2>
-
-                <div className="ml-auto mb-2">
-                  <select className="w-36 rounded-md  border border-solid border-terciary-500 bg-white py-2 px-3 text-base lg:w-60">
-                    <option>Ordenar Por</option>
-                    <option>Casa</option>
-                    <option>Apartamento</option>
-                  </select>
-
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-3 flex items-center justify-between gap-2 py-5 align-middle">
-              <div className="">
-                <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                  <option>Tipo de espaço</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                </select>
-               
-              </div>
-
-              <div>
-                <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                  <option>Preço</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                </select>
-
-               
-              </div>
-
-              <div>
-                <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                  <option>Comodidades</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                </select>
-
-               
-              </div>
-
-              <div className="text-end">
-                <Link href="/">
-                  <a className="rounded-md bg-primary-500 py-4 px-7 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-                    Mais Filtros
-                  </a>
-                </Link>
-              </div>
-            </div> */}
-
             {isLoading && (
               <div className="mt-32 flex flex-1 justify-center">
                 <Spinner color="info" aria-label="loading" size="lg" />
@@ -136,8 +90,8 @@ export default function ProcurarSection() {
             {!isLoading && (
               <>
                 <div>
-                  {advertisements &&
-                    advertisements.map((advertisement, index) => {
+                  {advertisementsInfo.advertisements &&
+                    advertisementsInfo.advertisements.map((advertisement, index) => {
                       return (
                         <Link href={`/anuncio/${advertisement.id}`} key={index}>
                           <a>
@@ -153,59 +107,6 @@ export default function ProcurarSection() {
             )}
           </div>
 
-          {/* <div className="row">
-            <div className="flex flex-1">
-              <h2 className="heading text-bold text-2xl">Pertence Onde Tu Quiseres!</h2>
-
-              <div className="ml-auto mb-2">
-                <select className="w-60 rounded-md  border border-solid border-terciary-500 bg-white py-2 px-3 text-base ">
-                  <option>Ordenar Por</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                </select>
-
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className="mb-3 grid grid-cols-4 items-center justify-between gap-2 bg-black py-5 align-middle">
-            <div className="">
-              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                <option>Tipo de espaço</option>
-                <option>Casa</option>
-                <option>Apartamento</option>
-              </select>
-             
-            </div>
-
-            <div>
-              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                <option>Preço</option>
-                <option>Casa</option>
-                <option>Apartamento</option>
-              </select>
-
-          
-            </div>
-
-            <div>
-              <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm">
-                <option>Comodidades</option>
-                <option>Casa</option>
-                <option>Apartamento</option>
-              </select>
-
-            </div>
-
-            <div className="text-end">
-              <Link href="/">
-                <a className="rounded-md bg-primary-500 py-4 px-7 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-                  Mais Filtros
-                </a>
-              </Link>
-            </div>
-          </div> */}
-
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">
               <Spinner color="info" aria-label="loading" size="lg" />
@@ -214,8 +115,8 @@ export default function ProcurarSection() {
           {!isLoading && (
             <>
               <div>
-                {advertisements &&
-                  advertisements.map((advertisement, index) => {
+                {advertisementsInfo.advertisements &&
+                  advertisementsInfo.advertisements.map((advertisement, index) => {
                     return (
                       <Link href={`/anuncio/${advertisement.id}`} key={index}>
                         <a>
@@ -229,13 +130,19 @@ export default function ProcurarSection() {
               </div>
               <div></div>
 
-              <div className="row mb-5">
-                <div className="col-md-2"></div>
-                <div className="flex flex-1 justify-around px-5">
-                  <Pagination currentPage={1} totalPages={100} onPageChange={() => {}} />
+              {advertisementsInfo.advertisements.length !== 0 && (
+                <div className="row mb-5">
+                  <div className="col-md-2"></div>
+                  <div className="flex flex-1 justify-around px-5">
+                    <Pagination
+                      currentPage={page}
+                      totalPages={advertisementsInfo.count / PAGE_NUMBER_COUNT}
+                      onPageChange={(page) => setPage(page)}
+                    />
+                  </div>
+                  <div className="col-md-5"></div>
                 </div>
-                <div className="col-md-5"></div>
-              </div>
+              )}
             </>
           )}
         </div>

@@ -6,6 +6,8 @@ import Advertisement, {
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
 
+export const PAGE_NUMBER_COUNT = 20 as const;
+
 export const addAdvertisement = async (advertisement: Advertisement) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
@@ -32,11 +34,6 @@ export const getSingleAdvertisement = async (id: string) => {
   return { data, error };
 };
 
-export const getAdvertisementsFromDB = async () => {
-  const { data, error } = await supabaseClient.from<Advertisement>(ADVERTISEMENT_TABLE_NAME).select();
-  return { data, error };
-};
-
 export const getAdvertismentsFromMultipleId = async (ids: string[]) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
@@ -51,6 +48,21 @@ export const getAdvertismentsFromUserId = async (userId: string) => {
     .select()
     .eq(ADVERTISEMENT_PROPERTIES.HOST, userId);
   return { data, error };
+};
+
+/*
+  Filtering
+*/
+
+export const getFilteredAdvertisements = async (page: number, filter: any) => {
+  let initRange = page == 1 ? 0 : page * PAGE_NUMBER_COUNT;
+
+  const { data, error, count } = await supabaseClient
+    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
+    .select("*", { count: "exact" })
+    .range(initRange, page * PAGE_NUMBER_COUNT - 1);
+
+  return { data, error, count };
 };
 
 /* IMAGE */
