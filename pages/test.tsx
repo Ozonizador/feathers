@@ -20,7 +20,7 @@ const Index = (): JSX.Element => {
       {/* <MenuTest /> */}
       {/* <Disponivel /> */}
 
-      <ModalDetalhesPagamento />
+      {/* <ModalDetalhesPagamento /> */}
       {/* <ModalDenuncia defaultOpen={false} /> */}
       {/* <ModalAlterarReserva defaultOpen={true} /> */}
     </div>
