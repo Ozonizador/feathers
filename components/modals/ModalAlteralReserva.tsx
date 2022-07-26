@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
+import { Reservation } from "../../models/reservations";
 
 /* PAGINA 23 DO XD 
 
@@ -10,7 +11,11 @@ para chamar na pagina => <ModalAlterarReserva defaultOpen={false} />
 false nao mostra nada true mostra.
 */
 
-const ModalAlterarReserva = () => {
+interface ModalAlterarReservaProps {
+  reservation: Reservation;
+}
+
+const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
   const isOpen = useModalAlterarReserva();
   const setIsOpen = useSetModalAlterarReserva();
 

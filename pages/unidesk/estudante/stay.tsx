@@ -13,15 +13,18 @@ import ModalAvaliarExperiencia from "../../../components/modals/ModalAvaliarExpe
 import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva";
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { getReservationByTenantId } from "../../../services/reservationService";
+import { getCurrentReservationByTenantId } from "../../../services/reservationService";
+import { Reservation } from "../../../models/reservations";
 /* PAGINA 21 do xd */
 const Estadia = () => {
   const profile = useProfileInformation();
+
+  const [currentReservation, setCurrentReservation] = useState<Reservation>();
   const getProfileReservations = useCallback(async () => {
     if (profile) {
-      const { data, error } = await getReservationByTenantId(profile.id);
+      const { data, error } = await getCurrentReservationByTenantId(profile.id);
       if (!error) {
       }
     }
@@ -30,16 +33,12 @@ const Estadia = () => {
   useEffect(() => {
     getProfileReservations();
   }, [getProfileReservations]);
+
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            {/* Modais */}
-            <ModalDenuncia />
-            <ModalAvaliarExperiencia />
-            <ModalAlterarReserva />
-            {/* Logica visivel */}
             <div>
               <Breadcrumbs />
               <div className="mx-auto my-20  w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
@@ -47,16 +46,25 @@ const Estadia = () => {
                   <div className="mr-12 w-1/5">
                     <MenuEstudante />
                   </div>
-                  <div>
-                    <div className="ml-12">
+                  <div className="ml-12">
+                    <div>
                       <div className="text-3xl font-bold">Informações gerais</div>
                       <div className="mt-7 mb-5 text-xl text-gray-600">Estadia atual</div>
                     </div>
-                    <div className="ml-10 flex items-center justify-between">
-                      <StayCard />
-                      <StayInfo />
+                    <div className="flex items-center justify-between">
+                      {currentReservation && (
+                        <>
+                          {/* Modais */}
+                          <ModalDenuncia advertisementId={currentReservation.advertisementId} />
+                          <ModalAvaliarExperiencia advertisementId={currentReservation.advertisementId} />
+                          <ModalAlterarReserva reservation={currentReservation} />
+                          {/* Logica visivel */}
+                          <StayCard />
+                          <StayInfo />
+                        </>
+                      )}
+                      {!currentReservation && <div>Não tem estadia programada</div>}
                     </div>
-
                     <div className="flex w-full flex-col items-center justify-center align-middle">
                       <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
                       <Link href="/">

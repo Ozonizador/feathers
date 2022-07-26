@@ -57,58 +57,59 @@ const UnideskFavoritos = () => {
             </div>
           )}
           {!isLoading && (
-            <div className="grid grid-cols-2 gap-5">
-              {favourites.map((favourite, index) => {
-                return (
-                  <div className="mb-10 h-40 w-full bg-white" key={index}>
-                    <div className="flex rounded-lg border-2 border-gray-200">
-                      <div className="w-1/3 rounded-l-lg">
-                        {favourite.photos ? (
-                          <Image
-                            src={favourite.photos[0]}
-                            alt="Foto de Capa"
-                            layout="intrinsic"
-                            height={164}
-                            width={164}
-                          />
-                        ) : (
-                          <Image
-                            src={NoPhotoAvailable}
-                            alt="no photo available"
-                            layout="intrinsic"
-                            height={164}
-                            width={164}
-                          />
-                        )}
-                      </div>
-                      <div className="ml-3 flex flex-1 flex-col p-2">
-                        <div className="text-lg font-bold">{favourite.title}</div>
-                        <div className="text-md mb-1 font-bold text-primary-500">
-                          {favourite.monthRent}€/mês
+            <>
+              <div className="grid grid-cols-2 gap-5">
+                {favourites.map((favourite, index) => {
+                  return (
+                    <div className="mb-10 h-40 w-full bg-white" key={index}>
+                      <div className="flex rounded-lg border-2 border-gray-200">
+                        <div className="w-1/3 rounded-l-lg">
+                          {favourite.photos ? (
+                            <Image
+                              src={favourite.photos[0]}
+                              alt="Foto de Capa"
+                              layout="intrinsic"
+                              height={164}
+                              width={164}
+                            />
+                          ) : (
+                            <Image
+                              src={NoPhotoAvailable}
+                              alt="no photo available"
+                              layout="intrinsic"
+                              height={164}
+                              width={164}
+                            />
+                          )}
                         </div>
+                        <div className="ml-3 flex flex-1 flex-col p-2">
+                          <div className="text-lg font-bold">{favourite.title}</div>
+                          <div className="text-md mb-1 font-bold text-primary-500">{favourite.monthRent}€/mês</div>
 
-                        <div className="mt-auto flex">
-                          <div className="relative mb-2 text-center text-base">
-                            <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
-                              <RoomUtilitesPopover expenses={favourite.expenses} />
-                              <BiInfoCircle />
-                            </div>
-                            {favourite.expenses &&
-                              favourite.expenses.inclusive !== undefined &&
-                              favourite.expenses.inclusive !== "EXCLUDED" && (
+                          <div className="mt-auto flex">
+                            <div className="relative mb-2 text-center text-base">
+                              <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
-                              )}
+                                <BiInfoCircle />
+                              </div>
+                              {favourite.expenses &&
+                                favourite.expenses.inclusive !== undefined &&
+                                favourite.expenses.inclusive !== "EXCLUDED" && (
+                                  <RoomUtilitesPopover expenses={favourite.expenses} />
+                                )}
+                            </div>
                           </div>
+                          <Link href={`/anuncio/${favourite.id}`}>
+                            <a className="text-base text-gray-500">Ver mais</a>
+                          </Link>
                         </div>
-                        <Link href={`/anuncio/${favourite.id}`}>
-                          <a className="text-base text-gray-500">Ver mais</a>
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+              {(!favourites || favourites.length === 0) && <div>Sem Favoritos</div>}
+            </>
           )}
         </div>
         <div className="mt-12 mb-20 flex justify-center">

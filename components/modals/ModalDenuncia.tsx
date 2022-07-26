@@ -16,7 +16,11 @@ interface PassosModaisProps {
   nextStep: () => void;
 }
 
-const ModalDenuncia = ({ advertisementId }) => {
+interface ModalDenunciaProps {
+  advertisementId: string;
+}
+
+const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
   const profile = useProfileInformation();
   const isOpen = useModalReportAdvertisement();
   const setIsOpen = useSetModalReportAdvertisement();
