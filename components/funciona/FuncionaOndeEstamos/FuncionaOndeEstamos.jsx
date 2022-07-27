@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const FuncionaOndeEstamos = () => {
   return (
-    <section className="container mx-auto my-60 flex rounded-2xl bg-terciary-600 py-20">
-      <div className="flex flex-1">MAP</div>
+    <section className="w-11/12 container mx-auto my-60 flex rounded-2xl bg-terciary-600 py-20">
+      {/* <div className="flex flex-1">MAP</div> */}
 
       <div className="flex flex-1 flex-col justify-center align-middle">
-        <div className="w-3/4">
-          <h1 className="m- text-6xl font-bold">Onde Estamos?</h1>
+        <div className="w-full lg:w-3/4">
+          <h1 className="text-3xl lg:text-6xl font-bold mb-4 text-center">Onde Estamos?</h1>
           <div className="flex w-80 items-center rounded-full bg-white p-4 align-middle drop-shadow-md">
             <div className="">
               <Image

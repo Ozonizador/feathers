@@ -5,7 +5,7 @@ import FuncionaSection2Card from "../funcionaSection2/FuncionaSection2Card";
 
 const FuncionaSection2 = () => {
   return (
-    <section className="container my-20 mx-10 lg:mx-auto">
+    <section className="container my-20  lg:mx-auto">
       <div className="container mx-auto flex flex-row justify-between  ">
         <FuncionaSection2Card
           img="/images/img1.png"
@@ -72,7 +72,7 @@ const FuncionaSection2 = () => {
         />
       </div>
       <Link href="" className="mb-24">
-        <a className="mx-auto   flex w-52 justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in  hover:text-white hover:drop-shadow-xl">
+        <a className="mx-auto   flex w-11/12 justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in  hover:text-white hover:drop-shadow-xl lg:w-52">
           Criar o anúncio
         </a>
       </Link>
