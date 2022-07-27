@@ -51,7 +51,7 @@ const StayInfo = () => {
                 <br />
                 mensagem
               </div>
-            </div>{" "}
+            </div>
           </a>
         </Link>
 

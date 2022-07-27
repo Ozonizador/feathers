@@ -23,6 +23,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
     });
   };
 
+  const changingHouseRulesPropertyInput = (event) => {
+    const { houseRules } = advertisement;
+
+    onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
+      ...houseRules,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <>
       <div className="my-8 flex items-center">
@@ -159,8 +168,9 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
             <Input
               label={HOUSE_RULES_NAMING.OTHER_RULES}
               labelText=""
-              value=""
-              onChange={(e) => changeHouseRulesProperty(e)}
+              customCss="w-full"
+              value={advertisement.houseRules.otherRules}
+              onChange={(e) => changingHouseRulesPropertyInput(e)}
             />
           </div>
           <div></div>

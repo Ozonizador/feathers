@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
-import { Reservation } from "../../models/reservations";
+import { Reservation } from "../../models/reservation";
 
 /* PAGINA 23 DO XD 
 

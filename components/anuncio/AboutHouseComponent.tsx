@@ -1,8 +1,8 @@
 import { Accordion } from "flowbite-react";
 import Advertisement, {
+  AboutHouseCommodities,
   AboutHouseSpace,
   ADVERTISEMENT_PROPERTIES,
-  Amenity,
   TypeAmenity,
 } from "../../models/advertisement";
 
@@ -12,9 +12,9 @@ interface AboutHouseComponentProps {
 }
 
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
-  const changeAdvertityProperty = (event, space: AboutHouseSpace) => {
+  const toggleAmmenityProperty = (event, space: AboutHouseSpace) => {
     const property = event.target.name;
-    const value = event.target.value;
+    const checked = event.target.checked;
 
     const { aboutHouse } = advertisement;
     let amenities = aboutHouse[space];
@@ -25,13 +25,13 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     let foundAmenity = false;
     for (let amenity of amenities) {
       if (amenity.type == property) {
-        amenity.available = value === "true";
+        amenity.available = checked;
         foundAmenity = true;
       }
     }
 
     if (!foundAmenity) {
-      amenities.push({ type: property, available: value === "true" });
+      amenities.push({ type: property, available: checked });
     }
 
     onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...aboutHouse, [space]: amenities });
@@ -60,251 +60,172 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     <>
       <Accordion>
         <Accordion.Panel>
+          <Accordion.Title>Comodidades Gerais</Accordion.Title>
+          <Accordion.Content>
+            {AboutHouseCommodities.general.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion.Content>
+        </Accordion.Panel>
+        <Accordion.Panel>
           <Accordion.Title>Sala de estar</Accordion.Title>
           <Accordion.Content>
-            <div className="mt-10 flex items-center">
-              <div className="flex">
-                <p className="w-40 text-base font-bold">Sofá</p>
-              </div>
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.SOFA,
-                        true
-                      )}
-                      name={TypeAmenity.SOFA}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
+            {AboutHouseCommodities.livingRoom.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.SOFA,
-                        false
-                      )}
-                      name={TypeAmenity.SOFA}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex items-center">
-              <div className="flex">
-                <p className="w-40 text-base font-bold">Televisão</p>{" "}
-              </div>
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      checked={checkIfAboutHousePropertyChecked("livingRoom", TypeAmenity.TV, true)}
-                      name={TypeAmenity.TV}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.TV,
-                        false
-                      )}
-                      name={TypeAmenity.TV}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex items-center">
-              <div className="flex">
-                <p className="w-40 text-base font-bold">Lareira</p>{" "}
-              </div>
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.FIREPLACE,
-                        true
-                      )}
-                      name={TypeAmenity.FIREPLACE}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.FIREPLACE,
-                        false
-                      )}
-                      name={TypeAmenity.FIREPLACE}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex items-center">
-              <div className="flex">
-                <p className="w-40 text-base font-bold">Mesa</p>{" "}
-              </div>
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.TABLE,
-                        true
-                      )}
-                      name={TypeAmenity.TABLE}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.TABLE,
-                        false
-                      )}
-                      name={TypeAmenity.TABLE}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="my-10 flex items-center">
-              <div className="flex">
-                <p className="w-40 text-base font-bold">Cadeiras</p>{" "}
-              </div>
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.CHAIRS,
-                        true
-                      )}
-                      name={TypeAmenity.CHAIRS}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      checked={checkIfAboutHousePropertyChecked(
-                        "livingRoom",
-                        TypeAmenity.CHAIRS,
-                        false
-                      )}
-                      name={TypeAmenity.CHAIRS}
-                      onChange={(e) => changeAdvertityProperty(e, "livingRoom")}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
           <Accordion.Title>Quarto</Accordion.Title>
-          <Accordion.Content>{/* FALTA AQUI AS OPÇÕES */}</Accordion.Content>
+          <Accordion.Content>
+            {AboutHouseCommodities.bedRoom.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
           <Accordion.Title>Casa de Banho</Accordion.Title>
-          <Accordion.Content>{/* FALTA AQUI AS OPÇÕES */}</Accordion.Content>
+          <Accordion.Content>
+            {AboutHouseCommodities.bathRoom.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
           <Accordion.Title>Zona Exterior</Accordion.Title>
-          <Accordion.Content>{/* FALTA AQUI AS OPÇÕES */}</Accordion.Content>
+          <Accordion.Content>
+            {AboutHouseCommodities.exterior.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion.Content>
+        </Accordion.Panel>
+        <Accordion.Panel>
+          <Accordion.Title>Cozinha</Accordion.Title>
+          <Accordion.Content>
+            {AboutHouseCommodities.kitchen.map((comodity, index) => {
+              return (
+                <div className="mt-10 flex items-center" key={index}>
+                  <div className="flex">
+                    <p className="w-40 text-base font-bold">{comodity.label}</p>
+                  </div>
+                  <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div>
+                      <div className="flex h-5 items-center">
+                        <input
+                          type="checkbox"
+                          className=" h-4 w-4 rounded border border-terciary-500"
+                          value="true"
+                          checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                          name={comodity.type}
+                          onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Accordion.Content>
         </Accordion.Panel>
       </Accordion>
     </>

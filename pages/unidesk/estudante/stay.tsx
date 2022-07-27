@@ -16,8 +16,10 @@ import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { getCurrentReservationByTenantId } from "../../../services/reservationService";
-import { Reservation } from "../../../models/reservations";
+import { Reservation } from "../../../models/reservation";
+
 /* PAGINA 21 do xd */
+
 const Estadia = () => {
   const profile = useProfileInformation();
 
@@ -26,6 +28,7 @@ const Estadia = () => {
     if (profile) {
       const { data, error } = await getCurrentReservationByTenantId(profile.id);
       if (!error) {
+        setCurrentReservation(data);
       }
     }
   }, [profile]);
@@ -59,7 +62,7 @@ const Estadia = () => {
                           <ModalAvaliarExperiencia advertisementId={currentReservation.advertisementId} />
                           <ModalAlterarReserva reservation={currentReservation} />
                           {/* Logica visivel */}
-                          <StayCard />
+                          <StayCard reservation={currentReservation} />
                           <StayInfo />
                         </>
                       )}

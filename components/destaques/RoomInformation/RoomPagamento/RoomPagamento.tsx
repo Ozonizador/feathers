@@ -7,21 +7,16 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import { EXPENSES_TO_TEXT } from "../../../../models/advertisement";
 import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { addReservation } from "../../../../services/reservationService";
-import { Reservation, ReservationStatus } from "../../../../models/reservations";
+import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
 import { addNotification } from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
-import {
-  NOTIFICATION_DESCRIPTION,
-  NOTIFICATION_LINKS,
-  NOTIFICATION_TITLES,
-} from "../../../../models/notification";
+import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LINKS, NOTIFICATION_TITLES } from "../../../../models/notification";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const advertisement = useGetSingleAdvertisement();
   const profile = useProfileInformation();
@@ -84,7 +79,7 @@ export default function RoomPagamento() {
               <div className="mb-2 block">
                 <Label htmlFor="Saida" value="Saida" />
               </div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+              <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
             </div>
           </div>
 
@@ -124,7 +119,7 @@ export default function RoomPagamento() {
         </div>
 
         <div onClick={makeReservation}>
-          <a className="mb-5 flex items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+          <a className="mb-5 flex cursor-pointer items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
             Enviar pedido de reserva
           </a>
         </div>

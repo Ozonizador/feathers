@@ -26,7 +26,7 @@ const CaixaEntrada = () => {
       const { data, error } = await getConversationsFromUser(profile.id);
       if (!error) {
         setConversations(data);
-        setCurrentConversation(data[0].id);
+        setCurrentConversation((data[0] && data[0].id) || null);
       }
     }
   }, [profile]);
@@ -65,7 +65,7 @@ const CaixaEntrada = () => {
   return (
     <>
       <Breadcrumb />
-      <div className="container mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
+      <div className="mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
         <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 py-6 align-middle">
           <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
@@ -100,7 +100,7 @@ const CaixaEntrada = () => {
             </div>
 
             <div className="flex max-h-screen w-full flex-col gap-2">
-              <div className="flex flex-col gap-1 overflow-y-auto p-2">
+              <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2">
                 {messages.map((message, index) => {
                   return <Mensagem key={index} message={message} />;
                 })}

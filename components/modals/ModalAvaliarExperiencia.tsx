@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Rating } from "flowbite-react";
 import { Review } from "../../models/review";
 import { addReview } from "../../services/reviewService";
-import { useUser } from "@supabase/auth-helpers-react";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useModalAvaliarExperiencia, useSetModalAvaliarExperiencia } from "../../context/ModalShowProvider";
 /* PAGINA 24-26 DO XD 
