@@ -107,8 +107,8 @@ model Reservation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  startDate       DateTime
-  endDate         DateTime
+  startDate       DateTime          @db.Date
+  endDate         DateTime          @db.Date
   advertisement   Advertisement     @relation("advertisementReservations", references: [id], fields: [advertisementId])
   advertisementId String            @db.Uuid
   status          ReservationStatus

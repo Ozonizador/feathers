@@ -1,7 +1,12 @@
 import Image from "next/image";
+import { Reservation } from "../../../models/reservation";
 import img1 from "../../../public/images/bed6.jpg";
 
-const StayCard = () => {
+interface StayCardProps {
+  reservation: Reservation;
+}
+
+const StayCard = ({ reservation }: StayCardProps) => {
   return (
     <div>
       {/* <div className="font-bold text-3xl">Informações gerais</div>

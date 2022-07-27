@@ -17,7 +17,7 @@ export default function ProcurarSection() {
   const [advertisementsInfo, setAdvertisementsInfo] = useState<ProcurarPagination>({ count: 0, advertisements: [] });
 
   const getAdvertisements = useCallback(async () => {
-    const { data, error, count } = await getFilteredAdvertisements(null, page);
+    const { data, error, count } = await getFilteredAdvertisements(page, null);
     if (!error) {
       setAdvertisementsInfo({ advertisements: data, count });
     }
@@ -130,19 +130,20 @@ export default function ProcurarSection() {
               </div>
               <div></div>
 
-              {advertisementsInfo.advertisements.length !== 0 && (
-                <div className="row mb-5">
-                  <div className="col-md-2"></div>
-                  <div className="flex flex-1 justify-around px-5">
-                    <Pagination
-                      currentPage={page}
-                      totalPages={advertisementsInfo.count / PAGE_NUMBER_COUNT}
-                      onPageChange={(page) => setPage(page)}
-                    />
+              {advertisementsInfo.advertisements.length !== 0 &&
+                advertisementsInfo.count !== advertisementsInfo.advertisements.length && (
+                  <div className="row mb-5">
+                    <div className="col-md-2"></div>
+                    <div className="flex flex-1 justify-around px-5">
+                      <Pagination
+                        currentPage={page}
+                        totalPages={advertisementsInfo.count / PAGE_NUMBER_COUNT}
+                        onPageChange={(page) => setPage(page)}
+                      />
+                    </div>
+                    <div className="col-md-5"></div>
                   </div>
-                  <div className="col-md-5"></div>
-                </div>
-              )}
+                )}
             </>
           )}
         </div>
