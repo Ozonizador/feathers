@@ -6,8 +6,8 @@ export default function HomeSection1() {
   return (
     <section>
       <div className="flex justify-center  bg-[url('/images//furniture5.jpg')] bg-cover py-52 ">
-        <div className="flex flex-col px-10 align-middle md:container">
-          <h1 className="text-6xl  font-bold leading-snug text-white">
+        <div className="flex flex-col px-4  align-middle md:container lg:px-10">
+          <h1 className="text-4xl mb-5  font-bold leading-snug text-white lg:text-6xl lg:mb-0">
             {" "}
             A tua{" "}
             <Image

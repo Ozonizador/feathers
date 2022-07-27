@@ -9,7 +9,7 @@ export default function HomeSection4() {
 
   return (
     <section>
-      <div onClick={routeChange} className="bg-terciary-300">
+      <div onClick={routeChange} className="hidden bg-terciary-300  lg:block">
         <div className="mx-auto p-4 text-center lg:px-8 lg:py-20">
           <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>
           <div className="grid gap-8 lg:grid-cols-4">
