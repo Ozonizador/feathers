@@ -5,6 +5,7 @@ import { useModalReportAdvertisement, useSetModalReportAdvertisement } from "../
 import { Report, ReportsType } from "../../models/report";
 import { addReportOnAdvert } from "../../services/reportService";
 import { useProfileInformation } from "../../context/MainProvider";
+import { Spinner } from "flowbite-react";
 
 /* PAGINA 21-22 DO XD 
 
@@ -30,6 +31,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
     type: ReportsType.IMPRECISE,
     advertisementId,
     tenantId: "",
+    description: "",
   });
 
   function closeModal() {
@@ -73,6 +75,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
 
   const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
     const [description, setDescription] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const changeReportType = (event) => {
       const type = event.target.value;
@@ -81,6 +84,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
 
     const saveReport = async (event) => {
       event.preventDefault();
+      setLoading(true);
       if (profile) {
         setReport({ ...report, description });
         const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
@@ -88,6 +92,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
           nextStep();
         }
       }
+      setLoading(false);
     };
 
     return (
@@ -182,8 +187,9 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
                       type="button"
                       className="mx-5 rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
                       onClick={saveReport}
+                      disabled={loading}
                     >
-                      Seguinte
+                      {loading ? <Spinner /> : "Seguinte"}
                     </button>
                   </div>
                 </div>

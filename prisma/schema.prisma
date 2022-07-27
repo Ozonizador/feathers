@@ -199,11 +199,20 @@ model Report {
   profile         Profile       @relation("tenantReports", references: [id], fields: [tenantId])
   tenantId        String        @db.Uuid
   description     String
+  type            ReportsType
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
   @@map("reports")
+}
+
+enum ReportsType {
+  IMPRECISE
+  NOT_REALITY
+  SCAM
+  OFFENSIVE
+  OTHER
 }
 
 model Stay {
