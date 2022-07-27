@@ -30,7 +30,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
   const [report, setReport] = useState<Report>({
     type: ReportsType.IMPRECISE,
     advertisementId,
-    tenantId: "",
+    tenantId: profile.id,
     description: "",
   });
 
@@ -40,6 +40,32 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
 
   const nextStep = () => {
     setStep((oldStep) => oldStep + 1);
+  };
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const changeReportType = (event) => {
+    const type = event.target.value;
+    setReport({ ...report, type });
+  };
+
+  const changeReportDescription = (event) => {
+    event.preventDefault();
+    const description = event.target.value;
+    setReport({ ...report, description });
+  };
+
+  const saveReport = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    if (profile) {
+      debugger;
+      const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
+      if (data) {
+        nextStep();
+      }
+    }
+    setLoading(false);
   };
 
   const ModalDenunciaSegundoPasso = () => {
@@ -62,7 +88,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
               <button
                 type="button"
                 className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
-                onClick={(e) => closeModal(false)}
+                onClick={(e) => closeModal(e)}
               >
                 Fechar
               </button>
@@ -70,134 +96,6 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
           </div>
         </div>
       </>
-    );
-  };
-
-  const ModalDenunciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
-    const [description, setDescription] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
-
-    const changeReportType = (event) => {
-      const type = event.target.value;
-      setReport({ ...report, type });
-    };
-
-    const saveReport = async (event) => {
-      event.preventDefault();
-      setLoading(true);
-      if (profile) {
-        setReport({ ...report, description });
-        const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
-        if (data) {
-          nextStep();
-        }
-      }
-      setLoading(false);
-    };
-
-    return (
-      <div className="container p-6">
-        <div>
-          <div tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className=" ">
-              <div className="" id="model-radius">
-                <div className="m-2">
-                  <h5 className="mt-2 text-2xl font-semibold">Porque estás a denunciar esta conta?</h5>
-                  <p className="mt-7 mb-10 text-xl">
-                    A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja verdadeira.
-                    Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.{" "}
-                  </p>
-                  <div className="radio mb-4">
-                    <label>
-                      <input
-                        className="m-2"
-                        type="radio"
-                        name="optradio"
-                        value={ReportsType.IMPRECISE}
-                        checked={report.type === ReportsType.IMPRECISE}
-                        onChange={changeReportType}
-                      />
-                      É impreciso ou incorreto
-                    </label>
-                  </div>
-                  <div className="radio mb-4">
-                    <label>
-                      <input
-                        className="m-2"
-                        type="radio"
-                        name="optradio"
-                        value={ReportsType.NOT_REALITY}
-                        checked={report.type === ReportsType.NOT_REALITY}
-                        onChange={changeReportType}
-                      />
-                      Não corresponde à realidade
-                    </label>
-                  </div>
-                  <div className="radio mb-4">
-                    <label>
-                      <input
-                        className="m-2"
-                        type="radio"
-                        name="optradio"
-                        value={ReportsType.SCAM}
-                        checked={report.type === ReportsType.SCAM}
-                        onChange={changeReportType}
-                      />
-                      É um esquema
-                    </label>
-                  </div>
-                  <div className="radio mb-4">
-                    <label>
-                      <input
-                        className="m-2"
-                        type="radio"
-                        name="optradio"
-                        value={ReportsType.OFFENSIVE}
-                        checked={report.type === ReportsType.OFFENSIVE}
-                        onChange={changeReportType}
-                      />
-                      É ofensivo
-                    </label>
-                  </div>
-                  <div className="radio">
-                    <label>
-                      <input
-                        className="m-2"
-                        type="radio"
-                        name="optradio"
-                        value={ReportsType.OTHER}
-                        checked={report.type === ReportsType.OTHER}
-                        onChange={changeReportType}
-                      />
-                      É outra coisa
-                    </label>
-                  </div>
-                  <div className="w-5/6">
-                    <textarea
-                      className="form-control w-full rounded-md border border-terciary-500 bg-white"
-                      id="exampleFormControlTextarea1"
-                      rows={3}
-                      onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Conta-nos mais sobre isso"
-                      defaultValue={description}
-                    ></textarea>
-                  </div>
-                  <div className="flex flex-1 justify-end">
-                    <button
-                      type="button"
-                      className="mx-5 rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
-                      onClick={saveReport}
-                      disabled={loading}
-                    >
-                      {loading ? <Spinner /> : "Seguinte"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     );
   };
 
@@ -224,7 +122,115 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
                   <Image className="m-2" src="/images/flag.png" alt="" width="40px" height="30px" />
                   <span className="my-auto ml-5 text-3xl font-bold">Reportar anúncio</span>
                 </Dialog.Title>
-                {step === 1 && <ModalDenunciaPrimeiroPasso nextStep={nextStep} />}
+                {step === 1 && (
+                  <>
+                    {" "}
+                    <div className="container p-6">
+                      <div>
+                        <div tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div className=" ">
+                            <div className="" id="model-radius">
+                              <div className="m-2">
+                                <h5 className="mt-2 text-2xl font-semibold">Porque estás a denunciar esta conta?</h5>
+                                <p className="mt-7 mb-10 text-xl">
+                                  A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja
+                                  verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor
+                                  reporta.
+                                </p>
+                                <div className="radio mb-4">
+                                  <label>
+                                    <input
+                                      className="m-2"
+                                      type="radio"
+                                      name="optradio"
+                                      value={ReportsType.IMPRECISE}
+                                      checked={report.type === ReportsType.IMPRECISE}
+                                      onChange={changeReportType}
+                                    />
+                                    É impreciso ou incorreto
+                                  </label>
+                                </div>
+                                <div className="radio mb-4">
+                                  <label>
+                                    <input
+                                      className="m-2"
+                                      type="radio"
+                                      name="optradio"
+                                      value={ReportsType.NOT_REALITY}
+                                      checked={report.type === ReportsType.NOT_REALITY}
+                                      onChange={changeReportType}
+                                    />
+                                    Não corresponde à realidade
+                                  </label>
+                                </div>
+                                <div className="radio mb-4">
+                                  <label>
+                                    <input
+                                      className="m-2"
+                                      type="radio"
+                                      name="optradio"
+                                      value={ReportsType.SCAM}
+                                      checked={report.type === ReportsType.SCAM}
+                                      onChange={changeReportType}
+                                    />
+                                    É um esquema
+                                  </label>
+                                </div>
+                                <div className="radio mb-4">
+                                  <label>
+                                    <input
+                                      className="m-2"
+                                      type="radio"
+                                      name="optradio"
+                                      value={ReportsType.OFFENSIVE}
+                                      checked={report.type === ReportsType.OFFENSIVE}
+                                      onChange={changeReportType}
+                                    />
+                                    É ofensivo
+                                  </label>
+                                </div>
+                                <div className="radio">
+                                  <label>
+                                    <input
+                                      className="m-2"
+                                      type="radio"
+                                      name="optradio"
+                                      value={ReportsType.OTHER}
+                                      checked={report.type === ReportsType.OTHER}
+                                      onChange={changeReportType}
+                                    />
+                                    É outra coisa
+                                  </label>
+                                </div>
+                                <div className="w-5/6">
+                                  <textarea
+                                    className="form-control w-full rounded-md border border-terciary-500 bg-white"
+                                    id="exampleFormControlTextarea1"
+                                    key="description-textarea"
+                                    rows={3}
+                                    onChange={(e) => changeReportDescription(e)}
+                                    placeholder="Conta-nos mais sobre isso"
+                                    defaultValue={report.description}
+                                  ></textarea>
+                                </div>
+                                <div className="flex flex-1 justify-end">
+                                  <button
+                                    type="button"
+                                    className="mx-5 rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
+                                    onClick={saveReport}
+                                    disabled={loading}
+                                  >
+                                    {loading ? <Spinner /> : "Seguinte"}
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
                 {step === 2 && <ModalDenunciaSegundoPasso />}
               </Dialog.Panel>
             </div>
