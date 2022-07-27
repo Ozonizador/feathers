@@ -6,7 +6,7 @@ import DicasConsumoCards from "../components/dicas consumo/DicasConsumoCards/Dic
 const Dicas = () => {
     return (
         <>
-            <div className="flex flex-1 justify-center">
+            <div className="flex flex-1 justify-start lg:justify-center">
                 <DicasConsumoHero />
             </div>
             <DicasConsumoCards />
