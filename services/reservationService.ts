@@ -39,7 +39,7 @@ export const getCurrentReservationByTenantId = async (tenantId: string) => {
 
   const { data, error } = await supabaseClient
     .from<Reservation>(RESERVATION_TABLE_NAME)
-    .select()
+    .select("*, advertisement:advertisementId(*)")
     .eq(RESERVATION_TABLE.TENANT_ID, tenantId)
     .eq(RESERVATION_TABLE.STATUS, ReservationStatus.ACCEPTED)
     .gte(RESERVATION_TABLE.START_DATE, date)

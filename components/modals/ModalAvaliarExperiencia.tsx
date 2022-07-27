@@ -2,11 +2,14 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
-import { Rating } from "flowbite-react";
-import { Review } from "../../models/review";
+import { Rating, Spinner } from "flowbite-react";
+import { Review, REVIEW_COLUMNS } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useModalAvaliarExperiencia, useSetModalAvaliarExperiencia } from "../../context/ModalShowProvider";
+import { Reservation } from "../../models/reservation";
+import { report } from "process";
+import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -16,25 +19,28 @@ false nao mostra nada true mostra.
 const startingReview = {
   advertisementId: "",
   tenantId: "",
-  overallRating: 0,
-  locationRating: 0,
-  valueQualityRating: 0,
-  landLordRating: 0,
-  comoditiesRating: 0,
+  overallRating: 1,
+  locationRating: 1,
+  valueQualityRating: 1,
+  landLordRating: 1,
+  comoditiesRating: 1,
   publicReview: "",
   privateReview: "",
 } as Review;
 
 interface ModalAvaliarExperienciaProps {
-  advertisementId: string;
+  reservation: Reservation;
 }
 
-const ModalAvaliarExperiencia = ({ advertisementId }: ModalAvaliarExperienciaProps) => {
+const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) => {
   const profile = useProfileInformation();
-  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [step, setStep] = useState<number>(1);
   const isOpen = useModalAvaliarExperiencia();
   const setIsOpen = useSetModalAvaliarExperiencia();
   const [review, setReview] = useState<Review>(startingReview);
+
+  const { advertisement } = reservation;
 
   function closeModal() {
     setIsOpen(false);
@@ -44,11 +50,18 @@ const ModalAvaliarExperiencia = ({ advertisementId }: ModalAvaliarExperienciaPro
     setStep((oldStep) => oldStep + 1);
   };
 
-  const saveReview = async () => {
-    const { data, error } = await addReview(review, profile.id);
+  const saveReview = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const { data, error } = await addReview(review, profile.id, advertisement.id);
     if (!error) {
       nextStep();
     }
+    setLoading(false);
+  };
+
+  const setReviwByProperty = (property, value) => {
+    setReview({ ...review, [property]: value });
   };
 
   return (
@@ -68,9 +81,206 @@ const ModalAvaliarExperiencia = ({ advertisementId }: ModalAvaliarExperienciaPro
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-14 text-center">
-            {step === 1 && <ModalAvaliarExperienciaPrimeiroPasso nextStep={nextStep} />}
-            {step === 2 && <ModalAvaliarExperienciaSegundoPasso nextStep={saveReview} />}
-            {step === 3 && <ModalAvaliarExperienciaTerceiroPasso nextStep={nextStep} />}
+            <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white  text-left align-middle shadow-xl transition-all">
+              <Dialog.Title
+                as="h3"
+                className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
+              >
+                <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
+                <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
+              </Dialog.Title>
+              {step === 1 && (
+                <>
+                  <div
+                    className="modal fade -centered"
+                    id="exampleModal"
+                    tabIndex={-1}
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="px-4 ">
+                      <div className="" id="model-radius">
+                        <div className=" m-4 ">
+                          <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T3 - Peniche</p>
+                          <div className="flex flex-col">
+                            <div className="mb-8 flex w-full flex-row justify-between">
+                              <div className="text-2xl text-secondary-300">Localização</div>
+                              <Rating>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 1)}>
+                                  <Rating.Star filled={review.locationRating >= 1 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 2)}>
+                                  <Rating.Star filled={review.locationRating >= 2 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 3)}>
+                                  <Rating.Star filled={review.locationRating >= 3 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 4)}>
+                                  <Rating.Star filled={review.locationRating >= 4 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 5)}>
+                                  <Rating.Star filled={review.locationRating == 5 ? true : false} />
+                                </div>
+                              </Rating>
+                            </div>
+
+                            <div className="mb-8 flex w-full flex-row justify-between">
+                              <div className="w-1/2 text-2xl text-secondary-300">Qualidade - preço</div>
+                              <Rating className="w-1/2">
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 1)}>
+                                  <Rating.Star filled={review.valueQualityRating >= 1 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 2)}>
+                                  <Rating.Star filled={review.valueQualityRating >= 2 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 3)}>
+                                  <Rating.Star filled={review.valueQualityRating >= 3 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 4)}>
+                                  <Rating.Star filled={review.valueQualityRating >= 4 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 5)}>
+                                  <Rating.Star filled={review.valueQualityRating == 5 ? true : false} />
+                                </div>
+                              </Rating>
+                            </div>
+
+                            <div className="mb-8 flex w-full flex-row justify-between">
+                              <div className="text-2xl text-secondary-300">Comodidades</div>
+                              <Rating>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 1)}>
+                                  <Rating.Star filled={review.comoditiesRating >= 1 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 2)}>
+                                  <Rating.Star filled={review.comoditiesRating >= 2 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 3)}>
+                                  <Rating.Star filled={review.comoditiesRating >= 3 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 4)}>
+                                  <Rating.Star filled={review.comoditiesRating >= 4 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 5)}>
+                                  <Rating.Star filled={review.comoditiesRating == 5 ? true : false} />
+                                </div>
+                              </Rating>
+                            </div>
+
+                            <div className="mb-8 flex w-full flex-row justify-between">
+                              <div className="text-2xl text-secondary-300">Senhorio</div>
+                              <Rating>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 1)}>
+                                  <Rating.Star filled={review.landLordRating >= 1 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 2)}>
+                                  <Rating.Star filled={review.landLordRating >= 2 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 3)}>
+                                  <Rating.Star filled={review.landLordRating >= 3 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 4)}>
+                                  <Rating.Star filled={review.landLordRating >= 4 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 5)}>
+                                  <Rating.Star filled={review.landLordRating == 5 ? true : false} />
+                                </div>
+                              </Rating>
+                            </div>
+
+                            <div className="mb-8 flex w-full flex-row justify-between">
+                              <div className="text-2xl text-secondary-300">Avaliação Geral</div>
+                              <Rating>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 1)}>
+                                  <Rating.Star filled={review.overallRating >= 1 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 2)}>
+                                  <Rating.Star filled={review.overallRating >= 2 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 3)}>
+                                  <Rating.Star filled={review.overallRating >= 3 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 4)}>
+                                  <Rating.Star filled={review.overallRating >= 4 ? true : false} />
+                                </div>
+                                <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 5)}>
+                                  <Rating.Star filled={review.overallRating == 5 ? true : false} />
+                                </div>
+                              </Rating>
+                            </div>
+                          </div>
+
+                          <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+                            <a
+                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                              role="button"
+                              id="modal-btn"
+                            >
+                              Seguinte
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+              {step === 2 && (
+                <>
+                  <div
+                    className="modal  fade  -centered"
+                    id="exampleModal"
+                    tabIndex={-1}
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="px-8">
+                      <div className="" id="model-radius">
+                        <p className="text-semibold mt-7 mb-11 text-3xl">
+                          {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.place}
+                        </p>
+
+                        <div className=" m-4 ">
+                          <p className="mb-3 text-base">Deixa o teu feedback público</p>
+                          <div className="mb-3 bg-slate-200">
+                            <textarea
+                              className="form-control w-full rounded-md border border-terciary-500 bg-white"
+                              id="exampleFormControlTextarea1"
+                              rows={3}
+                              value={review.publicReview}
+                              onChange={(e) => setReviwByProperty(REVIEW_COLUMNS.PUBLIC_REVIEW, e.target.value)}
+                            ></textarea>
+                          </div>
+                          <div className="mb-3 mt-10">
+                            <p className="mb-3 text-base">Deixa o teu feedback privado ao senhorio</p>
+                            <div className="mb-3 bg-slate-200">
+                              <textarea
+                                className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
+                                id="exampleFormControlTextarea1"
+                                rows={3}
+                                value={review.privateReview}
+                                onChange={(e) => setReviwByProperty(REVIEW_COLUMNS.PRIVATE_REVIEW, e.target.value)}
+                              ></textarea>
+                            </div>
+                          </div>
+
+                          <div className="lead mb-16 mt-7" onClick={() => saveReview}>
+                            <button
+                              type="button"
+                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                              onClick={(e) => saveReview(e)}
+                              disabled={loading}
+                            >
+                              {loading ? <Spinner /> : "Seguinte"}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+              {step === 3 && <ModalAvaliarExperienciaTerceiroPasso />}
+            </Dialog.Panel>
           </div>
         </div>
       </Dialog>
@@ -78,24 +288,18 @@ const ModalAvaliarExperiencia = ({ advertisementId }: ModalAvaliarExperienciaPro
   );
 };
 
-interface PassosModaisProps {
-  nextStep: () => void;
-}
+const ModalAvaliarExperienciaTerceiroPasso = () => {
+  const setIsOpen = useSetModalAvaliarExperiencia();
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
-const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) => {
   return (
-    <Dialog.Panel className="h-96 w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
-      <Dialog.Title
-        as="h3"
-        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
-      >
-        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
-        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
-      </Dialog.Title>
+    <>
       {/* <!-- Modal --> */}
       <div className="flex h-full flex-col items-center justify-center text-center align-middle">
         <div
-          className="modal  fade  -centered"
+          className="modal fade -centered"
           id="exampleModal"
           tabIndex={-1}
           aria-labelledby="exampleModalLabel"
@@ -109,7 +313,7 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
           </div>
 
           <div className="px-8">
-            <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+            <p className="lead mb-16 mt-7" onClick={() => closeModal()}>
               <a
                 className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
                 role="button"
@@ -121,224 +325,8 @@ const ModalAvaliarExperienciaTerceiroPasso = ({ nextStep }: PassosModaisProps) =
           </div>
         </div>
       </div>
-    </Dialog.Panel>
+    </>
   );
 };
 
-// ------------------------------------------------------------------------------------------------------------------------------------
-
-const ModalAvaliarExperienciaSegundoPasso = ({ nextStep }: PassosModaisProps) => {
-  const [publicFeedback, setPublicFeedback] = useState<string>("");
-  const [privateFeedback, setPrivateFeedback] = useState<string>("");
-  return (
-    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
-      <Dialog.Title
-        as="h3"
-        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
-      >
-        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
-        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
-      </Dialog.Title>
-      {/* <!-- Modal --> */}
-      <div
-        className="modal  fade  -centered"
-        id="exampleModal"
-        tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="px-8">
-          <div className="" id="model-radius">
-            <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T2 - Guarda</p>
-
-            <div className=" m-4 ">
-              <p className="mb-3 text-base">Deixa o teu feedback público</p>
-              <div className="mb-3 bg-slate-200">
-                <textarea
-                  className="form-control w-full rounded-md border border-terciary-500 bg-white"
-                  id="exampleFormControlTextarea1"
-                  rows={3}
-                  onChange={(e) => setPublicFeedback(e.target.value)}
-                ></textarea>
-              </div>
-              <div className="mb-3 mt-10">
-                <p className="mb-3 text-base">Deixa o teu feedback privado ao senhorio</p>
-                <div className="mb-3 bg-slate-200">
-                  <textarea
-                    className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
-                    id="exampleFormControlTextarea1"
-                    rows={3}
-                    onChange={(e) => setPrivateFeedback(e.target.value)}
-                  ></textarea>
-                </div>
-              </div>
-              <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
-                <a
-                  className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
-                  role="button"
-                  id="modal-btn"
-                >
-                  Seguinte
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Dialog.Panel>
-  );
-};
-
-// ------------------------------------------------------------------------------------------------------------------------------------
-
-const ModalAvaliarExperienciaPrimeiroPasso = ({ nextStep }: PassosModaisProps) => {
-  const [locationRating, setLocationRating] = useState<number>(1);
-  const [overallRating, setOverallRating] = useState<number>(1);
-  const [hostRating, setHostRating] = useState<number>(1);
-  const [comoditiesRating, setComoditiesRating] = useState<number>(1);
-  const [qualityValueRating, setQualityValueRating] = useState<number>(1);
-
-  return (
-    <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white  text-left align-middle shadow-xl transition-all">
-      <Dialog.Title
-        as="h3"
-        className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
-      >
-        <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
-        <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
-      </Dialog.Title>
-      <div
-        className="modal fade -centered"
-        id="exampleModal"
-        tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="px-4 ">
-          <div className="" id="model-radius">
-            <div className=" m-4 ">
-              <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T3 - Peniche</p>
-              <div className="flex flex-col">
-                <div className="mb-8 flex w-2/5 flex-row justify-between">
-                  <div className="text-2xl text-secondary-300">Localização</div>
-                  <Rating>
-                    <div onClick={(e) => setLocationRating(1)}>
-                      <Rating.Star filled={locationRating >= 1 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setLocationRating(2)}>
-                      <Rating.Star filled={locationRating >= 2 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setLocationRating(3)}>
-                      <Rating.Star filled={locationRating >= 3 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setLocationRating(4)}>
-                      <Rating.Star filled={locationRating >= 4 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setLocationRating(5)}>
-                      <Rating.Star filled={locationRating == 5 ? true : false} />
-                    </div>
-                  </Rating>
-                </div>
-
-                <div className="mb-8 flex w-2/5 flex-row justify-between">
-                  <div className="text-2xl text-secondary-300">Qualidade - preço</div>
-                  <Rating>
-                    <div onClick={(e) => setQualityValueRating(1)}>
-                      <Rating.Star filled={qualityValueRating >= 1 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setQualityValueRating(2)}>
-                      <Rating.Star filled={qualityValueRating >= 2 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setQualityValueRating(3)}>
-                      <Rating.Star filled={qualityValueRating >= 3 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setQualityValueRating(4)}>
-                      <Rating.Star filled={qualityValueRating >= 4 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setQualityValueRating(5)}>
-                      <Rating.Star filled={qualityValueRating == 5 ? true : false} />
-                    </div>
-                  </Rating>
-                </div>
-
-                <div className="mb-8 flex w-2/5 flex-row justify-between">
-                  <div className="text-2xl text-secondary-300">Comodidades</div>
-                  <Rating>
-                    <div onClick={(e) => setComoditiesRating(1)}>
-                      <Rating.Star filled={comoditiesRating >= 1 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setComoditiesRating(2)}>
-                      <Rating.Star filled={comoditiesRating >= 2 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setComoditiesRating(3)}>
-                      <Rating.Star filled={comoditiesRating >= 3 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setComoditiesRating(4)}>
-                      <Rating.Star filled={comoditiesRating >= 4 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setComoditiesRating(5)}>
-                      <Rating.Star filled={comoditiesRating == 5 ? true : false} />
-                    </div>
-                  </Rating>
-                </div>
-
-                <div className="mb-8 flex w-2/5 flex-row justify-between">
-                  <div className="text-2xl text-secondary-300">Senhorio</div>
-                  <Rating>
-                    <div onClick={(e) => setHostRating(1)}>
-                      <Rating.Star filled={hostRating >= 1 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setHostRating(2)}>
-                      <Rating.Star filled={hostRating >= 2 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setHostRating(3)}>
-                      <Rating.Star filled={hostRating >= 3 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setHostRating(4)}>
-                      <Rating.Star filled={hostRating >= 4 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setHostRating(5)}>
-                      <Rating.Star filled={hostRating == 5 ? true : false} />
-                    </div>
-                  </Rating>
-                </div>
-
-                <div className="mb-8 flex w-2/5 flex-row justify-between">
-                  <div className="text-2xl text-secondary-300">Avaliação Geral</div>
-                  <Rating>
-                    <div onClick={(e) => setOverallRating(1)}>
-                      <Rating.Star filled={overallRating >= 1 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setOverallRating(2)}>
-                      <Rating.Star filled={overallRating >= 2 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setOverallRating(3)}>
-                      <Rating.Star filled={overallRating >= 3 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setOverallRating(4)}>
-                      <Rating.Star filled={overallRating >= 4 ? true : false} />
-                    </div>
-                    <div onClick={(e) => setOverallRating(5)}>
-                      <Rating.Star filled={overallRating == 5 ? true : false} />
-                    </div>
-                  </Rating>
-                </div>
-              </div>
-
-              <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
-                <a
-                  className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
-                  role="button"
-                  id="modal-btn"
-                >
-                  Seguinte
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Dialog.Panel>
-  );
-};
 export default ModalAvaliarExperiencia;

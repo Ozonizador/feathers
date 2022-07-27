@@ -4,6 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
 import { Reservation } from "../../models/reservation";
+import FeatherDatePicker from "../utils/FeatherDatepicker";
 
 /* PAGINA 23 DO XD 
 
@@ -80,57 +81,42 @@ const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
                               rows={3}
                             ></textarea>
                           </div>
-                          <p className="mt-8 mb-9 text-xl font-semibold">Reserva Original</p>
+                          <p className="mt-8 mb-2 text-xl font-semibold">Reserva Original</p>
                           {/* left */}
                           {/* começa novo */}
+                          <div className="mb-5">
+                            <div className="inline-block">
+                              <label htmlFor="exampleInputEmail1" className="form-label  text-base">
+                                Entrada
+                              </label>
+                              <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
+                            </div>
+                            <div>
+                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
+                                Saida
+                              </label>
+                              <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
+                            </div>
+                          </div>
                           <div className="flex items-center justify-between gap-7 align-middle">
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              <input
-                                type="date"
-                                aria-label="First name"
-                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
-                              />
+                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
                             </div>
 
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Entrada
-                              </label>
-                              <input
-                                type="date"
-                                aria-label="First name"
-                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
-                              />
-                            </div>
                             <div>
                               <VscArrowRight className="mt-7 text-3xl" />
                             </div>
 
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Entrada
+                                Saida
                               </label>
-                              <input
-                                type="date"
-                                aria-label="First name"
-                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
-                              />
+                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
                             </div>
-
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Entrada
-                              </label>
-                              <input
-                                type="date"
-                                aria-label="First name"
-                                className="form-control mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white"
-                              />
-                            </div>
-                          </div>{" "}
+                          </div>
                           <div className="input-group">
                             {/* fim novo */}
 
