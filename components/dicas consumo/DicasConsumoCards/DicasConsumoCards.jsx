@@ -12,7 +12,7 @@ const DicasConsumoCards = () => {
 
             <div className="container mx-auto px-8 lg:px-32 mb-32">
                 <div className="font-bold text-4xl mb-11">Últimos artigos</div>
-                <div className="flex flex-col lg:flex">
+                <div className="flex flex-col lg:flex lg:flex-row">
 
                     <div className="flex flex-1 flex-col">
                         <div><Image src={img1} alt="" height="450" width="350" className="object-fill "></Image></div>
