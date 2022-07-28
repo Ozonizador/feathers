@@ -1,5 +1,4 @@
 import { Review } from "./review";
-import { JSONValue } from "./utils";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -93,9 +92,9 @@ export const HOUSE_RULES_NAMING = {
 
 /* ENUMS */
 export const TYPE_ADVERTISEMENT = {
-  "Apartamento Inteiro": "ENTIRE_SPACE",
-  "Quarto Partilhado": "SHARED_ROOM",
-  "Quarto Privado": "PRIVATE_ROOM",
+  ENTIRE_SPACE: "Apartamento Inteiro",
+  SHARED_ROOM: "Quarto Partilhado",
+  PRIVATE_ROOM: "Quarto Privado",
 };
 
 export enum HOST_TYPE {

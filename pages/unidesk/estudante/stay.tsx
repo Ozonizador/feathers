@@ -59,7 +59,7 @@ const Estadia = () => {
                         <>
                           {/* Modais */}
                           <ModalDenuncia advertisementId={currentReservation.advertisementId} />
-                          <ModalAvaliarExperiencia advertisementId={currentReservation.advertisementId} />
+                          <ModalAvaliarExperiencia reservation={currentReservation} />
                           <ModalAlterarReserva reservation={currentReservation} />
                           {/* Logica visivel */}
                           <StayCard reservation={currentReservation} />

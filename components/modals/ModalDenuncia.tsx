@@ -59,7 +59,6 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
     event.preventDefault();
     setLoading(true);
     if (profile) {
-      debugger;
       const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
       if (data) {
         nextStep();
@@ -74,6 +73,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
     const closeModal = (event) => {
       event.preventDefault();
       setIsOpen(false);
+      setTimeout(() => setStep(1), 1000);
     };
     return (
       <>
