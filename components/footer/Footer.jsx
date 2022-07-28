@@ -8,11 +8,11 @@ export default function Footer() {
   return (
     <footer>
       <div>
-        <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5">
-          <div className="my-auto mx-auto flex relative">
+        <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5 lg:pt-28">
+          <div className="my-auto flex relative lg:mx-auto">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
-          <div className="ml-5 py-5 text-center text-terciary-100 lg:text-left">
+          <div className="ml-0 py-5 text-left text-terciary-100 lg:text-left lg:ml-5">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
               <Link href="/aboutus" className="fs-300 clr-white">
@@ -45,7 +45,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="py-5 text-center text-terciary-100 lg:text-left">
+          <div className="py-5 text-left text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Estudantes</h3>
             <div className="py-1">
               <Link href="/" className="fs-300 clr-white">
@@ -65,7 +65,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="py-5 text-center text-terciary-100 lg:text-left">
+          <div className="py-5 text-left text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Senhorios</h3>
 
             <div className="py-1">
@@ -84,13 +84,13 @@ export default function Footer() {
             </div>
             <Link href="/anunciar" className="transition">
               <a>
-                <div className="my-3">
+                <div className="my-3 mt-7">
                   <span className="rounded-full bg-primary-500 p-3">Anuncie a sua propriedade</span>
                 </div>
               </a>
             </Link>
           </div>
-          <div className="flex flex-1 justify-center py-5">
+          <div className="flex flex-1 justify-start lg:justify-center py-5">
             <Socials type="secondary" size="md" />
           </div>
         </div>

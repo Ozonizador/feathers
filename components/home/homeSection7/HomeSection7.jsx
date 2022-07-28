@@ -6,12 +6,12 @@ export default function HomeSection7() {
     <section>
       <div className="w-11/12 rounded-3xl  mx-auto bg-terciary-300 my-24   lg:w-4/5 ">
         <div className="flex flex-col-reverse lg:flex-row">
-          <div className="items-center align-middle text-center p-0 lg:text-left lg:p-32">
-            <h2 className="text-2xl font-bold text-secondary-500 lg:text-6xl mt-8 lg:mt-0">
+          <div className="items-center align-middle  text-center basis-2/4 p-0 lg:text-left lg:p-0">
+            <h2 className="text-2xl font-bold text-secondary-500 lg:text-6xl mt-8 lg:mt-8 lg:ml-6 ">
               Tem Uma Propriedade?
             </h2>
             <p className="py-10 text-2xl text-terciary-400">
-              <div className="hidden lg:block">
+              <div className="hidden lg:block lg:mt-2 lg:ml-6">
                 Comece já a anunciar e rentabilize
                 <br />
                 o seu imóvel!
@@ -20,20 +20,19 @@ export default function HomeSection7() {
               <div className="block lg:hidden">
                 Comece já a anunciar e rentabilizeo seu imóvel!
               </div>
-
-
-
             </p>
-            <div className="mb-14 mt-8">
+            <div className="mb-14 mt-8 lg:mb-10 lg:mt-0 ">
               <Link href="/">
-                <a className=" rounded-full bg-primary-500 py-4 px-16 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                <a className="lg:ml-6 rounded-full bg-primary-500 py-4 px-16 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                   Anunciar
                 </a>
               </Link>
             </div>
           </div>
 
-          <div className="rounded-3xl bg-[url('/images//img9.jpg')] bg-cover w-full flex items-end justify-center lg:justify-end h-96">
+
+
+          <div className="rounded-3xl bg-[url('/images//img9.jpg')] bg-cover w-full flex items-end justify-center h-96   lg:justify-end ">
             <div className="mr-0 mb-9 lg:mr-11 lg:mb-14 ">
 
               <Link href="/7">
