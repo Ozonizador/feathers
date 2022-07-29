@@ -9,9 +9,9 @@ interface GeneralAdvertComponentProps {
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
   return (
     <>
-      <div className="my-20 flex w-full flex-row justify-between gap-5">
+      <div className="my-20 flex w-full flex-col  justify-between gap-5 lg:flex-row">
         {/* col left */}
-        <div className="mt-2 w-full">
+        <div className="mt-2 w-full ">
           <div className="">
             <label className="mb-1">Qual o seu tipo de espaço?</label>
             <select

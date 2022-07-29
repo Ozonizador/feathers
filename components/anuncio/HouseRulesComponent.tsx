@@ -34,7 +34,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
 
   return (
     <>
-      <div className="my-8 flex items-center">
+      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
         <div className="flex items-center">
           <div className="">
             <MdOutlinePets className="mr-3 text-2xl" />
@@ -42,7 +42,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Animais permitidos</p>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Sim</div>
           <div>
             <div className="flex h-5 items-center">
@@ -58,7 +58,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Não</div>
           <div>
             <div className="flex h-5 items-center">
@@ -74,7 +74,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
       </div>
-      <div className="my-8 flex items-center">
+      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
         <div className="flex items-center">
           <div className="">
             <GiCigarette className="mr-3 text-2xl" />
@@ -82,7 +82,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Fumar permitido</p>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Sim</div>
           <div>
             <div className="flex h-5 items-center">
@@ -98,7 +98,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Não</div>
           <div>
             <div className="flex h-5 items-center">
@@ -115,7 +115,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 flex items-center">
+      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
         <div className="flex items-center">
           <div className="">
             <BiDrink className="mr-3 text-2xl" />
@@ -123,7 +123,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Eventos Permitidos</p>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Sim</div>
           <div>
             <div className="flex h-5 items-center">
@@ -139,7 +139,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
 
-        <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div className="mr-16 text-base">Não</div>
           <div>
             <div className="flex h-5 items-center">
@@ -156,15 +156,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="flex items-center ">
+      <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="flex">
           <div>
             <MdChecklist className="mr-3 text-2xl" />
           </div>
           <p className="w-40 text-base font-bold">Outra Regra</p>
         </div>
-        <div className=" ml-6 flex flex-row  items-center ">
-          <div className="w-3/4  text-base">
+        <div className=" ml-0 flex flex-row  lg:ml-6 lg:items-center">
+          <div className="w-full text-base  lg:w-3/4">
             <Input
               label={HOUSE_RULES_NAMING.OTHER_RULES}
               labelText=""
@@ -177,16 +177,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 flex items-center">
-        <div className="flex items-center">
-          <div className="">
+      <div className="my-8 mb-14 flex flex-col lg:mb-24 lg:flex-row lg:items-center">
+        <div className="flex flex-row">
+          <div>
             <GiBroom className="mr-3 text-2xl" />
           </div>
-          <p className="w-40 text-base font-bold">Limpeza</p>
+          <p className="mb-6 w-40 text-base font-bold lg:mb-0">Limpeza</p>
         </div>
-
-        <div className=" ml-6 flex w-3/4 flex-row items-center justify-between">
-          <div>
+        <div className=" flex w-full flex-row items-center justify-between lg:ml-6 lg:w-3/4">
+          <div className="w-full lg:w-1/4">
             <div className="flex h-5 items-center">
               <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 ">
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {

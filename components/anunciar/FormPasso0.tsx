@@ -45,14 +45,14 @@ const FormPasso0 = () => {
 
   return (
     <>
-      <section className="my-20 mx-auto  flex w-3/4 justify-center ">
+      <section className="mx-auto mb-2 flex  w-full justify-center lg:my-20 lg:w-3/4 ">
         <GeneralAdvertComponent advertisement={advertisement} onChange={onChangeProperty} />
       </section>
       <div className="mt-1">
         <div className="flex">
           <button
             type="button"
-            className="mt-10 flex items-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+            className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
             onClick={(e) => nextStep(e)}
           >
             Seguinte &#8594;

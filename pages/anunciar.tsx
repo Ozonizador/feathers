@@ -20,8 +20,8 @@ export default function Anunciar() {
     <>
       <AnunciarProvider>
         <AdvertisementController>
-          <div className="container mx-auto my-20 rounded-2xl border border-terciary-700 py-20">
-            <h1 className="text-center  text-6xl font-bold leading-snug ">
+          <div className="mx-auto my-20  w-11/12 rounded-2xl border border-terciary-700 py-6 px-6  lg:container lg:my-20 lg:w-full lg:px-10 ">
+            <h1 className="text-center text-2xl  font-bold leading-snug lg:text-6xl">
               Anunciar a sua propriedade é rápido e fácil!
             </h1>
             <Stepper />

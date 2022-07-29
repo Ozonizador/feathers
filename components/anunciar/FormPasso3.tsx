@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
-import {
-  useAdvertisement,
-  useSetAdvertisementProperty,
-} from "../../context/AdvertisementController";
+import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { saveImage, updateAdvertisement } from "../../services/advertisementService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
@@ -63,11 +60,10 @@ const FormPasso3 = () => {
   };
 
   return (
-    <section className="container mx-auto my-20 w-5/6">
+    <section className="container mx-auto  my-20 w-full lg:w-5/6">
       <div className="w-full">
-        <div className="mb-4 block text-2xl font-bold text-gray-700">
-          Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que
-          esperar.
+        <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left lg:text-2xl">
+          Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.
           <br />
           (mín. 5 fotos)
         </div>
@@ -76,10 +72,7 @@ const FormPasso3 = () => {
           <div className=" mt-10 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-28">
             <div className="space-y-1 text-center">
               <div className="flex text-terciary-700">
-                <label
-                  htmlFor="files"
-                  className="relative cursor-pointer rounded-md bg-white text-indigo-500"
-                >
+                <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
                   <svg
                     className="mx-auto h-16 w-16 text-gray-400"
                     stroke="currentColor"
@@ -131,7 +124,7 @@ const FormPasso3 = () => {
       </div>
       <button
         type="button"
-        className="mt-10 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+        className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
         onClick={(e) => nextStep(e)}
       >
         Seguinte &#8594;
