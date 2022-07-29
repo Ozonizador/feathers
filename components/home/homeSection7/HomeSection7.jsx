@@ -18,7 +18,7 @@ export default function HomeSection7() {
               </div>
 
               <div className="block lg:hidden">
-                Comece já a anunciar e rentabilizeo seu imóvel!
+                Comece já a anunciar e rentabilize o seu imóvel!
               </div>
             </p>
             <div className="mb-14 mt-8 lg:mb-10 lg:mt-0 ">
