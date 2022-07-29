@@ -9,9 +9,21 @@ import valoresImage from "../public/images/sobre_nos_valores.jpg";
 const AboutUs = () => {
   return (
     <>
-      <div className="w-full">
+      <div className="hidden w-full lg:block">
         <Image layout="intrinsic" src={headerImage} alt="Sobre Nos"></Image>
       </div>
+
+      <div className="block w-full lg:hidden">
+        <Image
+          layout="responsive"
+          src="/images/sobre_nos.jpg"
+          alt="5 formas de melhorar o consumo energético da sua casa"
+          objectFit="cover"
+          height="100%"
+          width="100%"
+        ></Image>
+      </div>
+
       <div className="mt-10 px-3 lg:px-60">
         <div className="mb-5 px-4">
           <h4 className=" text-left text-5xl font-bold">Sobre Nós</h4>
