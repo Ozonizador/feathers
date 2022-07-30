@@ -13,6 +13,7 @@ import { useProfileInformation } from "../../../../context/MainProvider";
 import { addNotification } from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
 import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LINKS, NOTIFICATION_TITLES } from "../../../../models/notification";
+import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
@@ -72,14 +73,14 @@ export default function RoomPagamento() {
               <div className="mb-2 block">
                 <Label htmlFor="Entrada" value="Entrada" />
               </div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+              <FeatherDatePicker date={startDate} onChange={(date) => setStartDate(date)} />
             </div>
 
             <div className="mb-2 block">
               <div className="mb-2 block">
                 <Label htmlFor="Saida" value="Saida" />
               </div>
-              <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+              <FeatherDatePicker date={endDate} onChange={(date) => setEndDate(date)} />
             </div>
           </div>
 

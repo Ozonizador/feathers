@@ -24,12 +24,13 @@ export const getReservationByAdvertId = async (advertId: string) => {
 };
 
 export const getNextReservationsByTenantId = async (tenantId: string) => {
+  const date = new Date().toISOString();
   const { data, error } = await supabaseClient
     .from<Reservation>(RESERVATION_TABLE_NAME)
-    .select()
+    .select("*, advertisement:advertisementId(*)")
     .eq(RESERVATION_TABLE.TENANT_ID, tenantId)
     .eq(RESERVATION_TABLE.STATUS, ReservationStatus.ACCEPTED)
-    .gte(RESERVATION_TABLE.START_DATE, new Date());
+    .gte(RESERVATION_TABLE.START_DATE, date);
 
   return { data, error };
 };

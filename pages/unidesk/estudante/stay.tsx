@@ -15,8 +15,9 @@ import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { getCurrentReservationByTenantId } from "../../../services/reservationService";
+import { getCurrentReservationByTenantId, getNextReservationsByTenantId } from "../../../services/reservationService";
 import { Reservation } from "../../../models/reservation";
+import next from "next";
 
 /* PAGINA 21 do xd */
 
@@ -24,6 +25,7 @@ const Estadia = () => {
   const profile = useProfileInformation();
 
   const [currentReservation, setCurrentReservation] = useState<Reservation>();
+  const [nextReservations, setNextReservations] = useState<Reservation[]>([]);
   const getProfileReservations = useCallback(async () => {
     if (profile) {
       const { data, error } = await getCurrentReservationByTenantId(profile.id);
@@ -33,9 +35,19 @@ const Estadia = () => {
     }
   }, [profile]);
 
+  const getNextReservations = useCallback(async () => {
+    if (profile) {
+      const { data, error } = await getNextReservationsByTenantId(profile.id);
+      if (!error) {
+        setNextReservations(data);
+      }
+    }
+  }, [profile]);
+
   useEffect(() => {
     getProfileReservations();
-  }, [getProfileReservations]);
+    getNextReservations();
+  }, [getProfileReservations, getNextReservations]);
 
   return (
     <ModalApplyShowProvider>
@@ -69,16 +81,32 @@ const Estadia = () => {
                       {!currentReservation && <div>Não tem estadia programada</div>}
                     </div>
                     <div className="flex w-full flex-col items-center justify-center align-middle">
-                      <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
-                      <Link href="/">
-                        <a className="hover: flex w-48 items-center  justify-center rounded-md  bg-primary-500 px-9 py-3 align-middle text-base text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-                          Encontrar{" "}
-                          <span className="px-1">
-                            <CgHome />
-                          </span>{" "}
-                          em...
-                        </a>
-                      </Link>
+                      {(!nextReservations || nextReservations.length === 0) && (
+                        <>
+                          <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
+                          <Link href="/">
+                            <a className="hover: flex w-48 items-center  justify-center rounded-md  bg-primary-500 px-9 py-3 align-middle text-base text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+                              Encontrar
+                              <span className="px-1">
+                                <CgHome />
+                              </span>
+                              em...
+                            </a>
+                          </Link>
+                        </>
+                      )}
+                      {nextReservations && nextReservations.length !== 0 && (
+                        <div className="mt-2">
+                          <h6>Próximas estadias</h6>
+                          {nextReservations.map((reservation, index) => {
+                            return (
+                              <div key={index} className="mt-2">
+                                <StayCard reservation={reservation} />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

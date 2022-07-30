@@ -6,7 +6,7 @@ const RoomRating = () => {
   const advertisement = useGetSingleAdvertisement();
   return (
     <section className="mb-8">
-      {advertisement.reviews && (
+      {advertisement.reviews && advertisement.reviews.length !== 0 && (
         <>
           <Rating>
             <p className="mr-5 text-5xl font-medium text-secondary-500">4.71</p>
