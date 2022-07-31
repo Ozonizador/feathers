@@ -66,35 +66,22 @@ const Estadia = () => {
                       <div className="text-3xl font-bold">Informações gerais</div>
                       <div className="mt-7 mb-5 text-xl text-gray-600">Estadia atual</div>
                     </div>
+                    {/* Modais */}
+                    <ModalDenuncia />
+                    <ModalAvaliarExperiencia />
+                    <ModalAlterarReserva />
+                    {/* Logica visivel */}
+
                     <div className="flex items-center justify-between">
                       {currentReservation && (
                         <>
-                          {/* Modais */}
-                          <ModalDenuncia advertisementId={currentReservation.advertisementId} />
-                          <ModalAvaliarExperiencia reservation={currentReservation} />
-                          <ModalAlterarReserva reservation={currentReservation} />
-                          {/* Logica visivel */}
                           <StayCard reservation={currentReservation} />
-                          <StayInfo />
+                          <StayInfo reservation={currentReservation} />
                         </>
                       )}
                       {!currentReservation && <div>Não tem estadia programada</div>}
                     </div>
                     <div className="flex w-full flex-col items-center justify-center align-middle">
-                      {(!nextReservations || nextReservations.length === 0) && (
-                        <>
-                          <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
-                          <Link href="/">
-                            <a className="hover: flex w-48 items-center  justify-center rounded-md  bg-primary-500 px-9 py-3 align-middle text-base text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-                              Encontrar
-                              <span className="px-1">
-                                <CgHome />
-                              </span>
-                              em...
-                            </a>
-                          </Link>
-                        </>
-                      )}
                       {nextReservations && nextReservations.length !== 0 && (
                         <div className="mt-2">
                           <h6>Próximas estadias</h6>
@@ -102,11 +89,25 @@ const Estadia = () => {
                             return (
                               <div key={index} className="mt-2">
                                 <StayCard reservation={reservation} />
+
+                                <StayInfo reservation={reservation} />
                               </div>
                             );
                           })}
                         </div>
                       )}
+                      <>
+                        <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
+                        <Link href="/procurar">
+                          <a className="hover: flex w-48 items-center justify-center rounded-md bg-primary-500 px-9 py-3 align-middle text-base text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+                            Encontrar
+                            <span className="px-1">
+                              <CgHome />
+                            </span>
+                            em...
+                          </a>
+                        </Link>
+                      </>
                     </div>
                   </div>
                 </div>

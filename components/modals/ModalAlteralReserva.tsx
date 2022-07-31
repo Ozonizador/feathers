@@ -2,7 +2,11 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
-import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
+import {
+  useModalAlterarReserva,
+  useSetModalAlterarReserva,
+  useSetOpenModalAlterarReserva,
+} from "../../context/ModalShowProvider";
 import { Reservation } from "../../models/reservation";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
 
@@ -12,13 +16,9 @@ para chamar na pagina => <ModalAlterarReserva defaultOpen={false} />
 false nao mostra nada true mostra.
 */
 
-interface ModalAlterarReservaProps {
-  reservation: Reservation;
-}
-
-const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
-  const isOpen = useModalAlterarReserva();
-  const setIsOpen = useSetModalAlterarReserva();
+const ModalAlterarReserva = () => {
+  const { isOpen, reservation } = useModalAlterarReserva();
+  const setIsOpen = useSetOpenModalAlterarReserva();
 
   function closeModal() {
     setIsOpen(false);

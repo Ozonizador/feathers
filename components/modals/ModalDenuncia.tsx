@@ -1,7 +1,12 @@
 import React, { Fragment, useCallback, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
-import { useModalReportAdvertisement, useSetModalReportAdvertisement } from "../../context/ModalShowProvider";
+import {
+  useModalReportAdvertisement,
+  useSetModalReportAdvertisement,
+  useSetModalReportContextProperty,
+  useSetOpenModalReport,
+} from "../../context/ModalShowProvider";
 import { Report, ReportsType } from "../../models/report";
 import { addReportOnAdvert } from "../../services/reportService";
 import { useProfileInformation } from "../../context/MainProvider";
@@ -17,20 +22,16 @@ interface PassosModaisProps {
   nextStep: () => void;
 }
 
-interface ModalDenunciaProps {
-  advertisementId: string;
-}
-
-const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
+const ModalDenuncia = () => {
   const profile = useProfileInformation();
-  const isOpen = useModalReportAdvertisement();
-  const setIsOpen = useSetModalReportAdvertisement();
+  const { isOpen, step, reservation } = useModalReportAdvertisement();
+  const setModalReportProperty = useSetModalReportContextProperty();
+  const setIsOpen = useSetOpenModalReport();
 
-  const [step, setStep] = useState(1);
   const [report, setReport] = useState<Report>({
     type: ReportsType.IMPRECISE,
-    advertisementId,
-    tenantId: profile.id,
+    advertisementId: reservation?.advertisementId || "",
+    tenantId: profile?.id || "",
     description: "",
   });
 
@@ -39,7 +40,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
   }
 
   const nextStep = () => {
-    setStep((oldStep) => oldStep + 1);
+    setModalReportProperty("step", step + 1);
   };
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
     event.preventDefault();
     setLoading(true);
     if (profile) {
-      const { data, error } = await addReportOnAdvert(report, advertisementId, profile.id);
+      const { data, error } = await addReportOnAdvert(report, reservation.advertisementId, profile.id);
       if (data) {
         nextStep();
       }
@@ -68,12 +69,12 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
   };
 
   const ModalDenunciaSegundoPasso = () => {
-    const setIsOpen = useSetModalReportAdvertisement();
+    const reportModal = useModalReportAdvertisement();
+    const setModalReport = useSetModalReportAdvertisement();
 
     const closeModal = (event) => {
       event.preventDefault();
-      setIsOpen(false);
-      setTimeout(() => setStep(1), 1000);
+      setModalReport({ ...reportModal, isOpen: false, step: 1 });
     };
     return (
       <>
@@ -124,7 +125,6 @@ const ModalDenuncia = ({ advertisementId }: ModalDenunciaProps) => {
                 </Dialog.Title>
                 {step === 1 && (
                   <>
-                    {" "}
                     <div className="container p-6">
                       <div>
                         <div tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">

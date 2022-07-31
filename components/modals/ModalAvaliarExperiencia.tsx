@@ -6,7 +6,11 @@ import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
-import { useModalAvaliarExperiencia, useSetModalAvaliarExperiencia } from "../../context/ModalShowProvider";
+import {
+  useModalAvaliarExperiencia,
+  useSetModalAvaliarExperiencia,
+  useSetOpenModalAvaliarExperiencia,
+} from "../../context/ModalShowProvider";
 import { Reservation } from "../../models/reservation";
 import { report } from "process";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
@@ -28,19 +32,13 @@ const startingReview = {
   privateReview: "",
 } as Review;
 
-interface ModalAvaliarExperienciaProps {
-  reservation: Reservation;
-}
-
-const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) => {
+const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
   const [loading, setLoading] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
-  const isOpen = useModalAvaliarExperiencia();
-  const setIsOpen = useSetModalAvaliarExperiencia();
+  const { isOpen, reservation } = useModalAvaliarExperiencia();
+  const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const [review, setReview] = useState<Review>(startingReview);
-
-  const { advertisement } = reservation;
 
   function closeModal() {
     setIsOpen(false);
@@ -53,7 +51,7 @@ const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) 
   const saveReview = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { data, error } = await addReview(review, profile.id, advertisement.id);
+    const { data, error } = await addReview(review, profile.id, reservation.advertisement.id);
     if (!error) {
       nextStep();
     }
@@ -289,7 +287,7 @@ const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) 
 };
 
 const ModalAvaliarExperienciaTerceiroPasso = () => {
-  const setIsOpen = useSetModalAvaliarExperiencia();
+  const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const closeModal = () => {
     setIsOpen(false);
   };

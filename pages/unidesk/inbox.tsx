@@ -101,8 +101,8 @@ const CaixaEntrada = () => {
 
             <div className="flex max-h-screen w-full flex-col gap-2">
               <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2">
-                {messages.map((message, index) => {
-                  return <Mensagem key={index} message={message} />;
+                {messages.map((message, index, array) => {
+                  return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
                 })}
               </div>
               <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
