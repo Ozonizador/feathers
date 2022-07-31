@@ -1,15 +1,8 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Input from "../utils/Input";
-import {
-  ADVERTISEMENT_PROPERTIES,
-  EXPENSES_TYPE,
-  INCLUSIVE_EXPENSES,
-} from "../../models/advertisement";
+import { ADVERTISEMENT_PROPERTIES, EXPENSES_TYPE, INCLUSIVE_EXPENSES } from "../../models/advertisement";
 import classNames from "classnames";
-import {
-  useAdvertisement,
-  useSetAdvertisementProperty,
-} from "../../context/AdvertisementController";
+import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { updateAdvertisement } from "../../services/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";
 
@@ -33,7 +26,7 @@ const FormPasso6 = () => {
   };
 
   return (
-    <section className="container mx-auto my-20 w-5/6">
+    <section className="container mx-auto my-20 w-full lg:w-5/6">
       <div className="mb-28 text-2xl font-bold text-gray-700">Vamos a valores!</div>
       <div className="flex flex-col">
         <PricesComponent advertisement={advertisement} onChange={changeTypeProperty} />
@@ -41,7 +34,7 @@ const FormPasso6 = () => {
 
       <button
         type="button"
-        className="mt-16 flex items-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg "
+        className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
         onClick={(e) => nextStep(e)}
       >
         Seguinte &#8594;
