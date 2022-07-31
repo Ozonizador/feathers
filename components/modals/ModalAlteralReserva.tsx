@@ -25,13 +25,16 @@ const ModalAlterarReserva = () => {
   });
 
   const updateToOldReservation = useCallback(() => {
-    setNewReservation({
-      ...newReservation,
-      startDate: reservation?.startDate || new Date(),
-      endDate: reservation?.endDate || new Date(),
-      advertisementId: reservation?.advertisementId,
-      tenantId: reservation?.tenantId,
-    });
+    if (reservation && reservation.id !== newReservation.id) {
+      setNewReservation({
+        ...newReservation,
+        startDate: reservation?.startDate || new Date(),
+        endDate: reservation?.endDate || new Date(),
+        advertisementId: reservation?.advertisementId,
+        tenantId: reservation?.tenantId,
+        status: ReservationStatus.CHANGE_REQUESTED,
+      });
+    }
   }, [reservation, newReservation]);
 
   useEffect(() => {

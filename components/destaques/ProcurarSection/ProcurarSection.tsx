@@ -130,7 +130,7 @@ export default function ProcurarSection() {
               </div>
               <div></div>
 
-              {advertisementsInfo.advertisements.length !== 0 &&
+              {/* {advertisementsInfo.advertisements.length !== 0 &&
                 advertisementsInfo.count !== advertisementsInfo.advertisements.length && (
                   <div className="row mb-5">
                     <div className="col-md-2"></div>
@@ -143,7 +143,7 @@ export default function ProcurarSection() {
                     </div>
                     <div className="col-md-5"></div>
                   </div>
-                )}
+                )} */}
             </>
           )}
         </div>

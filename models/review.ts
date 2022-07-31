@@ -17,6 +17,8 @@ export interface Review {
 
 export const REVIEW_COLUMNS = {
   ID: "id",
+  ADVERTISEMENT_ID: "advertisementId",
+  TENANT_ID: "tenantId",
   OVERALL_RATING: "overallRating",
   LOCATION_RATING: "locationRating",
   LANDLORD_RATING: "landLordRating",

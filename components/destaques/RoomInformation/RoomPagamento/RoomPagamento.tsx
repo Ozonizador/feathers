@@ -55,7 +55,7 @@ export default function RoomPagamento() {
             {advertisement.monthRent}&euro;/mês
           </div>
 
-          <div className="relative  mb-2 text-center text-base">
+          <div className="relative mb-2 text-center text-base">
             <div className="flex items-center justify-center gap-2 align-middle">
               <div className="peer flex items-center">
                 {advertisement && advertisement.expenses && (
@@ -68,7 +68,7 @@ export default function RoomPagamento() {
           </div>
           <hr />
 
-          <div className="mt-5 flex gap-4">
+          <div className="mt-5 flex flex-wrap gap-4">
             <div className="mb-2 block ">
               <div className="mb-2 block">
                 <Label htmlFor="Entrada" value="Entrada" />
@@ -116,7 +116,7 @@ export default function RoomPagamento() {
 
         <div className="my-8 flex flex-row justify-between font-bold">
           <div className="text-base">Total</div>
-          <div>€300</div>
+          <div>€{advertisement.monthRent}</div>
         </div>
 
         <div onClick={makeReservation}>

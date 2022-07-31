@@ -1,7 +1,4 @@
-import Advertisement, {
-  FLEX_HOST_TYPE,
-  ADVERTISEMENT_PROPERTIES,
-} from "../../models/advertisement";
+import Advertisement, { FlexHostType, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import Image from "next/image";
 
 interface HostFlexTypeComponentProps {
@@ -20,10 +17,10 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <div>
               <input
                 type="radio"
-                name="flex_host_type"
-                value={FLEX_HOST_TYPE.SUPER_FLEX}
+                name="FlexHostType"
+                value={FlexHostType.SUPER_FLEX}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.SUPER_FLEX}
+                checked={advertisement.typeFlexHost === FlexHostType.SUPER_FLEX}
               />
             </div>
             <div className="mx-5">
@@ -35,9 +32,8 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div className="flex flex-col">
           <div className="text-xl font-bold">Host Super Flex</div>
           <div className="mt-2 text-base text-secondary-300">
-            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
-            período e até 2 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento
-            é integral.
+            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes
+            , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
@@ -47,10 +43,10 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <div>
               <input
                 type="radio"
-                name="flex_host_type"
-                value={FLEX_HOST_TYPE.FLEX}
+                name="FlexHostType"
+                value={FlexHostType.FLEX}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.FLEX}
+                checked={advertisement.typeFlexHost === FlexHostType.FLEX}
               />
             </div>
             <div className="mx-5">
@@ -62,9 +58,8 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div className="flex flex-col">
           <div className="text-xl font-bold">Host Flex</div>
           <div className="mt-2 text-base text-secondary-300">
-            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
-            período e até 7 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento
-            é integral.
+            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes
+            , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
@@ -74,10 +69,10 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <div>
               <input
                 type="radio"
-                name="flex_host_type"
-                value={FLEX_HOST_TYPE.MODERATE}
+                name="FlexHostType"
+                value={FlexHostType.MODERATE}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.MODERATE}
+                checked={advertisement.typeFlexHost === FlexHostType.MODERATE}
               />
             </div>
             <div className="mx-5">
@@ -89,9 +84,8 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div className="flex flex-col">
           <div className="text-xl font-bold">Host Moderado</div>
           <div className="mt-2 text-base text-secondary-300">
-            Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
-            período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o
-            pagamento é integral.
+            Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias
+            antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
@@ -101,10 +95,10 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <div>
               <input
                 type="radio"
-                name="flex_host_type"
-                value={FLEX_HOST_TYPE.RIGID}
+                name="FlexHostType"
+                value={FlexHostType.RIGID}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FLEX_HOST_TYPE.RIGID}
+                checked={advertisement.typeFlexHost === FlexHostType.RIGID}
               />
             </div>
             <div className="mx-5">
@@ -116,9 +110,8 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div className="flex flex-col">
           <div className="text-xl font-bold">Host Rígido</div>
           <div className="mt-2 text-base text-secondary-300">
-            Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse
-            período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o
-            pagamento é integral.
+            Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias
+            antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
