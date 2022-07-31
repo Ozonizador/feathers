@@ -1,14 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
-import {
-  useModalAlterarReserva,
-  useSetModalAlterarReserva,
-  useSetOpenModalAlterarReserva,
-} from "../../context/ModalShowProvider";
-import { Reservation } from "../../models/reservation";
+import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../context/ModalShowProvider";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
+import { Reservation, ReservationStatus } from "../../models/reservation";
 
 /* PAGINA 23 DO XD 
 
@@ -19,6 +15,28 @@ false nao mostra nada true mostra.
 const ModalAlterarReserva = () => {
   const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
+
+  const [newReservation, setNewReservation] = useState<Reservation>({
+    startDate: new Date(),
+    endDate: new Date(),
+    status: ReservationStatus.REQUESTED,
+    advertisementId: "",
+    tenantId: "",
+  });
+
+  const updateToOldReservation = useCallback(() => {
+    setNewReservation({
+      ...newReservation,
+      startDate: reservation.startDate,
+      endDate: reservation.endDate,
+      advertisementId: reservation.advertisementId,
+      tenantId: reservation.tenantId,
+    });
+  }, [reservation, newReservation]);
+
+  useEffect(() => {
+    updateToOldReservation();
+  }, [updateToOldReservation]);
 
   function closeModal() {
     setIsOpen(false);
@@ -89,13 +107,17 @@ const ModalAlterarReserva = () => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
+                              )}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
+                              )}
                             </div>
                           </div>
                           <div className="flex items-center justify-between gap-7 align-middle">

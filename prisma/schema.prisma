@@ -125,6 +125,8 @@ enum ReservationStatus {
   REQUESTED
   ACCEPTED
   REJECTED
+  CHANGE_REQUESTED
+  CHANGE_ACCEPTED
 }
 
 model Review {

@@ -87,7 +87,7 @@ const Estadia = () => {
                           <h6>Próximas estadias</h6>
                           {nextReservations.map((reservation, index) => {
                             return (
-                              <div key={index} className="mt-2">
+                              <div key={index} className="mt-2 flex  flex-row items-center gap-2">
                                 <StayCard reservation={reservation} />
 
                                 <StayInfo reservation={reservation} />

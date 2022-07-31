@@ -6,13 +6,7 @@ import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
-import {
-  useModalAvaliarExperiencia,
-  useSetModalAvaliarExperiencia,
-  useSetOpenModalAvaliarExperiencia,
-} from "../../context/ModalShowProvider";
-import { Reservation } from "../../models/reservation";
-import { report } from "process";
+import { useModalAvaliarExperiencia, useSetOpenModalAvaliarExperiencia } from "../../context/ModalShowProvider";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 /* PAGINA 24-26 DO XD 
 
@@ -225,7 +219,7 @@ const ModalAvaliarExperiencia = () => {
               {step === 2 && (
                 <>
                   <div
-                    className="modal  fade  -centered"
+                    className="modal fade -centered"
                     id="exampleModal"
                     tabIndex={-1}
                     aria-labelledby="exampleModalLabel"
@@ -233,10 +227,11 @@ const ModalAvaliarExperiencia = () => {
                   >
                     <div className="px-8">
                       <div className="" id="model-radius">
-                        <p className="text-semibold mt-7 mb-11 text-3xl">
-                          {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.place}
-                        </p>
-
+                        {reservation && (
+                          <p className="text-semibold mt-7 mb-11 text-3xl">
+                            {TYPE_ADVERTISEMENT[reservation.advertisement.type]} - {reservation.advertisement.place}
+                          </p>
+                        )}
                         <div className=" m-4 ">
                           <p className="mb-3 text-base">Deixa o teu feedback público</p>
                           <div className="mb-3 bg-slate-200">

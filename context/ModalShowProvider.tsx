@@ -195,7 +195,7 @@ export function useSetOpenModalAlterarReserva() {
 }
 
 export function useSetModalAlterarReserva() {
-  const setModalReport = useContext(SetModalReportarAnuncioContext);
+  const setModalReport = useContext(SetModalAlterarReservaContext);
   return (report: ModalReportContextElements) => {
     setModalReport(report);
   };
