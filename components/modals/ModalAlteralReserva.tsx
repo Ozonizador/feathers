@@ -27,10 +27,10 @@ const ModalAlterarReserva = () => {
   const updateToOldReservation = useCallback(() => {
     setNewReservation({
       ...newReservation,
-      startDate: reservation.startDate,
-      endDate: reservation.endDate,
-      advertisementId: reservation.advertisementId,
-      tenantId: reservation.tenantId,
+      startDate: reservation?.startDate || new Date(),
+      endDate: reservation?.endDate || new Date(),
+      advertisementId: reservation?.advertisementId,
+      tenantId: reservation?.tenantId,
     });
   }, [reservation, newReservation]);
 
@@ -41,6 +41,10 @@ const ModalAlterarReserva = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const changeNewReservationProperty = (property: string, value: any) => {
+    setNewReservation({ ...newReservation, [property]: value });
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -120,25 +124,34 @@ const ModalAlterarReserva = () => {
                               )}
                             </div>
                           </div>
-                          <div className="flex items-center justify-between gap-7 align-middle">
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label  text-base">
-                                Entrada
-                              </label>
-                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
-                            </div>
+                          {reservation && (
+                            <div className="flex items-center justify-between gap-7 align-middle">
+                              <div>
+                                <label htmlFor="exampleInputEmail1" className="form-label  text-base">
+                                  Entrada
+                                </label>
+                                <FeatherDatePicker
+                                  date={reservation.startDate}
+                                  onChange={(e) => changeNewReservationProperty("startDate", e.target.value)}
+                                />
+                              </div>
 
-                            <div>
-                              <VscArrowRight className="mt-7 text-3xl" />
-                            </div>
+                              <div>
+                                <VscArrowRight className="mt-7 text-3xl" />
+                              </div>
 
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Saida
-                              </label>
-                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
+                              <div>
+                                <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
+                                  Saida
+                                </label>
+
+                                <FeatherDatePicker
+                                  date={reservation.endDate}
+                                  onChange={(e) => changeNewReservationProperty("endDate", e.target.value)}
+                                />
+                              </div>
                             </div>
-                          </div>
+                          )}
                           <div className="input-group">
                             {/* fim novo */}
 
@@ -174,16 +187,12 @@ const ModalAlterarReserva = () => {
                             <div className="mx-auto flex w-8/12 justify-between ">
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Pagamento Original</h5>
-                                <a href="" id="link-modal" className="underline underline-offset-8">
-                                  Detalhes
-                                </a>
+                                <p className="underline underline-offset-8">Detalhes</p>
                               </div>
 
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Novo Pagamento</h5>
-                                <a href="" id="link-modal" className="underline underline-offset-8">
-                                  Detalhes
-                                </a>
+                                <p className="underline underline-offset-8">Detalhes</p>
                               </div>
                             </div>
                           </div>

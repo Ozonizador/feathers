@@ -90,6 +90,14 @@ export function useSetOpenModalAvaliarExperiencia() {
   };
 }
 
+export function useSetModalAvaliarExperienciaContextProperty() {
+  const reportModal = useContext(ModalAvaliarExperienciaContext);
+  const setModalApplyOpen = useContext(SetModalAvaliarExperienciaContext);
+  return (property: string, value: any) => {
+    setModalApplyOpen({ ...reportModal, [property]: value });
+  };
+}
+
 /**
  * Report Advertisement
  *

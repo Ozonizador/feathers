@@ -6,7 +6,11 @@ import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
-import { useModalAvaliarExperiencia, useSetOpenModalAvaliarExperiencia } from "../../context/ModalShowProvider";
+import {
+  useModalAvaliarExperiencia,
+  useSetModalAvaliarExperienciaContextProperty,
+  useSetOpenModalAvaliarExperiencia,
+} from "../../context/ModalShowProvider";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 /* PAGINA 24-26 DO XD 
 
@@ -29,8 +33,8 @@ const startingReview = {
 const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
   const [loading, setLoading] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(1);
-  const { isOpen, reservation } = useModalAvaliarExperiencia();
+  const { isOpen, reservation, step } = useModalAvaliarExperiencia();
+  const setModalProperty = useSetModalAvaliarExperienciaContextProperty();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const [review, setReview] = useState<Review>(startingReview);
 
@@ -39,7 +43,7 @@ const ModalAvaliarExperiencia = () => {
   }
 
   const nextStep = () => {
-    setStep((oldStep) => oldStep + 1);
+    setModalProperty("step", step + 1);
   };
 
   const saveReview = async (event) => {
