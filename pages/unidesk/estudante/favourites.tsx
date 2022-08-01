@@ -35,14 +35,14 @@ const UnideskFavoritos = () => {
 
   return (
     <section>
-      <div className=" mx-20 mt-24 flex w-4/6 items-center align-middle">
+      <div className=" ml-8 mt-24 flex w-4/6 lg:mx-20 lg:items-center lg:align-middle">
         <div>
           <Image src={iconfavorito} alt="Favoritos" height={55} width={55} />
         </div>
         <div className="ml-4 text-xl ">{"Unidesk > Favoritos"}</div>
       </div>
 
-      <div className="container mx-auto my-32 w-4/6 rounded-2xl border border-terciary-500 pt-20">
+      <div className="container mx-auto mb-32 mt-12  w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
         <div className="flex flex-col items-center justify-center align-middle">
           <div>
             <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
@@ -114,7 +114,7 @@ const UnideskFavoritos = () => {
         </div>
         <div className="mt-12 mb-20 flex justify-center">
           <Link href="/procurar">
-            <a className="flex w-1/5 items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:drop-shadow-xl">
+            <a className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44">
               Encontrar{" "}
               <span className="px-1">
                 <CgHome />
