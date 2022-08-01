@@ -5,9 +5,10 @@ import { Message } from "../../../models/message";
 
 interface MessageProps {
   message: Message;
+  previousMessage: Message | null;
 }
 
-const Mensagem = ({ message }: MessageProps) => {
+const Mensagem = ({ message, previousMessage }: MessageProps) => {
   const profile = useProfileInformation();
 
   return (
@@ -29,10 +30,13 @@ const Mensagem = ({ message }: MessageProps) => {
               /> 
               */}
             </div>
-            <div className="flex w-full flex-row justify-between text-xs">
-              <div>Victor Roberts</div>
-              <div>{new Date(message.createdAt).toDateString()}</div>
-            </div>
+
+            {previousMessage && previousMessage.profileId !== message.profileId && (
+              <div className="flex w-full flex-row justify-between text-xs">
+                <div>{message.profile?.name || ""}</div>
+                <div>{new Date(message.createdAt).toDateString()}</div>
+              </div>
+            )}
           </div>
 
           <div className="ml-4 mt-2 rounded-md bg-primary-500 p-4 text-xs text-white">{message.message}</div>

@@ -2,8 +2,13 @@ import React from "react";
 import { Card } from "flowbite-react/lib/esm/components";
 import { RiMailSendFill } from "react-icons/ri";
 import Image from "next/image";
+import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
+import classNames from "classnames";
+import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
+import { FlexHostType } from "../../../../models/advertisement";
 
 export default function RoomSenhorio() {
+  const advertisement = useGetSingleAdvertisement();
   return (
     <section className="my-20">
       <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
@@ -16,7 +21,11 @@ export default function RoomSenhorio() {
               <div className="flex flex-col items-center pb-10">
                 <Image
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                  src={
+                    advertisement.host.avatarUrl
+                      ? advertisement.host.avatarUrl
+                      : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                  }
                   alt="Bonnie image"
                   height={96}
                   width={96}
@@ -54,14 +63,18 @@ export default function RoomSenhorio() {
               <h1 className="text-xl font-bold">Política de Cancelamento</h1>
 
               <div className="flex flex-row items-start justify-start gap-4 align-top">
-                <div className="h-5 w-12 rounded-full bg-yellow-300"></div>
+                <div
+                  className={classNames("h-5 w-12 rounded-full ", {
+                    "bg-orange-400": advertisement.typeFlexHost === FlexHostType.MODERATE,
+                    "bg-yellow-300": advertisement.typeFlexHost === FlexHostType.FLEX,
+                    "bg-green-500": advertisement.typeFlexHost === FlexHostType.SUPER_FLEX,
+                    "bg-red-600": advertisement.typeFlexHost === FlexHostType.RIGID,
+                  })}
+                ></div>
 
                 <div className="flex flex-col">
-                  <h2 className="text-base font-bold">Flexível</h2>
-                  <p className="text-base text-secondary-400">
-                    Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7
-                    dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
-                  </p>
+                  <h2 className="text-base font-bold">{hostTranslate(advertisement.typeFlexHost)}</h2>
+                  <p className="text-base text-secondary-400">{hostTypeFlexDescription(advertisement.typeFlexHost)}</p>
                 </div>
               </div>
             </Card>

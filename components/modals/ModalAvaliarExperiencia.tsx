@@ -6,9 +6,11 @@ import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
 import { addReview } from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
-import { useModalAvaliarExperiencia, useSetModalAvaliarExperiencia } from "../../context/ModalShowProvider";
-import { Reservation } from "../../models/reservation";
-import { report } from "process";
+import {
+  useModalAvaliarExperiencia,
+  useSetModalAvaliarExperienciaContextProperty,
+  useSetOpenModalAvaliarExperiencia,
+} from "../../context/ModalShowProvider";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 /* PAGINA 24-26 DO XD 
 
@@ -28,32 +30,26 @@ const startingReview = {
   privateReview: "",
 } as Review;
 
-interface ModalAvaliarExperienciaProps {
-  reservation: Reservation;
-}
-
-const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) => {
+const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
   const [loading, setLoading] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(1);
-  const isOpen = useModalAvaliarExperiencia();
-  const setIsOpen = useSetModalAvaliarExperiencia();
+  const { isOpen, reservation, step } = useModalAvaliarExperiencia();
+  const setModalProperty = useSetModalAvaliarExperienciaContextProperty();
+  const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const [review, setReview] = useState<Review>(startingReview);
-
-  const { advertisement } = reservation;
 
   function closeModal() {
     setIsOpen(false);
   }
 
   const nextStep = () => {
-    setStep((oldStep) => oldStep + 1);
+    setModalProperty("step", step + 1);
   };
 
   const saveReview = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { data, error } = await addReview(review, profile.id, advertisement.id);
+    const { data, error } = await addReview(review, profile.id, reservation.advertisement.id);
     if (!error) {
       nextStep();
     }
@@ -227,7 +223,7 @@ const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) 
               {step === 2 && (
                 <>
                   <div
-                    className="modal  fade  -centered"
+                    className="modal fade -centered"
                     id="exampleModal"
                     tabIndex={-1}
                     aria-labelledby="exampleModalLabel"
@@ -235,10 +231,11 @@ const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) 
                   >
                     <div className="px-8">
                       <div className="" id="model-radius">
-                        <p className="text-semibold mt-7 mb-11 text-3xl">
-                          {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.place}
-                        </p>
-
+                        {reservation && (
+                          <p className="text-semibold mt-7 mb-11 text-3xl">
+                            {TYPE_ADVERTISEMENT[reservation.advertisement.type]} - {reservation.advertisement.place}
+                          </p>
+                        )}
                         <div className=" m-4 ">
                           <p className="mb-3 text-base">Deixa o teu feedback público</p>
                           <div className="mb-3 bg-slate-200">
@@ -289,7 +286,7 @@ const ModalAvaliarExperiencia = ({ reservation }: ModalAvaliarExperienciaProps) 
 };
 
 const ModalAvaliarExperienciaTerceiroPasso = () => {
-  const setIsOpen = useSetModalAvaliarExperiencia();
+  const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const closeModal = () => {
     setIsOpen(false);
   };

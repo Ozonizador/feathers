@@ -3,27 +3,41 @@ import { RiMailSendLine } from "react-icons/ri";
 import { TbRefresh } from "react-icons/tb";
 import { AiOutlineStar } from "react-icons/ai";
 import {
+  useModalAlterarReserva,
+  useModalAvaliarExperiencia,
+  useModalReportAdvertisement,
   useSetModalAlterarReserva,
   useSetModalAvaliarExperiencia,
   useSetModalReportAdvertisement,
 } from "../../../context/ModalShowProvider";
 import Link from "next/link";
+import { Reservation } from "../../../models/reservation";
 
-const StayInfo = () => {
+interface StayInfoProps {
+  reservation: Reservation;
+}
+
+const StayInfo = ({ reservation }: StayInfoProps) => {
+  // MODAL REPORT
+  const modalReportInfo = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
-  const setModalAvaliar = useSetModalAvaliarExperiencia();
+
+  const modalAlterarReservaInfo = useModalAlterarReserva();
   const setModalAlterar = useSetModalAlterarReserva();
 
+  const modalAvaliarExperiencia = useModalAvaliarExperiencia();
+  const setModalAvaliar = useSetModalAvaliarExperiencia();
+
   const openModalReport = () => {
-    setModalReport(true);
+    setModalReport({ ...modalReportInfo, isOpen: true, reservation });
   };
 
   const openModalAvaliarExperiencia = () => {
-    setModalAvaliar(true);
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation });
   };
 
   const openModalAlterarReserva = () => {
-    setModalAlterar(true);
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation });
   };
 
   return (
@@ -40,20 +54,22 @@ const StayInfo = () => {
           </div>
         </div>
 
-        <Link href="/unidesk/inbox">
-          <a>
-            <div className="flex flex-1 flex-col items-center">
-              <div>
-                <RiMailSendLine className="mb-2 text-4xl text-green-400" />
+        <div className="flex flex-1 cursor-pointer flex-col items-center">
+          <Link href="/unidesk/inbox">
+            <a>
+              <div className="flex flex-1 flex-col items-center">
+                <div>
+                  <RiMailSendLine className="mb-2 text-4xl text-green-400" />
+                </div>
+                <div className="text-center text-xs">
+                  Enviar
+                  <br />
+                  mensagem
+                </div>
               </div>
-              <div className="text-center text-xs">
-                Enviar
-                <br />
-                mensagem
-              </div>
-            </div>
-          </a>
-        </Link>
+            </a>
+          </Link>
+        </div>
 
         <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAlterarReserva()}>
           <div>

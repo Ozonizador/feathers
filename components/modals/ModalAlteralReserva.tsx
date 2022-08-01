@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
-import { useModalAlterarReserva, useSetModalAlterarReserva } from "../../context/ModalShowProvider";
-import { Reservation } from "../../models/reservation";
+import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../context/ModalShowProvider";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
+import { Reservation, ReservationStatus } from "../../models/reservation";
 
 /* PAGINA 23 DO XD 
 
@@ -12,17 +12,42 @@ para chamar na pagina => <ModalAlterarReserva defaultOpen={false} />
 false nao mostra nada true mostra.
 */
 
-interface ModalAlterarReservaProps {
-  reservation: Reservation;
-}
+const ModalAlterarReserva = () => {
+  const { isOpen, reservation } = useModalAlterarReserva();
+  const setIsOpen = useSetOpenModalAlterarReserva();
 
-const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
-  const isOpen = useModalAlterarReserva();
-  const setIsOpen = useSetModalAlterarReserva();
+  const [newReservation, setNewReservation] = useState<Reservation>({
+    startDate: new Date(),
+    endDate: new Date(),
+    status: ReservationStatus.REQUESTED,
+    advertisementId: "",
+    tenantId: "",
+  });
+
+  const updateToOldReservation = useCallback(() => {
+    if (reservation && reservation.id !== newReservation.id) {
+      setNewReservation({
+        ...newReservation,
+        startDate: reservation?.startDate || new Date(),
+        endDate: reservation?.endDate || new Date(),
+        advertisementId: reservation?.advertisementId,
+        tenantId: reservation?.tenantId,
+        status: ReservationStatus.CHANGE_REQUESTED,
+      });
+    }
+  }, [reservation, newReservation]);
+
+  useEffect(() => {
+    updateToOldReservation();
+  }, [updateToOldReservation]);
 
   function closeModal() {
     setIsOpen(false);
   }
+
+  const changeNewReservationProperty = (property: string, value: any) => {
+    setNewReservation({ ...newReservation, [property]: value });
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -89,34 +114,47 @@ const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
+                              )}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
+                              )}
                             </div>
                           </div>
-                          <div className="flex items-center justify-between gap-7 align-middle">
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label  text-base">
-                                Entrada
-                              </label>
-                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
-                            </div>
+                          {reservation && (
+                            <div className="flex items-center justify-between gap-7 align-middle">
+                              <div>
+                                <label htmlFor="exampleInputEmail1" className="form-label  text-base">
+                                  Entrada
+                                </label>
+                                <FeatherDatePicker
+                                  date={reservation.startDate}
+                                  onChange={(e) => changeNewReservationProperty("startDate", e.target.value)}
+                                />
+                              </div>
 
-                            <div>
-                              <VscArrowRight className="mt-7 text-3xl" />
-                            </div>
+                              <div>
+                                <VscArrowRight className="mt-7 text-3xl" />
+                              </div>
 
-                            <div>
-                              <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Saida
-                              </label>
-                              <FeatherDatePicker date={new Date()} onChange={() => {}} />
+                              <div>
+                                <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
+                                  Saida
+                                </label>
+
+                                <FeatherDatePicker
+                                  date={reservation.endDate}
+                                  onChange={(e) => changeNewReservationProperty("endDate", e.target.value)}
+                                />
+                              </div>
                             </div>
-                          </div>
+                          )}
                           <div className="input-group">
                             {/* fim novo */}
 
@@ -152,16 +190,12 @@ const ModalAlterarReserva = ({ reservation }: ModalAlterarReservaProps) => {
                             <div className="mx-auto flex w-8/12 justify-between ">
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Pagamento Original</h5>
-                                <a href="" id="link-modal" className="underline underline-offset-8">
-                                  Detalhes
-                                </a>
+                                <p className="underline underline-offset-8">Detalhes</p>
                               </div>
 
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Novo Pagamento</h5>
-                                <a href="" id="link-modal" className="underline underline-offset-8">
-                                  Detalhes
-                                </a>
+                                <p className="underline underline-offset-8">Detalhes</p>
                               </div>
                             </div>
                           </div>

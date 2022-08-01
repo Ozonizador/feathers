@@ -1,3 +1,4 @@
+import { Profile } from "./profile";
 import { Review } from "./review";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
@@ -5,7 +6,7 @@ export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
 export default interface Advertisement {
   id?: string;
-  typeFlexHost: "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID";
+  typeFlexHost: FlexHostType;
   place: string;
   street: string;
   streetNumber: string;
@@ -27,7 +28,8 @@ export default interface Advertisement {
   guaranteeValue: number;
   expenses: HouseExpenses;
   hostLivesProperty: Boolean;
-  host?: string;
+  hostId: string;
+  host?: Profile;
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
@@ -102,7 +104,7 @@ export enum HOST_TYPE {
   PARTICULAR = "PARTICULAR",
 }
 
-export enum FLEX_HOST_TYPE {
+export enum FlexHostType {
   SUPER_FLEX = "SUPER_FLEX",
   FLEX = "FLEX",
   MODERATE = "MODERATE",
