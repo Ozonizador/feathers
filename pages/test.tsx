@@ -4,7 +4,7 @@ import ModalDenuncia from "../components/modals/ModalDenuncia";
 import MenuTest from "../components/unidesk/Senhorio/Reviews/MenuTest/MenuTest";
 import Disponivel from "../components/anuncio/AnuncioDisponivel";
 import ModalDetalhesPagamento from "../components/modals/ModalDetalhesPagamentos";
-
+import Stay from "../components/Stay/Card/StayCard";
 // import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperiencia";
 
 // import Menu from "../components/unidesk/Menus/MenuSenhorio";
@@ -14,6 +14,7 @@ import Menu from "../components/unidesk/Menus/MenuEstudante";
 const Index = (): JSX.Element => {
   return (
     <div className="flex flex-1 justify-center p-10">
+      {/* <Stay /> */}
       {/* <ModalAvaliarExperiencia defaultOpen={true} /> */}
       {/* <Menu /> */}
 
