@@ -17,8 +17,8 @@ const Configurations = () => {
         </div>
 
         <div className="flex flex-1 justify-center">
-          <div className="w-full bg-terciary-300 p-10 border border-terciary-700 rounded-2xl px-32">
-            <div className="mx-auto w-1/3">
+          <div className="w-full bg-terciary-300 p-10 border border-terciary-700 rounded-2xl px-0 lg:px-32">
+            <div className="mx-auto w-full px-5 lg:w-1/3">
               <div className="text-3xl font-bold">Configurações</div>
               {/* password */}
               <div>
@@ -50,8 +50,18 @@ const Configurations = () => {
                     labelText="Repita palavra passe nova"
                   /> */}
                 </div>
-                <div className="mt-8 flex flex-1 ">
-                  <Button text="Alterar password" onClick={() => { }}></Button>
+                <div className=" flex flex-1 ">
+                  {/* <Button text="Alterar password" onClick={() => { }} ></Button> */}
+
+
+                  <button
+                    className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
+                  // onClick={saveChanges}
+                  >
+                    Alterar password
+                  </button>
+
+
                 </div>
               </div>
 
@@ -61,12 +71,12 @@ const Configurations = () => {
                 <h6>Receber notificações de unihosts</h6>
                 <div className="my-3 flex flex-col flex-1">
 
-                  <div className="flex items-center my-2">
+                  <div className="flex flex-col lg:items-center my-2 lg:flex-row">
                     <div className="flex items-center">
                       <p className="font-bold text-base w-32">Por email</p>
                     </div>
 
-                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
+                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between my-4 lg:ml-6 lg:my-0">
                       <div className="text-base mr-16">
                         Sim
                       </div>
@@ -77,7 +87,7 @@ const Configurations = () => {
                       </div>
                     </div>
 
-                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
+                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between lg:ml-6">
                       <div className="text-base mr-16">
                         Não
                       </div>
@@ -89,12 +99,12 @@ const Configurations = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center my-8">
+                  <div className="flex flex-col lg:items-center my-2 lg:flex-row">
                     <div className="flex items-center">
                       <p className="font-bold text-base w-32">Por mensagem</p>
                     </div>
 
-                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
+                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between my-4 lg:ml-6 lg:my-0">
                       <div className="text-base mr-16">
                         Sim
                       </div>
@@ -105,7 +115,7 @@ const Configurations = () => {
                       </div>
                     </div>
 
-                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between ml-6">
+                    <div className="w-40 border border-terciary-500 rounded-lg py-3 px-3 flex flex-row items-center justify-between lg:ml-6">
                       <div className="text-base mr-16">
                         Não
                       </div>
@@ -125,7 +135,7 @@ const Configurations = () => {
                 <div className="my-4 text-2xl font-bold">Localização</div>
                 <h6 className="my-6">Permitir que unihosts rastreie a minha localização ao usar</h6>
                 <div className="flex items-center h-5">
-                  <select className="rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 w-60 ">
+                  <select className="rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 w-full lg:w-60 ">
                     <option>Idioma</option>
                     <option>Casa</option>
                     <option>Apartamento</option>
@@ -134,7 +144,7 @@ const Configurations = () => {
 
 
                 <div className="flex items-center h-5 my-8">
-                  <select className="rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 w-60 ">
+                  <select className="rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 w-full lg:w-60 ">
                     <option>Moeda</option>
                     <option>Casa</option>
                     <option>Apartamento</option>
