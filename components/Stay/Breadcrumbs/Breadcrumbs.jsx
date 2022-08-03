@@ -4,7 +4,9 @@ import IconStay from "../../../public/images/icon-profile.svg"
 
 const Breadcrumbs = () => {
     return (
-        <div className=" mx-auto mt-24 flex w-11/12 items-center align-middle">
+
+
+        <div className="container mx-auto my-20 mt-24 w-11/12 flex items-center align-middle pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
             <div>
                 <Image src={IconStay} alt="Favoritos" height={55} width={55} />
             </div>
