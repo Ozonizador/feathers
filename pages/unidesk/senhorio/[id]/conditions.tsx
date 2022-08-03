@@ -7,10 +7,7 @@ import HouseRulesComponent from "../../../../components/anuncio/HouseRulesCompon
 
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import {
-  getSingleAdvertisement,
-  updateAdvertisement,
-} from "../../../../services/advertisementService";
+import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 
 interface ConditionsProps {
   id: string;
@@ -41,20 +38,17 @@ const Conditions = ({ id }: ConditionsProps) => {
   }, [getAdvertisementInfo]);
 
   return (
-    <div className="container mx-auto my-20 rounded-2xl border border-terciary-200 bg-terciary-300 py-12">
-      <div className="flex px-12">
-        <div className="w-1/5">
+    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
+      <div className="flex flex-col lg:flex-row">
+        <div className="p-5 lg:border-r lg:p-12">
           <MenuSenhorio id={id} />
         </div>
-        <div className="ml-20 w-4/5">
-          <div className="mb-7 text-2xl font-semibold">Condições e regras</div>
+        <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
+          <div className="mb-2 text-2xl font-semibold">Condições</div>
           <div className="text-xl text-gray-700">As suas regras</div>
 
           {advertisement && (
-            <HouseRulesComponent
-              advertisement={advertisement}
-              onChange={changeAdvertisementProperty}
-            />
+            <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
           )}
 
           <div>

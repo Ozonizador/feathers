@@ -8,10 +8,7 @@ import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacity
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement from "../../../../models/advertisement";
 import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
-import {
-  getSingleAdvertisement,
-  updateAdvertisement,
-} from "../../../../services/advertisementService";
+import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 
 interface DetailsProps {
   id: string;
@@ -42,66 +39,46 @@ const Details = ({ id }: DetailsProps) => {
   };
 
   return (
-    <div className="mx-auto my-20 flex w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 py-12 px-12">
-      <div className="w-1/5">
-        <MenuSenhorio id={id} />
-      </div>
-      <div className="ml-36 w-full">
-        {advertisement && (
-          <>
-            <div>
-              <h5 className="font-bold">{advertisement.title}</h5>
-              <AdvertisementInfoComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-              <HouseCapacityComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-            </div>
+    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
+      <div className="flex flex-col lg:flex-row">
+        <div className="p-5 lg:border-r lg:p-12">
+          <MenuSenhorio id={id} />
+        </div>
+        <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
+          <div className="mb-2 text-2xl font-semibold"></div>
+          <div className="text-xl text-gray-700"></div>
+          {advertisement && (
+            <>
+              <div>
+                <h5 className="font-bold">{advertisement.title}</h5>
+                <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              </div>
 
-            <div>
-              <h5 className="font-bold">{advertisement.title}</h5>
-              <AdvertisementInfoComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-              <AnuncioDisponivel
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-            </div>
+              <div>
+                <h5 className="font-bold">{advertisement.title}</h5>
+                <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <AnuncioDisponivel advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              </div>
 
-            <div>
-              <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
-              <AboutHouseComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-            </div>
-            <div>
-              <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
-              <GeneralAdvertComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-            </div>
-            <div>
-              <h5 className="font-bold">Política de Cancelamento</h5>
-              <HostFlexTypeComponent
-                advertisement={advertisement}
-                onChange={changeAdvertisementProperty}
-              />
-            </div>
-          </>
-        )}
-        <button
-          className="mt-10  rounded-md bg-primary-500 py-5 px-6 text-white"
-          onClick={saveChanges}
-        >
-          Guardar alterações &#10230;
-        </button>
+              <div>
+                <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
+                <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              </div>
+              <div>
+                <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
+                <GeneralAdvertComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              </div>
+              <div>
+                <h5 className="font-bold">Política de Cancelamento</h5>
+                <HostFlexTypeComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              </div>
+            </>
+          )}
+          <button className="mt-10  rounded-md bg-primary-500 py-5 px-6 text-white" onClick={saveChanges}>
+            Guardar alterações &#10230;
+          </button>
+        </div>
       </div>
     </div>
   );
