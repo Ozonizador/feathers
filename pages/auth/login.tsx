@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="my-10 flex justify-center">
-      <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
+      <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
 
@@ -45,7 +45,7 @@ const Login = () => {
           </Link>
         </div>
         <div className="p-3">
-          <div className="font-bold">Bem-vindo de novo!</div>
+          <div className="mb-9 text-xl font-bold">Bem-vindo</div>
           <form onSubmit={(e) => normalLogin(e)}>
             <div className="mt-3">
               <div>Email</div>
@@ -56,21 +56,17 @@ const Login = () => {
             <div className="mt-3">
               <div>Palavra-passe</div>
               <div className="mt-2">
-                <Input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                ></Input>
+                <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password"></Input>
               </div>
             </div>
             <div className="my-5">
-              <button className="w-full rounded-lg bg-primary-500 py-2">Iniciar sessão</button>
+              <button className="w-full rounded-lg bg-primary-500 py-2 text-white">Iniciar Sessão</button>
             </div>
             {hasError && <div>Username ou password errados</div>}
           </form>
           <Link href="/auth/recover">
             <a>
-              <div className="mt-3 text-center text-primary-500">Esqueci-me da palavra-passe</div>
+              <div className="mt-3 text-center text-primary-500 ">Esqueci-me da palavra-passe</div>
             </a>
           </Link>
 
@@ -79,15 +75,12 @@ const Login = () => {
             <span className="mx-4 flex-shrink text-gray-400">ou</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="flex flex-1 justify-around gap-5">
-            <button
-              className="h-16 w-full bg-socials-facebook px-8 text-center"
-              onClick={loginFacebook}
-            >
+          <div className="flex flex-1 flex-col justify-around gap-5">
+            <button className="h-16 w-full rounded-lg bg-socials-facebook px-8  text-center" onClick={loginFacebook}>
               <SiFacebook className="inline" color="blue" />
               <span className="my-auto ml-3 inline">Facebook</span>
             </button>
-            <button className="h-16 w-full bg-socials-gmail px-8 text-center" onClick={loginGoogle}>
+            <button className="h-16 w-full rounded-lg bg-socials-gmail px-8  text-center" onClick={loginGoogle}>
               <SiGmail color="red" className="inline" />
               <span className="my-auto ml-3 inline">Gmail</span>
             </button>
