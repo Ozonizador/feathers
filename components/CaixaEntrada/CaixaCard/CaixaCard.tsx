@@ -1,12 +1,14 @@
 import React from "react";
 import { Avatar } from "flowbite-react";
 import { Profile } from "../../../models/profile";
+import { Reservation, ReservationStatusLabel } from "../../../models/reservation";
 
 interface CaixaCardProps {
   profile: Profile;
+  reservation: Reservation;
 }
 
-const CaixaCard = ({ profile }: CaixaCardProps) => {
+const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
   return (
     <>
       <div className="mb-2 flex gap-3 bg-white p-2">
@@ -24,8 +26,8 @@ const CaixaCard = ({ profile }: CaixaCardProps) => {
 
         <div className="ml-1">
           <div className="flex flex-row justify-between">
-            <h1 className="text-base font-bold text-green-500">Reserva Confirmada</h1>
-            <p className="text-xs">16:45</p>
+            <h1 className="text-base font-bold text-green-500">{ReservationStatusLabel[reservation.status]}</h1>
+            <p className="text-xs">{new Date(reservation.updatedAt).toDateString()}</p>
           </div>
           <h2 className="mt-2 mb-2 text-xs text-secondary-500">
             Sed ut perspiciatis unde omnis iste natus error sit volup tatem

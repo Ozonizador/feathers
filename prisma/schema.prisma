@@ -65,12 +65,12 @@ model Advertisement {
   expenses          Json
   available         AdvertisementStatus
   hostLivesProperty Boolean
-  host              String              @db.Uuid
+  hostId            String              @db.Uuid
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
 
-  Profile Profile? @relation(fields: [host], references: [id])
-  Review  Review[] @relation("advertisementReviews")
+  host    Profile? @relation(fields: [hostId], references: [id])
+  reviews Review[] @relation("advertisementReviews")
 
   reservations Reservation[] @relation("advertisementReservations")
   reports      Report[]      @relation("advertisementReports")

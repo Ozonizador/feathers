@@ -14,6 +14,10 @@ import { addNotification } from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
 import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LINKS, NOTIFICATION_TITLES } from "../../../../models/notification";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
+import { addConversation } from "../../../../services/conversationService";
+import { Conversation } from "../../../../models/conversation";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
@@ -23,28 +27,49 @@ export default function RoomPagamento() {
   const profile = useProfileInformation();
   let setIsOpen = useSetModalDetalhesPagamentoOpen();
 
+  const router = useRouter();
+
   /* Reservation */
   const [reservation, setReservation] = useState<Reservation>({
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: startDate,
+    endDate: endDate,
     status: ReservationStatus.REQUESTED,
     advertisementId: advertisement.id,
     tenantId: "",
   });
 
   const makeReservation = async () => {
-    if (!profile) return;
+    if (!profile) {
+      router.push("/auth/login");
+      return;
+    }
     // get the reservation
     const { data, error } = await addReservation(reservation, profile.id);
-    if (!error) {
+    if (!error && data) {
       const notification = createNotification(
         NOTIFICATION_TITLES.GOOD_NEWS,
         NOTIFICATION_DESCRIPTION.ACCEPTED_RESERVATION,
         NOTIFICATION_LINKS.STAY,
         profile
       );
+
       await addNotification(notification);
+      await createConversation(data.id);
+      toast("Wow so easy!");
+    } else {
+      toast("ERROR");
     }
+  };
+
+  const createConversation = async (reservationId: string) => {
+    debugger;
+    const conversation = {
+      hostId: advertisement.host.id,
+      tenantId: profile.id,
+      reservationId: reservationId,
+    } as Conversation;
+
+    await addConversation(conversation);
   };
 
   return (

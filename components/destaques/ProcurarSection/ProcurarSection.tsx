@@ -107,30 +107,7 @@ export default function ProcurarSection() {
             )}
           </div>
 
-          {isLoading && (
-            <div className="mt-32 flex flex-1 justify-center">
-              <Spinner color="info" aria-label="loading" size="lg" />
-            </div>
-          )}
-          {!isLoading && (
-            <>
-              <div>
-                {advertisementsInfo.advertisements &&
-                  advertisementsInfo.advertisements.map((advertisement, index) => {
-                    return (
-                      <Link href={`/anuncio/${advertisement.id}`} key={index}>
-                        <a>
-                          <div>
-                            <RoomCard advertisement={advertisement} />
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                  })}
-              </div>
-              <div></div>
-
-              {/* {advertisementsInfo.advertisements.length !== 0 &&
+          {/* {advertisementsInfo.advertisements.length !== 0 &&
                 advertisementsInfo.count !== advertisementsInfo.advertisements.length && (
                   <div className="row mb-5">
                     <div className="col-md-2"></div>
@@ -144,8 +121,6 @@ export default function ProcurarSection() {
                     <div className="col-md-5"></div>
                   </div>
                 )} */}
-            </>
-          )}
         </div>
         <div className="w-1/2 px-5 lg:block">
           <Image src="/images/homemap.png" layout="responsive" height="100%" width="100%" alt="" />

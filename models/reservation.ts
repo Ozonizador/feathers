@@ -36,3 +36,11 @@ export const RESERVATION_TABLE = {
   END_DATE: "endDate",
   STATUS: "status",
 } as const;
+
+export enum ReservationStatusLabel {
+  REQUESTED = "Pedido de Reserva",
+  ACCEPTED = "Reserva Aceite",
+  REJECTED = "Reserva Rejeitada",
+  CHANGE_ACCEPTED = "Alteração de Reserva Aceite",
+  CHANGE_REQUESTED = "Alteração de Reserva",
+}

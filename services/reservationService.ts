@@ -5,7 +5,7 @@ import { Reservation, ReservationStatus, RESERVATION_TABLE, RESERVATION_TABLE_NA
 export const addReservation = async (reservation: Reservation, tenantId: string) => {
   const { data, error } = await supabaseClient
     .from<Reservation>(RESERVATION_TABLE_NAME)
-    .insert({ ...reservation, id: uuidv4(), updatedAt: new Date(), tenantId }, { returning: "minimal" })
+    .insert({ ...reservation, id: uuidv4(), updatedAt: new Date(), tenantId }, { returning: "representation" })
     .single();
   return { data, error };
 };

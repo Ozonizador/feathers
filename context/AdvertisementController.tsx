@@ -1,4 +1,5 @@
 import Advertisement, {
+  AboutHouseSections,
   AdvertisementStatus,
   HouseExpenses,
   HouseRules,
@@ -19,7 +20,15 @@ const defaultAdvertisement = {
   postalCode: "",
   title: "",
   description: "",
-  aboutHouse: { livingRoom: [], exterior: [], bedRoom: [], kitchen: [] },
+  hostId: "",
+  aboutHouse: {
+    bathRoom: [],
+    bedRoom: [],
+    kitchen: [],
+    livingRoom: [],
+    exterior: [],
+    general: [],
+  } as AboutHouseSections,
   rooms: 1,
   beds: 1,
   tenantNumber: 1,
@@ -47,16 +56,14 @@ export const AdvertisementController = ({ children }): JSX.Element => {
   useEffect(() => {
     if (user) {
       setAdvertisement((oldAdvert) => {
-        return { ...oldAdvert, host: user.id };
+        return { ...oldAdvert, hostId: user.id };
       });
     }
   }, [user]);
 
   return (
     <AdvertisementContext.Provider value={advertisement}>
-      <SetAdvertisementContext.Provider value={setAdvertisement}>
-        {children}
-      </SetAdvertisementContext.Provider>
+      <SetAdvertisementContext.Provider value={setAdvertisement}>{children}</SetAdvertisementContext.Provider>
     </AdvertisementContext.Provider>
   );
 };

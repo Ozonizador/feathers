@@ -92,7 +92,7 @@ const CaixaEntrada = () => {
                 {conversations.map((conversation, index) => {
                   return (
                     <div key={index} onClick={() => setCurrentConversation(conversation.id)} className="cursor-pointer">
-                      <CaixaCard profile={getOtherProfile(conversation)} />
+                      <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
                     </div>
                   );
                 })}

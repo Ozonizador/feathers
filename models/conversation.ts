@@ -1,5 +1,6 @@
-import { Profile, Reservation } from "@prisma/client";
 import { Message } from "./message";
+import { Profile } from "./profile";
+import { Reservation } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 

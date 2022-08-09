@@ -71,7 +71,7 @@ export const getServerSideProps = async ({
 
   const { data: advertisement, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .select(`*`)
+    .select(`*, host:hostId(*)`)
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .limit(1)
     .single();
