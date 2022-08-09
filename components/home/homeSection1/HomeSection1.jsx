@@ -17,8 +17,8 @@ export default function HomeSection1() {
               height={64}
               width={64}
             />
-            à distancia de um
-            <br />
+            à distancia de um {" "}
+            <br className="hidden lg:block" />
             click!
           </h1>
           <div className="flex flex-col lg:flex-row">
