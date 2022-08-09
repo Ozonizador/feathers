@@ -23,12 +23,15 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
   const toggleFavourite = async (e, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
-    const { favouriteRooms } = profile;
+    let { favouriteRooms } = profile;
 
     if (isFavourite) {
       const newFavRooms = favouriteRooms.filter((favourite) => advertId !== favourite);
       await setFavouriteProfile(newFavRooms);
     } else {
+      if (favouriteRooms === null) {
+        favouriteRooms = [];
+      }
       favouriteRooms.push(advertId);
       await setFavouriteProfile(favouriteRooms);
     }

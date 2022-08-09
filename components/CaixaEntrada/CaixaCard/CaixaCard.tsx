@@ -29,12 +29,10 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
             <h1 className="text-base font-bold text-green-500">{ReservationStatusLabel[reservation.status]}</h1>
             <p className="text-xs">{new Date(reservation.updatedAt).toDateString()}</p>
           </div>
-          <h2 className="mt-2 mb-2 text-xs text-secondary-500">
-            Sed ut perspiciatis unde omnis iste natus error sit volup tatem
-          </h2>
+          <h2 className="mt-2 mb-2 text-xs text-secondary-500">{profile.description}</h2>
 
           <a>
-            <p className="text-xs font-normal text-secondary-400">Nome do anuncio</p>
+            <p className="text-xs font-normal text-secondary-400">{reservation.advertisement.title}</p>
           </a>
         </div>
       </div>

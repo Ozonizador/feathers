@@ -5,6 +5,7 @@ import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/
 import Advertisement from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface ProcurarPagination {
   advertisements: Advertisement[];
@@ -16,6 +17,7 @@ export default function ProcurarSection() {
   const [page, setPage] = useState<number>(1);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<ProcurarPagination>({ count: 0, advertisements: [] });
 
+  const router = useRouter();
   const getAdvertisements = useCallback(async () => {
     const { data, error, count } = await getFilteredAdvertisements(page, null);
     if (!error) {
@@ -28,6 +30,10 @@ export default function ProcurarSection() {
     setIsLoading(true);
     getAdvertisements();
   }, [getAdvertisements]);
+
+  const goToAdvert = (id: string) => {
+    router.push(`/anuncio/${id}`);
+  };
 
   return (
     <>
@@ -93,13 +99,9 @@ export default function ProcurarSection() {
                   {advertisementsInfo.advertisements &&
                     advertisementsInfo.advertisements.map((advertisement, index) => {
                       return (
-                        <Link href={`/anuncio/${advertisement.id}`} key={index}>
-                          <a>
-                            <div>
-                              <RoomCard advertisement={advertisement} />
-                            </div>
-                          </a>
-                        </Link>
+                        <div onClick={() => goToAdvert(advertisement.id)} key={index}>
+                          <RoomCard advertisement={advertisement} />
+                        </div>
                       );
                     })}
                 </div>

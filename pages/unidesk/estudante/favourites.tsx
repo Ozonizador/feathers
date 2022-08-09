@@ -64,7 +64,7 @@ const UnideskFavoritos = () => {
                     <div className="mb-10 h-40 w-full bg-white" key={index}>
                       <div className="flex rounded-lg border-2 border-gray-200">
                         <div className="w-1/3 rounded-l-lg">
-                          {favourite.photos ? (
+                          {favourite.photos && favourite.photos.length > 0 ? (
                             <Image
                               src={favourite.photos[0]}
                               alt="Foto de Capa"

@@ -13,7 +13,7 @@ export const addConversation = async (conversation: Conversation) => {
 export const getConversationsFromUser = async (userId: string) => {
   const { data, error } = await supabaseClient
     .from<Conversation>(CONVERSATION_TABLE_NAME)
-    .select("*, host:hostId (*), tenant:tenantId (*), reservation:reservationId (*)")
+    .select("*, host:hostId (*), tenant:tenantId (*), reservation:reservationId (*, advertisement:advertisementId(*))")
     .or(`${CONVERSATION_PROPERTIES.HOST_ID}.eq.${userId},${CONVERSATION_PROPERTIES.TENANT_ID}.eq.${userId}`)
     .order(CONVERSATION_PROPERTIES.CREATED_ID, { ascending: false });
   return { data, error };
