@@ -17,59 +17,72 @@ export const NOTIFICATION_PROPERTIES = {
   ID: "id",
 } as const;
 
-export const NOTIFICATION_TITLES = {
-  GOOD_NEWS: "boas notícias!",
-};
-
-export const NOTIFICATION_DESCRIPTION = {
-  COMPLETE_PAYMENTS: "Completa o teu perfil com os métodos de pagamento!",
-  ACCEPTED_RESERVATION: "aceitou o teu pedido de reserva!",
-};
-
 export const NOTIFICATION_LINKS = {
   STAY: "/unidek/estudante/stay",
 };
 
-export const NOTIFICATION_TYPES = {
+export enum NOTIFICATION_TYPES {
+  STUDENT_RESERVATION_DECLINED = "STUDENT_RESERVATION_DECLINED",
+  STUDENT_RESERVATION_ACCEPTED = "STUDENT_RESERVATION_ACCEPTED",
+  STUDENT_UNIHOSTS_SUPPORT = "STUDENT_UNIHOSTS_SUPPORT",
+  STUDENT_COMPLETE_PROFILE = "STUDENT_COMPLETE_PROFILE",
+  STUDENT_EVALUATE_STAY = "STUDENT_EVALUATE_STAY",
+  LANDLORD_RESERVATION_RECEIVED = "LANDLORD_RESERVATION_RECEIVED",
+  LANDLORD_UNIHOSTS_SUPPORT = "LANDLORD_UNIHOSTS_SUPPORT",
+  LANDLORD_NEW_REVIEW = "LANDLORD_NEW_REVIEW",
+  LANDLORD_COMPLETE_PROFILE = "LANDLORD_COMPLETE_PROFILE",
+  LANDLORD_COMPLETE_ADVERT = "LANDLORD_COMPLETE_ADVERT",
+  BLOG = "BLOG",
+}
+
+export interface NotificationInformation {
+  title: string;
+  description: string;
+}
+
+export const NOTIFICATION_TYPES_INFORMATION = {
   STUDENT_RESERVATION_DECLINED: {
-    title: "",
-    description: "",
-  },
+    title: "Más Notícias, Reserva Recusada",
+    description: "Infelizmente o pedido de reserva foi recusado.",
+  } as NotificationInformation,
   STUDENT_RESERVATION_ACCEPTED: {
-    title: "",
-    description: "",
-  },
+    title: "Boas Notícias, Reserva Aceite",
+    description: "O teu pedido de reserva foi aceite!",
+  } as NotificationInformation,
   STUDENT_UNIHOSTS_SUPPORT: {
-    title: "",
-    description: "",
-  },
+    title: "Novidades da equipa de suporte estudante",
+    description: "Tens novas mensagens por ler da tua equipa Unihosts!",
+  } as NotificationInformation,
   STUDENT_COMPLETE_PROFILE: {
-    title: "",
-    description: "",
-  },
+    title: "Completa o teu perfil",
+    description: "O senhorio vai gostar de saber mais sobre ti antes de confirmar o pedido de reserva!",
+  } as NotificationInformation,
   STUDENT_EVALUATE_STAY: {
-    title: "",
-    description: "",
-  },
+    title: "Conta-nos como foi a tua estadia",
+    description: "Os comentários/pontuações são importantes para os futuros estudantes.",
+  } as NotificationInformation,
   LANDLORD_RESERVATION_RECEIVED: {
-    title: "",
-    description: "",
-  },
+    title: "Tens uma novo pedido de reserva!",
+    description: "Responde à consulta nas próximas 24 horas!",
+  } as NotificationInformation,
   LANDLORD_UNIHOSTS_SUPPORT: {
-    title: "",
-    description: "",
-  },
+    title: "Novidades do apoio ao Senhorio",
+    description: "Tens novas mensagens por ler da tua equipa Unihosts!",
+  } as NotificationInformation,
   LANDLORD_NEW_REVIEW: {
-    title: "",
-    description: "",
-  },
+    title: "Recebeste uma nova Avaliação",
+    description: "Os comentários/pontuações são importantes para os futuros estudantes.",
+  } as NotificationInformation,
   LANDLORD_COMPLETE_PROFILE: {
-    title: "",
-    descripion: "",
-  },
-  LANDLORD_COMPLETE_ADVERT: { title: "", description: "" },
+    title: "Completa o teu perfil",
+    description: "Os estudantes vão gostar de saber mais sobre ti antes de reservar!",
+  } as NotificationInformation,
+  LANDLORD_COMPLETE_ADVERT: {
+    title: "Completa o teu anúncio",
+    description: "Vários estudantes estão à procura de quarto! Aproveita!",
+  } as NotificationInformation,
   BLOG: {
-    title: "",
-    description: "",
-  },
+    title: "Lançámos um novo artigo de blog!",
+    description: "Confere já na categoria do Estudante as últimas novidades!",
+  } as NotificationInformation,
 };

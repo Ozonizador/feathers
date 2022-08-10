@@ -12,7 +12,7 @@ import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
 import { addNotification } from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
-import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LINKS, NOTIFICATION_TITLES } from "../../../../models/notification";
+import { NOTIFICATION_LINKS, NOTIFICATION_TYPES } from "../../../../models/notification";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import { addConversation } from "../../../../services/conversationService";
 import { Conversation } from "../../../../models/conversation";
@@ -47,8 +47,7 @@ export default function RoomPagamento() {
     const { data, error } = await addReservation(reservation, profile.id);
     if (!error && data) {
       const notification = createNotification(
-        NOTIFICATION_TITLES.GOOD_NEWS,
-        NOTIFICATION_DESCRIPTION.ACCEPTED_RESERVATION,
+        NOTIFICATION_TYPES.LANDLORD_RESERVATION_RECEIVED,
         NOTIFICATION_LINKS.STAY,
         profile
       );
