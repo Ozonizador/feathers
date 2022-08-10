@@ -80,7 +80,7 @@ const ModalAlterarReserva = () => {
                   as="h3"
                   className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
-                  <Image id="modal-img" className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
+                  <Image className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
                   <span className="ml-3 text-3xl font-bold">Alterar reserva</span>
                 </Dialog.Title>
 

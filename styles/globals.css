@@ -63,56 +63,6 @@
 }
 /* FINAL CÓDIGO RODRIGO */
 
-#flush-headings {
-  background-color: #f9f9f9 !important;
-  border-radius: 10px;
-  border: none;
-}
-
-/* home section 8 */
-
-#modal-img {
-  height: 30px;
-  width: 30px;
-}
-
-#maps {
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.Headingn {
-  color: #0d152e;
-  margin-left: 20px;
-  font-weight: bold;
-}
-.textn {
-  color: #2e4832;
-  margin-left: 20px;
-}
-#buttont {
-  width: 30%;
-  font-size: 15px;
-  background-color: #d6b592 !important;
-  border-style: none;
-  border-radius: 5px solid;
-  height: 30px;
-  color: white;
-}
-#buttont:hover {
-  width: 30%;
-  border: #885825 1px solid;
-  border-radius: 5px solid;
-  color: #d6b592;
-  background-color: white;
-}
-#search {
-  width: 70%;
-  background-color: white;
-  border-radius: 80px solid;
-  margin-left: 20px;
-}
-
 #model-radius {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
