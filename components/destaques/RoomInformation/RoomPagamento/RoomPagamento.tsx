@@ -61,7 +61,6 @@ export default function RoomPagamento() {
   };
 
   const createConversation = async (reservationId: string) => {
-    debugger;
     const conversation = {
       hostId: advertisement.host.id,
       tenantId: profile.id,

@@ -24,7 +24,6 @@ const CaixaEntrada = () => {
   const getUserConversations = useCallback(async () => {
     if (profile) {
       const { data, error } = await getConversationsFromUser(profile.id);
-      debugger;
       if (!error) {
         setConversations(data);
         setCurrentConversation((data[0] && data[0].id) || null);

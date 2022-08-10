@@ -6,6 +6,11 @@ import Advertisement from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
+  ssr: false,
+});
 
 interface ProcurarPagination {
   advertisements: Advertisement[];
@@ -99,7 +104,7 @@ export default function ProcurarSection() {
                   {advertisementsInfo.advertisements &&
                     advertisementsInfo.advertisements.map((advertisement, index) => {
                       return (
-                        <div onClick={() => goToAdvert(advertisement.id)} key={index}>
+                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.id)} key={index}>
                           <RoomCard advertisement={advertisement} />
                         </div>
                       );
@@ -125,9 +130,11 @@ export default function ProcurarSection() {
                 )} */}
         </div>
         <div className="hidden w-1/2 px-5 lg:block">
-          <Image src="/images/homemap.png" layout="responsive" height="100%" width="100%" alt="" />
+          <MapWithNoSSR />
         </div>
       </div>
     </>
   );
 }
+
+const ProcurarMap = () => {};
