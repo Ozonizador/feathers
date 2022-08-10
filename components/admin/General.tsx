@@ -36,6 +36,8 @@ const MainMenu = () => {
     }
   };
 
+  const uploadAvatar = () => {};
+
   const handleProfileInfoByProperty = (property: string, value: any) => {
     setProfile({ ...profile, [property]: value });
   };
@@ -93,7 +95,7 @@ const MainMenu = () => {
                   <div className="mb-1">Data de nascimento</div>
                   <div className="flex flex-row gap-4">
                     <FeatherDatePicker
-                      date={profile?.birthDate || new Date()}
+                      date={profile?.birthDate ? new Date(profile.birthDate) : new Date()}
                       onChange={(date) => handleProfileInfoByProperty(PROFILE_COLUMNS.BIRTH_DATE, date)}
                     />
                   </div>

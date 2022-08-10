@@ -6,6 +6,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { FlexHostType } from "../../../../models/advertisement";
+import { Gender } from "../../../../models/profile";
 
 export default function RoomSenhorio() {
   const advertisement = useGetSingleAdvertisement();
@@ -32,7 +33,9 @@ export default function RoomSenhorio() {
                   unoptimized={true}
                 />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Senhoria desde 2020</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{`${
+                  advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
+                } desde ${new Date(advertisement.host.createdAt).getFullYear()}`}</span>
                 {/*<hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">

@@ -13,6 +13,7 @@ export interface Profile {
   phone: string;
   avatarUrl: string;
   favouriteRooms: string[];
+  createdAt: Date;
 }
 
 export enum Gender {
