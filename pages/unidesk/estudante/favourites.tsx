@@ -58,7 +58,7 @@ const UnideskFavoritos = () => {
           )}
           {!isLoading && (
             <>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="w-full gap-5 lg:grid lg:grid-cols-2">
                 {favourites.map((favourite, index) => {
                   return (
                     <div className="mb-10 h-40 w-full bg-white" key={index}>

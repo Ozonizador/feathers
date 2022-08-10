@@ -50,18 +50,18 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
   return (
     <div>
-      <div className="container mb-4 rounded-xl bg-white drop-shadow-2xl">
+      <div className="mt-10 mb-4 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div>
           <div className="cards">
-            <div className="flex flex-1">
-              <div className="w-1/3">
+            <div className="flex flex-1 flex-col items-center lg:flex-row">
+              <div className="w-full lg:w-1/3 lg:pl-4">
                 {advertisement.photos && advertisement.photos[0] ? (
                   <Image src={advertisement.photos[0]} alt="..." height={256} width={256} />
                 ) : (
-                  <Image src={NoPhotoAvailable} alt="no photo available" />
+                  <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" />
                 )}
               </div>
-              <div className="p-3">
+              <div className="p-3 lg:w-2/4">
                 <div className="m-1">
                   <div className="flex flex-1">
                     <h6 className="mb-0 text-xl font-bold">{advertisement.title}</h6>
@@ -99,7 +99,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       </span>
                     </div>
                   </div>
-                  <div className="mb-1 mt-2 flex text-start text-xs">
+                  <div className="mb-1 mt-3 flex text-start text-xs lg:ml-3">
                     <ul className="pr-3-3 flex gap-5 text-gray-500">
                       <li className="list-none">Wifi</li>
                       <li>Cozinha</li>
@@ -108,25 +108,27 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </ul>
                   </div>
 
-                  <div className="mt-4 flex">
+                  <div className="mt-4 flex justify-between">
                     <div className="my-auto">
                       <button
-                        className="rounded-md  border border-black  py-2 px-4 text-xs hover:border-primary-500"
+                        className="rounded-md  border border-black py-2 px-4 text-xs hover:border-primary-500 lg:text-base"
                         onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                       >
                         <CgHeart
                           className={classNames("inline", {
-                            "fill-red-600 text-red-600": isFavourite(),
+                            "fill-gray-800 text-gray-800": isFavourite(),
                           })}
                         />
                         <span className="my-auto ml-2">Favoritos</span>
                       </button>
                     </div>
-                    <div className="relative left-36 ">
+                    <div className="">
                       <div className="text-end">
                         <h3 className="text-xl font-bold text-primary-500">{advertisement.monthRent} €/mês</h3>
                         <div className="d-flex">
-                          <p className="text-xs">{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</p>
+                          <p className="mt-1 text-xs lg:text-base">
+                            {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}
+                          </p>
                           <i className="fa-solid fa-circle-info m-1"></i>
                         </div>
                       </div>

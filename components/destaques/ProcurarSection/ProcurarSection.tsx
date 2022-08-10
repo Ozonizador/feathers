@@ -124,7 +124,7 @@ export default function ProcurarSection() {
                   </div>
                 )} */}
         </div>
-        <div className="w-1/2 px-5 lg:block">
+        <div className="hidden w-1/2 px-5 lg:block">
           <Image src="/images/homemap.png" layout="responsive" height="100%" width="100%" alt="" />
         </div>
       </div>
