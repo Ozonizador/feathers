@@ -6,6 +6,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { FlexHostType } from "../../../../models/advertisement";
+import { Gender } from "../../../../models/profile";
 
 export default function RoomSenhorio() {
   const advertisement = useGetSingleAdvertisement();
@@ -31,9 +32,11 @@ export default function RoomSenhorio() {
                   width={96}
                   unoptimized={true}
                 />
-                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Maria</h5>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Senhoria desde 2020</span>
-                <hr />
+                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{`${
+                  advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
+                } desde ${new Date(advertisement.host.createdAt).getFullYear()}`}</span>
+                {/*<hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
                     <RiMailSendFill className=" text-4xl text-blue-600 " />
@@ -41,7 +44,7 @@ export default function RoomSenhorio() {
                   <div className="">
                     Taxa de resposta <br /> 90%
                   </div>
-                </div>
+                </div>*/}
               </div>
             </Card>
           </div>
@@ -50,11 +53,8 @@ export default function RoomSenhorio() {
         <div className="flex w-7/12 flex-col">
           <div className="max-w-md">
             <div>
-              <h1 className="mb-4 text-2xl font-bold">Olá, sou a Maria!</h1>
-              <p className="text-secondary-400">
-                Tenho 4 casas em Peniche e já fui estudante também. Quero que os meus inquilinos se sintam bem e estou
-                sempre disponível para ajudar naquilo que for preciso.
-              </p>
+              <h1 className="mb-4 text-2xl font-bold">Olá, sou a {advertisement.host.name}!</h1>
+              <p className="text-secondary-400">{advertisement.host.description}</p>
             </div>
           </div>
 

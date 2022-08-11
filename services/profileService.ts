@@ -34,7 +34,8 @@ export const updateUserProfile = async (userID: string, profile: Profile) => {
   const { data, error } = await supabaseClient
     .from<Profile>(PROFILE_TABLE_NAME)
     .update({ ...profile })
-    .eq(PROFILE_COLUMNS.ID, userID);
+    .eq(PROFILE_COLUMNS.ID, userID)
+    .single();
   return { data, error };
 };
 

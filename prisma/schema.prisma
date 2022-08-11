@@ -16,7 +16,7 @@ model Profile {
   surname        String?
   nationality    String?
   town           String?
-  birthDate      DateTime?
+  birthDate      DateTime? @db.Date
   gender         Int?
   description    String?
   languages      String[]
