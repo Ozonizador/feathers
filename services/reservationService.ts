@@ -69,6 +69,7 @@ export const getCurrentReservationsByHostId = async (hostId: string) => {
   const { data, error } = await supabaseClient
     .from(RESERVATION_TABLE_NAME)
     .select("*, tenant:tenantId(*), advertisement:advertisementId(id, type, place)")
+    .eq(RESERVATION_TABLE.STATUS, ReservationStatus.ACCEPTED)
     .eq(RESERVATION_TABLE.HOST_ID, hostId);
 
   return { data, error };
