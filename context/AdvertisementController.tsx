@@ -44,6 +44,8 @@ const defaultAdvertisement = {
   } as HouseExpenses,
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,
+  latitude: null,
+  longitude: null,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

@@ -7,6 +7,7 @@ import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { MapCoordinates } from "../../../models/utils";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -21,8 +22,11 @@ export default function ProcurarSection() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<ProcurarPagination>({ count: 0, advertisements: [] });
+  const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
   const router = useRouter();
+  const { place } = router.query;
+
   const getAdvertisements = useCallback(async () => {
     const { data, error, count } = await getFilteredAdvertisements(page, null);
     if (!error) {
@@ -39,6 +43,19 @@ export default function ProcurarSection() {
   const goToAdvert = (id: string) => {
     router.push(`/anuncio/${id}`);
   };
+
+  useEffect(() => {
+    if (place) {
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          setCurrentMapCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+        },
+        function errorCallback(error) {},
+        { timeout: 10000 }
+      );
+    }
+  }, [place]);
 
   return (
     <>
@@ -130,11 +147,9 @@ export default function ProcurarSection() {
                 )} */}
         </div>
         <div className="hidden w-1/2 px-5 lg:block">
-          <MapWithNoSSR />
+          <MapWithNoSSR currentMap={currentMapCoordinates} />
         </div>
       </div>
     </>
   );
 }
-
-const ProcurarMap = () => {};

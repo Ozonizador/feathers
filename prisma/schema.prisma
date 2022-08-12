@@ -68,6 +68,8 @@ model Advertisement {
   hostId            String              @db.Uuid
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
+  latitude          Int?
+  longitude         Int?
 
   host    Profile? @relation(fields: [hostId], references: [id])
   reviews Review[] @relation("advertisementReviews")

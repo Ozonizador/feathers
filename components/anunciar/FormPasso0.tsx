@@ -8,6 +8,7 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
+import { getCoordinatesFromSearch } from "../../services/mapService";
 
 const FormPasso0 = () => {
   const [message, setMessage] = useState("");
@@ -30,6 +31,9 @@ const FormPasso0 = () => {
       setMessage("Campos por preencher.");
       return;
     }
+
+    const { latitude, longitude } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
+    setAdvertisement({ ...advertisement, latitude, longitude });
 
     const { data, error } = await addAdvertisement(advertisement);
     if (data) {
