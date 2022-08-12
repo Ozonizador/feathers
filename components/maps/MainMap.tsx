@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import { MapCoordinates } from "../../models/utils";
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";

@@ -12,6 +12,7 @@ import { Spinner } from "flowbite-react";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
+import classNames from "classnames";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -58,7 +59,12 @@ const UnideskFavoritos = () => {
           )}
           {!isLoading && (
             <>
-              <div className="w-full gap-5 lg:grid lg:grid-cols-2">
+              <div
+                className={classNames({
+                  "w-1/2 lg:flex lg:justify-center": favourites && favourites.length == 1,
+                  "gap-5 lg:grid lg:grid-cols-2": favourites && favourites.length > 1,
+                })}
+              >
                 {favourites.map((favourite, index) => {
                   return (
                     <div className="mb-10 h-40 w-full bg-white" key={index}>
