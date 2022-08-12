@@ -6,7 +6,7 @@ import HomeSection6Cards from "../homeSection6Cards/HomeSection6Cards";
 export default function HomeSection6() {
   return (
     <section>
-      <div className="container-fluid bg-terciary-300 px-8">
+      <div className="container-fluid bg-terciary-300">
         <div className="container mx-auto py-20 text-center">
           <h2 className="mb-20 text-5xl font-bold">Testemunhos</h2>
           <div className="grid gap-8 lg:grid-cols-3">

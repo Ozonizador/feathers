@@ -34,7 +34,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
           <div className="mx-auto md:container">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
-              <div className="w-full px-4 lg:w-4/6 lg:px-5">
+              <div className="w-4/6 px-5">
                 <RoomInformation />
                 <DescricaoCondicoes />
                 <RoomSlider />

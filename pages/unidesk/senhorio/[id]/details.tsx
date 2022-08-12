@@ -9,6 +9,12 @@ import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement from "../../../../models/advertisement";
 import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
+import dynamic from "next/dynamic";
+import { MapCoordinates } from "../../../../models/utils";
+
+const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
+  ssr: false,
+});
 
 interface DetailsProps {
   id: string;
@@ -38,6 +44,10 @@ const Details = ({ id }: DetailsProps) => {
     setAdvertisement({ ...advertisement, [property]: value });
   };
 
+  const createCurrentMapLocation = () => {
+    return { latitude: advertisement.latitude, longitude: advertisement.longitude } as MapCoordinates;
+  };
+
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
       <div className="flex flex-col lg:flex-row">
@@ -65,8 +75,18 @@ const Details = ({ id }: DetailsProps) => {
                 <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
                 <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
               </div>
-              <div>
+              <div className="mt-5">
                 <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
+                {(advertisement.latitude === null || !advertisement.longitude === null) && (
+                  <div>Não tem localização</div>
+                )}
+                {advertisement.latitude !== null && advertisement.longitude !== null && (
+                  <>
+                    <div className="h-96 w-full px-6">
+                      <MapWithNoSSR currentMap={createCurrentMapLocation()} />
+                    </div>
+                  </>
+                )}
                 <GeneralAdvertComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
               </div>
               <div>
@@ -75,7 +95,7 @@ const Details = ({ id }: DetailsProps) => {
               </div>
             </>
           )}
-          <button className="mt-10  rounded-md bg-primary-500 py-5 px-6 text-white" onClick={saveChanges}>
+          <button className="mt-10 mb-5 rounded-md bg-primary-500 py-5 px-6 text-white" onClick={saveChanges}>
             Guardar alterações &#10230;
           </button>
         </div>

@@ -24,7 +24,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
               />
             </div>
             <div className="mx-5">
-              <Image src="/images/green.png" alt="" height={16} width={32} />
+              <div className="h-4 w-8 rounded-full bg-green-400"></div>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
               />
             </div>
             <div className="mx-5">
-              <Image src="/images/yellow.png" alt="" height={16} width={32} />
+              <div className="h-4 w-8 rounded-full bg-yellow-300"></div>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
               />
             </div>
             <div className="mx-5">
-              <Image src="/images/orange.png" alt="" height={16} width={32} />
+              <div className="h-4 w-8 rounded-full bg-orange-400"></div>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
               />
             </div>
             <div className="mx-5">
-              <Image src="/images/red.png" alt="" height={16} width={32} />
+              <div className="h-4 w-8 rounded-full bg-red-600"></div>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function HomeSection7() {
   return (
     <section>
-      <div className="mx-auto my-24  w-11/12 rounded-3xl bg-terciary-300   lg:w-4/5 ">
+      <div className="my-24 w-11/12 rounded-3xl bg-terciary-300 lg:w-full">
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="basis-2/4 items-center  p-0 text-center align-middle lg:p-0 lg:text-left">
             <h2 className="mt-8 text-2xl font-bold text-secondary-500 lg:mt-8 lg:ml-6 lg:text-6xl ">

@@ -4,7 +4,7 @@ import HomeSection2Cards from "../homeSection2Cards/HomeSection2Cards";
 export default function HomeSection2() {
   return (
     <section>
-      <div className="mx-auto flex flex-col gap-5 justify-between px-2 lg:px-32 py-20 lg:flex-row lg:gap-0">
+      <div className="mx-auto flex flex-col justify-between gap-5 py-20 lg:flex-row lg:gap-0">
         <HomeSection2Cards
           img="/images/homeSection new-1.png"
           heading="Seguro e Verificado"

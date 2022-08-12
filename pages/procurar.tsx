@@ -15,4 +15,8 @@ const Procurar = () => {
   );
 };
 
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
+
 export default Procurar;

@@ -33,6 +33,8 @@ export default interface Advertisement {
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
+  latitude: number;
+  longitude: number;
 
   // foreign keys
   reviews?: Review[];

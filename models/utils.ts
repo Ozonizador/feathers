@@ -8,3 +8,10 @@ interface JSONObject {
 type JSONArray = Array<JSONValue>;
 
 /* end of JSON Representation */
+
+/* MAPS */
+
+export interface MapCoordinates {
+  latitude: number;
+  longitude: number;
+}

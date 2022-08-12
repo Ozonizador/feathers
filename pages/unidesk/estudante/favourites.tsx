@@ -6,12 +6,13 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement from "../../../models/advertisement";
+import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 import { getAdvertismentsFromMultipleId } from "../../../services/advertisementService";
 import { Spinner } from "flowbite-react";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
+import classNames from "classnames";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -58,7 +59,12 @@ const UnideskFavoritos = () => {
           )}
           {!isLoading && (
             <>
-              <div className="w-full gap-5 lg:grid lg:grid-cols-2">
+              <div
+                className={classNames({
+                  "w-1/2 lg:flex lg:justify-center": favourites && favourites.length == 1,
+                  "gap-5 lg:grid lg:grid-cols-2": favourites && favourites.length > 1,
+                })}
+              >
                 {favourites.map((favourite, index) => {
                   return (
                     <div className="mb-10 h-40 w-full bg-white" key={index}>
@@ -90,13 +96,11 @@ const UnideskFavoritos = () => {
                             <div className="relative mb-2 text-center text-base">
                               <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
+                                <p className="mt-1 text-xs lg:text-base">
+                                  {EXPENSES_TO_TEXT[favourite.expenses.inclusive]}
+                                </p>
                                 <BiInfoCircle />
                               </div>
-                              {favourite.expenses &&
-                                favourite.expenses.inclusive !== undefined &&
-                                favourite.expenses.inclusive !== "EXCLUDED" && (
-                                  <RoomUtilitesPopover expenses={favourite.expenses} />
-                                )}
                             </div>
                           </div>
                           <Link href={`/anuncio/${favourite.id}`}>
