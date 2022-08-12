@@ -13,8 +13,9 @@ import HomeParceiros from "../components/home/homeParceiros/HomeParceiros";
 export default function Home() {
   return (
     <div>
-      <div>
-        <HomeSection1 />
+      <HomeSection1 />
+
+      <div className="px-5 lg:px-20">
         <HomeSection2 />
         <HomeSection3 />
         <HomeSection4 />

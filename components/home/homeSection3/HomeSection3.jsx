@@ -6,13 +6,12 @@ import Image from "next/image";
 export default function HomeSection3() {
   return (
     <section>
-      <div className="container mx-auto mb-28">
+      <div className="mb-28">
         <div className="hidden lg:block">
           <div className="mb-12 flex justify-between align-middle">
             <h2 className="text-5xl font-bold text-black">Os quartos em destaque na tua área</h2>
 
             <Link href="/destaques">
-
               <a className="flex items-center rounded-full bg-primary-300 px-4 align-middle">
                 Ver Mais
                 <div>
@@ -22,8 +21,7 @@ export default function HomeSection3() {
             </Link>
           </div>
         </div>
-        <h2 className="text-4xl font-bold text-black mb-8 lg:hidden">Os quartos em destaque na tua área</h2>
-
+        <h2 className="mb-8 text-4xl font-bold text-black lg:hidden">Os quartos em destaque na tua área</h2>
 
         <div className="grid gap-8 lg:grid-cols-4 ">
           <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition">
@@ -48,12 +46,9 @@ export default function HomeSection3() {
         </div>
 
         <div className="block lg:hidden">
-          <div className="mb-12 flex justify-center align-middle mt-10">
-
-
+          <div className="mb-12 mt-10 flex justify-center align-middle">
             <Link href="/destaques">
-
-              <a className="w-full flex justify-center items-center rounded-full bg-primary-300 px-4 align-middle py-3">
+              <a className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle">
                 Ver Mais
                 <div>
                   <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
