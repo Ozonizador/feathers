@@ -33,8 +33,8 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
           <ModalDetalhesPagamento />
           <div className="mx-auto md:container">
             <SingleRoomGrid />
-            <div className="flex">
-              <div className="w-4/6 px-5">
+            <div className="flex flex-col lg:flex-row">
+              <div className="w-full px-4 lg:w-4/6 lg:px-5">
                 <RoomInformation />
                 <DescricaoCondicoes />
                 <RoomSlider />
@@ -44,7 +44,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 <RoomSemelhantes />
               </div>
 
-              <div className="w-2/6 px-5">
+              <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
                 <RoomPagamento />
                 {/*<RoomSobreTi />
                 <RoomPedido />*/}

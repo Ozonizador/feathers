@@ -7,7 +7,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 export default function DescricaoCondicoes() {
   const advertisement = useGetSingleAdvertisement();
   return (
-    <div className="my-20 flex flex-row items-center align-middle">
+    <div className="my-20 flex flex-col align-middle lg:flex-row lg:items-center">
       <div className="mr-5 flex w-3/4 flex-col">
         <div className="mb-5 text-2xl font-bold">Descrição</div>
 
@@ -16,7 +16,7 @@ export default function DescricaoCondicoes() {
         </div>
       </div>
 
-      <div>
+      <div className="mt-10 flex flex-col justify-start lg:mt-3 lg:flex-col">
         <div className="mb-5 text-2xl font-bold">Condições da casa</div>
 
         <div className="mb-2 mt-3 flex rounded-lg shadow-2xl">

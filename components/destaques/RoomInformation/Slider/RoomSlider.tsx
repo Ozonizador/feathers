@@ -13,7 +13,7 @@ export default function RoomSlider() {
   return (
     // PROBLEMA - DAR ESTILOS AS SETAS ESQUERDA E DIREITA
     <section>
-      <div className="mt-40 mb-32 h-44 rounded-xl border">
+      <div className="mt-10 mb-32 h-44 rounded-xl border lg:mt-40">
         <Carousel>
           <div>
             <div className="my-3 text-center text-2xl font-bold">Sala de estar</div>
