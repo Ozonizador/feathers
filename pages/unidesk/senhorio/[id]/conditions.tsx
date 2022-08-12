@@ -8,6 +8,7 @@ import HouseRulesComponent from "../../../../components/anuncio/HouseRulesCompon
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
+import { toast } from "react-toastify";
 
 interface ConditionsProps {
   id: string;
@@ -24,8 +25,11 @@ const Conditions = ({ id }: ConditionsProps) => {
   }, [id]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisement, id);
+    const { error } = await updateAdvertisement(advertisement, id);
     if (!error) {
+      toast("Anúncio Atualizado");
+    } else {
+      toast("Erro ao atualizar anúncio");
     }
   };
 
@@ -38,7 +42,7 @@ const Conditions = ({ id }: ConditionsProps) => {
   }, [getAdvertisementInfo]);
 
   return (
-    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
+    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
       <div className="flex flex-col lg:flex-row">
         <div className="p-5 lg:border-r lg:p-12">
           <MenuSenhorio id={id} />
@@ -51,9 +55,9 @@ const Conditions = ({ id }: ConditionsProps) => {
             <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
           )}
 
-          <div>
+          <div className="pb-4">
             <button
-              className="hover: mt-14  flex w-44 items-center justify-center rounded-md bg-primary-500 py-3   text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
+              className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
               onClick={saveChanges}
             >
               Guardar alterações

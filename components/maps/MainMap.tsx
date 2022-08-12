@@ -19,7 +19,7 @@ const MainMap = ({ currentMap, markers }: MainMapProps) => {
   }, [currentMap]);
 
   return (
-    <div className="h-screen w-full">
+    <>
       {loading && (
         <div className="mt-32 flex flex-1 justify-center">
           <Spinner color="info" aria-label="loading" size="lg" />
@@ -43,7 +43,7 @@ const MainMap = ({ currentMap, markers }: MainMapProps) => {
           </Marker>
         </MapContainer>
       )}
-    </div>
+    </>
   );
 };
 

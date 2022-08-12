@@ -6,7 +6,7 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement from "../../../models/advertisement";
+import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 import { getAdvertismentsFromMultipleId } from "../../../services/advertisementService";
 import { Spinner } from "flowbite-react";
 
@@ -90,13 +90,11 @@ const UnideskFavoritos = () => {
                             <div className="relative mb-2 text-center text-base">
                               <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
+                                <p className="mt-1 text-xs lg:text-base">
+                                  {EXPENSES_TO_TEXT[favourite.expenses.inclusive]}
+                                </p>
                                 <BiInfoCircle />
                               </div>
-                              {favourite.expenses &&
-                                favourite.expenses.inclusive !== undefined &&
-                                favourite.expenses.inclusive !== "EXCLUDED" && (
-                                  <RoomUtilitesPopover expenses={favourite.expenses} />
-                                )}
                             </div>
                           </div>
                           <Link href={`/anuncio/${favourite.id}`}>

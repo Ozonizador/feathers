@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CÓDIGO RODRIGO */
 .bg-hero-unidesk {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);
   background-size: cover;
@@ -61,7 +60,6 @@
   background-size: 10px;
   background-position: 95%;
 }
-/* FINAL CÓDIGO RODRIGO */
 
 #model-radius {
   border-top-left-radius: 30px;

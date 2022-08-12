@@ -46,7 +46,7 @@ export const getAdvertismentsFromUserId = async (userId: string) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select()
-    .eq(ADVERTISEMENT_PROPERTIES.HOST, userId);
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
   return { data, error };
 };
 

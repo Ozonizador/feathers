@@ -1,5 +1,6 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
+import Advertisement, { ADVERTISEMENT_PROPERTIES } from "../models/advertisement";
 import { Reservation, ReservationStatus, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 
 export const addReservation = async (reservation: Reservation, tenantId: string) => {
@@ -22,6 +23,8 @@ export const getReservationByAdvertId = async (advertId: string) => {
     .eq(RESERVATION_TABLE.ADVERT_ID, advertId);
   return { data, error };
 };
+
+/* BY TENANT ID */
 
 export const getNextReservationsByTenantId = async (tenantId: string) => {
   const date = new Date().toISOString();
@@ -56,6 +59,17 @@ export const getHistoryReservationsByTenantId = async (tenantId: string) => {
     .select()
     .eq(RESERVATION_TABLE.TENANT_ID, tenantId)
     .lte(RESERVATION_TABLE.END_DATE, new Date());
+
+  return { data, error };
+};
+
+/* BY HOST ID */
+
+export const getCurrentReservationsByHostId = async (hostId: string) => {
+  const { data, error } = await supabaseClient
+    .from(RESERVATION_TABLE_NAME)
+    .select("*, tenant:tenantId(*), advertisement:advertisementId(id, type, place)")
+    .eq(RESERVATION_TABLE.HOST_ID, hostId);
 
   return { data, error };
 };
