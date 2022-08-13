@@ -1,5 +1,6 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { AVATAR_STORAGE_NAME, Profile, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
+import { getCorrectUrl } from "../utils/utils";
 
 export const checkProfileAndCreate = async (userID: string) => {
   try {
@@ -56,18 +57,18 @@ export const addAvatar = async (userId: string, fileName: string, file: File) =>
     .eq(PROFILE_COLUMNS.ID, userId)
     .single();
 
-  const currentAvatar = data && data.avatarUrl;
+  const currentAvatarUrl = data && data.avatarUrl;
   // upload new picture
   const { publicURL, error: avatarError } = await uploadPicture(userId, fileName, file);
   if (!avatarError) {
     await updateAvatarInfo(userId, publicURL);
 
     // remove old picture
-    if (currentAvatar) {
-      await removePicture(userId, currentAvatar);
+    if (currentAvatarUrl) {
+      await removePicture(userId, currentAvatarUrl);
     }
 
-    return { data, error };
+    return { data: publicURL, error };
   } else {
     return { data: null, error };
   }
@@ -85,18 +86,16 @@ export const uploadPicture = async (userId: string, fileName: string, avatarFile
   return getPublicAvatarUrlFromImage(data.Key);
 };
 
-export const removePicture = async (userId: string, avatarName: string) => {
+export const removePicture = async (userId: string, avatarUrl: string) => {
+  let dividedUrl = avatarUrl.split("/");
+  let avatarName = dividedUrl[dividedUrl.length - 1];
   const { data, error } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).remove([`${userId}/${avatarName}`]);
+
   return { data, error };
 };
 
 /* Utils */
 export const getPublicAvatarUrlFromImage = async (key: string) => {
-  const parsedKey = key.split("\\");
-  const theCorrectKey = parsedKey.splice(1);
-  const { publicURL, error } = await supabaseClient.storage
-    .from(AVATAR_STORAGE_NAME)
-    .getPublicUrl(parsedKey.join("\\"));
-
+  const { publicURL, error } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).getPublicUrl(getCorrectUrl(key));
   return { publicURL, error };
 };

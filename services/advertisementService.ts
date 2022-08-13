@@ -1,10 +1,12 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { parse } from "path/posix";
 import { v4 as uuidv4 } from "uuid";
 import Advertisement, {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
+import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 20 as const;
 
@@ -93,11 +95,9 @@ export const saveImage = async (advertisementID: string, fileName: string, file:
 };
 
 export const getPublicUrlFromImage = async (key: string) => {
-  const parsedKey = key.split("\\");
-  const theCorrectKey = parsedKey.splice(1);
   const { publicURL, error } = await supabaseClient.storage
     .from(ADVERTISEMENT_STORAGE_BUCKET)
-    .getPublicUrl(parsedKey.join("\\"));
+    .getPublicUrl(getCorrectUrl(key));
 
   return { publicURL, error };
 };

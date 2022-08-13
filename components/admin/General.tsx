@@ -5,7 +5,7 @@ import { Avatar, Select, Spinner } from "flowbite-react";
 import { Toast } from "flowbite-react";
 import { Gender, LanguageLabel, Profile, PROFILE_COLUMNS } from "../../models/profile";
 import { useUser } from "@supabase/auth-helpers-react";
-import { getUserProfile, updateUserProfile } from "../../services/profileService";
+import { addAvatar, getUserProfile, updateUserProfile } from "../../services/profileService";
 import countryList from "react-select-country-list";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
 
@@ -43,19 +43,20 @@ const MainMenu = () => {
   /* Country */
   const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = (value) => {
-    // setValue(value);
+  const changeHandler = (event) => {
+    let value = event.target.value;
+    setProfile({ ...profile, nationality: value });
   };
 
-  const uploadAvatar = (event) => {
+  const uploadAvatar = async (event) => {
     event.preventDefault();
+
     if (event.target.files) {
-      let files = [];
-      for (let file of event.target.files) {
-        files.push(file);
+      let file = event.target.files[0] as File;
+      const { data, error } = await addAvatar(profile.id, file.name, file);
+      if (!error) {
+        setProfile({ ...profile, avatarUrl: data });
       }
-      // setImages(files);
-      // setObjectUrls(files.map((file) => URL.createObjectURL(file)));
     }
   };
 
@@ -83,17 +84,23 @@ const MainMenu = () => {
               <div className="text-3xl font-bold">Informações pessoais</div>
               <div className="mt-5 mb-5">
                 <div>
-                  <Avatar
-                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                    rounded={true}
-                    status="away"
-                    size="lg"
-                    statusPosition="bottom-right"
-                  />
+                  <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
+                    <Avatar
+                      img={
+                        profile?.avatarUrl
+                          ? profile.avatarUrl
+                          : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                      }
+                      rounded={true}
+                      status="away"
+                      size="lg"
+                      statusPosition="bottom-right"
+                    />
+                  </label>
                   <input
                     type="file"
                     id="files"
-                    onChange={uploadAvatar}
+                    onChange={(e) => uploadAvatar(e)}
                     multiple
                     accept="image/png, image/gif, image/jpeg"
                     className="hidden"
@@ -123,10 +130,19 @@ const MainMenu = () => {
                   <div className="my-10">
                     <label className="mt-2 block">Nacionalidade</label>
                     <Select
-                      value={profile?.nationality || "portuguese"}
-                      onChange={changeHandler}
+                      value={profile?.nationality || "PT"}
+                      onChange={(e) => changeHandler(e)}
                       // className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3"
-                    ></Select>
+                    >
+                      <option value="">Selecione uma nacionalidade</option>
+                      {options.map((option, index) => {
+                        return (
+                          <option key={index} value={option.value}>
+                            {option.label}
+                          </option>
+                        );
+                      })}
+                    </Select>
                   </div>
                 </div>
 
@@ -218,7 +234,7 @@ const MainMenu = () => {
               </div>
 
               <div className="my-8">
-                <div>Validade</div>
+                {/* <div>Validade</div>
                 <div className="flex w-full flex-row items-center  gap-4">
                   <div className="w-36">
                     <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white px-3">
@@ -280,7 +296,7 @@ const MainMenu = () => {
                       <option>Ano</option>
                     </select>
                   </div>
-                </div>
+                </div> */}
                 <div>
                   <button className="my-2 rounded bg-primary-500 p-2 text-white" onClick={saveUserProfile}>
                     Salvar

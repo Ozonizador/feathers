@@ -15,7 +15,7 @@ const FeatherDatePicker = ({ date, onChange, className }: FeatherDatePickerProps
         selected={date}
         onChange={onChange}
         dateFormat="yyyy-MM-dd"
-        className={classNames("h-16", `${className}`)}
+        className={classNames(`${className ? className : ""}`)}
       />
     </div>
   );
