@@ -36,8 +36,6 @@ const MainMenu = () => {
     }
   };
 
-  const uploadAvatar = () => {};
-
   const handleProfileInfoByProperty = (property: string, value: any) => {
     setProfile({ ...profile, [property]: value });
   };
@@ -47,6 +45,18 @@ const MainMenu = () => {
 
   const changeHandler = (value) => {
     // setValue(value);
+  };
+
+  const uploadAvatar = (event) => {
+    event.preventDefault();
+    if (event.target.files) {
+      let files = [];
+      for (let file of event.target.files) {
+        files.push(file);
+      }
+      // setImages(files);
+      // setObjectUrls(files.map((file) => URL.createObjectURL(file)));
+    }
   };
 
   useEffect(() => {
@@ -72,13 +82,23 @@ const MainMenu = () => {
             <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-32">
               <div className="text-3xl font-bold">Informações pessoais</div>
               <div className="mt-5 mb-5">
-                <Avatar
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  rounded={true}
-                  status="away"
-                  size="lg"
-                  statusPosition="bottom-right"
-                />
+                <div>
+                  <Avatar
+                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    rounded={true}
+                    status="away"
+                    size="lg"
+                    statusPosition="bottom-right"
+                  />
+                  <input
+                    type="file"
+                    id="files"
+                    onChange={uploadAvatar}
+                    multiple
+                    accept="image/png, image/gif, image/jpeg"
+                    className="hidden"
+                  />
+                </div>
               </div>
 
               {/* LEFT SIDE */}

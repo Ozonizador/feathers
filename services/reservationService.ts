@@ -1,6 +1,5 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
-import Advertisement, { ADVERTISEMENT_PROPERTIES } from "../models/advertisement";
 import { Reservation, ReservationStatus, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 
 export const addReservation = async (reservation: Reservation, tenantId: string) => {

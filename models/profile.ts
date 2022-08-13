@@ -1,4 +1,6 @@
 export const PROFILE_TABLE_NAME = "profiles" as const;
+export const AVATAR_STORAGE_NAME = "avatars" as const;
+
 export interface Profile {
   id: string;
   name: string;

@@ -46,6 +46,7 @@ export default function ProcurarSection() {
 
   useEffect(() => {
     if (address) {
+      // TODO: finish this.
       debugger;
     } else {
       navigator.geolocation.getCurrentPosition(
