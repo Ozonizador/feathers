@@ -2,12 +2,12 @@
 
 import AnuncioCard from "../../../components/senhorioanuncios/card/AnuncioCard";
 import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
-import MiniCard from "../../../components/senhorioanuncios/minicards/MiniCards";
 import Breadcrumb from "../../../components/senhorioanuncios/breadcrumb/Breadcrumb";
 import { useCallback, useEffect, useState } from "react";
 import Advertisement from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { getAdvertismentsFromUserId } from "../../../services/advertisementService";
+import DicasCard from "../../../components/senhorioanuncios/DicasCard/DicasCard";
 
 const Anuncios = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -31,8 +31,8 @@ const Anuncios = () => {
     <section>
       <Breadcrumb />
 
-      <div className="container mx-auto my-16 w-4/6 rounded-2xl  bg-terciary-300 py-20 ">
-        <div className="flex px-12">
+      <div className="container mx-auto my-16 w-5/6 rounded-2xl  bg-terciary-300 py-20 ">
+        <div className="flex flex-col gap-6 lg:flex-row">
           <div>
             <MenuAnuncio />
           </div>
@@ -49,9 +49,9 @@ const Anuncios = () => {
               })}
             </div>
 
-            <div>
-              <MiniCard />
-            </div>
+            {/* <div>
+              <DicasCard />
+            </div> */}
           </div>
         </div>
       </div>

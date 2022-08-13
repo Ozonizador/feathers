@@ -19,7 +19,7 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
     return false;
   };
   return (
-    <div className="absolute -left-32  z-50 hidden bg-white peer-hover:block lg:bottom-6 lg:left-1">
+    <div className="absolute -left-32  z-50 hidden bg-white peer-hover:block lg:bottom-6 lg:-left-32">
       <div className="mb-2 mt-3 flex rounded-lg p-1 shadow-2xl lg:p-4">
         {checkIfIncluded(EXPENSES_TYPE["LIGHTS"]) && (
           <div className="mx-4 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:px-4">
