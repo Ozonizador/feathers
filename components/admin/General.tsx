@@ -8,6 +8,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { addAvatar, getUserProfile, updateUserProfile } from "../../services/profileService";
 import countryList from "react-select-country-list";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
+import PhoneInput from "react-phone-number-input";
 
 /*
     pagina 32 do XD
@@ -48,6 +49,7 @@ const MainMenu = () => {
     setProfile({ ...profile, nationality: value });
   };
 
+  /* avatar */
   const uploadAvatar = async (event) => {
     event.preventDefault();
 
@@ -58,6 +60,10 @@ const MainMenu = () => {
         setProfile({ ...profile, avatarUrl: data });
       }
     }
+  };
+
+  const changePhoneNumber = async (phone) => {
+    setProfile({ ...profile, phone });
   };
 
   useEffect(() => {
@@ -216,20 +222,13 @@ const MainMenu = () => {
               {/* CONTATO TELEFONICO */}
               <div className="my-8">
                 <div>Contacto telefónico</div>
-                <div className="flex w-full flex-row items-center  gap-4">
-                  <div className="w-36">
-                    <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white px-3">
-                      <option>PT +351</option>
-                    </select>
-                  </div>
-                  <div className="">
-                    <Input
-                      value={profile?.phone}
-                      onChange={(e) => handleProfileInfoByProperty(PROFILE_COLUMNS.PHONE, e.target.value)}
-                      label="phone"
-                      labelText=""
-                    />
-                  </div>
+                <div className="w-10">
+                  <PhoneInput
+                    defaultCountry="PT"
+                    placeholder="Enter phone number"
+                    value={profile?.phone || ""}
+                    onChange={(e) => changePhoneNumber(e)}
+                  />
                 </div>
               </div>
 
