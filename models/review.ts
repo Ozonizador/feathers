@@ -2,6 +2,7 @@ import { Profile } from "@prisma/client";
 import Advertisement from "./advertisement";
 
 export const REVIEWS_TABLE_NAME = "reviews" as const;
+export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 
 export interface Review {
   id: string;
@@ -34,3 +35,17 @@ export const REVIEW_COLUMNS = {
   HOST_ID: "advertisement.hostId",
   CREATED_AT: "createdAt",
 } as const;
+
+/*
+ * AVERAGE RATING INTERFACE
+ */
+
+export interface AdvertisementReviewSummary {
+  advertisementId: string;
+  reviewNumber: number;
+  overallAverage: number;
+  locationAverage: number;
+  valueQualityAverage: number;
+  landlordAverage: number;
+  comoditiesAverage: number;
+}

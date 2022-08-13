@@ -1,5 +1,11 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Review, REVIEWS_TABLE_NAME, REVIEW_COLUMNS } from "../models/review";
+import {
+  AdvertisementReviewSummary,
+  Review,
+  REVIEWS_AVERAGE_TABLE_VIEW,
+  REVIEWS_TABLE_NAME,
+  REVIEW_COLUMNS,
+} from "../models/review";
 import { v4 as uuidv4 } from "uuid";
 
 export const addReview = async (review: Review, tenantId: string, advertisementId: string) => {
@@ -29,6 +35,20 @@ export const getReviewsByHostId = async (hostId: string) => {
     .select("*, advertisement:advertisements(id,hostId), tenant:tenantId(*)")
     .eq(REVIEW_COLUMNS.HOST_ID, hostId)
     .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false });
+
+  return { data, error };
+};
+
+/*
+ * Average Rating Table Reviews
+ */
+
+export const getAveragesByAdvertisementId = async (advertisementId: string) => {
+  const { data, error } = await supabaseClient
+    .from<AdvertisementReviewSummary>(REVIEWS_AVERAGE_TABLE_VIEW)
+    .select()
+    .eq(REVIEW_COLUMNS.ADVERTISEMENT_ID, advertisementId)
+    .single();
 
   return { data, error };
 };
