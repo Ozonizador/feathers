@@ -22,3 +22,13 @@ export const getReviewsByAdvertId = async (advertId: string) => {
 
   return { data, error };
 };
+
+export const getReviewsByHostId = async (hostId: string) => {
+  const { data, error } = await supabaseClient
+    .from(REVIEWS_TABLE_NAME)
+    .select("*, advertisement:advertisements(id,hostId), tenant:tenantId(*)")
+    .eq(REVIEW_COLUMNS.HOST_ID, hostId)
+    .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false });
+
+  return { data, error };
+};

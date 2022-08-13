@@ -127,14 +127,14 @@ const ModalAlterarReserva = () => {
                               )}
                             </div>
                           </div>
-                          {reservation && (
+                          {newReservation && (
                             <div className="flex items-center justify-between gap-7 align-middle">
                               <div>
                                 <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                   Entrada
                                 </label>
                                 <FeatherDatePicker
-                                  date={reservation.startDate}
+                                  date={newReservation.startDate || new Date()}
                                   onChange={(e) => changeNewReservationProperty("startDate", e.target.value)}
                                 />
                               </div>
@@ -149,7 +149,7 @@ const ModalAlterarReserva = () => {
                                 </label>
 
                                 <FeatherDatePicker
-                                  date={reservation.endDate}
+                                  date={newReservation.endDate || new Date()}
                                   onChange={(e) => changeNewReservationProperty("endDate", e.target.value)}
                                 />
                               </div>

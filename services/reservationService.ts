@@ -49,7 +49,6 @@ export const getCurrentReservationByTenantId = async (tenantId: string) => {
     // .lte(RESERVATION_TABLE.END_DATE, date)
     .single();
 
-  debugger;
   return { data, error };
 };
 
