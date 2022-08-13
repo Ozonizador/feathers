@@ -7,7 +7,7 @@ export default function HomeSection1() {
     <section>
       <div className="flex justify-center  bg-[url('/images//furniture5.jpg')] bg-cover py-52 ">
         <div className="flex flex-col px-4  align-middle md:container lg:px-10">
-          <h1 className="text-4xl mb-5  font-bold leading-snug text-white lg:text-6xl lg:mb-0">
+          <h1 className="mb-5 text-4xl  font-bold leading-snug text-white lg:mb-0 lg:text-6xl">
             {" "}
             A tua{" "}
             <Image
@@ -17,11 +17,10 @@ export default function HomeSection1() {
               height={64}
               width={64}
             />
-            à distancia de um {" "}
-            <br className="hidden lg:block" />
+            à distancia de um <br className="hidden lg:block" />
             click!
           </h1>
-          <div className="flex flex-col lg:flex-row">
+          <div className="flex flex-col gap-2 lg:flex-row">
             <SearchInputField />
           </div>
         </div>

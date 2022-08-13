@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import FeatherDatePicker from "../utils/FeatherDatepicker";
 {
   /* AINDA PRECISA DE MUDANÇAS */
 }
@@ -13,12 +14,16 @@ export const SearchInputField = () => {
   const router = useRouter();
 
   const sendQueryRequest = () => {
-    router.push("/procurar");
+    router.push({
+      pathname: "/procurar",
+      query: { address, start: startDate.toLocaleDateString(), endDate: endDate.toLocaleDateString() },
+    });
   };
+
   return (
     <>
       <div className="container flex-row justify-center lg:flex">
-        <div className="relative my-2 lg:mx-2">
+        <div className="my-2 lg:mx-2">
           <input
             type="text"
             className="bg-terciary-50 h-16 w-full rounded-xl border p-0 px-2 lg:w-72"
@@ -28,19 +33,21 @@ export const SearchInputField = () => {
           />
         </div>
 
-        <div className="flex flex-row gap-4">
-          <div className="relative my-2 lg:mx-2">
-            <input
-              type="text"
+        <div className="flex flex-row">
+          <div className="my-2 w-1/2 lg:mx-2">
+            <FeatherDatePicker
+              date={startDate}
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
-              placeholder="&#x2192; Entrada"
+              onChange={(date) => setStartDate(date)}
+              // placeholder="&#x2192; Entrada"
             />
           </div>
-          <div className="relative my-2 lg:mx-2">
-            <input
-              type="text"
+          <div className="my-2 w-1/2 lg:mx-2">
+            <FeatherDatePicker
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
-              placeholder="&#x2190; Saida"
+              date={endDate}
+              onChange={(date) => setEndDate(date)}
+              // placeholder="&#x2190; Saida"
             />
           </div>
         </div>

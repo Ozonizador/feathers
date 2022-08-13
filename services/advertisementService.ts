@@ -13,6 +13,7 @@ export const addAdvertisement = async (advertisement: Advertisement) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .insert({ ...advertisement, updatedAt: new Date(), id: uuidv4() }, { returning: "representation" })
     .single();
+
   return { data, error };
 };
 
@@ -22,6 +23,7 @@ export const updateAdvertisement = async (advertisement: Partial<Advertisement>,
     .update({ ...advertisement, updatedAt: new Date() }, { returning: "minimal" })
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
+
   return { data, error };
 };
 
@@ -31,6 +33,7 @@ export const getSingleAdvertisement = async (id: string) => {
     .select()
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
+
   return { data, error };
 };
 
@@ -39,6 +42,7 @@ export const getAdvertismentsFromMultipleId = async (ids: string[]) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select()
     .in(ADVERTISEMENT_PROPERTIES.ID, ids);
+
   return { data, error };
 };
 
@@ -47,6 +51,15 @@ export const getAdvertismentsFromUserId = async (userId: string) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select()
     .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+
+  return { data, error };
+};
+export const getAdvertisementsFromPlace = async (place: string) => {
+  const { data, error } = await supabaseClient
+    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
+    .select()
+    .eq(ADVERTISEMENT_PROPERTIES.PLACE, place);
+
   return { data, error };
 };
 

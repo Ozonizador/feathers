@@ -69,3 +69,9 @@
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
+
+/* date pickers */
+
+.react-datepicker__input-container input {
+  border-color: #dfdfdf;
+}

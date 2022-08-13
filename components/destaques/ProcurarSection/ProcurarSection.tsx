@@ -25,7 +25,7 @@ export default function ProcurarSection() {
   const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
   const router = useRouter();
-  const { place } = router.query;
+  const { address, startDate, endDate } = router.query;
 
   const getAdvertisements = useCallback(async () => {
     const { data, error, count } = await getFilteredAdvertisements(page, null);
@@ -45,7 +45,8 @@ export default function ProcurarSection() {
   };
 
   useEffect(() => {
-    if (place) {
+    if (address) {
+      debugger;
     } else {
       navigator.geolocation.getCurrentPosition(
         function (pos) {
@@ -55,7 +56,7 @@ export default function ProcurarSection() {
         { timeout: 10000 }
       );
     }
-  }, [place]);
+  }, [address]);
 
   return (
     <>
