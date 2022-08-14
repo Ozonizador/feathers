@@ -41,7 +41,7 @@ export default function RoomSenhorio() {
           </div>
         </div>
 
-        <div className="flex w-7/12 flex-col">
+        <div className="flex w-full flex-col lg:w-7/12">
           <div className="max-w-md">
             <div>
               <h1 className="mb-4 text-2xl font-bold">Olá, sou a {advertisement.host.name}!</h1>
