@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import RoomCard from "./RoomCard";
 import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
-import Advertisement from "../../../models/advertisement";
+import Advertisement, { AdvertisementWithReviewAverage } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 });
 
 interface ProcurarPagination {
-  advertisements: Advertisement[];
+  advertisements: AdvertisementWithReviewAverage[];
   count: number;
 }
 

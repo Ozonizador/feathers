@@ -1,11 +1,12 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { parse } from "path/posix";
 import { v4 as uuidv4 } from "uuid";
 import Advertisement, {
+  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
+import { AdvertisementReviewSummary } from "../models/review";
 import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 20 as const;
@@ -73,8 +74,8 @@ export const getFilteredAdvertisements = async (page: number, filter: any) => {
   let initRange = page == 1 ? 0 : page * PAGE_NUMBER_COUNT;
 
   const { data, error, count } = await supabaseClient
-    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .select("*", { count: "exact" })
+    .from<AdvertisementWithReviewAverage>(ADVERTISEMENT_TABLE_NAME)
+    .select("*, averages:reviewsPerAdvertisement!left(*)", { count: "exact" })
     .range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
   return { data, error, count };

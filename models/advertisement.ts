@@ -1,5 +1,5 @@
 import { Profile } from "./profile";
-import { Review } from "./review";
+import { AdvertisementReviewSummary, Review } from "./review";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -38,6 +38,11 @@ export default interface Advertisement {
 
   // foreign keys
   reviews?: Review[];
+}
+
+// With advertisement averages
+export interface AdvertisementWithReviewAverage extends Advertisement {
+  averages: AdvertisementReviewSummary[];
 }
 
 export interface HouseExpenses {

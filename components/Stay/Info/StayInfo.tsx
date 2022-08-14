@@ -29,10 +29,20 @@ const StayInfo = ({ reservation }: StayInfoProps) => {
   const setModalAvaliar = useSetModalAvaliarExperiencia();
 
   const openModalReport = () => {
+    // check if there are any reports already sent.
+
+    // return if yes
+
+    // keep doing if no
     setModalReport({ ...modalReportInfo, isOpen: true, reservation });
   };
 
   const openModalAvaliarExperiencia = () => {
+    // check if there are any reviews already sent.
+
+    // return if yes
+
+    // keep doing if no
     setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation });
   };
 

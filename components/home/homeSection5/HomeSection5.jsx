@@ -28,7 +28,7 @@ export default function HomeSection5() {
           />
         </div>
         <span className="hidden justify-center lg:flex">
-          <Link href="/4_5">
+          <Link href="/procurar">
             <a className="hover: flex w-1/5 items-center justify-center  rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
               Encontrar{" "}
               <span className="px-1">
