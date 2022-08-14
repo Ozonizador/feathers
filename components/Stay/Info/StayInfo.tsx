@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { Stay } from "../../../models/stay";
+import classNames from "classnames";
 
 interface StayInfoProps {
   stay: Stay;
@@ -37,7 +38,7 @@ const StayInfo = ({ stay }: StayInfoProps) => {
     }
 
     // TODO change this for the stay
-    setModalReport({ ...modalReportInfo, isOpen: true, reservation: stay.reservations[0] });
+    setModalReport({ ...modalReportInfo, isOpen: true, stay });
   };
 
   const openModalAvaliarExperiencia = () => {
@@ -48,12 +49,12 @@ const StayInfo = ({ stay }: StayInfoProps) => {
     }
 
     // TODO change this
-    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation: stay.reservations[0] });
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, stay });
   };
 
   const openModalAlterarReserva = () => {
     // TODO change this
-    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation: stay.reservations[0] });
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, stay });
   };
 
   return (
@@ -61,7 +62,12 @@ const StayInfo = ({ stay }: StayInfoProps) => {
       <div className="flex w-96 flex-row gap-4">
         <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalReport()}>
           <div>
-            <BsFlag className="mb-2 text-4xl text-red-500" />
+            <BsFlag
+              className={classNames("mb-2 text-4xl", {
+                "text-red-500": stay?.report === null,
+                "text-gray-600": stay?.report !== null,
+              })}
+            />
           </div>
           <div className="text-center text-xs">
             Reportar
@@ -100,7 +106,12 @@ const StayInfo = ({ stay }: StayInfoProps) => {
 
         <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAvaliarExperiencia()}>
           <div>
-            <AiOutlineStar className="mb-2 text-4xl text-yellow-400" />
+            <AiOutlineStar
+              className={classNames("mb-2 text-4xl ", {
+                "text-yellow-400": stay?.review === null,
+                "text-gray-600": stay?.review !== null,
+              })}
+            />
           </div>
           <div className="text-center text-xs">
             Avaliar
