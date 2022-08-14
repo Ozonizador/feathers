@@ -15,39 +15,41 @@ import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { getCurrentReservationByTenantId, getNextReservationsByTenantId } from "../../../services/reservationService";
 import { Reservation } from "../../../models/reservation";
 import next from "next";
+import { getCurrentStayByTenantId, getNextStaysByTenantId } from "../../../services/stayService";
+import { Stay } from "../../../models/stay";
 
 /* PAGINA 21 do xd */
 
 const Estadia = () => {
   const profile = useProfileInformation();
 
-  const [currentReservation, setCurrentReservation] = useState<Reservation>();
-  const [nextReservations, setNextReservations] = useState<Reservation[]>([]);
-  const getProfileReservations = useCallback(async () => {
+  const [currentStay, setCurrentStay] = useState<Stay>();
+  const [nextStays, setNextStays] = useState<Stay[]>([]);
+
+  const getProfileStays = useCallback(async () => {
     if (profile) {
-      const { data, error } = await getCurrentReservationByTenantId(profile.id);
+      const { data, error } = await getCurrentStayByTenantId(profile.id);
       if (!error) {
-        setCurrentReservation(data);
+        setCurrentStay(data);
       }
     }
   }, [profile]);
 
   const getNextReservations = useCallback(async () => {
     if (profile) {
-      const { data, error } = await getNextReservationsByTenantId(profile.id);
+      const { data, error } = await getNextStaysByTenantId(profile.id);
       if (!error) {
-        setNextReservations(data);
+        setNextStays(data);
       }
     }
   }, [profile]);
 
   useEffect(() => {
-    getProfileReservations();
+    getProfileStays();
     getNextReservations();
-  }, [getProfileReservations, getNextReservations]);
+  }, [getProfileStays, getNextReservations]);
 
   return (
     <ModalApplyShowProvider>
@@ -72,24 +74,24 @@ const Estadia = () => {
                     {/* Logica visivel */}
 
                     <div className="flex items-center justify-center lg:justify-between">
-                      {currentReservation && (
+                      {currentStay && (
                         <>
-                          <StayCard reservation={currentReservation} />
-                          <StayInfo reservation={currentReservation} />
+                          <StayCard stay={currentStay} />
+                          <StayInfo stay={currentStay} />
                         </>
                       )}
-                      {!currentReservation && <div>Não tem estadia programada</div>}
+                      {!currentStay && <div>Não tem estadia programada</div>}
                     </div>
                     <div className="flex w-full flex-col items-center justify-center align-middle">
-                      {nextReservations && nextReservations.length !== 0 && (
+                      {nextStays && nextStays.length !== 0 && (
                         <div className="mt-2">
                           <h6>Próximas estadias</h6>
-                          {nextReservations.map((reservation, index) => {
+                          {nextStays.map((stay, index) => {
                             return (
                               <div key={index} className="mt-2 flex  flex-row items-center gap-2">
-                                <StayCard reservation={reservation} />
+                                <StayCard stay={stay} />
 
-                                <StayInfo reservation={reservation} />
+                                <StayInfo stay={stay} />
                               </div>
                             );
                           })}

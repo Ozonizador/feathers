@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { Reservation } from "../../../models/reservation";
+import { Stay } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 interface StayCardProps {
-  reservation: Reservation;
+  stay: Stay;
 }
 
-const StayCard = ({ reservation }: StayCardProps) => {
-  const { advertisement } = reservation;
+const StayCard = ({ stay }: StayCardProps) => {
+  const { advertisement } = stay;
   return (
     <div>
       <div className="w-96 rounded-lg border-2 border-terciary-200 bg-white p-0">

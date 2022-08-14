@@ -1,4 +1,4 @@
-DROP VIEW "reviewsPerAdvertisement";
+DROP VIEW IF EXISTS "reviewsPerAdvertisement";
 
 CREATE VIEW "reviewsPerAdvertisement" AS
     SELECT "advertisementId", 
@@ -8,4 +8,4 @@ CREATE VIEW "reviewsPerAdvertisement" AS
      AVG("valueQualityRating")::numeric(10,2)  AS "valueQualityAverage", 
      AVG("landLordRating")::numeric(10,2)  AS "landlordAverage", 
      AVG("comoditiesRating")::numeric(10,2)  AS "comoditiesAverage"
-    FROM reviews GROUP BY "advertisementId";
+    FROM reviews LEFT JOIN stays on reviews."stayId" = stays.id GROUP BY "advertisementId";
