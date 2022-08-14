@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import RoomCard from "./RoomCard";
 import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
-import Advertisement, { AdvertisementWithReviewAverage } from "../../../models/advertisement";
+import Advertisement, { AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -71,7 +71,7 @@ export default function ProcurarSection() {
               <div className="mb-2">
                 <select className="w-36 rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 text-sm  lg:w-60">
                   <option>Ordenar Por</option>
-                  <option>Casa</option>
+                  <option>Preço</option>
                   <option>Apartamento</option>
                 </select>
               </div>
@@ -79,9 +79,14 @@ export default function ProcurarSection() {
 
             <div className=" mr-0 flex-row lg:flex">
               <select className="mb-3 mr-4 w-full rounded-md border border-solid border-terciary-500 bg-white  py-4 text-sm lg:w-52">
-                <option>Tipo de espaço</option>
-                <option>Casa</option>
-                <option>Apartamento</option>
+                <option value="all">Qualquer Espaço</option>
+                {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
+                  return (
+                    <option key={index} value={type}>
+                      {TYPE_ADVERTISEMENT[type]}
+                    </option>
+                  );
+                })}
               </select>
               <div className="flex flex-row justify-start gap-4">
                 <div className="flex-1">
