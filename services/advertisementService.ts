@@ -1,10 +1,13 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 import Advertisement, {
+  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
+import { AdvertisementReviewSummary } from "../models/review";
+import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 20 as const;
 
@@ -13,6 +16,7 @@ export const addAdvertisement = async (advertisement: Advertisement) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .insert({ ...advertisement, updatedAt: new Date(), id: uuidv4() }, { returning: "representation" })
     .single();
+
   return { data, error };
 };
 
@@ -22,6 +26,7 @@ export const updateAdvertisement = async (advertisement: Partial<Advertisement>,
     .update({ ...advertisement, updatedAt: new Date() }, { returning: "minimal" })
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
+
   return { data, error };
 };
 
@@ -31,6 +36,7 @@ export const getSingleAdvertisement = async (id: string) => {
     .select()
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
+
   return { data, error };
 };
 
@@ -39,6 +45,7 @@ export const getAdvertismentsFromMultipleId = async (ids: string[]) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select()
     .in(ADVERTISEMENT_PROPERTIES.ID, ids);
+
   return { data, error };
 };
 
@@ -47,6 +54,15 @@ export const getAdvertismentsFromUserId = async (userId: string) => {
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select()
     .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+
+  return { data, error };
+};
+export const getAdvertisementsFromPlace = async (place: string) => {
+  const { data, error } = await supabaseClient
+    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
+    .select()
+    .eq(ADVERTISEMENT_PROPERTIES.PLACE, place);
+
   return { data, error };
 };
 
@@ -58,8 +74,8 @@ export const getFilteredAdvertisements = async (page: number, filter: any) => {
   let initRange = page == 1 ? 0 : page * PAGE_NUMBER_COUNT;
 
   const { data, error, count } = await supabaseClient
-    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .select("*", { count: "exact" })
+    .from<AdvertisementWithReviewAverage>(ADVERTISEMENT_TABLE_NAME)
+    .select("*, averages:reviewsPerAdvertisement!left(*)", { count: "exact" })
     .range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
   return { data, error, count };
@@ -80,11 +96,9 @@ export const saveImage = async (advertisementID: string, fileName: string, file:
 };
 
 export const getPublicUrlFromImage = async (key: string) => {
-  const parsedKey = key.split("\\");
-  const theCorrectKey = parsedKey.splice(1);
   const { publicURL, error } = await supabaseClient.storage
     .from(ADVERTISEMENT_STORAGE_BUCKET)
-    .getPublicUrl(parsedKey.join("\\"));
+    .getPublicUrl(getCorrectUrl(key));
 
   return { publicURL, error };
 };

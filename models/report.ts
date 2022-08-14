@@ -3,7 +3,7 @@ export const REPORTS_TABLE_NAME = "reports" as const;
 export interface Report {
   id?: string;
   advertisementId: string;
-  tenantId: string;
+  stayId: string;
   description?: string;
   type: ReportsType;
 
@@ -22,5 +22,5 @@ export enum ReportsType {
 export const REPORT_TABLE = {
   ID: "id",
   ADVERT_ID: "advertisementId",
-  TENANT_ID: "tenantId",
+  STAY_ID: "stayId",
 } as const;

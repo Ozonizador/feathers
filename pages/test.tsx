@@ -1,31 +1,5 @@
-import ModalAlterarReserva from "../components/modals/ModalAlteralReserva";
-import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperiencia";
-import ModalDenuncia from "../components/modals/ModalDenuncia";
-import MenuTest from "../components/unidesk/Senhorio/Reviews/MenuTest/MenuTest";
-import Disponivel from "../components/anuncio/AnuncioDisponivel";
-import ModalDetalhesPagamento from "../components/modals/ModalDetalhesPagamentos";
-import Stay from "../components/Stay/Card/StayCard";
-// import ModalAvaliarExperiencia from "../components/modals/ModalAvaliarExperiencia";
-
-// import Menu from "../components/unidesk/Menus/MenuSenhorio";
-import Menu from "../components/unidesk/Menus/MenuEstudante";
-// import Menu from "../components/unidesk/Menus/HospedesMenu";
-
 const Index = (): JSX.Element => {
-  return (
-    <div className="flex flex-1 justify-center p-10">
-      {/* <Stay /> */}
-      {/* <ModalAvaliarExperiencia defaultOpen={true} /> */}
-      {/* <Menu /> */}
-
-      {/* <MenuTest /> */}
-      {/* <Disponivel /> */}
-
-      {/* <ModalDetalhesPagamento /> */}
-      {/* <ModalDenuncia defaultOpen={false} /> */}
-      {/* <ModalAlterarReserva defaultOpen={true} /> */}
-    </div>
-  );
+  return <div className="flex flex-1 justify-center p-10"></div>;
 };
 
 export default Index;

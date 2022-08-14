@@ -13,7 +13,7 @@ false nao mostra nada true mostra.
 */
 
 const ModalAlterarReserva = () => {
-  const { isOpen, reservation } = useModalAlterarReserva();
+  const { isOpen, stay } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
 
   const [newReservation, setNewReservation] = useState<Reservation>({
@@ -25,17 +25,20 @@ const ModalAlterarReserva = () => {
   });
 
   const updateToOldReservation = useCallback(() => {
-    if (reservation && reservation.id !== newReservation.id) {
-      setNewReservation({
-        ...newReservation,
-        startDate: reservation?.startDate || new Date(),
-        endDate: reservation?.endDate || new Date(),
-        advertisementId: reservation?.advertisementId,
-        tenantId: reservation?.tenantId,
-        status: ReservationStatus.CHANGE_REQUESTED,
-      });
+    if (stay) {
+      const reservation = stay.reservations && stay.reservations[stay.reservations.length - 1];
+      if (reservation && reservation.id !== newReservation.id) {
+        setNewReservation({
+          ...newReservation,
+          startDate: reservation?.startDate || new Date(),
+          endDate: reservation?.endDate || new Date(),
+          advertisementId: reservation?.advertisementId,
+          tenantId: reservation?.tenantId,
+          status: ReservationStatus.CHANGE_REQUESTED,
+        });
+      }
     }
-  }, [reservation, newReservation]);
+  }, [newReservation, stay]);
 
   useEffect(() => {
     updateToOldReservation();
@@ -114,27 +117,23 @@ const ModalAlterarReserva = () => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              {reservation && (
-                                <div className="ml-3 inline-block">{new String(reservation.startDate)}</div>
-                              )}
+                              {stay && <div className="ml-3 inline-block">{new String(stay.startDate)}</div>}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              {reservation && (
-                                <div className="ml-3 inline-block">{new String(reservation.endDate)}</div>
-                              )}
+                              {stay && <div className="ml-3 inline-block">{new String(stay.endDate)}</div>}
                             </div>
                           </div>
-                          {reservation && (
+                          {newReservation && (
                             <div className="flex items-center justify-between gap-7 align-middle">
                               <div>
                                 <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                   Entrada
                                 </label>
                                 <FeatherDatePicker
-                                  date={reservation.startDate}
+                                  date={newReservation.startDate || new Date()}
                                   onChange={(e) => changeNewReservationProperty("startDate", e.target.value)}
                                 />
                               </div>
@@ -149,7 +148,7 @@ const ModalAlterarReserva = () => {
                                 </label>
 
                                 <FeatherDatePicker
-                                  date={reservation.endDate}
+                                  date={newReservation.endDate || new Date()}
                                   onChange={(e) => changeNewReservationProperty("endDate", e.target.value)}
                                 />
                               </div>

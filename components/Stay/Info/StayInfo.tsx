@@ -11,13 +11,15 @@ import {
   useSetModalReportAdvertisement,
 } from "../../../context/ModalShowProvider";
 import Link from "next/link";
-import { Reservation } from "../../../models/reservation";
+import { toast } from "react-toastify";
+import { Stay } from "../../../models/stay";
+import classNames from "classnames";
 
 interface StayInfoProps {
-  reservation: Reservation;
+  stay: Stay;
 }
 
-const StayInfo = ({ reservation }: StayInfoProps) => {
+const StayInfo = ({ stay }: StayInfoProps) => {
   // MODAL REPORT
   const modalReportInfo = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
@@ -29,23 +31,43 @@ const StayInfo = ({ reservation }: StayInfoProps) => {
   const setModalAvaliar = useSetModalAvaliarExperiencia();
 
   const openModalReport = () => {
-    setModalReport({ ...modalReportInfo, isOpen: true, reservation });
+    // check if there are any reports already sent.
+    if (stay.report) {
+      toast.error("Report was already sent");
+      return;
+    }
+
+    // TODO change this for the stay
+    setModalReport({ ...modalReportInfo, isOpen: true, stay });
   };
 
   const openModalAvaliarExperiencia = () => {
-    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation });
+    // check if there are any reviews already sent.
+    if (stay.review) {
+      toast.error("Review was already done");
+      return;
+    }
+
+    // TODO change this
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, stay });
   };
 
   const openModalAlterarReserva = () => {
-    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation });
+    // TODO change this
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, stay });
   };
 
   return (
     <div>
-      <div className="ml-8 flex w-96 flex-row gap-4">
+      <div className="flex w-96 flex-row gap-4">
         <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalReport()}>
           <div>
-            <BsFlag className="mb-2 text-4xl text-red-500" />
+            <BsFlag
+              className={classNames("mb-2 text-4xl", {
+                "text-red-500": stay?.report === null,
+                "text-gray-600": stay?.report !== null,
+              })}
+            />
           </div>
           <div className="text-center text-xs">
             Reportar
@@ -84,7 +106,12 @@ const StayInfo = ({ reservation }: StayInfoProps) => {
 
         <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAvaliarExperiencia()}>
           <div>
-            <AiOutlineStar className="mb-2 text-4xl text-yellow-400" />
+            <AiOutlineStar
+              className={classNames("mb-2 text-4xl ", {
+                "text-yellow-400": stay?.review === null,
+                "text-gray-600": stay?.review !== null,
+              })}
+            />
           </div>
           <div className="text-center text-xs">
             Avaliar

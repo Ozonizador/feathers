@@ -21,6 +21,9 @@ export const Navbar = () => {
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
+  const setModoSenhorio = () => {
+    toggleUserTypeContext("SENHORIO");
+  };
   /* Changing the toggle senhorio estudante */
   const toggleSenhorioEstudante = () => {
     if (!user) {
@@ -71,13 +74,7 @@ export const Navbar = () => {
             <div className="lg:block">
               <Link href="/">
                 <a>
-                  <Image
-                    src="/images/logo1.png"
-                    alt=""
-                    className="cursor-pointer"
-                    height={55}
-                    width={208}
-                  ></Image>
+                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={55} width={208}></Image>
                 </a>
               </Link>
             </div>
@@ -148,7 +145,10 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div>
-                      <span className="mr-2">Estudante</span>
+                      <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
+                        Modo Senhorio
+                      </button>
+                      {/* <span className="mr-2">Estudante</span>
                       <Switch
                         checked={true}
                         onChange={toggleSenhorioEstudante}
@@ -160,7 +160,7 @@ export const Navbar = () => {
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
-                      <span className="ml-2">Senhorio</span>
+                      <span className="ml-2">Senhorio</span> */}
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
@@ -227,10 +227,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div
-                                    className="py-1"
-                                    onClick={() => supabaseClient.auth.signOut()}
-                                  >
+                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
@@ -249,10 +246,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink
-                                    customClass="py-1"
-                                    href="/unidesk/senhorio/advertisements"
-                                  >
+                                  <MyLink customClass="py-1" href="/unidesk/senhorio/advertisements">
                                     Anúncios
                                   </MyLink>
                                 </Menu.Item>
@@ -278,10 +272,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div
-                                    className="py-1"
-                                    onClick={() => supabaseClient.auth.signOut()}
-                                  >
+                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
                                     Sair
                                   </div>
                                 </Menu.Item>

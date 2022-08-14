@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
@@ -6,7 +6,7 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
+import { AdvertisementWithReviewAverage, EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
@@ -14,12 +14,14 @@ import { useProfileInformation, useSetProfileFavouritesInformation } from "../..
 import classNames from "classnames";
 
 interface RoomCardProps {
-  advertisement: Advertisement;
+  advertisement: AdvertisementWithReviewAverage;
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
   const profile = useProfileInformation();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
+  const advertisementOverallRating =
+    (advertisement.averages && advertisement.averages[0] && advertisement.averages[0].overallAverage.toFixed(2)) || "-";
 
   const toggleFavourite = async (e, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
@@ -64,12 +66,14 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
               <div className="p-3 lg:w-2/4">
                 <div className="m-1">
                   <div className="flex flex-1">
-                    <h6 className="mb-0 text-xl font-bold">{advertisement.title}</h6>
+                    <h6 className="mb-0 text-xl font-bold">
+                      {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
+                    </h6>
                     <div className="ml-2 flex items-center align-middle">
                       <Rating className="">
-                        <Rating.Star />
+                        <Rating.Star filled={true} />
                       </Rating>
-                      <p className="text-sm text-yellow-400">4.9</p>
+                      <p className="text-sm text-yellow-400">{advertisementOverallRating}</p>
                     </div>
                   </div>
                   {/* icon with images */}

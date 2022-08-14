@@ -1,9 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { CgHome } from "react-icons/cg";
+import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 
 export default function RoomSemelhantes() {
+  const advertisement = useGetSingleAdvertisement();
   return (
     <section className="mb-40">
       <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
@@ -39,6 +40,8 @@ export default function RoomSemelhantes() {
         </div>
       </div>
       {/* <div className="mb-10 grid w-full grid-cols-2 justify-start gap-52 lg:w-3/5 lg:grid-cols-4">
+      {/* <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
+      <div className="mb-10 grid w-3/5 justify-start gap-52 lg:grid-cols-4">
         <article className="bg-destaques-slider1 relative h-56  w-48  rounded-lg ">
           <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
           <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
@@ -66,7 +69,7 @@ export default function RoomSemelhantes() {
           <span className="px-1">
             <CgHome />
           </span>{" "}
-          em Peniche
+          em {advertisement.place}
         </a>
       </Link>
     </section>

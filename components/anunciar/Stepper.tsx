@@ -82,7 +82,7 @@ export default function Stepper() {
 
 interface StepIconProps {
   stepNumber: number;
-  text: String;
+  text: string;
 }
 
 /**

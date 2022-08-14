@@ -19,7 +19,7 @@ export default function HomeSection7() {
               <div className="block lg:hidden">Comece já a anunciar e rentabilize o seu imóvel!</div>
             </div>
             <div className="mb-14 mt-8 lg:mb-10 lg:mt-0 ">
-              <Link href="/">
+              <Link href="/anunciar">
                 <a className="rounded-full bg-primary-500 py-4 px-16 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl lg:ml-6">
                   Anunciar
                 </a>

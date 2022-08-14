@@ -27,15 +27,14 @@ model Profile {
   updatedAt      DateTime  @updatedAt
 
   advertisements Advertisement[]
-  tenantReviews  Review[]        @relation("tenantReviews")
   notifications  Notification[]  @relation("notifications")
   reservations   Reservation[]   @relation("tenantReservations")
 
   conversationsAsHost   Conversation[] @relation("conversationsAsHost")
   conversationsAsTenant Conversation[] @relation("conversationsAsTenant")
 
-  messages    Message[] @relation("profileMessages")
-  reportsMade Report[]  @relation("tenantReports")
+  messages Message[] @relation("profileMessages")
+  stays    Stay[]    @relation("tenantStays")
 
   @@map("profiles")
 }
@@ -71,8 +70,8 @@ model Advertisement {
   latitude          Int?
   longitude         Int?
 
-  host    Profile? @relation(fields: [hostId], references: [id])
-  reviews Review[] @relation("advertisementReviews")
+  host  Profile? @relation(fields: [hostId], references: [id])
+  stays Stay[]   @relation("advertisementStays")
 
   reservations Reservation[] @relation("advertisementReservations")
   reports      Report[]      @relation("advertisementReports")
@@ -117,7 +116,8 @@ model Reservation {
 
   tenant       Profile       @relation("tenantReservations", references: [id], fields: [tenantId])
   tenantId     String        @db.Uuid
-  stay         Stay?         @relation("reservationOfStay")
+  stay         Stay?         @relation("reservationStay", references: [id], fields: [stayId])
+  stayId       String        @db.Uuid
   Conversation Conversation? @relation("conversationOfReservation")
 
   @@map("reservations")
@@ -132,11 +132,9 @@ enum ReservationStatus {
 }
 
 model Review {
-  id            String        @id @default(uuid()) @db.Uuid
-  advertisement Advertisement @relation("advertisementReviews", references: [id], fields: [advertisementId])
-  tenant        Profile       @relation("tenantReviews", references: [id], fields: [tenantId])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id     String @id @default(uuid()) @db.Uuid
+  stay   Stay   @relation("stayReview", references: [id], fields: [stayId])
+  stayId String @unique @db.Uuid
 
   overallRating      Int
   locationRating     Int
@@ -145,8 +143,9 @@ model Review {
   comoditiesRating   Int
   publicReview       String
   privateReview      String
-  advertisementId    String @db.Uuid
-  tenantId           String @db.Uuid
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("reviews")
 }
@@ -200,8 +199,8 @@ model Report {
 
   advertisement   Advertisement @relation("advertisementReports", references: [id], fields: [advertisementId])
   advertisementId String        @db.Uuid
-  profile         Profile       @relation("tenantReports", references: [id], fields: [tenantId])
-  tenantId        String        @db.Uuid
+  stay            Stay          @relation("stayReport", references: [id], fields: [stayId])
+  stayId          String        @unique @db.Uuid
   description     String
   type            ReportsType
 
@@ -220,9 +219,18 @@ enum ReportsType {
 }
 
 model Stay {
-  id            String      @id @default(uuid()) @db.Uuid
-  reservation   Reservation @relation("reservationOfStay", references: [id], fields: [reservationId])
-  reservationId String      @unique @db.Uuid
+  id        String   @id @default(uuid()) @db.Uuid
+  startDate DateTime
+  endDate   DateTime
+  report    Report?  @relation("stayReport")
+  review    Review?  @relation("stayReview")
+
+  advertisement   Advertisement @relation("advertisementStays", references: [id], fields: [advertisementId])
+  advertisementId String        @db.Uuid
+  tenant          Profile       @relation("tenantStays", references: [id], fields: [tenantId])
+  tenantId        String        @db.Uuid
+
+  reservations Reservation[] @relation("reservationStay")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

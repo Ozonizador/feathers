@@ -24,14 +24,14 @@ interface PassosModaisProps {
 
 const ModalDenuncia = () => {
   const profile = useProfileInformation();
-  const { isOpen, step, reservation } = useModalReportAdvertisement();
+  const { isOpen, step, stay } = useModalReportAdvertisement();
   const setModalReportProperty = useSetModalReportContextProperty();
   const setIsOpen = useSetOpenModalReport();
 
   const [report, setReport] = useState<Report>({
     type: ReportsType.IMPRECISE,
-    advertisementId: reservation?.advertisementId || "",
-    tenantId: profile?.id || "",
+    stayId: stay?.id || "",
+    advertisementId: stay?.advertisementId || "",
     description: "",
   });
 
@@ -60,7 +60,7 @@ const ModalDenuncia = () => {
     event.preventDefault();
     setLoading(true);
     if (profile) {
-      const { data, error } = await addReportOnAdvert(report, reservation.advertisementId, profile.id);
+      const { data, error } = await addReportOnAdvert(report, stay.advertisementId, profile.id);
       if (data) {
         nextStep();
       }

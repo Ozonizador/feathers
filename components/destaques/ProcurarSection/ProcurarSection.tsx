@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import RoomCard from "./RoomCard";
 import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
-import Advertisement from "../../../models/advertisement";
+import Advertisement, { AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 });
 
 interface ProcurarPagination {
-  advertisements: Advertisement[];
+  advertisements: AdvertisementWithReviewAverage[];
   count: number;
 }
 
@@ -25,7 +25,7 @@ export default function ProcurarSection() {
   const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
   const router = useRouter();
-  const { place } = router.query;
+  const { address, startDate, endDate } = router.query;
 
   const getAdvertisements = useCallback(async () => {
     const { data, error, count } = await getFilteredAdvertisements(page, null);
@@ -45,7 +45,9 @@ export default function ProcurarSection() {
   };
 
   useEffect(() => {
-    if (place) {
+    if (address) {
+      // TODO: finish this.
+      debugger;
     } else {
       navigator.geolocation.getCurrentPosition(
         function (pos) {
@@ -55,7 +57,7 @@ export default function ProcurarSection() {
         { timeout: 10000 }
       );
     }
-  }, [place]);
+  }, [address]);
 
   return (
     <>
@@ -69,7 +71,7 @@ export default function ProcurarSection() {
               <div className="mb-2">
                 <select className="w-36 rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 text-sm  lg:w-60">
                   <option>Ordenar Por</option>
-                  <option>Casa</option>
+                  <option>Preço</option>
                   <option>Apartamento</option>
                 </select>
               </div>
@@ -77,9 +79,14 @@ export default function ProcurarSection() {
 
             <div className=" mr-0 flex-row lg:flex">
               <select className="mb-3 mr-4 w-full rounded-md border border-solid border-terciary-500 bg-white  py-4 text-sm lg:w-52">
-                <option>Tipo de espaço</option>
-                <option>Casa</option>
-                <option>Apartamento</option>
+                <option value="all">Qualquer Espaço</option>
+                {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
+                  return (
+                    <option key={index} value={type}>
+                      {TYPE_ADVERTISEMENT[type]}
+                    </option>
+                  );
+                })}
               </select>
               <div className="flex flex-row justify-start gap-4">
                 <div className="flex-1">
