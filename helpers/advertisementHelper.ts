@@ -1,4 +1,6 @@
-import { FlexHostType } from "../models/advertisement";
+import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
+import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
+import { AdvertisementWithReviewAverage, ADVERTISEMENT_PROPERTIES, FlexHostType } from "../models/advertisement";
 
 const hostTypeFlexDescription = (type: FlexHostType) => {
   return {
@@ -20,8 +22,22 @@ const hostTranslate = (type: FlexHostType) => {
   }[type];
 };
 
-const houseAmenities = () => {
-  // get the icons to use here
+// get the icons to use here
+const houseAmenities = () => {};
+
+export const addFilterAdvertisement = (
+  query: PostgrestFilterBuilder<AdvertisementWithReviewAverage>,
+  filters: FilterAdvertisements
+) => {
+  const { filter, order } = filters;
+
+  filter.address && query.eq(ADVERTISEMENT_PROPERTIES.PLACE, filter.address);
+  filter.placeType !== "ALL" && query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType);
+
+  // missing price and comodities
+
+  order.isActive && query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" });
+  return query;
 };
 
 export { hostTypeFlexDescription, hostTranslate };
