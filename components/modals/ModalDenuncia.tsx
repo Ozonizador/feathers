@@ -30,7 +30,7 @@ const ModalDenuncia = () => {
 
   const [report, setReport] = useState<Report>({
     type: ReportsType.IMPRECISE,
-    stayId: stay.id,
+    stayId: stay?.id || "",
     advertisementId: stay?.advertisementId || "",
     description: "",
   });

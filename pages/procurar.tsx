@@ -1,17 +1,20 @@
 import React from "react";
 import ProcurarSection from "../components/destaques/ProcurarSection/ProcurarSection";
 import SearchInputField from "../components/search/SearchInputField";
+import { ProcurarAdvertisementsProvider } from "../context/ProcurarAdvertisementsProvider";
 
 const Procurar = () => {
   return (
-    <div className="">
-      <div className="flex flex-col justify-center  lg:flex-row">
-        <SearchInputField />
+    <ProcurarAdvertisementsProvider>
+      <div>
+        <div className="flex flex-col justify-center  lg:flex-row">
+          <SearchInputField />
+        </div>
+        <div className="mt-10">
+          <ProcurarSection />
+        </div>
       </div>
-      <div className="mt-10">
-        <ProcurarSection />
-      </div>
-    </div>
+    </ProcurarAdvertisementsProvider>
   );
 };
 

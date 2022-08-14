@@ -6,7 +6,7 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { AdvertisementWithReviewAverage, EXPENSES_TO_TEXT } from "../../../models/advertisement";
+import { AdvertisementWithReviewAverage, EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
@@ -66,7 +66,9 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
               <div className="p-3 lg:w-2/4">
                 <div className="m-1">
                   <div className="flex flex-1">
-                    <h6 className="mb-0 text-xl font-bold">{advertisement.title}</h6>
+                    <h6 className="mb-0 text-xl font-bold">
+                      {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
+                    </h6>
                     <div className="ml-2 flex items-center align-middle">
                       <Rating className="">
                         <Rating.Star filled={true} />

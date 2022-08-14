@@ -11,10 +11,10 @@ export interface Stay {
   endDate: Date;
 
   // Advertisement
-  advertisementId: String;
+  advertisementId: string;
   advertisement?: Advertisement;
   // Tenant
-  tenantId: String;
+  tenantId: string;
   tenant?: Profile;
 
   // Reservations associated with Stay
