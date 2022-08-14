@@ -12,8 +12,8 @@ export const TitleInfo = () => {
       <div className="mb-8 text-5xl font-bold">{advertisement.title}</div>
 
       <div className="mb-2 mt-3 flex w-full justify-between lg:w-0">
-        <div className="flex flex-col lg:flex-row">
-          <div className="flex h-32 w-40 flex-col items-center justify-center rounded-lg  align-middle text-secondary-500 shadow-2xl lg:mr-3">
+        <div className="flex flex-col  lg:flex-row">
+          <div className="mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle  text-secondary-500 shadow-2xl lg:mb-0 lg:mr-3">
             <RiUserLine className="text-4xl" />
             <div className="mt-3 text-base ">
               {advertisement.tenantNumber > 1
@@ -22,7 +22,7 @@ export const TitleInfo = () => {
             </div>
           </div>
 
-          <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center  rounded-lg align-middle text-secondary-500 shadow-2xl">
+          <div className="mr-3 flex h-32 w-40 flex-col  items-center justify-center  rounded-lg align-middle text-secondary-500 shadow-2xl">
             <BiBed className="text-4xl" />
             <div className="mt-3 text-base">
               {advertisement.beds > 1 ? `${advertisement.beds} Camas` : `${advertisement.beds} Cama`}
@@ -31,7 +31,7 @@ export const TitleInfo = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row">
-          <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center  rounded-lg align-middle text-secondary-500 shadow-2xl">
+          <div className="mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle  text-secondary-500 shadow-2xl lg:mb-0 lg:mr-3">
             <TbBed className="text-4xl" />
             <div className="mt-3 text-base">
               {advertisement.rooms > 1 ? `${advertisement.rooms} Quartos` : `${advertisement.rooms} Quarto`}

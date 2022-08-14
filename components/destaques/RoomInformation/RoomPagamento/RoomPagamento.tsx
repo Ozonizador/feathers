@@ -73,7 +73,7 @@ export default function RoomPagamento() {
   return (
     <>
       <div className="w-full ">
-        <div className="w-full rounded-2xl border border-terciary-700 px-4">
+        <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
               {advertisement.monthRent}&euro;/mês
@@ -162,7 +162,7 @@ export default function RoomPagamento() {
           <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 
           <div
-            className="mb-7 cursor-pointer text-xl text-gray-500 underline underline-offset-8"
+            className="mb-7 cursor-pointer text-base  text-gray-500 underline underline-offset-8"
             onClick={(e) => setIsOpen(true)}
           >
             Detalhes do Pagamento
@@ -171,7 +171,7 @@ export default function RoomPagamento() {
 
         <div>
           <div onClick={makeReservation}>
-            <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-10 py-5 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+            <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
               Reserva
             </a>
           </div>
