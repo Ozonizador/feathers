@@ -1,19 +1,17 @@
 import React from "react";
 
-
 const UnideskHero = () => {
   return (
     <section>
-    <div className="flex justify-center bg-hero-unidesk  py-52 ">
-        <div className="flex flex-col px-10 align-middle md:container">
-            <h1 className="text-7xl text-center font-normal leading-snug text-white tracking-widest mb-0">
-                Unidesk
-            </h1>
-            <h2 className="text-4xl font-normal text-white text-center">Senhorio</h2>
-
+      <div className="bg-hero-unidesk flex justify-center  py-52 ">
+        <div className="flex flex-col px-10 align-middle ">
+          <h1 className="mb-0 text-center text-5xl font-normal leading-snug tracking-widest text-white lg:text-7xl">
+            Unidesk
+          </h1>
+          <h2 className="text-center text-4xl font-normal text-white">Senhorio</h2>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
   );
 };
 

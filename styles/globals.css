@@ -8,7 +8,7 @@
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 17px 7px;
+  /* background-position: 17px 7px;  prejudica mobile*/
 }
 
 .bg-destaques-slider1 {
