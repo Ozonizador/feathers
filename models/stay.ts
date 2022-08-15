@@ -12,10 +12,7 @@ export interface Stay {
 
   // Advertisement
   advertisementId: string;
-  advertisement?: Advertisement;
-  // Tenant
   tenantId: string;
-  tenant?: Profile;
 
   // Reservations associated with Stay
   reservations: Reservation[];
@@ -33,4 +30,13 @@ export const STAY_TABLE = {
   TENANT_ID: "tenantId",
   START_DATE: "startDate",
   END_DATE: "endDate",
+  ADVERTISEMENT_HOST: "advertisement.host",
 } as const;
+
+/*
+ * composed types
+ */
+
+/* FOR GUESTS PANEL */
+
+export type StayGuest = Stay & { advertisement: Partial<Advertisement>; tenant: Partial<Profile> };

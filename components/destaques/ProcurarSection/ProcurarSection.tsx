@@ -1,20 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
 import Select from "react-select";
-import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
-import Advertisement, {
-  AdvertisementWithReviewAverage,
-  TypeAmenity,
-  TypeAmenityLabel,
-  TYPE_ADVERTISEMENT,
-} from "../../../models/advertisement";
-import { Pagination, Spinner } from "flowbite-react";
+import { TypeAmenityLabel, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { MapCoordinates } from "../../../models/utils";
 import { customStyles } from "./ProcurarSectionConfig";
-import { useAdvertisementInfo } from "../../../context/ProcurarAdvertisementsProvider";
+import {
+  useAdvertisementInfo,
+  useCurrentProcurarAdvertisementContext,
+  useSetFiltersContext,
+} from "../../../context/ProcurarAdvertisementsProvider";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -23,35 +21,48 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 export default function ProcurarSection() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { advertisements, count, page, loading } = useAdvertisementInfo();
+  const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
+  const setFilters = useSetFiltersContext();
+
   const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
   const router = useRouter();
-  const { address, startDate, endDate } = router.query;
+  let { address, startDate, endDate } = router.query;
 
   const goToAdvert = (id: string) => {
     router.push(`/anuncio/${id}`);
   };
 
+  const locateByQuery = useCallback(() => {
+    let addressFormatted = address as string;
+    let startDateFormatted = new Date(startDate as string);
+    let endDateFormatted = new Date(endDate as string);
+
+    setFilters({
+      address: addressFormatted,
+      dates: {
+        startDate: startDateFormatted,
+        endDate: endDateFormatted,
+      },
+    });
+  }, [address, startDate, endDate]);
+
   useEffect(() => {
-    if (address) {
-      // TODO: finish this.
-      debugger;
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        function (pos) {
-          setCurrentMapCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
-        },
-        function errorCallback(error) {},
-        { timeout: 10000 }
-      );
-    }
-  }, [address]);
+    locateByQuery();
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        setCurrentMapCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+      },
+      function errorCallback(error) {},
+      { timeout: 10000 }
+    );
+  }, [locateByQuery]);
 
   // Filters
   const setComoditiesFilter = (options) => {
     const comoditiesFilter = options.map((option) => option.value);
-    debugger;
   };
+
   return (
     <>
       <div className="mt-5 flex flex-1 px-10">
@@ -59,7 +70,15 @@ export default function ProcurarSection() {
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
-                {count} espaços <span className="font-normal text-gray-400">disponíveis para Peniche</span>{" "}
+                {count} espaços <span className="font-normal text-gray-400">disponíveis</span>
+                {address ? (
+                  <>
+                    <span className="font-normal text-gray-400">{" para "}</span>
+                    <span className="font-normal capitalize text-gray-400">{address}</span>
+                  </>
+                ) : (
+                  <>na area</>
+                )}
               </div>
               <div className="mb-2">
                 <select className="w-36 rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm lg:w-60">
@@ -71,8 +90,11 @@ export default function ProcurarSection() {
             </div>
 
             <div className="mr-0 gap-2 lg:flex lg:flex-row">
-              <select className="mb-2 w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:mb-0 lg:w-52">
-                <option value="all">Qualquer Espaço</option>
+              <select
+                defaultValue={currentFilter.placeType}
+                className="mb-2 w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:mb-0 lg:w-52"
+              >
+                <option value="ALL">Qualquer Espaço</option>
                 {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                   return (
                     <option key={index} value={type}>
@@ -92,6 +114,7 @@ export default function ProcurarSection() {
 
                 <div className="w-1/2">
                   <Select
+                    id="comodities-select"
                     placeholder="Comodities"
                     options={TypeAmenityLabel.map((amenity) => amenity)}
                     isMulti={true}

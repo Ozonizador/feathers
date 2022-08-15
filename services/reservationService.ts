@@ -22,15 +22,3 @@ export const getReservationByAdvertId = async (advertId: string) => {
     .eq(RESERVATION_TABLE.ADVERT_ID, advertId);
   return { data, error };
 };
-
-/* BY HOST ID */
-
-export const getCurrentReservationsByHostId = async (hostId: string) => {
-  const { data, error } = await supabaseClient
-    .from(RESERVATION_TABLE_NAME)
-    .select("*, tenant:tenantId(*), advertisement:advertisementId(id, type, place)")
-    .eq(RESERVATION_TABLE.STATUS, ReservationStatus.ACCEPTED)
-    .eq(RESERVATION_TABLE.HOST_ID, hostId);
-
-  return { data, error };
-};

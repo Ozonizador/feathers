@@ -1,6 +1,7 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
-import { Stay, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
+import { ADVERTISEMENT_PROPERTIES } from "../models/advertisement";
+import { Stay, StayGuest, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
 
 export const addStay = async (stay: Stay) => {
   const { data, error } = await supabaseClient
@@ -48,6 +49,21 @@ export const getHistoryStayByTenantId = async (tenantId: string) => {
     .select()
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .lte(STAY_TABLE.END_DATE, new Date());
+
+  return { data, error };
+};
+
+/* BY HOST ID */
+
+export const getCurrentStaysByHostId = async (hostId: string) => {
+  const date = new Date().toISOString();
+
+  const { data, error } = await supabaseClient
+    .from(STAYS_TABLE_NAME)
+    .select("*, tenant:tenantId(name, avatarUrl), advertisement:advertisementId(id, type, place, hostId)")
+    .eq("advertisement.hostId", hostId)
+    .gte(STAY_TABLE.START_DATE, date)
+    .lte(STAY_TABLE.END_DATE, date);
 
   return { data, error };
 };

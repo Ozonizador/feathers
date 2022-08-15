@@ -5,18 +5,23 @@ import { getFilteredAdvertisements } from "../services/advertisementService";
 
 /* FILTERS */
 export interface FilterAdvertisements {
-  filter: {
-    comodities: TypeAmenity[];
-    placeType: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-    price: {
-      startRange: number | null;
-      endRange: number | null;
-    };
-    address: string;
-  };
-  order: AdvertOrder;
+  filter: Partial<FilterOptions>;
+  order: Partial<AdvertOrder>;
 }
 
+export interface FilterOptions {
+  comodities: TypeAmenity[];
+  placeType: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
+  price: {
+    startRange: number | null;
+    endRange: number | null;
+  };
+  dates: {
+    startDate: Date;
+    endDate: Date;
+  };
+  address: string;
+}
 export interface AdvertOrder {
   byColumn: "price";
   type: "asc" | "desc";
@@ -108,5 +113,19 @@ export const useSetPageAdvertisementinfo = () => {
   const advertInfo = useContext(AdvertisementsContext);
   return (page: number) => {
     setPage({ ...advertInfo, page });
+  };
+};
+
+export const useSetFiltersContext = () => {
+  const setFilters = useContext(SetProcurarAdvertisementsContext);
+  return (filters: Partial<FilterOptions>) => {
+    setFilters((oldFilters) => ({ ...oldFilters, filter: { ...oldFilters.filter, ...filters } }));
+  };
+};
+
+export const useSetOrderContext = () => {
+  const setFilters = useContext(SetProcurarAdvertisementsContext);
+  return (order: AdvertOrder) => {
+    setFilters((oldFilters) => ({ ...oldFilters, order }));
   };
 };

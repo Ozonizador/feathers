@@ -14,28 +14,32 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import person from "../../public/images/person.png";
 import ukFlag from "../../public/images/icon-uk.jpg";
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
   const { user } = useUser();
+  const router = useRouter();
 
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   const setModoSenhorio = () => {
     toggleUserTypeContext("SENHORIO");
+    router.push("/unidesk");
   };
-  /* Changing the toggle senhorio estudante */
-  const toggleSenhorioEstudante = () => {
-    if (!user) {
-      return;
-    }
 
-    if (toggleUserType === "ESTUDANTE") {
-      toggleUserTypeContext("SENHORIO");
-    } else {
-      toggleUserTypeContext("ESTUDANTE");
-    }
-  };
+  // /* Changing the toggle senhorio estudante */
+  // const toggleSenhorioEstudante = () => {
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   if (toggleUserType === "ESTUDANTE") {
+  //     toggleUserTypeContext("SENHORIO");
+  //   } else {
+  //     toggleUserTypeContext("ESTUDANTE");
+  //   }
+  // };
 
   return (
     <header>

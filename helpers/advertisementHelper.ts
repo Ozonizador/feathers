@@ -25,19 +25,19 @@ const hostTranslate = (type: FlexHostType) => {
 // get the icons to use here
 const houseAmenities = () => {};
 
-export const addFilterAdvertisement = (
+const addFilterAdvertisement = (
   query: PostgrestFilterBuilder<AdvertisementWithReviewAverage>,
   filters: FilterAdvertisements
 ) => {
   const { filter, order } = filters;
 
-  filter.address && query.eq(ADVERTISEMENT_PROPERTIES.PLACE, filter.address);
-  filter.placeType !== "ALL" && query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType);
+  filter.address && (query = query.eq(ADVERTISEMENT_PROPERTIES.PLACE, filter.address));
+  filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
   // missing price and comodities
 
-  order.isActive && query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" });
+  order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
   return query;
 };
 
-export { hostTypeFlexDescription, hostTranslate };
+export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement };

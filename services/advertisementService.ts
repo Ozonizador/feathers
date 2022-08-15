@@ -8,7 +8,6 @@ import Advertisement, {
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
-import { AdvertisementReviewSummary } from "../models/review";
 import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 20 as const;
