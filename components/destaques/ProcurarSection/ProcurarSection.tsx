@@ -1,44 +1,32 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
 import RoomCard from "./RoomCard";
+import Select from "react-select";
 import { getFilteredAdvertisements, PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
-import Advertisement, { AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import Advertisement, {
+  AdvertisementWithReviewAverage,
+  TypeAmenity,
+  TypeAmenityLabel,
+  TYPE_ADVERTISEMENT,
+} from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { MapCoordinates } from "../../../models/utils";
+import { customStyles } from "./ProcurarSectionConfig";
+import { useAdvertisementInfo } from "../../../context/ProcurarAdvertisementsProvider";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
 });
 
-interface ProcurarPagination {
-  advertisements: AdvertisementWithReviewAverage[];
-  count: number;
-}
-
 export default function ProcurarSection() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1);
-  const [advertisementsInfo, setAdvertisementsInfo] = useState<ProcurarPagination>({ count: 0, advertisements: [] });
+  const { advertisements, count, page, loading } = useAdvertisementInfo();
   const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
   const router = useRouter();
   const { address, startDate, endDate } = router.query;
-
-  const getAdvertisements = useCallback(async () => {
-    const { data, error, count } = await getFilteredAdvertisements(page, null);
-    if (!error) {
-      setAdvertisementsInfo({ advertisements: data, count });
-    }
-    setIsLoading(false);
-  }, [page]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getAdvertisements();
-  }, [getAdvertisements]);
 
   const goToAdvert = (id: string) => {
     router.push(`/anuncio/${id}`);
@@ -59,6 +47,11 @@ export default function ProcurarSection() {
     }
   }, [address]);
 
+  // Filters
+  const setComoditiesFilter = (options) => {
+    const comoditiesFilter = options.map((option) => option.value);
+    debugger;
+  };
   return (
     <>
       <div className="mt-5 flex flex-1 px-10">
@@ -66,19 +59,19 @@ export default function ProcurarSection() {
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
-                23 espaços <span className="font-normal text-gray-400">disponíveis para Peniche</span>{" "}
+                {count} espaços <span className="font-normal text-gray-400">disponíveis para Peniche</span>{" "}
               </div>
               <div className="mb-2">
-                <select className="w-36 rounded-md border  border-solid border-terciary-500 bg-white py-2 px-3 text-sm  lg:w-60">
-                  <option>Ordenar Por</option>
-                  <option>Preço</option>
-                  <option>Apartamento</option>
+                <select className="w-36 rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm lg:w-60">
+                  <option>Ordenar por:</option>
+                  <option value="asc">Preço (crescente)</option>
+                  <option value="desc">Preço (descrescente)</option>
                 </select>
               </div>
             </div>
 
-            <div className=" mr-0 flex-row lg:flex">
-              <select className="mb-3 mr-4 w-full rounded-md border border-solid border-terciary-500 bg-white  py-4 text-sm lg:w-52">
+            <div className="mr-0 gap-2 lg:flex lg:flex-row">
+              <select className="mb-2 w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:mb-0 lg:w-52">
                 <option value="all">Qualquer Espaço</option>
                 {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                   return (
@@ -89,20 +82,23 @@ export default function ProcurarSection() {
                 })}
               </select>
               <div className="flex flex-row justify-start gap-4">
-                <div className="flex-1">
-                  <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm lg:w-52">
+                <div className="w-1/2">
+                  <select className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52">
                     <option>Preço</option>
                     <option>Casa</option>
                     <option>Apartamento</option>
                   </select>
                 </div>
 
-                <div className="flex-1">
-                  <select className="w-full rounded-md  border border-solid border-terciary-500 bg-white py-4  text-sm lg:w-52">
-                    <option>Comodidades</option>
-                    <option>Casa</option>
-                    <option>Apartamento</option>
-                  </select>
+                <div className="w-1/2">
+                  <Select
+                    placeholder="Comodities"
+                    options={TypeAmenityLabel.map((amenity) => amenity)}
+                    isMulti={true}
+                    styles={customStyles}
+                    onChange={setComoditiesFilter}
+                    className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52"
+                  />
                 </div>
               </div>
 
@@ -125,8 +121,8 @@ export default function ProcurarSection() {
             {!isLoading && (
               <>
                 <div>
-                  {advertisementsInfo.advertisements &&
-                    advertisementsInfo.advertisements.map((advertisement, index) => {
+                  {advertisements &&
+                    advertisements.map((advertisement, index) => {
                       return (
                         <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.id)} key={index}>
                           <RoomCard advertisement={advertisement} />
@@ -153,7 +149,7 @@ export default function ProcurarSection() {
                   </div>
                 )} */}
         </div>
-        <div className="z-10 hidden w-1/2 px-5 lg:block">
+        <div className="z-10 hidden w-1/2 px-5 lg:block lg:min-h-[500px]">
           <MapWithNoSSR currentMap={currentMapCoordinates} />
         </div>
       </div>
