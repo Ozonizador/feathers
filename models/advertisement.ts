@@ -35,8 +35,7 @@ export type Advertisement = {
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
-  latitude: number;
-  longitude: number;
+  geo?: any;
 
   // foreign keys
   reviews?: Review[];

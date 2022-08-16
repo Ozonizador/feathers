@@ -47,7 +47,7 @@ const Details = ({ id }: DetailsProps) => {
   };
 
   const createCurrentMapLocation = () => {
-    return { latitude: advertisement.latitude, longitude: advertisement.longitude } as MapCoordinates;
+    // return { latitude: advertisement.latitude, longitude: advertisement.longitude } as MapCoordinates;
   };
 
   return (
@@ -73,7 +73,7 @@ const Details = ({ id }: DetailsProps) => {
               </div>
               <div className="mt-5">
                 <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
-                {(advertisement.latitude === null || !advertisement.longitude === null) && (
+                {/* {(advertisement.latitude === null || !advertisement.longitude === null) && (
                   <div>Não tem localização</div>
                 )}
                 {advertisement.latitude !== null && advertisement.longitude !== null && (
@@ -82,7 +82,7 @@ const Details = ({ id }: DetailsProps) => {
                       <MapWithNoSSR currentMap={createCurrentMapLocation()} />
                     </div>
                   </>
-                )}
+                )} */}
                 <GeneralAdvertComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
               </div>
               <div>

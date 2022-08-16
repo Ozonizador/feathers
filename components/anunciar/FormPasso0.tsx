@@ -33,7 +33,7 @@ const FormPasso0 = () => {
     }
 
     const { latitude, longitude } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
-    setAdvertisement({ ...advertisement, latitude, longitude });
+    setAdvertisement({ ...advertisement });
 
     const { data, error } = await addAdvertisement(advertisement);
     if (data) {
