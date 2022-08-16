@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { Stay } from "../../../models/stay";
+import { Stay, StayGuest } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 interface StayCardProps {
-  stay: Stay;
+  stay: StayGuest;
 }
 
 const StayCard = ({ stay }: StayCardProps) => {

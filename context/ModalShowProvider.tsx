@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { Stay } from "../models/stay";
+import { Stay, StayGuest } from "../models/stay";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -40,7 +40,7 @@ interface ModalAvaliarExperienciaProps {
 }
 
 interface ModaAvaliarExperienceContextElements {
-  stay: Stay;
+  stay: StayGuest;
   isOpen: boolean;
   step: number;
 }

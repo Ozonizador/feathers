@@ -44,7 +44,7 @@ const addFilterAdvertisement = (
   filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
 
   // Dates
-  debugger;
+
   filter.dates?.startDate && (query = query.not("stay.startDate", "gte", filter.dates.startDate));
   filter.dates?.endDate && (query = query.not("stay.endDate", "lte", filter.dates.endDate));
   order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));

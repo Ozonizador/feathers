@@ -36,14 +36,15 @@ export default function ProcurarSection() {
 
   const locateByQuery = useCallback(() => {
     let addressFormatted = address as string;
-    let startDateFormatted = new Date(startDate as string);
-    let endDateFormatted = new Date(endDate as string);
+    let startDateFormatted = startDate as string;
+    let endDateFormatted = endDate as string;
 
+    debugger;
     setFilters({
       address: addressFormatted,
       dates: {
-        startDate: startDateFormatted,
-        endDate: endDateFormatted,
+        startDate: startDateFormatted && startDateFormatted != "" ? new Date(startDateFormatted).toISOString() : "",
+        endDate: endDateFormatted && endDateFormatted != "" ? new Date(endDateFormatted).toISOString() : "",
       },
     });
   }, [address, startDate, endDate]);

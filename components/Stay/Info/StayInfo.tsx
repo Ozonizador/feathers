@@ -12,11 +12,11 @@ import {
 } from "../../../context/ModalShowProvider";
 import Link from "next/link";
 import { toast } from "react-toastify";
-import { Stay } from "../../../models/stay";
+import { StayGuest } from "../../../models/stay";
 import classNames from "classnames";
 
 interface StayInfoProps {
-  stay: Stay;
+  stay: StayGuest;
 }
 
 const StayInfo = ({ stay }: StayInfoProps) => {

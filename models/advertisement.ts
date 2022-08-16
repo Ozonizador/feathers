@@ -42,8 +42,9 @@ export type Advertisement = {
 };
 
 // With advertisement averages
-export type AdvertisementWithReviewAverage = Advertisement &
-  AdvertisementReviewSummary[] & { stay: Pick<Stay, "startDate" | "endDate"> };
+export type AdvertisementWithReviewAverage = Advertisement & { averages: AdvertisementReviewSummary[] } & {
+  stay: Pick<Stay, "startDate" | "endDate">;
+};
 
 export interface HouseExpenses {
   inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED";
@@ -341,3 +342,5 @@ export const AboutHouseCommodities = {
     { label: "Estacionamento", type: TypeAmenity.PARKING_SPOT },
   ],
 };
+
+export default Advertisement;

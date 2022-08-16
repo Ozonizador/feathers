@@ -15,18 +15,16 @@ import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { Reservation } from "../../../models/reservation";
-import next from "next";
 import { getCurrentStayByTenantId, getNextStaysByTenantId } from "../../../services/stayService";
-import { Stay } from "../../../models/stay";
+import { StayGuest } from "../../../models/stay";
 
 /* PAGINA 21 do xd */
 
 const Estadia = () => {
   const profile = useProfileInformation();
 
-  const [currentStay, setCurrentStay] = useState<Stay>();
-  const [nextStays, setNextStays] = useState<Stay[]>([]);
+  const [currentStay, setCurrentStay] = useState<StayGuest>();
+  const [nextStays, setNextStays] = useState<StayGuest[]>([]);
 
   const getProfileStays = useCallback(async () => {
     if (profile) {

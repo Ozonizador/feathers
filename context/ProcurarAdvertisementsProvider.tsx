@@ -17,8 +17,8 @@ export interface FilterOptions {
     endRange: number | null;
   };
   dates: {
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
   };
   address: string;
 }
