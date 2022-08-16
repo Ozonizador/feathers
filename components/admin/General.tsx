@@ -72,7 +72,7 @@ const MainMenu = () => {
   }, [getProfile]);
 
   return (
-    <div className="mx-auto mb-20 w-10/12">
+    <div className="sm: container mx-auto mb-20 w-full lg:w-10/12">
       <div className="font-b my-10 text-xl">
         <Link href="/admin">Conta</Link>
         {" > Informações pessoais"}
@@ -86,11 +86,11 @@ const MainMenu = () => {
         )}
         {!loading && (
           <>
-            <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-32">
-              <div className="text-3xl font-bold">Informações pessoais</div>
-              <div className="mt-5 mb-5">
-                <div>
-                  <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
+            <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 lg:px-32 ">
+              <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">Informações pessoais</div>
+              <div className="mt-5 mb-5 ">
+                <div className="flex items-center justify-center lg:justify-start">
+                  <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500 ">
                     <Avatar
                       img={
                         profile?.avatarUrl
@@ -115,8 +115,8 @@ const MainMenu = () => {
               </div>
 
               {/* LEFT SIDE */}
-              <div className="flex flex-row justify-between gap-12">
-                <div className="w-1/2">
+              <div className="flex flex-col justify-between gap-12 lg:flex-row">
+                <div className="w-full lg:w-1/2">
                   <div className="mb-10">
                     <Input
                       value={profile?.name}
@@ -153,7 +153,7 @@ const MainMenu = () => {
                 </div>
 
                 {/* RIGHT SIDE */}
-                <div className="w-1/2 ">
+                <div className=" -mt-12 w-full lg:mt-0 lg:w-1/2 ">
                   <div className="mb-10">
                     <Input
                       value={profile?.surname || ""}
@@ -297,9 +297,19 @@ const MainMenu = () => {
                   </div>
                 </div> */}
                 <div>
+                  <div className="mt-1">
+                    <button
+                      type="button"
+                      className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
+                      onClick={saveUserProfile}
+                    >
+                      Salvar
+                    </button>
+                  </div>
+                  {/* 
                   <button className="my-2 rounded bg-primary-500 p-2 text-white" onClick={saveUserProfile}>
                     Salvar
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
