@@ -1,19 +1,19 @@
 import HospedesMenu from "../../../components/unidesk/Menus/HospedesMenu";
 import Breadcrumb from "../../../components/hospedes/breadcrumb/Breadcrumb";
-import { getCurrentReservationsByHostId } from "../../../services/reservationService";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
-import { Reservation } from "../../../models/reservation";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
+import { getCurrentStaysByHostId } from "../../../services/stayService";
+import { StayGuest } from "../../../models/stay";
 
 const UniControloHospedes = () => {
   const { user } = useUser();
-  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [stays, setStays] = useState<StayGuest[]>([]);
   const getCurrentGuests = useCallback(async () => {
     if (user) {
-      const { data, error } = await getCurrentReservationsByHostId(user.id);
+      const { data, error } = await getCurrentStaysByHostId(user.id);
       if (!error) {
-        setReservations(data);
+        setStays(data);
       }
     }
   }, [user]);
@@ -36,8 +36,9 @@ const UniControloHospedes = () => {
             <>
               <div className="mb-7 text-3xl font-semibold">Hóspedes</div>
               <div className="mb-5 font-bold">Hóspedes Atuais</div>
-              {reservations.map((reservation, index) => {
-                return <HospedeCard reservation={reservation} key={index} />;
+              {!stays || (stays.length === 0 && <div>Sem hospedes</div>)}
+              {stays.map((stay, index) => {
+                return <HospedeCard stay={stay} key={index} />;
               })}
               {/* <h2 className="mt-14 mb-6 text-xl text-secondary-500">Hóspedes Anteriores</h2> */}
             </>

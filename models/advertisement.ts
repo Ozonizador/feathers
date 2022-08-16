@@ -1,10 +1,11 @@
 import { Profile } from "./profile";
 import { AdvertisementReviewSummary, Review } from "./review";
+import { Stay } from "./stay";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
-export default interface Advertisement {
+export type Advertisement = {
   id?: string;
   typeFlexHost: FlexHostType;
   place: string;
@@ -38,12 +39,11 @@ export default interface Advertisement {
 
   // foreign keys
   reviews?: Review[];
-}
+};
 
 // With advertisement averages
-export interface AdvertisementWithReviewAverage extends Advertisement {
-  averages: AdvertisementReviewSummary[];
-}
+export type AdvertisementWithReviewAverage = Advertisement &
+  AdvertisementReviewSummary[] & { stay: Pick<Stay, "startDate" | "endDate"> };
 
 export interface HouseExpenses {
   inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED";
@@ -155,17 +155,12 @@ export const EXPENSES_TO_TEXT = {
 /* About house */
 
 export interface AboutHouseSections {
-  bathRoom: Amenity[];
-  bedRoom: Amenity[];
-  kitchen: Amenity[];
-  livingRoom: Amenity[];
-  exterior: Amenity[];
-  general: Amenity[];
-}
-
-export interface Amenity {
-  available: boolean;
-  type: TypeAmenity;
+  bathRoom: TypeAmenity[];
+  bedRoom: TypeAmenity[];
+  kitchen: TypeAmenity[];
+  livingRoom: TypeAmenity[];
+  exterior: TypeAmenity[];
+  general: TypeAmenity[];
 }
 
 export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";

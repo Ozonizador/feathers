@@ -1,15 +1,15 @@
 import React from "react";
 import { Avatar } from "flowbite-react";
 import Link from "next/link";
-import { Reservation } from "../../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { StayGuest } from "../../../models/stay";
 
 interface HospedeCardProps {
-  reservation: Reservation;
+  stay: StayGuest;
 }
 
-const HospedeCard = ({ reservation }: HospedeCardProps) => {
-  const { advertisement, tenant } = reservation;
+const HospedeCard = ({ stay }: HospedeCardProps) => {
+  const { advertisement, tenant } = stay;
   return (
     <>
       <div className="mt-5 flex rounded-md bg-white py-6 pr-14">

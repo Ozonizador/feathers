@@ -11,6 +11,7 @@ import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel"
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 import dynamic from "next/dynamic";
 import { MapCoordinates } from "../../../../models/utils";
+import { toast } from "react-toastify";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
   ssr: false,
@@ -37,6 +38,7 @@ const Details = ({ id }: DetailsProps) => {
   const saveChanges = async () => {
     const { data, error } = await updateAdvertisement(advertisement, id);
     if (!error) {
+      toast.success("Sucesso");
     }
   };
 
@@ -54,7 +56,7 @@ const Details = ({ id }: DetailsProps) => {
         <div className="p-5 lg:border-r lg:p-12">
           <MenuSenhorio id={id} />
         </div>
-        <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
+        <div className="mx-6 pt-12 text-center  lg:text-left">
           <div className="mb-2 text-2xl font-semibold"></div>
           <div className="text-xl text-gray-700"></div>
           {advertisement && (
@@ -63,12 +65,6 @@ const Details = ({ id }: DetailsProps) => {
                 <h5 className="font-bold">{advertisement.title}</h5>
                 <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
                 <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
-              </div>
-
-              <div>
-                <h5 className="font-bold">{advertisement.title}</h5>
-                <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
-                <AnuncioDisponivel advertisement={advertisement} onChange={changeAdvertisementProperty} />
               </div>
 
               <div>
