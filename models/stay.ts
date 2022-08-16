@@ -33,6 +33,8 @@ export const STAY_TABLE = {
   ADVERTISEMENT_HOST: "advertisement.host",
 } as const;
 
+export type StayDates = Pick<Stay, "startDate" | "endDate">;
+
 /*
  * composed types
  */

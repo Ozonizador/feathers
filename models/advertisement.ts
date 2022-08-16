@@ -1,6 +1,7 @@
+import { Stay } from "@prisma/client";
 import { Profile } from "./profile";
 import { AdvertisementReviewSummary, Review } from "./review";
-import { Stay } from "./stay";
+import { StayDates } from "./stay";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -42,8 +43,11 @@ export type Advertisement = {
 };
 
 // With advertisement averages
-export type AdvertisementWithReviewAverage = Advertisement & { averages: AdvertisementReviewSummary[] } & {
-  stay: Pick<Stay, "startDate" | "endDate">;
+export type AdvertisementWithReviewAverage = Advertisement & {
+  averages: AdvertisementReviewSummary[];
+  stay: StayDates;
+  "stay.startDate": Date;
+  "stay.endDate": Date;
 };
 
 export interface HouseExpenses {
@@ -90,6 +94,8 @@ export const ADVERTISEMENT_PROPERTIES = {
   HOST_ID: "hostId",
   AVAILABLE: "available",
   ID: "id",
+  STAY_START_DATE: "stay.startDate",
+  STAY_END_DATE: "stay.endDate",
 } as const;
 
 export const HOUSE_RULES_NAMING = {

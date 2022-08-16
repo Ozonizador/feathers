@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { MapCoordinates } from "../../../models/utils";
 import { customStyles } from "./ProcurarSectionConfig";
+import Slider from "rc-slider";
+import debounce from "debounce";
 import {
   useAdvertisementInfo,
   useCurrentProcurarAdvertisementContext,
@@ -39,7 +41,6 @@ export default function ProcurarSection() {
     let startDateFormatted = startDate as string;
     let endDateFormatted = endDate as string;
 
-    debugger;
     setFilters({
       address: addressFormatted,
       dates: {
@@ -66,6 +67,11 @@ export default function ProcurarSection() {
     setComoditiesFilter(comoditiesFilter);
   };
 
+  const setPriceChange = debounce((value) => {
+    const [startRange, endRange] = value;
+    setFilters({ price: { startRange, endRange } });
+  }, 400);
+
   return (
     <>
       <div className="mt-5 flex flex-1 px-10">
@@ -80,7 +86,7 @@ export default function ProcurarSection() {
                     <span className="font-normal capitalize text-gray-400">{address}</span>
                   </>
                 ) : (
-                  <>na area</>
+                  <>{" na area"}</>
                 )}
               </div>
               <div className="mb-2">
@@ -108,11 +114,18 @@ export default function ProcurarSection() {
               </select>
               <div className="flex flex-row justify-start gap-4">
                 <div className="w-1/2">
-                  <select className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52">
-                    <option>Preço</option>
-                    <option>Casa</option>
-                    <option>Apartamento</option>
-                  </select>
+                  <div className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white p-1 text-sm lg:w-52">
+                    <div className="mb-1 text-sm">Preço</div>
+                    <Slider
+                      range
+                      marks={{ 0: "0€", 1000: "1000€", 3000: "3000€" }}
+                      defaultValue={[0, 3000]}
+                      onChange={setPriceChange}
+                      min={0}
+                      max={3000}
+                      className="mx-auto my-auto w-3/4"
+                    ></Slider>
+                  </div>
                 </div>
 
                 <div className="w-1/2">
