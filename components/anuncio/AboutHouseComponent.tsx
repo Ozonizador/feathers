@@ -1,7 +1,8 @@
 import { Accordion } from "flowbite-react";
-import Advertisement, {
+import {
   AboutHouseCommodities,
   AboutHouseSpace,
+  Advertisement,
   ADVERTISEMENT_PROPERTIES,
   TypeAmenity,
 } from "../../models/advertisement";
@@ -22,16 +23,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     if (!amenities) {
       amenities = [];
     }
+
     let foundAmenity = false;
-    for (let amenity of amenities) {
-      if (amenity.type == property) {
-        amenity.available = checked;
+    for (let i = 0; i < amenities.length; i++) {
+      if (amenities[i] === property) {
         foundAmenity = true;
+        amenities.splice(i);
+        break;
       }
     }
 
     if (!foundAmenity) {
-      amenities.push({ type: property, available: checked });
+      amenities.push(property);
     }
 
     onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...aboutHouse, [space]: amenities });
@@ -48,14 +51,11 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     if (!amenities) {
       return false;
     }
-    for (let amenity of amenities) {
-      if (amenity.type == toCheckAmenity) {
-        return amenity.available === expectedValue;
-      }
-    }
 
-    return false;
+    const found = amenities.find((amenity) => amenity === toCheckAmenity);
+    return found !== undefined;
   };
+
   return (
     <>
       <Accordion>

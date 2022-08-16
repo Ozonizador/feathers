@@ -11,6 +11,7 @@ import { customStyles } from "./ProcurarSectionConfig";
 import {
   useAdvertisementInfo,
   useCurrentProcurarAdvertisementContext,
+  useSetComoditiesContext,
   useSetFiltersContext,
 } from "../../../context/ProcurarAdvertisementsProvider";
 
@@ -19,10 +20,10 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 });
 
 export default function ProcurarSection() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
   const setFilters = useSetFiltersContext();
+  const setComoditiesFilter = useSetComoditiesContext();
 
   const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
 
@@ -59,8 +60,9 @@ export default function ProcurarSection() {
   }, [locateByQuery]);
 
   // Filters
-  const setComoditiesFilter = (options) => {
+  const toggleComododitiesFilter = (options) => {
     const comoditiesFilter = options.map((option) => option.value);
+    setComoditiesFilter(comoditiesFilter);
   };
 
   return (
@@ -119,7 +121,7 @@ export default function ProcurarSection() {
                     options={TypeAmenityLabel.map((amenity) => amenity)}
                     isMulti={true}
                     styles={customStyles}
-                    onChange={setComoditiesFilter}
+                    onChange={toggleComododitiesFilter}
                     className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52"
                   />
                 </div>
@@ -136,12 +138,12 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            {isLoading && (
+            {loading && (
               <div className="mt-32 flex flex-1 justify-center">
                 <Spinner color="info" aria-label="loading" size="lg" />
               </div>
             )}
-            {!isLoading && (
+            {!loading && (
               <>
                 <div>
                   {advertisements &&

@@ -1,11 +1,11 @@
 import { Profile, Report } from "@prisma/client";
-import Advertisement from "./advertisement";
+import { Advertisement } from "./advertisement";
 import { Reservation } from "./reservation";
 import { Review } from "./review";
 
 export const STAYS_TABLE_NAME = "stays" as const;
 
-export interface Stay {
+export type Stay = {
   id?: string;
   startDate: Date;
   endDate: Date;
@@ -21,7 +21,7 @@ export interface Stay {
   review?: Review;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
 export const STAY_TABLE = {
   ID: "id",

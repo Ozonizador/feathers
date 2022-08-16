@@ -38,6 +38,10 @@ const defaultFilter = {
       endRange: null,
     },
     address: "",
+    dates: {
+      startDate: null,
+      endDate: null,
+    },
   },
   order: {
     byColumn: "price",
@@ -127,5 +131,12 @@ export const useSetOrderContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
   return (order: AdvertOrder) => {
     setFilters((oldFilters) => ({ ...oldFilters, order }));
+  };
+};
+
+export const useSetComoditiesContext = () => {
+  const setFilters = useContext(SetProcurarAdvertisementsContext);
+  return (comodities: TypeAmenity[]) => {
+    setFilters((oldFilters) => ({ ...oldFilters, filter: { ...oldFilters.filter, comodities: comodities } }));
   };
 };
