@@ -10,7 +10,7 @@ const Configurations = () => {
   return (
     <>
 
-      <div className=" w-10/12 mx-auto mb-20 ">
+      <div className="container lg:w-10/12 mx-auto mb-20 ">
         <div className="my-10 text-xl font-b">
           <Link href="/admin">Conta</Link>
           {" > Configurações"}
