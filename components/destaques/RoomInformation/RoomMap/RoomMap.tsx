@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { MapCoordinates } from "../../../../models/utils";
+import { Coordinates, MapCoordinates } from "../../../../models/utils";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
   ssr: false,
@@ -11,7 +11,7 @@ const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap")
 export default function RoomMap() {
   const { latitude, longitude } = { latitude: 0, longitude: 0 };
 
-  const currentMap = { latitude, longitude } as MapCoordinates;
+  const currentMap = [latitude, longitude] as Coordinates;
   return (
     <section className="my-32">
       {latitude !== null && longitude !== null && (
@@ -19,7 +19,7 @@ export default function RoomMap() {
           <div className="mb-5 text-2xl font-bold">Este espaço localiza-se nesta zona</div>
 
           <div className="h-64 w-3/5 rounded-md">
-            <MapWithNoSSR currentMap={currentMap} />
+            <MapWithNoSSR currentMapCoords={currentMap} />
           </div>
         </>
       )}

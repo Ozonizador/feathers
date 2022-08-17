@@ -1,21 +1,23 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { MapCoordinates } from "../../models/utils";
+import { Coordinates } from "../../models/utils";
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
+import { getCoordsFromPoint } from "../../services/mapService";
 
 interface MainMapProps {
-  currentMap: MapCoordinates;
+  currentMapCoords: Coordinates;
   markers?: any;
 }
 
-const MainMap = ({ currentMap, markers }: MainMapProps) => {
+const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
+  const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
   useEffect(() => {
-    if (currentMap) {
+    if (currentMapCoords) {
       setLoading(false);
     }
-  }, [currentMap]);
+  }, [currentMapCoords]);
 
   return (
     <>
@@ -26,7 +28,7 @@ const MainMap = ({ currentMap, markers }: MainMapProps) => {
       )}
       {!loading && (
         <MapContainer
-          center={[currentMap.latitude, currentMap.longitude]}
+          center={[latitude, longitude]}
           zoom={13}
           scrollWheelZoom={false}
           style={{ height: "100%", width: "100%" }}

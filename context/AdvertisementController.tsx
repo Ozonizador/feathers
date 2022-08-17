@@ -44,8 +44,7 @@ const defaultAdvertisement = {
   } as HouseExpenses,
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,
-  latitude: null,
-  longitude: null,
+  geom: "",
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);
@@ -85,6 +84,7 @@ export const useSetAdvertisementProperty = () => {
   const setAdvertisement = useContext(SetAdvertisementContext);
   const advertisement = useContext(AdvertisementContext);
   return (property: string, value: any) => {
+    debugger;
     setAdvertisement({ ...advertisement, [property]: value });
   };
 };

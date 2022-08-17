@@ -1,6 +1,7 @@
 //api.mapbox.com/{api_service}/{version}
 
 import axios from "axios";
+import { Coordinates, MapCoordinates } from "../models/utils";
 
 const GEOCODING_API = "geocoding";
 const MAPBOX_VERSION = "v5";
@@ -12,13 +13,22 @@ export const getCoordinatesFromSearch = async (address: string) => {
     );
     if (data && data.features && data.features.length > 0) {
       const feature = data.features[0];
-      const longitude = feature.center[0];
-      const latitude = feature.center[1];
-      return { longitude, latitude };
+      const geometry = feature.geometry;
+      return { geometry };
     } else {
-      return { longitude: null, latitude: null };
+      return { geometry: null };
     }
   } catch (error) {
-    return { data: null, error };
+    return { geometry: null, error };
   }
+};
+
+export const createPointForDatabase = (point: MapCoordinates) => {
+  const { latitude, longitude } = getCoordsFromPoint(point.coordinates);
+  return `POINT(${longitude} ${latitude})`;
+  // return `ST_GeomFromText(ST_MakePoint(${longitude} ${latitude}), 4326);`;
+};
+
+export const getCoordsFromPoint = (coordinates: Coordinates) => {
+  return { latitude: coordinates[1], longitude: coordinates[0] };
 };

@@ -8,7 +8,7 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
-import { getCoordinatesFromSearch } from "../../services/mapService";
+import { createPointForDatabase, getCoordinatesFromSearch } from "../../services/mapService";
 
 const FormPasso0 = () => {
   const [message, setMessage] = useState("");
@@ -32,10 +32,15 @@ const FormPasso0 = () => {
       return;
     }
 
-    const { latitude, longitude } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
-    setAdvertisement({ ...advertisement });
+    const { geometry } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
 
+    if (geometry) {
+      const postGisPoint = createPointForDatabase(geometry);
+      changeAdvertisementProperty("geom", postGisPoint);
+    }
+    debugger;
     const { data, error } = await addAdvertisement(advertisement);
+    debugger;
     if (data) {
       setAdvertisement(data);
     }

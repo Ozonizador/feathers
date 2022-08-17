@@ -40,7 +40,7 @@ model Profile {
 }
 
 model Advertisement {
-  id                String                   @id @default(uuid()) @db.Uuid
+  id                String              @id @default(uuid()) @db.Uuid
   type              TypeRoom
   place             String
   street            String
@@ -64,10 +64,9 @@ model Advertisement {
   expenses          Json
   available         AdvertisementStatus
   hostLivesProperty Boolean
-  hostId            String                   @db.Uuid
-  createdAt         DateTime                 @default(now())
-  updatedAt         DateTime                 @updatedAt
-  geo               Unsupported("geometry")?
+  hostId            String              @db.Uuid
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
 
   host  Profile? @relation(fields: [hostId], references: [id])
   stays Stay[]   @relation("advertisementStays")

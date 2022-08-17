@@ -11,7 +11,9 @@ type JSONArray = Array<JSONValue>;
 
 /* MAPS */
 
-export interface MapCoordinates {
-  latitude: number;
-  longitude: number;
-}
+export type Coordinates = number[];
+
+export type MapCoordinates = {
+  type: string;
+  coordinates: Coordinates;
+};

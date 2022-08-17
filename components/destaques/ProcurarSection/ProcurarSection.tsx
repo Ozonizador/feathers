@@ -6,7 +6,7 @@ import { Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { MapCoordinates } from "../../../models/utils";
+import { Coordinates, MapCoordinates } from "../../../models/utils";
 import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
 import debounce from "debounce";
@@ -27,7 +27,7 @@ export default function ProcurarSection() {
   const setFilters = useSetFiltersContext();
   const setComoditiesFilter = useSetComoditiesContext();
 
-  const [currentMapCoordinates, setCurrentMapCoordinates] = useState<MapCoordinates | null>(null);
+  const [currentMapCoordinates, setCurrentMapCoordinates] = useState<Coordinates | null>(null);
 
   const router = useRouter();
   let { address, startDate, endDate } = router.query;
@@ -54,7 +54,7 @@ export default function ProcurarSection() {
     locateByQuery();
     navigator.geolocation.getCurrentPosition(
       function (pos) {
-        setCurrentMapCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+        setCurrentMapCoordinates([pos.coords.latitude, pos.coords.longitude]);
       },
       function errorCallback(error) {},
       { timeout: 10000 }
@@ -189,7 +189,7 @@ export default function ProcurarSection() {
                 )} */}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:min-h-[500px]">
-          <MapWithNoSSR currentMap={currentMapCoordinates} />
+          <MapWithNoSSR currentMapCoords={currentMapCoordinates} />
         </div>
       </div>
     </>

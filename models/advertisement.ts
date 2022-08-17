@@ -1,4 +1,3 @@
-import { Stay } from "@prisma/client";
 import { Profile } from "./profile";
 import { AdvertisementReviewSummary, Review } from "./review";
 import { StayDates } from "./stay";
@@ -35,7 +34,7 @@ export type Advertisement = {
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
-  geo?: any;
+  geom?: string;
 
   // foreign keys
   reviews?: Review[];
