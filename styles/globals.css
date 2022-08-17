@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "leaflet/dist/leaflet.css";
+@import "rc-slider/assets/index.css";
 
 .bg-hero-unidesk {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);

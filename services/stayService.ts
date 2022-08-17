@@ -21,7 +21,7 @@ export const getStays = async () => {
 export const getNextStaysByTenantId = async (tenantId: string) => {
   const date = new Date().toISOString();
   const { data, error } = await supabaseClient
-    .from<Stay>(STAYS_TABLE_NAME)
+    .from<StayGuest>(STAYS_TABLE_NAME)
     .select("*, advertisement:advertisementId(*)")
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .gte(STAY_TABLE.START_DATE, date);
@@ -33,7 +33,7 @@ export const getCurrentStayByTenantId = async (tenantId: string) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from<Stay>(STAYS_TABLE_NAME)
+    .from<StayGuest>(STAYS_TABLE_NAME)
     .select("*, advertisement:advertisementId(*)")
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .gte(STAY_TABLE.START_DATE, date)

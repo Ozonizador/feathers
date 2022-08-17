@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
+import { dateToFormat } from "../../utils/utils";
 {
   /* AINDA PRECISA DE MUDANÇAS */
 }
@@ -16,7 +17,7 @@ export const SearchInputField = () => {
   const sendQueryRequest = () => {
     router.push({
       pathname: "/procurar",
-      query: { address, start: startDate.toLocaleDateString(), endDate: endDate.toLocaleDateString() },
+      query: { address, startDate: dateToFormat(startDate), endDate: dateToFormat(endDate) },
     });
   };
 

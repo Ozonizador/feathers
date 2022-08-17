@@ -20,9 +20,9 @@ const UnideskOptions = () => {
 
         <div className="flex flex-col justify-start">
           <Link href="unidesk/senhorio/advertisements">
-            <a className="mb-5 text-xl font-bold">Painel</a>
+            <a className="my-2 text-xl font-bold">Painel</a>
           </Link>
-          <MyDropdown />
+          {/*<MyDropdown />*/}
         </div>
         <div className="flex flex-row">
           <Image className="object-scale-down" src="/images/icon-pg14-5.svg" alt="" height="25" width="25"></Image>
