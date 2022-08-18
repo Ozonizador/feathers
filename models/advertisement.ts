@@ -1,6 +1,57 @@
 import { Profile } from "./profile";
 import { AdvertisementReviewSummary, Review } from "./review";
 import { StayDates } from "./stay";
+import {TbSofa} from "react-icons/tb"
+import {MdOutlineFireplace} from "react-icons/md"
+import {GiTable} from "react-icons/gi"
+import {BiChair} from "react-icons/bi"
+import {AiOutlineWifi} from "react-icons/ai"
+import {GiElevator} from "react-icons/gi"
+import {GiComputerFan} from "react-icons/gi"
+import {GiWashingMachine} from "react-icons/gi"
+import {GiMirrorMirror} from "react-icons/gi"
+import {GiRiceCooker} from "react-icons/gi"
+import {TbBed} from "react-icons/tb"
+import {MdOutlineBed} from "react-icons/md"
+import {MdOutlineMicrowave} from "react-icons/md"
+import {GiToaster} from "react-icons/gi"
+import {MdOutlineCoffeeMaker} from "react-icons/md"
+import {GiThermometerHot} from "react-icons/gi"
+import {MdOutlineIron} from "react-icons/md"
+import {GiClothesline} from "react-icons/gi"
+import {MdOutlineLiving} from "react-icons/md"
+import {MdBalcony} from "react-icons/md"
+import {MdPool} from "react-icons/md"
+import {FaParking} from "react-icons/fa"
+import {MdOutlineDeck} from "react-icons/md"
+import {GiBarbecue} from "react-icons/gi"
+import {GiIceBolt} from "react-icons/gi"
+import {GiFurnace} from "react-icons/gi"
+import {CgSmartHomeCooker} from "react-icons/cg"
+import {GrFan} from "react-icons/gr"
+import {MdOutlineLocalLaundryService} from "react-icons/md"
+import {MdOutlineBathtub} from "react-icons/md"
+import {GiShower} from "react-icons/gi"
+import {FaRestroom} from "react-icons/fa"
+import {GrRestroomMen} from "react-icons/gr"
+import {GiForkKnifeSpoon} from "react-icons/gi"
+import {GiDesk} from "react-icons/gi"
+import {GiPillow} from "react-icons/gi"
+import {MdOutlineBedroomChild} from "react-icons/md"
+import {BsTrash} from "react-icons/bs"
+import {MdLocalLaundryService} from "react-icons/md"
+import {GiHotMeal} from "react-icons/gi"
+import {BiBold} from "react-icons/bi"
+import {BsKey} from "react-icons/bs"
+import {TbHanger} from "react-icons/tb"
+import {GiCoffeePot} from "react-icons/gi"
+import {BiPlug} from "react-icons/bi"
+import {FiMonitor} from "react-icons/fi"
+
+
+
+
+
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -170,6 +221,58 @@ export interface AboutHouseSections {
 }
 
 export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";
+
+// export const TypeAmenityIcons = {
+//   SOFA : <TbSofa>,
+//   TV : <FiMonitor>,
+//   FIREPLACE : <MdOutlineFireplace>,
+//   TABLE : <GiTable>,
+//   CHAIRS : <BiChair>,
+//   WIFI : <AiOutlineWifi>,
+//   ELEVADOR : <GiElevator>,
+//   AIR_CONDITIONING : <GiComputerFan>,
+//   WASHING_MACHINE : <GiWashingMachine>,
+//   MIRROR: <GiMirrorMirror>,
+//   FRIDGE : <GiRiceCooker>,
+//   SINGLE_BED : <TbBed>,
+//   DOUBLE_BED : <MdOutlineBed>,
+//   MICROWAVE : <MdOutlineMicrowave>,
+//   TOASTER : <GiToaster>,
+//   COFFEE_MAKER : <MdOutlineCoffeeMaker>,
+//   HEATING : <GiThermometerHot>,
+//   IRON_BOARD : <MdOutlineIron>,
+//   ESTENDAL : <GiClothesline>,
+//   LIVING_ROOM : <MdOutlineLiving>,
+//   BALCONY : <MdBalcony>,
+//   SWIMMING_POOL : <MdPool>,
+//   PARKING_SPOT : <FaParking>,
+//   COURTYARD : <COURTYARD>,
+//   TERRACE : <MdOutlineDeck>,
+//   BARBECUE : <GiBarbecue>,
+//   FREEZER : <GiIceBolt>,
+//   OVEN : <GiFurnace>,
+//   STOVE: <CgSmartHomeCooker>,
+//   EXAUSTOR_FAN: <GrFan>,
+//   DRYER : <MdOutlineLocalLaundryService>,
+//   BATHTUB: <MdOutlineBathtub>,
+//   SHOWER: <GiShower>,
+//   SHARED_BATHROOM : <FaRestroom>,
+//   PRIVATE_BATHROOM : <GrRestroomMen>,
+//   CUTLERY: <GiForkKnifeSpoon>,
+//   DESK : <GiDesk>,
+//   PILLOWS : <GiPillow>,
+//   BED_SHEETS : <MdOutlineBedroomChild>,
+//   BLACKOUTS : <>,
+//   GARBAGE_CAN : <BsTrash>,
+//   LAUNDRY_MACHINE : <MdLocalLaundryService>,
+//   MEAL_ZONE : <GiHotMeal>,
+//   BASIC_UTILIES : <BiBold>,
+//   KEY_TO_LOCK_DOOR : <BsKey>,
+//   HANGERS_SUPPORT : <TbHanger>,
+//   HOT_WATER_KETTLE : <GiCoffeePot>,
+//   POWER_PLUG_NEAR_BED : <BiPlug>,
+// }
+
 
 export enum TypeAmenity {
   SOFA = "SOFA",
