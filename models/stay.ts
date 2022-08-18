@@ -1,5 +1,6 @@
-import { Profile, Report } from "@prisma/client";
 import { Advertisement } from "./advertisement";
+import { Profile } from "./profile";
+import { Report } from "./report";
 import { Reservation } from "./reservation";
 import { Review } from "./review";
 

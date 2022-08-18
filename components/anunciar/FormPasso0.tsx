@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Input from "../utils/Input";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -9,6 +8,7 @@ import {
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
 import { createPointForDatabase, getCoordinatesFromSearch } from "../../services/mapService";
+import { toast } from "react-toastify";
 
 const FormPasso0 = () => {
   const [message, setMessage] = useState("");
@@ -34,18 +34,18 @@ const FormPasso0 = () => {
 
     const { geometry } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
 
-    if (geometry) {
-      const postGisPoint = createPointForDatabase(geometry);
-      changeAdvertisementProperty("geom", postGisPoint);
-    }
-    debugger;
-    const { data, error } = await addAdvertisement(advertisement);
-    debugger;
+    const postGisPoint = createPointForDatabase(geometry);
+    const newAdvertisement = { ...advertisement, geom: postGisPoint ? postGisPoint : null, description: postGisPoint };
+
+    const { data, error } = await addAdvertisement(newAdvertisement);
     if (data) {
       setAdvertisement(data);
+
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+    } else {
+      toast.error("An error occured");
     }
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
   };
 
   const onChangeProperty = (property, value) => {

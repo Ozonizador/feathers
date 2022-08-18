@@ -1,5 +1,5 @@
-import { Profile } from "@prisma/client";
 import Advertisement from "./advertisement";
+import { Profile } from "./profile";
 
 export const REVIEWS_TABLE_NAME = "reviews" as const;
 export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;

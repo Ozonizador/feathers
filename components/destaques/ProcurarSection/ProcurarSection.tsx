@@ -6,7 +6,7 @@ import { Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { Coordinates, MapCoordinates } from "../../../models/utils";
+import { Coordinates } from "../../../models/utils";
 import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
 import debounce from "debounce";
@@ -71,6 +71,9 @@ export default function ProcurarSection() {
     const [startRange, endRange] = value;
     setFilters({ price: { startRange, endRange } });
   }, 400);
+
+  // TODO finish this
+  const getAdvertisementsMarkers = () => {};
 
   return (
     <>
@@ -189,7 +192,7 @@ export default function ProcurarSection() {
                 )} */}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:min-h-[500px]">
-          <MapWithNoSSR currentMapCoords={currentMapCoordinates} />
+          <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers} />
         </div>
       </div>
     </>

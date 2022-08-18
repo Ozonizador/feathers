@@ -84,7 +84,6 @@ export const useSetAdvertisementProperty = () => {
   const setAdvertisement = useContext(SetAdvertisementContext);
   const advertisement = useContext(AdvertisementContext);
   return (property: string, value: any) => {
-    debugger;
     setAdvertisement({ ...advertisement, [property]: value });
   };
 };

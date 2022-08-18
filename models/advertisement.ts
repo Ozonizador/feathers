@@ -34,7 +34,7 @@ export type Advertisement = {
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
-  geom?: string;
+  geom?: unknown | null;
 
   // foreign keys
   reviews?: Review[];
@@ -92,6 +92,7 @@ export const ADVERTISEMENT_PROPERTIES = {
   HOST_ID: "hostId",
   AVAILABLE: "available",
   ID: "id",
+  GEOM: "geom",
   STAY_START_DATE: "stay.startDate",
   STAY_END_DATE: "stay.endDate",
 } as const;
