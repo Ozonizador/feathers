@@ -1,57 +1,7 @@
+import { Label } from "flowbite-react";
 import { Profile } from "./profile";
 import { AdvertisementReviewSummary, Review } from "./review";
 import { StayDates } from "./stay";
-import {TbSofa} from "react-icons/tb"
-import {MdOutlineFireplace} from "react-icons/md"
-import {GiTable} from "react-icons/gi"
-import {BiChair} from "react-icons/bi"
-import {AiOutlineWifi} from "react-icons/ai"
-import {GiElevator} from "react-icons/gi"
-import {GiComputerFan} from "react-icons/gi"
-import {GiWashingMachine} from "react-icons/gi"
-import {GiMirrorMirror} from "react-icons/gi"
-import {GiRiceCooker} from "react-icons/gi"
-import {TbBed} from "react-icons/tb"
-import {MdOutlineBed} from "react-icons/md"
-import {MdOutlineMicrowave} from "react-icons/md"
-import {GiToaster} from "react-icons/gi"
-import {MdOutlineCoffeeMaker} from "react-icons/md"
-import {GiThermometerHot} from "react-icons/gi"
-import {MdOutlineIron} from "react-icons/md"
-import {GiClothesline} from "react-icons/gi"
-import {MdOutlineLiving} from "react-icons/md"
-import {MdBalcony} from "react-icons/md"
-import {MdPool} from "react-icons/md"
-import {FaParking} from "react-icons/fa"
-import {MdOutlineDeck} from "react-icons/md"
-import {GiBarbecue} from "react-icons/gi"
-import {GiIceBolt} from "react-icons/gi"
-import {GiFurnace} from "react-icons/gi"
-import {CgSmartHomeCooker} from "react-icons/cg"
-import {GrFan} from "react-icons/gr"
-import {MdOutlineLocalLaundryService} from "react-icons/md"
-import {MdOutlineBathtub} from "react-icons/md"
-import {GiShower} from "react-icons/gi"
-import {FaRestroom} from "react-icons/fa"
-import {GrRestroomMen} from "react-icons/gr"
-import {GiForkKnifeSpoon} from "react-icons/gi"
-import {GiDesk} from "react-icons/gi"
-import {GiPillow} from "react-icons/gi"
-import {MdOutlineBedroomChild} from "react-icons/md"
-import {BsTrash} from "react-icons/bs"
-import {MdLocalLaundryService} from "react-icons/md"
-import {GiHotMeal} from "react-icons/gi"
-import {BiBold} from "react-icons/bi"
-import {BsKey} from "react-icons/bs"
-import {TbHanger} from "react-icons/tb"
-import {GiCoffeePot} from "react-icons/gi"
-import {BiPlug} from "react-icons/bi"
-import {FiMonitor} from "react-icons/fi"
-
-
-
-
-
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -222,58 +172,6 @@ export interface AboutHouseSections {
 
 export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";
 
-// export const TypeAmenityIcons = {
-//   SOFA : <TbSofa>,
-//   TV : <FiMonitor>,
-//   FIREPLACE : <MdOutlineFireplace>,
-//   TABLE : <GiTable>,
-//   CHAIRS : <BiChair>,
-//   WIFI : <AiOutlineWifi>,
-//   ELEVADOR : <GiElevator>,
-//   AIR_CONDITIONING : <GiComputerFan>,
-//   WASHING_MACHINE : <GiWashingMachine>,
-//   MIRROR: <GiMirrorMirror>,
-//   FRIDGE : <GiRiceCooker>,
-//   SINGLE_BED : <TbBed>,
-//   DOUBLE_BED : <MdOutlineBed>,
-//   MICROWAVE : <MdOutlineMicrowave>,
-//   TOASTER : <GiToaster>,
-//   COFFEE_MAKER : <MdOutlineCoffeeMaker>,
-//   HEATING : <GiThermometerHot>,
-//   IRON_BOARD : <MdOutlineIron>,
-//   ESTENDAL : <GiClothesline>,
-//   LIVING_ROOM : <MdOutlineLiving>,
-//   BALCONY : <MdBalcony>,
-//   SWIMMING_POOL : <MdPool>,
-//   PARKING_SPOT : <FaParking>,
-//   COURTYARD : <COURTYARD>,
-//   TERRACE : <MdOutlineDeck>,
-//   BARBECUE : <GiBarbecue>,
-//   FREEZER : <GiIceBolt>,
-//   OVEN : <GiFurnace>,
-//   STOVE: <CgSmartHomeCooker>,
-//   EXAUSTOR_FAN: <GrFan>,
-//   DRYER : <MdOutlineLocalLaundryService>,
-//   BATHTUB: <MdOutlineBathtub>,
-//   SHOWER: <GiShower>,
-//   SHARED_BATHROOM : <FaRestroom>,
-//   PRIVATE_BATHROOM : <GrRestroomMen>,
-//   CUTLERY: <GiForkKnifeSpoon>,
-//   DESK : <GiDesk>,
-//   PILLOWS : <GiPillow>,
-//   BED_SHEETS : <MdOutlineBedroomChild>,
-//   BLACKOUTS : <>,
-//   GARBAGE_CAN : <BsTrash>,
-//   LAUNDRY_MACHINE : <MdLocalLaundryService>,
-//   MEAL_ZONE : <GiHotMeal>,
-//   BASIC_UTILIES : <BiBold>,
-//   KEY_TO_LOCK_DOOR : <BsKey>,
-//   HANGERS_SUPPORT : <TbHanger>,
-//   HOT_WATER_KETTLE : <GiCoffeePot>,
-//   POWER_PLUG_NEAR_BED : <BiPlug>,
-// }
-
-
 export enum TypeAmenity {
   SOFA = "SOFA",
   TV = "TV",
@@ -325,56 +223,61 @@ export enum TypeAmenity {
   POWER_PLUG_NEAR_BED = "POWER_PLUG_NEAR_BED",
 }
 
-export const TypeAmenityLabel = [
-  { value: TypeAmenity.SOFA, label: "Sofa" },
-  { value: TypeAmenity.TV, label: "TV" },
-  { value: TypeAmenity.FIREPLACE, label: "Lareira" },
-  { value: TypeAmenity.TABLE, label: "Mesa" },
-  { value: TypeAmenity.CHAIRS, label: "Cadeiras" },
-  { value: TypeAmenity.WIFI, label: "Internet" },
-  { value: TypeAmenity.ELEVADOR, label: "Elevador" },
-  { value: TypeAmenity.AIR_CONDITIONING, label: "Ar Condicionado" },
-  { value: TypeAmenity.WASHING_MACHINE, label: "Maquina de Lavar Roupa" },
-  { value: TypeAmenity.MIRROR, label: "Espelho" },
-  { value: TypeAmenity.FRIDGE, label: "Frigorífico" },
-  { value: TypeAmenity.SINGLE_BED, label: "Cama Single" },
-  { value: TypeAmenity.DOUBLE_BED, label: "Cama Dupla" },
-  { value: TypeAmenity.MICROWAVE, label: "Microondas" },
-  { value: TypeAmenity.TOASTER, label: "Torradeira" },
-  { value: TypeAmenity.COFFEE_MAKER, label: "Máquina de café" },
-  { value: TypeAmenity.HEATING, label: "Aquecimento" },
-  { value: TypeAmenity.IRON_BOARD, label: "Máquina de passar roupa" },
-  { value: TypeAmenity.ESTENDAL, label: "Estendal" },
-  { value: TypeAmenity.LIVING_ROOM, label: "Sala de estar" },
-  { value: TypeAmenity.BALCONY, label: "Varanda" },
-  { value: TypeAmenity.SWIMMING_POOL, label: "Piscina" },
-  { value: TypeAmenity.PARKING_SPOT, label: "Lugar de parque" },
-  { value: TypeAmenity.COURTYARD, label: "Pátio" },
-  { value: TypeAmenity.TERRACE, label: "Terraço" },
-  { value: TypeAmenity.BARBECUE, label: "Barbecue" },
-  { value: TypeAmenity.FREEZER, label: "Congelador" },
-  { value: TypeAmenity.OVEN, label: "Fogão" },
-  { value: TypeAmenity.STOVE, label: "Forno" },
-  { value: TypeAmenity.EXAUSTOR_FAN, label: "Exaustor" },
-  { value: TypeAmenity.DRYER, label: "Secador" },
-  { value: TypeAmenity.BATHTUB, label: "Banheira" },
-  { value: TypeAmenity.SHOWER, label: "Chuveiro" },
-  { value: TypeAmenity.PRIVATE_BATHROOM, label: "Casa de banho privada" },
-  { value: TypeAmenity.SHARED_BATHROOM, label: "Casa de banho pública" },
-  { value: TypeAmenity.CUTLERY, label: "Talheres" },
-  { value: TypeAmenity.DESK, label: "Secretária" },
-  { value: TypeAmenity.PILLOWS, label: "Almofadas" },
-  { value: TypeAmenity.BED_SHEETS, label: "BED_SHEETS" },
-  { value: TypeAmenity.BLACKOUTS, label: "Cortinas blackout" },
-  { value: TypeAmenity.GARBAGE_CAN, label: "Caixote do lixo" },
-  { value: TypeAmenity.LAUNDRY_MACHINE, label: "Máquina de lavar" },
-  { value: TypeAmenity.MEAL_ZONE, label: "Zona de Refeições ao ar livre" },
-  { value: TypeAmenity.BASIC_UTILIES, label: "Utensílios básicos de cozinha (Panelas, tachos...)" },
-  { value: TypeAmenity.KEY_TO_LOCK_DOOR, label: "Chave para trancar porta" },
-  { value: TypeAmenity.HANGERS_SUPPORT, label: "Suporte para Cabides" },
-  { value: TypeAmenity.HOT_WATER_KETTLE, label: "Chaleira de água quente" },
-  { value: TypeAmenity.POWER_PLUG_NEAR_BED, label: "Tomada perto da tomada" },
-];
+export const TypeAmenityLabel = {
+  SOFA: "Sofa",
+  TV: "TV",
+  FIREPLACE: "Lareira",
+  TABLE: "Mesa",
+  CHAIRS: "Cadeiras",
+  WIFI: "Internet",
+  ELEVADOR: "Elevador",
+  AIR_CONDITIONING: "Ar Condicionado",
+  WASHING_MACHINE: "Maquina de Lavar Roupa",
+  MIRROR: "Espelho",
+  FRIDGE: "Frigorífico",
+  SINGLE_BED: "Cama Single",
+  DOUBLE_BED: "Cama Dupla",
+  MICROWAVE: "Microondas",
+  TOASTER: "Torradeira",
+  COFFEE_MAKER: "Máquina de café",
+  HEATING: "Aquecimento",
+  IRON_BOARD: "Máquina de passar roupa",
+  ESTENDAL: "Estendal",
+  LIVING_ROOM: "Sala de estar",
+  BALCONY: "Varanda",
+  SWIMMING_POOL: "Piscina",
+  PARKING_SPOT: "Lugar de parque",
+  COURTYARD: "Pátio",
+  TERRACE: "Terraço",
+  BARBECUE: "Barbecue",
+  FREEZER: "Congelador",
+  OVEN: "Fogão",
+  STOVE: "Forno",
+  EXAUSTOR_FAN: "Exaustor",
+  DRYER: "Secador",
+  BATHTUB: "Banheira",
+  SHOWER: "Chuveiro",
+  PRIVATE_BATHROOM: "Casa de banho privada",
+  SHARED_BATHROOM: "Casa de banho pública",
+  CUTLERY: "Talheres",
+  DESK: "Secretária",
+  PILLOWS: "Almofadas",
+  BED_SHEETS: "BED_SHEETS",
+  BLACKOUTS: "Cortinas blackout",
+  GARBAGE_CAN: "Caixote do lixo",
+  LAUNDRY_MACHINE: "Máquina de lavar",
+  MEAL_ZONE: "Zona de Refeições ao ar livre",
+  BASIC_UTILIES: "Utensílios básicos de cozinha (Panelas, tachos...)",
+  KEY_TO_LOCK_DOOR: "Chave para trancar porta",
+  HANGERS_SUPPORT: "Suporte para Cabides",
+  HOT_WATER_KETTLE: "Chaleira de água quente",
+  POWER_PLUG_NEAR_BED: "Tomada perto da tomada",
+};
+
+/* FOR THE SELECT ON PROCURAR */
+export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((label) => {
+  return { label, value: TypeAmenityLabel[label] };
+});
 
 /* ADVERT_STATUS */
 

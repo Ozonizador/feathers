@@ -1,6 +1,59 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import { AdvertisementWithReviewAverage, ADVERTISEMENT_PROPERTIES, FlexHostType } from "../models/advertisement";
+import {
+  AdvertisementWithReviewAverage,
+  ADVERTISEMENT_PROPERTIES,
+  FlexHostType,
+  TypeAmenity,
+} from "../models/advertisement";
+
+import { TbSofa } from "react-icons/tb";
+import { MdOutlineFireplace } from "react-icons/md";
+import { GiTable } from "react-icons/gi";
+import { BiChair } from "react-icons/bi";
+import { AiOutlineWifi } from "react-icons/ai";
+import { GiElevator } from "react-icons/gi";
+import { GiComputerFan } from "react-icons/gi";
+import { GiWashingMachine } from "react-icons/gi";
+import { GiMirrorMirror } from "react-icons/gi";
+import { GiRiceCooker } from "react-icons/gi";
+import { TbBed } from "react-icons/tb";
+import { MdOutlineBed } from "react-icons/md";
+import { MdOutlineMicrowave } from "react-icons/md";
+import { GiToaster } from "react-icons/gi";
+import { MdOutlineCoffeeMaker } from "react-icons/md";
+import { GiThermometerHot } from "react-icons/gi";
+import { MdOutlineIron } from "react-icons/md";
+import { GiClothesline } from "react-icons/gi";
+import { MdOutlineLiving } from "react-icons/md";
+import { MdBalcony } from "react-icons/md";
+import { MdPool } from "react-icons/md";
+import { FaParking } from "react-icons/fa";
+import { MdOutlineDeck } from "react-icons/md";
+import { GiBarbecue } from "react-icons/gi";
+import { GiIceBolt } from "react-icons/gi";
+import { GiFurnace } from "react-icons/gi";
+import { CgSmartHomeCooker } from "react-icons/cg";
+import { GrFan } from "react-icons/gr";
+import { MdOutlineLocalLaundryService } from "react-icons/md";
+import { MdOutlineBathtub } from "react-icons/md";
+import { GiShower } from "react-icons/gi";
+import { FaRestroom } from "react-icons/fa";
+import { GrRestroomMen } from "react-icons/gr";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { GiDesk } from "react-icons/gi";
+import { GiPillow } from "react-icons/gi";
+import { MdOutlineBedroomChild } from "react-icons/md";
+import { BsTrash } from "react-icons/bs";
+import { MdLocalLaundryService } from "react-icons/md";
+import { GiHotMeal } from "react-icons/gi";
+import { BiBold } from "react-icons/bi";
+import { BsKey } from "react-icons/bs";
+import { TbHanger } from "react-icons/tb";
+import { GiCoffeePot } from "react-icons/gi";
+import { BiPlug } from "react-icons/bi";
+import { FiMonitor } from "react-icons/fi";
+import { IconType } from "react-icons";
 
 const hostTypeFlexDescription = (type: FlexHostType) => {
   return {
@@ -23,7 +76,106 @@ const hostTranslate = (type: FlexHostType) => {
 };
 
 // get the icons to use here
-const houseAmenities = () => {};
+export const houseAmenities = (type: TypeAmenity): IconType => {
+  switch (type) {
+    case "SOFA":
+      return TbSofa;
+    case "TV":
+      return FiMonitor;
+    case "FIREPLACE":
+      return MdOutlineFireplace;
+    case "TABLE":
+      return GiTable;
+    case "CHAIRS":
+      return BiChair;
+    case "WIFI":
+      return AiOutlineWifi;
+    case "ELEVADOR":
+      return GiElevator;
+    case "AIR_CONDITIONING":
+      return GiComputerFan;
+    case "WASHING_MACHINE":
+      return GiWashingMachine;
+    case "MIRROR":
+      return GiMirrorMirror;
+    case "FRIDGE":
+      return GiRiceCooker;
+    case "SINGLE_BED":
+      return TbBed;
+    case "DOUBLE_BED":
+      return MdOutlineBed;
+    case "MICROWAVE":
+      return MdOutlineMicrowave;
+    case "TOASTER":
+      return GiToaster;
+    case "COFFEE_MAKER":
+      return MdOutlineCoffeeMaker;
+    case "HEATING":
+      return GiThermometerHot;
+    case "IRON_BOARD":
+      return MdOutlineIron;
+    case "ESTENDAL":
+      return GiClothesline;
+    case "LIVING_ROOM":
+      return MdOutlineLiving;
+    case "BALCONY":
+      return MdBalcony;
+    case "SWIMMING_POOL":
+      return MdPool;
+    case "PARKING_SPOT":
+      return FaParking;
+    case "TERRACE":
+      return MdOutlineDeck;
+    case "BARBECUE":
+      return GiBarbecue;
+    case "FREEZER":
+      return GiIceBolt;
+    case "OVEN":
+      return GiFurnace;
+    case "STOVE":
+      return CgSmartHomeCooker;
+    case "EXAUSTOR_FAN":
+      return GrFan;
+    case "DRYER":
+      return MdOutlineLocalLaundryService;
+    case "BATHTUB":
+      return MdOutlineBathtub;
+    case "SHOWER":
+      return GiShower;
+    case "SHARED_BATHROOM":
+      return FaRestroom;
+    case "PRIVATE_BATHROOM":
+      return GrRestroomMen;
+    case "CUTLERY":
+      return GiForkKnifeSpoon;
+    case "DESK":
+      return GiDesk;
+    case "PILLOWS":
+      return GiPillow;
+    case "BED_SHEETS":
+      return MdOutlineBedroomChild;
+    case "GARBAGE_CAN":
+      return BsTrash;
+    case "LAUNDRY_MACHINE":
+      return MdLocalLaundryService;
+    case "MEAL_ZONE":
+      return GiHotMeal;
+    case "BASIC_UTILIES":
+      return BiBold;
+    case "KEY_TO_LOCK_DOOR":
+      return BsKey;
+    case "HANGERS_SUPPORT":
+      return TbHanger;
+    case "HOT_WATER_KETTLE":
+      return GiCoffeePot;
+    case "POWER_PLUG_NEAR_BED":
+      return BiPlug;
+    default:
+      return null;
+    // case   "COURTYARD": return COURTYARD
+    // case   "BLACKOUTS": return typeof
+  }
+};
 
 const addFilterAdvertisement = (
   query: PostgrestFilterBuilder<AdvertisementWithReviewAverage>,

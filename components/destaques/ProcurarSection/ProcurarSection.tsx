@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
 import Select from "react-select";
-import { TypeAmenityLabel, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { SelectAmenityLabel, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -135,7 +135,7 @@ export default function ProcurarSection() {
                   <Select
                     id="comodities-select"
                     placeholder="Comodities"
-                    options={TypeAmenityLabel.map((amenity) => amenity)}
+                    options={SelectAmenityLabel.map((amenity) => amenity)}
                     isMulti={true}
                     styles={customStyles}
                     onChange={toggleComododitiesFilter}

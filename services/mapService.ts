@@ -30,5 +30,9 @@ export const createPointForDatabase = (point: MapCoordinates) => {
 };
 
 export const getCoordsFromPoint = (coordinates: Coordinates) => {
-  return { latitude: coordinates[1], longitude: coordinates[0] };
+  if (coordinates) {
+    return { latitude: coordinates[1], longitude: coordinates[0] };
+  } else {
+    return { latitude: 0, longitude: 0 };
+  }
 };

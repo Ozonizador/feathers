@@ -1,62 +1,118 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Carousel } from "flowbite-react";
-import { TbSofa } from "react-icons/tb";
-import { BiChair } from "react-icons/bi";
-import { BiJoystick } from "react-icons/bi";
-import { MdFireplace } from "react-icons/md";
-import { BiTv } from "react-icons/bi";
-import { MdOutlineBalcony } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
+import { houseAmenities } from "../../../../helpers/advertisementHelper";
+import { TypeAmenityLabel } from "../../../../models/advertisement";
 
 export default function RoomSlider() {
-  const advertisement = useGetSingleAdvertisement();
+  const { aboutHouse } = useGetSingleAdvertisement();
+
+  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = aboutHouse;
+  const Comodities = ({}) =>
+    useMemo(() => {
+      return (
+        <>
+          <Carousel>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Comodidades gerais</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-6 align-middle">
+                {(!general || general.length === 0) && <div>Sem nada a assinalar</div>}
+                {general.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Quarto</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+                {(!bedRoom || bedRoom.length === 0) && <div>Sem nada a assinalar</div>}
+                {bedRoom.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Cozinha</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+                {(!kitchen || kitchen.length === 0) && <div>Sem nada a assinalar</div>}
+                {kitchen.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Casa de Banho</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+                {(!bathRoom || bathRoom.length === 0) && <div>Sem nada a assinalar</div>}
+                {bathRoom.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Zona de estar</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+                {(!livingRoom || livingRoom.length === 0) && <div>Sem nada a assinalar</div>}
+                {livingRoom.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex h-full items-center justify-center text-primary-500">Zona Exterior</div>
+              <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+                {(!exterior || exterior.length === 0) && <div>Sem nada a assinalar</div>}
+                {exterior.map((amenity, index) => {
+                  const icon = houseAmenities(amenity);
+                  return (
+                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon({ size: 24 })}
+                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Carousel>
+        </>
+      );
+    }, []);
+
   return (
-    // PROBLEMA - DAR ESTILOS AS SETAS ESQUERDA E DIREITA
     <section>
       <div className="mt-10 mb-32 h-44 rounded-xl border lg:mt-40">
         <Carousel>
-          <div>
-            <div className="my-3 text-center text-2xl font-bold">Sala de estar</div>
-            <div className="flex h-full items-center justify-center gap-14 align-middle">
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <MdFireplace className="text-4xl" />
-                <div className="text-base">Lareira</div>
-              </div>
-
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <TbSofa className="text-4xl" />
-                <div className="text-base">Sofá</div>
-              </div>
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <BiTv className="text-4xl" />
-                <div className="text-base">TV</div>
-              </div>
-
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <BiChair className="text-4xl" />
-                <div className="text-base">Cadeiras</div>
-              </div>
-
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <MdOutlineBalcony className="text-4xl" />
-                <div className="text-base">Varanda</div>
-              </div>
-
-              <div className="mb-8 flex flex-col items-center justify-center align-middle">
-                <BiJoystick className="text-4xl" />
-                <div className="text-base">Videojogos</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="flex h-full items-center justify-center ">Quarto</div>
-          </div>
-          <div>
-            <div className="flex h-full items-center justify-center ">Cozinha</div>
-          </div>
-          <div>
-            <div className="flex h-full items-center justify-center ">Zona Exterior</div>
-          </div>
+          <Comodities />
         </Carousel>
       </div>
       {/*
@@ -75,6 +131,3 @@ export default function RoomSlider() {
     </section>
   );
 }
-
-/* Comoditites */
-const Commodities = () => {};
