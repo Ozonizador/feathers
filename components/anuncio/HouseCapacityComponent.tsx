@@ -12,13 +12,13 @@ interface HouseCapacityComponentProps {
 const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityComponentProps) => {
   return (
     <>
-      <div className="my-20">
-        <div className="my-8 mt-20 flex items-center">
+      <div>
+        <div className="my-8 flex items-center">
           <div className="flex items-center">
             <MdPeopleOutline className="text-2xl" />
           </div>
           <div className="w-5/12">
-            <h2 className="ml-2 align-middle text-base  font-bold">Capacidade</h2>
+            <h2 className="ml-2 align-middle text-base font-bold">Capacidade</h2>
           </div>
           <div>
             <QuantityInput
@@ -29,7 +29,7 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
           </div>
         </div>
 
-        <div className="my-8 flex">
+        <div className="my-8 flex items-center">
           <div className="flex items-center">
             <BiBed className="text-2xl" />
           </div>
@@ -45,7 +45,7 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
           </div>
         </div>
 
-        <div className="my-8 flex">
+        <div className="my-8 flex items-center">
           <div className="flex items-center">
             <GiPersonInBed className="text-2xl" />
           </div>
@@ -61,7 +61,7 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
           </div>
         </div>
 
-        <div className="my-8 flex">
+        <div className="my-8 flex items-center">
           <div className="flex items-center">
             <MdOutlineBathtub className="text-2xl" />
           </div>
