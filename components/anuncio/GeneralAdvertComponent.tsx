@@ -1,5 +1,11 @@
+import dynamic from "next/dynamic";
 import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { Coordinates, MapCoordinates } from "../../models/utils";
 import Input from "../utils/Input";
+
+const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
+  ssr: false,
+});
 
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
@@ -7,8 +13,20 @@ interface GeneralAdvertComponentProps {
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
+  const createCurrentMapLocation = () => {
+    return advertisement.geom.coordinates as Coordinates;
+  };
+
   return (
     <>
+      {!advertisement.geom && <div>Não tem localização</div>}
+      {advertisement.geom !== null && (
+        <>
+          <div className="h-96 w-full px-6">
+            <MapWithNoSSR currentMapCoords={createCurrentMapLocation()} />
+          </div>
+        </>
+      )}
       <div className="my-5 flex w-full flex-col  justify-between gap-5 lg:flex-row">
         {/* col left */}
         <div className="mt-2 w-full ">

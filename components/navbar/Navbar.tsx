@@ -65,7 +65,7 @@ export const Navbar = () => {
               <div className="my-auto">
                 <Socials type="primary" />
               </div>
-              <div className="flex h-10">
+              <div className="my-auto flex h-4">
                 <Image src={ukFlag} alt="" />
                 <select className="ml-2 border-none">
                   <option value="eng" disabled>

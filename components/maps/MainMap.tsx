@@ -3,7 +3,8 @@ import { Coordinates } from "../../models/utils";
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
-import { Icon } from "leaflet";
+import L, { Icon } from "leaflet";
+import markerSvg from "../../public/icons/marker.png";
 
 interface MainMapProps {
   currentMapCoords: Coordinates;
@@ -19,6 +20,10 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
       setLoading(false);
     }
   }, [currentMapCoords]);
+
+  let icon = new Icon({
+    iconUrl: markerSvg,
+  });
 
   return (
     <>
@@ -38,10 +43,7 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
-          <Marker
-            position={[latitude, longitude]}
-            icon={new Icon({ iconUrl: "/images/5.png", iconSize: [25, 41], iconAnchor: [12, 41] })}
-          >
+          <Marker position={[latitude, longitude]} icon={icon}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
