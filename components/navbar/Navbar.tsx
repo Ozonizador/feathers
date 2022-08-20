@@ -15,6 +15,7 @@ import person from "../../public/images/person.png";
 import ukFlag from "../../public/images/icon-uk.jpg";
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
+import { CgMenuLeft } from "react-icons/cg";
 
 export const Navbar = () => {
   const { user } = useUser();
@@ -41,9 +42,10 @@ export const Navbar = () => {
   //   }
   // };
 
+  const openMobileMenu = () => {};
   return (
     <header>
-      <nav className="mx-28 mb-5">
+      <nav className="mx-6 mb-5 lg:mx-28">
         <div>
           <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
             {/* CONTACTS */}
@@ -74,13 +76,16 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="my-5 lg:flex lg:flex-1 lg:gap-5">
+          <div className="my-5 flex lg:gap-5">
             <div className="lg:block">
               <Link href="/">
                 <a>
                   <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={55} width={208}></Image>
                 </a>
               </Link>
+            </div>
+            <div className="my-auto ml-auto rounded-full border border-black p-2 lg:hidden" onClick={openMobileMenu}>
+              <CgMenuLeft size={28} />
             </div>
 
             <div className="mx-auto my-auto hidden lg:block">
