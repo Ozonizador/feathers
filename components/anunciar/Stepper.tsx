@@ -5,78 +5,81 @@ import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvide
 export default function Stepper() {
   const currentStep = useCurrentStep();
   return (
-    <div className="p-5">
-      <div className="mx-4 p-4">
-        <div className="flex items-center justify-center">
-          <div className="flex-auto border-t-2 border-primary-500"></div>
+    <>
+      {/* DESKTOP */}
+      <div className="hidden p-5 lg:block">
+        <div className="mx-4 p-4">
+          <div className="flex items-center justify-center">
+            <div className="flex-auto border-t-2 border-primary-500"></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={1} text="Passo 1" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 1,
-              "border-primary-500": currentStep >= 1,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={1} text="Passo 1" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 1,
+                "border-primary-500": currentStep >= 1,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={2} text="Passo 2" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 2,
-              "border-primary-500": currentStep >= 2,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={2} text="Passo 2" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 2,
+                "border-primary-500": currentStep >= 2,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={3} text="Passo 3" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 3,
-              "border-primary-500": currentStep >= 3,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={3} text="Passo 3" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 3,
+                "border-primary-500": currentStep >= 3,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={4} text="Passo 4" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 4,
-              "border-primary-500": currentStep >= 4,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={4} text="Passo 4" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 4,
+                "border-primary-500": currentStep >= 4,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={5} text="Passo 5" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 5,
-              "border-primary-500": currentStep >= 5,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={5} text="Passo 5" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 5,
+                "border-primary-500": currentStep >= 5,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={6} text="Passo 6" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 6,
-              "border-primary-500": currentStep >= 6,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={6} text="Passo 6" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 6,
+                "border-primary-500": currentStep >= 6,
+              })}
+            ></div>
 
-          {/* PASSO */}
-          <StepIcon stepNumber={7} text="Passo 7" />
-          <div
-            className={classNames("flex-auto border-t-2", {
-              "border-terciary-500": currentStep < 7,
-              "border-primary-500": currentStep >= 7,
-            })}
-          ></div>
+            {/* PASSO */}
+            <StepIcon stepNumber={7} text="Passo 7" />
+            <div
+              className={classNames("flex-auto border-t-2", {
+                "border-terciary-500": currentStep < 7,
+                "border-primary-500": currentStep >= 7,
+              })}
+            ></div>
 
-          {/* PASSO */}
+            {/* PASSO */}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
