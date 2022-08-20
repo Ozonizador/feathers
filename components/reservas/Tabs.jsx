@@ -26,8 +26,8 @@ const Tabs = () => {
       hover:border-transparent hover:bg-gray-100
       focus:border-transparent
       active
-    " id="tabs-home-tab" data-bs-toggle="pill" data-bs-target="#tabs-home" role="tab" aria-controls="tabs-home"
-                        aria-selected="true">Home</a>
+    " id="tabs-home-tab" data-bs-toggle="pill" data-bs-target="#tabs-atuais" role="tab" aria-controls="tabs-home"
+                        aria-selected="true">Atuais</a>
                 </li>
                 <li className="nav-item" role="presentation">
                     <a href="#tabs-profile" className="
@@ -43,8 +43,8 @@ const Tabs = () => {
       my-2
       hover:border-transparent hover:bg-gray-100
       focus:border-transparent
-    " id="tabs-profile-tab" data-bs-toggle="pill" data-bs-target="#tabs-profile" role="tab"
-                        aria-controls="tabs-profile" aria-selected="false">Profile</a>
+    " id="tabs-profile-tab" data-bs-toggle="pill" data-bs-target="#tabs-proximas" role="tab"
+                        aria-controls="tabs-profile" aria-selected="false" >Próximas</a>
                 </li>
                 <li className="nav-item" role="presentation">
                     <a href="#tabs-messages" className="
@@ -60,28 +60,10 @@ const Tabs = () => {
       my-2
       hover:border-transparent hover:bg-gray-100
       focus:border-transparent
-    " id="tabs-messages-tab" data-bs-toggle="pill" data-bs-target="#tabs-messages" role="tab"
-                        aria-controls="tabs-messages" aria-selected="false">Messages</a>
+    " id="tabs-messages-tab" data-bs-toggle="pill" data-bs-target="#tabs-todas" role="tab"
+                        aria-controls="tabs-messages" aria-selected="false">Todas</a>
                 </li>
-                <li className="nav-item" role="presentation">
-                    <a href="#tabs-contact" className="
-      nav-link
-      disabled
-      pointer-events-none
-      block
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      border-x-0 border-t-0 border-b-2 border-transparent
-      px-6
-      py-3
-      my-2
-      hover:border-transparent hover:bg-gray-100
-      focus:border-transparent
-    " id="tabs-contact-tab" data-bs-toggle="pill" data-bs-target="#tabs-contact" role="tab"
-                        aria-controls="tabs-contact" aria-selected="false">Contact</a>
-                </li>
+
             </ul>
             <div className="tab-content" id="tabs-tabContent">
                 <div className="tab-pane fade show active" id="tabs-home" role="tabpanel" aria-labelledby="tabs-home-tab">
