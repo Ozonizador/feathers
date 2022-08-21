@@ -57,4 +57,4 @@ export const LanguageLabel = {
   FINNISH: "Finnish",
 };
 
-type userOption = "senhorio" | "estudante";
+export type UserTypes = "senhorio" | "estudante";

@@ -27,6 +27,9 @@ const FormPasso3 = () => {
 
   const uploadToClient = (event) => {
     event.preventDefault();
+    if (event.target.files.length < 5) {
+      return;
+    }
     if (event.target.files) {
       let files = [];
       for (let file of event.target.files) {

@@ -22,7 +22,7 @@ export type Advertisement = {
   description: string;
   type: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
   typeHost: "PROFISSIONAL" | "PARTICULAR";
-  photos?: string[];
+  photos?: AdvertisementPhotos;
   houseRules: HouseRules;
   aboutHouse: AboutHouseSections;
   monthRent: number;
@@ -62,6 +62,16 @@ export interface HouseRules {
   otherRules?: string;
   cleaning?: string;
 }
+
+export interface AdvertisementPhotos {
+  capa: string;
+  other: AdvertisementZone[];
+}
+
+export type AdvertisementZone = {
+  url: string;
+  zone: "bedroom" | "bathroom" | "livingroom";
+};
 
 /* ------ STRING ------ */
 

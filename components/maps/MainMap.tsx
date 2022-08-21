@@ -1,14 +1,13 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { Coordinates } from "../../models/utils";
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
-import L, { Icon } from "leaflet";
-import markerSvg from "../../public/icons/marker.png";
+import { Icon } from "leaflet";
+import { Coordinates } from "../../models/utils";
 
 interface MainMapProps {
   currentMapCoords: Coordinates;
-  markers?: any;
+  markers?: Coordinates[];
 }
 
 const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
@@ -21,9 +20,7 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
     }
   }, [currentMapCoords]);
 
-  let icon = new Icon({
-    iconUrl: markerSvg,
-  });
+  let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
 
   return (
     <>
@@ -43,11 +40,19 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
-          <Marker position={[latitude, longitude]} icon={icon}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+          {markers &&
+            markers.map((marker, index) => {
+              const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
+              return (
+                <>
+                  <Marker position={[markerLat, markerLong]} icon={icon}>
+                    {/* <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup> */}
+                  </Marker>
+                </>
+              );
+            })}
         </MapContainer>
       )}
     </>

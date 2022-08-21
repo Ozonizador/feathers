@@ -40,7 +40,7 @@ model Profile {
 }
 
 model Advertisement {
-  id                String              @id @default(uuid()) @db.Uuid
+  id                String                   @id @default(uuid()) @db.Uuid
   type              TypeRoom
   place             String
   street            String
@@ -55,7 +55,7 @@ model Advertisement {
   description       String
   typeFlexHost      HostFlexType
   typeHost          TypeHost
-  photos            String[]
+  photos            Json                     @default("{}")
   houseRules        Json
   aboutHouse        Json
   monthRent         Int
@@ -64,9 +64,10 @@ model Advertisement {
   expenses          Json
   available         AdvertisementStatus
   hostLivesProperty Boolean
-  hostId            String              @db.Uuid
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
+  hostId            String                   @db.Uuid
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+  geom              Unsupported("geometry")? // requires sql first on prod when migrating
 
   host  Profile? @relation(fields: [hostId], references: [id])
   stays Stay[]   @relation("advertisementStays")
