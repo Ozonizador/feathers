@@ -105,3 +105,13 @@ export const getPublicUrlFromImage = async (key: string) => {
 
   return { publicURL, error };
 };
+
+export const removePicture = async (advertisementID: string, photoUrl: string) => {
+  let dividedUrl = photoUrl.split("/");
+  let avatarName = dividedUrl[dividedUrl.length - 1];
+  const { data, error } = await supabaseClient.storage
+    .from(ADVERTISEMENT_STORAGE_BUCKET)
+    .remove([`${advertisementID}/${avatarName}`]);
+
+  return { data, error };
+};
