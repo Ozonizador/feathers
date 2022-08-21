@@ -25,7 +25,7 @@ export const addAdvertisement = async (advertisement: Advertisement) => {
 export const updateAdvertisement = async (advertisement: Partial<Advertisement>, id: string) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .update({ ...advertisement, updatedAt: new Date() }, { returning: "minimal" })
+    .update({ ...advertisement, updatedAt: new Date() }, { returning: "representation" })
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
 

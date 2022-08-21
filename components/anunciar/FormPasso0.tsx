@@ -35,7 +35,7 @@ const FormPasso0 = () => {
     const { geometry } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
 
     const postGisPoint = createPointForDatabase(geometry);
-    const newAdvertisement = { ...advertisement, geom: postGisPoint ? postGisPoint : null, description: postGisPoint };
+    const newAdvertisement = { ...advertisement, geom: postGisPoint ? postGisPoint : null };
 
     const { data, error } = await addAdvertisement(newAdvertisement);
     if (data) {

@@ -22,7 +22,7 @@ export type Advertisement = {
   description: string;
   type: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
   typeHost: "PROFISSIONAL" | "PARTICULAR";
-  photos?: AdvertisementPhotos;
+  photos?: AdvertisementPhoto[];
   houseRules: HouseRules;
   aboutHouse: AboutHouseSections;
   monthRent: number;
@@ -63,15 +63,21 @@ export interface HouseRules {
   cleaning?: string;
 }
 
-export interface AdvertisementPhotos {
-  capa: string;
-  other: AdvertisementZone[];
-}
-
-export type AdvertisementZone = {
+export type AdvertisementPhoto = {
   url: string;
-  zone: "bedroom" | "bathroom" | "livingroom";
+  zone: HouseZones;
 };
+
+export type HouseZones = "bedroom" | "bathroom" | "livingroom" | "kitchen" | "other" | "main";
+
+export enum HouseZonesLabel {
+  "bedroom" = "Quarto",
+  "bathroom" = "Casa de Banho",
+  "livingroom" = "Sala de Estar",
+  "kitchen" = "Cozinha",
+  "other" = "Outro",
+  "main" = "Capa",
+}
 
 /* ------ STRING ------ */
 
