@@ -72,7 +72,7 @@ const UnideskFavoritos = () => {
                         <div className="w-1/3 rounded-l-lg">
                           {favourite.photos && favourite.photos.length > 0 ? (
                             <Image
-                              src={favourite.photos[0]}
+                              src={favourite.photos[0].url}
                               alt="Foto de Capa"
                               layout="intrinsic"
                               height={164}

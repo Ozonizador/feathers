@@ -52,3 +52,10 @@ export const getAveragesByAdvertisementId = async (advertisementId: string) => {
 
   return { data, error };
 };
+
+/* GET Average rating of all the ratings per host */
+export const averageFromAllReviewsByHost = async (hostId: string) => {
+  const { data, error } = await supabaseClient.rpc<number>("average_rating_per_host", { host: hostId }).single();
+
+  return { data, error };
+};

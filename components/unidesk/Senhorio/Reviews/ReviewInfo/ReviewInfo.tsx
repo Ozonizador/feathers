@@ -2,13 +2,14 @@ import { Rating } from "flowbite-react/lib/esm/components";
 import { Avatar } from "flowbite-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
-import { Review } from "../../../../../models/review";
-import { getReviewsByHostId } from "../../../../../services/reviewService";
+import { Review, ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
+import { averageFromAllReviewsByHost, getReviewsByHostId } from "../../../../../services/reviewService";
 
 const ReviewInfo = () => {
   const { user } = useUser();
 
-  const [latestReviews, setLatestReviews] = useState<Review[]>([]);
+  const [latestReviews, setLatestReviews] = useState<ReviewWithTenantAndAdvertisement[]>([]);
+  const [averageReviews, setAverageReviews] = useState<number>();
 
   const getLatestReviews = useCallback(async () => {
     if (user) {
@@ -19,9 +20,19 @@ const ReviewInfo = () => {
     }
   }, [user]);
 
+  const getAverageAllReviews = useCallback(async () => {
+    if (user) {
+      const { data, error } = await averageFromAllReviewsByHost(user.id);
+      if (!error) {
+        setAverageReviews(data);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     getLatestReviews();
-  }, [getLatestReviews]);
+    getAverageAllReviews();
+  }, [getLatestReviews, getAverageAllReviews]);
 
   return (
     <>
@@ -35,7 +46,7 @@ const ReviewInfo = () => {
           <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
           <Rating>
             <Rating.Star />
-            <p className="ml-2 text-xl  text-yellow-300">4.95</p>
+            <p className="ml-2 text-xl  text-yellow-300">{averageReviews}</p>
           </Rating>
         </div>
 
@@ -60,7 +71,7 @@ const ReviewInfo = () => {
 export default ReviewInfo;
 
 interface SingleReviewCardPros {
-  review: Review;
+  review: ReviewWithTenantAndAdvertisement;
 }
 
 const SingleReviewCard = ({ review }: SingleReviewCardPros) => {

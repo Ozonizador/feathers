@@ -1,6 +1,6 @@
 export const REPORTS_TABLE_NAME = "reports" as const;
 
-export interface Report {
+export type Report = {
   id?: string;
   advertisementId: string;
   stayId: string;
@@ -9,7 +9,7 @@ export interface Report {
 
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
 export enum ReportsType {
   IMPRECISE = "IMPRECISE",

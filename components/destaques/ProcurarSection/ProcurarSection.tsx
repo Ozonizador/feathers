@@ -73,7 +73,9 @@ export default function ProcurarSection() {
   }, 400);
 
   // TODO finish this
-  const getAdvertisementsMarkers = () => {};
+  const getAdvertisementsMarkers = () => {
+    return [];
+  };
 
   return (
     <>
@@ -192,7 +194,7 @@ export default function ProcurarSection() {
                 )} */}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:min-h-[500px]">
-          <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers} />
+          <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers()} />
         </div>
       </div>
     </>

@@ -29,18 +29,18 @@ export const Navbar = () => {
     router.push("/unidesk");
   };
 
-  // /* Changing the toggle senhorio estudante */
-  // const toggleSenhorioEstudante = () => {
-  //   if (!user) {
-  //     return;
-  //   }
+  /* Changing the toggle senhorio estudante */
+  const toggleSenhorioEstudante = () => {
+    if (!user) {
+      return;
+    }
 
-  //   if (toggleUserType === "ESTUDANTE") {
-  //     toggleUserTypeContext("SENHORIO");
-  //   } else {
-  //     toggleUserTypeContext("ESTUDANTE");
-  //   }
-  // };
+    if (toggleUserType === "ESTUDANTE") {
+      toggleUserTypeContext("SENHORIO");
+    } else {
+      toggleUserTypeContext("ESTUDANTE");
+    }
+  };
 
   const openMobileMenu = () => {};
   return (
@@ -154,10 +154,10 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div>
-                      <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
+                      {/* <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
                         Modo Senhorio
-                      </button>
-                      {/* <span className="mr-2">Estudante</span>
+                      </button> */}
+                      <span className="mr-2">Estudante</span>
                       <Switch
                         checked={true}
                         onChange={toggleSenhorioEstudante}
@@ -169,7 +169,7 @@ export const Navbar = () => {
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
-                      <span className="ml-2">Senhorio</span> */}
+                      <span className="ml-2">Senhorio</span>
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
