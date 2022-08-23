@@ -63,7 +63,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
         <div className="flex">
           <div className="h-40 w-52">
             <Image
-              src={(advertisement.photos && advertisement.photos[0]) || NoPhotoAvailable}
+              src={(advertisement.photos && advertisement.photos[0]?.url) || NoPhotoAvailable}
               alt="Foto Quarto"
               height={160}
               width={208}
