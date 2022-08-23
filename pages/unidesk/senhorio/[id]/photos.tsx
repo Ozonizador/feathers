@@ -5,9 +5,13 @@ import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement, { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-import { getSingleAdvertisement, saveImage, updateAdvertisement } from "../../../../services/advertisementService";
+import {
+  getSingleAdvertisement,
+  removePicture,
+  saveImage,
+  updateAdvertisement,
+} from "../../../../services/advertisementService";
 import classNames from "classnames";
-import { debug } from "console";
 
 const Photos = ({ id }) => {
   const [advertisement, setAdvertisement] = useState<Advertisement>();
@@ -75,9 +79,16 @@ const Photos = ({ id }) => {
     setSelectedImages(newImageSelection);
   };
 
-  function deletePhoto(url: string): void {
-    throw new Error("Function not implemented.");
-  }
+  const deletePhoto = async (url: string) => {
+    const { data, error } = await removePicture(advertisement.id, url);
+    if (!error && data.length !== 0) {
+      const photosAux = advertisement.photos.filter((photo) => photo.url !== url);
+      const { data, error } = await updateAdvertisement({ ...advertisement, photos: photosAux }, advertisement.id);
+      if (!error) {
+        setAdvertisement(data);
+      }
+    }
+  };
 
   const isImageSelected = (url) => {
     const image = selectedImages.find((image) => image == url);
@@ -104,20 +115,20 @@ const Photos = ({ id }) => {
                     <>
                       <div
                         className={classNames(
-                          "relative h-64 w-64 rounded-lg bg-black bg-[url('/images//rectangle_3400.jpg')] bg-cover bg-no-repeat lg:h-32 lg:w-32",
+                          "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
                           { "border-2 border-blue-600": isImageSelected(photo.url) }
                         )}
                         key={index}
                         onClick={(e) => toggleImageSelection(photo.url)}
                       >
                         <div
-                          className="absolute right-0 top-0 z-50 rounded-xl border border-red-600 p-1 font-bold text-red-600"
+                          className="absolute right-0 top-0 z-50 rounded-full border border-red-600 p-1 font-bold text-red-600"
                           onClick={() => deletePhoto(photo.url)}
                         >
                           x
                         </div>
                         {photo.zone !== "other" && (
-                          <div className="absolute top-2 left-2 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
+                          <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
                             {HouseZonesLabel[photo.zone]}
                           </div>
                         )}
@@ -132,7 +143,7 @@ const Photos = ({ id }) => {
                 <div className=" flex flex-col items-center justify-center align-middle">
                   <div>
                     <span className="text-5xl text-primary-300">
-                      <AiOutlinePlusCircle />{" "}
+                      <AiOutlinePlusCircle />
                     </span>
                   </div>
                   <div className="text-gray-500">carregar mais fotos</div>
