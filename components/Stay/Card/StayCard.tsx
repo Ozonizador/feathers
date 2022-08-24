@@ -14,7 +14,7 @@ const StayCard = ({ stay }: StayCardProps) => {
         <div className="flex">
           <div className="relative h-32 w-28">
             <Image
-              src={(advertisement.photos && advertisement.photos[0]) || NoPhotoAvailable}
+              src={(advertisement.photos && advertisement.photos[0].url) || NoPhotoAvailable}
               alt="Foto Quarto"
               layout="fill"
               className="rounded-l-lg object-cover "

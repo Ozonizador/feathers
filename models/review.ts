@@ -4,12 +4,10 @@ import { Profile } from "./profile";
 export const REVIEWS_TABLE_NAME = "reviews" as const;
 export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 
-export interface Review {
+export type Review = {
   id: string;
   advertisementId: string;
-  advertisment?: Advertisement;
   tenantId: string;
-  tenant?: Profile;
   overallRating: number;
   locationRating: number;
   valueQualityRating: number;
@@ -19,7 +17,13 @@ export interface Review {
   privateReview: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
+
+export type ReviewWithTenantAndAdvertisement = Review & {
+  advertisment: Partial<Advertisement>;
+  tenant: Partial<Profile>;
+  "advertisements.hostId": string;
+};
 
 export const REVIEW_COLUMNS = {
   ID: "id",
@@ -32,7 +36,7 @@ export const REVIEW_COLUMNS = {
   COMODITIES_RATING: "comoditiesRating",
   PUBLIC_REVIEW: "publicReview",
   PRIVATE_REVIEW: "privateReview",
-  HOST_ID: "advertisement.hostId",
+  HOST_ID: "advertisements.hostId",
   CREATED_AT: "createdAt",
 } as const;
 

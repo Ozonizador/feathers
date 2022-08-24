@@ -44,14 +44,14 @@ export default function RoomSenhorio() {
                   advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
                 } desde ${new Date(advertisement.host.createdAt).getFullYear()}`}</span>
                 <hr />
-                <div className="mt-4 flex items-center space-x-3 lg:mt-6">
+                {/* <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
                     <RiMailSendFill className=" text-4xl text-blue-600 " />
                   </div>
                   <div className="">
                     Taxa de resposta <br /> 90%
                   </div>
-                </div>
+                </div> */}
               </div>
             </Card>
           </div>

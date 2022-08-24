@@ -35,7 +35,7 @@ export type Advertisement = {
   createdAt?: Date;
   updatedAt?: Date;
   available: AdvertisementStatus;
-  geom?: unknown | null;
+  geom?: any | null;
 
   // foreign keys
   reviews?: Review[];

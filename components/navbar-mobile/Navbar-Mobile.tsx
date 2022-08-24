@@ -130,7 +130,7 @@ export const NavbarMobile = () => {
 
           <div className="mt-7 flex justify-center rounded-lg bg-gray-100 py-4">
             <span className="mr-2">Estudante</span>
-            <Switch
+            {/* <Switch
               checked={true}
               // onChange={toggleSenhorioEstudante}
               className="relative inline-flex h-7 w-14 items-center rounded-full bg-primary-500"
@@ -140,7 +140,7 @@ export const NavbarMobile = () => {
                   toggleUserType === "SENHORIO" ? "translate-x-6" : "translate-x-1"
                 } inline-block h-4 w-4 transform rounded-full bg-white`}
               />
-            </Switch>
+            </Switch> */}
             <span className="ml-2">Senhorio</span>
           </div>
         </div>

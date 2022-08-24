@@ -58,7 +58,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
             <div className="flex flex-1 flex-col items-center lg:flex-row">
               <div className="w-full lg:w-1/3 lg:pl-4">
                 {advertisement.photos && advertisement.photos[0] ? (
-                  <Image src={advertisement.photos[0]} alt="..." height={256} width={256} />
+                  <Image src={advertisement.photos[0].url} alt="..." height={256} width={256} />
                 ) : (
                   <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" />
                 )}

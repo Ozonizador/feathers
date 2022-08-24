@@ -16,62 +16,37 @@ export const SingleRoomGrid = () => {
       )}
       {advertisement.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
-          <div className="col-span-6 row-span-2 bg-black">
+          <div className="relative col-span-6 row-span-2 bg-black">
             {advertisement.photos[0] ? (
-              <Image
-                src={advertisement.photos[0]}
-                alt="no photo available"
-                width="100%"
-                height="100%"
-              />
+              <Image src={advertisement.photos[0].url} alt="no photo available" layout="fill" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}
           </div>
           <div className="col-span-2 bg-orange-500">
             {advertisement.photos[1] ? (
-              <Image
-                src={advertisement.photos[1]}
-                alt="no photo available"
-                width="100%"
-                height="100%"
-              />
+              <Image src={advertisement.photos[1].url} alt="no photo available" width="100%" height="100%" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}
           </div>
           <div className="col-span-4 bg-blue-500">
             {advertisement.photos[2] ? (
-              <Image
-                src={advertisement.photos[2]}
-                alt="no photo available"
-                width="100%"
-                height="100%"
-              />
+              <Image src={advertisement.photos[2].url} alt="no photo available" width="100%" height="100%" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}
           </div>
           <div className="col-span-4 bg-red-400">
             {advertisement.photos[3] ? (
-              <Image
-                src={advertisement.photos[3]}
-                alt="no photo available"
-                width="100%"
-                height="100%"
-              />
+              <Image src={advertisement.photos[3].url} alt="no photo available" width="100%" height="100%" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}
           </div>
           <div className="col-span-2 bg-purple-500">
             {advertisement.photos[4] ? (
-              <Image
-                src={advertisement.photos[4]}
-                alt="no photo available"
-                width="100%"
-                height="100%"
-              />
+              <Image src={advertisement.photos[4].url} alt="no photo available" width="100%" height="100%" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}

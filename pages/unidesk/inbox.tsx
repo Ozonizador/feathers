@@ -9,6 +9,7 @@ import { Message } from "../../models/message";
 import { Conversation } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
+import { Avatar } from "flowbite-react";
 
 {
   /* page 59 XD */
@@ -105,6 +106,7 @@ const CaixaEntrada = () => {
                   return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
                 })}
               </div>
+
               <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
                 <div className="w-10/12">
                   <form onSubmit={(e) => sendMessage(e)}>
@@ -118,13 +120,34 @@ const CaixaEntrada = () => {
                     <input type="submit" className="hidden" />
                   </form>
                 </div>
-
                 {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}
                 {/* <div className="mt-5 flex gap-4">
                   <AiOutlinePicture className="text-xl text-slate-400" />
                   <FiPaperclip className="text-xl text-slate-400" />
                   <BiSmile className="text-xl text-slate-400" />
                 </div>*/}
+              </div>
+            </div>
+            <div className="w-96 border-l border-terciary-500 p-2">
+              <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
+              <div className="flex flex-row">
+                <div>
+                  <Avatar
+                    img={
+                      profile?.avatarUrl
+                        ? profile.avatarUrl
+                        : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    }
+                    rounded={true}
+                    status="away"
+                    size="lg"
+                    statusPosition="bottom-right"
+                  />
+                </div>
+                <div>
+                  <div>Pedido de Reserva</div>
+                  <div>Quarto Privado em Aveiro</div>
+                </div>
               </div>
             </div>
           </div>

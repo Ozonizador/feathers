@@ -1,5 +1,5 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import Advertisement, { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
@@ -12,10 +12,12 @@ import {
   updateAdvertisement,
 } from "../../../../services/advertisementService";
 import classNames from "classnames";
+import { toast } from "react-toastify";
+import { url } from "inspector";
 
 const Photos = ({ id }) => {
   const [advertisement, setAdvertisement] = useState<Advertisement>();
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
 
   const photos = advertisement ? advertisement.photos : ([] as AdvertisementPhoto[]);
   const getAdvertisementInfo = useCallback(async () => {
@@ -67,15 +69,14 @@ const Photos = ({ id }) => {
     }
   };
 
-  const toggleImageSelection = (url) => {
-    const index = selectedImages.findIndex((image) => image == url);
-    let newImageSelection = null;
-    if (index) {
-      newImageSelection = selectedImages.splice(index, 1);
+  const toggleImageSelection = (toggledImage) => {
+    const index = selectedImages.findIndex((image) => image.url == toggledImage.url);
+    let newImageSelection = selectedImages;
+    if (index !== -1) {
+      newImageSelection.splice(index, 1);
     } else {
-      newImageSelection = [...selectedImages, url];
+      newImageSelection = [...selectedImages, toggledImage];
     }
-
     setSelectedImages(newImageSelection);
   };
 
@@ -90,9 +91,41 @@ const Photos = ({ id }) => {
     }
   };
 
-  const isImageSelected = (url) => {
-    const image = selectedImages.find((image) => image == url);
-    return image !== undefined;
+  const isImageSelected = useCallback(
+    (url: string) => {
+      const image = selectedImages.find((image) => image.url == url);
+      return image !== undefined;
+    },
+    [selectedImages]
+  );
+
+  const setImagesZone = async (event) => {
+    const value = (event.target as HTMLInputElement).value;
+
+    if (value === "main" && selectedImages.length !== 1) {
+      toast.error("Só pode ter 1 foto de capa");
+      return;
+    } else {
+      let { photos } = advertisement;
+
+      let newImages = photos.map((photo) => {
+        if (checkIfImageInSelected(photo.url)) {
+          return { url: photo.url, zone: value } as AdvertisementPhoto;
+        } else {
+          return photo;
+        }
+      });
+      const { data, error } = await updateAdvertisement({ ...advertisement, photos: newImages }, advertisement.id);
+      if (!error) {
+        setAdvertisement(data);
+      }
+    }
+    setSelectedImages([]);
+  };
+
+  const checkIfImageInSelected = async (url) => {
+    const foundImage = selectedImages.find((image) => image.url == url);
+    return foundImage !== undefined;
   };
 
   return (
@@ -106,36 +139,36 @@ const Photos = ({ id }) => {
         <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
           <div className="mb-7 text-2xl font-semibold">Fotografias</div>
 
-          <div className="mx-auto flex w-64 flex-col  gap-6 lg:w-full lg:flex-row lg:items-center">
+          <div className="mx-auto flex w-64 flex-col gap-6 lg:w-full lg:flex-row lg:items-center">
             <>
               {photos &&
                 photos.length !== 0 &&
                 photos.map((photo, index) => {
                   return (
-                    <>
+                    <div
+                      className={classNames(
+                        "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
+                        {
+                          "border-4 border-primary-500": isImageSelected(photo.url),
+                        }
+                      )}
+                      key={index}
+                      onClick={(e) => toggleImageSelection(photo)}
+                    >
                       <div
-                        className={classNames(
-                          "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
-                          { "border-2 border-blue-600": isImageSelected(photo.url) }
-                        )}
-                        key={index}
-                        onClick={(e) => toggleImageSelection(photo.url)}
+                        className="absolute right-0 top-0 z-50 rounded-full border border-red-600 p-1 font-bold text-red-600"
+                        onClick={() => deletePhoto(photo.url)}
                       >
-                        <div
-                          className="absolute right-0 top-0 z-50 rounded-full border border-red-600 p-1 font-bold text-red-600"
-                          onClick={() => deletePhoto(photo.url)}
-                        >
-                          x
-                        </div>
-                        {photo.zone !== "other" && (
-                          <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                            {HouseZonesLabel[photo.zone]}
-                          </div>
-                        )}
-
-                        <Image src={photo.url} height={128} width={128} alt="photo" />
+                        x
                       </div>
-                    </>
+                      {photo.zone !== "other" && (
+                        <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
+                          {HouseZonesLabel[photo.zone]}
+                        </div>
+                      )}
+
+                      <Image src={photo.url} layout="fill" alt="photo" />
+                    </div>
                   );
                 })}
               {/* BOTÃO */}
@@ -160,6 +193,25 @@ const Photos = ({ id }) => {
               />
             </>
           </div>
+          {selectedImages && selectedImages.length !== 0 && (
+            <>
+              <div className="mt-4">
+                <>
+                  <h3 className="text-xl text-neutral-400">Associar photos</h3>
+                  {Object.keys(HouseZonesLabel).map((zone, index) => {
+                    return (
+                      <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
+                        <input type="radio" id="scales" name="type" value={zone} />
+                        <label htmlFor="scales" className="my-auto ml-1">
+                          {HouseZonesLabel[zone]}
+                        </label>
+                      </div>
+                    );
+                  })}
+                </>
+              </div>
+            </>
+          )}
           <button
             className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-28"
             onClick={saveChanges}
