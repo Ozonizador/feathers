@@ -4,20 +4,19 @@ import { Reservation } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
-export interface Conversation {
+export type Conversation = {
   id?: string;
   tenantId: string;
   hostId: string;
   reservationId: string;
 
-  host?: Profile;
-  tenant?: Profile;
   messages?: Message[];
-  reservation?: Reservation;
 
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
+
+export type ConversationWithTenant = Conversation & { tenant: Partial<Profile>; reservation: Partial<Reservation> };
 
 /* VALUES FOR DB */
 export const CONVERSATION_PROPERTIES = {

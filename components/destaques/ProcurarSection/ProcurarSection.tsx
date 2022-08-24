@@ -193,7 +193,7 @@ export default function ProcurarSection() {
                   </div>
                 )} */}
         </div>
-        <div className="z-10 hidden w-1/2 px-5 lg:block lg:min-h-[500px]">
+        <div className="z-10 hidden w-1/2 px-5 lg:block lg:h-[500px]">
           <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers()} />
         </div>
       </div>

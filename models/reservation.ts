@@ -26,6 +26,7 @@ export enum ReservationStatus {
   REJECTED = "REJECTED",
   CHANGE_REQUESTED = "CHANGE_REQUESTED",
   CHANGE_ACCEPTED = "CHANGE_ACCEPTED",
+  CHANGE_REJECTED = "CHANGE_REJECTED",
 }
 
 export const RESERVATION_TABLE = {
@@ -44,4 +45,5 @@ export enum ReservationStatusLabel {
   REJECTED = "Reserva Rejeitada",
   CHANGE_ACCEPTED = "Alteração de Reserva Aceite",
   CHANGE_REQUESTED = "Alteração de Reserva",
+  CHANGE_REJECTED = "Alteração de Reserva Rejeitada",
 }

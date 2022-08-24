@@ -5,7 +5,7 @@ import { Reservation, ReservationStatusLabel } from "../../../models/reservation
 
 interface CaixaCardProps {
   profile: Profile;
-  reservation: Reservation;
+  reservation: Partial<Reservation>;
 }
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
