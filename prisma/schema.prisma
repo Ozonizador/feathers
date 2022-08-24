@@ -116,7 +116,7 @@ model Reservation {
   tenant       Profile       @relation("tenantReservations", references: [id], fields: [tenantId])
   tenantId     String        @db.Uuid
   stay         Stay?         @relation("reservationStay", references: [id], fields: [stayId])
-  stayId       String        @db.Uuid
+  stayId       String?       @db.Uuid
   Conversation Conversation? @relation("conversationOfReservation")
 
   @@map("reservations")

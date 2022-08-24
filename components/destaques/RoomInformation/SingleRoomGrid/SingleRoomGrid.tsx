@@ -16,9 +16,9 @@ export const SingleRoomGrid = () => {
       )}
       {advertisement.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
-          <div className="col-span-6 row-span-2 bg-black">
+          <div className="relative col-span-6 row-span-2 bg-black">
             {advertisement.photos[0] ? (
-              <Image src={advertisement.photos[0].url} alt="no photo available" width="100%" height="100%" />
+              <Image src={advertisement.photos[0].url} alt="no photo available" layout="fill" />
             ) : (
               <Image src={NoPhotoAvailable} alt="no photo available" />
             )}
