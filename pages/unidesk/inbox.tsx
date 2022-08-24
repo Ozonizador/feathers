@@ -146,6 +146,7 @@ const CaixaEntrada = () => {
                 </div>
                 <div>
                   <div>Pedido de Reserva</div>
+                  <div>Quarto Privado em Aveiro</div>
                 </div>
               </div>
             </div>
