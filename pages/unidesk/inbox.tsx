@@ -13,6 +13,7 @@ import { Avatar } from "flowbite-react";
 import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
+import { updateReservationStatusOnDB } from "../../services/reservationService";
 
 {
   /* page 59 XD */
@@ -65,7 +66,14 @@ const CaixaEntrada = () => {
     return conversation.host.id === profile.id ? conversation.tenant : conversation.host;
   };
 
-  const updateReservationStatus = (status: ReservationStatus) => {};
+  const updateReservationStatus = async (status: ReservationStatus) => {
+    const { reservation } = currentConversation;
+    const { data, error } = await updateReservationStatusOnDB(reservation.id, status);
+
+    if (!error) {
+      setCurrentConversation({ ...currentConversation, reservation: data });
+    }
+  };
 
   const clearConversation = () => {
     setCurrentConversation(null);
@@ -229,9 +237,10 @@ const CaixaEntrada = () => {
                       {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
                         <div>Alteração reserva rejeitada</div>
                       )}
+
+                      <div>Mostrar perfil de {currentConversation.tenant.name}</div>
                     </>
                   )}
-                  <div>Mostrar perfil de {currentConversation.tenant.name}</div>
                 </div>
               </>
             )}

@@ -22,3 +22,13 @@ export const getReservationByAdvertId = async (advertId: string) => {
     .eq(RESERVATION_TABLE.ADVERT_ID, advertId);
   return { data, error };
 };
+
+export const updateReservationStatusOnDB = async (reservationId: string, status: ReservationStatus) => {
+  const { data, error } = await supabaseClient
+    .from<Reservation>(RESERVATION_TABLE_NAME)
+    .update({ status }, { returning: "representation" })
+    .eq(RESERVATION_TABLE.ID, reservationId)
+    .single();
+
+  return { data, error };
+};
