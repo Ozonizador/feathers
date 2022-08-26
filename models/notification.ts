@@ -4,7 +4,7 @@ export interface Notification {
   id?: string;
   title: string;
   description: string;
-  url: string;
+  type: NotificationType;
 
   profileId: string;
   createdAt?: Date;
@@ -18,10 +18,34 @@ export const NOTIFICATION_PROPERTIES = {
 } as const;
 
 export const NOTIFICATION_LINKS = {
-  STAY: "/unidek/estudante/stay",
+  STUDENT_EVALUATE_STAY: "/unidesk/estudante/stay",
+  STUDENT_RESERVATION_DECLINED: "/unidesk/estudante/stay",
+  STUDENT_RESERVATION_ACCEPTED: "/unidesk/estudante/stay",
+  STUDENT_UNIHOSTS_SUPPORT: "/",
+  STUDENT_COMPLETE_PROFILE: "/unidesk/admin/general",
+  LANDLORD_RESERVATION_RECEIVED: "/unidesk/inbox",
+  LANDLORD_UNIHOSTS_SUPPORT: "/",
+  LANDLORD_NEW_REVIEW: "/unidesk/senhorio/reviews",
+  LANDLORD_COMPLETE_PROFILE: "/unidesk/admin/general",
+  LANDLORD_COMPLETE_ADVERT: "/unidesk/senhorio/advertisements",
+  BLOG: "/",
 };
 
-export enum NOTIFICATION_TYPES {
+export const BUTTON_MESSAGE_LABEL = {
+  STUDENT_EVALUATE_STAY: "Ir para estadias",
+  STUDENT_RESERVATION_DECLINED: "Ir para estadias",
+  STUDENT_RESERVATION_ACCEPTED: "Ir para estadias",
+  STUDENT_UNIHOSTS_SUPPORT: "Ver",
+  STUDENT_COMPLETE_PROFILE: "Ir para perfil",
+  LANDLORD_RESERVATION_RECEIVED: "Ir para a caixa de entrada",
+  LANDLORD_UNIHOSTS_SUPPORT: "Ver",
+  LANDLORD_NEW_REVIEW: "Ver Review",
+  LANDLORD_COMPLETE_PROFILE: "Ir para perfil",
+  LANDLORD_COMPLETE_ADVERT: "Ver anúncios",
+  BLOG: "Ver",
+};
+
+export enum NotificationType {
   STUDENT_RESERVATION_DECLINED = "STUDENT_RESERVATION_DECLINED",
   STUDENT_RESERVATION_ACCEPTED = "STUDENT_RESERVATION_ACCEPTED",
   STUDENT_UNIHOSTS_SUPPORT = "STUDENT_UNIHOSTS_SUPPORT",

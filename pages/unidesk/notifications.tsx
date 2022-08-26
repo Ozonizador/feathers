@@ -28,7 +28,7 @@ const Notifications = () => {
   return (
     <>
       <Breadcrumb />
-      <div className="container mx-auto my-16 w-3/5">
+      <div className="container mx-auto my-16 w-full lg:w-4/5">
         <>
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">
@@ -36,11 +36,11 @@ const Notifications = () => {
             </div>
           )}
           {!isLoading && (
-            <>
+            <div className="flex flex-col gap-1">
               {notifications.map((notification, index) => {
                 return <NotificationCard key={index} notification={notification} />;
               })}
-            </>
+            </div>
           )}
         </>
       </div>

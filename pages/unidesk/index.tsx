@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 
 import UnideskHero from "../../components/unidesk/Estudante/unideskHero/UnideskHero";
@@ -30,10 +31,11 @@ const UnideskEstudante = () => {
   return (
     <div>
       <div>
-        {/* é igual para o senhorio . pensar onde colocar isto para o senhorio tambem */}
         <UnideskHero title="Estudante" />
         <UnideskOptions />
       </div>
     </div>
   );
 };
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

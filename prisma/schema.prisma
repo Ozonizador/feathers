@@ -151,16 +151,30 @@ model Review {
 }
 
 model Notification {
-  id          String   @id @default(uuid()) @db.Uuid
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String           @id @default(uuid()) @db.Uuid
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   title       String
   description String
-  url         String
-  profile     Profile  @relation("notifications", references: [id], fields: [profileId])
-  profileId   String   @db.Uuid
+  type        NotificationType
+  profile     Profile          @relation("notifications", references: [id], fields: [profileId])
+  profileId   String           @db.Uuid
 
   @@map("notifications")
+}
+
+enum NotificationType {
+  STUDENT_EVALUATE_STAY
+  STUDENT_RESERVATION_DECLINED
+  STUDENT_RESERVATION_ACCEPTED
+  STUDENT_UNIHOSTS_SUPPORT
+  STUDENT_COMPLETE_PROFILE
+  LANDLORD_RESERVATION_RECEIVED
+  LANDLORD_UNIHOSTS_SUPPORT
+  LANDLORD_NEW_REVIEW
+  LANDLORD_COMPLETE_PROFILE
+  LANDLORD_COMPLETE_ADVERT
+  BLOG
 }
 
 model Conversation {

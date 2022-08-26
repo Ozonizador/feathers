@@ -16,8 +16,7 @@ interface SectionCardProps {
 }
 
 export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
-  const width = window.innerWidth;
-  const [openMenu, setOpenMenu] = useState<boolean>(width > 992);
+  const [openMenu, setOpenMenu] = useState<boolean>(true);
 
   return (
     <div className="flex cursor-pointer flex-col gap-5 rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-2/6 lg:pb-10">
