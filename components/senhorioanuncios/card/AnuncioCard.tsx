@@ -8,6 +8,7 @@ import { BsThreeDots } from "react-icons/bs";
 import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
 import { useRouter } from "next/router";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
+import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
 
 function EditInactiveIcon(props) {
   return (
@@ -51,9 +52,11 @@ interface AnuncioCardProps {
 
 const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const router = useRouter();
+  const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const editAdvertisement = (event, id: string) => {
     event.preventDefault();
+    setMenuSelectedAdvertisement(advertisement);
     router.push(`/unidesk/senhorio/${id}/details`);
   };
 

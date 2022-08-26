@@ -10,7 +10,7 @@ const Procurar = () => {
         <div className="flex flex-col justify-center  lg:flex-row">
           <SearchInputField />
         </div>
-        <div className="mt-10">
+        <div className="my-10">
           <ProcurarSection />
         </div>
       </div>

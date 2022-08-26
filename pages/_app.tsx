@@ -8,21 +8,24 @@ import "react-toastify/dist/ReactToastify.css";
 import { MainProvider } from "../context/MainProvider";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { ToastContainer } from "react-toastify";
+import { MenuSenhorioProvider } from "../context/MenuSenhorioAnuncioProvider";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <UserProvider autoRefreshToken={true} supabaseClient={supabaseClient}>
         <MainProvider>
-          <Head>
-            <title>Unihosts</title>
-          </Head>
-          <Navbar />
-          <div className="min-h-screen">
-            <Component {...pageProps} />
-            <ToastContainer />
-          </div>
-          <Footer />
+          <MenuSenhorioProvider>
+            <Head>
+              <title>Unihosts</title>
+            </Head>
+            <Navbar />
+            <div className="min-h-screen">
+              <Component {...pageProps} />
+              <ToastContainer />
+            </div>
+            <Footer />
+          </MenuSenhorioProvider>
         </MainProvider>
       </UserProvider>
     </>

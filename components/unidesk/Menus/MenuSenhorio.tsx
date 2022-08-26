@@ -4,62 +4,61 @@ import Link from "next/link";
 import Image from "next/image";
 import { TiLockClosed } from "react-icons/ti";
 import classNames from "classnames";
+import { useSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
 
 interface MenuSenhorioProps {
   activeLink?: string;
-  id?: string;
 }
 
-const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
+const MenuSenhorio = ({ activeLink }: MenuSenhorioProps) => {
   const [summary2, setSummary2] = useState(true);
+  const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
 
   return (
-    <div className="w-80  rounded-2xl bg-terciary-600 p-2">
-      <div className="w-64">
+    <div className="w-80 rounded-2xl bg-terciary-600 p-2">
+      <div>
         <div className="flex justify-start border border-b-primary-500 px-2 align-middle">
-          <h1 className="text-xl font-bold ">Anúncios</h1>
+          <h1 className="py-1 text-xl font-bold">Anúncios</h1>
         </div>
         <div className="flex flex-col justify-start px-2">
           <Link href="/unidesk/senhorio/advertisements">
             <div
-              className={classNames("ml-1 mt-4 cursor-pointer text-base font-bold", {
-                "rounded bg-primary-500 p-2 text-white": activeLink === "advertisements",
+              className={classNames("mt-4 cursor-pointer text-base", {
+                "rounded bg-primary-500 text-white": activeLink === "advertisements",
               })}
             >
               Painel
             </div>
           </Link>
           <div className="flex flex-col gap-2">
-            <div className="mt-2 flex flex-1 items-center justify-between px-2">
-              <div>
-                <p className="">Anúncios</p>
-              </div>
-            </div>
-            {id && (
+            {currentAdvertisement && (
               <>
+                <div className="mt-2 flex flex-1 items-center justify-between">
+                  Anúncio - {currentAdvertisement.title}
+                </div>
                 <div className="flex">
-                  <Link href={`/unidesk/senhorio/${id}/details`}>
+                  <Link href={`/unidesk/senhorio/${currentAdvertisement.id}/details`}>
                     <a>
                       <span className="ml-2">Detalhes do anúncio</span>
                     </a>
                   </Link>
                 </div>
                 <div className="flex">
-                  <Link href={`/unidesk/senhorio/${id}/photos`}>
+                  <Link href={`/unidesk/senhorio/${currentAdvertisement.id}/photos`}>
                     <a>
                       <span className="ml-2">Fotos</span>
                     </a>
                   </Link>
                 </div>
                 <div className="flex">
-                  <Link href={`/unidesk/senhorio/${id}/conditions`}>
+                  <Link href={`/unidesk/senhorio/${currentAdvertisement.id}/conditions`}>
                     <a>
                       <span className="ml-2">Condições e regras</span>
                     </a>
                   </Link>
                 </div>
                 <div className="flex">
-                  <Link href={`/unidesk/senhorio/${id}/prices`}>
+                  <Link href={`/unidesk/senhorio/${currentAdvertisement.id}/prices`}>
                     <a>
                       <span className="ml-2">Preços</span>
                     </a>
@@ -89,7 +88,7 @@ const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
           }}
         >
           <div>
-            <p className="">Uni-controlo</p>
+            <p>Uni-controlo</p>
           </div>
           <Image
             src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
@@ -99,9 +98,9 @@ const MenuSenhorio = ({ activeLink, id }: MenuSenhorioProps) => {
           />
         </div>
         {summary2 && (
-          <div className="flex items-center justify-start align-middle">
+          <div className="mt-2 flex items-center justify-start align-middle">
             <>
-              <div className=" ml-5 flex flex-col gap-2 text-base">
+              <div className="ml-5 flex flex-col gap-2 text-base">
                 <div>
                   <Link href="/unidesk/unicontrolo/guests">Hóspedes</Link>
                 </div>
