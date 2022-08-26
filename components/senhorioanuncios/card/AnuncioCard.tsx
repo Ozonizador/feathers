@@ -63,8 +63,8 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   return (
     <section>
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
-        <div className="flex">
-          <div className="h-40 w-52">
+        <div className="w-full lg:flex">
+          <div className="min-h-40 min-w-52 hidden lg:block">
             <Image
               src={(advertisement.photos && advertisement.photos[0]?.url) || NoPhotoAvailable}
               alt="Foto Quarto"
@@ -74,8 +74,8 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
             />
           </div>
           <div className="ml-3 py-2">
-            <div className="flex flex-row justify-between">
-              <div className="text-xl font-bold ">{advertisement.title}</div>
+            <div className="flex flex-row justify-between pr-2 lg:pr-0">
+              <div className="text-xl font-bold">{advertisement.title}</div>
 
               <div>
                 <div className="text-right">
@@ -114,7 +114,6 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                             )}
                           </Menu.Item>
                         </div>
-                        <div className="px-1 py-1"></div>
                         <div className="px-1 py-1">
                           <Menu.Item>
                             {({ active }) => (

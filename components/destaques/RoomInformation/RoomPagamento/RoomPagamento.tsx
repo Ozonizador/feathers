@@ -12,12 +12,12 @@ import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
 import { addNotification } from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
-import { NOTIFICATION_LINKS, NOTIFICATION_TYPES } from "../../../../models/notification";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import { addConversation } from "../../../../services/conversationService";
 import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { NotificationType } from "../../../../models/notification";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
@@ -46,11 +46,7 @@ export default function RoomPagamento() {
     // get the reservation
     const { data, error } = await addReservation(reservation, profile.id);
     if (!error && data) {
-      const notification = createNotification(
-        NOTIFICATION_TYPES.LANDLORD_RESERVATION_RECEIVED,
-        NOTIFICATION_LINKS.STAY,
-        profile
-      );
+      const notification = createNotification(NotificationType.LANDLORD_RESERVATION_RECEIVED, profile);
 
       await addNotification(notification);
       await createConversation(data.id);

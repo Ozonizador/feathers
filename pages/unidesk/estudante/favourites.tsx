@@ -13,6 +13,7 @@ import { Spinner } from "flowbite-react";
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,11 +37,14 @@ const UnideskFavoritos = () => {
 
   return (
     <section>
-      <div className=" ml-8 mt-24 flex w-4/6 lg:mx-20 lg:items-center lg:align-middle">
+      <div className="ml-8 mt-24 flex w-4/6 lg:mx-28 lg:items-center lg:align-middle">
         <div>
           <Image src={iconfavorito} alt="Favoritos" height={55} width={55} />
         </div>
-        <div className="ml-4 text-xl ">{"Unidesk > Favoritos"}</div>
+        <div className="ml-4 text-xl">
+          <Link href="/unidesk">Unidesk</Link>
+          {" > Favoritos"}
+        </div>
       </div>
 
       <div className="container mx-auto mb-32 mt-12  w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
@@ -51,7 +55,11 @@ const UnideskFavoritos = () => {
           <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
         </div>
 
-        <div className="mx-auto mt-16 flex justify-center gap-10">
+        <div
+          className={classNames("mx-auto mt-16 flex justify-center", {
+            "gap-10": favourites && favourites.length > 0,
+          })}
+        >
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">
               <Spinner color="info" aria-label="loading" size="lg" />
@@ -133,3 +141,5 @@ const UnideskFavoritos = () => {
 };
 
 export default UnideskFavoritos;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

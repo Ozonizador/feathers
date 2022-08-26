@@ -33,11 +33,11 @@ const Anuncios = () => {
 
       <div className="container mx-auto my-16 w-5/6 rounded-2xl  bg-terciary-300 py-20 ">
         <div className="flex flex-col gap-6 lg:flex-row">
-          <div>
+          <div className="flex justify-center lg:block">
             <MenuAnuncio />
           </div>
 
-          <div className="ml-4">
+          <div className="ml-0 lg:ml-4">
             <div className="my-4">Os meus anúncios</div>
             <div className="flex flex-col gap-4">
               {advertisements.map((advertisement) => {

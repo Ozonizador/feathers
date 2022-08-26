@@ -40,11 +40,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...aboutHouse, [space]: amenities });
   };
 
-  const checkIfAboutHousePropertyChecked = (
-    space: AboutHouseSpace,
-    toCheckAmenity: TypeAmenity,
-    expectedValue: boolean
-  ) => {
+  const checkIfAboutHousePropertyChecked = (space: AboutHouseSpace, toCheckAmenity: TypeAmenity) => {
     const { aboutHouse } = advertisement;
     const amenities = aboutHouse[space];
 
@@ -65,18 +61,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.general.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
@@ -95,18 +91,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.livingRoom.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
@@ -125,18 +121,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.bedRoom.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
@@ -155,18 +151,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.bathRoom.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
@@ -185,18 +181,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.exterior.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
@@ -215,18 +211,18 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
             <div className="grid grid-cols-2 gap-2">
               {AboutHouseCommodities.kitchen.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center" key={index}>
+                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="w-40 text-base font-bold">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-6 flex w-10 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div>
                         <div className="flex h-5 items-center">
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
                             value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type, true)}
+                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
                           />
