@@ -8,6 +8,7 @@ import Advertisement from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { getAdvertismentsFromUserId } from "../../../services/advertisementService";
 import DicasCard from "../../../components/senhorioanuncios/DicasCard/DicasCard";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const Anuncios = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -60,3 +61,5 @@ const Anuncios = () => {
 };
 
 export default Anuncios;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

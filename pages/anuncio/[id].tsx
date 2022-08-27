@@ -6,10 +6,8 @@ import SingleRoomGrid from "../../components/destaques/RoomInformation/SingleRoo
 import RoomInformation from "../../components/destaques/RoomInformation/RoomInformation";
 import RoomMap from "../../components/destaques/RoomInformation/RoomMap/RoomMap";
 import RoomPagamento from "../../components/destaques/RoomInformation/RoomPagamento/RoomPagamento";
-import RoomPedido from "../../components/destaques/RoomInformation/RoomPedido/RoomPedido";
 import RoomRating from "../../components/destaques/RoomInformation/RoomRating/RoomRating";
 import RoomSenhorio from "../../components/destaques/RoomInformation/RoomSenhorio/RoomSenhorio";
-import RoomSobreTi from "../../components/destaques/RoomInformation/RoomSobreTi/RoomSobreTi";
 import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSemelhantes/RoomsSemelhantes";
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
@@ -46,8 +44,6 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
 
               <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
                 <RoomPagamento />
-                {/*<RoomSobreTi />
-                <RoomPedido />*/}
               </div>
             </div>
           </div>

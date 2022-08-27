@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { Spinner } from "flowbite-react";
 import { useCallback, useEffect, useState } from "react";
 import Breadcrumb from "../../components/notifications/Breadcrumbs/Breadcrumb";
@@ -49,3 +50,5 @@ const Notifications = () => {
 };
 
 export default Notifications;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

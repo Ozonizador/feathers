@@ -1,6 +1,7 @@
 import BreadCrumbs from "../../../components/unidesk/Senhorio/Reviews/Breadcrumb/Breadcrumbs";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import ReviewInfo from "../../../components/unidesk/Senhorio/Reviews/ReviewInfo/ReviewInfo";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const reviews = () => {
   return (
@@ -21,3 +22,5 @@ const reviews = () => {
 };
 
 export default reviews;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

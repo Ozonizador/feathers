@@ -1,3 +1,4 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import Input from "../../../components/utils/Input";
@@ -72,3 +73,5 @@ const calendar = () => {
 };
 
 export default calendar;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

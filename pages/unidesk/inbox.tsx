@@ -14,6 +14,7 @@ import { ReservationStatus, ReservationStatusLabel } from "../../models/reservat
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import { updateReservationStatusOnDB } from "../../services/reservationService";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 {
   /* page 59 XD */
@@ -252,3 +253,5 @@ const CaixaEntrada = () => {
 };
 
 export default CaixaEntrada;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

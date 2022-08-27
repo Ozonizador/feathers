@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
 import { getCurrentStaysByHostId } from "../../../services/stayService";
 import { StayGuest } from "../../../models/stay";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const UniControloHospedes = () => {
   const { user } = useUser();
@@ -50,3 +51,5 @@ const UniControloHospedes = () => {
 };
 
 export default UniControloHospedes;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

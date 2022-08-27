@@ -1,8 +1,11 @@
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import React from "react";
-import Tabs from "../../../components/reservas/Tabs";
+import ReservasSection from "../../../components/reservas/ReservasSection";
 
 const reservas = () => {
-  return <Tabs />;
+  return <ReservasSection />;
 };
 
 export default reservas;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });

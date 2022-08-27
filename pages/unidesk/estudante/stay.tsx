@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { getCurrentStayByTenantId, getNextStaysByTenantId } from "../../../services/stayService";
 import { StayGuest } from "../../../models/stay";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 /* PAGINA 21 do xd */
 
@@ -122,3 +123,5 @@ const Estadia = () => {
 };
 
 export default Estadia;
+
+export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
