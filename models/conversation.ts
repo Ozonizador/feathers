@@ -1,6 +1,6 @@
 import { Message } from "./message";
 import { Profile } from "./profile";
-import { Reservation } from "./reservation";
+import { Reservation, ReservationWithAdvertisement } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
@@ -16,7 +16,10 @@ export type Conversation = {
   updatedAt?: Date;
 };
 
-export type ConversationWithTenant = Conversation & { tenant: Partial<Profile>; reservation: Partial<Reservation> };
+export type ConversationWithTenant = Conversation & {
+  tenant: Partial<Profile>;
+  reservation: Partial<ReservationWithAdvertisement>;
+};
 
 /* VALUES FOR DB */
 export const CONVERSATION_PROPERTIES = {

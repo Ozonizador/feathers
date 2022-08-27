@@ -1,11 +1,11 @@
 import React from "react";
 import { Avatar } from "flowbite-react";
 import { Profile } from "../../../models/profile";
-import { Reservation, ReservationStatusLabel } from "../../../models/reservation";
+import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../models/reservation";
 
 interface CaixaCardProps {
   profile: Profile;
-  reservation: Partial<Reservation>;
+  reservation: Partial<ReservationWithAdvertisement>;
 }
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {

@@ -4,21 +4,24 @@ import { Stay } from "./stay";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 
-export interface Reservation {
+export type Reservation = {
   id?: string;
   startDate: Date;
   endDate: Date;
   status: ReservationStatus;
   advertisementId: string;
   tenantId: string;
+  stayId?: string;
 
-  advertisement?: Advertisement;
-  tenant?: Profile;
-
-  stay?: Stay;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
+
+export type ReservationWithAdvertisement = Reservation & {
+  advertisement: Partial<Advertisement>;
+  tenant: Pick<Profile, "name">;
+  "advertisement.hostId": string;
+};
 
 export enum ReservationStatus {
   REQUESTED = "REQUESTED",

@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Tab } from "@headlessui/react";
 import { Reservation } from "@prisma/client";
+import { useUser } from "@supabase/auth-helpers-react";
+import {
+  getAllReservationsByHostId,
+  getCurrentStaysByHostId,
+  getNextReservationsByHostId,
+} from "../../services/stayService";
+import { StayGuest } from "../../models/stay";
+import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { ReservationWithAdvertisement } from "../../models/reservation";
 
 const ReservasSection = () => {
   return (
@@ -77,7 +86,32 @@ const ReservasSection = () => {
 };
 
 const CurrentReservationsSection = () => {
-  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const { user } = useUser();
+  const [reservations, setReservations] = useState<StayGuest[]>([]);
+
+  const getCurrentStays = useCallback(async () => {
+    if (user) {
+      const { data, error } = await getCurrentStaysByHostId(user.id);
+      if (!error) {
+        setReservations(data);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    getCurrentStays();
+  }, [getCurrentStays]);
+
+  const formatDate = (date: Date) => {
+    if (!date) return "";
+
+    const newDate = new Date(date);
+    return newDate.toLocaleString("default", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   return (
     <>
@@ -94,43 +128,37 @@ const CurrentReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          <Table.Row className="bg-white ">
-            <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
-            <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">Podo Santos</Table.Cell>
-            <Table.Cell className="text-xl text-gray-700 dark:text-white">20 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-700 dark:text-white">23 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-700 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-            <Table.Cell>
-              <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                Detalhes
-              </a>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row className="bg-white">
-            <Table.Cell className="dark:text-white0 text-xl text-gray-900">Atualmente a hospedar</Table.Cell>
-            <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
-            <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-            <Table.Cell>
-              <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                Detalhes
-              </a>
-            </Table.Cell>
-          </Table.Row>
-
-          <Table.Row className="bg-white ">
-            <Table.Cell className="text-xl text-gray-900 dark:text-white">Atualmente a hospedar</Table.Cell>
-            <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
-            <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
-            <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-            <Table.Cell>
-              <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                Detalhes
-              </a>
-            </Table.Cell>
-          </Table.Row>
+          {!reservations ||
+            (reservations.length == 0 && (
+              <Table.Row>
+                <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
+              </Table.Row>
+            ))}
+          {reservations &&
+            reservations.map((reservation, index) => {
+              return (
+                <Table.Row className="bg-white" key={index}>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                    {reservation.tenant.name}
+                  </Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.startDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.endDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                  <Table.Cell>
+                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a> */}
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
         </Table.Body>
       </Table>
     </>
@@ -138,11 +166,167 @@ const CurrentReservationsSection = () => {
 };
 
 const NextReservationsSection = () => {
-  return <></>;
+  const { user } = useUser();
+  const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
+
+  const getNextReservations = useCallback(async () => {
+    if (user) {
+      const { data, error } = await getNextReservationsByHostId(user.id);
+      if (!error) {
+        setReservations(data);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    getNextReservations();
+  }, [getNextReservations]);
+
+  const formatDate = (date: Date) => {
+    if (!date) return "";
+
+    const newDate = new Date(date);
+    return newDate.toLocaleString("default", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
+  return (
+    <>
+      <Table className="w-full">
+        <Table.Head>
+          <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
+            <div className="my-5"> Estado</div>
+          </Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+
+          <Table.HeadCell></Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
+          {!reservations || (reservations.length == 0 && <div>Sem próximas reservas</div>)}
+          {reservations &&
+            reservations.map((reservation, index) => {
+              return (
+                <Table.Row className="bg-white" key={index}>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                    {reservation.tenant.name}
+                  </Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.startDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.endDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                  <Table.Cell>
+                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a> */}
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+        </Table.Body>
+      </Table>
+    </>
+  );
 };
 
 const AllReservationsSection = () => {
-  return <></>;
+  const { user } = useUser();
+  const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
+
+  const getNextReservations = useCallback(async () => {
+    if (user) {
+      const { data, error } = await getAllReservationsByHostId(user.id);
+      if (!error) {
+        setReservations(data);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    getNextReservations();
+  }, [getNextReservations]);
+
+  const formatDate = (date: Date) => {
+    if (!date) return "";
+
+    const newDate = new Date(date);
+    return newDate.toLocaleString("default", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
+  const checkIntervalForDate = (reservation: ReservationWithAdvertisement) => {
+    const currentDate = new Date();
+
+    if (new Date(reservation.startDate) < currentDate && new Date(reservation.endDate) >= currentDate)
+      return "A decorrer estadia";
+    if (new Date(reservation.startDate) < currentDate && new Date(reservation.endDate) < currentDate)
+      return "Finalizado";
+    if (new Date(reservation.startDate) > currentDate && new Date(reservation.endDate) > currentDate) return "Próxima";
+
+    return "";
+  };
+
+  return (
+    <>
+      <Table className="w-full">
+        <Table.Head>
+          <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
+            <div className="my-5"> Estado</div>
+          </Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+
+          <Table.HeadCell></Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
+          {!reservations || (reservations.length == 0 && <div>Sem reservas</div>)}
+          {reservations &&
+            reservations.map((reservation, index) => {
+              return (
+                <Table.Row className="bg-white" key={index}>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {checkIntervalForDate(reservation)}
+                  </Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                    {reservation.tenant.name}
+                  </Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.startDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                    {formatDate(reservation.endDate)}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                  <Table.Cell>
+                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a> */}
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+        </Table.Body>
+      </Table>
+    </>
+  );
 };
 
-export default Reservas;
+export default ReservasSection;

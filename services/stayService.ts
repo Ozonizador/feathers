@@ -1,6 +1,6 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
-import { ADVERTISEMENT_PROPERTIES } from "../models/advertisement";
+import { ReservationWithAdvertisement, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 import { Stay, StayGuest, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
 
 export const addStay = async (stay: Stay) => {
@@ -24,7 +24,8 @@ export const getNextStaysByTenantId = async (tenantId: string) => {
     .from<StayGuest>(STAYS_TABLE_NAME)
     .select("*, advertisement:advertisementId(*)")
     .eq(STAY_TABLE.TENANT_ID, tenantId)
-    .gte(STAY_TABLE.START_DATE, date);
+    .gte(STAY_TABLE.START_DATE, date)
+    .gte(STAY_TABLE.END_DATE, date);
 
   return { data, error };
 };
@@ -59,11 +60,35 @@ export const getCurrentStaysByHostId = async (hostId: string) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from(STAYS_TABLE_NAME)
+    .from<StayGuest>(STAYS_TABLE_NAME)
     .select("*, tenant:tenantId(name, avatarUrl), advertisement:advertisementId(id, type, place, hostId)")
     .eq("advertisement.hostId", hostId)
     .gte(STAY_TABLE.START_DATE, date)
     .lte(STAY_TABLE.END_DATE, date);
+
+  return { data, error };
+};
+
+export const getNextReservationsByHostId = async (hostId: string) => {
+  const date = new Date().toISOString();
+
+  const { data, error } = await supabaseClient
+    .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+    .select("*, tenant:tenantId(name, avatarUrl), advertisement:advertisementId(id, type, place, hostId)")
+    .eq("advertisement.hostId", hostId)
+    .gte(RESERVATION_TABLE.START_DATE, date)
+    .gte(RESERVATION_TABLE.END_DATE, date);
+
+  return { data, error };
+};
+
+export const getAllReservationsByHostId = async (hostId: string) => {
+  const date = new Date().toISOString();
+
+  const { data, error } = await supabaseClient
+    .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+    .select("*, tenant:tenantId(name, avatarUrl), advertisement:advertisementId(id, type, place, hostId)")
+    .eq("advertisement.hostId", hostId);
 
   return { data, error };
 };

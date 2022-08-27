@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getConversationsFromUser } from "../../services/conversationService";
 import { getMessagesFromConversationId, insertMessageOnConversation } from "../../services/messageService";
 import { Message } from "../../models/message";
-import { Conversation, ConversationWithTenant } from "../../models/conversation";
+import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
 import { Avatar } from "flowbite-react";

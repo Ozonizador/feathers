@@ -42,4 +42,8 @@ export type StayDates = Pick<Stay, "startDate" | "endDate">;
 
 /* FOR GUESTS PANEL */
 
-export type StayGuest = Stay & { advertisement: Partial<Advertisement>; tenant: Partial<Profile> };
+export type StayGuest = Stay & {
+  advertisement: Partial<Advertisement>;
+  tenant: Pick<Profile, "name" | "avatarUrl">;
+  "advertisement.hostId": string;
+};
