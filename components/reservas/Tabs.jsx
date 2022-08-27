@@ -1,10 +1,78 @@
 import React from "react";
 import { Table } from "flowbite-react";
+import { Tab } from "@headlessui/react";
 
-const Tabs = () => {
+const Reservas = () => {
   return (
-    <section className="container mx-auto  pt-20 pb-5">
-      <ul
+    <section className="container mx-auto pt-20 pb-5">
+      <Tab.Group>
+        <Tab.List className="flex gap-5">
+          <Tab>Ativas</Tab>
+          <Tab>Próximas</Tab>
+          <Tab>Todas</Tab>
+        </Tab.List>
+        <Tab.Panels>
+          <Tab.Panel>
+            <Table className="w-full">
+              <Table.Head>
+                <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
+                  <div className="my-5"> Estado</div>
+                </Table.HeadCell>
+                <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+                <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
+                <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
+                <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+
+                <Table.HeadCell></Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                <Table.Row className="bg-white ">
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                    Podo Santos
+                  </Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">20 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">23 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">Quarto privado em Aveiro</Table.Cell>
+                  <Table.Cell>
+                    <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a>
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row className="bg-white">
+                  <Table.Cell className="dark:text-white0 text-xl text-gray-900">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
+                  <Table.Cell>
+                    <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a>
+                  </Table.Cell>
+                </Table.Row>
+
+                <Table.Row className="bg-white ">
+                  <Table.Cell className="text-xl text-gray-900 dark:text-white">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
+                  <Table.Cell>
+                    <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
+                      Detalhes
+                    </a>
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+          </Tab.Panel>
+          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>Content 3</Tab.Panel>
+        </Tab.Panels>
+      </Tab.Group>
+      {/* <ul
         className="nav nav-tabs mb-4 flex list-none flex-col flex-wrap border-b-0 pl-0 md:flex-row"
         id="tabs-tab"
         role="tablist"
@@ -91,75 +159,9 @@ const Tabs = () => {
             Todas
           </a>
         </li>
-      </ul>
-      <div className="tab-content" id="tabs-tabContent">
-        <div className="tab-pane fade show active" id="tabs-home" role="tabpanel" aria-labelledby="tabs-home-tab">
-          <Table className="w-full">
-            <Table.Head>
-              <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
-                <div className="my-5"> Estado</div>
-              </Table.HeadCell>
-              <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
-              <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
-              <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
-              <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
-              <Table.HeadCell></Table.HeadCell>
-
-              <Table.HeadCell></Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              <Table.Row className="bg-white ">
-                <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
-                <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">Podo Santos</Table.Cell>
-                <Table.Cell className="text-xl text-gray-700 dark:text-white">20 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-700 dark:text-white">23 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-700 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-                <Table.Cell>
-                  <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                    Detalhes
-                  </a>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white">
-                <Table.Cell className="dark:text-white0 text-xl text-gray-900">Atualmente a hospedar</Table.Cell>
-                <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
-                <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-                <Table.Cell>
-                  <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                    Detalhes
-                  </a>
-                </Table.Cell>
-              </Table.Row>
-
-              <Table.Row className="bg-white ">
-                <Table.Cell className="text-xl text-gray-900 dark:text-white">Atualmente a hospedar</Table.Cell>
-                <Table.Cell className="text-xl text-gray-900 dark:text-white">Podo Santos</Table.Cell>
-                <Table.Cell className="text-xl text-gray-900 dark:text-white">20 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-900 dark:text-white">23 de Junho de 2022</Table.Cell>
-                <Table.Cell className=" text-xl text-gray-900 dark:text-white">Quarto privado em Aveiro</Table.Cell>
-                <Table.Cell>
-                  <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                    Detalhes
-                  </a>
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          </Table>
-        </div>
-        <div className="tab-pane fade" id="tabs-profile" role="tabpanel" aria-labelledby="tabs-profile-tab">
-          Tab 2 content
-        </div>
-        <div className="tab-pane fade" id="tabs-messages" role="tabpanel" aria-labelledby="tabs-profile-tab">
-          Tab 3 content
-        </div>
-        <div className="tab-pane fade" id="tabs-contact" role="tabpanel" aria-labelledby="tabs-contact-tab">
-          Tab 4 content
-        </div>
-      </div>
+      </ul> */}
     </section>
   );
 };
 
-export default Tabs;
+export default Reservas;
