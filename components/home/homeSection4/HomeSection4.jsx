@@ -19,7 +19,7 @@ export default function HomeSection4() {
             <article className="flex justify-center rounded-2xl bg-gray-300 bg-[url('/images//place-peniche.jpg')] bg-cover bg-no-repeat p-10 align-middle lg:px-16 lg:py-32">
               <h3 className="text-5xl font-bold text-white">Peniche</h3>
             </article>
-            <article className="flex justify-center rounded-2xl bg-gray-300 bg-[url('/images//place-brazil.jpg')] bg-cover bg-no-repeat p-10 align-middle lg:px-16 lg:py-32">
+            <article className="flex justify-center rounded-2xl bg-gray-300 bg-[url('/images//place-brazil.png')] bg-cover bg-no-repeat p-10 align-middle lg:px-16 lg:py-32">
               <h3 className="text-5xl font-bold text-white">Rio Maior</h3>
             </article>
             <article className="flex justify-center rounded-2xl bg-gray-300 bg-[url('/images//place-santarem.jpg')] bg-cover bg-no-repeat p-10 align-middle lg:px-16 lg:py-32">

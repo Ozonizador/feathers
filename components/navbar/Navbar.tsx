@@ -45,7 +45,11 @@ export const Navbar = () => {
     }
   };
 
-  const openMobileMenu = () => {};
+  const logout = () => {
+    supabaseClient.auth.signOut();
+    router.push("/");
+  };
+
   return (
     <header>
       {/* DESKTOP */}
@@ -67,10 +71,12 @@ export const Navbar = () => {
             {/* SOCIAL MEDIA + FLAG */}
             <div className="flex lg:ml-auto">
               <div className="my-auto">
-                <Socials type="primary" />
+                <Socials type="primary" />p
               </div>
-              <div className="my-auto flex h-4">
-                <Image src={ukFlag} alt="" />
+              <div className="flex">
+                <div className="my-auto mt-3 h-7 w-7">
+                  <Image src={ukFlag} alt="" />
+                </div>
                 <select className="ml-2 border-none">
                   <option value="eng" disabled>
                     EN
@@ -90,7 +96,7 @@ export const Navbar = () => {
             </div>
             <div
               className="my-auto ml-auto cursor-pointer rounded-full border border-black p-2 lg:hidden"
-              onClick={() => setMobileOpen(true)}
+              onClick={() => setMobileOpen(!mobileOpen)}
             >
               <CgMenuLeft size={28} />
             </div>
@@ -243,7 +249,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
+                                  <div className="py-1" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
@@ -288,7 +294,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
+                                  <div className="py-1" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
