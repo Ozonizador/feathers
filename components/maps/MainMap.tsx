@@ -4,6 +4,7 @@ import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
 import { Icon } from "leaflet";
 import { Coordinates } from "../../models/utils";
+import { useGetUserCoordinates } from "../../context/MainProvider";
 
 interface MainMapProps {
   currentMapCoords: Coordinates;
@@ -23,12 +24,12 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
 
   let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
 
-  function SetViewOnClick({ coords }) {
+  const SetViewOnClick = ({ coords }) => {
     const map = useMap();
     map.setView(coords, map.getZoom());
 
     return null;
-  }
+  };
 
   return (
     <>
@@ -53,15 +54,11 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
               const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
               return (
                 <>
-                  <Marker position={[markerLat, markerLong]} icon={icon}>
-                    {/* <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup> */}
-                  </Marker>
-                  <SetViewOnClick coords={[longitude, latitude]} />
+                  <Marker position={[markerLat, markerLong]} icon={icon}></Marker>
                 </>
               );
             })}
+          <SetViewOnClick coords={[longitude, latitude]} />
         </MapContainer>
       )}
     </>

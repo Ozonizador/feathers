@@ -33,7 +33,7 @@ export const getCoordsFromPoint = (coordinates: Coordinates) => {
   if (coordinates) {
     return { latitude: coordinates[1], longitude: coordinates[0] };
   } else {
-    return { latitude: 0, longitude: 0 };
+    return { latitude: null, longitude: null };
   }
 };
 

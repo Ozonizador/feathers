@@ -47,7 +47,7 @@ export default function HomeSection3() {
 
         <div className="block lg:hidden">
           <div className="mb-12 mt-10 flex justify-center align-middle">
-            <Link href="/destaques">
+            <Link href="/procurar">
               <a className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle">
                 Ver Mais
                 <div>

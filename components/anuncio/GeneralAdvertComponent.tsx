@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useGetUserCoordinates } from "../../context/MainProvider";
 import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { Coordinates, MapCoordinates } from "../../models/utils";
 import Input from "../utils/Input";
@@ -13,8 +14,13 @@ interface GeneralAdvertComponentProps {
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
+  const userlocation = useGetUserCoordinates();
   const createCurrentMapLocation = () => {
-    return advertisement.geom.coordinates as Coordinates;
+    if (advertisement.geom) {
+      return advertisement.geom.coordinates as Coordinates;
+    } else {
+      return userlocation;
+    }
   };
 
   return (
