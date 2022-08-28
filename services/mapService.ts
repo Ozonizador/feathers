@@ -36,3 +36,14 @@ export const getCoordsFromPoint = (coordinates: Coordinates) => {
     return { latitude: 0, longitude: 0 };
   }
 };
+
+export const getResultsFromSearch = async (address: string) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.mapbox.com/${GEOCODING_API}/${MAPBOX_VERSION}/mapbox.places/${address}.json?types=address&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`
+    );
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
