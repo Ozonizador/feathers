@@ -2,11 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
 import Select from "react-select";
 import { SelectAmenityLabel, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { Spinner } from "flowbite-react";
+import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { Coordinates } from "../../../models/utils";
 import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
 import debounce from "debounce";
@@ -15,7 +14,10 @@ import {
   useCurrentProcurarAdvertisementContext,
   useSetComoditiesContext,
   useSetFiltersContext,
+  useSetPageAdvertisementinfo,
 } from "../../../context/ProcurarAdvertisementsProvider";
+import { useGetUserCoordinates } from "../../../context/MainProvider";
+import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -26,8 +28,8 @@ export default function ProcurarSection() {
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
   const setFilters = useSetFiltersContext();
   const setComoditiesFilter = useSetComoditiesContext();
-
-  const [currentMapCoordinates, setCurrentMapCoordinates] = useState<Coordinates | null>(null);
+  const setPage = useSetPageAdvertisementinfo();
+  const currentMapCoordinates = useGetUserCoordinates();
 
   const router = useRouter();
   let { address, startDate, endDate } = router.query;
@@ -52,13 +54,6 @@ export default function ProcurarSection() {
 
   useEffect(() => {
     locateByQuery();
-    navigator.geolocation.getCurrentPosition(
-      function (pos) {
-        setCurrentMapCoordinates([pos.coords.latitude, pos.coords.longitude]);
-      },
-      function errorCallback(error) {},
-      { timeout: 10000 }
-    );
   }, [locateByQuery]);
 
   // Filters
@@ -74,7 +69,19 @@ export default function ProcurarSection() {
 
   // TODO finish this
   const getAdvertisementsMarkers = () => {
-    return [];
+    const markers = [];
+    for (let advertisement of advertisements) {
+      if (advertisement.geom) {
+        markers.push(advertisement.geom.coordinates);
+      }
+    }
+    return markers;
+  };
+
+  const getTotalPages = () => {
+    if (count !== 0) {
+      return Math.ceil(count / PAGE_NUMBER_COUNT);
+    } else return 1;
   };
 
   return (
@@ -178,20 +185,15 @@ export default function ProcurarSection() {
             )}
           </div>
 
-          {/* {advertisementsInfo.advertisements.length !== 0 &&
-                advertisementsInfo.count !== advertisementsInfo.advertisements.length && (
-                  <div className="row mb-5">
-                    <div className="col-md-2"></div>
-                    <div className="flex flex-1 justify-around px-5">
-                      <Pagination
-                        currentPage={page}
-                        totalPages={advertisementsInfo.count / PAGE_NUMBER_COUNT}
-                        onPageChange={(page) => setPage(page)}
-                      />
-                    </div>
-                    <div className="col-md-5"></div>
-                  </div>
-                )} */}
+          {advertisements && advertisements.length !== 0 && count !== advertisements.length && (
+            <div className="row mb-5">
+              <div className="col-md-2"></div>
+              <div className="flex flex-1 justify-around px-5">
+                <Pagination currentPage={page} totalPages={getTotalPages()} onPageChange={(page) => setPage(page)} />
+              </div>
+              <div className="col-md-5"></div>
+            </div>
+          )}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:h-[500px]">
           <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers()} />

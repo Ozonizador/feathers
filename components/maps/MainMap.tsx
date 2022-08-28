@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
@@ -14,6 +14,7 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
+
   useEffect(() => {
     if (currentMapCoords) {
       setLoading(false);
@@ -21,6 +22,13 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
   }, [currentMapCoords]);
 
   let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
+
+  function SetViewOnClick({ coords }) {
+    const map = useMap();
+    map.setView(coords, map.getZoom());
+
+    return null;
+  }
 
   return (
     <>
@@ -50,6 +58,7 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
                       A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup> */}
                   </Marker>
+                  <SetViewOnClick coords={[longitude, latitude]} />
                 </>
               );
             })}

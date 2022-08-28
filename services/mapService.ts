@@ -1,6 +1,7 @@
 //api.mapbox.com/{api_service}/{version}
 
 import axios from "axios";
+import { GiConsoleController } from "react-icons/gi";
 import { Coordinates, MapCoordinates } from "../models/utils";
 
 const GEOCODING_API = "geocoding";
@@ -26,7 +27,6 @@ export const getCoordinatesFromSearch = async (address: string) => {
 export const createPointForDatabase = (point: MapCoordinates) => {
   const { latitude, longitude } = getCoordsFromPoint(point.coordinates);
   return `POINT(${longitude} ${latitude})`;
-  // return `ST_GeomFromText(ST_MakePoint(${longitude} ${latitude}), 4326);`;
 };
 
 export const getCoordsFromPoint = (coordinates: Coordinates) => {

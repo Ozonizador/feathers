@@ -2,6 +2,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile } from "../models/profile";
+import { Coordinates } from "../models/utils";
 import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
@@ -15,12 +16,15 @@ const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
   toggleUserType: "ESTUDANTE",
   profile: null,
 });
-const SetUnihostsWebsiteContext = createContext<
-  Dispatch<SetStateAction<GeneralUnihostInformation>>
->(() => {});
+const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
+
+/* user location */
+const UserLocationContext = createContext<Coordinates | null>(null);
+const SetUserLocationContext = createContext<Dispatch<SetStateAction<Coordinates>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
   const { user } = useUser();
+  const [userLocationCoordinates, setUserLocationCoordinates] = useState<Coordinates | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "ESTUDANTE",
     profile: null,
@@ -38,12 +42,23 @@ export const MainProvider = ({ children }): JSX.Element => {
     if (user) {
       checkUserProfile(user.id);
     }
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        setUserLocationCoordinates([pos.coords.latitude, pos.coords.longitude]);
+      },
+      function errorCallback(error) {},
+      { timeout: 10000 }
+    );
   }, [user, checkUserProfile]);
 
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>
       <SetUnihostsWebsiteContext.Provider value={setCurrentUnihostState}>
-        {children}
+        <UserLocationContext.Provider value={userLocationCoordinates}>
+          <SetUserLocationContext.Provider value={setUserLocationCoordinates}>
+            {children}
+          </SetUserLocationContext.Provider>
+        </UserLocationContext.Provider>
       </SetUnihostsWebsiteContext.Provider>
     </UnihostsWebsiteContext.Provider>
   );
@@ -84,4 +99,10 @@ export const useSetProfileFavouritesInformation = () => {
       setCurrentInfo({ ...currentInfo, profile: data });
     }
   };
+};
+
+/* COORDINATES */
+
+export const useGetUserCoordinates = () => {
+  return useContext(UserLocationContext);
 };
