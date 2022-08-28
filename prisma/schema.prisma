@@ -41,6 +41,7 @@ model Profile {
 
 model Advertisement {
   id                String                   @id @default(uuid()) @db.Uuid
+  slug              String                   @unique
   type              TypeRoom
   place             String
   street            String
