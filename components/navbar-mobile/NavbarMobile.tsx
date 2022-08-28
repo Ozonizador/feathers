@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useUser } from "@supabase/auth-helpers-react";
-
+import person from "../../public/images/person.png";
 /* import person image */
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
-
+import { TiLockClosed } from "react-icons/ti";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -33,6 +34,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
   };
 
   const [summary2, setSummary2] = useState(false);
+  const [menuaberto, setMenuaberto] = useState(false);
 
   return (
     <>
@@ -44,6 +46,9 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
       >
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
+            <Link href="/">
+              <div className="mb-3 font-bold">Home</div>
+            </Link>
             <div
               className="flex flex-1 items-center "
               onClick={() => {
@@ -75,17 +80,15 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 </>
               </div>
             )}
-
             <div className="mt-3">
               <Link href="/blog">Blog</Link>
             </div>
-
             <div className="mt-3">
               <Link href="/contactos">Contactos</Link>
             </div>
           </div>
-          <div className="mt-7 flex justify-center rounded-lg bg-gray-100 py-4">
-            <div className="flex flex-1">
+          <div className="mt-7  rounded-3xl bg-gray-100 py-4 px-8">
+            <div className="align-center flex flex-1 justify-center">
               <div>
                 {/* <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
                           Modo Senhorio
@@ -94,22 +97,140 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 <Switch
                   checked={true}
                   onChange={toggleSenhorioEstudante}
-                  className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500"
+                  className="relative mx-5 mt-2 inline-flex h-8 w-20 items-center rounded-full bg-primary-500"
                 >
                   <span
                     className={`${
-                      toggleUserType === "senhorio" ? "translate-x-6" : "translate-x-1"
+                      toggleUserType === "senhorio" ? "translate-x-14" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
                 <span className="ml-2">Senhorio</span>
               </div>
             </div>
+            <div className="my-10 flex">
+              <div className=" flex">
+                {user?.user_metadata?.avatar_url && (
+                  <Image
+                    unoptimized={true}
+                    src={user?.user_metadata?.avatar_url || person}
+                    height={32}
+                    width={36}
+                    alt=""
+                    className="rounded-full"
+                  />
+                )}
+                <div className="ml-2">Rodrigo</div>
+              </div>
+              <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
+                <Image
+                  src={!menuaberto ? "/images/down-arrow.png" : "/images/up-arrow.png"}
+                  height={22}
+                  width={22}
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <div className={classNames("mb-3 w-full  rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
+              {toggleUserType == "estudante" && (
+                <>
+                  <div className="mt-3 py-1 px-2">
+                    <a className="py-1 " href="/unidesk">
+                      Uni-desk
+                    </a>
+                  </div>
+                  <div className="flex items-center py-1 px-2 align-middle">
+                    <div>
+                      <a className="py-1" href="/unidesk/estudante/stay">
+                        Minha Estadia
+                      </a>
+                    </div>
+                    <div className="ml-3 flex h-4 w-4 items-center justify-center rounded-full border border-black p-2 align-middle text-sm font-semibold">
+                      5
+                    </div>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/estudante/favourites">
+                      Favoritos
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/inbox">
+                      Caixa de Entrada
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/notifications">
+                      Notificações
+                    </a>
+                  </div>
+                  <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-3"></div>
+                  <div className="py-1 px-2 text-gray-500">
+                    <a className="py-1" href="/admin">
+                      Conta
+                    </a>
+                  </div>
+                  <div className="py-1 px-2 text-gray-500">
+                    <a className="py-1" href="/faqs">
+                      Ajuda
+                    </a>
+                  </div>
+                  <div className="py-1 px-2 text-gray-500">
+                    <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
+                      Sair
+                    </div>
+                  </div>
+                </>
+              )}
+              {toggleUserType == "senhorio" && (
+                <>
+                  <div className="mt-3 py-1 px-2">
+                    <a className="py-1 " href="/unidesk">
+                      Uni-desk
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/inbox">
+                      Caixa de Entrada
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/senhorio/advertisements">
+                      Anúncios
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1" href="/unidesk/unicontrolo/guests">
+                      Uni-controlo
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1 " href="/unidesk/notifications">
+                      Notificações
+                    </a>
+                  </div>
+                  <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-1"></div>
+                  <div className="py-1 px-2">
+                    <a className="py-1 text-gray-500" href="/admin">
+                      Conta
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <a className="py-1 text-gray-500" href="/notifications">
+                      Ajuda
+                    </a>
+                  </div>
+                  <div className="py-1 px-2">
+                    <div className="py-1 text-gray-500" onClick={() => supabaseClient.auth.signOut()}>
+                      Sair
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
-        <button className="bg-primary-500 p-2" onClick={() => setOpenMobile()}>
-          Close Mobile Navbar - Apagar depois
-        </button>
       </div>
     </>
   );
