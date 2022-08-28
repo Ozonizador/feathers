@@ -16,7 +16,7 @@ import Advertisement, { ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } fro
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 
 type PageParams = {
-  id: string;
+  slug: string;
 };
 
 interface AnuncioProps {
@@ -56,10 +56,10 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
 export const getServerSideProps = async ({
   params,
 }: GetStaticPropsContext<PageParams>): Promise<GetServerSidePropsResult<AnuncioProps>> => {
-  const id = params?.id;
+  const slug = params?.slug;
 
   /* Not Found */
-  if (!id) {
+  if (!slug) {
     return {
       notFound: true,
     };
@@ -68,12 +68,12 @@ export const getServerSideProps = async ({
   const { data: advertisement, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
     .select(`*, host:hostId(*)`)
-    .eq(ADVERTISEMENT_PROPERTIES.ID, id)
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
     .single();
 
   if (error) {
-    console.log(`[Supabase]: Failed to fetch the advertisement: ${id}`, error.message);
+    console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
   }
 
   if (advertisement) {

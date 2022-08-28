@@ -113,6 +113,7 @@ export const ADVERTISEMENT_PROPERTIES = {
   GEOM: "geom",
   STAY_START_DATE: "stay.startDate",
   STAY_END_DATE: "stay.endDate",
+  SLUG: "slug",
 } as const;
 
 export const HOUSE_RULES_NAMING = {

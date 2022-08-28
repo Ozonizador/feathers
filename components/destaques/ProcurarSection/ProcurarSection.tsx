@@ -175,7 +175,7 @@ export default function ProcurarSection() {
                   {advertisements &&
                     advertisements.map((advertisement, index) => {
                       return (
-                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.id)} key={index}>
+                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.slug)} key={index}>
                           <RoomCard advertisement={advertisement} />
                         </div>
                       );

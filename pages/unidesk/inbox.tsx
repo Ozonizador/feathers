@@ -93,11 +93,14 @@ const CaixaEntrada = () => {
     <>
       <Breadcrumb />
       <div className="mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
-        <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 align-middle">
-          <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
+        {!conversations || (conversations.length === 0 && <div className="p-4">Não tem conversações</div>)}
+        {conversations && conversations.length > 0 && (
+          <>
+            <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 align-middle">
+              <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
-          <div className="mr-8 flex w-full items-center justify-end align-middle">
-            {/* <div>
+              <div className="mr-8 flex w-full items-center justify-end align-middle">
+                {/* <div>
               <a>
                 <GoSearch className="text-xl" />
               </a>
@@ -109,151 +112,153 @@ const CaixaEntrada = () => {
                 Filter
               </a>
             </div> */}
-          </div>
-          {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
-        </div>
-
-        <div className="flex flex-col">
-          <div className="flex flex-row">
-            <div className="flex w-1/5 flex-col border-r border-terciary-500">
-              <div>
-                {conversations.map((conversation, index) => {
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setCurrentConversation(conversation)}
-                      className={classNames("cursor-pointer p-1", {
-                        "bg-primary-100": currentConversation?.id === conversation.id,
-                      })}
-                    >
-                      <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
-                    </div>
-                  );
-                })}
               </div>
+              {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
             </div>
 
-            <div className="flex max-h-screen w-full flex-col gap-2">
-              <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2">
-                {messages.map((message, index, array) => {
-                  return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
-                })}
-              </div>
-
-              <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
-                <div className="w-10/12">
-                  <form onSubmit={(e) => sendMessage(e)}>
-                    <input
-                      className="w-full border-0 p-4 text-xs outline-0"
-                      placeholder="Type a message..."
-                      type="text"
-                      value={currentMessage}
-                      onChange={(e) => setCurrentMessage(e.target.value)}
-                    />
-                    <input type="submit" className="hidden" />
-                  </form>
+            <div className="flex flex-col">
+              <div className="flex flex-row">
+                <div className="flex w-1/5 flex-col border-r border-terciary-500">
+                  <div>
+                    {conversations.map((conversation, index) => {
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => setCurrentConversation(conversation)}
+                          className={classNames("cursor-pointer p-1", {
+                            "bg-primary-100": currentConversation?.id === conversation.id,
+                          })}
+                        >
+                          <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}
-                {/* <div className="mt-5 flex gap-4">
+
+                <div className="flex max-h-screen w-full flex-col gap-2">
+                  <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2">
+                    {messages.map((message, index, array) => {
+                      return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
+                    })}
+                  </div>
+
+                  <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
+                    <div className="w-10/12">
+                      <form onSubmit={(e) => sendMessage(e)}>
+                        <input
+                          className="w-full border-0 p-4 text-xs outline-0"
+                          placeholder="Type a message..."
+                          type="text"
+                          value={currentMessage}
+                          onChange={(e) => setCurrentMessage(e.target.value)}
+                        />
+                        <input type="submit" className="hidden" />
+                      </form>
+                    </div>
+                    {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}
+                    {/* <div className="mt-5 flex gap-4">
                   <AiOutlinePicture className="text-xl text-slate-400" />
                   <FiPaperclip className="text-xl text-slate-400" />
                   <BiSmile className="text-xl text-slate-400" />
                 </div>*/}
+                  </div>
+                </div>
+                {currentConversation && currentConversation.hostId === profile.id && (
+                  <>
+                    <div className="w-1/3 border-l border-terciary-500 p-2">
+                      {currentConversation && (
+                        <>
+                          <div className="flex">
+                            <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
+                            <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                          </div>
+                          <div className="my-4 flex flex-row gap-3">
+                            <div>
+                              <Avatar
+                                img={
+                                  currentConversation.tenant?.avatarUrl
+                                    ? currentConversation.tenant?.avatarUrl
+                                    : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                }
+                                rounded={true}
+                                status="away"
+                                size="md"
+                                statusPosition="bottom-right"
+                              />
+                            </div>
+                            <div>
+                              <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
+                              <div className="text-sm">
+                                {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement.type]} em
+                        ${currentConversation.reservation.advertisement.place}`}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="my-4 flex justify-center">
+                            {`${formatDate(currentConversation.reservation.startDate)} - ${formatDate(
+                              currentConversation.reservation.endDate
+                            )}`}
+                          </div>
+                          {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
+                            <div className="flex justify-around gap-5">
+                              <button
+                                className="bg-primary-500 p-2 text-white"
+                                onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)}
+                              >
+                                Aceitar
+                              </button>
+
+                              <button
+                                className="bg-neutral-300 p-2"
+                                onClick={() => updateReservationStatus(ReservationStatus.REJECTED)}
+                              >
+                                Rejeitar
+                              </button>
+                            </div>
+                          )}
+                          {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
+                            <div className="flex justify-around">
+                              <button
+                                className="bg-primary-500 p-2 text-white"
+                                onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
+                              >
+                                Aceitar
+                              </button>
+
+                              <button
+                                className="bg-neutral-300 p-2"
+                                onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
+                              >
+                                Rejeitar
+                              </button>
+                            </div>
+                          )}
+                          {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (
+                            <div className="text-primary-500">Reserva aceite</div>
+                          )}
+                          {currentConversation.reservation.status === ReservationStatus.REJECTED && (
+                            <div>Reserva rejeitada</div>
+                          )}
+                          {currentConversation.reservation.status === ReservationStatus.CHANGE_ACCEPTED && (
+                            <div className="text-primary-500">Alteração reserva aceite</div>
+                          )}
+                          {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
+                            <div>Alteração reserva rejeitada</div>
+                          )}
+
+                          <a href="">
+                            <div>Mostrar perfil de {currentConversation.tenant.name}</div>
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
-            {currentConversation && currentConversation.hostId === profile.id && (
-              <>
-                <div className="w-1/3 border-l border-terciary-500 p-2">
-                  {currentConversation && (
-                    <>
-                      <div className="flex">
-                        <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
-                        <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
-                      </div>
-                      <div className="my-4 flex flex-row gap-3">
-                        <div>
-                          <Avatar
-                            img={
-                              currentConversation.tenant?.avatarUrl
-                                ? currentConversation.tenant?.avatarUrl
-                                : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                            }
-                            rounded={true}
-                            status="away"
-                            size="md"
-                            statusPosition="bottom-right"
-                          />
-                        </div>
-                        <div>
-                          <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
-                          <div className="text-sm">
-                            {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement.type]} em
-                        ${currentConversation.reservation.advertisement.place}`}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="my-4 flex justify-center">
-                        {`${formatDate(currentConversation.reservation.startDate)} - ${formatDate(
-                          currentConversation.reservation.endDate
-                        )}`}
-                      </div>
-                      {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
-                        <div className="flex justify-around gap-5">
-                          <button
-                            className="bg-primary-500 p-2 text-white"
-                            onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)}
-                          >
-                            Aceitar
-                          </button>
-
-                          <button
-                            className="bg-neutral-300 p-2"
-                            onClick={() => updateReservationStatus(ReservationStatus.REJECTED)}
-                          >
-                            Rejeitar
-                          </button>
-                        </div>
-                      )}
-                      {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
-                        <div className="flex justify-around">
-                          <button
-                            className="bg-primary-500 p-2 text-white"
-                            onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
-                          >
-                            Aceitar
-                          </button>
-
-                          <button
-                            className="bg-neutral-300 p-2"
-                            onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
-                          >
-                            Rejeitar
-                          </button>
-                        </div>
-                      )}
-                      {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (
-                        <div className="text-primary-500">Reserva aceite</div>
-                      )}
-                      {currentConversation.reservation.status === ReservationStatus.REJECTED && (
-                        <div>Reserva rejeitada</div>
-                      )}
-                      {currentConversation.reservation.status === ReservationStatus.CHANGE_ACCEPTED && (
-                        <div className="text-primary-500">Alteração reserva aceite</div>
-                      )}
-                      {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
-                        <div>Alteração reserva rejeitada</div>
-                      )}
-
-                      <a href="">
-                        <div>Mostrar perfil de {currentConversation.tenant.name}</div>
-                      </a>
-                    </>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </>
   );

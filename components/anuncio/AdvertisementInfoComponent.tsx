@@ -18,13 +18,12 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
         />
 
-        <label className="mb-4 block text-2xl font-bold text-gray-700">None Interno</label>
+        <label className="mb-4 block text-2xl font-bold text-gray-700">Nome Interno</label>
         <input
-          className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
-          placeholder="Máximo de 50 palavras"
+          className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2 shadow-sm"
           maxLength={50}
-          defaultValue={advertisement.title}
-          onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TITLE, e.target.value)}
+          disabled
+          defaultValue={advertisement.slug}
         />
 
         <div className="mt-12">
