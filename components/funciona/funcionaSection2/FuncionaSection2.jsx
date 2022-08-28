@@ -45,7 +45,7 @@ const FuncionaSection2 = () => {
         />
       </div>
 
-      <div className="container mx-auto flex flex-row  justify-between  ">
+      <div className="container mx-auto flex w-full flex-row justify-between">
         <FuncionaSection2Card
           img="/images/55.png"
           icon="/images/5.png"

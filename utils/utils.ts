@@ -17,3 +17,14 @@ export const dateToFormat = (date: Date) => {
 export const createRandomUniqWord = () => {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 };
+
+// Debounce function
+export function debounceFn(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}

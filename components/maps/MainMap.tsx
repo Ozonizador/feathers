@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
 import { Icon } from "leaflet";
-import { Coordinates } from "../../models/utils";
+import { Coordinates, GEO } from "../../models/utils";
 
 interface MainMapProps {
   currentMapCoords: Coordinates;
@@ -14,10 +14,12 @@ interface MainMapProps {
 const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMapProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
+  const [mapCenter, setMapCenter] = useState<GEO>({ latitude: 0, longitude: 0 });
 
   useEffect(() => {
     if (currentMapCoords) {
+      const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
+      setMapCenter({ latitude, longitude });
       setLoading(false);
     }
   }, [currentMapCoords]);
@@ -26,8 +28,9 @@ const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMap
 
   const SetViewOnClick = ({ coords }) => {
     const map = useMap();
-    map.setView(coords, map.getZoom());
-
+    if (coords) {
+      map.setView(coords, map.getZoom());
+    }
     return null;
   };
 
@@ -40,7 +43,7 @@ const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMap
       )}
       {!loading && (
         <MapContainer
-          center={[latitude, longitude]}
+          center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
           zoom={13}
           scrollWheelZoom={false}
           style={{ height: "100%", width: "100%" }}
@@ -56,12 +59,17 @@ const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMap
                 const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
                 return (
                   <>
-                    <Marker position={[markerLat, markerLong]} icon={icon} draggable={draggableMarker}></Marker>
+                    <Marker
+                      position={[markerLat, markerLong]}
+                      icon={icon}
+                      draggable={draggableMarker}
+                      key={index}
+                    ></Marker>
                   </>
                 );
               }
             })}
-          <SetViewOnClick coords={[longitude, latitude]} />
+          <SetViewOnClick coords={{ lat: mapCenter.latitude, lng: mapCenter.longitude }} />
         </MapContainer>
       )}
     </>

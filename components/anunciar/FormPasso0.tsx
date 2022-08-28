@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -7,15 +7,13 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
-import { createPointForDatabase, getCoordinatesFromSearch, getResultsFromSearch } from "../../services/mapService";
+import { getResultsFromSearch } from "../../services/mapService";
 import { toast } from "react-toastify";
-import debounce from "debounce";
-import { useEffect } from "react";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { MapCoordinates } from "../../models/utils";
+import { debounceFn } from "../../utils/utils";
 
 const FormPasso0 = () => {
-  const [message, setMessage] = useState("");
-
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -24,25 +22,21 @@ const FormPasso0 = () => {
   const changeAdvertisementProperty = useSetAdvertisementProperty();
   const setAdvertisement = useSetAdvertisement();
 
-  const streeProperties = ["place", "street", "streetNumber", "postalCode"];
-
   const nextStep = async (e) => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
-    const { type, street, floor, place, streetNumber, postalCode } = advertisement;
+    const { type, street, place, streetNumber, postalCode } = advertisement;
 
     if (!type || !street || !place || !streetNumber || !postalCode) {
-      setMessage("Campos por preencher.");
+      toast.error("Campos por preencher.");
       return;
     }
 
     const { data, error } = await addAdvertisement(advertisement);
     if (data) {
       setAdvertisement(data);
-
-      const nextStep = currentStep + 1;
-      setCurrentStep(nextStep);
+      setCurrentStep(currentStep + 1);
     } else {
       toast.error("An error occured");
     }
@@ -50,27 +44,22 @@ const FormPasso0 = () => {
 
   const onChangeProperty = (property, value) => {
     changeAdvertisementProperty(property, value);
-    if (streeProperties.includes(property)) {
-      debounce(checkPossibilites, 2000);
-    }
+    debounceFn(checkPossibilites, 3000);
   };
 
-  const checkPossibilites = useCallback(async () => {
-    const street = getCurrentStreet();
+  const checkPossibilites = () => {
+    const street = `${advertisement.street} ${advertisement.place} ${advertisement.streetNumber} ${advertisement.postalCode}`;
     console.log(street);
-    const { data, error } = await getResultsFromSearch(street);
-    if (!error && data && data.length > 0) {
-      const feature = data[0];
-      const geometry = feature.geometry;
-      const postGisPoint = createPointForDatabase(geometry);
-      changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, postGisPoint);
-    }
-    console.log(data, error);
-  }, []);
-
-  const getCurrentStreet = () => {
-    const { street, place, streetNumber, postalCode } = advertisement;
-    return `${street} ${place} ${streetNumber} ${postalCode}`;
+    getResultsFromSearch(street)
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          const feature = data[0];
+          const geometry = feature.geometry as MapCoordinates;
+          console.log(street);
+          changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry.coordinates);
+        }
+      })
+      .catch((err) => {});
   };
 
   return (
@@ -88,7 +77,6 @@ const FormPasso0 = () => {
             Seguinte &#8594;
           </button>
         </div>
-        {message && <div className="text-red-600">{message}</div>}
       </div>
     </>
   );
