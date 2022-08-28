@@ -231,7 +231,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/help">
+                                  <MyLink customClass="py-1" href="/faqs">
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>

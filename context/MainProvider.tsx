@@ -1,19 +1,19 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { Profile } from "../models/profile";
+import { Profile, UserTypes } from "../models/profile";
 import { Coordinates } from "../models/utils";
 import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
 interface GeneralUnihostInformation {
-  toggleUserType: "SENHORIO" | "ESTUDANTE";
+  toggleUserType: UserTypes;
   profile: Profile | null;
 }
 
 /* Contexts */
 const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
-  toggleUserType: "ESTUDANTE",
+  toggleUserType: "estudante",
   profile: null,
 });
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
@@ -26,7 +26,7 @@ export const MainProvider = ({ children }): JSX.Element => {
   const { user } = useUser();
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<Coordinates | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
-    toggleUserType: "ESTUDANTE",
+    toggleUserType: "estudante",
     profile: null,
   });
 
@@ -76,7 +76,7 @@ export const useProfileInformation = () => {
 export const useToggleUserType = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   const currentInfo = useContext(UnihostsWebsiteContext);
-  return (userType: "SENHORIO" | "ESTUDANTE"): void => {
+  return (userType: UserTypes): void => {
     setCurrentInfo({ ...currentInfo, toggleUserType: userType });
   };
 };

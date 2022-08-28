@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Accordion } from "flowbite-react";
 import Change from "../../toggle/toggle";
 import { UserTypes } from "../../../models/profile";
+import { useGetUserType } from "../../../context/MainProvider";
 
 const FaqEstudante = () => {
-  const [selectedFaq, setSelectedFaq] = useState<UserTypes>("estudante");
+  const { toggleUserType } = useGetUserType();
+  const [selectedFaq, setSelectedFaq] = useState<UserTypes>(toggleUserType);
 
   return (
     <>
