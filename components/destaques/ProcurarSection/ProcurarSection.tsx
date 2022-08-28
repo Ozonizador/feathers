@@ -124,7 +124,7 @@ export default function ProcurarSection() {
                   );
                 })}
               </select>
-              <div className="flex flex-row justify-start gap-4">
+              <div className="flex h-20 flex-row justify-start gap-4">
                 <div className="w-1/2">
                   <div className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white p-1 text-sm lg:w-52">
                     <div className="mb-1 text-sm">Preço</div>
@@ -140,7 +140,7 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="w-1/2">
+                <div className="hidden w-1/2">
                   <Select
                     id="comodities-select"
                     placeholder="Comodities"
@@ -153,7 +153,7 @@ export default function ProcurarSection() {
                 </div>
               </div>
 
-              <div className="my-2 ml-auto mt-0">
+              <div className="my-2 ml-auto mt-0 hidden">
                 <Link href="/procurar">
                   <a>
                     <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">

@@ -15,6 +15,7 @@ import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import { updateReservationStatusOnDB } from "../../services/reservationService";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import classNames from "classnames";
 
 {
   /* page 59 XD */
@@ -117,10 +118,16 @@ const CaixaEntrada = () => {
         <div className="flex flex-col">
           <div className="flex flex-row">
             <div className="flex w-1/5 flex-col border-r border-terciary-500">
-              <div className="p-1">
+              <div>
                 {conversations.map((conversation, index) => {
                   return (
-                    <div key={index} onClick={() => setCurrentConversation(conversation)} className="cursor-pointer">
+                    <div
+                      key={index}
+                      onClick={() => setCurrentConversation(conversation)}
+                      className={classNames("cursor-pointer p-1", {
+                        "bg-primary-100": currentConversation?.id === conversation.id,
+                      })}
+                    >
                       <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
                     </div>
                   );

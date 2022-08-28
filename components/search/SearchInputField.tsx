@@ -34,7 +34,7 @@ export const SearchInputField = () => {
           />
         </div>
 
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-2 lg:gap-0">
           <div className="my-2 w-1/2 lg:mx-2">
             <FeatherDatePicker
               date={startDate}

@@ -55,12 +55,12 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
       <div className="mt-10 mb-4 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div>
           <div className="cards">
-            <div className="flex flex-1 flex-col items-center lg:flex-row">
-              <div className="w-full lg:w-1/3 lg:pl-4">
+            <div className="flex-col items-center lg:flex lg:flex-row">
+              <div className="relative h-96 w-full lg:w-1/3 lg:pl-4">
                 {advertisement.photos && advertisement.photos[0] ? (
-                  <Image src={advertisement.photos[0].url} alt="..." height={256} width={256} />
+                  <Image src={advertisement.photos[0].url} alt="..." layout="fill" />
                 ) : (
-                  <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" />
+                  <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" layout="fill" />
                 )}
               </div>
               <div className="p-3 lg:w-2/4">
