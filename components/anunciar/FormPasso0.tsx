@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -7,8 +7,11 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
-import { createPointForDatabase, getCoordinatesFromSearch } from "../../services/mapService";
+import { createPointForDatabase, getCoordinatesFromSearch, getResultsFromSearch } from "../../services/mapService";
 import { toast } from "react-toastify";
+import debounce from "debounce";
+import { useEffect } from "react";
+import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
 const FormPasso0 = () => {
   const [message, setMessage] = useState("");
@@ -21,6 +24,8 @@ const FormPasso0 = () => {
   const changeAdvertisementProperty = useSetAdvertisementProperty();
   const setAdvertisement = useSetAdvertisement();
 
+  const streeProperties = ["place", "street", "streetNumber", "postalCode"];
+
   const nextStep = async (e) => {
     e.preventDefault();
 
@@ -32,12 +37,7 @@ const FormPasso0 = () => {
       return;
     }
 
-    const { geometry } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
-
-    const postGisPoint = createPointForDatabase(geometry);
-    const newAdvertisement = { ...advertisement, geom: postGisPoint ? postGisPoint : null };
-
-    const { data, error } = await addAdvertisement(newAdvertisement);
+    const { data, error } = await addAdvertisement(advertisement);
     if (data) {
       setAdvertisement(data);
 
@@ -50,6 +50,27 @@ const FormPasso0 = () => {
 
   const onChangeProperty = (property, value) => {
     changeAdvertisementProperty(property, value);
+    if (streeProperties.includes(property)) {
+      debounce(checkPossibilites, 2000);
+    }
+  };
+
+  const checkPossibilites = useCallback(async () => {
+    const street = getCurrentStreet();
+    console.log(street);
+    const { data, error } = await getResultsFromSearch(street);
+    if (!error && data && data.length > 0) {
+      const feature = data[0];
+      const geometry = feature.geometry;
+      const postGisPoint = createPointForDatabase(geometry);
+      changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, postGisPoint);
+    }
+    console.log(data, error);
+  }, []);
+
+  const getCurrentStreet = () => {
+    const { street, place, streetNumber, postalCode } = advertisement;
+    return `${street} ${place} ${streetNumber} ${postalCode}`;
   };
 
   return (

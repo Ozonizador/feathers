@@ -4,14 +4,14 @@ import { Spinner } from "flowbite-react";
 import { getCoordsFromPoint } from "../../services/mapService";
 import { Icon } from "leaflet";
 import { Coordinates } from "../../models/utils";
-import { useGetUserCoordinates } from "../../context/MainProvider";
 
 interface MainMapProps {
   currentMapCoords: Coordinates;
   markers?: Coordinates[];
+  draggableMarker?: boolean;
 }
 
-const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
+const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMapProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
@@ -49,14 +49,17 @@ const MainMap = ({ currentMapCoords, markers }: MainMapProps) => {
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
+
           {markers &&
             markers.map((marker, index) => {
-              const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
-              return (
-                <>
-                  <Marker position={[markerLat, markerLong]} icon={icon}></Marker>
-                </>
-              );
+              if (marker) {
+                const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
+                return (
+                  <>
+                    <Marker position={[markerLat, markerLong]} icon={icon} draggable={draggableMarker}></Marker>
+                  </>
+                );
+              }
             })}
           <SetViewOnClick coords={[longitude, latitude]} />
         </MapContainer>

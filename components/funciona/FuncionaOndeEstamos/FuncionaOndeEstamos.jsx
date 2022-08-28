@@ -11,7 +11,7 @@ const FuncionaOndeEstamos = () => {
         <div className="w-full">
           <h1 className="mb-4 text-center text-3xl font-bold lg:text-6xl">Onde Estamos?</h1>
           <div className="flex flex-col gap-10 lg:flex-row">
-            <div className="relative w-full lg:w-1/3">
+            <div className="lg:min-h-96 relative h-96 w-full lg:w-1/3">
               <Image src="/images/mapa_unihosts_funciona.jpeg" layout="fill" alt="" className="rounded-lg" />
             </div>
             <div className="sm:w-full lg:w-2/3">

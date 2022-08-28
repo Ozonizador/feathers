@@ -71,7 +71,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 <>
                   <div className="flex flex-col gap-2 text-base">
                     <div className="mt-2">
-                      <Link href="/unidesk/unicontrolo/guests">Como funciona?</Link>
+                      <Link href="/funciona">Como funciona?</Link>
                     </div>
                     <div>
                       <Link href="/unidesk/unicontrolo/guests">Anunciar!</Link>
@@ -120,7 +120,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                     className="rounded-full"
                   />
                 )}
-                <div className="ml-2">Rodrigo</div>
+                <div className="my-auto ml-2">{user?.user_metadata.name}</div>
               </div>
               <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
                 <Image

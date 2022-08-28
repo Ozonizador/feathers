@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Blog() {
   return (
-    <section>
+    <section className="pb-10">
       <div>
         <h2 className="my-10 text-5xl font-bold text-black">Blog</h2>
         <div className=" grid gap-8 lg:grid-cols-4">
