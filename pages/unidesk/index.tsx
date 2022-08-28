@@ -10,8 +10,8 @@ export default function Unidesk() {
   const { toggleUserType } = useGetUserType();
   return (
     <div>
-      {toggleUserType === "SENHORIO" && <UnideskSenhorio />}
-      {toggleUserType === "ESTUDANTE" && <UnideskEstudante />}
+      {toggleUserType === "senhorio" && <UnideskSenhorio />}
+      {toggleUserType === "estudante" && <UnideskEstudante />}
     </div>
   );
 }

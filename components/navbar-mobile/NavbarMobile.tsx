@@ -36,7 +36,12 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
 
   return (
     <>
-      <div className={classNames("flex w-full flex-col px-5 transition-all ease-in-out", { hidden: !open })}>
+      <div
+        className={classNames("flex w-full transform flex-col px-5 transition-[display]", {
+          hidden: !open,
+          block: open,
+        })}
+      >
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
             <div

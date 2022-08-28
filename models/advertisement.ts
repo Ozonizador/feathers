@@ -8,6 +8,7 @@ export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
 export type Advertisement = {
   id?: string;
+  slug: string;
   typeFlexHost: FlexHostType;
   place: string;
   street: string;

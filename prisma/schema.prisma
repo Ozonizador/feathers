@@ -12,6 +12,7 @@ datasource db {
 
 model Profile {
   id             String    @id @default(uuid()) @db.Uuid
+  slug           String    @unique
   name           String?
   surname        String?
   nationality    String?

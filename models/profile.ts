@@ -16,6 +16,7 @@ export interface Profile {
   avatarUrl: string;
   favouriteRooms: string[];
   createdAt: Date;
+  slug: string;
 }
 
 export enum Gender {

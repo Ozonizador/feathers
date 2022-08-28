@@ -30,18 +30,19 @@ export const MainProvider = ({ children }): JSX.Element => {
     profile: null,
   });
 
-  const checkUserProfile = useCallback(async (userID) => {
+  const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
-    const { data, error } = await checkProfileAndCreate(userID);
-    if (!error) {
-      setCurrentUnihostState((c) => ({ ...c, profile: data }));
+    if (user) {
+      const { data, error } = await checkProfileAndCreate(user.id);
+      if (!error) {
+        setCurrentUnihostState((c) => ({ ...c, profile: data }));
+      }
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    if (user) {
-      checkUserProfile(user.id);
-    }
+    checkUserProfile();
+
     navigator.geolocation.getCurrentPosition(
       function (pos) {
         setUserLocationCoordinates([pos.coords.latitude, pos.coords.longitude]);
@@ -49,7 +50,7 @@ export const MainProvider = ({ children }): JSX.Element => {
       function errorCallback(error) {},
       { timeout: 10000 }
     );
-  }, [user, checkUserProfile]);
+  }, [checkUserProfile]);
 
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>

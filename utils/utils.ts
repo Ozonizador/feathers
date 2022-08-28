@@ -12,3 +12,8 @@ export const dateToFormat = (date: Date) => {
 
   return `${year}-${month}-${day}`;
 };
+
+/* unique word */
+export const createRandomUniqWord = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};

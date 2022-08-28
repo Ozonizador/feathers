@@ -1,5 +1,3 @@
-import { BsFilterCircle } from "react-icons/bs";
-import { GoSearch } from "react-icons/go";
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
@@ -99,7 +97,7 @@ const CaixaEntrada = () => {
           <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
           <div className="mr-8 flex w-full items-center justify-end align-middle">
-            <div>
+            {/* <div>
               <a>
                 <GoSearch className="text-xl" />
               </a>
@@ -110,7 +108,7 @@ const CaixaEntrada = () => {
                 <BsFilterCircle className="mr-2 text-xl" />
                 Filter
               </a>
-            </div>
+            </div> */}
           </div>
           {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
         </div>
@@ -246,7 +244,9 @@ const CaixaEntrada = () => {
                         <div>Alteração reserva rejeitada</div>
                       )}
 
-                      <div>Mostrar perfil de {currentConversation.tenant.name}</div>
+                      <a href="">
+                        <div>Mostrar perfil de {currentConversation.tenant.name}</div>
+                      </a>
                     </>
                   )}
                 </div>
