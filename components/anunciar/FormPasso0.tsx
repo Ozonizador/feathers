@@ -54,7 +54,7 @@ const FormPasso0 = () => {
 
   return (
     <>
-      <section className="mx-auto flex w-full justify-center gap-8 lg:my-5 lg:px-32">
+      <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
         <GeneralAdvertComponent advertisement={advertisement} onChange={onChangeProperty} />
       </section>
       <div className="mt-1">
