@@ -16,16 +16,19 @@ import ukFlag from "../../public/images/icon-uk.jpg";
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
+import NavbarMobile from "../navbar-mobile/NavbarMobile";
 
 export const Navbar = () => {
   const { user } = useUser();
   const router = useRouter();
 
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   const setModoSenhorio = () => {
-    toggleUserTypeContext("SENHORIO");
+    toggleUserTypeContext("senhorio");
     router.push("/unidesk");
   };
 
@@ -35,16 +38,17 @@ export const Navbar = () => {
       return;
     }
 
-    if (toggleUserType === "ESTUDANTE") {
-      toggleUserTypeContext("SENHORIO");
+    if (toggleUserType === "estudante") {
+      toggleUserTypeContext("senhorio");
     } else {
-      toggleUserTypeContext("ESTUDANTE");
+      toggleUserTypeContext("estudante");
     }
   };
 
   const openMobileMenu = () => {};
   return (
     <header>
+      {/* DESKTOP */}
       <nav className="mx-6 mb-5 lg:mx-28">
         <div>
           <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
@@ -84,7 +88,10 @@ export const Navbar = () => {
                 </a>
               </Link>
             </div>
-            <div className="my-auto ml-auto rounded-full border border-black p-2 lg:hidden" onClick={openMobileMenu}>
+            <div
+              className="my-auto ml-auto cursor-pointer rounded-full border border-black p-2 lg:hidden"
+              onClick={() => setMobileOpen(true)}
+            >
               <CgMenuLeft size={28} />
             </div>
 
@@ -165,7 +172,7 @@ export const Navbar = () => {
                       >
                         <span
                           className={`${
-                            toggleUserType === "SENHORIO" ? "translate-x-6" : "translate-x-1"
+                            toggleUserType === "senhorio" ? "translate-x-6" : "translate-x-1"
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
@@ -197,7 +204,7 @@ export const Navbar = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute z-50 flex flex-col bg-white p-2 px-4 shadow-md">
-                            {toggleUserType == "ESTUDANTE" && (
+                            {toggleUserType == "estudante" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
@@ -242,7 +249,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                               </>
                             )}
-                            {toggleUserType == "SENHORIO" && (
+                            {toggleUserType == "senhorio" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
@@ -298,6 +305,8 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
+      {/* MOBILE */}
+      <NavbarMobile open={mobileOpen} setOpenMobile={() => setMobileOpen(false)} />
     </header>
   );
 };
