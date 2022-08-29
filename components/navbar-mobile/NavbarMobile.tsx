@@ -97,11 +97,11 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 <Switch
                   checked={true}
                   onChange={toggleSenhorioEstudante}
-                  className="relative mx-5 mt-2 inline-flex h-8 w-20 items-center rounded-full bg-primary-500"
+                  className="relative mx-5 mt-2 inline-flex h-8 w-16 items-center rounded-full bg-primary-500"
                 >
                   <span
                     className={`${
-                      toggleUserType === "senhorio" ? "translate-x-14" : "translate-x-1"
+                      toggleUserType === "senhorio" ? "translate-x-11" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
