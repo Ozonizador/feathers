@@ -11,6 +11,7 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
   onChange: (property, value) => void;
+  markerLocation?: Coordinates;
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
@@ -25,11 +26,14 @@ const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertCompon
 
   return (
     <>
-      {!advertisement.geom && <div>Não tem localização</div>}
       {advertisement.geom !== null && (
         <>
           <div className="h-96 w-full px-6">
-            <MapWithNoSSR currentMapCoords={createCurrentMapLocation()} />
+            <MapWithNoSSR
+              currentMapCoords={createCurrentMapLocation()}
+              draggableMarker={true}
+              markers={[advertisement.geom]}
+            />
           </div>
         </>
       )}

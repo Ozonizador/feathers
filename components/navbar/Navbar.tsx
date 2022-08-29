@@ -71,7 +71,7 @@ export const Navbar = () => {
             {/* SOCIAL MEDIA + FLAG */}
             <div className="flex lg:ml-auto">
               <div className="my-auto">
-                <Socials type="primary" />p
+                <Socials type="primary" />
               </div>
               <div className="flex">
                 <div className="my-auto mt-3 h-7 w-7">

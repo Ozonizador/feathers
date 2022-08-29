@@ -13,7 +13,7 @@ const MenuEstudante = () => {
       <div className="flex flex-col justify-start px-2">
         <div className="flex flex-col gap-2">
           <>
-            <div className="mt-7 mb-4 flex rounded-lg bg-slate-400 py-4">
+            <div className="mt-7 mb-4 flex rounded-lg bg-primary-500 py-4">
               <Link href="/unidesk/estudante/stay">
                 <a>
                   <span className="ml-2">Informações gerais</span>

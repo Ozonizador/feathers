@@ -84,6 +84,8 @@ export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
     const { data, error, count } = await getFilteredAdvertisements(advertisementsInfo.page, currentFilter);
     if (!error) {
       setAdvertisementsInfo((oldState) => ({ ...oldState, advertisements: data, count, loading: false }));
+    } else {
+      setAdvertisementsInfo((oldState) => ({ ...oldState, advertisements: [], count, loading: false }));
     }
   }, [advertisementsInfo.page, currentFilter]);
 

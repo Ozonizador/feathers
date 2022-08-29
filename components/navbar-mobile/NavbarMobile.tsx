@@ -39,7 +39,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
   return (
     <>
       <div
-        className={classNames("flex w-full transform flex-col px-5 transition-[display]", {
+        className={classNames("flex w-full transform flex-col px-5 transition-[display] lg:hidden", {
           hidden: !open,
           block: open,
         })}
@@ -71,7 +71,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 <>
                   <div className="flex flex-col gap-2 text-base">
                     <div className="mt-2">
-                      <Link href="/unidesk/unicontrolo/guests">Como funciona?</Link>
+                      <Link href="/funciona">Como funciona?</Link>
                     </div>
                     <div>
                       <Link href="/unidesk/unicontrolo/guests">Anunciar!</Link>
@@ -120,7 +120,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                     className="rounded-full"
                   />
                 )}
-                <div className="ml-2">Rodrigo</div>
+                <div className="my-auto ml-2">{user?.user_metadata.name}</div>
               </div>
               <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
                 <Image
@@ -136,45 +136,45 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
               {toggleUserType == "estudante" && (
                 <>
                   <div className="mt-3 py-1 px-2">
-                    <a className="py-1 " href="/unidesk">
+                    <Link className="py-1 " href="/unidesk">
                       Uni-desk
-                    </a>
+                    </Link>
                   </div>
                   <div className="flex items-center py-1 px-2 align-middle">
                     <div>
-                      <a className="py-1" href="/unidesk/estudante/stay">
+                      <Link className="py-1" href="/unidesk/estudante/stay">
                         Minha Estadia
-                      </a>
+                      </Link>
                     </div>
                     <div className="ml-3 flex h-4 w-4 items-center justify-center rounded-full border border-black p-2 align-middle text-sm font-semibold">
                       5
                     </div>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/estudante/favourites">
+                    <Link className="py-1" href="/unidesk/estudante/favourites">
                       Favoritos
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/inbox">
+                    <Link className="py-1" href="/unidesk/inbox">
                       Caixa de Entrada
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/notifications">
+                    <Link className="py-1" href="/unidesk/notifications">
                       Notificações
-                    </a>
+                    </Link>
                   </div>
                   <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-3"></div>
                   <div className="py-1 px-2 text-gray-500">
-                    <a className="py-1" href="/admin">
+                    <Link className="py-1" href="/admin">
                       Conta
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2 text-gray-500">
-                    <a className="py-1" href="/faqs">
+                    <Link className="py-1" href="/faqs">
                       Ajuda
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2 text-gray-500">
                     <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
@@ -186,40 +186,40 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
               {toggleUserType == "senhorio" && (
                 <>
                   <div className="mt-3 py-1 px-2">
-                    <a className="py-1 " href="/unidesk">
+                    <Link className="py-1 " href="/unidesk">
                       Uni-desk
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/inbox">
+                    <Link className="py-1" href="/unidesk/inbox">
                       Caixa de Entrada
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/senhorio/advertisements">
+                    <Link className="py-1" href="/unidesk/senhorio/advertisements">
                       Anúncios
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1" href="/unidesk/unicontrolo/guests">
+                    <Link className="py-1" href="/unidesk/unicontrolo/guests">
                       Uni-controlo
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1 " href="/unidesk/notifications">
+                    <Link className="py-1 " href="/unidesk/notifications">
                       Notificações
-                    </a>
+                    </Link>
                   </div>
                   <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-1"></div>
                   <div className="py-1 px-2">
-                    <a className="py-1 text-gray-500" href="/admin">
+                    <Link className="py-1 text-gray-500" href="/admin">
                       Conta
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <a className="py-1 text-gray-500" href="/notifications">
+                    <Link className="py-1 text-gray-500" href="/notifications">
                       Ajuda
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-1 px-2">
                     <div className="py-1 text-gray-500" onClick={() => supabaseClient.auth.signOut()}>
