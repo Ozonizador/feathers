@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -7,13 +7,20 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
-import { getResultsFromSearch } from "../../services/mapService";
 import { toast } from "react-toastify";
+import { getResultsFromSearch } from "../../services/mapService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
-import { debounceFn } from "../../utils/utils";
 
+const SEARCH_PROPERTIES = [
+  ADVERTISEMENT_PROPERTIES.PLACE,
+  ADVERTISEMENT_PROPERTIES.POSTAL_CODE,
+  ADVERTISEMENT_PROPERTIES.STREET_NUMBER,
+  ADVERTISEMENT_PROPERTIES.STREET,
+];
 const FormPasso0 = () => {
+  /* STEPS */
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -44,23 +51,24 @@ const FormPasso0 = () => {
 
   const onChangeProperty = (property, value) => {
     changeAdvertisementProperty(property, value);
-    debounceFn(checkPossibilites, 3000);
+    if (SEARCH_PROPERTIES.includes(property)) {
+      // console.log("aaaab");
+      //  searchByAddress();
+    }
   };
 
-  const checkPossibilites = () => {
-    const street = `${advertisement.street} ${advertisement.place} ${advertisement.streetNumber} ${advertisement.postalCode}`;
-    console.log(street);
-    getResultsFromSearch(street)
-      .then(({ data, error }) => {
-        if (!error && data && data.length > 0) {
-          const feature = data[0];
-          const geometry = feature.geometry as MapCoordinates;
-          console.log(street);
-          changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry.coordinates);
-        }
-      })
-      .catch((err) => {});
+  const checkPossibilites = async (address) => {
+    console.log(address);
+    const { data, error } = await getResultsFromSearch(address);
+
+    if (!error && data && data.length > 0) {
+      const feature = data[0];
+      const geometry = feature.geometry as MapCoordinates;
+      changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
+    }
   };
+
+  const searchByAddress = _.debounce(checkPossibilites, 400);
 
   return (
     <>

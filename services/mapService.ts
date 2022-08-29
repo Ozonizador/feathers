@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { GiConsoleController } from "react-icons/gi";
-import { Coordinates, MapCoordinates } from "../models/utils";
+import { MapCoordinates } from "../models/utils";
 
 const GEOCODING_API = "geocoding";
 const MAPBOX_VERSION = "v5";
@@ -25,16 +25,8 @@ export const getCoordinatesFromSearch = async (address: string) => {
 };
 
 export const createPointForDatabase = (point: MapCoordinates) => {
-  const { latitude, longitude } = getCoordsFromPoint(point.coordinates);
+  const { latitude, longitude } = point.coordinates;
   return `POINT(${longitude} ${latitude})`;
-};
-
-export const getCoordsFromPoint = (coordinates: Coordinates) => {
-  if (coordinates) {
-    return { latitude: coordinates[1], longitude: coordinates[0] };
-  } else {
-    return { latitude: null, longitude: null };
-  }
 };
 
 export const getResultsFromSearch = async (address: string) => {

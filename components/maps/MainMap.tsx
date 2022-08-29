@@ -1,51 +1,55 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { Spinner } from "flowbite-react";
-import { getCoordsFromPoint } from "../../services/mapService";
 import { Icon } from "leaflet";
-import { Coordinates, GEO } from "../../models/utils";
+import { GEO } from "../../models/utils";
 
 interface MainMapProps {
-  currentMapCoords: Coordinates;
-  markers?: Coordinates[];
+  currentMapCoords: GEO;
+  showCenterMarker: boolean;
   draggableMarker?: boolean;
+  allowZoom?: boolean;
+  markers?: GEO[];
 }
 
-const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMapProps) => {
-  const [loading, setLoading] = useState<boolean>(true);
+const MainMap = ({
+  currentMapCoords,
+  markers,
+  draggableMarker = false,
+  allowZoom = false,
+  showCenterMarker = true,
+}: MainMapProps) => {
+  const [mapCenter, setMapCenter] = useState<GEO | null>(null);
 
-  const [mapCenter, setMapCenter] = useState<GEO>({ latitude: 0, longitude: 0 });
+  const LocationMarker = () => {
+    const [position, setPosition] = useState(null);
+    const map = useMapEvents({
+      click() {
+        map.locate();
+      },
+      locationfound(e) {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
 
-  useEffect(() => {
-    if (currentMapCoords) {
-      const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
-      setMapCenter({ latitude, longitude });
-      setLoading(false);
-    }
-  }, [currentMapCoords]);
+    return position === null ? null : <Marker position={position} icon={icon} draggable={draggableMarker}></Marker>;
+  };
 
   let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
 
-  const SetViewOnClick = ({ coords }) => {
-    const map = useMap();
-    if (coords) {
-      map.setView(coords, map.getZoom());
+  useEffect(() => {
+    if (currentMapCoords !== null) {
+      setMapCenter(currentMapCoords);
     }
-    return null;
-  };
+  }, [currentMapCoords]);
 
   return (
     <>
-      {loading && (
-        <div className="mt-32 flex flex-1 justify-center">
-          <Spinner color="info" aria-label="loading" size="lg" />
-        </div>
-      )}
-      {!loading && (
+      {mapCenter && (
         <MapContainer
           center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
           zoom={13}
-          scrollWheelZoom={false}
+          scrollWheelZoom={allowZoom}
           style={{ height: "100%", width: "100%" }}
         >
           <TileLayer
@@ -56,22 +60,18 @@ const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMap
           {markers &&
             markers.map((marker, index) => {
               if (marker) {
-                const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
+                const { latitude, longitude } = marker;
                 return (
                   <>
-                    <Marker
-                      position={[markerLat, markerLong]}
-                      icon={icon}
-                      draggable={draggableMarker}
-                      key={index}
-                    ></Marker>
+                    <Marker position={{ lat: latitude, lng: longitude }} key={index}></Marker>
                   </>
                 );
               }
             })}
-          <SetViewOnClick coords={{ lat: mapCenter.latitude, lng: mapCenter.longitude }} />
+          <LocationMarker />
         </MapContainer>
       )}
+      {/* )} */}
     </>
   );
 };

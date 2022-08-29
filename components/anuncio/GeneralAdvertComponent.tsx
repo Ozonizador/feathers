@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { useGetUserCoordinates } from "../../context/MainProvider";
 import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
-import { Coordinates, MapCoordinates } from "../../models/utils";
+import { GEO } from "../../models/utils";
 import Input from "../utils/Input";
 
 const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
@@ -11,14 +11,15 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
   onChange: (property, value) => void;
-  markerLocation?: Coordinates;
+  markerLocation?: GEO;
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
+
   const createCurrentMapLocation = () => {
     if (advertisement.geom) {
-      return advertisement.geom.coordinates as Coordinates;
+      return advertisement.geom.coordinates as GEO;
     } else {
       return userlocation;
     }
@@ -32,7 +33,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertCompon
             <MapWithNoSSR
               currentMapCoords={createCurrentMapLocation()}
               draggableMarker={true}
-              markers={[advertisement.geom]}
+              showCenterMarker={true}
             />
           </div>
         </>

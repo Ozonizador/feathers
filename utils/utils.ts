@@ -19,12 +19,12 @@ export const createRandomUniqWord = () => {
 };
 
 // Debounce function
-export function debounceFn(func, timeout = 300) {
-  let timer;
+export const debounceFn = (callback, wait) => {
+  let timeoutId = null;
   return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      func.apply(this, args);
-    }, timeout);
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback.apply(null, args);
+    }, wait);
   };
-}
+};

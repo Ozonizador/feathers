@@ -2,7 +2,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
-import { Coordinates } from "../models/utils";
+import { GEO } from "../models/utils";
 import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
@@ -19,12 +19,12 @@ const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
 
 /* user location */
-const UserLocationContext = createContext<Coordinates | null>(null);
-const SetUserLocationContext = createContext<Dispatch<SetStateAction<Coordinates>>>(() => {});
+const UserLocationContext = createContext<GEO | null>(null);
+const SetUserLocationContext = createContext<Dispatch<SetStateAction<GEO>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
   const { user } = useUser();
-  const [userLocationCoordinates, setUserLocationCoordinates] = useState<Coordinates | null>(null);
+  const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "estudante",
     profile: null,
@@ -45,7 +45,7 @@ export const MainProvider = ({ children }): JSX.Element => {
 
     navigator.geolocation.getCurrentPosition(
       function (pos) {
-        setUserLocationCoordinates([pos.coords.latitude, pos.coords.longitude]);
+        setUserLocationCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
       },
       function errorCallback(error) {},
       { timeout: 10000 }

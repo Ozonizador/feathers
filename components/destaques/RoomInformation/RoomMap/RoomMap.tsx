@@ -1,7 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { getCoordsFromPoint } from "../../../../services/mapService";
 import { MapCoordinates } from "../../../../models/utils";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
@@ -20,7 +19,7 @@ export default function RoomMap() {
           <div className="mb-5 text-2xl font-bold">Este espaço localiza-se nesta zona</div>
 
           <div className="h-64 w-3/5 rounded-md">
-            <MapWithNoSSR currentMapCoords={geom.coordinates} />
+            <MapWithNoSSR currentMapCoords={geom.coordinates} showCenterMarker={true} />
           </div>
         </>
       )}
