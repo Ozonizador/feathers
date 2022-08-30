@@ -12,9 +12,10 @@ interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
   onChange: (property, value) => void;
   markerLocation?: GEO;
+  onChangeMarker?: (lat, lng) => void;
 }
 
-const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertComponentProps) => {
+const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
 
   const createCurrentMapLocation = () => {
@@ -34,6 +35,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange }: GeneralAdvertCompon
               currentMapCoords={createCurrentMapLocation()}
               draggableMarker={true}
               showCenterMarker={true}
+              onChangeMarker={onChangeMarker}
             />
           </div>
         </>
