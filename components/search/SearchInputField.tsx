@@ -23,7 +23,7 @@ export const SearchInputField = () => {
 
   return (
     <>
-      <div className="container flex-row justify-center lg:flex">
+      <div className="flex-row justify-center lg:mt-7 lg:flex">
         <div className="my-2 lg:mx-2">
           <input
             type="text"

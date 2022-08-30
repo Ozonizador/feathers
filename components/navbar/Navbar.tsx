@@ -90,7 +90,7 @@ export const Navbar = () => {
             <div className="lg:block">
               <Link href="/">
                 <a>
-                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={55} width={208}></Image>
+                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
                 </a>
               </Link>
             </div>
