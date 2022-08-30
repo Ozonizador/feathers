@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function HomeSection3() {
   return (
     <section>
-      <div className="mb-28">
+      <div className="mb-28 mt-5">
         <div className="hidden lg:block">
           <div className="mb-12 flex justify-between align-middle">
             <h2 className="text-5xl font-bold text-black">Os quartos em destaque na tua área</h2>
@@ -23,24 +23,24 @@ export default function HomeSection3() {
         </div>
         <h2 className="mb-8 text-4xl font-bold text-black lg:hidden">Os quartos em destaque na tua área</h2>
 
-        <div className="grid gap-8 lg:grid-cols-4 ">
-          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition">
-            <h2 className=" text-2xl text-white">Quarto Privado</h2>
+        <div className="grid gap-8 lg:grid-cols-4 lg:h-96">
+          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4">
+            <h2 className=" text-xl text-white">Quarto Privado</h2>
             <p className="bold absolute bottom-8 right-8 text-4xl text-white">&euro;320</p>
           </article>
 
-          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition">
-            <h2 className=" text-2xl text-white">Quarto Privado</h2>
+          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4">
+            <h2 className=" text-xl text-white">Quarto Privado</h2>
             <p className="bold absolute bottom-8 right-8 text-4xl text-white">&euro;320</p>
           </article>
 
-          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition">
-            <h2 className=" text-2xl text-white">Quarto Privado</h2>
+          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4">
+            <h2 className=" text-xl text-white">Quarto Privado</h2>
             <p className="bold absolute bottom-8 right-8 text-4xl text-white">&euro;320</p>
           </article>
 
-          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition">
-            <h2 className=" text-2xl text-white">Quarto Privado</h2>
+          <article className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4">
+            <h2 className=" text-xl text-white">Quarto Privado</h2>
             <p className="bold absolute bottom-8 right-8 text-4xl text-white">&euro;320</p>
           </article>
         </div>
