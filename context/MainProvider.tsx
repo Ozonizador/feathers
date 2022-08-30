@@ -45,7 +45,7 @@ export const MainProvider = ({ children }): JSX.Element => {
 
     navigator.geolocation.getCurrentPosition(
       function (pos) {
-        setUserLocationCoordinates({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+        setUserLocationCoordinates({ lat: pos.coords.latitude, lng: pos.coords.longitude });
       },
       function errorCallback(error) {},
       { timeout: 10000 }

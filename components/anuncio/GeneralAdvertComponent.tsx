@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
+import { useCallback } from "react";
 import { useGetUserCoordinates } from "../../context/MainProvider";
 import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { GEO } from "../../models/utils";
+import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";
 
 const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
@@ -18,28 +20,28 @@ interface GeneralAdvertComponentProps {
 const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
 
-  const createCurrentMapLocation = () => {
+  const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
-      return advertisement.geom.coordinates as GEO;
+      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates);
+      return { lat, lng };
     } else {
       return userlocation;
     }
-  };
+  }, [advertisement.geom, userlocation]);
 
   return (
     <>
-      {advertisement.geom !== null && (
-        <>
-          <div className="h-96 w-full px-6">
-            <MapWithNoSSR
-              currentMapCoords={createCurrentMapLocation()}
-              draggableMarker={true}
-              showCenterMarker={true}
-              onChangeMarker={onChangeMarker}
-            />
-          </div>
-        </>
-      )}
+      <>
+        <div className="h-96 w-full px-6">
+          <MapWithNoSSR
+            currentMapCoords={createCurrentMapLocation()}
+            draggableMarker={true}
+            showCenterMarker={true}
+            onChangeMarker={onChangeMarker}
+            allowZoom={true}
+          />
+        </div>
+      </>
       <div className="my-5 flex w-full flex-col  justify-between gap-5 lg:flex-row">
         {/* col left */}
         <div className="mt-2 w-full ">

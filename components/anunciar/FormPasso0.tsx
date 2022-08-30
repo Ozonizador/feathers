@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 import { getResultsFromSearch } from "../../services/mapService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
-import { GEO, MapCoordinates } from "../../models/utils";
+import { MapCoordinates } from "../../models/utils";
+import { coordinatesObjectToArray } from "../../utils/map-services";
 
 const FormPasso0 = () => {
   /* STEPS */
@@ -61,7 +62,8 @@ const FormPasso0 = () => {
   };
 
   const onChangeMarker = (lat, lng) => {
-    let newCoordinates = { type: "Point", coordinates: { latitude: lat, longitude: lng } as GEO } as MapCoordinates;
+    const coordsArray = coordinatesObjectToArray({ lat, lng });
+    let newCoordinates = { type: "Point", coordinates: coordsArray };
 
     changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, newCoordinates);
   };

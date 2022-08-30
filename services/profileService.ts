@@ -17,7 +17,6 @@ async function createProfile(userID: string) {
     .from<Profile>(PROFILE_TABLE_NAME)
     .insert({ id: userID, updatedAt: new Date(), slug: createRandomUniqWord() })
     .single();
-  debugger;
   return { data, error };
 }
 

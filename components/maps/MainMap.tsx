@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DragEndEvent, Icon } from "leaflet";
 import { GEO } from "../../models/utils";
 
@@ -20,26 +20,27 @@ const MainMap = ({
   showCenterMarker = true,
   onChangeMarker,
 }: MainMapProps) => {
-  const [mapCenter, setMapCenter] = useState<GEO | null>(null);
+  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
 
   let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
 
-  useEffect(() => {
-    if (currentMapCoords !== null) {
-      setMapCenter(currentMapCoords);
-    }
-  }, [currentMapCoords]);
-
   const MapComponent = () => {
+    const [position, setPosition] = useState<GEO | null>(currentMapCoords);
     const map = useMap();
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+      if (currentMapCoords) {
+        const { lat, lng } = currentMapCoords;
+        map.panTo({ lat: lat, lng: lng });
+        setPosition({ lat, lng });
+      }
+    }, [map]);
 
     return (
       <>
         {showCenterMarker && (
           <Marker
-            position={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
+            position={{ lat: position.lat, lng: position.lng }}
             icon={icon}
             draggable={draggableMarker}
             eventHandlers={{
@@ -56,10 +57,10 @@ const MainMap = ({
         {markers &&
           markers.map((marker, index) => {
             if (marker) {
-              const { latitude, longitude } = marker;
+              const { lat, lng } = marker;
               return (
                 <>
-                  <Marker position={{ lat: latitude, lng: longitude }} key={index}></Marker>
+                  <Marker position={{ lat, lng: lng }} key={index}></Marker>
                 </>
               );
             }
@@ -68,16 +69,18 @@ const MainMap = ({
     );
   };
 
+  const AdvertisementsMarkersComponents = useMemo(() => {}, []);
+
   return (
     <>
       {mapCenter && (
         <MapContainer
-          center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
+          center={{ lat: mapCenter.lat, lng: mapCenter.lng }}
           zoom={13}
           scrollWheelZoom={allowZoom}
           style={{ height: "100%", width: "100%" }}
           zoomControl={allowZoom}
-          maxZoom={allowZoom ? 1 : 13}
+          maxZoom={allowZoom ? 18 : 13}
         >
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}
