@@ -15,7 +15,7 @@ export default function Home() {
     <div>
       <HomeSection1 />
 
-      <div className="px-5 lg:px-20 xl:mx-32">
+      <div className="px-5 lg:px-8 xl:mx-32">
         <HomeSection2 />
         <HomeSection3 />
         <HomeSection4 />
