@@ -1,75 +1,92 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { useEffect, useState } from "react";
-import { Spinner } from "flowbite-react";
-import { getCoordsFromPoint } from "../../services/mapService";
-import { Icon } from "leaflet";
-import { Coordinates, GEO } from "../../models/utils";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
+import { useEffect, useMemo, useState } from "react";
+import { DragEndEvent, Icon } from "leaflet";
+import { GEO } from "../../models/utils";
 
 interface MainMapProps {
-  currentMapCoords: Coordinates;
-  markers?: Coordinates[];
+  currentMapCoords: GEO;
+  showCenterMarker: boolean;
   draggableMarker?: boolean;
+  allowZoom?: boolean;
+  markers?: GEO[];
+  onChangeMarker?: (lat, lng) => void;
 }
 
-const MainMap = ({ currentMapCoords, markers, draggableMarker = false }: MainMapProps) => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const [mapCenter, setMapCenter] = useState<GEO>({ latitude: 0, longitude: 0 });
-
-  useEffect(() => {
-    if (currentMapCoords) {
-      const { latitude, longitude } = getCoordsFromPoint(currentMapCoords);
-      setMapCenter({ latitude, longitude });
-      setLoading(false);
-    }
-  }, [currentMapCoords]);
+const MainMap = ({
+  currentMapCoords,
+  markers,
+  draggableMarker = false,
+  allowZoom = false,
+  showCenterMarker = true,
+  onChangeMarker,
+}: MainMapProps) => {
+  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
 
   let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
 
-  const SetViewOnClick = ({ coords }) => {
+  const MapComponent = () => {
+    const [position, setPosition] = useState<GEO | null>(currentMapCoords);
     const map = useMap();
-    if (coords) {
-      map.setView(coords, map.getZoom());
-    }
-    return null;
+
+    useEffect(() => {
+      if (currentMapCoords) {
+        const { lat, lng } = currentMapCoords;
+        map.panTo({ lat: lat, lng: lng });
+        setPosition({ lat, lng });
+      }
+    }, [map]);
+
+    return (
+      <>
+        {showCenterMarker && (
+          <Marker
+            position={{ lat: position.lat, lng: position.lng }}
+            icon={icon}
+            draggable={draggableMarker}
+            eventHandlers={{
+              moveend: (e) => {
+                try {
+                  const { lat, lng } = e.target.getLatLng();
+                  onChangeMarker(lat, lng);
+                } catch {}
+                const target = e.type;
+              },
+            }}
+          ></Marker>
+        )}
+        {markers &&
+          markers.map((marker, index) => {
+            if (marker) {
+              const { lat, lng } = marker;
+              return (
+                <>
+                  <Marker position={{ lat, lng: lng }} key={index}></Marker>
+                </>
+              );
+            }
+          })}
+      </>
+    );
   };
+
+  const AdvertisementsMarkersComponents = useMemo(() => {}, []);
 
   return (
     <>
-      {loading && (
-        <div className="mt-32 flex flex-1 justify-center">
-          <Spinner color="info" aria-label="loading" size="lg" />
-        </div>
-      )}
-      {!loading && (
+      {mapCenter && (
         <MapContainer
-          center={{ lat: mapCenter.latitude, lng: mapCenter.longitude }}
+          center={{ lat: mapCenter.lat, lng: mapCenter.lng }}
           zoom={13}
-          scrollWheelZoom={false}
+          scrollWheelZoom={allowZoom}
           style={{ height: "100%", width: "100%" }}
+          zoomControl={allowZoom}
+          maxZoom={allowZoom ? 18 : 13}
         >
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
-
-          {markers &&
-            markers.map((marker, index) => {
-              if (marker) {
-                const { latitude: markerLat, longitude: markerLong } = getCoordsFromPoint(marker);
-                return (
-                  <>
-                    <Marker
-                      position={[markerLat, markerLong]}
-                      icon={icon}
-                      draggable={draggableMarker}
-                      key={index}
-                    ></Marker>
-                  </>
-                );
-              }
-            })}
-          <SetViewOnClick coords={{ lat: mapCenter.latitude, lng: mapCenter.longitude }} />
+          <MapComponent />
         </MapContainer>
       )}
     </>

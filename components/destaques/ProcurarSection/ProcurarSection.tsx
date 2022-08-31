@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
-import debounce from "debounce";
+import _ from "lodash";
 import {
   useAdvertisementInfo,
   useCurrentProcurarAdvertisementContext,
@@ -62,7 +62,7 @@ export default function ProcurarSection() {
     setComoditiesFilter(comoditiesFilter);
   };
 
-  const setPriceChange = debounce((value) => {
+  const setPriceChange = _.debounce((value) => {
     const [startRange, endRange] = value;
     setFilters({ price: { startRange, endRange } });
   }, 400);
@@ -196,7 +196,11 @@ export default function ProcurarSection() {
           )}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:h-[500px]">
-          <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers()} />
+          <MapWithNoSSR
+            currentMapCoords={currentMapCoordinates}
+            markers={getAdvertisementsMarkers()}
+            showCenterMarker={false}
+          />
         </div>
       </div>
     </>

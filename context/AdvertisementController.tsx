@@ -46,7 +46,7 @@ const defaultAdvertisement = {
   } as HouseExpenses,
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,
-  geom: "",
+  geom: null,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

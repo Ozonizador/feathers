@@ -11,13 +11,14 @@ type JSONArray = Array<JSONValue>;
 
 /* MAPS */
 
-export type Coordinates = number[] | null;
 export type GEO = {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lng: number;
 };
 
 export type MapCoordinates = {
   type: string;
-  coordinates: Coordinates;
+  coordinates: GEO;
 };
+
+export type CoordinatesAsArray = number[];
