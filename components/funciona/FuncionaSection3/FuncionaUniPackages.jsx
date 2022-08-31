@@ -9,9 +9,9 @@ const FuncionaUniPackages = () => {
         <p className="mb-10 text-primary-500 underline underline-offset-1">
           Não tem tempo ou não está perto da sua propriedade? A UniHosts tem a solução!
         </p>
-        <h1 className="text-6xl font-bold">Conheça Os Nossos Unipackages</h1>
+        <h1 className="lg:text-6xl text-5xl font-bold">Conheça Os Nossos Unipackages</h1>
 
-        <div className="mb-24 mt-28 grid grid-cols-1 gap-10 lg:grid-cols-1 ">
+        <div className=" mb-24 mt-28 grid grid-cols-1 gap-10 lg:flex flex-row ">
           <FuncionaSection3Card
             img="/images/image1.png"
             heading="Nós somos o senhorio por si!"

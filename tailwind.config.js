@@ -14,6 +14,9 @@ module.exports = {
         xl: "5rem",
         "2xl": "6rem",
       },
+      // fontSize:{
+      //   sm: "14px",
+      // }
     },
     extend: {
       colors: {

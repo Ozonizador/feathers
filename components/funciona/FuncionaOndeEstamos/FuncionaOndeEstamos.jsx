@@ -9,13 +9,13 @@ const FuncionaOndeEstamos = () => {
 
       <div className="flex flex-1 flex-col justify-center align-middle">
         <div className="w-full">
-          <h1 className="mb-4 text-center text-3xl font-bold lg:text-6xl">Onde Estamos?</h1>
           <div className="flex flex-col gap-10 lg:flex-row">
             <div className="lg:min-h-96 relative h-96 w-full lg:w-1/3">
               <Image src="/images/mapa_unihosts_funciona.jpeg" layout="fill" alt="" className="rounded-lg" />
             </div>
             <div className="sm:w-full lg:w-2/3">
-              <div className="flex w-80 items-center rounded-full bg-white p-4 align-middle drop-shadow-md">
+              <h1 className="mb-4 text-center text-3xl font-bold lg:text-5xl lg:text-left">Onde Estamos?</h1>
+              <div className="flex w-2/4 items-center rounded-full bg-white p-4 align-middle drop-shadow-md">
                 <div className="">
                   <Image
                     className="flex object-scale-down "

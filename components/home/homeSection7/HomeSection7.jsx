@@ -27,7 +27,7 @@ export default function HomeSection7() {
               </Link>
             </div>
           </div>
-          <div className="lg:min-h-96 h-96 w-full rounded-3xl lg:my-auto lg:basis-2/4">
+          <div className="lg:min-h-96 h-96 w-full rounded-3xl lg:basis-2/4">
             <div className="relative h-full w-full">
               <div className="absolute h-full w-full">
                 <Image src="/images/img9.jpg" layout="fill" alt="" className="rounded-3xl"></Image>
