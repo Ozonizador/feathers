@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { CgFileDocument } from "react-icons/cg";
 import Socials from "../components/socials/Socials";
 import Input from "../components/utils/Input";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Contactos = () => {
   const [name, setName] = useState<string>("");
@@ -29,8 +31,12 @@ const Contactos = () => {
 
               <div className="mt-20">
                 <div className="text-3xl font-bold">Contactos</div>
-                <div className="pt-5">+351 914 626 616</div>
-                <div className="py-4">info@unihosts.pt</div>
+                <div className="mt-5 flex items-center align-middle">
+                  <FaPhoneAlt className="mr-2" /> +351 914 626 616
+                </div>
+                <div className="mt-5 mb-3 flex items-center align-middle">
+                  <MdEmail className="mr-2" /> info@unihosts.pt
+                </div>
               </div>
 
               <div className="-ml-3">
