@@ -120,14 +120,14 @@ export const Navbar = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute z-50 flex w-52 flex-col bg-white p-2 shadow-md">
+                      <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                         <Menu.Item>
-                          <MyLink customClass="py-1 w-full" href="/funciona">
+                          <MyLink customClass="py-1 mt-2 w-full" href="/funciona">
                             Como funciona?
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <MyLink customClass="py-1 w-full" href="/anunciar">
+                          <MyLink customClass="py-2 w-full" href="/anunciar">
                             Anunciar!
                           </MyLink>
                         </Menu.Item>
@@ -209,7 +209,7 @@ export const Navbar = () => {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute z-50 flex flex-col bg-white p-2 px-4 shadow-md">
+                          <Menu.Items className="absolute z-50 flex flex-col rounded-lg bg-white p-2 px-4 shadow-md">
                             {toggleUserType == "estudante" && (
                               <>
                                 <Menu.Item>
