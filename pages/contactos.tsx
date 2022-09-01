@@ -5,6 +5,7 @@ import Input from "../components/utils/Input";
 
 const Contactos = () => {
   const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   const sendToEmail = () => {
@@ -43,9 +44,11 @@ const Contactos = () => {
             <div className="w-90">
               <Input value={name} onChange={(e) => setName(e.target.value)} labelText="Nome" label="name" />
             </div>
-            {/* <div className="w-90 my-5">
+
+            <div className="w-90 my-10">
               <Input value={email} onChange={(e) => setEmail(e.target.value)} labelText="Email" label="email" />
-            </div> */}
+            </div>
+
             <div>
               <label htmlFor="about" className=" text-gray-700">
                 Mensagem
