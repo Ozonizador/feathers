@@ -18,6 +18,8 @@ import {
 } from "../../../context/ProcurarAdvertisementsProvider";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
 import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
+import { GEO } from "../../../models/utils";
+import { coordinateArrayToLatitude } from "../../../utils/map-services";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -69,10 +71,10 @@ export default function ProcurarSection() {
 
   // TODO finish this
   const getAdvertisementsMarkers = () => {
-    const markers = [];
+    const markers: GEO[] = [];
     for (let advertisement of advertisements) {
       if (advertisement.geom) {
-        markers.push(advertisement.geom.coordinates);
+        markers.push(coordinateArrayToLatitude(advertisement.geom.coordinates));
       }
     }
     return markers;

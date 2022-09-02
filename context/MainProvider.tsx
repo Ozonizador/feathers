@@ -2,7 +2,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
-import { GEO } from "../models/utils";
+import { CoordinatesAsArray, GEO } from "../models/utils";
 import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
@@ -22,12 +22,40 @@ const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralU
 const UserLocationContext = createContext<GEO | null>(null);
 const SetUserLocationContext = createContext<Dispatch<SetStateAction<GEO>>>(() => {});
 
+type UserSearchInfo = {
+  location: string;
+  startDate: Date;
+  endDate: Date;
+  coordinates: AddressOptionInfo;
+};
+
+interface AddressOptionInfo {
+  place_name: string;
+  geometry: { type: string; coordinates: CoordinatesAsArray };
+}
+
+/* searched location */
+
+const UserLocationSearchContext = createContext<UserSearchInfo>({
+  location: "",
+  startDate: new Date(),
+  endDate: new Date(),
+});
+
+const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
+
 export const MainProvider = ({ children }): JSX.Element => {
   const { user } = useUser();
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "estudante",
     profile: null,
+  });
+
+  const [userSearch, setUserSearch] = useState<UserSearchInfo>({
+    location: "",
+    startDate: new Date(),
+    endDate: new Date(),
   });
 
   const checkUserProfile = useCallback(async () => {
@@ -57,7 +85,11 @@ export const MainProvider = ({ children }): JSX.Element => {
       <SetUnihostsWebsiteContext.Provider value={setCurrentUnihostState}>
         <UserLocationContext.Provider value={userLocationCoordinates}>
           <SetUserLocationContext.Provider value={setUserLocationCoordinates}>
-            {children}
+            <UserLocationSearchContext.Provider value={userSearch}>
+              <SetUserLocationSearchContext.Provider value={setUserSearch}>
+                {children}
+              </SetUserLocationSearchContext.Provider>
+            </UserLocationSearchContext.Provider>
           </SetUserLocationContext.Provider>
         </UserLocationContext.Provider>
       </SetUnihostsWebsiteContext.Provider>
@@ -106,4 +138,18 @@ export const useSetProfileFavouritesInformation = () => {
 
 export const useGetUserCoordinates = () => {
   return useContext(UserLocationContext);
+};
+
+/* SEARCH */
+
+export const useUserSearch = () => {
+  return useContext(UserLocationSearchContext);
+};
+
+export const useSetSearchLocationByProperty = () => {
+  const search = useContext(UserLocationSearchContext);
+  const setSearch = useContext(SetUserLocationSearchContext);
+  return (property: string, value: any) => {
+    setSearch({ ...search, [property]: value });
+  };
 };
