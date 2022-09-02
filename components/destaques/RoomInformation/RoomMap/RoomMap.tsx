@@ -2,6 +2,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { MapCoordinates } from "../../../../models/utils";
+import { coordinateArrayToLatitude } from "../../../../utils/map-services";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
   ssr: false,
@@ -10,16 +11,17 @@ const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap")
 export default function RoomMap() {
   const advertisement = useGetSingleAdvertisement();
 
-  const geom = advertisement.geom as MapCoordinates;
+  const geom = advertisement.geom;
+
+  const geoCoordinates = coordinateArrayToLatitude(geom.coordinates);
 
   return (
     <section className="my-32">
-      {geom !== null && (
+      {geom !== null && geom.coordinates !== null && (
         <>
           <div className="mb-5 text-2xl font-bold">Este espaço localiza-se nesta zona</div>
-
           <div className="h-64 w-3/5 rounded-md">
-            <MapWithNoSSR currentMapCoords={geom.coordinates} showCenterMarker={true} />
+            <MapWithNoSSR currentMapCoords={geoCoordinates} showCenterMarker={true} />
           </div>
         </>
       )}
