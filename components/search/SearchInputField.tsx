@@ -7,7 +7,8 @@ import { dateToFormat } from "../../utils/utils";
 import { giveSearchByLocationSearch } from "../../services/mapService";
 import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";
-import { useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
+import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
+import { coordinateArrayToLatitude } from "../../utils/map-services";
 
 enum SearchFields {
   START_DATE = "startDate",
@@ -24,7 +25,8 @@ interface AddressOptionInfo {
 export const SearchInputField = () => {
   const router = useRouter();
   const { location, startDate, endDate } = useUserSearch();
-  const setSearchInfo = useSetSearchLocationByProperty();
+  const setSearchInfoProperty = useSetSearchLocationByProperty();
+  const setSearch = useSetSearchLocation();
 
   const [addressOptions, setAddressOptions] = useState<AddressOptionInfo[]>();
 
@@ -41,7 +43,7 @@ export const SearchInputField = () => {
   };
 
   const setAddressByText = (value: string) => {
-    setSearchInfo(SearchFields.LOCATION, value);
+    setSearchInfoProperty(SearchFields.LOCATION, value);
     searchText(value);
   };
 
@@ -56,9 +58,14 @@ export const SearchInputField = () => {
   const setSelectedOption = (value: string) => {
     const option = addressOptions.find((option) => value === option.place_name);
     if (option) {
-      setSearchInfo(SearchFields.COORDINATES, option.geometry);
+      const { lat, lng } = coordinateArrayToLatitude(option.geometry.coordinates);
       setAddressOptions([]);
-      setSearchInfo(SearchFields.LOCATION, option.place_name);
+      setSearch({
+        startDate,
+        endDate,
+        coordinates: { type: option.geometry.type, coordinates: { lat, lng } },
+        location: option.place_name,
+      });
     }
   };
 
@@ -95,14 +102,14 @@ export const SearchInputField = () => {
             <FeatherDatePicker
               date={startDate}
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
-              onChange={(date) => setSearchInfo(SearchFields.START_DATE, date)}
+              onChange={(date) => setSearchInfoProperty(SearchFields.START_DATE, date)}
             />
           </div>
           <div className="z-50 my-2 w-1/2 lg:mx-2">
             <FeatherDatePicker
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
               date={endDate}
-              onChange={(date) => setSearchInfo(SearchFields.END_DATE, date)}
+              onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
             />
           </div>
         </div>
