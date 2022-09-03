@@ -8,16 +8,16 @@ export default function HomeSection7() {
       <div className="my-24 rounded-3xl bg-terciary-300 lg:w-full">
         <div className="flex flex-col-reverse lg:flex-row lg:h-96">
           <div className="items-center p-0 text-center align-middle lg:basis-2/4 lg:p-0 lg:text-left lg:ml-12">
-            <h2 className="mt-8 py-8 text-2xl font-bold text-secondary-500 lg:mt-8 lg:ml-6 lg:text-5xl ">
+            <h2 className="mt-8 py-8 text-4xl font-bold text-secondary-500 lg:mt-8 lg:ml-6 lg:text-5xl ">
               Tem Uma<br /> Propriedade?
             </h2>
             <div className="lg:pb-0 text-2xl text-terciary-400 -mb-6">
-              <div className="hidden lg:mt-2 lg:ml-6 lg:block">
+              <div className="hidden  lg:mt-2 lg:ml-6 lg:block">
                 Comece já a anunciar e rentabilize
                 <br />o seu imóvel!
               </div>
 
-              <div className="block lg:hidden">Comece já a anunciar e rentabilize o seu imóvel!</div>
+              <div className="block mb-20 lg:hidden">Comece já a anunciar e rentabilize o seu imóvel!</div>
             </div>
             <div className="mb-14 mt-8 lg:mb-20 lg:mt-0 lg:pt-16">
               <Link href="/anunciar">
