@@ -2,7 +2,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
-import { CoordinatesAsArray, GEO, MapCoordinates } from "../models/utils";
+import { GEO, MapCoordinates } from "../models/utils";
 import { updateFavouriteFromUser } from "../services/favouriteService";
 import { checkProfileAndCreate } from "../services/profileService";
 
@@ -13,7 +13,7 @@ interface GeneralUnihostInformation {
 
 /* Contexts */
 const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
-  toggleUserType: "estudante",
+  toggleUserType: "TENANT",
   profile: null,
 });
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
@@ -44,7 +44,7 @@ export const MainProvider = ({ children }): JSX.Element => {
   const { user } = useUser();
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
-    toggleUserType: "estudante",
+    toggleUserType: "TENANT",
     profile: null,
   });
 

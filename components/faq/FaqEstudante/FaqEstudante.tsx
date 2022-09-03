@@ -25,7 +25,7 @@ const FaqEstudante = () => {
 
         <div className="mb-32 lg:px-96">
           {/* Estudante */}
-          {selectedFaq === "estudante" && (
+          {selectedFaq === "TENANT" && (
             <Accordion>
               <Accordion.Panel>
                 <Accordion.Title>What is Flowbite?</Accordion.Title>
@@ -81,7 +81,7 @@ const FaqEstudante = () => {
             </Accordion>
           )}
           {/* SENHORIO */}
-          {selectedFaq === "senhorio" && <div>Colocar aqui cenas para o senhorio</div>}
+          {selectedFaq === "LANDLORD" && <div>Colocar aqui cenas para o senhorio</div>}
         </div>
       </section>
     </>

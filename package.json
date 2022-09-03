@@ -32,6 +32,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-leaflet": "^4.0.1",
+    "react-markdown": "^8.0.3",
     "react-phone-number-input": "^3.2.7",
     "react-select": "^5.4.0",
     "react-select-country-list": "^2.2.3",

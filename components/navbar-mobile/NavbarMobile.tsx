@@ -5,10 +5,8 @@ import { useUser } from "@supabase/auth-helpers-react";
 import person from "../../public/images/person.png";
 /* import person image */
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
-import { useRouter } from "next/router";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
-import { TiLockClosed } from "react-icons/ti";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 interface NavbarMobileProps {
   open: boolean;
@@ -26,10 +24,10 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
       return;
     }
 
-    if (toggleUserType === "estudante") {
-      toggleUserTypeContext("senhorio");
+    if (toggleUserType === "TENANT") {
+      toggleUserTypeContext("TENANT");
     } else {
-      toggleUserTypeContext("estudante");
+      toggleUserTypeContext("LANDLORD");
     }
   };
 
@@ -101,7 +99,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                 >
                   <span
                     className={`${
-                      toggleUserType === "senhorio" ? "translate-x-11" : "translate-x-1"
+                      toggleUserType === "LANDLORD" ? "translate-x-11" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
@@ -133,7 +131,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
             </div>
 
             <div className={classNames("mb-3 w-full  rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
-              {toggleUserType == "estudante" && (
+              {toggleUserType == "TENANT" && (
                 <>
                   <div className="mt-3 py-1 px-2">
                     <Link className="py-1 " href="/unidesk">
@@ -183,7 +181,7 @@ export const NavbarMobile = ({ open, setOpenMobile }) => {
                   </div>
                 </>
               )}
-              {toggleUserType == "senhorio" && (
+              {toggleUserType == "LANDLORD" && (
                 <>
                   <div className="mt-3 py-1 px-2">
                     <Link className="py-1 " href="/unidesk">

@@ -58,4 +58,4 @@ export const LanguageLabel = {
   FINNISH: "Finnish",
 };
 
-export type UserTypes = "senhorio" | "estudante";
+export type UserTypes = "LANDLORD" | "TENANT";
