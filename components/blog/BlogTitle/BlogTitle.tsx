@@ -1,3 +1,5 @@
+import { BlogCategoryLabel } from "../../../models/blog";
+
 export default function BlogTitle() {
   return (
     <section className="container mx-auto  pt-20 pb-5">
@@ -8,9 +10,13 @@ export default function BlogTitle() {
             className="mt-24 w-full  rounded-md border border-solid border-terciary-500 bg-white py-2 px-3 lg:mt-0 lg:w-44"
             placeholder="Categoria"
           >
-            <option>Categoria</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
+            {Object.keys(BlogCategoryLabel).map((option, index) => {
+              return (
+                <option value={option} key={index}>
+                  {BlogCategoryLabel[option]}
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>

@@ -28,20 +28,20 @@ export const Navbar = () => {
   const toggleUserTypeContext = useToggleUserType();
 
   const setModoSenhorio = () => {
-    toggleUserTypeContext("senhorio");
+    toggleUserTypeContext("TENANT");
     router.push("/unidesk");
   };
 
-  /* Changing the toggle senhorio estudante */
+  /* Changing the toggle TENANT estudante */
   const toggleSenhorioEstudante = () => {
     if (!user) {
       return;
     }
 
-    if (toggleUserType === "estudante") {
-      toggleUserTypeContext("senhorio");
+    if (toggleUserType === "LANDLORD") {
+      toggleUserTypeContext("TENANT");
     } else {
-      toggleUserTypeContext("estudante");
+      toggleUserTypeContext("LANDLORD");
     }
   };
 
@@ -178,7 +178,7 @@ export const Navbar = () => {
                       >
                         <span
                           className={`${
-                            toggleUserType === "senhorio" ? "translate-x-6" : "translate-x-1"
+                            toggleUserType === "LANDLORD" ? "translate-x-6" : "translate-x-1"
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
@@ -210,7 +210,7 @@ export const Navbar = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute z-50 flex flex-col rounded-lg bg-white p-2 px-4 shadow-md">
-                            {toggleUserType == "estudante" && (
+                            {toggleUserType == "TENANT" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
@@ -255,7 +255,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                               </>
                             )}
-                            {toggleUserType == "senhorio" && (
+                            {toggleUserType == "LANDLORD" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
