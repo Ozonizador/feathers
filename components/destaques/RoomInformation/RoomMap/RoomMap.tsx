@@ -1,7 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { MapCoordinates } from "../../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../../utils/map-services";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
