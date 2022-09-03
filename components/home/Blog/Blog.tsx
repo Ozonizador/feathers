@@ -42,7 +42,7 @@ export default function BlogSection() {
                 return (
                   <Link href={`/blog/${blogPost.slug}`} key={blogPost.id}>
                     <a>
-                      <article className="relative h-96 w-full rounded-2xl bg-primary-300 bg-cover bg-center p-7 duration-200 ease-in hover:drop-shadow-xl lg:w-64">
+                      <article className="relative h-96 w-full rounded-2xl bg-black bg-cover bg-center p-7 duration-200 ease-in hover:drop-shadow-xl lg:w-64">
                         <h2 className="absolute bottom-0 left-0 z-50 mb-6 ml-5 text-2xl text-white lg:text-base">
                           {blogPost.title}
                         </h2>
