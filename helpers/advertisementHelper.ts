@@ -183,7 +183,6 @@ const addFilterAdvertisement = (
 ) => {
   const { filter, order } = filters;
 
-  filter.address && (query = query.eq(ADVERTISEMENT_PROPERTIES.PLACE, filter.address));
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
   // comodities not working

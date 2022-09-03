@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
+import { GEO } from "../models/utils";
 import { getFilteredAdvertisements } from "../services/advertisementService";
 
 /* FILTERS */
@@ -20,7 +21,7 @@ export interface FilterOptions {
     startDate: string;
     endDate: string;
   };
-  address: string;
+  coordinates: GEO;
 }
 export interface AdvertOrder {
   byColumn: "price";
@@ -37,7 +38,7 @@ const defaultFilter = {
       startRange: null,
       endRange: null,
     },
-    address: "",
+    coordinates: null,
     dates: {
       startDate: null,
       endDate: null,

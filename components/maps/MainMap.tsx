@@ -1,6 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
-import { useEffect, useMemo, useState } from "react";
-import { DragEndEvent, Icon } from "leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { Icon } from "leaflet";
 import { GEO } from "../../models/utils";
 
 interface MainMapProps {
@@ -60,7 +60,7 @@ const MainMap = ({
               const { lat, lng } = marker;
               return (
                 <>
-                  <Marker position={{ lat, lng: lng }} key={index}></Marker>
+                  <Marker position={{ lat, lng: lng }} key={index} icon={icon}></Marker>
                 </>
               );
             }
@@ -69,17 +69,13 @@ const MainMap = ({
     );
   };
 
-  const AdvertisementsMarkersComponents = useMemo(() => {}, []);
-
   return (
     <>
       {mapCenter && (
         <MapContainer
           center={{ lat: mapCenter.lat, lng: mapCenter.lng }}
           zoom={13}
-          scrollWheelZoom={allowZoom}
           style={{ height: "100%", width: "100%" }}
-          zoomControl={allowZoom}
           maxZoom={allowZoom ? 18 : 13}
         >
           <TileLayer
