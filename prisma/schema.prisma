@@ -259,6 +259,7 @@ model Blog {
   slug        String       @unique
   title       String
   description String
+  image       String
   category    BlogCategory
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @default(now()) @updatedAt

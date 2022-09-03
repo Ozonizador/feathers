@@ -10,7 +10,16 @@ export type Blog = {
   updatedAt: Date;
 };
 
+export const BLOG_PROPERTIES = {
+  CATEGORY: "category",
+} as const;
+
 export enum BlogCategory {
   LANDLORD = "LANDLORD",
   TENANT = "TENANT",
 }
+
+export const BlogCategoryLabel = {
+  LANDLORD: "Senhorio",
+  TENANT: "Estudante",
+};
