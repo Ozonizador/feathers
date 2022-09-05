@@ -20,7 +20,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
 
         <label className="mb-4 block text-2xl font-bold text-gray-700">Nome Interno</label>
         <input
-          className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2 shadow-sm"
+          className="bg-grey mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 py-3 px-2 shadow-sm"
           maxLength={50}
           disabled
           defaultValue={advertisement.slug}

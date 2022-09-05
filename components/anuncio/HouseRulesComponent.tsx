@@ -14,12 +14,12 @@ interface HouseRulesProps {
 }
 
 const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
-  const changeHouseRulesProperty = (event) => {
+  const toggleHouseRulesProperty = (event) => {
     const { houseRules } = advertisement;
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
       ...houseRules,
-      [event.target.name]: event.target.value === "true",
+      [event.target.name]: event.target.checked,
     });
   };
 
@@ -42,33 +42,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Animais permitidos</p>
         </div>
 
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Sim</div>
+        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div>
             <div className="flex h-5 items-center">
               <input
                 name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
-                type="radio"
-                value="true"
+                type="checkbox"
                 checked={advertisement.houseRules.animalsAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Não</div>
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
-                type="radio"
-                value="false"
-                checked={!advertisement.houseRules.animalsAllowed}
-                className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
+                onChange={(e) => toggleHouseRulesProperty(e)}
               />
             </div>
           </div>
@@ -82,33 +64,16 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Fumar permitido</p>
         </div>
 
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Sim</div>
+        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div>
             <div className="flex h-5 items-center">
               <input
                 name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
-                type="radio"
+                type="checkbox"
                 value="true"
                 checked={advertisement.houseRules.smokeAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Não</div>
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
-                type="radio"
-                value="false"
-                checked={!advertisement.houseRules.smokeAllowed}
-                className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
+                onChange={(e) => toggleHouseRulesProperty(e)}
               />
             </div>
           </div>
@@ -123,33 +88,16 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Eventos Permitidos</p>
         </div>
 
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Sim</div>
+        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
           <div>
             <div className="flex h-5 items-center">
               <input
-                type="radio"
+                type="checkbox"
                 name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
                 value="true"
                 checked={advertisement.houseRules.eventsAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="ml-0 mt-5 flex w-40 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div className="mr-16 text-base">Não</div>
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                type="radio"
-                value="false"
-                name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
-                checked={!advertisement.houseRules.eventsAllowed}
-                className=" h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => changeHouseRulesProperty(e)}
+                onChange={(e) => toggleHouseRulesProperty(e)}
               />
             </div>
           </div>
@@ -185,8 +133,8 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="mb-6 w-40 text-base font-bold lg:mb-0">Limpeza</p>
         </div>
         <div className="flex w-full flex-row items-center justify-between lg:ml-6 lg:w-3/4">
-          <div className="w-full lg:w-1/4">
-            <div className="flex h-5 w-40 items-center">
+          <div className="w-full lg:w-2/3">
+            <div className="flex h-5 w-full items-center">
               <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 ">
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {
                   return (
