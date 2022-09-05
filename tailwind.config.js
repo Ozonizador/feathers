@@ -14,6 +14,9 @@ module.exports = {
         xl: "5rem",
         "2xl": "6rem",
       },
+      // fontSize:{
+      //   sm: "14px",
+      // }
     },
     extend: {
       colors: {
@@ -47,5 +50,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin"), require("@tailwindcss/line-clamp")],
 };

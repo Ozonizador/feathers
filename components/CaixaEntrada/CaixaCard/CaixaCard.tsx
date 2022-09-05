@@ -11,7 +11,7 @@ interface CaixaCardProps {
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
   return (
     <>
-      <div className="mb-2 flex gap-3 bg-white p-2">
+      <div className="gap-3p-2 mb-2 flex">
         <div className="flex w-20 flex-col items-center justify-center align-middle">
           <Avatar
             alt="Hóspede"

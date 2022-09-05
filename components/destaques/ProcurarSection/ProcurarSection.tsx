@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
-import debounce from "debounce";
+import _ from "lodash";
 import {
   useAdvertisementInfo,
   useCurrentProcurarAdvertisementContext,
@@ -16,8 +16,10 @@ import {
   useSetFiltersContext,
   useSetPageAdvertisementinfo,
 } from "../../../context/ProcurarAdvertisementsProvider";
-import { useGetUserCoordinates } from "../../../context/MainProvider";
-import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
+import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
+import { PAGE_NUMBER_COUNT, testAdvertisements } from "../../../services/advertisementService";
+import { GEO } from "../../../models/utils";
+import { coordinateArrayToLatitude } from "../../../utils/map-services";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -26,53 +28,59 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 export default function ProcurarSection() {
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
+  const { location, startDate, endDate, coordinates } = useUserSearch();
+
+  /* Filters */
   const setFilters = useSetFiltersContext();
   const setComoditiesFilter = useSetComoditiesContext();
   const setPage = useSetPageAdvertisementinfo();
   const currentMapCoordinates = useGetUserCoordinates();
 
   const router = useRouter();
-  let { address, startDate, endDate } = router.query;
 
   const goToAdvert = (id: string) => {
     router.push(`/anuncio/${id}`);
   };
 
-  const locateByQuery = useCallback(() => {
-    let addressFormatted = address as string;
-    let startDateFormatted = startDate as string;
-    let endDateFormatted = endDate as string;
+  const testClose = async () => {
+    if (coordinates) {
+      const { lat, lng } = coordinates.coordinates;
+      await testAdvertisements(lat, lng);
+    }
+  };
 
+  const locateByQuery = useCallback(() => {
     setFilters({
-      address: addressFormatted,
+      coordinates: coordinates && coordinates.coordinates,
       dates: {
-        startDate: startDateFormatted && startDateFormatted != "" ? new Date(startDateFormatted).toISOString() : "",
-        endDate: endDateFormatted && endDateFormatted != "" ? new Date(endDateFormatted).toISOString() : "",
+        startDate: startDate ? new Date(startDate).toISOString() : "",
+        endDate: endDate ? new Date(endDate).toISOString() : "",
       },
     });
-  }, [address, startDate, endDate]);
+  }, [coordinates, startDate, endDate]);
 
   useEffect(() => {
     locateByQuery();
   }, [locateByQuery]);
 
+  testClose();
   // Filters
   const toggleComododitiesFilter = (options) => {
     const comoditiesFilter = options.map((option) => option.value);
     setComoditiesFilter(comoditiesFilter);
   };
 
-  const setPriceChange = debounce((value) => {
+  const setPriceChange = _.debounce((value) => {
     const [startRange, endRange] = value;
     setFilters({ price: { startRange, endRange } });
   }, 400);
 
   // TODO finish this
   const getAdvertisementsMarkers = () => {
-    const markers = [];
+    const markers: GEO[] = [];
     for (let advertisement of advertisements) {
       if (advertisement.geom) {
-        markers.push(advertisement.geom.coordinates);
+        markers.push(coordinateArrayToLatitude(advertisement.geom.coordinates));
       }
     }
     return markers;
@@ -92,10 +100,10 @@ export default function ProcurarSection() {
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
                 {count} espaços <span className="font-normal text-gray-400">disponíveis</span>
-                {address ? (
+                {location ? (
                   <>
                     <span className="font-normal text-gray-400">{" para "}</span>
-                    <span className="font-normal capitalize text-gray-400">{address}</span>
+                    <span className="font-normal capitalize text-gray-400">{location.split(",")[0]}</span>
                   </>
                 ) : (
                   <>{" na area"}</>
@@ -124,7 +132,7 @@ export default function ProcurarSection() {
                   );
                 })}
               </select>
-              <div className="flex flex-row justify-start gap-4">
+              <div className="flex h-20 flex-row justify-start gap-4">
                 <div className="w-1/2">
                   <div className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white p-1 text-sm lg:w-52">
                     <div className="mb-1 text-sm">Preço</div>
@@ -140,7 +148,7 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="w-1/2">
+                <div className="hidden w-1/2">
                   <Select
                     id="comodities-select"
                     placeholder="Comodities"
@@ -153,7 +161,7 @@ export default function ProcurarSection() {
                 </div>
               </div>
 
-              <div className="my-2 ml-auto mt-0">
+              <div className="my-2 ml-auto mt-0 hidden">
                 <Link href="/procurar">
                   <a>
                     <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">
@@ -175,7 +183,7 @@ export default function ProcurarSection() {
                   {advertisements &&
                     advertisements.map((advertisement, index) => {
                       return (
-                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.id)} key={index}>
+                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.slug)} key={index}>
                           <RoomCard advertisement={advertisement} />
                         </div>
                       );
@@ -196,7 +204,11 @@ export default function ProcurarSection() {
           )}
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:h-[500px]">
-          <MapWithNoSSR currentMapCoords={currentMapCoordinates} markers={getAdvertisementsMarkers()} />
+          <MapWithNoSSR
+            currentMapCoords={coordinates ? coordinates.coordinates : currentMapCoordinates}
+            markers={getAdvertisementsMarkers()}
+            showCenterMarker={false}
+          />
         </div>
       </div>
     </>

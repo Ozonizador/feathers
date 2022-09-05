@@ -85,6 +85,16 @@ export const getFilteredAdvertisements = async (page: number, filters: FilterAdv
   return { data, error, count };
 };
 
+export const testAdvertisements = async (lat: number, lng: number) => {
+  let { data, error } = await supabaseClient.rpc("close_advertisements", {
+    lat,
+    lng,
+  });
+
+  if (error) console.error(error);
+  else console.log(data);
+};
+
 /* IMAGE */
 
 export const saveImage = async (advertisementID: string, fileName: string, file: File) => {

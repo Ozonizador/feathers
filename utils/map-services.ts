@@ -1,3 +1,5 @@
+import { GEO } from "../models/utils";
+
 export const mapServices = [
   {
     name: "OpenStreetMap",
@@ -11,3 +13,11 @@ export const mapServices = [
     url: `https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.MAPBOX_ACCESSTOKEN}`,
   },
 ];
+
+export const coordinateArrayToLatitude = (coordinates: number[]) => {
+  return { lat: coordinates[1], lng: coordinates[0] };
+};
+
+export const coordinatesObjectToArray = (coordinates: GEO) => {
+  return [coordinates.lng, coordinates.lat];
+};

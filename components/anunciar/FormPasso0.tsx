@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -7,12 +7,15 @@ import {
 } from "../../context/AdvertisementController";
 import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
-import { createPointForDatabase, getCoordinatesFromSearch } from "../../services/mapService";
 import { toast } from "react-toastify";
+import { getResultsFromSearch } from "../../services/mapService";
+import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import _ from "lodash";
+import { MapCoordinates } from "../../models/utils";
+import { coordinatesObjectToArray } from "../../utils/map-services";
 
 const FormPasso0 = () => {
-  const [message, setMessage] = useState("");
-
+  /* STEPS */
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -25,24 +28,17 @@ const FormPasso0 = () => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
-    const { type, street, floor, place, streetNumber, postalCode } = advertisement;
+    const { type, street, place, streetNumber, postalCode } = advertisement;
 
     if (!type || !street || !place || !streetNumber || !postalCode) {
-      setMessage("Campos por preencher.");
+      toast.error("Campos por preencher.");
       return;
     }
 
-    const { geometry } = await getCoordinatesFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
-
-    const postGisPoint = createPointForDatabase(geometry);
-    const newAdvertisement = { ...advertisement, geom: postGisPoint ? postGisPoint : null };
-
-    const { data, error } = await addAdvertisement(newAdvertisement);
+    const { data, error } = await addAdvertisement(advertisement);
     if (data) {
       setAdvertisement(data);
-
-      const nextStep = currentStep + 1;
-      setCurrentStep(nextStep);
+      setCurrentStep(currentStep + 1);
     } else {
       toast.error("An error occured");
     }
@@ -52,22 +48,52 @@ const FormPasso0 = () => {
     changeAdvertisementProperty(property, value);
   };
 
+  const checkPossibilites = async () => {
+    const { street, place, streetNumber, postalCode } = advertisement;
+    const { data, error } = await getResultsFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
+
+    if (!error && data && data.length > 0) {
+      const feature = data[0];
+      const geometry = feature.geometry as MapCoordinates;
+      if (geometry) {
+        changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
+      }
+    }
+  };
+
+  const onChangeMarker = (lat, lng) => {
+    const coordsArray = coordinatesObjectToArray({ lat, lng });
+    let newCoordinates = { type: "Point", coordinates: coordsArray };
+
+    changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, newCoordinates);
+  };
+
   return (
     <>
-      <section className="mx-auto flex w-full justify-center gap-8 lg:my-5 lg:px-32">
-        <GeneralAdvertComponent advertisement={advertisement} onChange={onChangeProperty} />
+      <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
+        <GeneralAdvertComponent
+          advertisement={advertisement}
+          onChange={onChangeProperty}
+          onChangeMarker={onChangeMarker}
+        />
       </section>
       <div className="mt-1">
         <div className="flex lg:px-32">
           <button
             type="button"
             className="w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
+            onClick={() => checkPossibilites()}
+          >
+            Atualizar No Mapa
+          </button>
+          <button
+            type="button"
+            className="mx-4 w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
             onClick={(e) => nextStep(e)}
           >
             Seguinte &#8594;
           </button>
         </div>
-        {message && <div className="text-red-600">{message}</div>}
       </div>
     </>
   );

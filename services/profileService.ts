@@ -1,11 +1,11 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { AVATAR_STORAGE_NAME, Profile, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
-import { getCorrectUrl } from "../utils/utils";
+import { getCorrectUrl, createRandomUniqWord } from "../utils/utils";
 
 export const checkProfileAndCreate = async (userID: string) => {
   try {
     const { data, error } = await getUserProfile(userID);
-    if (error) return createProfile(userID);
+    if (error || !data) return createProfile(userID);
     return { data, error };
   } catch (error) {
     return createProfile(userID);
@@ -15,7 +15,7 @@ export const checkProfileAndCreate = async (userID: string) => {
 async function createProfile(userID: string) {
   const { data, error } = await supabaseClient
     .from<Profile>(PROFILE_TABLE_NAME)
-    .insert({ id: userID, updatedAt: new Date() })
+    .insert({ id: userID, updatedAt: new Date(), slug: createRandomUniqWord() })
     .single();
   return { data, error };
 }

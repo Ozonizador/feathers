@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <footer>
       <div>
-        <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5 lg:pt-28">
-          <div className="my-auto flex relative lg:mx-auto">
+        <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5 lg:pt-20">
+          <div className="my-auto flex relative lg:mx-auto lg:-mt-16">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
           <div className="ml-0 py-5 text-left text-terciary-100 lg:text-left lg:ml-5">

@@ -78,11 +78,11 @@ const Login = () => {
           <div className="flex flex-1 flex-col justify-around gap-5">
             <button className="h-16 w-full rounded-lg bg-socials-facebook px-8  text-center" onClick={loginFacebook}>
               <SiFacebook className="inline" color="blue" />
-              <span className="my-auto ml-3 inline">Facebook</span>
+              <span className="my-auto ml-3 inline">Entrar com Facebook</span>
             </button>
             <button className="h-16 w-full rounded-lg bg-socials-gmail px-8  text-center" onClick={loginGoogle}>
               <SiGmail color="red" className="inline" />
-              <span className="my-auto ml-3 inline">Gmail</span>
+              <span className="my-auto ml-3 inline">Entrar com Gmail</span>
             </button>
           </div>
         </div>

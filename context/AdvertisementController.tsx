@@ -7,9 +7,11 @@ import Advertisement, {
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
+import { createRandomUniqWord } from "../utils/utils";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
+  slug: createRandomUniqWord(),
   type: "ENTIRE_SPACE",
   typeFlexHost: "SUPER_FLEX",
   typeHost: "PARTICULAR",
@@ -44,7 +46,7 @@ const defaultAdvertisement = {
   } as HouseExpenses,
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,
-  geom: "",
+  geom: null,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

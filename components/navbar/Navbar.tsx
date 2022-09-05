@@ -16,35 +16,43 @@ import ukFlag from "../../public/images/icon-uk.jpg";
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
+import NavbarMobile from "../navbar-mobile/NavbarMobile";
 
 export const Navbar = () => {
   const { user } = useUser();
   const router = useRouter();
 
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   const setModoSenhorio = () => {
-    toggleUserTypeContext("SENHORIO");
+    toggleUserTypeContext("TENANT");
     router.push("/unidesk");
   };
 
-  /* Changing the toggle senhorio estudante */
+  /* Changing the toggle TENANT estudante */
   const toggleSenhorioEstudante = () => {
     if (!user) {
       return;
     }
 
-    if (toggleUserType === "ESTUDANTE") {
-      toggleUserTypeContext("SENHORIO");
+    if (toggleUserType === "LANDLORD") {
+      toggleUserTypeContext("TENANT");
     } else {
-      toggleUserTypeContext("ESTUDANTE");
+      toggleUserTypeContext("LANDLORD");
     }
   };
 
-  const openMobileMenu = () => {};
+  const logout = () => {
+    supabaseClient.auth.signOut();
+    router.push("/");
+  };
+
   return (
     <header>
+      {/* DESKTOP */}
       <nav className="mx-6 mb-5 lg:mx-28">
         <div>
           <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
@@ -65,8 +73,10 @@ export const Navbar = () => {
               <div className="my-auto">
                 <Socials type="primary" />
               </div>
-              <div className="my-auto flex h-4">
-                <Image src={ukFlag} alt="" />
+              <div className="flex">
+                <div className="my-auto mt-3 h-7 w-7">
+                  <Image src={ukFlag} alt="" />
+                </div>
                 <select className="ml-2 border-none">
                   <option value="eng" disabled>
                     EN
@@ -80,11 +90,14 @@ export const Navbar = () => {
             <div className="lg:block">
               <Link href="/">
                 <a>
-                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={55} width={208}></Image>
+                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
                 </a>
               </Link>
             </div>
-            <div className="my-auto ml-auto rounded-full border border-black p-2 lg:hidden" onClick={openMobileMenu}>
+            <div
+              className="my-auto ml-auto cursor-pointer rounded-full border border-black p-2 lg:hidden"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
               <CgMenuLeft size={28} />
             </div>
 
@@ -107,14 +120,14 @@ export const Navbar = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute z-50 flex w-52 flex-col bg-white p-2 shadow-md">
+                      <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                         <Menu.Item>
-                          <MyLink customClass="py-1 w-full" href="/funciona">
+                          <MyLink customClass="py-1 mt-2 w-full" href="/funciona">
                             Como funciona?
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <MyLink customClass="py-1 w-full" href="/anunciar">
+                          <MyLink customClass="py-2 w-full" href="/anunciar">
                             Anunciar!
                           </MyLink>
                         </Menu.Item>
@@ -165,7 +178,7 @@ export const Navbar = () => {
                       >
                         <span
                           className={`${
-                            toggleUserType === "SENHORIO" ? "translate-x-6" : "translate-x-1"
+                            toggleUserType === "LANDLORD" ? "translate-x-6" : "translate-x-1"
                           } inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
@@ -196,8 +209,8 @@ export const Navbar = () => {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute z-50 flex flex-col bg-white p-2 px-4 shadow-md">
-                            {toggleUserType == "ESTUDANTE" && (
+                          <Menu.Items className="absolute z-50 flex flex-col rounded-lg bg-white p-2 px-4 shadow-md">
+                            {toggleUserType == "TENANT" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
@@ -231,18 +244,18 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/help">
+                                  <MyLink customClass="py-1" href="/faqs">
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
+                                  <div className="py-1" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
                               </>
                             )}
-                            {toggleUserType == "SENHORIO" && (
+                            {toggleUserType == "LANDLORD" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1" href="/unidesk">
@@ -281,7 +294,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
+                                  <div className="py-1" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
@@ -298,6 +311,8 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
+      {/* MOBILE */}
+      <NavbarMobile open={mobileOpen} setOpenMobile={() => setMobileOpen(false)} />
     </header>
   );
 };

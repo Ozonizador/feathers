@@ -45,7 +45,7 @@ const FuncionaSection2 = () => {
         />
       </div>
 
-      <div className="container mx-auto flex flex-row  justify-between  ">
+      <div className="container mx-auto flex w-full flex-row justify-between">
         <FuncionaSection2Card
           img="/images/55.png"
           icon="/images/5.png"
@@ -71,7 +71,7 @@ const FuncionaSection2 = () => {
           text="Quando a reserva é confirmada debitamos ao inquilino a primeira renda e guardamos este valor até 24h após a entrada. Após garantir que tudo está correto, o dinheiro é libertado para o seu cartão, que deve adicionar nos métodos de pagamento."
         />
       </div>
-      <Link href="" className="mb-24">
+      <Link href="/anunciar" className="mb-24">
         <a className="mx-auto   flex w-11/12 justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in  hover:text-white hover:drop-shadow-xl lg:w-52">
           Criar o anúncio
         </a>

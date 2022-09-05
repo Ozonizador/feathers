@@ -15,7 +15,7 @@ const MenuSenhorio = ({ activeLink }: MenuSenhorioProps) => {
   const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
 
   return (
-    <div className="w-80 rounded-2xl bg-terciary-600 p-2">
+    <div className="h-fit w-80 rounded-2xl bg-terciary-600 p-2">
       <div>
         <div className="flex justify-start border border-b-primary-500 px-2 align-middle">
           <h1 className="py-1 text-xl font-bold">Anúncios</h1>

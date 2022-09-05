@@ -12,6 +12,7 @@ datasource db {
 
 model Profile {
   id             String    @id @default(uuid()) @db.Uuid
+  slug           String    @unique
   name           String?
   surname        String?
   nationality    String?
@@ -41,6 +42,7 @@ model Profile {
 
 model Advertisement {
   id                String                   @id @default(uuid()) @db.Uuid
+  slug              String                   @unique
   type              TypeRoom
   place             String
   street            String
@@ -250,4 +252,22 @@ model Stay {
   updatedAt DateTime @default(now()) @updatedAt
 
   @@map("stays")
+}
+
+model Blog {
+  id          String       @id @default(uuid()) @db.Uuid
+  slug        String       @unique
+  title       String
+  description String
+  image       String
+  category    BlogCategory
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now()) @updatedAt
+
+  @@map("blogs")
+}
+
+enum BlogCategory {
+  LANDLORD
+  TENANT
 }

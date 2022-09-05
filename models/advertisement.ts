@@ -8,6 +8,7 @@ export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
 export type Advertisement = {
   id?: string;
+  slug: string;
   typeFlexHost: FlexHostType;
   place: string;
   street: string;
@@ -112,6 +113,7 @@ export const ADVERTISEMENT_PROPERTIES = {
   GEOM: "geom",
   STAY_START_DATE: "stay.startDate",
   STAY_END_DATE: "stay.endDate",
+  SLUG: "slug",
 } as const;
 
 export const HOUSE_RULES_NAMING = {

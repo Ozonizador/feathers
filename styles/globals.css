@@ -5,6 +5,13 @@
 @import "leaflet/dist/leaflet.css";
 @import "rc-slider/assets/index.css";
 
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+    src: url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+  }
+}
+
 .bg-hero-unidesk {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);
   background-size: cover;
@@ -42,13 +49,6 @@
   background-size: cover;
 }
 
-/* CÓDIGO PARA ESCURECER BANNERS */
-.background-banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/girlspic.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .modal-w {
   width: 100%;
 }
@@ -64,7 +64,7 @@
   background-position: 95%;
 }
 
-.percent{
+.percent {
   background: url(/images/percent.png) no-repeat;
   background-size: 20px;
   background-position: 95%;
