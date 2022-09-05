@@ -7,6 +7,10 @@ const nextConfig = {
   images: {
     domains: ["repknakjxuwlkuloscsl.supabase.co"],
   },
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
 };
 
 module.exports = withPlugins([[withTM]], nextConfig);

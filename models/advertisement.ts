@@ -50,10 +50,16 @@ export type AdvertisementWithReviewAverage = Advertisement & {
   "stay.endDate": Date;
 };
 
+/* EXPENSES */
 export interface HouseExpenses {
   inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED";
-  servicesIncluded?: EXPENSES_TYPE[];
-  servicesExcluded?: EXPENSES_TYPE[];
+  services?: InfoExpenses[];
+}
+
+export interface InfoExpenses {
+  name: EXPENSE_TYPE;
+  max: number;
+  included: boolean;
 }
 
 export interface HouseRules {
@@ -149,7 +155,7 @@ export enum INCLUSIVE_EXPENSES {
   EXCLUDED = "EXCLUDED",
 }
 
-export enum EXPENSES_TYPE {
+export enum EXPENSE_TYPE {
   GAS = "GAS",
   LIGHTS = "LIGHTS",
   WATER = "WATER",

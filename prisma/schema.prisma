@@ -66,6 +66,7 @@ model Advertisement {
   expenses          Json
   available         AdvertisementStatus
   hostLivesProperty Boolean
+  verified          Boolean                  @default(false)
   hostId            String                   @db.Uuid
   createdAt         DateTime                 @default(now())
   updatedAt         DateTime                 @updatedAt

@@ -1,8 +1,9 @@
 import classNames from "classnames";
 import Advertisement, {
   ADVERTISEMENT_PROPERTIES,
-  EXPENSES_TYPE,
+  EXPENSE_TYPE,
   INCLUSIVE_EXPENSES,
+  InfoExpenses,
 } from "../../models/advertisement";
 import Input from "../utils/Input";
 
@@ -30,45 +31,25 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newExpense);
   };
 
-  // for the expenses.
-  const defineTypeExpenses = (e) => {
+  const toggleTypeExpenses = (event) => {
     const { expenses } = advertisement;
 
-    const typeLabel = e.target.name as EXPENSES_TYPE;
-    const typeValue = e.target.value === "true";
+    const services = expenses.services;
+    const newService = { name: event.target.name, max: 0, included: event.target.checked } as InfoExpenses;
 
-    let excludedExpenses = expenses.servicesExcluded || [];
-    let includedExpenses = expenses.servicesIncluded || [];
-
-    if (typeValue) {
-      const index = includedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
-      if (index == -1) {
-        includedExpenses.push(typeLabel);
-      }
-      excludedExpenses = excludedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
-    } else {
-      const index = excludedExpenses.findIndex((expense: EXPENSES_TYPE) => expense == typeLabel);
-      if (index == -1) {
-        excludedExpenses.push(typeLabel);
-      }
-      includedExpenses = includedExpenses.filter((expense: EXPENSES_TYPE) => expense != typeLabel);
-    }
-
-    const newTypeExpense = {
+    onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
       ...expenses,
-      servicesExcluded: excludedExpenses,
-      servicesIncluded: includedExpenses,
-    };
-
-    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newTypeExpense);
+      services: { ...services, newService },
+    });
   };
 
-  const checkPartiallyExpense = (label: EXPENSES_TYPE, included: boolean) => {
+  const checkPartiallyExpense = (label: EXPENSE_TYPE, included: boolean) => {
     const { expenses } = advertisement;
-    if (included) {
-      return expenses.servicesIncluded && expenses.servicesIncluded.includes(label);
-    }
-    return expenses.servicesExcluded && expenses.servicesExcluded.includes(label);
+    return (
+      expenses &&
+      expenses.services &&
+      expenses.services.filter((service) => service.name === label && service.included === included).length > 0
+    );
   };
 
   return (
@@ -154,33 +135,15 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 <p className="w-24 text-base font-bold">Gás</p>
               </div>
 
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
+              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
                 <div>
                   <div className="flex h-5 items-center">
                     <input
-                      type="radio"
+                      type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSES_TYPE.GAS}
-                      value="true"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.GAS, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="radio"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSES_TYPE.GAS}
-                      value="false"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.GAS, false)}
+                      name={EXPENSE_TYPE.GAS}
+                      onChange={(e) => toggleTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSE_TYPE.GAS, true)}
                     />
                   </div>
                 </div>
@@ -192,33 +155,15 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 <p className="w-24 text-base font-bold">Internet</p>
               </div>
 
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
+              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
                 <div>
                   <div className="flex h-5 items-center">
                     <input
-                      type="radio"
+                      type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSES_TYPE.INTERNET}
-                      value="true"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.INTERNET, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="radio"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSES_TYPE.INTERNET}
-                      value="false"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.INTERNET, false)}
+                      name={EXPENSE_TYPE.INTERNET}
+                      onChange={(e) => toggleTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSE_TYPE.INTERNET, true)}
                     />
                   </div>
                 </div>
@@ -230,33 +175,15 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 <p className="w-24 text-base font-bold">Agua</p>
               </div>
 
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
+              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
                 <div>
                   <div className="flex h-5 items-center">
                     <input
-                      type="radio"
+                      type="checkbox"
                       className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSES_TYPE.WATER}
-                      value="true"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.WATER, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="radio"
-                      name={EXPENSES_TYPE.WATER}
-                      className="h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.WATER, false)}
+                      name={EXPENSE_TYPE.WATER}
+                      onChange={(e) => toggleTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSE_TYPE.WATER, true)}
                     />
                   </div>
                 </div>
@@ -268,33 +195,15 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 <p className="w-24 text-base font-bold">Luz</p>
               </div>
 
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Sim</div>
+              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
                 <div>
                   <div className="flex h-5 items-center">
                     <input
-                      type="radio"
-                      name={EXPENSES_TYPE.LIGHTS}
+                      type="checkbox"
+                      name={EXPENSE_TYPE.LIGHTS}
                       className="h-4 w-4 rounded border border-terciary-500"
-                      value="true"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.LIGHTS, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-6 flex w-40 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div className="mr-16 text-base">Não</div>
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="radio"
-                      name={EXPENSES_TYPE.LIGHTS}
-                      className="h-4 w-4 rounded border border-terciary-500"
-                      value="false"
-                      onChange={(e) => defineTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSES_TYPE.LIGHTS, false)}
+                      onChange={(e) => toggleTypeExpenses(e)}
+                      checked={checkPartiallyExpense(EXPENSE_TYPE.LIGHTS, true)}
                     />
                   </div>
                 </div>

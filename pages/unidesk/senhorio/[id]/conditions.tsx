@@ -1,27 +1,31 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
-import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import Advertisement from "../../../../models/advertisement";
-import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
-import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 import { toast } from "react-toastify";
+import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
+import { Spinner } from "flowbite-react";
 
 interface ConditionsProps {
   id: string;
 }
 
 const Conditions = ({ id }: ConditionsProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [advertisement, setAdvertisement] = useState<Advertisement>();
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
 
   const getAdvertisementInfo = useCallback(async () => {
+    setLoading(true);
     const { data, error } = await getSingleAdvertisement(id);
     if (!error) {
       setAdvertisement(data);
+      setAdvertisementContext(data);
     }
+    setLoading(false);
   }, [id]);
 
   const saveChanges = async () => {
@@ -51,18 +55,26 @@ const Conditions = ({ id }: ConditionsProps) => {
           <div className="mb-2 text-2xl font-semibold">Condições</div>
           <div className="text-xl text-gray-700">As suas regras</div>
 
-          {advertisement && (
-            <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+          {loading && (
+            <div className="mt-32 flex flex-1 justify-center">
+              <Spinner color="info" aria-label="loading" size="lg" />
+            </div>
           )}
 
-          <div className="pb-4">
-            <button
-              className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
-              onClick={saveChanges}
-            >
-              Guardar alterações
-            </button>
-          </div>
+          {!loading && advertisement && (
+            <>
+              <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+
+              <div className="pb-4">
+                <button
+                  className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
+                  onClick={saveChanges}
+                >
+                  Guardar alterações
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { Spinner } from "flowbite-react";
 import { useCallback, useEffect, useState } from "react";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
+import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
 
 import Advertisement from "../../../../models/advertisement";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
@@ -11,13 +13,18 @@ interface PricesProps {
 }
 
 const Prices = ({ id }: PricesProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [advertisement, setAdvertisement] = useState<Advertisement>();
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
 
   const getAdvertisementInfo = useCallback(async () => {
+    setLoading(true);
     const { data, error } = await getSingleAdvertisement(id);
     if (!error) {
       setAdvertisement(data);
+      setAdvertisementContext(data);
     }
+    setLoading(false);
   }, [id]);
 
   useEffect(() => {
@@ -41,13 +48,15 @@ const Prices = ({ id }: PricesProps) => {
           <MenuSenhorio />
         </div>
         <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
-          <div className="mb-7 text-2xl font-semibold">Fotografias</div>
-
-          {/* {advertisement && (
+          <div className="mb-7 text-2xl font-semibold">Preços</div>
+          {loading && (
+            <>
+              <Spinner color="info" aria-label="loading" size="lg" />
+            </>
+          )}
+          {!loading && advertisement && (
             <PricesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
-          )} */}
-
-          {advertisement && <PricesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />}
+          )}
 
           <div>
             <button

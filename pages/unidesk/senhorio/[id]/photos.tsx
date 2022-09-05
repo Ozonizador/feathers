@@ -13,19 +13,22 @@ import {
 } from "../../../../services/advertisementService";
 import classNames from "classnames";
 import { toast } from "react-toastify";
-import { url } from "inspector";
+import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
 
 const Photos = ({ id }) => {
   const [advertisement, setAdvertisement] = useState<Advertisement>();
   const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
 
   const photos = advertisement ? advertisement.photos : ([] as AdvertisementPhoto[]);
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
+
   const getAdvertisementInfo = useCallback(async () => {
     const { data, error } = await getSingleAdvertisement(id);
     if (!error) {
       setAdvertisement(data);
+      setAdvertisementContext(data);
     }
-  }, [id]);
+  }, [id, setAdvertisementContext]);
 
   useEffect(() => {
     getAdvertisementInfo();
@@ -82,7 +85,7 @@ const Photos = ({ id }) => {
 
   const deletePhoto = async (url: string) => {
     const { data, error } = await removePicture(advertisement.id, url);
-    if (!error && data.length !== 0) {
+    if (!error && data.length > 0) {
       const photosAux = advertisement.photos.filter((photo) => photo.url !== url);
       const { data, error } = await updateAdvertisement({ ...advertisement, photos: photosAux }, advertisement.id);
       if (!error) {
@@ -142,7 +145,7 @@ const Photos = ({ id }) => {
           <div className="mx-auto flex w-64 flex-col gap-6 lg:w-full lg:flex-row lg:items-center">
             <>
               {photos &&
-                photos.length !== 0 &&
+                photos.length > 0 &&
                 photos.map((photo, index) => {
                   return (
                     <div
