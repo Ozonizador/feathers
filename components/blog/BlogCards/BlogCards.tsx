@@ -10,7 +10,7 @@ export default function BlogCards() {
           <div className="flex-1">
             <div className="flex-1 rounded-3xl bg-white p-5 drop-shadow-xl">
               <div className="flex flex-col lg:flex-row">
-                <div className="w-80 rounded-3xl ">
+                <div className="w-full rounded-3xl lg:w-80 ">
                   <Image
                     layout="responsive"
                     src="/images/cardpic1.png"
@@ -43,7 +43,7 @@ export default function BlogCards() {
           <div className="flex-1">
             <div className="flex-1 rounded-3xl bg-white p-5 drop-shadow-xl">
               <div className="flex flex-col lg:flex-row">
-                <div className="w-80 rounded-3xl ">
+                <div className="w-full rounded-3xl lg:w-80 ">
                   <Image
                     layout="responsive"
                     src="/images/cardpic2.png"
