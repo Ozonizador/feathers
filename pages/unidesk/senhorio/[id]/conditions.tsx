@@ -1,35 +1,25 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useState } from "react";
 import Advertisement from "../../../../models/advertisement";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 import { toast } from "react-toastify";
-import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
-import { Spinner } from "flowbite-react";
+import {
+  useSelectedAnuncioMenuSenhorio,
+  useSetSelectedAnuncioMenuSenhorio,
+} from "../../../../context/MenuSenhorioAnuncioProvider";
 
 interface ConditionsProps {
-  id: string;
+  advertisement: Advertisement;
 }
 
-const Conditions = ({ id }: ConditionsProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [advertisement, setAdvertisement] = useState<Advertisement>();
-  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
-
-  const getAdvertisementInfo = useCallback(async () => {
-    setLoading(true);
-    const { data, error } = await getSingleAdvertisement(id);
-    if (!error) {
-      setAdvertisement(data);
-      setAdvertisementContext(data);
-    }
-    setLoading(false);
-  }, [id]);
+const Conditions = ({ advertisement }: ConditionsProps) => {
+  const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
-    const { error } = await updateAdvertisement(advertisement, id);
+    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast("Anúncio Atualizado");
     } else {
@@ -38,12 +28,8 @@ const Conditions = ({ id }: ConditionsProps) => {
   };
 
   const changeAdvertisementProperty = (property, value) => {
-    setAdvertisement({ ...advertisement, [property]: value });
+    setAdvertisement({ ...advertisementContext, [property]: value });
   };
-
-  useEffect(() => {
-    getAdvertisementInfo();
-  }, [getAdvertisementInfo]);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
@@ -55,15 +41,9 @@ const Conditions = ({ id }: ConditionsProps) => {
           <div className="mb-2 text-2xl font-semibold">Condições</div>
           <div className="text-xl text-gray-700">As suas regras</div>
 
-          {loading && (
-            <div className="mt-32 flex flex-1 justify-center">
-              <Spinner color="info" aria-label="loading" size="lg" />
-            </div>
-          )}
-
-          {!loading && advertisement && (
+          {advertisementContext && (
             <>
-              <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+              <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
               <div className="pb-4">
                 <button
@@ -86,10 +66,12 @@ export default Conditions;
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
   getServerSideProps: async (context) => {
-    const id = context.query.id;
+    const id = context.query.id as string;
+    const { data, error } = await getSingleAdvertisement(id);
+    if (error || !data) return { notFound: true };
 
     return {
-      props: { id },
+      props: { advertisement: data },
     };
   },
 });

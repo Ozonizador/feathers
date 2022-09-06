@@ -13,29 +13,30 @@ import {
 } from "../../../../services/advertisementService";
 import classNames from "classnames";
 import { toast } from "react-toastify";
-import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
+import {
+  useSelectedAnuncioMenuSenhorio,
+  useSetSelectedAnuncioMenuSenhorio,
+} from "../../../../context/MenuSenhorioAnuncioProvider";
 
-const Photos = ({ id }) => {
-  const [advertisement, setAdvertisement] = useState<Advertisement>();
-  const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
+interface PhotoProps {
+  advertisement: Advertisement;
+}
 
-  const photos = advertisement ? advertisement.photos : ([] as AdvertisementPhoto[]);
-  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
-
-  const getAdvertisementInfo = useCallback(async () => {
-    const { data, error } = await getSingleAdvertisement(id);
-    if (!error) {
-      setAdvertisement(data);
-      setAdvertisementContext(data);
-    }
-  }, [id, setAdvertisementContext]);
+const Photos = ({ advertisement }: PhotoProps) => {
+  const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   useEffect(() => {
-    getAdvertisementInfo();
-  }, [getAdvertisementInfo]);
+    setAdvertisement(advertisement);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [advertisement]);
+
+  const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
+
+  const photos = advertisementContext ? advertisementContext.photos : ([] as AdvertisementPhoto[]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisement, id);
+    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
     }
   };
@@ -54,7 +55,7 @@ const Photos = ({ id }) => {
 
       // saving images in storage
       for (let file of files) {
-        const { publicURL, error } = await saveImage(advertisement.id, file.name, file);
+        const { publicURL, error } = await saveImage(advertisementContext.id, file.name, file);
         if (publicURL) {
           paths.push({ url: publicURL, zone: "other" });
         }
@@ -62,8 +63,8 @@ const Photos = ({ id }) => {
 
       // associate images to advertisement
       const { data, error } = await updateAdvertisement(
-        { ...advertisement, photos: [...advertisement.photos, ...paths] },
-        advertisement.id
+        { ...advertisementContext, photos: [...advertisementContext.photos, ...paths] },
+        advertisementContext.id
       );
       if (!error) {
         setAdvertisement(data);
@@ -84,10 +85,13 @@ const Photos = ({ id }) => {
   };
 
   const deletePhoto = async (url: string) => {
-    const { data, error } = await removePicture(advertisement.id, url);
+    const { data, error } = await removePicture(advertisementContext.id, url);
     if (!error && data.length > 0) {
-      const photosAux = advertisement.photos.filter((photo) => photo.url !== url);
-      const { data, error } = await updateAdvertisement({ ...advertisement, photos: photosAux }, advertisement.id);
+      const photosAux = advertisementContext.photos.filter((photo) => photo.url !== url);
+      const { data, error } = await updateAdvertisement(
+        { ...advertisementContext, photos: photosAux },
+        advertisementContext.id
+      );
       if (!error) {
         setAdvertisement(data);
       }
@@ -109,7 +113,7 @@ const Photos = ({ id }) => {
       toast.error("Só pode ter 1 foto de capa");
       return;
     } else {
-      let { photos } = advertisement;
+      let { photos } = advertisementContext;
 
       let newImages = photos.map((photo) => {
         if (checkIfImageInSelected(photo.url)) {
@@ -118,7 +122,10 @@ const Photos = ({ id }) => {
           return photo;
         }
       });
-      const { data, error } = await updateAdvertisement({ ...advertisement, photos: newImages }, advertisement.id);
+      const { data, error } = await updateAdvertisement(
+        { ...advertisementContext, photos: newImages },
+        advertisementContext.id
+      );
       if (!error) {
         setAdvertisement(data);
       }
@@ -232,10 +239,12 @@ export default Photos;
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
   getServerSideProps: async (context) => {
-    const id = context.query.id;
+    const id = context.query.id as string;
+    const { data, error } = await getSingleAdvertisement(id);
+    if (error || !data) return { notFound: true };
 
     return {
-      props: { id },
+      props: { advertisement: data },
     };
   },
 });

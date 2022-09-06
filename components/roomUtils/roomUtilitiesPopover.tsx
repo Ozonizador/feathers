@@ -12,7 +12,9 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
     if (!expenses) return false;
     if (expenses.inclusive === "INCLUDED") return true;
     if (expenses.inclusive === "PARTIALLY") {
-      const index = expenses.services.findIndex((expense) => expense.name === type && expense.included === true);
+      const index =
+        expenses.services &&
+        expenses.services.findIndex((expense) => expense.name === type && expense.included === true);
       if (index !== -1) return true;
     }
 

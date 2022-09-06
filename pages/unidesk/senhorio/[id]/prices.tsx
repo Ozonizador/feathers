@@ -3,42 +3,35 @@ import { Spinner } from "flowbite-react";
 import { useCallback, useEffect, useState } from "react";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
+import {
+  useSelectedAnuncioMenuSenhorio,
+  useSetSelectedAnuncioMenuSenhorio,
+} from "../../../../context/MenuSenhorioAnuncioProvider";
 
 import Advertisement from "../../../../models/advertisement";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
 
 interface PricesProps {
-  id: string;
+  advertisement: Advertisement;
 }
 
-const Prices = ({ id }: PricesProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [advertisement, setAdvertisement] = useState<Advertisement>();
-  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
-
-  const getAdvertisementInfo = useCallback(async () => {
-    setLoading(true);
-    const { data, error } = await getSingleAdvertisement(id);
-    if (!error) {
-      setAdvertisement(data);
-      setAdvertisementContext(data);
-    }
-    setLoading(false);
-  }, [id]);
+const Prices = ({ advertisement }: PricesProps) => {
+  const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   useEffect(() => {
-    getAdvertisementInfo();
-  }, [getAdvertisementInfo]);
+    setAdvertisement(advertisement);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [advertisement]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisement, id);
+    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
     }
   };
 
   const changeAdvertisementProperty = (property, value) => {
-    setAdvertisement({ ...advertisement, [property]: value });
+    setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
   return (
@@ -49,13 +42,9 @@ const Prices = ({ id }: PricesProps) => {
         </div>
         <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
           <div className="mb-7 text-2xl font-semibold">Preços</div>
-          {loading && (
-            <>
-              <Spinner color="info" aria-label="loading" size="lg" />
-            </>
-          )}
-          {!loading && advertisement && (
-            <PricesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+
+          {advertisementContext && (
+            <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
           )}
 
           <div>
@@ -77,10 +66,12 @@ export default Prices;
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
   getServerSideProps: async (context) => {
-    const id = context.query.id;
+    const id = context.query.id as string;
+    const { data, error } = await getSingleAdvertisement(id);
+    if (error || !data) return { notFound: true };
 
     return {
-      props: { id },
+      props: { advertisement: data },
     };
   },
 });

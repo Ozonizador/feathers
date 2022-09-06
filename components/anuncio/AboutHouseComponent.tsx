@@ -15,7 +15,7 @@ interface AboutHouseComponentProps {
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
   const toggleAmmenityProperty = (event, space: AboutHouseSpace) => {
     const property = event.target.name;
-    const checked = event.target.checked;
+    //const checked = event.target.checked;
 
     const { aboutHouse } = advertisement;
     let amenities = aboutHouse[space];
@@ -29,7 +29,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
       if (amenities[i] === property) {
         foundAmenity = true;
         amenities.splice(i);
-        break;
+        return;
       }
     }
 
@@ -41,9 +41,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
   };
 
   const checkIfAboutHousePropertyChecked = (space: AboutHouseSpace, toCheckAmenity: TypeAmenity) => {
-    const { aboutHouse } = advertisement;
-    const amenities = aboutHouse[space];
-
+    const amenities = advertisement.aboutHouse[space];
     if (!amenities) {
       return false;
     }
@@ -71,7 +69,6 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
                             checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
                             name={comodity.type}
                             onChange={(e) => toggleAmmenityProperty(e, "general")}
@@ -101,10 +98,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                            checked={checkIfAboutHousePropertyChecked("livingRoom", comodity.type)}
                             name={comodity.type}
-                            onChange={(e) => toggleAmmenityProperty(e, "general")}
+                            onChange={(e) => toggleAmmenityProperty(e, "livingRoom")}
                           />
                         </div>
                       </div>
@@ -131,10 +127,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                            checked={checkIfAboutHousePropertyChecked("bedRoom", comodity.type)}
                             name={comodity.type}
-                            onChange={(e) => toggleAmmenityProperty(e, "general")}
+                            onChange={(e) => toggleAmmenityProperty(e, "bedRoom")}
                           />
                         </div>
                       </div>
@@ -161,10 +156,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                            checked={checkIfAboutHousePropertyChecked("bathRoom", comodity.type)}
                             name={comodity.type}
-                            onChange={(e) => toggleAmmenityProperty(e, "general")}
+                            onChange={(e) => toggleAmmenityProperty(e, "bathRoom")}
                           />
                         </div>
                       </div>
@@ -191,10 +185,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                            checked={checkIfAboutHousePropertyChecked("exterior", comodity.type)}
                             name={comodity.type}
-                            onChange={(e) => toggleAmmenityProperty(e, "general")}
+                            onChange={(e) => toggleAmmenityProperty(e, "exterior")}
                           />
                         </div>
                       </div>
@@ -221,10 +214,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                           <input
                             type="checkbox"
                             className=" h-4 w-4 rounded border border-terciary-500"
-                            value="true"
-                            checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                            checked={checkIfAboutHousePropertyChecked("kitchen", comodity.type)}
                             name={comodity.type}
-                            onChange={(e) => toggleAmmenityProperty(e, "general")}
+                            onChange={(e) => toggleAmmenityProperty(e, "kitchen")}
                           />
                         </div>
                       </div>

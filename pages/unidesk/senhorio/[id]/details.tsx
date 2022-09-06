@@ -13,38 +13,35 @@ import { Spinner } from "flowbite-react";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
 import { MapCoordinates } from "../../../../models/utils";
 import { getResultsFromSearch } from "../../../../services/mapService";
-import { useSetSelectedAnuncioMenuSenhorio } from "../../../../context/MenuSenhorioAnuncioProvider";
+import {
+  useSelectedAnuncioMenuSenhorio,
+  useSetSelectedAnuncioMenuSenhorio,
+} from "../../../../context/MenuSenhorioAnuncioProvider";
 
 interface DetailsProps {
-  id: string;
+  advertisement: Advertisement;
 }
 
-const Details = ({ id }: DetailsProps) => {
-  const [advertisement, setAdvertisement] = useState<Advertisement>();
-
-  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
-
-  const getAdvertisementInfo = useCallback(async () => {
-    const { data, error } = await getSingleAdvertisement(id);
-    if (!error) {
-      setAdvertisement(data);
-      setAdvertisementContext(data);
-    }
-  }, [id, setAdvertisementContext]);
+const Details = ({ advertisement }: DetailsProps) => {
+  const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   useEffect(() => {
-    getAdvertisementInfo();
-  }, [getAdvertisementInfo]);
+    setAdvertisement(advertisement);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [advertisement]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisement, id);
+    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
+    } else {
+      toast.error("Error saving the advertisement");
     }
   };
 
   const changeAdvertisementProperty = (property, value) => {
-    setAdvertisement({ ...advertisement, [property]: value });
+    setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
   const onChangeMarker = (lat, lng) => {
@@ -55,7 +52,7 @@ const Details = ({ id }: DetailsProps) => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, streetNumber, postalCode } = advertisement;
+    const { street, place, streetNumber, postalCode } = advertisementContext;
     const { data, error } = await getResultsFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
 
     if (!error && data && data.length > 0) {
@@ -76,22 +73,25 @@ const Details = ({ id }: DetailsProps) => {
         <div className="mx-6 pt-12 text-center  lg:text-left">
           <div className="mb-2 text-2xl font-semibold"></div>
           <div className="text-xl text-gray-700"></div>
-          {!advertisement && (
+          {!advertisementContext && (
             <div className="mt-32 flex flex-1 justify-center">
               <Spinner color="info" aria-label="loading" size="lg" />
             </div>
           )}
-          {advertisement && (
+          {advertisementContext && (
             <>
               <div>
-                <h5 className="font-bold">{advertisement.title}</h5>
-                <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
-                <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <h5 className="font-bold">{advertisementContext.title}</h5>
+                <AdvertisementInfoComponent
+                  advertisement={advertisementContext}
+                  onChange={changeAdvertisementProperty}
+                />
+                <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
 
               <div>
                 <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
-                <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
               <div className="mt-5">
                 <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
@@ -103,14 +103,14 @@ const Details = ({ id }: DetailsProps) => {
                   Atualizar No Mapa
                 </button>
                 <GeneralAdvertComponent
-                  advertisement={advertisement}
+                  advertisement={advertisementContext}
                   onChange={changeAdvertisementProperty}
                   onChangeMarker={onChangeMarker}
                 />
               </div>
               <div>
                 <h5 className="font-bold">Política de Cancelamento</h5>
-                <HostFlexTypeComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
             </>
           )}
@@ -128,10 +128,12 @@ export default Details;
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
   getServerSideProps: async (context) => {
-    const id = context.query.id;
+    const id = context.query.id as string;
+    const { data, error } = await getSingleAdvertisement(id);
+    if (error || !data) return { notFound: true };
 
     return {
-      props: { id },
+      props: { advertisement: data },
     };
   },
 });
