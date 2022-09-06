@@ -4,7 +4,6 @@ import React from "react";
 import UltimosArtigos from "../../components/dicas consumo/UltimosArtigos/UltimosArtigos";
 import BlogPostSection from "../../components/dicas consumo/BlogPostSection/BlogPostSection";
 import { Blog, BLOG_PROPERTIES, BLOG_TABLE_NAME } from "../../models/blog";
-import { blob } from "stream/consumers";
 
 type PageParams = {
   slug: string;

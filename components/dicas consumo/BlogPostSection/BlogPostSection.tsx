@@ -18,10 +18,10 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
 
   return (
     <section>
-      <div className="relative">
+      <div className="relative h-[650px] bg-black">
         <Image layout="fill" src={blog.image} alt="blog" className="opacity-50" objectFit="cover" />
 
-        <div className="z-50 flex flex-col items-center justify-start py-4 align-middle lg:justify-center lg:py-96">
+        <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:justify-center">
           <div className="mt-5 mb-7 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">
             {BlogCategoryLabel[blog.category]}
           </div>

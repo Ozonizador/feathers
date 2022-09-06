@@ -12,7 +12,7 @@ export default function RoomMap() {
 
   const geom = advertisement.geom;
 
-  const geoCoordinates = coordinateArrayToLatitude(geom.coordinates);
+  const geoCoordinates = (geom && coordinateArrayToLatitude(geom.coordinates)) || null;
 
   return (
     <section className="my-32">

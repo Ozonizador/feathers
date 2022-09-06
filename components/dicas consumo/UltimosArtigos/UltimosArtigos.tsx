@@ -49,11 +49,11 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
               return (
                 <Link href={`/blog/${blog.slug}`} key={index}>
                   <a>
-                    <div className="flex flex-1 flex-col">
-                      <div className="flex justify-center">
-                        <Image src={blog.image} alt="" height="450" width="350" objectFit="cover"></Image>
+                    <div className="flex  flex-col">
+                      <div className="relative block h-[350px] w-full  px-4 lg:flex lg:h-[350px] lg:w-[350px]">
+                        <Image className="rounded-lg" src={blog.image} alt="" layout="fill" objectFit="cover"></Image>
                       </div>
-                      <div className="my-4 w-2/3 text-2xl">{blog.title}</div>
+                      <div className="my-4 w-full text-xl lg:w-2/3">{blog.title}</div>
                       <div className="w-full line-clamp-5 lg:w-2/3">{blog.description}</div>
 
                       <div className="mt-5 mb-10 flex w-full justify-between text-base text-gray-400 lg:mt-10 lg:mb-0 lg:w-4/6">
