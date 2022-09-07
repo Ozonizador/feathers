@@ -1,7 +1,5 @@
-import { Label } from "flowbite-react";
 import { Profile } from "./profile";
-import { AdvertisementReviewSummary, Review } from "./review";
-import { StayDates } from "./stay";
+import { Review } from "./review";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
@@ -42,26 +40,26 @@ export type Advertisement = {
   reviews?: Review[];
 };
 
-// With advertisement averages
-export type AdvertisementWithReviewAverage = Advertisement & {
-  averages: AdvertisementReviewSummary[];
-  stay: StayDates;
-  "stay.startDate": Date;
-  "stay.endDate": Date;
-};
+/*
+ * EXPENSES
+ */
 
-/* EXPENSES */
 export interface HouseExpenses {
-  inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED";
-  services?: InfoExpenses[];
+  inclusive?: Included;
+  services?: TypeExpense[];
 }
 
-export interface InfoExpenses {
-  name: EXPENSE_TYPE;
+export interface TypeExpense {
+  name: ExpenseName;
   max: number;
-  included: boolean;
+  included: Included;
 }
 
+export type Included = "INCLUDED" | "PARTIALLY" | "EXCLUDED";
+
+/*
+ * House Rules
+ */
 export interface HouseRules {
   smokeAllowed?: boolean;
   animalsAllowed?: boolean;
@@ -70,6 +68,9 @@ export interface HouseRules {
   cleaning?: string;
 }
 
+/*
+ * PHOTOS
+ */
 export type AdvertisementPhoto = {
   url: string;
   zone: HouseZones;
@@ -137,7 +138,7 @@ export const TYPE_ADVERTISEMENT = {
   PRIVATE_ROOM: "Quarto Privado",
 };
 
-export enum HOST_TYPE {
+export enum HostType {
   PROFISSIONAL = "PROFISSIONAL",
   PARTICULAR = "PARTICULAR",
 }
@@ -149,13 +150,13 @@ export enum FlexHostType {
   RIGID = "RIGID",
 }
 
-export enum INCLUSIVE_EXPENSES {
+export enum InclusiveExpenses {
   INCLUDED = "INCLUDED",
   PARTIALLY = "PARTIALLY",
   EXCLUDED = "EXCLUDED",
 }
 
-export enum EXPENSE_TYPE {
+export enum ExpenseName {
   GAS = "GAS",
   LIGHTS = "LIGHTS",
   WATER = "WATER",
@@ -171,11 +172,6 @@ export const TYPE_CLEANING_LABELS = {
   "Não Tem": "N/A",
 };
 
-export enum CLEANING_TYPE {
-  TRIMESTRAL = "TRIMESTRAL",
-  SEMESTRAL = "SEMESTRAL",
-}
-
 /* Some namings */
 export const EXPENSES_TO_TEXT = {
   INCLUDED: "Despesas incluídas",
@@ -183,7 +179,9 @@ export const EXPENSES_TO_TEXT = {
   EXCLUDED: "Despesas excluídas",
 };
 
-/* About house */
+/*
+ * About house
+ */
 
 export interface AboutHouseSections {
   bathRoom: TypeAmenity[];

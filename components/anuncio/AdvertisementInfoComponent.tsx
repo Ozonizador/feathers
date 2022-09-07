@@ -1,4 +1,4 @@
-import Advertisement, { ADVERTISEMENT_PROPERTIES, HOST_TYPE } from "../../models/advertisement";
+import Advertisement, { ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -95,8 +95,8 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   name="host_type"
                   type="radio"
                   className="h-4 w-4 rounded border border-terciary-500"
-                  value={HOST_TYPE.PARTICULAR}
-                  checked={advertisement.typeHost === HOST_TYPE.PARTICULAR}
+                  value={HostType.PARTICULAR}
+                  checked={advertisement.typeHost === HostType.PARTICULAR}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
                 />
               </div>
@@ -111,8 +111,8 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   name="host_type"
                   type="radio"
                   className="h-4 w-4 rounded border border-terciary-500"
-                  value={HOST_TYPE.PROFISSIONAL}
-                  checked={advertisement.typeHost === HOST_TYPE.PROFISSIONAL}
+                  value={HostType.PROFISSIONAL}
+                  checked={advertisement.typeHost === HostType.PROFISSIONAL}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
                 />
               </div>

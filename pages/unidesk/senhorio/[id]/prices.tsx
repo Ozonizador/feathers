@@ -1,6 +1,6 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { Spinner } from "flowbite-react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import {
@@ -27,6 +27,7 @@ const Prices = ({ advertisement }: PricesProps) => {
   const saveChanges = async () => {
     const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
+      toast("Success");
     }
   };
 
@@ -49,7 +50,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 
           <div>
             <button
-              className="hover: mt-14  flex w-44 items-center justify-center rounded-md bg-primary-500 py-3   text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
+              className="hover: mt-14 mb-10 flex w-44 items-center justify-center rounded-md bg-primary-500 py-3   text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
               onClick={saveChanges}
             >
               Guardar alterações

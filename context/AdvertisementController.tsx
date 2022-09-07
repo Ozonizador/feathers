@@ -3,7 +3,7 @@ import Advertisement, {
   AdvertisementStatus,
   HouseExpenses,
   HouseRules,
-  INCLUSIVE_EXPENSES,
+  InclusiveExpenses,
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
@@ -40,9 +40,8 @@ const defaultAdvertisement = {
   guaranteeValue: 0,
   houseRules: {} as HouseRules,
   expenses: {
-    inclusive: INCLUSIVE_EXPENSES.INCLUDED,
-    servicesExcluded: [],
-    servicesIncluded: [],
+    inclusive: InclusiveExpenses.INCLUDED,
+    services: [],
   } as HouseExpenses,
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,

@@ -139,7 +139,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
               </div>
             </div>
             <div className="w-96">
-              <div className="mt-4 mb-1 text-base text-secondary-300">{advertisement.description}</div>
+              <div className="mt-4 mb-1 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
               <div className="text-xl font-bold text-primary-500">{`${advertisement.monthRent}€/mês`}</div>
               <div>
                 <div className="relative mb-3 mt-1 text-center text-base">

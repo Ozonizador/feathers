@@ -1,9 +1,11 @@
 import classNames from "classnames";
+import { useCallback, useMemo } from "react";
 import Advertisement, {
   ADVERTISEMENT_PROPERTIES,
-  EXPENSE_TYPE,
-  INCLUSIVE_EXPENSES,
-  InfoExpenses,
+  ExpenseName,
+  Included,
+  InclusiveExpenses,
+  TypeExpense,
 } from "../../models/advertisement";
 import Input from "../utils/Input";
 
@@ -12,8 +14,13 @@ interface PricesComponentProps {
   onChange: (property, value) => void;
 }
 
+interface ExpenseSelectionProps {
+  expense: ExpenseName;
+  title: string;
+}
+
 const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
-  const checkTypeExpenses = (typeExpense: INCLUSIVE_EXPENSES) => {
+  const checkTypeExpenses = (typeExpense: InclusiveExpenses) => {
     const { expenses } = advertisement;
     return expenses.inclusive === typeExpense;
   };
@@ -21,7 +28,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   // check if expenses are partially selected
   const isPartiallyIncluded = () => {
     const { expenses } = advertisement;
-    return expenses?.inclusive === INCLUSIVE_EXPENSES.PARTIALLY;
+    return expenses?.inclusive === InclusiveExpenses.PARTIALLY;
   };
 
   // for the primary value.
@@ -31,24 +38,137 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newExpense);
   };
 
+  // radio yes or no per expense */
   const toggleTypeExpenses = (event) => {
     const { expenses } = advertisement;
 
-    const services = expenses.services;
-    const newService = { name: event.target.name, max: 0, included: event.target.checked } as InfoExpenses;
+    const services = expenses && expenses.services.filter((service) => service.name !== event.target.name);
+    const newService = { name: event.target.name, max: 0, included: event.target.value } as TypeExpense;
 
-    onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
-      services: { ...services, newService },
+      services: [...services, newService],
     });
   };
 
-  const checkPartiallyExpense = (label: EXPENSE_TYPE, included: boolean) => {
+  const setTypeExpenseIncluded = (event) => {
     const { expenses } = advertisement;
-    return (
+    const expenseType = event.target.getAttribute("data-expense");
+
+    const services =
       expenses &&
-      expenses.services &&
-      expenses.services.filter((service) => service.name === label && service.included === included).length > 0
+      expenses.services.map((service) => {
+        if (service.name === expenseType) {
+          return { ...service, included: event.target.checked ? "INCLUDED" : "PARTIALLY" };
+        } else {
+          return service;
+        }
+      });
+
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
+      ...expenses,
+      services,
+    });
+  };
+
+  const checkPartiallyExpense = useCallback(
+    (label: ExpenseName) => {
+      const { expenses } = advertisement;
+
+      return expenses && expenses.services && expenses.services.find((service) => service.name === label);
+    },
+    [advertisement]
+  );
+
+  const setMaxExpenseValue = (event) => {
+    const { expenses } = advertisement;
+    const expenseType = event.target.getAttribute("data-expense");
+
+    const services =
+      expenses &&
+      expenses.services.map((service) => {
+        if (service.name === expenseType) {
+          return { ...service, max: event.target.value };
+        } else {
+          return service;
+        }
+      });
+
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
+      ...expenses,
+      services,
+    });
+  };
+
+  const ExpenseSelection = ({ expense, title }: ExpenseSelectionProps) => {
+    const expenseInfo = checkPartiallyExpense(expense);
+    return (
+      <div className="my-8 mt-4 flex items-center">
+        <div className="mb-auto flex py-4">
+          <p className="w-16 text-base font-bold">{title}</p>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+            <div>
+              <div className="flex h-5 items-center">
+                <div className="mr-3">Sim</div>
+                <input
+                  type="radio"
+                  name={expense}
+                  value={"PARTIALLY"}
+                  className="h-4 w-4 rounded border border-terciary-500"
+                  onChange={(e) => toggleTypeExpenses(e)}
+                  checked={expenseInfo?.included !== "EXCLUDED"}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+            <div className="flex h-5 items-center">
+              <div className="mr-3">Não</div>
+              <input
+                type="radio"
+                className="h-4 w-4 rounded border border-terciary-500"
+                name={expense}
+                value={"EXCLUDED"}
+                onChange={(e) => toggleTypeExpenses(e)}
+                checked={expenseInfo?.included === "EXCLUDED"}
+              />
+            </div>
+          </div>
+        </div>
+
+        {expenseInfo?.included !== "EXCLUDED" && (
+          <div className="ml-3 flex flex-col gap-2">
+            <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+              <label htmlFor="all_included">Totalmente incluído.</label>
+              <input
+                name="all_included"
+                data-expense={expense}
+                onChange={(e) => setTypeExpenseIncluded(e)}
+                checked={expenseInfo?.included === "INCLUDED"}
+                type="checkbox"
+                className="h-4 w-4 rounded border border-terciary-500"
+              />
+            </div>
+            <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-2 px-3">
+              <label htmlFor="max_value">Incluído até:</label>
+              <input
+                name="max_value"
+                data-expense={expense}
+                type="number"
+                defaultValue={expenseInfo?.max || 0}
+                disabled={expenseInfo?.included === "INCLUDED"}
+                onChange={(e) => setMaxExpenseValue(e)}
+                className={classNames("ml-2 rounded border border-terciary-500 p-1", {
+                  "bg-gray-200": expenseInfo.included === "INCLUDED",
+                })}
+              ></input>
+            </div>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -108,9 +228,9 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               <input
                 type="radio"
                 name="inclusive"
-                value={INCLUSIVE_EXPENSES.INCLUDED}
+                value={InclusiveExpenses.INCLUDED}
                 onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.INCLUDED)}
+                checked={checkTypeExpenses(InclusiveExpenses.INCLUDED)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas incluídas</div>
@@ -121,104 +241,30 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               <input
                 type="radio"
                 name="inclusive"
-                value={INCLUSIVE_EXPENSES.PARTIALLY}
+                value={InclusiveExpenses.PARTIALLY}
                 onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.PARTIALLY)}
+                checked={checkTypeExpenses(InclusiveExpenses.PARTIALLY)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas parcialmente incluídas</div>
           </div>
 
           <div className={classNames({ hidden: !isPartiallyIncluded() })}>
-            <div className="my-8 mt-20 flex items-center">
-              <div className="flex items-center">
-                <p className="w-24 text-base font-bold">Gás</p>
-              </div>
-
-              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSE_TYPE.GAS}
-                      onChange={(e) => toggleTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSE_TYPE.GAS, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="my-8 mt-4 flex items-center">
-              <div className="flex items-center">
-                <p className="w-24 text-base font-bold">Internet</p>
-              </div>
-
-              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSE_TYPE.INTERNET}
-                      onChange={(e) => toggleTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSE_TYPE.INTERNET, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="my-8 mt-4 flex items-center">
-              <div className="flex items-center">
-                <p className="w-24 text-base font-bold">Agua</p>
-              </div>
-
-              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 rounded border border-terciary-500"
-                      name={EXPENSE_TYPE.WATER}
-                      onChange={(e) => toggleTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSE_TYPE.WATER, true)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="my-8 mt-4 flex items-center">
-              <div className="flex items-center">
-                <p className="w-24 text-base font-bold">Luz</p>
-              </div>
-
-              <div className="ml-6 flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
-                <div>
-                  <div className="flex h-5 items-center">
-                    <input
-                      type="checkbox"
-                      name={EXPENSE_TYPE.LIGHTS}
-                      className="h-4 w-4 rounded border border-terciary-500"
-                      onChange={(e) => toggleTypeExpenses(e)}
-                      checked={checkPartiallyExpense(EXPENSE_TYPE.LIGHTS, true)}
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="my-8 flex flex-col">
+              <ExpenseSelection expense={ExpenseName.GAS} title="Gás" />
+              <ExpenseSelection expense={ExpenseName.INTERNET} title="Internet" />
+              <ExpenseSelection expense={ExpenseName.WATER} title="Água" />
+              <ExpenseSelection expense={ExpenseName.LIGHTS} title="Luz" />
             </div>
           </div>
-
           <div className="mt-8 flex flex-row items-center align-middle">
             <div>
               <input
                 type="radio"
                 name="inclusive"
-                value={INCLUSIVE_EXPENSES.EXCLUDED}
+                value={InclusiveExpenses.EXCLUDED}
                 onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(INCLUSIVE_EXPENSES.EXCLUDED)}
+                checked={checkTypeExpenses(InclusiveExpenses.EXCLUDED)}
               />
             </div>
             <div className="ml-4 text-xl font-bold">Despesas excluídas</div>

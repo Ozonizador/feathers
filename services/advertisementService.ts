@@ -5,11 +5,12 @@ import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider"
 import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import {
   Advertisement,
-  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
 } from "../models/advertisement";
+import { AdvertisementReviewSummary } from "../models/review";
+import { StayDates } from "../models/stay";
 import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 10 as number;
@@ -72,6 +73,13 @@ export const getAdvertisementsFromPlace = async (place: string) => {
 /*
   Filtering
 */
+
+export type AdvertisementWithReviewAverage = Advertisement & {
+  averages: AdvertisementReviewSummary[];
+  stay: StayDates;
+  "stay.startDate": Date;
+  "stay.endDate": Date;
+};
 
 export const getFilteredAdvertisements = async (page: number, filters: FilterAdvertisements) => {
   let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
