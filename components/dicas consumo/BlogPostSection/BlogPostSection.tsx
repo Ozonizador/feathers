@@ -21,16 +21,16 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
       <div className="relative h-[650px] bg-black">
         <Image layout="fill" src={blog.image} alt="blog" className="opacity-50" objectFit="cover" />
 
-        <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:justify-center">
+        <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:w-full lg:justify-center">
           <div className="mt-5 mb-7 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">
             {BlogCategoryLabel[blog.category]}
           </div>
-          <h1 className="w-3/4 text-center text-2xl font-bold text-white lg:text-6xl">{blog.title}</h1>
+          <h1 className="w-full text-center text-2xl font-bold text-white lg:w-3/4 lg:text-5xl">{blog.title}</h1>
           <p className="text-x1 mt-6  text-center text-white lg:mt-14 lg:text-2xl">BY UNIHOST ON FEBRUARY 02, 2022</p>
         </div>
       </div>
 
-      <div className="container mx-auto mt-10 px-8 lg:px-32">
+      <div className="container mx-auto mt-20 px-8 lg:px-32">
         <ReactMarkdown components={renderers}>{blog.description}</ReactMarkdown>
 
         <div className="mt-20 mb-24 flex items-center gap-4 align-middle">
