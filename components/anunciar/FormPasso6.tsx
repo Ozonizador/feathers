@@ -1,7 +1,4 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import Input from "../utils/Input";
-import { ADVERTISEMENT_PROPERTIES, EXPENSE_TYPE, InclusiveExpenses } from "../../models/advertisement";
-import classNames from "classnames";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { updateAdvertisement } from "../../services/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";

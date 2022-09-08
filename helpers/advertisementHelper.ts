@@ -1,11 +1,6 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import {
-  AdvertisementWithReviewAverage,
-  ADVERTISEMENT_PROPERTIES,
-  FlexHostType,
-  TypeAmenity,
-} from "../models/advertisement";
+import { ADVERTISEMENT_PROPERTIES, FlexHostType, TypeAmenity } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
 import { MdOutlineFireplace } from "react-icons/md";
@@ -54,6 +49,7 @@ import { GiCoffeePot } from "react-icons/gi";
 import { BiPlug } from "react-icons/bi";
 import { FiMonitor } from "react-icons/fi";
 import { IconType } from "react-icons";
+import { AdvertisementWithReviewAverage } from "../services/advertisementService";
 
 const hostTypeFlexDescription = (type: FlexHostType) => {
   return {
