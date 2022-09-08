@@ -24,7 +24,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
           {blogs &&
             blogs.map((blog, index) => {
               return (
-                <div className="w-1/2" key={index}>
+                <div className="w-full lg:w-1/2" key={index}>
                   <div className="flex-1 rounded-3xl bg-white p-5 drop-shadow-xl">
                     <div className="flex flex-col lg:flex-row lg:items-center  lg:justify-center lg:gap-8 lg:align-middle">
                       <div className="w-full rounded-3xl lg:w-80">
