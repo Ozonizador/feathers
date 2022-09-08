@@ -1,10 +1,4 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import { MdOutlinePets } from "react-icons/md";
-import { GiCigarette } from "react-icons/gi";
-import { BiDrink } from "react-icons/bi";
-import { MdChecklist } from "react-icons/md";
-import { GiBroom } from "react-icons/gi";
-import Input from "../utils/Input";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { updateAdvertisement } from "../../services/advertisementService";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";

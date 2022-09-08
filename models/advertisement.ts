@@ -35,6 +35,7 @@ export type Advertisement = {
   updatedAt?: Date;
   available: AdvertisementStatus;
   geom?: any | null;
+  maxRooms: number;
 
   // foreign keys
   reviews?: Review[];
@@ -91,6 +92,7 @@ export enum HouseZonesLabel {
 
 /* VALUES FOR DB */
 export const ADVERTISEMENT_PROPERTIES = {
+  MAX_ROOMS: "maxRooms",
   TYPE_FLEX_HOST: "typeFlexHost",
   TYPE: "type",
   TYPE_HOST: "typeHost",

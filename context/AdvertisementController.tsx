@@ -46,6 +46,7 @@ const defaultAdvertisement = {
   hostLivesProperty: false,
   available: AdvertisementStatus.AVAILABLE,
   geom: null,
+  maxRooms: 1,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

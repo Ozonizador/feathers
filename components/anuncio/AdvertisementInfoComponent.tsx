@@ -26,6 +26,15 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           defaultValue={advertisement.slug}
         />
 
+        <label className="mb-4 block text-2xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>
+        <input
+          className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 py-3 px-2 shadow-sm"
+          maxLength={10}
+          type="number"
+          defaultValue={advertisement.maxRooms}
+          onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MAX_ROOMS, e.target.value)}
+        />
+
         <div className="mt-12">
           <label htmlFor="about" className="text-2xl font-bold text-gray-700">
             Descreva o seu espaço de forma simples e concisa.
@@ -45,7 +54,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
         {/* missing here */}
         <div className="mt-24 flex flex-col lg:flex-row lg:items-center">
           <div className="flex ">
-            <p className="mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>{" "}
+            <p className="mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>
           </div>
           <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
             <div className="mr-16 text-base">Sim</div>

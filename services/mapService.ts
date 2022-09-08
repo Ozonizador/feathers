@@ -31,7 +31,7 @@ export const createPointForDatabase = (point: MapCoordinates) => {
 export const getResultsFromSearch = async (address: string) => {
   try {
     const { data } = await axios.get(
-      `https://api.mapbox.com/${GEOCODING_API}/${MAPBOX_VERSION}/mapbox.places/${address}.json?types=address&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`
+      `https://api.mapbox.com/${GEOCODING_API}/${MAPBOX_VERSION}/mapbox.places/${address}.json?country=pt&types=address&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`
     );
     return { data: data.features, error: null };
   } catch (error) {
