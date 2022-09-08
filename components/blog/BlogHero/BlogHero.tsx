@@ -22,8 +22,9 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
         {blogs &&
           blogs.map((blog, index) => {
             return (
-              <article className=" relative h-96 w-full  rounded-3xl  px-7 lg:w-2/6" key={index}>
-                <Image src={blog.image} layout="fill" alt="" className="bg-black opacity-70" />
+              <article className=" relative h-96 w-full  rounded-3xl  bg-black px-7 lg:w-2/6" key={index}>
+                <Image src={blog.image} layout="fill" alt="" className="opacity-50" />
+
                 <div className="absolute bottom-8 left-4 w-11/12 lg:left-6">
                   <h2 className="bold  mb-2 text-2xl font-normal text-white">{blog.title}</h2>
                   <p className="bold  text-base font-normal text-white line-clamp-2">{blog.description}</p>

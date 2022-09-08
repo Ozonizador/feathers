@@ -14,15 +14,17 @@ export default function RoomSlider() {
         <>
           <Carousel>
             <div className="flex flex-col gap-8">
-              <div className="flex h-full items-center justify-center text-primary-500">Comodidades gerais</div>
+              <div className="flex h-full items-center justify-center font-bold text-primary-500">
+                Comodidades gerais
+              </div>
               <div className="flex h-full flex-wrap items-center justify-center gap-6 align-middle">
                 {(!general || general.length === 0) && <div>Sem nada a assinalar</div>}
                 {general.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                    <div className="mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
                       {icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                      <div className="mt-3 text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
                 })}
@@ -110,7 +112,7 @@ export default function RoomSlider() {
 
   return (
     <section>
-      <div className="mt-10 mb-32 h-44 rounded-xl border lg:mt-40">
+      <div className="mt-10 mb-32 h-96 rounded-xl border lg:mt-40">
         <Carousel>
           <Comodities />
         </Carousel>
