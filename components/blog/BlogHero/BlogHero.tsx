@@ -26,15 +26,15 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                 <Image src={blog.image} layout="fill" alt="" className="opacity-50" />
 
                 <div className="absolute bottom-8 left-4 w-11/12 lg:left-6">
-                  <h2 className="bold  mb-2 text-2xl font-normal text-white">{blog.title}</h2>
-                  <p className="bold  text-base font-normal text-white line-clamp-2">{blog.description}</p>
+                  <h2 className="bold  mb-2 text-2xl font-normal capitalize text-white">{blog.title}</h2>
+                  <p className="bold  text-base font-normal normal-case text-white line-clamp-2">{blog.description}</p>
                   <div className="mt-8 flex flex-row justify-between">
                     <div>
                       <p className="text-gray-300">By Unihosts</p>
                     </div>
 
                     <div>
-                      <p className="text-gray-300">{formatDate(blog.createdAt)}</p>
+                      <p className="normal-case text-gray-300">{formatDate(blog.createdAt)}</p>
                     </div>
                   </div>
                 </div>

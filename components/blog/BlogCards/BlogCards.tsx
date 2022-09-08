@@ -20,21 +20,22 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
   return (
     <section className="container mx-auto pt-20 pb-5 ">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
-        <div className="flex flex-col gap-8 lg:flex-row">
+        <div className="flex flex-col gap-8 lg:flex-row ">
           {blogs &&
             blogs.map((blog, index) => {
               return (
                 <div className="w-1/2" key={index}>
                   <div className="flex-1 rounded-3xl bg-white p-5 drop-shadow-xl">
-                    <div className="flex flex-col lg:flex-row">
+                    <div className="flex flex-col lg:flex-row lg:items-center  lg:justify-center lg:gap-8 lg:align-middle">
                       <div className="w-full rounded-3xl lg:w-80">
                         <Image
                           layout="responsive"
                           src={blog.image}
                           alt=""
-                          objectFit="contain"
+                          objectFit="cover"
                           height="100%"
                           width="100%"
+                          className="rounded-3xl"
                         ></Image>
                       </div>
 
@@ -42,7 +43,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                         <div className="mb-2  mt-3 text-xl lg:mt-0">{blog.title}</div>
                         <div className="text-sm line-clamp-2">{blog.description}</div>
 
-                        <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full lg:gap-8">
+                        <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full">
                           <div className=" text-sm text-gray-400">{formatDate(blog.createdAt)}</div>
                           <div className="text-sm text-gray-400 ">By Unihosts</div>
                         </div>
