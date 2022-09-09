@@ -6,7 +6,7 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
+import Advertisement from "../../../models/advertisement";
 import { getAdvertismentsFromMultipleId } from "../../../services/advertisementService";
 import { Spinner } from "flowbite-react";
 
@@ -14,6 +14,7 @@ import { Spinner } from "flowbite-react";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -105,7 +106,7 @@ const UnideskFavoritos = () => {
                               <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
                                 <p className="mt-1 text-xs lg:text-base">
-                                  {EXPENSES_TO_TEXT[favourite.expenses.inclusive]}
+                                  {checkIfExpensesIncluded(favourite.expenses.services)}
                                 </p>
                                 <BiInfoCircle />
                               </div>

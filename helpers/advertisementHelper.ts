@@ -1,6 +1,6 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import { ADVERTISEMENT_PROPERTIES, FlexHostType, TypeAmenity } from "../models/advertisement";
+import { ADVERTISEMENT_PROPERTIES, FlexHostType, TypeAmenity, TypeExpense } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
 import { MdOutlineFireplace } from "react-icons/md";
@@ -200,4 +200,21 @@ const addFilterAdvertisement = (
   return query;
 };
 
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement };
+const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
+  let included = 0;
+  let partially = 0;
+  let excluded = 0;
+
+  for (let expense of expenses) {
+    if (expense.included == "INCLUDED") return included++;
+    if (expense.included == "PARTIALLY") return partially++;
+    if (expense.included == "EXCLUDED") return excluded++;
+  }
+
+  if (included === 0 && partially === 0 && excluded === 0) return "";
+  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluidas";
+  if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
+  if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
+};
+
+export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, checkIfExpensesIncluded };

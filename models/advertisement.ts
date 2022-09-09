@@ -174,13 +174,6 @@ export const TYPE_CLEANING_LABELS = {
   "Não Tem": "N/A",
 };
 
-/* Some namings */
-export const EXPENSES_TO_TEXT = {
-  INCLUDED: "Despesas incluídas",
-  PARTIALLY: "Despesas partialmente incluídas",
-  EXCLUDED: "Despesas excluídas",
-};
-
 /*
  * About house
  */

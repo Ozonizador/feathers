@@ -4,7 +4,6 @@ import { Label } from "flowbite-react/lib/esm/components";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { EXPENSES_TO_TEXT } from "../../../../models/advertisement";
 import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
 
 import { addReservation } from "../../../../services/reservationService";
@@ -18,6 +17,7 @@ import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { NotificationType } from "../../../../models/notification";
+import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 
 export default function RoomPagamento() {
   const [startDate, setStartDate] = useState(new Date());
@@ -79,7 +79,7 @@ export default function RoomPagamento() {
               <div className="flex items-center justify-center gap-2 align-middle">
                 <div className="peer flex items-center">
                   {advertisement && advertisement.expenses && (
-                    <span>{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</span>
+                    <span>{checkIfExpensesIncluded(advertisement.expenses?.services || [])}</span>
                   )}
                   <BiInfoCircle className="ml-2" />
                 </div>

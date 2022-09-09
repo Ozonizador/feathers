@@ -6,13 +6,14 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
 import { AdvertisementWithReviewAverage } from "../../../services/advertisementService";
+import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -132,7 +133,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                         <h3 className="text-xl font-bold text-primary-500">{advertisement.monthRent} €/mês</h3>
                         <div className="d-flex">
                           <p className="mt-1 text-xs lg:text-base">
-                            {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}
+                            {checkIfExpensesIncluded(advertisement.expenses.services || [])}
                           </p>
                           <i className="fa-solid fa-circle-info m-1"></i>
                         </div>
