@@ -117,19 +117,6 @@ export default function RoomSlider() {
           <Comodities />
         </Carousel>
       </div>
-      {/*
-      <div className="mb-4 text-2xl font-bold">Mais quartos nesta casa</div>
-      <div className="mb-40 grid w-96 justify-start gap-0 lg:grid-cols-2">
-        <article className="bg-destaques-slider1 relative h-44  w-44  rounded-lg ">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-base font-bold text-white">&euro;320</p>
-        </article>
-
-        <article className="bg-destaques-slider2 relative h-44  w-44 rounded-lg">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-base font-bold text-white">&euro;320</p>
-        </article>
-      </div> */}
     </section>
   );
 }

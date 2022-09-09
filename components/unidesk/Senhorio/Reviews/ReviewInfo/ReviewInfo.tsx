@@ -41,7 +41,7 @@ const ReviewInfo = () => {
         <p className="mb-12 text-xl text-slate-400 lg:mb-6">Os meus Anúncios</p>
       </div>
 
-      <div className="flex flex-col items-center lg:flex-row ">
+      <div className="flex flex-col items-center lg:flex-row">
         <div className="flex h-36 w-60 flex-col items-center justify-center rounded-lg border  border-terciary-500 bg-white align-middle">
           <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
           <Rating>
@@ -58,7 +58,7 @@ const ReviewInfo = () => {
         <div className="text-secondary-300">Anúncios</div>
       </div>
 
-      {!latestReviews || (latestReviews.length === 0 && <>Não existem reviews para mostrar</>)}
+      {!latestReviews || (latestReviews.length === 0 && <div className="mb-5">Não existem reviews para mostrar</div>)}
       {/* CARD */}
       {latestReviews &&
         latestReviews.map((review, index) => {

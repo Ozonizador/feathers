@@ -208,7 +208,10 @@ const NextReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!reservations || (reservations.length == 0 && <div>Sem próximas reservas</div>)}
+          {!reservations ||
+            (reservations.length == 0 && (
+              <Table.Cell className="flex justify-center py-2">Sem próximas reservas</Table.Cell>
+            ))}
           {reservations &&
             reservations.map((reservation, index) => {
               return (
@@ -295,7 +298,8 @@ const AllReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!reservations || (reservations.length == 0 && <div>Sem reservas</div>)}
+          {!reservations ||
+            (reservations.length == 0 && <Table.Cell className="flex justify-center py-2">Sem reservas</Table.Cell>)}
           {reservations &&
             reservations.map((reservation, index) => {
               return (

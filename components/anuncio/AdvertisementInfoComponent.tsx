@@ -26,7 +26,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           defaultValue={advertisement.slug}
         />
 
-        <label className="mb-4 block text-2xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>
+        <label className="mb-4 block text-xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>
         <input
           className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 py-3 px-2 shadow-sm"
           maxLength={10}

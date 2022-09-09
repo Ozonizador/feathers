@@ -1,6 +1,12 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import { ADVERTISEMENT_PROPERTIES, FlexHostType, TypeAmenity, TypeExpense } from "../models/advertisement";
+import {
+  AdvertisementStatus,
+  ADVERTISEMENT_PROPERTIES,
+  FlexHostType,
+  TypeAmenity,
+  TypeExpense,
+} from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
 import { MdOutlineFireplace } from "react-icons/md";
@@ -179,6 +185,9 @@ const addFilterAdvertisement = (
 ) => {
   const { filter, order } = filters;
 
+  // is available
+  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, AdvertisementStatus.AVAILABLE);
+
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
   // comodities not working
@@ -192,9 +201,9 @@ const addFilterAdvertisement = (
 
   // Dates
 
-  filter.dates?.startDate &&
-    (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
-  filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "lte", filter.dates.endDate));
+  // filter.dates?.startDate &&
+  //   (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
+  // filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "lte", filter.dates.endDate));
 
   order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
   return query;
