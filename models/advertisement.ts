@@ -2,6 +2,7 @@ import { Profile } from "./profile";
 import { Review } from "./review";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
+export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 /* MODEL */
 export type Advertisement = {
@@ -46,7 +47,6 @@ export type Advertisement = {
  */
 
 export interface HouseExpenses {
-  inclusive?: Included;
   services?: TypeExpense[];
 }
 

@@ -8,6 +8,7 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
+  CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 import { AdvertisementReviewSummary } from "../models/review";
 import { StayDates } from "../models/stay";
@@ -81,6 +82,39 @@ export type AdvertisementWithReviewAverage = Advertisement & {
   "stay.endDate": Date;
 };
 
+export const getAdvertisementsByCloseCoordinatesWithFilters = async (
+  lat: number,
+  lng: number,
+  page: number,
+  filters: FilterAdvertisements
+) => {
+  let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
+  let query = supabaseClient
+    .rpc(
+      CLOSE_ADVERTISEMENTS_TABLE_NAME,
+      {
+        lat,
+        lng,
+      },
+      { count: "exact" }
+    )
+    .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)")
+    .range(initRange, page * PAGE_NUMBER_COUNT - 1);
+
+  query = addFilterAdvertisement(query, filters);
+  const { data, error, count } = await query;
+
+  return { data, error, count };
+};
+
+export const getAdvertisementsForMainPage = async (lat: number, lng: number) => {
+  let query = supabaseClient.rpc(CLOSE_ADVERTISEMENTS_TABLE_NAME, { lat, lng }).limit(4);
+
+  const { data, error } = await query;
+  return { data, error };
+};
+
+/* NOT BEING USED - TO REMOVE */
 export const getFilteredAdvertisements = async (page: number, filters: FilterAdvertisements) => {
   let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
   let query = supabaseClient
@@ -91,16 +125,6 @@ export const getFilteredAdvertisements = async (page: number, filters: FilterAdv
   query = addFilterAdvertisement(query, filters);
   const { data, error, count } = await query;
   return { data, error, count };
-};
-
-export const testAdvertisements = async (lat: number, lng: number) => {
-  let { data, error } = await supabaseClient.rpc("close_advertisements", {
-    lat,
-    lng,
-  });
-
-  if (error) console.error(error);
-  else console.log(data);
 };
 
 /* IMAGE */

@@ -1,12 +1,6 @@
 import classNames from "classnames";
 import { useCallback, useMemo } from "react";
-import Advertisement, {
-  ADVERTISEMENT_PROPERTIES,
-  ExpenseName,
-  Included,
-  InclusiveExpenses,
-  TypeExpense,
-} from "../../models/advertisement";
+import Advertisement, { ADVERTISEMENT_PROPERTIES, ExpenseName, TypeExpense } from "../../models/advertisement";
 import Input from "../utils/Input";
 
 interface PricesComponentProps {
@@ -20,24 +14,6 @@ interface ExpenseSelectionProps {
 }
 
 const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
-  const checkTypeExpenses = (typeExpense: InclusiveExpenses) => {
-    const { expenses } = advertisement;
-    return expenses.inclusive === typeExpense;
-  };
-
-  // check if expenses are partially selected
-  const isPartiallyIncluded = () => {
-    const { expenses } = advertisement;
-    return expenses?.inclusive === InclusiveExpenses.PARTIALLY;
-  };
-
-  // for the primary value.
-  const defineExpensesTopLevel = (e) => {
-    const { expenses } = advertisement;
-    const newExpense = { ...expenses, inclusive: e.target.value };
-    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, newExpense);
-  };
-
   // radio yes or no per expense */
   const toggleTypeExpenses = (event) => {
     const { expenses } = advertisement;
@@ -55,23 +31,20 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     const { expenses } = advertisement;
     const expenseType = event.target.getAttribute("data-expense");
 
-    const services =
-      expenses &&
-      expenses.services.map((service) => {
-        if (service.name === expenseType) {
-          return { ...service, included: event.target.checked ? "INCLUDED" : "PARTIALLY" };
-        } else {
-          return service;
-        }
-      });
+    const services = expenses && expenses.services.filter((service) => service.name !== expenseType);
+    const newService = {
+      name: expenseType,
+      max: 0,
+      included: event.target.checked ? "INCLUDED" : "PARTIALLY",
+    } as TypeExpense;
 
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
-      services,
+      services: [...services, newService],
     });
   };
 
-  const checkPartiallyExpense = useCallback(
+  const getExpenseInfoByInfo = useCallback(
     (label: ExpenseName) => {
       const { expenses } = advertisement;
 
@@ -88,7 +61,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
       expenses &&
       expenses.services.map((service) => {
         if (service.name === expenseType) {
-          return { ...service, max: event.target.value };
+          return { ...service, max: parseInt(event.target.value) };
         } else {
           return service;
         }
@@ -101,7 +74,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   };
 
   const ExpenseSelection = ({ expense, title }: ExpenseSelectionProps) => {
-    const expenseInfo = checkPartiallyExpense(expense);
+    const expenseInfo = getExpenseInfoByInfo(expense);
     return (
       <div className="my-8 mt-4 flex items-center">
         <div className="mb-auto flex py-4">
@@ -119,7 +92,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                   value={"PARTIALLY"}
                   className="h-4 w-4 rounded border border-terciary-500"
                   onChange={(e) => toggleTypeExpenses(e)}
-                  checked={expenseInfo?.included !== "EXCLUDED"}
+                  checked={expenseInfo && expenseInfo.included !== "EXCLUDED"}
                 />
               </div>
             </div>
@@ -133,7 +106,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 name={expense}
                 value={"EXCLUDED"}
                 onChange={(e) => toggleTypeExpenses(e)}
-                checked={expenseInfo?.included === "EXCLUDED"}
+                checked={expenseInfo && expenseInfo.included === "EXCLUDED"}
               />
             </div>
           </div>
@@ -147,7 +120,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 name="all_included"
                 data-expense={expense}
                 onChange={(e) => setTypeExpenseIncluded(e)}
-                checked={expenseInfo?.included === "INCLUDED"}
+                checked={expenseInfo && expenseInfo.included === "INCLUDED"}
                 type="checkbox"
                 className="h-4 w-4 rounded border border-terciary-500"
               />
@@ -158,11 +131,11 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 name="max_value"
                 data-expense={expense}
                 type="number"
-                defaultValue={expenseInfo?.max || 0}
-                disabled={expenseInfo?.included === "INCLUDED"}
+                value={expenseInfo?.max || 0}
+                disabled={!expenseInfo || (expenseInfo && expenseInfo.included === "INCLUDED")}
                 onChange={(e) => setMaxExpenseValue(e)}
                 className={classNames("ml-2 rounded border border-terciary-500 p-1", {
-                  "bg-gray-200": expenseInfo.included === "INCLUDED",
+                  "bg-gray-200": !expenseInfo || expenseInfo?.included === "INCLUDED",
                 })}
               ></input>
             </div>
@@ -222,52 +195,12 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col">
-          <div className="my-5 flex flex-row items-center align-middle">
-            <div>
-              <input
-                type="radio"
-                name="inclusive"
-                value={InclusiveExpenses.INCLUDED}
-                onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(InclusiveExpenses.INCLUDED)}
-              />
-            </div>
-            <div className="ml-4 text-xl font-bold">Despesas incluídas</div>
-          </div>
-
-          <div className="flex flex-row items-center align-middle">
-            <div>
-              <input
-                type="radio"
-                name="inclusive"
-                value={InclusiveExpenses.PARTIALLY}
-                onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(InclusiveExpenses.PARTIALLY)}
-              />
-            </div>
-            <div className="ml-4 text-xl font-bold">Despesas parcialmente incluídas</div>
-          </div>
-
-          <div className={classNames({ hidden: !isPartiallyIncluded() })}>
-            <div className="my-8 flex flex-col">
-              <ExpenseSelection expense={ExpenseName.GAS} title="Gás" />
-              <ExpenseSelection expense={ExpenseName.INTERNET} title="Internet" />
-              <ExpenseSelection expense={ExpenseName.WATER} title="Água" />
-              <ExpenseSelection expense={ExpenseName.LIGHTS} title="Luz" />
-            </div>
-          </div>
-          <div className="mt-8 flex flex-row items-center align-middle">
-            <div>
-              <input
-                type="radio"
-                name="inclusive"
-                value={InclusiveExpenses.EXCLUDED}
-                onChange={(e) => defineExpensesTopLevel(e)}
-                checked={checkTypeExpenses(InclusiveExpenses.EXCLUDED)}
-              />
-            </div>
-            <div className="ml-4 text-xl font-bold">Despesas excluídas</div>
+        <div>
+          <div className="my-8 flex flex-col">
+            <ExpenseSelection expense={ExpenseName.GAS} title="Gás" />
+            <ExpenseSelection expense={ExpenseName.INTERNET} title="Internet" />
+            <ExpenseSelection expense={ExpenseName.WATER} title="Água" />
+            <ExpenseSelection expense={ExpenseName.LIGHTS} title="Luz" />
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ interface NavbarMobileProps {
   setOpenMobile: () => void;
 }
 
-export const NavbarMobile = ({ open, setOpenMobile }) => {
+export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const { user } = useUser();
 
   const { toggleUserType } = useGetUserType();

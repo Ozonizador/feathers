@@ -17,7 +17,7 @@ import {
   useSetPageAdvertisementinfo,
 } from "../../../context/ProcurarAdvertisementsProvider";
 import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
-import { PAGE_NUMBER_COUNT, testAdvertisements } from "../../../services/advertisementService";
+import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
 import { GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 
@@ -42,28 +42,20 @@ export default function ProcurarSection() {
     router.push(`/anuncio/${id}`);
   };
 
-  const testClose = async () => {
-    if (coordinates) {
-      const { lat, lng } = coordinates.coordinates;
-      await testAdvertisements(lat, lng);
-    }
-  };
-
   const locateByQuery = useCallback(() => {
     setFilters({
-      coordinates: coordinates && coordinates.coordinates,
+      coordinates: (coordinates && coordinates.coordinates) || currentMapCoordinates || null,
       dates: {
         startDate: startDate ? new Date(startDate).toISOString() : "",
         endDate: endDate ? new Date(endDate).toISOString() : "",
       },
     });
-  }, [coordinates, startDate, endDate]);
+  }, [coordinates, startDate, endDate, currentMapCoordinates]);
 
   useEffect(() => {
     locateByQuery();
   }, [locateByQuery]);
 
-  testClose();
   // Filters
   const toggleComododitiesFilter = (options) => {
     const comoditiesFilter = options.map((option) => option.value);
