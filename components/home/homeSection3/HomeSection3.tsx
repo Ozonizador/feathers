@@ -5,6 +5,8 @@ import { Advertisement } from "@prisma/client";
 import { getAdvertisementsForMainPage } from "../../../services/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import Image from "next/image";
+import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 
 export default function HomeSection3() {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -53,6 +55,11 @@ export default function HomeSection3() {
                       className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4"
                       key={index}
                     >
+                      {advertisement.photos && advertisement.photos[0] ? (
+                        <Image src={advertisement.photos[0].url} alt="..." layout="fill" />
+                      ) : (
+                        <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" layout="fill" />
+                      )}
                       <h2 className=" text-xl text-white">{TYPE_ADVERTISEMENT[advertisement.type]}</h2>
                       <p className="bold absolute bottom-8 right-8 text-4xl text-white">
                         &euro;{advertisement.monthRent}
