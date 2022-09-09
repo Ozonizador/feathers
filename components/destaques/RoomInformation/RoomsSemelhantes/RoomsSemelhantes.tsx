@@ -1,43 +1,51 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CgHome } from "react-icons/cg";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
+import { getSimilarAdvertisements } from "../../../../services/advertisementService";
+import Advertisement, { TYPE_ADVERTISEMENT } from "../../../../models/advertisement";
+import { Spinner } from "flowbite-react";
+import Image from "next/image";
 
 export default function RoomSemelhantes() {
   const advertisement = useGetSingleAdvertisement();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [similarAdverts, setSimilarAdverts] = useState<Partial<Advertisement>[]>([]);
+
+  const getSimilarAdverts = useCallback(async () => {
+    setLoading(true);
+    const { data, error } = await getSimilarAdvertisements();
+    if (!error && data) setSimilarAdverts(data);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    getSimilarAdverts();
+  }, [getSimilarAdverts]);
+
   return (
     <section className="mb-40">
       <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
       <div className="flex flex-col lg:flex-row">
-        <div className="mr-0 flex w-full flex-row justify-between gap-5 lg:mr-7">
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
+        {loading && (
+          <div className="mt-32 flex flex-1 justify-center">
+            <Spinner color="info" aria-label="loading" size="lg" />
           </div>
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-        </div>
-
-        <div className="flex w-full flex-row justify-between gap-5 ">
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-        </div>
+        )}
+        {!loading &&
+          similarAdverts &&
+          similarAdverts.map((advert, index) => {
+            return (
+              <div key={index}>
+                <article className="relative h-56 w-40 rounded-lg lg:h-56  lg:w-48">
+                  <Image src={advert.photos[0].url} alt="" layout="responsive" height="200" width="200" />
+                  <h2 className=" mt-3 p-3 text-base text-white">{TYPE_ADVERTISEMENT[advert.type]}</h2>
+                  <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
+                </article>
+              </div>
+            );
+          })}
       </div>
 
       <Link href="/procurar">

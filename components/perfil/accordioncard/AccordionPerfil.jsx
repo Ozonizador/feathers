@@ -25,22 +25,22 @@ function AccordionPerfil() {
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
               <Carousel indicators={false} slide={false}>
                 <div className="flex h-full items-center justify-center gap-2 bg-gray-200 lg:gap-4">
-                  <article className="bg-destaques-slider1 relative h-32  w-32 rounded-lg lg:h-48  lg:w-48">
+                  <article className=" relative h-32  w-32 rounded-lg lg:h-48  lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-sm font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-sm  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative h-32  w-32  rounded-lg lg:h-48  lg:w-48">
+                  <article className=" relative h-32  w-32  rounded-lg lg:h-48  lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
+                  <article className=" relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
+                  <article className=" relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
@@ -68,22 +68,22 @@ function AccordionPerfil() {
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
               <Carousel indicators={false} slide={false}>
                 <div className="flex h-full items-center justify-center gap-2 bg-gray-200 lg:gap-4">
-                  <article className="bg-destaques-slider1 relative h-32  w-32 rounded-lg lg:h-48  lg:w-48">
+                  <article className=" relative h-32  w-32 rounded-lg lg:h-48  lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-sm font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-sm  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative h-32  w-32  rounded-lg lg:h-48  lg:w-48">
+                  <article className=" relative h-32  w-32  rounded-lg lg:h-48  lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
+                  <article className=" relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
 
-                  <article className="bg-destaques-slider1 relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
+                  <article className=" relative hidden  h-32 w-32  rounded-lg lg:block  lg:h-48 lg:w-48">
                     <p className="bold absolute bottom-14 left-2 text-base font-bold text-white">Título do Anúncio</p>
                     <p className="bold absolute bottom-3 left-2 text-base  text-gray-300">Ver mais</p>
                   </article>
