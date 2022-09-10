@@ -7,7 +7,7 @@ const Procurar = () => {
   return (
     <ProcurarAdvertisementsProvider>
       <div>
-        <div className="flex flex-col justify-center  lg:flex-row">
+        <div className="flex flex-col justify-center  px-5  lg:flex-row lg:px-0">
           <SearchInputField />
         </div>
         <div className="my-10">
