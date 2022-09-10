@@ -12,7 +12,7 @@
     "dev:inspect": "NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
-    "@headlessui/react": "1.6.6",
+    "@headlessui/react": "1.7.0",
     "@prisma/client": "^3.15.2",
     "@supabase/auth-helpers-nextjs": "0.2.7",
     "@supabase/auth-helpers-react": "0.2.3",
@@ -25,7 +25,7 @@
     "google-map-react": "^2.1.10",
     "leaflet": "^1.8.0",
     "lodash": "^4.17.21",
-    "next": "12.2.x",
+    "next": "12.3.0",
     "next-transpile-modules": "^9.0.0",
     "rc-slider": "^10.0.1",
     "react": "18.2.0",

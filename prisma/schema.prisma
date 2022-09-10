@@ -50,6 +50,7 @@ model Advertisement {
   floor             String?
   postalCode        String
   rooms             Int
+  maxRooms          Int                      @default(1)
   beds              Int
   tenantNumber      Int
   bathrooms         Int

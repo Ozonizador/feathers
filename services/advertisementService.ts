@@ -114,17 +114,9 @@ export const getAdvertisementsForMainPage = async (lat: number, lng: number) => 
   return { data, error };
 };
 
-/* NOT BEING USED - TO REMOVE */
-export const getFilteredAdvertisements = async (page: number, filters: FilterAdvertisements) => {
-  let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
-  let query = supabaseClient
-    .from<AdvertisementWithReviewAverage>(ADVERTISEMENT_TABLE_NAME)
-    .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)", { count: "exact" })
-    .range(initRange, page * PAGE_NUMBER_COUNT - 1);
-
-  query = addFilterAdvertisement(query, filters);
-  const { data, error, count } = await query;
-  return { data, error, count };
+/* Waiting João response */
+export const getSimilarAdvertisements = async () => {
+  return { data: [], error: null };
 };
 
 /* IMAGE */

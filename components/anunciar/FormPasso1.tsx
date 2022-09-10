@@ -13,7 +13,7 @@ const FormPasso1 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await updateAdvertisement({ tenantNumber: advertisement.tenantNumber }, advertisement.id);
+    await updateAdvertisement({ tenantNumber: advertisement.tenantNumber }, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -24,7 +24,7 @@ const FormPasso1 = () => {
 
   return (
     <section className="w-full px-0 lg:px-40">
-      <div className="flex">
+      <div className="flex justify-center">
         <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
       </div>
 

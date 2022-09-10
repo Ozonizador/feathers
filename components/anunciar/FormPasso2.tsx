@@ -3,10 +3,9 @@ import { useAdvertisement, useSetAdvertisementProperty } from "../../context/Adv
 import { useState } from "react";
 import { updateAdvertisement } from "../../services/advertisementService";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
+import { toast } from "react-toastify";
 
 const FormPasso2 = () => {
-  const [message, setMessage] = useState("");
-
   // contexts
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
@@ -20,7 +19,7 @@ const FormPasso2 = () => {
     const { title, description } = advertisement;
 
     if (!title || !description) {
-      setMessage("Campos por preencher.");
+      toast.error("Campos por preencher.");
       return;
     }
 
@@ -45,7 +44,6 @@ const FormPasso2 = () => {
       >
         Seguinte &#8594;
       </button>
-      {message && <div className="text-red-600">{message}</div>}
     </section>
   );
 };
