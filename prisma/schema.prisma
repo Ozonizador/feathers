@@ -58,7 +58,7 @@ model Advertisement {
   description       String
   typeFlexHost      HostFlexType
   typeHost          TypeHost
-  photos            Json                     @default("{}")
+  photos            Json                     @default("[]")
   houseRules        Json
   aboutHouse        Json
   monthRent         Int

@@ -61,9 +61,10 @@ const Photos = ({ advertisement }: PhotoProps) => {
         }
       }
 
+      const currentPhotos = advertisementContext.photos || [];
       // associate images to advertisement
       const { data, error } = await updateAdvertisement(
-        { ...advertisementContext, photos: [...advertisementContext.photos, ...paths] },
+        { ...advertisementContext, photos: [...currentPhotos, ...paths] },
         advertisementContext.id
       );
       if (!error) {
