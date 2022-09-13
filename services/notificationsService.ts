@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 export const addNotification = async (review: Notification) => {
   const { data, error } = await supabaseClient
     .from<Notification>(NOTIFICATION_TABLE_NAME)
-    .insert({ ...review, id: uuidv4(), updatedAt: new Date() }, { returning: "minimal" })
+    .insert({ ...review, id: uuidv4(), updated_at: new Date() }, { returning: "minimal" })
     .single();
   return { data, error };
 };

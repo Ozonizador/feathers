@@ -1,6 +1,5 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import Advertisement from "../../../../models/advertisement";
-import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
@@ -9,6 +8,7 @@ import {
   useSelectedAnuncioMenuSenhorio,
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
+import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
 interface ConditionsProps {
   advertisement: Advertisement;

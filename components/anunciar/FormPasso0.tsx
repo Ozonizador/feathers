@@ -28,9 +28,9 @@ const FormPasso0 = () => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
-    const { type, street, place, streetNumber, postalCode } = advertisement;
+    const { type, street, place, street_number, postal_code } = advertisement;
 
-    if (!type || !street || !place || !streetNumber || !postalCode) {
+    if (!type || !street || !place || !street_number || !postal_code) {
       toast.error("Campos por preencher.");
       return;
     }
@@ -49,8 +49,8 @@ const FormPasso0 = () => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, streetNumber, postalCode } = advertisement;
-    const { data, error } = await getResultsFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
+    const { street, place, street_number, postal_code } = advertisement;
+    const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
 
     if (!error && data && data.length > 0) {
       const feature = data[0];

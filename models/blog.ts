@@ -9,8 +9,8 @@ export type Blog = {
   description: string;
   category: UserTypes;
   image: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export const BLOG_PROPERTIES = {

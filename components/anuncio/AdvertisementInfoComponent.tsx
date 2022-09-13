@@ -31,7 +31,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 py-3 px-2 shadow-sm"
           maxLength={10}
           type="number"
-          defaultValue={advertisement.maxRooms}
+          defaultValue={advertisement.max_rooms}
           onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MAX_ROOMS, e.target.value)}
         />
 
@@ -66,7 +66,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   type="radio"
                   value="true"
                   className="h-4 w-4 rounded border border-terciary-500"
-                  checked={advertisement.hostLivesProperty === true}
+                  checked={advertisement.host_lives_property === true}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, e.target.value === "true")}
                 />
               </div>
@@ -83,7 +83,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   type="radio"
                   value="false"
                   className="h-4 w-4 rounded border border-terciary-500"
-                  checked={advertisement.hostLivesProperty === false}
+                  checked={advertisement.host_lives_property === false}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, e.target.value === "true")}
                 />
               </div>
@@ -105,7 +105,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   type="radio"
                   className="h-4 w-4 rounded border border-terciary-500"
                   value={HostType.PARTICULAR}
-                  checked={advertisement.typeHost === HostType.PARTICULAR}
+                  checked={advertisement.type_host === HostType.PARTICULAR}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
                 />
               </div>
@@ -121,7 +121,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
                   type="radio"
                   className="h-4 w-4 rounded border border-terciary-500"
                   value={HostType.PROFISSIONAL}
-                  checked={advertisement.typeHost === HostType.PROFISSIONAL}
+                  checked={advertisement.type_host === HostType.PROFISSIONAL}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
                 />
               </div>

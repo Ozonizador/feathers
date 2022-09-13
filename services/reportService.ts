@@ -2,10 +2,10 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 import { Report, REPORTS_TABLE_NAME, REPORT_TABLE } from "../models/report";
 
-export const addReportOnAdvert = async (report: Report, advertisementId: string, stayId: string) => {
+export const addReportOnAdvert = async (report: Report, advertisement_id: string, stay_id: string) => {
   const { data, error } = await supabaseClient
     .from<Report>(REPORTS_TABLE_NAME)
-    .insert({ ...report, updatedAt: new Date(), stayId, id: uuidv4(), advertisementId });
+    .insert({ ...report, updated_at: new Date(), stay_id, id: uuidv4(), advertisement_id });
   return { data, error };
 };
 
@@ -17,12 +17,12 @@ export const getReports = async (advertId: string) => {
   return { data, error };
 };
 
-export const checkIfReportWasMade = async (stayId: string) => {
+export const checkIfReportWasMade = async (stay_id: string) => {
   try {
     const { data, error } = await supabaseClient
       .from<Report>(REPORTS_TABLE_NAME)
       .select()
-      .eq(REPORT_TABLE.STAY_ID, stayId)
+      .eq(REPORT_TABLE.STAY_ID, stay_id)
       .single();
 
     return data ? true : false;

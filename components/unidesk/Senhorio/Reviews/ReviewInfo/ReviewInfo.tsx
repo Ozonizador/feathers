@@ -76,7 +76,7 @@ interface SingleReviewCardPros {
 
 const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
   /* For the date on the single review card */
-  const formattedCreatedDate = new Date(review.createdAt);
+  const formattedCreatedDate = new Date(review.created_at);
   const singleDateDisplayOptions = { year: "numeric", month: "long" } as const;
 
   return (
@@ -86,8 +86,8 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
           <Avatar
             alt="Default avatar with alt text"
             img={
-              review.tenant?.avatarUrl
-                ? review.tenant.avatarUrl
+              review.tenant?.avatar_url
+                ? review.tenant.avatar_url
                 : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
             }
             rounded={true}
@@ -96,7 +96,7 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
           <div className="text-base font-bold">{review.tenant?.name}</div>
         </div>
         <div className="text-base text-secondary-500">
-          {review.privateReview}
+          {review.private_review}
           <div className="mt-2 flex flex-row text-base text-primary-500 lg:justify-end">
             {formattedCreatedDate && formattedCreatedDate.toLocaleDateString(undefined, singleDateDisplayOptions)}
           </div>

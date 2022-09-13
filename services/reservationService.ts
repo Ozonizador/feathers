@@ -2,10 +2,10 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 import { Reservation, ReservationStatus, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 
-export const addReservation = async (reservation: Reservation, tenantId: string) => {
+export const addReservation = async (reservation: Reservation, tenant_id: string) => {
   const { data, error } = await supabaseClient
     .from<Reservation>(RESERVATION_TABLE_NAME)
-    .insert({ ...reservation, id: uuidv4(), updatedAt: new Date(), tenantId }, { returning: "representation" })
+    .insert({ ...reservation, id: uuidv4(), updated_at: new Date(), tenant_id }, { returning: "representation" })
     .single();
   return { data, error };
 };
@@ -23,11 +23,11 @@ export const getReservationByAdvertId = async (advertId: string) => {
   return { data, error };
 };
 
-export const updateReservationStatusOnDB = async (reservationId: string, status: ReservationStatus) => {
+export const updateReservationStatusOnDB = async (reservation_id: string, status: ReservationStatus) => {
   const { data, error } = await supabaseClient
     .from<Reservation>(RESERVATION_TABLE_NAME)
     .update({ status }, { returning: "representation" })
-    .eq(RESERVATION_TABLE.ID, reservationId)
+    .eq(RESERVATION_TABLE.ID, reservation_id)
     .single();
 
   return { data, error };

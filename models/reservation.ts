@@ -1,20 +1,19 @@
 import Advertisement from "./advertisement";
 import { Profile } from "./profile";
-import { Stay } from "./stay";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 
 export type Reservation = {
   id?: string;
-  startDate: Date;
-  endDate: Date;
+  start_date: Date;
+  end_date: Date;
   status: ReservationStatus;
-  advertisementId: string;
-  tenantId: string;
-  stayId?: string;
+  advertisement_id: string;
+  tenant_id: string;
+  stay_id?: string;
 
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 export type ReservationWithAdvertisement = Reservation & {
@@ -34,12 +33,12 @@ export enum ReservationStatus {
 
 export const RESERVATION_TABLE = {
   ID: "id",
-  ADVERT_ID: "advertisementId",
-  TENANT_ID: "tenantId",
-  START_DATE: "startDate",
-  END_DATE: "endDate",
+  ADVERT_ID: "advertisement_id",
+  TENANT_ID: "tenant_id",
+  START_DATE: "start_date",
+  END_DATE: "end_date",
   STATUS: "status",
-  HOST_ID: "advertisement.hostId",
+  HOST_ID: "advertisement.host_id",
 } as const;
 
 export enum ReservationStatusLabel {

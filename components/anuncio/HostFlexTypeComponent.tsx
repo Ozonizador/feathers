@@ -20,7 +20,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
                 name="FlexHostType"
                 value={FlexHostType.SUPER_FLEX}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FlexHostType.SUPER_FLEX}
+                checked={advertisement.type_flex_host === FlexHostType.SUPER_FLEX}
               />
             </div>
             <div className="mx-5">
@@ -46,7 +46,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
                 name="FlexHostType"
                 value={FlexHostType.FLEX}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FlexHostType.FLEX}
+                checked={advertisement.type_flex_host === FlexHostType.FLEX}
               />
             </div>
             <div className="mx-5">
@@ -72,7 +72,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
                 name="FlexHostType"
                 value={FlexHostType.MODERATE}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FlexHostType.MODERATE}
+                checked={advertisement.type_flex_host === FlexHostType.MODERATE}
               />
             </div>
             <div className="mx-5">
@@ -98,7 +98,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
                 name="FlexHostType"
                 value={FlexHostType.RIGID}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
-                checked={advertisement.typeFlexHost === FlexHostType.RIGID}
+                checked={advertisement.type_flex_host === FlexHostType.RIGID}
               />
             </div>
             <div className="mx-5">

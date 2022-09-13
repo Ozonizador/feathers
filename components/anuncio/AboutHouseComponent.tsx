@@ -17,8 +17,8 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     const property = event.target.name;
     //const checked = event.target.checked;
 
-    const { aboutHouse } = advertisement;
-    let amenities = aboutHouse[space];
+    const { about_house } = advertisement;
+    let amenities = about_house[space];
 
     if (!amenities) {
       amenities = [];
@@ -37,11 +37,11 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
       amenities.push(property);
     }
 
-    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...aboutHouse, [space]: amenities });
+    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...about_house, [space]: amenities });
   };
 
   const checkIfAboutHousePropertyChecked = (space: AboutHouseSpace, toCheckAmenity: TypeAmenity) => {
-    const amenities = advertisement.aboutHouse[space];
+    const amenities = advertisement.about_house[space];
     if (!amenities) {
       return false;
     }

@@ -22,7 +22,7 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
           </div>
           <div>
             <QuantityInput
-              initValue={advertisement.tenantNumber}
+              initValue={advertisement.tenant_number}
               onChange={onChange}
               property={ADVERTISEMENT_PROPERTIES.NUMBER_TENANT}
             />

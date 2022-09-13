@@ -30,8 +30,8 @@ const ModalDenuncia = () => {
 
   const [report, setReport] = useState<Report>({
     type: ReportsType.IMPRECISE,
-    stayId: stay?.id || "",
-    advertisementId: stay?.advertisementId || "",
+    stay_id: stay?.id || "",
+    advertisement_id: stay?.advertisement_id || "",
     description: "",
   });
 
@@ -60,7 +60,7 @@ const ModalDenuncia = () => {
     event.preventDefault();
     setLoading(true);
     if (profile) {
-      const { data, error } = await addReportOnAdvert(report, stay.advertisementId, profile.id);
+      const { data, error } = await addReportOnAdvert(report, stay.advertisement_id, profile.id);
       if (data) {
         nextStep();
       }

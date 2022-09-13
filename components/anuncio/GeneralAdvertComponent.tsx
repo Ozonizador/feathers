@@ -96,7 +96,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             <Input
               label="street_number"
               labelText="Número"
-              value={advertisement.streetNumber}
+              value={advertisement.street_number}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
             />
           </div>
@@ -105,7 +105,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             <Input
               label="postal_code"
               labelText="Código Postal"
-              value={advertisement.postalCode}
+              value={advertisement.postal_code}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
             />
           </div>

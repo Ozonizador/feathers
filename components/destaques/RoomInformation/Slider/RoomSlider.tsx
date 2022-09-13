@@ -5,9 +5,9 @@ import { houseAmenities } from "../../../../helpers/advertisementHelper";
 import { TypeAmenityLabel } from "../../../../models/advertisement";
 
 export default function RoomSlider() {
-  const { aboutHouse } = useGetSingleAdvertisement();
+  const { about_house } = useGetSingleAdvertisement();
 
-  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = aboutHouse;
+  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = about_house;
   const Comodities = ({}) =>
     useMemo(() => {
       return (

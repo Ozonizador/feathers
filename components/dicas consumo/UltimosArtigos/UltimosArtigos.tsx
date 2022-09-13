@@ -56,7 +56,7 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
                     <div className="w-full line-clamp-5 lg:w-full  lg:text-base">{blog.description}</div>
 
                     <div className="mt-5 mb-10 flex w-full justify-between text-sm text-gray-400 lg:mt-10 lg:mb-0 lg:w-full">
-                      <div>{formatDate(blog.createdAt)}</div>
+                      <div>{formatDate(blog.created_at)}</div>
                       <div>By Unihosts</div>
                     </div>
                   </a>

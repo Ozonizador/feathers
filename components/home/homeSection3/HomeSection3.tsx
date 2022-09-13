@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
-import { Advertisement } from "@prisma/client";
 import { getAdvertisementsForMainPage } from "../../../services/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
-import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import Advertisement, { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 
@@ -62,7 +61,7 @@ export default function HomeSection3() {
                       )}
                       <h2 className=" text-xl text-white">{TYPE_ADVERTISEMENT[advertisement.type]}</h2>
                       <p className="bold absolute bottom-8 right-8 text-4xl text-white">
-                        &euro;{advertisement.monthRent}
+                        &euro;{advertisement.month_rent}
                       </p>
                     </article>
                   );

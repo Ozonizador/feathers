@@ -8,35 +8,35 @@ export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 export type Advertisement = {
   id?: string;
   slug: string;
-  typeFlexHost: FlexHostType;
+  type_flex_host: FlexHostType;
   place: string;
   street: string;
-  streetNumber: string;
+  street_number: string;
   floor?: string;
-  postalCode: string;
+  postal_code: string;
   rooms: number;
   beds: number;
-  tenantNumber: number;
+  tenant_number: number;
   bathrooms: number;
   title: string;
   description: string;
   type: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-  typeHost: "PROFISSIONAL" | "PARTICULAR";
+  type_host: "PROFISSIONAL" | "PARTICULAR";
   photos?: AdvertisementPhoto[];
-  houseRules: HouseRules;
-  aboutHouse: AboutHouseSections;
-  monthRent: number;
-  extraPerHost: number;
-  guaranteeValue: number;
+  house_rules: HouseRules;
+  about_house: AboutHouseSections;
+  month_rent: number;
+  extra_per_host: number;
+  guarantee_value: number;
   expenses: HouseExpenses;
-  hostLivesProperty: Boolean;
-  hostId: string;
+  host_lives_property: Boolean;
+  host_id: string;
   host?: Profile;
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
   available: AdvertisementStatus;
   geom?: any | null;
-  maxRooms: number;
+  max_rooms: number;
 
   // foreign keys
   reviews?: Review[];
@@ -92,31 +92,31 @@ export enum HouseZonesLabel {
 
 /* VALUES FOR DB */
 export const ADVERTISEMENT_PROPERTIES = {
-  MAX_ROOMS: "maxRooms",
-  TYPE_FLEX_HOST: "typeFlexHost",
+  MAX_ROOMS: "max_rooms",
+  TYPE_FLEX_HOST: "type_flex_host",
   TYPE: "type",
-  TYPE_HOST: "typeHost",
+  TYPE_HOST: "type_host",
   PLACE: "place",
   STREET: "street",
-  STREET_NUMBER: "streetNumber",
+  STREET_NUMBER: "street_number",
   FLOOR: "floor",
-  POSTAL_CODE: "postalCode",
+  POSTAL_CODE: "postal_code",
   ROOMS: "rooms",
   BEDS: "beds",
-  NUMBER_TENANT: "tenantNumber",
+  NUMBER_TENANT: "tenant_number",
   BATHROOMS: "bathrooms",
   TITLE: "title",
   DESCRIPTION: "description",
   PHOTOS: "photos",
-  HOUSE_RULES: "houseRules",
-  ABOUT_HOUSE: "aboutHouse",
-  MONTH_RENT: "monthRent",
-  EXTRA_PER_HOST: "extraPerHost",
-  GUARANTEE_VALUE: "guaranteeValue",
+  HOUSE_RULES: "house_rules",
+  ABOUT_HOUSE: "about_house",
+  MONTH_RENT: "month_rent",
+  EXTRA_PER_HOST: "extra_per_host",
+  GUARANTEE_VALUE: "guarantee_value",
   EXPENSES: "expenses",
-  HOST_LIVES_PROPERTY: "hostLivesProperty",
+  HOST_LIVES_PROPERTY: "host_lives_property",
   HOST: "host",
-  HOST_ID: "hostId",
+  HOST_ID: "host_id",
   AVAILABLE: "available",
   ID: "id",
   GEOM: "geom",

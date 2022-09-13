@@ -1,6 +1,5 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
-import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
@@ -17,6 +16,7 @@ import {
   useSelectedAnuncioMenuSenhorio,
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
+import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 
 interface DetailsProps {
   advertisement: Advertisement;
@@ -52,8 +52,8 @@ const Details = ({ advertisement }: DetailsProps) => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, streetNumber, postalCode } = advertisementContext;
-    const { data, error } = await getResultsFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
+    const { street, place, street_number, postal_code } = advertisementContext;
+    const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
 
     if (!error && data && data.length > 0) {
       const feature = data[0];

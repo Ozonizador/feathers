@@ -11,28 +11,28 @@ datasource db {
 }
 
 model Profile {
-  id             String    @id @default(uuid()) @db.Uuid
-  slug           String    @unique
-  name           String?
-  surname        String?
-  nationality    String?
-  town           String?
-  birthDate      DateTime? @db.Date
-  gender         Int?
-  description    String?
-  languages      String[]
-  phone          String?
-  avatarUrl      String?
-  favouriteRooms String[]
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id              String    @id @default(uuid()) @db.Uuid
+  slug            String    @unique
+  name            String?
+  surname         String?
+  nationality     String?
+  town            String?
+  birth_date      DateTime? @db.Date
+  gender          Int?
+  description     String?
+  languages       String[]
+  phone           String?
+  avatar_url      String?
+  favourite_rooms String[]
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @default(now()) @updatedAt
 
   advertisements Advertisement[]
   notifications  Notification[]  @relation("notifications")
   reservations   Reservation[]   @relation("tenantReservations")
 
-  conversationsAsHost   Conversation[] @relation("conversationsAsHost")
-  conversationsAsTenant Conversation[] @relation("conversationsAsTenant")
+  conversations_as_host   Conversation[] @relation("conversationsAsHost")
+  conversations_as_tenant Conversation[] @relation("conversationsAsTenant")
 
   messages Message[] @relation("profileMessages")
   stays    Stay[]    @relation("tenantStays")
@@ -41,39 +41,39 @@ model Profile {
 }
 
 model Advertisement {
-  id                String                   @id @default(uuid()) @db.Uuid
-  slug              String                   @unique
-  type              TypeRoom
-  place             String
-  street            String
-  streetNumber      String
-  floor             String?
-  postalCode        String
-  rooms             Int
-  maxRooms          Int                      @default(1)
-  beds              Int
-  tenantNumber      Int
-  bathrooms         Int
-  title             String
-  description       String
-  typeFlexHost      HostFlexType
-  typeHost          TypeHost
-  photos            Json                     @default("[]")
-  houseRules        Json
-  aboutHouse        Json
-  monthRent         Int
-  extraPerHost      Int
-  guaranteeValue    Int
-  expenses          Json
-  available         AdvertisementStatus
-  hostLivesProperty Boolean
-  verified          Boolean                  @default(false)
-  hostId            String                   @db.Uuid
-  createdAt         DateTime                 @default(now())
-  updatedAt         DateTime                 @updatedAt
-  geom              Unsupported("geometry")? // requires sql first on prod when migrating
+  id                  String                   @id @default(uuid()) @db.Uuid
+  slug                String                   @unique
+  type                TypeRoom
+  place               String
+  street              String
+  street_number       String
+  floor               String?
+  postal_code         String
+  rooms               Int
+  max_rooms           Int                      @default(1)
+  beds                Int
+  tenant_number       Int
+  bathrooms           Int
+  title               String
+  description         String
+  type_flex_host      HostFlexType
+  type_host           type_host
+  photos              Json                     @default("[]")
+  house_rules         Json
+  about_house         Json
+  month_rent          Int
+  extra_per_host      Int
+  guarantee_value     Int
+  expenses            Json
+  available           AdvertisementStatus
+  host_lives_property Boolean
+  verified            Boolean                  @default(false)
+  host_id             String                   @db.Uuid
+  created_at          DateTime                 @default(now())
+  updated_at          DateTime                 @default(now()) @updatedAt
+  geom                Unsupported("geometry")? // requires sql first on prod when migrating
 
-  host  Profile? @relation(fields: [hostId], references: [id])
+  host  Profile? @relation(fields: [host_id], references: [id])
   stays Stay[]   @relation("advertisementStays")
 
   reservations Reservation[] @relation("advertisementReservations")
@@ -95,7 +95,7 @@ enum TypeRoom {
   PRIVATE_ROOM
 }
 
-enum TypeHost {
+enum type_host {
   PROFISSIONAL
   PARTICULAR
 }
@@ -107,21 +107,19 @@ enum AdvertisementStatus {
 }
 
 model Reservation {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  startDate       DateTime          @db.Date
-  endDate         DateTime          @db.Date
-  advertisement   Advertisement     @relation("advertisementReservations", references: [id], fields: [advertisementId])
-  advertisementId String            @db.Uuid
-  status          ReservationStatus
-
-  tenant       Profile       @relation("tenantReservations", references: [id], fields: [tenantId])
-  tenantId     String        @db.Uuid
-  stay         Stay?         @relation("reservationStay", references: [id], fields: [stayId])
-  stayId       String?       @db.Uuid
-  Conversation Conversation? @relation("conversationOfReservation")
+  id               String            @id @default(uuid()) @db.Uuid
+  start_date       DateTime          @db.Date
+  end_date         DateTime          @db.Date
+  advertisement    Advertisement     @relation("advertisementReservations", references: [id], fields: [advertisement_id])
+  advertisement_id String            @db.Uuid
+  status           ReservationStatus
+  tenant           Profile           @relation("tenantReservations", references: [id], fields: [tenant_id])
+  tenant_id        String            @db.Uuid
+  stay             Stay?             @relation("reservationStay", references: [id], fields: [stay_id])
+  stay_id          String?           @db.Uuid
+  Conversation     Conversation?     @relation("conversationOfReservation")
+  created_at       DateTime          @default(now())
+  updated_at       DateTime          @default(now()) @updatedAt
 
   @@map("reservations")
 }
@@ -136,33 +134,33 @@ enum ReservationStatus {
 }
 
 model Review {
-  id     String @id @default(uuid()) @db.Uuid
-  stay   Stay   @relation("stayReview", references: [id], fields: [stayId])
-  stayId String @unique @db.Uuid
+  id      String @id @default(uuid()) @db.Uuid
+  stay    Stay   @relation("stayReview", references: [id], fields: [stay_id])
+  stay_id String @unique @db.Uuid
 
-  overallRating      Int
-  locationRating     Int
-  valueQualityRating Int
-  landLordRating     Int
-  comoditiesRating   Int
-  publicReview       String
-  privateReview      String
+  overall_rating       Int
+  location_rating      Int
+  value_quality_rating Int
+  landlord_rating      Int
+  comodities_rating    Int
+  public_review        String
+  private_review       String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 
   @@map("reviews")
 }
 
 model Notification {
   id          String           @id @default(uuid()) @db.Uuid
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
   title       String
   description String
   type        NotificationType
-  profile     Profile          @relation("notifications", references: [id], fields: [profileId])
-  profileId   String           @db.Uuid
+  profile     Profile          @relation("notifications", references: [id], fields: [profile_id])
+  profile_id  String           @db.Uuid
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @default(now()) @updatedAt
 
   @@map("notifications")
 }
@@ -182,48 +180,43 @@ enum NotificationType {
 }
 
 model Conversation {
-  id            String      @id @default(uuid()) @db.Uuid
-  host          Profile     @relation("conversationsAsHost", references: [id], fields: [hostId])
-  hostId        String      @db.Uuid
-  tenant        Profile     @relation("conversationsAsTenant", references: [id], fields: [tenantId])
-  tenantId      String      @db.Uuid
-  reservation   Reservation @relation("conversationOfReservation", references: [id], fields: [reservationId])
-  reservationId String      @unique @db.Uuid
-
-  messages Message[] @relation("conversationMessages")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id             String      @id @default(uuid()) @db.Uuid
+  host           Profile     @relation("conversationsAsHost", references: [id], fields: [host_id])
+  host_id        String      @db.Uuid
+  tenant         Profile     @relation("conversationsAsTenant", references: [id], fields: [tenant_id])
+  tenant_id      String      @db.Uuid
+  reservation    Reservation @relation("conversationOfReservation", references: [id], fields: [reservation_id])
+  reservation_id String      @unique @db.Uuid
+  messages       Message[]   @relation("conversationMessages")
+  created_at     DateTime    @default(now())
+  updated_at     DateTime    @default(now()) @updatedAt
 
   @@map("conversations")
 }
 
 model Message {
-  id        String   @id @default(uuid()) @db.Uuid
-  message   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  conversation   Conversation @relation("conversationMessages", references: [id], fields: [conversationId])
-  conversationId String       @db.Uuid
-  profile        Profile      @relation("profileMessages", references: [id], fields: [profileId])
-  profileId      String       @db.Uuid
+  id              String       @id @default(uuid()) @db.Uuid
+  message         String
+  conversation    Conversation @relation("conversationMessages", references: [id], fields: [conversation_id])
+  conversation_id String       @db.Uuid
+  profile         Profile      @relation("profileMessages", references: [id], fields: [profile_id])
+  profile_id      String       @db.Uuid
+  created_at      DateTime     @default(now())
+  updated_at      DateTime     @default(now()) @updatedAt
 
   @@map("messages")
 }
 
 model Report {
-  id String @id @default(uuid()) @db.Uuid
-
-  advertisement   Advertisement @relation("advertisementReports", references: [id], fields: [advertisementId])
-  advertisementId String        @db.Uuid
-  stay            Stay          @relation("stayReport", references: [id], fields: [stayId])
-  stayId          String        @unique @db.Uuid
-  description     String
-  type            ReportsType
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id               String        @id @default(uuid()) @db.Uuid
+  advertisement    Advertisement @relation("advertisementReports", references: [id], fields: [advertisement_id])
+  advertisement_id String        @db.Uuid
+  stay             Stay          @relation("stayReport", references: [id], fields: [stay_id])
+  stay_id          String        @unique @db.Uuid
+  description      String
+  type             ReportsType
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @default(now()) @updatedAt
 
   @@map("reports")
 }
@@ -237,21 +230,18 @@ enum ReportsType {
 }
 
 model Stay {
-  id        String   @id @default(uuid()) @db.Uuid
-  startDate DateTime
-  endDate   DateTime
-  report    Report?  @relation("stayReport")
-  review    Review?  @relation("stayReview")
-
-  advertisement   Advertisement @relation("advertisementStays", references: [id], fields: [advertisementId])
-  advertisementId String        @db.Uuid
-  tenant          Profile       @relation("tenantStays", references: [id], fields: [tenantId])
-  tenantId        String        @db.Uuid
-
-  reservations Reservation[] @relation("reservationStay")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id               String        @id @default(uuid()) @db.Uuid
+  start_date       DateTime
+  end_date         DateTime
+  report           Report?       @relation("stayReport")
+  review           Review?       @relation("stayReview")
+  advertisement    Advertisement @relation("advertisementStays", references: [id], fields: [advertisement_id])
+  advertisement_id String        @db.Uuid
+  tenant           Profile       @relation("tenantStays", references: [id], fields: [tenant_id])
+  tenant_id        String        @db.Uuid
+  reservations     Reservation[] @relation("reservationStay")
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @default(now()) @updatedAt
 
   @@map("stays")
 }
@@ -263,8 +253,8 @@ model Blog {
   description String
   image       String
   category    BlogCategory
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @default(now()) @updatedAt
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @default(now()) @updatedAt
 
   @@map("blogs")
 }

@@ -31,11 +31,11 @@ export default function RoomPagamento() {
 
   /* Reservation */
   const [reservation, setReservation] = useState<Reservation>({
-    startDate: startDate,
-    endDate: endDate,
+    start_date: startDate,
+    end_date: endDate,
     status: ReservationStatus.REQUESTED,
-    advertisementId: advertisement.id,
-    tenantId: "",
+    advertisement_id: advertisement.id,
+    tenant_id: "",
   });
 
   const makeReservation = async () => {
@@ -56,11 +56,11 @@ export default function RoomPagamento() {
     }
   };
 
-  const createConversation = async (reservationId: string) => {
+  const createConversation = async (reservation_id: string) => {
     const conversation = {
-      hostId: advertisement.host.id,
-      tenantId: profile.id,
-      reservationId: reservationId,
+      host_id: advertisement.host.id,
+      tenant_id: profile.id,
+      reservation_id: reservation_id,
     } as Conversation;
 
     await addConversation(conversation);
@@ -72,7 +72,7 @@ export default function RoomPagamento() {
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
-              {advertisement.monthRent}&euro;/mês
+              {advertisement.month_rent}&euro;/mês
             </div>
 
             <div className="relative mb-2 text-center text-base">
@@ -116,7 +116,7 @@ export default function RoomPagamento() {
 
           <div className="flex flex-row justify-between">
             <div>1ª Renda</div>
-            <div>{`€${advertisement.monthRent}`}</div>
+            <div>{`€${advertisement.month_rent}`}</div>
           </div>
 
           <div className="my-2 flex flex-row justify-between">
@@ -136,7 +136,7 @@ export default function RoomPagamento() {
 
           <div className="my-8 flex flex-row justify-between font-bold">
             <div className="text-base">Total</div>
-            <div>€{advertisement.monthRent}</div>
+            <div>€{advertisement.month_rent}</div>
           </div>
 
           <div onClick={makeReservation}>
@@ -153,7 +153,7 @@ export default function RoomPagamento() {
         <div className="flex flex-col text-left">
           <h1 className="mt-2 text-2xl font-bold text-black">
             {" "}
-            {advertisement.monthRent}&euro;<span className="text-gray-600">/mês</span>
+            {advertisement.month_rent}&euro;<span className="text-gray-600">/mês</span>
           </h1>
           <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 

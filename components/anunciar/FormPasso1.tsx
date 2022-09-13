@@ -13,7 +13,7 @@ const FormPasso1 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement({ tenantNumber: advertisement.tenantNumber }, advertisement.id);
+    await updateAdvertisement({ tenant_number: advertisement.tenant_number }, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

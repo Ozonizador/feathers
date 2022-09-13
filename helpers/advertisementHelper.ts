@@ -1,6 +1,7 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import {
+  AdvertisementPhoto,
   AdvertisementStatus,
   ADVERTISEMENT_PROPERTIES,
   FlexHostType,
@@ -186,7 +187,7 @@ const addFilterAdvertisement = (
   const { filter, order } = filters;
 
   // is available
-  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, AdvertisementStatus.AVAILABLE);
+  // query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, AdvertisementStatus.AVAILABLE);
 
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
@@ -223,10 +224,21 @@ const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
     if (expense.included == "EXCLUDED") return excluded++;
   }
 
-  if (included === 0 && partially === 0 && excluded === 0) return "";
+  if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
   if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluidas";
   if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
   if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
+
+  return "Despesas Partialmente Incluídas";
 };
 
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, checkIfExpensesIncluded };
+const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
+  if (photos && photos.length > 0) {
+    let photo = photos.find((photo) => photo.zone == "main");
+    return photo ? photo : photos[0];
+  } else {
+    return null;
+  }
+};
+
+export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, checkIfExpensesIncluded, getMainAdvertPhoto };

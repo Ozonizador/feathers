@@ -6,14 +6,14 @@ export interface Notification {
   description: string;
   type: NotificationType;
 
-  profileId: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  profile_id: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 /* VALUES FOR DB */
 export const NOTIFICATION_PROPERTIES = {
-  PROFILE_ID: "profileId",
+  PROFILE_ID: "profile_id",
   ID: "id",
 } as const;
 

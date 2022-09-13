@@ -7,7 +7,6 @@ import { useCallback, useEffect, useState } from "react";
 import Advertisement from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { getAdvertismentsFromUserId } from "../../../services/advertisementService";
-import DicasCard from "../../../components/senhorioanuncios/DicasCard/DicasCard";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const Anuncios = () => {

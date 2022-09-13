@@ -57,7 +57,7 @@ const MainMenu = () => {
       let file = event.target.files[0] as File;
       const { data, error } = await addAvatar(profile.id, file.name, file);
       if (!error) {
-        setProfile({ ...profile, avatarUrl: data });
+        setProfile({ ...profile, avatar_url: data });
       }
     }
   };
@@ -93,8 +93,8 @@ const MainMenu = () => {
                   <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500 ">
                     <Avatar
                       img={
-                        profile?.avatarUrl
-                          ? profile.avatarUrl
+                        profile?.avatar_url
+                          ? profile.avatar_url
                           : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                       }
                       rounded={true}
@@ -128,7 +128,7 @@ const MainMenu = () => {
                   <div className="mb-1">Data de nascimento</div>
                   <div className="flex flex-row gap-4">
                     <FeatherDatePicker
-                      date={profile?.birthDate ? new Date(profile.birthDate) : new Date()}
+                      date={profile?.birth_date ? new Date(profile.birth_date) : new Date()}
                       onChange={(date) => handleProfileInfoByProperty(PROFILE_COLUMNS.BIRTH_DATE, date)}
                     />
                   </div>

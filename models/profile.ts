@@ -3,20 +3,20 @@ export const AVATAR_STORAGE_NAME = "avatars" as const;
 
 export interface Profile {
   id: string;
+  slug: string;
   name: string;
   surname: string;
   nationality: string;
   town: string;
-  birthDate: Date;
+  birth_date: Date;
   gender: Gender;
-  updatedAt: Date;
   description: string;
   languages: string[];
   phone: string;
-  avatarUrl: string;
-  favouriteRooms: string[];
-  createdAt: Date;
-  slug: string;
+  avatar_url: string;
+  favourite_rooms: string[];
+  created_at: Date;
+  updated_at: Date;
 }
 
 export enum Gender {
@@ -30,7 +30,7 @@ export const PROFILE_COLUMNS = {
   NAME: "name",
   SURNAME: "surname",
   TOWN: "town",
-  BIRTH_DATE: "birthDate",
+  BIRTH_DATE: "birth_date",
   GENDER: "gender",
   DESCRIPTION: "description",
   PHONE: "phone",

@@ -26,7 +26,7 @@ const StayCard = ({ stay }: StayCardProps) => {
               <div className="mb-3 mt-3 text-base font-bold">
                 {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
               </div>
-              <div className="mb-1 text-xl font-bold text-primary-500">{advertisement.monthRent}€/mês</div>
+              <div className="mb-1 text-xl font-bold text-primary-500">{advertisement.month_rent}€/mês</div>
               {advertisement.expenses?.services && (
                 <div className="text-base text-secondary-300">
                   {checkIfExpensesIncluded(advertisement.expenses.services)}

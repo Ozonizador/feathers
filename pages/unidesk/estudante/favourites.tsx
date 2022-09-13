@@ -22,8 +22,8 @@ const UnideskFavoritos = () => {
   const profile = useProfileInformation();
 
   const getUserFavourites = useCallback(async () => {
-    if (profile && profile.favouriteRooms) {
-      const { data, error } = await getAdvertismentsFromMultipleId(profile.favouriteRooms);
+    if (profile && profile.favourite_rooms) {
+      const { data, error } = await getAdvertismentsFromMultipleId(profile.favourite_rooms);
       if (!error) {
         setFavourites(data);
       }
@@ -99,7 +99,7 @@ const UnideskFavoritos = () => {
                         </div>
                         <div className="ml-3 flex flex-1 flex-col p-2">
                           <div className="text-lg font-bold">{favourite.title}</div>
-                          <div className="text-md mb-1 font-bold text-primary-500">{favourite.monthRent}€/mês</div>
+                          <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
 
                           <div className="mt-auto flex">
                             <div className="relative mb-2 text-center text-base">

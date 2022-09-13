@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Tab } from "@headlessui/react";
-import { Reservation } from "@prisma/client";
 import { useUser } from "@supabase/auth-helpers-react";
 import {
   getAllReservationsByHostId,
@@ -143,10 +142,10 @@ const CurrentReservationsSection = () => {
                     {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.startDate)}
+                    {formatDate(reservation.start_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.endDate)}
+                    {formatDate(reservation.end_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
@@ -214,6 +213,7 @@ const NextReservationsSection = () => {
             ))}
           {reservations &&
             reservations.map((reservation, index) => {
+              debugger;
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
@@ -221,10 +221,10 @@ const NextReservationsSection = () => {
                     {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.startDate)}
+                    {formatDate(reservation.start_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.endDate)}
+                    {formatDate(reservation.end_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
@@ -274,11 +274,12 @@ const AllReservationsSection = () => {
   const checkIntervalForDate = (reservation: ReservationWithAdvertisement) => {
     const currentDate = new Date();
 
-    if (new Date(reservation.startDate) < currentDate && new Date(reservation.endDate) >= currentDate)
+    if (new Date(reservation.start_date) < currentDate && new Date(reservation.end_date) >= currentDate)
       return "A decorrer estadia";
-    if (new Date(reservation.startDate) < currentDate && new Date(reservation.endDate) < currentDate)
+    if (new Date(reservation.start_date) < currentDate && new Date(reservation.end_date) < currentDate)
       return "Finalizado";
-    if (new Date(reservation.startDate) > currentDate && new Date(reservation.endDate) > currentDate) return "Próxima";
+    if (new Date(reservation.start_date) > currentDate && new Date(reservation.end_date) > currentDate)
+      return "Próxima";
 
     return "";
   };
@@ -311,10 +312,10 @@ const AllReservationsSection = () => {
                     {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.startDate)}
+                    {formatDate(reservation.start_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {formatDate(reservation.endDate)}
+                    {formatDate(reservation.end_date)}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]

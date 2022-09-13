@@ -6,38 +6,38 @@ export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 
 export type Review = {
   id: string;
-  advertisementId: string;
-  tenantId: string;
-  overallRating: number;
-  locationRating: number;
-  valueQualityRating: number;
-  landLordRating: number;
-  comoditiesRating: number;
-  publicReview: string;
-  privateReview: string;
-  createdAt: Date;
-  updatedAt: Date;
+  advertisement_id: string;
+  tenant_id: string;
+  overall_rating: number;
+  location_rating: number;
+  value_quality_rating: number;
+  landlord_rating: number;
+  comodities_rating: number;
+  public_review: string;
+  private_review: string;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Partial<Advertisement>;
   tenant: Partial<Profile>;
-  "advertisements.hostId": string;
+  "advertisements.host_id": string;
 };
 
 export const REVIEW_COLUMNS = {
   ID: "id",
-  ADVERTISEMENT_ID: "advertisementId",
-  TENANT_ID: "tenantId",
-  OVERALL_RATING: "overallRating",
-  LOCATION_RATING: "locationRating",
-  LANDLORD_RATING: "landLordRating",
-  VALUE_QUALITY_RATING: "valueQualityRating",
-  COMODITIES_RATING: "comoditiesRating",
-  PUBLIC_REVIEW: "publicReview",
-  PRIVATE_REVIEW: "privateReview",
-  HOST_ID: "advertisements.hostId",
-  CREATED_AT: "createdAt",
+  ADVERTISEMENT_ID: "advertisement_id",
+  TENANT_ID: "tenant_id",
+  OVERALL_RATING: "overall_rating",
+  LOCATION_RATING: "location_rating",
+  LANDLORD_RATING: "landLord_rating",
+  VALUE_QUALITY_RATING: "valueQuality_rating",
+  COMODITIES_RATING: "comodities_rating",
+  PUBLIC_REVIEW: "public_review",
+  PRIVATE_REVIEW: "private_review",
+  HOST_ID: "advertisements.host_id",
+  CREATED_AT: "created_at",
 } as const;
 
 /*
@@ -45,11 +45,11 @@ export const REVIEW_COLUMNS = {
  */
 
 export interface AdvertisementReviewSummary {
-  advertisementId: string;
-  reviewNumber: number;
-  overallAverage: number;
-  locationAverage: number;
-  valueQualityAverage: number;
-  landlordAverage: number;
-  comoditiesAverage: number;
+  advertisement_id: string;
+  review_number: number;
+  overall_average: number;
+  location_average: number;
+  value_quality_average: number;
+  landlord_average: number;
+  comodities_average: number;
 }

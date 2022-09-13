@@ -1,11 +1,11 @@
 DROP VIEW IF EXISTS "reviewsPerAdvertisement";
 
 CREATE VIEW "reviewsPerAdvertisement" AS
-    SELECT "advertisementId", 
-     COUNT(*) AS "reviewNumber",
-     AVG("overallRating")::numeric(10,2)  AS "overallAverage",
-     AVG("locationRating")::numeric(10,2)  AS "locationAverage",
-     AVG("valueQualityRating")::numeric(10,2)  AS "valueQualityAverage", 
-     AVG("landLordRating")::numeric(10,2)  AS "landlordAverage", 
-     AVG("comoditiesRating")::numeric(10,2)  AS "comoditiesAverage"
-    FROM reviews LEFT JOIN stays on reviews."stayId" = stays.id GROUP BY "advertisementId";
+    SELECT "advertisement_id", 
+     COUNT(*) AS "review_number",
+     AVG("overall_rating")::numeric(10,2)  AS "overall_average",
+     AVG("location_rating")::numeric(10,2)  AS "location_average",
+     AVG("value_quality_rating")::numeric(10,2)  AS "value_quality_average", 
+     AVG("landlord_rating")::numeric(10,2)  AS "landlord_average", 
+     AVG("comodities_rating")::numeric(10,2)  AS "comodities_average"
+    FROM reviews LEFT JOIN stays on reviews.stay_id = stays.id GROUP BY "advertisement_id";

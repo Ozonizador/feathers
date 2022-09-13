@@ -164,7 +164,7 @@ const CaixaEntrada = () => {
                 </div>*/}
                   </div>
                 </div>
-                {currentConversation && currentConversation.hostId === profile.id && (
+                {currentConversation && currentConversation.host_id === profile.id && (
                   <>
                     <div className="w-1/3 border-l border-terciary-500 p-2">
                       {currentConversation && (
@@ -177,8 +177,8 @@ const CaixaEntrada = () => {
                             <div>
                               <Avatar
                                 img={
-                                  currentConversation.tenant?.avatarUrl
-                                    ? currentConversation.tenant?.avatarUrl
+                                  currentConversation.tenant?.avatar_url
+                                    ? currentConversation.tenant?.avatar_url
                                     : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                                 }
                                 rounded={true}
@@ -196,8 +196,8 @@ const CaixaEntrada = () => {
                             </div>
                           </div>
                           <div className="my-4 flex justify-center">
-                            {`${formatDate(currentConversation.reservation.startDate)} - ${formatDate(
-                              currentConversation.reservation.endDate
+                            {`${formatDate(currentConversation.reservation.start_date)} - ${formatDate(
+                              currentConversation.reservation.end_date
                             )}`}
                           </div>
                           {currentConversation.reservation.status === ReservationStatus.REQUESTED && (

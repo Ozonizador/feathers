@@ -7,7 +7,7 @@ export const createNotification = (type: NotificationType, profile: Profile) => 
   return {
     title: NOTIFICATION_TYPES_INFORMATION[type].title,
     description: NOTIFICATION_TYPES_INFORMATION[type].description,
-    profileId: profile.id,
+    profile_id: profile.id,
     type,
   } as Notification;
 };

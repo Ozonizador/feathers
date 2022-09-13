@@ -156,7 +156,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 label={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
                 labelText=""
                 customCss="euro"
-                value={String(advertisement.monthRent)}
+                value={String(advertisement.month_rent)}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)}
               />
             </div>
@@ -172,7 +172,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 label={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
                 labelText=""
                 customCss="euro"
-                value={String(advertisement.extraPerHost)}
+                value={String(advertisement.extra_per_host)}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)}
               />
             </div>
@@ -188,7 +188,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                 label={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
                 labelText=""
                 customCss="euro"
-                value={String(advertisement.guaranteeValue)}
+                value={String(advertisement.guarantee_value)}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)}
               />
             </div>

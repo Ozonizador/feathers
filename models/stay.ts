@@ -8,33 +8,33 @@ export const STAYS_TABLE_NAME = "stays" as const;
 
 export type Stay = {
   id?: string;
-  startDate: Date;
-  endDate: Date;
+  start_date: Date;
+  end_date: Date;
 
   // Advertisement
-  advertisementId: string;
-  tenantId: string;
+  advertisement_id: string;
+  tenant_id: string;
 
   // Reservations associated with Stay
   reservations: Reservation[];
 
   report?: Report;
   review?: Review;
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 export const STAY_TABLE = {
   ID: "id",
-  RESERVATION_ID: "advertisementId",
+  RESERVATION_ID: "advertisement_id",
   REPORT: "reports",
-  TENANT_ID: "tenantId",
-  START_DATE: "startDate",
-  END_DATE: "endDate",
+  TENANT_ID: "tenant_id",
+  START_DATE: "start_date",
+  END_DATE: "end_date",
   ADVERTISEMENT_HOST: "advertisement.host",
 } as const;
 
-export type StayDates = Pick<Stay, "startDate" | "endDate">;
+export type StayDates = Pick<Stay, "start_date" | "end_date">;
 
 /*
  * composed types
@@ -44,6 +44,6 @@ export type StayDates = Pick<Stay, "startDate" | "endDate">;
 
 export type StayGuest = Stay & {
   advertisement: Partial<Advertisement>;
-  tenant: Pick<Profile, "name" | "avatarUrl">;
+  tenant: Pick<Profile, "name" | "avatar_url">;
   "advertisement.hostId": string;
 };

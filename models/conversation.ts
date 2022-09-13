@@ -6,14 +6,14 @@ export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
 export type Conversation = {
   id?: string;
-  tenantId: string;
-  hostId: string;
-  reservationId: string;
+  tenant_id: string;
+  host_id: string;
+  reservation_id: string;
 
   messages?: Message[];
 
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 export type ConversationWithTenant = Conversation & {
@@ -23,10 +23,10 @@ export type ConversationWithTenant = Conversation & {
 
 /* VALUES FOR DB */
 export const CONVERSATION_PROPERTIES = {
-  TENANT_ID: "tenantId",
-  HOST_ID: "hostId",
-  RESERVATION_ID: "reservationId",
+  TENANT_ID: "tenant_id",
+  HOST_ID: "host_id",
+  RESERVATION_ID: "reservation_id",
   ID: "id",
-  UPDATED_ID: "updatedAt",
-  CREATED_ID: "createdAt",
+  UPDATED_ID: "updated_at",
+  CREATED_ID: "created_at",
 } as const;

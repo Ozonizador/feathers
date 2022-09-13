@@ -34,7 +34,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                     </div>
 
                     <div>
-                      <p className="normal-case text-gray-300">{formatDate(blog.createdAt)}</p>
+                      <p className="normal-case text-gray-300">{formatDate(blog.created_at)}</p>
                     </div>
                   </div>
                 </div>

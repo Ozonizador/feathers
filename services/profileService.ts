@@ -15,7 +15,7 @@ export const checkProfileAndCreate = async (userID: string) => {
 async function createProfile(userID: string) {
   const { data, error } = await supabaseClient
     .from<Profile>(PROFILE_TABLE_NAME)
-    .insert({ id: userID, updatedAt: new Date(), slug: createRandomUniqWord() })
+    .insert({ id: userID, updated_at: new Date(), slug: createRandomUniqWord() })
     .single();
   return { data, error };
 }
@@ -40,10 +40,10 @@ export const updateUserProfile = async (userID: string, profile: Profile) => {
   return { data, error };
 };
 
-export const updateAvatarInfo = async (userId: string, avatarUrl: string) => {
+export const updateAvatarInfo = async (userId: string, avatar_url: string) => {
   const { data, error } = await supabaseClient
     .from<Profile>(PROFILE_TABLE_NAME)
-    .update({ avatarUrl })
+    .update({ avatar_url })
     .eq(PROFILE_COLUMNS.ID, userId)
     .single();
 
@@ -53,11 +53,11 @@ export const updateAvatarInfo = async (userId: string, avatarUrl: string) => {
 export const addAvatar = async (userId: string, fileName: string, file: File) => {
   const { data, error } = await supabaseClient
     .from<Profile>(PROFILE_TABLE_NAME)
-    .select("avatarUrl")
+    .select("avatar_url")
     .eq(PROFILE_COLUMNS.ID, userId)
     .single();
 
-  const currentAvatarUrl = data && data.avatarUrl;
+  const currentAvatarUrl = data && data.avatar_url;
   // upload new picture
   const { publicURL, error: avatarError } = await uploadPicture(userId, fileName, file);
   if (!avatarError) {
@@ -86,8 +86,8 @@ export const uploadPicture = async (userId: string, fileName: string, avatarFile
   return getPublicAvatarUrlFromImage(data.Key);
 };
 
-export const removePicture = async (userId: string, avatarUrl: string) => {
-  let dividedUrl = avatarUrl.split("/");
+export const removePicture = async (userId: string, avatar_url: string) => {
+  let dividedUrl = avatar_url.split("/");
   let avatarName = dividedUrl[dividedUrl.length - 1];
   const { data, error } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).remove([`${userId}/${avatarName}`]);
 

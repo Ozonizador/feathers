@@ -2,13 +2,13 @@ export const REPORTS_TABLE_NAME = "reports" as const;
 
 export type Report = {
   id?: string;
-  advertisementId: string;
-  stayId: string;
+  advertisement_id: string;
+  stay_id: string;
   description?: string;
   type: ReportsType;
 
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 export enum ReportsType {
@@ -21,6 +21,6 @@ export enum ReportsType {
 
 export const REPORT_TABLE = {
   ID: "id",
-  ADVERT_ID: "advertisementId",
-  STAY_ID: "stayId",
+  ADVERT_ID: "advertisement_id",
+  STAY_ID: "stay_id",
 } as const;

@@ -11,7 +11,6 @@ import {
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 import { AdvertisementReviewSummary } from "../models/review";
-import { StayDates } from "../models/stay";
 import { getCorrectUrl } from "../utils/utils";
 
 export const PAGE_NUMBER_COUNT = 10 as number;
@@ -19,7 +18,7 @@ export const PAGE_NUMBER_COUNT = 10 as number;
 export const addAdvertisement = async (advertisement: Advertisement) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .insert({ ...advertisement, updatedAt: new Date(), id: uuidv4() }, { returning: "representation" })
+    .insert({ ...advertisement, updated_at: new Date(), id: uuidv4() }, { returning: "representation" })
     .single();
 
   return { data, error };
@@ -28,7 +27,7 @@ export const addAdvertisement = async (advertisement: Advertisement) => {
 export const updateAdvertisement = async (advertisement: Partial<Advertisement>, id: string) => {
   const { data, error } = await supabaseClient
     .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .update({ ...advertisement, updatedAt: new Date() }, { returning: "representation" })
+    .update({ ...advertisement, updated_at: new Date() }, { returning: "representation" })
     .eq(ADVERTISEMENT_PROPERTIES.ID, id)
     .single();
 
@@ -77,9 +76,6 @@ export const getAdvertisementsFromPlace = async (place: string) => {
 
 export type AdvertisementWithReviewAverage = Advertisement & {
   averages: AdvertisementReviewSummary[];
-  stay: StayDates;
-  "stay.startDate": Date;
-  "stay.endDate": Date;
 };
 
 export const getAdvertisementsByCloseCoordinatesWithFilters = async (
@@ -98,11 +94,10 @@ export const getAdvertisementsByCloseCoordinatesWithFilters = async (
       },
       { count: "exact" }
     )
-    .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)")
-    .range(initRange, page * PAGE_NUMBER_COUNT - 1);
-
+    .select("*, averages:reviewsPerAdvertisement!left(*)");
   query = addFilterAdvertisement(query, filters);
-  const { data, error, count } = await query;
+
+  const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
   return { data, error, count };
 };
