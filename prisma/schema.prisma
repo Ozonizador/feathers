@@ -41,8 +41,8 @@ model Profile {
 }
 
 model Advertisement {
-  id                  String                   @id @default(uuid()) @db.Uuid
-  slug                String                   @unique
+  id                  String              @id @default(uuid()) @db.Uuid
+  slug                String              @unique
   type                TypeRoom
   place               String
   street              String
@@ -50,7 +50,7 @@ model Advertisement {
   floor               String?
   postal_code         String
   rooms               Int
-  max_rooms           Int                      @default(1)
+  max_rooms           Int                 @default(1)
   beds                Int
   tenant_number       Int
   bathrooms           Int
@@ -58,7 +58,7 @@ model Advertisement {
   description         String
   type_flex_host      HostFlexType
   type_host           type_host
-  photos              Json                     @default("[]")
+  photos              Json                @default("[]")
   house_rules         Json
   about_house         Json
   month_rent          Int
@@ -67,11 +67,11 @@ model Advertisement {
   expenses            Json
   available           AdvertisementStatus
   host_lives_property Boolean
-  verified            Boolean                  @default(false)
-  host_id             String                   @db.Uuid
-  created_at          DateTime                 @default(now())
-  updated_at          DateTime                 @default(now()) @updatedAt
-  geom                Unsupported("geometry")? // requires sql first on prod when migrating
+  verified            Boolean             @default(false)
+  host_id             String              @db.Uuid
+  created_at          DateTime            @default(now())
+  updated_at          DateTime            @default(now()) @updatedAt
+  // geom                Unsupported("geometry")? // requires sql first on prod when migrating
 
   host  Profile? @relation(fields: [host_id], references: [id])
   stays Stay[]   @relation("advertisementStays")

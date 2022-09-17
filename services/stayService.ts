@@ -61,8 +61,8 @@ export const getCurrentStaysByHostId = async (hostId: string) => {
 
   const { data, error } = await supabaseClient
     .from<StayGuest>(STAYS_TABLE_NAME)
-    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, hostId)")
-    .eq("advertisement.hostId", hostId)
+    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
+    .eq("advertisement.host_id", hostId)
     .gte(STAY_TABLE.START_DATE, date)
     .lte(STAY_TABLE.END_DATE, date);
 
@@ -74,8 +74,8 @@ export const getNextReservationsByHostId = async (hostId: string) => {
 
   const { data, error } = await supabaseClient
     .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
-    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:'advertisement_id'(id, type, place, hostId)")
-    .eq("advertisement.hostId", hostId)
+    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
+    .eq("advertisement.host_id", hostId)
     .gte(RESERVATION_TABLE.START_DATE, date)
     .gte(RESERVATION_TABLE.END_DATE, date);
 
@@ -87,8 +87,8 @@ export const getAllReservationsByHostId = async (hostId: string) => {
 
   const { data, error } = await supabaseClient
     .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
-    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, hostId)")
-    .eq("advertisement.hostId", hostId);
+    .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
+    .eq("advertisement.host_id", hostId);
 
   return { data, error };
 };

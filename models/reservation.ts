@@ -19,7 +19,7 @@ export type Reservation = {
 export type ReservationWithAdvertisement = Reservation & {
   advertisement: Partial<Advertisement>;
   tenant: Pick<Profile, "name">;
-  "advertisement.hostId": string;
+  "advertisement.host_id": string;
 };
 
 export enum ReservationStatus {

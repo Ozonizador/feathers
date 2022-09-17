@@ -4,13 +4,13 @@ ALTER TABLE public.profiles
 -- do on supabase api
 create policy "Users can insert their own profile."
   on profiles for insert
-  with check ( uid()::text = id );
+  with check ( auth.uid() = id );
 
 
 -- do on supabase api
 create policy "Users can update own profile."
   on profiles for update
-  using ( uid()::text = id );
+  using ( auth.uid() = id );
 
 -- inserts a row into public.users
 create function public.handle_new_user() 

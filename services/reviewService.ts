@@ -32,7 +32,7 @@ export const getReviewsByAdvertId = async (advertId: string) => {
 export const getReviewsByHostId = async (hostId: string) => {
   const { data, error } = await supabaseClient
     .from(REVIEWS_TABLE_NAME)
-    .select("*, advertisement:advertisements(id,hostId), tenant:tenant_id(*)")
+    .select("*, advertisement:advertisements(id,host_id), tenant:tenant_id(*)")
     .eq(REVIEW_COLUMNS.HOST_ID, hostId)
     .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false });
 

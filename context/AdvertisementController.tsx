@@ -59,7 +59,7 @@ export const AdvertisementController = ({ children }): JSX.Element => {
   useEffect(() => {
     if (user) {
       setAdvertisement((oldAdvert) => {
-        return { ...oldAdvert, hostId: user.id };
+        return { ...oldAdvert, host_id: user.id };
       });
     }
   }, [user]);

@@ -57,6 +57,7 @@ export const MainProvider = ({ children }): JSX.Element => {
 
   const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
+    debugger;
     if (user) {
       const { data, error } = await checkProfileAndCreate(user.id);
       if (!error) {

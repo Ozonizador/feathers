@@ -45,5 +45,5 @@ export type StayDates = Pick<Stay, "start_date" | "end_date">;
 export type StayGuest = Stay & {
   advertisement: Partial<Advertisement>;
   tenant: Pick<Profile, "name" | "avatar_url">;
-  "advertisement.hostId": string;
+  "advertisement.host_id": string;
 };
