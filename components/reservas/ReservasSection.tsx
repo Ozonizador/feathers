@@ -213,7 +213,6 @@ const NextReservationsSection = () => {
             ))}
           {reservations &&
             reservations.map((reservation, index) => {
-              debugger;
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>

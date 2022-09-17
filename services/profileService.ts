@@ -5,7 +5,6 @@ import { getCorrectUrl, createRandomUniqWord } from "../utils/utils";
 export const checkProfileAndCreate = async (userID: string) => {
   try {
     const { data, error } = await getUserProfile(userID);
-    debugger;
     if (error || !data) return createProfile(userID);
     return { data, error };
   } catch (error) {
@@ -18,7 +17,6 @@ async function createProfile(userID: string) {
     .from<Profile>(PROFILE_TABLE_NAME)
     .insert({ id: userID, updated_at: new Date(), slug: createRandomUniqWord() })
     .single();
-  debugger;
   return { data, error };
 }
 
