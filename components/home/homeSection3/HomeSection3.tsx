@@ -27,7 +27,7 @@ export default function HomeSection3() {
   return (
     <>
       {!advertisements && <></>}
-      {advertisements && (
+      {advertisements && advertisements.length > 0 && (
         <>
           <section>
             <div className="mb-28 mt-5">
