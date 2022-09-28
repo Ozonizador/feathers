@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { updateAdvertisement } from "../../services/advertisementService";
 
@@ -11,6 +12,7 @@ const FormPasso8 = () => {
     // setAdvertisementProperty("aboutHouse", "testing");
     const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
+      toast.success("Registo Bem Sucedido");
       router.push("/");
     }
   };
