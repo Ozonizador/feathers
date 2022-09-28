@@ -33,7 +33,7 @@ export default function BlogSection() {
           <Spinner color="info" aria-label="loading" size="lg" />
         </>
       )}
-      {!loading && blogPosts && (
+      {!loading && blogPosts && blogPosts.length > 0 && (
         <div>
           <h2 className="my-10 text-5xl font-bold text-black">Blog</h2>
           <div className=" grid gap-8 lg:grid-cols-4">
