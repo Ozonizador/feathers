@@ -34,10 +34,10 @@ export async function loginWithFacebook() {
   const { user, session, error } = await supabaseClient.auth.signIn(
     {
       provider: "facebook",
-    },
-    {
-      redirectTo: `${window.location.origin}`,
     }
+    // {
+    //   redirectTo: `${window.location.origin}`,
+    // }
   );
 
   return { user, session, error };
@@ -47,10 +47,10 @@ export async function loginWithGoogle() {
   const { user, session, error } = await supabaseClient.auth.signIn(
     {
       provider: "google",
-    },
-    {
-      redirectTo: `${window.location.origin}`,
     }
+    // {
+    //   redirectTo: `${window.location.origin}`,
+    // }
   );
 
   return { user, session, error };
