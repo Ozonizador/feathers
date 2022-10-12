@@ -6,7 +6,7 @@ import { Review, ReviewWithTenantAndAdvertisement } from "../../../../../models/
 import { averageFromAllReviewsByHost, getReviewsByHostId } from "../../../../../services/reviewService";
 
 const ReviewInfo = () => {
-  const { user } = useUser();
+  const user = useUser();
 
   const [latestReviews, setLatestReviews] = useState<ReviewWithTenantAndAdvertisement[]>([]);
   const [averageReviews, setAverageReviews] = useState<number>();

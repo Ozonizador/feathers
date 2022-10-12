@@ -14,7 +14,7 @@ interface NavbarMobileProps {
 }
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
-  const { user } = useUser();
+  const user = useUser();
 
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();

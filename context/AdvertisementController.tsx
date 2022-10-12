@@ -53,7 +53,7 @@ const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);
 const SetAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
 
 export const AdvertisementController = ({ children }): JSX.Element => {
-  const { user } = useUser();
+  const user = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
 
   useEffect(() => {

@@ -19,7 +19,7 @@ import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
 
 export const Navbar = () => {
-  const { user } = useUser();
+  const user = useUser();
   const router = useRouter();
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);

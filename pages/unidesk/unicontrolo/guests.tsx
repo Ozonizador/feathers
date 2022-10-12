@@ -8,7 +8,7 @@ import { StayGuest } from "../../../models/stay";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const UniControloHospedes = () => {
-  const { user } = useUser();
+  const user = useUser();
   const [stays, setStays] = useState<StayGuest[]>([]);
   const getCurrentGuests = useCallback(async () => {
     if (user) {

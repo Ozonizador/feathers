@@ -41,7 +41,7 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
-  const { user } = useUser();
+  const user = useUser();
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",

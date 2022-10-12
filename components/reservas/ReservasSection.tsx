@@ -85,7 +85,7 @@ const ReservasSection = () => {
 };
 
 const CurrentReservationsSection = () => {
-  const { user } = useUser();
+  const user = useUser();
   const [reservations, setReservations] = useState<StayGuest[]>([]);
 
   const getCurrentStays = useCallback(async () => {
@@ -165,7 +165,7 @@ const CurrentReservationsSection = () => {
 };
 
 const NextReservationsSection = () => {
-  const { user } = useUser();
+  const user = useUser();
   const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
 
   const getNextReservations = useCallback(async () => {
@@ -243,7 +243,7 @@ const NextReservationsSection = () => {
 };
 
 const AllReservationsSection = () => {
-  const { user } = useUser();
+  const user = useUser();
   const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
 
   const getNextReservations = useCallback(async () => {

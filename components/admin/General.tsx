@@ -18,7 +18,7 @@ const MainMenu = () => {
   const [profile, setProfile] = useState<Profile>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { user } = useUser();
+  const user = useUser();
 
   const getProfile = useCallback(async () => {
     if (user) {
