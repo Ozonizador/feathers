@@ -1,10 +1,6 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json }
-  | Json[];
+import { MapCoordinates } from "./models/utils";
+
+export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
   public: {
@@ -364,7 +360,7 @@ export interface Database {
           verified: boolean;
           created_at: string;
           updated_at: string;
-          geom: unknown | null;
+          geom: any | null;
         };
         Insert: {
           id: string;
@@ -397,7 +393,7 @@ export interface Database {
           verified?: boolean;
           created_at?: string;
           updated_at?: string;
-          geom?: unknown | null;
+          geom?: any | null;
         };
         Update: {
           id?: string;
@@ -430,7 +426,7 @@ export interface Database {
           verified?: boolean;
           created_at?: string;
           updated_at?: string;
-          geom?: unknown | null;
+          geom?: any | null;
         };
       };
     };
@@ -3681,4 +3677,3 @@ export interface Database {
     };
   };
 }
-

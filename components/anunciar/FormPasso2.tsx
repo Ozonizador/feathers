@@ -1,18 +1,20 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { useState } from "react";
-import { updateAdvertisement } from "../../services/advertisementService";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso2 = () => {
-  const supabaseClient = useSupabaseClient();
   // contexts
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
+
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
 
   const nextStep = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const FormPasso2 = () => {
     }
 
     // proximo passo
-    const { data, error } = await updateAdvertisement(supabaseClient, advertisement, advertisement.id);
+    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

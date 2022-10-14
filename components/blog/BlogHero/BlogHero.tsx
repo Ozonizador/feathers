@@ -5,17 +5,6 @@ interface BlogHeroProps {
 }
 
 export default function BlogHero({ blogs }: BlogHeroProps) {
-  const formatDate = (date: Date) => {
-    if (!date) return "";
-
-    const newDate = new Date(date);
-    return newDate.toLocaleString("default", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   return (
     <section className="container mx-auto py-20 ">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
@@ -35,7 +24,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                     </div>
 
                     <div>
-                      <p className="normal-case text-gray-300">{formatDate(blog.created_at)}</p>
+                      <p className="normal-case text-gray-300">{blog.created_at}</p>
                     </div>
                   </div>
                 </div>

@@ -4,31 +4,31 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
-import { login, loginWithFacebook, loginWithGoogle } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Login = () => {
-  const supabaseClient = useSupabaseClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState<boolean>(false);
 
   const router = useRouter();
+  const { login, loginWithFacebook, loginWithGoogle } = useUserService();
 
   const loginFacebook = async (event) => {
     event.preventDefault();
-    await loginWithFacebook(supabaseClient);
+    await loginWithFacebook();
   };
 
   /** registar com google */
   const loginGoogle = async (event) => {
     event.preventDefault();
-    await loginWithGoogle(supabaseClient);
+    await loginWithGoogle();
   };
 
   const normalLogin = async (event) => {
     event.preventDefault();
     setHasError(false);
-    const { error } = await login(supabaseClient, email, password);
+    const { error } = await login(email, password);
     if (error) {
       setHasError(true);
     } else {

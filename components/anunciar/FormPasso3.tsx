@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { saveImage, updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso3 = () => {
-  const supabaseClient = useSupabaseClient();
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -18,6 +16,9 @@ const FormPasso3 = () => {
   const [images, setImages] = useState<File[]>([]);
   const [objectUrls, setObjectUrls] = useState<string[]>([]);
 
+  /* Services */
+  const { updateAdvertisement, saveImage } = useAdvertisementService();
+
   const nextStep = async (e) => {
     e.preventDefault();
 
@@ -26,7 +27,7 @@ const FormPasso3 = () => {
       return;
     }
     await saveImages();
-    await updateAdvertisement(supabaseClient, advertisement, advertisement.id);
+    await updateAdvertisement(advertisement, advertisement.id);
 
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
@@ -61,9 +62,9 @@ const FormPasso3 = () => {
   const saveImages = async () => {
     const paths = [] as string[];
     for (let image of images) {
-      const { publicURL, error } = await saveImage(supabaseClient, advertisement.id, image.name, image);
-      if (publicURL) {
-        paths.push(publicURL);
+      const { data } = await saveImage(advertisement.id, image.name, image);
+      if (data) {
+        paths.push(data.publicUrl);
       }
     }
     setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);

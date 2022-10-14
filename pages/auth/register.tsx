@@ -1,30 +1,30 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
-import { loginWithFacebook, loginWithGoogle, register } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Register = () => {
-  const supabaseClient = useSupabaseClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { register, loginWithFacebook, loginWithGoogle } = useUserService();
 
   /** registar com google */
   const registerWithGoogle = async (event) => {
     event.preventDefault();
-    await loginWithGoogle(supabaseClient);
+    await loginWithGoogle();
   };
 
   const registerWithFacebook = async (event) => {
     event.preventDefault();
-    await loginWithFacebook(supabaseClient);
+    await loginWithFacebook();
   };
 
   const normalRegister = async (event) => {
     event.preventDefault();
 
-    const { error } = await register(supabaseClient, email, password);
+    const { error } = await register(email, password);
   };
 
   return (

@@ -6,17 +6,6 @@ interface BlogCardsProps {
 }
 
 export default function BlogCards({ blogs }: BlogCardsProps) {
-  const formatDate = (date: Date) => {
-    if (!date) return "";
-
-    const newDate = new Date(date);
-    return newDate.toLocaleString("default", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   return (
     <section className="container mx-auto pt-20 pb-5 ">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
@@ -44,7 +33,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                         <div className="text-sm line-clamp-2">{blog.description}</div>
 
                         <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full">
-                          <div className=" text-sm text-gray-400">{formatDate(blog.created_at)}</div>
+                          <div className=" text-sm text-gray-400">{blog.created_at}</div>
                           <div className="text-sm text-gray-400 ">By Unihosts</div>
                         </div>
                       </div>

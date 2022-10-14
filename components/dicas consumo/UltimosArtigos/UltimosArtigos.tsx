@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Blog } from "../../../models/blog";
-import { getSimilarBlogPosts } from "../../../services/blogService";
+import useBlogService from "../../../services/blogService";
 import { UserTypes } from "../../../models/profile";
 import Link from "next/link";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface UltimosArtigosProps {
   slug: string;
@@ -12,11 +11,11 @@ interface UltimosArtigosProps {
 }
 
 const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
-  const supabaseClient = useSupabaseClient();
+  const { getSimilarBlogPosts } = useBlogService();
   const [similarBlogs, setSimilarBlogs] = useState<Blog[]>([]);
 
   const getSimilarPosts = useCallback(async () => {
-    const { data, error } = await getSimilarBlogPosts(supabaseClient, category, slug);
+    const { data, error } = await getSimilarBlogPosts(category, slug);
     if (!error && data) {
       setSimilarBlogs(data);
     }
@@ -25,17 +24,6 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
   useEffect(() => {
     getSimilarPosts();
   }, [getSimilarPosts]);
-
-  // const formatDate = (date: Date) => {
-  //   if (!date) return "";
-
-  //   const newDate = new Date(date);
-  //   return newDate.toLocaleString("default", {
-  //     day: "numeric",
-  //     month: "long",
-  //     year: "numeric",
-  //   });
-  // };
 
   return (
     <section>

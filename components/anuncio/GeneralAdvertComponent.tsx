@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { useGetUserCoordinates } from "../../context/MainProvider";
 import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
-import { GEO } from "../../models/utils";
+import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";
 
@@ -21,7 +21,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
-      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates);
+      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates as CoordinatesAsArray);
       return { lat, lng };
     } else {
       return userlocation;

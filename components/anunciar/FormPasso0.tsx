@@ -5,7 +5,6 @@ import {
   useSetAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
-import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
 import { toast } from "react-toastify";
 import { getResultsFromSearch } from "../../services/mapService";
@@ -14,9 +13,9 @@ import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso0 = () => {
-  const supabaseClient = useSupabaseClient();
   /* STEPS */
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
@@ -26,6 +25,9 @@ const FormPasso0 = () => {
   const changeAdvertisementProperty = useSetAdvertisementProperty();
   const setAdvertisement = useSetAdvertisement();
 
+  /* Services */
+  const { addAdvertisement } = useAdvertisementService();
+  
   const nextStep = async (e) => {
     e.preventDefault();
 
@@ -37,7 +39,7 @@ const FormPasso0 = () => {
       return;
     }
 
-    const { data, error } = await addAdvertisement(supabaseClient, advertisement);
+    const { data, error } = await addAdvertisement(advertisement);
     if (data) {
       setAdvertisement(data);
       setCurrentStep(currentStep + 1);

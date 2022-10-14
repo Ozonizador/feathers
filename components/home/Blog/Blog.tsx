@@ -2,20 +2,19 @@ import { Spinner } from "flowbite-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useGetUserType } from "../../../context/MainProvider";
 import { Blog } from "../../../models/blog";
-import { getBlogs } from "../../../services/blogService";
+import useBlogService from "../../../services/blogService";
 import Image from "next/image";
 import Link from "next/link";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function BlogSection() {
-  const supabaseClient = useSupabaseClient();
+  const { getBlogs } = useBlogService();
   const { toggleUserType } = useGetUserType();
   const [loading, setLoading] = useState<boolean>(false);
   const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
 
   const getLatestBlogs = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await getBlogs(supabaseClient, toggleUserType, 4);
+    const { data, error } = await getBlogs(toggleUserType, 4);
     if (!error && data) {
       setBlogPosts(data);
     }

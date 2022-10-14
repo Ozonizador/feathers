@@ -1,5 +1,4 @@
 import Advertisement, { FlexHostType, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
-import Image from "next/image";
 
 interface HostFlexTypeComponentProps {
   advertisement: Advertisement;

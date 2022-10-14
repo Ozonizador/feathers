@@ -1,18 +1,19 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import { useAdvertisement } from "../../context/AdvertisementController";
+import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso8 = () => {
-  const supabaseClient = useSupabaseClient();
   const advertisement = useAdvertisement();
   const router = useRouter();
+
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
 
   const nextSteps = async (e) => {
     e.preventDefault();
     // setAdvertisementProperty("aboutHouse", "testing");
-    const { data, error } = await updateAdvertisement(supabaseClient, advertisement, advertisement.id);
+    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
       toast.success("Registo Bem Sucedido");
       router.push("/");

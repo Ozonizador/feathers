@@ -1,25 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
-import { getAdvertisementsForMainPage } from "../../../services/advertisementService";
+import useAdvertisementService from "../../../services/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
 import Advertisement, { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function HomeSection3() {
-  const supabaseClient = useSupabaseClient();
+  const { getAdvertisementsForMainPage } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const currentMapCoordinates = useGetUserCoordinates();
 
   const getCloseAdvertisements = useCallback(async () => {
     if (currentMapCoordinates) {
-      const { data, error } = await getAdvertisementsForMainPage(
-        supabaseClient,
-        currentMapCoordinates.lat,
-        currentMapCoordinates.lng
-      );
+      const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
       if (!error && data) {
         setAdvertisements(data);
       }

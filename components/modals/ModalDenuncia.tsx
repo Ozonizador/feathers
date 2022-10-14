@@ -8,9 +8,9 @@ import {
   useSetOpenModalReport,
 } from "../../context/ModalShowProvider";
 import { Report, ReportsType } from "../../models/report";
-import { addReportOnAdvert } from "../../services/reportService";
 import { useProfileInformation } from "../../context/MainProvider";
 import { Spinner } from "flowbite-react";
+import useReportService from "../../services/reportService";
 
 /* PAGINA 21-22 DO XD 
 
@@ -23,12 +23,13 @@ interface PassosModaisProps {
 }
 
 const ModalDenuncia = () => {
+  const { addReportOnAdvert } = useReportService();
   const profile = useProfileInformation();
   const { isOpen, step, stay } = useModalReportAdvertisement();
   const setModalReportProperty = useSetModalReportContextProperty();
   const setIsOpen = useSetOpenModalReport();
 
-  const [report, setReport] = useState<Report>({
+  const [report, setReport] = useState<Partial<Report>>({
     type: ReportsType.IMPRECISE,
     stay_id: stay?.id || "",
     advertisement_id: stay?.advertisement_id || "",

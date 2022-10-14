@@ -1,21 +1,22 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useSetAdvertisementProperty, useAdvertisement } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso1 = () => {
-  const supabaseClient = useSupabaseClient();
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
+
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(supabaseClient, { tenant_number: advertisement.tenant_number }, advertisement.id);
+    await updateAdvertisement({ tenant_number: advertisement.tenant_number }, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

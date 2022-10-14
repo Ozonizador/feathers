@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Button from "../utils/Button";
-import Input from "../utils/Input";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
 // PÁGINA 36
