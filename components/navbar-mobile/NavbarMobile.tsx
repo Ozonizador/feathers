@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import person from "../../public/images/person.png";
 /* import person image */
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "../../database.types";
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -15,6 +15,7 @@ interface NavbarMobileProps {
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const user = useUser();
+  const supabaseClient = useSupabaseClient<Database>();
 
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();

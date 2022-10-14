@@ -1,46 +1,12 @@
-import { Profile } from "./profile";
-import { Review } from "./review";
+import { Database } from "../database.types";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
-/* MODEL */
-export type Advertisement = {
-  id?: string;
-  slug: string;
-  type_flex_host: FlexHostType;
-  place: string;
-  street: string;
-  street_number: string;
-  floor?: string;
-  postal_code: string;
-  rooms: number;
-  beds: number;
-  tenant_number: number;
-  bathrooms: number;
-  title: string;
-  description: string;
-  type: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-  type_host: "PROFISSIONAL" | "PARTICULAR";
-  photos?: AdvertisementPhoto[];
-  house_rules: HouseRules;
-  about_house: AboutHouseSections;
-  month_rent: number;
-  extra_per_host: number;
-  guarantee_value: number;
-  expenses: HouseExpenses;
-  host_lives_property: Boolean;
-  host_id: string;
-  host?: Profile;
-  created_at?: Date;
-  updated_at?: Date;
-  available: AdvertisementStatus;
-  geom?: any | null;
-  max_rooms: number;
 
-  // foreign keys
-  reviews?: Review[];
-};
+/* MODEL */
+export type AdvertisementsResponse = Database["public"]["Tables"]["advertisements"];
+export type Advertisement = AdvertisementsResponse["Row"];
 
 /*
  * EXPENSES

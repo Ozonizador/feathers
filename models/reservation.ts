@@ -1,20 +1,11 @@
+import { Database } from "../database.types";
 import Advertisement from "./advertisement";
 import { Profile } from "./profile";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 
-export type Reservation = {
-  id?: string;
-  start_date: Date;
-  end_date: Date;
-  status: ReservationStatus;
-  advertisement_id: string;
-  tenant_id: string;
-  stay_id?: string;
-
-  created_at?: Date;
-  updated_at?: Date;
-};
+export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
+export type Reservation = ReservationsResponse["Row"];
 
 export type ReservationWithAdvertisement = Reservation & {
   advertisement: Partial<Advertisement>;

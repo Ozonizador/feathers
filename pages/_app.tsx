@@ -10,9 +10,10 @@ import { createBrowserSupabaseClient, SupabaseClient } from "@supabase/auth-help
 import { ToastContainer } from "react-toastify";
 import { MenuSenhorioProvider } from "../context/MenuSenhorioAnuncioProvider";
 import { useState } from "react";
+import { Database } from "../database.types";
 
 function MyApp({ Component, pageProps }) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
 
   return (
     <>

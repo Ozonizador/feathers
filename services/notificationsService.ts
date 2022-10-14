@@ -1,4 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Notification, NOTIFICATION_PROPERTIES, NOTIFICATION_TABLE_NAME } from "../models/notification";
 import { v4 as uuidv4 } from "uuid";
 

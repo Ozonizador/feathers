@@ -1,4 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import {
   AdvertisementReviewSummary,
   Review,

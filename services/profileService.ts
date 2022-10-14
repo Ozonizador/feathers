@@ -1,4 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { AVATAR_STORAGE_NAME, Profile, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 import { getCorrectUrl, createRandomUniqWord } from "../utils/utils";
 

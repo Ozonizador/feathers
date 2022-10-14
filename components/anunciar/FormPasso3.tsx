@@ -5,8 +5,10 @@ import { useAdvertisement, useSetAdvertisementProperty } from "../../context/Adv
 import { saveImage, updateAdvertisement } from "../../services/advertisementService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso3 = () => {
+  const supabaseClient = useSupabaseClient();
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -24,7 +26,7 @@ const FormPasso3 = () => {
       return;
     }
     await saveImages();
-    await updateAdvertisement(advertisement, advertisement.id);
+    await updateAdvertisement(supabaseClient, advertisement, advertisement.id);
 
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
@@ -59,7 +61,7 @@ const FormPasso3 = () => {
   const saveImages = async () => {
     const paths = [] as string[];
     for (let image of images) {
-      const { publicURL, error } = await saveImage(advertisement.id, image.name, image);
+      const { publicURL, error } = await saveImage(supabaseClient, advertisement.id, image.name, image);
       if (publicURL) {
         paths.push(publicURL);
       }

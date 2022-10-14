@@ -1,28 +1,11 @@
+import { Database } from "../database.types";
 import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
-import { Report } from "./report";
-import { Reservation } from "./reservation";
-import { Review } from "./review";
 
 export const STAYS_TABLE_NAME = "stays" as const;
 
-export type Stay = {
-  id?: string;
-  start_date: Date;
-  end_date: Date;
-
-  // Advertisement
-  advertisement_id: string;
-  tenant_id: string;
-
-  // Reservations associated with Stay
-  reservations: Reservation[];
-
-  report?: Report;
-  review?: Review;
-  created_at?: Date;
-  updated_at?: Date;
-};
+export type StaysResponse = Database["public"]["Tables"]["stays"];
+export type Stay = StaysResponse["Row"];
 
 export const STAY_TABLE = {
   ID: "id",

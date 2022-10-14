@@ -4,6 +4,7 @@ import { Blog } from "../../../models/blog";
 import { getSimilarBlogPosts } from "../../../services/blogService";
 import { UserTypes } from "../../../models/profile";
 import Link from "next/link";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface UltimosArtigosProps {
   slug: string;
@@ -11,33 +12,30 @@ interface UltimosArtigosProps {
 }
 
 const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const supabaseClient = useSupabaseClient();
   const [similarBlogs, setSimilarBlogs] = useState<Blog[]>([]);
 
   const getSimilarPosts = useCallback(async () => {
-    setLoading(true);
-    const { data, error } = await getSimilarBlogPosts(category, slug);
+    const { data, error } = await getSimilarBlogPosts(supabaseClient, category, slug);
     if (!error && data) {
       setSimilarBlogs(data);
     }
-
-    setLoading(false);
   }, [category, slug]);
 
   useEffect(() => {
     getSimilarPosts();
   }, [getSimilarPosts]);
 
-  const formatDate = (date: Date) => {
-    if (!date) return "";
+  // const formatDate = (date: Date) => {
+  //   if (!date) return "";
 
-    const newDate = new Date(date);
-    return newDate.toLocaleString("default", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
+  //   const newDate = new Date(date);
+  //   return newDate.toLocaleString("default", {
+  //     day: "numeric",
+  //     month: "long",
+  //     year: "numeric",
+  //   });
+  // };
 
   return (
     <section>
@@ -56,7 +54,7 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
                     <div className="w-full line-clamp-5 lg:w-full  lg:text-base">{blog.description}</div>
 
                     <div className="mt-5 mb-10 flex w-full justify-between text-sm text-gray-400 lg:mt-10 lg:mb-0 lg:w-full">
-                      <div>{formatDate(blog.created_at)}</div>
+                      <div>{blog.created_at}</div>
                       <div>By Unihosts</div>
                     </div>
                   </a>

@@ -1,27 +1,27 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SupabaseClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
 import { ReservationWithAdvertisement, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 import { Stay, StayGuest, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
 
-export const addStay = async (stay: Stay) => {
+export const addStay = async (supabaseClient: SupabaseClient<any, "public", any>, stay: Stay) => {
   const { data, error } = await supabaseClient
-    .from<Stay>(STAYS_TABLE_NAME)
-    .insert({ ...stay, id: uuidv4(), updated_at: new Date() }, { returning: "minimal" })
+    .from(STAYS_TABLE_NAME)
+    .insert({ ...stay, id: uuidv4(), updated_at: new Date() })
     .single();
   return { data, error };
 };
 
-export const getStays = async () => {
-  const { data, error } = await supabaseClient.from<Stay>(STAYS_TABLE_NAME).select();
+export const getStays = async (supabaseClient: SupabaseClient<any, "public", any>) => {
+  const { data, error } = await supabaseClient.from<"stays", Stay>(STAYS_TABLE_NAME).select();
   return { data, error };
 };
 
 /* BY TENANT ID */
 
-export const getNextStaysByTenantId = async (tenantId: string) => {
+export const getNextStaysByTenantId = async (supabaseClient: SupabaseClient<any, "public", any>, tenantId: string) => {
   const date = new Date().toISOString();
   const { data, error } = await supabaseClient
-    .from<StayGuest>(STAYS_TABLE_NAME)
+    .from<"stays", StayGuest>(STAYS_TABLE_NAME)
     .select("*, advertisement:advertisement_id(*)")
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .gte(STAY_TABLE.START_DATE, date)
@@ -30,11 +30,14 @@ export const getNextStaysByTenantId = async (tenantId: string) => {
   return { data, error };
 };
 
-export const getCurrentStayByTenantId = async (tenantId: string) => {
+export const getCurrentStayByTenantId = async (
+  supabaseClient: SupabaseClient<any, "public", any>,
+  tenantId: string
+) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from<StayGuest>(STAYS_TABLE_NAME)
+    .from<"stays", StayGuest>(STAYS_TABLE_NAME)
     .select("*, advertisement:advertisement_id(*)")
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .gte(STAY_TABLE.START_DATE, date)
@@ -44,9 +47,12 @@ export const getCurrentStayByTenantId = async (tenantId: string) => {
   return { data, error };
 };
 
-export const getHistoryStayByTenantId = async (tenantId: string) => {
+export const getHistoryStayByTenantId = async (
+  supabaseClient: SupabaseClient<any, "public", any>,
+  tenantId: string
+) => {
   const { data, error } = await supabaseClient
-    .from<Stay>(STAYS_TABLE_NAME)
+    .from<"stays", Stay>(STAYS_TABLE_NAME)
     .select()
     .eq(STAY_TABLE.TENANT_ID, tenantId)
     .lte(STAY_TABLE.END_DATE, new Date());
@@ -56,11 +62,11 @@ export const getHistoryStayByTenantId = async (tenantId: string) => {
 
 /* BY HOST ID */
 
-export const getCurrentStaysByHostId = async (hostId: string) => {
+export const getCurrentStaysByHostId = async (supabaseClient: SupabaseClient<any, "public", any>, hostId: string) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from<StayGuest>(STAYS_TABLE_NAME)
+    .from<"stays", StayGuest>(STAYS_TABLE_NAME)
     .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
     .eq("advertisement.host_id", hostId)
     .gte(STAY_TABLE.START_DATE, date)
@@ -69,11 +75,14 @@ export const getCurrentStaysByHostId = async (hostId: string) => {
   return { data, error };
 };
 
-export const getNextReservationsByHostId = async (hostId: string) => {
+export const getNextReservationsByHostId = async (
+  supabaseClient: SupabaseClient<any, "public", any>,
+  hostId: string
+) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+    .from<"reservations", ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
     .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
     .eq("advertisement.host_id", hostId)
     .gte(RESERVATION_TABLE.START_DATE, date)
@@ -82,11 +91,14 @@ export const getNextReservationsByHostId = async (hostId: string) => {
   return { data, error };
 };
 
-export const getAllReservationsByHostId = async (hostId: string) => {
+export const getAllReservationsByHostId = async (
+  supabaseClient: SupabaseClient<any, "public", any>,
+  hostId: string
+) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabaseClient
-    .from<ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+    .from<"reservations", ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
     .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
     .eq("advertisement.host_id", hostId);
 

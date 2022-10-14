@@ -13,8 +13,10 @@ import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso0 = () => {
+  const supabaseClient = useSupabaseClient();
   /* STEPS */
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
@@ -35,7 +37,7 @@ const FormPasso0 = () => {
       return;
     }
 
-    const { data, error } = await addAdvertisement(advertisement);
+    const { data, error } = await addAdvertisement(supabaseClient, advertisement);
     if (data) {
       setAdvertisement(data);
       setCurrentStep(currentStep + 1);

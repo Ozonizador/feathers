@@ -1,4 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 import { Report, REPORTS_TABLE_NAME, REPORT_TABLE } from "../models/report";
 

@@ -1,4 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetStaticPropsContext, GetServerSidePropsResult } from "next";
 import React from "react";
 import UltimosArtigos from "../../components/dicas consumo/UltimosArtigos/UltimosArtigos";

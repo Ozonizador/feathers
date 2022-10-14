@@ -4,17 +4,18 @@ import { useGetUserType } from "../../../context/MainProvider";
 import { Blog } from "../../../models/blog";
 import { getBlogs } from "../../../services/blogService";
 import Image from "next/image";
-import classNames from "classnames";
 import Link from "next/link";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function BlogSection() {
+  const supabaseClient = useSupabaseClient();
   const { toggleUserType } = useGetUserType();
   const [loading, setLoading] = useState<boolean>(false);
   const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
 
   const getLatestBlogs = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await getBlogs(toggleUserType, 4);
+    const { data, error } = await getBlogs(supabaseClient, toggleUserType, 4);
     if (!error && data) {
       setBlogPosts(data);
     }

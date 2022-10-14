@@ -1,3 +1,4 @@
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -6,6 +7,7 @@ import Input from "../../components/utils/Input";
 import { login, loginWithFacebook, loginWithGoogle } from "../../services/userService";
 
 const Login = () => {
+  const supabaseClient = useSupabaseClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState<boolean>(false);
@@ -14,19 +16,19 @@ const Login = () => {
 
   const loginFacebook = async (event) => {
     event.preventDefault();
-    await loginWithFacebook();
+    await loginWithFacebook(supabaseClient);
   };
 
   /** registar com google */
   const loginGoogle = async (event) => {
     event.preventDefault();
-    await loginWithGoogle();
+    await loginWithGoogle(supabaseClient);
   };
 
   const normalLogin = async (event) => {
     event.preventDefault();
     setHasError(false);
-    const { user, session, error } = await login(email, password);
+    const { error } = await login(supabaseClient, email, password);
     if (error) {
       setHasError(true);
     } else {

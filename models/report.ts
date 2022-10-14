@@ -1,15 +1,9 @@
+import { Database } from "../database.types";
+
 export const REPORTS_TABLE_NAME = "reports" as const;
 
-export type Report = {
-  id?: string;
-  advertisement_id: string;
-  stay_id: string;
-  description?: string;
-  type: ReportsType;
-
-  created_at?: Date;
-  updated_at?: Date;
-};
+export type ReportsResponse = Database["public"]["Tables"]["reports"];
+export type Report = ReportsResponse["Row"];
 
 export enum ReportsType {
   IMPRECISE = "IMPRECISE",

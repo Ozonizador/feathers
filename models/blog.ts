@@ -1,17 +1,9 @@
-import { UserTypes } from "./profile";
+import { Database } from "../database.types";
 
 export const BLOG_TABLE_NAME = "blogs";
 
-export type Blog = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  category: UserTypes;
-  image: string;
-  created_at: Date;
-  updated_at: Date;
-};
+export type BlogsResponse = Database["public"]["Tables"]["blogs"];
+export type Blog = BlogsResponse["Row"];
 
 export const BLOG_PROPERTIES = {
   CATEGORY: "category",

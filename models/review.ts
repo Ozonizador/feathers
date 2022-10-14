@@ -1,23 +1,12 @@
+import { Database } from "../database.types";
 import Advertisement from "./advertisement";
 import { Profile } from "./profile";
 
 export const REVIEWS_TABLE_NAME = "reviews" as const;
 export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 
-export type Review = {
-  id: string;
-  advertisement_id: string;
-  tenant_id: string;
-  overall_rating: number;
-  location_rating: number;
-  value_quality_rating: number;
-  landlord_rating: number;
-  comodities_rating: number;
-  public_review: string;
-  private_review: string;
-  created_at: Date;
-  updated_at: Date;
-};
+export type ReviewsResponse = Database["public"]["Tables"]["reviews"];
+export type Review = ReviewsResponse["Row"];
 
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Partial<Advertisement>;

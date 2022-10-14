@@ -7,8 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, Switch, Transition } from "@headlessui/react";
 import MyLink from "../utils/MyLink";
-import { useUser } from "@supabase/auth-helpers-react";
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import person from "../../public/images/person.png";
@@ -17,10 +16,12 @@ import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
+import { Database } from "../../database.types";
 
 export const Navbar = () => {
   const user = useUser();
   const router = useRouter();
+  const supabaseClient = useSupabaseClient<Database>();
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
