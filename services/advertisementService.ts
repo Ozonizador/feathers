@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import Advertisement, {
-  AdvertisementsResponse,
+  Advertisements,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
@@ -18,7 +18,7 @@ const useAdvertisementService = () => {
   const supabaseClient = useSupabaseClient();
   const addAdvertisement = async (advertisement: Advertisement) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .insert({ ...advertisement, updated_at: new Date().toDateString(), id: uuidv4() })
       .single();
 
@@ -27,7 +27,7 @@ const useAdvertisementService = () => {
 
   const updateAdvertisement = async (advertisement: Partial<Advertisement>, id: string) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
       .eq(ADVERTISEMENT_PROPERTIES.ID, id)
       .single();
@@ -37,7 +37,7 @@ const useAdvertisementService = () => {
 
   const getSingleAdvertisement = async (id: string) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.ID, id)
       .single();
@@ -47,7 +47,7 @@ const useAdvertisementService = () => {
 
   const getAdvertismentsFromMultipleId = async (ids: string[]) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .in(ADVERTISEMENT_PROPERTIES.ID, ids);
 
@@ -56,7 +56,7 @@ const useAdvertisementService = () => {
 
   const getAdvertismentsFromUserId = async (userId: string) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
 
@@ -64,7 +64,7 @@ const useAdvertisementService = () => {
   };
   const getAdvertisementsFromPlace = async (place: string) => {
     const { data, error } = await supabaseClient
-      .from<"advertisements", AdvertisementsResponse>(ADVERTISEMENT_TABLE_NAME)
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.PLACE, place);
 

@@ -15,14 +15,14 @@ import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { getCurrentStayByTenantId, getNextStaysByTenantId } from "../../../services/stayService";
-import { StayGuest } from "../../../models/stay";
+import useStayService, { StayGuest } from "../../../services/stayService";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 /* PAGINA 21 do xd */
 
 const Estadia = () => {
   const profile = useProfileInformation();
+  const { getCurrentStayByTenantId, getNextStaysByTenantId } = useStayService();
 
   const [currentStay, setCurrentStay] = useState<StayGuest>();
   const [nextStays, setNextStays] = useState<StayGuest[]>([]);

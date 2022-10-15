@@ -1,4 +1,4 @@
-import Advertisement, { ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
 
 interface PricesComponentProps {
   advertisement: Advertisement;

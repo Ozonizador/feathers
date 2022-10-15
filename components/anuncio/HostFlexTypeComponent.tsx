@@ -1,4 +1,4 @@
-import Advertisement, { FlexHostType, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { Advertisement, FlexHostType, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
 interface HostFlexTypeComponentProps {
   advertisement: Advertisement;

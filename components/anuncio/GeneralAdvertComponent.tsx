@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { useGetUserCoordinates } from "../../context/MainProvider";
-import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";

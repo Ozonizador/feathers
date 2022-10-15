@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import Advertisement from "./advertisement";
+import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
 
 export const REVIEWS_TABLE_NAME = "reviews" as const;
@@ -9,7 +9,7 @@ export type ReviewsResponse = Database["public"]["Tables"]["reviews"];
 export type Review = ReviewsResponse["Row"];
 
 export type ReviewWithTenantAndAdvertisement = Review & {
-  advertisment: Partial<Advertisement>;
+  advertisment: Advertisement;
   tenant: Partial<Profile>;
   "advertisements.host_id": string;
 };

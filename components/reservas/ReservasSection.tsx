@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Tab } from "@headlessui/react";
 import { useUser } from "@supabase/auth-helpers-react";
-import useStayService from "../../services/stayService";
-import { StayGuest } from "../../models/stay";
+import useStayService, { StayGuest } from "../../services/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ReservationWithAdvertisement } from "../../models/reservation";
 

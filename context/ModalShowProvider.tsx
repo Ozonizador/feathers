@@ -1,5 +1,6 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { Stay, StayGuest } from "../models/stay";
+import { Stay } from "../models/stay";
+import { StayGuest } from "../services/stayService";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;

@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "flowbite-react";
 import Link from "next/link";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { StayGuest } from "../../../models/stay";
+import { StayGuest } from "../../../services/stayService";
 
 interface HospedeCardProps {
   stay: StayGuest;

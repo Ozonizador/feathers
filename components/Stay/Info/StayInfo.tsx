@@ -12,8 +12,8 @@ import {
 } from "../../../context/ModalShowProvider";
 import Link from "next/link";
 import { toast } from "react-toastify";
-import { StayGuest } from "../../../models/stay";
 import classNames from "classnames";
+import { StayGuest } from "../../../services/stayService";
 
 interface StayInfoProps {
   stay: StayGuest;

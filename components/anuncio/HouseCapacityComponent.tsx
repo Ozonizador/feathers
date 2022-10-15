@@ -1,7 +1,7 @@
 import { BiBed } from "react-icons/bi";
 import { GiPersonInBed } from "react-icons/gi";
 import { MdPeopleOutline, MdOutlineBathtub } from "react-icons/md";
-import Advertisement, { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import QuantityInput from "../utils/QuantityInput";
 
 interface HouseCapacityComponentProps {

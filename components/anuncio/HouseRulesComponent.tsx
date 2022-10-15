@@ -1,7 +1,8 @@
 import { BiDrink } from "react-icons/bi";
 import { GiCigarette, GiBroom } from "react-icons/gi";
 import { MdChecklist, MdOutlinePets } from "react-icons/md";
-import Advertisement, {
+import {
+  Advertisement,
   ADVERTISEMENT_PROPERTIES,
   HOUSE_RULES_NAMING,
   TYPE_CLEANING_LABELS,

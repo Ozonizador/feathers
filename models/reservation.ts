@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import Advertisement from "./advertisement";
+import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
@@ -8,7 +8,7 @@ export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
 export type Reservation = ReservationsResponse["Row"];
 
 export type ReservationWithAdvertisement = Reservation & {
-  advertisement: Partial<Advertisement>;
+  advertisement: Advertisement;
   tenant: Pick<Profile, "name">;
   "advertisement.host_id": string;
 };

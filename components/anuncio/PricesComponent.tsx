@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { useCallback, useMemo } from "react";
-import Advertisement, { ADVERTISEMENT_PROPERTIES, ExpenseName, TypeExpense } from "../../models/advertisement";
+import { useCallback } from "react";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, ExpenseName, TypeExpense } from "../../models/advertisement";
 import Input from "../utils/Input";
 
 interface PricesComponentProps {
@@ -67,6 +67,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         }
       });
 
+    const newExpenses = { ...(expenses, services) };
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
       services,

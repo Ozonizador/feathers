@@ -5,8 +5,8 @@ export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 
 /* MODEL */
-export type AdvertisementsResponse = Database["public"]["Tables"]["advertisements"];
-export type Advertisement = AdvertisementsResponse["Row"];
+export type Advertisements = Database["public"]["Tables"]["advertisements"];
+export type Advertisement = Advertisements["Row"];
 
 /*
  * EXPENSES
@@ -336,5 +336,3 @@ export const AboutHouseCommodities = {
     { label: "Estacionamento", type: TypeAmenity.PARKING_SPOT },
   ],
 };
-
-export default Advertisement;
