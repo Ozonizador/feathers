@@ -9,10 +9,10 @@ export default function Footer() {
     <footer>
       <div>
         <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5 lg:pt-20">
-          <div className="my-auto flex relative lg:mx-auto lg:-mt-16">
+          <div className="relative my-auto flex lg:mx-auto lg:-mt-16">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
-          <div className="ml-0 py-5 text-left text-terciary-100 lg:text-left lg:ml-5">
+          <div className="ml-0 py-5 text-left text-terciary-100 lg:ml-5 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
               <Link href="/aboutus" className="fs-300 clr-white">
@@ -90,14 +90,12 @@ export default function Footer() {
               </a>
             </Link>
           </div>
-          <div className="flex flex-1 justify-start lg:justify-center py-5">
+          <div className="flex flex-1 justify-start py-5 lg:justify-center">
             <Socials type="secondary" size="md" />
           </div>
         </div>
         <div className="bg-secondary-300 px-20">
-          <p className="border-t border-terciary-100 pt-8 pb-7 text-center text-terciary-100">
-            Unihosts
-          </p>
+          <p className="border-t border-terciary-100 pt-8 pb-7 text-center text-terciary-100">Unihosts</p>
         </div>
       </div>
     </footer>

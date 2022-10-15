@@ -6,13 +6,13 @@ import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
 
-import { addReservation } from "../../../../services/reservationService";
+import useReservationService from "../../../../services/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
-import { addNotification } from "../../../../services/notificationsService";
+import useNotificationService from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
-import { addConversation } from "../../../../services/conversationService";
+import useConversationService from "../../../../services/conversationService";
 import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -20,6 +20,9 @@ import { NotificationType } from "../../../../models/notification";
 import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 
 export default function RoomPagamento() {
+  const { addConversation } = useConversationService();
+  const { addNotification } = useNotificationService();
+  const { addReservation } = useReservationService();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -30,9 +33,9 @@ export default function RoomPagamento() {
   const router = useRouter();
 
   /* Reservation */
-  const [reservation, setReservation] = useState<Reservation>({
-    start_date: startDate,
-    end_date: endDate,
+  const [reservation, setReservation] = useState<Partial<Reservation>>({
+    start_date: startDate.toDateString(),
+    end_date: endDate.toDateString(),
     status: ReservationStatus.REQUESTED,
     advertisement_id: advertisement.id,
     tenant_id: "",
@@ -58,7 +61,7 @@ export default function RoomPagamento() {
 
   const createConversation = async (reservation_id: string) => {
     const conversation = {
-      host_id: advertisement.host.id,
+      host_id: advertisement.host_id,
       tenant_id: profile.id,
       reservation_id: reservation_id,
     } as Conversation;

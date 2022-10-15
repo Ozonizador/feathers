@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "flowbite-react/lib/esm/components";
-import { RiMailSendFill } from "react-icons/ri";
 import Image from "next/image";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import classNames from "classnames";

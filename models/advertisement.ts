@@ -9,7 +9,7 @@ export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];
 
 export type AdvertisementWithReviewAverage = Advertisement & {
-  reviews: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
+  averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
 };
 
 /*

@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { Rating } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { getAveragesByAdvertisementId } from "../../../../services/reviewService";
+import useReviewService from "../../../../services/reviewService";
 import { AdvertisementReviewSummary } from "../../../../models/review";
 
 const RoomRating = () => {
+  const { getAveragesByAdvertisementId } = useReviewService();
   const advertisement = useGetSingleAdvertisement();
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
 
