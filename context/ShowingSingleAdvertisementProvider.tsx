@@ -1,12 +1,10 @@
 import { useContext } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import Advertisement from "../models/advertisement";
+import { Advertisement } from "../models/advertisement";
 
 /* STEPS */
 const SingleAdvertisementContext = createContext<Advertisement>(null);
-const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(
-  () => {}
-);
+const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
 
 interface ShowingSingleAdvertisementProviderProps {
   advertisement: Advertisement;

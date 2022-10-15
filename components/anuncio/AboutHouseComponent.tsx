@@ -37,7 +37,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
       amenities.push(property);
     }
 
-    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...(about_house && { [space]: amenities }) });
+    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...about_house, [space]: amenities });
   };
 
   const checkIfAboutHousePropertyChecked = (space: AboutHouseSpace, toCheckAmenity: TypeAmenity) => {

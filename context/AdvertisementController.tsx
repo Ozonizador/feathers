@@ -1,4 +1,5 @@
-import Advertisement, {
+import {
+  Advertisement,
   AboutHouseSections,
   AdvertisementStatus,
   HouseExpenses,

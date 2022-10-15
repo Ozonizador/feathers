@@ -1,11 +1,8 @@
 import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { TypeAmenity } from "../models/advertisement";
+import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
 import { GEO } from "../models/utils";
-import {
-  AdvertisementWithReviewAverage,
-  getAdvertisementsByCloseCoordinatesWithFilters,
-} from "../services/advertisementService";
+import useAdvertisementService from "../services/advertisementService";
 
 /* FILTERS */
 export interface FilterAdvertisements {
@@ -81,6 +78,7 @@ const SetAdvertisementsContext = createContext<Dispatch<SetStateAction<Advertise
 export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
+  const { getAdvertisementsByCloseCoordinatesWithFilters } = useAdvertisementService();
 
   const getAdvertisements = useCallback(async () => {
     setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));

@@ -8,10 +8,13 @@ export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];
 
+export type AdvertisementWithReviewAverage = Advertisement & {
+  reviews: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
+};
+
 /*
  * EXPENSES
  */
-
 export interface HouseExpenses {
   services?: TypeExpense[];
 }

@@ -5,9 +5,10 @@ import Breadcrumb from "../../components/notifications/Breadcrumbs/Breadcrumb";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { Notification } from "../../models/notification";
-import { getNotifications } from "../../services/notificationsService";
+import useNotificationService from "../../services/notificationsService";
 
 const Notifications = () => {
+  const { getNotifications } = useNotificationService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const profile = useProfileInformation();

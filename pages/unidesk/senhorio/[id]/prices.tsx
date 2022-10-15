@@ -1,5 +1,4 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useEffect } from "react";
 import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
@@ -8,21 +7,12 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 
-import Advertisement from "../../../../models/advertisement";
-import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../services/advertisementService";
 
-interface PricesProps {
-  advertisement: Advertisement;
-}
-
-const Prices = ({ advertisement }: PricesProps) => {
+const Prices = () => {
+  const { getSingleAdvertisement, updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
-
-  useEffect(() => {
-    setAdvertisement(advertisement);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [advertisement]);
 
   const saveChanges = async () => {
     const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
@@ -66,13 +56,4 @@ export default Prices;
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
-  getServerSideProps: async (context) => {
-    const id = context.query.id as string;
-    const { data, error } = await getSingleAdvertisement(id);
-    if (error || !data) return { notFound: true };
-
-    return {
-      props: { advertisement: data },
-    };
-  },
 });

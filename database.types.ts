@@ -1,3 +1,5 @@
+import { AboutHouseSections, AdvertisementPhoto, HouseExpenses, HouseRules } from "./models/advertisement";
+
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
@@ -344,17 +346,17 @@ export interface Database {
           description: string;
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
-          house_rules: Json;
-          about_house: Json;
+          house_rules: HouseRules;
+          about_house: AboutHouseSections;
           month_rent: number;
           extra_per_host: number;
           guarantee_value: number;
-          expenses: Json;
+          expenses: HouseExpenses;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
           host_lives_property: boolean;
           host_id: string;
           max_rooms: number;
-          photos: Json;
+          photos: AdvertisementPhoto[];
           verified: boolean;
           created_at: string;
           updated_at: string;
@@ -377,17 +379,17 @@ export interface Database {
           description: string;
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
-          house_rules: Json;
-          about_house: Json;
+          house_rules: HouseRules;
+          about_house: AboutHouseSections;
           month_rent: number;
           extra_per_host: number;
           guarantee_value: number;
-          expenses: Json;
+          expenses: HouseExpenses;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
           host_lives_property: boolean;
           host_id: string;
           max_rooms?: number;
-          photos?: Json;
+          photos?: AdvertisementPhoto[];
           verified?: boolean;
           created_at?: string;
           updated_at?: string;
@@ -410,17 +412,17 @@ export interface Database {
           description?: string;
           type_flex_host?: Database["public"]["Enums"]["HostFlexType"];
           type_host?: Database["public"]["Enums"]["type_host"];
-          house_rules?: Json;
-          about_house?: Json;
+          house_rules?: HouseRules;
+          about_house?: AboutHouseSections;
           month_rent?: number;
           extra_per_host?: number;
           guarantee_value?: number;
-          expenses?: Json;
+          expenses?: HouseExpenses;
           available?: Database["public"]["Enums"]["AdvertisementStatus"];
           host_lives_property?: boolean;
           host_id?: string;
           max_rooms?: number;
-          photos?: Json;
+          photos?: AdvertisementPhoto[];
           verified?: boolean;
           created_at?: string;
           updated_at?: string;

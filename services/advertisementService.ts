@@ -1,8 +1,9 @@
-import { SupabaseClient, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { v4 as uuidv4 } from "uuid";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import { addFilterAdvertisement } from "../helpers/advertisementHelper";
-import Advertisement, {
+import {
+  Advertisement,
   Advertisements,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,

@@ -1,12 +1,11 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useState } from "react";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import Advertisement, { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
-import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
+import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
+import useAdvertisementService from "../../../../services/advertisementService";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
@@ -18,18 +17,10 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 
-interface DetailsProps {
-  advertisement: Advertisement;
-}
-
-const Details = ({ advertisement }: DetailsProps) => {
+const Details = () => {
+  const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
-
-  useEffect(() => {
-    setAdvertisement(advertisement);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [advertisement]);
 
   const saveChanges = async () => {
     const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
@@ -127,13 +118,4 @@ export default Details;
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
-  getServerSideProps: async (context) => {
-    const id = context.query.id as string;
-    const { data, error } = await getSingleAdvertisement(id);
-    if (error || !data) return { notFound: true };
-
-    return {
-      props: { advertisement: data },
-    };
-  },
 });

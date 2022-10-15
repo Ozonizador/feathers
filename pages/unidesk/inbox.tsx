@@ -1,9 +1,9 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import { getConversationsFromUser } from "../../services/conversationService";
-import { getMessagesFromConversationId, insertMessageOnConversation } from "../../services/messageService";
-import { Message } from "../../models/message";
+import useConversationService from "../../services/conversationService";
+import useMessagesService from "../../services/messageService";
+import { Message, MessageWithProfile } from "../../models/message";
 import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
@@ -11,7 +11,7 @@ import { Avatar } from "flowbite-react";
 import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
-import { updateReservationStatusOnDB } from "../../services/reservationService";
+import useReservationService from "../../services/reservationService";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 
@@ -20,8 +20,11 @@ import classNames from "classnames";
 }
 const CaixaEntrada = () => {
   const [conversations, setConversations] = useState<ConversationWithTenant[]>([]);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageWithProfile[]>([]);
   const profile = useProfileInformation();
+  const { updateReservationStatusOnDB } = useReservationService();
+  const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
+  const { getConversationsFromUser } = useConversationService();
 
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [currentConversation, setCurrentConversation] = useState<ConversationWithTenant>(null);
@@ -77,16 +80,6 @@ const CaixaEntrada = () => {
 
   const clearConversation = () => {
     setCurrentConversation(null);
-  };
-
-  const formatDate = (date: Date) => {
-    if (!date) return "";
-
-    const newDate = new Date(date);
-    return newDate.toLocaleString("default", {
-      day: "numeric",
-      month: "long",
-    });
   };
 
   return (
@@ -196,9 +189,7 @@ const CaixaEntrada = () => {
                             </div>
                           </div>
                           <div className="my-4 flex justify-center">
-                            {`${formatDate(currentConversation.reservation.start_date)} - ${formatDate(
-                              currentConversation.reservation.end_date
-                            )}`}
+                            {`${currentConversation.reservation.start_date} - ${currentConversation.reservation.end_date}`}
                           </div>
                           {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
                             <div className="flex justify-around gap-5">

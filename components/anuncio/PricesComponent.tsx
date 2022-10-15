@@ -67,7 +67,6 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         }
       });
 
-    const newExpenses = { ...(expenses, services) };
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
       services,

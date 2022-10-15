@@ -1,8 +1,7 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import Advertisement from "../../../../models/advertisement";
 
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../services/advertisementService";
 import { toast } from "react-toastify";
 import {
   useSelectedAnuncioMenuSenhorio,
@@ -10,11 +9,8 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 
-interface ConditionsProps {
-  advertisement: Advertisement;
-}
-
-const Conditions = ({ advertisement }: ConditionsProps) => {
+const Conditions = () => {
+  const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
@@ -65,13 +61,4 @@ export default Conditions;
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
-  getServerSideProps: async (context) => {
-    const id = context.query.id as string;
-    const { data, error } = await getSingleAdvertisement(id);
-    if (error || !data) return { notFound: true };
-
-    return {
-      props: { advertisement: data },
-    };
-  },
 });

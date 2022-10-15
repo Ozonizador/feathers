@@ -6,17 +6,16 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
-import { AdvertisementWithReviewAverage } from "../../../services/advertisementService";
 import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 
 interface RoomCardProps {
-  advertisement: AdvertisementWithReviewAverage;
+  advertisement: Advertisement;
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {

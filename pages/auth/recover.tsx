@@ -1,20 +1,19 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/utils/Input";
 import { Spinner } from "../../components/utils/Spinner";
-import { recoverPasswordViaEmail } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Recover = () => {
-  const supabaseClient = useSupabaseClient();
   const router = useRouter();
+  const { recoverPasswordViaEmail } = useUserService();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const recoverPassword = async () => {
     setLoading(true);
-    const { data, error } = await recoverPasswordViaEmail(supabaseClient, email);
+    const { data, error } = await recoverPasswordViaEmail(email);
     setLoading(false);
     if (!error) {
       router.push("/");

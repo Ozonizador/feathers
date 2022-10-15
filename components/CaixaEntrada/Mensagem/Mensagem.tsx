@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { Avatar } from "flowbite-react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { Message } from "../../../models/message";
+import { Message, MessageWithProfile } from "../../../models/message";
 
 interface MessageProps {
-  message: Message;
-  previousMessage: Message | null;
+  message: MessageWithProfile;
+  previousMessage: MessageWithProfile | null;
 }
 
 const Mensagem = ({ message, previousMessage }: MessageProps) => {

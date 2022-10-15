@@ -10,9 +10,7 @@ export const AnunciarProvider = ({ children }): JSX.Element => {
 
   return (
     <AnunciarStepContext.Provider value={currentStep}>
-      <SetAnunciarStepContext.Provider value={setCurrentStep}>
-        {children}
-      </SetAnunciarStepContext.Provider>
+      <SetAnunciarStepContext.Provider value={setCurrentStep}>{children}</SetAnunciarStepContext.Provider>
     </AnunciarStepContext.Provider>
   );
 };

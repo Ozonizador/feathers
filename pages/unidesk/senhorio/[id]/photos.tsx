@@ -1,16 +1,11 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import Advertisement, { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
+import { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-import {
-  getSingleAdvertisement,
-  removePicture,
-  saveImage,
-  updateAdvertisement,
-} from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../services/advertisementService";
 import classNames from "classnames";
 import { toast } from "react-toastify";
 import {
@@ -18,18 +13,10 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 
-interface PhotoProps {
-  advertisement: Advertisement;
-}
-
-const Photos = ({ advertisement }: PhotoProps) => {
+const Photos = () => {
+  const { removePicture, saveImage, updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
-
-  useEffect(() => {
-    setAdvertisement(advertisement);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [advertisement]);
 
   const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
 
@@ -55,9 +42,9 @@ const Photos = ({ advertisement }: PhotoProps) => {
 
       // saving images in storage
       for (let file of files) {
-        const { publicURL, error } = await saveImage(advertisementContext.id, file.name, file);
-        if (publicURL) {
-          paths.push({ url: publicURL, zone: "other" });
+        const { data, error } = await saveImage(advertisementContext.id, file.name, file);
+        if (data) {
+          paths.push({ url: data.publicUrl, zone: "other" });
         }
       }
 
@@ -239,13 +226,4 @@ export default Photos;
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
-  getServerSideProps: async (context) => {
-    const id = context.query.id as string;
-    const { data, error } = await getSingleAdvertisement(id);
-    if (error || !data) return { notFound: true };
-
-    return {
-      props: { advertisement: data },
-    };
-  },
 });

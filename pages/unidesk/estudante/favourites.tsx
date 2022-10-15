@@ -6,8 +6,7 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement from "../../../models/advertisement";
-import { getAdvertismentsFromMultipleId } from "../../../services/advertisementService";
+import useAdvertisementService from "../../../services/advertisementService";
 import { Spinner } from "flowbite-react";
 
 /* IMAGES */
@@ -15,11 +14,13 @@ import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
+import { Advertisement } from "../../../models/advertisement";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
   const profile = useProfileInformation();
+  const { getAdvertismentsFromMultipleId } = useAdvertisementService();
 
   const getUserFavourites = useCallback(async () => {
     if (profile && profile.favourite_rooms) {
