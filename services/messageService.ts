@@ -1,4 +1,4 @@
-import { MessageWithProfile, MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
+import { MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
 import { v4 as uuidv4 } from "uuid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -14,7 +14,7 @@ const useMessagesService = () => {
 
   const getMessagesFromConversationId = async (conversation_id: string) => {
     const { data, error } = await supabaseClient
-      .from<"messages", MessageWithProfile>(MESSAGE_TABLE_NAME)
+      .from(MESSAGE_TABLE_NAME)
       .select()
       .eq(MESSAGE_TABLE_PROPERTIES.CONVERSATION_ID, conversation_id);
     return { data, error };

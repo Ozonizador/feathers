@@ -5,7 +5,7 @@ import Image from "next/image";
 import notification from "../public/images/notification.png";
 import { Blog, BlogCategoryLabel } from "../models/blog";
 import { useCallback, useEffect, useState } from "react";
-import { getBlogs } from "../services/blogService";
+import useBlogService from "../services/blogService";
 import { UserTypes } from "../models/profile";
 import { Spinner } from "flowbite-react";
 
@@ -18,6 +18,7 @@ const Index = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const { getBlogs } = useBlogService();
   const getBlogPosts = useCallback(async () => {
     setLoading(true);
     const { data, error } = await getBlogs(category, 5);

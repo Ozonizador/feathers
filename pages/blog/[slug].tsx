@@ -3,6 +3,7 @@ import React from "react";
 import UltimosArtigos from "../../components/dicas consumo/UltimosArtigos/UltimosArtigos";
 import BlogPostSection from "../../components/dicas consumo/BlogPostSection/BlogPostSection";
 import { Blog, BLOG_PROPERTIES, BLOG_TABLE_NAME } from "../../models/blog";
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 type PageParams = {
   slug: string;
@@ -20,37 +21,40 @@ const BlogPost = ({ blog }: BlogPostProps) => {
   );
 };
 
-export const getServerSideProps = async ({
-  params,
-}: GetStaticPropsContext<PageParams>): Promise<GetServerSidePropsResult<BlogPostProps>> => {
-  const slug = params?.slug;
-
-  /* Not Found */
-  if (!slug) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const { data: blog, error } = await supabaseClient
-    .from<Blog>(BLOG_TABLE_NAME)
-    .select()
-    .eq(BLOG_PROPERTIES.SLUG, slug)
-    .limit(1)
-    .single();
-
-  if (error) {
-    console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
-  }
-
-  if (blog) {
-    return {
-      props: { blog },
-    };
-  } else {
-    return {
-      notFound: true,
-    };
-  }
-};
 export default BlogPost;
+
+export const getServerSideProps = withPageAuth({
+  redirectTo: "/auth/login",
+  authRequired: false,
+  async getServerSideProps(ctx, supabase) {
+    const slug = ctx.params.slug;
+
+    /* Not Found */
+    if (!slug) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const { data: blog, error } = await supabase
+      .from(BLOG_TABLE_NAME)
+      .select()
+      .eq(BLOG_PROPERTIES.SLUG, slug)
+      .limit(1)
+      .single();
+
+    if (error) {
+      console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
+    }
+
+    if (blog) {
+      return {
+        props: { blog },
+      };
+    } else {
+      return {
+        notFound: true,
+      };
+    }
+  },
+});
