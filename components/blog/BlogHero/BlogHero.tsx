@@ -6,7 +6,7 @@ interface BlogHeroProps {
 
 export default function BlogHero({ blogs }: BlogHeroProps) {
   return (
-    <section className="container mx-auto py-20 ">
+    <section className="container mx-auto py-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
         {!blogs || (blogs.length && <div>Sem blog posts</div>)}
         {blogs &&
