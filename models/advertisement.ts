@@ -12,6 +12,10 @@ export type AdvertisementWithReviewAverage = Advertisement & {
   averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
 };
 
+export type AdvertisementWithHost = Advertisement & {
+  host: Database["public"]["Tables"]["profiles"]["Row"];
+};
+
 /*
  * EXPENSES
  */
@@ -114,12 +118,7 @@ export enum HostType {
   PARTICULAR = "PARTICULAR",
 }
 
-export enum FlexHostType {
-  SUPER_FLEX = "SUPER_FLEX",
-  FLEX = "FLEX",
-  MODERATE = "MODERATE",
-  RIGID = "RIGID",
-}
+export type FlexHostType = "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID";
 
 export enum InclusiveExpenses {
   INCLUDED = "INCLUDED",

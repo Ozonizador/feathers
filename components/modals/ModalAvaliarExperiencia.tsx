@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
-import { addReview } from "../../services/reviewService";
+import useReviewService from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
 import {
   useModalAvaliarExperiencia,
@@ -19,8 +19,10 @@ false nao mostra nada true mostra.
 */
 
 const startingReview = {
+  id: "",
   advertisement_id: "",
   tenant_id: "",
+  stay_id: null,
   overall_rating: 1,
   location_rating: 1,
   value_quality_rating: 1,
@@ -28,15 +30,16 @@ const startingReview = {
   comodities_rating: 1,
   public_review: "",
   private_review: "",
-} as Review;
+} as Omit<Review, "created_at" | "updated_at">;
 
 const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
+  const { addReview } = useReviewService();
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, stay, step } = useModalAvaliarExperiencia();
   const setModalProperty = useSetModalAvaliarExperienciaContextProperty();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
-  const [review, setReview] = useState<Review>(startingReview);
+  const [review, setReview] = useState<Omit<Review, "created_at" | "updated_at">>(startingReview);
 
   function closeModal() {
     setIsOpen(false);

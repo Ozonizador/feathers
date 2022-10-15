@@ -10,7 +10,6 @@ export type Reservation = ReservationsResponse["Row"];
 export type ReservationWithAdvertisement = Reservation & {
   advertisement: Advertisement;
   tenant: Pick<Profile, "name">;
-  "advertisement.host_id": string;
 };
 
 export enum ReservationStatus {

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { StayGuest } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
-import { StayGuest } from "../../../services/stayService";
 interface StayCardProps {
   stay: StayGuest;
 }

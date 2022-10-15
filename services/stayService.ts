@@ -1,14 +1,9 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { v4 as uuidv4 } from "uuid";
-import { Advertisement, Advertisements } from "../models/advertisement";
+import { Advertisement } from "../models/advertisement";
 import { Profile } from "../models/profile";
-import { ReservationWithAdvertisement, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
+import { RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 import { Stay, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
-
-export type StayGuest = Stays & {
-  advertisement: Advertisement[];
-  tenant: Pick<Profile, "name" | "avatar_url">;
-};
 
 const useStayService = () => {
   const supabaseClient = useSupabaseClient();
@@ -69,7 +64,7 @@ const useStayService = () => {
     const date = new Date().toISOString();
 
     const { data, error } = await supabaseClient
-      .from<"stays", StayGuest>(STAYS_TABLE_NAME)
+      .from(STAYS_TABLE_NAME)
       .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
       .eq("advertisement.host_id", hostId)
       .gte(STAY_TABLE.START_DATE, date)
@@ -82,7 +77,7 @@ const useStayService = () => {
     const date = new Date().toISOString();
 
     const { data, error } = await supabaseClient
-      .from<"reservations", ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+      .from(RESERVATION_TABLE_NAME)
       .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
       .eq("advertisement.host_id", hostId)
       .gte(RESERVATION_TABLE.START_DATE, date)
@@ -93,7 +88,7 @@ const useStayService = () => {
 
   const getAllReservationsByHostId = async (hostId: string) => {
     const { data, error } = await supabaseClient
-      .from<"reservations", ReservationWithAdvertisement>(RESERVATION_TABLE_NAME)
+      .from(RESERVATION_TABLE_NAME)
       .select("*, tenant:tenant_id(id, name, avatar_url), advertisement:advertisement_id(id, type, place, host_id)")
       .eq("advertisement.host_id", hostId);
 

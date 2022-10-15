@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { AboutHouseSections, AdvertisementPhoto, HouseExpenses, HouseRules } from "./models/advertisement";
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];

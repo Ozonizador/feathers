@@ -3,8 +3,9 @@ import Breadcrumb from "../../../components/hospedes/breadcrumb/Breadcrumb";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
-import useStayService, { StayGuest } from "../../../services/stayService";
+import useStayService from "../../../services/stayService";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { StayGuest } from "../../../models/stay";
 
 const UniControloHospedes = () => {
   const { getCurrentStaysByHostId } = useStayService();

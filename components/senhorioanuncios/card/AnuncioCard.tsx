@@ -5,7 +5,7 @@ import { BiInfoCircle } from "react-icons/bi";
 import { Menu, Transition } from "@headlessui/react";
 import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
 import { BsThreeDots } from "react-icons/bs";
-import Advertisement from "../../../models/advertisement";
+import { Advertisement } from "../../../models/advertisement";
 import { useRouter } from "next/router";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";

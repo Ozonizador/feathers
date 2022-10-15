@@ -3,7 +3,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
 import useAdvertisementService from "../../../services/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
-import Advertisement, { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 

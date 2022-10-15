@@ -13,10 +13,10 @@ import {
 import Link from "next/link";
 import { toast } from "react-toastify";
 import classNames from "classnames";
-import { StayGuest } from "../../../services/stayService";
+import { StayComplete } from "../../../models/stay";
 
 interface StayInfoProps {
-  stay: StayGuest;
+  stay: StayComplete;
 }
 
 const StayInfo = ({ stay }: StayInfoProps) => {

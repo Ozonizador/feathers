@@ -2,12 +2,12 @@ import { Rating } from "flowbite-react/lib/esm/components";
 import { Avatar } from "flowbite-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
-import { Review, ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
-import { averageFromAllReviewsByHost, getReviewsByHostId } from "../../../../../services/reviewService";
+import { ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
+import useReviewService from "../../../../../services/reviewService";
 
 const ReviewInfo = () => {
   const user = useUser();
-
+  const { averageFromAllReviewsByHost, getReviewsByHostId } = useReviewService();
   const [latestReviews, setLatestReviews] = useState<ReviewWithTenantAndAdvertisement[]>([]);
   const [averageReviews, setAverageReviews] = useState<number>();
 

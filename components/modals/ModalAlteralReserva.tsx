@@ -16,9 +16,11 @@ const ModalAlterarReserva = () => {
   const { isOpen, stay } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
 
-  const [newReservation, setNewReservation] = useState<Reservation>({
-    start_date: new Date(),
-    end_date: new Date(),
+  const [newReservation, setNewReservation] = useState<Omit<Reservation, "created_at" | "updated_at">>({
+    id: "",
+    stay_id: null,
+    start_date: new Date().toDateString(),
+    end_date: new Date().toDateString(),
     status: ReservationStatus.REQUESTED,
     advertisement_id: "",
     tenant_id: "",
@@ -26,12 +28,12 @@ const ModalAlterarReserva = () => {
 
   const updateToOldReservation = useCallback(() => {
     if (stay) {
-      const reservation = stay.reservations && stay.reservations[stay.reservations.length - 1];
+      const reservation = stay.reservation;
       if (reservation && reservation.id !== newReservation.id) {
         setNewReservation({
           ...newReservation,
-          start_date: reservation?.start_date || new Date(),
-          end_date: reservation?.end_date || new Date(),
+          start_date: reservation?.start_date || new Date().toDateString(),
+          end_date: reservation?.end_date || new Date().toDateString(),
           advertisement_id: reservation?.advertisement_id,
           tenant_id: reservation?.tenant_id,
           status: ReservationStatus.CHANGE_REQUESTED,
@@ -133,7 +135,7 @@ const ModalAlterarReserva = () => {
                                   Entrada
                                 </label>
                                 <FeatherDatePicker
-                                  date={newReservation.start_date || new Date()}
+                                  date={new Date(newReservation.start_date) || new Date()}
                                   onChange={(e) =>
                                     changeNewReservationProperty(RESERVATION_TABLE.START_DATE, e.target.value)
                                   }
@@ -150,7 +152,7 @@ const ModalAlterarReserva = () => {
                                 </label>
 
                                 <FeatherDatePicker
-                                  date={newReservation.end_date || new Date()}
+                                  date={new Date(newReservation.end_date) || new Date()}
                                   onChange={(e) =>
                                     changeNewReservationProperty(RESERVATION_TABLE.END_DATE, e.target.value)
                                   }

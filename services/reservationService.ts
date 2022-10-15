@@ -11,10 +11,15 @@ import {
 const useReservationService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReservation = async (reservation: Reservation, tenant_id: string) => {
+  const addReservation = async (
+    reservation: Omit<Reservation, "id" | "created_at" | "updated_at">,
+    tenant_id: string
+  ) => {
     const { data, error } = await supabaseClient
       .from<"reservations", ReservationsResponse>(RESERVATION_TABLE_NAME)
-      .insert({ ...reservation, id: uuidv4(), updated_at: new Date().toDateString(), tenant_id });
+      .insert({ ...reservation, id: uuidv4(), updated_at: new Date().toDateString(), tenant_id })
+      .select()
+      .single();
     return { data, error };
   };
 

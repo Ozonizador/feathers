@@ -13,13 +13,7 @@ const FuncionaOptions = () => {
         {optionsCard1.map((option, index) => {
           return (
             <div key={index} className="flex flex-1 flex-row">
-              <Image
-                className="object-scale-down"
-                src="/images/tick.png"
-                alt=""
-                height="25"
-                width="25"
-              ></Image>
+              <Image className="object-scale-down" src="/images/tick.png" alt="" height="25" width="25"></Image>
               <p className="my-auto ml-4 py-2 text-xl">{option.text}</p>
             </div>
           );
@@ -44,13 +38,7 @@ const FuncionaOptions = () => {
           {optionsCard2.map((option, index) => {
             return (
               <div key={index} className="flex flex-row">
-                <Image
-                  className="object-scale-down"
-                  src="/images/tick.png"
-                  alt=""
-                  height="25"
-                  width="25"
-                ></Image>
+                <Image className="object-scale-down" src="/images/tick.png" alt="" height="25" width="25"></Image>
                 <p className="my-auto ml-4 py-2 text-xl">{option.text}</p>
               </div>
             );

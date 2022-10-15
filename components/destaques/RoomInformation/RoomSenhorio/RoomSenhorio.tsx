@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
-import { FlexHostType } from "../../../../models/advertisement";
 import { Gender } from "../../../../models/profile";
 
 export default function RoomSenhorio() {
@@ -71,10 +70,10 @@ export default function RoomSenhorio() {
               <div className="flex flex-row items-start justify-start gap-4 align-top">
                 <div
                   className={classNames("h-5 w-12 rounded-full ", {
-                    "bg-orange-400": advertisement.type_flex_host === FlexHostType.MODERATE,
-                    "bg-yellow-300": advertisement.type_flex_host === FlexHostType.FLEX,
-                    "bg-green-500": advertisement.type_flex_host === FlexHostType.SUPER_FLEX,
-                    "bg-red-600": advertisement.type_flex_host === FlexHostType.RIGID,
+                    "bg-orange-400": advertisement.type_flex_host === "MODERATE",
+                    "bg-yellow-300": advertisement.type_flex_host === "FLEX",
+                    "bg-green-500": advertisement.type_flex_host === "SUPER_FLEX",
+                    "bg-red-600": advertisement.type_flex_host === "RIGID",
                   })}
                 ></div>
 

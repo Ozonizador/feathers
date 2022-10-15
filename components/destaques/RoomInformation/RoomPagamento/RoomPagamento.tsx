@@ -33,8 +33,9 @@ export default function RoomPagamento() {
   const router = useRouter();
 
   /* Reservation */
-  const [reservation, setReservation] = useState<Partial<Reservation>>({
+  const [reservation, setReservation] = useState<Omit<Reservation, "id" | "created_at" | "updated_at">>({
     start_date: startDate.toDateString(),
+    stay_id: null,
     end_date: endDate.toDateString(),
     status: ReservationStatus.REQUESTED,
     advertisement_id: advertisement.id,
