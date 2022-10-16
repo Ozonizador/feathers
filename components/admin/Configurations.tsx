@@ -1,9 +1,23 @@
 import Link from "next/link";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
+import FeathersCheckbox from "../common/FeathersCheckbox";
+import useUserService from "../../services/userService";
+import { useState } from "react";
+import { toast } from "react-toastify";
 // PÁGINA 36
 
 const Configurations = () => {
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const { updateUserPassword } = useUserService();
+  const updatePassword = () => {
+    if (password !== confirmPassword) {
+      return toast("Palavras passe não coincidem.");
+    }
+    updateUserPassword(password);
+  };
+
   return (
     <>
       <div className="container mx-auto mb-20 lg:w-10/12 ">
@@ -23,10 +37,24 @@ const Configurations = () => {
                   <div className="mb-2 block">
                     <div className="my-3">
                       <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
-                      <TextInput id="passwordNew" type="password" required={true} shadow={true} />
+                      <TextInput
+                        id="passwordNew"
+                        type="password"
+                        required={true}
+                        shadow={true}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
                     </div>
                     <Label htmlFor="Repita palavra passe nova" value="Repita palavra passe nova" />
-                    <TextInput id="passwordRepeat" type="password" required={true} shadow={true} />
+                    <TextInput
+                      id="passwordRepeat"
+                      type="password"
+                      required={true}
+                      shadow={true}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className=" flex flex-1 ">
@@ -34,7 +62,7 @@ const Configurations = () => {
 
                   <button
                     className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
-                    // onClick={saveChanges}
+                    onClick={updatePassword}
                   >
                     Alterar password
                   </button>
@@ -52,7 +80,7 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                            <FeathersCheckbox selected={true} onChangeFn={() => {}} />
                           </div>
                         </div>
                       </div>
@@ -65,7 +93,7 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <input type="checkbox" className=" h-4 w-4 rounded border border-terciary-500" />
+                            <FeathersCheckbox selected={true} onChangeFn={() => {}} />
                           </div>
                         </div>
                       </div>

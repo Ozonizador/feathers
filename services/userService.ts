@@ -57,11 +57,25 @@ const useUserService = () => {
   }
 
   /* recover email */
-  async function recoverPasswordViaEmail(email) {
+  async function recoverPasswordViaEmail(email: string) {
     const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email);
     return { data, error };
   }
-  return { loginWithFacebook, recoverPasswordViaEmail, signout, loginWithGoogle, loginWithMagicLink, register, login };
+
+  async function updateUserPassword(password: string) {
+    const { error } = await supabaseClient.auth.updateUser({ password });
+    return { error };
+  }
+  return {
+    loginWithFacebook,
+    recoverPasswordViaEmail,
+    signout,
+    loginWithGoogle,
+    loginWithMagicLink,
+    register,
+    login,
+    updateUserPassword,
+  };
 };
 
 export default useUserService;
