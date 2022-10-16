@@ -3,8 +3,8 @@ import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
-import { updateFavouriteFromUser } from "../services/favouriteService";
-import { checkProfileAndCreate } from "../services/profileService";
+import useFavouriteService from "../services/favouriteService";
+import useProfileService from "../services/profileService";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
@@ -41,7 +41,9 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
-  const { user } = useUser();
+  const user = useUser();
+  const { checkProfileAndCreate } = useProfileService();
+
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
@@ -120,6 +122,7 @@ export const useSetProfileInformation = () => {
 };
 
 export const useSetProfileFavouritesInformation = () => {
+  const { updateFavouriteFromUser } = useFavouriteService();
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   const currentInfo = useContext(UnihostsWebsiteContext);
 

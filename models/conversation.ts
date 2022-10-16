@@ -1,20 +1,11 @@
-import { Message } from "./message";
+import { Database } from "../database.types";
 import { Profile } from "./profile";
-import { Reservation, ReservationWithAdvertisement } from "./reservation";
+import { ReservationWithAdvertisement } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
-export type Conversation = {
-  id?: string;
-  tenantId: string;
-  hostId: string;
-  reservationId: string;
-
-  messages?: Message[];
-
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+export type ConversationsResponse = Database["public"]["Tables"]["conversations"];
+export type Conversation = ConversationsResponse["Row"];
 
 export type ConversationWithTenant = Conversation & {
   tenant: Partial<Profile>;
@@ -23,10 +14,10 @@ export type ConversationWithTenant = Conversation & {
 
 /* VALUES FOR DB */
 export const CONVERSATION_PROPERTIES = {
-  TENANT_ID: "tenantId",
-  HOST_ID: "hostId",
-  RESERVATION_ID: "reservationId",
+  TENANT_ID: "tenant_id",
+  HOST_ID: "host_id",
+  RESERVATION_ID: "reservation_id",
   ID: "id",
-  UPDATED_ID: "updatedAt",
-  CREATED_ID: "createdAt",
+  UPDATED_ID: "updated_at",
+  CREATED_ID: "created_at",
 } as const;

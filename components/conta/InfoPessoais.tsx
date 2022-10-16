@@ -158,9 +158,7 @@ const InfoPessoais = () => {
                   </table>
                 </div>
 
-                <div className="mt-8 text-center text-secondary-400">
-                  Não tem mais pagamentos para mostrar
-                </div>
+                <div className="mt-8 text-center text-secondary-400">Não tem mais pagamentos para mostrar</div>
               </div>
             </div>
           </div>

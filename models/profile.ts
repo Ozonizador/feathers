@@ -1,23 +1,10 @@
+import { Database } from "../database.types";
+
 export const PROFILE_TABLE_NAME = "profiles" as const;
 export const AVATAR_STORAGE_NAME = "avatars" as const;
 
-export interface Profile {
-  id: string;
-  name: string;
-  surname: string;
-  nationality: string;
-  town: string;
-  birthDate: Date;
-  gender: Gender;
-  updatedAt: Date;
-  description: string;
-  languages: string[];
-  phone: string;
-  avatarUrl: string;
-  favouriteRooms: string[];
-  createdAt: Date;
-  slug: string;
-}
+export type ProfilesResponse = Database["public"]["Tables"]["profiles"];
+export type Profile = ProfilesResponse["Row"];
 
 export enum Gender {
   male = 1,
@@ -30,7 +17,7 @@ export const PROFILE_COLUMNS = {
   NAME: "name",
   SURNAME: "surname",
   TOWN: "town",
-  BIRTH_DATE: "birthDate",
+  BIRTH_DATE: "birth_date",
   GENDER: "gender",
   DESCRIPTION: "description",
   PHONE: "phone",

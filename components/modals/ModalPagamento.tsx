@@ -46,10 +46,7 @@ const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900"
-                >
+                <Dialog.Title as="h3" className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
                   <span>Adicionar detalhes do cartão</span>
                 </Dialog.Title>
@@ -65,13 +62,7 @@ const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
                   <div className=" ">
                     <div className="" id="model-radius">
                       <div id="" className="modal-header ">
-                        <Image
-                          className="m-2"
-                          src="/images/keyboard.png"
-                          height={32}
-                          width={32}
-                          alt=""
-                        />
+                        <Image className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
                         <div id="" className="p-2">
                           <p id="model-heading-text">Adicionar detalhes do cartão</p>
                         </div>
@@ -89,20 +80,10 @@ const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
                                 />
                               </div>
                               <div className="col-md-6">
-                                <input
-                                  type="email"
-                                  className="form-control"
-                                  id="inputEmail4"
-                                  placeholder="Validade"
-                                />
+                                <input type="email" className="form-control" id="inputEmail4" placeholder="Validade" />
                               </div>
                               <div className="col-md-6">
-                                <input
-                                  type="password"
-                                  className="form-control"
-                                  id="inputPassword4"
-                                  placeholder="CVV"
-                                />
+                                <input type="password" className="form-control" id="inputPassword4" placeholder="CVV" />
                               </div>
                               <div className="col-12">
                                 <input

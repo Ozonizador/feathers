@@ -1,13 +1,14 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
-import { loginWithFacebook, loginWithGoogle, loginWithMagicLink, register } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { register, loginWithFacebook, loginWithGoogle } = useUserService();
 
   /** registar com google */
   const registerWithGoogle = async (event) => {
@@ -23,7 +24,7 @@ const Register = () => {
   const normalRegister = async (event) => {
     event.preventDefault();
 
-    const { user, session, error } = await register(email, password);
+    const { error } = await register(email, password);
   };
 
   return (
@@ -35,7 +36,7 @@ const Register = () => {
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">Registar</div>
         </div>
-        <div className="mt-9  p-3">
+        <div className="mt-9 p-3">
           <div className="mb-9 text-xl font-bold">
             Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
           </div>

@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { Stay, StayGuest } from "../models/stay";
+import { StayComplete, StayGuest } from "../models/stay";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -108,7 +108,7 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  stay: Stay;
+  stay: StayComplete;
   isOpen: boolean;
   step: number;
 }
@@ -167,7 +167,7 @@ interface ModalAlterarReversaProps {
 }
 
 interface ModalAlterReservaElements {
-  stay: Stay;
+  stay: StayComplete;
   isOpen: boolean;
   step: number;
 }

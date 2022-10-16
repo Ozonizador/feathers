@@ -6,23 +6,25 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
-import { getAdvertismentsFromMultipleId } from "../../../services/advertisementService";
+import useAdvertisementService from "../../../services/advertisementService";
 import { Spinner } from "flowbite-react";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
+import { Advertisement } from "../../../models/advertisement";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
   const profile = useProfileInformation();
+  const { getAdvertismentsFromMultipleId } = useAdvertisementService();
 
   const getUserFavourites = useCallback(async () => {
-    if (profile && profile.favouriteRooms) {
-      const { data, error } = await getAdvertismentsFromMultipleId(profile.favouriteRooms);
+    if (profile && profile.favourite_rooms) {
+      const { data, error } = await getAdvertismentsFromMultipleId(profile.favourite_rooms);
       if (!error) {
         setFavourites(data);
       }
@@ -98,14 +100,14 @@ const UnideskFavoritos = () => {
                         </div>
                         <div className="ml-3 flex flex-1 flex-col p-2">
                           <div className="text-lg font-bold">{favourite.title}</div>
-                          <div className="text-md mb-1 font-bold text-primary-500">{favourite.monthRent}€/mês</div>
+                          <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
 
                           <div className="mt-auto flex">
                             <div className="relative mb-2 text-center text-base">
                               <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
                                 <p className="mt-1 text-xs lg:text-base">
-                                  {EXPENSES_TO_TEXT[favourite.expenses.inclusive]}
+                                  {checkIfExpensesIncluded(favourite.expenses.services)}
                                 </p>
                                 <BiInfoCircle />
                               </div>

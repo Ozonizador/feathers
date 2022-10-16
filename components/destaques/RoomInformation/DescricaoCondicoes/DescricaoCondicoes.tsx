@@ -22,21 +22,21 @@ export default function DescricaoCondicoes() {
             <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
               <FaDog className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
               <div className="mt-3 text-sm">
-                {advertisement.houseRules.animalsAllowed ? "Permitido" : "Não Permitido"}
+                {advertisement.house_rules.animalsAllowed ? "Permitido" : "Não Permitido"}
               </div>
             </div>
 
             <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
               <GiPartyPopper className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
               <div className="mt-3 text-sm">
-                {advertisement.houseRules.eventsAllowed ? "Permitido" : "Não Permitido"}
+                {advertisement.house_rules.eventsAllowed ? "Permitido" : "Não Permitido"}
               </div>
             </div>
 
             <div className="mr-3 flex h-32 w-40 flex-col items-center justify-center align-middle text-secondary-500">
               <MdSmokeFree className="h-12 w-12 rounded-full bg-terciary-300 p-2" />
               <div className="mt-3 text-sm">
-                {advertisement.houseRules.smokeAllowed ? "Permitido" : "Não Permitido"}
+                {advertisement.house_rules.smokeAllowed ? "Permitido" : "Não Permitido"}
               </div>
             </div>
           </div>

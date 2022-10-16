@@ -4,22 +4,25 @@ import { Label } from "flowbite-react/lib/esm/components";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { EXPENSES_TO_TEXT } from "../../../../models/advertisement";
 import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
 
-import { addReservation } from "../../../../services/reservationService";
+import useReservationService from "../../../../services/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
-import { addNotification } from "../../../../services/notificationsService";
+import useNotificationService from "../../../../services/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
-import { addConversation } from "../../../../services/conversationService";
+import useConversationService from "../../../../services/conversationService";
 import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { NotificationType } from "../../../../models/notification";
+import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 
 export default function RoomPagamento() {
+  const { addConversation } = useConversationService();
+  const { addNotification } = useNotificationService();
+  const { addReservation } = useReservationService();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -30,12 +33,13 @@ export default function RoomPagamento() {
   const router = useRouter();
 
   /* Reservation */
-  const [reservation, setReservation] = useState<Reservation>({
-    startDate: startDate,
-    endDate: endDate,
+  const [reservation, setReservation] = useState<Omit<Reservation, "id" | "created_at" | "updated_at">>({
+    start_date: startDate.toDateString(),
+    stay_id: null,
+    end_date: endDate.toDateString(),
     status: ReservationStatus.REQUESTED,
-    advertisementId: advertisement.id,
-    tenantId: "",
+    advertisement_id: advertisement.id,
+    tenant_id: "",
   });
 
   const makeReservation = async () => {
@@ -56,11 +60,11 @@ export default function RoomPagamento() {
     }
   };
 
-  const createConversation = async (reservationId: string) => {
+  const createConversation = async (reservation_id: string) => {
     const conversation = {
-      hostId: advertisement.host.id,
-      tenantId: profile.id,
-      reservationId: reservationId,
+      host_id: advertisement.host_id,
+      tenant_id: profile.id,
+      reservation_id: reservation_id,
     } as Conversation;
 
     await addConversation(conversation);
@@ -72,14 +76,14 @@ export default function RoomPagamento() {
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
-              {advertisement.monthRent}&euro;/mês
+              {advertisement.month_rent}&euro;/mês
             </div>
 
             <div className="relative mb-2 text-center text-base">
               <div className="flex items-center justify-center gap-2 align-middle">
                 <div className="peer flex items-center">
                   {advertisement && advertisement.expenses && (
-                    <span>{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</span>
+                    <span>{checkIfExpensesIncluded(advertisement.expenses?.services || [])}</span>
                   )}
                   <BiInfoCircle className="ml-2" />
                 </div>
@@ -116,7 +120,7 @@ export default function RoomPagamento() {
 
           <div className="flex flex-row justify-between">
             <div>1ª Renda</div>
-            <div>{`€${advertisement.monthRent}`}</div>
+            <div>{`€${advertisement.month_rent}`}</div>
           </div>
 
           <div className="my-2 flex flex-row justify-between">
@@ -136,7 +140,7 @@ export default function RoomPagamento() {
 
           <div className="my-8 flex flex-row justify-between font-bold">
             <div className="text-base">Total</div>
-            <div>€{advertisement.monthRent}</div>
+            <div>€{advertisement.month_rent}</div>
           </div>
 
           <div onClick={makeReservation}>
@@ -153,7 +157,7 @@ export default function RoomPagamento() {
         <div className="flex flex-col text-left">
           <h1 className="mt-2 text-2xl font-bold text-black">
             {" "}
-            {advertisement.monthRent}&euro;<span className="text-gray-600">/mês</span>
+            {advertisement.month_rent}&euro;<span className="text-gray-600">/mês</span>
           </h1>
           <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 

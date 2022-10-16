@@ -1,21 +1,16 @@
+import { Database } from "../database.types";
 import { Profile } from "./profile";
 
 export const MESSAGE_TABLE_NAME = "messages" as const;
 
-export interface Message {
-    id: string,
-    message: string,
+export type MessagesResponse = Database["public"]["Tables"]["messages"];
+export type Message = MessagesResponse["Row"];
 
-    profileId: string,
-    profile?: Profile
-    conversationId: string,
-    createdAt?: Date,
-    updatedAt?: Date
-}
+export type MessageWithProfile = Message & { profile: Profile };
 
 export const MESSAGE_TABLE_PROPERTIES = {
-    ID: "id",
-    MESSAGE: "message",
-    CONVERSATION_ID: "conversationId",
-    PROFILE_ID: "profileId"
+  ID: "id",
+  MESSAGE: "message",
+  CONVERSATION_ID: "conversation_id",
+  PROFILE_ID: "profile_id",
 } as const;

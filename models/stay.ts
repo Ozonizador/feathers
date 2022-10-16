@@ -1,3 +1,4 @@
+import { Database } from "../database.types";
 import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
 import { Report } from "./report";
@@ -6,44 +7,28 @@ import { Review } from "./review";
 
 export const STAYS_TABLE_NAME = "stays" as const;
 
-export type Stay = {
-  id?: string;
-  startDate: Date;
-  endDate: Date;
+export type Stays = Database["public"]["Tables"]["stays"];
+export type Stay = Stays["Row"];
 
-  // Advertisement
-  advertisementId: string;
-  tenantId: string;
+export type StayGuest = Stay & {
+  advertisement: Advertisement;
+  tenant: Pick<Profile, "name" | "avatar_url">;
+};
 
-  // Reservations associated with Stay
-  reservations: Reservation[];
-
-  report?: Report;
-  review?: Review;
-  createdAt?: Date;
-  updatedAt?: Date;
+export type StayComplete = StayGuest & {
+  report: Report;
+  review: Review;
+  reservation: Reservation;
 };
 
 export const STAY_TABLE = {
   ID: "id",
-  RESERVATION_ID: "advertisementId",
+  RESERVATION_ID: "advertisement_id",
   REPORT: "reports",
-  TENANT_ID: "tenantId",
-  START_DATE: "startDate",
-  END_DATE: "endDate",
+  TENANT_ID: "tenant_id",
+  START_DATE: "start_date",
+  END_DATE: "end_date",
   ADVERTISEMENT_HOST: "advertisement.host",
 } as const;
 
-export type StayDates = Pick<Stay, "startDate" | "endDate">;
-
-/*
- * composed types
- */
-
-/* FOR GUESTS PANEL */
-
-export type StayGuest = Stay & {
-  advertisement: Partial<Advertisement>;
-  tenant: Pick<Profile, "name" | "avatarUrl">;
-  "advertisement.hostId": string;
-};
+export type StayDates = Pick<Stay, "start_date" | "end_date">;

@@ -2,12 +2,12 @@ import { Rating } from "flowbite-react/lib/esm/components";
 import { Avatar } from "flowbite-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
-import { Review, ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
-import { averageFromAllReviewsByHost, getReviewsByHostId } from "../../../../../services/reviewService";
+import { ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
+import useReviewService from "../../../../../services/reviewService";
 
 const ReviewInfo = () => {
-  const { user } = useUser();
-
+  const user = useUser();
+  const { averageFromAllReviewsByHost, getReviewsByHostId } = useReviewService();
   const [latestReviews, setLatestReviews] = useState<ReviewWithTenantAndAdvertisement[]>([]);
   const [averageReviews, setAverageReviews] = useState<number>();
 
@@ -41,7 +41,7 @@ const ReviewInfo = () => {
         <p className="mb-12 text-xl text-slate-400 lg:mb-6">Os meus Anúncios</p>
       </div>
 
-      <div className="flex flex-col items-center lg:flex-row ">
+      <div className="flex flex-col items-center lg:flex-row">
         <div className="flex h-36 w-60 flex-col items-center justify-center rounded-lg border  border-terciary-500 bg-white align-middle">
           <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
           <Rating>
@@ -58,7 +58,7 @@ const ReviewInfo = () => {
         <div className="text-secondary-300">Anúncios</div>
       </div>
 
-      {!latestReviews || (latestReviews.length === 0 && <>Não existem reviews para mostrar</>)}
+      {!latestReviews || (latestReviews.length === 0 && <div className="mb-5">Não existem reviews para mostrar</div>)}
       {/* CARD */}
       {latestReviews &&
         latestReviews.map((review, index) => {
@@ -76,7 +76,7 @@ interface SingleReviewCardPros {
 
 const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
   /* For the date on the single review card */
-  const formattedCreatedDate = new Date(review.createdAt);
+  const formattedCreatedDate = new Date(review.created_at);
   const singleDateDisplayOptions = { year: "numeric", month: "long" } as const;
 
   return (
@@ -86,8 +86,8 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
           <Avatar
             alt="Default avatar with alt text"
             img={
-              review.tenant?.avatarUrl
-                ? review.tenant.avatarUrl
+              review.tenant?.avatar_url
+                ? review.tenant.avatar_url
                 : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
             }
             rounded={true}
@@ -96,7 +96,7 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
           <div className="text-base font-bold">{review.tenant?.name}</div>
         </div>
         <div className="text-base text-secondary-500">
-          {review.privateReview}
+          {review.private_review}
           <div className="mt-2 flex flex-row text-base text-primary-500 lg:justify-end">
             {formattedCreatedDate && formattedCreatedDate.toLocaleDateString(undefined, singleDateDisplayOptions)}
           </div>

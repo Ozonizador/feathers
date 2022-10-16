@@ -5,10 +5,11 @@ import { BiInfoCircle } from "react-icons/bi";
 import { Menu, Transition } from "@headlessui/react";
 import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
 import { BsThreeDots } from "react-icons/bs";
-import Advertisement, { EXPENSES_TO_TEXT } from "../../../models/advertisement";
+import { Advertisement } from "../../../models/advertisement";
 import { useRouter } from "next/router";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
+import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 
 function EditInactiveIcon(props) {
   return (
@@ -139,12 +140,12 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
               </div>
             </div>
             <div className="w-96">
-              <div className="mt-4 mb-1 text-base text-secondary-300">{advertisement.description}</div>
-              <div className="text-xl font-bold text-primary-500">{`${advertisement.monthRent}€/mês`}</div>
+              <div className="mt-4 mb-1 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
+              <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
               <div>
                 <div className="relative mb-3 mt-1 text-center text-base">
                   <div className="peer flex gap-1 align-middle text-base">
-                    {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]} <BiInfoCircle className="my-auto" />
+                    {checkIfExpensesIncluded(advertisement.expenses.services)} <BiInfoCircle className="my-auto" />
                   </div>
                   <RoomUtilitesPopover expenses={advertisement.expenses} />
                 </div>

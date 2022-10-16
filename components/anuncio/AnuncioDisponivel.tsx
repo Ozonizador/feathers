@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Advertisement, { AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { Advertisement, AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
 interface AnuncioDisponivelProps {
   advertisement: Advertisement;

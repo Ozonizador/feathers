@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { saveImage, updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { toast } from "react-toastify";
 
 const FormPasso3 = () => {
   const currentStep = useCurrentStep();
@@ -15,9 +16,16 @@ const FormPasso3 = () => {
   const [images, setImages] = useState<File[]>([]);
   const [objectUrls, setObjectUrls] = useState<string[]>([]);
 
+  /* Services */
+  const { updateAdvertisement, saveImage } = useAdvertisementService();
+
   const nextStep = async (e) => {
     e.preventDefault();
 
+    if (images.length < 5) {
+      toast.error("Introduza pelo menos 5 imagens");
+      return;
+    }
     await saveImages();
     await updateAdvertisement(advertisement, advertisement.id);
 
@@ -54,9 +62,9 @@ const FormPasso3 = () => {
   const saveImages = async () => {
     const paths = [] as string[];
     for (let image of images) {
-      const { publicURL, error } = await saveImage(advertisement.id, image.name, image);
-      if (publicURL) {
-        paths.push(publicURL);
+      const { data } = await saveImage(advertisement.id, image.name, image);
+      if (data) {
+        paths.push(data.publicUrl);
       }
     }
     setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);

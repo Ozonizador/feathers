@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function HomeSection6Cards({ img, testimonial, name, desc }) {
   return (
-    <article className="  bg-white rounded-xl lg:h-80 p-4 lg:w-96 lg:mb-8">
+    <article className="  rounded-xl bg-white p-4 lg:mb-8 lg:h-80 lg:w-96">
       {/* <div>
         <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" style={{ width: "42px" }} className="py-4" />
         <p className="text-xl">{testimonial}</p>
@@ -18,10 +18,16 @@ export default function HomeSection6Cards({ img, testimonial, name, desc }) {
 
       <div className="">
         <div>
-          <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" style={{ width: "42px" }} className="py-4" />
+          <Image
+            height={32}
+            width={32}
+            src="/images/icon-quotest.svg"
+            alt=""
+            style={{ width: "42px" }}
+            className="py-4"
+          />
 
           <p className="text-sm">{testimonial}</p>
-
         </div>
       </div>
       <div className="mt-7 flex">

@@ -1,11 +1,9 @@
 import React from "react";
 import { Card } from "flowbite-react/lib/esm/components";
-import { RiMailSendFill } from "react-icons/ri";
 import Image from "next/image";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
-import { FlexHostType } from "../../../../models/advertisement";
 import { Gender } from "../../../../models/profile";
 
 export default function RoomSenhorio() {
@@ -30,8 +28,8 @@ export default function RoomSenhorio() {
                 <Image
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
                   src={
-                    advertisement.host.avatarUrl
-                      ? advertisement.host.avatarUrl
+                    advertisement.host.avatar_url
+                      ? advertisement.host.avatar_url
                       : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                   }
                   alt="Bonnie image"
@@ -42,7 +40,7 @@ export default function RoomSenhorio() {
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
                 <span className="text-sm text-gray-500 dark:text-gray-400">{`${
                   advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
-                } desde ${new Date(advertisement.host.createdAt).getFullYear()}`}</span>
+                } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
                 <hr />
                 {/* <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
@@ -72,16 +70,18 @@ export default function RoomSenhorio() {
               <div className="flex flex-row items-start justify-start gap-4 align-top">
                 <div
                   className={classNames("h-5 w-12 rounded-full ", {
-                    "bg-orange-400": advertisement.typeFlexHost === FlexHostType.MODERATE,
-                    "bg-yellow-300": advertisement.typeFlexHost === FlexHostType.FLEX,
-                    "bg-green-500": advertisement.typeFlexHost === FlexHostType.SUPER_FLEX,
-                    "bg-red-600": advertisement.typeFlexHost === FlexHostType.RIGID,
+                    "bg-orange-400": advertisement.type_flex_host === "MODERATE",
+                    "bg-yellow-300": advertisement.type_flex_host === "FLEX",
+                    "bg-green-500": advertisement.type_flex_host === "SUPER_FLEX",
+                    "bg-red-600": advertisement.type_flex_host === "RIGID",
                   })}
                 ></div>
 
                 <div className="flex flex-col">
-                  <h2 className="text-base font-bold">{hostTranslate(advertisement.typeFlexHost)}</h2>
-                  <p className="text-base text-secondary-400">{hostTypeFlexDescription(advertisement.typeFlexHost)}</p>
+                  <h2 className="text-base font-bold">{hostTranslate(advertisement.type_flex_host)}</h2>
+                  <p className="text-base text-secondary-400">
+                    {hostTypeFlexDescription(advertisement.type_flex_host)}
+                  </p>
                 </div>
               </div>
             </Card>

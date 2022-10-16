@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import Input from "../../components/utils/Input";
-import { login, loginWithFacebook, loginWithGoogle } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ const Login = () => {
   const [hasError, setHasError] = useState<boolean>(false);
 
   const router = useRouter();
+  const { login, loginWithFacebook, loginWithGoogle } = useUserService();
 
   const loginFacebook = async (event) => {
     event.preventDefault();
@@ -26,7 +27,7 @@ const Login = () => {
   const normalLogin = async (event) => {
     event.preventDefault();
     setHasError(false);
-    const { user, session, error } = await login(email, password);
+    const { error } = await login(email, password);
     if (error) {
       setHasError(true);
     } else {
@@ -44,8 +45,10 @@ const Login = () => {
             <a className="border-l border-terciary-100 p-3 text-center">Registar</a>
           </Link>
         </div>
-        <div className="p-3">
-          <div className="mb-9 text-xl font-bold">Bem-vindo</div>
+        <div className="mt-9 p-3">
+          <div className="mb-9 text-xl font-bold">
+            Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
+          </div>
           <form onSubmit={(e) => normalLogin(e)}>
             <div className="mt-3">
               <div>Email</div>

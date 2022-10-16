@@ -1,45 +1,58 @@
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useState } from "react";
-import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import Advertisement from "../../../../models/advertisement";
-import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
-import { getSingleAdvertisement, updateAdvertisement } from "../../../../services/advertisementService";
-import dynamic from "next/dynamic";
-import { MapCoordinates } from "../../../../models/utils";
+import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
+import useAdvertisementService from "../../../../services/advertisementService";
 import { toast } from "react-toastify";
+import { Spinner } from "flowbite-react";
+import { coordinatesObjectToArray } from "../../../../utils/map-services";
+import { MapCoordinates } from "../../../../models/utils";
+import { getResultsFromSearch } from "../../../../services/mapService";
+import {
+  useSelectedAnuncioMenuSenhorio,
+  useSetSelectedAnuncioMenuSenhorio,
+} from "../../../../context/MenuSenhorioAnuncioProvider";
+import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 
-interface DetailsProps {
-  id: string;
-}
-
-const Details = ({ id }: DetailsProps) => {
-  const [advertisement, setAdvertisement] = useState<Advertisement>();
-
-  const getAdvertisementInfo = useCallback(async () => {
-    const { data, error } = await getSingleAdvertisement(id);
-    if (!error) {
-      setAdvertisement(data);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    getAdvertisementInfo();
-  }, [getAdvertisementInfo]);
+const Details = () => {
+  const { updateAdvertisement } = useAdvertisementService();
+  const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisement, id);
+    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
+    } else {
+      toast.error("Error saving the advertisement");
     }
   };
 
   const changeAdvertisementProperty = (property, value) => {
-    setAdvertisement({ ...advertisement, [property]: value });
+    setAdvertisement({ ...advertisementContext, [property]: value });
+  };
+
+  const onChangeMarker = (lat, lng) => {
+    const coordsArray = coordinatesObjectToArray({ lat, lng });
+    let newCoordinates = { type: "Point", coordinates: coordsArray };
+
+    changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, newCoordinates);
+  };
+
+  const checkPossibilites = async () => {
+    const { street, place, street_number, postal_code } = advertisementContext;
+    const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
+
+    if (!error && data && data.length > 0) {
+      const feature = data[0];
+      const geometry = feature.geometry as MapCoordinates;
+      if (geometry) {
+        changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
+      }
+    }
   };
 
   return (
@@ -51,25 +64,44 @@ const Details = ({ id }: DetailsProps) => {
         <div className="mx-6 pt-12 text-center  lg:text-left">
           <div className="mb-2 text-2xl font-semibold"></div>
           <div className="text-xl text-gray-700"></div>
-          {advertisement && (
+          {!advertisementContext && (
+            <div className="mt-32 flex flex-1 justify-center">
+              <Spinner color="info" aria-label="loading" size="lg" />
+            </div>
+          )}
+          {advertisementContext && (
             <>
               <div>
-                <h5 className="font-bold">{advertisement.title}</h5>
-                <AdvertisementInfoComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
-                <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <h5 className="font-bold">{advertisementContext.title}</h5>
+                <AdvertisementInfoComponent
+                  advertisement={advertisementContext}
+                  onChange={changeAdvertisementProperty}
+                />
+                <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
 
               <div>
                 <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
-                <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
               <div className="mt-5">
-                <h5 className="mb-6 text-xl text-gray-600">Localização</h5>
-                <GeneralAdvertComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
+                <button
+                  type="button"
+                  className="my-5 w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-60"
+                  onClick={() => checkPossibilites()}
+                >
+                  Atualizar No Mapa
+                </button>
+                <GeneralAdvertComponent
+                  advertisement={advertisementContext}
+                  onChange={changeAdvertisementProperty}
+                  onChangeMarker={onChangeMarker}
+                />
               </div>
               <div>
                 <h5 className="font-bold">Política de Cancelamento</h5>
-                <HostFlexTypeComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+                <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
               </div>
             </>
           )}
@@ -86,11 +118,4 @@ export default Details;
 
 export const getServerSideProps = withPageAuth({
   redirectTo: "/auth/login",
-  getServerSideProps: async (context) => {
-    const id = context.query.id;
-
-    return {
-      props: { id },
-    };
-  },
 });

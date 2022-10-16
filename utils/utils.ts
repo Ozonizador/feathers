@@ -28,3 +28,14 @@ export const debounceFn = (callback, wait) => {
     }, wait);
   };
 };
+
+export const formatDate = (date: Date) => {
+  if (!date) return "";
+
+  const newDate = new Date(date);
+  return newDate.toLocaleString("default", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};

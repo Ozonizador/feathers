@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { Avatar } from "flowbite-react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { Message } from "../../../models/message";
+import { Message, MessageWithProfile } from "../../../models/message";
 
 interface MessageProps {
-  message: Message;
-  previousMessage: Message | null;
+  message: MessageWithProfile;
+  previousMessage: MessageWithProfile | null;
 }
 
 const Mensagem = ({ message, previousMessage }: MessageProps) => {
@@ -15,8 +15,8 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
     <>
       <div
         className={classNames("mt-4 ml-2 flex", {
-          "justify-end": message.profileId === profile.id,
-          "justify-start": message.profileId !== profile.id,
+          "justify-end": message.profile_id === profile.id,
+          "justify-start": message.profile_id !== profile.id,
         })}
       >
         <div className="w-1/2">
@@ -31,10 +31,10 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
               */}
             </div>
 
-            {previousMessage && previousMessage.profileId !== message.profileId && (
+            {previousMessage && previousMessage.profile_id !== message.profile_id && (
               <div className="flex w-full flex-row justify-between text-xs">
                 <div>{message.profile?.name || ""}</div>
-                <div>{new Date(message.createdAt).toDateString()}</div>
+                <div>{new Date(message.created_at).toDateString()}</div>
               </div>
             )}
           </div>

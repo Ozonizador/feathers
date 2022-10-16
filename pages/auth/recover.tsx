@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/utils/Input";
 import { Spinner } from "../../components/utils/Spinner";
-import { recoverPasswordViaEmail } from "../../services/userService";
+import useUserService from "../../services/userService";
 
 const Recover = () => {
   const router = useRouter();
+  const { recoverPasswordViaEmail } = useUserService();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 

@@ -1,74 +1,67 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
-export async function register(email, password) {
-  const { user, session, error } = await supabaseClient.auth.signUp({
-    email,
-    password,
-  });
-  return { user, session, error };
-}
+const useUserService = () => {
+  const supabaseClient = useSupabaseClient();
 
-export async function login(email, password) {
-  const { user, session, error } = await supabaseClient.auth.signIn({
-    email,
-    password,
-  });
-
-  return { user, session, error };
-}
-
-export async function loginWithMagicLink(email) {
-  const { user, session, error } = await supabaseClient.auth.signIn(
-    {
+  async function register(email, password) {
+    const { error } = await supabaseClient.auth.signUp({
       email,
-    },
-    {
-      redirectTo: `${window.location.origin}`,
-    }
-  );
+      password,
+    });
+    return { error };
+  }
 
-  return { user, session, error };
-}
+  async function login(email, password) {
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-export async function loginWithFacebook() {
-  const { user, session, error } = await supabaseClient.auth.signIn(
-    {
+    return { error };
+  }
+
+  async function loginWithMagicLink(email) {
+    const { error } = await supabaseClient.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: `${window.location.origin}` },
+    });
+
+    return { error };
+  }
+
+  async function loginWithFacebook() {
+    const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "facebook",
-    },
-    {
-      redirectTo: `${window.location.origin}`,
-    }
-  );
+      options: {
+        redirectTo: `${window.location.origin}`,
+      },
+    });
 
-  return { user, session, error };
-}
+    return { error };
+  }
 
-export async function loginWithGoogle() {
-  const { user, session, error } = await supabaseClient.auth.signIn(
-    {
+  async function loginWithGoogle() {
+    const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
-    },
-    {
-      redirectTo: `${window.location.origin}`,
-    }
-  );
+      options: {
+        redirectTo: `${window.location.origin}`,
+      },
+    });
 
-  return { user, session, error };
-}
+    return { error };
+  }
 
-export async function signout() {
-  const { error } = await supabaseClient.auth.signOut();
-  return error;
-}
+  async function signout() {
+    const { error } = await supabaseClient.auth.signOut();
+    return error;
+  }
 
-/* check session */
-export async function checkUserLoggedIn() {
-  const session = await supabaseClient.auth.session();
-  return session;
-}
+  /* recover email */
+  async function recoverPasswordViaEmail(email) {
+    const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email);
+    return { data, error };
+  }
+  return { loginWithFacebook, recoverPasswordViaEmail, signout, loginWithGoogle, loginWithMagicLink, register, login };
+};
 
-/* recover email */
-export async function recoverPasswordViaEmail(email) {
-  const { data, error } = await supabaseClient.auth.api.resetPasswordForEmail(email);
-  return { data, error };
-}
+export default useUserService;

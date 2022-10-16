@@ -1,6 +1,6 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useSetAdvertisementProperty, useAdvertisement } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 
 const FormPasso1 = () => {
@@ -10,10 +10,13 @@ const FormPasso1 = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
+
   const nextStep = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await updateAdvertisement({ tenantNumber: advertisement.tenantNumber }, advertisement.id);
+    await updateAdvertisement({ tenant_number: advertisement.tenant_number }, advertisement.id);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -24,7 +27,7 @@ const FormPasso1 = () => {
 
   return (
     <section className="w-full px-0 lg:px-40">
-      <div className="flex">
+      <div className="flex justify-center">
         <HouseCapacityComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
       </div>
 

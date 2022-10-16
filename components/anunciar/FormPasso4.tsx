@@ -1,13 +1,8 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import { MdOutlinePets } from "react-icons/md";
-import { GiCigarette } from "react-icons/gi";
-import { BiDrink } from "react-icons/bi";
-import { MdChecklist } from "react-icons/md";
-import { GiBroom } from "react-icons/gi";
-import Input from "../utils/Input";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso4 = () => {
   const currentStep = useCurrentStep();
@@ -15,6 +10,9 @@ const FormPasso4 = () => {
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
+
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
 
   const nextStep = async (e) => {
     e.preventDefault();

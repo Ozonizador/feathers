@@ -1,10 +1,12 @@
 import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import {
+  AdvertisementPhoto,
   AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   FlexHostType,
   TypeAmenity,
+  TypeExpense,
 } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
@@ -177,11 +179,11 @@ export const houseAmenities = (type: TypeAmenity): IconType => {
   }
 };
 
-const addFilterAdvertisement = (
-  query: PostgrestFilterBuilder<AdvertisementWithReviewAverage>,
-  filters: FilterAdvertisements
-) => {
+const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   const { filter, order } = filters;
+
+  // is available
+  // query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, AdvertisementStatus.AVAILABLE);
 
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
@@ -196,12 +198,43 @@ const addFilterAdvertisement = (
 
   // Dates
 
-  filter.dates?.startDate &&
-    (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
-  filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "lte", filter.dates.endDate));
+  // filter.dates?.startDate &&
+  //   (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
+  // filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "lte", filter.dates.endDate));
 
   order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
   return query;
 };
 
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement };
+const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
+  let included = 0;
+  let partially = 0;
+  let excluded = 0;
+
+  if (!expenses || expenses.length === 0) {
+    return "";
+  }
+  for (let expense of expenses) {
+    if (expense.included == "INCLUDED") return included++;
+    if (expense.included == "PARTIALLY") return partially++;
+    if (expense.included == "EXCLUDED") return excluded++;
+  }
+
+  if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
+  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluidas";
+  if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
+  if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
+
+  return "Despesas Partialmente Incluídas";
+};
+
+const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
+  if (photos && photos.length > 0) {
+    let photo = photos.find((photo) => photo.zone == "main");
+    return photo ? photo : photos[0];
+  } else {
+    return null;
+  }
+};
+
+export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, checkIfExpensesIncluded, getMainAdvertPhoto };

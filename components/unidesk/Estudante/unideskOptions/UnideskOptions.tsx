@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+
 import { MenuSectionCard } from "../../components/MenuSectionCard";
 
 const UnideskOptions = () => {

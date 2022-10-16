@@ -1,9 +1,10 @@
-import Advertisement, {
+import {
+  Advertisement,
   AboutHouseSections,
   AdvertisementStatus,
   HouseExpenses,
   HouseRules,
-  INCLUSIVE_EXPENSES,
+  InclusiveExpenses,
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
@@ -13,17 +14,17 @@ import { createRandomUniqWord } from "../utils/utils";
 const defaultAdvertisement = {
   slug: createRandomUniqWord(),
   type: "ENTIRE_SPACE",
-  typeFlexHost: "SUPER_FLEX",
-  typeHost: "PARTICULAR",
+  type_flex_host: "SUPER_FLEX",
+  type_host: "PARTICULAR",
   place: "",
   street: "",
-  streetNumber: "",
+  street_number: "",
   floor: "",
-  postalCode: "",
+  postal_code: "",
   title: "",
   description: "",
-  hostId: "",
-  aboutHouse: {
+  host_id: "",
+  about_house: {
     bathRoom: [],
     bedRoom: [],
     kitchen: [],
@@ -33,33 +34,33 @@ const defaultAdvertisement = {
   } as AboutHouseSections,
   rooms: 1,
   beds: 1,
-  tenantNumber: 1,
+  tenant_number: 1,
   bathrooms: 1,
-  monthRent: 0,
-  extraPerHost: 0,
-  guaranteeValue: 0,
-  houseRules: {} as HouseRules,
+  month_rent: 0,
+  extra_per_host: 0,
+  guarantee_value: 0,
+  house_rules: {} as HouseRules,
   expenses: {
-    inclusive: INCLUSIVE_EXPENSES.INCLUDED,
-    servicesExcluded: [],
-    servicesIncluded: [],
+    inclusive: InclusiveExpenses.INCLUDED,
+    services: [],
   } as HouseExpenses,
-  hostLivesProperty: false,
-  available: AdvertisementStatus.AVAILABLE,
+  host_lives_property: false,
+  available: AdvertisementStatus.DISABLED,
   geom: null,
+  max_rooms: 1,
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);
 const SetAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
 
 export const AdvertisementController = ({ children }): JSX.Element => {
-  const { user } = useUser();
+  const user = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
 
   useEffect(() => {
     if (user) {
       setAdvertisement((oldAdvert) => {
-        return { ...oldAdvert, hostId: user.id };
+        return { ...oldAdvert, host_id: user.id };
       });
     }
   }, [user]);

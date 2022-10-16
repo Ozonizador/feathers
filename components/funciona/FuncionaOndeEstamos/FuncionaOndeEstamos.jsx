@@ -14,8 +14,8 @@ const FuncionaOndeEstamos = () => {
               <Image src="/images/mapa_unihosts_funciona.jpeg" layout="fill" alt="" className="rounded-lg" />
             </div>
             <div className="sm:w-full lg:w-2/3">
-              <h1 className="mb-4 text-center text-3xl font-bold lg:text-5xl lg:text-left">Onde Estamos?</h1>
-              <div className="flex w-2/4 items-center rounded-full bg-white p-4 align-middle drop-shadow-md">
+              <h1 className="mb-4 text-center text-3xl font-bold lg:text-left lg:text-5xl">Onde Estamos?</h1>
+              <div className="flex w-11/12  items-center rounded-full bg-white p-4 align-middle drop-shadow-md lg:w-1/2">
                 <div className="">
                   <Image
                     className="flex object-scale-down "
@@ -25,7 +25,7 @@ const FuncionaOndeEstamos = () => {
                     width="25"
                   ></Image>
                 </div>
-                <div className="ml-2 text-xl">Portugal continental e ilhas</div>
+                <div className="ml-2 text-base lg:text-xl">Portugal continental e ilhas</div>
               </div>
 
               <div className="mt-6 mb-10 text-lg">

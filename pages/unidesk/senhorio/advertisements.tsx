@@ -4,13 +4,13 @@ import AnuncioCard from "../../../components/senhorioanuncios/card/AnuncioCard";
 import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
 import Breadcrumb from "../../../components/senhorioanuncios/breadcrumb/Breadcrumb";
 import { useCallback, useEffect, useState } from "react";
-import Advertisement from "../../../models/advertisement";
+import { Advertisement } from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
-import { getAdvertismentsFromUserId } from "../../../services/advertisementService";
-import DicasCard from "../../../components/senhorioanuncios/DicasCard/DicasCard";
+import useAdvertisementService from "../../../services/advertisementService";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 const Anuncios = () => {
+  const { getAdvertismentsFromUserId } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
   const profile = useProfileInformation();

@@ -1,16 +1,21 @@
 import { useRouter } from "next/router";
-import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import { toast } from "react-toastify";
+import { useAdvertisement } from "../../context/AdvertisementController";
+import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();
   const router = useRouter();
+
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
 
   const nextSteps = async (e) => {
     e.preventDefault();
     // setAdvertisementProperty("aboutHouse", "testing");
     const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
+      toast.success("Registo Bem Sucedido");
       router.push("/");
     }
   };

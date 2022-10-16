@@ -5,7 +5,6 @@ import {
   useSetAdvertisement,
   useSetAdvertisementProperty,
 } from "../../context/AdvertisementController";
-import { addAdvertisement } from "../../services/advertisementService";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
 import { toast } from "react-toastify";
 import { getResultsFromSearch } from "../../services/mapService";
@@ -13,6 +12,8 @@ import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso0 = () => {
   /* STEPS */
@@ -24,13 +25,16 @@ const FormPasso0 = () => {
   const changeAdvertisementProperty = useSetAdvertisementProperty();
   const setAdvertisement = useSetAdvertisement();
 
+  /* Services */
+  const { addAdvertisement } = useAdvertisementService();
+  
   const nextStep = async (e) => {
     e.preventDefault();
 
     // confirmar se esta tudo preenchido
-    const { type, street, place, streetNumber, postalCode } = advertisement;
+    const { type, street, place, street_number, postal_code } = advertisement;
 
-    if (!type || !street || !place || !streetNumber || !postalCode) {
+    if (!type || !street || !place || !street_number || !postal_code) {
       toast.error("Campos por preencher.");
       return;
     }
@@ -49,8 +53,8 @@ const FormPasso0 = () => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, streetNumber, postalCode } = advertisement;
-    const { data, error } = await getResultsFromSearch(`${street} ${place} ${streetNumber} ${postalCode}`);
+    const { street, place, street_number, postal_code } = advertisement;
+    const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
 
     if (!error && data && data.length > 0) {
       const feature = data[0];

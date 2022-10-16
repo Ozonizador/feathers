@@ -1,61 +1,39 @@
-import { Label } from "flowbite-react";
-import { Profile } from "./profile";
-import { AdvertisementReviewSummary, Review } from "./review";
-import { StayDates } from "./stay";
+import { Database } from "../database.types";
 
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
+export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
+
 /* MODEL */
-export type Advertisement = {
-  id?: string;
-  slug: string;
-  typeFlexHost: FlexHostType;
-  place: string;
-  street: string;
-  streetNumber: string;
-  floor?: string;
-  postalCode: string;
-  rooms: number;
-  beds: number;
-  tenantNumber: number;
-  bathrooms: number;
-  title: string;
-  description: string;
-  type: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-  typeHost: "PROFISSIONAL" | "PARTICULAR";
-  photos?: AdvertisementPhoto[];
-  houseRules: HouseRules;
-  aboutHouse: AboutHouseSections;
-  monthRent: number;
-  extraPerHost: number;
-  guaranteeValue: number;
-  expenses: HouseExpenses;
-  hostLivesProperty: Boolean;
-  hostId: string;
-  host?: Profile;
-  createdAt?: Date;
-  updatedAt?: Date;
-  available: AdvertisementStatus;
-  geom?: any | null;
+export type Advertisements = Database["public"]["Tables"]["advertisements"];
+export type Advertisement = Advertisements["Row"];
 
-  // foreign keys
-  reviews?: Review[];
-};
-
-// With advertisement averages
 export type AdvertisementWithReviewAverage = Advertisement & {
-  averages: AdvertisementReviewSummary[];
-  stay: StayDates;
-  "stay.startDate": Date;
-  "stay.endDate": Date;
+  averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
 };
 
+export type AdvertisementWithHost = Advertisement & {
+  host: Database["public"]["Tables"]["profiles"]["Row"];
+};
+
+/*
+ * EXPENSES
+ */
 export interface HouseExpenses {
-  inclusive?: "INCLUDED" | "PARTIALLY" | "EXCLUDED";
-  servicesIncluded?: EXPENSES_TYPE[];
-  servicesExcluded?: EXPENSES_TYPE[];
+  services?: TypeExpense[];
 }
 
+export interface TypeExpense {
+  name: ExpenseName;
+  max: number;
+  included: Included;
+}
+
+export type Included = "INCLUDED" | "PARTIALLY" | "EXCLUDED";
+
+/*
+ * House Rules
+ */
 export interface HouseRules {
   smokeAllowed?: boolean;
   animalsAllowed?: boolean;
@@ -64,6 +42,9 @@ export interface HouseRules {
   cleaning?: string;
 }
 
+/*
+ * PHOTOS
+ */
 export type AdvertisementPhoto = {
   url: string;
   zone: HouseZones;
@@ -84,30 +65,31 @@ export enum HouseZonesLabel {
 
 /* VALUES FOR DB */
 export const ADVERTISEMENT_PROPERTIES = {
-  TYPE_FLEX_HOST: "typeFlexHost",
+  MAX_ROOMS: "max_rooms",
+  TYPE_FLEX_HOST: "type_flex_host",
   TYPE: "type",
-  TYPE_HOST: "typeHost",
+  TYPE_HOST: "type_host",
   PLACE: "place",
   STREET: "street",
-  STREET_NUMBER: "streetNumber",
+  STREET_NUMBER: "street_number",
   FLOOR: "floor",
-  POSTAL_CODE: "postalCode",
+  POSTAL_CODE: "postal_code",
   ROOMS: "rooms",
   BEDS: "beds",
-  NUMBER_TENANT: "tenantNumber",
+  NUMBER_TENANT: "tenant_number",
   BATHROOMS: "bathrooms",
   TITLE: "title",
   DESCRIPTION: "description",
   PHOTOS: "photos",
-  HOUSE_RULES: "houseRules",
-  ABOUT_HOUSE: "aboutHouse",
-  MONTH_RENT: "monthRent",
-  EXTRA_PER_HOST: "extraPerHost",
-  GUARANTEE_VALUE: "guaranteeValue",
+  HOUSE_RULES: "house_rules",
+  ABOUT_HOUSE: "about_house",
+  MONTH_RENT: "month_rent",
+  EXTRA_PER_HOST: "extra_per_host",
+  GUARANTEE_VALUE: "guarantee_value",
   EXPENSES: "expenses",
-  HOST_LIVES_PROPERTY: "hostLivesProperty",
+  HOST_LIVES_PROPERTY: "host_lives_property",
   HOST: "host",
-  HOST_ID: "hostId",
+  HOST_ID: "host_id",
   AVAILABLE: "available",
   ID: "id",
   GEOM: "geom",
@@ -131,25 +113,20 @@ export const TYPE_ADVERTISEMENT = {
   PRIVATE_ROOM: "Quarto Privado",
 };
 
-export enum HOST_TYPE {
+export enum HostType {
   PROFISSIONAL = "PROFISSIONAL",
   PARTICULAR = "PARTICULAR",
 }
 
-export enum FlexHostType {
-  SUPER_FLEX = "SUPER_FLEX",
-  FLEX = "FLEX",
-  MODERATE = "MODERATE",
-  RIGID = "RIGID",
-}
+export type FlexHostType = "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID";
 
-export enum INCLUSIVE_EXPENSES {
+export enum InclusiveExpenses {
   INCLUDED = "INCLUDED",
   PARTIALLY = "PARTIALLY",
   EXCLUDED = "EXCLUDED",
 }
 
-export enum EXPENSES_TYPE {
+export enum ExpenseName {
   GAS = "GAS",
   LIGHTS = "LIGHTS",
   WATER = "WATER",
@@ -165,19 +142,9 @@ export const TYPE_CLEANING_LABELS = {
   "Não Tem": "N/A",
 };
 
-export enum CLEANING_TYPE {
-  TRIMESTRAL = "TRIMESTRAL",
-  SEMESTRAL = "SEMESTRAL",
-}
-
-/* Some namings */
-export const EXPENSES_TO_TEXT = {
-  INCLUDED: "Despesas incluídas",
-  PARTIALLY: "Despesas partialmente incluídas",
-  EXCLUDED: "Despesas excluídas",
-};
-
-/* About house */
+/*
+ * About house
+ */
 
 export interface AboutHouseSections {
   bathRoom: TypeAmenity[];
@@ -371,5 +338,3 @@ export const AboutHouseCommodities = {
     { label: "Estacionamento", type: TypeAmenity.PARKING_SPOT },
   ],
 };
-
-export default Advertisement;

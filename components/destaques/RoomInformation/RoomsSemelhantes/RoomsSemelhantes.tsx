@@ -1,67 +1,53 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CgHome } from "react-icons/cg";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
+import useAdvertisementService from "../../../../services/advertisementService";
+import { Advertisement, TYPE_ADVERTISEMENT } from "../../../../models/advertisement";
+import { Spinner } from "flowbite-react";
+import Image from "next/image";
 
 export default function RoomSemelhantes() {
   const advertisement = useGetSingleAdvertisement();
+  const { getSimilarAdvertisements } = useAdvertisementService();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [similarAdverts, setSimilarAdverts] = useState<Partial<Advertisement>[]>([]);
+
+  const getSimilarAdverts = useCallback(async () => {
+    setLoading(true);
+    const { data, error } = await getSimilarAdvertisements();
+    if (!error && data) setSimilarAdverts(data);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    getSimilarAdverts();
+  }, [getSimilarAdverts]);
+
   return (
     <section className="mb-40">
       <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
       <div className="flex flex-col lg:flex-row">
-        <div className="mr-0 flex w-full flex-row justify-between gap-5 lg:mr-7">
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
+        {loading && (
+          <div className="mt-32 flex flex-1 justify-center">
+            <Spinner color="info" aria-label="loading" size="lg" />
           </div>
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-        </div>
-
-        <div className="flex w-full flex-row justify-between gap-5 ">
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-          <div>
-            <article className="bg-destaques-slider1 relative h-56  w-40  rounded-lg lg:h-56  lg:w-48">
-              <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-              <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-            </article>
-          </div>
-        </div>
+        )}
+        {!loading &&
+          similarAdverts &&
+          similarAdverts.map((advert, index) => {
+            return (
+              <div key={index}>
+                <article className="relative h-56 w-40 rounded-lg lg:h-56  lg:w-48">
+                  <Image src={advert.photos[0].url} alt="" layout="responsive" height="200" width="200" />
+                  <h2 className=" mt-3 p-3 text-base text-white">{TYPE_ADVERTISEMENT[advert.type]}</h2>
+                  <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
+                </article>
+              </div>
+            );
+          })}
       </div>
-      {/* <div className="mb-10 grid w-full grid-cols-2 justify-start gap-52 lg:w-3/5 lg:grid-cols-4">
-      {/* <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
-      <div className="mb-10 grid w-3/5 justify-start gap-52 lg:grid-cols-4">
-        <article className="bg-destaques-slider1 relative h-56  w-48  rounded-lg ">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-        </article>
-
-        <article className="bg-destaques-slider2 relative h-56  w-48 rounded-lg">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto partilhado</h2>
-          <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-        </article>
-
-        <article className="bg-destaques-slider2 relative h-56  w-48 rounded-lg">
-          <h2 className=" mt-3 p-3 text-base text-white">Casa Inteira</h2>
-          <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-        </article>
-
-        <article className="bg-destaques-slider2 relative h-56  w-48 rounded-lg">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
-        </article>
-      </div> */}
 
       <Link href="/procurar">
         <a className="hover: lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96">

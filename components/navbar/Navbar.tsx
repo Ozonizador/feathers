@@ -7,8 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, Switch, Transition } from "@headlessui/react";
 import MyLink from "../utils/MyLink";
-import { useUser } from "@supabase/auth-helpers-react";
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import person from "../../public/images/person.png";
@@ -17,20 +16,17 @@ import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
+import { Database } from "../../database.types";
 
 export const Navbar = () => {
-  const { user } = useUser();
+  const user = useUser();
   const router = useRouter();
+  const supabaseClient = useSupabaseClient<Database>();
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
-
-  const setModoSenhorio = () => {
-    toggleUserTypeContext("TENANT");
-    router.push("/unidesk");
-  };
 
   /* Changing the toggle TENANT estudante */
   const toggleSenhorioEstudante = () => {
@@ -56,7 +52,6 @@ export const Navbar = () => {
       <nav className="mx-6 mb-5 lg:mx-28">
         <div>
           <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
-            {/* CONTACTS */}
             <div className="flex">
               <div className="my-auto mr-3 flex">
                 <ImPhone className="mr-1 self-center" />
@@ -90,7 +85,9 @@ export const Navbar = () => {
             <div className="lg:block">
               <Link href="/">
                 <a>
-                  <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
+                  <div className="relative h-3/4 w-3/4">
+                    <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
+                  </div>
                 </a>
               </Link>
             </div>
@@ -289,7 +286,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/notifications">
+                                  <MyLink customClass="py-1" href="/faqs">
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>

@@ -6,12 +6,13 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { AdvertisementWithReviewAverage, EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { Advertisement, AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
+import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -21,35 +22,43 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const profile = useProfileInformation();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
   const advertisementOverallRating =
-    (advertisement.averages && advertisement.averages[0] && advertisement.averages[0].overallAverage.toFixed(2)) || "-";
+    (advertisement.averages && advertisement.averages[0] && advertisement.averages[0].overall_average.toFixed(2)) ||
+    "-";
 
   const toggleFavourite = async (e, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
-    let { favouriteRooms } = profile;
+    let { favourite_rooms } = profile;
 
     if (isFavourite) {
-      const newFavRooms = favouriteRooms.filter((favourite) => advertId !== favourite);
+      const newFavRooms = favourite_rooms.filter((favourite) => advertId !== favourite);
       await setFavouriteProfile(newFavRooms);
     } else {
-      if (favouriteRooms === null) {
-        favouriteRooms = [];
+      if (favourite_rooms === null) {
+        favourite_rooms = [];
       }
-      favouriteRooms.push(advertId);
-      await setFavouriteProfile(favouriteRooms);
+      favourite_rooms.push(advertId);
+      await setFavouriteProfile(favourite_rooms);
     }
   };
 
   const isFavourite = useCallback(() => {
     if (profile) {
-      const { favouriteRooms } = profile;
-      if (favouriteRooms) {
-        const index = favouriteRooms.findIndex((room) => advertisement.id == room);
+      const { favourite_rooms } = profile;
+      if (favourite_rooms) {
+        const index = favourite_rooms.findIndex((room) => advertisement.id == room);
         return index !== -1;
       }
     }
     return false;
   }, [advertisement.id, profile]);
 
+  const getMainPhoto = useCallback(() => {
+    if (advertisement) {
+      getMainAdvertPhoto(advertisement.photos);
+    } else {
+      return null;
+    }
+  }, [advertisement]);
   return (
     <div>
       <div className="mt-10 mb-4 bg-white lg:rounded-xl lg:drop-shadow-2xl">
@@ -57,8 +66,8 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
           <div className="cards">
             <div className="flex-col items-center lg:flex lg:flex-row">
               <div className="relative h-96 w-full lg:w-1/3 lg:pl-4">
-                {advertisement.photos && advertisement.photos[0] ? (
-                  <Image src={advertisement.photos[0].url} alt="..." layout="fill" />
+                {getMainPhoto() ? (
+                  <Image src={getMainPhoto().url} alt="..." layout="fill" />
                 ) : (
                   <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" layout="fill" />
                 )}
@@ -81,7 +90,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <div>
                       <RiUserLine className="my-auto inline" />
                       <span className="my-auto ml-1 text-xs">
-                        {advertisement.tenantNumber} {advertisement.tenantNumber == 1 ? "Hóspede" : "Hóspedes"}
+                        {advertisement.tenant_number} {advertisement.tenant_number == 1 ? "Hóspede" : "Hóspedes"}
                       </span>
                     </div>
                     <div className="ml-2">
@@ -128,10 +137,10 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </div>
                     <div className="">
                       <div className="text-end">
-                        <h3 className="text-xl font-bold text-primary-500">{advertisement.monthRent} €/mês</h3>
+                        <h3 className="text-xl font-bold text-primary-500">{advertisement.month_rent} €/mês</h3>
                         <div className="d-flex">
                           <p className="mt-1 text-xs lg:text-base">
-                            {EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}
+                            {checkIfExpensesIncluded(advertisement.expenses.services || [])}
                           </p>
                           <i className="fa-solid fa-circle-info m-1"></i>
                         </div>

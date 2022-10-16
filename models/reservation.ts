@@ -1,26 +1,15 @@
-import Advertisement from "./advertisement";
+import { Database } from "../database.types";
+import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
-import { Stay } from "./stay";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 
-export type Reservation = {
-  id?: string;
-  startDate: Date;
-  endDate: Date;
-  status: ReservationStatus;
-  advertisementId: string;
-  tenantId: string;
-  stayId?: string;
-
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
+export type Reservation = ReservationsResponse["Row"];
 
 export type ReservationWithAdvertisement = Reservation & {
-  advertisement: Partial<Advertisement>;
+  advertisement: Advertisement;
   tenant: Pick<Profile, "name">;
-  "advertisement.hostId": string;
 };
 
 export enum ReservationStatus {
@@ -34,12 +23,12 @@ export enum ReservationStatus {
 
 export const RESERVATION_TABLE = {
   ID: "id",
-  ADVERT_ID: "advertisementId",
-  TENANT_ID: "tenantId",
-  START_DATE: "startDate",
-  END_DATE: "endDate",
+  ADVERT_ID: "advertisement_id",
+  TENANT_ID: "tenant_id",
+  START_DATE: "start_date",
+  END_DATE: "end_date",
   STATUS: "status",
-  HOST_ID: "advertisement.hostId",
+  HOST_ID: "advertisement.host_id",
 } as const;
 
 export enum ReservationStatusLabel {

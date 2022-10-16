@@ -1,19 +1,27 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Profile, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 
-export const updateFavouriteFromUser = async (userId: string, favouriteRooms: string[]) => {
-  const { data, error } = await supabaseClient
-    .from<Profile>(PROFILE_TABLE_NAME)
-    .update({ favouriteRooms: favouriteRooms })
-    .eq(PROFILE_COLUMNS.ID, userId)
-    .single();
-  return { data, error };
+const useFavouriteService = () => {
+  const supabaseClient = useSupabaseClient();
+
+  const updateFavouriteFromUser = async (userId: string, favourite_rooms: string[]) => {
+    const { data, error } = await supabaseClient
+      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+      .update({ favourite_rooms })
+      .eq(PROFILE_COLUMNS.ID, userId)
+      .single();
+    return { data, error };
+  };
+
+  const getFavouritesFromUser = async (userId: string) => {
+    const { data, error } = await supabaseClient
+      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+      .select()
+      .eq(PROFILE_COLUMNS.ID, userId);
+    return { data, error };
+  };
+
+  return { updateFavouriteFromUser, getFavouritesFromUser };
 };
 
-export const getFavouritesFromUser = async (userId: string) => {
-  const { data, error } = await supabaseClient
-    .from<Profile>(PROFILE_TABLE_NAME)
-    .select()
-    .eq(PROFILE_COLUMNS.ID, userId);
-  return { data, error };
-};
+export default useFavouriteService;

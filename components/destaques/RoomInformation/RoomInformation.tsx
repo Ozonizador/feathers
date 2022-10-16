@@ -16,9 +16,9 @@ export default function RoomInformation() {
           <div className="mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle  text-secondary-500 shadow-2xl lg:mb-0 lg:mr-3">
             <RiUserLine className="text-4xl" />
             <div className="mt-3 text-base ">
-              {advertisement.tenantNumber > 1
-                ? `${advertisement.tenantNumber} Hóspedes`
-                : `${advertisement.tenantNumber} Hóspede`}
+              {advertisement.tenant_number > 1
+                ? `${advertisement.tenant_number} Hóspedes`
+                : `${advertisement.tenant_number} Hóspede`}
             </div>
           </div>
 

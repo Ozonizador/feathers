@@ -5,24 +5,26 @@ import { houseAmenities } from "../../../../helpers/advertisementHelper";
 import { TypeAmenityLabel } from "../../../../models/advertisement";
 
 export default function RoomSlider() {
-  const { aboutHouse } = useGetSingleAdvertisement();
+  const { about_house } = useGetSingleAdvertisement();
 
-  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = aboutHouse;
+  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = about_house;
   const Comodities = ({}) =>
     useMemo(() => {
       return (
         <>
           <Carousel>
             <div className="flex flex-col gap-8">
-              <div className="flex h-full items-center justify-center text-primary-500">Comodidades gerais</div>
+              <div className="flex h-full items-center justify-center font-bold text-primary-500">
+                Comodidades gerais
+              </div>
               <div className="flex h-full flex-wrap items-center justify-center gap-6 align-middle">
                 {(!general || general.length === 0) && <div>Sem nada a assinalar</div>}
                 {general.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
+                    <div className="mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
                       {icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
+                      <div className="mt-3 text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
                 })}
@@ -110,24 +112,11 @@ export default function RoomSlider() {
 
   return (
     <section>
-      <div className="mt-10 mb-32 h-44 rounded-xl border lg:mt-40">
+      <div className="mt-10 mb-32 h-96 rounded-xl border lg:mt-40">
         <Carousel>
           <Comodities />
         </Carousel>
       </div>
-      {/*
-      <div className="mb-4 text-2xl font-bold">Mais quartos nesta casa</div>
-      <div className="mb-40 grid w-96 justify-start gap-0 lg:grid-cols-2">
-        <article className="bg-destaques-slider1 relative h-44  w-44  rounded-lg ">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-base font-bold text-white">&euro;320</p>
-        </article>
-
-        <article className="bg-destaques-slider2 relative h-44  w-44 rounded-lg">
-          <h2 className=" mt-3 p-3 text-base text-white">Quarto Privado</h2>
-          <p className="bold absolute bottom-3 right-4 text-base font-bold text-white">&euro;320</p>
-        </article>
-      </div> */}
     </section>
   );
 }

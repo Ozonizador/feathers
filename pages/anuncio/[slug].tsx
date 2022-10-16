@@ -1,5 +1,3 @@
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSidePropsResult, GetStaticPropsContext } from "next";
 import React from "react";
 import DescricaoCondicoes from "../../components/destaques/RoomInformation/DescricaoCondicoes/DescricaoCondicoes";
 import SingleRoomGrid from "../../components/destaques/RoomInformation/SingleRoomGrid/SingleRoomGrid";
@@ -12,15 +10,12 @@ import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSem
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
-import Advertisement, { ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
+import { AdvertisementWithHost, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
-
-type PageParams = {
-  slug: string;
-};
+import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 
 interface AnuncioProps {
-  advertisement: Advertisement;
+  advertisement: AdvertisementWithHost;
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
@@ -53,37 +48,39 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
   );
 };
 
-export const getServerSideProps = async ({
-  params,
-}: GetStaticPropsContext<PageParams>): Promise<GetServerSidePropsResult<AnuncioProps>> => {
-  const slug = params?.slug;
+export const getServerSideProps = withPageAuth({
+  redirectTo: "/auth/login",
+  authRequired: false,
+  async getServerSideProps(ctx, supabase) {
+    const slug = ctx.params?.slug;
+    /* Not Found */
+    if (!slug) {
+      return {
+        notFound: true,
+      };
+    }
 
-  /* Not Found */
-  if (!slug) {
-    return {
-      notFound: true,
-    };
-  }
+    const { data: advertisement, error } = await supabase
+      .from(ADVERTISEMENT_TABLE_NAME)
+      .select(`*, host:host_id(*)`)
+      .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+      .limit(1)
+      .single();
 
-  const { data: advertisement, error } = await supabaseClient
-    .from<Advertisement>(ADVERTISEMENT_TABLE_NAME)
-    .select(`*, host:hostId(*)`)
-    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
-    .limit(1)
-    .single();
+    if (error) {
+      console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
+    }
 
-  if (error) {
-    console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
-  }
+    if (advertisement) {
+      return {
+        props: { advertisement },
+      };
+    } else {
+      return {
+        notFound: true,
+      };
+    }
+  },
+});
 
-  if (advertisement) {
-    return {
-      props: { advertisement },
-    };
-  } else {
-    return {
-      notFound: true,
-    };
-  }
-};
 export default Anuncio;

@@ -1,7 +1,8 @@
 import { BiDrink } from "react-icons/bi";
 import { GiCigarette, GiBroom } from "react-icons/gi";
 import { MdChecklist, MdOutlinePets } from "react-icons/md";
-import Advertisement, {
+import {
+  Advertisement,
   ADVERTISEMENT_PROPERTIES,
   HOUSE_RULES_NAMING,
   TYPE_CLEANING_LABELS,
@@ -15,19 +16,19 @@ interface HouseRulesProps {
 
 const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
   const toggleHouseRulesProperty = (event) => {
-    const { houseRules } = advertisement;
+    const { house_rules } = advertisement;
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
-      ...houseRules,
+      ...house_rules,
       [event.target.name]: event.target.checked,
     });
   };
 
-  const changingHouseRulesPropertyInput = (event) => {
-    const { houseRules } = advertisement;
+  const changeHouseRulesInput = (event) => {
+    const { house_rules } = advertisement;
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
-      ...houseRules,
+      ...house_rules,
       [event.target.name]: event.target.value,
     });
   };
@@ -48,7 +49,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
               <input
                 name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
                 type="checkbox"
-                checked={advertisement.houseRules.animalsAllowed}
+                checked={advertisement.house_rules.animalsAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
                 onChange={(e) => toggleHouseRulesProperty(e)}
               />
@@ -71,7 +72,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
                 name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
                 type="checkbox"
                 value="true"
-                checked={advertisement.houseRules.smokeAllowed}
+                checked={advertisement.house_rules.smokeAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
                 onChange={(e) => toggleHouseRulesProperty(e)}
               />
@@ -95,7 +96,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
                 type="checkbox"
                 name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
                 value="true"
-                checked={advertisement.houseRules.eventsAllowed}
+                checked={advertisement.house_rules.eventsAllowed}
                 className="h-4 w-4 rounded border border-terciary-500"
                 onChange={(e) => toggleHouseRulesProperty(e)}
               />
@@ -117,8 +118,8 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
               label={HOUSE_RULES_NAMING.OTHER_RULES}
               labelText=""
               customCss="w-full"
-              value={advertisement.houseRules.otherRules}
-              onChange={(e) => changingHouseRulesPropertyInput(e)}
+              value={advertisement.house_rules.otherRules}
+              onChange={(e) => changeHouseRulesInput(e)}
             />
           </div>
           <div></div>

@@ -1,7 +1,8 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { updateAdvertisement } from "../../services/advertisementService";
+import useAdvertisementService from "../../services/advertisementService";
 import HostFlexTypeComponent from "../anuncio/HostFlexTypeComponent";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso7 = () => {
   const currentStep = useCurrentStep();
@@ -9,6 +10,9 @@ const FormPasso7 = () => {
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
+
+  /* Services */
+  const { updateAdvertisement } = useAdvertisementService();
 
   const nextStep = async (e) => {
     e.preventDefault();

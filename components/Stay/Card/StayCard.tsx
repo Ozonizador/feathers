@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { EXPENSES_TO_TEXT, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { Stay, StayGuest } from "../../../models/stay";
+import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
+import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { StayGuest } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 interface StayCardProps {
   stay: StayGuest;
@@ -25,9 +26,11 @@ const StayCard = ({ stay }: StayCardProps) => {
               <div className="mb-3 mt-3 text-base font-bold">
                 {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
               </div>
-              <div className="mb-1 text-xl font-bold text-primary-500">{advertisement.monthRent}€/mês</div>
-              {advertisement.expenses?.inclusive && (
-                <div className="text-base text-secondary-300">{EXPENSES_TO_TEXT[advertisement.expenses.inclusive]}</div>
+              <div className="mb-1 text-xl font-bold text-primary-500">{advertisement.month_rent}€/mês</div>
+              {advertisement.expenses?.services && (
+                <div className="text-base text-secondary-300">
+                  {checkIfExpensesIncluded(advertisement.expenses.services)}
+                </div>
               )}
             </div>
           </div>

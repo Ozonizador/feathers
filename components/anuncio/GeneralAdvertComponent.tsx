@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { useGetUserCoordinates } from "../../context/MainProvider";
-import Advertisement, { ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
-import { GEO } from "../../models/utils";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";
 
@@ -13,7 +13,6 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
   onChange: (property, value) => void;
-  markerLocation?: GEO;
   onChangeMarker?: (lat, lng) => void;
 }
 
@@ -22,7 +21,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
-      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates);
+      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates as CoordinatesAsArray);
       return { lat, lng };
     } else {
       return userlocation;
@@ -97,7 +96,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             <Input
               label="street_number"
               labelText="Número"
-              value={advertisement.streetNumber}
+              value={advertisement.street_number}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
             />
           </div>
@@ -106,7 +105,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             <Input
               label="postal_code"
               labelText="Código Postal"
-              value={advertisement.postalCode}
+              value={advertisement.postal_code}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
             />
           </div>

@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
-import { addReview } from "../../services/reviewService";
+import useReviewService from "../../services/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
 import {
   useModalAvaliarExperiencia,
@@ -19,24 +19,27 @@ false nao mostra nada true mostra.
 */
 
 const startingReview = {
-  advertisementId: "",
-  tenantId: "",
-  overallRating: 1,
-  locationRating: 1,
-  valueQualityRating: 1,
-  landLordRating: 1,
-  comoditiesRating: 1,
-  publicReview: "",
-  privateReview: "",
-} as Review;
+  id: "",
+  advertisement_id: "",
+  tenant_id: "",
+  stay_id: null,
+  overall_rating: 1,
+  location_rating: 1,
+  value_quality_rating: 1,
+  landlord_rating: 1,
+  comodities_rating: 1,
+  public_review: "",
+  private_review: "",
+} as Omit<Review, "created_at" | "updated_at">;
 
 const ModalAvaliarExperiencia = () => {
   const profile = useProfileInformation();
+  const { addReview } = useReviewService();
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, stay, step } = useModalAvaliarExperiencia();
   const setModalProperty = useSetModalAvaliarExperienciaContextProperty();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
-  const [review, setReview] = useState<Review>(startingReview);
+  const [review, setReview] = useState<Omit<Review, "created_at" | "updated_at">>(startingReview);
 
   function closeModal() {
     setIsOpen(false);
@@ -103,19 +106,19 @@ const ModalAvaliarExperiencia = () => {
                               <div className="text-2xl text-secondary-300">Localização</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 1)}>
-                                  <Rating.Star filled={review.locationRating >= 1 ? true : false} />
+                                  <Rating.Star filled={review.location_rating >= 1 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 2)}>
-                                  <Rating.Star filled={review.locationRating >= 2 ? true : false} />
+                                  <Rating.Star filled={review.location_rating >= 2 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 3)}>
-                                  <Rating.Star filled={review.locationRating >= 3 ? true : false} />
+                                  <Rating.Star filled={review.location_rating >= 3 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 4)}>
-                                  <Rating.Star filled={review.locationRating >= 4 ? true : false} />
+                                  <Rating.Star filled={review.location_rating >= 4 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 5)}>
-                                  <Rating.Star filled={review.locationRating == 5 ? true : false} />
+                                  <Rating.Star filled={review.location_rating == 5 ? true : false} />
                                 </div>
                               </Rating>
                             </div>
@@ -124,19 +127,19 @@ const ModalAvaliarExperiencia = () => {
                               <div className="w-1/2 text-2xl text-secondary-300">Qualidade - preço</div>
                               <Rating className="w-1/2">
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 1)}>
-                                  <Rating.Star filled={review.valueQualityRating >= 1 ? true : false} />
+                                  <Rating.Star filled={review.value_quality_rating >= 1 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 2)}>
-                                  <Rating.Star filled={review.valueQualityRating >= 2 ? true : false} />
+                                  <Rating.Star filled={review.value_quality_rating >= 2 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 3)}>
-                                  <Rating.Star filled={review.valueQualityRating >= 3 ? true : false} />
+                                  <Rating.Star filled={review.value_quality_rating >= 3 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 4)}>
-                                  <Rating.Star filled={review.valueQualityRating >= 4 ? true : false} />
+                                  <Rating.Star filled={review.value_quality_rating >= 4 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 5)}>
-                                  <Rating.Star filled={review.valueQualityRating == 5 ? true : false} />
+                                  <Rating.Star filled={review.value_quality_rating == 5 ? true : false} />
                                 </div>
                               </Rating>
                             </div>
@@ -145,19 +148,19 @@ const ModalAvaliarExperiencia = () => {
                               <div className="text-2xl text-secondary-300">Comodidades</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 1)}>
-                                  <Rating.Star filled={review.comoditiesRating >= 1 ? true : false} />
+                                  <Rating.Star filled={review.comodities_rating >= 1 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 2)}>
-                                  <Rating.Star filled={review.comoditiesRating >= 2 ? true : false} />
+                                  <Rating.Star filled={review.comodities_rating >= 2 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 3)}>
-                                  <Rating.Star filled={review.comoditiesRating >= 3 ? true : false} />
+                                  <Rating.Star filled={review.comodities_rating >= 3 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 4)}>
-                                  <Rating.Star filled={review.comoditiesRating >= 4 ? true : false} />
+                                  <Rating.Star filled={review.comodities_rating >= 4 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 5)}>
-                                  <Rating.Star filled={review.comoditiesRating == 5 ? true : false} />
+                                  <Rating.Star filled={review.comodities_rating == 5 ? true : false} />
                                 </div>
                               </Rating>
                             </div>
@@ -166,19 +169,19 @@ const ModalAvaliarExperiencia = () => {
                               <div className="text-2xl text-secondary-300">Senhorio</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 1)}>
-                                  <Rating.Star filled={review.landLordRating >= 1 ? true : false} />
+                                  <Rating.Star filled={review.landlord_rating >= 1 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 2)}>
-                                  <Rating.Star filled={review.landLordRating >= 2 ? true : false} />
+                                  <Rating.Star filled={review.landlord_rating >= 2 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 3)}>
-                                  <Rating.Star filled={review.landLordRating >= 3 ? true : false} />
+                                  <Rating.Star filled={review.landlord_rating >= 3 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 4)}>
-                                  <Rating.Star filled={review.landLordRating >= 4 ? true : false} />
+                                  <Rating.Star filled={review.landlord_rating >= 4 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 5)}>
-                                  <Rating.Star filled={review.landLordRating == 5 ? true : false} />
+                                  <Rating.Star filled={review.landlord_rating == 5 ? true : false} />
                                 </div>
                               </Rating>
                             </div>
@@ -187,19 +190,19 @@ const ModalAvaliarExperiencia = () => {
                               <div className="text-2xl text-secondary-300">Avaliação Geral</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 1)}>
-                                  <Rating.Star filled={review.overallRating >= 1 ? true : false} />
+                                  <Rating.Star filled={review.overall_rating >= 1 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 2)}>
-                                  <Rating.Star filled={review.overallRating >= 2 ? true : false} />
+                                  <Rating.Star filled={review.overall_rating >= 2 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 3)}>
-                                  <Rating.Star filled={review.overallRating >= 3 ? true : false} />
+                                  <Rating.Star filled={review.overall_rating >= 3 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 4)}>
-                                  <Rating.Star filled={review.overallRating >= 4 ? true : false} />
+                                  <Rating.Star filled={review.overall_rating >= 4 ? true : false} />
                                 </div>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 5)}>
-                                  <Rating.Star filled={review.overallRating == 5 ? true : false} />
+                                  <Rating.Star filled={review.overall_rating == 5 ? true : false} />
                                 </div>
                               </Rating>
                             </div>
@@ -243,7 +246,7 @@ const ModalAvaliarExperiencia = () => {
                               className="form-control w-full rounded-md border border-terciary-500 bg-white"
                               id="exampleFormControlTextarea1"
                               rows={3}
-                              value={review.publicReview}
+                              value={review.public_review}
                               onChange={(e) => setReviwByProperty(REVIEW_COLUMNS.PUBLIC_REVIEW, e.target.value)}
                             ></textarea>
                           </div>
@@ -254,7 +257,7 @@ const ModalAvaliarExperiencia = () => {
                                 className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
                                 id="exampleFormControlTextarea1"
                                 rows={3}
-                                value={review.privateReview}
+                                value={review.private_review}
                                 onChange={(e) => setReviwByProperty(REVIEW_COLUMNS.PRIVATE_REVIEW, e.target.value)}
                               ></textarea>
                             </div>

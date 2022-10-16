@@ -1,19 +1,13 @@
+import { Database } from "../database.types";
+
 export const NOTIFICATION_TABLE_NAME = "notifications" as const;
 
-export interface Notification {
-  id?: string;
-  title: string;
-  description: string;
-  type: NotificationType;
-
-  profileId: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+export type NotificationsResponse = Database["public"]["Tables"]["notifications"];
+export type Notification = NotificationsResponse["Row"];
 
 /* VALUES FOR DB */
 export const NOTIFICATION_PROPERTIES = {
-  PROFILE_ID: "profileId",
+  PROFILE_ID: "profile_id",
   ID: "id",
 } as const;
 

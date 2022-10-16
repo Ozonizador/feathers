@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
 import { GEO } from "../models/utils";
-import { getFilteredAdvertisements } from "../services/advertisementService";
+import useAdvertisementService from "../services/advertisementService";
 
 /* FILTERS */
 export interface FilterAdvertisements {
@@ -78,11 +78,18 @@ const SetAdvertisementsContext = createContext<Dispatch<SetStateAction<Advertise
 export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
+  const { getAdvertisementsByCloseCoordinatesWithFilters } = useAdvertisementService();
 
   const getAdvertisements = useCallback(async () => {
     setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));
     // load advertisements
-    const { data, error, count } = await getFilteredAdvertisements(advertisementsInfo.page, currentFilter);
+    const { data, error, count } = await getAdvertisementsByCloseCoordinatesWithFilters(
+      currentFilter.filter?.coordinates?.lat,
+      currentFilter.filter?.coordinates?.lng,
+      advertisementsInfo.page,
+      currentFilter
+    );
+
     if (!error) {
       setAdvertisementsInfo((oldState) => ({ ...oldState, advertisements: data, count, loading: false }));
     } else {

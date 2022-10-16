@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import Advertisement from "../models/advertisement";
+import { Advertisement } from "../models/advertisement";
 
 /* Senhorio anuncio context */
 const MenuSenhorioAnuncioContext = createContext<Advertisement>(null);
