@@ -36,7 +36,7 @@ const Register = () => {
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">Registar</div>
         </div>
-        <div className="mt-9  p-3">
+        <div className="mt-9 p-3">
           <div className="mb-9 text-xl font-bold">
             Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
           </div>

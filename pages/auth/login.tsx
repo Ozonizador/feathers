@@ -45,8 +45,10 @@ const Login = () => {
             <a className="border-l border-terciary-100 p-3 text-center">Registar</a>
           </Link>
         </div>
-        <div className="p-3">
-          <div className="mb-9 text-xl font-bold">Bem-vindo</div>
+        <div className="mt-9 p-3">
+          <div className="mb-9 text-xl font-bold">
+            Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
+          </div>
           <form onSubmit={(e) => normalLogin(e)}>
             <div className="mt-3">
               <div>Email</div>
