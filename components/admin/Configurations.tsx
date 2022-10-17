@@ -13,7 +13,7 @@ const Configurations = () => {
   const { updateUserPassword } = useUserService();
   const updatePassword = () => {
     if (password !== confirmPassword) {
-      return toast("Palavras passe não coincidem.");
+      return toast.error("Palavras passe não coincidem.");
     }
     updateUserPassword(password);
   };

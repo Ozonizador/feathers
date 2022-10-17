@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
+import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import useUserService from "../../services/userService";
 
@@ -25,7 +26,11 @@ const Register = () => {
     event.preventDefault();
 
     const { error } = await register(email, password);
-    debugger;
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
   };
 
   return (
