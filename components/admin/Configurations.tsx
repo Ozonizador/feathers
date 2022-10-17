@@ -57,11 +57,9 @@ const Configurations = () => {
                     />
                   </div>
                 </div>
-                <div className=" flex flex-1 ">
-                  {/* <Button text="Alterar password" onClick={() => { }} ></Button> */}
-
+                <div className="flex flex-1">
                   <button
-                    className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
+                    className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
                     onClick={updatePassword}
                   >
                     Alterar password
