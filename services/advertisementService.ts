@@ -126,13 +126,11 @@ const useAdvertisementService = () => {
     if (error) {
       return { data: null, error };
     }
-    debugger;
     return getPublicUrlFromImage(data.path);
   };
 
   const getPublicUrlFromImage = async (key: string) => {
     const { data } = await supabaseClient.storage.from(ADVERTISEMENT_STORAGE_BUCKET).getPublicUrl(getCorrectUrl(key));
-    debugger;
     return { data, error: null };
   };
 

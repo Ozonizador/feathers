@@ -97,13 +97,51 @@ const useProfileService = () => {
     return { data, error };
   };
 
+  async function updateNotificationEmail(userId: string, notify: boolean) {
+    const { error, data } = await supabaseClient
+      .from(PROFILE_TABLE_NAME)
+      .update({ accepts_notification_email: notify })
+      .eq(PROFILE_COLUMNS.ID, userId)
+      .select("accepts_notification_email")
+      .single();
+
+    return { error, data };
+  }
+
+  async function updateNotificationMessage(userId: string, notify: boolean) {
+    const { error, data } = await supabaseClient
+      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+      .update({ accepts_notification_message: notify })
+      .eq(PROFILE_COLUMNS.ID, userId)
+      .select("accepts_notification_message")
+      .single();
+
+    return { error, data };
+  }
+
+  async function getNotificationInfoFromUser(userId: string) {
+    const { error, data } = await supabaseClient
+      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+      .select("accepts_notification_email, accepts_notification_message");
+
+    return { error, data };
+  }
+
   /* Utils */
   const getPublicAvatarUrlFromImage = async (key: string) => {
     const { data } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).getPublicUrl(getCorrectUrl(key));
     return { publicUrl: data.publicUrl, error: null };
   };
 
-  return { checkProfileAndCreate, addAvatar, updateUserProfile, getUserProfile };
+  return {
+    checkProfileAndCreate,
+    addAvatar,
+    updateUserProfile,
+    getUserProfile,
+    updateNotificationEmail,
+    updateNotificationMessage,
+    getNotificationInfoFromUser,
+  };
 };
 
 export default useProfileService;

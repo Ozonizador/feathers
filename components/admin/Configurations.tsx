@@ -5,17 +5,47 @@ import FeathersCheckbox from "../common/FeathersCheckbox";
 import useUserService from "../../services/userService";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import FeathersButton from "../utils/Button";
+import { useUser } from "@supabase/auth-helpers-react";
+import useProfileService from "../../services/profileService";
 // PÁGINA 36
 
 const Configurations = () => {
+  const user = useUser();
+  const [loading, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { updateUserPassword } = useUserService();
-  const updatePassword = () => {
-    if (password !== confirmPassword) {
-      return toast.error("Palavras passe não coincidem.");
+  const { updateNotificationEmail, updateNotificationMessage } = useProfileService();
+
+  const updatePassword = async () => {
+    setLoading(true);
+    try {
+      if (password !== confirmPassword) throw Error("Palavras passe não coincidem.");
+
+      const { error } = await updateUserPassword(password);
+      if (error) throw Error(error.message);
+
+      toast.success("Password alterada");
+    } catch (e) {
+      toast.error(e);
+    } finally {
+      setLoading(false);
     }
-    updateUserPassword(password);
+  };
+
+  const toggleUserNotificationEmail = async () => {
+    if (user) {
+      // modify this
+      const { data, error } = await updateNotificationEmail(user.id, false);
+    }
+  };
+
+  const toggleUserNotificationMessage = async () => {
+    if (user) {
+      // modify this
+      const { data, error } = await updateNotificationMessage(user.id, false);
+    }
   };
 
   return (
@@ -58,12 +88,9 @@ const Configurations = () => {
                   </div>
                 </div>
                 <div className="flex flex-1">
-                  <button
-                    className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
-                    onClick={updatePassword}
-                  >
-                    Alterar password
-                  </button>
+                  <div className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
+                    <FeathersButton text={"Alterar password"} loading={loading} onClick={updatePassword} />
+                  </div>
                 </div>
               </div>
 
@@ -78,7 +105,7 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <FeathersCheckbox selected={true} onChangeFn={() => {}} />
+                            <FeathersCheckbox selected={true} onChangeFn={toggleUserNotificationEmail} />
                           </div>
                         </div>
                       </div>
@@ -91,7 +118,7 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <FeathersCheckbox selected={true} onChangeFn={() => {}} />
+                            <FeathersCheckbox selected={true} onChangeFn={toggleUserNotificationMessage} />
                           </div>
                         </div>
                       </div>
