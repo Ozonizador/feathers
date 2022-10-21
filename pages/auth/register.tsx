@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
@@ -6,6 +7,7 @@ import Input from "../../components/utils/Input";
 import useUserService from "../../services/userService";
 
 const Register = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,6 +32,9 @@ const Register = () => {
     if (error) {
       toast.error(error.message);
       return;
+    } else {
+      toast.success("Register successfully");
+      router.push("/");
     }
   };
 
