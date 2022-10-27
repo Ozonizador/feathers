@@ -99,12 +99,12 @@ export const Navbar = () => {
             </div>
 
             <div className="mx-auto my-auto hidden lg:block">
-              <div className="flex">
+              <div className="flex gap-1">
                 <div className="w-fit">
                   <Menu as="div" className="z-50 ml-5 w-full">
                     <Menu.Button className="flex flex-1">
-                      <div>Anuncie a sua propriedade</div>
-                      <div className="my-auto ml-auto">
+                      <h6>Anuncie a sua propriedade</h6>
+                      <div className="my-auto">
                         <VscTriangleDown className="w-8 text-[#2C3E50]" />
                       </div>
                     </Menu.Button>
@@ -132,10 +132,10 @@ export const Navbar = () => {
                     </Transition>
                   </Menu>
                 </div>
-                <div className="px-5">
+                <div className="my-auto px-5">
                   <Link href="/blog">Blog</Link>
                 </div>
-                <div className="px-5">
+                <div className="my-auto px-5">
                   <Link href="/contactos">Contactos</Link>
                 </div>
               </div>
@@ -143,10 +143,10 @@ export const Navbar = () => {
             <div className="my-auto ml-auto hidden lg:block ">
               <div>
                 {!user && (
-                  <div className="my-auto flex">
+                  <div className="my-auto flex gap-2">
                     <Link href="/auth/register">
                       <a className="p-0">
-                        <div className="mr-2 rounded border-2 border-primary-500 px-6 py-3 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                        <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                           Registar
                         </div>
                       </a>
@@ -164,9 +164,6 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div>
-                      {/* <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
-                        Modo Senhorio
-                      </button> */}
                       <span className="mr-2">Estudante</span>
                       <Switch
                         checked={true}

@@ -25,7 +25,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
       return;
     }
 
-    if (toggleUserType === "TENANT") {
+    if (toggleUserType !== "TENANT") {
       toggleUserTypeContext("TENANT");
     } else {
       toggleUserTypeContext("LANDLORD");
@@ -73,7 +73,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                       <Link href="/funciona">Como funciona?</Link>
                     </div>
                     <div>
-                      <Link href="/unidesk/unicontrolo/guests">Anunciar!</Link>
+                      <Link href="/anunciar">Anunciar!</Link>
                     </div>
                   </div>
                 </>
@@ -89,12 +89,9 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
           <div className="mt-7  rounded-3xl bg-gray-100 py-4 px-8">
             <div className="align-center flex flex-1 justify-center">
               <div>
-                {/* <button className="mx-3 rounded border border-primary-500 p-2" onClick={setModoSenhorio}>
-                          Modo Senhorio
-                        </button> */}
                 <span className="mr-2">Estudante</span>
                 <Switch
-                  checked={true}
+                  checked={false}
                   onChange={toggleSenhorioEstudante}
                   className="relative mx-5 mt-2 inline-flex h-8 w-16 items-center rounded-full bg-primary-500"
                 >
@@ -108,27 +105,51 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               </div>
             </div>
             <div className="my-10 flex">
-              <div className=" flex">
-                {user?.user_metadata?.avatar_url && (
-                  <Image
-                    unoptimized={true}
-                    src={user?.user_metadata?.avatar_url || person}
-                    height={32}
-                    width={36}
-                    alt=""
-                    className="rounded-full"
-                  />
-                )}
-                <div className="my-auto ml-2">{user?.user_metadata.name}</div>
-              </div>
-              <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
-                <Image
-                  src={!menuaberto ? "/images/down-arrow.png" : "/images/up-arrow.png"}
-                  height={22}
-                  width={22}
-                  alt=""
-                />
-              </div>
+              {user && (
+                <>
+                  <div className="flex">
+                    {user?.user_metadata?.avatar_url && (
+                      <Image
+                        unoptimized={true}
+                        src={user?.user_metadata?.avatar_url || person}
+                        height={32}
+                        width={36}
+                        alt=""
+                        className="rounded-full"
+                      />
+                    )}
+                    <div className="my-auto ml-2">{user?.user_metadata.name}</div>
+                  </div>
+
+                  <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
+                    <Image
+                      src={!menuaberto ? "/images/down-arrow.png" : "/images/up-arrow.png"}
+                      height={22}
+                      width={22}
+                      alt=""
+                    />
+                  </div>
+                </>
+              )}
+              {!user && (
+                <div className="my-auto flex w-full  justify-center gap-2">
+                  <Link href="/auth/register">
+                    <a className="p-0">
+                      <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                        Registar
+                      </div>
+                    </a>
+                  </Link>
+
+                  <Link href="/auth/login">
+                    <a className="p-0">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                        Iniciar sessão
+                      </div>
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className={classNames("mb-3 w-full  rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
