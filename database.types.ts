@@ -1,4 +1,4 @@
-import { AboutHouseSections, AdvertisementPhoto, HouseExpenses, HouseRules } from "./models/advertisement";
+import { HouseRules, AboutHouseSections, HouseExpenses, AdvertisementPhoto } from "./models/advertisement";
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
@@ -193,8 +193,6 @@ export interface Database {
       notifications: {
         Row: {
           id: string;
-          title: string;
-          description: string;
           type: Database["public"]["Enums"]["NotificationType"];
           profile_id: string;
           created_at: string;
@@ -202,8 +200,6 @@ export interface Database {
         };
         Insert: {
           id: string;
-          title: string;
-          description: string;
           type: Database["public"]["Enums"]["NotificationType"];
           profile_id: string;
           created_at?: string;
@@ -211,8 +207,6 @@ export interface Database {
         };
         Update: {
           id?: string;
-          title?: string;
-          description?: string;
           type?: Database["public"]["Enums"]["NotificationType"];
           profile_id?: string;
           created_at?: string;
