@@ -45,6 +45,9 @@ module.exports = {
           gmail: "#FFEBE9",
         },
       },
+      zIndex: {
+        900: 900,
+      },
     },
   },
   variants: {

@@ -100,8 +100,8 @@ export const Navbar = () => {
 
             <div className="mx-auto my-auto hidden lg:block">
               <div className="flex gap-1">
-                <div className="w-fit">
-                  <Menu as="div" className="z-50 ml-5 w-full">
+                <div className="z-900 w-fit">
+                  <Menu as="div" className="ml-5 w-full">
                     <Menu.Button className="flex flex-1">
                       <h6>Anuncie a sua propriedade</h6>
                       <div className="my-auto">

@@ -50,7 +50,7 @@ export enum NotificationType {
   LANDLORD_NEW_REVIEW = "LANDLORD_NEW_REVIEW", // trigger done
   LANDLORD_COMPLETE_PROFILE = "LANDLORD_COMPLETE_PROFILE",
   LANDLORD_COMPLETE_ADVERT = "LANDLORD_COMPLETE_ADVERT",
-  BLOG = "BLOG",
+  BLOG = "BLOG", // trigger done
 }
 
 export interface NotificationInformation {
