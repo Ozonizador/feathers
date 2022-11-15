@@ -23,10 +23,10 @@ export default function HomeSection6() {
           >
             {group(Testemunhos, 3).map((children, index) => {
               return (
-                <div key={index} className="flex w-5/6 gap-6 px-10 lg:justify-center">
+                <div key={index} className="flex gap-6 px-24 lg:justify-center">
                   {children.map((testemunho, index) => {
                     return (
-                      <div className="w-5/6" key={index}>
+                      <div key={index}>
                         <TestemunhoCard
                           testimonial={testemunho.description}
                           img={testemunho.image}
@@ -36,7 +36,6 @@ export default function HomeSection6() {
                       </div>
                     );
                   })}
-                  ;
                 </div>
               );
             })}

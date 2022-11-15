@@ -10,7 +10,7 @@ interface TestemunhoCardProps {
 
 export default function TestemunhoCard({ img, testimonial, name, desc }: TestemunhoCardProps) {
   return (
-    <article className="rounded-xl bg-white p-4 lg:mb-8 lg:h-80 lg:w-96">
+    <article className="w-full rounded-xl bg-white p-4 lg:mb-8 lg:h-80">
       <div>
         <div>
           <Image
@@ -19,14 +19,14 @@ export default function TestemunhoCard({ img, testimonial, name, desc }: Testemu
             src="/images/icon-quotest.svg"
             alt=""
             style={{ width: "42px" }}
-            className="py-4"
+            className="rounded-lg py-4"
           />
 
           <p className="text-sm">{testimonial}</p>
         </div>
       </div>
       <div className="mt-7 flex">
-        <Image height={64} width={64} src={img} alt="" />
+        <Image height={64} width={64} src={img} alt="" className="rounded-lg" />
         <div className="ml-2">
           <p className="mb-0 text-xl font-bold">{name}</p>
           <p className="mb-0">{desc}</p>
