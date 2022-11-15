@@ -13,15 +13,7 @@ export default function TestemunhoCard({ img, testimonial, name, desc }: Testemu
     <article className="w-full rounded-xl bg-white p-4 lg:mb-8 lg:h-80">
       <div>
         <div>
-          <Image
-            height={32}
-            width={32}
-            src="/images/icon-quotest.svg"
-            alt=""
-            style={{ width: "42px" }}
-            className="rounded-lg py-4"
-          />
-
+          <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" className="rounded-lg py-4" />
           <p className="text-sm">{testimonial}</p>
         </div>
       </div>

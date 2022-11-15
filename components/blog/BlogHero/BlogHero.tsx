@@ -1,5 +1,6 @@
 import { Blog } from "../../../models/blog";
 import Image from "next/image";
+import { dateToFormat } from "../../../utils/utils";
 interface BlogHeroProps {
   blogs: Blog[];
 }
@@ -24,7 +25,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                     </div>
 
                     <div>
-                      <p className="normal-case text-gray-300">{blog.created_at}</p>
+                      <p className="normal-case text-gray-300">{dateToFormat(new Date(blog.created_at))}</p>
                     </div>
                   </div>
                 </div>

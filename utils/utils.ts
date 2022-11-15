@@ -39,3 +39,10 @@ export const formatDate = (date: Date) => {
     year: "numeric",
   });
 };
+
+export const group = (items, n) =>
+  items.reduce((acc, x, i) => {
+    const idx = Math.floor(i / n);
+    acc[idx] = [...(acc[idx] || []), x];
+    return acc;
+  }, []);
