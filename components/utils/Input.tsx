@@ -9,6 +9,7 @@ interface InputProps {
   label?: string;
   type?: "password" | "text";
   defaultValue?: string;
+  autoComplete?: string;
 }
 
 export default function Input({
@@ -19,6 +20,7 @@ export default function Input({
   customCss = "",
   type = "text",
   defaultValue,
+  autoComplete = "off",
 }: InputProps) {
   return (
     <div className="my-2">
@@ -34,6 +36,7 @@ export default function Input({
           value={value}
           type={type}
           defaultValue={defaultValue}
+          autoComplete={autoComplete}
         ></input>
       </div>
     </div>

@@ -8,6 +8,7 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
+  CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 import { AdvertisementReviewSummary } from "../models/review";
@@ -86,9 +87,13 @@ const useAdvertisementService = () => {
     page: number,
     filters: FilterAdvertisements
   ) => {
+    if (!lng || !lat) {
+      return { data: null, error: "No latitude or longitude provided", count: null };
+    }
+
     let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
     let query = supabaseClient
-      .rpc(
+      .rpc<"close_advertisements", CloseAdvertisementsFn>(
         CLOSE_ADVERTISEMENTS_TABLE_NAME,
         {
           lat,

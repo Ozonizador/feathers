@@ -9,7 +9,6 @@ import useUserService from "../../services/userService";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [hasError, setHasError] = useState<boolean>(false);
 
   const router = useRouter();
   const { login, loginWithFacebook, loginWithGoogle } = useUserService();
@@ -27,11 +26,9 @@ const Login = () => {
 
   const normalLogin = async (event) => {
     event.preventDefault();
-    setHasError(false);
     const { error } = await login(email, password);
     if (error) {
       toast.error(error.message);
-      setHasError(true);
       return;
     } else {
       router.push("/");
@@ -62,13 +59,17 @@ const Login = () => {
             <div className="mt-3">
               <div>Palavra-passe</div>
               <div className="mt-2">
-                <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password"></Input>
+                <Input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  autoComplete="on"
+                ></Input>
               </div>
             </div>
             <div className="my-5">
               <button className="w-full rounded-lg bg-primary-500 py-2 text-white">Iniciar Sessão</button>
             </div>
-            {hasError && <div>Username ou password errados</div>}
           </form>
           <Link href="/auth/recover">
             <a>
