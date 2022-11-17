@@ -18,12 +18,13 @@ export const PAGE_NUMBER_COUNT = 10 as number;
 
 const useAdvertisementService = () => {
   const supabaseClient = useSupabaseClient();
+
   const addAdvertisement = async (advertisement: Advertisement) => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .insert({ ...advertisement, updated_at: new Date().toDateString(), id: uuidv4() })
+      .select()
       .single();
-
     return { data, error };
   };
 
@@ -32,6 +33,7 @@ const useAdvertisementService = () => {
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
       .eq(ADVERTISEMENT_PROPERTIES.ID, id)
+      .select()
       .single();
 
     return { data, error };

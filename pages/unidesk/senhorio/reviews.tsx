@@ -1,7 +1,8 @@
 import BreadCrumbs from "../../../components/unidesk/Senhorio/Reviews/Breadcrumb/Breadcrumbs";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import ReviewInfo from "../../../components/unidesk/Senhorio/Reviews/ReviewInfo/ReviewInfo";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
 
 const reviews = () => {
   return (
@@ -23,4 +24,26 @@ const reviews = () => {
 
 export default reviews;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

@@ -3,7 +3,7 @@ import { useProfileInformation } from "../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
 import useConversationService from "../../services/conversationService";
 import useMessagesService from "../../services/messageService";
-import { Message, MessageWithProfile } from "../../models/message";
+import { MessageWithProfile } from "../../models/message";
 import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
@@ -12,8 +12,9 @@ import { ReservationStatus, ReservationStatusLabel } from "../../models/reservat
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import useReservationService from "../../services/reservationService";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
+import { GetServerSidePropsContext } from "next";
 
 {
   /* page 59 XD */
@@ -257,4 +258,26 @@ const CaixaEntrada = () => {
 
 export default CaixaEntrada;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

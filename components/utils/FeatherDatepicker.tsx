@@ -1,6 +1,10 @@
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 import classNames from "classnames";
+import dynamic from "next/dynamic";
+
+const DatePicker = dynamic(() => import("react-datepicker"), {
+  ssr: true,
+});
 
 interface FeatherDatePickerProps {
   date: Date;

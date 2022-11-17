@@ -3,7 +3,6 @@ import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
-import { dateToFormat } from "../../utils/utils";
 import { giveSearchByLocationSearch } from "../../services/mapService";
 import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";

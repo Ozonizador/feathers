@@ -12,9 +12,10 @@ import { Spinner } from "flowbite-react";
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { Advertisement } from "../../../models/advertisement";
+import { GetServerSidePropsContext } from "next";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -144,4 +145,26 @@ const UnideskFavoritos = () => {
 
 export default UnideskFavoritos;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

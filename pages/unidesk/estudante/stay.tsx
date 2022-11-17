@@ -16,8 +16,9 @@ import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useStayService from "../../../services/stayService";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayComplete } from "../../../models/stay";
+import { GetServerSidePropsContext } from "next";
 
 /* PAGINA 21 do xd */
 
@@ -125,4 +126,26 @@ const Estadia = () => {
 
 export default Estadia;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

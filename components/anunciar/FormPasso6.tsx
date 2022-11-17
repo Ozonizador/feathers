@@ -2,7 +2,6 @@ import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvide
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../services/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const FormPasso6 = () => {
   const currentStep = useCurrentStep();

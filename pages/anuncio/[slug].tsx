@@ -12,7 +12,8 @@ import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamen
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
 import { AdvertisementWithHost, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
 
 interface AnuncioProps {
   advertisement: AdvertisementWithHost;
@@ -48,39 +49,50 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
   );
 };
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/auth/login",
-  authRequired: false,
-  async getServerSideProps(ctx, supabase) {
-    const slug = ctx.params?.slug;
-    /* Not Found */
-    if (!slug) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const { data: advertisement, error } = await supabase
-      .from(ADVERTISEMENT_TABLE_NAME)
-      .select(`*, host:host_id(*)`)
-      .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
-      .limit(1)
-      .single();
-
-    if (error) {
-      console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
-    }
-
-    if (advertisement) {
-      return {
-        props: { advertisement },
-      };
-    } else {
-      return {
-        notFound: true,
-      };
-    }
-  },
-});
-
 export default Anuncio;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const slug = ctx.params?.slug;
+  /* Not Found */
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data: advertisement, error } = await supabase
+    .from(ADVERTISEMENT_TABLE_NAME)
+    .select(`*, host:host_id(*)`)
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+    .limit(1)
+    .single();
+
+  if (error) {
+    console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
+  }
+
+  if (advertisement) {
+    return {
+      props: { advertisement, initialSession: session, user: session.user },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
+};

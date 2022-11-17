@@ -13,7 +13,8 @@ import FormPasso8 from "../components/anunciar/FormPasso8";
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
 import { AdvertisementController } from "../context/AdvertisementController";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
 
 export default function Anunciar() {
   return (
@@ -52,4 +53,26 @@ const ZonaFormulario = () => {
   );
 };
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

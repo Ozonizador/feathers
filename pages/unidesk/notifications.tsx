@@ -1,5 +1,6 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Spinner } from "flowbite-react";
+import { GetServerSidePropsContext } from "next";
 import { useCallback, useEffect, useState } from "react";
 import Breadcrumb from "../../components/notifications/Breadcrumbs/Breadcrumb";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
@@ -52,4 +53,26 @@ const Notifications = () => {
 
 export default Notifications;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};
