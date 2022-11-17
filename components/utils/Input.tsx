@@ -28,7 +28,7 @@ export default function Input({
         {label && <label htmlFor={label}>{labelText}</label>}
         <input
           className={classNames(
-            "block w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-4 shadow-sm",
+            "block w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-5 shadow-sm",
             `${customCss}`
           )}
           onChange={onChange}

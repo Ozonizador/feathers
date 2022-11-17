@@ -1,4 +1,4 @@
-import { createServerSupabaseClient, withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";

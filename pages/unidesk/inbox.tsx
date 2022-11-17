@@ -6,7 +6,6 @@ import useMessagesService from "../../services/messageService";
 import { MessageWithProfile } from "../../models/message";
 import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
-import Breadcrumb from "../../components/CaixaEntrada/breadcrumbs/Breadcrumb";
 import { Avatar } from "flowbite-react";
 import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
@@ -15,6 +14,9 @@ import useReservationService from "../../services/reservationService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
+import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
+
+import IconCaixa from "../../public/images/iconCaixa.svg";
 
 {
   /* page 59 XD */
@@ -85,9 +87,9 @@ const CaixaEntrada = () => {
 
   return (
     <>
-      <Breadcrumb />
+      <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
       <div className="mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
-        {!conversations || (conversations.length === 0 && <div className="p-4">Não tem conversações</div>)}
+        {!conversations || (conversations.length === 0 && <div className="p-4">Não existem conversações</div>)}
         {conversations && conversations.length > 0 && (
           <>
             <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 align-middle">

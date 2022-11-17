@@ -3,7 +3,7 @@ import classNames from "classnames";
 import dynamic from "next/dynamic";
 
 const DatePicker = dynamic(() => import("react-datepicker"), {
-  ssr: true,
+  ssr: false,
 });
 
 interface FeatherDatePickerProps {

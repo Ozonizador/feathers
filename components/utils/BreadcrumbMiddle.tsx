@@ -1,8 +1,12 @@
 /* PAGINA 59 DO XD */
 import Image from "next/image";
-import IconCaixa from "../../../public/images/icon-pg14-3.svg";
 
-const Breadcrumb = () => {
+interface BreadcrumbMiddleProps {
+  title: string;
+  icon: string;
+}
+
+const BreadcrumbMiddle = ({ title, icon }: BreadcrumbMiddleProps) => {
   return (
     <>
       <div className="mx-auto mt-24 flex w-5/6 flex-col items-center justify-center align-middle">
@@ -11,16 +15,16 @@ const Breadcrumb = () => {
             <hr />
           </div>
           <div>
-            <Image className="" src={IconCaixa} alt="Favoritos" height={145} width={145} />
+            <Image className="" src={icon} alt="breadcrumb-image" height={145} width={145} />
           </div>
           <div className="w-full">
             <hr />
           </div>
         </div>
-        <div className="ml-4 text-xl font-bold text-primary-500">{"Caixa de Entrada"}</div>
+        <div className="ml-4 text-xl font-bold text-primary-500">{title}</div>
       </div>
     </>
   );
 };
 
-export default Breadcrumb;
+export default BreadcrumbMiddle;

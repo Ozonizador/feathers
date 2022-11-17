@@ -1,11 +1,9 @@
-import { Advertisement, FlexHostType, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 
 interface HostFlexTypeComponentProps {
   advertisement: Advertisement;
-  onChange: (flexLabel, flexType) => void;
+  onChange: (flexLabel: string, flexType: unknown) => void;
 }
-
-/* PARA UTILIZAR NOS EDITS */
 
 const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
   return (

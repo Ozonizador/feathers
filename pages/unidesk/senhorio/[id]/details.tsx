@@ -24,7 +24,7 @@ const Details = () => {
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
+    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
     } else {
@@ -32,7 +32,7 @@ const Details = () => {
     }
   };
 
-  const changeAdvertisementProperty = (property, value) => {
+  const changeAdvertisementProperty = (property: string, value: unknown) => {
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
