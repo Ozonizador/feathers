@@ -11,7 +11,7 @@ import {
 import useAdvertisementService from "../../../../services/advertisementService";
 
 const Prices = () => {
-  const { getSingleAdvertisement, updateAdvertisement } = useAdvertisementService();
+  const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 

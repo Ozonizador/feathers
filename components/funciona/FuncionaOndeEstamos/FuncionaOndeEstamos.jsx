@@ -5,8 +5,6 @@ import Image from "next/image";
 const FuncionaOndeEstamos = () => {
   return (
     <section className="container mx-auto my-60 flex w-11/12 rounded-2xl bg-terciary-600 py-20">
-      {/* <div className="flex flex-1">MAP</div> */}
-
       <div className="flex flex-1 flex-col justify-center align-middle">
         <div className="w-full">
           <div className="flex flex-col gap-10 lg:flex-row">

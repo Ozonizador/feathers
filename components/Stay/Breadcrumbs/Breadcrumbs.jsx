@@ -1,4 +1,3 @@
-// pag 20
 import Image from "next/image";
 import IconStay from "../../../public/images/icon-profile.svg";
 

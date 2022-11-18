@@ -1,71 +1,79 @@
 import React from "react";
-import Link from "next/link";
-import { TiLockClosed } from "react-icons/ti";
+import { MenuItem } from "../../menu/Menu";
+import { useRouter } from "next/router";
 
 const MenuEstudante = () => {
+  const router = useRouter();
+
+  const moveToMenuLink = (href: string) => {
+    href && router.push(href);
+  };
+
+  const checkActiveLink = (href: string) => {
+    return (href && router.asPath.includes(href)) || false;
+  };
+
   return (
     <div className=" w-80 rounded-2xl bg-terciary-600 p-2">
       <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
-        <Link href="/unidesk/estudante/stay">
-          <h1 className="pt-7 pb-4 pl-1 text-xl font-bold">Minha estadia</h1>
-        </Link>
+        <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
       </div>
-      <div className="flex flex-col justify-start px-2">
-        <div className="flex flex-col gap-2">
-          <>
-            <div className="mt-7 mb-4 flex rounded-lg bg-primary-500 py-4">
-              <Link href="/unidesk/estudante/stay">
-                <a>
-                  <span className="ml-2">Informações gerais</span>
-                </a>
-              </Link>
-            </div>
-            <div className="flex">
-              <Link href="/">
-                <a className=" mb-4 flex flex-row items-center">
-                  <TiLockClosed className="my-auto" />
-                  Renda
-                </a>
-              </Link>
-            </div>
-            <div className="flex">
-              <Link href="/">
-                <a className=" mb-4 flex flex-row items-center">
-                  <TiLockClosed className="my-auto" />
-                  Reparações
-                </a>
-              </Link>
-            </div>
-            <div className="flex">
-              <Link href="/">
-                <a className=" mb-4 flex flex-row items-center">
-                  <TiLockClosed className="my-auto" />
-                  Despesas
-                </a>
-              </Link>
-            </div>
-            <div className="flex">
-              <Link href="/">
-                <a className=" mb-4 flex flex-row items-center">
-                  <TiLockClosed className="my-auto" />
-                  Informações contratuais
-                </a>
-              </Link>
-            </div>
-          </>
+      <div className="mt-1 flex flex-col justify-start px-2">
+        <div className="flex flex-col">
+          <MenuItem
+            clickOnLink={moveToMenuLink}
+            url={"/unidesk/estudante/stay"}
+            label={"Informações gerais"}
+            activeLink={checkActiveLink("/unidesk/estudante/stay")}
+          />
+          <MenuItem
+            blocked={true}
+            clickOnLink={moveToMenuLink}
+            url={""}
+            label={"Renda"}
+            activeLink={checkActiveLink("")}
+          />
+          <MenuItem
+            blocked={true}
+            clickOnLink={moveToMenuLink}
+            url={""}
+            label={"Reparações"}
+            activeLink={checkActiveLink("")}
+          />
+          <MenuItem
+            blocked={true}
+            clickOnLink={moveToMenuLink}
+            url={""}
+            label={"Despesas"}
+            activeLink={checkActiveLink("")}
+          />
+          <MenuItem
+            blocked={true}
+            clickOnLink={moveToMenuLink}
+            url={""}
+            label={"Informações contratuais"}
+            activeLink={checkActiveLink("")}
+          />
+          <MenuItem
+            clickOnLink={moveToMenuLink}
+            url={"/unidesk/estudante/favourites"}
+            label={"Favoritos"}
+            activeLink={checkActiveLink("/unidesk/estudante/favourites")}
+          />
+          <MenuItem
+            clickOnLink={moveToMenuLink}
+            url={"/unidesk/inbox"}
+            label={"Caixa de Entrada"}
+            activeLink={checkActiveLink("/unidesk/inbox")}
+          />
+          <MenuItem
+            clickOnLink={moveToMenuLink}
+            url={"/unidesk/notifications"}
+            label={"Notificações"}
+            activeLink={checkActiveLink("/unidesk/notifications")}
+          />
         </div>
       </div>
-
-      <div className="my-4 ml-2 flex flex-col  gap-4 text-xl">
-        <Link href="/unidesk/estudante/favourites">Favoritos</Link>
-      </div>
-      <div className="my-4 ml-2 flex flex-col  gap-4 text-xl">
-        <Link href="/unidesk/inbox">Caixa de Entrada</Link>
-      </div>
-      <div className="my-4  ml-2 flex flex-col  gap-4 text-xl">
-        <Link href="/unidesk/notifications">Notificações</Link>
-      </div>
-      <div className="h-2"></div>
     </div>
   );
 };
