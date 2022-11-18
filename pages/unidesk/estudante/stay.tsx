@@ -34,6 +34,7 @@ const EstadiaBreadcrumbs = [
   url: string;
   label: string;
 }[];
+
 const Estadia = () => {
   const profile = useProfileInformation();
   const { getCurrentStayByTenantId, getNextStaysByTenantId } = useStayService();
