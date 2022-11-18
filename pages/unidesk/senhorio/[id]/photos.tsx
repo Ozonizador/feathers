@@ -1,4 +1,4 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
@@ -12,6 +12,7 @@ import {
   useSelectedAnuncioMenuSenhorio,
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
+import { GetServerSidePropsContext } from "next";
 
 const Photos = () => {
   const { removePicture, saveImage, updateAdvertisement } = useAdvertisementService();
@@ -224,6 +225,26 @@ const Photos = () => {
 
 export default Photos;
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/auth/login",
-});
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

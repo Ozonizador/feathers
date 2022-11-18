@@ -1,11 +1,15 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Spinner } from "flowbite-react";
+import { GetServerSidePropsContext } from "next";
 import { useCallback, useEffect, useState } from "react";
-import Breadcrumb from "../../components/notifications/Breadcrumbs/Breadcrumb";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { Notification } from "../../models/notification";
 import useNotificationService from "../../services/notificationsService";
+import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
+
+// image
+import IconNotification from "../../public/images/notificationsIcon.svg";
 
 const Notifications = () => {
   const { getNotifications } = useNotificationService();
@@ -29,7 +33,7 @@ const Notifications = () => {
   }, [getUserNotifications]);
   return (
     <>
-      <Breadcrumb />
+      <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
       <div className="container mx-auto my-16 w-full lg:w-4/5">
         <>
           {isLoading && (
@@ -42,6 +46,8 @@ const Notifications = () => {
               {notifications.map((notification, index) => {
                 return <NotificationCard key={index} notification={notification} />;
               })}
+              {!notifications ||
+                (notifications.length == 0 && <div className="flex justify-center text-xl">Sem notificações.</div>)}
             </div>
           )}
         </>
@@ -52,4 +58,26 @@ const Notifications = () => {
 
 export default Notifications;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

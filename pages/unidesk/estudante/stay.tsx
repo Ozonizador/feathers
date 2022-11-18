@@ -1,5 +1,4 @@
 import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
-import Breadcrumbs from "../../../components/Stay/Breadcrumbs/Breadcrumbs";
 import StayCard from "../../../components/Stay/Card/StayCard";
 import Link from "next/link";
 import { CgHome } from "react-icons/cg";
@@ -16,11 +15,25 @@ import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useStayService from "../../../services/stayService";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayComplete } from "../../../models/stay";
+import { GetServerSidePropsContext } from "next";
+import Breadcrumbs from "../../../components/utils/Breadcrumbs";
+
+// icons
+
+import IconStay from "../../../public/images/icon-profile.svg";
 
 /* PAGINA 21 do xd */
 
+const EstadiaBreadcrumbs = [
+  { url: "", label: "Perfil" },
+  { url: "Conta", label: "Conta" },
+  { url: "Informações", label: "Informações" },
+] as {
+  url: string;
+  label: string;
+}[];
 const Estadia = () => {
   const profile = useProfileInformation();
   const { getCurrentStayByTenantId, getNextStaysByTenantId } = useStayService();
@@ -57,7 +70,7 @@ const Estadia = () => {
         <ModalAlterarReservaProvider>
           <>
             <div>
-              <Breadcrumbs />
+              <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
                 <div className="flex flex-col lg:flex-row">
                   <div className="p-5 lg:border-r lg:p-12">
@@ -125,4 +138,26 @@ const Estadia = () => {
 
 export default Estadia;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

@@ -1,8 +1,6 @@
-import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import {
   AdvertisementPhoto,
-  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   FlexHostType,
   TypeAmenity,

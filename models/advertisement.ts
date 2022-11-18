@@ -4,6 +4,8 @@ export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 
+export type CloseAdvertisementsFn = Database["public"]["Functions"]["close_advertisements"];
+
 /* MODEL */
 export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];

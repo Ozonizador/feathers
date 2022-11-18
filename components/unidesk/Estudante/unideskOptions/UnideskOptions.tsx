@@ -38,12 +38,12 @@ const UnideskOptions = () => {
       />
 
       <MenuSectionCard
-        topIcon={{ text: "Caixa de entrada", image: "/images/icon-pg14-3.svg", link: "/unidesk/inbox" }}
+        topIcon={{ text: "Caixa de entrada", image: "/images/iconCaixa.svg", link: "/unidesk/inbox" }}
         options={[]}
       />
 
       <MenuSectionCard
-        topIcon={{ link: "/unidesk/notifications", text: "Notificações", image: "/images/icon-pg14-4.svg" }}
+        topIcon={{ link: "/unidesk/notifications", text: "Notificações", image: "/images/notificationsIcon.svg" }}
         options={[]}
       />
     </section>

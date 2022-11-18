@@ -12,7 +12,7 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
-  onChange: (property, value) => void;
+  onChange: (property: string, value: unknown) => void;
   onChangeMarker?: (lat, lng) => void;
 }
 

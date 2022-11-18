@@ -54,7 +54,7 @@ export default function Footer() {
             </div>
 
             <div className="py-1">
-              <Link href="/faq" className="fs-300 clr-white">
+              <Link href="/faqs" className="fs-300 clr-white">
                 Ajuda para os Estudantes
               </Link>
             </div>
@@ -72,7 +72,7 @@ export default function Footer() {
               <Link href="/funciona">Como funciona</Link>
             </div>
             <div className="py-1">
-              <Link href="/faq" className="fs-300 clr-white">
+              <Link href="/faqs" className="fs-300 clr-white">
                 Ajuda para os senhorios
               </Link>
             </div>

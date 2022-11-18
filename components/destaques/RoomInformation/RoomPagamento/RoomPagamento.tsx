@@ -52,8 +52,7 @@ export default function RoomPagamento() {
     if (!error && data) {
       const notification = createNotification(NotificationType.LANDLORD_RESERVATION_RECEIVED, profile);
 
-      await addNotification(notification);
-      await createConversation(data.id);
+      //await addNotification(notification);
       toast("Wow so easy!");
     } else {
       toast("ERROR");

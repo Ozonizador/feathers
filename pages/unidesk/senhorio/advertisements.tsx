@@ -7,7 +7,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Advertisement } from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useAdvertisementService from "../../../services/advertisementService";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
 
 const Anuncios = () => {
   const { getAdvertismentsFromUserId } = useAdvertisementService();
@@ -62,4 +63,26 @@ const Anuncios = () => {
 
 export default Anuncios;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

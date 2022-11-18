@@ -1,4 +1,4 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
@@ -16,6 +16,7 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
+import { GetServerSidePropsContext } from "next";
 
 const Details = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -23,7 +24,7 @@ const Details = () => {
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
+    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
     } else {
@@ -31,7 +32,7 @@ const Details = () => {
     }
   };
 
-  const changeAdvertisementProperty = (property, value) => {
+  const changeAdvertisementProperty = (property: string, value: unknown) => {
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
@@ -116,6 +117,26 @@ const Details = () => {
 
 export default Details;
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/auth/login",
-});
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

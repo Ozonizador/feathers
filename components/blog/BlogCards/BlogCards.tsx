@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Blog } from "../../../models/blog";
+import { dateToFormat } from "../../../utils/utils";
 
 interface BlogCardsProps {
   blogs: Blog[];
@@ -33,7 +34,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                         <div className="text-sm line-clamp-2">{blog.description}</div>
 
                         <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full">
-                          <div className=" text-sm text-gray-400">{blog.created_at}</div>
+                          <div className=" text-sm text-gray-400">{dateToFormat(new Date(blog.created_at))}</div>
                           <div className="text-sm text-gray-400 ">By Unihosts</div>
                         </div>
                       </div>

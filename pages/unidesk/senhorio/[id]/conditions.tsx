@@ -1,4 +1,4 @@
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import useAdvertisementService from "../../../../services/advertisementService";
@@ -8,6 +8,7 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
+import { GetServerSidePropsContext } from "next";
 
 const Conditions = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -59,6 +60,26 @@ const Conditions = () => {
 
 export default Conditions;
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/auth/login",
-});
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

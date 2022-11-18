@@ -2,7 +2,7 @@ import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/
 
 interface PricesComponentProps {
   advertisement: Advertisement;
-  onChange: (property, value) => void;
+  onChange: (property: string, value: string | boolean) => void;
 }
 
 const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponentProps) => {
@@ -98,33 +98,30 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
 
           <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
             <div className="mr-16 text-base">Particular</div>
-            <div>
-              <div className="flex h-5 items-center">
-                <input
-                  name="host_type"
-                  type="radio"
-                  className="h-4 w-4 rounded border border-terciary-500"
-                  value={HostType.PARTICULAR}
-                  checked={advertisement.type_host === HostType.PARTICULAR}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
-                />
-              </div>
+
+            <div className="flex h-5 items-center">
+              <input
+                name="host_type"
+                type="radio"
+                className="h-4 w-4 rounded border border-terciary-500"
+                value={HostType.PARTICULAR}
+                checked={advertisement.type_host === HostType.PARTICULAR}
+                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
+              />
             </div>
           </div>
 
           <div className="ml-0  flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6">
             <div className="mr-16 text-base">Profissional</div>
-            <div>
-              <div className="flex h-5 items-center">
-                <input
-                  name="host_type"
-                  type="radio"
-                  className="h-4 w-4 rounded border border-terciary-500"
-                  value={HostType.PROFISSIONAL}
-                  checked={advertisement.type_host === HostType.PROFISSIONAL}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
-                />
-              </div>
+            <div className="flex h-5 items-center">
+              <input
+                name="host_type"
+                type="radio"
+                className="h-4 w-4 rounded border border-terciary-500"
+                value={HostType.PROFISSIONAL}
+                checked={advertisement.type_host === HostType.PROFISSIONAL}
+                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_HOST, e.target.value)}
+              />
             </div>
           </div>
         </div>

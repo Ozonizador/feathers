@@ -12,7 +12,6 @@ import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useAdvertisementService from "../../services/advertisementService";
 
 const FormPasso0 = () => {
@@ -27,7 +26,7 @@ const FormPasso0 = () => {
 
   /* Services */
   const { addAdvertisement } = useAdvertisementService();
-  
+
   const nextStep = async (e) => {
     e.preventDefault();
 
@@ -40,11 +39,11 @@ const FormPasso0 = () => {
     }
 
     const { data, error } = await addAdvertisement(advertisement);
-    if (data) {
+    if (!error) {
       setAdvertisement(data);
       setCurrentStep(currentStep + 1);
     } else {
-      toast.error("An error occured");
+      toast.error(error.message);
     }
   };
 
@@ -86,14 +85,14 @@ const FormPasso0 = () => {
           <button
             type="button"
             className="w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-            onClick={() => checkPossibilites()}
+            onClick={checkPossibilites}
           >
             Atualizar No Mapa
           </button>
           <button
             type="button"
             className="mx-4 w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-            onClick={(e) => nextStep(e)}
+            onClick={nextStep}
           >
             Seguinte &#8594;
           </button>

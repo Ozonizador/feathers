@@ -4,8 +4,9 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
 import useStayService from "../../../services/stayService";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayGuest } from "../../../models/stay";
+import { GetServerSidePropsContext } from "next";
 
 const UniControloHospedes = () => {
   const { getCurrentStaysByHostId } = useStayService();
@@ -42,7 +43,6 @@ const UniControloHospedes = () => {
               {stays.map((stay, index) => {
                 return <HospedeCard stay={stay} key={index} />;
               })}
-              {/* <h2 className="mt-14 mb-6 text-xl text-secondary-500">Hóspedes Anteriores</h2> */}
             </>
           </div>
         </div>
@@ -53,4 +53,26 @@ const UniControloHospedes = () => {
 
 export default UniControloHospedes;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/auth/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

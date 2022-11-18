@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { BUTTON_MESSAGE_LABEL, Notification, NOTIFICATION_LINKS } from "../../../models/notification";
+import {
+  BUTTON_MESSAGE_LABEL,
+  Notification,
+  NOTIFICATION_LINKS,
+  NOTIFICATION_TYPES_INFORMATION,
+} from "../../../models/notification";
 interface NotificationCardProps {
   notification: Notification;
 }
@@ -9,8 +14,8 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
     <>
       <div className="mb-5 flex w-full flex-col items-center justify-between gap-5 rounded-md border border-gray-200 p-4 lg:flex-row">
         <div className="lg:flex lg:flex-col">
-          <h1 className="mb-1 text-xl font-bold">{notification.title}</h1>
-          <p className="text-base text-gray-400 ">{notification.description}</p>
+          <h1 className="mb-1 text-xl font-bold">{NOTIFICATION_TYPES_INFORMATION[notification.type].title}</h1>
+          <p className="text-base text-gray-400 ">{NOTIFICATION_TYPES_INFORMATION[notification.type].description}</p>
         </div>
 
         <div>
