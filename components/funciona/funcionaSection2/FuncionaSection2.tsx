@@ -1,7 +1,8 @@
 import React from "react";
 
 import Link from "next/link";
-import FuncionaSection2Card from "../funcionaSection2/FuncionaSection2Card";
+import FuncionaSection2Card from "./FuncionaSection2Card";
+import { ANUNCIAR_PROP_URL } from "../../../models/paths";
 
 const FuncionaSection2 = () => {
   return (
@@ -71,7 +72,7 @@ const FuncionaSection2 = () => {
           text="Quando a reserva é confirmada debitamos ao inquilino a primeira renda e guardamos este valor até 24h após a entrada. Após garantir que tudo está correto, o dinheiro é libertado para o seu cartão, que deve adicionar nos métodos de pagamento."
         />
       </div>
-      <Link href="/anunciar" className="mb-24">
+      <Link href={ANUNCIAR_PROP_URL} className="mb-24">
         <a className="mx-auto   flex w-11/12 justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in  hover:text-white hover:drop-shadow-xl lg:w-52">
           Criar o anúncio
         </a>

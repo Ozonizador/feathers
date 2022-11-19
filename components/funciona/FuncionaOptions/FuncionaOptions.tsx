@@ -22,7 +22,7 @@ const FuncionaOptions = () => {
         <h1 className="mb-5 text-center text-2xl font-bold">Preço Sob Consulta</h1>
 
         <div className="flex flex-1 justify-center">
-          <Link href=" ">
+          <Link href="#">
             <a className="rounded-md bg-primary-300 py-2 px-7 text-center text-white">Saber mais</a>
           </Link>
         </div>
@@ -47,7 +47,7 @@ const FuncionaOptions = () => {
           <h1 className="mb-5 text-center text-2xl font-bold">Preço Sob Consulta</h1>
 
           <div className="flex flex-1 justify-center">
-            <Link href=" ">
+            <Link href="#">
               <a className="rounded-md bg-primary-300 py-2 px-7 text-white">Saber mais</a>
             </Link>
           </div>

@@ -8,7 +8,24 @@ import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
-import { HOME_URL, UNIDESK_STAY_URL } from "../../models/paths";
+import {
+  ADMIN_URL,
+  ANUNCIAR_PROP_URL,
+  BLOG_URL,
+  COMO_FUNCIONA_URL,
+  CONTACTOS_URL,
+  FAQS_URL,
+  HOME_URL,
+  INBOX_URL,
+  LOGIN_URL,
+  NOTIFICATIONS_URL,
+  REGISTER_URL,
+  UNICONTROLO_GUESTS_URL,
+  UNIDESK_SENHORIO_PAINEL_URL,
+  UNIDESK_STAY_URL,
+  UNIDESK_STUDENT_FAVOURITES_URL,
+  UNIDESK_URL,
+} from "../../models/paths";
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -71,20 +88,20 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <>
                   <div className="flex flex-col gap-2 text-base">
                     <div className="mt-2">
-                      <Link href="/funciona">Como funciona?</Link>
+                      <Link href={COMO_FUNCIONA_URL}>Como funciona?</Link>
                     </div>
                     <div>
-                      <Link href="/anunciar">Anunciar!</Link>
+                      <Link href={ANUNCIAR_PROP_URL}>Anunciar!</Link>
                     </div>
                   </div>
                 </>
               </div>
             )}
             <div className="mt-3">
-              <Link href="/blog">Blog</Link>
+              <Link href={BLOG_URL}>Blog</Link>
             </div>
             <div className="mt-3">
-              <Link href="/contactos">Contactos</Link>
+              <Link href={CONTACTOS_URL}>Contactos</Link>
             </div>
           </div>
           <div className="mt-7  rounded-3xl bg-gray-100 py-4 px-8">
@@ -134,7 +151,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               )}
               {!user && (
                 <div className="my-auto flex w-full  justify-center gap-2">
-                  <Link href="/auth/register">
+                  <Link href={REGISTER_URL}>
                     <a className="p-0">
                       <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                         Registar
@@ -142,7 +159,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     </a>
                   </Link>
 
-                  <Link href="/auth/login">
+                  <Link href={LOGIN_URL}>
                     <a className="p-0">
                       <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                         Iniciar sessão
@@ -157,7 +174,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {toggleUserType == "TENANT" && (
                 <>
                   <div className="mt-3 py-1 px-2">
-                    <Link className="py-1 " href="/unidesk">
+                    <Link className="py-1 " href={UNIDESK_URL}>
                       Uni-desk
                     </Link>
                   </div>
@@ -172,28 +189,28 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     </div>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/estudante/favourites">
+                    <Link className="py-1" href={UNIDESK_STUDENT_FAVOURITES_URL}>
                       Favoritos
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/inbox">
+                    <Link className="py-1" href={INBOX_URL}>
                       Caixa de Entrada
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/notifications">
+                    <Link className="py-1" href={NOTIFICATIONS_URL}>
                       Notificações
                     </Link>
                   </div>
                   <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-3"></div>
                   <div className="py-1 px-2 text-gray-500">
-                    <Link className="py-1" href="/admin">
+                    <Link className="py-1" href={ADMIN_URL}>
                       Conta
                     </Link>
                   </div>
                   <div className="py-1 px-2 text-gray-500">
-                    <Link className="py-1" href="/faqs">
+                    <Link className="py-1" href={FAQS_URL}>
                       Ajuda
                     </Link>
                   </div>
@@ -207,38 +224,38 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {toggleUserType == "LANDLORD" && (
                 <>
                   <div className="mt-3 py-1 px-2">
-                    <Link className="py-1 " href="/unidesk">
+                    <Link className="py-1 " href={UNIDESK_URL}>
                       Uni-desk
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/inbox">
+                    <Link className="py-1" href={INBOX_URL}>
                       Caixa de Entrada
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/senhorio/advertisements">
+                    <Link className="py-1" href={UNIDESK_SENHORIO_PAINEL_URL}>
                       Anúncios
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1" href="/unidesk/unicontrolo/guests">
+                    <Link className="py-1" href={UNICONTROLO_GUESTS_URL}>
                       Uni-controlo
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1 " href="/unidesk/notifications">
+                    <Link className="py-1 " href={NOTIFICATIONS_URL}>
                       Notificações
                     </Link>
                   </div>
                   <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-1"></div>
                   <div className="py-1 px-2">
-                    <Link className="py-1 text-gray-500" href="/admin">
+                    <Link className="py-1 text-gray-500" href={ADMIN_URL}>
                       Conta
                     </Link>
                   </div>
                   <div className="py-1 px-2">
-                    <Link className="py-1 text-gray-500" href="/notifications">
+                    <Link className="py-1 text-gray-500" href={NOTIFICATIONS_URL}>
                       Ajuda
                     </Link>
                   </div>

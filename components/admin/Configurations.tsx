@@ -8,7 +8,11 @@ import { toast } from "react-toastify";
 import FeathersButton from "../utils/Button";
 import { useUser } from "@supabase/auth-helpers-react";
 import useProfileService from "../../services/profileService";
+import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
+import { ADMIN_URL } from "../../models/paths";
 // PÁGINA 36
+
+const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
 
 const Configurations = () => {
   const user = useUser();
@@ -51,10 +55,7 @@ const Configurations = () => {
   return (
     <>
       <div className="container mx-auto mb-20 lg:w-10/12 ">
-        <div className="font-b my-10 text-xl">
-          <Link href="/admin">Conta</Link>
-          {" > Configurações"}
-        </div>
+        <Breadcrumbs paths={paths} />
 
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-0 lg:px-32">

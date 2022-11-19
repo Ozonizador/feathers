@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
-import { RECOVER_URL } from "../../models/paths";
+import { RECOVER_URL, REGISTER_URL } from "../../models/paths";
 import useUserService from "../../services/userService";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
 
-          <Link href="/auth/register">
+          <Link href={REGISTER_URL}>
             <a className="border-l border-terciary-100 p-3 text-center">Registar</a>
           </Link>
         </div>

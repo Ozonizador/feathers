@@ -14,6 +14,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import { StayComplete } from "../../../models/stay";
+import { INBOX_URL } from "../../../models/paths";
 
 interface StayInfoProps {
   stay: StayComplete;
@@ -77,7 +78,7 @@ const StayInfo = ({ stay }: StayInfoProps) => {
         </div>
 
         <div className="flex flex-1 cursor-pointer flex-col items-center">
-          <Link href="/unidesk/inbox">
+          <Link href={INBOX_URL}>
             <a>
               <div className="flex flex-1 flex-col items-center">
                 <div>
