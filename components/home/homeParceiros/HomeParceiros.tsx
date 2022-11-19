@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function HomeParceiros() {
+const HomeParceiros = () => {
   return (
     <section>
       <div className="block lg:hidden">
@@ -142,4 +142,6 @@ export default function HomeParceiros() {
       </div>
     </section>
   );
-}
+};
+
+export default HomeParceiros;

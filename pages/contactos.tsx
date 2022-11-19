@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { CgFileDocument } from "react-icons/cg";
-import Socials from "../components/socials/Socials";
 import Input from "../components/utils/Input";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import Socials from "../components/socials/Socials";
 
 const Contactos = () => {
   const [name, setName] = useState<string>("");

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
+/*  not being used */
 const ProfileInput = () => {
   return (
     <div>

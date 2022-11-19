@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import SearchInputField from "../../search/SearchInputField";
 
-export default function HomeSection1() {
+const HomeSection1 = () => {
   return (
     <section>
       <div className="flex justify-center  bg-[url('/images/furniture5.jpg')] bg-cover py-52 px-1 ">
@@ -26,4 +26,6 @@ export default function HomeSection1() {
       </div>
     </section>
   );
-}
+};
+
+export default HomeSection1;

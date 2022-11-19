@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar } from "flowbite-react";
 
 const PicAbout = () => {
+  const uploadAvatar = (e) => {};
   return (
     <>
       <section className="mb-10">
