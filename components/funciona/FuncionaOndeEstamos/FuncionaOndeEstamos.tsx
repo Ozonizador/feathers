@@ -34,7 +34,7 @@ const FuncionaOndeEstamos = () => {
                 e Rio Maior.
               </div>
 
-              <Link href=" ">
+              <Link href="#">
                 <a className="rounded-md bg-primary-500 py-3 px-11 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
                   Saber mais
                 </a>

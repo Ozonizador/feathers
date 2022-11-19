@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
 import { AiFillLock } from "react-icons/ai";
+import { UNICONTROLO_GUESTS_URL } from "../../../models/paths";
 
 interface HospedesMenuProps {
   activeLink: "guests" | "transactions" | "expenses" | "repairs";
@@ -13,7 +14,7 @@ interface HospedesMenuProps {
 const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
   return (
     <div className="w-80 rounded-2xl bg-terciary-600 py-8 px-6">
-      <Link href="/unidesk/unicontrolo/guests">
+      <Link href={UNICONTROLO_GUESTS_URL}>
         <div
           className={classNames("flex cursor-pointer rounded-2xl py-5 px-4", {
             "bg-primary-300": activeLink == "guests",
@@ -23,7 +24,6 @@ const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
           <span className="ml-2 self-center text-xl font-semibold">Hóspedes</span>
         </div>
       </Link>
-      {/* <Link href="/unidesk/unicontrolo/transactions"> */}
       <div
         className={classNames("flex rounded-2xl py-5 px-4", {
           "bg-primary-300": activeLink == "transactions",
@@ -35,8 +35,6 @@ const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
           <span className="ml-2 self-center text-xl font-semibold">Transações</span>
         </div>
       </div>
-      {/* </Link> */}
-      {/* <Link href="/unidesk/unicontrolo/expenses"> */}
       <div
         className={classNames("flex rounded-2xl py-5 px-4", {
           "bg-primary-300": activeLink == "expenses",
@@ -48,8 +46,6 @@ const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
           <span className="ml-2 self-center text-xl font-semibold">Despesas</span>
         </div>
       </div>
-      {/* </Link> */}
-      {/* <Link href="/unidesk/unicontrolo/repairs"> */}
       <div
         className={classNames("flex rounded-2xl py-5 px-4", {
           "bg-primary-300": activeLink == "repairs",
@@ -61,7 +57,6 @@ const HospedesMenu = ({ activeLink }: HospedesMenuProps) => {
           <span className="ml-2 self-center text-xl font-semibold">Reparações</span>
         </div>
       </div>
-      {/* </Link> */}
     </div>
   );
 };

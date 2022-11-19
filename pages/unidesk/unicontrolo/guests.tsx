@@ -1,5 +1,4 @@
 import HospedesMenu from "../../../components/unidesk/Menus/HospedesMenu";
-import Breadcrumb from "../../../components/hospedes/breadcrumb/Breadcrumb";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
@@ -7,6 +6,12 @@ import useStayService from "../../../services/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayGuest } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";
+import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
+
+// Icon
+import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
+
+const paths = [{ url: "", label: "Hóspedes" }] as BreadcrumbPath[];
 
 const UniControloHospedes = () => {
   const { getCurrentStaysByHostId } = useStayService();
@@ -27,7 +32,7 @@ const UniControloHospedes = () => {
 
   return (
     <section>
-      <Breadcrumb />
+      <Breadcrumbs icon={IconAHospedes} paths={paths} />
 
       <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">
         <div className="flex flex-col gap-10 px-12 lg:flex-row">

@@ -5,6 +5,7 @@ import personalInformationImage from "../../public/images/mainmenu_1.png";
 import paymentsImage from "../../public/images/mainmenu_2.png";
 import configurationsImage from "../../public/images/mainmenu_3.png";
 import Link from "next/link";
+import { CONFIGURATIONS_URL, GENERAL_ADMIN_URL, PAYMENTS_URL } from "../../models/paths";
 
 /*
     pagina 31 do XD
@@ -19,7 +20,7 @@ const MainMenu = () => {
 
       <div className="flex flex-col items-center justify-center gap-12 px-4 pb-10 align-middle">
         <div className="rounded-2xl bg-white drop-shadow-xl lg:w-1/3">
-          <Link href="/admin/general">
+          <Link href={GENERAL_ADMIN_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
                 <div className="flex">
@@ -37,7 +38,7 @@ const MainMenu = () => {
         </div>
 
         <div className="rounded-2xl bg-white drop-shadow-xl lg:w-1/3">
-          <Link href="/admin/payments">
+          <Link href={PAYMENTS_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
                 <div className=" flex">
@@ -55,7 +56,7 @@ const MainMenu = () => {
         </div>
 
         <div className="rounded-2xl bg-white drop-shadow-xl lg:w-1/3">
-          <Link href="/admin/configurations">
+          <Link href={CONFIGURATIONS_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
                 <div className=" flex">

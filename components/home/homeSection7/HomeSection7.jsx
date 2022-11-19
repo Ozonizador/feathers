@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ANUNCIAR_PROP_URL, COMO_FUNCIONA_URL } from "../../../models/paths";
 
 export default function HomeSection7() {
   return (
@@ -21,7 +22,7 @@ export default function HomeSection7() {
               <div className="mb-20 block lg:hidden">Comece já a anunciar e rentabilize o seu imóvel!</div>
             </div>
             <div className="mb-14 mt-8 lg:mb-20 lg:mt-0 lg:pt-16">
-              <Link href="/anunciar">
+              <Link href={ANUNCIAR_PROP_URL}>
                 <a className="rounded-full bg-primary-500 py-4 px-16 text-white  duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl lg:ml-6 lg:px-9">
                   Anunciar
                 </a>
@@ -34,7 +35,7 @@ export default function HomeSection7() {
                 <Image src="/images/house-key.jpg" layout="fill" alt="" className="rounded-3xl"></Image>
               </div>
               <div className="absolute right-20  bottom-10  mb-6 lg:right-8 lg:bottom-6">
-                <Link href="/funciona">
+                <Link href={COMO_FUNCIONA_URL}>
                   <a className=" mb-9 rounded-full  border-2 border-solid border-white bg-black/30 py-4 px-8 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                     Quero saber mais...
                   </a>

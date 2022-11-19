@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HomeSection4() {
+const ExploreCity = () => {
   return (
     <section>
       <div className="hidden bg-terciary-300  lg:block">
@@ -36,4 +36,6 @@ export default function HomeSection4() {
       </div>
     </section>
   );
-}
+};
+
+export default ExploreCity;

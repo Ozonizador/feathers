@@ -1,7 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { v4 as uuidv4 } from "uuid";
-import { Advertisement } from "../models/advertisement";
-import { Profile } from "../models/profile";
 import { RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 import { Stay, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
 

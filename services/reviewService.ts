@@ -1,5 +1,4 @@
 import {
-  AdvertisementReviewSummary,
   Review,
   ReviewsResponse,
   REVIEWS_AVERAGE_TABLE_VIEW,

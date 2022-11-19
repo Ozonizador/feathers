@@ -1,6 +1,7 @@
 import React from "react";
 import { MenuItem } from "../../menu/Menu";
 import { useRouter } from "next/router";
+import { UNIDESK_STAY_URL } from "../../../models/paths";
 
 const MenuEstudante = () => {
   const router = useRouter();
@@ -22,9 +23,9 @@ const MenuEstudante = () => {
         <div className="flex flex-col">
           <MenuItem
             clickOnLink={moveToMenuLink}
-            url={"/unidesk/estudante/stay"}
+            url={UNIDESK_STAY_URL}
             label={"Informações gerais"}
-            activeLink={checkActiveLink("/unidesk/estudante/stay")}
+            activeLink={checkActiveLink(UNIDESK_STAY_URL)}
           />
           <MenuItem
             blocked={true}

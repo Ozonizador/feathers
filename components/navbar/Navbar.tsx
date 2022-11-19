@@ -17,6 +17,24 @@ import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
 import { Database } from "../../database.types";
+import {
+  ADMIN_URL,
+  ANUNCIAR_PROP_URL,
+  BLOG_URL,
+  COMO_FUNCIONA_URL,
+  CONTACTOS_URL,
+  FAQS_URL,
+  HOME_URL,
+  INBOX_URL,
+  LOGIN_URL,
+  NOTIFICATIONS_URL,
+  REGISTER_URL,
+  UNICONTROLO_GUESTS_URL,
+  UNIDESK_SENHORIO_PAINEL_URL,
+  UNIDESK_STAY_URL,
+  UNIDESK_STUDENT_FAVOURITES_URL,
+  UNIDESK_URL,
+} from "../../models/paths";
 
 export const Navbar = () => {
   const user = useUser();
@@ -83,7 +101,7 @@ export const Navbar = () => {
           </div>
           <div className="my-5 flex lg:gap-5">
             <div className="lg:block">
-              <Link href="/">
+              <Link href={HOME_URL}>
                 <a>
                   <div className="relative h-3/4 w-3/4">
                     <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
@@ -119,12 +137,12 @@ export const Navbar = () => {
                     >
                       <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                         <Menu.Item>
-                          <MyLink customClass="py-1 mt-2 w-full" href="/funciona">
+                          <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
                             Como funciona?
                           </MyLink>
                         </Menu.Item>
                         <Menu.Item>
-                          <MyLink customClass="py-2 w-full" href="/anunciar">
+                          <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
                             Anunciar!
                           </MyLink>
                         </Menu.Item>
@@ -133,10 +151,10 @@ export const Navbar = () => {
                   </Menu>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href="/blog">Blog</Link>
+                  <Link href={BLOG_URL}>Blog</Link>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href="/contactos">Contactos</Link>
+                  <Link href={CONTACTOS_URL}>Contactos</Link>
                 </div>
               </div>
             </div>
@@ -144,7 +162,7 @@ export const Navbar = () => {
               <div>
                 {!user && (
                   <div className="my-auto flex gap-2">
-                    <Link href="/auth/register">
+                    <Link href={REGISTER_URL}>
                       <a className="p-0">
                         <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                           Registar
@@ -152,7 +170,7 @@ export const Navbar = () => {
                       </a>
                     </Link>
 
-                    <Link href="/auth/login">
+                    <Link href={LOGIN_URL}>
                       <a className="p-0">
                         <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                           Iniciar sessão
@@ -207,38 +225,38 @@ export const Navbar = () => {
                             {toggleUserType == "TENANT" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk">
+                                  <MyLink customClass="py-1" href={UNIDESK_URL}>
                                     Uni-desk
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/estudante/stay">
+                                  <MyLink customClass="py-1" href={UNIDESK_STAY_URL}>
                                     Minha Estadia
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/estudante/favourites">
+                                  <MyLink customClass="py-1" href={UNIDESK_STUDENT_FAVOURITES_URL}>
                                     Favoritos
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/inbox">
+                                  <MyLink customClass="py-1" href={INBOX_URL}>
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/notifications">
+                                  <MyLink customClass="py-1" href={NOTIFICATIONS_URL}>
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/admin">
+                                  <MyLink customClass="py-1" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/faqs">
+                                  <MyLink customClass="py-1" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
@@ -252,38 +270,38 @@ export const Navbar = () => {
                             {toggleUserType == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk">
+                                  <MyLink customClass="py-1" href={UNIDESK_URL}>
                                     Uni-desk
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/inbox">
+                                  <MyLink customClass="py-1" href={INBOX_URL}>
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/senhorio/advertisements">
+                                  <MyLink customClass="py-1" href={UNIDESK_SENHORIO_PAINEL_URL}>
                                     Anúncios
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/unicontrolo/guests">
+                                  <MyLink customClass="py-1" href={UNICONTROLO_GUESTS_URL}>
                                     Uni-controlo
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/unidesk/notifications">
+                                  <MyLink customClass="py-1" href={NOTIFICATIONS_URL}>
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/admin">
+                                  <MyLink customClass="py-1" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href="/faqs">
+                                  <MyLink customClass="py-1" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>

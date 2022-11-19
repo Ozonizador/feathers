@@ -3,8 +3,13 @@ import Link from "next/link";
 
 interface BreadcrumbsProps {
   icon?: string;
-  paths: { url: string; label: string }[];
+  paths: BreadcrumbPath[];
 }
+
+export type BreadcrumbPath = {
+  url: string;
+  label: string;
+};
 
 const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
   const numberUrls = paths.length;
@@ -21,7 +26,6 @@ const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
             ) : (
               <div className="inline">{path.label}</div>
             );
-            console.log(index);
             return (
               <>
                 {mainInfo}

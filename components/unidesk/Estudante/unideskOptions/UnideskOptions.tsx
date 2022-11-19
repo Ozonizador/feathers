@@ -1,4 +1,5 @@
 import React from "react";
+import { UNIDESK_STAY_URL } from "../../../../models/paths";
 
 import { MenuSectionCard } from "../../components/MenuSectionCard";
 
@@ -9,7 +10,7 @@ const UnideskOptions = () => {
         topIcon={{ text: "Minha estadia", image: "/images/icon-pg14-1.svg" }}
         options={[
           {
-            link: "/unidesk/estudante/stay",
+            link: UNIDESK_STAY_URL,
             blocked: false,
             text: "Informações gerais",
           },

@@ -132,11 +132,6 @@ const CurrentReservationsSection = () => {
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   } em ${reservation.advertisement.place}`}</Table.Cell>
-                  <Table.Cell>
-                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                      Detalhes
-                    </a> */}
-                  </Table.Cell>
                 </Table.Row>
               );
             })}
@@ -196,11 +191,6 @@ const NextReservationsSection = () => {
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   } em ${reservation.advertisement.place}`}</Table.Cell>
-                  <Table.Cell>
-                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                      Detalhes
-                    </a> */}
-                  </Table.Cell>
                 </Table.Row>
               );
             })}
@@ -273,11 +263,6 @@ const AllReservationsSection = () => {
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   } em ${reservation.advertisement.place}`}</Table.Cell>
-                  <Table.Cell>
-                    {/* <a href="/teste" className="rounded-lg border  border-gray-600 px-6 py-2">
-                      Detalhes
-                    </a> */}
-                  </Table.Cell>
                 </Table.Row>
               );
             })}
