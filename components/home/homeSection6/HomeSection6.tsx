@@ -6,7 +6,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Testemunhos } from "../../../models/static";
 import { group } from "../../../utils/utils";
 
-export default function HomeSection6() {
+const HomeSection6 = () => {
   return (
     <section>
       <div className="w-full bg-terciary-300">
@@ -58,4 +58,6 @@ export default function HomeSection6() {
       </div>
     </section>
   );
-}
+};
+
+export default HomeSection6;
