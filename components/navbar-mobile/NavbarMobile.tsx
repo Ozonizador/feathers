@@ -8,6 +8,7 @@ import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
+import { HOME_URL, UNIDESK_STAY_URL } from "../../models/paths";
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -45,7 +46,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
       >
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
-            <Link href="/">
+            <Link href={HOME_URL}>
               <div className="mb-3 font-bold">Home</div>
             </Link>
             <div
@@ -162,7 +163,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   </div>
                   <div className="flex items-center py-1 px-2 align-middle">
                     <div>
-                      <Link className="py-1" href="/unidesk/estudante/stay">
+                      <Link className="py-1" href={UNIDESK_STAY_URL}>
                         Minha Estadia
                       </Link>
                     </div>

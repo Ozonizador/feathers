@@ -1,10 +1,19 @@
 import React from "react";
-
 import Socials from "../socials/Socials";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ABOUT_US_URL,
+  ANUNCIAR_PROP_URL,
+  BLOG_URL,
+  COMO_FUNCIONA_URL,
+  CONTACTOS_URL,
+  FAQS_URL,
+  HOME_URL,
+  LOGIN_URL,
+} from "../../models/paths";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer>
       <div>
@@ -15,32 +24,32 @@ export default function Footer() {
           <div className="ml-0 py-5 text-left text-terciary-100 lg:ml-5 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
-              <Link href="/aboutus" className="fs-300 clr-white">
+              <Link href={ABOUT_US_URL} className="fs-300 clr-white">
                 Sobre nós
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/blog" className="fs-300 clr-white">
+              <Link href={BLOG_URL} className="fs-300 clr-white">
                 Blog
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/" className="fs-300 clr-white">
+              <Link href={HOME_URL} className="fs-300 clr-white">
                 Torne-se um parceiro
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/" className="fs-300 clr-white">
+              <Link href={HOME_URL} className="fs-300 clr-white">
                 Termos e condições
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/" className="fs-300 clr-white">
+              <Link href={HOME_URL} className="fs-300 clr-white">
                 Política de cookies
               </Link>
             </div>
             <div className="py-1">
-              <Link href="/contactos" className="fs-300 clr-white">
+              <Link href={CONTACTOS_URL} className="fs-300 clr-white">
                 Fale connosco
               </Link>
             </div>
@@ -48,19 +57,19 @@ export default function Footer() {
           <div className="py-5 text-left text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Estudantes</h3>
             <div className="py-1">
-              <Link href="/" className="fs-300 clr-white">
+              <Link href={HOME_URL} className="fs-300 clr-white">
                 Como alugar
               </Link>
             </div>
 
             <div className="py-1">
-              <Link href="/faqs" className="fs-300 clr-white">
+              <Link href={FAQS_URL} className="fs-300 clr-white">
                 Ajuda para os Estudantes
               </Link>
             </div>
 
             <div className="py-1">
-              <Link href="/auth/register" className="fs-300 clr-white">
+              <Link href={LOGIN_URL} className="fs-300 clr-white">
                 Iniciar sessão/Registar
               </Link>
             </div>
@@ -69,20 +78,20 @@ export default function Footer() {
             <h3 className="mb-3 text-lg font-bold">Senhorios</h3>
 
             <div className="py-1">
-              <Link href="/funciona">Como funciona</Link>
+              <Link href={COMO_FUNCIONA_URL}>Como funciona</Link>
             </div>
             <div className="py-1">
-              <Link href="/faqs" className="fs-300 clr-white">
+              <Link href={FAQS_URL} className="fs-300 clr-white">
                 Ajuda para os senhorios
               </Link>
             </div>
 
             <div className="py-1">
-              <Link href="/auth/register" className="fs-300 clr-white">
+              <Link href={LOGIN_URL} className="fs-300 clr-white">
                 Iniciar sessão/ Registar
               </Link>
             </div>
-            <Link href="/anunciar" className="transition">
+            <Link href={ANUNCIAR_PROP_URL} className="transition">
               <a>
                 <div className="my-3 mt-7">
                   <span className="rounded-full bg-primary-500 p-3">Anuncie a sua propriedade</span>
@@ -100,4 +109,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

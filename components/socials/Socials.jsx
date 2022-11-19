@@ -42,24 +42,6 @@ export default function Socials({ type, size = "sm" }) {
           />
         </a>
       </div>
-
-      <div
-        className={classNames("rounded-full transition", {
-          "h-10 w-10": size === "md",
-          "h-6 w-6": size === "sm",
-          "bg-primary-500 text-white": type === "primary",
-          "bg-white text-primary-500": type !== "primary",
-        })}
-      >
-        <a href="/" target="_blank" rel="noreferrer noopener">
-          <RiTwitterFill
-            className={classNames("mx-auto my-auto h-full", {
-              "text-lg": size === "sm",
-              "text-xl": size === "md",
-            })}
-          />
-        </a>
-      </div>
     </div>
   );
 }

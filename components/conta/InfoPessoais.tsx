@@ -1,19 +1,21 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 // import Menu from "../unideskAdminEstudante/Menu";
 import { IoWarningOutline } from "react-icons/io5";
 import { BsCheckCircle } from "react-icons/bs";
 import MenuEstudante from "../unidesk/Menus/MenuEstudante";
+import { ADMIN_URL } from "../../models/paths";
+import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
+
+const paths = [
+  { url: ADMIN_URL, label: "Conta" },
+  { url: "", label: "Informações pessoais" },
+] as BreadcrumbPath[];
 
 const InfoPessoais = () => {
   return (
     <section>
       <div className=" mx-auto mb-20 w-10/12 ">
-        <div className="font-b my-10 text-xl">
-          <Link href="/admin">Conta</Link>
-          {"  > Informações pessoais"}
-        </div>
+        <Breadcrumbs paths={paths} />
 
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-10">

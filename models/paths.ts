@@ -5,10 +5,12 @@ export const BLOG_URL = "/blog" as const;
 export const CONTACTOS_URL = "/contactos" as const;
 export const ABOUT_US_URL = "/aboutus" as const;
 export const FAQS_URL = "/faqs" as const;
+export const PROCURAR_ADVERT_URL = "/procurar" as const;
 
 // AUTH
 export const REGISTER_URL = "/auth/register" as const;
 export const LOGIN_URL = "/auth/login" as const;
+export const RECOVER_URL = "/auth/recover" as const;
 
 // SHARED UNIDESK
 export const UNIDESK_URL = "/unidesk" as const;

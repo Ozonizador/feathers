@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/utils/Input";
 import { Spinner } from "../../components/utils/Spinner";
+import { REGISTER_URL } from "../../models/paths";
 import useUserService from "../../services/userService";
 
 const Recover = () => {
@@ -26,7 +27,7 @@ const Recover = () => {
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center">Iniciar sessão</div>
 
-          <Link href="/auth/register">
+          <Link href={REGISTER_URL}>
             <a className="border-l border-terciary-100 p-3 text-center">Registar</a>
           </Link>
         </div>

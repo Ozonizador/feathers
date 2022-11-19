@@ -1,18 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import { ADMIN_URL } from "../../models/paths";
+import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 
 /*
     pagina 33 do XD
 */
 
+const paths = [
+  { url: ADMIN_URL, label: "Conta" },
+  { url: "", label: "Pagamentos e Recebimentos" },
+] as BreadcrumbPath[];
+
 const Payments = () => {
   return (
     <section>
       <div className=" mx-auto mb-20 w-10/12 ">
-        <div className="font-b my-10 text-xl">
-          <Link href="/admin">Conta</Link>
-          {" > Pagamentos e Recebimentos"}
-        </div>
+        <Breadcrumbs paths={paths} />
 
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-5 lg:px-32">
@@ -54,7 +58,7 @@ const Payments = () => {
             </div>
 
             {/* ADICIONAR CARTÕES */}
-            <Link href="/">
+            <Link href="#">
               <a>
                 <div className="my-5 flex flex-row items-center align-middle">
                   <div className="mt-16 text-2xl text-primary-500 lg:mt-0">

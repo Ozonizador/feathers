@@ -20,6 +20,7 @@ import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvi
 import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
 import { GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
+import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -154,7 +155,7 @@ export default function ProcurarSection() {
               </div>
 
               <div className="my-2 ml-auto mt-0 hidden">
-                <Link href="/procurar">
+                <Link href={PROCURAR_ADVERT_URL}>
                   <a>
                     <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">
                       Mais Filtros

@@ -23,6 +23,7 @@ import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 // icons
 
 import IconStay from "../../../public/images/icon-profile.svg";
+import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 /* PAGINA 21 do xd */
 
@@ -115,7 +116,7 @@ const Estadia = () => {
                         <div className="justify-center lg:mt-10">
                           <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
                         </div>
-                        <Link href="/procurar">
+                        <Link href={PROCURAR_ADVERT_URL}>
                           <a className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
                             Encontrar
                             <span className="px-1">

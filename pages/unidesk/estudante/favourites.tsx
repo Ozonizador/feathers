@@ -16,6 +16,7 @@ import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { Advertisement } from "../../../models/advertisement";
 import { GetServerSidePropsContext } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,7 +46,7 @@ const UnideskFavoritos = () => {
           <Image src={iconfavorito} alt="Favoritos" height={55} width={55} />
         </div>
         <div className="ml-4 text-xl">
-          <Link href="/unidesk">Unidesk</Link>
+          <Link href={UNIDESK_URL}>Unidesk</Link>
           {" > Favoritos"}
         </div>
       </div>
@@ -128,7 +129,7 @@ const UnideskFavoritos = () => {
           )}
         </div>
         <div className="mt-12 mb-20 flex justify-center">
-          <Link href="/procurar">
+          <Link href={PROCURAR_ADVERT_URL}>
             <a className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44">
               Encontrar{" "}
               <span className="px-1">

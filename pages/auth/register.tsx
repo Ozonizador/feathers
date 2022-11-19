@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
+import { LOGIN_URL } from "../../models/paths";
 import useUserService from "../../services/userService";
 
 const Register = () => {
@@ -42,7 +43,7 @@ const Register = () => {
     <div className="my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <Link href="/auth/login">
+          <Link href={LOGIN_URL}>
             <a className="p-3 text-center">Iniciar Sessão</a>
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">Registar</div>
@@ -99,13 +100,13 @@ const Register = () => {
           </div>
           <div className="mt-4 text-center">
             Ao registar-se está a concordar com os nossos {/* mudar link */}
-            <Link href="/auth/recover">
+            <Link href="#">
               <a>
                 <span className="italic text-primary-500">termos e condições</span> e{" "}
               </a>
             </Link>
             {/* mudar link */}
-            <Link href="/auth/recover">
+            <Link href="#">
               <a>
                 <span className="italic text-primary-500">política de privacidade.</span>
               </a>

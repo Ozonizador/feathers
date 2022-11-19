@@ -6,6 +6,7 @@ import useAdvertisementService from "../../../../services/advertisementService";
 import { Advertisement, TYPE_ADVERTISEMENT } from "../../../../models/advertisement";
 import { Spinner } from "flowbite-react";
 import Image from "next/image";
+import { PROCURAR_ADVERT_URL } from "../../../../models/paths";
 
 export default function RoomSemelhantes() {
   const advertisement = useGetSingleAdvertisement();
@@ -49,7 +50,7 @@ export default function RoomSemelhantes() {
           })}
       </div>
 
-      <Link href="/procurar">
+      <Link href={PROCURAR_ADVERT_URL}>
         <a className="hover: lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96">
           Encontrar mais
           <span className="px-1">

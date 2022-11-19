@@ -1,11 +1,11 @@
 import React from "react";
 import HomeSection5Cards from "../homeSection5Cards/HomeSection5Cards";
 import Link from "next/link";
-// import Image from "next-image"
 
 import { CgHome } from "react-icons/cg";
+import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
-export default function HomeSection5() {
+const HomeSection5 = () => {
   return (
     <section>
       <div className="pt-24 pb-36">
@@ -28,7 +28,7 @@ export default function HomeSection5() {
           />
         </div>
         <span className="hidden justify-center lg:flex">
-          <Link href="/procurar">
+          <Link href={PROCURAR_ADVERT_URL}>
             <a className="hover: flex w-1/5 items-center justify-center  rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
               Encontrar{" "}
               <span className="px-1">
@@ -41,4 +41,6 @@ export default function HomeSection5() {
       </div>
     </section>
   );
-}
+};
+
+export default HomeSection5;
