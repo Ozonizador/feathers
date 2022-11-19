@@ -2,13 +2,18 @@
 
 import AnuncioCard from "../../../components/senhorioanuncios/card/AnuncioCard";
 import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
-import Breadcrumb from "../../../components/senhorioanuncios/breadcrumb/Breadcrumb";
 import { useCallback, useEffect, useState } from "react";
 import { Advertisement } from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useAdvertisementService from "../../../services/advertisementService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
+import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
+
+// icons
+import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
+
+const paths = [{ url: "", label: "Painel" }] as BreadcrumbPath[];
 
 const Anuncios = () => {
   const { getAdvertismentsFromUserId } = useAdvertisementService();
@@ -31,7 +36,7 @@ const Anuncios = () => {
 
   return (
     <section>
-      <Breadcrumb />
+      <Breadcrumbs icon={IconAnuncios} paths={paths} />
 
       <div className="container mx-auto my-16 w-5/6 rounded-2xl  bg-terciary-300 py-20 ">
         <div className="flex flex-col gap-6 lg:flex-row">
@@ -49,6 +54,7 @@ const Anuncios = () => {
                   </div>
                 );
               })}
+              {!advertisements || (advertisements.length === 0 && <div>Sem anúncios</div>)}
             </div>
 
             {/* <div>

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import Input from "../utils/Input";
 import { Avatar, Select, Spinner } from "flowbite-react";
 import { Toast } from "flowbite-react";
@@ -9,10 +8,17 @@ import useProfileService from "../../services/profileService";
 import countryList from "react-select-country-list";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
 import PhoneInput from "react-phone-number-input";
+import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
+import { ADMIN_URL } from "../../models/paths";
 
 /*
     pagina 32 do XD
 */
+
+const paths = [
+  { url: ADMIN_URL, label: "Conta" },
+  { url: "", label: "Informações pessoais" },
+] as BreadcrumbPath[];
 
 const MainMenu = () => {
   const [profile, setProfile] = useState<Profile>(null);
@@ -73,12 +79,8 @@ const MainMenu = () => {
   }, [getProfile]);
 
   return (
-    <div className="sm: container mx-auto mb-20 w-full lg:w-10/12">
-      <div className="font-b my-10 text-xl">
-        <Link href="/admin">Conta</Link>
-        {" > Informações pessoais"}
-      </div>
-
+    <div className="mx-auto mb-20 w-full sm:container lg:w-10/12">
+      <Breadcrumbs paths={paths} />
       <div className="flex flex-1 justify-center">
         {loading && (
           <>

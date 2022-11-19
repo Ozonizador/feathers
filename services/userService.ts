@@ -1,5 +1,4 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 
 const useUserService = () => {
   const supabaseClient = useSupabaseClient();
