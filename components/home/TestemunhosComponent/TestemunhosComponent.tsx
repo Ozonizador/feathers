@@ -6,7 +6,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Testemunhos } from "../../../models/static";
 import { group } from "../../../utils/utils";
 
-const HomeSection6 = () => {
+const TestemunhosComponent = () => {
   return (
     <section>
       <div className="w-full bg-terciary-300">
@@ -60,4 +60,4 @@ const HomeSection6 = () => {
   );
 };
 
-export default HomeSection6;
+export default TestemunhosComponent;
