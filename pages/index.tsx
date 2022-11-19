@@ -6,8 +6,8 @@ import HomeSection2 from "../components/home/homeSection2/HomeSection2";
 import HomeSection3 from "../components/home/homeSection3/HomeSection3";
 import ExploreCity from "../components/home/ExploreCity/ExploreCity";
 import HomeSection5 from "../components/home/homeSection5/HomeSection5";
-import HomeSection6 from "../components/home/HomeSection6/HomeSection6";
 import HomeSection7 from "../components/home/HomeSection7/HomeSection7";
+import HomeSection6 from "../components/home/HomeSection6/HomeSection6";
 
 const Home = () => {
   return (
