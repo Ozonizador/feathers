@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-export default function HomeSection5Cards({ img, heading, text }) {
+const HomeSection5Cards = ({ img, heading, text }) => {
   return (
     <article className=" rounded-2xl border border-solid border-terciary-200 p-9">
       <Image src={img} alt="" height={64} width={64} />
@@ -9,4 +9,6 @@ export default function HomeSection5Cards({ img, heading, text }) {
       <p className="text-xl text-secondary-400">{text}</p>
     </article>
   );
-}
+};
+
+export default HomeSection5Cards;
