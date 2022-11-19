@@ -3,6 +3,7 @@ import { Accordion } from "flowbite-react";
 import { Carousel } from "flowbite-react";
 import { GiPersonInBed } from "react-icons/gi";
 
+// this is repeated to accordionPeril */
 const AccordionEstudante = () => {
   return (
     <div>

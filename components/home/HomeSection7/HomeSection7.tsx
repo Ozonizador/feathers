@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ANUNCIAR_PROP_URL, COMO_FUNCIONA_URL } from "../../../models/paths";
 
-export default function HomeSection7() {
+const HomeSection7 = () => {
   return (
     <section>
       <div className="my-24 rounded-3xl bg-terciary-300 lg:w-full">
@@ -47,4 +47,6 @@ export default function HomeSection7() {
       </div>
     </section>
   );
-}
+};
+
+export default HomeSection7;
