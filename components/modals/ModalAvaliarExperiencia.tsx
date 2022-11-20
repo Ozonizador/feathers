@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
-import useReviewService from "../../services/reviewService";
+import useReviewService from "../../hooks/reviewService";
 import { useProfileInformation } from "../../context/MainProvider";
 import {
   useModalAvaliarExperiencia,

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useAdvertisement } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 
 const FormPasso8 = () => {
   const advertisement = useAdvertisement();

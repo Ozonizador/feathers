@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Input from "../../components/utils/Input";
 import { Spinner } from "../../components/utils/Spinner";
 import { REGISTER_URL } from "../../models/paths";
-import useUserService from "../../services/userService";
+import useUserService from "../../hooks/userService";
 
 const Recover = () => {
   const router = useRouter();

@@ -2,12 +2,12 @@ import Link from "next/link";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
 import FeathersCheckbox from "../common/FeathersCheckbox";
-import useUserService from "../../services/userService";
+import useUserService from "../../hooks/userService";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import FeathersButton from "../utils/Button";
 import { useUser } from "@supabase/auth-helpers-react";
-import useProfileService from "../../services/useProfileService";
+import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 // PÁGINA 36

@@ -2,7 +2,7 @@ import HospedesMenu from "../../../components/unidesk/Menus/HospedesMenu";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
-import useStayService from "../../../services/stayService";
+import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayGuest } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";

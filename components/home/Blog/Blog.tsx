@@ -2,7 +2,7 @@ import { Spinner } from "flowbite-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useGetUserType } from "../../../context/MainProvider";
 import { Blog } from "../../../models/blog";
-import useBlogService from "../../../services/blogService";
+import useBlogService from "../../../hooks/blogService";
 import Image from "next/image";
 import Link from "next/link";
 

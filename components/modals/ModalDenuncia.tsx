@@ -10,7 +10,7 @@ import {
 import { Report, ReportsType } from "../../models/report";
 import { useProfileInformation } from "../../context/MainProvider";
 import { Spinner } from "flowbite-react";
-import useReportService from "../../services/reportService";
+import useReportService from "../../hooks/reportService";
 
 /* PAGINA 21-22 DO XD 
 

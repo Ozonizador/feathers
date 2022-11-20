@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
 import { GEO } from "../models/utils";
-import useAdvertisementService from "../services/advertisementService";
+import useAdvertisementService from "../hooks/advertisementService";
 
 /* FILTERS */
 export interface FilterAdvertisements {

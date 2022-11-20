@@ -3,8 +3,8 @@ import { useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
-import useFavouriteService from "../services/favouriteService";
-import useProfileService from "../services/useProfileService";
+import useFavouriteService from "../hooks/favouriteService";
+import useProfileService from "../hooks/useProfileService";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;

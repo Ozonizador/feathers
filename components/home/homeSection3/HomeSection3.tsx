@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
-import useAdvertisementService from "../../../services/advertisementService";
+import useAdvertisementService from "../../../hooks/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
 import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";

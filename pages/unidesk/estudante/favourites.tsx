@@ -6,7 +6,7 @@ import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useProfileInformation } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
-import useAdvertisementService from "../../../services/advertisementService";
+import useAdvertisementService from "../../../hooks/advertisementService";
 import { Spinner } from "flowbite-react";
 
 /* IMAGES */

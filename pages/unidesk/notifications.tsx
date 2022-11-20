@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
 import { useProfileInformation } from "../../context/MainProvider";
 import { Notification } from "../../models/notification";
-import useNotificationService from "../../services/notificationsService";
+import useNotificationService from "../../hooks/notificationsService";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 
 // image

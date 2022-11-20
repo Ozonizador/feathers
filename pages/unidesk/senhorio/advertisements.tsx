@@ -5,7 +5,7 @@ import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { useCallback, useEffect, useState } from "react";
 import { Advertisement } from "../../../models/advertisement";
 import { useProfileInformation } from "../../../context/MainProvider";
-import useAdvertisementService from "../../../services/advertisementService";
+import useAdvertisementService from "../../../hooks/advertisementService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";

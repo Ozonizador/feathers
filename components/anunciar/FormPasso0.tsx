@@ -7,12 +7,12 @@ import {
 } from "../../context/AdvertisementController";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
 import { toast } from "react-toastify";
-import { getResultsFromSearch } from "../../services/mapService";
+import { getResultsFromSearch } from "../../hooks/mapService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 
 const FormPasso0 = () => {
   /* STEPS */

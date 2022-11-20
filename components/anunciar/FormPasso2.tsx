@@ -4,7 +4,7 @@ import { useState } from "react";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 
 const FormPasso2 = () => {
   // contexts

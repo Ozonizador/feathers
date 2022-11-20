@@ -11,8 +11,15 @@ import { toast } from "react-toastify";
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import FeatherDatePicker from "../../components/utils/FeatherDatepicker";
 import Input from "../../components/utils/Input";
-import { Profile, Gender, LanguageLabel } from "../../models/profile";
-import useProfileService from "../../services/useProfileService";
+import {
+  Profile,
+  Gender,
+  LanguageLabel,
+  ProfilesResponse,
+  PROFILE_COLUMNS,
+  PROFILE_TABLE_NAME,
+} from "../../models/profile";
+import useProfileService from "../../hooks/useProfileService";
 import { dateToFormat } from "../../utils/utils";
 
 import "react-phone-number-input/style.css";
@@ -90,16 +97,6 @@ const Index = ({ user, profileData }: IndexProps) => {
     }
   };
 
-  const getProfile = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getUserProfile(user.id);
-      if (!error && data) {
-        setProfile(data);
-      }
-    }
-    setLoading(false);
-  }, [user]);
-
   /* Country */
   const options = useMemo(() => countryList().getData(), []);
 
@@ -115,11 +112,6 @@ const Index = ({ user, profileData }: IndexProps) => {
       }
     }
   };
-
-  useEffect(() => {
-    setLoading(true);
-    getProfile();
-  }, [getProfile]);
 
   return (
     <div className="mx-auto mb-20 w-full sm:container lg:w-10/12">
@@ -337,12 +329,17 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const user = session.user;
-  const { data, error } = await getUserProfile(user.id);
+  const { data: profile, error } = await supabase
+    .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+    .select()
+    .eq(PROFILE_COLUMNS.ID, user.id)
+    .single();
 
   return {
     props: {
       initialSession: session,
       user: user,
+      profileData: profile,
     },
   };
 };

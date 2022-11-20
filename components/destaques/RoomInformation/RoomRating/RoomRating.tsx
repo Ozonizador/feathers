@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { Rating } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import useReviewService from "../../../../services/reviewService";
+import useReviewService from "../../../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../../../models/review";
 
 const RoomRating = () => {
