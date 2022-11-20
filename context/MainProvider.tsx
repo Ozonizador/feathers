@@ -4,7 +4,7 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
 import useFavouriteService from "../services/favouriteService";
-import useProfileService from "../services/profileService";
+import useProfileService from "../services/useProfileService";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;

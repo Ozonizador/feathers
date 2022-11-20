@@ -23,11 +23,11 @@ const MainMenu = () => {
           <Link href={GENERAL_ADMIN_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
-                <div className="flex">
+                <div className="flex p-3">
                   <div>
                     <Image src={personalInformationImage} alt="Informações pessoais" height={96} width={96} />
                   </div>
-                  <div className="ml-3 p-2 lg:ml-5 lg:mt-6">
+                  <div className="ml-3 lg:ml-5">
                     <div className="mb-2 text-xl font-bold lg:text-2xl">Informações pessoais</div>
                     <div>Forneça os dados sobre si e como o podemos contactar.</div>
                   </div>
@@ -41,11 +41,11 @@ const MainMenu = () => {
           <Link href={PAYMENTS_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
-                <div className=" flex">
+                <div className="flex p-3">
                   <div>
                     <Image src={paymentsImage} alt="Pagamentos" height={96} width={96} />
                   </div>
-                  <div className="ml-3 p-2 lg:ml-5 lg:mt-6">
+                  <div className="ml-3 lg:ml-5">
                     <div className="mb-2 text-xl font-bold lg:text-2xl">Pagamentos e recebimentos</div>
                     <div>Defina como vai receber/pagar as transações que efectuar.</div>
                   </div>
@@ -59,11 +59,11 @@ const MainMenu = () => {
           <Link href={CONFIGURATIONS_URL}>
             <a>
               <div className="my-5 flex cursor-pointer pl-5 ">
-                <div className=" flex">
+                <div className="flex p-3">
                   <div>
                     <Image src={configurationsImage} alt="Configurações" height={96} width={96} />
                   </div>
-                  <div className="ml-3 p-2 lg:ml-5 lg:mt-6">
+                  <div className="ml-3 lg:ml-5">
                     <div className="mb-2 text-xl font-bold lg:text-2xl">Configurações</div>
                     <div>Atualize a sua palavra-passe e controle as notificações.</div>
                   </div>

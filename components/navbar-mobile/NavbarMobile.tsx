@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import person from "../../public/images/person.png";
 /* import person image */
 import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
@@ -26,6 +25,8 @@ import {
   UNIDESK_STUDENT_FAVOURITES_URL,
   UNIDESK_URL,
 } from "../../models/paths";
+import { BsPerson } from "react-icons/bs";
+
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -126,16 +127,19 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {user && (
                 <>
                   <div className="flex">
-                    {user?.user_metadata?.avatar_url && (
+                    {user?.avatar_url ? (
                       <Image
                         unoptimized={true}
-                        src={user?.user_metadata?.avatar_url || person}
-                        height={32}
+                        src={user?.avatar_url}
+                        height={36}
                         width={36}
-                        alt=""
+                        alt="profile-avatar"
                         className="rounded-full"
                       />
+                    ) : (
+                      <BsPerson size={32} />
                     )}
+
                     <div className="my-auto ml-2">{user?.user_metadata.name}</div>
                   </div>
 

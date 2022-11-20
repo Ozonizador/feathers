@@ -10,9 +10,8 @@ import MyLink from "../utils/MyLink";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
-import person from "../../public/images/person.png";
 import ukFlag from "../../public/images/icon-uk.jpg";
-import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useProfileInformation, useToggleUserType } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
@@ -35,9 +34,11 @@ import {
   UNIDESK_STUDENT_FAVOURITES_URL,
   UNIDESK_URL,
 } from "../../models/paths";
+import { BsPerson } from "react-icons/bs";
 
 export const Navbar = () => {
   const user = useUser();
+  const profile = useProfileInformation();
   const router = useRouter();
   const supabaseClient = useSupabaseClient<Database>();
 
@@ -181,17 +182,17 @@ export const Navbar = () => {
                 )}
                 {user && (
                   <div className="flex flex-1">
-                    <div>
+                    <div className="my-auto flex">
                       <span className="mr-2">Estudante</span>
                       <Switch
                         checked={true}
                         onChange={toggleSenhorioEstudante}
-                        className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-500"
+                        className="relative inline-flex h-6 w-11 rounded-full bg-primary-500"
                       >
                         <span
                           className={`${
                             toggleUserType === "LANDLORD" ? "translate-x-6" : "translate-x-1"
-                          } inline-block h-4 w-4 transform rounded-full bg-white`}
+                          } absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white`}
                         />
                       </Switch>
                       <span className="ml-2">Senhorio</span>
@@ -199,14 +200,18 @@ export const Navbar = () => {
                     <div>
                       <Menu as="div" className="ml-5">
                         <Menu.Button className="flex flex-1">
-                          <Image
-                            unoptimized={true}
-                            src={user.user_metadata.avatar_url || person}
-                            height={32}
-                            width={32}
-                            alt=""
-                            className="rounded-lg"
-                          />
+                          {profile?.avatar_url ? (
+                            <Image
+                              unoptimized={true}
+                              src={profile?.avatar_url}
+                              height={32}
+                              width={32}
+                              alt="profile-avatar"
+                              className="rounded-full"
+                            />
+                          ) : (
+                            <BsPerson size={28} />
+                          )}
                           <p className="my-auto ml-2">{user.user_metadata.name}</p>
                           <div className="my-auto ml-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />

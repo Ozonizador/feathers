@@ -27,10 +27,10 @@ const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
               <div className="inline">{path.label}</div>
             );
             return (
-              <>
+              <div key={index} className="flex gap-2">
                 {mainInfo}
                 {index !== numberUrls - 1 && ">"}
-              </>
+              </div>
             );
           })}
       </div>

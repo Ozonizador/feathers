@@ -7,7 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import FeathersButton from "../utils/Button";
 import { useUser } from "@supabase/auth-helpers-react";
-import useProfileService from "../../services/profileService";
+import useProfileService from "../../services/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 // PÁGINA 36
