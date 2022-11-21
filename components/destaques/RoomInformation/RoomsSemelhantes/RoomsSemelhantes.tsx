@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CgHome } from "react-icons/cg";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import useAdvertisementService from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../hooks/advertisementService";
 import { Advertisement, TYPE_ADVERTISEMENT } from "../../../../models/advertisement";
 import { Spinner } from "flowbite-react";
 import Image from "next/image";

@@ -1,6 +1,6 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 

@@ -1,7 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 import AboutHouseComponent from "../anuncio/AboutHouseComponent";
 
 /* TODO MISSING LOGIC */

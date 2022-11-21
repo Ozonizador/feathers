@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
 

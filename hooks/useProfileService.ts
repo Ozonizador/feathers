@@ -35,12 +35,12 @@ const useProfileService = () => {
   };
 
   const updateUserProfile = async (userID: string, profile: Profile) => {
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .update({ ...profile })
-      .eq(PROFILE_COLUMNS.ID, userID)
-      .single();
-    return { data, error };
+      .eq(PROFILE_COLUMNS.ID, userID);
+
+    return { error };
   };
 
   const updateAvatarInfo = async (userId: string, avatar_url: string) => {

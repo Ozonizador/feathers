@@ -5,7 +5,7 @@ import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import { LOGIN_URL } from "../../models/paths";
-import useUserService from "../../services/userService";
+import useUserService from "../../hooks/userService";
 
 const Register = () => {
   const router = useRouter();

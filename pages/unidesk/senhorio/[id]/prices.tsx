@@ -8,7 +8,7 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 
-import useAdvertisementService from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../hooks/advertisementService";
 
 const Prices = () => {
   const { updateAdvertisement } = useAdvertisementService();

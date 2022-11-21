@@ -3,7 +3,7 @@ import { Avatar } from "flowbite-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import { ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
-import useReviewService from "../../../../../services/reviewService";
+import useReviewService from "../../../../../hooks/reviewService";
 
 const ReviewInfo = () => {
   const user = useUser();

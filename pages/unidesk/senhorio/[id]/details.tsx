@@ -5,12 +5,12 @@ import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeCo
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
-import useAdvertisementService from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
 import { MapCoordinates } from "../../../../models/utils";
-import { getResultsFromSearch } from "../../../../services/mapService";
+import { getResultsFromSearch } from "../../../../hooks/mapService";
 import {
   useSelectedAnuncioMenuSenhorio,
   useSetSelectedAnuncioMenuSenhorio,

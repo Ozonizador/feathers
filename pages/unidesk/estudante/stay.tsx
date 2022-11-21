@@ -14,7 +14,7 @@ import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
-import useStayService from "../../../services/stayService";
+import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayComplete } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";

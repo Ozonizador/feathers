@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
@@ -7,12 +7,12 @@ import {
 } from "../../context/AdvertisementController";
 import GeneralAdvertComponent from "../anuncio/GeneralAdvertComponent";
 import { toast } from "react-toastify";
-import { getResultsFromSearch } from "../../services/mapService";
+import { getResultsFromSearch } from "../../hooks/mapService";
 import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 
 const FormPasso0 = () => {
   /* STEPS */
@@ -47,7 +47,7 @@ const FormPasso0 = () => {
     }
   };
 
-  const onChangeProperty = (property, value) => {
+  const onChangeProperty = (property: string, value: any) => {
     changeAdvertisementProperty(property, value);
   };
 
@@ -64,7 +64,7 @@ const FormPasso0 = () => {
     }
   };
 
-  const onChangeMarker = (lat, lng) => {
+  const onChangeMarker = (lat: number, lng: number) => {
     const coordsArray = coordinatesObjectToArray({ lat, lng });
     let newCoordinates = { type: "Point", coordinates: coordsArray };
 

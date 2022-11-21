@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Blog } from "../../../models/blog";
-import useBlogService from "../../../services/blogService";
+import useBlogService from "../../../hooks/blogService";
 import { UserTypes } from "../../../models/profile";
 import Link from "next/link";
 

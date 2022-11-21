@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
-import { giveSearchByLocationSearch } from "../../services/mapService";
+import { giveSearchByLocationSearch } from "../../hooks/mapService";
 import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";

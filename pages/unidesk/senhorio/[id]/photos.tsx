@@ -5,7 +5,7 @@ import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-import useAdvertisementService from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../hooks/advertisementService";
 import classNames from "classnames";
 import { toast } from "react-toastify";
 import {

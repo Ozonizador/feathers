@@ -6,13 +6,13 @@ import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
 
-import useReservationService from "../../../../services/reservationService";
+import useReservationService from "../../../../hooks/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
-import useNotificationService from "../../../../services/notificationsService";
+import useNotificationService from "../../../../hooks/notificationsService";
 import { createNotification } from "../../../../helpers/notificationHelper";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
-import useConversationService from "../../../../services/conversationService";
+import useConversationService from "../../../../hooks/conversationService";
 import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";

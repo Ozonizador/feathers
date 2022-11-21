@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import person from "../../public/images/person.png";
 /* import person image */
-import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useProfileInformation, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
@@ -26,6 +25,8 @@ import {
   UNIDESK_STUDENT_FAVOURITES_URL,
   UNIDESK_URL,
 } from "../../models/paths";
+import { BsPerson } from "react-icons/bs";
+
 interface NavbarMobileProps {
   open: boolean;
   setOpenMobile: () => void;
@@ -33,6 +34,7 @@ interface NavbarMobileProps {
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const user = useUser();
+  const profile = useProfileInformation();
   const supabaseClient = useSupabaseClient<Database>();
 
   const { toggleUserType } = useGetUserType();
@@ -126,16 +128,19 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {user && (
                 <>
                   <div className="flex">
-                    {user?.user_metadata?.avatar_url && (
+                    {profile?.avatar_url ? (
                       <Image
                         unoptimized={true}
-                        src={user?.user_metadata?.avatar_url || person}
-                        height={32}
+                        src={profile?.avatar_url}
+                        height={36}
                         width={36}
-                        alt=""
+                        alt="profile-avatar"
                         className="rounded-full"
                       />
+                    ) : (
+                      <BsPerson size={32} />
                     )}
+
                     <div className="my-auto ml-2">{user?.user_metadata.name}</div>
                   </div>
 

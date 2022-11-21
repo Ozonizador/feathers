@@ -5,7 +5,7 @@ import Image from "next/image";
 import notification from "../public/images/notification.png";
 import { Blog, BlogCategoryLabel } from "../models/blog";
 import { useCallback, useEffect, useState } from "react";
-import useBlogService from "../services/blogService";
+import useBlogService from "../hooks/blogService";
 import { UserTypes } from "../models/profile";
 import { Spinner } from "flowbite-react";
 

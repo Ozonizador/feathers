@@ -1,6 +1,6 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useSetAdvertisementProperty, useAdvertisement } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../services/advertisementService";
+import useAdvertisementService from "../../hooks/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 
 const FormPasso1 = () => {

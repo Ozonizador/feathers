@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import useAdvertisementService from "../../../../services/advertisementService";
+import useAdvertisementService from "../../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import {
   useSelectedAnuncioMenuSenhorio,

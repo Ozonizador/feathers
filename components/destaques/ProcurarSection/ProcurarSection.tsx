@@ -17,7 +17,7 @@ import {
   useSetPageAdvertisementinfo,
 } from "../../../context/ProcurarAdvertisementsProvider";
 import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
-import { PAGE_NUMBER_COUNT } from "../../../services/advertisementService";
+import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
