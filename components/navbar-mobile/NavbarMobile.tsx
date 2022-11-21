@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 /* import person image */
-import { useGetUserType, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useProfileInformation, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
@@ -34,6 +34,7 @@ interface NavbarMobileProps {
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const user = useUser();
+  const profile = useProfileInformation();
   const supabaseClient = useSupabaseClient<Database>();
 
   const { toggleUserType } = useGetUserType();
@@ -127,10 +128,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {user && (
                 <>
                   <div className="flex">
-                    {user?.avatar_url ? (
+                    {profile?.avatar_url ? (
                       <Image
                         unoptimized={true}
-                        src={user?.avatar_url}
+                        src={profile?.avatar_url}
                         height={36}
                         width={36}
                         alt="profile-avatar"

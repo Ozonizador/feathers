@@ -64,7 +64,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             <Input
               label="street"
               margin-bottom="21px"
-              labelText="Rua"
+              labelText="Rua *"
               value={advertisement.street}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)}
             />
@@ -85,7 +85,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           <div>
             <Input
               label="place"
-              labelText="Localidade"
+              labelText="Localidade *"
               customCss="icon"
               value={advertisement.place}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)}
@@ -95,7 +95,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           <div>
             <Input
               label="street_number"
-              labelText="Número"
+              labelText="Número *"
               value={advertisement.street_number}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
             />
@@ -104,7 +104,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           <div>
             <Input
               label="postal_code"
-              labelText="Código Postal"
+              labelText="Código Postal *"
               value={advertisement.postal_code}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
             />

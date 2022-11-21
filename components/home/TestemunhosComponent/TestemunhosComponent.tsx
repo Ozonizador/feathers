@@ -12,8 +12,9 @@ const TestemunhosComponent = () => {
       <div className="w-full bg-terciary-300">
         <div className="hidden h-96 lg:flex">
           <Carousel
-            leftControl={<BsFillArrowLeftCircleFill className="text-5xl text-white drop-shadow-xl" />}
-            rightControl={<BsFillArrowRightCircleFill className="text-5xl text-white drop-shadow-xl" />}
+            leftControl={<BsFillArrowLeftCircleFill size={32} className="text-5xl text-white drop-shadow-xl" />}
+            rightControl={<BsFillArrowRightCircleFill size={32} className="text-5xl text-white drop-shadow-xl" />}
+            indicators={false}
           >
             {group(Testemunhos, 3).map((children, index) => {
               return (
@@ -38,8 +39,13 @@ const TestemunhosComponent = () => {
 
         <div className="flex h-96 lg:hidden">
           <Carousel
-            leftControl={<BsFillArrowLeftCircleFill className="hidden text-5xl text-white drop-shadow-xl lg:block" />}
-            rightControl={<BsFillArrowRightCircleFill className="hidden text-5xl text-white drop-shadow-xl lg:block" />}
+            leftControl={
+              <BsFillArrowLeftCircleFill size={32} className="hidden text-5xl text-white drop-shadow-xl lg:block" />
+            }
+            rightControl={
+              <BsFillArrowRightCircleFill size={32} className="hidden text-5xl text-white drop-shadow-xl lg:block" />
+            }
+            indicators={false}
           >
             {Testemunhos.map((testemunho, index) => {
               return (

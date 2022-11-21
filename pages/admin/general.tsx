@@ -200,7 +200,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 </div>
 
                 {/* RIGHT SIDE */}
-                <div className=" -mt-12 w-full lg:mt-0 lg:w-1/2 ">
+                <div className="w-full lg:mt-0 lg:w-1/2">
                   <div className="mb-10">
                     <Controller
                       control={control}
