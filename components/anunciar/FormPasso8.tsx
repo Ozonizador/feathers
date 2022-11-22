@@ -13,8 +13,12 @@ interface FormTermos {
 }
 
 const FormPasso8 = () => {
-  const { control, handleSubmit } = useForm<FormTermos>({
-    defaultValues: { termos: false, politica: false, calendarUpdated: true, trustInformation: true },
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<FormTermos>({
+    defaultValues: { termos: false, politica: false, calendarUpdated: false, trustInformation: false },
   });
   const advertisement = useAdvertisement();
   const router = useRouter();
@@ -22,7 +26,7 @@ const FormPasso8 = () => {
   /* Services */
   const { updateAdvertisement } = useAdvertisementService();
 
-  const nextSteps = async (data) => {
+  const nextSteps = async (data, e) => {
     debugger;
     // setAdvertisementProperty("aboutHouse", "testing");
     const { error } = await updateAdvertisement(advertisement, advertisement.id);
@@ -48,7 +52,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="termos" checked={value} />;
                 }}
-                rules={{ validate: (value) => value === true }}
+                rules={{ validate: (value) => value !== true }}
               ></Controller>
               <div className="text-xl">Termos e condições</div>{" "}
             </div>
@@ -62,7 +66,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="politica" checked={value} />;
                 }}
-                rules={{ validate: (value) => value === true }}
+                rules={{ validate: (value) => value !== true }}
               ></Controller>
 
               <div className="text-xl">Política de privacidade</div>
@@ -77,7 +81,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="calendarUpdated" checked={value} />;
                 }}
-                rules={{ validate: (value) => value === true || "error" }}
+                rules={{ validate: (value) => value !== true || "error" }}
               ></Controller>
               <div className="text-xl">Acordo em manter o meu calendário atualizado</div>{" "}
             </div>
@@ -91,7 +95,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="trustInformation" checked={value} />;
                 }}
-                rules={{ validate: (value) => value === true }}
+                rules={{ validate: (value) => value !== true }}
               ></Controller>
 
               <div className="text-xl">As informações que providencio são verdadeiras</div>
@@ -102,7 +106,7 @@ const FormPasso8 = () => {
         <button
           type="submit"
           className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-          onClick={(e) => nextSteps(e)}
+          disabled={!isValid}
         >
           Gravar anúncio
         </button>
