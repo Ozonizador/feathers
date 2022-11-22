@@ -11,31 +11,36 @@ import { ToastContainer } from "react-toastify";
 import { MenuSenhorioProvider } from "../context/MenuSenhorioAnuncioProvider";
 import { useState } from "react";
 import { Database } from "../database.types";
+import Maintenance from "../components/maintenance/Maintenance";
 
 function MyApp({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
 
   return (
     <>
-      <SessionContextProvider supabaseClient={supabaseClient}>
-        <MainProvider>
-          <MenuSenhorioProvider>
-            <Head>
-              <title>Unihosts</title>
-              <meta
-                name="description"
-                content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
-              ></meta>
-            </Head>
-            <Navbar />
-            <div className="min-h-screen">
-              <Component {...pageProps} />
-              <ToastContainer />
-            </div>
-            <Footer />
-          </MenuSenhorioProvider>
-        </MainProvider>
-      </SessionContextProvider>
+      {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+        <SessionContextProvider supabaseClient={supabaseClient}>
+          <MainProvider>
+            <MenuSenhorioProvider>
+              <Head>
+                <title>Unihosts</title>
+                <meta
+                  name="description"
+                  content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
+                ></meta>
+              </Head>
+              <Navbar />
+              <div className="min-h-screen">
+                <Component {...pageProps} />
+                <ToastContainer />
+              </div>
+              <Footer />
+            </MenuSenhorioProvider>
+          </MainProvider>
+        </SessionContextProvider>
+      ) : (
+        <Maintenance />
+      )}
     </>
   );
 }
