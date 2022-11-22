@@ -13,7 +13,9 @@ interface FormTermos {
 }
 
 const FormPasso8 = () => {
-  const { control, handleSubmit } = useForm<FormTermos>({ defaultValues: { termos: false } });
+  const { control, handleSubmit } = useForm<FormTermos>({
+    defaultValues: { termos: false, politica: false, calendarUpdated: true, trustInformation: true },
+  });
   const advertisement = useAdvertisement();
   const router = useRouter();
 
@@ -21,6 +23,7 @@ const FormPasso8 = () => {
   const { updateAdvertisement } = useAdvertisementService();
 
   const nextSteps = async (data) => {
+    debugger;
     // setAdvertisementProperty("aboutHouse", "testing");
     const { error } = await updateAdvertisement(advertisement, advertisement.id);
     if (!error) {
@@ -45,7 +48,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="termos" checked={value} />;
                 }}
-                rules={{ value: true }}
+                rules={{ validate: (value) => value === true }}
               ></Controller>
               <div className="text-xl">Termos e condições</div>{" "}
             </div>
@@ -59,7 +62,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="politica" checked={value} />;
                 }}
-                rules={{ value: true }}
+                rules={{ validate: (value) => value === true }}
               ></Controller>
 
               <div className="text-xl">Política de privacidade</div>
@@ -74,7 +77,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="calendarUpdated" checked={value} />;
                 }}
-                rules={{ value: true }}
+                rules={{ validate: (value) => value === true || "error" }}
               ></Controller>
               <div className="text-xl">Acordo em manter o meu calendário atualizado</div>{" "}
             </div>
@@ -88,7 +91,7 @@ const FormPasso8 = () => {
                 render={({ field: { onChange, value } }) => {
                   return <Checkbox onChange={onChange} name="trustInformation" checked={value} />;
                 }}
-                rules={{ value: true }}
+                rules={{ validate: (value) => value === true }}
               ></Controller>
 
               <div className="text-xl">As informações que providencio são verdadeiras</div>
