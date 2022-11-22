@@ -1,9 +1,7 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { useState } from "react";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useAdvertisementService from "../../hooks/advertisementService";
 
 const FormPasso2 = () => {
@@ -29,6 +27,9 @@ const FormPasso2 = () => {
 
     // proximo passo
     const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) {
+      return toast.success("Erro a gravar a informação");
+    }
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };

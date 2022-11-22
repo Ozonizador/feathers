@@ -103,9 +103,15 @@ export const Navbar = () => {
           <div className="my-5 flex lg:gap-5">
             <div className="lg:block">
               <Link href={HOME_URL}>
-                <a>
-                  <div className="relative h-3/4 w-3/4">
-                    <Image src="/images/logo1.png" alt="" className="cursor-pointer" height={45} width={208}></Image>
+                <a aria-label="home">
+                  <div className="relative h-full w-52">
+                    <Image
+                      src="/images/logo1.png"
+                      alt=""
+                      className="cursor-pointer"
+                      objectFit="contain"
+                      layout="fill"
+                    ></Image>
                   </div>
                 </a>
               </Link>

@@ -13,6 +13,7 @@ import _ from "lodash";
 import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
 import useAdvertisementService from "../../hooks/advertisementService";
+import { FormProvider, useForm } from "react-hook-form";
 
 const FormPasso0 = () => {
   /* STEPS */
@@ -26,6 +27,9 @@ const FormPasso0 = () => {
 
   /* Services */
   const { addAdvertisement } = useAdvertisementService();
+
+  /* Form */
+  const methods = useForm();
 
   const nextStep = async (e) => {
     e.preventDefault();
@@ -73,31 +77,33 @@ const FormPasso0 = () => {
 
   return (
     <>
-      <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
-        <GeneralAdvertComponent
-          advertisement={advertisement}
-          onChange={onChangeProperty}
-          onChangeMarker={onChangeMarker}
-        />
-      </section>
-      <div className="mt-1">
-        <div className="flex lg:px-32">
-          <button
-            type="button"
-            className="w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-            onClick={checkPossibilites}
-          >
-            Atualizar No Mapa
-          </button>
-          <button
-            type="button"
-            className="mx-4 w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-            onClick={nextStep}
-          >
-            Seguinte &#8594;
-          </button>
+      <FormProvider {...methods}>
+        <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
+          <GeneralAdvertComponent
+            advertisement={advertisement}
+            onChange={onChangeProperty}
+            onChangeMarker={onChangeMarker}
+          />
+        </section>
+        <div className="mt-1">
+          <div className="flex lg:px-32">
+            <button
+              type="button"
+              className="w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
+              onClick={checkPossibilites}
+            >
+              Atualizar No Mapa
+            </button>
+            <button
+              type="button"
+              className="mx-4 w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
+              onClick={nextStep}
+            >
+              Seguinte &#8594;
+            </button>
+          </div>
         </div>
-      </div>
+      </FormProvider>
     </>
   );
 };

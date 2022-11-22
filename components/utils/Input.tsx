@@ -37,6 +37,7 @@ export default function Input({
           type={type}
           defaultValue={defaultValue}
           autoComplete={autoComplete}
+          aria-labelledby={label}
         ></input>
       </div>
     </div>

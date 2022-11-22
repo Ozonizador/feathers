@@ -6,7 +6,7 @@ interface FeathersButtonProps {
   loading: boolean;
 }
 
-const FeathersButton = ({ text, onClick, loading }: FeathersButtonProps) => {
+const FeathersButton = ({ text, onClick, loading = false }: FeathersButtonProps) => {
   return (
     <>
       <button className="rounded-xl bg-primary-500 p-2 text-center text-white" onClick={onClick} disabled={loading}>

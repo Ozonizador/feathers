@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 import { useGetUserCoordinates } from "../../context/MainProvider";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { CoordinatesAsArray } from "../../models/utils";
@@ -18,6 +19,7 @@ interface GeneralAdvertComponentProps {
 
 const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
+  const { register, control } = useFormContext();
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
@@ -41,7 +43,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           />
         </div>
       </>
-      <div className="my-5 flex w-full flex-col  justify-between gap-5 lg:flex-row">
+      <div className="my-5 flex w-full flex-col justify-between gap-5 lg:flex-row">
         {/* col left */}
         <div className="mt-2 w-full ">
           <div className="">
@@ -61,21 +63,32 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           </div>
 
           <div className="">
-            <Input
-              label="street"
-              margin-bottom="21px"
-              labelText="Rua *"
-              value={advertisement.street}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)}
+            <Controller
+              control={control}
+              name="street"
+              render={() => (
+                <Input
+                  label="street"
+                  labelText="Rua *"
+                  value={advertisement.street}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)}
+                />
+              )}
             />
           </div>
 
           <div>
-            <Input
-              label="floor"
-              labelText="Andar"
-              value={advertisement.floor}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.FLOOR, e.target.value)}
+            <Controller
+              control={control}
+              name="floor"
+              render={() => (
+                <Input
+                  label="floor"
+                  labelText="Andar"
+                  value={advertisement.floor}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.FLOOR, e.target.value)}
+                />
+              )}
             />
           </div>
         </div>
@@ -83,30 +96,48 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
         {/* col right */}
         <div className="w-full">
           <div>
-            <Input
-              label="place"
-              labelText="Localidade *"
-              customCss="icon"
-              value={advertisement.place}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)}
+            <Controller
+              control={control}
+              name="place"
+              render={() => (
+                <Input
+                  label="place"
+                  labelText="Localidade *"
+                  customCss="icon"
+                  value={advertisement.place}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)}
+                />
+              )}
             />
           </div>
 
           <div>
-            <Input
-              label="street_number"
-              labelText="Número *"
-              value={advertisement.street_number}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
+            <Controller
+              name="street_number"
+              control={control}
+              render={() => (
+                <Input
+                  label="street_number"
+                  labelText="Número *"
+                  value={advertisement.street_number}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
+                />
+              )}
             />
           </div>
 
           <div>
-            <Input
-              label="postal_code"
-              labelText="Código Postal *"
-              value={advertisement.postal_code}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
+            <Controller
+              control={control}
+              name="street_number"
+              render={() => (
+                <Input
+                  label="postal_code"
+                  labelText="Código Postal *"
+                  value={advertisement.postal_code}
+                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
+                />
+              )}
             />
           </div>
         </div>

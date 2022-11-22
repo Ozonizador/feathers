@@ -14,10 +14,10 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
     <div>
       <div className="my-8 flex items-center">
         <div className="flex items-center">
-          <MdPeopleOutline className="text-2xl" />
+          <MdPeopleOutline size={32} />
         </div>
-        <div className="w-5/12">
-          <h2 className="ml-2 align-middle text-base font-bold">Capacidade</h2>
+        <div className="w-6/12">
+          <h2 className="my-auto ml-3 align-middle text-base font-bold">Capacidade</h2>
         </div>
         <div>
           <QuantityInput
@@ -30,10 +30,10 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
 
       <div className="my-8 flex items-center">
         <div className="flex items-center">
-          <BiBed className="text-2xl" />
+          <BiBed size={32} />
         </div>
-        <div className="w-5/12">
-          <h2 className="ml-2 align-middle text-base font-bold">Camas</h2>
+        <div className="w-6/12">
+          <h2 className="my-auto ml-3 align-middle text-base font-bold">Camas</h2>
         </div>
         <div>
           <QuantityInput property={ADVERTISEMENT_PROPERTIES.BEDS} initValue={advertisement.beds} onChange={onChange} />
@@ -42,10 +42,10 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
 
       <div className="my-8 flex items-center">
         <div className="flex items-center">
-          <GiPersonInBed className="text-2xl" />
+          <GiPersonInBed size={32} />
         </div>
-        <div className="w-5/12">
-          <h2 className="ml-2 align-middle text-base font-bold">Quartos</h2>
+        <div className="w-6/12">
+          <h2 className="my-auto ml-3 align-middle text-base font-bold">Quartos</h2>
         </div>
         <div>
           <QuantityInput
@@ -58,10 +58,10 @@ const HouseCapacityComponent = ({ advertisement, onChange }: HouseCapacityCompon
 
       <div className="my-8 flex items-center">
         <div className="flex items-center">
-          <MdOutlineBathtub className="text-2xl" />
+          <MdOutlineBathtub size={32} />
         </div>
-        <div className="w-5/12">
-          <h2 className="ml-2 align-middle text-base  font-bold">Casas de Banho</h2>
+        <div className="w-6/12">
+          <h2 className="my-auto ml-3 align-middle text-base font-bold">Casas de Banho</h2>
         </div>
         <div>
           <QuantityInput
