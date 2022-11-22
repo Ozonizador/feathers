@@ -51,40 +51,20 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           </div>
         </div>
 
-        {/* missing here */}
-        <div className="mt-24 flex flex-col lg:flex-row lg:items-center">
-          <div className="flex ">
-            <p className="mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>
-          </div>
-          <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
-            <div className="mr-16 text-base">Sim</div>
+        <div className="mt-24 flex flex-row lg:items-center">
+          <p className="my-auto mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>
 
+          <div className="ml-0 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
             <div>
               <div className="flex h-5 items-center">
                 <input
                   name="host_lives_apartment"
-                  type="radio"
-                  value="true"
+                  type="checkbox"
                   className="h-4 w-4 rounded border border-terciary-500"
                   checked={advertisement.host_lives_property === true}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, e.target.value === "true")}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
-            <div className="mr-16 text-base">Não</div>
-
-            <div>
-              <div className="flex h-5 items-center">
-                <input
-                  name="host_lives_apartment"
-                  type="radio"
-                  value="false"
-                  className="h-4 w-4 rounded border border-terciary-500"
-                  checked={advertisement.host_lives_property === false}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, e.target.value === "true")}
+                  onChange={(e) =>
+                    onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, !advertisement.host_lives_property)
+                  }
                 />
               </div>
             </div>
@@ -93,7 +73,7 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
 
         <div className="mt-5 flex flex-col lg:mt-14 lg:flex-row lg:items-center">
           <div className="flex">
-            <p className="w-44 text-base font-bold">Tipo de senhorio</p>{" "}
+            <p className="w-44 text-base font-bold">Tipo de senhorio</p>
           </div>
 
           <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">

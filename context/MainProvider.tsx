@@ -107,17 +107,15 @@ export const useProfileInformation = () => {
 
 export const useToggleUserType = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
-  const currentInfo = useContext(UnihostsWebsiteContext);
   return (userType: UserTypes): void => {
-    setCurrentInfo({ ...currentInfo, toggleUserType: userType });
+    setCurrentInfo((currentStatus) => ({ ...currentStatus, toggleUserType: userType }));
   };
 };
 
 export const useSetProfileInformation = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
-  const currentInfo = useContext(UnihostsWebsiteContext);
   return (profile: Profile): void => {
-    setCurrentInfo({ ...currentInfo, profile });
+    setCurrentInfo((currentStatus) => ({ ...currentStatus, profile }));
   };
 };
 
@@ -129,7 +127,7 @@ export const useSetProfileFavouritesInformation = () => {
   return async (favouriteRooms: string[]): Promise<void> => {
     const { data, error } = await updateFavouriteFromUser(currentInfo.profile.id, favouriteRooms);
     if (!error) {
-      setCurrentInfo({ ...currentInfo, profile: data });
+      setCurrentInfo((currentStatus) => ({ ...currentStatus, profile: data }));
     }
   };
 };
@@ -147,10 +145,9 @@ export const useUserSearch = () => {
 };
 
 export const useSetSearchLocationByProperty = () => {
-  const search = useContext(UserLocationSearchContext);
   const setSearch = useContext(SetUserLocationSearchContext);
   return (property: string, value: any) => {
-    setSearch({ ...search, [property]: value });
+    setSearch((currentSearch) => ({ ...currentSearch, [property]: value }));
   };
 };
 
