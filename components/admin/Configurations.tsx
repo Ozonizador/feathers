@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
-import FeathersCheckbox from "../common/FeathersCheckbox";
 import useUserService from "../../hooks/userService";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -10,6 +9,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
+import Checkbox from "../utils/Checkbox";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
@@ -90,7 +90,9 @@ const Configurations = () => {
                 </div>
                 <div className="flex flex-1">
                   <div className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
-                    <FeathersButton text={"Alterar password"} loading={loading} onClick={updatePassword} />
+                    <FeathersButton loading={loading} onClick={updatePassword} type={"button"}>
+                      Alterar password
+                    </FeathersButton>
                   </div>
                 </div>
               </div>
@@ -106,7 +108,7 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <FeathersCheckbox selected={true} onChangeFn={toggleUserNotificationEmail} />
+                            <Checkbox checked={true} onChange={toggleUserNotificationEmail} name="notification_email" />
                           </div>
                         </div>
                       </div>
@@ -119,7 +121,11 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <FeathersCheckbox selected={true} onChangeFn={toggleUserNotificationMessage} />
+                            <Checkbox
+                              checked={true}
+                              onChange={toggleUserNotificationMessage}
+                              name="notification_message"
+                            />
                           </div>
                         </div>
                       </div>

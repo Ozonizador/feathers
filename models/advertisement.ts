@@ -44,6 +44,14 @@ export interface HouseRules {
   cleaning?: string;
 }
 
+/* Advertisement information */
+export type AdvertisementInfo = {
+  terms: boolean;
+  politica: boolean;
+  calendarUpdated: boolean;
+  trustInformation: boolean;
+};
+
 /*
  * PHOTOS
  */

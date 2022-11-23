@@ -1,4 +1,10 @@
-import { HouseRules, AboutHouseSections, HouseExpenses, AdvertisementPhoto } from "./models/advertisement";
+import {
+  HouseRules,
+  AboutHouseSections,
+  HouseExpenses,
+  AdvertisementPhoto,
+  AdvertisementInfo,
+} from "./models/advertisement";
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
@@ -16,6 +22,7 @@ export interface Database {
           floor: string | null;
           postal_code: string;
           rooms: number;
+          max_rooms: number;
           beds: number;
           tenant_number: number;
           bathrooms: number;
@@ -23,6 +30,7 @@ export interface Database {
           description: string;
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
+          photos: AdvertisementPhoto[];
           house_rules: HouseRules;
           about_house: AboutHouseSections;
           month_rent: number;
@@ -31,13 +39,12 @@ export interface Database {
           expenses: HouseExpenses;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
           host_lives_property: boolean;
-          host_id: string;
-          max_rooms: number;
-          photos: AdvertisementPhoto[];
           verified: boolean;
+          host_id: string;
           created_at: string;
           updated_at: string;
           geom: any | null;
+          agreementsinfo: AdvertisementInfo | null;
         };
         Insert: {
           id: string;
@@ -71,6 +78,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
           geom?: any | null;
+          agreementsinfo?: AdvertisementInfo | null;
         };
         Update: {
           id?: string;
@@ -104,6 +112,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
           geom?: any | null;
+          agreementsinfo?: AdvertisementInfo | null;
         };
       };
       blogs: {

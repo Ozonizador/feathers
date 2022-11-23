@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import { RECOVER_URL, REGISTER_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
+import Button from "../../components/utils/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -75,7 +76,7 @@ const Login = () => {
               </div>
             </div>
             <div className="my-5">
-              <button className="w-full rounded-lg bg-primary-500 py-2 text-white">Iniciar Sessão</button>
+              <Button type="submit">Iniciar Sessão</Button>
             </div>
           </form>
           <Link href={RECOVER_URL}>
@@ -90,14 +91,14 @@ const Login = () => {
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
           <div className="flex flex-1 flex-col justify-around gap-5">
-            <button className="h-16 w-full rounded-lg bg-socials-facebook px-8 text-center" onClick={loginFacebook}>
+            <Button onClick={loginFacebook} type="button" variant="facebook">
               <SiFacebook className="inline" color="blue" />
               <span className="my-auto ml-3 inline">Entrar com Facebook</span>
-            </button>
-            <button className="h-16 w-full rounded-lg bg-socials-gmail px-8 text-center" onClick={loginGoogle}>
+            </Button>
+            <Button onClick={loginGoogle} type="button" variant="gmail">
               <SiGmail color="red" className="inline" />
               <span className="my-auto ml-3 inline">Entrar com Gmail</span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

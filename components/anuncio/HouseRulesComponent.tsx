@@ -7,6 +7,7 @@ import {
   HOUSE_RULES_NAMING,
   TYPE_CLEANING_LABELS,
 } from "../../models/advertisement";
+import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
 
 interface HouseRulesProps {
@@ -44,16 +45,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
 
         <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
-                type="checkbox"
-                checked={advertisement.house_rules.animalsAllowed}
-                className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => toggleHouseRulesProperty(e)}
-              />
-            </div>
+          <div className="flex h-5 items-center">
+            <Checkbox
+              onChange={(e) => toggleHouseRulesProperty(e)}
+              checked={advertisement.house_rules.animalsAllowed}
+              name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
+            />
           </div>
         </div>
       </div>
@@ -66,17 +63,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
 
         <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
-                type="checkbox"
-                value="true"
-                checked={advertisement.house_rules.smokeAllowed}
-                className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => toggleHouseRulesProperty(e)}
-              />
-            </div>
+          <div className="flex h-5 items-center">
+            <Checkbox
+              onChange={(e) => toggleHouseRulesProperty(e)}
+              checked={advertisement.house_rules.smokeAllowed}
+              name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
+            />
           </div>
         </div>
       </div>
@@ -90,17 +82,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
 
         <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
-          <div>
-            <div className="flex h-5 items-center">
-              <input
-                type="checkbox"
-                name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
-                value="true"
-                checked={advertisement.house_rules.eventsAllowed}
-                className="h-4 w-4 rounded border border-terciary-500"
-                onChange={(e) => toggleHouseRulesProperty(e)}
-              />
-            </div>
+          <div className="flex h-5 items-center">
+            <Checkbox
+              onChange={(e) => toggleHouseRulesProperty(e)}
+              checked={advertisement.house_rules.eventsAllowed}
+              name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
+            />
           </div>
         </div>
       </div>

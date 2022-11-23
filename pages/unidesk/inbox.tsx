@@ -17,6 +17,7 @@ import { GetServerSidePropsContext } from "next";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 
 import IconCaixa from "../../public/images/iconCaixa.svg";
+import Button from "../../components/utils/Button";
 
 {
   /* page 59 XD */
@@ -196,36 +197,28 @@ const CaixaEntrada = () => {
                           </div>
                           {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
                             <div className="flex justify-around gap-5">
-                              <button
-                                className="bg-primary-500 p-2 text-white"
-                                onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)}
-                              >
+                              <Button onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)} type="button">
                                 Aceitar
-                              </button>
-
-                              <button
-                                className="bg-neutral-300 p-2"
-                                onClick={() => updateReservationStatus(ReservationStatus.REJECTED)}
-                              >
-                                Rejeitar
-                              </button>
+                              </Button>
+                              <Button onClick={() => updateReservationStatus(ReservationStatus.REJECTED)} type="button">
+                                Aceitar
+                              </Button>
                             </div>
                           )}
                           {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
                             <div className="flex justify-around">
-                              <button
-                                className="bg-primary-500 p-2 text-white"
+                              <Button
                                 onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
+                                type="button"
                               >
                                 Aceitar
-                              </button>
-
-                              <button
-                                className="bg-neutral-300 p-2"
+                              </Button>
+                              <Button
                                 onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
+                                type="button"
                               >
-                                Rejeitar
-                              </button>
+                                Aceitar
+                              </Button>
                             </div>
                           )}
                           {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (

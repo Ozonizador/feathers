@@ -1,19 +1,34 @@
-import React from "react";
+import classNames from "classnames";
+import React, { ReactNode } from "react";
+import { Spinner } from "./Spinner";
 
-interface FeathersButtonProps {
-  text: string;
-  onClick: (e) => void;
-  loading: boolean;
+interface ButtonProps {
+  onClick?: (e) => void;
+  type: "submit" | "button" | "reset";
+  children: ReactNode;
+  loading?: boolean;
+  disabled?: boolean;
+  variant?: "primary" | "facebook" | "gmail";
 }
 
-const FeathersButton = ({ text, onClick, loading = false }: FeathersButtonProps) => {
+const Button = ({ children, onClick, loading = false, disabled, variant = "primary" }: ButtonProps) => {
   return (
     <>
-      <button className="rounded-xl bg-primary-500 p-2 text-center text-white" onClick={onClick} disabled={loading}>
-        {loading ? <svg className="... mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24"></svg> : text}
+      <button
+        className={classNames("w-full rounded-xl bg-primary-500 p-4 text-center focus:outline-none focus:ring-0", {
+          "opacity-50": disabled,
+          "bg-primary-500 text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg":
+            variant === "primary",
+          "bg-socials-facebook": variant === "facebook",
+          "bg-socials-gmail": variant === "gmail",
+        })}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {loading ? <Spinner /> : children}
       </button>
     </>
   );
 };
 
-export default FeathersButton;
+export default Button;

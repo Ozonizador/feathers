@@ -6,13 +6,14 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { Advertisement, AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
 import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
+import Button from "../../utils/Button";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -123,17 +124,14 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
                   <div className="mt-4 flex justify-between">
                     <div className="my-auto">
-                      <button
-                        className="rounded-md  border border-black py-2 px-4 text-xs hover:border-primary-500 lg:text-base"
-                        onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
-                      >
+                      <Button type="submit" onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}>
                         <CgHeart
                           className={classNames("inline", {
                             "fill-gray-800 text-gray-800": isFavourite(),
                           })}
                         />
                         <span className="my-auto ml-2">Favoritos</span>
-                      </button>
+                      </Button>
                     </div>
                     <div className="">
                       <div className="text-end">

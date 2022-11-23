@@ -2,9 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/utils/Input";
-import { Spinner } from "../../components/utils/Spinner";
 import { REGISTER_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
+import Button from "../../components/utils/Button";
 
 const Recover = () => {
   const router = useRouter();
@@ -45,13 +45,9 @@ const Recover = () => {
           </div>
 
           <div className="my-5">
-            <button
-              onClick={recoverPassword}
-              className="w-full rounded-lg bg-primary-500 py-2 text-white"
-              disabled={loading}
-            >
-              {loading ? <Spinner /> : "Recuperar password"}
-            </button>
+            <Button type="button" onClick={recoverPassword} loading={loading}>
+              Recuperar password
+            </Button>
           </div>
         </div>
       </div>

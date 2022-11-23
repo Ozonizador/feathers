@@ -17,6 +17,7 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import { GetServerSidePropsContext } from "next";
+import Button from "../../../../components/utils/Button";
 
 const Details = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -87,13 +88,9 @@ const Details = () => {
               </div>
               <div className="mt-5">
                 <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
-                <button
-                  type="button"
-                  className="my-5 w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-60"
-                  onClick={() => checkPossibilites()}
-                >
+                <Button type="button" onClick={() => checkPossibilites()}>
                   Atualizar No Mapa
-                </button>
+                </Button>
                 <GeneralAdvertComponent
                   advertisement={advertisementContext}
                   onChange={changeAdvertisementProperty}
@@ -106,9 +103,9 @@ const Details = () => {
               </div>
             </>
           )}
-          <button className="mt-10 mb-5 rounded-md bg-primary-500 py-5 px-6 text-white" onClick={saveChanges}>
+          <Button onClick={saveChanges} type={"button"}>
             Guardar alterações &#10230;
-          </button>
+          </Button>
         </div>
       </div>
     </div>

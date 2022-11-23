@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import { LOGIN_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
+import Button from "../../components/utils/Button";
 
 const Register = () => {
   const router = useRouter();
@@ -54,21 +55,19 @@ const Register = () => {
           </div>
           <form onSubmit={normalRegister}>
             <div className="mt-3">
-              <div>Email</div>
-              <div className="mt-2">
-                <Input value={email} onChange={(e) => setEmail(e.target.value)}></Input>
-              </div>
+              <Input value={email} onChange={(e) => setEmail(e.target.value)} label="email" labelText="Email:"></Input>
             </div>
             <div className="mt-3">
-              <div>Palavra-passe</div>
-              <div className="mt-2">
-                <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password"></Input>
-              </div>
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                label="password"
+                labelText="Palavra-passe:"
+              ></Input>
             </div>
-            <div className="my-5">
-              <button type="submit" className="w-full rounded-lg bg-primary-500 py-2 text-white">
-                Registar
-              </button>
+            <div className="my-5 w-full">
+              <Button type="submit">Registar</Button>
             </div>
           </form>
 
@@ -79,30 +78,20 @@ const Register = () => {
           </div>
 
           <div className="flex flex-1 flex-col justify-around gap-5">
-            <div className="my-3 flex flex-1">
-              <button
-                className="h-16 w-full rounded-lg bg-socials-facebook px-8 text-center"
-                onClick={(event) => registerWithFacebook(event)}
-              >
-                <SiFacebook className="inline " color="blue" />
-                <span className="my-auto ml-3 inline">Continuar com o Facebook</span>
-              </button>
-            </div>
-            <div>
-              <button
-                className="h-16 w-full rounded-lg bg-socials-gmail px-8 text-center"
-                onClick={(event) => registerWithGoogle(event)}
-              >
-                <SiGmail color="red" className="inline" />
-                <span className="my-auto ml-3 inline">Continuar com o Google</span>
-              </button>
-            </div>
+            <Button variant="facebook" onClick={(event) => registerWithFacebook(event)} type={"button"}>
+              <SiFacebook className="inline " color="blue" />
+              <span className="my-auto ml-3 inline">Continuar com o Facebook</span>
+            </Button>
+            <Button variant="gmail" onClick={(event) => registerWithGoogle(event)} type={"button"}>
+              <SiGmail color="red" className="inline" />
+              <span className="my-auto ml-3 inline">Continuar com o Google</span>
+            </Button>
           </div>
           <div className="mt-4 text-center">
             Ao registar-se está a concordar com os nossos {/* mudar link */}
             <Link href="#">
               <a>
-                <span className="italic text-primary-500">termos e condições</span> e{" "}
+                <span className="italic text-primary-500">termos e condições</span> e
               </a>
             </Link>
             {/* mudar link */}
