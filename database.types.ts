@@ -78,7 +78,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
           geom?: any | null;
-          agreementsinfo: AdvertisementInfo | null;
+          agreementsinfo?: AdvertisementInfo | null;
         };
         Update: {
           id?: string;
@@ -112,7 +112,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
           geom?: any | null;
-          agreementsinfo: AdvertisementInfo | null;
+          agreementsinfo?: AdvertisementInfo | null;
         };
       };
       blogs: {
