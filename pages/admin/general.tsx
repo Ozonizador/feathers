@@ -1,9 +1,9 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Session, User, useUser } from "@supabase/auth-helpers-react";
+import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
-import { Spinner, Avatar, Select, Toast } from "flowbite-react";
+import { Avatar, Select, Toast } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import countryList from "react-select-country-list";

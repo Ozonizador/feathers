@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { ReactNode } from "react";
+import { Spinner } from "./Spinner";
 
 interface ButtonProps {
   onClick?: (e) => void;
@@ -24,7 +25,7 @@ const Button = ({ children, onClick, loading = false, disabled, variant = "prima
         onClick={onClick}
         disabled={disabled}
       >
-        {loading ? <svg className="... mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24"></svg> : children}
+        {loading ? <Spinner /> : children}
       </button>
     </>
   );
