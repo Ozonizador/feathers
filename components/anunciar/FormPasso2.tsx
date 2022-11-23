@@ -3,6 +3,7 @@ import { useAdvertisement, useSetAdvertisementProperty } from "../../context/Adv
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
 import useAdvertisementService from "../../hooks/advertisementService";
+import Button from "../utils/Button";
 
 const FormPasso2 = () => {
   // contexts
@@ -42,13 +43,9 @@ const FormPasso2 = () => {
     <section className="mx-auto my-20 w-full lg:container lg:w-5/6">
       <AdvertisementInfoComponent advertisement={advertisement} onChange={changeTypeProperty} />
 
-      <button
-        type="button"
-        className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-        onClick={(e) => nextStep(e)}
-      >
+      <Button onClick={nextStep} type="button">
         Seguinte &#8594;
-      </button>
+      </Button>
     </section>
   );
 };

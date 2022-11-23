@@ -13,6 +13,7 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import { GetServerSidePropsContext } from "next";
+import Button from "../../../../components/utils/Button";
 
 const Photos = () => {
   const { removePicture, saveImage, updateAdvertisement } = useAdvertisementService();
@@ -211,12 +212,9 @@ const Photos = () => {
               </div>
             </>
           )}
-          <button
-            className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-28"
-            onClick={saveChanges}
-          >
+          <Button onClick={saveChanges} type="button">
             Guardar
-          </button>
+          </Button>
         </div>
       </div>
     </div>

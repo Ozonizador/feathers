@@ -3,6 +3,7 @@ import { useAdvertisement, useSetAdvertisementProperty } from "../../context/Adv
 import useAdvertisementService from "../../hooks/advertisementService";
 import HostFlexTypeComponent from "../anuncio/HostFlexTypeComponent";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Button from "../utils/Button";
 
 const FormPasso7 = () => {
   const currentStep = useCurrentStep();
@@ -34,13 +35,9 @@ const FormPasso7 = () => {
 
       <HostFlexTypeComponent advertisement={advertisement} onChange={changeTypeProperty} />
 
-      <button
-        type="button"
-        className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
-        onClick={(e) => nextStep(e)}
-      >
+      <Button onClick={nextStep} type="button">
         Seguinte &#8594;
-      </button>
+      </Button>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
+import Checkbox from "../utils/Checkbox";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -55,18 +56,14 @@ const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponent
           <p className="my-auto mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>
 
           <div className="ml-0 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
-            <div>
-              <div className="flex h-5 items-center">
-                <input
-                  name="host_lives_apartment"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border border-terciary-500"
-                  checked={advertisement.host_lives_property === true}
-                  onChange={(e) =>
-                    onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, !advertisement.host_lives_property)
-                  }
-                />
-              </div>
+            <div className="flex h-5 items-center">
+              <Checkbox
+                onChange={(e) =>
+                  onChange(ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY, !advertisement.host_lives_property)
+                }
+                checked={advertisement.host_lives_property === true}
+                name="host_lives_apartment"
+              />
             </div>
           </div>
         </div>

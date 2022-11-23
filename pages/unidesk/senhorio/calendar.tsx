@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import React from "react";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
+import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
 
 const calendar = () => {
@@ -33,12 +34,9 @@ const calendar = () => {
             </div>
 
             <div className="pb-4">
-              <button
-                className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
-                //   onClick={saveChanges}
-              >
+              <Button onClick={() => {}} type="button">
                 Guardar alterações
-              </button>
+              </Button>
             </div>
 
             <div className="mt-10 mb-8 text-2xl font-bold">Descontos (opcional)</div>
@@ -58,12 +56,9 @@ const calendar = () => {
                 </div>
               </div>
               <div className="mb-14 pb-4">
-                <button
-                  className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
-                  //   onClick={saveChanges}
-                >
+                <Button onClick={() => {}} type="button">
                   Guardar alterações
-                </button>
+                </Button>
               </div>
             </div>
           </div>

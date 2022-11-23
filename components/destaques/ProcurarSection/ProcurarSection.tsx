@@ -68,7 +68,6 @@ export default function ProcurarSection() {
     setFilters({ price: { startRange, endRange } });
   }, 400);
 
-  // TODO finish this
   const getAdvertisementsMarkers = () => {
     const markers: GEO[] = [];
     for (let advertisement of advertisements) {

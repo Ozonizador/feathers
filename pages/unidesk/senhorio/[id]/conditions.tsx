@@ -9,6 +9,7 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 import { GetServerSidePropsContext } from "next";
+import Button from "../../../../components/utils/Button";
 
 const Conditions = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -43,12 +44,9 @@ const Conditions = () => {
               <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
               <div className="pb-4">
-                <button
-                  className="flex w-44 items-center justify-center rounded-md bg-primary-500 py-3 text-white duration-200 ease-in hover:drop-shadow-xl"
-                  onClick={saveChanges}
-                >
+                <Button onClick={saveChanges} type="button">
                   Guardar alterações
-                </button>
+                </Button>
               </div>
             </>
           )}

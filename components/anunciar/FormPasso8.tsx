@@ -3,23 +3,17 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useAdvertisement } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
+import { AdvertisementInfo } from "../../models/advertisement";
 import FeathersButton from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
-
-interface FormTermos {
-  termos: boolean;
-  politica: boolean;
-  calendarUpdated: boolean;
-  trustInformation: boolean;
-}
 
 const FormPasso8 = () => {
   const {
     control,
     handleSubmit,
     formState: { isValid },
-  } = useForm<FormTermos>({
-    defaultValues: { termos: false, politica: false, calendarUpdated: false, trustInformation: false },
+  } = useForm<AdvertisementInfo>({
+    defaultValues: { terms: false, politica: false, calendarUpdated: false, trustInformation: false },
   });
   const advertisement = useAdvertisement();
   const router = useRouter();
@@ -27,11 +21,20 @@ const FormPasso8 = () => {
   /* Services */
   const { updateAdvertisement } = useAdvertisementService();
 
-  const onSubmit = async (data) => {
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+  const onSubmit = async ({ terms, politica, trustInformation, calendarUpdated }: AdvertisementInfo) => {
+    if (!isValid) return;
+    const { error } = await updateAdvertisement(
+      {
+        ...advertisement,
+        agreementsinfo: { terms, politica, trustInformation, calendarUpdated },
+      },
+      advertisement.id
+    );
     if (!error) {
       toast.success("Registo Bem Sucedido");
       router.push("/");
+    } else {
+      toast.error(error.message);
     }
   };
 
@@ -46,7 +49,7 @@ const FormPasso8 = () => {
           <div className="flex flex-row items-center gap-4">
             <Controller
               control={control}
-              name={"termos"}
+              name={"terms"}
               render={({ field: { onChange, value } }) => {
                 return <Checkbox onChange={onChange} name="termos" checked={value} />;
               }}
