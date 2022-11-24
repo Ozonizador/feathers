@@ -7,7 +7,6 @@ import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { toast } from "react-toastify";
-import { Spinner } from "flowbite-react";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
 import { MapCoordinates } from "../../../../models/utils";
 import { getResultsFromSearch } from "../../../../hooks/mapService";
@@ -18,6 +17,11 @@ import {
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
+import dynamic from "next/dynamic";
+
+const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
+  ssr: false,
+});
 
 const Details = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -68,7 +72,7 @@ const Details = () => {
           <div className="text-xl text-gray-700"></div>
           {!advertisementContext && (
             <div className="mt-32 flex flex-1 justify-center">
-              <Spinner color="info" aria-label="loading" size="lg" />
+              <Spinner />
             </div>
           )}
           {advertisementContext && (

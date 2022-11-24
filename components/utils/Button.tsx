@@ -1,6 +1,7 @@
 import classNames from "classnames";
+import dynamic from "next/dynamic";
 import React, { ReactNode } from "react";
-import { Spinner } from "./Spinner";
+import FeathersSpinner from "./Spinner";
 
 interface ButtonProps {
   onClick?: (e) => void;
@@ -10,6 +11,10 @@ interface ButtonProps {
   disabled?: boolean;
   variant?: "primary" | "facebook" | "gmail";
 }
+
+const Spinner = dynamic(() => import("./Spinner"), {
+  ssr: false,
+});
 
 const Button = ({ children, onClick, loading = false, disabled, variant = "primary" }: ButtonProps) => {
   return (
