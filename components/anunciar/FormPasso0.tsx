@@ -87,11 +87,11 @@ const FormPasso0 = () => {
           />
         </section>
         <div className="mt-1">
-          <div className="flex lg:px-32">
+          <div className="flex gap-5 lg:px-32">
             <Button onClick={checkPossibilites} type="button">
               Atualizar No Mapa
             </Button>
-            <Button onClick={nextStep} type="button">
+            <Button onClick={methods.handleSubmit(nextStep)} type="button">
               Seguinte &#8594;
             </Button>
           </div>

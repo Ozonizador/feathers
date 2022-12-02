@@ -19,7 +19,12 @@ interface GeneralAdvertComponentProps {
 
 const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
-  const { register, control } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  console.log(errors);
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
@@ -62,16 +67,17 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
             </select>
           </div>
 
-          <div className="">
+          <div>
             <Controller
-              control={control}
               name="street"
+              rules={{ required: true }}
               render={() => (
                 <Input
                   label="street"
                   labelText="Rua *"
                   value={advertisement.street}
                   onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)}
+                  errorMessage={errors.street ? (errors.street.message as string) : null}
                 />
               )}
             />
@@ -79,8 +85,8 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
           <div>
             <Controller
-              control={control}
               name="floor"
+              rules={{ required: true }}
               render={() => (
                 <Input
                   label="floor"
@@ -97,8 +103,8 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
         <div className="w-full">
           <div>
             <Controller
-              control={control}
               name="place"
+              rules={{ required: true }}
               render={() => (
                 <Input
                   label="place"
@@ -114,7 +120,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           <div>
             <Controller
               name="street_number"
-              control={control}
+              rules={{ required: true }}
               render={() => (
                 <Input
                   label="street_number"
@@ -128,8 +134,7 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
           <div>
             <Controller
-              control={control}
-              name="street_number"
+              name="postal_code"
               render={() => (
                 <Input
                   label="postal_code"

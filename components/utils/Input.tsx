@@ -10,6 +10,7 @@ interface InputProps {
   type?: "password" | "text";
   defaultValue?: string;
   autoComplete?: string;
+  errorMessage?: string;
 }
 
 export default function Input({
@@ -21,6 +22,7 @@ export default function Input({
   type = "text",
   defaultValue,
   autoComplete = "off",
+  errorMessage = "", // TODO missing here
 }: InputProps) {
   return (
     <div className="my-2">
@@ -29,7 +31,8 @@ export default function Input({
         <input
           className={classNames(
             "block w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-5 shadow-sm",
-            `${customCss}`
+            `${customCss}`,
+            { "border-red-700": errorMessage }
           )}
           onChange={onChange}
           name={label}

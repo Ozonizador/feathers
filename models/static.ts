@@ -11,7 +11,7 @@ export const Testemunhos: TestemunhoInfo[] = [
 para o respetivo Ano Lectivo, contudo com este serviço digital especializado consigo de forma
 eficiente e eficaz encher a minha casa!`,
     image: "/images/testemunhos/1.jpg",
-    host: "",
+    host: "Luísa Pereira",
     job: "",
   },
   {
@@ -19,7 +19,7 @@ eficiente e eficaz encher a minha casa!`,
     funcionalidade de saber quem vai ficar na minha casa ajuda muito! A política de proteção de
     proprietários é algo que me faz querer repetir a experiência sem medo.`,
     image: "/images/testemunhos/2.jpg",
-    host: "",
+    host: "Lucas Sousa",
     job: "",
   },
   {
@@ -27,7 +27,7 @@ eficiente e eficaz encher a minha casa!`,
     Consegui alugar mesmo a meio do ano letivo e correu tudo muito bem! Recomendo a novos
     proprietários que procuram encontrar estudantes por uma fee bem razoável!`,
     image: "/images/testemunhos/3.jpg",
-    host: "",
+    host: "Hórvat Dávid",
     job: "",
   },
   {
@@ -35,15 +35,15 @@ eficiente e eficaz encher a minha casa!`,
     virei fã! O processo é simples e para o efeito era o serviço que faltava pois já não tenho que
     recorrer a meios mais tradicionais e é seguramente um intermediário de confiança.`,
     image: "/images/testemunhos/4.jpg",
-    host: "",
+    host: "Kira Németh",
     job: "",
   },
   {
     description: `No meu painel consigo sempre controlar o calendário e a disponibilidade dos anúncios. O
     sistema das notificações está muito claro. É uma plataforma que merece oportunidade pois
     está idealizada para harmonizar a procura de quarto entre o estudante e proprietário.`,
-    image: "/images/testemunhos/5.jpg",
+    image: "/images/testemunhos/6.jpg",
     host: "",
-    job: "",
+    job: "Mónica Lourenço",
   },
 ];
