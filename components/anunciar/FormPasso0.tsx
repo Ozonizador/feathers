@@ -32,28 +32,15 @@ const FormPasso0 = () => {
   /* Form */
   const methods = useForm();
 
-  const nextStep = async (e) => {
-    e.preventDefault();
-
-    // confirmar se esta tudo preenchido
-    const { type, street, place, street_number, postal_code } = advertisement;
-
-    if (!type || !street || !place || !street_number || !postal_code) {
-      toast.error("Campos por preencher.");
-      return;
-    }
-
-    const { data, error } = await addAdvertisement(advertisement);
+  const nextStep = async (data, e) => {
+    debugger;
+    const { data: advertisementInfo, error } = await addAdvertisement(advertisement);
     if (!error) {
-      setAdvertisement(data);
+      setAdvertisement(advertisementInfo);
       setCurrentStep(currentStep + 1);
     } else {
       toast.error(error.message);
     }
-  };
-
-  const onChangeProperty = (property: string, value: any) => {
-    changeAdvertisementProperty(property, value);
   };
 
   const checkPossibilites = async () => {
@@ -72,7 +59,6 @@ const FormPasso0 = () => {
   const onChangeMarker = (lat: number, lng: number) => {
     const coordsArray = coordinatesObjectToArray({ lat, lng });
     let newCoordinates = { type: "Point", coordinates: coordsArray };
-
     changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, newCoordinates);
   };
 
@@ -80,18 +66,14 @@ const FormPasso0 = () => {
     <>
       <FormProvider {...methods}>
         <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
-          <GeneralAdvertComponent
-            advertisement={advertisement}
-            onChange={onChangeProperty}
-            onChangeMarker={onChangeMarker}
-          />
+          <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
         </section>
         <div className="mt-1">
           <div className="flex gap-5 lg:px-32">
             <Button onClick={checkPossibilites} type="button">
               Atualizar No Mapa
             </Button>
-            <Button onClick={methods.handleSubmit(nextStep)} type="button">
+            <Button type="button" onClick={methods.handleSubmit(nextStep)}>
               Seguinte &#8594;
             </Button>
           </div>

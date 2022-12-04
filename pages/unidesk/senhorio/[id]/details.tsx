@@ -18,6 +18,7 @@ import AboutHouseComponent from "../../../../components/anuncio/AboutHouseCompon
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
 import dynamic from "next/dynamic";
+import { FormProvider, useForm } from "react-hook-form";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -27,6 +28,9 @@ const Details = () => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
+
+  /* Form */
+  const methods = useForm();
 
   const saveChanges = async () => {
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
@@ -77,39 +81,37 @@ const Details = () => {
           )}
           {advertisementContext && (
             <>
-              <div>
-                <h5 className="font-bold">{advertisementContext.title}</h5>
-                <AdvertisementInfoComponent
-                  advertisement={advertisementContext}
-                  onChange={changeAdvertisementProperty}
-                />
-                <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
+              <FormProvider {...methods}>
+                <div>
+                  <h5 className="font-bold">{advertisementContext.title}</h5>
+                  <AdvertisementInfoComponent
+                    advertisement={advertisementContext}
+                    onChange={changeAdvertisementProperty}
+                  />
+                  <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                </div>
 
-              <div>
-                <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
-                <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
-              <div className="mt-5">
-                <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
-                <Button type="button" onClick={() => checkPossibilites()}>
-                  Atualizar No Mapa
+                <div>
+                  <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
+                  <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                </div>
+                <div className="mt-5">
+                  <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
+                  <Button type="button" onClick={() => checkPossibilites()}>
+                    Atualizar No Mapa
+                  </Button>
+                  <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
+                </div>
+                <div>
+                  <h5 className="font-bold">Política de Cancelamento</h5>
+                  <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                </div>
+                <Button onClick={saveChanges} type={"button"}>
+                  Guardar alterações &#10230;
                 </Button>
-                <GeneralAdvertComponent
-                  advertisement={advertisementContext}
-                  onChange={changeAdvertisementProperty}
-                  onChangeMarker={onChangeMarker}
-                />
-              </div>
-              <div>
-                <h5 className="font-bold">Política de Cancelamento</h5>
-                <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
+              </FormProvider>
             </>
           )}
-          <Button onClick={saveChanges} type={"button"}>
-            Guardar alterações &#10230;
-          </Button>
         </div>
       </div>
     </div>

@@ -2,15 +2,13 @@ import classNames from "classnames";
 import React from "react";
 
 interface InputProps {
-  value: string;
-  onChange: (e) => void;
+  onChange?: (e) => void;
+  value?: string;
   customCss?: string;
   labelText?: string;
   label?: string;
-  type?: "password" | "text";
-  defaultValue?: string;
-  autoComplete?: string;
   errorMessage?: string;
+  [x: string]: any;
 }
 
 export default function Input({
@@ -19,10 +17,8 @@ export default function Input({
   label = "",
   labelText = "",
   customCss = "",
-  type = "text",
-  defaultValue,
-  autoComplete = "off",
-  errorMessage = "", // TODO missing here
+  errorMessage = "",
+  ...props
 }: InputProps) {
   return (
     <div className="my-2">
@@ -37,11 +33,10 @@ export default function Input({
           onChange={onChange}
           name={label}
           value={value}
-          type={type}
-          defaultValue={defaultValue}
-          autoComplete={autoComplete}
           aria-labelledby={label}
+          {...props}
         ></input>
+        {errorMessage && <small className="text-red-700">{errorMessage}</small>}
       </div>
     </div>
   );

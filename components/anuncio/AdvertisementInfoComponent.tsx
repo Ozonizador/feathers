@@ -1,5 +1,7 @@
+import { useFormContext } from "react-hook-form";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
+import Input from "../utils/Input";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -7,11 +9,13 @@ interface PricesComponentProps {
 }
 
 const AdvertisementInfoComponent = ({ advertisement, onChange }: PricesComponentProps) => {
+  const { control } = useFormContext();
+
   return (
     <>
       <div className="w-full">
         <label className="mb-4 block text-2xl font-bold text-gray-700">Título do Anúncio</label>
-        <input
+        <Input
           className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
           placeholder="Máximo de 50 palavras"
           maxLength={50}
