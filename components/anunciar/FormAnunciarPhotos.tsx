@@ -7,7 +7,7 @@ import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
-const FormPasso3 = () => {
+const FormAnunciarPhotos = () => {
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
 
@@ -141,4 +141,4 @@ const FormPasso3 = () => {
   );
 };
 
-export default FormPasso3;
+export default FormAnunciarPhotos;

@@ -2,7 +2,7 @@ import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider"
 import {
   AdvertisementPhoto,
   ADVERTISEMENT_PROPERTIES,
-  FlexHostType,
+  HostFlexType,
   TypeAmenity,
   TypeExpense,
 } from "../models/advertisement";
@@ -55,7 +55,7 @@ import { BiPlug } from "react-icons/bi";
 import { FiMonitor } from "react-icons/fi";
 import { IconType } from "react-icons";
 
-const hostTypeFlexDescription = (type: FlexHostType) => {
+const hostTypeFlexDescription = (type: HostFlexType) => {
   return {
     SUPER_FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
     FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
@@ -65,7 +65,7 @@ const hostTypeFlexDescription = (type: FlexHostType) => {
   }[type];
 };
 
-const hostTranslate = (type: FlexHostType) => {
+const hostTranslate = (type: HostFlexType) => {
   return {
     SUPER_FLEX: `Super Flexível`,
     FLEX: `Flexível`,

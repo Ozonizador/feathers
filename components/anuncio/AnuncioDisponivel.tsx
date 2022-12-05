@@ -1,11 +1,12 @@
+import { Controller } from "react-hook-form";
 import { Advertisement, AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import RadioBox from "../utils/Radiobox";
 
 interface AnuncioDisponivelProps {
   advertisement: Advertisement;
-  onChange: (property, value) => void;
 }
 
-const AnuncioDisponivel = ({ advertisement, onChange }: AnuncioDisponivelProps) => {
+const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
   return (
     <>
       <div className="my-20 flex flex-col">
@@ -14,12 +15,17 @@ const AnuncioDisponivel = ({ advertisement, onChange }: AnuncioDisponivelProps) 
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
               <div>
-                <input
-                  type="radio"
-                  name="availability"
-                  value={AdvertisementStatus.NOT_AVAILABLE}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
-                  checked={advertisement.available === AdvertisementStatus.NOT_AVAILABLE}
+                <Controller
+                  name={ADVERTISEMENT_PROPERTIES.AVAILABLE}
+                  defaultValue={advertisement.available}
+                  render={({ field: { value, onChange } }) => (
+                    <RadioBox
+                      name="availability"
+                      value={AdvertisementStatus.NOT_AVAILABLE}
+                      onChange={onChange}
+                      checked={value === AdvertisementStatus.NOT_AVAILABLE}
+                    />
+                  )}
                 />
               </div>
               <div className="mx-5">
@@ -39,12 +45,17 @@ const AnuncioDisponivel = ({ advertisement, onChange }: AnuncioDisponivelProps) 
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
               <div>
-                <input
-                  type="radio"
-                  name="availability"
-                  value={AdvertisementStatus.DISABLED}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
-                  checked={advertisement.available === AdvertisementStatus.DISABLED}
+                <Controller
+                  name={ADVERTISEMENT_PROPERTIES.AVAILABLE}
+                  defaultValue={advertisement.available}
+                  render={({ field: { value, onChange } }) => (
+                    <RadioBox
+                      name="availability"
+                      value={AdvertisementStatus.DISABLED}
+                      onChange={onChange}
+                      checked={value === AdvertisementStatus.DISABLED}
+                    />
+                  )}
                 />
               </div>
               <div className="mx-5">
@@ -65,12 +76,17 @@ const AnuncioDisponivel = ({ advertisement, onChange }: AnuncioDisponivelProps) 
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
               <div>
-                <input
-                  type="radio"
-                  name="availability"
-                  value={AdvertisementStatus.AVAILABLE}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.AVAILABLE, e.target.value)}
-                  checked={advertisement.available === AdvertisementStatus.AVAILABLE}
+                <Controller
+                  name={ADVERTISEMENT_PROPERTIES.AVAILABLE}
+                  defaultValue={advertisement.available}
+                  render={({ field: { value, onChange } }) => (
+                    <RadioBox
+                      name="availability"
+                      value={AdvertisementStatus.AVAILABLE}
+                      onChange={onChange}
+                      checked={value === AdvertisementStatus.AVAILABLE}
+                    />
+                  )}
                 />
               </div>
               <div className="mx-5">

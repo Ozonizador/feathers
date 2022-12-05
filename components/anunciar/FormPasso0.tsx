@@ -32,9 +32,8 @@ const FormPasso0 = () => {
   /* Form */
   const methods = useForm();
 
-  const nextStep = async (data, e) => {
-    debugger;
-    const { data: advertisementInfo, error } = await addAdvertisement(advertisement);
+  const nextStep = async (data) => {
+    const { data: advertisementInfo, error } = await addAdvertisement({ ...advertisement, ...data });
     if (!error) {
       setAdvertisement(advertisementInfo);
       setCurrentStep(currentStep + 1);

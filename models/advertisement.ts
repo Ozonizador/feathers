@@ -128,7 +128,7 @@ export enum HostType {
   PARTICULAR = "PARTICULAR",
 }
 
-export type FlexHostType = "SUPER_FLEX" | "FLEX" | "MODERATE" | "RIGID";
+export type HostFlexType = Database["public"]["Enums"]["HostFlexType"];
 
 export enum InclusiveExpenses {
   INCLUDED = "INCLUDED",

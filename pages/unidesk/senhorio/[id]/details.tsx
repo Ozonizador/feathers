@@ -84,11 +84,8 @@ const Details = () => {
               <FormProvider {...methods}>
                 <div>
                   <h5 className="font-bold">{advertisementContext.title}</h5>
-                  <AdvertisementInfoComponent
-                    advertisement={advertisementContext}
-                    onChange={changeAdvertisementProperty}
-                  />
-                  <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                  <AdvertisementInfoComponent advertisement={advertisementContext} />
+                  <HouseCapacityComponent advertisement={advertisementContext} />
                 </div>
 
                 <div>
@@ -106,7 +103,7 @@ const Details = () => {
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                 </div>
-                <Button onClick={saveChanges} type={"button"}>
+                <Button onClick={methods.handleSubmit(saveChanges)} type="button">
                   Guardar alterações &#10230;
                 </Button>
               </FormProvider>

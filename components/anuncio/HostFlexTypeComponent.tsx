@@ -1,4 +1,5 @@
-import { Advertisement, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, HostFlexType } from "../../models/advertisement";
+import RadioBox from "../utils/Radiobox";
 
 interface HostFlexTypeComponentProps {
   advertisement: Advertisement;
@@ -12,10 +13,9 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
-              <input
-                type="radio"
-                name="FlexHostType"
-                value={"SUPER_FLEX"}
+              <RadioBox
+                name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
+                value={"SUPER_FLEX" as HostFlexType}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
                 checked={advertisement.type_flex_host === "SUPER_FLEX"}
               />
@@ -38,10 +38,9 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
-              <input
-                type="radio"
-                name="FlexHostType"
-                value={"FLEX"}
+              <RadioBox
+                name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
+                value={"FLEX" as HostFlexType}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
                 checked={advertisement.type_flex_host === "FLEX"}
               />
@@ -64,10 +63,9 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
-              <input
-                type="radio"
-                name="FlexHostType"
-                value={"MODERATE"}
+              <RadioBox
+                name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
+                value={"MODERATE" as HostFlexType}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
                 checked={advertisement.type_flex_host === "MODERATE"}
               />
@@ -90,10 +88,9 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
             <div>
-              <input
-                type="radio"
-                name="FlexHostType"
-                value={"RIGID"}
+              <RadioBox
+                name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
+                value={"RIGID" as HostFlexType}
                 onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
                 checked={advertisement.type_flex_host === "RIGID"}
               />

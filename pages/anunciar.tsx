@@ -3,7 +3,7 @@ import React from "react";
 import FormPasso0 from "../components/anunciar/FormPasso0";
 import FormPasso1 from "../components/anunciar/FormPasso1";
 import FormPasso2 from "../components/anunciar/FormPasso2";
-import FormPasso3 from "../components/anunciar/FormPasso3";
+import FormAnunciarPhotos from "../components/anunciar/FormAnunciarPhotos";
 import FormPasso4 from "../components/anunciar/FormPasso4";
 import FormPasso5 from "../components/anunciar/FormPasso5";
 import FormPasso6 from "../components/anunciar/FormPasso6";
@@ -43,7 +43,7 @@ const ZonaFormulario = () => {
       {currentStep === 0 && <FormPasso0 />}
       {currentStep === 1 && <FormPasso1 />}
       {currentStep === 2 && <FormPasso2 />}
-      {currentStep === 3 && <FormPasso3 />}
+      {currentStep === 3 && <FormAnunciarPhotos />}
       {currentStep === 4 && <FormPasso4 />}
       {currentStep === 5 && <FormPasso5 />}
       {currentStep === 6 && <FormPasso6 />}

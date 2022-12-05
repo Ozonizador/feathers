@@ -1,16 +1,19 @@
 import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
+import { useAdvertisement } from "../../context/AdvertisementController";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
 import useAdvertisementService from "../../hooks/advertisementService";
 import Button from "../utils/Button";
+import { FormProvider, useForm } from "react-hook-form";
 
 const FormPasso2 = () => {
   // contexts
   const currentStep = useCurrentStep();
   const setCurrentStep = useSetCurrentStep();
   const advertisement = useAdvertisement();
-  const setAdvertisementProperty = useSetAdvertisementProperty();
+
+  /* Form */
+  const methods = useForm();
 
   /* Services */
   const { updateAdvertisement } = useAdvertisementService();
@@ -27,7 +30,7 @@ const FormPasso2 = () => {
     }
 
     // proximo passo
-    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
     if (error) {
       return toast.success("Erro a gravar a informação");
     }
@@ -35,18 +38,16 @@ const FormPasso2 = () => {
     setCurrentStep(nextStep);
   };
 
-  const changeTypeProperty = (label, value) => {
-    setAdvertisementProperty(label, value);
-  };
-
   return (
-    <section className="mx-auto my-20 w-full lg:container lg:w-5/6">
-      <AdvertisementInfoComponent advertisement={advertisement} onChange={changeTypeProperty} />
+    <FormProvider {...methods}>
+      <section className="mx-auto w-full lg:container lg:w-5/6">
+        <AdvertisementInfoComponent advertisement={advertisement} />
 
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
-    </section>
+        <Button onClick={methods.handleSubmit(nextStep)} type="button">
+          Seguinte &#8594;
+        </Button>
+      </section>
+    </FormProvider>
   );
 };
 
