@@ -37,6 +37,7 @@ export default function Input({
           name={label}
           value={value}
           aria-labelledby={label}
+          disabled={disabled}
           {...props}
         ></input>
         {errorMessage && <small className="text-red-700">{errorMessage}</small>}

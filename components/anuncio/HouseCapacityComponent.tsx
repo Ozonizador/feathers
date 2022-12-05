@@ -21,9 +21,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
           <Controller
             name={ADVERTISEMENT_PROPERTIES.NUMBER_TENANT}
             defaultValue={advertisement.tenant_number}
-            render={({ field: { value, onChange } }) => (
-              <QuantityInput initValue={value} onChange={onChange} property={ADVERTISEMENT_PROPERTIES.NUMBER_TENANT} />
-            )}
+            render={({ field: { value, onChange } }) => <QuantityInput initValue={value} onChange={onChange} />}
           />
         </div>
       </div>
@@ -37,9 +35,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
           <Controller
             name={ADVERTISEMENT_PROPERTIES.BEDS}
             defaultValue={advertisement.beds}
-            render={({ field: { value, onChange } }) => (
-              <QuantityInput property={ADVERTISEMENT_PROPERTIES.BEDS} initValue={value} onChange={onChange} />
-            )}
+            render={({ field: { value, onChange } }) => <QuantityInput initValue={value} onChange={onChange} />}
           />
         </div>
       </div>
@@ -53,9 +49,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
           <Controller
             name={ADVERTISEMENT_PROPERTIES.ROOMS}
             defaultValue={advertisement.rooms}
-            render={({ field: { value, onChange } }) => (
-              <QuantityInput property={ADVERTISEMENT_PROPERTIES.ROOMS} initValue={value} onChange={onChange} />
-            )}
+            render={({ field: { value, onChange } }) => <QuantityInput initValue={value} onChange={onChange} />}
           />
         </div>
       </div>
@@ -69,9 +63,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
           <Controller
             name={ADVERTISEMENT_PROPERTIES.BATHROOMS}
             defaultValue={advertisement.bathrooms}
-            render={({ field: { value, onChange } }) => (
-              <QuantityInput property={ADVERTISEMENT_PROPERTIES.BATHROOMS} initValue={value} onChange={onChange} />
-            )}
+            render={({ field: { value, onChange } }) => <QuantityInput initValue={value} onChange={onChange} />}
           />
         </div>
       </div>

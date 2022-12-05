@@ -2,25 +2,24 @@ import { useState } from "react";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 
 interface QuantityInputProps {
-  onChange?: (property: string, value) => void;
+  onChange?: (value) => void;
   initValue: number;
-  property: string;
 }
 
-const QuantityInput = ({ onChange, initValue, property }: QuantityInputProps) => {
+const QuantityInput = ({ onChange, initValue }: QuantityInputProps) => {
   const [value, setValue] = useState(initValue);
 
   const decreaseInput = () => {
     let newValue = value - 1 < 0 ? 0 : value - 1;
 
     setValue(newValue);
-    onChange && onChange(property, newValue);
+    onChange && onChange(newValue);
   };
 
   const increaseInput = () => {
     let newValue = value + 1;
     setValue(newValue);
-    onChange && onChange(property, newValue);
+    onChange && onChange(newValue);
   };
 
   return (

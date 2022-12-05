@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { Controller, useFormContext } from "react-hook-form";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
 import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
@@ -22,8 +23,14 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
             defaultValue={advertisement.title}
             rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <Input placeholder="Máximo de 50 palavras" maxLength={50} onChange={onChange} value={value} />
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <Input
+                placeholder="Máximo de 50 palavras"
+                maxLength={50}
+                onChange={onChange}
+                value={value}
+                errorMessage={error?.message}
+              />
             )}
           />
         </div>
@@ -43,14 +50,9 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
             name={ADVERTISEMENT_PROPERTIES.MAX_ROOMS}
             defaultValue={advertisement.max_rooms}
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 py-3 px-2 shadow-sm"
-                maxLength={10}
-                type="number"
-                value={value}
-                onChange={onChange}
-              />
+            rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <Input maxLength={10} type="number" value={value} onChange={onChange} errorMessage={error?.message} />
             )}
           />
         </div>
@@ -64,15 +66,22 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
               name={ADVERTISEMENT_PROPERTIES.DESCRIPTION}
               defaultValue={advertisement.description}
               control={control}
-              render={({ field: { onChange, value } }) => (
-                <textarea
-                  rows={5}
-                  className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
-                  placeholder="Descreva o seu espaço em 500 palavras"
-                  maxLength={500}
-                  value={value}
-                  onChange={onChange}
-                />
+              rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <>
+                  <textarea
+                    rows={5}
+                    className={classNames(
+                      "mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2 shadow-sm",
+                      { "border-red-700": error }
+                    )}
+                    placeholder="Descreva o seu espaço em 500 palavras"
+                    maxLength={500}
+                    value={value}
+                    onChange={onChange}
+                  />
+                  {error && <small className="text-red-700">{error.message}</small>}
+                </>
               )}
             />
           </div>

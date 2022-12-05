@@ -121,7 +121,7 @@ const FormAnunciarPhotos = () => {
           return (
             <div className="relative mr-2" key={index}>
               <div
-                className="absolute right-0 top-0 z-50 rounded-xl border border-red-600 p-1 font-bold text-red-600"
+                className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index)}
               >
                 x
