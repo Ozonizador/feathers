@@ -1,14 +1,14 @@
 import React from "react";
 
-import FormPasso0 from "../components/anunciar/FormPasso0";
-import FormPasso1 from "../components/anunciar/FormPasso1";
-import FormPasso2 from "../components/anunciar/FormPasso2";
+import FormInicio from "../components/anunciar/FormInicio";
+import FormCapacidade from "../components/anunciar/FormCapacidade";
+import FormSobreCasa from "../components/anunciar/FormSobreCasa";
 import FormAnunciarPhotos from "../components/anunciar/FormAnunciarPhotos";
-import FormPasso4 from "../components/anunciar/FormPasso4";
-import FormPasso5 from "../components/anunciar/FormPasso5";
-import FormPasso6 from "../components/anunciar/FormPasso6";
-import FormPasso7 from "../components/anunciar/FormPasso7";
-import FormPasso8 from "../components/anunciar/FormPasso8";
+import FormHouseRules from "../components/anunciar/FormHouseRules";
+import FormAboutHouse from "../components/anunciar/FormAboutHouse";
+import FormPrices from "../components/anunciar/FormPrices";
+import FormTipoHost from "../components/anunciar/FormTipoHost";
+import FormTermos from "../components/anunciar/FormTermos";
 
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
@@ -40,15 +40,15 @@ const ZonaFormulario = () => {
   const currentStep = useCurrentStep();
   return (
     <>
-      {currentStep === 0 && <FormPasso0 />}
-      {currentStep === 1 && <FormPasso1 />}
-      {currentStep === 2 && <FormPasso2 />}
+      {currentStep === 0 && <FormInicio />}
+      {currentStep === 1 && <FormCapacidade />}
+      {currentStep === 2 && <FormSobreCasa />}
       {currentStep === 3 && <FormAnunciarPhotos />}
-      {currentStep === 4 && <FormPasso4 />}
-      {currentStep === 5 && <FormPasso5 />}
-      {currentStep === 6 && <FormPasso6 />}
-      {currentStep === 7 && <FormPasso7 />}
-      {currentStep === 8 && <FormPasso8 />}
+      {currentStep === 4 && <FormHouseRules />}
+      {currentStep === 5 && <FormAboutHouse />}
+      {currentStep === 6 && <FormPrices />}
+      {currentStep === 7 && <FormTipoHost />}
+      {currentStep === 8 && <FormTermos />}
     </>
   );
 };

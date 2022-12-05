@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
@@ -8,8 +8,7 @@ import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
 const FormAnunciarPhotos = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -23,15 +22,13 @@ const FormAnunciarPhotos = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    if (images.length < 5) {
-      toast.error("Introduza pelo menos 5 imagens");
-      return;
-    }
-    await saveImages();
-    await updateAdvertisement(advertisement, advertisement.id);
+    if (images.length < 5) return toast.error("Introduza pelo menos 5 imagens");
 
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    await saveImages();
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+
+    incrementStep();
   };
 
   const uploadToClient = (event) => {

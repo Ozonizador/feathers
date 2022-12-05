@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
   useSetAdvertisement,
@@ -16,10 +16,9 @@ import useAdvertisementService from "../../hooks/advertisementService";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../utils/Button";
 
-const FormPasso0 = () => {
+const FormInicio = () => {
   /* STEPS */
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+  const incrementStep = useIncrementStep();
 
   /* ADVERTISEMENT */
   const advertisement = useAdvertisement();
@@ -34,12 +33,10 @@ const FormPasso0 = () => {
 
   const nextStep = async (data) => {
     const { data: advertisementInfo, error } = await addAdvertisement({ ...advertisement, ...data });
-    if (!error) {
-      setAdvertisement(advertisementInfo);
-      setCurrentStep(currentStep + 1);
-    } else {
-      toast.error(error.message);
-    }
+    if (error) return toast.error(error.message);
+
+    setAdvertisement(advertisementInfo);
+    incrementStep();
   };
 
   const checkPossibilites = async () => {
@@ -82,4 +79,4 @@ const FormPasso0 = () => {
   );
 };
 
-export default FormPasso0;
+export default FormInicio;

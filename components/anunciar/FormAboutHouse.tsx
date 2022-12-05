@@ -1,16 +1,14 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { toast } from "react-toastify";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import useAdvertisementService from "../../hooks/advertisementService";
-import HouseRulesComponent from "../anuncio/HouseRulesComponent";
+import AboutHouseComponent from "../anuncio/AboutHouseComponent";
 import Button from "../utils/Button";
-import { useForm } from "react-hook-form";
 
-const FormPasso4 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
-
+const FormAboutHouse = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
+  const incrementStep = useIncrementStep();
 
   /* Services */
   const { updateAdvertisement } = useAdvertisementService();
@@ -18,23 +16,21 @@ const FormPasso4 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
-  const changeTypeProperty = (label, value) => {
+  const changeAdvertisementProperty = (label, value) => {
     setAdvertisementProperty(label, value);
   };
 
   return (
     <section className="container mx-auto my-20 w-full lg:w-5/6">
       <div className="w-full">
-        <div className="mb-28 font-bold text-gray-700 lg:text-2xl">Falemos agora sobre condições e regras da casa</div>
-
-        <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
+        <div className="mb-28 text-center text-2xl font-bold text-gray-700 lg:text-left">Sobre a sua casa</div>
+        <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
       </div>
-
       <Button onClick={nextStep} type="button">
         Seguinte &#8594;
       </Button>
@@ -42,4 +38,4 @@ const FormPasso4 = () => {
   );
 };
 
-export default FormPasso4;
+export default FormAboutHouse;

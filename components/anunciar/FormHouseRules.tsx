@@ -1,12 +1,12 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
-import PricesComponent from "../anuncio/PricesComponent";
+import HouseRulesComponent from "../anuncio/HouseRulesComponent";
 import Button from "../utils/Button";
+import { toast } from "react-toastify";
 
-const FormPasso6 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+const FormHouseRules = () => {
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -17,9 +17,9 @@ const FormPasso6 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   const changeTypeProperty = (label, value) => {
@@ -28,9 +28,9 @@ const FormPasso6 = () => {
 
   return (
     <section className="container mx-auto my-20 w-full lg:w-5/6">
-      <div className="mb-28 text-2xl font-bold text-gray-700">Vamos a valores!</div>
-      <div className="flex flex-col">
-        <PricesComponent advertisement={advertisement} onChange={changeTypeProperty} />
+      <div className="w-full">
+        <div className="mb-28 font-bold text-gray-700 lg:text-2xl">Falemos agora sobre condições e regras da casa</div>
+        <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
       <Button onClick={nextStep} type="button">
@@ -40,4 +40,4 @@ const FormPasso6 = () => {
   );
 };
 
-export default FormPasso6;
+export default FormHouseRules;

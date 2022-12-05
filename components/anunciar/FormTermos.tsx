@@ -7,7 +7,7 @@ import { AdvertisementInfo } from "../../models/advertisement";
 import FeathersButton from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
 
-const FormPasso8 = () => {
+const FormTermos = () => {
   const {
     control,
     handleSubmit,
@@ -30,12 +30,10 @@ const FormPasso8 = () => {
       },
       advertisement.id
     );
-    if (!error) {
-      toast.success("Registo Bem Sucedido");
-      router.push("/");
-    } else {
-      toast.error(error.message);
-    }
+    if (!error) return toast.error(error.message);
+
+    toast.success("Registo Bem Sucedido");
+    router.push("/");
   };
 
   return (
@@ -113,4 +111,4 @@ const FormPasso8 = () => {
   );
 };
 
-export default FormPasso8;
+export default FormTermos;

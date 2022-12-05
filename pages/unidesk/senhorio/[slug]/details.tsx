@@ -140,8 +140,31 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const { query } = ctx;
-  debugger;
-  const { data: advertisement, error } = await supabase.from(ADVERTISEMENT_TABLE_NAME).select("*").single();
+  const { slug } = query;
+  if (!slug) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data: advertisement, error } = await supabase
+    .from(ADVERTISEMENT_TABLE_NAME)
+    .select("*")
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+    .eq(ADVERTISEMENT_PROPERTIES.HOST, session.user.id)
+    .single();
+
+  if (error) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       initialSession: session,

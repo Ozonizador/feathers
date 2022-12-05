@@ -1,14 +1,13 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
-import { useSetAdvertisementProperty, useAdvertisement } from "../../context/AdvertisementController";
+import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useAdvertisement } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-const FormPasso1 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
-
+const FormCapacidade = () => {
+  const incrementStep = useIncrementStep();
   const advertisement = useAdvertisement();
 
   /* Form */
@@ -18,9 +17,9 @@ const FormPasso1 = () => {
   const { updateAdvertisement } = useAdvertisementService();
 
   const nextStep = async (data) => {
-    await updateAdvertisement({ ...data }, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement({ ...data }, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   return (
@@ -38,4 +37,4 @@ const FormPasso1 = () => {
   );
 };
 
-export default FormPasso1;
+export default FormCapacidade;
