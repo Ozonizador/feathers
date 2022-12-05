@@ -1,10 +1,10 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../../../models/advertisement";
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
@@ -24,7 +24,13 @@ const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
 });
 
-const Details = () => {
+interface DetailsProps {
+  initialSession: Session;
+  user: User;
+  advertisement: Advertisement;
+}
+
+const Details = ({ initialSession, user, advertisement }: DetailsProps) => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
@@ -133,10 +139,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const { query } = ctx;
+  debugger;
+  const { data: advertisement, error } = await supabase.from(ADVERTISEMENT_TABLE_NAME).select("*").single();
   return {
     props: {
       initialSession: session,
       user: session.user,
+      advertisement: advertisement,
     },
   };
 };
