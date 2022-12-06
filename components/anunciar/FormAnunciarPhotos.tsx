@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
@@ -7,9 +7,8 @@ import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
-const FormPasso3 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+const FormAnunciarPhotos = () => {
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -23,15 +22,13 @@ const FormPasso3 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    if (images.length < 5) {
-      toast.error("Introduza pelo menos 5 imagens");
-      return;
-    }
-    await saveImages();
-    await updateAdvertisement(advertisement, advertisement.id);
+    if (images.length < 5) return toast.error("Introduza pelo menos 5 imagens");
 
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    await saveImages();
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+
+    incrementStep();
   };
 
   const uploadToClient = (event) => {
@@ -124,7 +121,7 @@ const FormPasso3 = () => {
           return (
             <div className="relative mr-2" key={index}>
               <div
-                className="absolute right-0 top-0 z-50 rounded-xl border border-red-600 p-1 font-bold text-red-600"
+                className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index)}
               >
                 x
@@ -141,4 +138,4 @@ const FormPasso3 = () => {
   );
 };
 
-export default FormPasso3;
+export default FormAnunciarPhotos;

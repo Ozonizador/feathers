@@ -1,13 +1,12 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
 import HouseCapacityComponent from "../../../../components/anuncio/HouseCapacityComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import { ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../../../models/advertisement";
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { toast } from "react-toastify";
-import { Spinner } from "flowbite-react";
 import { coordinatesObjectToArray } from "../../../../utils/map-services";
 import { MapCoordinates } from "../../../../models/utils";
 import { getResultsFromSearch } from "../../../../hooks/mapService";
@@ -18,11 +17,26 @@ import {
 import AboutHouseComponent from "../../../../components/anuncio/AboutHouseComponent";
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
+import dynamic from "next/dynamic";
+import { FormProvider, useForm } from "react-hook-form";
 
-const Details = () => {
+const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
+  ssr: false,
+});
+
+interface DetailsProps {
+  initialSession: Session;
+  user: User;
+  advertisement: Advertisement;
+}
+
+const Details = ({ initialSession, user, advertisement }: DetailsProps) => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
+
+  /* Form */
+  const methods = useForm();
 
   const saveChanges = async () => {
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
@@ -68,44 +82,43 @@ const Details = () => {
           <div className="text-xl text-gray-700"></div>
           {!advertisementContext && (
             <div className="mt-32 flex flex-1 justify-center">
-              <Spinner color="info" aria-label="loading" size="lg" />
+              <Spinner />
             </div>
           )}
           {advertisementContext && (
             <>
-              <div>
-                <h5 className="font-bold">{advertisementContext.title}</h5>
-                <AdvertisementInfoComponent
-                  advertisement={advertisementContext}
-                  onChange={changeAdvertisementProperty}
-                />
-                <HouseCapacityComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
+              <FormProvider {...methods}>
+                <div>
+                  <h5 className="font-bold">{advertisementContext.title}</h5>
+                  <AdvertisementInfoComponent advertisement={advertisementContext} />
+                  <HouseCapacityComponent advertisement={advertisementContext} />
+                </div>
 
-              <div>
-                <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
-                <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
-              <div className="mt-5">
-                <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
-                <Button type="button" onClick={() => checkPossibilites()}>
-                  Atualizar No Mapa
-                </Button>
-                <GeneralAdvertComponent
-                  advertisement={advertisementContext}
-                  onChange={changeAdvertisementProperty}
-                  onChangeMarker={onChangeMarker}
-                />
-              </div>
-              <div>
-                <h5 className="font-bold">Política de Cancelamento</h5>
-                <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-              </div>
+                <div>
+                  <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
+                  <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                </div>
+                <div className="mt-5">
+                  <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
+                  <div className="my-5 mr-auto w-1/2 px-6">
+                    <Button type="button" onClick={checkPossibilites}>
+                      Atualizar No Mapa
+                    </Button>
+                  </div>
+                  <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
+                </div>
+                <div>
+                  <h5 className="font-bold">Política de Cancelamento</h5>
+                  <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                </div>
+                <div className="my-5 mx-auto w-1/2 px-6">
+                  <Button onClick={methods.handleSubmit(saveChanges)} type="button">
+                    Guardar alterações &#10230;
+                  </Button>
+                </div>
+              </FormProvider>
             </>
           )}
-          <Button onClick={saveChanges} type={"button"}>
-            Guardar alterações &#10230;
-          </Button>
         </div>
       </div>
     </div>
@@ -130,10 +143,38 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const { query } = ctx;
+  const { slug } = query;
+
+  if (!slug) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data: advertisement, error } = await supabase
+    .from(ADVERTISEMENT_TABLE_NAME)
+    .select("*")
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, session.user.id)
+    .single();
+
+  if (error) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       initialSession: session,
       user: session.user,
+      advertisement: advertisement,
     },
   };
 };

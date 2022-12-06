@@ -1,13 +1,12 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
 import HostFlexTypeComponent from "../anuncio/HostFlexTypeComponent";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Button from "../utils/Button";
+import { toast } from "react-toastify";
 
-const FormPasso7 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+const FormTipoHost = () => {
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -18,9 +17,9 @@ const FormPasso7 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   const changeTypeProperty = (typeFlex, value) => {
@@ -42,4 +41,4 @@ const FormPasso7 = () => {
   );
 };
 
-export default FormPasso7;
+export default FormTipoHost;

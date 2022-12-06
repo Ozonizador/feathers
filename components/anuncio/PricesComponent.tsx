@@ -1,7 +1,9 @@
 import classNames from "classnames";
 import { useCallback } from "react";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, ExpenseName, TypeExpense } from "../../models/advertisement";
+import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
+import RadioBox from "../utils/Radiobox";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -188,11 +190,9 @@ const ExpenseSelection = ({
           <div>
             <div className="flex h-5 items-center">
               <div className="mr-3">Sim</div>
-              <input
-                type="radio"
+              <RadioBox
                 name={expense}
                 value={"PARTIALLY"}
-                className="h-4 w-4 rounded border border-terciary-500"
                 onChange={toggleTypeExpenses}
                 checked={expenseInfo && expenseInfo.included !== "EXCLUDED"}
               />
@@ -202,9 +202,7 @@ const ExpenseSelection = ({
         <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
           <div className="flex h-5 items-center">
             <div className="mr-3">Não</div>
-            <input
-              type="radio"
-              className="h-4 w-4 rounded border border-terciary-500"
+            <RadioBox
               name={expense}
               value={"EXCLUDED"}
               onChange={toggleTypeExpenses}
@@ -218,13 +216,11 @@ const ExpenseSelection = ({
         <div className="ml-3 flex flex-col gap-2">
           <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
             <label htmlFor="all_included">Totalmente incluído.</label>
-            <input
+            <Checkbox
               name="all_included"
               data-expense={expense}
               onChange={setTypeExpenseIncluded}
               checked={expenseInfo && expenseInfo.included === "INCLUDED"}
-              type="checkbox"
-              className="h-4 w-4 rounded border border-terciary-500"
             />
           </div>
           <div className="ml-6 flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-2 px-3">

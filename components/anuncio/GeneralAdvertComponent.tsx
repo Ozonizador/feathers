@@ -2,7 +2,8 @@ import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useGetUserCoordinates } from "../../context/MainProvider";
-import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { Advertisement, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
 import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";
@@ -13,13 +14,12 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
-  onChange: (property: string, value: unknown) => void;
   onChangeMarker?: (lat, lng) => void;
 }
 
-const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: GeneralAdvertComponentProps) => {
+const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvertComponentProps) => {
   const userlocation = useGetUserCoordinates();
-  const { register, control } = useFormContext();
+  const { control } = useFormContext();
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
@@ -46,32 +46,43 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
       <div className="my-5 flex w-full flex-col justify-between gap-5 lg:flex-row">
         {/* col left */}
         <div className="mt-2 w-full ">
-          <div className="">
+          <div>
             <label className="mb-1">Qual o seu tipo de espaço?</label>
-            <select
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE, e.target.value)}
-              className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
-            >
-              {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
-                return (
-                  <option key={index} value={type}>
-                    {TYPE_ADVERTISEMENT[type]}
-                  </option>
-                );
-              })}
-            </select>
+            <Controller
+              name="type"
+              defaultValue={"ENTIRE_SPACE"}
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <select
+                  className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
+                  value={value}
+                  onChange={onChange}
+                >
+                  {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
+                    return (
+                      <option key={index} value={type}>
+                        {TYPE_ADVERTISEMENT[type]}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
+            />
           </div>
 
-          <div className="">
+          <div>
             <Controller
-              control={control}
               name="street"
-              render={() => (
+              rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
+              control={control}
+              defaultValue=""
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   label="street"
                   labelText="Rua *"
-                  value={advertisement.street}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET, e.target.value)}
+                  value={value}
+                  onChange={onChange}
+                  errorMessage={error?.message}
                 />
               )}
             />
@@ -79,15 +90,11 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
           <div>
             <Controller
-              control={control}
               name="floor"
-              render={() => (
-                <Input
-                  label="floor"
-                  labelText="Andar"
-                  value={advertisement.floor}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.FLOOR, e.target.value)}
-                />
+              defaultValue=""
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Input label="floor" labelText="Andar" onChange={onChange} value={value} />
               )}
             />
           </div>
@@ -97,15 +104,18 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
         <div className="w-full">
           <div>
             <Controller
-              control={control}
               name="place"
-              render={() => (
+              rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
+              control={control}
+              defaultValue=""
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   label="place"
                   labelText="Localidade *"
                   customCss="icon"
-                  value={advertisement.place}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.PLACE, e.target.value)}
+                  value={value}
+                  onChange={onChange}
+                  errorMessage={error?.message}
                 />
               )}
             />
@@ -114,13 +124,16 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
           <div>
             <Controller
               name="street_number"
+              rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
-              render={() => (
+              defaultValue=""
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   label="street_number"
                   labelText="Número *"
-                  value={advertisement.street_number}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.STREET_NUMBER, e.target.value)}
+                  value={value}
+                  onChange={onChange}
+                  errorMessage={error?.message}
                 />
               )}
             />
@@ -128,14 +141,17 @@ const GeneralAdvertComponent = ({ advertisement, onChange, onChangeMarker }: Gen
 
           <div>
             <Controller
+              name="postal_code"
+              rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
-              name="street_number"
-              render={() => (
+              defaultValue=""
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   label="postal_code"
                   labelText="Código Postal *"
-                  value={advertisement.postal_code}
-                  onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.POSTAL_CODE, e.target.value)}
+                  value={value}
+                  onChange={onChange}
+                  errorMessage={error?.message}
                 />
               )}
             />

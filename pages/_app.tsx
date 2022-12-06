@@ -12,35 +12,43 @@ import { MenuSenhorioProvider } from "../context/MenuSenhorioAnuncioProvider";
 import { useState } from "react";
 import { Database } from "../database.types";
 import Maintenance from "../components/maintenance/Maintenance";
+import { CookiesProvider, useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
+  const [cookies] = useCookies(["test"]);
   const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
+  const router = useRouter();
 
+  console.log(process.env.NEXT_PUBLIC_MAINTENANCE_MODE, process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false");
+  console.log(cookies.test);
   return (
     <>
-      {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
-        <SessionContextProvider supabaseClient={supabaseClient}>
-          <MainProvider>
-            <MenuSenhorioProvider>
-              <Head>
-                <title>Unihosts</title>
-                <meta
-                  name="description"
-                  content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
-                ></meta>
-              </Head>
-              <Navbar />
-              <div className="min-h-screen">
-                <Component {...pageProps} />
-                <ToastContainer />
-              </div>
-              <Footer />
-            </MenuSenhorioProvider>
-          </MainProvider>
-        </SessionContextProvider>
-      ) : (
-        <Maintenance />
-      )}
+      <CookiesProvider>
+        {router.asPath == "/joaotest" || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" || cookies.test ? (
+          <SessionContextProvider supabaseClient={supabaseClient}>
+            <MainProvider>
+              <MenuSenhorioProvider>
+                <Head>
+                  <title>Unihosts</title>
+                  <meta
+                    name="description"
+                    content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
+                  ></meta>
+                </Head>
+                <Navbar />
+                <div className="min-h-screen">
+                  <Component {...pageProps} />
+                  <ToastContainer />
+                </div>
+                <Footer />
+              </MenuSenhorioProvider>
+            </MainProvider>
+          </SessionContextProvider>
+        ) : (
+          <Maintenance />
+        )}
+      </CookiesProvider>
     </>
   );
 }

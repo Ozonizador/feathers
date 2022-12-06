@@ -1,18 +1,14 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { toast } from "react-toastify";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import useAdvertisementService from "../../hooks/advertisementService";
 import AboutHouseComponent from "../anuncio/AboutHouseComponent";
 import Button from "../utils/Button";
 
-/* TODO MISSING LOGIC */
-
-const FormPasso5 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
-
+const FormAboutHouse = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
+  const incrementStep = useIncrementStep();
 
   /* Services */
   const { updateAdvertisement } = useAdvertisementService();
@@ -20,9 +16,9 @@ const FormPasso5 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   const changeAdvertisementProperty = (label, value) => {
@@ -42,4 +38,4 @@ const FormPasso5 = () => {
   );
 };
 
-export default FormPasso5;
+export default FormAboutHouse;

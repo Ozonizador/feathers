@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import {
   useAdvertisement,
   useSetAdvertisement,
@@ -16,10 +16,9 @@ import useAdvertisementService from "../../hooks/advertisementService";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../utils/Button";
 
-const FormPasso0 = () => {
+const FormInicio = () => {
   /* STEPS */
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+  const incrementStep = useIncrementStep();
 
   /* ADVERTISEMENT */
   const advertisement = useAdvertisement();
@@ -32,28 +31,12 @@ const FormPasso0 = () => {
   /* Form */
   const methods = useForm();
 
-  const nextStep = async (e) => {
-    e.preventDefault();
+  const nextStep = async (data) => {
+    const { data: advertisementInfo, error } = await addAdvertisement({ ...advertisement, ...data });
+    if (error) return toast.error(error.message);
 
-    // confirmar se esta tudo preenchido
-    const { type, street, place, street_number, postal_code } = advertisement;
-
-    if (!type || !street || !place || !street_number || !postal_code) {
-      toast.error("Campos por preencher.");
-      return;
-    }
-
-    const { data, error } = await addAdvertisement(advertisement);
-    if (!error) {
-      setAdvertisement(data);
-      setCurrentStep(currentStep + 1);
-    } else {
-      toast.error(error.message);
-    }
-  };
-
-  const onChangeProperty = (property: string, value: any) => {
-    changeAdvertisementProperty(property, value);
+    setAdvertisement(advertisementInfo);
+    incrementStep();
   };
 
   const checkPossibilites = async () => {
@@ -72,7 +55,6 @@ const FormPasso0 = () => {
   const onChangeMarker = (lat: number, lng: number) => {
     const coordsArray = coordinatesObjectToArray({ lat, lng });
     let newCoordinates = { type: "Point", coordinates: coordsArray };
-
     changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, newCoordinates);
   };
 
@@ -80,18 +62,14 @@ const FormPasso0 = () => {
     <>
       <FormProvider {...methods}>
         <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
-          <GeneralAdvertComponent
-            advertisement={advertisement}
-            onChange={onChangeProperty}
-            onChangeMarker={onChangeMarker}
-          />
+          <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
         </section>
         <div className="mt-1">
-          <div className="flex lg:px-32">
+          <div className="flex gap-5 lg:px-32">
             <Button onClick={checkPossibilites} type="button">
               Atualizar No Mapa
             </Button>
-            <Button onClick={nextStep} type="button">
+            <Button type="button" onClick={methods.handleSubmit(nextStep)}>
               Seguinte &#8594;
             </Button>
           </div>
@@ -101,4 +79,4 @@ const FormPasso0 = () => {
   );
 };
 
-export default FormPasso0;
+export default FormInicio;

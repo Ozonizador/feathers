@@ -1,12 +1,12 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";
 import Button from "../utils/Button";
+import { toast } from "react-toastify";
 
-const FormPasso6 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+const FormPrices = () => {
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -17,9 +17,9 @@ const FormPasso6 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   const changeTypeProperty = (label, value) => {
@@ -40,4 +40,4 @@ const FormPasso6 = () => {
   );
 };
 
-export default FormPasso6;
+export default FormPrices;

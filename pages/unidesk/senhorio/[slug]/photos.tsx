@@ -2,7 +2,12 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
-import { AdvertisementPhoto, HouseZonesLabel } from "../../../../models/advertisement";
+import {
+  AdvertisementPhoto,
+  ADVERTISEMENT_PROPERTIES,
+  ADVERTISEMENT_TABLE_NAME,
+  HouseZonesLabel,
+} from "../../../../models/advertisement";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 import useAdvertisementService from "../../../../hooks/advertisementService";
@@ -239,10 +244,38 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const { query } = ctx;
+  const { slug } = query;
+
+  if (!slug) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data: advertisement, error } = await supabase
+    .from(ADVERTISEMENT_TABLE_NAME)
+    .select("*")
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, session.user.id)
+    .single();
+
+  if (error) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       initialSession: session,
       user: session.user,
+      advertisement: advertisement,
     },
   };
 };

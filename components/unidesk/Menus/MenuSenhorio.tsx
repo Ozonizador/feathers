@@ -34,7 +34,7 @@ const MenuSenhorio = () => {
             {currentAdvertisement && (
               <div className="flex flex-col px-2">
                 <div className="mt-2 flex flex-1 items-center justify-between">
-                  Anúncio - {currentAdvertisement.title}
+                  Anúncio - {currentAdvertisement.title || "#"}
                 </div>
                 <div className="ml-5 mt-2">
                   <MenuItem

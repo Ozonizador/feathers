@@ -1,13 +1,12 @@
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Button from "../utils/Button";
+import { toast } from "react-toastify";
 
-const FormPasso4 = () => {
-  const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
+const FormHouseRules = () => {
+  const incrementStep = useIncrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -18,9 +17,9 @@ const FormPasso4 = () => {
   const nextStep = async (e) => {
     e.preventDefault();
 
-    await updateAdvertisement(advertisement, advertisement.id);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const { error } = await updateAdvertisement(advertisement, advertisement.id);
+    if (error) return toast.error(error.message);
+    incrementStep();
   };
 
   const changeTypeProperty = (label, value) => {
@@ -31,7 +30,6 @@ const FormPasso4 = () => {
     <section className="container mx-auto my-20 w-full lg:w-5/6">
       <div className="w-full">
         <div className="mb-28 font-bold text-gray-700 lg:text-2xl">Falemos agora sobre condições e regras da casa</div>
-
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
@@ -42,4 +40,4 @@ const FormPasso4 = () => {
   );
 };
 
-export default FormPasso4;
+export default FormHouseRules;

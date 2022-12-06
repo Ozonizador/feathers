@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { useCurrentStep, useSetCurrentStep } from "../../context/AnunciarProvider";
+import { useCurrentStep } from "../../context/AnunciarProvider";
 
 export default function Stepper() {
   const currentStep = useCurrentStep();
@@ -96,10 +96,9 @@ interface StepIconProps {
  */
 const StepIcon = ({ stepNumber, text }: StepIconProps) => {
   const currentStep = useCurrentStep();
-  const setCurrentStep = useSetCurrentStep();
 
   return (
-    <div className="relative flex items-center text-white" onClick={() => setCurrentStep(stepNumber)}>
+    <div className="relative flex items-center text-white">
       <div
         className={classNames("h-12 w-12 rounded-full py-3 text-center", {
           "bg-primary-500": currentStep >= stepNumber,
