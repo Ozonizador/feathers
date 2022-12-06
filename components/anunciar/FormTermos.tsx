@@ -30,7 +30,7 @@ const FormTermos = () => {
       },
       advertisement.id
     );
-    if (!error) return toast.error(error.message);
+    if (error) return toast.error(error.message);
 
     toast.success("Registo Bem Sucedido");
     router.push("/");

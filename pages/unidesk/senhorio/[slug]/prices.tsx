@@ -9,6 +9,7 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 
 import useAdvertisementService from "../../../../hooks/advertisementService";
+import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
 
 const Prices = () => {
   const { updateAdvertisement } = useAdvertisementService();
@@ -71,10 +72,38 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const { query } = ctx;
+  const { slug } = query;
+
+  if (!slug) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data: advertisement, error } = await supabase
+    .from(ADVERTISEMENT_TABLE_NAME)
+    .select("*")
+    .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, session.user.id)
+    .single();
+
+  if (error) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       initialSession: session,
       user: session.user,
+      advertisement: advertisement,
     },
   };
 };

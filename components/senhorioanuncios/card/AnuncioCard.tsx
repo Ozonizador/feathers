@@ -55,10 +55,10 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const router = useRouter();
   const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
-  const editAdvertisement = (event, id: string) => {
+  const editAdvertisement = (event, slug: string) => {
     event.preventDefault();
     setMenuSelectedAdvertisement(advertisement);
-    router.push(`/unidesk/senhorio/${id}/details`);
+    router.push(`/unidesk/senhorio/${slug}/details`);
   };
 
   return (
@@ -100,7 +100,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                           <Menu.Item>
                             {({ active }) => (
                               <button
-                                onClick={(e) => editAdvertisement(e, advertisement.id)}
+                                onClick={(e) => editAdvertisement(e, advertisement.slug)}
                                 className={`${
                                   active ? "bg-violet-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

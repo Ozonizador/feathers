@@ -100,18 +100,22 @@ const Details = ({ initialSession, user, advertisement }: DetailsProps) => {
                 </div>
                 <div className="mt-5">
                   <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
-                  <Button type="button" onClick={() => checkPossibilites()}>
-                    Atualizar No Mapa
-                  </Button>
+                  <div className="my-5 mr-auto w-1/2 px-6">
+                    <Button type="button" onClick={checkPossibilites}>
+                      Atualizar No Mapa
+                    </Button>
+                  </div>
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
                 </div>
                 <div>
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                 </div>
-                <Button onClick={methods.handleSubmit(saveChanges)} type="button">
-                  Guardar alterações &#10230;
-                </Button>
+                <div className="my-5 mx-auto w-1/2 px-6">
+                  <Button onClick={methods.handleSubmit(saveChanges)} type="button">
+                    Guardar alterações &#10230;
+                  </Button>
+                </div>
               </FormProvider>
             </>
           )}
@@ -141,6 +145,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { query } = ctx;
   const { slug } = query;
+
   if (!slug) {
     return {
       redirect: {
@@ -154,7 +159,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .from(ADVERTISEMENT_TABLE_NAME)
     .select("*")
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
-    .eq(ADVERTISEMENT_PROPERTIES.HOST, session.user.id)
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, session.user.id)
     .single();
 
   if (error) {
