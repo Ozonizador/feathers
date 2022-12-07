@@ -16,6 +16,15 @@ import useAdvertisementService from "../../hooks/advertisementService";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../utils/Button";
 
+interface FormInicioProps {
+  street: string;
+  place: string;
+  street_number: string;
+  postal_code: string;
+  type: string;
+  floor: string;
+}
+
 const FormInicio = () => {
   /* STEPS */
   const incrementStep = useIncrementStep();
@@ -29,7 +38,7 @@ const FormInicio = () => {
   const { addAdvertisement } = useAdvertisementService();
 
   /* Form */
-  const methods = useForm();
+  const methods = useForm<FormInicioProps>();
 
   const nextStep = async (data) => {
     const { data: advertisementInfo, error } = await addAdvertisement({ ...advertisement, ...data });
@@ -40,7 +49,8 @@ const FormInicio = () => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, street_number, postal_code } = advertisement;
+    const { getValues } = methods;
+    const { place, street_number, postal_code, street } = getValues();
     const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
 
     if (!error && data && data.length > 0) {

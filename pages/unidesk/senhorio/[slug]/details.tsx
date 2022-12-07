@@ -19,6 +19,7 @@ import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
 import dynamic from "next/dynamic";
 import { FormProvider, useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -30,9 +31,10 @@ interface DetailsProps {
   advertisement: Advertisement;
 }
 
-const Details = ({ initialSession, user, advertisement }: DetailsProps) => {
+const Details = ({ advertisement }: DetailsProps) => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   /* Form */
@@ -70,6 +72,10 @@ const Details = ({ initialSession, user, advertisement }: DetailsProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    setAdvertisementContext(advertisement);
+  }, []);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">

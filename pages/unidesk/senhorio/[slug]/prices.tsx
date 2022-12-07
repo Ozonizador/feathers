@@ -1,5 +1,6 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
@@ -9,11 +10,18 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 
 import useAdvertisementService from "../../../../hooks/advertisementService";
-import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES } from "../../../../models/advertisement";
+import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES, Advertisement } from "../../../../models/advertisement";
 
-const Prices = () => {
+interface PricesProps {
+  initialSession: Session;
+  user: User;
+  advertisement: Advertisement;
+}
+
+const Prices = ({ advertisement }: PricesProps) => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
@@ -27,6 +35,9 @@ const Prices = () => {
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
+  useEffect(() => {
+    setAdvertisementContext(advertisement);
+  }, []);
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
       <div className="flex flex-col lg:flex-row">

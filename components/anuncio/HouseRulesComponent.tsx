@@ -121,7 +121,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="mb-6 w-40 text-base font-bold lg:mb-0">Limpeza</p>
         </div>
         <div className="flex w-full flex-row items-center justify-between lg:ml-6 lg:w-3/4">
-          <div className="w-full lg:w-2/3">
+          <div className="w-full lg:w-3/4">
             <div className="flex h-5 w-full items-center">
               <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 ">
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {

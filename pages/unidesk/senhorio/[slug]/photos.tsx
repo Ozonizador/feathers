@@ -1,8 +1,9 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useState } from "react";
+import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import {
+  Advertisement,
   AdvertisementPhoto,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
@@ -20,9 +21,16 @@ import {
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
 
-const Photos = () => {
+interface PhotosProps {
+  initialSession: Session;
+  user: User;
+  advertisement: Advertisement;
+}
+
+const Photos = ({ advertisement }: PhotosProps) => {
   const { removePicture, saveImage, updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
+  const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const [selectedImages, setSelectedImages] = useState<AdvertisementPhoto[]>([]);
@@ -61,9 +69,8 @@ const Photos = () => {
         { ...advertisementContext, photos: [...currentPhotos, ...paths] },
         advertisementContext.id
       );
-      if (!error) {
-        setAdvertisement(data);
-      }
+      if (error) return toast.error(error.message);
+      setAdvertisement(data);
       event.target.value = null;
     }
   };
@@ -87,9 +94,8 @@ const Photos = () => {
         { ...advertisementContext, photos: photosAux },
         advertisementContext.id
       );
-      if (!error) {
-        setAdvertisement(data);
-      }
+      if (error) return toast.error(error.message);
+      setAdvertisement(data);
     }
   };
 
@@ -121,9 +127,8 @@ const Photos = () => {
         { ...advertisementContext, photos: newImages },
         advertisementContext.id
       );
-      if (!error) {
-        setAdvertisement(data);
-      }
+      if (error) return toast.error(error.message);
+      setAdvertisement(data);
     }
     setSelectedImages([]);
   };
@@ -132,6 +137,10 @@ const Photos = () => {
     const foundImage = selectedImages.find((image) => image.url == url);
     return foundImage !== undefined;
   };
+
+  useEffect(() => {
+    setAdvertisementContext(advertisement);
+  }, []);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full lg:px-0 ">
@@ -217,9 +226,11 @@ const Photos = () => {
               </div>
             </>
           )}
-          <Button onClick={saveChanges} type="button">
-            Guardar
-          </Button>
+          <div className="mr-auto mt-5 w-1/2">
+            <Button onClick={saveChanges} type="button">
+              Guardar
+            </Button>
+          </div>
         </div>
       </div>
     </div>

@@ -38,25 +38,25 @@ const MenuSenhorio = () => {
                 </div>
                 <div className="ml-5 mt-2">
                   <MenuItem
-                    url={`/unidesk/senhorio/${currentAdvertisement.id}/details`}
+                    url={`/unidesk/senhorio/${currentAdvertisement.slug}/details`}
                     label="Detalhes do anúncio"
                     clickOnLink={moveToMenuLink}
                     child={true}
                   />
                   <MenuItem
-                    url={`/unidesk/senhorio/${currentAdvertisement.id}/photos`}
+                    url={`/unidesk/senhorio/${currentAdvertisement.slug}/photos`}
                     label="Fotos"
                     clickOnLink={moveToMenuLink}
                     child={true}
                   />
                   <MenuItem
-                    url={`/unidesk/senhorio/${currentAdvertisement.id}/conditions`}
+                    url={`/unidesk/senhorio/${currentAdvertisement.slug}/conditions`}
                     label="Condições e regras"
                     clickOnLink={moveToMenuLink}
                     child={true}
                   />
                   <MenuItem
-                    url={`/unidesk/senhorio/${currentAdvertisement.id}/prices`}
+                    url={`/unidesk/senhorio/${currentAdvertisement.slug}/prices`}
                     label="Preços"
                     clickOnLink={moveToMenuLink}
                     child={true}
