@@ -22,7 +22,7 @@ const MainMap = ({
   showCenterMarker = true,
   onChangeMarker,
 }: MainMapProps) => {
-  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
+  const [mapCenter] = useState<GEO | null>(currentMapCoords);
 
   return (
     <>
@@ -66,7 +66,7 @@ const MapComponent = ({
       map.panTo({ lat: lat, lng: lng });
       setPosition({ lat, lng });
     }
-  }, [map]);
+  }, [currentMapCoords, map]);
 
   return (
     <>

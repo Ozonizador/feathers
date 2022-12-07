@@ -20,8 +20,6 @@ function MyApp({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
   const router = useRouter();
 
-  console.log(process.env.NEXT_PUBLIC_MAINTENANCE_MODE, process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false");
-  console.log(cookies.test);
   return (
     <>
       <CookiesProvider>

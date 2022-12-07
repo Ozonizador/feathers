@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useGetUserCoordinates } from "../../context/MainProvider";
-import { Advertisement, TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
 import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
@@ -49,7 +49,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
           <div>
             <label className="mb-1">Qual o seu tipo de espaço?</label>
             <Controller
-              name="type"
+              name={ADVERTISEMENT_PROPERTIES.TYPE}
               defaultValue={"ENTIRE_SPACE"}
               control={control}
               render={({ field: { value, onChange } }) => (
@@ -72,7 +72,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
           <div>
             <Controller
-              name="street"
+              name={ADVERTISEMENT_PROPERTIES.STREET}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
               defaultValue=""
@@ -90,7 +90,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
           <div>
             <Controller
-              name="floor"
+              name={ADVERTISEMENT_PROPERTIES.FLOOR}
               defaultValue=""
               control={control}
               render={({ field: { value, onChange } }) => (
@@ -104,7 +104,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
         <div className="w-full">
           <div>
             <Controller
-              name="place"
+              name={ADVERTISEMENT_PROPERTIES.PLACE}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
               defaultValue=""
@@ -123,7 +123,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
           <div>
             <Controller
-              name="street_number"
+              name={ADVERTISEMENT_PROPERTIES.STREET_NUMBER}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
               defaultValue=""
@@ -141,7 +141,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
           <div>
             <Controller
-              name="postal_code"
+              name={ADVERTISEMENT_PROPERTIES.POSTAL_CODE}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
               defaultValue=""
