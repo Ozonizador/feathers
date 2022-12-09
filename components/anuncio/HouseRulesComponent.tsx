@@ -36,15 +36,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
 
   return (
     <>
-      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
+      <div className="my-8 flex flex-row gap-2 lg:items-center">
         <div className="flex items-center">
-          <div className="">
+          <div>
             <MdOutlinePets className="mr-3 text-2xl" />
           </div>
           <p className="w-40 text-base font-bold">Animais permitidos</p>
         </div>
 
-        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
+        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -54,15 +54,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
       </div>
-      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
+      <div className="my-8 flex flex-row gap-2 lg:items-center">
         <div className="flex items-center">
-          <div className="">
+          <div>
             <GiCigarette className="mr-3 text-2xl" />
           </div>
           <p className="w-40 text-base font-bold">Fumar permitido</p>
         </div>
 
-        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
+        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -73,15 +73,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 flex flex-col lg:flex-row lg:items-center">
+      <div className="my-8 flex flex-row gap-2 lg:items-center">
         <div className="flex items-center">
-          <div className="">
+          <div>
             <BiDrink className="mr-3 text-2xl" />
           </div>
           <p className="w-40 text-base font-bold">Eventos Permitidos</p>
         </div>
 
-        <div className="ml-0 mt-5 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:mt-0 lg:ml-6 lg:items-center">
+        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -92,14 +92,14 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row lg:items-center">
+      <div className="flex flex-row lg:items-center">
         <div className="flex">
           <div>
             <MdChecklist className="mr-3 text-2xl" />
           </div>
           <p className="w-40 text-base font-bold">Outra Regra</p>
         </div>
-        <div className=" ml-0 flex flex-1 flex-row lg:ml-6 lg:items-center">
+        <div className=" ml-0 flex flex-1 flex-row lg:items-center">
           <div className="w-full text-base lg:w-3/4">
             <Input
               label={HOUSE_RULES_NAMING.OTHER_RULES}
@@ -113,17 +113,21 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 mb-14 flex flex-col lg:mb-24 lg:flex-row lg:items-center">
+      <div className="my-8 mb-14 mb-24 flex lg:flex-row lg:items-center">
         <div className="flex flex-row">
           <div>
             <GiBroom className="mr-3 text-2xl" />
           </div>
           <p className="mb-6 w-40 text-base font-bold lg:mb-0">Limpeza</p>
         </div>
-        <div className="flex w-full flex-row items-center justify-between lg:ml-6 lg:w-3/4">
+        <div className="flex w-full flex-row items-center justify-between lg:w-3/4">
           <div className="w-full lg:w-3/4">
             <div className="flex h-5 w-full items-center">
-              <select className="w-full rounded-md border  border-solid border-terciary-500 bg-white py-2 ">
+              <select
+                name={HOUSE_RULES_NAMING.CLEANING}
+                className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2"
+                onChange={changeHouseRulesInput}
+              >
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {
                   return (
                     <option key={index} value={TYPE_CLEANING_LABELS[type]}>

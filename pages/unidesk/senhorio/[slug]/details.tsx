@@ -31,6 +31,21 @@ interface DetailsProps {
   advertisement: Advertisement;
 }
 
+type DetailsForm = Pick<
+  Advertisement,
+  | "title"
+  | "slug"
+  | "max_rooms"
+  | "description"
+  | "host_lives_property"
+  | "type_host"
+  | "street"
+  | "street_number"
+  | "type"
+  | "place"
+  | "postal_code"
+>;
+
 const Details = ({ advertisement }: DetailsProps) => {
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
@@ -38,10 +53,24 @@ const Details = ({ advertisement }: DetailsProps) => {
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   /* Form */
-  const methods = useForm();
+  const methods = useForm<DetailsForm>({
+    defaultValues: {
+      title: advertisement.title,
+      slug: advertisement.slug,
+      max_rooms: advertisement.max_rooms,
+      description: advertisement.description,
+      host_lives_property: advertisement.host_lives_property,
+      type_host: advertisement.type_host,
+      street: advertisement.street,
+      street_number: advertisement.street_number,
+      place: advertisement.place,
+      postal_code: advertisement.postal_code,
+      type: advertisement.type,
+    },
+  });
 
-  const saveChanges = async () => {
-    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
+  const saveChanges = async (data) => {
+    const { error } = await updateAdvertisement({ ...advertisementContext, ...data }, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
     } else {
@@ -74,8 +103,8 @@ const Details = ({ advertisement }: DetailsProps) => {
   };
 
   useEffect(() => {
-    setAdvertisementContext(advertisement);
-  }, []);
+    if (advertisement) setAdvertisementContext(advertisement);
+  }, [advertisement]);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
@@ -94,17 +123,14 @@ const Details = ({ advertisement }: DetailsProps) => {
           {advertisementContext && (
             <>
               <FormProvider {...methods}>
-                <div>
+                <div className="flex flex-col gap-2 px-3">
                   <h5 className="font-bold">{advertisementContext.title}</h5>
                   <AdvertisementInfoComponent advertisement={advertisementContext} />
                   <HouseCapacityComponent advertisement={advertisementContext} />
-                </div>
 
-                <div>
-                  <h5 className="mb-6 text-xl text-gray-600">Sobre a sua casa</h5>
+                  <h5 className="text-xl text-gray-600">Sobre a sua casa</h5>
                   <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-                </div>
-                <div className="mt-5">
+
                   <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
                   <div className="my-5 mr-auto w-1/2 px-6">
                     <Button type="button" onClick={checkPossibilites}>
@@ -112,15 +138,14 @@ const Details = ({ advertisement }: DetailsProps) => {
                     </Button>
                   </div>
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
-                </div>
-                <div>
+
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-                </div>
-                <div className="my-5 mx-auto w-1/2 px-6">
-                  <Button onClick={methods.handleSubmit(saveChanges)} type="button">
-                    Guardar alterações &#10230;
-                  </Button>
+                  <div className="my-5 mx-auto w-1/2 px-6">
+                    <Button onClick={methods.handleSubmit(saveChanges)} type="button">
+                      Guardar alterações &#10230;
+                    </Button>
+                  </div>
                 </div>
               </FormProvider>
             </>

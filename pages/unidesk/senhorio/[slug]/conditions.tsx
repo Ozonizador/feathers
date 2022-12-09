@@ -40,7 +40,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
 
   useEffect(() => {
     setAdvertisementContext(advertisement);
-  }, []);
+  }, [advertisement, setAdvertisementContext]);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
@@ -56,7 +56,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
             <>
               <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
-              <div className="pb-4">
+              <div className="mx-auto w-1/2 pb-4">
                 <Button onClick={saveChanges} type="button">
                   Guardar alterações
                 </Button>

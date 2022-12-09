@@ -153,7 +153,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
         <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
           <div className="mb-7 text-2xl font-semibold">Fotografias</div>
 
-          <div className="mx-auto flex w-64 flex-col gap-6 lg:w-full lg:flex-row lg:items-center">
+          <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
             <>
               {photos &&
                 photos.length > 0 &&
