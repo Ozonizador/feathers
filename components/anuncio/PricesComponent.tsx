@@ -123,7 +123,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         <div>
           <div className="my-8 flex flex-col">
             <ExpenseSelection
-              expense={ExpenseName.GAS}
+              expense={"GAS"}
               title="Gás"
               setMaxExpenseValue={setMaxExpenseValue}
               toggleTypeExpenses={toggleTypeExpenses}
@@ -131,7 +131,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               setTypeExpenseIncluded={setTypeExpenseIncluded}
             />
             <ExpenseSelection
-              expense={ExpenseName.INTERNET}
+              expense={"INTERNET"}
               title="Internet"
               setMaxExpenseValue={setMaxExpenseValue}
               toggleTypeExpenses={toggleTypeExpenses}
@@ -139,7 +139,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               setTypeExpenseIncluded={setTypeExpenseIncluded}
             />
             <ExpenseSelection
-              expense={ExpenseName.WATER}
+              expense={"WATER"}
               title="Água"
               setMaxExpenseValue={setMaxExpenseValue}
               toggleTypeExpenses={toggleTypeExpenses}
@@ -147,7 +147,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               setTypeExpenseIncluded={setTypeExpenseIncluded}
             />
             <ExpenseSelection
-              expense={ExpenseName.LIGHTS}
+              expense={"LIGHTS"}
               title="Luz"
               setMaxExpenseValue={setMaxExpenseValue}
               toggleTypeExpenses={toggleTypeExpenses}

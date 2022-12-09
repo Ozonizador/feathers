@@ -23,14 +23,13 @@ import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 // icons
 
 import IconStay from "../../../public/images/icon-profile.svg";
-import { PROCURAR_ADVERT_URL } from "../../../models/paths";
+import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 
 /* PAGINA 21 do xd */
 
 const EstadiaBreadcrumbs = [
-  { url: "", label: "Perfil" },
-  { url: "Conta", label: "Conta" },
-  { url: "Informações", label: "Informações" },
+  { url: UNIDESK_URL, label: "Perfil" },
+  { url: "", label: "Informações" },
 ] as {
   url: string;
   label: string;

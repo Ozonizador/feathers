@@ -29,7 +29,7 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             <>
               Eletricidade
               <br />
-              {checkIfIncluded(ExpenseName["LIGHTS"])}
+              {checkIfIncluded("LIGHTS")}
             </>
           </div>
         </div>
@@ -39,7 +39,7 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             <>
               Gás
               <br />
-              {checkIfIncluded(ExpenseName["GAS"])}
+              {checkIfIncluded("GAS")}
             </>
           </div>
         </div>
@@ -50,7 +50,7 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             <>
               Internet
               <br />
-              {checkIfIncluded(ExpenseName["INTERNET"])}
+              {checkIfIncluded("INTERNET")}
             </>
           </div>
         </div>
@@ -60,7 +60,7 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             <>
               Água
               <br />
-              {checkIfIncluded(ExpenseName["WATER"])}
+              {checkIfIncluded("WATER")}
             </>
           </div>
         </div>
