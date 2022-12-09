@@ -72,51 +72,51 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex items-center align-middle">
-          <p className="w-60 text-base font-bold">Valor Mensal</p>
-          <div className=" ml-6 flex flex-row items-center">
-            <div className="w-full  text-base">
-              <Input
-                label={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
-                labelText=""
-                customCss="euro"
-                value={String(advertisement.month_rent)}
-                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)}
-              />
-            </div>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col items-center align-middle md:mx-5 md:flex-row md:gap-2">
+          <div className="flex justify-start md:w-60">
+            <p className="items-start text-base font-bold">Valor Mensal</p>
+          </div>
+          <div className="flex flex-row items-center lg:ml-6">
+            <Input
+              label={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
+              labelText=""
+              customCss="euro"
+              value={String(advertisement.month_rent)}
+              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)}
+            />
             <div className="ml-2 text-base font-bold">/mês</div>
           </div>
         </div>
 
-        <div className="flex items-center align-middle">
-          <p className="w-60 text-base font-bold">Preço por pessoa extra</p>
-          <div className=" ml-6 flex flex-row items-center">
-            <div className="w-full  text-base">
-              <Input
-                label={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
-                labelText=""
-                customCss="euro"
-                value={String(advertisement.extra_per_host)}
-                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)}
-              />
-            </div>
+        <div className="flex flex-col items-center align-middle md:mx-5 md:flex-row md:gap-2">
+          <div className="flex justify-start md:w-60">
+            <p className="items-start text-base font-bold">Preço por pessoa extra</p>
+          </div>
+          <div className="flex flex-row items-center justify-center lg:ml-6">
+            <Input
+              label={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
+              labelText=""
+              customCss="euro"
+              value={String(advertisement.extra_per_host)}
+              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)}
+            />
             <div className="ml-2 text-base font-bold">/mês</div>
           </div>
         </div>
 
-        <div className="flex items-center align-middle">
-          <p className="w-60 text-base font-bold">Caução</p>
-          <div className=" ml-6 flex flex-row items-center ">
-            <div className="w-full  text-base">
-              <Input
-                label={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
-                labelText=""
-                customCss="euro"
-                value={String(advertisement.guarantee_value)}
-                onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)}
-              />
-            </div>
+        <div className="flex flex-col items-center align-middle md:mx-5 md:flex-row md:gap-2">
+          <div className="flex justify-start md:w-60">
+            <p className="items-start text-base font-bold">Caução</p>
+          </div>
+          <div className="flex flex-row items-center lg:ml-6">
+            <Input
+              label={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
+              labelText=""
+              customCss="euro"
+              value={String(advertisement.guarantee_value)}
+              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE, e.target.value)}
+            />
           </div>
         </div>
 

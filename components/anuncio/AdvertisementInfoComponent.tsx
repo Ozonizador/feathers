@@ -20,7 +20,6 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
           <label className="mb-4 block text-2xl font-bold text-gray-700">Título do Anúncio</label>
           <Controller
             name={ADVERTISEMENT_PROPERTIES.TITLE}
-            defaultValue={advertisement.title}
             rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -37,7 +36,7 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
         <div>
           <label className="mb-4 block text-2xl font-bold text-gray-700">Nome Interno</label>
           <Controller
-            name={ADVERTISEMENT_PROPERTIES.MAX_ROOMS}
+            name={ADVERTISEMENT_PROPERTIES.SLUG}
             defaultValue={advertisement.slug}
             control={control}
             render={({ field: { value } }) => <Input maxLength={50} disabled defaultValue={value} />}
@@ -48,7 +47,6 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
           <label className="mb-4 block text-xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>
           <Controller
             name={ADVERTISEMENT_PROPERTIES.MAX_ROOMS}
-            defaultValue={advertisement.max_rooms}
             control={control}
             rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -64,7 +62,6 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
           <div className="mt-4">
             <Controller
               name={ADVERTISEMENT_PROPERTIES.DESCRIPTION}
-              defaultValue={advertisement.description}
               control={control}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -88,13 +85,12 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
         </div>
 
         <div className="flex flex-row lg:items-center">
-          <p className="my-auto mb-3 w-44 text-base font-bold lg:mb-0">Vive na propriedade?</p>
+          <p className="my-auto mb-3 text-base font-bold lg:mb-0 lg:w-44">Vive na propriedade?</p>
 
           <div className="ml-0 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
-                defaultValue={advertisement.host_lives_property}
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Checkbox onChange={onChange} checked={value} name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY} />
@@ -104,17 +100,16 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-center">
+        <div className="flex flex-row gap-3 lg:items-center">
           <div className="flex">
-            <p className="w-44 text-base font-bold">Tipo de senhorio</p>
+            <p className="my-auto text-base font-bold lg:w-44">Tipo de senhorio</p>
           </div>
 
-          <div className="mb-5 ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
+          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
             <div className="mr-16 text-base">Particular</div>
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.TYPE_HOST}
-                defaultValue={advertisement.type_host}
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <RadioBox

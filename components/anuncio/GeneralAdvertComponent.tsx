@@ -33,7 +33,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
   return (
     <>
       <>
-        <div className="h-96 w-full px-6">
+        <div className="h-96 w-full px-1">
           <MapWithNoSSR
             currentMapCoords={createCurrentMapLocation()}
             draggableMarker={true}
