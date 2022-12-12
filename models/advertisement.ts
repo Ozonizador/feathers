@@ -123,12 +123,10 @@ export const TYPE_ADVERTISEMENT = {
   PRIVATE_ROOM: "Quarto Privado",
 };
 
-export enum HostType {
-  PROFISSIONAL = "PROFISSIONAL",
-  PARTICULAR = "PARTICULAR",
-}
-
+export type TypeAdvertisement = Database["public"]["Enums"]["TypeRoom"];
+export type HostType = Database["public"]["Enums"]["type_host"];
 export type HostFlexType = Database["public"]["Enums"]["HostFlexType"];
+export type AdvertisementStatus = Database["public"]["Enums"]["AdvertisementStatus"];
 
 export enum InclusiveExpenses {
   INCLUDED = "INCLUDED",
@@ -269,8 +267,6 @@ export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((label) => {
 });
 
 /* ADVERT_STATUS */
-
-export type AdvertisementStatus = Database["public"]["Enums"]["AdvertisementStatus"];
 
 export const AboutHouseCommodities = {
   general: [

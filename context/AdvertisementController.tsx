@@ -5,7 +5,9 @@ import {
   HouseExpenses,
   HouseRules,
   InclusiveExpenses,
-  ExpenseName,
+  HostType,
+  HostFlexType,
+  TypeAdvertisement,
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
@@ -14,9 +16,9 @@ import { createRandomUniqWord } from "../utils/utils";
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
   slug: createRandomUniqWord(),
-  type: "ENTIRE_SPACE",
-  type_flex_host: "SUPER_FLEX",
-  type_host: "PARTICULAR",
+  type: "ENTIRE_SPACE" as TypeAdvertisement,
+  type_flex_host: "SUPER_FLEX" as HostFlexType,
+  type_host: "PARTICULAR" as HostType,
   place: "",
   street: "",
   street_number: "",
@@ -57,7 +59,7 @@ const defaultAdvertisement = {
     ],
   } as HouseExpenses,
   host_lives_property: false,
-  available: "DISABLED",
+  available: "DISABLED" as AdvertisementStatus,
   geom: null,
   max_rooms: 1,
   agreementsinfo: {},
