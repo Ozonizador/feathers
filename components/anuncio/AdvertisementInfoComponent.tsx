@@ -85,9 +85,9 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
         </div>
 
         <div className="flex flex-row lg:items-center">
-          <p className="my-auto mb-3 text-base font-bold lg:mb-0 lg:w-44">Vive na propriedade?</p>
+          <p className="my-auto mb-3 text-base font-bold lg:w-44">Vive na propriedade?</p>
 
-          <div className="ml-0 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
+          <div className="ml-2 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 p-3 lg:ml-6 lg:mb-0">
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
@@ -100,7 +100,7 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
           </div>
         </div>
 
-        <div className="flex flex-row gap-3 lg:items-center">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="flex">
             <p className="my-auto text-base font-bold lg:w-44">Tipo de senhorio</p>
           </div>
