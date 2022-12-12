@@ -116,17 +116,17 @@ const FormAnunciarPhotos = () => {
       </div>
 
       {/* FALTA GALERIA DE FOTOS */}
-      <div className="mt-3 flex flex-1 flex-wrap">
+      <div className="mt-3 flex flex-1 flex-wrap gap-1">
         {objectUrls.map((object, index) => {
           return (
-            <div className="relative mr-2" key={index}>
+            <div className="relative" key={index}>
               <div
                 className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index)}
               >
                 x
               </div>
-              <Image src={object} height={128} width={128} alt="advert-image" />
+              <Image src={object} height={116} width={116} alt="advert-image" />
             </div>
           );
         })}

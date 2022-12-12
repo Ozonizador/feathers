@@ -5,6 +5,9 @@ import {
   HouseExpenses,
   HouseRules,
   InclusiveExpenses,
+  HostType,
+  HostFlexType,
+  TypeAdvertisement,
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
@@ -13,9 +16,9 @@ import { createRandomUniqWord } from "../utils/utils";
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
   slug: createRandomUniqWord(),
-  type: "ENTIRE_SPACE",
-  type_flex_host: "SUPER_FLEX",
-  type_host: "PARTICULAR",
+  type: "ENTIRE_SPACE" as TypeAdvertisement,
+  type_flex_host: "SUPER_FLEX" as HostFlexType,
+  type_host: "PARTICULAR" as HostType,
   place: "",
   street: "",
   street_number: "",
@@ -39,13 +42,24 @@ const defaultAdvertisement = {
   month_rent: 0,
   extra_per_host: 0,
   guarantee_value: 0,
-  house_rules: {} as HouseRules,
+  house_rules: {
+    smokeAllowed: false,
+    eventsAllowed: false,
+    otherRules: "",
+    animalsAllowed: false,
+    cleaning: "MENSAL",
+  } as HouseRules,
   expenses: {
     inclusive: InclusiveExpenses.INCLUDED,
-    services: [],
+    services: [
+      { name: "GAS", included: "INCLUDED" },
+      { name: "INTERNET", included: "INCLUDED" },
+      { name: "WATER", included: "INCLUDED" },
+      { name: "LIGHTS", included: "INCLUDED" },
+    ],
   } as HouseExpenses,
   host_lives_property: false,
-  available: AdvertisementStatus.DISABLED,
+  available: "DISABLED" as AdvertisementStatus,
   geom: null,
   max_rooms: 1,
   agreementsinfo: {},

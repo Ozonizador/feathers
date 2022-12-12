@@ -21,9 +21,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
                   render={({ field: { value, onChange } }) => (
                     <RadioBox
                       name="availability"
-                      value={AdvertisementStatus.NOT_AVAILABLE}
+                      value={"NOT_AVAILABLE" as AdvertisementStatus}
                       onChange={onChange}
-                      checked={value === AdvertisementStatus.NOT_AVAILABLE}
+                      checked={value === ("NOT_AVAILABLE" as AdvertisementStatus)}
                     />
                   )}
                 />
@@ -51,9 +51,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
                   render={({ field: { value, onChange } }) => (
                     <RadioBox
                       name="availability"
-                      value={AdvertisementStatus.DISABLED}
+                      value={"DISABLED" as AdvertisementStatus}
                       onChange={onChange}
-                      checked={value === AdvertisementStatus.DISABLED}
+                      checked={value === ("DISABLED" as AdvertisementStatus)}
                     />
                   )}
                 />
@@ -82,9 +82,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
                   render={({ field: { value, onChange } }) => (
                     <RadioBox
                       name="availability"
-                      value={AdvertisementStatus.AVAILABLE}
+                      value={"AVAILABLE"}
                       onChange={onChange}
-                      checked={value === AdvertisementStatus.AVAILABLE}
+                      checked={value === "AVAILABLE"}
                     />
                   )}
                 />

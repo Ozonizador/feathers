@@ -213,9 +213,9 @@ const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
     return "";
   }
   for (let expense of expenses) {
-    if (expense.included == "INCLUDED") return included++;
-    if (expense.included == "PARTIALLY") return partially++;
-    if (expense.included == "EXCLUDED") return excluded++;
+    if (expense.included == "INCLUDED") included++;
+    if (expense.included == "PARTIALLY") partially++;
+    if (expense.included == "EXCLUDED") excluded++;
   }
 
   if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
