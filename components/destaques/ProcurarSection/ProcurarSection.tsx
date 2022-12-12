@@ -143,6 +143,7 @@ export default function ProcurarSection() {
                 <div className="hidden w-1/2">
                   <Select
                     id="comodities-select"
+                    instanceId="comodities-select"
                     placeholder="Comodities"
                     options={SelectAmenityLabel.map((amenity) => amenity)}
                     isMulti={true}
