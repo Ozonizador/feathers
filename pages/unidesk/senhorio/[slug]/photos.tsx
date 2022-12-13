@@ -86,9 +86,10 @@ const Photos = ({ advertisement }: PhotosProps) => {
     setSelectedImages(newImageSelection);
   };
 
-  const deletePhoto = async (url: string) => {
-    const { data, error } = await removePicture(advertisementContext.id, url);
-    if (!error && data.length > 0) {
+  const deletePhoto = async (event: React.MouseEvent<HTMLDivElement>, url: string) => {
+    event.stopPropagation();
+    const { error } = await removePicture(advertisementContext.id, url);
+    if (!error) {
       const photosAux = advertisementContext.photos.filter((photo) => photo.url !== url);
       const { data, error } = await updateAdvertisement(
         { ...advertisementContext, photos: photosAux },
@@ -140,7 +141,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
   useEffect(() => {
     setAdvertisementContext(advertisement);
-  }, []);
+  }, [advertisement]);
 
   return (
     <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full lg:px-0 ">
@@ -170,8 +171,8 @@ const Photos = ({ advertisement }: PhotosProps) => {
                       onClick={(e) => toggleImageSelection(photo)}
                     >
                       <div
-                        className="absolute right-0 top-0 z-50 rounded-full border border-red-600 p-1 font-bold text-red-600"
-                        onClick={() => deletePhoto(photo.url)}
+                        className="absolute right-0 top-0 z-50 cursor-pointer rounded-full border border-red-600 p-1 font-bold text-red-600"
+                        onClick={(e) => deletePhoto(e, photo.url)}
                       >
                         x
                       </div>

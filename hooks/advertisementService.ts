@@ -12,8 +12,6 @@ import {
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 import { AdvertisementReviewSummary } from "../models/review";
-import { getCorrectUrl } from "../utils/utils";
-
 export const PAGE_NUMBER_COUNT = 10 as number;
 
 const useAdvertisementService = () => {
@@ -137,13 +135,15 @@ const useAdvertisementService = () => {
   };
 
   const getPublicUrlFromImage = async (key: string) => {
-    const { data } = await supabaseClient.storage.from(ADVERTISEMENT_STORAGE_BUCKET).getPublicUrl(getCorrectUrl(key));
+    const { data } = await supabaseClient.storage.from(ADVERTISEMENT_STORAGE_BUCKET).getPublicUrl(key);
     return { data, error: null };
   };
 
   const removePicture = async (advertisementID: string, photoUrl: string) => {
     let dividedUrl = photoUrl.split("/");
     let avatarName = dividedUrl[dividedUrl.length - 1];
+    // TODO: add access control for removal.
+    debugger;
     const { data, error } = await supabaseClient.storage
       .from(ADVERTISEMENT_STORAGE_BUCKET)
       .remove([`${advertisementID}/${avatarName}`]);

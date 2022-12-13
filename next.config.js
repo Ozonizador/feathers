@@ -5,7 +5,7 @@ const withPlugins = require("next-compose-plugins");
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["repknakjxuwlkuloscsl.supabase.co"],
+    domains: ["erlshltwlqhutsoglatg.supabase.co"],
   },
   i18n: {
     locales: ["en"],

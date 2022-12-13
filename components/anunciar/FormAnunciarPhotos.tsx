@@ -3,7 +3,7 @@ import { useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
-import { ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
@@ -58,11 +58,11 @@ const FormAnunciarPhotos = () => {
   };
 
   const saveImages = async () => {
-    const paths = [] as string[];
+    const paths = [] as AdvertisementPhoto[];
     for (let image of images) {
       const { data } = await saveImage(advertisement.id, image.name, image);
       if (data) {
-        paths.push(data.publicUrl);
+        paths.push({ url: data.publicUrl, zone: "other" });
       }
     }
     setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);

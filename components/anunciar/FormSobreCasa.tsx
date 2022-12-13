@@ -1,5 +1,5 @@
 import { useIncrementStep } from "../../context/AnunciarProvider";
-import { useAdvertisement } from "../../context/AdvertisementController";
+import { useAdvertisement, useSetAdvertisement } from "../../context/AdvertisementController";
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import { toast } from "react-toastify";
 import useAdvertisementService from "../../hooks/advertisementService";
@@ -10,6 +10,7 @@ const FormSobreCasa = () => {
   // contexts
   const incrementStep = useIncrementStep();
   const advertisement = useAdvertisement();
+  const setAdvertisement = useSetAdvertisement();
 
   /* Form */
   const methods = useForm();
@@ -18,8 +19,12 @@ const FormSobreCasa = () => {
   const { updateAdvertisement } = useAdvertisementService();
 
   const nextStep = async (data) => {
-    const { error } = await updateAdvertisement({ ...advertisement, ...data }, advertisement.id);
-    if (error) return toast.success("Erro a gravar a informação");
+    const { data: advertisementData, error } = await updateAdvertisement(
+      { ...advertisement, ...data },
+      advertisement.id
+    );
+    if (error) return toast.error("Erro a gravar a informação");
+    setAdvertisement(advertisementData);
     incrementStep();
   };
 
