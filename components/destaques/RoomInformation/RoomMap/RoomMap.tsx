@@ -19,7 +19,7 @@ export default function RoomMap() {
       {geom !== null && geom.coordinates !== null && (
         <>
           <div className="mb-5 text-2xl font-bold">Este espaço localiza-se nesta zona</div>
-          <div className="h-64 w-3/5 rounded-md">
+          <div className="h-72 w-full rounded-md lg:h-64 lg:w-3/5">
             <MapWithNoSSR currentMapCoords={geoCoordinates} showCenterMarker={true} />
           </div>
         </>

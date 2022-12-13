@@ -20,6 +20,7 @@ import Button from "../../../../components/utils/Button";
 import dynamic from "next/dynamic";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect } from "react";
+import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -44,6 +45,7 @@ type DetailsForm = Pick<
   | "type"
   | "place"
   | "postal_code"
+  | "available"
 >;
 
 const Details = ({ advertisement }: DetailsProps) => {
@@ -66,6 +68,7 @@ const Details = ({ advertisement }: DetailsProps) => {
       place: advertisement.place,
       postal_code: advertisement.postal_code,
       type: advertisement.type,
+      available: advertisement.available,
     },
   });
 
@@ -141,6 +144,7 @@ const Details = ({ advertisement }: DetailsProps) => {
 
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                  <AnuncioDisponivel advertisement={advertisementContext} />
                   <div className="my-5 mx-auto w-1/2 px-6">
                     <Button onClick={methods.handleSubmit(saveChanges)} type="button">
                       Guardar alterações &#10230;

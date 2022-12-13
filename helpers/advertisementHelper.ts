@@ -1,6 +1,7 @@
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import {
   AdvertisementPhoto,
+  AdvertisementStatus,
   ADVERTISEMENT_PROPERTIES,
   HostFlexType,
   TypeAmenity,
@@ -181,7 +182,7 @@ const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   const { filter, order } = filters;
 
   // is available
-  // query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, AdvertisementStatus.AVAILABLE);
+  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);
 
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 

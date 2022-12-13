@@ -143,7 +143,6 @@ const useAdvertisementService = () => {
     let dividedUrl = photoUrl.split("/");
     let avatarName = dividedUrl[dividedUrl.length - 1];
     // TODO: add access control for removal.
-    debugger;
     const { data, error } = await supabaseClient.storage
       .from(ADVERTISEMENT_STORAGE_BUCKET)
       .remove([`${advertisementID}/${avatarName}`]);

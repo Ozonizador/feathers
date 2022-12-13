@@ -61,9 +61,8 @@ export const MainProvider = ({ children }): JSX.Element => {
     // check if profile exists else create
     if (user) {
       const { data, error } = await checkProfileAndCreate(user.id);
-      if (!error) {
-        setCurrentUnihostState((c) => ({ ...c, profile: data }));
-      }
+
+      if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
     }
   }, [user]);
 
