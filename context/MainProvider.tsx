@@ -60,7 +60,7 @@ export const MainProvider = ({ children }): JSX.Element => {
   const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
     if (user) {
-      const { data, error } = await checkProfileAndCreate(user.id);
+      const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
 
       if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
     }

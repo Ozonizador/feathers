@@ -5,20 +5,40 @@ import { createRandomUniqWord } from "../utils/utils";
 const useProfileService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const checkProfileAndCreate = async (userID: string) => {
+  const checkProfileAndCreate = async (userID: string, metadata: any) => {
     try {
       const { data, error } = await getUserProfile(userID);
-      if (error || !data) return createProfile(userID);
+
+      if (error || !data)
+        return createProfile(userID, {
+          avatar_url: metadata?.avatar_url,
+          firstName: metadata?.full_name.split(" ")[0] || "",
+          lastName: metadata?.full_name.split(" ")[1] || "",
+        });
       return { data, error };
     } catch (error) {
-      return createProfile(userID);
+      return createProfile(userID, {
+        avatar_url: metadata?.avatar_url,
+        firstName: metadata?.full_name.split(" ")[0] || "",
+        lastName: metadata?.full_name.split(" ")[1] || "",
+      });
     }
   };
 
-  const createProfile = async (userID: string) => {
+  const createProfile = async (
+    userID: string,
+    metadata?: { avatar_url?: string; firstName?: string; lastName?: string }
+  ) => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-      .insert({ id: userID, updated_at: new Date().toDateString(), slug: createRandomUniqWord() })
+      .insert({
+        id: userID,
+        updated_at: new Date().toDateString(),
+        slug: createRandomUniqWord(),
+        avatar_url: metadata.avatar_url,
+        name: metadata.firstName,
+        surname: metadata.lastName,
+      })
       .single();
     return { data, error };
   };

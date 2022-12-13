@@ -141,7 +141,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                       <BsPerson size={32} />
                     )}
 
-                    <div className="my-auto ml-2">{user?.user_metadata.name}</div>
+                    <div className="my-auto ml-2">{profile?.name}</div>
                   </div>
 
                   <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
