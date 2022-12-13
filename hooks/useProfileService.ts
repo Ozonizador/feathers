@@ -1,6 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { AVATAR_STORAGE_NAME, Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
-import { getCorrectUrl, createRandomUniqWord } from "../utils/utils";
+import { createRandomUniqWord } from "../utils/utils";
 
 const useProfileService = () => {
   const supabaseClient = useSupabaseClient();
@@ -129,7 +129,7 @@ const useProfileService = () => {
 
   /* Utils */
   const getPublicAvatarUrlFromImage = async (key: string) => {
-    const { data } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).getPublicUrl(getCorrectUrl(key));
+    const { data } = await supabaseClient.storage.from(AVATAR_STORAGE_NAME).getPublicUrl(key);
     return { publicUrl: data.publicUrl, error: null };
   };
 

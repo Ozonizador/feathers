@@ -20,6 +20,7 @@ import Button from "../../../../components/utils/Button";
 import dynamic from "next/dynamic";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect } from "react";
+import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -44,6 +45,7 @@ type DetailsForm = Pick<
   | "type"
   | "place"
   | "postal_code"
+  | "available"
 >;
 
 const Details = ({ advertisement }: DetailsProps) => {
@@ -66,6 +68,7 @@ const Details = ({ advertisement }: DetailsProps) => {
       place: advertisement.place,
       postal_code: advertisement.postal_code,
       type: advertisement.type,
+      available: advertisement.available,
     },
   });
 
@@ -90,7 +93,7 @@ const Details = ({ advertisement }: DetailsProps) => {
   };
 
   const checkPossibilites = async () => {
-    const { street, place, street_number, postal_code } = advertisementContext;
+    const { street, place, street_number, postal_code } = methods.getValues();
     const { data, error } = await getResultsFromSearch(`${street} ${place} ${street_number} ${postal_code}`);
 
     if (!error && data && data.length > 0) {
@@ -132,15 +135,16 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
                   <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
-                  <div className="my-5 mr-auto w-1/2 px-6">
+                  <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
+                  <div className="mb-4 mr-auto w-1/2 px-6">
                     <Button type="button" onClick={checkPossibilites}>
                       Atualizar No Mapa
                     </Button>
                   </div>
-                  <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
 
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+                  <AnuncioDisponivel advertisement={advertisementContext} />
                   <div className="my-5 mx-auto w-1/2 px-6">
                     <Button onClick={methods.handleSubmit(saveChanges)} type="button">
                       Guardar alterações &#10230;

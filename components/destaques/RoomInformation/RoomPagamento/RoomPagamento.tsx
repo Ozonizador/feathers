@@ -50,9 +50,6 @@ export default function RoomPagamento() {
     // get the reservation
     const { data, error } = await addReservation(reservation, profile.id);
     if (!error && data) {
-      const notification = createNotification(NotificationType.LANDLORD_RESERVATION_RECEIVED, profile);
-
-      //await addNotification(notification);
       toast("Wow so easy!");
     } else {
       toast("ERROR");
@@ -92,14 +89,14 @@ export default function RoomPagamento() {
             <hr />
 
             <div className="mt-5 flex flex-wrap gap-4">
-              <div className="mb-2 block ">
+              <div className="mb-2 block w-full">
                 <div className="mb-2 block">
                   <Label htmlFor="Entrada" value="Entrada" />
                 </div>
                 <FeatherDatePicker date={startDate} onChange={(date) => setStartDate(date)} />
               </div>
 
-              <div className="mb-2 block">
+              <div className="mb-2 block w-full">
                 <div className="mb-2 block">
                   <Label htmlFor="Saida" value="Saida" />
                 </div>

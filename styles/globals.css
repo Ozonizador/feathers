@@ -51,4 +51,5 @@
 
 .react-datepicker__input-container input {
   border-color: #dfdfdf;
+  width: 100%;
 }

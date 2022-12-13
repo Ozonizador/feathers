@@ -13,7 +13,6 @@ interface PricesComponentProps {
 const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => {
   const { control } = useFormContext();
 
-  debugger;
   return (
     <>
       <div className="my-5 flex w-full flex-col gap-6">

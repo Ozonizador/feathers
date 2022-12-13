@@ -82,8 +82,8 @@ export const SearchInputField = () => {
             />
           </div>
           {addressOptions && addressOptions.length > 0 && (
-            <div className="absolute -bottom-8 left-0 z-50 mx-2 w-full border p-2">
-              <div>
+            <div className="absolute -bottom-14 -left-2 z-50 mx-2 w-full rounded border bg-white p-2">
+              <div className="flex flex-col gap-2">
                 {addressOptions.map((addressOption, index) => {
                   return (
                     <div key={index} onClick={(e) => setSelectedOption(addressOption.place_name)}>
