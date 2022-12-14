@@ -41,21 +41,20 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
-  const user = useUser();
-  const { checkProfileAndCreate } = useProfileService();
-
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
     profile: null,
   });
-
   const [userSearch, setUserSearch] = useState<UserSearchInfo>({
     location: "",
     startDate: new Date(),
     endDate: new Date(),
     coordinates: null,
   });
+
+  const user = useUser();
+  const { checkProfileAndCreate } = useProfileService();
 
   const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
@@ -67,17 +66,21 @@ export const MainProvider = ({ children }): JSX.Element => {
 
   useEffect(() => {
     checkUserProfile();
-  }, [checkUserProfile]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       function (pos) {
-        setUserLocationCoordinates({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        const newUserPos = {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        };
+        setUserLocationCoordinates(newUserPos);
       },
       function errorCallback(error) {},
-      { timeout: 10000 }
+      { timeout: 10000, enableHighAccuracy: false }
     );
-  }, []);
+  }, [checkUserProfile]);
+
+  console.log(userLocationCoordinates);
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>
       <SetUnihostsWebsiteContext.Provider value={setCurrentUnihostState}>

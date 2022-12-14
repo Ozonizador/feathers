@@ -8,13 +8,16 @@ import { Gender } from "../../../../models/profile";
 
 export default function RoomSenhorio() {
   const advertisement = useGetSingleAdvertisement();
+
   return (
     <section className="my-20">
       <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
 
       <div className="block max-w-md lg:hidden">
         <div>
-          <h1 className="mb-4 text-2xl font-bold">Olá, sou a {advertisement.host.name}!</h1>
+          <h1 className="mb-4 text-2xl font-bold">
+            Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
+          </h1>
           <p className="text-secondary-400">{advertisement.host.description}</p>
         </div>
       </div>
