@@ -9,7 +9,7 @@ interface HostFlexTypeComponentProps {
 const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
   console.log(advertisement.type_flex_host);
   return (
-    <>
+    <div>
       <div className=" flex flex-row items-baseline">
         <div>
           <div className="my-5 flex flex-row items-center align-middle">
@@ -110,7 +110,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

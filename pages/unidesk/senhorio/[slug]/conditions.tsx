@@ -48,7 +48,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
         <div className="flex justify-center p-5 lg:border-r lg:p-12">
           <MenuSenhorio />
         </div>
-        <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
+        <div className="mx-auto w-4/5 pt-12 text-center lg:ml-12 lg:text-left">
           <div className="mb-2 text-2xl font-semibold">Condições</div>
           <div className="text-xl text-gray-700">As suas regras</div>
 
@@ -56,7 +56,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
             <>
               <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
-              <div className="mx-auto w-1/2 pb-4">
+              <div className="mb-10 w-1/2">
                 <Button onClick={saveChanges} type="button">
                   Guardar alterações
                 </Button>

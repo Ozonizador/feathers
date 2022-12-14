@@ -218,7 +218,7 @@ export const Navbar = () => {
                           ) : (
                             <BsPerson size={28} />
                           )}
-                          <p className="my-auto ml-2">{user.user_metadata.name}</p>
+                          <p className="my-auto ml-2">{profile?.name}</p>
                           <div className="my-auto ml-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />
                           </div>

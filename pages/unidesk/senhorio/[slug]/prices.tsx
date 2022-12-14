@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
+import Button from "../../../../components/utils/Button";
 import {
   useSelectedAnuncioMenuSenhorio,
   useSetSelectedAnuncioMenuSenhorio,
@@ -53,13 +54,10 @@ const Prices = ({ advertisement }: PricesProps) => {
             <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
           )}
 
-          <div>
-            <button
-              className="hover: mt-14 mb-10 flex w-44 items-center justify-center rounded-md bg-primary-500 py-3   text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
-              onClick={saveChanges}
-            >
-              Guardar alterações
-            </button>
+          <div className="mr-auto mb-10 w-1/2">
+            <Button onClick={saveChanges} type="button">
+              Guardar
+            </Button>
           </div>
         </div>
       </div>

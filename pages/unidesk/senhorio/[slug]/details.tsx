@@ -126,7 +126,7 @@ const Details = ({ advertisement }: DetailsProps) => {
           {advertisementContext && (
             <>
               <FormProvider {...methods}>
-                <div className="flex flex-col gap-2 px-3">
+                <div className="flex flex-col gap-5 px-3">
                   <h5 className="font-bold">{advertisementContext.title}</h5>
                   <AdvertisementInfoComponent advertisement={advertisementContext} />
                   <HouseCapacityComponent advertisement={advertisementContext} />
@@ -134,9 +134,9 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <h5 className="text-xl text-gray-600">Sobre a sua casa</h5>
                   <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
-                  <h5 className="mb-3 text-xl text-gray-600">Localização</h5>
+                  <h5 className="text-xl text-gray-600">Localização</h5>
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
-                  <div className="mb-4 mr-auto w-1/2 px-6">
+                  <div className="mr-auto w-1/3">
                     <Button type="button" onClick={checkPossibilites}>
                       Atualizar No Mapa
                     </Button>

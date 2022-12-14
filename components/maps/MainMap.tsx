@@ -75,6 +75,7 @@ const MapComponent = ({
           position={{ lat: position.lat, lng: position.lng }}
           icon={icon}
           draggable={draggableMarker}
+          key="center-marker"
           eventHandlers={{
             moveend: (e) => {
               try {

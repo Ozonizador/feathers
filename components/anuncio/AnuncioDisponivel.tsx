@@ -8,7 +8,7 @@ interface AnuncioDisponivelProps {
 
 const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
   return (
-    <>
+    <div>
       <div className="my-20 flex flex-col">
         <div className="mb-6 text-xl text-gray-600 ">Estado do anúncio</div>
         <div className="my-6 flex flex-row items-baseline">
@@ -101,7 +101,7 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
