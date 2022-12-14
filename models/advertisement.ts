@@ -1,5 +1,8 @@
 import { Database } from "../database.types";
 
+// TODO: change the advertisements to listings because of adblocker
+// - https://www.alibabacloud.com/help/en/object-storage-service/latest/what-do-i-do-if-typeerror-failed-to-fetch-is-displayed
+
 export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
 export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
 export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
