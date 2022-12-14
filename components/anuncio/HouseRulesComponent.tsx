@@ -92,7 +92,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="flex flex-row lg:items-center">
+      <div className="flex flex-row gap-2 lg:items-center">
         <div className="flex">
           <div>
             <MdChecklist className="mr-3 text-2xl" />
@@ -113,7 +113,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 mb-14 flex lg:flex-row lg:items-center">
+      <div className="my-8 mb-14 flex gap-2 lg:flex-row lg:items-center">
         <div className="flex flex-row">
           <div>
             <GiBroom className="mr-3 text-2xl" />

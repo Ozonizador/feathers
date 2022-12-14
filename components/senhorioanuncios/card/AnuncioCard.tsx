@@ -65,13 +65,12 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
     <section>
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
         <div className="w-full lg:flex">
-          <div className="min-h-40 min-w-52 hidden lg:block">
+          <div className="relative hidden h-52 w-52 lg:block">
             <Image
               src={(advertisement.photos && advertisement.photos[0]?.url) || NoPhotoAvailable}
               alt="Foto Quarto"
-              height={160}
-              width={208}
-              className="rounded-l-lg object-cover"
+              layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className="ml-3 py-2">

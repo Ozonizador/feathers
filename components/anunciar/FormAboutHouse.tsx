@@ -26,14 +26,16 @@ const FormAboutHouse = () => {
   };
 
   return (
-    <section className="container mx-auto my-20 w-full lg:w-5/6">
+    <section className="container mx-auto my-10 w-full lg:w-5/6">
       <div className="w-full">
         <div className="mb-28 text-center text-2xl font-bold text-gray-700 lg:text-left">Sobre a sua casa</div>
         <AboutHouseComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
       </div>
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
+      <div className="mt-10 w-1/2">
+        <Button onClick={nextStep} type="button">
+          Seguinte &#8594;
+        </Button>
+      </div>
     </section>
   );
 };

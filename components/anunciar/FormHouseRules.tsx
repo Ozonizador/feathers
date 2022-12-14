@@ -33,9 +33,11 @@ const FormHouseRules = () => {
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
+      <div className="w-1/2">
+        <Button onClick={nextStep} type="button">
+          Seguinte &#8594;
+        </Button>
+      </div>
     </section>
   );
 };
