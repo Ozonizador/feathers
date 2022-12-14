@@ -189,9 +189,6 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                         Minha Estadia
                       </Link>
                     </div>
-                    <div className="ml-3 flex h-4 w-4 items-center justify-center rounded-full border border-black p-2 align-middle text-sm font-semibold">
-                      5
-                    </div>
                   </div>
                   <div className="py-1 px-2">
                     <Link className="py-1" href={UNIDESK_STUDENT_FAVOURITES_URL}>
