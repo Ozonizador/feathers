@@ -26,13 +26,13 @@ const FormHouseRules = () => {
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
-      <div className="flex gap-2">
-        <div className="w-1/2">
+      <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+        <div className="mx-auto w-5/6 lg:w-2/3">
           <Button onClick={(e) => decrementStep()} type="button">
             Voltar Atrás
           </Button>
         </div>
-        <div className="w-1/2">
+        <div className="mx-auto w-5/6 lg:w-2/3">
           <Button onClick={nextStep} type="button">
             Seguinte &#8594;
           </Button>

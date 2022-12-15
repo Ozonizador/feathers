@@ -36,7 +36,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
 
   return (
     <>
-      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
+      <div className="my-8 flex gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <MdOutlinePets className="mr-3 text-2xl" />
@@ -54,7 +54,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
       </div>
-      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
+      <div className="my-8 flex gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <GiCigarette className="mr-3 text-2xl" />
@@ -73,7 +73,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
+      <div className="my-8 flex gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <BiDrink className="mr-3 text-2xl" />

@@ -186,8 +186,8 @@ const ExpenseSelection = ({
           <p className="text-base font-bold">{title}</p>
         </div>
         <div className="my-4 flex flex-col items-center gap-4 lg:flex-row">
-          <div className="flex w-full flex-row justify-between gap-2 lg:flex-col">
-            <div className="flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3">
+          <div className="flex w-full flex-row gap-2 lg:w-1/2 lg:flex-col">
+            <div className="flex w-full flex-row items-center rounded-lg border border-terciary-500 py-3 px-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Sim</div>
                 <RadioBox
@@ -198,7 +198,7 @@ const ExpenseSelection = ({
                 />
               </div>
             </div>
-            <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+            <div className="flex w-full flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Não</div>
                 <RadioBox
@@ -210,10 +210,10 @@ const ExpenseSelection = ({
               </div>
             </div>
           </div>
-          <div>
+          <div className="w-full">
             {expenseInfo?.included !== "EXCLUDED" && (
               <div className="flex flex-col gap-2">
-                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:w-11/12">
+                <div className="flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:w-11/12">
                   <label htmlFor="all_included">Totalmente incluído.</label>
                   <Checkbox
                     name="all_included"

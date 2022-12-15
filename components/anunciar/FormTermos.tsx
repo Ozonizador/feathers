@@ -132,18 +132,16 @@ const FormTermos = () => {
             </div>
           </div>
 
-          <div className="mt-10 w-full lg:w-44">
-            <div className="flex gap-2">
-              <div className="w-1/2">
-                <Button onClick={(e) => decrementStep()} type="button">
-                  Voltar Atrás
-                </Button>
-              </div>
-              <div className="w-1/2">
-                <Button type="submit" disabled={!isValid}>
-                  <span className="uppercase leading-tight">Gravar Anúncio</span>
-                </Button>
-              </div>
+          <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+            <div className="mx-auto w-5/6 lg:w-2/3">
+              <Button onClick={(e) => decrementStep()} type="button">
+                Voltar Atrás
+              </Button>
+            </div>
+            <div className="mx-auto w-5/6 lg:w-2/3">
+              <Button type="submit" disabled={!isValid}>
+                <span className="uppercase leading-tight">Gravar Anúncio</span>
+              </Button>
             </div>
           </div>
         </form>

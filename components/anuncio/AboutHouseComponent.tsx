@@ -57,7 +57,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Comodidades Gerais</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.general.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
@@ -82,7 +82,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Sala de estar</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.livingRoom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
@@ -107,7 +107,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Quarto</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bedRoom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
@@ -132,7 +132,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Casa de Banho</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bathRoom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
@@ -157,7 +157,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Zona Exterior</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.exterior.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
@@ -182,7 +182,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>Cozinha</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.kitchen.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>

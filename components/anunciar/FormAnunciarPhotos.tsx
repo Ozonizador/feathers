@@ -43,7 +43,7 @@ const FormAnunciarPhotos = () => {
   };
 
   return (
-    <section className="container mx-auto  my-20 w-full lg:w-5/6">
+    <section className="container mx-auto my-10 w-full lg:w-5/6">
       <div className="w-full">
         <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left lg:text-2xl">
           Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.
@@ -52,7 +52,7 @@ const FormAnunciarPhotos = () => {
         </div>
 
         <div>
-          <div className=" mt-10 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-28">
+          <div className="mt-10 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-28">
             <div className="space-y-1 text-center">
               <div className="flex text-terciary-700">
                 <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
@@ -93,25 +93,26 @@ const FormAnunciarPhotos = () => {
       <div className="mt-3 flex flex-1 flex-wrap gap-1">
         {filesUrl.map((object, index) => {
           return (
-            <div className="relative" key={index}>
+            <div className="relative h-28 w-full lg:h-28 lg:w-28" key={index}>
               <div
                 className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index)}
               >
                 x
               </div>
-              <Image src={object} height={116} width={116} alt="advert-image" />
+              <Image src={object} className="h-28 w-28" layout="fill" objectFit="cover" alt="advert-image" />
             </div>
           );
         })}
       </div>
-      <div className="flex gap-2">
-        <div className="w-1/2">
+
+      <div className="mt-10 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+        <div className="mx-auto w-5/6 lg:w-2/3">
           <Button onClick={(e) => decrementStep()} type="button">
             Voltar Atrás
           </Button>
         </div>
-        <div className="w-1/2">
+        <div className="mx-auto w-5/6 lg:w-2/3">
           <Button onClick={nextStep} type="button">
             Seguinte &#8594;
           </Button>
