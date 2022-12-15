@@ -75,18 +75,16 @@ const FormInicio = () => {
         <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
           <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
         </section>
-        <div className="mt-1">
-          <div className="flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
-            <div className="mx-auto w-5/6 lg:w-1/3">
-              <Button onClick={checkPossibilites} type="button">
-                Atualizar No Mapa
-              </Button>
-            </div>
-            <div className="mx-auto w-5/6 lg:w-1/3">
-              <Button type="button" onClick={methods.handleSubmit(nextStep)}>
-                Seguinte &#8594;
-              </Button>
-            </div>
+        <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+          <div className="mx-auto w-5/6 lg:w-1/3">
+            <Button onClick={checkPossibilites} type="button">
+              Atualizar No Mapa
+            </Button>
+          </div>
+          <div className="mx-auto w-5/6 lg:w-1/3">
+            <Button type="button" onClick={methods.handleSubmit(nextStep)}>
+              Seguinte &#8594;
+            </Button>
           </div>
         </div>
       </FormProvider>

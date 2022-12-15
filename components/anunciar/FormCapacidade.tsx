@@ -23,14 +23,14 @@ const FormCapacidade = () => {
       <section className="w-full px-0 lg:px-40">
         <HouseCapacityComponent advertisement={advertisement} />
 
-        <div className="flex gap-2">
-          <div className="w-1/2">
+        <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+          <div className="mx-auto w-5/6 lg:w-1/3">
             <Button onClick={(e) => decrementStep()} type="button">
               Voltar Atrás
             </Button>
           </div>
-          <div className="w-1/2">
-            <Button onClick={methods.handleSubmit(nextStep)} type="button">
+          <div className="mx-auto w-5/6 lg:w-1/3">
+            <Button type="button" onClick={methods.handleSubmit(nextStep)}>
               Seguinte &#8594;
             </Button>
           </div>

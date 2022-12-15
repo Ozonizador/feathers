@@ -21,17 +21,13 @@ const FormTipoHost = () => {
 
   return (
     <section className="container mx-auto my-20 w-5/6">
-      <div className="my-28 text-4xl font-bold text-gray-700">
+      <div className="my-28 text-2xl font-bold text-gray-700 lg:text-4xl">
         Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.
       </div>
 
       <HostFlexTypeComponent advertisement={advertisement} onChange={changeTypeProperty} />
 
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
-
-      <div className="mt-10 w-full lg:w-44">
+      <div className="mt-10 w-full">
         <div className="flex gap-2">
           <div className="w-1/2">
             <Button onClick={(e) => decrementStep()} type="button">

@@ -121,7 +121,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         </div>
 
         <div>
-          <div className="my-8 grid grid-cols-2 lg:flex lg:flex-col">
+          <div className="my-8 flex flex-col lg:grid lg:grid-cols-2">
             <ExpenseSelection
               expense={"GAS"}
               title="Gás"
@@ -182,12 +182,12 @@ const ExpenseSelection = ({
   return (
     <>
       <div>
-        <div className="mb-auto py-4">
+        <div className="mb-auto flex justify-center py-4 lg:justify-start">
           <p className="text-base font-bold">{title}</p>
         </div>
-        <div className="my-4 flex items-center gap-4">
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+        <div className="my-4 flex flex-col items-center gap-4 lg:flex-row">
+          <div className="flex w-full flex-row justify-between gap-2 lg:flex-col">
+            <div className="flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Sim</div>
                 <RadioBox
@@ -213,7 +213,7 @@ const ExpenseSelection = ({
           <div>
             {expenseInfo?.included !== "EXCLUDED" && (
               <div className="flex flex-col gap-2">
-                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:w-11/12">
                   <label htmlFor="all_included">Totalmente incluído.</label>
                   <Checkbox
                     name="all_included"
@@ -222,7 +222,7 @@ const ExpenseSelection = ({
                     checked={expenseInfo && expenseInfo.included === "INCLUDED"}
                   />
                 </div>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-2 px-3">
+                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-2 px-3 lg:w-11/12">
                   <label className="text-xs" htmlFor="max_value">
                     Incluído até:
                   </label>
@@ -233,7 +233,7 @@ const ExpenseSelection = ({
                     value={expenseInfo?.max || 0}
                     disabled={!expenseInfo || (expenseInfo && expenseInfo.included === "INCLUDED")}
                     onChange={setMaxExpenseValue}
-                    className={classNames("ml-2 rounded border border-terciary-500 p-1 pl-2", {
+                    className={classNames("ml-2 w-1/2 rounded border border-terciary-500 p-1 pl-2 lg:w-full", {
                       "bg-gray-200": !expenseInfo || expenseInfo?.included === "INCLUDED",
                     })}
                   ></input>

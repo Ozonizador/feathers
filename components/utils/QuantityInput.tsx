@@ -23,7 +23,7 @@ const QuantityInput = ({ onChange, initValue }: QuantityInputProps) => {
   };
 
   return (
-    <div className="flex flex-1 items-center rounded-lg border border-terciary-300 px-6 py-1">
+    <div className="flex flex-1 items-center rounded-lg border border-terciary-300 px-3 py-1 lg:px-6">
       <div className="flex flex-1 cursor-pointer justify-center border-r border-terciary-300" onClick={decreaseInput}>
         <CgMathMinus />
       </div>
