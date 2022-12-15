@@ -8,9 +8,10 @@ import RadioBox from "../utils/Radiobox";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
+  showInternalName?: boolean;
 }
 
-const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => {
+const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }: PricesComponentProps) => {
   const { control } = useFormContext();
 
   return (
@@ -33,10 +34,12 @@ const AdvertisementInfoComponent = ({ advertisement }: PricesComponentProps) => 
             )}
           />
         </div>
-        <div>
-          <label className="mb-4 block text-2xl font-bold text-gray-700">Nome Interno</label>
-          <Input maxLength={50} disabled value={advertisement.slug} />
-        </div>
+        {showInternalName && (
+          <div>
+            <label className="mb-4 block text-2xl font-bold text-gray-700">Nome Interno</label>
+            <Input maxLength={50} disabled value={advertisement.slug} />
+          </div>
+        )}
 
         <div>
           <label className="mb-4 block text-xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>

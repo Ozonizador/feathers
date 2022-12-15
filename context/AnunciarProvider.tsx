@@ -32,3 +32,12 @@ export const useIncrementStep = () => {
     setCurrentStep((oldStep) => oldStep + 1);
   };
 };
+
+export const useDecrementStep = () => {
+  const setCurrentStep = useContext(SetAnunciarStepContext);
+  const currentStep = useContext(AnunciarStepContext);
+  return (): void => {
+    let newStep = currentStep - 1 === 0 ? 1 : currentStep - 1;
+    setCurrentStep(newStep);
+  };
+};

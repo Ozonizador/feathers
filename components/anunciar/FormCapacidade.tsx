@@ -1,5 +1,5 @@
 import { useIncrementStep } from "../../context/AnunciarProvider";
-import { useAdvertisement } from "../../context/AdvertisementController";
+import { useAdvertisement, useSetAdvertisement } from "../../context/AdvertisementController";
 import useAdvertisementService from "../../hooks/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 import Button from "../utils/Button";
@@ -9,16 +9,13 @@ import { toast } from "react-toastify";
 const FormCapacidade = () => {
   const incrementStep = useIncrementStep();
   const advertisement = useAdvertisement();
+  const setAdvertisement = useSetAdvertisement();
 
   /* Form */
   const methods = useForm();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (data) => {
-    const { error } = await updateAdvertisement({ ...data }, advertisement.id);
-    if (error) return toast.error(error.message);
+    setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };
 

@@ -22,19 +22,16 @@ const FormTermos = () => {
   const router = useRouter();
 
   /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
+  const { addAdvertisement } = useAdvertisementService();
 
   const onSubmit = async ({ terms, politica, trustInformation, calendarUpdated }: AdvertisementInfo) => {
     try {
       setSaving(true);
       if (!isValid) return;
-      const { error } = await updateAdvertisement(
-        {
-          ...advertisement,
-          agreementsinfo: { terms, politica, trustInformation, calendarUpdated },
-        },
-        advertisement.id
-      );
+      const { error } = await addAdvertisement({
+        ...advertisement,
+        agreementsinfo: { terms, politica, trustInformation, calendarUpdated },
+      });
       if (error) return toast.error(error.message);
 
       toast.success("Registo Bem Sucedido");

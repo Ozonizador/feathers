@@ -76,11 +76,10 @@ export const MainProvider = ({ children }): JSX.Element => {
         setUserLocationCoordinates(newUserPos);
       },
       function errorCallback(error) {},
-      { timeout: 10000, enableHighAccuracy: false }
+      { maximumAge: 60000, timeout: 5000, enableHighAccuracy: false }
     );
   }, [checkUserProfile]);
 
-  console.log(userLocationCoordinates);
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>
       <SetUnihostsWebsiteContext.Provider value={setCurrentUnihostState}>

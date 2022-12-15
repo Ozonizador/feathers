@@ -15,16 +15,8 @@ const FormSobreCasa = () => {
   /* Form */
   const methods = useForm();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (data) => {
-    const { data: advertisementData, error } = await updateAdvertisement(
-      { ...advertisement, ...data },
-      advertisement.id
-    );
-    if (error) return toast.error("Erro a gravar a informação");
-    setAdvertisement(advertisementData);
+    setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };
 

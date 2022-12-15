@@ -3,7 +3,6 @@ import { useAdvertisement, useSetAdvertisementProperty } from "../../context/Adv
 import useAdvertisementService from "../../hooks/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";
 import Button from "../utils/Button";
-import { toast } from "react-toastify";
 
 const FormPrices = () => {
   const incrementStep = useIncrementStep();
@@ -11,14 +10,8 @@ const FormPrices = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (e) => {
     e.preventDefault();
-
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
-    if (error) return toast.error(error.message);
     incrementStep();
   };
 

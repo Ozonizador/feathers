@@ -1,7 +1,5 @@
-import { toast } from "react-toastify";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { useIncrementStep } from "../../context/AnunciarProvider";
-import useAdvertisementService from "../../hooks/advertisementService";
 import AboutHouseComponent from "../anuncio/AboutHouseComponent";
 import Button from "../utils/Button";
 
@@ -10,14 +8,8 @@ const FormAboutHouse = () => {
   const setAdvertisementProperty = useSetAdvertisementProperty();
   const incrementStep = useIncrementStep();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (e) => {
     e.preventDefault();
-
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
-    if (error) return toast.error(error.message);
     incrementStep();
   };
 

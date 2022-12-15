@@ -17,17 +17,13 @@ const FormAnunciarPhotos = () => {
   const [objectUrls, setObjectUrls] = useState<string[]>([]);
 
   /* Services */
-  const { updateAdvertisement, saveImage } = useAdvertisementService();
+  const { saveImage } = useAdvertisementService();
 
   const nextStep = async (e) => {
     e.preventDefault();
 
     if (images.length < 5) return toast.error("Introduza pelo menos 5 imagens");
-
     await saveImages();
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
-    if (error) return toast.error(error.message);
-
     incrementStep();
   };
 

@@ -1,6 +1,6 @@
 import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
@@ -20,7 +20,6 @@ interface PricesProps {
 }
 
 const Prices = ({ advertisement }: PricesProps) => {
-  console.log(advertisement);
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
