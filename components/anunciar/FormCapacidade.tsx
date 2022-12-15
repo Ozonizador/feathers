@@ -1,13 +1,12 @@
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisement } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 const FormCapacidade = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
   const advertisement = useAdvertisement();
   const setAdvertisement = useSetAdvertisement();
 
@@ -24,10 +23,17 @@ const FormCapacidade = () => {
       <section className="w-full px-0 lg:px-40">
         <HouseCapacityComponent advertisement={advertisement} />
 
-        <div className="w-1/2">
-          <Button onClick={methods.handleSubmit(nextStep)} type="button">
-            Seguinte &#8594;
-          </Button>
+        <div className="flex gap-2">
+          <div className="w-1/2">
+            <Button onClick={(e) => decrementStep()} type="button">
+              Voltar Atrás
+            </Button>
+          </div>
+          <div className="w-1/2">
+            <Button onClick={methods.handleSubmit(nextStep)} type="button">
+              Seguinte &#8594;
+            </Button>
+          </div>
         </div>
       </section>
     </FormProvider>

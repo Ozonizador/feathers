@@ -33,7 +33,16 @@ const FormInicio = () => {
   const setAdvertisement = useSetAdvertisement();
 
   /* Form */
-  const methods = useForm<FormInicioProps>();
+  const methods = useForm<FormInicioProps>({
+    defaultValues: {
+      street: advertisement.street,
+      place: advertisement.place,
+      street_number: advertisement.street_number,
+      type: advertisement.type,
+      floor: advertisement.floor,
+      postal_code: advertisement.postal_code,
+    },
+  });
 
   const nextStep = async (data) => {
     setAdvertisement({ ...advertisement, ...data });

@@ -37,7 +37,6 @@ export const useDecrementStep = () => {
   const setCurrentStep = useContext(SetAnunciarStepContext);
   const currentStep = useContext(AnunciarStepContext);
   return (): void => {
-    let newStep = currentStep - 1 === 0 ? 1 : currentStep - 1;
-    setCurrentStep(newStep);
+    setCurrentStep((oldStep) => oldStep !== 0 && oldStep - 1);
   };
 };

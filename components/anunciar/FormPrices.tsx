@@ -1,11 +1,11 @@
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
 import PricesComponent from "../anuncio/PricesComponent";
 import Button from "../utils/Button";
 
 const FormPrices = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -26,10 +26,17 @@ const FormPrices = () => {
         <PricesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
-      <div className="w-1/2">
-        <Button onClick={nextStep} type="button">
-          Seguinte &#8594;
-        </Button>
+      <div className="flex gap-2">
+        <div className="w-1/2">
+          <Button onClick={(e) => decrementStep()} type="button">
+            Voltar Atrás
+          </Button>
+        </div>
+        <div className="w-1/2">
+          <Button onClick={nextStep} type="button">
+            Seguinte &#8594;
+          </Button>
+        </div>
       </div>
     </section>
   );

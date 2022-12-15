@@ -1,10 +1,11 @@
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import HostFlexTypeComponent from "../anuncio/HostFlexTypeComponent";
 import Button from "../utils/Button";
 
 const FormTipoHost = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
@@ -29,6 +30,21 @@ const FormTipoHost = () => {
       <Button onClick={nextStep} type="button">
         Seguinte &#8594;
       </Button>
+
+      <div className="mt-10 w-full lg:w-44">
+        <div className="flex gap-2">
+          <div className="w-1/2">
+            <Button onClick={(e) => decrementStep()} type="button">
+              Voltar Atrás
+            </Button>
+          </div>
+          <div className="w-1/2">
+            <Button onClick={nextStep} type="button">
+              Seguinte &#8594;
+            </Button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

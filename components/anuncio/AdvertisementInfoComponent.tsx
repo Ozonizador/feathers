@@ -130,14 +130,16 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
               <Controller
                 control={control}
                 name={ADVERTISEMENT_PROPERTIES.TYPE_HOST}
-                render={({ field: { value, onChange } }) => (
-                  <RadioBox
-                    name={ADVERTISEMENT_PROPERTIES.TYPE_HOST}
-                    value={"PROFISSIONAL" as HostType}
-                    checked={value == ("PROFISSIONAL" as HostType)}
-                    onChange={onChange}
-                  />
-                )}
+                render={({ field: { value, onChange } }) => {
+                  return (
+                    <RadioBox
+                      name={ADVERTISEMENT_PROPERTIES.TYPE_HOST}
+                      value={"PROFISSIONAL" as HostType}
+                      checked={value == ("PROFISSIONAL" as HostType)}
+                      onChange={onChange}
+                    />
+                  );
+                }}
               />
             </div>
           </div>

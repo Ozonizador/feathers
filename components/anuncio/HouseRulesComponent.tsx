@@ -36,7 +36,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
 
   return (
     <>
-      <div className="my-8 flex flex-row gap-2 lg:items-center">
+      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <MdOutlinePets className="mr-3 text-2xl" />
@@ -44,7 +44,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Animais permitidos</p>
         </div>
 
-        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
+        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -54,7 +54,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
         </div>
       </div>
-      <div className="my-8 flex flex-row gap-2 lg:items-center">
+      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <GiCigarette className="mr-3 text-2xl" />
@@ -62,7 +62,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Fumar permitido</p>
         </div>
 
-        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
+        <div className="ml-0 flex w-11 justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -73,7 +73,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 flex flex-row gap-2 lg:items-center">
+      <div className="my-8 flex flex-col gap-2 md:flex-row lg:items-center">
         <div className="flex items-center">
           <div>
             <BiDrink className="mr-3 text-2xl" />
@@ -81,7 +81,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Eventos Permitidos</p>
         </div>
 
-        <div className="ml-0 flex flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:items-center">
+        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
@@ -92,7 +92,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="flex flex-row gap-2 lg:items-center">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
         <div className="flex">
           <div>
             <MdChecklist className="mr-3 text-2xl" />
@@ -113,7 +113,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
       </div>
 
-      <div className="my-8 mb-14 flex gap-2 lg:flex-row lg:items-center">
+      <div className="my-8 mb-14 flex flex-col gap-2 lg:flex-row lg:items-center">
         <div className="flex flex-row">
           <div>
             <GiBroom className="mr-3 text-2xl" />

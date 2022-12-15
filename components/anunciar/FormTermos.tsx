@@ -2,14 +2,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useAdvertisement } from "../../context/AdvertisementController";
+import { useAdvertisement, useImageFiles, useSetAdvertisementProperty } from "../../context/AdvertisementController";
+import { useDecrementStep } from "../../context/AnunciarProvider";
 import useAdvertisementService from "../../hooks/advertisementService";
-import { AdvertisementInfo } from "../../models/advertisement";
-import FeathersButton from "../utils/Button";
+import { AdvertisementInfo, AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import Button from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
 import FeathersSpinner from "../utils/Spinner";
 
 const FormTermos = () => {
+  const router = useRouter();
+  const decrementStep = useDecrementStep();
   const [saving, setSaving] = useState<boolean>(false);
   const {
     control,
@@ -19,15 +22,22 @@ const FormTermos = () => {
     defaultValues: { terms: false, politica: false, calendarUpdated: false, trustInformation: false },
   });
   const advertisement = useAdvertisement();
-  const router = useRouter();
+
+  const setAdvertisementProperty = useSetAdvertisementProperty();
 
   /* Services */
-  const { addAdvertisement } = useAdvertisementService();
+  const { addAdvertisement, saveImage } = useAdvertisementService();
+  const { files } = useImageFiles();
 
   const onSubmit = async ({ terms, politica, trustInformation, calendarUpdated }: AdvertisementInfo) => {
     try {
       setSaving(true);
       if (!isValid) return;
+
+      // saving images
+      await saveImages();
+
+      // adding advertisements
       const { error } = await addAdvertisement({
         ...advertisement,
         agreementsinfo: { terms, politica, trustInformation, calendarUpdated },
@@ -41,6 +51,17 @@ const FormTermos = () => {
     } finally {
       setSaving(false);
     }
+  };
+
+  const saveImages = async () => {
+    const paths = [] as AdvertisementPhoto[];
+    for (let image of files) {
+      const { data } = await saveImage(advertisement.id, image.name, image);
+      if (data) {
+        paths.push({ url: data.publicUrl, zone: "other" });
+      }
+    }
+    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);
   };
 
   return (
@@ -112,9 +133,18 @@ const FormTermos = () => {
           </div>
 
           <div className="mt-10 w-full lg:w-44">
-            <FeathersButton type="submit" disabled={!isValid}>
-              <span className="uppercase leading-tight">Gravar Anúncio</span>
-            </FeathersButton>
+            <div className="flex gap-2">
+              <div className="w-1/2">
+                <Button onClick={(e) => decrementStep()} type="button">
+                  Voltar Atrás
+                </Button>
+              </div>
+              <div className="w-1/2">
+                <Button type="submit" disabled={!isValid}>
+                  <span className="uppercase leading-tight">Gravar Anúncio</span>
+                </Button>
+              </div>
+            </div>
           </div>
         </form>
       ) : (

@@ -1,29 +1,19 @@
-import { useState } from "react";
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
-import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
-import { AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { useImageFiles, useSetImageFiles } from "../../context/AdvertisementController";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
 const FormAnunciarPhotos = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
 
-  const advertisement = useAdvertisement();
-  const setAdvertisementProperty = useSetAdvertisementProperty();
-
-  const [images, setImages] = useState<File[]>([]);
-  const [objectUrls, setObjectUrls] = useState<string[]>([]);
-
-  /* Services */
-  const { saveImage } = useAdvertisementService();
+  const { files, filesUrl } = useImageFiles();
+  const setImagesInfo = useSetImageFiles();
 
   const nextStep = async (e) => {
     e.preventDefault();
-
-    if (images.length < 5) return toast.error("Introduza pelo menos 5 imagens");
-    await saveImages();
+    if (files.length < 5) return toast.error("Introduza pelo menos 5 imagens");
     incrementStep();
   };
 
@@ -37,31 +27,19 @@ const FormAnunciarPhotos = () => {
       for (let file of event.target.files) {
         files.push(file);
       }
-      setImages(files);
-      setObjectUrls(files.map((file) => URL.createObjectURL(file)));
+
+      setImagesInfo({ files, filesUrl: files.map((file) => URL.createObjectURL(file)) });
     }
   };
 
   const removeImageFromSelection = (index) => {
-    const currentImages = [...images];
-    const currentObjectUrls = [...objectUrls];
+    const currentImages = [...files];
+    const currentObjectUrls = [...filesUrl];
     currentImages.splice(index, 1);
     currentObjectUrls.splice(index, 1);
 
     // save
-    setImages(currentImages);
-    setObjectUrls(currentObjectUrls);
-  };
-
-  const saveImages = async () => {
-    const paths = [] as AdvertisementPhoto[];
-    for (let image of images) {
-      const { data } = await saveImage(advertisement.id, image.name, image);
-      if (data) {
-        paths.push({ url: data.publicUrl, zone: "other" });
-      }
-    }
-    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);
+    setImagesInfo({ files: currentImages, filesUrl: currentObjectUrls });
   };
 
   return (
@@ -113,7 +91,7 @@ const FormAnunciarPhotos = () => {
 
       {/* FALTA GALERIA DE FOTOS */}
       <div className="mt-3 flex flex-1 flex-wrap gap-1">
-        {objectUrls.map((object, index) => {
+        {filesUrl.map((object, index) => {
           return (
             <div className="relative" key={index}>
               <div
@@ -127,9 +105,18 @@ const FormAnunciarPhotos = () => {
           );
         })}
       </div>
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
+      <div className="flex gap-2">
+        <div className="w-1/2">
+          <Button onClick={(e) => decrementStep()} type="button">
+            Voltar Atrás
+          </Button>
+        </div>
+        <div className="w-1/2">
+          <Button onClick={nextStep} type="button">
+            Seguinte &#8594;
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };
