@@ -128,7 +128,7 @@ const Details = ({ advertisement }: DetailsProps) => {
               <FormProvider {...methods}>
                 <div className="flex flex-col gap-5 px-3">
                   <h5 className="font-bold">{advertisementContext.title}</h5>
-                  <AdvertisementInfoComponent advertisement={advertisementContext} />
+                  <AdvertisementInfoComponent advertisement={advertisementContext} showInternalName={true} />
                   <HouseCapacityComponent advertisement={advertisementContext} />
 
                   <h5 className="text-xl text-gray-600">Sobre a sua casa</h5>

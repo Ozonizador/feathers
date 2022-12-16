@@ -1,24 +1,17 @@
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";
 import Button from "../utils/Button";
-import { toast } from "react-toastify";
 
 const FormHouseRules = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
 
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (e) => {
     e.preventDefault();
-
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
-    if (error) return toast.error(error.message);
     incrementStep();
   };
 
@@ -33,10 +26,17 @@ const FormHouseRules = () => {
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
-      <div className="w-1/2">
-        <Button onClick={nextStep} type="button">
-          Seguinte &#8594;
-        </Button>
+      <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+        <div className="mx-auto w-5/6 lg:w-2/3">
+          <Button onClick={(e) => decrementStep()} type="button">
+            Voltar Atrás
+          </Button>
+        </div>
+        <div className="mx-auto w-5/6 lg:w-2/3">
+          <Button onClick={nextStep} type="button">
+            Seguinte &#8594;
+          </Button>
+        </div>
       </div>
     </section>
   );

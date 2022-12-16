@@ -1,24 +1,20 @@
-import { useIncrementStep } from "../../context/AnunciarProvider";
-import { useAdvertisement } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
+import { useAdvertisement, useSetAdvertisement } from "../../context/AdvertisementController";
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 const FormCapacidade = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
   const advertisement = useAdvertisement();
+  const setAdvertisement = useSetAdvertisement();
 
   /* Form */
   const methods = useForm();
 
-  /* Services */
-  const { updateAdvertisement } = useAdvertisementService();
-
   const nextStep = async (data) => {
-    const { error } = await updateAdvertisement({ ...data }, advertisement.id);
-    if (error) return toast.error(error.message);
+    setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };
 
@@ -27,10 +23,17 @@ const FormCapacidade = () => {
       <section className="w-full px-0 lg:px-40">
         <HouseCapacityComponent advertisement={advertisement} />
 
-        <div className="w-1/2">
-          <Button onClick={methods.handleSubmit(nextStep)} type="button">
-            Seguinte &#8594;
-          </Button>
+        <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+          <div className="mx-auto w-5/6 lg:w-2/3">
+            <Button onClick={(e) => decrementStep()} type="button">
+              Voltar Atrás
+            </Button>
+          </div>
+          <div className="mx-auto w-5/6 lg:w-2/3">
+            <Button type="button" onClick={methods.handleSubmit(nextStep)}>
+              Seguinte &#8594;
+            </Button>
+          </div>
         </div>
       </section>
     </FormProvider>

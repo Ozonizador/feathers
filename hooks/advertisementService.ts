@@ -1,5 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { v4 as uuidv4 } from "uuid";
+
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import {
@@ -20,7 +20,7 @@ const useAdvertisementService = () => {
   const addAdvertisement = async (advertisement: Advertisement) => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .insert({ ...advertisement, updated_at: new Date().toDateString(), id: uuidv4() })
+      .insert({ ...advertisement, updated_at: new Date().toDateString() })
       .select()
       .single();
     return { data, error };

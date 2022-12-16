@@ -1,33 +1,19 @@
-import { useState } from "react";
-import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
-import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
-import useAdvertisementService from "../../hooks/advertisementService";
-import { AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { useImageFiles, useSetImageFiles } from "../../context/AdvertisementController";
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
 const FormAnunciarPhotos = () => {
   const incrementStep = useIncrementStep();
+  const decrementStep = useDecrementStep();
 
-  const advertisement = useAdvertisement();
-  const setAdvertisementProperty = useSetAdvertisementProperty();
-
-  const [images, setImages] = useState<File[]>([]);
-  const [objectUrls, setObjectUrls] = useState<string[]>([]);
-
-  /* Services */
-  const { updateAdvertisement, saveImage } = useAdvertisementService();
+  const { files, filesUrl } = useImageFiles();
+  const setImagesInfo = useSetImageFiles();
 
   const nextStep = async (e) => {
     e.preventDefault();
-
-    if (images.length < 5) return toast.error("Introduza pelo menos 5 imagens");
-
-    await saveImages();
-    const { error } = await updateAdvertisement(advertisement, advertisement.id);
-    if (error) return toast.error(error.message);
-
+    if (files.length < 5) return toast.error("Introduza pelo menos 5 imagens");
     incrementStep();
   };
 
@@ -41,35 +27,23 @@ const FormAnunciarPhotos = () => {
       for (let file of event.target.files) {
         files.push(file);
       }
-      setImages(files);
-      setObjectUrls(files.map((file) => URL.createObjectURL(file)));
+
+      setImagesInfo({ files, filesUrl: files.map((file) => URL.createObjectURL(file)) });
     }
   };
 
   const removeImageFromSelection = (index) => {
-    const currentImages = [...images];
-    const currentObjectUrls = [...objectUrls];
+    const currentImages = [...files];
+    const currentObjectUrls = [...filesUrl];
     currentImages.splice(index, 1);
     currentObjectUrls.splice(index, 1);
 
     // save
-    setImages(currentImages);
-    setObjectUrls(currentObjectUrls);
-  };
-
-  const saveImages = async () => {
-    const paths = [] as AdvertisementPhoto[];
-    for (let image of images) {
-      const { data } = await saveImage(advertisement.id, image.name, image);
-      if (data) {
-        paths.push({ url: data.publicUrl, zone: "other" });
-      }
-    }
-    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);
+    setImagesInfo({ files: currentImages, filesUrl: currentObjectUrls });
   };
 
   return (
-    <section className="container mx-auto  my-20 w-full lg:w-5/6">
+    <section className="container mx-auto my-10 w-full lg:w-5/6">
       <div className="w-full">
         <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left lg:text-2xl">
           Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.
@@ -78,7 +52,7 @@ const FormAnunciarPhotos = () => {
         </div>
 
         <div>
-          <div className=" mt-10 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-28">
+          <div className="mt-10 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-28">
             <div className="space-y-1 text-center">
               <div className="flex text-terciary-700">
                 <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
@@ -117,23 +91,33 @@ const FormAnunciarPhotos = () => {
 
       {/* FALTA GALERIA DE FOTOS */}
       <div className="mt-3 flex flex-1 flex-wrap gap-1">
-        {objectUrls.map((object, index) => {
+        {filesUrl.map((object, index) => {
           return (
-            <div className="relative" key={index}>
+            <div className="relative h-28 w-full lg:h-28 lg:w-28" key={index}>
               <div
                 className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index)}
               >
                 x
               </div>
-              <Image src={object} height={116} width={116} alt="advert-image" />
+              <Image src={object} className="h-28 w-28" layout="fill" objectFit="cover" alt="advert-image" />
             </div>
           );
         })}
       </div>
-      <Button onClick={nextStep} type="button">
-        Seguinte &#8594;
-      </Button>
+
+      <div className="mt-10 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
+        <div className="mx-auto w-5/6 lg:w-2/3">
+          <Button onClick={(e) => decrementStep()} type="button">
+            Voltar Atrás
+          </Button>
+        </div>
+        <div className="mx-auto w-5/6 lg:w-2/3">
+          <Button onClick={nextStep} type="button">
+            Seguinte &#8594;
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };

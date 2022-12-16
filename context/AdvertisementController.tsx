@@ -10,11 +10,13 @@ import {
   TypeAdvertisement,
 } from "../models/advertisement";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createRandomUniqWord } from "../utils/utils";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
+  id: uuidv4(),
   slug: createRandomUniqWord(),
   type: "ENTIRE_SPACE" as TypeAdvertisement,
   type_flex_host: "SUPER_FLEX" as HostFlexType,
@@ -68,9 +70,19 @@ const defaultAdvertisement = {
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);
 const SetAdvertisementContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
 
+interface MemoryFiles {
+  files: File[];
+  filesUrl: string[];
+}
+
+// memory files
+const ImageFilesContext = createContext<MemoryFiles>({ files: [], filesUrl: [] });
+const SetImageFilesContext = createContext<Dispatch<SetStateAction<MemoryFiles>>>(() => {});
+
 export const AdvertisementController = ({ children }): JSX.Element => {
   const user = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
+  const [fileInfo, setFileInfo] = useState<MemoryFiles>({ files: [], filesUrl: [] });
 
   useEffect(() => {
     if (user) {
@@ -82,7 +94,11 @@ export const AdvertisementController = ({ children }): JSX.Element => {
 
   return (
     <AdvertisementContext.Provider value={advertisement}>
-      <SetAdvertisementContext.Provider value={setAdvertisement}>{children}</SetAdvertisementContext.Provider>
+      <SetAdvertisementContext.Provider value={setAdvertisement}>
+        <ImageFilesContext.Provider value={fileInfo}>
+          <SetImageFilesContext.Provider value={setFileInfo}>{children}</SetImageFilesContext.Provider>
+        </ImageFilesContext.Provider>
+      </SetAdvertisementContext.Provider>
     </AdvertisementContext.Provider>
   );
 };
@@ -103,5 +119,16 @@ export const useSetAdvertisementProperty = () => {
   const advertisement = useContext(AdvertisementContext);
   return (property: string, value: any) => {
     setAdvertisement({ ...advertisement, [property]: value });
+  };
+};
+
+export const useImageFiles = () => {
+  return useContext(ImageFilesContext);
+};
+
+export const useSetImageFiles = () => {
+  const setMemoryFiles = useContext(SetImageFilesContext);
+  return (files: MemoryFiles) => {
+    setMemoryFiles(files);
   };
 };
