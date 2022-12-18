@@ -11,8 +11,8 @@ export default function RoomInformation() {
     <div>
       <div className="mb-8 text-5xl font-bold">{advertisement.title}</div>
 
-      <div className="mb-2 mt-3 flex w-full justify-between lg:w-0">
-        <div className="flex flex-col  lg:flex-row">
+      <div className="mb-2 mt-3 flex w-full justify-center lg:w-0 lg:justify-between">
+        <div className="flex flex-col gap-2 md:flex-row">
           <div className="mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle  text-secondary-500 shadow-2xl lg:mb-0 lg:mr-3">
             <RiUserLine className="text-4xl" />
             <div className="mt-3 text-base ">
@@ -30,7 +30,7 @@ export default function RoomInformation() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col gap-2 md:flex-row">
           <div className="mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle  text-secondary-500 shadow-2xl lg:mb-0 lg:mr-3">
             <TbBed className="text-4xl" />
             <div className="mt-3 text-base">

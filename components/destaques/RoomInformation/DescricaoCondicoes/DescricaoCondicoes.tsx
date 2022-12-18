@@ -17,7 +17,7 @@ export default function DescricaoCondicoes() {
           <div className="text-justify text-base text-secondary-500">{advertisement.description}</div>
         </div>
 
-        <div className="mt-10 flex w-2/4 flex-col justify-start lg:mt-3 lg:flex-col">
+        <div className="mt-2 flex w-2/4 flex-col justify-start lg:mt-3 lg:flex-col">
           <div className="mb-2 flex flex-col gap-5 rounded-lg shadow-2xl lg:flex-row lg:justify-around">
             <div className="flex flex-col items-center p-3 align-middle text-secondary-500">
               <FaDog className="h-12 w-12 rounded-full bg-terciary-300 p-2" />

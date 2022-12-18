@@ -32,6 +32,7 @@ const MainMap = ({
           zoom={13}
           style={{ height: "100%", width: "100%" }}
           maxZoom={allowZoom ? 18 : 13}
+          className="z-50"
         >
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/paulonotpablo/cl6ppz0xp001l14p3r271vry6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESSTOKEN}`}

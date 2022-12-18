@@ -52,26 +52,33 @@ export default function HomeSection3() {
               <div className="grid gap-8 lg:h-96 lg:grid-cols-4">
                 {advertisements.map((advertisement, index) => {
                   return (
-                    <article
-                      className="min-h-96 relative h-96 rounded-3xl bg-black bg-gradient-to-r from-gray-400 bg-cover p-8 transition lg:h-3/4"
-                      key={index}
-                    >
-                      {advertisement.photos && advertisement.photos[0] ? (
-                        <Image src={advertisement.photos[0].url} alt="..." layout="fill" />
-                      ) : (
-                        <Image src={NoPhotoAvailable} alt="no photo available" className="rounded-2xl" layout="fill" />
-                      )}
-                      <h2 className=" text-xl text-white">{TYPE_ADVERTISEMENT[advertisement.type]}</h2>
-                      <p className="bold absolute bottom-8 right-8 text-4xl text-white">
-                        &euro;{advertisement.month_rent}
-                      </p>
-                    </article>
+                    <Link key={index} href={advertisement.id}>
+                      <article className="min-h-96 relative h-96 rounded-3xl bg-cover p-8 transition lg:h-3/4">
+                        {advertisement.photos && advertisement.photos[0] ? (
+                          <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
+                        ) : (
+                          <Image
+                            src={NoPhotoAvailable}
+                            alt="no photo available"
+                            className="rounded-2xl"
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        )}
+                        {/* <h2 className="bg-primary-500 p-2 text-xl text-white">
+                        {TYPE_ADVERTISEMENT[advertisement.type]}
+                      </h2> */}
+                        <p className="bold absolute right-4 bottom-6 rounded-full bg-primary-500 p-3 text-white md:right-3.5 lg:right-8 lg:text-4xl">
+                          &euro;{advertisement.month_rent}
+                        </p>
+                      </article>
+                    </Link>
                   );
                 })}
               </div>
 
               <div className="block lg:hidden">
-                <div className="mb-12 mt-10 flex justify-center align-middle">
+                <div className="mx-auto mb-12 mt-10 flex w-1/2 justify-center align-middle">
                   <Link href={PROCURAR_ADVERT_URL}>
                     <a className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle">
                       Ver Mais
