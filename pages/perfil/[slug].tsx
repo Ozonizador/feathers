@@ -4,7 +4,6 @@ import PerfilInfo from "../../components/perfil/PerfilInfo";
 import { GetServerSidePropsContext } from "next/types";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
-import AccordionEstudante from "../../components/perfil/accordioncard/AccordionEstudante";
 {
   /* page 61 - 62 XD */
 }
@@ -17,10 +16,9 @@ const Index = ({ profile }: IndexProps) => {
   return (
     <>
       <div className="lg_px-0 mx-auto mt-24 w-full px-6 lg:w-1/2 ">
-        <PicAbout />
-        <AccordionPerfil />
-        <PerfilInfo />
-        <AccordionEstudante />
+        <PicAbout profile={profile} />
+        <AccordionPerfil profile={profile} />
+        <PerfilInfo profile={profile} />
       </div>
     </>
   );
@@ -57,7 +55,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: profile, error } = await supabase
     .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-    .select()
+    .select("*, advertisements(*)")
     .eq(PROFILE_COLUMNS.SLUG, slug)
     .single();
 

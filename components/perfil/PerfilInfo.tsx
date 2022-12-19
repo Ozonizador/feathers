@@ -1,7 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import { Profile } from "../../models/profile";
 
-const PerfilInfo = () => {
+interface PerfilIntoProps {
+  profile: Profile;
+}
+
+const PerfilInfo = ({ profile }: PerfilIntoProps) => {
   return (
     <div className="flex w-full flex-col justify-end">
       <div className="flex flex-row items-center justify-end align-middle">
