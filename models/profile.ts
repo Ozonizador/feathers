@@ -21,6 +21,7 @@ export const PROFILE_COLUMNS = {
   GENDER: "gender",
   DESCRIPTION: "description",
   PHONE: "phone",
+  SLUG: "slug",
 } as const;
 
 export enum SpokenLanguages {
