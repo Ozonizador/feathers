@@ -26,6 +26,7 @@ import {
   UNIDESK_URL,
 } from "../../models/paths";
 import { BsPerson } from "react-icons/bs";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 interface NavbarMobileProps {
   open: boolean;
@@ -145,12 +146,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   </div>
 
                   <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
-                    <Image
-                      src={!menuaberto ? "/images/down-arrow.png" : "/images/up-arrow.png"}
-                      height={22}
-                      width={22}
-                      alt=""
-                    />
+                    {!menuaberto ? <AiOutlineDown size={24} /> : <AiOutlineUp size={24} />}
                   </div>
                 </>
               )}

@@ -79,7 +79,7 @@ const UnideskFavoritos = () => {
                   return (
                     <div className="w-full bg-white" key={index}>
                       <div className="flex rounded-lg border-2 border-gray-200">
-                        <div className="relative h-44 w-full rounded-l-lg lg:w-1/3">
+                        <div className="relative h-44 w-full max-w-[350px] rounded-l-lg lg:w-1/3">
                           {favourite.photos && favourite.photos.length > 0 ? (
                             <Image src={favourite.photos[0].url} alt="Foto de Capa" layout="fill" objectFit="cover" />
                           ) : (
@@ -94,14 +94,12 @@ const UnideskFavoritos = () => {
                             <div className="relative mb-2 text-center text-base">
                               <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
-                                <p className="mt-1 text-xs lg:text-base">
-                                  {checkIfExpensesIncluded(favourite.expenses.services)}
-                                </p>
-                                <BiInfoCircle />
+                                <p className="text-base">{checkIfExpensesIncluded(favourite.expenses.services)}</p>
+                                <BiInfoCircle className="peer my-auto" />
                               </div>
                             </div>
                           </div>
-                          <Link href={`/anuncio/${favourite.id}`}>
+                          <Link href={`/anuncio/${favourite.slug}`}>
                             <a className="text-base text-gray-500">Ver mais</a>
                           </Link>
                         </div>

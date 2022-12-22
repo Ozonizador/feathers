@@ -3,7 +3,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useModalDetalhesPagamento, useSetModalDetalhesPagamentoOpen } from "../../context/ModalShowProvider";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { Advertisement } from "../../models/advertisement";
-import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
+import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 /* PAGINA 7 DO XD */
 
