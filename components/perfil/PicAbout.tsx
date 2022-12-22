@@ -30,15 +30,8 @@ const PicAbout = ({ profile }: PicAboutProps) => {
             </label>
           </div>
 
-          <div className="w-full">
-            <textarea
-              rows={5}
-              className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2 shadow-sm"
-              placeholder="Sobre mim"
-              maxLength={500}
-              disabled={true}
-              defaultValue={profile.description}
-            />
+          <div className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-5 px-2 shadow-sm">
+            {profile.description}
           </div>
         </div>
       </section>

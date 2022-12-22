@@ -77,9 +77,6 @@ const useAdvertisementService = () => {
   Filtering
 */
 
-  type AdvertisementWithReviewAverage = Advertisement & {
-    averages: AdvertisementReviewSummary[];
-  };
 
   const getAdvertisementsByCloseCoordinatesWithFilters = async (
     lat: number,

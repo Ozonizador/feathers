@@ -4,12 +4,14 @@ import PerfilInfo from "../../components/perfil/PerfilInfo";
 import { GetServerSidePropsContext } from "next/types";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
+import { Advertisement } from "../../models/advertisement";
 {
   /* page 61 - 62 XD */
 }
 
+
 interface IndexProps {
-  profile: Profile;
+  profile: Profile & { advertisements: Advertisement[] };
 }
 
 const Index = ({ profile }: IndexProps) => {
