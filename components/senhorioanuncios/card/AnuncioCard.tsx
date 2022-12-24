@@ -143,7 +143,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
               <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
               <div>
                 <div className="relative mb-3 mt-1 text-center text-base">
-                  <div className="peer flex gap-1 align-middle text-base">
+                  <div className="group flex gap-1 align-middle text-base">
                     {checkIfExpensesIncluded(advertisement.expenses.services)} <BiInfoCircle className="my-auto" />
                   </div>
                   <RoomUtilitesPopover expenses={advertisement.expenses} />

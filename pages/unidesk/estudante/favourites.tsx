@@ -51,11 +51,9 @@ const UnideskFavoritos = () => {
         </div>
       </div>
 
-      <div className="container mx-auto mb-32 mt-12  w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
+      <div className="container mx-auto mb-32 mt-12 w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
         <div className="flex flex-col items-center justify-center align-middle">
-          <div>
-            <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
-          </div>
+          <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
           <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
         </div>
 
@@ -73,49 +71,35 @@ const UnideskFavoritos = () => {
             <>
               <div
                 className={classNames({
-                  "w-1/2 lg:flex lg:justify-center": favourites && favourites.length == 1,
+                  "w-11/12 lg:flex lg:w-1/2 lg:justify-center": favourites && favourites.length == 1,
                   "gap-5 lg:grid lg:grid-cols-2": favourites && favourites.length > 1,
                 })}
               >
                 {favourites.map((favourite, index) => {
                   return (
-                    <div className="mb-10 h-40 w-full bg-white" key={index}>
+                    <div className="w-full bg-white" key={index}>
                       <div className="flex rounded-lg border-2 border-gray-200">
-                        <div className="w-1/3 rounded-l-lg">
+                        <div className="relative h-48 w-1/2 max-w-[350px] rounded-l-lg lg:w-1/3">
                           {favourite.photos && favourite.photos.length > 0 ? (
-                            <Image
-                              src={favourite.photos[0].url}
-                              alt="Foto de Capa"
-                              layout="intrinsic"
-                              height={164}
-                              width={164}
-                            />
+                            <Image src={favourite.photos[0].url} alt="Foto de Capa" layout="fill" objectFit="cover" />
                           ) : (
-                            <Image
-                              src={NoPhotoAvailable}
-                              alt="no photo available"
-                              layout="intrinsic"
-                              height={164}
-                              width={164}
-                            />
+                            <Image src={NoPhotoAvailable} alt="no photo available" layout="fill" objectFit="cover" />
                           )}
                         </div>
-                        <div className="ml-3 flex flex-1 flex-col p-2">
+                        <div className="flex flex-1 flex-col p-2">
                           <div className="text-lg font-bold">{favourite.title}</div>
                           <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
 
                           <div className="mt-auto flex">
                             <div className="relative mb-2 text-center text-base">
-                              <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
+                              <div className="group flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
-                                <p className="mt-1 text-xs lg:text-base">
-                                  {checkIfExpensesIncluded(favourite.expenses.services)}
-                                </p>
-                                <BiInfoCircle />
+                                <p className="text-base">{checkIfExpensesIncluded(favourite.expenses.services)}</p>
+                                <BiInfoCircle className="my-auto" />
                               </div>
                             </div>
                           </div>
-                          <Link href={`/anuncio/${favourite.id}`}>
+                          <Link href={`/anuncio/${favourite.slug}`}>
                             <a className="text-base text-gray-500">Ver mais</a>
                           </Link>
                         </div>

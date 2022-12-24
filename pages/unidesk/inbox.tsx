@@ -18,6 +18,7 @@ import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
+import Link from "next/link";
 
 {
   /* page 59 XD */
@@ -234,9 +235,11 @@ const CaixaEntrada = () => {
                             <div>Alteração reserva rejeitada</div>
                           )}
 
-                          <a href="">
-                            <div>Mostrar perfil de {currentConversation.tenant.name}</div>
-                          </a>
+                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>
+                            <a className="text-small mt-2">
+                              <div>Mostrar perfil de {currentConversation.tenant.name}</div>
+                            </a>
+                          </Link>
                         </>
                       )}
                     </div>

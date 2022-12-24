@@ -12,7 +12,6 @@ export default function RoomSenhorio() {
   return (
     <section className="my-20">
       <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
-
       <div className="block max-w-md lg:hidden">
         <div>
           <h1 className="mb-4 text-2xl font-bold">
@@ -21,9 +20,8 @@ export default function RoomSenhorio() {
           <p className="text-secondary-400">{advertisement.host.description}</p>
         </div>
       </div>
-
       <div className="flex w-full flex-col gap-8 lg:w-11/12 lg:flex-row lg:items-end">
-        <div className="max-w-md">
+        <div>
           <div className="w-full lg:w-64">
             <Card>
               <div className="flex justify-end px-4 pt-4"></div>

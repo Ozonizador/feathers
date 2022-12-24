@@ -14,6 +14,7 @@ import { AdvertisementWithHost, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NA
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
+import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 
 interface AnuncioProps {
   advertisement: AdvertisementWithHost;
@@ -24,13 +25,17 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
         <div>
-          <ModalDetalhesPagamento />
-          <div className="mx-auto md:container">
+          <ModalDetalhesPagamento advertisement={advertisement} />
+          <div className="mx-auto px-2 md:px-20">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
               <div className="w-full px-5 lg:w-4/6">
                 <RoomInformation />
-                <DescricaoCondicoes />
+                <div className="mt-10 flex flex-col gap-4 lg:flex-row">
+                  <DescricaoCondicoes />
+                  <AdvertConditions />
+                </div>
+
                 <RoomSlider />
                 <RoomRating />
                 <RoomMap />

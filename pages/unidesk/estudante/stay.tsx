@@ -74,7 +74,7 @@ const Estadia = () => {
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
                 <div className="flex flex-col lg:flex-row">
-                  <div className="p-5 lg:border-r lg:p-12">
+                  <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
                     <MenuEstudante />
                   </div>
                   <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">

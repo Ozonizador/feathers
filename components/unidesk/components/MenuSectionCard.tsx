@@ -45,7 +45,7 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
                 <div className="relative h-8 w-8 lg:mx-auto lg:h-20 lg:w-20">
                   <Image src={topIcon.image} alt="" layout="fill"></Image>
                 </div>
-                <h1 className="ml-2 text-center text-xl font-bold text-primary-500 lg:ml-0 lg:mt-4 lg:text-2xl">
+                <h1 className="my-auto ml-2 text-center text-xl font-bold text-primary-500 lg:ml-0 lg:mt-4 lg:text-2xl">
                   {topIcon.text}
                 </h1>
                 <div className="my-auto ml-auto lg:hidden">
@@ -57,26 +57,28 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
           </>
         )}
       </div>
-      <div
-        className={classNames("mt-2 flex flex-col justify-start gap-5 transition-all ease-in", {
-          hidden: !openMenu,
-          block: openMenu,
-        })}
-      >
-        {options &&
-          options.map((option, index) => {
-            return option.blocked ? (
-              <div className="flex flex-1 items-center" key={index}>
-                <Image src="/images/icon-pg37-3.svg" alt="" height={24} width={24}></Image>
-                <p className="ml-3 text-base">{option.text}</p>
-              </div>
-            ) : (
-              <Link href={option.link} key={index}>
-                <a className="text-xl font-bold">{option.text}</a>
-              </Link>
-            );
+      {options && options.length > 0 && (
+        <div
+          className={classNames("mt-2 flex flex-col justify-start gap-5 transition-all ease-in", {
+            hidden: !openMenu,
+            block: openMenu,
           })}
-      </div>
+        >
+          {options &&
+            options.map((option, index) => {
+              return option.blocked ? (
+                <div className="flex flex-1 items-center" key={index}>
+                  <Image src="/images/icon-pg37-3.svg" alt="" height={24} width={24}></Image>
+                  <p className="ml-3 text-base">{option.text}</p>
+                </div>
+              ) : (
+                <Link href={option.link} key={index}>
+                  <a className="text-xl font-bold">{option.text}</a>
+                </Link>
+              );
+            })}
+        </div>
+      )}
     </div>
   );
 };
