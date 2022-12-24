@@ -10,14 +10,12 @@ import useReservationService from "../../../../hooks/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useProfileInformation } from "../../../../context/MainProvider";
 import useNotificationService from "../../../../hooks/notificationsService";
-import { createNotification } from "../../../../helpers/notificationHelper";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import useConversationService from "../../../../hooks/conversationService";
-import { Conversation } from "../../../../models/conversation";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { NotificationType } from "../../../../models/notification";
 import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
+import Link from "next/link";
 
 export default function RoomPagamento() {
   const { addConversation } = useConversationService();
@@ -56,19 +54,9 @@ export default function RoomPagamento() {
     }
   };
 
-  const createConversation = async (reservation_id: string) => {
-    const conversation = {
-      host_id: advertisement.host_id,
-      tenant_id: profile.id,
-      reservation_id: reservation_id,
-    } as Conversation;
-
-    await addConversation(conversation);
-  };
-
   return (
     <>
-      <div className="w-full ">
+      <div className="w-full" id="reserva">
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
@@ -164,13 +152,11 @@ export default function RoomPagamento() {
           </div>
         </div>
 
-        <div>
-          <div onClick={makeReservation}>
-            <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-              Reserva
-            </a>
-          </div>
-        </div>
+        <Link href="#reserva">
+          <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+            Reserva
+          </a>
+        </Link>
       </div>
     </>
   );

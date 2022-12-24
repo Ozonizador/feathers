@@ -11,7 +11,7 @@ export default function RoomSlider() {
   const Comodities = ({}) =>
     useMemo(() => {
       return (
-        <>
+        <div>
           <Carousel>
             <div className="flex flex-col gap-8">
               <div className="flex h-full items-center justify-center font-bold text-primary-500">
@@ -106,17 +106,15 @@ export default function RoomSlider() {
               </div>
             </div>
           </Carousel>
-        </>
+        </div>
       );
     }, []);
 
   return (
-    <section>
-      <div className="mt-10 mb-32 h-96 rounded-xl border lg:mt-40">
-        <Carousel>
-          <Comodities />
-        </Carousel>
-      </div>
-    </section>
+    <div className="mt-10 mb-32 h-96 rounded-xl border lg:mt-40">
+      <Carousel>
+        <Comodities />
+      </Carousel>
+    </div>
   );
 }
