@@ -77,7 +77,7 @@ export default function RoomPagamento() {
 
             <div className="relative mb-2 text-center text-base">
               <div className="flex items-center justify-center gap-2 align-middle">
-                <div className="peer flex items-center">
+                <div className="group flex items-center">
                   {advertisement && advertisement.expenses && (
                     <span>{checkIfExpensesIncluded(advertisement.expenses?.services || [])}</span>
                   )}

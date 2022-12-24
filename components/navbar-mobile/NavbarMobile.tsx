@@ -27,6 +27,7 @@ import {
 } from "../../models/paths";
 import { BsPerson } from "react-icons/bs";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 interface NavbarMobileProps {
   open: boolean;
@@ -37,6 +38,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const user = useUser();
   const profile = useProfileInformation();
   const supabaseClient = useSupabaseClient<Database>();
+  const router = useRouter();
 
   const { toggleUserType } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
@@ -56,10 +58,15 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const [summary2, setSummary2] = useState(false);
   const [menuaberto, setMenuaberto] = useState(false);
 
+  const selectMenuButton = (href: string) => {
+    href && router.push(href);
+    setMenuaberto(false);
+  };
+
   return (
     <>
       <div
-        className={classNames("flex w-full transform flex-col px-5 transition-[display] lg:hidden", {
+        className={classNames("mb-3 flex w-full transform flex-col px-5 transition-[display] lg:hidden", {
           hidden: !open,
           block: open,
         })}
@@ -171,98 +178,44 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               )}
             </div>
 
-            <div className={classNames("mb-3 w-full  rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
+            <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
               {toggleUserType == "TENANT" && (
-                <>
-                  <div className="mt-3 py-1 px-2">
-                    <Link className="py-1 " href={UNIDESK_URL}>
-                      Uni-desk
-                    </Link>
+                <div className="flex flex-col gap-2 py-3 px-5">
+                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>Minha Estadia</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>Favoritos</div>
+                  <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
+                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
+                  <div className="my-3 mx-auto h-[1px] w-full bg-neutral-600"></div>
+                  <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
+                    Conta
                   </div>
-                  <div className="flex items-center py-1 px-2 align-middle">
-                    <div>
-                      <Link className="py-1" href={UNIDESK_STAY_URL}>
-                        Minha Estadia
-                      </Link>
-                    </div>
+                  <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
+                    Ajuda
                   </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={UNIDESK_STUDENT_FAVOURITES_URL}>
-                      Favoritos
-                    </Link>
+                  <div onClick={() => supabaseClient.auth.signOut()} className="text-gray-500">
+                    Sair
                   </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={INBOX_URL}>
-                      Caixa de Entrada
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={NOTIFICATIONS_URL}>
-                      Notificações
-                    </Link>
-                  </div>
-                  <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-3"></div>
-                  <div className="py-1 px-2 text-gray-500">
-                    <Link className="py-1" href={ADMIN_URL}>
-                      Conta
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2 text-gray-500">
-                    <Link className="py-1" href={FAQS_URL}>
-                      Ajuda
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2 text-gray-500">
-                    <div className="py-1" onClick={() => supabaseClient.auth.signOut()}>
-                      Sair
-                    </div>
-                  </div>
-                </>
+                </div>
               )}
               {toggleUserType == "LANDLORD" && (
-                <>
-                  <div className="mt-3 py-1 px-2">
-                    <Link className="py-1 " href={UNIDESK_URL}>
-                      Uni-desk
-                    </Link>
+                <div className="flex flex-col gap-2 py-3 px-5">
+                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
+                  <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>Anúncios</div>
+                  <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>Uni-controlo</div>
+                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
+                  <div className="my-3 mx-auto h-[1px] w-full bg-neutral-600"></div>
+                  <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
+                    Conta
                   </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={INBOX_URL}>
-                      Caixa de Entrada
-                    </Link>
+                  <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
+                    Ajuda
                   </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={UNIDESK_SENHORIO_PAINEL_URL}>
-                      Anúncios
-                    </Link>
+                  <div onClick={() => supabaseClient.auth.signOut()} className="text-gray-500">
+                    Sair
                   </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1" href={UNICONTROLO_GUESTS_URL}>
-                      Uni-controlo
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1 " href={NOTIFICATIONS_URL}>
-                      Notificações
-                    </Link>
-                  </div>
-                  <div className="my-3 mx-auto h-[1px] w-11/12 bg-neutral-600 px-1"></div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1 text-gray-500" href={ADMIN_URL}>
-                      Conta
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2">
-                    <Link className="py-1 text-gray-500" href={NOTIFICATIONS_URL}>
-                      Ajuda
-                    </Link>
-                  </div>
-                  <div className="py-1 px-2">
-                    <div className="py-1 text-gray-500" onClick={() => supabaseClient.auth.signOut()}>
-                      Sair
-                    </div>
-                  </div>
-                </>
+                </div>
               )}
             </div>
           </div>

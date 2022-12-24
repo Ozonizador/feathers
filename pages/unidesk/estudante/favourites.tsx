@@ -51,7 +51,7 @@ const UnideskFavoritos = () => {
         </div>
       </div>
 
-      <div className="container mx-auto mb-32 mt-12  w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
+      <div className="container mx-auto mb-32 mt-12 w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
         <div className="flex flex-col items-center justify-center align-middle">
           <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
           <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
@@ -79,7 +79,7 @@ const UnideskFavoritos = () => {
                   return (
                     <div className="w-full bg-white" key={index}>
                       <div className="flex rounded-lg border-2 border-gray-200">
-                        <div className="relative h-44 w-full max-w-[350px] rounded-l-lg lg:w-1/3">
+                        <div className="relative h-48 w-1/2 max-w-[350px] rounded-l-lg lg:w-1/3">
                           {favourite.photos && favourite.photos.length > 0 ? (
                             <Image src={favourite.photos[0].url} alt="Foto de Capa" layout="fill" objectFit="cover" />
                           ) : (
@@ -92,10 +92,10 @@ const UnideskFavoritos = () => {
 
                           <div className="mt-auto flex">
                             <div className="relative mb-2 text-center text-base">
-                              <div className="peer flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
+                              <div className="group flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
                                 <p className="text-base">{checkIfExpensesIncluded(favourite.expenses.services)}</p>
-                                <BiInfoCircle className="peer my-auto" />
+                                <BiInfoCircle className="my-auto" />
                               </div>
                             </div>
                           </div>
