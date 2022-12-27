@@ -11,7 +11,6 @@ import {
   CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
-import { AdvertisementReviewSummary } from "../models/review";
 export const PAGE_NUMBER_COUNT = 10 as number;
 
 const useAdvertisementService = () => {
@@ -77,7 +76,6 @@ const useAdvertisementService = () => {
   Filtering
 */
 
-
   const getAdvertisementsByCloseCoordinatesWithFilters = async (
     lat: number,
     lng: number,
@@ -100,7 +98,6 @@ const useAdvertisementService = () => {
       )
       .select("*, averages:reviewsPerAdvertisement!left(*)");
     query = addFilterAdvertisement(query, filters);
-
     const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
     return { data, error, count };

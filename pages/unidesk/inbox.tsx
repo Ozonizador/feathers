@@ -94,22 +94,22 @@ const CaixaEntrada = () => {
         {!conversations || (conversations.length === 0 && <div className="p-4">Não existem conversações</div>)}
         {conversations && conversations.length > 0 && (
           <>
-            <div className="flex h-20 w-full items-center justify-between border-b  border-terciary-500 align-middle">
+            <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
               <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
               <div className="mr-8 flex w-full items-center justify-end align-middle">
                 {/* <div>
-              <a>
-                <GoSearch className="text-xl" />
-              </a>
-            </div>
+                  <a>
+                    <GoSearch className="text-xl" />
+                  </a>
+                </div>
 
-            <div>
-              <a className="ml-8 flex flex-row items-center justify-center rounded-md bg-primary-500 py-3 px-6 text-white">
-                <BsFilterCircle className="mr-2 text-xl" />
-                Filter
-              </a>
-            </div> */}
+                <div>
+                  <a className="ml-8 flex flex-row items-center justify-center rounded-md bg-primary-500 py-3 px-6 text-white">
+                    <BsFilterCircle className="mr-2 text-xl" />
+                    Filter
+                  </a>
+                </div> */}
               </div>
               {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
             </div>

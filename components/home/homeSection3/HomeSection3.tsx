@@ -52,8 +52,8 @@ export default function HomeSection3() {
               <div className="grid gap-8 lg:h-96 lg:grid-cols-4">
                 {advertisements.map((advertisement, index) => {
                   return (
-                    <Link key={index} href={advertisement.id}>
-                      <article className="min-h-96 relative h-96 rounded-3xl bg-cover p-8 transition lg:h-3/4">
+                    <Link key={index} href={`anuncio/${advertisement.slug}`}>
+                      <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-cover p-8 transition lg:h-3/4">
                         {advertisement.photos && advertisement.photos[0] ? (
                           <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
                         ) : (
