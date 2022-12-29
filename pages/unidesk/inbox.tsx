@@ -90,27 +90,15 @@ const CaixaEntrada = () => {
   return (
     <>
       <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
-      <div className="mx-auto my-16 w-5/6 rounded-2xl border border-terciary-500 ">
-        {!conversations || (conversations.length === 0 && <div className="p-4">Não existem conversações</div>)}
+      {/* DESKTOP */}
+      <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
+        {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
         {conversations && conversations.length > 0 && (
           <>
             <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-              <a className=" ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
+              <a className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
 
-              <div className="mr-8 flex w-full items-center justify-end align-middle">
-                {/* <div>
-                  <a>
-                    <GoSearch className="text-xl" />
-                  </a>
-                </div>
-
-                <div>
-                  <a className="ml-8 flex flex-row items-center justify-center rounded-md bg-primary-500 py-3 px-6 text-white">
-                    <BsFilterCircle className="mr-2 text-xl" />
-                    Filter
-                  </a>
-                </div> */}
-              </div>
+              <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
               {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
             </div>
 
@@ -154,12 +142,6 @@ const CaixaEntrada = () => {
                         <input type="submit" className="hidden" />
                       </form>
                     </div>
-                    {/* OTHER OPTIONS - ANEX FILE, IMAGE ETC */}
-                    {/* <div className="mt-5 flex gap-4">
-                  <AiOutlinePicture className="text-xl text-slate-400" />
-                  <FiPaperclip className="text-xl text-slate-400" />
-                  <BiSmile className="text-xl text-slate-400" />
-                </div>*/}
                   </div>
                 </div>
                 {currentConversation && currentConversation.host_id === profile.id && (
@@ -248,6 +230,34 @@ const CaixaEntrada = () => {
               </div>
             </div>
           </>
+        )}
+      </div>
+      <div className="block lg:hidden">
+        <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
+          <a className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
+
+          <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
+          {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
+        </div>
+        {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
+        {conversations && (
+          <div>
+            <div>
+              {conversations?.map((conversation, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setCurrentConversation(conversation)}
+                    className={classNames("cursor-pointer p-1", {
+                      "bg-primary-100": currentConversation?.id === conversation.id,
+                    })}
+                  >
+                    <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         )}
       </div>
     </>
