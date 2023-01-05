@@ -27,7 +27,7 @@ import { dateToFormat } from "../../utils/utils";
 
 import "react-phone-number-input/style.css";
 import { ADMIN_URL } from "../../models/paths";
-import { customStyles } from "./general.config";
+import { customStyles } from "../../components/admin/general.config";
 
 const paths = [
   { url: ADMIN_URL, label: "Conta" },
