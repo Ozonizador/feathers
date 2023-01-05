@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
-import { Avatar, Select, Toast } from "flowbite-react";
+import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
 import { useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -15,11 +15,9 @@ import Select2 from "react-select";
 import {
   Profile,
   Gender,
-  LanguageLabel,
   ProfilesResponse,
   PROFILE_COLUMNS,
   PROFILE_TABLE_NAME,
-  spokenLanguages,
   getSpokenLanguages,
 } from "../../models/profile";
 import useProfileService from "../../hooks/useProfileService";
