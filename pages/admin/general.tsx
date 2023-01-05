@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
-import { Avatar, Select, Toast } from "flowbite-react";
+import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
 import { useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -11,19 +11,21 @@ import { toast } from "react-toastify";
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import FeatherDatePicker from "../../components/utils/FeatherDatepicker";
 import Input from "../../components/utils/Input";
+import Select2 from "react-select";
 import {
   Profile,
   Gender,
-  LanguageLabel,
   ProfilesResponse,
   PROFILE_COLUMNS,
   PROFILE_TABLE_NAME,
+  getSpokenLanguages,
 } from "../../models/profile";
 import useProfileService from "../../hooks/useProfileService";
 import { dateToFormat } from "../../utils/utils";
 
 import "react-phone-number-input/style.css";
 import { ADMIN_URL } from "../../models/paths";
+import { customStyles } from "../../components/admin/general.config";
 
 const paths = [
   { url: ADMIN_URL, label: "Conta" },
@@ -39,6 +41,7 @@ interface ProfileEdition {
   nationality: string;
   description: string;
   birth_date: Date;
+  languages: string[];
 }
 
 interface IndexProps {
@@ -66,6 +69,7 @@ const Index = ({ user, profileData }: IndexProps) => {
       nationality: profile?.nationality || "PT",
       description: profile?.description || "",
       birth_date: profile?.birth_date ? new Date(profile.birth_date) : new Date(),
+      languages: profile.languages || [],
     },
   });
 
@@ -78,6 +82,7 @@ const Index = ({ user, profileData }: IndexProps) => {
     nationality,
     description,
     birth_date,
+    languages,
   }: ProfileEdition) => {
     const { error } = await updateUserProfile(user.id, {
       ...profile,
@@ -89,6 +94,7 @@ const Index = ({ user, profileData }: IndexProps) => {
       nationality,
       description,
       birth_date: dateToFormat(birth_date),
+      languages,
     });
 
     if (!error) {
@@ -240,10 +246,26 @@ const Index = ({ user, profileData }: IndexProps) => {
           {/* LÍNGUAS FALADAS */}
           <div className="mb-1">Línguas faladas</div>
           <div className="flex flex-row">
-            <div className="mr-3 flex items-center rounded-xl bg-socials-gmail py-2 px-3  text-primary-500">
-              + Adicionar línguas
-            </div>
-            <div className="mr-5 flex flex-col gap-2 overflow-y-auto">
+            <Controller
+              control={control}
+              name="languages"
+              render={({ field: { onChange, value } }) => {
+                const options = [...getSpokenLanguages()];
+
+                return (
+                  <Select2
+                    placeholder="Adicionar línguas"
+                    value={options.filter((option) => value.includes(option.value))}
+                    onChange={(val) => onChange(val.map((c) => c.value))}
+                    isMulti
+                    options={options}
+                    className="mr-3 flex w-full items-center rounded-xl bg-socials-gmail px-3 py-2 text-primary-500"
+                    styles={customStyles}
+                  />
+                );
+              }}
+            ></Controller>
+            {/* <div className="mr-5 flex flex-col gap-2 overflow-y-auto">
               {profile?.languages &&
                 profile.languages.map((language) => {
                   return (
@@ -255,7 +277,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                     </>
                   );
                 })}
-            </div>
+            </div> */}
           </div>
 
           {/* CONTATO TELEFONICO */}

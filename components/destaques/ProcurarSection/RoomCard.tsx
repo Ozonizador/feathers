@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
@@ -6,7 +6,12 @@ import { TbBed } from "react-icons/tb";
 import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
-import { AdvertisementWithReviewAverage, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import {
+  AdvertisementWithReviewAverage,
+  TypeAmenity,
+  TypeAmenityLabel,
+  TYPE_ADVERTISEMENT,
+} from "../../../models/advertisement";
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
@@ -59,6 +64,28 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
       return null;
     }
   }, [advertisement]);
+
+  const showSomeAmenities = useMemo(() => {
+    if (advertisement.about_house) {
+      const { general, bedRoom, bathRoom, exterior, livingRoom, kitchen } = advertisement.about_house;
+
+      const amenities: TypeAmenity[] = [].concat.apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom]);
+      return (
+        <ul className="pr-3-3 flex gap-5 text-gray-500">
+          {amenities.map((amenity, index) => {
+            console.log(index);
+            return (
+              <li key={index} className={classNames({ "list-none": index === 0 })}>
+                {TypeAmenityLabel[amenity]}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+    return <></>;
+  }, [advertisement]);
+
   return (
     <div>
       <div className="mt-10 mb-4 bg-white lg:rounded-xl lg:drop-shadow-2xl">
@@ -91,7 +118,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   </div>
                 </div>
                 {/* icon with images */}
-                <div className="mb-2 mt-3 flex flex-1 justify-around gap-1 text-gray-500">
+                <div className="mb-2 mt-3 flex flex-1 justify-between gap-1 text-gray-500">
                   <div>
                     <RiUserLine className="my-auto inline" />
                     <span className="my-auto text-xs">
@@ -120,14 +147,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
                 {advertisement.about_house && (
                   <>
-                    <div className="mb-1 mt-3 flex text-start text-xs lg:ml-3">
-                      <ul className="pr-3-3 flex gap-5 text-gray-500">
-                        <li className="list-none">Wifi</li>
-                        <li>Cozinha</li>
-                        <li>Secretária</li>
-                        <li>Varanda</li>
-                      </ul>
-                    </div>
+                    <div className="mb-1 mt-3 flex text-start text-xs lg:ml-3">{showSomeAmenities}</div>
                   </>
                 )}
 
@@ -136,7 +156,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <Button type="submit" onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}>
                       <CgHeart
                         className={classNames("inline", {
-                          "fill-gray-800 text-gray-800": isFavourite(),
+                          "fill-red-600 text-red-600": isFavourite(),
                         })}
                       />
                       <span className="my-auto ml-2">Favoritos</span>
