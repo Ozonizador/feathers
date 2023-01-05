@@ -1,4 +1,5 @@
 import { Database } from "../database.types";
+import _ from "lodash";
 
 export const PROFILE_TABLE_NAME = "profiles" as const;
 export const AVATAR_STORAGE_NAME = "avatars" as const;
@@ -24,26 +25,26 @@ export const PROFILE_COLUMNS = {
   SLUG: "slug",
 } as const;
 
-export enum SpokenLanguages {
-  PORTUGUESE = "PORTUGUESE",
-  SPANISH = "SPANISH",
-  ENGLISH = "ENGLISH",
-  ITALIAN = "ITALIAN",
-  GREEK = "GREEK",
-  FRENCH = "FRENCH",
-  GERMAN = "GERMAN",
-  FINNISH = "FINNISH",
-}
+export const spokenLanguages = ["portuguese", "spanish", "english", "italian", "greek", "french", "german", "finnish"];
+
+export type SpokenLanguage = typeof spokenLanguages[number];
 
 export const LanguageLabel = {
-  PORTUGUESE: "Português",
-  SPANISH: "Spanish",
-  ENGLISH: "English",
-  ITALIAN: "Italian",
-  GREEK: "Greek",
-  FRENCH: "French",
-  GERMAN: "German",
-  FINNISH: "Finnish",
+  portuguese: "Português",
+  spanish: "Spanish",
+  english: "English",
+  italian: "Italian",
+  greek: "Greek",
+  french: "French",
+  german: "German",
+  finnish: "Finnish",
+};
+
+export const getSpokenLanguages = () => {
+  return spokenLanguages.map((language) => {
+    const label = LanguageLabel[language] || _.capitalize(language);
+    return { label, value: language };
+  });
 };
 
 export type UserTypes = "LANDLORD" | "TENANT";

@@ -10,10 +10,19 @@ interface CaixaCardProps {
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
   const formatCardDate = () => {
-    if (!reservation?.created_at) return "";
-    let difference = Date.now() - new Date(reservation.created_at).getTime();
+    if (!reservation?.updated_at) return "";
+    const now = new Date();
+    const reservationDate = new Date(reservation.updated_at);
+    let msBetweenDates = Math.abs(reservationDate.getTime() - now.getTime());
 
-    if (new Date() - new Date()) var iscurrentDate = createdDate.isSame(new Date(), "day");
+    const daysBetweenDates = msBetweenDates / (60 * 60 * 1000 * 24);
+    if (daysBetweenDates < 1) {
+      return `${reservationDate.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`;
+    }
+    return `${reservationDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })}`;
   };
   return (
     <div className="mb-2 flex gap-5 p-2">
@@ -32,7 +41,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
       <div className="flex-1">
         <div className="flex flex-row justify-between">
           <h1 className="text-base font-bold text-green-500">{ReservationStatusLabel[reservation.status]}</h1>
-          <p className="text-xs">{new Date(reservation.updated_at).toDateString()}</p>
+          <p className="text-xs">{formatCardDate()}</p>
         </div>
         <h2 className="mt-2 mb-2 text-xs text-secondary-500 line-clamp-2">{profile.description}</h2>
 

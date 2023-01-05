@@ -1,6 +1,6 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useProfileInformation } from "../../context/MainProvider";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useConversationService from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
@@ -23,6 +23,7 @@ import Link from "next/link";
 {
   /* page 59 XD */
 }
+
 const CaixaEntrada = () => {
   const [conversations, setConversations] = useState<ConversationWithTenant[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
@@ -88,7 +89,7 @@ const CaixaEntrada = () => {
   };
 
   return (
-    <>
+    <div className="mx-5 h-full rounded-xl border lg:border-none">
       <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
       {/* DESKTOP */}
       <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
@@ -104,7 +105,7 @@ const CaixaEntrada = () => {
 
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <div className="flex w-1/5 flex-col border-r border-terciary-500">
+                <div className="flex w-2/5 flex-col border-r border-terciary-500">
                   <div>
                     {conversations.map((conversation, index) => {
                       return (
@@ -122,28 +123,12 @@ const CaixaEntrada = () => {
                   </div>
                 </div>
 
-                <div className="flex max-h-screen w-full flex-col gap-2">
-                  <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2">
-                    {messages.map((message, index, array) => {
-                      return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
-                    })}
-                  </div>
-
-                  <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
-                    <div className="w-10/12">
-                      <form onSubmit={(e) => sendMessage(e)}>
-                        <input
-                          className="w-full border-0 p-4 text-xs outline-0"
-                          placeholder="Type a message..."
-                          type="text"
-                          value={currentMessage}
-                          onChange={(e) => setCurrentMessage(e.target.value)}
-                        />
-                        <input type="submit" className="hidden" />
-                      </form>
-                    </div>
-                  </div>
-                </div>
+                <MessagesSenderZone
+                  messages={messages}
+                  sendMessage={sendMessage}
+                  currentMessage={currentMessage}
+                  setCurrentMessage={setCurrentMessage}
+                />
                 {currentConversation && currentConversation.host_id === profile.id && (
                   <>
                     <div className="w-1/3 border-l border-terciary-500 p-2">
@@ -170,8 +155,8 @@ const CaixaEntrada = () => {
                             <div>
                               <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
                               <div className="text-sm">
-                                {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement.type]} em
-                        ${currentConversation.reservation.advertisement.place}`}
+                                {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
+                        ${currentConversation.reservation.advertisement?.place}`}
                               </div>
                             </div>
                           </div>
@@ -234,7 +219,12 @@ const CaixaEntrada = () => {
       </div>
       <div className="block lg:hidden">
         <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-          <a className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
+          <a
+            className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white"
+            onClick={() => setCurrentConversation(null)}
+          >
+            Mensagens
+          </a>
 
           <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
           {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
@@ -242,13 +232,13 @@ const CaixaEntrada = () => {
         {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
         {conversations && (
           <div>
-            <div>
-              {conversations?.map((conversation, index) => {
+            {!currentConversation &&
+              conversations?.map((conversation, index) => {
                 return (
                   <div
                     key={index}
                     onClick={() => setCurrentConversation(conversation)}
-                    className={classNames("cursor-pointer p-1", {
+                    className={classNames("cursor-pointer border p-1 last:rounded-b-xl", {
                       "bg-primary-100": currentConversation?.id === conversation.id,
                     })}
                   >
@@ -256,11 +246,52 @@ const CaixaEntrada = () => {
                   </div>
                 );
               })}
-            </div>
+            {currentConversation && (
+              <MessagesSenderZone
+                messages={messages}
+                sendMessage={sendMessage}
+                currentMessage={currentMessage}
+                setCurrentMessage={setCurrentMessage}
+              />
+            )}
           </div>
         )}
       </div>
-    </>
+    </div>
+  );
+};
+
+interface MessagesSenderZoneProps {
+  messages: MessageWithProfile[];
+  sendMessage: (e) => void;
+  currentMessage: string;
+  setCurrentMessage: (e) => void;
+}
+
+const MessagesSenderZone = ({ messages, sendMessage, currentMessage, setCurrentMessage }: MessagesSenderZoneProps) => {
+  return (
+    <div className="flex max-h-screen w-full flex-col gap-2">
+      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2 lg:h-96">
+        {messages.map((message, index, array) => {
+          return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
+        })}
+      </div>
+
+      <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
+        <div className="w-10/12">
+          <form onSubmit={(e) => sendMessage(e)}>
+            <input
+              className="w-full border-0 p-4 text-xs outline-0"
+              placeholder="Type a message..."
+              type="text"
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+            />
+            <input type="submit" className="hidden" />
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
