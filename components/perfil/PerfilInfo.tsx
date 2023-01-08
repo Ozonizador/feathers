@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
-import { Profile } from "../../models/profile";
+import { LanguageLabel, Profile } from "../../models/profile";
+import countryList from "react-select-country-list";
 
 interface PerfilIntoProps {
   profile: Profile;
@@ -8,7 +9,8 @@ interface PerfilIntoProps {
 
 const PerfilInfo = ({ profile }: PerfilIntoProps) => {
   const getUserLanguages = () => {
-    return profile.languages?.join(" , ");
+    const languages = profile.languages.map((language) => LanguageLabel[language]).join(", ");
+    return languages;
   };
 
   return (
@@ -16,7 +18,7 @@ const PerfilInfo = ({ profile }: PerfilIntoProps) => {
       <div className="flex flex-row items-center justify-end align-middle">
         <div>
           <h2 className="mr-3">
-            É de {profile.town} {profile.nationality}
+            É de {profile.town} {countryList().getLabel(profile.nationality)}
           </h2>
         </div>
         <div>
