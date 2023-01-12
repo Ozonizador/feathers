@@ -32,9 +32,9 @@ const Notifications = () => {
     getUserNotifications();
   }, [getUserNotifications]);
   return (
-    <>
+    <div className="mx-5 my-16 rounded-lg border lg:border-none">
       <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
-      <div className="container mx-auto my-16 w-full lg:w-4/5">
+      <div className="container mx-auto w-full lg:w-4/5">
         <>
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">
@@ -52,7 +52,7 @@ const Notifications = () => {
           )}
         </>
       </div>
-    </>
+    </div>
   );
 };
 
