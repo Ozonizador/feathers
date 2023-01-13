@@ -28,7 +28,7 @@ const useReservationService = () => {
     const { data, error } = await supabaseClient
       .rpc<"modify_reservation", ReservationsResponse>(MODIFY_RESERVATION_FUNCTION, {
         reservation_id,
-        status,
+        reservation_status: status,
         stay_id,
       })
       .single();

@@ -23,7 +23,7 @@ export interface Database {
           expenses: HouseExpenses;
           extra_per_host: number;
           floor: string | null;
-          geom: unknown | null;
+          geom: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;

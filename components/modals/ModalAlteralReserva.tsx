@@ -118,13 +118,15 @@ const ModalAlterarReserva = () => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              {stay && <div className="ml-3 inline-block">{new String(stay.start_date)}</div>}
+                              {stay && (
+                                <div className="ml-3 inline-block">{new String(stay.reservation.start_date)}</div>
+                              )}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              {stay && <div className="ml-3 inline-block">{new String(stay.end_date)}</div>}
+                              {stay && <div className="ml-3 inline-block">{new String(stay.reservation.end_date)}</div>}
                             </div>
                           </div>
                           {newReservation && (

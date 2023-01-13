@@ -169,7 +169,7 @@ const CaixaEntrada = () => {
                                 Aceitar
                               </Button>
                               <Button onClick={() => updateReservationStatus(ReservationStatus.REJECTED)} type="button">
-                                Aceitar
+                                Rejeitar
                               </Button>
                             </div>
                           )}
@@ -185,7 +185,7 @@ const CaixaEntrada = () => {
                                 onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
                                 type="button"
                               >
-                                Aceitar
+                                Rejeitar
                               </Button>
                             </div>
                           )}

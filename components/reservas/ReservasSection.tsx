@@ -89,7 +89,7 @@ const CurrentReservationsSection = () => {
     if (user) {
       const { data, error } = await getCurrentStaysByHostId(user.id);
       if (!error) {
-        setReservations(data);
+        setReservations(data as StayGuest[]);
       }
     }
   }, [user]);

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { StayGuest } from "../../../models/stay";
+import { StayWithReservation } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 interface StayCardProps {
-  stay: StayGuest;
+  stay: StayWithReservation;
 }
 
 const StayCard = ({ stay }: StayCardProps) => {

@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayComplete } from "../../../models/stay";
+import { StayComplete, StayWithReservation } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
@@ -45,18 +45,14 @@ const Estadia = () => {
   const getProfileStays = useCallback(async () => {
     if (profile) {
       const { data, error } = await getCurrentStayByTenantId(profile.id);
-      if (!error) {
-        setCurrentStay(data);
-      }
+      if (!error) setCurrentStay(data as StayComplete);
     }
   }, [profile]);
 
   const getNextReservations = useCallback(async () => {
     if (profile) {
       const { data, error } = await getNextStaysByTenantId(profile.id);
-      if (!error) {
-        setNextStays(data);
-      }
+      if (!error) setNextStays(data as StayComplete[]);
     }
   }, [profile]);
 
