@@ -3,6 +3,7 @@ import { Advertisement } from "./advertisement";
 import { Profile } from "./profile";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
+export const MODIFY_RESERVATION_FUNCTION = "modify_reservation" as const;
 
 export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
 export type Reservation = ReservationsResponse["Row"];

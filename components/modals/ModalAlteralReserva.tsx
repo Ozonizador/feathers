@@ -18,7 +18,6 @@ const ModalAlterarReserva = () => {
 
   const [newReservation, setNewReservation] = useState<Omit<Reservation, "created_at" | "updated_at">>({
     id: "",
-    stay_id: null,
     start_date: new Date().toDateString(),
     end_date: new Date().toDateString(),
     status: ReservationStatus.REQUESTED,

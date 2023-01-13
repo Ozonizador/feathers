@@ -13,428 +13,425 @@ export interface Database {
     Tables: {
       advertisements: {
         Row: {
-          id: string;
-          slug: string;
-          type: Database["public"]["Enums"]["TypeRoom"];
-          place: string;
-          street: string;
-          street_number: string;
+          about_house: AboutHouseSections;
+          agreementsinfo: AdvertisementInfo | null;
+          available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathrooms: number;
+          beds: number;
+          created_at: string;
+          description: string;
+          expenses: HouseExpenses;
+          extra_per_host: number;
           floor: string | null;
+          geom: unknown | null;
+          guarantee_value: number;
+          host_id: string;
+          host_lives_property: boolean;
+          house_rules: HouseRules;
+          id: string;
+          max_rooms: number;
+          month_rent: number;
+          photos: AdvertisementPhoto[];
+          place: string;
           postal_code: string;
           rooms: number;
-          max_rooms: number;
-          beds: number;
+          slug: string;
+          street: string;
+          street_number: string;
           tenant_number: number;
-          bathrooms: number;
           title: string;
-          description: string;
+          type: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
-          photos: AdvertisementPhoto[];
-          house_rules: HouseRules;
-          about_house: AboutHouseSections;
-          month_rent: number;
-          extra_per_host: number;
-          guarantee_value: number;
-          expenses: HouseExpenses;
-          available: Database["public"]["Enums"]["AdvertisementStatus"];
-          host_lives_property: boolean;
-          verified: boolean;
-          host_id: string;
-          created_at: string;
           updated_at: string;
-          geom: any | null;
-          agreementsinfo: AdvertisementInfo | null;
+          verified: boolean;
         };
         Insert: {
-          id: string;
-          slug: string;
-          type: Database["public"]["Enums"]["TypeRoom"];
-          place: string;
-          street: string;
-          street_number: string;
+          about_house: AboutHouseSections;
+          agreementsinfo?: AdvertisementInfo | null;
+          available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathrooms: number;
+          beds: number;
+          created_at?: string;
+          description: string;
+          expenses: HouseExpenses;
+          extra_per_host: number;
           floor?: string | null;
+          geom?: unknown | null;
+          guarantee_value: number;
+          host_id: string;
+          host_lives_property: boolean;
+          house_rules: Json;
+          id: string;
+          max_rooms?: number;
+          month_rent: number;
+          photos?: AdvertisementPhoto[];
+          place: string;
           postal_code: string;
           rooms: number;
-          beds: number;
+          slug: string;
+          street: string;
+          street_number: string;
           tenant_number: number;
-          bathrooms: number;
           title: string;
-          description: string;
+          type: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
-          house_rules: HouseRules;
-          about_house: AboutHouseSections;
-          month_rent: number;
-          extra_per_host: number;
-          guarantee_value: number;
-          expenses: HouseExpenses;
-          available: Database["public"]["Enums"]["AdvertisementStatus"];
-          host_lives_property: boolean;
-          host_id: string;
-          max_rooms?: number;
-          photos?: AdvertisementPhoto[];
-          verified?: boolean;
-          created_at?: string;
           updated_at?: string;
-          geom?: any | null;
-          agreementsinfo?: AdvertisementInfo | null;
+          verified?: boolean;
         };
         Update: {
-          id?: string;
-          slug?: string;
-          type?: Database["public"]["Enums"]["TypeRoom"];
-          place?: string;
-          street?: string;
-          street_number?: string;
+          about_house?: AboutHouseSections;
+          agreementsinfo?: AdvertisementInfo | null;
+          available?: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathrooms?: number;
+          beds?: number;
+          created_at?: string;
+          description?: string;
+          expenses?: HouseExpenses;
+          extra_per_host?: number;
           floor?: string | null;
+          geom?: unknown | null;
+          guarantee_value?: number;
+          host_id?: string;
+          host_lives_property?: boolean;
+          house_rules?: HouseRules;
+          id?: string;
+          max_rooms?: number;
+          month_rent?: number;
+          photos?: AdvertisementPhoto[];
+          place?: string;
           postal_code?: string;
           rooms?: number;
-          beds?: number;
+          slug?: string;
+          street?: string;
+          street_number?: string;
           tenant_number?: number;
-          bathrooms?: number;
           title?: string;
-          description?: string;
+          type?: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host?: Database["public"]["Enums"]["HostFlexType"];
           type_host?: Database["public"]["Enums"]["type_host"];
-          house_rules?: HouseRules;
-          about_house?: AboutHouseSections;
-          month_rent?: number;
-          extra_per_host?: number;
-          guarantee_value?: number;
-          expenses?: HouseExpenses;
-          available?: Database["public"]["Enums"]["AdvertisementStatus"];
-          host_lives_property?: boolean;
-          host_id?: string;
-          max_rooms?: number;
-          photos?: AdvertisementPhoto[];
-          verified?: boolean;
-          created_at?: string;
           updated_at?: string;
-          geom?: any | null;
-          agreementsinfo?: AdvertisementInfo | null;
+          verified?: boolean;
         };
       };
       blogs: {
         Row: {
-          id: string;
-          slug: string;
-          title: string;
-          description: string;
-          image: string;
           category: Database["public"]["Enums"]["BlogCategory"];
           created_at: string;
+          description: string;
+          id: string;
+          image: string;
+          slug: string;
+          title: string;
           updated_at: string;
         };
         Insert: {
-          id: string;
-          slug: string;
-          title: string;
-          description: string;
-          image: string;
           category: Database["public"]["Enums"]["BlogCategory"];
           created_at?: string;
+          description: string;
+          id: string;
+          image: string;
+          slug: string;
+          title: string;
           updated_at?: string;
         };
         Update: {
-          id?: string;
-          slug?: string;
-          title?: string;
-          description?: string;
-          image?: string;
           category?: Database["public"]["Enums"]["BlogCategory"];
           created_at?: string;
+          description?: string;
+          id?: string;
+          image?: string;
+          slug?: string;
+          title?: string;
           updated_at?: string;
         };
       };
       conversations: {
         Row: {
-          id: string;
-          host_id: string;
-          tenant_id: string;
-          reservation_id: string;
           created_at: string;
+          host_id: string;
+          id: string;
+          reservation_id: string;
+          tenant_id: string;
           updated_at: string;
         };
         Insert: {
-          id: string;
-          host_id: string;
-          tenant_id: string;
-          reservation_id: string;
           created_at?: string;
+          host_id: string;
+          id: string;
+          reservation_id: string;
+          tenant_id: string;
           updated_at?: string;
         };
         Update: {
-          id?: string;
-          host_id?: string;
-          tenant_id?: string;
-          reservation_id?: string;
           created_at?: string;
+          host_id?: string;
+          id?: string;
+          reservation_id?: string;
+          tenant_id?: string;
           updated_at?: string;
         };
       };
       messages: {
         Row: {
+          conversation_id: string;
+          created_at: string;
           id: string;
           message: string;
-          conversation_id: string;
           profile_id: string;
-          created_at: string;
           updated_at: string;
         };
         Insert: {
+          conversation_id: string;
+          created_at?: string;
           id: string;
           message: string;
-          conversation_id: string;
           profile_id: string;
-          created_at?: string;
           updated_at?: string;
         };
         Update: {
+          conversation_id?: string;
+          created_at?: string;
           id?: string;
           message?: string;
-          conversation_id?: string;
           profile_id?: string;
-          created_at?: string;
           updated_at?: string;
         };
       };
       notifications: {
         Row: {
-          id: string;
-          type: Database["public"]["Enums"]["NotificationType"];
-          profile_id: string;
           created_at: string;
+          id: string;
+          profile_id: string;
+          type: Database["public"]["Enums"]["NotificationType"];
           updated_at: string;
         };
         Insert: {
-          id: string;
-          type: Database["public"]["Enums"]["NotificationType"];
-          profile_id: string;
           created_at?: string;
+          id: string;
+          profile_id: string;
+          type: Database["public"]["Enums"]["NotificationType"];
           updated_at?: string;
         };
         Update: {
-          id?: string;
-          type?: Database["public"]["Enums"]["NotificationType"];
-          profile_id?: string;
           created_at?: string;
+          id?: string;
+          profile_id?: string;
+          type?: Database["public"]["Enums"]["NotificationType"];
           updated_at?: string;
         };
       };
       profiles: {
         Row: {
-          id: string;
-          slug: string;
-          name: string | null;
-          surname: string | null;
-          nationality: string | null;
-          town: string | null;
-          birth_date: string | null;
-          gender: number | null;
-          description: string | null;
-          languages: string[] | null;
-          phone: string | null;
-          avatar_url: string | null;
-          favourite_rooms: string[] | null;
-          created_at: string;
-          updated_at: string;
           accepts_notification_email: boolean | null;
           accepts_notification_message: boolean | null;
+          avatar_url: string | null;
+          birth_date: string | null;
+          created_at: string;
+          description: string | null;
+          favourite_rooms: string[] | null;
+          gender: number | null;
+          id: string;
+          languages: string[] | null;
+          name: string | null;
+          nationality: string | null;
+          phone: string | null;
+          slug: string;
+          surname: string | null;
+          town: string | null;
+          updated_at: string;
         };
         Insert: {
-          id: string;
-          slug: string;
-          name?: string | null;
-          surname?: string | null;
-          nationality?: string | null;
-          town?: string | null;
-          birth_date?: string | null;
-          gender?: number | null;
-          description?: string | null;
-          languages?: string[] | null;
-          phone?: string | null;
-          avatar_url?: string | null;
-          favourite_rooms?: string[] | null;
-          created_at?: string;
-          updated_at?: string;
           accepts_notification_email?: boolean | null;
           accepts_notification_message?: boolean | null;
+          avatar_url?: string | null;
+          birth_date?: string | null;
+          created_at?: string;
+          description?: string | null;
+          favourite_rooms?: string[] | null;
+          gender?: number | null;
+          id: string;
+          languages?: string[] | null;
+          name?: string | null;
+          nationality?: string | null;
+          phone?: string | null;
+          slug: string;
+          surname?: string | null;
+          town?: string | null;
+          updated_at?: string;
         };
         Update: {
-          id?: string;
-          slug?: string;
-          name?: string | null;
-          surname?: string | null;
-          nationality?: string | null;
-          town?: string | null;
-          birth_date?: string | null;
-          gender?: number | null;
-          description?: string | null;
-          languages?: string[] | null;
-          phone?: string | null;
-          avatar_url?: string | null;
-          favourite_rooms?: string[] | null;
-          created_at?: string;
-          updated_at?: string;
           accepts_notification_email?: boolean | null;
           accepts_notification_message?: boolean | null;
+          avatar_url?: string | null;
+          birth_date?: string | null;
+          created_at?: string;
+          description?: string | null;
+          favourite_rooms?: string[] | null;
+          gender?: number | null;
+          id?: string;
+          languages?: string[] | null;
+          name?: string | null;
+          nationality?: string | null;
+          phone?: string | null;
+          slug?: string;
+          surname?: string | null;
+          town?: string | null;
+          updated_at?: string;
         };
       };
       reports: {
         Row: {
-          id: string;
           advertisement_id: string;
-          stay_id: string;
-          description: string;
-          type: Database["public"]["Enums"]["ReportsType"];
           created_at: string;
+          description: string;
+          id: string;
+          stay_id: string;
+          type: Database["public"]["Enums"]["ReportsType"];
           updated_at: string;
         };
         Insert: {
-          id: string;
           advertisement_id: string;
-          stay_id: string;
-          description: string;
-          type: Database["public"]["Enums"]["ReportsType"];
           created_at?: string;
+          description: string;
+          id: string;
+          stay_id: string;
+          type: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
         };
         Update: {
-          id?: string;
           advertisement_id?: string;
-          stay_id?: string;
-          description?: string;
-          type?: Database["public"]["Enums"]["ReportsType"];
           created_at?: string;
+          description?: string;
+          id?: string;
+          stay_id?: string;
+          type?: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
         };
       };
       reservations: {
         Row: {
+          advertisement_id: string;
+          created_at: string;
+          end_date: string;
           id: string;
           start_date: string;
-          end_date: string;
-          advertisement_id: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
-          stay_id: string | null;
-          created_at: string;
           updated_at: string;
         };
         Insert: {
+          advertisement_id: string;
+          created_at?: string;
+          end_date: string;
           id: string;
           start_date: string;
-          end_date: string;
-          advertisement_id: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
-          stay_id?: string | null;
-          created_at?: string;
           updated_at?: string;
         };
         Update: {
+          advertisement_id?: string;
+          created_at?: string;
+          end_date?: string;
           id?: string;
           start_date?: string;
-          end_date?: string;
-          advertisement_id?: string;
           status?: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id?: string;
-          stay_id?: string | null;
-          created_at?: string;
           updated_at?: string;
         };
       };
       reviews: {
         Row: {
-          id: string;
-          stay_id: string;
-          overall_rating: number;
-          location_rating: number;
-          value_quality_rating: number;
-          landlord_rating: number;
           comodities_rating: number;
-          public_review: string;
-          private_review: string;
           created_at: string;
+          id: string;
+          landlord_rating: number;
+          location_rating: number;
+          overall_rating: number;
+          private_review: string;
+          public_review: string;
+          stay_id: string;
           updated_at: string;
+          value_quality_rating: number;
         };
         Insert: {
-          id: string;
-          stay_id: string;
-          overall_rating: number;
-          location_rating: number;
-          value_quality_rating: number;
-          landlord_rating: number;
           comodities_rating: number;
-          public_review: string;
-          private_review: string;
           created_at?: string;
+          id: string;
+          landlord_rating: number;
+          location_rating: number;
+          overall_rating: number;
+          private_review: string;
+          public_review: string;
+          stay_id: string;
           updated_at?: string;
+          value_quality_rating: number;
         };
         Update: {
-          id?: string;
-          stay_id?: string;
-          overall_rating?: number;
-          location_rating?: number;
-          value_quality_rating?: number;
-          landlord_rating?: number;
           comodities_rating?: number;
-          public_review?: string;
-          private_review?: string;
           created_at?: string;
+          id?: string;
+          landlord_rating?: number;
+          location_rating?: number;
+          overall_rating?: number;
+          private_review?: string;
+          public_review?: string;
+          stay_id?: string;
           updated_at?: string;
+          value_quality_rating?: number;
         };
       };
       spatial_ref_sys: {
         Row: {
-          srid: number;
           auth_name: string | null;
           auth_srid: number | null;
-          srtext: string | null;
           proj4text: string | null;
+          srid: number;
+          srtext: string | null;
         };
         Insert: {
-          srid: number;
           auth_name?: string | null;
           auth_srid?: number | null;
-          srtext?: string | null;
           proj4text?: string | null;
+          srid: number;
+          srtext?: string | null;
         };
         Update: {
-          srid?: number;
           auth_name?: string | null;
           auth_srid?: number | null;
-          srtext?: string | null;
           proj4text?: string | null;
+          srid?: number;
+          srtext?: string | null;
         };
       };
       stays: {
         Row: {
-          id: string;
-          start_date: string;
-          end_date: string;
           advertisement_id: string;
-          tenant_id: string;
           created_at: string;
+          id: string;
+          reservation_id: string | null;
+          status: Database["public"]["Enums"]["staysstatus"] | null;
+          tenant_id: string;
           updated_at: string;
         };
         Insert: {
-          id: string;
-          start_date: string;
-          end_date: string;
           advertisement_id: string;
-          tenant_id: string;
           created_at?: string;
+          id?: string;
+          reservation_id?: string | null;
+          status?: Database["public"]["Enums"]["staysstatus"] | null;
+          tenant_id: string;
           updated_at?: string;
         };
         Update: {
-          id?: string;
-          start_date?: string;
-          end_date?: string;
           advertisement_id?: string;
-          tenant_id?: string;
           created_at?: string;
+          id?: string;
+          reservation_id?: string | null;
+          status?: Database["public"]["Enums"]["staysstatus"] | null;
+          tenant_id?: string;
           updated_at?: string;
         };
       };
@@ -442,40 +439,40 @@ export interface Database {
     Views: {
       geography_columns: {
         Row: {
-          f_table_catalog: unknown | null;
-          f_table_schema: unknown | null;
-          f_table_name: unknown | null;
-          f_geography_column: unknown | null;
           coord_dimension: number | null;
+          f_geography_column: unknown | null;
+          f_table_catalog: unknown | null;
+          f_table_name: unknown | null;
+          f_table_schema: unknown | null;
           srid: number | null;
           type: string | null;
         };
       };
       geometry_columns: {
         Row: {
-          f_table_catalog: string | null;
-          f_table_schema: unknown | null;
-          f_table_name: unknown | null;
-          f_geometry_column: unknown | null;
           coord_dimension: number | null;
+          f_geometry_column: unknown | null;
+          f_table_catalog: string | null;
+          f_table_name: unknown | null;
+          f_table_schema: unknown | null;
           srid: number | null;
           type: string | null;
         };
         Insert: {
-          f_table_catalog?: string | null;
-          f_table_schema?: unknown | null;
-          f_table_name?: unknown | null;
-          f_geometry_column?: unknown | null;
           coord_dimension?: number | null;
+          f_geometry_column?: unknown | null;
+          f_table_catalog?: string | null;
+          f_table_name?: unknown | null;
+          f_table_schema?: unknown | null;
           srid?: number | null;
           type?: string | null;
         };
         Update: {
-          f_table_catalog?: string | null;
-          f_table_schema?: unknown | null;
-          f_table_name?: unknown | null;
-          f_geometry_column?: unknown | null;
           coord_dimension?: number | null;
+          f_geometry_column?: unknown | null;
+          f_table_catalog?: string | null;
+          f_table_name?: unknown | null;
+          f_table_schema?: unknown | null;
           srid?: number | null;
           type?: string | null;
         };
@@ -483,12 +480,12 @@ export interface Database {
       reviewsPerAdvertisement: {
         Row: {
           advertisement_id: string | null;
-          review_number: number | null;
-          overall_average: number | null;
-          location_average: number | null;
-          value_quality_average: number | null;
-          landlord_average: number | null;
           comodities_average: number | null;
+          landlord_average: number | null;
+          location_average: number | null;
+          overall_average: number | null;
+          review_number: number | null;
+          value_quality_average: number | null;
         };
       };
     };
@@ -815,7 +812,7 @@ export interface Database {
         Returns: unknown;
       };
       geography_typmod_in: {
-        Args: { "": unknown };
+        Args: { "": unknown[] };
         Returns: number;
       };
       geography_typmod_out: {
@@ -1004,7 +1001,7 @@ export interface Database {
         Returns: unknown;
       };
       geometry_typmod_in: {
-        Args: { "": unknown };
+        Args: { "": unknown[] };
         Returns: number;
       };
       geometry_typmod_out: {
@@ -1059,6 +1056,14 @@ export interface Database {
       longtransactionsenabled: {
         Args: Record<PropertyKey, never>;
         Returns: boolean;
+      };
+      modify_reservation: {
+        Args: {
+          reservation_id: string;
+          reservation_status: Database["public"]["Enums"]["ReservationStatus"];
+          stay_id: string;
+        };
+        Returns: unknown;
       };
       path: {
         Args: { "": unknown };
@@ -1483,8 +1488,8 @@ export interface Database {
           }
         | {
             Args: {
-              geom: unknown;
-              ids: unknown;
+              geom: unknown[];
+              ids: number[];
               prec: number;
               prec_z: number;
               prec_m: number;
@@ -1549,7 +1554,7 @@ export interface Database {
         Returns: unknown;
       };
       st_clusterintersecting: {
-        Args: { "": unknown };
+        Args: { "": unknown[] };
         Returns: unknown[];
       };
       st_collect:
@@ -1558,7 +1563,7 @@ export interface Database {
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: { "": unknown[] };
             Returns: unknown;
           };
       st_collectionextract: {
@@ -2013,7 +2018,7 @@ export interface Database {
       };
       st_makeline:
         | {
-            Args: { "": unknown };
+            Args: { "": unknown[] };
             Returns: unknown;
           }
         | {
@@ -2210,7 +2215,7 @@ export interface Database {
         Returns: unknown;
       };
       st_polygonize: {
-        Args: { "": unknown };
+        Args: { "": unknown[] };
         Returns: unknown;
       };
       st_project: {
@@ -2355,7 +2360,7 @@ export interface Database {
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: { "": unknown[] };
             Returns: unknown;
           };
       st_voronoilines: {
@@ -2465,6 +2470,7 @@ export interface Database {
         | "CHANGE_REQUESTED"
         | "CHANGE_ACCEPTED"
         | "CHANGE_REJECTED";
+      staysstatus: "OK" | "CHANGED";
       type_host: "PROFISSIONAL" | "PARTICULAR";
       TypeRoom: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
     };

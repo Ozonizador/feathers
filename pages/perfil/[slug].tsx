@@ -9,7 +9,6 @@ import { Advertisement } from "../../models/advertisement";
   /* page 61 - 62 XD */
 }
 
-
 interface IndexProps {
   profile: Profile & { advertisements: Advertisement[] };
 }

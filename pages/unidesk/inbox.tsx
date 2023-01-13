@@ -7,7 +7,7 @@ import { MessageWithProfile } from "../../models/message";
 import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import { Avatar } from "flowbite-react";
-import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
+import { Reservation, ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import useReservationService from "../../hooks/reservationService";
@@ -28,7 +28,7 @@ const CaixaEntrada = () => {
   const [conversations, setConversations] = useState<ConversationWithTenant[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
   const profile = useProfileInformation();
-  const { updateReservationStatusOnDB } = useReservationService();
+  const { acceptReservation } = useReservationService();
   const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
   const { getConversationsFromUser } = useConversationService();
 
@@ -77,10 +77,10 @@ const CaixaEntrada = () => {
 
   const updateReservationStatus = async (status: ReservationStatus) => {
     const { reservation } = currentConversation;
-    const { data, error } = await updateReservationStatusOnDB(reservation.id, status);
+    const { data, error } = await acceptReservation(reservation.id, status);
 
     if (!error) {
-      setCurrentConversation({ ...currentConversation, reservation: data });
+      setCurrentConversation({ ...currentConversation, reservation: data as Reservation });
     }
   };
 
