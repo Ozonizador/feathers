@@ -143,12 +143,12 @@ const CurrentReservationsSection = () => {
 
 const NextReservationsSection = () => {
   const user = useUser();
-  const { getNextReservationsByHostId } = useStayService();
+  const { getNextStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (user) {
-      const { data, error } = await getNextReservationsByHostId(user.id);
+      const { data, error } = await getNextStaysByHostId(user.id);
       if (!error) {
         setReservations(data);
       }
@@ -202,12 +202,12 @@ const NextReservationsSection = () => {
 
 const AllReservationsSection = () => {
   const user = useUser();
-  const { getAllReservationsByHostId } = useStayService();
+  const { getAllStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (user) {
-      const { data, error } = await getAllReservationsByHostId(user.id);
+      const { data, error } = await getAllStaysByHostId(user.id);
       if (!error) {
         setReservations(data);
       }

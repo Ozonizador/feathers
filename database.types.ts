@@ -61,7 +61,7 @@ export interface Database {
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
-          house_rules: Json;
+          house_rules: HouseRules;
           id: string;
           max_rooms?: number;
           month_rent: number;

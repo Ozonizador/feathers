@@ -1,11 +1,10 @@
 import { Database } from "../database.types";
 import { Profile } from "./profile";
-import { ReservationWithAdvertisement } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 
-export type ConversationsResponse = Database["public"]["Tables"]["conversations"];
-export type Conversation = ConversationsResponse["Row"];
+export type Conversations = Database["public"]["Tables"]["conversations"];
+export type Conversation = Conversations["Row"];
 
 export type ConversationWithTenant = Conversation & {
   tenant: Partial<Profile>;

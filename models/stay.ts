@@ -16,7 +16,7 @@ export type StayWithReservation = Stay & {
 };
 
 export type StayGuest = StayWithReservation & {
-  tenant: Pick<Profile, "name" | "avatar_url">;
+  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
 };
 
 // todo: confirm this
