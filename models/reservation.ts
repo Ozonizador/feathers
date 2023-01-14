@@ -22,8 +22,6 @@ export const RESERVATION_TABLE = {
   ID: "id",
   ADVERT_ID: "advertisement_id",
   TENANT_ID: "tenant_id",
-  START_DATE: "start_date",
-  END_DATE: "end_date",
   STATUS: "status",
   HOST_ID: "advertisement.host_id",
 } as const;

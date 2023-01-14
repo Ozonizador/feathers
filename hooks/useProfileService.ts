@@ -1,4 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { PostgrestError } from "@supabase/supabase-js";
 import { AVATAR_STORAGE_NAME, Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 import { createRandomUniqWord } from "../utils/utils";
 
@@ -117,7 +118,10 @@ const useProfileService = () => {
     return { data, error };
   };
 
-  async function updateNotificationEmail(userId: string, notify: boolean) {
+  async function updateNotificationEmail(
+    userId: string,
+    notify: boolean
+  ): Promise<{ data: { accepts_notification_email: boolean }; error: PostgrestError }> {
     const { error, data } = await supabaseClient
       .from(PROFILE_TABLE_NAME)
       .update({ accepts_notification_email: notify })
@@ -142,7 +146,8 @@ const useProfileService = () => {
   async function getNotificationInfoFromUser(userId: string) {
     const { error, data } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-      .select("accepts_notification_email, accepts_notification_message");
+      .select("accepts_notification_email, accepts_notification_message")
+      .eq(PROFILE_COLUMNS.ID, userId);
 
     return { error, data };
   }

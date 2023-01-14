@@ -32,4 +32,6 @@ export const STAY_TABLE = {
   RESERVATION_ID: "reservation_id",
   REPORT: "reports",
   TENANT_ID: "tenant_id",
+  START_DATE: "reservation.start_date",
+  END_DATE: "reservation.end_date",
 } as const;
