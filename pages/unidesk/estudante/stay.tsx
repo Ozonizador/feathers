@@ -16,14 +16,15 @@ import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayComplete } from "../../../models/stay";
-import { GetServerSidePropsContext } from "next";
+import { StayComplete, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../../../models/stay";
+import next, { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
 // icons
 
 import IconStay from "../../../public/images/icon-profile.svg";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
+import error from "next/error";
 
 /* PAGINA 21 do xd */
 
@@ -35,32 +36,12 @@ const EstadiaBreadcrumbs = [
   label: string;
 }[];
 
-const Estadia = () => {
-  const profile = useProfileInformation();
-  const { getCurrentStayByTenantId, getNextStaysByTenantId } = useStayService();
+interface EstadiaComponentProps {
+  currentStay: StayComplete;
+  nextStays: StayComplete[];
+}
 
-  const [currentStay, setCurrentStay] = useState<StayComplete>();
-  const [nextStays, setNextStays] = useState<StayComplete[]>([]);
-
-  const getProfileStays = useCallback(async () => {
-    if (profile) {
-      const { data, error } = await getCurrentStayByTenantId(profile.id);
-      if (!error) setCurrentStay(data as StayComplete);
-    }
-  }, [profile]);
-
-  const getNextReservations = useCallback(async () => {
-    if (profile) {
-      const { data, error } = await getNextStaysByTenantId(profile.id);
-      if (!error) setNextStays(data as StayComplete[]);
-    }
-  }, [profile]);
-
-  useEffect(() => {
-    getProfileStays();
-    getNextReservations();
-  }, [getProfileStays, getNextReservations]);
-
+const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
@@ -133,7 +114,7 @@ const Estadia = () => {
   );
 };
 
-export default Estadia;
+export default EstadiaComponent;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
@@ -143,18 +124,51 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session)
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",
         permanent: false,
       },
     };
+  }
+
+  const user = session.user;
+  const date = new Date().toISOString();
+
+  const getCurrentUserStay = async () => {
+    const { data, error } = await supabase
+      .from<"stays", Stays>(STAYS_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .eq(STAY_TABLE.TENANT_ID, user.id)
+      .gte("reservation.start_date", date)
+      .lte("reservation.end_date", date)
+      .single();
+
+    return { data, error };
+  };
+
+  const getNextStaysForUser = async () => {
+    const { data, error } = await supabase
+      .from<"stays", Stays>(STAYS_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .eq(STAY_TABLE.TENANT_ID, user.id)
+      .gte("reservation.start_date", date)
+      .lte("reservation.end_date", date);
+
+    return { data, error };
+  };
+
+  const [currentUserStay, nextUserStays] = await Promise.all([getCurrentUserStay(), getNextStaysForUser()]);
+  const { data: currentStay, error: currentStayError } = currentUserStay;
+  const { data: nextStays, error: nextStaysError } = nextUserStays;
 
   return {
     props: {
       initialSession: session,
       user: session.user,
+      currentStay: !currentStayError && currentStay ? currentStay : undefined,
+      nextStays: !nextStaysError && nextStays ? nextStays : [],
     },
   };
 };

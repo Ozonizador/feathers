@@ -12,6 +12,7 @@ const useReportService = () => {
     return { data, error };
   };
 
+  // Not being used. for the unihosts panel.
   const getReports = async (advertId: string) => {
     const { data, error } = await supabaseClient
       .from<"reports", ReportsResponse>(REPORTS_TABLE_NAME)
@@ -28,7 +29,7 @@ const useReportService = () => {
         .eq(REPORT_TABLE.STAY_ID, stay_id)
         .single();
 
-      return data ? true : false;
+      return !error && data ? true : false;
     } catch (err) {
       return false;
     }

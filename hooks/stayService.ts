@@ -28,22 +28,6 @@ const useStayService = () => {
     return { data, error };
   };
 
-  const getCurrentStayByTenantId = async (
-    tenantId: string
-  ): Promise<{ data: StayWithReservation; error: PostgrestError }> => {
-    const date = new Date().toISOString();
-
-    const { data, error } = await supabaseClient
-      .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
-      .eq(STAY_TABLE.TENANT_ID, tenantId)
-      .gte("reservation.start_date", date)
-      .lte("reservation.end_date", date)
-      .single();
-
-    return { data, error };
-  };
-
   const getHistoryStayByTenantId = async (tenantId: string): Promise<{ data: Stay[]; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)

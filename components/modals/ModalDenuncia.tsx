@@ -24,7 +24,7 @@ const ModalDenuncia = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [report, setReport] = useState<Partial<Report>>({
     type: ReportsType.IMPRECISE,
-    stay_id: stay.id || "",
+    stay_id: stay?.id || "",
     description: "",
   });
 
