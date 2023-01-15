@@ -80,7 +80,7 @@ const ModalAvaliarExperiencia = () => {
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-14 text-center">
-            <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white  text-left align-middle shadow-xl transition-all">
+            <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left  align-middle shadow-xl transition-all lg:w-1/2">
               <Dialog.Title
                 as="h3"
                 className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"

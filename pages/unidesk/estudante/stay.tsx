@@ -73,9 +73,9 @@ const Estadia = () => {
                   <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
                     <MenuEstudante />
                   </div>
-                  <div className="mx-auto flex w-4/5 flex-col gap-3 pt-12 text-center lg:ml-12 lg:text-left">
+                  <div className="mx-auto flex w-4/5 flex-col gap-3 pt-12 lg:ml-12">
                     <div className="mb-4 text-2xl font-semibold">Informações gerais</div>
-                    <h6 className="text-xl text-gray-600">Estadia atual</h6>
+                    <h6 className="text-left text-xl text-gray-600">Estadia atual</h6>
                     {/* Modais */}
                     <ModalDenuncia />
                     <ModalAvaliarExperiencia />

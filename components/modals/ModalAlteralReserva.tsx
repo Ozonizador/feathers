@@ -8,8 +8,6 @@ import { Reservation, ReservationStatus, RESERVATION_TABLE } from "../../models/
 
 /* PAGINA 23 DO XD 
 
-para chamar na pagina => <ModalAlterarReserva defaultOpen={false} /> 
-false nao mostra nada true mostra.
 */
 
 const ModalAlterarReserva = () => {
@@ -79,7 +77,7 @@ const ModalAlterarReserva = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title
                   as="h3"
                   className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"

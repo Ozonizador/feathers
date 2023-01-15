@@ -57,7 +57,7 @@ export interface Database {
           expenses: HouseExpenses;
           extra_per_host: number;
           floor?: string | null;
-          geom?: unknown | null;
+          geom?: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
@@ -91,7 +91,7 @@ export interface Database {
           expenses?: HouseExpenses;
           extra_per_host?: number;
           floor?: string | null;
-          geom?: unknown | null;
+          geom?: any | null;
           guarantee_value?: number;
           host_id?: string;
           host_lives_property?: boolean;
@@ -283,7 +283,6 @@ export interface Database {
       };
       reports: {
         Row: {
-          advertisement_id: string;
           created_at: string;
           description: string;
           id: string;
@@ -292,7 +291,6 @@ export interface Database {
           updated_at: string;
         };
         Insert: {
-          advertisement_id: string;
           created_at?: string;
           description: string;
           id: string;
@@ -301,7 +299,6 @@ export interface Database {
           updated_at?: string;
         };
         Update: {
-          advertisement_id?: string;
           created_at?: string;
           description?: string;
           id?: string;

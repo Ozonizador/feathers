@@ -1,0 +1,1 @@
+ALTER TABLE reports DROP COLUMN advertisement_id;
