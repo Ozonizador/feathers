@@ -1,5 +1,6 @@
 import { Database } from "../database.types";
 import { Profile } from "./profile";
+import { ReservationWithAdvertisement } from "./reservation";
 
 export const CONVERSATION_TABLE_NAME = "conversations" as const;
 

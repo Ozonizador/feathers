@@ -4,7 +4,6 @@ import { Tab } from "@headlessui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import useStayService from "../../hooks/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
-import { ReservationWithAdvertisement } from "../../models/reservation";
 import { StayGuest } from "../../models/stay";
 
 const ReservasSection = () => {
@@ -83,13 +82,13 @@ const ReservasSection = () => {
 const CurrentReservationsSection = () => {
   const user = useUser();
   const { getCurrentStaysByHostId } = useStayService();
-  const [reservations, setReservations] = useState<StayGuest[]>([]);
+  const [stays, setStays] = useState<StayGuest[]>([]);
 
   const getCurrentStays = useCallback(async () => {
     if (user) {
       const { data, error } = await getCurrentStaysByHostId(user.id);
       if (!error) {
-        setReservations(data as StayGuest[]);
+        setStays(data as StayGuest[]);
       }
     }
   }, [user]);
@@ -113,25 +112,27 @@ const CurrentReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!reservations ||
-            (reservations.length == 0 && (
+          {!stays ||
+            (stays.length == 0 && (
               <Table.Row>
                 <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
               </Table.Row>
             ))}
-          {reservations &&
-            reservations.map((reservation, index) => {
+          {stays &&
+            stays.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                    {stay.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{reservation.start_date}</Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{reservation.end_date}</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {stay.reservation.start_date}
+                  </Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{stay.reservation.end_date}</Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[stay.advertisement.type]
+                  } em ${stay.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -144,7 +145,7 @@ const CurrentReservationsSection = () => {
 const NextReservationsSection = () => {
   const user = useUser();
   const { getNextStaysByHostId } = useStayService();
-  const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
+  const [reservations, setReservations] = useState<StayGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (user) {
@@ -179,18 +180,22 @@ const NextReservationsSection = () => {
               <Table.Cell className="flex justify-center py-2">Sem próximas reservas</Table.Cell>
             ))}
           {reservations &&
-            reservations.map((reservation, index) => {
+            reservations.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                    {stay.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{reservation.start_date}</Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{reservation.end_date}</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {stay.reservation.start_date}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                    {stay.reservation.end_date}
+                  </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[stay.advertisement.type]
+                  } em ${stay.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -203,7 +208,7 @@ const NextReservationsSection = () => {
 const AllReservationsSection = () => {
   const user = useUser();
   const { getAllStaysByHostId } = useStayService();
-  const [reservations, setReservations] = useState<ReservationWithAdvertisement[]>([]);
+  const [reservations, setReservations] = useState<StayGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (user) {
@@ -218,14 +223,14 @@ const AllReservationsSection = () => {
     getNextReservations();
   }, [getNextReservations]);
 
-  const checkIntervalForDate = (reservation: ReservationWithAdvertisement) => {
+  const checkIntervalForDate = (stay: StayGuest) => {
     const currentDate = new Date();
 
-    if (new Date(reservation.start_date) < currentDate && new Date(reservation.end_date) >= currentDate)
+    if (new Date(stay.reservation.start_date) < currentDate && new Date(stay.reservation.end_date) >= currentDate)
       return "A decorrer estadia";
-    if (new Date(reservation.start_date) < currentDate && new Date(reservation.end_date) < currentDate)
+    if (new Date(stay.reservation.start_date) < currentDate && new Date(stay.reservation.end_date) < currentDate)
       return "Finalizado";
-    if (new Date(reservation.start_date) > currentDate && new Date(reservation.end_date) > currentDate)
+    if (new Date(stay.reservation.start_date) > currentDate && new Date(stay.reservation.end_date) > currentDate)
       return "Próxima";
 
     return "";
@@ -249,20 +254,24 @@ const AllReservationsSection = () => {
           {!reservations ||
             (reservations.length == 0 && <Table.Cell className="flex justify-center py-2">Sem reservas</Table.Cell>)}
           {reservations &&
-            reservations.map((reservation, index) => {
+            reservations.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {checkIntervalForDate(reservation)}
+                    {checkIntervalForDate(stay)}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                    {stay.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{reservation.start_date}</Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{reservation.end_date}</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {stay.reservation.start_date}
+                  </Table.Cell>
+                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                    {stay.reservation.end_date}
+                  </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[stay.advertisement.type]
+                  } em ${stay.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}

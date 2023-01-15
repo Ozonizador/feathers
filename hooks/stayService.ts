@@ -1,30 +1,11 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
-import { Advertisement } from "../models/advertisement";
-import { Profile } from "../models/profile";
-import { Reservation, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
-import { Stay, StayGuest, Stays, STAYS_TABLE_NAME, StayWithReservation, STAY_TABLE } from "../models/stay";
+import { Stay, StayGuest, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../models/stay";
 
 const useStayService = () => {
   const supabaseClient = useSupabaseClient();
   const getStays = async () => {
     const { data, error } = await supabaseClient.from<"stays", Stay>(STAYS_TABLE_NAME).select();
-    return { data, error };
-  };
-
-  /* BY TENANT ID */
-
-  const getNextStaysByTenantId = async (
-    tenantId: string
-  ): Promise<{ data: StayWithReservation[]; error: PostgrestError }> => {
-    const date = new Date().toISOString();
-    const { data, error } = await supabaseClient
-      .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
-      .eq(STAY_TABLE.TENANT_ID, tenantId)
-      .gte("reservation.start_date", date)
-      .lte("reservation.end_date", date);
-
     return { data, error };
   };
 
@@ -85,9 +66,7 @@ const useStayService = () => {
     getStays,
     getAllStaysByHostId,
     getNextStaysByHostId,
-    getCurrentStayByTenantId,
     getCurrentStaysByHostId,
-    getNextStaysByTenantId,
   };
 };
 
