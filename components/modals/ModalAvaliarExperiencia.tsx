@@ -101,8 +101,8 @@ const ModalAvaliarExperiencia = () => {
                       <div className="" id="model-radius">
                         <div className=" m-4 ">
                           <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T3 - Peniche</p>
-                          <div className="flex flex-col">
-                            <div className="mb-8 flex w-full flex-row justify-between">
+                          <div className="flex flex-col gap-6">
+                            <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">Localização</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 1)}>
@@ -123,9 +123,9 @@ const ModalAvaliarExperiencia = () => {
                               </Rating>
                             </div>
 
-                            <div className="mb-8 flex w-full flex-row justify-between">
-                              <div className="w-1/2 text-2xl text-secondary-300">Qualidade - preço</div>
-                              <Rating className="w-1/2">
+                            <div className="flex w-full flex-row justify-between">
+                              <div className="text-2xl text-secondary-300">Qualidade - preço</div>
+                              <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 1)}>
                                   <Rating.Star filled={review.value_quality_rating >= 1 ? true : false} />
                                 </div>
@@ -144,7 +144,7 @@ const ModalAvaliarExperiencia = () => {
                               </Rating>
                             </div>
 
-                            <div className="mb-8 flex w-full flex-row justify-between">
+                            <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">Comodidades</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 1)}>
@@ -165,7 +165,7 @@ const ModalAvaliarExperiencia = () => {
                               </Rating>
                             </div>
 
-                            <div className="mb-8 flex w-full flex-row justify-between">
+                            <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">Senhorio</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 1)}>
@@ -186,7 +186,7 @@ const ModalAvaliarExperiencia = () => {
                               </Rating>
                             </div>
 
-                            <div className="mb-8 flex w-full flex-row justify-between">
+                            <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">Avaliação Geral</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 1)}>
