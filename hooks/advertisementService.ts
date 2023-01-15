@@ -1,4 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { PostgrestError } from "@supabase/supabase-js";
 
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import { addFilterAdvertisement } from "../helpers/advertisementHelper";
@@ -16,16 +17,22 @@ export const PAGE_NUMBER_COUNT = 10 as number;
 const useAdvertisementService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addAdvertisement = async (advertisement: Advertisement) => {
+  const addAdvertisement = async (
+    advertisement: Advertisement
+  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .insert({ ...advertisement, updated_at: new Date().toDateString() })
       .select()
       .single();
+
     return { data, error };
   };
 
-  const updateAdvertisement = async (advertisement: Partial<Advertisement>, id: string) => {
+  const updateAdvertisement = async (
+    advertisement: Partial<Advertisement>,
+    id: string
+  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
@@ -36,7 +43,7 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  const getSingleAdvertisement = async (id: string) => {
+  const getSingleAdvertisement = async (id: string): Promise<{ data: Advertisement; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -46,7 +53,9 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  const getAdvertismentsFromMultipleId = async (ids: string[]) => {
+  const getAdvertisementsFromMultipleId = async (
+    ids: string[]
+  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -55,19 +64,13 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  const getAdvertismentsFromUserId = async (userId: string) => {
+  const getAdvertismentsFromUserId = async (
+    userId: string
+  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
-
-    return { data, error };
-  };
-  const getAdvertisementsFromPlace = async (place: string) => {
-    const { data, error } = await supabaseClient
-      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select()
-      .eq(ADVERTISEMENT_PROPERTIES.PLACE, place);
 
     return { data, error };
   };
@@ -148,11 +151,10 @@ const useAdvertisementService = () => {
     addAdvertisement,
     updateAdvertisement,
     getSingleAdvertisement,
-    getAdvertismentsFromMultipleId,
+    getAdvertisementsFromMultipleId,
     getAdvertismentsFromUserId,
     getAdvertisementsForMainPage,
     getSimilarAdvertisements,
-    getAdvertisementsFromPlace,
     getAdvertisementsByCloseCoordinatesWithFilters,
     saveImage,
     getPublicUrlFromImage,

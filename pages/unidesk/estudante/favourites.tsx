@@ -22,11 +22,11 @@ const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
   const profile = useProfileInformation();
-  const { getAdvertismentsFromMultipleId } = useAdvertisementService();
+  const { getAdvertisementsFromMultipleId } = useAdvertisementService();
 
   const getUserFavourites = useCallback(async () => {
     if (profile && profile.favourite_rooms) {
-      const { data, error } = await getAdvertismentsFromMultipleId(profile.favourite_rooms);
+      const { data, error } = await getAdvertisementsFromMultipleId(profile.favourite_rooms);
       if (!error) {
         setFavourites(data);
       }

@@ -4,13 +4,15 @@ import { Report, ReportsResponse, REPORTS_TABLE_NAME, REPORT_TABLE } from "../mo
 
 const useReportService = () => {
   const supabaseClient = useSupabaseClient();
-  const addReportOnAdvert = async (report: Partial<Report>, advertisement_id: string, stay_id: string) => {
+
+  const addReportOnAdvert = async (report: Partial<Report>) => {
     const { data, error } = await supabaseClient
       .from(REPORTS_TABLE_NAME)
-      .insert({ ...report, updated_at: new Date().toDateString(), stay_id, id: uuidv4(), advertisement_id });
+      .insert({ ...report, updated_at: new Date().toDateString(), id: uuidv4() });
     return { data, error };
   };
 
+  // Not being used. for the unihosts panel.
   const getReports = async (advertId: string) => {
     const { data, error } = await supabaseClient
       .from<"reports", ReportsResponse>(REPORTS_TABLE_NAME)
@@ -27,7 +29,7 @@ const useReportService = () => {
         .eq(REPORT_TABLE.STAY_ID, stay_id)
         .single();
 
-      return data ? true : false;
+      return !error && data ? true : false;
     } catch (err) {
       return false;
     }

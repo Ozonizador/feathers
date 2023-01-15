@@ -59,66 +59,56 @@ const StayInfo = ({ stay }: StayInfoProps) => {
   };
 
   return (
-    <div>
-      <div className="flex w-96 flex-row gap-4">
-        <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalReport()}>
-          <div>
-            <BsFlag
-              className={classNames("mb-2 text-4xl", {
-                "text-red-500": stay?.report === null,
-                "text-gray-600": stay?.report !== null,
-              })}
-            />
-          </div>
-          <div className="text-center text-xs">
-            Reportar
-            <br />
-            anúncio
-          </div>
+    <div className="my-auto flex w-full flex-row gap-3">
+      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalReport()}>
+        <BsFlag
+          className={classNames("mb-2 text-4xl", {
+            "text-red-500": stay?.report === null,
+            "text-gray-600": stay?.report !== null,
+          })}
+        />
+        <div className="text-center text-xs">
+          Reportar
+          <br />
+          anúncio
         </div>
+      </div>
 
-        <div className="flex flex-1 cursor-pointer flex-col items-center">
-          <Link href={INBOX_URL}>
-            <a>
-              <div className="flex flex-1 flex-col items-center">
-                <div>
-                  <RiMailSendLine className="mb-2 text-4xl text-green-400" />
-                </div>
-                <div className="text-center text-xs">
-                  Enviar
-                  <br />
-                  mensagem
-                </div>
+      <div className="flex flex-1 cursor-pointer flex-col items-center">
+        <Link href={INBOX_URL}>
+          <a>
+            <div className="flex flex-1 flex-col items-center">
+              <RiMailSendLine className="mb-2 text-4xl text-green-400" />
+              <div className="text-center text-xs">
+                Enviar
+                <br />
+                mensagem
               </div>
-            </a>
-          </Link>
-        </div>
+            </div>
+          </a>
+        </Link>
+      </div>
 
-        <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAlterarReserva()}>
-          <div>
-            <TbRefresh className="mb-2 text-4xl text-amber-700" />
-          </div>
-          <div className="text-center text-xs">
-            Alterar
-            <br />
-            reserva
-          </div>
+      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAlterarReserva()}>
+        <TbRefresh className="mb-2 text-4xl text-amber-700" />
+        <div className="text-center text-xs">
+          Alterar
+          <br />
+          reserva
         </div>
+      </div>
 
-        <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAvaliarExperiencia()}>
-          <div>
-            <AiOutlineStar
-              className={classNames("mb-2 text-4xl ", {
-                "text-yellow-400": stay?.review === null,
-                "text-gray-600": stay?.review !== null,
-              })}
-            />
-          </div>
-          <div className="text-center text-xs">
-            Avaliar
-            <br />
-            experiência
-          </div>
+      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAvaliarExperiencia()}>
+        <AiOutlineStar
+          className={classNames("mb-2 text-4xl ", {
+            "text-yellow-400": stay?.review === null,
+            "text-gray-600": stay?.review !== null,
+          })}
+        />
+        <div className="text-center text-xs">
+          Avaliar
+          <br />
+          experiência
         </div>
       </div>
     </div>

@@ -33,7 +33,6 @@ export default function RoomPagamento() {
   /* Reservation */
   const [reservation, setReservation] = useState<Omit<Reservation, "id" | "created_at" | "updated_at">>({
     start_date: startDate.toDateString(),
-    stay_id: null,
     end_date: endDate.toDateString(),
     status: ReservationStatus.REQUESTED,
     advertisement_id: advertisement.id,

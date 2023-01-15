@@ -9,18 +9,10 @@ import {
 } from "../../context/ModalShowProvider";
 import { Report, ReportsType } from "../../models/report";
 import { useProfileInformation } from "../../context/MainProvider";
-import { Spinner } from "flowbite-react";
 import useReportService from "../../hooks/reportService";
+import FeathersSpinner from "../utils/Spinner";
 
-/* PAGINA 21-22 DO XD 
-
-para chamar na pagina => <ModalDenuncia /> 
-false nao mostra nada true mostra.
-*/
-
-interface PassosModaisProps {
-  nextStep: () => void;
-}
+/* PAGINA 21-22 DO XD */
 
 const ModalDenuncia = () => {
   const { addReportOnAdvert } = useReportService();
@@ -29,22 +21,21 @@ const ModalDenuncia = () => {
   const setModalReportProperty = useSetModalReportContextProperty();
   const setIsOpen = useSetOpenModalReport();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [report, setReport] = useState<Partial<Report>>({
     type: ReportsType.IMPRECISE,
     stay_id: stay?.id || "",
-    advertisement_id: stay?.advertisement_id || "",
     description: "",
   });
 
   function closeModal() {
     setIsOpen(false);
+    setReport((oldReport) => ({ ...oldReport, description: "" }));
   }
 
   const nextStep = () => {
     setModalReportProperty("step", step + 1);
   };
-
-  const [loading, setLoading] = useState<boolean>(false);
 
   const changeReportType = (event) => {
     const type = event.target.value;
@@ -61,44 +52,10 @@ const ModalDenuncia = () => {
     event.preventDefault();
     setLoading(true);
     if (profile) {
-      const { data, error } = await addReportOnAdvert(report, stay.advertisement_id, profile.id);
-      if (data) {
-        nextStep();
-      }
+      const { data, error } = await addReportOnAdvert(report);
+      if (!error) nextStep();
     }
     setLoading(false);
-  };
-
-  const ModalDenunciaSegundoPasso = () => {
-    const reportModal = useModalReportAdvertisement();
-    const setModalReport = useSetModalReportAdvertisement();
-
-    const closeModal = (event) => {
-      event.preventDefault();
-      setModalReport({ ...reportModal, isOpen: false, step: 1 });
-    };
-    return (
-      <>
-        <div className="container p-6">
-          <div>
-            <div className="jumbotron m-4 p-4 text-center">
-              <h5 className="text-xl font-bold">A UniHosts agradece!</h5>
-              <p className="my-7">
-                Vamos averiguar a situação. Obrigada por teres denunciado e tornado
-                <br />a nosssa comunidade unihosts num lugar melhor!
-              </p>
-              <button
-                type="button"
-                className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
-                onClick={(e) => closeModal(e)}
-              >
-                Fechar
-              </button>
-            </div>
-          </div>
-        </div>
-      </>
-    );
   };
 
   return (
@@ -119,7 +76,7 @@ const ModalDenuncia = () => {
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image className="m-2" src="/images/flag.png" alt="" width="40px" height="30px" />
                   <span className="my-auto ml-5 text-3xl font-bold">Reportar anúncio</span>
@@ -221,7 +178,7 @@ const ModalDenuncia = () => {
                                     onClick={saveReport}
                                     disabled={loading}
                                   >
-                                    {loading ? <Spinner /> : "Seguinte"}
+                                    {loading ? <FeathersSpinner /> : "Seguinte"}
                                   </button>
                                 </div>
                               </div>
@@ -238,6 +195,38 @@ const ModalDenuncia = () => {
           </div>
         </Dialog>
       </Transition>
+    </>
+  );
+};
+
+const ModalDenunciaSegundoPasso = () => {
+  const reportModal = useModalReportAdvertisement();
+  const setModalReport = useSetModalReportAdvertisement();
+
+  const closeModal = (event) => {
+    event.preventDefault();
+    setModalReport({ ...reportModal, isOpen: false, step: 1 });
+  };
+  return (
+    <>
+      <div className="container p-6">
+        <div>
+          <div className="jumbotron m-4 p-4 text-center">
+            <h5 className="text-xl font-bold">A UniHosts agradece!</h5>
+            <p className="my-7">
+              Vamos averiguar a situação. Obrigada por teres denunciado e tornado
+              <br />a nosssa comunidade unihosts num lugar melhor!
+            </p>
+            <button
+              type="button"
+              className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
+              onClick={closeModal}
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

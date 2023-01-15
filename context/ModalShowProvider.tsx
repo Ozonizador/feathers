@@ -40,7 +40,7 @@ interface ModalAvaliarExperienciaProps {
 }
 
 interface ModaAvaliarExperienceContextElements {
-  stay: StayGuest;
+  stay: StayComplete;
   isOpen: boolean;
   step: number;
 }

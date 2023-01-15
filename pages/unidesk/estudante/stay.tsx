@@ -16,14 +16,15 @@ import { useCallback, useEffect, useState } from "react";
 import { useProfileInformation } from "../../../context/MainProvider";
 import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayComplete } from "../../../models/stay";
-import { GetServerSidePropsContext } from "next";
+import { StayComplete, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../../../models/stay";
+import next, { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
 // icons
 
 import IconStay from "../../../public/images/icon-profile.svg";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
+import error from "next/error";
 
 /* PAGINA 21 do xd */
 
@@ -35,36 +36,12 @@ const EstadiaBreadcrumbs = [
   label: string;
 }[];
 
-const Estadia = () => {
-  const profile = useProfileInformation();
-  const { getCurrentStayByTenantId, getNextStaysByTenantId } = useStayService();
+interface EstadiaComponentProps {
+  currentStay: StayComplete;
+  nextStays: StayComplete[];
+}
 
-  const [currentStay, setCurrentStay] = useState<StayComplete>();
-  const [nextStays, setNextStays] = useState<StayComplete[]>([]);
-
-  const getProfileStays = useCallback(async () => {
-    if (profile) {
-      const { data, error } = await getCurrentStayByTenantId(profile.id);
-      if (!error) {
-        setCurrentStay(data);
-      }
-    }
-  }, [profile]);
-
-  const getNextReservations = useCallback(async () => {
-    if (profile) {
-      const { data, error } = await getNextStaysByTenantId(profile.id);
-      if (!error) {
-        setNextStays(data);
-      }
-    }
-  }, [profile]);
-
-  useEffect(() => {
-    getProfileStays();
-    getNextReservations();
-  }, [getProfileStays, getNextReservations]);
-
+const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
@@ -77,17 +54,16 @@ const Estadia = () => {
                   <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
                     <MenuEstudante />
                   </div>
-                  <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
-                    <div className="mb-7 text-2xl font-semibold">Informações gerais</div>
-                    <div className="mt-7 mb-5 text-xl text-gray-600">Estadia atual</div>
-
+                  <div className="mx-auto flex w-4/5 flex-col gap-3 pt-12 lg:ml-12">
+                    <div className="mb-4 text-2xl font-semibold">Informações gerais</div>
+                    <h6 className="text-left text-xl text-gray-600">Estadia atual</h6>
                     {/* Modais */}
                     <ModalDenuncia />
                     <ModalAvaliarExperiencia />
                     <ModalAlterarReserva />
                     {/* Logica visivel */}
 
-                    <div className="flex items-center justify-center lg:justify-between">
+                    <div className="flex flex-col gap-7 lg:flex-row lg:gap-2">
                       {currentStay && (
                         <>
                           <StayCard stay={currentStay} />
@@ -96,25 +72,26 @@ const Estadia = () => {
                       )}
                       {!currentStay && <div>Não tem estadia programada</div>}
                     </div>
-                    <div className="flex w-full flex-col items-center justify-center align-middle">
-                      {nextStays && nextStays.length !== 0 && (
-                        <div className="mt-2">
-                          <h6>Próximas estadias</h6>
-                          {nextStays.map((stay, index) => {
+                    <div className="flex flex-col gap-3">
+                      <div className="mt-2">
+                        <h6 className="text-xl text-gray-600">Próximas estadias</h6>
+                      </div>
+                      <>
+                        {nextStays ? (
+                          nextStays.map((stay, index) => {
                             return (
-                              <div key={index} className="mt-2 flex  flex-row items-center gap-2">
+                              <div key={index} className="flex flex-col gap-7 lg:flex-row lg:gap-2">
                                 <StayCard stay={stay} />
-
                                 <StayInfo stay={stay} />
                               </div>
                             );
-                          })}
-                        </div>
-                      )}
-                      <>
-                        <div className="justify-center lg:mt-10">
+                          })
+                        ) : (
                           <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
-                        </div>
+                        )}
+                      </>
+
+                      <div className="flex justify-center">
                         <Link href={PROCURAR_ADVERT_URL}>
                           <a className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
                             Encontrar
@@ -124,7 +101,7 @@ const Estadia = () => {
                             em...
                           </a>
                         </Link>
-                      </>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -137,7 +114,7 @@ const Estadia = () => {
   );
 };
 
-export default Estadia;
+export default EstadiaComponent;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
@@ -147,18 +124,51 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session)
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",
         permanent: false,
       },
     };
+  }
+
+  const user = session.user;
+  const date = new Date().toISOString();
+
+  const getCurrentUserStay = async () => {
+    const { data, error } = await supabase
+      .from<"stays", Stays>(STAYS_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .eq(STAY_TABLE.TENANT_ID, user.id)
+      .gte("reservation.start_date", date)
+      .lte("reservation.end_date", date)
+      .single();
+
+    return { data, error };
+  };
+
+  const getNextStaysForUser = async () => {
+    const { data, error } = await supabase
+      .from<"stays", Stays>(STAYS_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .eq(STAY_TABLE.TENANT_ID, user.id)
+      .gte("reservation.start_date", date)
+      .lte("reservation.end_date", date);
+
+    return { data, error };
+  };
+
+  const [currentUserStay, nextUserStays] = await Promise.all([getCurrentUserStay(), getNextStaysForUser()]);
+  const { data: currentStay, error: currentStayError } = currentUserStay;
+  const { data: nextStays, error: nextStaysError } = nextUserStays;
 
   return {
     props: {
       initialSession: session,
       user: session.user,
+      currentStay: !currentStayError && currentStay ? currentStay : undefined,
+      nextStays: !nextStaysError && nextStays ? nextStays : [],
     },
   };
 };

@@ -1,6 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { v4 as uuidv4 } from "uuid";
 import {
+  MODIFY_RESERVATION_FUNCTION,
   Reservation,
   ReservationsResponse,
   ReservationStatus,
@@ -23,33 +24,19 @@ const useReservationService = () => {
     return { data, error };
   };
 
-  const getReservations = async () => {
+  const acceptReservation = async (reservation_id: string, status: ReservationStatus, stay_id?: string) => {
     const { data, error } = await supabaseClient
-      .from<"reservations", ReservationsResponse>(RESERVATION_TABLE_NAME)
-      .select();
-    return { data, error };
-  };
-
-  const getReservationByAdvertId = async (advertId: string) => {
-    const { data, error } = await supabaseClient
-      .from<"reservations", ReservationsResponse>(RESERVATION_TABLE_NAME)
-      .select()
-      .eq(RESERVATION_TABLE.ADVERT_ID, advertId);
-    return { data, error };
-  };
-
-  const updateReservationStatusOnDB = async (reservation_id: string, status: ReservationStatus) => {
-    const { data, error } = await supabaseClient
-      .from<"reservations", ReservationsResponse>(RESERVATION_TABLE_NAME)
-      .update({ status })
-      .eq(RESERVATION_TABLE.ID, reservation_id)
-      .select()
+      .rpc<"modify_reservation", ReservationsResponse>(MODIFY_RESERVATION_FUNCTION, {
+        reservation_id,
+        reservation_status: status,
+        stay_id,
+      })
       .single();
 
     return { data, error };
   };
 
-  return { addReservation, getReservations, updateReservationStatusOnDB, getReservationByAdvertId };
+  return { addReservation, acceptReservation };
 };
 
 export default useReservationService;

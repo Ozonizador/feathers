@@ -8,8 +8,6 @@ import { Reservation, ReservationStatus, RESERVATION_TABLE } from "../../models/
 
 /* PAGINA 23 DO XD 
 
-para chamar na pagina => <ModalAlterarReserva defaultOpen={false} /> 
-false nao mostra nada true mostra.
 */
 
 const ModalAlterarReserva = () => {
@@ -18,7 +16,6 @@ const ModalAlterarReserva = () => {
 
   const [newReservation, setNewReservation] = useState<Omit<Reservation, "created_at" | "updated_at">>({
     id: "",
-    stay_id: null,
     start_date: new Date().toDateString(),
     end_date: new Date().toDateString(),
     status: ReservationStatus.REQUESTED,
@@ -80,7 +77,7 @@ const ModalAlterarReserva = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-1/2 transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title
                   as="h3"
                   className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
@@ -119,13 +116,15 @@ const ModalAlterarReserva = () => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              {stay && <div className="ml-3 inline-block">{new String(stay.start_date)}</div>}
+                              {stay && (
+                                <div className="ml-3 inline-block">{new String(stay.reservation.start_date)}</div>
+                              )}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              {stay && <div className="ml-3 inline-block">{new String(stay.end_date)}</div>}
+                              {stay && <div className="ml-3 inline-block">{new String(stay.reservation.end_date)}</div>}
                             </div>
                           </div>
                           {newReservation && (

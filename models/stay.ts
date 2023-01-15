@@ -10,25 +10,28 @@ export const STAYS_TABLE_NAME = "stays" as const;
 export type Stays = Database["public"]["Tables"]["stays"];
 export type Stay = Stays["Row"];
 
-export type StayGuest = Stay & {
+export type StayWithReservation = Stay & {
+  reservation: Reservation;
   advertisement: Advertisement;
-  tenant: Pick<Profile, "name" | "avatar_url">;
 };
 
-export type StayComplete = StayGuest & {
+export type StayGuest = StayWithReservation & {
+  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
+};
+
+// todo: confirm this
+export type StayDates = Pick<StayWithReservation, "reservation">;
+
+export type StayComplete = StayWithReservation & {
   report: Report;
   review: Review;
-  reservation: Reservation;
 };
 
 export const STAY_TABLE = {
   ID: "id",
-  RESERVATION_ID: "advertisement_id",
+  RESERVATION_ID: "reservation_id",
   REPORT: "reports",
   TENANT_ID: "tenant_id",
-  START_DATE: "start_date",
-  END_DATE: "end_date",
-  ADVERTISEMENT_HOST: "advertisement.host",
+  START_DATE: "reservation.start_date",
+  END_DATE: "reservation.end_date",
 } as const;
-
-export type StayDates = Pick<Stay, "start_date" | "end_date">;

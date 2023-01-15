@@ -1,16 +1,13 @@
 import { Database } from "../database.types";
 import { Advertisement } from "./advertisement";
-import { Profile } from "./profile";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
+export const MODIFY_RESERVATION_FUNCTION = "modify_reservation" as const;
 
 export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
 export type Reservation = ReservationsResponse["Row"];
 
-export type ReservationWithAdvertisement = Reservation & {
-  advertisement: Advertisement;
-  tenant: Pick<Profile, "name">;
-};
+export type ReservationWithAdvertisement = Reservation & { advertisement: Advertisement };
 
 export enum ReservationStatus {
   REQUESTED = "REQUESTED",
@@ -25,10 +22,10 @@ export const RESERVATION_TABLE = {
   ID: "id",
   ADVERT_ID: "advertisement_id",
   TENANT_ID: "tenant_id",
-  START_DATE: "start_date",
-  END_DATE: "end_date",
   STATUS: "status",
   HOST_ID: "advertisement.host_id",
+  START_DATE: "start_date",
+  END_DATE: "end_date",
 } as const;
 
 export enum ReservationStatusLabel {
