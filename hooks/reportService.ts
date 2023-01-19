@@ -5,10 +5,10 @@ import { Report, ReportsResponse, REPORTS_TABLE_NAME, REPORT_TABLE } from "../mo
 const useReportService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReportOnAdvert = async (report: Partial<Report>) => {
+  const addReportOnAdvert = async (report: Partial<Report>, stayId: string) => {
     const { data, error } = await supabaseClient
       .from(REPORTS_TABLE_NAME)
-      .insert({ ...report, updated_at: new Date().toDateString(), id: uuidv4() });
+      .insert({ ...report, id: uuidv4(), stay_id: stayId });
     return { data, error };
   };
 
@@ -21,21 +21,7 @@ const useReportService = () => {
     return { data, error };
   };
 
-  const checkIfReportWasMade = async (stay_id: string) => {
-    try {
-      const { data, error } = await supabaseClient
-        .from<"reports", ReportsResponse>(REPORTS_TABLE_NAME)
-        .select()
-        .eq(REPORT_TABLE.STAY_ID, stay_id)
-        .single();
-
-      return !error && data ? true : false;
-    } catch (err) {
-      return false;
-    }
-  };
-
-  return { addReportOnAdvert, getReports, checkIfReportWasMade };
+  return { addReportOnAdvert, getReports };
 };
 
 export default useReportService;

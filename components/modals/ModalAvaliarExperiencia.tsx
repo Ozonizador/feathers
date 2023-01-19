@@ -20,9 +20,6 @@ false nao mostra nada true mostra.
 
 const startingReview = {
   id: "",
-  advertisement_id: "",
-  tenant_id: "",
-  stay_id: null,
   overall_rating: 1,
   location_rating: 1,
   value_quality_rating: 1,
@@ -52,10 +49,12 @@ const ModalAvaliarExperiencia = () => {
   const saveReview = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { data, error } = await addReview(review, profile.id, stay.advertisement.id);
-    if (!error) {
-      nextStep();
-    }
+    if (!stay) return;
+
+    const { data, error } = await addReview(review, stay.id);
+    if (error) return;
+
+    nextStep();
     setLoading(false);
   };
 
@@ -208,7 +207,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
                           </div>
 
-                          <p className="lead mb-16 mt-7" onClick={() => nextStep()}>
+                          <p className="my-3 flex justify-end" onClick={() => nextStep()}>
                             <a
                               className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
                               role="button"
@@ -263,7 +262,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
                           </div>
 
-                          <div className="lead mb-16 mt-7" onClick={() => saveReview}>
+                          <div className="my-3 flex justify-end" onClick={() => saveReview}>
                             <button
                               type="button"
                               className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"

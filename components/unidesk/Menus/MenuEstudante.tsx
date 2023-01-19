@@ -15,7 +15,7 @@ const MenuEstudante = () => {
   };
 
   return (
-    <div className=" w-80 rounded-2xl bg-terciary-600 p-2">
+    <div className="rounded-2xl bg-terciary-600 p-2">
       <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
         <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
       </div>
