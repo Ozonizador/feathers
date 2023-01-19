@@ -4,8 +4,8 @@ import { Advertisement } from "./advertisement";
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 export const MODIFY_RESERVATION_FUNCTION = "modify_reservation" as const;
 
-export type ReservationsResponse = Database["public"]["Tables"]["reservations"];
-export type Reservation = ReservationsResponse["Row"];
+export type Reservations = Database["public"]["Tables"]["reservations"];
+export type Reservation = Reservations["Row"];
 
 export type ReservationWithAdvertisement = Reservation & { advertisement: Advertisement };
 

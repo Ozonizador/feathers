@@ -3,9 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import {
   MODIFY_RESERVATION_FUNCTION,
   Reservation,
-  ReservationsResponse,
+  Reservations,
   ReservationStatus,
-  RESERVATION_TABLE,
   RESERVATION_TABLE_NAME,
 } from "../models/reservation";
 
@@ -17,7 +16,7 @@ const useReservationService = () => {
     tenant_id: string
   ) => {
     const { data, error } = await supabaseClient
-      .from<"reservations", ReservationsResponse>(RESERVATION_TABLE_NAME)
+      .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .insert({ ...reservation, id: uuidv4(), updated_at: new Date().toDateString(), tenant_id })
       .select()
       .single();
@@ -26,7 +25,7 @@ const useReservationService = () => {
 
   const acceptReservation = async (reservation_id: string, status: ReservationStatus, stay_id?: string) => {
     const { data, error } = await supabaseClient
-      .rpc<"modify_reservation", ReservationsResponse>(MODIFY_RESERVATION_FUNCTION, {
+      .rpc<"modify_reservation", Reservations>(MODIFY_RESERVATION_FUNCTION, {
         reservation_id,
         reservation_status: status,
         stay_id,
