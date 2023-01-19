@@ -133,9 +133,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const getCurrentUserStay = async () => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select(
-        "*, advertisement:advertisement_id(*), reservation:reservation_id(*), report:reports(id), review:reviews(id)"
-      )
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
       .eq(STAY_TABLE.TENANT_ID, user.id)
       .gte("reservation.start_date", date)
       .lte("reservation.end_date", date)
@@ -147,13 +145,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const getNextStaysForUser = async () => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select(
-        "*, advertisement:advertisement_id(*), reservation:reservation_id(*) report:report_id(id), review:reviews(id)"
-      )
-      .eq(STAY_TABLE.TENANT_ID, user.id)
-      .gte("reservation.start_date", date)
-      .gte("reservation.end_date", date);
+      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
+      .eq(STAY_TABLE.TENANT_ID, user.id);
+    // .gte("reservation.start_date", date)
+    // .gte("reservation.end_date", date);
 
+    debugger;
     return { data, error };
   };
 

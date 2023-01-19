@@ -23,8 +23,8 @@ export type StayGuest = StayWithReservation & {
 export type StayDates = Pick<StayWithReservation, "reservation">;
 
 export type StayComplete = StayWithReservation & {
-  report: Report;
-  review: Review;
+  reports: Report[];
+  reviews: Review[];
 };
 
 export const STAY_TABLE = {

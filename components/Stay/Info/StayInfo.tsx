@@ -36,7 +36,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
 
   const openModalReport = () => {
     // check if there are any reports already sent.
-    if (stay.report) {
+    if (reportWasAlreadySent()) {
       toast.error("Report was already sent");
       return;
     }
@@ -46,7 +46,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
 
   const openModalAvaliarExperiencia = () => {
     // check if there are any reviews already sent.
-    if (stay.review) {
+    if (evaluationWasDone()) {
       toast.error("Review was already done");
       return;
     }
@@ -59,11 +59,11 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
   };
 
   const reportWasAlreadySent = (): boolean => {
-    return stay.report ? true : false;
+    return stay.reports && stay.reports.length > 0 ? true : false;
   };
 
   const evaluationWasDone = (): boolean => {
-    return stay.review ? true : false;
+    return stay.reviews && stay.reviews.length > 0 ? true : false;
   };
 
   return (
@@ -73,8 +73,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
           <BsFlag
             size={32}
             className={classNames("mb-2 text-4xl", {
-              "text-red-500": stay?.report === null,
-              "text-gray-600": stay?.report !== null,
+              "fill-red-500": !reportWasAlreadySent(),
             })}
           />
           <div className="text-center text-xs lg:text-sm">
@@ -117,8 +116,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
           <AiOutlineStar
             size={32}
             className={classNames("mb-2 text-4xl ", {
-              "text-yellow-400": stay.review === null,
-              "text-gray-600": stay.review !== null,
+              "text-yellow-400": !evaluationWasDone(),
             })}
           />
           <div className="text-center text-xs lg:text-sm">
