@@ -41,7 +41,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
       return;
     }
 
-    setModalReport({ ...modalReportInfo, isOpen: true, stay });
+    setModalReport({ ...modalReportInfo, isOpen: true, stayId: stay.id });
   };
 
   const openModalAvaliarExperiencia = () => {

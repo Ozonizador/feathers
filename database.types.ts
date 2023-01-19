@@ -408,7 +408,7 @@ export interface Database {
           advertisement_id: string;
           created_at: string;
           id: string;
-          reservation_id: string | null;
+          reservation_id: string;
           status: Database["public"]["Enums"]["staysstatus"] | null;
           tenant_id: string;
           updated_at: string;
@@ -417,7 +417,7 @@ export interface Database {
           advertisement_id: string;
           created_at?: string;
           id?: string;
-          reservation_id?: string | null;
+          reservation_id: string;
           status?: Database["public"]["Enums"]["staysstatus"] | null;
           tenant_id: string;
           updated_at?: string;
@@ -426,7 +426,7 @@ export interface Database {
           advertisement_id?: string;
           created_at?: string;
           id?: string;
-          reservation_id?: string | null;
+          reservation_id?: string;
           status?: Database["public"]["Enums"]["staysstatus"] | null;
           tenant_id?: string;
           updated_at?: string;

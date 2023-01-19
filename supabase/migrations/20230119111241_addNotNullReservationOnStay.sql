@@ -1,0 +1,1 @@
+ALTER TABLE stays ALTER COLUMN reservation_id SET NOT NULL;

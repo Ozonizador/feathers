@@ -12,19 +12,14 @@ import ModalAvaliarExperiencia from "../../../components/modals/ModalAvaliarExpe
 import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva";
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
-import { useCallback, useEffect, useState } from "react";
-import { useProfileInformation } from "../../../context/MainProvider";
-import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { StayComplete, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../../../models/stay";
-import next, { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
 // icons
-
 import IconStay from "../../../public/images/icon-profile.svg";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
-import error from "next/error";
 
 /* PAGINA 21 do xd */
 
@@ -138,7 +133,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const getCurrentUserStay = async () => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .select(
+        "*, advertisement:advertisement_id(*), reservation:reservation_id(*), report:reports(id), review:reviews(id)"
+      )
       .eq(STAY_TABLE.TENANT_ID, user.id)
       .gte("reservation.start_date", date)
       .lte("reservation.end_date", date)
@@ -150,10 +147,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const getNextStaysForUser = async () => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .select(
+        "*, advertisement:advertisement_id(*), reservation:reservation_id(*) report:report_id(id), review:reviews(id)"
+      )
       .eq(STAY_TABLE.TENANT_ID, user.id)
       .gte("reservation.start_date", date)
-      .lte("reservation.end_date", date);
+      .gte("reservation.end_date", date);
 
     return { data, error };
   };
@@ -166,7 +165,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      currentStay: !currentStayError && currentStay ? currentStay : undefined,
+      currentStay: !currentStayError && currentStay ? currentStay : null,
       nextStays: !nextStaysError && nextStays ? nextStays : [],
     },
   };

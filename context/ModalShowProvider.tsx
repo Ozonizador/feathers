@@ -100,7 +100,6 @@ export function useSetModalAvaliarExperienciaContextProperty() {
 
 /**
  * Report Advertisement
- *
  */
 
 interface ModalReportAnuncioProps {
@@ -108,20 +107,20 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  stay: StayComplete;
+  stayId: string;
   isOpen: boolean;
   step: number;
 }
 
 const ModalReportarAnuncioContext = createContext<ModalReportContextElements>({
   isOpen: false,
-  stay: null,
+  stayId: "",
   step: 1,
 });
 const SetModalReportarAnuncioContext = createContext<Dispatch<SetStateAction<ModalReportContextElements>>>(() => {});
 
 export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioProps): JSX.Element => {
-  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stay: null, step: 1 });
+  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stayId: "", step: 1 });
 
   return (
     <ModalReportarAnuncioContext.Provider value={modalInfo}>
@@ -204,7 +203,7 @@ export function useSetOpenModalAlterarReserva() {
 
 export function useSetModalAlterarReserva() {
   const setModalReport = useContext(SetModalAlterarReservaContext);
-  return (report: ModalReportContextElements) => {
+  return (report: ModalAlterReservaElements) => {
     setModalReport(report);
   };
 }
