@@ -54,7 +54,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                   <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
                     <MenuEstudante />
                   </div>
-                  <div className="mx-auto flex w-4/5 flex-col gap-3 pt-12 lg:ml-12">
+                  <div className="mx-auto flex w-11/12 flex-col gap-3 pt-12 lg:ml-12 lg:w-4/5">
                     <div className="mb-4 text-2xl font-semibold">Informações gerais</div>
                     <h6 className="text-left text-xl text-gray-600">Estadia atual</h6>
                     {/* Modais */}
@@ -62,12 +62,11 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     <ModalAvaliarExperiencia />
                     <ModalAlterarReserva />
                     {/* Logica visivel */}
-
-                    <div className="flex flex-col gap-7 lg:flex-row lg:gap-2">
+                    <div className="flex flex-col gap-7 px-0 lg:flex-row lg:gap-10">
                       {currentStay && (
                         <>
                           <StayCard stay={currentStay} />
-                          <StayInfo stay={currentStay} />
+                          <StayInfo stay={currentStay} options={{ isNextStay: false }} />
                         </>
                       )}
                       {!currentStay && <div>Não tem estadia programada</div>}
@@ -77,18 +76,18 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                         <h6 className="text-xl text-gray-600">Próximas estadias</h6>
                       </div>
                       <>
-                        {nextStays ? (
-                          nextStays.map((stay, index) => {
+                        {nextStays &&
+                          nextStays.map((stay) => {
                             return (
-                              <div key={index} className="flex flex-col gap-7 lg:flex-row lg:gap-2">
+                              <div className="flex flex-col gap-7 lg:flex-row lg:gap-10" key={stay.id}>
                                 <StayCard stay={stay} />
-                                <StayInfo stay={stay} />
+                                <StayInfo stay={stay} options={{ isNextStay: true }} />
                               </div>
                             );
-                          })
-                        ) : (
-                          <div className="mt-12 mb-5 text-base text-primary-500">Não tem + estadias programadas</div>
-                        )}
+                          })}
+                        <div className="mt-12 text-center text-base text-primary-500">
+                          Não tem + estadias programadas
+                        </div>
                       </>
 
                       <div className="flex justify-center">

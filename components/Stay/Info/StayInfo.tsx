@@ -18,9 +18,12 @@ import { INBOX_URL } from "../../../models/paths";
 
 interface StayInfoProps {
   stay: StayComplete;
+  options: { isNextStay: boolean };
 }
 
-const StayInfo = ({ stay }: StayInfoProps) => {
+const StayInfo = ({ stay, options }: StayInfoProps) => {
+  const { isNextStay } = options;
+
   // MODAL REPORT
   const modalReportInfo = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
@@ -38,7 +41,6 @@ const StayInfo = ({ stay }: StayInfoProps) => {
       return;
     }
 
-    // TODO change this for the stay
     setModalReport({ ...modalReportInfo, isOpen: true, stay });
   };
 
@@ -49,37 +51,46 @@ const StayInfo = ({ stay }: StayInfoProps) => {
       return;
     }
 
-    // TODO change this
     setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, stay });
   };
 
   const openModalAlterarReserva = () => {
-    // TODO change this
     setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, stay });
   };
 
-  return (
-    <div className="my-auto flex w-full flex-row gap-3">
-      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalReport()}>
-        <BsFlag
-          className={classNames("mb-2 text-4xl", {
-            "text-red-500": stay?.report === null,
-            "text-gray-600": stay?.report !== null,
-          })}
-        />
-        <div className="text-center text-xs">
-          Reportar
-          <br />
-          anúncio
-        </div>
-      </div>
+  const reportWasAlreadySent = (): boolean => {
+    return stay.report ? true : false;
+  };
 
-      <div className="flex flex-1 cursor-pointer flex-col items-center">
+  const evaluationWasDone = (): boolean => {
+    return stay.review ? true : false;
+  };
+
+  return (
+    <div className="my-auto flex w-full flex-row gap-2 py-1 lg:w-1/2 lg:gap-5 lg:px-2">
+      {!reportWasAlreadySent() && (
+        <div className="w-18 flex cursor-pointer flex-col items-center gap-1" onClick={() => openModalReport()}>
+          <BsFlag
+            size={32}
+            className={classNames("mb-2 text-4xl", {
+              "text-red-500": stay?.report === null,
+              "text-gray-600": stay?.report !== null,
+            })}
+          />
+          <div className="text-center text-xs lg:text-sm">
+            Reportar
+            <br />
+            anúncio
+          </div>
+        </div>
+      )}
+
+      <div>
         <Link href={INBOX_URL}>
           <a>
-            <div className="flex flex-1 flex-col items-center">
-              <RiMailSendLine className="mb-2 text-4xl text-green-400" />
-              <div className="text-center text-xs">
+            <div className="w-18 flex cursor-pointer flex-col items-center gap-1">
+              <RiMailSendLine className="mb-2 text-4xl text-green-400" size={32} />
+              <div className="text-center text-xs lg:text-sm">
                 Enviar
                 <br />
                 mensagem
@@ -89,28 +100,34 @@ const StayInfo = ({ stay }: StayInfoProps) => {
         </Link>
       </div>
 
-      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAlterarReserva()}>
-        <TbRefresh className="mb-2 text-4xl text-amber-700" />
-        <div className="text-center text-xs">
+      <div className="w-18 flex cursor-pointer flex-col items-center gap-1" onClick={() => openModalAlterarReserva()}>
+        <TbRefresh className="mb-2 text-4xl text-amber-700" size={32} />
+        <div className="text-center text-xs lg:text-sm">
           Alterar
           <br />
           reserva
         </div>
       </div>
 
-      <div className="flex flex-1 cursor-pointer flex-col items-center" onClick={() => openModalAvaliarExperiencia()}>
-        <AiOutlineStar
-          className={classNames("mb-2 text-4xl ", {
-            "text-yellow-400": stay?.review === null,
-            "text-gray-600": stay?.review !== null,
-          })}
-        />
-        <div className="text-center text-xs">
-          Avaliar
-          <br />
-          experiência
+      {!isNextStay && !evaluationWasDone() && (
+        <div
+          className="w-18 flex cursor-pointer flex-col items-center gap-1"
+          onClick={() => openModalAvaliarExperiencia()}
+        >
+          <AiOutlineStar
+            size={32}
+            className={classNames("mb-2 text-4xl ", {
+              "text-yellow-400": stay.review === null,
+              "text-gray-600": stay.review !== null,
+            })}
+          />
+          <div className="text-center text-xs lg:text-sm">
+            Avaliar
+            <br />
+            experiência
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
