@@ -17,6 +17,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "date-fns": "^2.29.3",
     "flowbite": "1.5.x",
     "flowbite-react": "0.3.5",
     "google-map-react": "^2.1.10",

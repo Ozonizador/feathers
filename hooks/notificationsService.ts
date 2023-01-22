@@ -14,7 +14,8 @@ const useNotificationService = () => {
   const addNotification = async (review: Notification) => {
     const { data, error } = await supabaseClient
       .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
-      .insert({ ...review, id: uuidv4(), updated_at: new Date().toDateString() });
+      .insert(review)
+      .single();
 
     return { data, error };
   };

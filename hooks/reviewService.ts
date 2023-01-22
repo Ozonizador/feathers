@@ -15,7 +15,7 @@ const useReviewService = () => {
     debugger;
     const { data, error } = await supabaseClient
       .from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME)
-      .insert({ ...review, id: uuidv4(), stay_id });
+      .insert({ ...review, stay_id });
     debugger;
     return { data, error };
   };

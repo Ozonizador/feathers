@@ -485,6 +485,19 @@ export interface Database {
           value_quality_average: number | null;
         };
       };
+      stays_with_dates: {
+        Row: {
+          advertisement_id: string | null;
+          created_at: string | null;
+          end_date: string | null;
+          id: string | null;
+          reservation_id: string | null;
+          start_date: string | null;
+          status: Database["public"]["Enums"]["staysstatus"] | null;
+          tenant_id: string | null;
+          updated_at: string | null;
+        };
+      };
     };
     Functions: {
       _postgis_deprecate: {

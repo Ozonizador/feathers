@@ -7,7 +7,7 @@ const useMessagesService = () => {
   const insertMessageOnConversation = async (message: string, conversation_id: string, profile_id: string) => {
     const { data, error } = await supabaseClient
       .from(MESSAGE_TABLE_NAME)
-      .insert({ message, conversation_id, id: uuidv4(), profile_id, updated_at: new Date().toDateString() })
+      .insert({ message, conversation_id, profile_id })
       .single();
     return { data, error };
   };

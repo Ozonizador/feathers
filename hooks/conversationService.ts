@@ -19,7 +19,7 @@ const useConversationService = () => {
   ): Promise<{ data: Conversation; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-      .insert({ ...conversation, id: uuidv4() })
+      .insert(conversation)
       .single();
     return { data, error };
   };

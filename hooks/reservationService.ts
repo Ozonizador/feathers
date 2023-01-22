@@ -17,7 +17,7 @@ const useReservationService = () => {
   ) => {
     const { data, error } = await supabaseClient
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
-      .insert({ ...reservation, id: uuidv4(), updated_at: new Date().toDateString(), tenant_id })
+      .insert({ ...reservation, tenant_id })
       .select()
       .single();
     return { data, error };

@@ -18,7 +18,7 @@ const ModalAlterarReserva = () => {
     id: "",
     start_date: new Date().toDateString(),
     end_date: new Date().toDateString(),
-    status: ReservationStatus.REQUESTED,
+    status: ReservationStatus.CHANGE_REQUESTED,
     advertisement_id: "",
     tenant_id: "",
   });

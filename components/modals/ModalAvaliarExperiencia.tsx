@@ -46,8 +46,7 @@ const ModalAvaliarExperiencia = () => {
     setModalProperty("step", step + 1);
   };
 
-  const saveReview = async (event) => {
-    event.preventDefault();
+  const saveReview = async () => {
     setLoading(true);
     if (!stay) return;
 
@@ -262,11 +261,11 @@ const ModalAvaliarExperiencia = () => {
                             </div>
                           </div>
 
-                          <div className="my-3 flex justify-end" onClick={() => saveReview}>
+                          <div className="my-3 flex justify-end">
                             <button
                               type="button"
                               className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
-                              onClick={(e) => saveReview(e)}
+                              onClick={saveReview}
                               disabled={loading}
                             >
                               {loading ? <Spinner /> : "Seguinte"}

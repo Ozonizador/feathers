@@ -8,7 +8,8 @@ const useReportService = () => {
   const addReportOnAdvert = async (report: Partial<Report>, stayId: string) => {
     const { data, error } = await supabaseClient
       .from(REPORTS_TABLE_NAME)
-      .insert({ ...report, id: uuidv4(), stay_id: stayId });
+      .insert({ ...report, stay_id: stayId })
+      .single();
     return { data, error };
   };
 

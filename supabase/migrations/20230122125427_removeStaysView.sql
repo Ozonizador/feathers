@@ -1,0 +1,1 @@
+DROP VIEW stays_with_dates;

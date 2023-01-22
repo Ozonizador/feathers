@@ -7,6 +7,16 @@ import { Review } from "./review";
 
 export const STAYS_TABLE_NAME = "stays" as const;
 
+export const STAY_TABLE = {
+  ID: "id",
+  RESERVATION_ID: "reservation_id",
+  REPORT: "reports",
+  TENANT_ID: "tenant_id",
+  START_DATE: "reservation.start_date",
+  END_DATE: "reservation.end_date",
+} as const;
+
+export type StayWithDate = Database["public"]["Views"]["stays_with_dates"]["Row"];
 export type Stays = Database["public"]["Tables"]["stays"];
 export type Stay = Stays["Row"];
 
@@ -27,11 +37,5 @@ export type StayComplete = StayWithReservation & {
   reviews: Review[];
 };
 
-export const STAY_TABLE = {
-  ID: "id",
-  RESERVATION_ID: "reservation_id",
-  REPORT: "reports",
-  TENANT_ID: "tenant_id",
-  START_DATE: "reservation.start_date",
-  END_DATE: "reservation.end_date",
-} as const;
+/* ENUMS */
+export type StayStatus = Database["public"]["Enums"]["staysstatus"];
