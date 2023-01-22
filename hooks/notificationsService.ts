@@ -4,7 +4,6 @@ import {
   NOTIFICATION_PROPERTIES,
   NOTIFICATION_TABLE_NAME,
 } from "../models/notification";
-import { v4 as uuidv4 } from "uuid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 /* DB */

@@ -37,8 +37,7 @@
     "react-phone-number-input": "^3.2.7",
     "react-select": "^5.4.0",
     "react-select-country-list": "^2.2.3",
-    "react-toastify": "^9.0.7",
-    "uuid": "9.0.x"
+    "react-toastify": "^9.0.7"
   },
   "devDependencies": {
     "@types/leaflet": "^1.7.11",

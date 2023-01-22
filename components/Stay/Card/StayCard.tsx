@@ -1,8 +1,10 @@
 import Image from "next/image";
+import { BiInfoCircle } from "react-icons/bi";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { StayWithReservation } from "../../../models/stay";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
+import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
 interface StayCardProps {
   stay: StayWithReservation;
 }
@@ -27,8 +29,14 @@ const StayCard = ({ stay }: StayCardProps) => {
             </div>
             <div className="mb-1 text-base font-bold text-primary-500 lg:text-xl">{advertisement.month_rent}€/mês</div>
             {advertisement.expenses?.services && (
-              <div className="text-xs text-secondary-300 lg:text-base">
-                {checkIfExpensesIncluded(advertisement.expenses.services)}
+              <div className="relative mb-2 text-center text-base">
+                <div className="group flex cursor-pointer gap-2 text-base">
+                  <RoomUtilitesPopover expenses={advertisement.expenses} />
+                  <p className="break-words text-left text-xs lg:text-base">
+                    {checkIfExpensesIncluded(advertisement.expenses.services)}
+                  </p>
+                  <BiInfoCircle className="my-auto" />
+                </div>
               </div>
             )}
           </div>

@@ -5,18 +5,16 @@ import {
   REVIEWS_TABLE_NAME,
   REVIEW_COLUMNS,
 } from "../models/review";
-import { v4 as uuidv4 } from "uuid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const useReviewService = () => {
   const supabaseClient = useSupabaseClient();
 
   const addReview = async (review: Omit<Review, "created_at" | "updated_at">, stay_id: string) => {
-    debugger;
     const { data, error } = await supabaseClient
       .from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME)
-      .insert({ ...review, stay_id });
-    debugger;
+      .insert({ ...review, stay_id })
+      .select();
     return { data, error };
   };
 

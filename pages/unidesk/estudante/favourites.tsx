@@ -92,9 +92,11 @@ const UnideskFavoritos = () => {
 
                           <div className="mt-auto flex">
                             <div className="relative mb-2 text-center text-base">
-                              <div className="group flex cursor-pointer items-center justify-center gap-2 align-middle text-base">
+                              <div className="group flex cursor-pointer gap-2 text-base">
                                 <RoomUtilitesPopover expenses={favourite.expenses} />
-                                <p className="text-base">{checkIfExpensesIncluded(favourite.expenses.services)}</p>
+                                <p className="break-words text-left text-xs lg:text-base">
+                                  {checkIfExpensesIncluded(favourite.expenses.services)}
+                                </p>
                                 <BiInfoCircle className="my-auto" />
                               </div>
                             </div>

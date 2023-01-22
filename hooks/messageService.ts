@@ -1,5 +1,4 @@
 import { MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
-import { v4 as uuidv4 } from "uuid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const useMessagesService = () => {

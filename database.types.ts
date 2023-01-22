@@ -62,7 +62,7 @@ export interface Database {
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
-          id: string;
+          id?: string;
           max_rooms?: number;
           month_rent: number;
           photos?: AdvertisementPhoto[];
@@ -322,7 +322,7 @@ export interface Database {
           advertisement_id: string;
           created_at?: string;
           end_date: string;
-          id: string;
+          id?: string;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;

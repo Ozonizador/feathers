@@ -43,11 +43,11 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            <div>
+            <div className="lg:mx-5">
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
-              <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
+              <div className="mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full lg:px-0">
                 <div className="flex flex-col lg:flex-row">
-                  <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
+                  <div className="mx-auto w-10/12 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:py-12 lg:px-6">
                     <MenuEstudante />
                   </div>
                   <div className="mx-auto flex w-11/12 flex-col gap-3 pt-12 lg:ml-12 lg:w-4/5">

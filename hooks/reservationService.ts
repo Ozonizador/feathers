@@ -1,5 +1,4 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { v4 as uuidv4 } from "uuid";
 import {
   MODIFY_RESERVATION_FUNCTION,
   Reservation,
