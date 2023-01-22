@@ -4,3 +4,6 @@ ALTER TABLE notifications ALTER COLUMN id SET DEFAULT uuid_generate_v4();
 ALTER TABLE reports ALTER COLUMN id SET DEFAULT uuid_generate_v4();
 ALTER TABLE reservations ALTER COLUMN id SET DEFAULT uuid_generate_v4();
 ALTER TABLE messages ALTER COLUMN id SET DEFAULT uuid_generate_v4();
+ALTER TABLE profiles ALTER COLUMN id SET DEFAULT uuid_generate_v4();
+ALTER TABLE advertisements ALTER COLUMN id SET DEFAULT uuid_generate_v4();
+ALTER TABLE blogs ALTER COLUMN id SET DEFAULT uuid_generate_v4();
