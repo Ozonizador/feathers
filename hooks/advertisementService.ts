@@ -22,7 +22,7 @@ const useAdvertisementService = () => {
   ): Promise<{ data: Advertisement; error: PostgrestError }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .insert({ ...advertisement, updated_at: new Date().toDateString() })
+      .insert(advertisement)
       .select()
       .single();
 

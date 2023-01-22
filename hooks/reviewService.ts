@@ -10,11 +10,13 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 const useReviewService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReview = async (review: Omit<Review, "created_at" | "updated_at">, stay_id: string) => {
+  const addReview = async (review: Omit<Review, "created_at" | "updated_at">, stayId: string) => {
     const { data, error } = await supabaseClient
       .from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME)
-      .insert({ ...review, stay_id })
-      .select();
+      .insert({ ...review, stay_id: stayId })
+      .select()
+      .single();
+
     return { data, error };
   };
 

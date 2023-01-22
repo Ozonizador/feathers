@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { StayComplete, StayGuest } from "../models/stay";
+import { StayComplete } from "../models/stay";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -107,20 +107,20 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  stayId: string;
+  stay: StayComplete;
   isOpen: boolean;
   step: number;
 }
 
 const ModalReportarAnuncioContext = createContext<ModalReportContextElements>({
   isOpen: false,
-  stayId: "",
+  stay: null,
   step: 1,
 });
 const SetModalReportarAnuncioContext = createContext<Dispatch<SetStateAction<ModalReportContextElements>>>(() => {});
 
 export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioProps): JSX.Element => {
-  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stayId: "", step: 1 });
+  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stay: null, step: 1 });
 
   return (
     <ModalReportarAnuncioContext.Provider value={modalInfo}>

@@ -251,7 +251,7 @@ export interface Database {
           description?: string | null;
           favourite_rooms?: string[] | null;
           gender?: number | null;
-          id: string;
+          id?: string;
           languages?: string[] | null;
           name?: string | null;
           nationality?: string | null;
@@ -293,7 +293,7 @@ export interface Database {
         Insert: {
           created_at?: string;
           description: string;
-          id: string;
+          id?: string;
           stay_id: string;
           type: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
@@ -356,7 +356,7 @@ export interface Database {
         Insert: {
           comodities_rating: number;
           created_at?: string;
-          id: string;
+          id?: string;
           landlord_rating: number;
           location_rating: number;
           overall_rating: number;

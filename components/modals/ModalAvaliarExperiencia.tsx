@@ -19,7 +19,6 @@ false nao mostra nada true mostra.
 */
 
 const startingReview = {
-  id: "",
   overall_rating: 1,
   location_rating: 1,
   value_quality_rating: 1,
@@ -30,7 +29,6 @@ const startingReview = {
 } as Omit<Review, "created_at" | "updated_at">;
 
 const ModalAvaliarExperiencia = () => {
-  const profile = useProfileInformation();
   const { addReview } = useReviewService();
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, stay, step } = useModalAvaliarExperiencia();
@@ -49,12 +47,15 @@ const ModalAvaliarExperiencia = () => {
   const saveReview = async () => {
     setLoading(true);
     if (!stay) return;
+    try {
+      const { error } = await addReview(review, stay.id);
+      if (error) return;
 
-    const { data, error } = await addReview(review, stay.id);
-    if (error) return;
-
-    nextStep();
-    setLoading(false);
+      nextStep();
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const setReviwByProperty = (property, value) => {

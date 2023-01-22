@@ -33,8 +33,6 @@ const useProfileService = () => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({
-        id: userID,
-        updated_at: new Date().toDateString(),
         slug: createRandomUniqWord(),
         avatar_url: metadata.avatar_url,
         name: metadata.firstName,
