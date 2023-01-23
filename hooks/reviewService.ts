@@ -1,33 +1,26 @@
-import {
-  Review,
-  ReviewsResponse,
-  REVIEWS_AVERAGE_TABLE_VIEW,
-  REVIEWS_TABLE_NAME,
-  REVIEW_COLUMNS,
-} from "../models/review";
-import { v4 as uuidv4 } from "uuid";
+import { Review, Reviews, REVIEWS_AVERAGE_TABLE_VIEW, REVIEWS_TABLE_NAME, REVIEW_COLUMNS } from "../models/review";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const useReviewService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReview = async (review: Omit<Review, "created_at" | "updated_at">, stay_id: string) => {
-    debugger;
+  const addReview = async (review: Omit<Review, "created_at" | "updated_at">, stayId: string) => {
     const { data, error } = await supabaseClient
-      .from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME)
-      .insert({ ...review, id: uuidv4(), stay_id });
-    debugger;
+      .from<"reviews", Reviews>(REVIEWS_TABLE_NAME)
+      .insert({ ...review, stay_id: stayId })
+      .select()
+      .single();
     return { data, error };
   };
 
   const getReviews = async () => {
-    const { data, error } = await supabaseClient.from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME).select();
+    const { data, error } = await supabaseClient.from<"reviews", Reviews>(REVIEWS_TABLE_NAME).select();
     return { data, error };
   };
 
   const getReviewsByAdvertId = async (advertId: string) => {
     const { data, error } = await supabaseClient
-      .from<"reviews", ReviewsResponse>(REVIEWS_TABLE_NAME)
+      .from<"reviews", Reviews>(REVIEWS_TABLE_NAME)
       .select()
       .eq(REVIEW_COLUMNS.ADVERTISEMENT_ID, advertId);
 

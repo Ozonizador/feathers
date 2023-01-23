@@ -62,7 +62,7 @@ export interface Database {
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
-          id: string;
+          id?: string;
           max_rooms?: number;
           month_rent: number;
           photos?: AdvertisementPhoto[];
@@ -251,7 +251,7 @@ export interface Database {
           description?: string | null;
           favourite_rooms?: string[] | null;
           gender?: number | null;
-          id: string;
+          id?: string;
           languages?: string[] | null;
           name?: string | null;
           nationality?: string | null;
@@ -293,7 +293,7 @@ export interface Database {
         Insert: {
           created_at?: string;
           description: string;
-          id: string;
+          id?: string;
           stay_id: string;
           type: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
@@ -322,7 +322,7 @@ export interface Database {
           advertisement_id: string;
           created_at?: string;
           end_date: string;
-          id: string;
+          id?: string;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -356,7 +356,7 @@ export interface Database {
         Insert: {
           comodities_rating: number;
           created_at?: string;
-          id: string;
+          id?: string;
           landlord_rating: number;
           location_rating: number;
           overall_rating: number;
@@ -483,6 +483,19 @@ export interface Database {
           overall_average: number | null;
           review_number: number | null;
           value_quality_average: number | null;
+        };
+      };
+      stays_with_dates: {
+        Row: {
+          advertisement_id: string | null;
+          created_at: string | null;
+          end_date: string | null;
+          id: string | null;
+          reservation_id: string | null;
+          start_date: string | null;
+          status: Database["public"]["Enums"]["staysstatus"] | null;
+          tenant_id: string | null;
+          updated_at: string | null;
         };
       };
     };

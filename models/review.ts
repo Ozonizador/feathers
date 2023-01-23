@@ -5,13 +5,12 @@ import { Profile } from "./profile";
 export const REVIEWS_TABLE_NAME = "reviews" as const;
 export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 
-export type ReviewsResponse = Database["public"]["Tables"]["reviews"];
-export type Review = ReviewsResponse["Row"];
+export type Reviews = Database["public"]["Tables"]["reviews"];
+export type Review = Reviews["Row"];
 
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Advertisement;
   tenant: Partial<Profile>;
-  "advertisements.host_id": string;
 };
 
 export const REVIEW_COLUMNS = {

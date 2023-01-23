@@ -21,10 +21,10 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
     return "Não Incluído";
   };
   return (
-    <div className="absolute left-28 z-50 hidden bg-white group-hover:block lg:-left-32 lg:bottom-6">
-      <div className="mb-2 mt-3 flex flex-col gap-2 rounded-lg p-1 shadow-2xl lg:flex-row lg:p-4">
-        <div className="mx-4 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:px-4">
-          <FaRegLightbulb className="h-4 w-4  lg:h-12 lg:w-12 lg:p-2" />
+    <div className="absolute -left-32 -bottom-20 z-50 hidden bg-white group-hover:block lg:-left-32">
+      <div className="mb-2 mt-3 flex flex-row gap-2 rounded-lg p-1 shadow-2xl lg:p-4">
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
+          <FaRegLightbulb className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm">
             <>
               Eletricidade
@@ -33,8 +33,8 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             </>
           </div>
         </div>
-        <div className="mx-4 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:px-4">
-          <AiOutlineFire className="h-4 w-4  lg:h-12 lg:w-12 lg:p-2" />
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
+          <AiOutlineFire className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
               Gás
@@ -44,8 +44,8 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
           </div>
         </div>
 
-        <div className="mx-4 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:px-4">
-          <AiOutlineWifi className="h-4 w-4  lg:h-12 lg:w-12 lg:p-2" />
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
+          <AiOutlineWifi className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
               Internet
@@ -54,8 +54,8 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
             </>
           </div>
         </div>
-        <div className="mx-4 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:px-4">
-          <BsWater className="h-4 w-4  lg:h-12 lg:w-12 lg:p-2" />
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
+          <BsWater className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
               Água

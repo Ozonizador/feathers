@@ -13,13 +13,14 @@ import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva"
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayComplete, Stays, STAYS_TABLE_NAME, STAY_TABLE } from "../../../models/stay";
+import { StayComplete, Stays, STAYS_TABLE_NAME } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
 // icons
 import IconStay from "../../../public/images/icon-profile.svg";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
+import { format } from "date-fns";
 
 /* PAGINA 21 do xd */
 
@@ -42,11 +43,11 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            <div>
+            <div className="lg:mx-5">
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
-              <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
+              <div className="mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full lg:px-0">
                 <div className="flex flex-col lg:flex-row">
-                  <div className="mx-auto p-5 lg:ml-auto lg:border-r lg:p-12">
+                  <div className="mx-auto w-10/12 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:py-12 lg:px-6">
                     <MenuEstudante />
                   </div>
                   <div className="mx-auto flex w-11/12 flex-col gap-3 pt-12 lg:ml-12 lg:w-4/5">
@@ -128,15 +129,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 
   const user = session.user;
-  const date = new Date().toISOString();
+  const date = new Date();
+  const formattedDate = format(date, "yyyy-MM-dd");
 
   const getCurrentUserStay = async () => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
-      .eq(STAY_TABLE.TENANT_ID, user.id)
-      .gte("reservation.start_date", date)
-      .lte("reservation.end_date", date)
+      .match({ tenant_id: user.id, status: "OK" })
+      .lte("reservation.start_date", formattedDate)
+      .gte("reservation.end_date", formattedDate)
       .single();
 
     return { data, error };
@@ -146,11 +148,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const { data, error } = await supabase
       .from<"stays", Stays>(STAYS_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
-      .eq(STAY_TABLE.TENANT_ID, user.id);
-    // .gte("reservation.start_date", date)
-    // .gte("reservation.end_date", date);
+      .match({ tenant_id: user.id, status: "OK" })
+      .gte("reservation.start_date", date)
+      .gte("reservation.end_date", date);
 
-    debugger;
     return { data, error };
   };
 

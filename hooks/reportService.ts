@@ -1,14 +1,16 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { v4 as uuidv4 } from "uuid";
 import { Report, ReportsResponse, REPORTS_TABLE_NAME, REPORT_TABLE } from "../models/report";
 
 const useReportService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReportOnAdvert = async (report: Partial<Report>, stayId: string) => {
+  const addReportOnAdvert = async (report: Pick<Report, "type" | "description">, stayId: string) => {
     const { data, error } = await supabaseClient
-      .from(REPORTS_TABLE_NAME)
-      .insert({ ...report, id: uuidv4(), stay_id: stayId });
+      .from<"reports", ReportsResponse>(REPORTS_TABLE_NAME)
+      .insert({ ...report, stay_id: stayId })
+      .select()
+      .single();
+
     return { data, error };
   };
 
