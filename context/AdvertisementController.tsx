@@ -9,12 +9,14 @@ import {
   HostFlexType,
   TypeAdvertisement,
 } from "../models/advertisement";
+import { v4 as uuidv4 } from "uuid";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createRandomUniqWord } from "../utils/utils";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
+  id: uuidv4(),
   slug: createRandomUniqWord(),
   type: "ENTIRE_SPACE" as TypeAdvertisement,
   type_flex_host: "SUPER_FLEX" as HostFlexType,

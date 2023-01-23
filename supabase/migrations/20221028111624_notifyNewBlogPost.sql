@@ -4,8 +4,7 @@ CREATE OR REPLACE FUNCTION notify_new_blog()
   AS
 $$
 BEGIN
-    INSERT INTO notifications (id, type, profile_id) VALUES ( uuid_generate_v4 (),
-		'BLOG', ( SELECT
+    INSERT INTO notifications (type, profile_id) VALUES ('BLOG', ( SELECT
 	(id)
 FROM
 	profiles ));
@@ -15,6 +14,6 @@ $$;
 
 CREATE TRIGGER new_blog_post_notification
   AFTER INSERT
-  ON reviews
+  ON blogs
   FOR EACH ROW
   EXECUTE PROCEDURE notify_new_blog();
