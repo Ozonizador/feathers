@@ -36,7 +36,7 @@ const UniControloHospedes = () => {
 
       <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">
         <div className="flex flex-col gap-10 px-12 lg:flex-row">
-          <div>
+          <div className="flex justify-center">
             <HospedesMenu activeLink="guests" />
           </div>
 

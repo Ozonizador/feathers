@@ -21,6 +21,7 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
+  debugger;
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
@@ -82,11 +83,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: advertisement, error } = await supabase
     .from(ADVERTISEMENT_TABLE_NAME)
-    .select(`*, host:host_id(*)`)
+    .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url),reviews(*))`)
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
     .single();
 
+  debugger;
   if (error) {
     console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
   }

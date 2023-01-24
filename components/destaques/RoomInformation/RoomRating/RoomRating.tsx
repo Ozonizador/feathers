@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-
 import { Rating } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import useReviewService from "../../../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../../../models/review";
+import Button from "../../../utils/Button";
 
 const RoomRating = () => {
   const { getAveragesByAdvertisementId } = useReviewService();
@@ -40,8 +40,8 @@ const RoomRating = () => {
   return (
     <section className="mb-8">
       {roomAverages && roomAverages.review_number !== 0 && (
-        <>
-          <Rating>
+        <div className="flex flex-col gap-5">
+          <Rating size="lg">
             <p className="mr-5 text-5xl font-medium text-secondary-500">{averageOfAll().toFixed(2)}</p>
             <Rating.Star filled={averageOfAll() >= 1 ? true : false} />
             <Rating.Star filled={averageOfAll() >= 2 ? true : false} />
@@ -49,87 +49,86 @@ const RoomRating = () => {
             <Rating.Star filled={averageOfAll() >= 4 ? true : false} />
             <Rating.Star filled={averageOfAll() >= 5 ? true : false} />
           </Rating>
-          <p className="my-5 text-2xl font-medium text-secondary-500">{roomAverages.review_number} comentários</p>
+          <p className="text-xl font-medium text-secondary-500 lg:text-2xl">{roomAverages.review_number} comentários</p>
           <hr />
 
-          <div className="flex flex-row gap-16">
+          <div className="mt-3 flex flex-col gap-5 md:grid md:grid-cols-2">
             {/* COL 1 */}
-            <div className="mt-8 flex flex-col">
-              <div className="flex flex-row">
-                <div className="w-44 text-xl font-bold">Localização</div>
-                <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
-                  {roomAverages.location_average.toFixed(2)}
-                </p>
-                <Rating>
-                  <Rating.Star filled={roomAverages.location_average >= 1 ? true : false} />
-                  <Rating.Star filled={roomAverages.location_average >= 2 ? true : false} />
-                  <Rating.Star filled={roomAverages.location_average >= 3 ? true : false} />
-                  <Rating.Star filled={roomAverages.location_average >= 4 ? true : false} />
-                  <Rating.Star filled={roomAverages.location_average >= 5 ? true : false} />
-                </Rating>
-              </div>
-
-              <div className="my-4 flex flex-row">
-                <div className="w-44 text-xl font-bold">Qualidade - preço</div>
-                <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
-                  {roomAverages.value_quality_average.toFixed(2)}
-                </p>
-                <Rating>
-                  <Rating.Star filled={roomAverages.value_quality_average >= 1 ? true : false} />
-                  <Rating.Star filled={roomAverages.value_quality_average >= 2 ? true : false} />
-                  <Rating.Star filled={roomAverages.value_quality_average >= 3 ? true : false} />
-                  <Rating.Star filled={roomAverages.value_quality_average >= 4 ? true : false} />
-                  <Rating.Star filled={roomAverages.value_quality_average >= 5 ? true : false} />
-                </Rating>
-              </div>
-
-              <div className="flex flex-row">
-                <div className="w-44 text-xl font-bold">Comodidades</div>
-                <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
-                  {roomAverages.comodities_average.toFixed(2)}
-                </p>
-                <Rating>
-                  <Rating.Star filled={roomAverages.comodities_average >= 1 ? true : false} />
-                  <Rating.Star filled={roomAverages.comodities_average >= 2 ? true : false} />
-                  <Rating.Star filled={roomAverages.comodities_average >= 3 ? true : false} />
-                  <Rating.Star filled={roomAverages.comodities_average >= 4 ? true : false} />
-                  <Rating.Star filled={roomAverages.comodities_average >= 5 ? true : false} />
-                </Rating>
-              </div>
+            <div className="flex flex-row gap-1">
+              <div className="flex-1 text-xl font-bold">Localização</div>
+              <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
+                {`(${roomAverages.location_average.toFixed(2)})`}
+              </p>
+              <Rating>
+                <Rating.Star filled={roomAverages.location_average >= 1 ? true : false} />
+                <Rating.Star filled={roomAverages.location_average >= 2 ? true : false} />
+                <Rating.Star filled={roomAverages.location_average >= 3 ? true : false} />
+                <Rating.Star filled={roomAverages.location_average >= 4 ? true : false} />
+                <Rating.Star filled={roomAverages.location_average >= 5 ? true : false} />
+              </Rating>
             </div>
 
-            {/* COL 2 */}
-            <div className="mt-8 flex flex-col">
-              <div className="flex flex-row">
-                <div className="w-44 text-xl font-bold">Senhorio</div>
-                <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
-                  {roomAverages.landlord_average.toFixed(2)}
-                </p>
-                <Rating>
-                  <Rating.Star filled={roomAverages.landlord_average >= 1 ? true : false} />
-                  <Rating.Star filled={roomAverages.landlord_average >= 2 ? true : false} />
-                  <Rating.Star filled={roomAverages.landlord_average >= 3 ? true : false} />
-                  <Rating.Star filled={roomAverages.landlord_average >= 4 ? true : false} />
-                  <Rating.Star filled={roomAverages.landlord_average >= 5 ? true : false} />
-                </Rating>
-              </div>
+            <div className="flex flex-row gap-1">
+              <div className="flex-1 text-xl font-bold">Qualidade - preço</div>
+              <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
+                {`(${roomAverages.value_quality_average.toFixed(2)})`}
+              </p>
+              <Rating>
+                <Rating.Star filled={roomAverages.value_quality_average >= 1 ? true : false} />
+                <Rating.Star filled={roomAverages.value_quality_average >= 2 ? true : false} />
+                <Rating.Star filled={roomAverages.value_quality_average >= 3 ? true : false} />
+                <Rating.Star filled={roomAverages.value_quality_average >= 4 ? true : false} />
+                <Rating.Star filled={roomAverages.value_quality_average >= 5 ? true : false} />
+              </Rating>
+            </div>
 
-              <div className="my-4 flex flex-row">
-                <div className="w-44 text-xl font-bold">Avaliação Geral</div>
-                <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
-                  {roomAverages.overall_average.toFixed(2)}
-                </p>
-                <Rating>
-                  <Rating.Star filled={roomAverages.overall_average >= 1 ? true : false} />
-                  <Rating.Star filled={roomAverages.overall_average >= 2 ? true : false} />
-                  <Rating.Star filled={roomAverages.overall_average >= 3 ? true : false} />
-                  <Rating.Star filled={roomAverages.overall_average >= 4 ? true : false} />
-                  <Rating.Star filled={roomAverages.overall_average >= 5 ? true : false} />
-                </Rating>
-              </div>
+            <div className="flex flex-row gap-1">
+              <div className="flex-1 text-xl font-bold">Comodidades</div>
+              <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
+                {`(${roomAverages.comodities_average.toFixed(2)})`}
+              </p>
+              <Rating>
+                <Rating.Star filled={roomAverages.comodities_average >= 1 ? true : false} />
+                <Rating.Star filled={roomAverages.comodities_average >= 2 ? true : false} />
+                <Rating.Star filled={roomAverages.comodities_average >= 3 ? true : false} />
+                <Rating.Star filled={roomAverages.comodities_average >= 4 ? true : false} />
+                <Rating.Star filled={roomAverages.comodities_average >= 5 ? true : false} />
+              </Rating>
+            </div>
+
+            <div className="flex flex-row gap-1">
+              <div className="flex-1 text-xl font-bold">Senhorio</div>
+              <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
+                {`(${roomAverages.landlord_average.toFixed(2)})`}
+              </p>
+              <Rating>
+                <Rating.Star filled={roomAverages.landlord_average >= 1 ? true : false} />
+                <Rating.Star filled={roomAverages.landlord_average >= 2 ? true : false} />
+                <Rating.Star filled={roomAverages.landlord_average >= 3 ? true : false} />
+                <Rating.Star filled={roomAverages.landlord_average >= 4 ? true : false} />
+                <Rating.Star filled={roomAverages.landlord_average >= 5 ? true : false} />
+              </Rating>
+            </div>
+
+            <div className="flex flex-row gap-1">
+              <div className="flex-1 text-xl font-bold">Avaliação Geral</div>
+              <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
+                {`(${roomAverages.overall_average.toFixed(2)})`}
+              </p>
+              <Rating>
+                <Rating.Star filled={roomAverages.overall_average >= 1 ? true : false} />
+                <Rating.Star filled={roomAverages.overall_average >= 2 ? true : false} />
+                <Rating.Star filled={roomAverages.overall_average >= 3 ? true : false} />
+                <Rating.Star filled={roomAverages.overall_average >= 4 ? true : false} />
+                <Rating.Star filled={roomAverages.overall_average >= 5 ? true : false} />
+              </Rating>
             </div>
           </div>
-        </>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2"></div>
+          <div className="flex justify-center">
+            <Button type="button">Ver todos os comentários</Button>
+          </div>
+        </div>
       )}
       {!roomAverages && (
         <>
