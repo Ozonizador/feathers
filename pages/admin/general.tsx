@@ -69,7 +69,7 @@ const Index = ({ user, profileData }: IndexProps) => {
       nationality: profile?.nationality || "PT",
       description: profile?.description || "",
       birth_date: profile?.birth_date ? new Date(profile.birth_date) : new Date(),
-      languages: profile.languages || [],
+      languages: profile?.languages || [],
     },
   });
 

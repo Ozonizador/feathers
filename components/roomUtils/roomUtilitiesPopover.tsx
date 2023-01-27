@@ -9,8 +9,8 @@ interface roomUtilitesPopoverProps {
 
 const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
   const checkIfIncluded = (type: ExpenseName) => {
-    if (!expenses) return false;
-    const selectedExpense = expenses.services && expenses.services.find((expense) => expense.name === type);
+    if (!expenses || !expenses.services || expenses.services.length === 0) return false;
+    const selectedExpense = expenses.services.find((expense) => expense.name === type);
     if (selectedExpense !== null) {
       if (selectedExpense?.included === "INCLUDED") return "Incluído";
       if (selectedExpense?.included === "EXCLUDED") return "Não Incluído";

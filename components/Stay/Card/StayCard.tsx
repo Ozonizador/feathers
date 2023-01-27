@@ -16,7 +16,10 @@ const StayCard = ({ stay }: StayCardProps) => {
       <div className="flex">
         <div className="relative h-32 w-28 lg:h-36">
           <Image
-            src={(advertisement.photos && advertisement.photos[0].url) || NoPhotoAvailable}
+            src={
+              (advertisement.photos && advertisement.photos.length > 0 && advertisement.photos[0].url) ||
+              NoPhotoAvailable
+            }
             alt="Foto Quarto"
             layout="fill"
             className="rounded-l-lg object-cover"
@@ -28,7 +31,7 @@ const StayCard = ({ stay }: StayCardProps) => {
               {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
             </div>
             <div className="mb-1 text-base font-bold text-primary-500 lg:text-xl">{advertisement.month_rent}€/mês</div>
-            {advertisement.expenses?.services && (
+            {advertisement.expenses && advertisement.expenses?.services && (
               <div className="relative mb-2 text-center text-base">
                 <div className="group flex cursor-pointer gap-2 text-base">
                   <RoomUtilitesPopover expenses={advertisement.expenses} />
