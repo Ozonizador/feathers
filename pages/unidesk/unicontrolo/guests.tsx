@@ -1,10 +1,7 @@
 import HospedesMenu from "../../../components/unidesk/Menus/HospedesMenu";
-import { useUser } from "@supabase/auth-helpers-react";
-import { useCallback, useEffect, useState } from "react";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
-import useStayService from "../../../hooks/stayService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayGuest } from "../../../models/stay";
+import { StayGuest, Stays, STAYS_TABLE_NAME } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 
@@ -13,23 +10,11 @@ import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
 
 const paths = [{ url: "", label: "Hóspedes" }] as BreadcrumbPath[];
 
-const UniControloHospedes = () => {
-  const { getCurrentStaysByHostId } = useStayService();
-  const user = useUser();
-  const [stays, setStays] = useState<StayGuest[]>([]);
-  const getCurrentGuests = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getCurrentStaysByHostId(user.id);
-      if (!error) {
-        setStays(data);
-      }
-    }
-  }, [user]);
+interface UniControloHospedesProps {
+  stays: StayGuest[];
+}
 
-  useEffect(() => {
-    getCurrentGuests();
-  }, [getCurrentGuests]);
-
+const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
   return (
     <section>
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
@@ -45,9 +30,10 @@ const UniControloHospedes = () => {
               <div className="mb-7 text-3xl font-semibold">Hóspedes</div>
               <div className="mb-5 font-bold">Hóspedes Atuais</div>
               {!stays || (stays.length === 0 && <div>Sem hospedes</div>)}
-              {stays.map((stay, index) => {
-                return <HospedeCard stay={stay} key={index} />;
-              })}
+              {stays &&
+                stays.map((stay, index) => {
+                  return <HospedeCard stay={stay} key={index} />;
+                })}
             </>
           </div>
         </div>
@@ -74,10 +60,21 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const host = session.user;
+  const date = new Date().toISOString();
+
+  const { data, error } = await supabase
+    .from<"stays", Stays>(STAYS_TABLE_NAME)
+    .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
+    .eq("advertisement.host_id", host.id)
+    .gte("reservation.start_date", date)
+    .lte("reservation.end_date", date);
+
   return {
     props: {
       initialSession: session,
       user: session.user,
+      stays: error ? [] : data,
     },
   };
 };
