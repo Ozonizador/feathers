@@ -11,17 +11,6 @@ export const createRandomUniqWord = () => {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 };
 
-// Debounce function
-export const debounceFn = (callback, wait) => {
-  let timeoutId = null;
-  return (...args) => {
-    window.clearTimeout(timeoutId);
-    timeoutId = window.setTimeout(() => {
-      callback.apply(null, args);
-    }, wait);
-  };
-};
-
 export const formatDate = (date: Date) => {
   if (!date) return "";
 
@@ -39,3 +28,8 @@ export const group = (items, n) =>
     acc[idx] = [...(acc[idx] || []), x];
     return acc;
   }, []);
+
+export const averageOfArrayNumbers = (arr: number[]) => {
+  var result = arr.reduce((start, end, index, array) => start + end / array.length, 0);
+  return result;
+};

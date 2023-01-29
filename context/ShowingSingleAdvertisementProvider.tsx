@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { AdvertisementWithHost } from "../models/advertisement";
+import { AdvertisementComplete } from "../models/advertisement";
 
 /* STEPS */
-const SingleAdvertisementContext = createContext<AdvertisementWithHost>(null);
-const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<AdvertisementWithHost>>>(() => {});
+const SingleAdvertisementContext = createContext<AdvertisementComplete>(null);
+const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<AdvertisementComplete>>>(() => {});
 
 interface ShowingSingleAdvertisementProviderProps {
-  advertisement: AdvertisementWithHost;
+  advertisement: AdvertisementComplete;
   children: JSX.Element;
 }
 
@@ -15,7 +15,7 @@ export const ShowingSingleAdvertisementProvider = ({
   advertisement,
   children,
 }: ShowingSingleAdvertisementProviderProps): JSX.Element => {
-  const [singleAdvertisement, setSingleAdvertisement] = useState<AdvertisementWithHost>(advertisement);
+  const [singleAdvertisement, setSingleAdvertisement] = useState<AdvertisementComplete>(advertisement);
 
   return (
     <SingleAdvertisementContext.Provider value={singleAdvertisement}>
@@ -32,7 +32,7 @@ export const useGetSingleAdvertisement = () => {
 
 export const useSetSingleAdvertisement = () => {
   const setAdvertisement = useContext(SetSingleAdvertisementContext);
-  return (advertisement: AdvertisementWithHost): void => {
+  return (advertisement: AdvertisementComplete): void => {
     setAdvertisement(advertisement);
   };
 };

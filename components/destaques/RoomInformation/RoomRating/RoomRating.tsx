@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Rating } from "flowbite-react/lib/esm/components";
+import { Avatar, Rating } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import useReviewService from "../../../../hooks/reviewService";
-import { AdvertisementReviewSummary } from "../../../../models/review";
+import { AdvertisementReviewSummary, Review } from "../../../../models/review";
 import Button from "../../../utils/Button";
+import { Profile } from "../../../../models/profile";
+import { averageOfArrayNumbers } from "../../../../utils/utils";
 
 const RoomRating = () => {
+  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
   const { getAveragesByAdvertisementId } = useReviewService();
   const advertisement = useGetSingleAdvertisement();
-  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
+  const { stays } = advertisement;
 
   const getRoomAverages = useCallback(async () => {
     if (advertisement) {
@@ -37,6 +40,7 @@ const RoomRating = () => {
     getRoomAverages();
   }, [getRoomAverages]);
 
+  debugger;
   return (
     <section className="mb-8">
       {roomAverages && roomAverages.review_number !== 0 && (
@@ -124,10 +128,20 @@ const RoomRating = () => {
               </Rating>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2"></div>
-          <div className="flex justify-center">
-            <Button type="button">Ver todos os comentários</Button>
-          </div>
+          {stays.length > 0 && (
+            <>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                {stays &&
+                  stays.slice(0, 3).map((stay, index) => {
+                    const review = stay.reviews && stay.reviews[0];
+                    return <ReviewCard review={review} tenant={stay.tenant} key={index} />;
+                  })}
+              </div>
+              <div className="mx-auto flex w-1/2 justify-center">
+                <Button type="button">Ver todos os comentários</Button>
+              </div>
+            </>
+          )}
         </div>
       )}
       {!roomAverages && (
@@ -136,6 +150,49 @@ const RoomRating = () => {
         </>
       )}
     </section>
+  );
+};
+
+interface ReviewCardProps {
+  review: Omit<Review, "private_review" | "stay_id" | "updated_at">;
+  tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
+}
+
+const ReviewCard = ({ review, tenant }: ReviewCardProps) => {
+  const ratings = [
+    review.comodities_rating,
+    review.landlord_rating,
+    review.location_rating,
+    review.overall_rating,
+    review.value_quality_rating,
+  ];
+
+  const averageRating = averageOfArrayNumbers(ratings) || 0;
+  return (
+    <>
+      <div key={review.id} className="flex flex-col gap-5 rounded-lg border border-terciary-200 p-4">
+        <div className="flex gap-5">
+          <div>
+            <Avatar
+              alt="Hóspede"
+              img="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+              rounded={true}
+              size="sm"
+            />
+          </div>
+          <div className="my-auto">{`${tenant.name} ${tenant.surname}`}</div>
+          <div className="my-auto ml-auto text-secondary-400">{averageRating.toFixed(2)}</div>
+          <Rating>
+            <Rating.Star filled={averageRating >= 1 ? true : false} />
+            <Rating.Star filled={averageRating >= 2 ? true : false} />
+            <Rating.Star filled={averageRating >= 3 ? true : false} />
+            <Rating.Star filled={averageRating >= 4 ? true : false} />
+            <Rating.Star filled={averageRating >= 5 ? true : false} />
+          </Rating>
+        </div>
+        <div className="text-justify">{review.public_review}</div>
+      </div>
+    </>
   );
 };
 

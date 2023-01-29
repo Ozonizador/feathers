@@ -1,4 +1,6 @@
 import { Database } from "../database.types";
+import { Review } from "./review";
+import { StayWithPublicReview } from "./stay";
 
 // TODO: change the advertisements to listings because of adblocker
 // - https://www.alibabacloud.com/help/en/object-storage-service/latest/what-do-i-do-if-typeerror-failed-to-fetch-is-displayed
@@ -17,8 +19,9 @@ export type AdvertisementWithReviewAverage = Advertisement & {
   averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
 };
 
-export type AdvertisementWithHost = Advertisement & {
+export type AdvertisementComplete = Advertisement & {
   host: Database["public"]["Tables"]["profiles"]["Row"];
+  stays: StayWithPublicReview[];
 };
 
 /*

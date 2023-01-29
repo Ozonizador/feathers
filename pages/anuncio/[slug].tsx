@@ -10,18 +10,17 @@ import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSem
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
-import { AdvertisementWithHost, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
+import { AdvertisementComplete, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 
 interface AnuncioProps {
-  advertisement: AdvertisementWithHost;
+  advertisement: AdvertisementComplete;
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
-  debugger;
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
@@ -83,12 +82,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: advertisement, error } = await supabase
     .from(ADVERTISEMENT_TABLE_NAME)
-    .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url),reviews(*))`)
+    .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url), reviews(*))`)
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
     .single();
 
-  debugger;
   if (error) {
     console.log(`[Supabase]: Failed to fetch the advertisement: ${slug}`, error.message);
   }
