@@ -21,10 +21,12 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
+  // TODO: activate modal
+  const activateModal = () => {};
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
-        <div>
+        <>
           <ModalDetalhesPagamento advertisement={advertisement} />
           <div className="mx-auto px-2 md:px-20">
             <SingleRoomGrid />
@@ -37,7 +39,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 </div>
 
                 <RoomSlider />
-                <RoomRating />
+                <RoomRating activateModal={activateModal} />
                 <RoomMap />
                 <RoomSenhorio />
                 <RoomSemelhantes />
@@ -48,7 +50,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       </ModalDetalhesPagamentoProvider>
     </ShowingSingleAdvertisementProvider>
   );

@@ -7,7 +7,11 @@ import Button from "../../../utils/Button";
 import { Profile } from "../../../../models/profile";
 import { averageOfArrayNumbers } from "../../../../utils/utils";
 
-const RoomRating = () => {
+interface RoomRatingProps {
+  activateModal: () => void;
+}
+
+const RoomRating = ({ activateModal }: RoomRatingProps) => {
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
   const { getAveragesByAdvertisementId } = useReviewService();
   const advertisement = useGetSingleAdvertisement();
@@ -23,17 +27,17 @@ const RoomRating = () => {
   }, [advertisement]);
 
   const averageOfAll = () => {
-    if (roomAverages) {
-      return (
-        (roomAverages.comodities_average +
-          roomAverages.landlord_average +
-          roomAverages.location_average +
-          roomAverages.overall_average +
-          roomAverages.value_quality_average) /
-        5
-      );
-    }
-    return 0;
+    if (!roomAverages) return 0;
+
+    const averages = [
+      roomAverages.comodities_average,
+      roomAverages.landlord_average,
+      roomAverages.location_average,
+      roomAverages.overall_average,
+      roomAverages.value_quality_average,
+    ];
+
+    return averageOfArrayNumbers(averages);
   };
 
   useEffect(() => {
@@ -128,17 +132,18 @@ const RoomRating = () => {
               </Rating>
             </div>
           </div>
-          {stays.length > 0 && (
+          {stays && stays.length > 0 && (
             <>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                {stays &&
-                  stays.slice(0, 3).map((stay, index) => {
-                    const review = stay.reviews && stay.reviews[0];
-                    return <ReviewCard review={review} tenant={stay.tenant} key={index} />;
-                  })}
+                {stays.slice(0, 3).map((stay, index) => {
+                  const review = stay.reviews && stay.reviews[0];
+                  return <ReviewCard review={review} tenant={stay.tenant} key={index} />;
+                })}
               </div>
               <div className="mx-auto flex w-1/2 justify-center">
-                <Button type="button">Ver todos os comentários</Button>
+                <Button type="button" onClick={activateModal}>
+                  Ver todos os comentários
+                </Button>
               </div>
             </>
           )}
