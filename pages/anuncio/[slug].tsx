@@ -15,19 +15,19 @@ import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
+import ModalReviewsAdvert from "../../components/modals/ModalReviewsAdvert";
 
 interface AnuncioProps {
   advertisement: AdvertisementComplete;
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
-  // TODO: activate modal
-  const activateModal = () => {};
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
         <>
-          <ModalDetalhesPagamento advertisement={advertisement} />
+          <ModalReviewsAdvert />
+          <ModalDetalhesPagamento />
           <div className="mx-auto px-2 md:px-20">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
@@ -39,7 +39,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 </div>
 
                 <RoomSlider />
-                <RoomRating activateModal={activateModal} />
+                <RoomRating />
                 <RoomMap />
                 <RoomSenhorio />
                 <RoomSemelhantes />
