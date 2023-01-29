@@ -10,21 +10,23 @@ import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSem
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
-import { AdvertisementWithHost, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
+import { AdvertisementComplete, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
 import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 
 interface AnuncioProps {
-  advertisement: AdvertisementWithHost;
+  advertisement: AdvertisementComplete;
 }
 
 const Anuncio = ({ advertisement }: AnuncioProps) => {
+  // TODO: activate modal
+  const activateModal = () => {};
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalDetalhesPagamentoProvider>
-        <div>
+        <>
           <ModalDetalhesPagamento advertisement={advertisement} />
           <div className="mx-auto px-2 md:px-20">
             <SingleRoomGrid />
@@ -37,7 +39,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 </div>
 
                 <RoomSlider />
-                <RoomRating />
+                <RoomRating activateModal={activateModal} />
                 <RoomMap />
                 <RoomSenhorio />
                 <RoomSemelhantes />
@@ -48,7 +50,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       </ModalDetalhesPagamentoProvider>
     </ShowingSingleAdvertisementProvider>
   );
@@ -82,7 +84,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: advertisement, error } = await supabase
     .from(ADVERTISEMENT_TABLE_NAME)
-    .select(`*, host:host_id(*)`)
+    .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url), reviews(*))`)
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
     .single();

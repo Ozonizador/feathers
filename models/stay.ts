@@ -29,12 +29,19 @@ export type StayGuest = StayWithReservation & {
   tenant: Pick<Profile, "id" | "name" | "avatar_url">;
 };
 
-// todo: confirm this
-export type StayDates = Pick<StayWithReservation, "reservation">;
-
 export type StayComplete = StayWithReservation & {
   reports: Report[];
   reviews: Review[];
+};
+
+export type StayWithPrivateReview = Stay & {
+  reviews: Omit<Review, "public_review" | "id" | "updated_at">;
+  tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
+};
+
+export type StayWithPublicReview = Stay & {
+  reviews: Omit<Review, "private_review" | "stay_id" | "updated_at">[];
+  tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
 };
 
 /* ENUMS */

@@ -13,15 +13,15 @@ const useProfileService = () => {
       if (error || !data)
         return createProfile(userID, {
           avatar_url: metadata?.avatar_url,
-          firstName: metadata?.full_name.split(" ")[0] || "",
-          lastName: metadata?.full_name.split(" ")[1] || "",
+          firstName: metadata?.full_name?.split(" ")[0] || "",
+          lastName: metadata?.full_name?.split(" ")[1] || "",
         });
       return { data, error };
     } catch (error) {
       return createProfile(userID, {
         avatar_url: metadata?.avatar_url,
-        firstName: metadata?.full_name.split(" ")[0] || "",
-        lastName: metadata?.full_name.split(" ")[1] || "",
+        firstName: metadata?.full_name?.split(" ")[0] || "",
+        lastName: metadata?.full_name?.split(" ")[1] || "",
       });
     }
   };
