@@ -13,16 +13,6 @@ export type ConversationComplete = Conversation & {
 const useConversationService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addConversation = async (
-    conversation: Conversation
-  ): Promise<{ data: Conversation; error: PostgrestError }> => {
-    const { data, error } = await supabaseClient
-      .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-      .insert(conversation)
-      .single();
-    return { data, error };
-  };
-
   const getConversationsFromUser = async (
     userId: string
   ): Promise<{ data: ConversationComplete[]; error: PostgrestError }> => {
@@ -37,7 +27,7 @@ const useConversationService = () => {
     return { data, error };
   };
 
-  return { addConversation, getConversationsFromUser };
+  return { getConversationsFromUser };
 };
 
 export default useConversationService;

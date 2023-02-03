@@ -78,23 +78,29 @@ const SetAdvertisementsContext = createContext<Dispatch<SetStateAction<Advertise
 export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
-  const { getAdvertisementsByCloseCoordinatesWithFilters } = useAdvertisementService();
+  const { getAdvertisementsByCloseCoordinatesWithFilters, getAdvertisementsWithoutCoordinates } =
+    useAdvertisementService();
+
+  const callAdvertisementsDB = async () => {
+    const { lat, lng } = currentFilter?.filter?.coordinates || { lat: null, lng: null };
+    if (lat && lng) {
+      return await getAdvertisementsByCloseCoordinatesWithFilters(lat, lng, advertisementsInfo.page, currentFilter);
+    }
+
+    return await getAdvertisementsWithoutCoordinates(advertisementsInfo.page, currentFilter);
+  };
 
   const getAdvertisements = useCallback(async () => {
     setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));
     // load advertisements
-    const { data, error, count } = await getAdvertisementsByCloseCoordinatesWithFilters(
-      currentFilter.filter?.coordinates?.lat,
-      currentFilter.filter?.coordinates?.lng,
-      advertisementsInfo.page,
-      currentFilter
-    );
+    const { data, error, count } = await callAdvertisementsDB();
 
-    if (!error) {
-      setAdvertisementsInfo((oldState) => ({ ...oldState, advertisements: data, count, loading: false }));
-    } else {
-      setAdvertisementsInfo((oldState) => ({ ...oldState, advertisements: [], count, loading: false }));
-    }
+    setAdvertisementsInfo((oldState) => ({
+      ...oldState,
+      advertisements: (!error && data) || [],
+      count,
+      loading: false,
+    }));
   }, [advertisementsInfo.page, currentFilter]);
 
   useEffect(() => {
