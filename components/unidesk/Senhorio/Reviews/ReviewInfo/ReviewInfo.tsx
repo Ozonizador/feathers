@@ -12,20 +12,18 @@ const ReviewInfo = () => {
   const [averageReviews, setAverageReviews] = useState<number>();
 
   const getLatestReviews = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getReviewsByHostId(user.id);
-      if (!error) {
-        setLatestReviews(data);
-      }
+    if (!user) return;
+    const { data, error } = await getReviewsByHostId(user.id);
+    if (!error) {
+      setLatestReviews(data);
     }
   }, [user]);
 
   const getAverageAllReviews = useCallback(async () => {
-    if (user) {
-      const { data, error } = await averageFromAllReviewsByHost(user.id);
-      if (!error) {
-        setAverageReviews(data);
-      }
+    if (!user) return;
+    const { data, error } = await averageFromAllReviewsByHost(user.id);
+    if (!error) {
+      setAverageReviews(data);
     }
   }, []);
 
