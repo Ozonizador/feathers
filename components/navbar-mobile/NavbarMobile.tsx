@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 /* import person image */
-import { useGetUserType, useProfileInformation, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useCurrentUser, useToggleUserType } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
@@ -36,7 +36,7 @@ interface NavbarMobileProps {
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const user = useUser();
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
 

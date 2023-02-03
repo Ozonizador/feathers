@@ -29,9 +29,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
       <div className="flex flex-col items-center justify-center align-middle">
         <Avatar
           alt="Hóspede"
-          img={
-            profile.avatar_url ? profile.avatar_url : "https://flowbite.com/docs/images/people/profile-picture-1.jpg"
-          }
+          img={profile.avatar_url ? profile.avatar_url : "/images/sec6-person1.jpg"}
           rounded={true}
           size="md"
         />

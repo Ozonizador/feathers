@@ -9,6 +9,7 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = ({ review, tenant }: ReviewCardProps) => {
+  if (!review) return;
   const ratings = [
     review.comodities_rating,
     review.landlord_rating,
@@ -23,12 +24,7 @@ const ReviewCard = ({ review, tenant }: ReviewCardProps) => {
       <div key={review.id} className="flex flex-col gap-5 rounded-lg border border-terciary-200 p-4">
         <div className="flex gap-5">
           <div>
-            <Avatar
-              alt="Hóspede"
-              img="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-              rounded={true}
-              size="sm"
-            />
+            <Avatar alt="Hóspede" img={tenant.avatar_url || "/images/sec6-person1.jpg"} rounded={true} size="sm" />
           </div>
           <div className="my-auto">{`${tenant.name} ${tenant.surname}`}</div>
           <div className="my-auto ml-auto text-secondary-400">{averageRating.toFixed(2)}</div>

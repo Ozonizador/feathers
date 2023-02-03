@@ -28,11 +28,7 @@ export default function RoomSenhorio() {
               <div className="flex flex-col items-center pb-10">
                 <Image
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  src={
-                    advertisement.host.avatar_url
-                      ? advertisement.host.avatar_url
-                      : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                  }
+                  src={advertisement.host.avatar_url ? advertisement.host.avatar_url : "/images/sec6-person1.jpg"}
                   alt="Bonnie image"
                   height={96}
                   width={96}

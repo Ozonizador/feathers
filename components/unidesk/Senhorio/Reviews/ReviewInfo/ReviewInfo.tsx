@@ -85,11 +85,7 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
         <div className="flex w-60 flex-col items-center justify-center align-middle">
           <Avatar
             alt="Default avatar with alt text"
-            img={
-              review.tenant?.avatar_url
-                ? review.tenant.avatar_url
-                : "https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-            }
+            img={review.tenant?.avatar_url ? review.tenant.avatar_url : "/images/sec6-person1.jpg"}
             rounded={true}
             size="lg"
           />

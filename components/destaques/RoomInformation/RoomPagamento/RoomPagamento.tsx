@@ -8,7 +8,7 @@ import { useSetModalDetalhesPagamento } from "../../../../context/ModalShowProvi
 
 import useReservationService from "../../../../hooks/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
-import { useProfileInformation } from "../../../../context/MainProvider";
+import { useCurrentUser } from "../../../../context/MainProvider";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -21,7 +21,7 @@ export default function RoomPagamento() {
   const [endDate, setEndDate] = useState(new Date());
 
   const advertisement = useGetSingleAdvertisement();
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   let setIsOpen = useSetModalDetalhesPagamento();
 
   const router = useRouter();

@@ -8,11 +8,11 @@ INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encryp
 INSERT INTO "public"."profiles" ("id", "slug", "name", "surname", "nationality", "town", "birth_date", "gender", "description", "languages", "phone", "avatar_url", "favourite_rooms" ) VALUES
 ('3a21df80-34be-435a-8c61-06da3c9e1caa', 'profiletest', 'paulo', 'cardoso','portuguese', 'poto', '1992-11-05',1, 'OLA SOU O PAULO', NULL,NULL,NULL,NULL), 
 ('ab723c81-b13b-47b6-867c-091377e9b418','joao','joao','penas','portuguese','nazare', '1992-11-05',1, 'OLA SOU O JOAO', NULL,NULL, NULL, NULL),
-('c4c7874c-a388-46c1-94db-5cb11839ff7b', 'castelhano', 'castelhano', 'portuguese', 'nazare', '2000-01-01', 1, 'BOAS', NULL, NULL, NULL, NULL);
+('c4c7874c-a388-46c1-94db-5cb11839ff7b', 'castelhano', 'castelhano', 'developer', 'portuguese', 'nazare', '2000-01-01', 1, 'BOAS', NULL, NULL, NULL, NULL);
 
 -- advertisements
-INSERT INTO "public"."advertisements" ("slug", "type", "place", "street", "street_number", "floor", "postal_code", "rooms", "max_rooms", "beds", "tenant_number", "bathrooms", "title", "description", "type_flex_host", "type_host", "photos", "house_rules", "about_house", "month_rent", "extra_per_host", "guarantee_value", "expenses", "available", "host_lives_property", "verified", "host_id", "geom", "agreementsinfo") 
-VALUES ('aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', null, '{}');
+INSERT INTO "public"."advertisements" ("id", "slug", "type", "place", "street", "street_number", "floor", "postal_code", "rooms", "max_rooms", "beds", "tenant_number", "bathrooms", "title", "description", "type_flex_host", "type_host", "photos", "house_rules", "about_house", "month_rent", "extra_per_host", "guarantee_value", "expenses", "available", "host_lives_property", "verified", "host_id", "geom", "agreementsinfo") 
+VALUES ('0a54f7fe-2fda-4d30-9767-954796daa5bd','aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', null, '{}');
 
 
 -- reservations
@@ -25,10 +25,10 @@ INSERT INTO "public"."reservations" ("id", "start_date", "end_date", "advertisem
 -- stays
 INSERT INTO "public"."stays" ("id", "advertisement_id", "tenant_id", "reservation_id", "status") VALUES
 ('d977b25a-855d-4707-bb12-ca9972abae8e', '0a54f7fe-2fda-4d30-9767-954796daa5bd', 'ab723c81-b13b-47b6-867c-091377e9b418', '629e0125-dd17-46a5-ad3b-11de8f4e1bd6','OK'),
-('0dc9f1a2-566d-4211-92b8-0acee274f595', '0a54f7fe-2fda-4d30-9767-954796daa5bd', 'c4c7874c-a388-46c1-94db-5cb11839ff7b', '53d879c4-23b4-48a7-a89c-f5d25b675db3', 'OK')
+('0dc9f1a2-566d-4211-92b8-0acee274f595', '0a54f7fe-2fda-4d30-9767-954796daa5bd', 'c4c7874c-a388-46c1-94db-5cb11839ff7b', '53d879c4-23b4-48a7-a89c-f5d25b675db3', 'OK');
 
 -- reviews
--- INSERT INTO "public"."reviews" ("stay_id", "overall_rating", "location_rating", "value_quality_rating", "landlord_rating", "comodities_rating", "public_review", "private_review") VALUES
--- ()
+INSERT INTO "public"."reviews" ("stay_id", "overall_rating", "location_rating", "value_quality_rating", "landlord_rating", "comodities_rating", "public_review", "private_review") VALUES
+('d977b25a-855d-4707-bb12-ca9972abae8e', 1, 2, 3, 4,5, 'Tudo ok', 'Tudo ok. Obrigado');
 
 -- 

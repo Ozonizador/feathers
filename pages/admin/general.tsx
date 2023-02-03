@@ -131,11 +131,7 @@ const Index = ({ user, profileData }: IndexProps) => {
             <div className="flex items-center justify-center lg:justify-start">
               <label htmlFor="files" className="relative cursor-pointer rounded-md text-indigo-500 ">
                 <Avatar
-                  img={
-                    profile?.avatar_url
-                      ? profile.avatar_url
-                      : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  }
+                  img={profile?.avatar_url ? profile.avatar_url : "/images/sec6-person1.jpg"}
                   rounded={true}
                   status="away"
                   size="lg"

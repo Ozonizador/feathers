@@ -40,9 +40,9 @@ const ModalReviewsAdvert = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="flex flex-col py-3 px-2 lg:flex-row">
-                    <div></div>
-                    <div>
+                  <div className="flex flex-col gap-2 py-3 px-2 lg:flex-row">
+                    <div className="w-full lg:w-1/2"></div>
+                    <div className="w-full lg:w-1/2">
                       {stays && stays.length > 0 && (
                         <>
                           <div className="flex flex-col gap-2">
