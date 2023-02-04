@@ -8,7 +8,7 @@ import {
   useSetOpenModalReport,
 } from "../../context/ModalShowProvider";
 import { Report, ReportsType } from "../../models/report";
-import { useProfileInformation } from "../../context/MainProvider";
+import { useCurrentUser } from "../../context/MainProvider";
 import useReportService from "../../hooks/reportService";
 import FeathersSpinner from "../utils/Spinner";
 
@@ -16,7 +16,7 @@ import FeathersSpinner from "../utils/Spinner";
 
 const ModalDenuncia = () => {
   const { addReportOnAdvert } = useReportService();
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   const { isOpen, step, stay } = useModalReportAdvertisement();
   const setModalReportProperty = useSetModalReportContextProperty();
   const setIsOpen = useSetOpenModalReport();

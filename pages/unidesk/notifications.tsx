@@ -3,7 +3,7 @@ import { Spinner } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
 import { useCallback, useEffect, useState } from "react";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
-import { useProfileInformation } from "../../context/MainProvider";
+import { useCurrentUser } from "../../context/MainProvider";
 import { Notification } from "../../models/notification";
 import useNotificationService from "../../hooks/notificationsService";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
@@ -15,7 +15,7 @@ const Notifications = () => {
   const { getNotifications } = useNotificationService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
 
   const getUserNotifications = useCallback(async () => {
     setIsLoading(true);

@@ -101,7 +101,7 @@ export const useGetUserType = () => {
   return useContext(UnihostsWebsiteContext);
 };
 
-export const useProfileInformation = () => {
+export const useCurrentUser = () => {
   const { profile } = useContext(UnihostsWebsiteContext);
   return profile;
 };

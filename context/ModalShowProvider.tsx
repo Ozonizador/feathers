@@ -5,31 +5,47 @@ interface ModalDetalhesPagamentoProps {
   children: ReactElement;
 }
 
+interface ModalAdvertPageProps {
+  detailsModalOpen: boolean;
+  reviewsModalOpen: boolean;
+}
+
 // Context Modal Open Share
-const ModalDetalhesPagamentoContext = createContext<boolean>(false);
-const SetModalDetalhesPagamentoContext = createContext<Dispatch<SetStateAction<boolean>>>(() => {});
+const ModalsAdvertPageContext = createContext<ModalAdvertPageProps>({
+  detailsModalOpen: false,
+  reviewsModalOpen: false,
+});
+const SetModalsAdvertPageContext = createContext<Dispatch<SetStateAction<ModalAdvertPageProps>>>(() => {});
 
 export const ModalDetalhesPagamentoProvider = ({ children }: ModalDetalhesPagamentoProps): JSX.Element => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<ModalAdvertPageProps>({
+    detailsModalOpen: false,
+    reviewsModalOpen: false,
+  });
 
   return (
-    <ModalDetalhesPagamentoContext.Provider value={modalOpen}>
-      <SetModalDetalhesPagamentoContext.Provider value={setModalOpen}>
-        {children}
-      </SetModalDetalhesPagamentoContext.Provider>
-    </ModalDetalhesPagamentoContext.Provider>
+    <ModalsAdvertPageContext.Provider value={modalOpen}>
+      <SetModalsAdvertPageContext.Provider value={setModalOpen}>{children}</SetModalsAdvertPageContext.Provider>
+    </ModalsAdvertPageContext.Provider>
   );
 };
 
 export function useModalDetalhesPagamento() {
-  const modalOpen = useContext(ModalDetalhesPagamentoContext);
+  const modalOpen = useContext(ModalsAdvertPageContext);
   return modalOpen;
 }
 
-export function useSetModalDetalhesPagamentoOpen() {
-  const setModalOpen = useContext(SetModalDetalhesPagamentoContext);
+export function useSetModalDetalhesPagamento() {
+  const setModal = useContext(SetModalsAdvertPageContext);
   return (value: boolean) => {
-    setModalOpen(value);
+    setModal((currentValue) => ({ ...currentValue, detailsModalOpen: value }));
+  };
+}
+
+export function useSetModalReviews() {
+  const setModal = useContext(SetModalsAdvertPageContext);
+  return (value: boolean) => {
+    setModal((currentValue) => ({ ...currentValue, reviewsModalOpen: value }));
   };
 }
 

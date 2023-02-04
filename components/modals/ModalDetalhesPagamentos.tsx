@@ -1,28 +1,21 @@
 import React, { Fragment, ReactNode } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { useModalDetalhesPagamento, useSetModalDetalhesPagamentoOpen } from "../../context/ModalShowProvider";
+import { useModalDetalhesPagamento, useSetModalDetalhesPagamento } from "../../context/ModalShowProvider";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { Advertisement } from "../../models/advertisement";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 
 /* PAGINA 7 DO XD */
 
-interface ModalDetalhesPagamentoProps {
-  advertisement: Advertisement;
-}
-
-const ModalDetalhesPagamento = ({ advertisement }: ModalDetalhesPagamentoProps) => {
-  let isOpen = useModalDetalhesPagamento();
-  let setIsOpen = useSetModalDetalhesPagamentoOpen();
-
-  function closeModal() {
-    setIsOpen(false);
-  }
+const ModalDetalhesPagamento = () => {
+  const advertisement = useGetSingleAdvertisement();
+  let { detailsModalOpen } = useModalDetalhesPagamento();
+  let setIsOpen = useSetModalDetalhesPagamento();
 
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-900" onClose={closeModal}>
+      <Transition appear show={detailsModalOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-900" onClose={() => setIsOpen(false)}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

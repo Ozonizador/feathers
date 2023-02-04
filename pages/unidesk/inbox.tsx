@@ -1,5 +1,5 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
-import { useProfileInformation } from "../../context/MainProvider";
+import { useCurrentUser } from "../../context/MainProvider";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useConversationService from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
@@ -27,7 +27,7 @@ import Link from "next/link";
 const CaixaEntrada = () => {
   const [conversations, setConversations] = useState<ConversationWithTenant[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   const { acceptReservation } = useReservationService();
   const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
   const { getConversationsFromUser } = useConversationService();
@@ -144,7 +144,7 @@ const CaixaEntrada = () => {
                                 img={
                                   currentConversation.tenant?.avatar_url
                                     ? currentConversation.tenant?.avatar_url
-                                    : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    : "/images/sec6-person1.jpg"
                                 }
                                 rounded={true}
                                 status="away"

@@ -106,6 +106,19 @@ const useAdvertisementService = () => {
     return { data, error, count };
   };
 
+  const getAdvertisementsWithoutCoordinates = async (page: number, filters: FilterAdvertisements) => {
+    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
+    let query = supabaseClient
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .select()
+      .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
+
+    query = addFilterAdvertisement(query, filters);
+
+    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
+    return { data, error, count };
+  };
+
   const getAdvertisementsForMainPage = async (lat: number, lng: number) => {
     let query = supabaseClient.rpc(CLOSE_ADVERTISEMENTS_TABLE_NAME, { lat, lng }).limit(4);
 
@@ -156,6 +169,7 @@ const useAdvertisementService = () => {
     getAdvertisementsForMainPage,
     getSimilarAdvertisements,
     getAdvertisementsByCloseCoordinatesWithFilters,
+    getAdvertisementsWithoutCoordinates,
     saveImage,
     getPublicUrlFromImage,
     removePicture,

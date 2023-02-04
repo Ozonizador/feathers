@@ -4,7 +4,7 @@ import iconfavorito from "../../../public/images/icon-pg14-2.svg";
 import { BiInfoCircle } from "react-icons/bi";
 import { CgHome } from "react-icons/cg";
 import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
-import { useProfileInformation } from "../../../context/MainProvider";
+import { useCurrentUser } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { Spinner } from "flowbite-react";
@@ -21,7 +21,7 @@ import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   const { getAdvertisementsFromMultipleId } = useAdvertisementService();
 
   const getUserFavourites = useCallback(async () => {

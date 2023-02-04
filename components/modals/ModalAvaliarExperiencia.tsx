@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Rating, Spinner } from "flowbite-react";
 import { Review, REVIEW_COLUMNS } from "../../models/review";
 import useReviewService from "../../hooks/reviewService";
-import { useProfileInformation } from "../../context/MainProvider";
+import { useCurrentUser } from "../../context/MainProvider";
 import {
   useModalAvaliarExperiencia,
   useSetModalAvaliarExperienciaContextProperty,

@@ -15,7 +15,7 @@ import {
 
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
-import { useProfileInformation, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
+import { useCurrentUser, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
 import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
@@ -25,7 +25,7 @@ interface RoomCardProps {
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
   const advertisementOverallRating =
     (advertisement.averages && advertisement.averages[0] && advertisement.averages[0].overall_average.toFixed(2)) ||

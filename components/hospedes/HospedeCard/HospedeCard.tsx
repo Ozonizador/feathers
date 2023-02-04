@@ -15,7 +15,7 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
       <div className="flex w-36 flex-col items-center justify-center align-middle">
         <Avatar
           alt="Hóspede"
-          img={tenant.avatar_url ? tenant.avatar_url : "https://flowbite.com/docs/images/people/profile-picture-2.jpg"}
+          img={tenant.avatar_url ? tenant.avatar_url : "/images/sec6-person1.jpg"}
           rounded={true}
           size="lg"
         />

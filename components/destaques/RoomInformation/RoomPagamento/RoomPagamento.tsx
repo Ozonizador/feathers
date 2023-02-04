@@ -4,29 +4,25 @@ import { Label } from "flowbite-react/lib/esm/components";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { useSetModalDetalhesPagamentoOpen } from "../../../../context/ModalShowProvider";
+import { useSetModalDetalhesPagamento } from "../../../../context/ModalShowProvider";
 
 import useReservationService from "../../../../hooks/reservationService";
 import { Reservation, ReservationStatus } from "../../../../models/reservation";
-import { useProfileInformation } from "../../../../context/MainProvider";
-import useNotificationService from "../../../../hooks/notificationsService";
+import { useCurrentUser } from "../../../../context/MainProvider";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
-import useConversationService from "../../../../hooks/conversationService";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 import Link from "next/link";
 
 export default function RoomPagamento() {
-  const { addConversation } = useConversationService();
-  const { addNotification } = useNotificationService();
   const { addReservation } = useReservationService();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const advertisement = useGetSingleAdvertisement();
-  const profile = useProfileInformation();
-  let setIsOpen = useSetModalDetalhesPagamentoOpen();
+  const profile = useCurrentUser();
+  let setIsOpen = useSetModalDetalhesPagamento();
 
   const router = useRouter();
 

@@ -7,13 +7,18 @@ import { GetServerSidePropsContext } from "next";
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../../models/paths";
+import { Review, Reviews, REVIEWS_TABLE_NAME } from "../../../models/review";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "Anúncios" },
   { url: "", label: "Detalhes dos Anúncios" },
 ] as BreadcrumbPath[];
 
-const reviews = () => {
+interface ReviewsPageProps {
+  latestReviews: Review[];
+}
+
+const ReviewsPage = ({ latestReviews }: ReviewsPageProps) => {
   return (
     <>
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
@@ -31,7 +36,7 @@ const reviews = () => {
   );
 };
 
-export default reviews;
+export default ReviewsPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
@@ -48,6 +53,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         permanent: false,
       },
     };
+
+  const user = session.user;
+  const { data, error } = await supabase.from<"reviews", Reviews>(REVIEWS_TABLE_NAME).select();
 
   return {
     props: {

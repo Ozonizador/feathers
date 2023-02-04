@@ -4,7 +4,7 @@ import AnuncioCard from "../../../components/senhorioanuncios/card/AnuncioCard";
 import MenuAnuncio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { useCallback, useEffect, useState } from "react";
 import { Advertisement } from "../../../models/advertisement";
-import { useProfileInformation } from "../../../context/MainProvider";
+import { useCurrentUser } from "../../../context/MainProvider";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
@@ -19,7 +19,7 @@ const Anuncios = () => {
   const { getAdvertismentsFromUserId } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
-  const profile = useProfileInformation();
+  const profile = useCurrentUser();
 
   const getUserAdvertisements = useCallback(async () => {
     if (profile) {
