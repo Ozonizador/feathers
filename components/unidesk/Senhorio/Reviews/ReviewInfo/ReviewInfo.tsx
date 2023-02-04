@@ -5,32 +5,33 @@ import { useCallback, useEffect, useState } from "react";
 import { ReviewWithTenantAndAdvertisement } from "../../../../../models/review";
 import useReviewService from "../../../../../hooks/reviewService";
 
-const ReviewInfo = () => {
+interface ReviewInfoProps {
+  generalClassification: number;
+  responseRate: number;
+  latestReviews: ReviewWithTenantAndAdvertisement[];
+}
+
+const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: ReviewInfoProps) => {
   const user = useUser();
-  const { averageFromAllReviewsByHost, getReviewsByHostId } = useReviewService();
-  const [latestReviews, setLatestReviews] = useState<ReviewWithTenantAndAdvertisement[]>([]);
-  const [averageReviews, setAverageReviews] = useState<number>();
 
-  const getLatestReviews = useCallback(async () => {
-    if (!user) return;
-    const { data, error } = await getReviewsByHostId(user.id);
-    if (!error) {
-      setLatestReviews(data);
-    }
-  }, [user]);
+  // const getLatestReviews = useCallback(async () => {
+  //   if (!user) return;
+  //   const { data, error } = await getReviewsByHostId(user.id);
+  //   if (error) return;
+  //   setLatestReviews(data);
+  // }, [user]);
 
-  const getAverageAllReviews = useCallback(async () => {
-    if (!user) return;
-    const { data, error } = await averageFromAllReviewsByHost(user.id);
-    if (!error) {
-      setAverageReviews(data);
-    }
-  }, []);
+  // const getAverageAllReviews = useCallback(async () => {
+  //   if (!user) return;
+  //   const { data, error } = await averageFromAllReviewsByHost(user.id);
+  //   if (error) return;
+  //   setAverageReviews(data);
+  // }, []);
 
-  useEffect(() => {
-    getLatestReviews();
-    getAverageAllReviews();
-  }, [getLatestReviews, getAverageAllReviews]);
+  // useEffect(() => {
+  //   getLatestReviews();
+  //   getAverageAllReviews();
+  // }, [getLatestReviews, getAverageAllReviews]);
 
   return (
     <>
@@ -44,11 +45,13 @@ const ReviewInfo = () => {
           <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
           <Rating>
             <Rating.Star />
-            <p className="ml-2 text-xl  text-yellow-300">{averageReviews}</p>
+            <p className="ml-2 text-xl  text-yellow-300">{responseRate}</p>
           </Rating>
         </div>
 
-        <div className="mt-3 text-center text-xl font-bold lg:mt-0 lg:ml-7 lg:text-left">Taxa de resposta: N/A</div>
+        <div className="mt-3 text-center text-xl font-bold lg:mt-0 lg:ml-7 lg:text-left">
+          Taxa de resposta: {responseRate}%
+        </div>
       </div>
 
       <div className="mt-14 mb-6 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">

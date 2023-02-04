@@ -7,7 +7,14 @@ import { GetServerSidePropsContext } from "next";
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../../models/paths";
-import { Review, Reviews, REVIEWS_TABLE_NAME } from "../../../models/review";
+import {
+  Review,
+  Reviews,
+  REVIEWS_TABLE_NAME,
+  ReviewWithTenantAndAdvertisement,
+  REVIEW_COLUMNS,
+} from "../../../models/review";
+import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "Anúncios" },
@@ -16,6 +23,8 @@ const breadcrumbPaths = [
 
 interface ReviewsPageProps {
   latestReviews: Review[];
+  generalClassification: number;
+  responseRate: number;
 }
 
 const ReviewsPage = ({ latestReviews }: ReviewsPageProps) => {
@@ -28,7 +37,11 @@ const ReviewsPage = ({ latestReviews }: ReviewsPageProps) => {
             <MenuSenhorio />
           </div>
           <div className="mx-auto w-full lg:ml-20 lg:pr-10">
-            <ReviewInfo />
+            <ReviewInfo
+              latestReviews={latestReviews as ReviewWithTenantAndAdvertisement[]}
+              generalClassification={0}
+              responseRate={0}
+            />
           </div>
         </div>
       </div>
@@ -55,12 +68,24 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const user = session.user;
-  const { data, error } = await supabase.from<"reviews", Reviews>(REVIEWS_TABLE_NAME).select();
 
+  const { data: latestReviews, error: reviewsError } = await supabase
+    .from<"reviews", Reviews>(REVIEWS_TABLE_NAME)
+    .select("*, advertisement:advertisements(id,host_id), tenant:tenant_id(*)")
+    .eq(REVIEW_COLUMNS.HOST_ID, user.id)
+    .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false })
+    .range(0, PAGE_NUMBER_COUNT - 1);
+
+  // adicionar o response rate
+
+  // adicionar a classificação geral
   return {
     props: {
       initialSession: session,
       user: session.user,
+      latestReviews: reviewsError ? [] : latestReviews,
+      generalClassification: 0, // TODO: generalClassification
+      responseRate: 0, // TODO add
     },
   };
 };
