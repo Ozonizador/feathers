@@ -161,7 +161,9 @@ const CaixaEntrada = () => {
                             </div>
                           </div>
                           <div className="my-4 flex justify-center">
-                            {`${currentConversation.reservation.start_date} - ${currentConversation.reservation.end_date}`}
+                            {`${currentConversation.reservation?.start_date || ""} - ${
+                              currentConversation.reservation?.end_date || ""
+                            }`}
                           </div>
                           {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
                             <div className="flex justify-around gap-5">

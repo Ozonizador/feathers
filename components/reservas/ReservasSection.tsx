@@ -127,9 +127,11 @@ const CurrentReservationsSection = () => {
                     {stay.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation.start_date}
+                    {stay.reservation?.start_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{stay.reservation.end_date}</Table.Cell>
+                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                    {stay.reservation?.end_date || ""}
+                  </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[stay.advertisement.type]
                   } em ${stay.advertisement.place}`}</Table.Cell>
@@ -188,10 +190,10 @@ const NextReservationsSection = () => {
                     {stay.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation.start_date}
+                    {stay.reservation?.start_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {stay.reservation.end_date}
+                    {stay.reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[stay.advertisement.type]
@@ -226,11 +228,11 @@ const AllReservationsSection = () => {
   const checkIntervalForDate = (stay: StayGuest) => {
     const currentDate = new Date();
 
-    if (new Date(stay.reservation.start_date) < currentDate && new Date(stay.reservation.end_date) >= currentDate)
+    if (new Date(stay.reservation?.start_date) < currentDate && new Date(stay.reservation?.end_date) >= currentDate)
       return "A decorrer estadia";
-    if (new Date(stay.reservation.start_date) < currentDate && new Date(stay.reservation.end_date) < currentDate)
+    if (new Date(stay.reservation?.start_date) < currentDate && new Date(stay.reservation?.end_date) < currentDate)
       return "Finalizado";
-    if (new Date(stay.reservation.start_date) > currentDate && new Date(stay.reservation.end_date) > currentDate)
+    if (new Date(stay.reservation?.start_date) > currentDate && new Date(stay.reservation?.end_date) > currentDate)
       return "Próxima";
 
     return "";
@@ -264,10 +266,10 @@ const AllReservationsSection = () => {
                     {stay.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation.start_date}
+                    {stay.reservation?.start_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {stay.reservation.end_date}
+                    {stay.reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[stay.advertisement.type]

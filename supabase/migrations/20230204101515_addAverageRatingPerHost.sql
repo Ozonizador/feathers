@@ -15,3 +15,6 @@
 -- SECURITY DEFINER SET search_path = extensions, public, pg_temp;
 
 -- -- CREATE OR REPLACE VIEW response_rate_per_host ()
+
+-- todo finish this.
+
