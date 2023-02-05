@@ -51,19 +51,11 @@ const useReviewService = () => {
     return { data, error };
   };
 
-  /* GET Average rating of all the ratings per host */
-  const averageFromAllReviewsByHost = async (hostId: string) => {
-    const { data, error } = await supabaseClient.rpc("average_rating_per_host", { host: hostId }).single();
-
-    return { data, error };
-  };
-
   return {
     addReview,
     getAveragesByAdvertisementId,
     getReviewsByHostId,
     getReviewsByAdvertId,
-    averageFromAllReviewsByHost,
     getReviews,
   };
 };

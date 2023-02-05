@@ -27,7 +27,8 @@ interface ReviewsPageProps {
   responseRate: number;
 }
 
-const ReviewsPage = ({ latestReviews }: ReviewsPageProps) => {
+const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: ReviewsPageProps) => {
+  debugger;
   return (
     <>
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
@@ -39,8 +40,8 @@ const ReviewsPage = ({ latestReviews }: ReviewsPageProps) => {
           <div className="mx-auto w-full lg:ml-20 lg:pr-10">
             <ReviewInfo
               latestReviews={latestReviews as ReviewWithTenantAndAdvertisement[]}
-              generalClassification={0}
-              responseRate={0}
+              generalClassification={generalClassification}
+              responseRate={responseRate}
             />
           </div>
         </div>
@@ -77,15 +78,22 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .range(0, PAGE_NUMBER_COUNT - 1);
 
   // adicionar o response rate
+  const { data: hostGeneralInfo, error: hostGeneralError } = await supabase
+    .rpc("average_rating_per_host", { host: user.id })
+    .single();
 
   // adicionar a classificação geral
+  const { data: generalClassification, error: classificationError } = await supabase
+    .rpc("average_rating_per_host", { host: user.id })
+    .single();
+
   return {
     props: {
       initialSession: session,
       user: session.user,
       latestReviews: reviewsError ? [] : latestReviews,
-      generalClassification: 0, // TODO: generalClassification
-      responseRate: 0, // TODO add
+      generalClassification: classificationError ? 0 : generalClassification,
+      responseRate: hostGeneralError ? 0 : hostGeneralInfo, // TODO add
     },
   };
 };
