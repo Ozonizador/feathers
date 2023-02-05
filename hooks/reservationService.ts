@@ -14,12 +14,10 @@ const useReservationService = () => {
     reservation: Omit<Reservation, "id" | "created_at" | "updated_at">,
     tenant_id: string
   ) => {
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
-      .insert({ ...reservation, tenant_id })
-      .select()
-      .single();
-    return { data, error };
+      .insert({ ...reservation, tenant_id });
+    return { error };
   };
 
   const acceptReservation = async (reservation_id: string, status: ReservationStatus, stay_id?: string) => {
