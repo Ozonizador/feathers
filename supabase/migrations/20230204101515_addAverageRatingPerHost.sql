@@ -14,6 +14,25 @@ END;
 $$
 SECURITY DEFINER SET search_path = extensions, public, pg_temp;
 
-CREATE OR REPLACE VIEW response_rate_per_host ()
-
-
+CREATE OR REPLACE FUNCTION host_general_info (hostId uuid)
+	RETURNS TABLE (
+		number_conversations integer, conversations_answered integer)
+	LANGUAGE sql
+	AS $$
+	SELECT
+		*
+	FROM (
+		SELECT
+			COUNT(*) AS number_conversations
+		FROM
+			conversations
+		WHERE
+			host_id = hostId) AS number_conversations, (
+		SELECT
+			COUNT(DISTINCT conversation_id) AS conversations_answered
+		FROM
+			messages
+		WHERE
+			profile_id = hostId) AS messages_per_host
+$$
+SECURITY DEFINER SET search_path = extensions, public, pg_temp;
