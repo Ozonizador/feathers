@@ -27,7 +27,6 @@ const TestemunhosComponent = () => {
                           testimonial={testemunho.description}
                           img={testemunho.image}
                           name={testemunho.host}
-                          desc={testemunho.job}
                         />
                       </div>
                     );
@@ -51,12 +50,7 @@ const TestemunhosComponent = () => {
             {Testemunhos.map((testemunho, index) => {
               return (
                 <div key={index}>
-                  <TestemunhoCard
-                    testimonial={testemunho.description}
-                    img={testemunho.image}
-                    name={testemunho.host}
-                    desc={testemunho.job}
-                  />
+                  <TestemunhoCard testimonial={testemunho.description} img={testemunho.image} name={testemunho.host} />
                 </div>
               );
             })}
