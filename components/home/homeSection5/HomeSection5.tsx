@@ -34,7 +34,7 @@ const HomeSection5 = () => {
               <span className="px-1">
                 <CgHome />
               </span>{" "}
-              um...
+              em...
             </a>
           </Link>
         </span>

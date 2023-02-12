@@ -10,9 +10,10 @@ interface FeatherDatePickerProps {
   date: Date;
   onChange: (date) => void;
   className?: string;
+  minDate?: Date;
 }
 
-const FeatherDatePicker = ({ date, onChange, className }: FeatherDatePickerProps) => {
+const FeatherDatePicker = ({ date, onChange, className, minDate }: FeatherDatePickerProps) => {
   return (
     <div className="w-full">
       <DatePicker
@@ -20,6 +21,7 @@ const FeatherDatePicker = ({ date, onChange, className }: FeatherDatePickerProps
         onChange={onChange}
         dateFormat="yyyy-MM-dd"
         className={classNames(`${className ? className : ""}`)}
+        minDate={minDate}
       />
     </div>
   );

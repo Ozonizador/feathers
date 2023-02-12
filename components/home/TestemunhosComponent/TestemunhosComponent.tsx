@@ -10,11 +10,12 @@ const TestemunhosComponent = () => {
   return (
     <section>
       <div className="w-full bg-terciary-300">
+        <h6 className="py-8 text-center text-3xl font-black">Testemunhos</h6>
         <div className="hidden h-96 lg:flex">
           <Carousel
             leftControl={<BsFillArrowLeftCircleFill size={32} className="text-5xl text-white drop-shadow-xl" />}
             rightControl={<BsFillArrowRightCircleFill size={32} className="text-5xl text-white drop-shadow-xl" />}
-            indicators={false}
+            indicators={true}
           >
             {group(Testemunhos, 3).map((children, index) => {
               return (

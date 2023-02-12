@@ -35,6 +35,7 @@ import {
   UNIDESK_URL,
 } from "../../models/paths";
 import { BsPerson } from "react-icons/bs";
+import classNames from "classnames";
 
 export const Navbar = () => {
   const user = useUser();
@@ -65,6 +66,11 @@ export const Navbar = () => {
     router.push("/");
   };
 
+  const checkIfUrlActive = (urls: string[]) => {
+    const path = router.asPath;
+    return urls.includes(path);
+  };
+
   return (
     <header>
       {/* DESKTOP */}
@@ -84,10 +90,10 @@ export const Navbar = () => {
 
             {/* SOCIAL MEDIA + FLAG */}
             <div className="flex lg:ml-auto">
-              <div className="my-auto">
+              <div className="my-auto border-r">
                 <Socials type="primary" />
               </div>
-              <div className="flex">
+              <div className="flex pl-2">
                 <div className="my-auto mt-3 h-7 w-7">
                   <Image src={ukFlag} alt="" />
                 </div>
@@ -125,8 +131,20 @@ export const Navbar = () => {
 
             <div className="mx-auto my-auto hidden lg:block">
               <div className="flex gap-1">
+                <div
+                  className={classNames({
+                    "border-b-4 border-primary-500 font-black": checkIfUrlActive(["/"]) == true,
+                  })}
+                >
+                  <Link href="/">Home</Link>
+                </div>
                 <div className="z-900 w-fit">
-                  <Menu as="div" className="ml-5 w-full">
+                  <Menu
+                    as="div"
+                    className={classNames("ml-5 w-full", {
+                      "border-b-4 border-primary-500 font-black": checkIfUrlActive(["/funciona", "/anunciar"]) == true,
+                    })}
+                  >
                     <Menu.Button className="flex flex-1">
                       <h6>Anuncie a sua propriedade</h6>
                       <div className="my-auto">

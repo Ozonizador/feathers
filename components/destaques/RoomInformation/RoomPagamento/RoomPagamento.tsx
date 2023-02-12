@@ -80,7 +80,7 @@ export default function RoomPagamento() {
                 <div className="mb-2 block">
                   <Label htmlFor="Saida" value="Saida" />
                 </div>
-                <FeatherDatePicker date={endDate} onChange={(date) => setEndDate(date)} />
+                <FeatherDatePicker date={endDate} onChange={(date) => setEndDate(date)} minDate={startDate} />
               </div>
             </div>
 
