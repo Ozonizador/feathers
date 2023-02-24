@@ -220,7 +220,7 @@ const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
   }
 
   if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
-  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluidas";
+  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluídas";
   if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
   if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
 

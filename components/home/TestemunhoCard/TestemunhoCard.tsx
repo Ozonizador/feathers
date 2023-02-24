@@ -7,7 +7,7 @@ interface TestemunhoCardProps {
   name: string;
 }
 
-export default function TestemunhoCard({ img, testimonial, name, desc }: TestemunhoCardProps) {
+export default function TestemunhoCard({ img, testimonial, name }: TestemunhoCardProps) {
   return (
     <article className="mx-auto w-11/12 rounded-xl bg-white p-4 lg:mb-8 lg:h-80 lg:w-full">
       <div>

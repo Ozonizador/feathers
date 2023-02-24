@@ -26,7 +26,7 @@ const AboutUs = () => {
 
       <div className="mt-10 px-3 lg:px-60">
         <div className="mb-5 px-4">
-          <h4 className=" text-left text-5xl font-bold">Sobre Nós</h4>
+          <h4 className="text-left text-5xl font-bold">Sobre Nós</h4>
           <h6 className="mb-10 mt-16 text-4xl lg:mb-11 lg:mt-16">
             Uma plataforma que facilita o aluguer à velocidade do agora!
           </h6>
@@ -41,7 +41,7 @@ const AboutUs = () => {
             <Image layout="intrinsic" src={ownerImage} alt="Sobre Nos" className=" rounded-xl"></Image>
           </div>
           <div>
-            <h6 className="ml-2 mt-0 text-left text-3xl font-bold lg:ml-0 ">A nossa história</h6>
+            <h6 className="ml-2 mt-0 pt-6 text-left text-3xl font-bold lg:ml-0">A nossa história</h6>
             <p className="mt-5 p-3 text-justify">
               A Unihosts nasce em Setembro de 2020, em plena pandemia, no quarto do João, no Baleal. Um dos grandes
               desafios que na altura existia era encontrar de forma simples um quarto na Universidade. Através das
