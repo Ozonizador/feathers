@@ -18,7 +18,15 @@ const Spinner = dynamic(() => import("./Spinner"), {
   ssr: false,
 });
 
-const Button = ({ children, onClick, loading = false, disabled, variant = "primary", rounded = "xl" }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  loading = false,
+  disabled,
+  variant = "primary",
+  rounded = "xl",
+  padding,
+}: ButtonProps) => {
   return (
     <>
       <button

@@ -298,17 +298,17 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={ADMIN_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={FAQS_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => logout()}>
+                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
@@ -343,17 +343,17 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={ADMIN_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={FAQS_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => logout()}>
+                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
