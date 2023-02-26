@@ -5,10 +5,9 @@ interface TestemunhoCardProps {
   img: string;
   testimonial: string;
   name: string;
-  desc: string;
 }
 
-export default function TestemunhoCard({ img, testimonial, name, desc }: TestemunhoCardProps) {
+export default function TestemunhoCard({ img, testimonial, name }: TestemunhoCardProps) {
   return (
     <article className="mx-auto w-11/12 rounded-xl bg-white p-4 lg:mb-8 lg:h-80 lg:w-full">
       <div>
@@ -21,7 +20,7 @@ export default function TestemunhoCard({ img, testimonial, name, desc }: Testemu
         <Image height={64} width={64} src={img} alt="" className="rounded-lg" />
         <div className="ml-2">
           <p className="mb-0 text-xl font-bold">{name}</p>
-          <p className="mb-0">{desc}</p>
+          <p className="mb-0">Proprietário Unihosts</p>
         </div>
       </div>
     </article>

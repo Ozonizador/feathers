@@ -81,23 +81,23 @@ const Login = () => {
           </form>
           <Link href={RECOVER_URL}>
             <a aria-label="recover_password">
-              <div className="mt-3 text-center text-primary-500">Esqueci-me da palavra-passe</div>
+              <div className="mt-3 text-center italic text-primary-500">Esqueci-me da palavra-passe</div>
             </a>
           </Link>
 
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
-            <span className="mx-4 flex-shrink text-gray-400">ou</span>
+            <span className="mx-4 flex-shrink text-lg font-bold text-gray-400">ou</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="flex flex-1 flex-col justify-around gap-5">
+          <div className="mb-3 flex justify-around gap-5">
             <Button onClick={loginFacebook} type="button" variant="facebook">
               <SiFacebook className="inline" color="blue" />
-              <span className="my-auto ml-3 inline">Entrar com Facebook</span>
+              <span className="my-auto ml-3 inline">Facebook</span>
             </Button>
             <Button onClick={loginGoogle} type="button" variant="gmail">
               <SiGmail color="red" className="inline" />
-              <span className="my-auto ml-3 inline">Entrar com Gmail</span>
+              <span className="my-auto ml-3 inline">Gmail</span>
             </Button>
           </div>
         </div>

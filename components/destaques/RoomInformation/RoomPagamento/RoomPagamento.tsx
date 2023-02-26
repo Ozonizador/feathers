@@ -41,12 +41,9 @@ export default function RoomPagamento() {
       return;
     }
     // get the reservation
-    const { data, error } = await addReservation(reservation, profile.id);
-    if (!error && data) {
-      toast("Wow so easy!");
-    } else {
-      toast("ERROR");
-    }
+    const { error } = await addReservation(reservation, profile.id);
+    if (error) return toast.error("There was a error making the reservation. Contact the Unihosts support.");
+    toast.success("Reservation requested.");
   };
 
   return (
@@ -83,7 +80,7 @@ export default function RoomPagamento() {
                 <div className="mb-2 block">
                   <Label htmlFor="Saida" value="Saida" />
                 </div>
-                <FeatherDatePicker date={endDate} onChange={(date) => setEndDate(date)} />
+                <FeatherDatePicker date={endDate} onChange={(date) => setEndDate(date)} minDate={startDate} />
               </div>
             </div>
 

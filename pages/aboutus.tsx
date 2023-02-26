@@ -9,24 +9,25 @@ import valoresImage from "../public/images/sobre_nos_valores.jpg";
 const AboutUs = () => {
   return (
     <>
-      <div className="hidden w-full lg:block">
-        <Image layout="intrinsic" src={headerImage} alt="Sobre Nos"></Image>
+      <div className="hidden w-full bg-black lg:block">
+        <Image layout="intrinsic" src={headerImage} alt="Sobre Nos" className=" opacity-60"></Image>
       </div>
 
-      <div className="block w-full lg:hidden">
+      <div className="block w-full bg-black lg:hidden">
         <Image
           layout="responsive"
           src="/images/sobre_nos.jpg"
-          alt="5 formas de melhorar o consumo energético da sua casa"
+          alt="sobre nos image"
           objectFit="cover"
           height="100%"
           width="100%"
+          className="opacity-60"
         ></Image>
       </div>
 
       <div className="mt-10 px-3 lg:px-60">
         <div className="mb-5 px-4">
-          <h4 className=" text-left text-5xl font-bold">Sobre Nós</h4>
+          <h4 className="text-left text-5xl font-bold">Sobre Nós</h4>
           <h6 className="mb-10 mt-16 text-4xl lg:mb-11 lg:mt-16">
             Uma plataforma que facilita o aluguer à velocidade do agora!
           </h6>
@@ -40,9 +41,9 @@ const AboutUs = () => {
           <div className="order-first rounded-lg p-5 lg:order-first">
             <Image layout="intrinsic" src={ownerImage} alt="Sobre Nos" className=" rounded-xl"></Image>
           </div>
-          <div>
-            <h6 className="ml-2 mt-0 text-left text-3xl font-bold lg:ml-0 ">A nossa história</h6>
-            <p className="mt-5 p-3 text-justify">
+          <div className="p-3">
+            <h6 className="ml-2 mt-0 pt-6 text-left text-3xl font-bold lg:ml-0">A nossa história</h6>
+            <p className="mt-5 text-justify font-medium">
               A Unihosts nasce em Setembro de 2020, em plena pandemia, no quarto do João, no Baleal. Um dos grandes
               desafios que na altura existia era encontrar de forma simples um quarto na Universidade. Através das
               Associações de estudantes locais percebemos que existia uma necessidade de descomplicar este processo.
@@ -55,8 +56,8 @@ const AboutUs = () => {
         <div className="my-5 grid grid-cols-1 gap-2 lg:grid-cols-2">
           <div className="order-last  p-5 lg:order-first">
             <div>
-              <h6 className="mt-0 text-left text-3xl font-bold">Missão</h6>
-              <p className="mt-5  text-justify">
+              <h6 className="text-left text-3xl font-bold lg:mt-10">Missão</h6>
+              <p className="mt-5 text-justify text-base font-normal">
                 Queremos que o estudante encontre o seu quarto ideal de forma prática, eficaz e segura! Pretendemos
                 clarificar a oferta digital de alojamentos disponíveis de forma a consolidar uma harmonia funcional
                 entre os proprietários e os estudantes.
@@ -69,12 +70,12 @@ const AboutUs = () => {
         </div>
 
         <div className="my-5 grid grid-cols-1 gap-2 lg:grid-cols-2">
-          <div className="order-first  p-5 lg:order-first">
+          <div className="order-first p-5 lg:order-first">
             <Image layout="intrinsic" src={valoresImage} alt="Valores"></Image>
           </div>
           <div className="rounded-lg p-5">
-            <h6 className="mt-0 text-left text-3xl font-bold">Valores</h6>
-            <p className="mt-5  text-justify">
+            <h6 className="text-left text-3xl font-bold lg:mt-10">Valores</h6>
+            <p className="mt-5 text-justify text-base font-normal">
               Acreditamos que o alojamento e todos os intervenientes do capítulo universitário são marcantes nas nossas
               vidas. Em comunidade queremos explorar continuamente novas ideias, processos e soluções. Valorizamos a
               simplicidade, transparência e compromisso de forma a aproximar as pessoas.

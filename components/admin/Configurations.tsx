@@ -59,7 +59,7 @@ const Configurations = () => {
 
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-0 lg:px-32">
-            <div className="mx-auto w-full px-5 lg:w-full">
+            <div className="mx-auto w-full px-5 lg:w-1/2">
               <div className="text-3xl font-bold">Configurações</div>
               {/* password */}
               <div>

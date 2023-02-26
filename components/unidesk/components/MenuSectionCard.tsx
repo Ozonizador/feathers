@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { CgArrowDown, CgArrowRight } from "react-icons/cg";
+import { FcLock } from "react-icons/fc";
 import classNames from "classnames";
 
 type UnideskMenuSectionOption = {
@@ -68,8 +69,8 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
             options.map((option, index) => {
               return option.blocked ? (
                 <div className="flex flex-1 items-center" key={index}>
-                  <Image src="/images/icon-pg37-3.svg" alt="" height={24} width={24}></Image>
-                  <p className="ml-3 text-base">{option.text}</p>
+                  <FcLock size="24" />
+                  <p className="ml-3 text-base font-bold">{option.text}</p>
                 </div>
               ) : (
                 <Link href={option.link} key={index}>

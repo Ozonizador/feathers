@@ -30,5 +30,3 @@ INSERT INTO "public"."stays" ("id", "advertisement_id", "tenant_id", "reservatio
 -- reviews
 INSERT INTO "public"."reviews" ("stay_id", "overall_rating", "location_rating", "value_quality_rating", "landlord_rating", "comodities_rating", "public_review", "private_review") VALUES
 ('d977b25a-855d-4707-bb12-ca9972abae8e', 1, 2, 3, 4,5, 'Tudo ok', 'Tudo ok. Obrigado');
-
--- 

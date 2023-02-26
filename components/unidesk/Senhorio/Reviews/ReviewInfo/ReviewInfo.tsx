@@ -14,25 +14,6 @@ interface ReviewInfoProps {
 const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: ReviewInfoProps) => {
   const user = useUser();
 
-  // const getLatestReviews = useCallback(async () => {
-  //   if (!user) return;
-  //   const { data, error } = await getReviewsByHostId(user.id);
-  //   if (error) return;
-  //   setLatestReviews(data);
-  // }, [user]);
-
-  // const getAverageAllReviews = useCallback(async () => {
-  //   if (!user) return;
-  //   const { data, error } = await averageFromAllReviewsByHost(user.id);
-  //   if (error) return;
-  //   setAverageReviews(data);
-  // }, []);
-
-  // useEffect(() => {
-  //   getLatestReviews();
-  //   getAverageAllReviews();
-  // }, [getLatestReviews, getAverageAllReviews]);
-
   return (
     <>
       <div className="mx-auto w-11/12 lg:w-full">
