@@ -16,7 +16,7 @@ const Contactos = () => {
 
   return (
     <>
-      <div className="my-20 w-full px-7 lg:my-20 lg:w-full lg:px-28">
+      <div className="my-20 px-7 lg:mx-40 lg:my-20">
         <div className="flex flex-col lg:flex-row ">
           <div className="flex w-full lg:w-1/3">
             <div className="flex flex-col gap-3">

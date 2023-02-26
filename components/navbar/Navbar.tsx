@@ -133,22 +133,24 @@ export const Navbar = () => {
               <div className="flex gap-1">
                 <div
                   className={classNames({
-                    "border-b-4 border-primary-500 font-black": checkIfUrlActive(["/"]) == true,
+                    "border-b-4 border-primary-500 font-black": checkIfUrlActive([HOME_URL]) == true,
                   })}
                 >
                   <Link href="/">Home</Link>
                 </div>
                 <div className="z-900 w-fit">
-                  <Menu
-                    as="div"
-                    className={classNames("ml-5 w-full", {
-                      "border-b-4 border-primary-500 font-black": checkIfUrlActive(["/funciona", "/anunciar"]) == true,
-                    })}
-                  >
-                    <Menu.Button className="flex flex-1">
-                      <h6>Anuncie a sua propriedade</h6>
-                      <div className="my-auto">
-                        <VscTriangleDown className="w-8 text-[#2C3E50]" />
+                  <Menu as="div" className={classNames("ml-5 w-full")}>
+                    <Menu.Button>
+                      <div
+                        className={classNames("flex", {
+                          "border-b-4 border-primary-500 font-black":
+                            checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
+                        })}
+                      >
+                        <h6>Anuncie a sua propriedade</h6>
+                        <div className="my-auto">
+                          <VscTriangleDown className="w-8 text-[#2C3E50]" />
+                        </div>
                       </div>
                     </Menu.Button>
                     <Transition
@@ -176,10 +178,26 @@ export const Navbar = () => {
                   </Menu>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href={BLOG_URL}>Blog</Link>
+                  <Link href={BLOG_URL}>
+                    <a
+                      className={classNames({
+                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
+                      })}
+                    >
+                      Blog
+                    </a>
+                  </Link>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href={CONTACTOS_URL}>Contactos</Link>
+                  <Link href={CONTACTOS_URL}>
+                    <a
+                      className={classNames({
+                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
+                      })}
+                    >
+                      Contactos
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

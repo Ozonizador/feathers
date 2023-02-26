@@ -79,22 +79,22 @@ const Register = () => {
 
           <div className="flex flex-1 flex-col justify-around gap-5">
             <Button variant="facebook" onClick={(event) => registerWithFacebook(event)} type={"button"}>
-              <SiFacebook className="inline " color="blue" />
+              <SiFacebook className="inline " color="blue" size={36} />
               <span className="my-auto ml-3 inline">Continuar com o Facebook</span>
             </Button>
             <Button variant="gmail" onClick={(event) => registerWithGoogle(event)} type={"button"}>
-              <SiGmail color="red" className="inline" />
+              <SiGmail color="red" className="inline" size={36} />
               <span className="my-auto ml-3 inline">Continuar com o Google</span>
             </Button>
           </div>
-          <div className="mt-4 text-center">
-            Ao registar-se está a concordar com os nossos {/* mudar link */}
+          <div className="mt-4 text-center text-sm italic">
+            {`Ao registar-se está a concordar com os nossos `}
             <Link href="#">
               <a>
-                <span className="italic text-primary-500">termos e condições</span> e
+                <span className="italic text-primary-500">termos e condições</span>
+                {` e `}
               </a>
             </Link>
-            {/* mudar link */}
             <Link href="#">
               <a>
                 <span className="italic text-primary-500">política de privacidade.</span>
