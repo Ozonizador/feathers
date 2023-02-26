@@ -11,6 +11,7 @@ interface ButtonProps {
   disabled?: boolean;
   variant?: "primary" | "facebook" | "gmail";
   rounded?: "xl" | "full";
+  padding?: "sm" | "md" | "lg";
 }
 
 const Spinner = dynamic(() => import("./Spinner"), {
