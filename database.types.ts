@@ -9,6 +9,31 @@ import {
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never;
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string;
+          query?: string;
+          variables?: Json;
+          extensions?: Json;
+        };
+        Returns: Json;
+      };
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
+  };
   public: {
     Tables: {
       advertisements: {
@@ -130,7 +155,7 @@ export interface Database {
           category: Database["public"]["Enums"]["BlogCategory"];
           created_at?: string;
           description: string;
-          id: string;
+          id?: string;
           image: string;
           slug: string;
           title: string;
@@ -159,7 +184,7 @@ export interface Database {
         Insert: {
           created_at?: string;
           host_id: string;
-          id: string;
+          id?: string;
           reservation_id: string;
           tenant_id: string;
           updated_at?: string;
@@ -185,7 +210,7 @@ export interface Database {
         Insert: {
           conversation_id: string;
           created_at?: string;
-          id: string;
+          id?: string;
           message: string;
           profile_id: string;
           updated_at?: string;
@@ -209,7 +234,7 @@ export interface Database {
         };
         Insert: {
           created_at?: string;
-          id: string;
+          id?: string;
           profile_id: string;
           type: Database["public"]["Enums"]["NotificationType"];
           updated_at?: string;
@@ -485,27 +510,21 @@ export interface Database {
           value_quality_average: number | null;
         };
       };
-      stays_with_dates: {
-        Row: {
-          advertisement_id: string | null;
-          created_at: string | null;
-          end_date: string | null;
-          id: string | null;
-          reservation_id: string | null;
-          start_date: string | null;
-          status: Database["public"]["Enums"]["staysstatus"] | null;
-          tenant_id: string | null;
-          updated_at: string | null;
-        };
-      };
     };
     Functions: {
       _postgis_deprecate: {
-        Args: { oldname: string; newname: string; version: string };
+        Args: {
+          oldname: string;
+          newname: string;
+          version: string;
+        };
         Returns: undefined;
       };
       _postgis_index_extent: {
-        Args: { tbl: unknown; col: string };
+        Args: {
+          tbl: unknown;
+          col: string;
+        };
         Returns: unknown;
       };
       _postgis_pgsql_version: {
@@ -517,49 +536,82 @@ export interface Database {
         Returns: string;
       };
       _postgis_selectivity: {
-        Args: { tbl: unknown; att_name: string; geom: unknown; mode: string };
+        Args: {
+          tbl: unknown;
+          att_name: string;
+          geom: unknown;
+          mode?: string;
+        };
         Returns: number;
       };
       _st_3dintersects: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_bestsrid: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       _st_concavehull: {
-        Args: { param_inputgeom: unknown };
+        Args: {
+          param_inputgeom: unknown;
+        };
         Returns: unknown;
       };
       _st_contains: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_containsproperly: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_coveredby:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: boolean;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: boolean;
           };
       _st_covers:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: boolean;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: boolean;
           };
       _st_crosses: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_dwithin: {
@@ -567,65 +619,98 @@ export interface Database {
           geog1: unknown;
           geog2: unknown;
           tolerance: number;
-          use_spheroid: boolean;
+          use_spheroid?: boolean;
         };
         Returns: boolean;
       };
       _st_equals: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_intersects: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_linecrossingdirection: {
-        Args: { line1: unknown; line2: unknown };
+        Args: {
+          line1: unknown;
+          line2: unknown;
+        };
         Returns: number;
       };
       _st_longestline: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       _st_maxdistance: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       _st_orderingequals: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_overlaps: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_pointoutside: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       _st_sortablehash: {
-        Args: { geom: unknown };
+        Args: {
+          geom: unknown;
+        };
         Returns: number;
       };
       _st_touches: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       _st_voronoi: {
         Args: {
           g1: unknown;
-          clip: unknown;
-          tolerance: number;
-          return_polygons: boolean;
+          clip?: unknown;
+          tolerance?: number;
+          return_polygons?: boolean;
         };
         Returns: unknown;
       };
       _st_within: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       addauth: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: boolean;
       };
       addgeometrycolumn:
@@ -638,7 +723,7 @@ export interface Database {
               new_srid_in: number;
               new_type: string;
               new_dim: number;
-              use_typmod: boolean;
+              use_typmod?: boolean;
             };
             Returns: string;
           }
@@ -650,7 +735,7 @@ export interface Database {
               new_srid: number;
               new_type: string;
               new_dim: number;
-              use_typmod: boolean;
+              use_typmod?: boolean;
             };
             Returns: string;
           }
@@ -661,81 +746,155 @@ export interface Database {
               new_srid: number;
               new_type: string;
               new_dim: number;
-              use_typmod: boolean;
+              use_typmod?: boolean;
             };
             Returns: string;
           };
       average_per_host: {
-        Args: { host: string };
+        Args: {
+          host: string;
+        };
+        Returns: number;
+      };
+      average_rating_per_host: {
+        Args: {
+          hostid: string;
+        };
         Returns: number;
       };
       box:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           };
       box2d:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           };
       box2d_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box2d_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box2df_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box2df_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box3d:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           };
       box3d_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box3d_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       box3dtobox: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       bytea:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           };
       close_advertisements: {
-        Args: { lat: number; lng: number };
-        Returns: unknown;
+        Args: {
+          lat: number;
+          lng: number;
+        };
+        Returns: {
+          about_house: Json;
+          agreementsinfo: Json | null;
+          available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathrooms: number;
+          beds: number;
+          created_at: string;
+          description: string;
+          expenses: Json;
+          extra_per_host: number;
+          floor: string | null;
+          geom: unknown | null;
+          guarantee_value: number;
+          host_id: string;
+          host_lives_property: boolean;
+          house_rules: Json;
+          id: string;
+          max_rooms: number;
+          month_rent: number;
+          photos: Json;
+          place: string;
+          postal_code: string;
+          rooms: number;
+          slug: string;
+          street: string;
+          street_number: string;
+          tenant_number: number;
+          title: string;
+          type: Database["public"]["Enums"]["TypeRoom"];
+          type_flex_host: Database["public"]["Enums"]["HostFlexType"];
+          type_host: Database["public"]["Enums"]["type_host"];
+          updated_at: string;
+          verified: boolean;
+        }[];
       };
       disablelongtransactions: {
         Args: Record<PropertyKey, never>;
@@ -760,7 +919,10 @@ export interface Database {
             Returns: string;
           }
         | {
-            Args: { table_name: string; column_name: string };
+            Args: {
+              table_name: string;
+              column_name: string;
+            };
             Returns: string;
           };
       dropgeometrytable:
@@ -773,11 +935,16 @@ export interface Database {
             Returns: string;
           }
         | {
-            Args: { schema_name: string; table_name: string };
+            Args: {
+              schema_name: string;
+              table_name: string;
+            };
             Returns: string;
           }
         | {
-            Args: { table_name: string };
+            Args: {
+              table_name: string;
+            };
             Returns: string;
           };
       enablelongtransactions: {
@@ -785,262 +952,415 @@ export interface Database {
         Returns: string;
       };
       equals: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geography:
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           };
       geography_analyze: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       geography_gist_compress: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geography_gist_decompress: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geography_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geography_send: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       geography_spgist_compress_nd: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geography_typmod_in: {
-        Args: { "": unknown[] };
+        Args: {
+          "": unknown[];
+        };
         Returns: number;
       };
       geography_typmod_out: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: unknown;
       };
       geometry:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           };
       geometry_above: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_analyze: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       geometry_below: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_cmp: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       geometry_contained_3d: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_contains: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_contains_3d: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_distance_box: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       geometry_distance_centroid: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       geometry_eq: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_ge: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_gist_compress_2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_gist_compress_nd: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_gist_decompress_2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_gist_decompress_nd: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_gt: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_hash: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       geometry_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_le: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_left: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_lt: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_overabove: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_overbelow: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_overlaps: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_overlaps_3d: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_overleft: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_overright: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_recv: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_right: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_same: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_same_3d: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometry_send: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       geometry_sortsupport: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: undefined;
       };
       geometry_spgist_compress_2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_spgist_compress_3d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_spgist_compress_nd: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       geometry_typmod_in: {
-        Args: { "": unknown[] };
+        Args: {
+          "": unknown[];
+        };
         Returns: number;
       };
       geometry_typmod_out: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: unknown;
       };
       geometry_within: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       geometrytype:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           };
       geomfromewkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       geomfromewkt: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       get_proj4_from_srid: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: string;
       };
       gettransactionid: {
@@ -1048,19 +1368,36 @@ export interface Database {
         Returns: unknown;
       };
       gidx_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       gidx_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
+      host_general_info: {
+        Args: {
+          hostid: string;
+        };
+        Returns: {
+          number_conversations: number;
+          conversations_answered: number;
+        }[];
+      };
       json: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: Json;
       };
       jsonb: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: Json;
       };
       longtransactionsenabled: {
@@ -1071,85 +1408,139 @@ export interface Database {
         Args: {
           reservation_id: string;
           reservation_status: Database["public"]["Enums"]["ReservationStatus"];
-          stay_id: string;
+          stay_id?: string;
+        };
+        Returns: {
+          advertisement_id: string;
+          created_at: string;
+          end_date: string;
+          id: string;
+          start_date: string;
+          status: Database["public"]["Enums"]["ReservationStatus"];
+          tenant_id: string;
+          updated_at: string;
+        }[];
+      };
+      path: {
+        Args: {
+          "": unknown;
         };
         Returns: unknown;
       };
-      path: {
-        Args: { "": unknown };
-        Returns: unknown;
-      };
       pgis_asgeobuf_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       pgis_asmvt_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       pgis_asmvt_serialfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       pgis_geometry_clusterintersecting_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown[];
       };
       pgis_geometry_clusterwithin_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown[];
       };
       pgis_geometry_collect_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       pgis_geometry_makeline_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       pgis_geometry_polygonize_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       pgis_geometry_union_finalfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       point: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       polygon: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       populate_geometry_columns:
         | {
-            Args: { use_typmod: boolean };
+            Args: {
+              use_typmod?: boolean;
+            };
             Returns: string;
           }
         | {
-            Args: { tbl_oid: unknown; use_typmod: boolean };
+            Args: {
+              tbl_oid: unknown;
+              use_typmod?: boolean;
+            };
             Returns: number;
           };
       postgis_addbbox: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_constraint_dims: {
-        Args: { geomschema: string; geomtable: string; geomcolumn: string };
+        Args: {
+          geomschema: string;
+          geomtable: string;
+          geomcolumn: string;
+        };
         Returns: number;
       };
       postgis_constraint_srid: {
-        Args: { geomschema: string; geomtable: string; geomcolumn: string };
+        Args: {
+          geomschema: string;
+          geomtable: string;
+          geomcolumn: string;
+        };
         Returns: number;
       };
       postgis_constraint_type: {
-        Args: { geomschema: string; geomtable: string; geomcolumn: string };
+        Args: {
+          geomschema: string;
+          geomtable: string;
+          geomcolumn: string;
+        };
         Returns: string;
       };
       postgis_dropbbox: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_extensions_upgrade: {
@@ -1161,7 +1552,9 @@ export interface Database {
         Returns: string;
       };
       postgis_geos_noop: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_geos_version: {
@@ -1169,15 +1562,21 @@ export interface Database {
         Returns: string;
       };
       postgis_getbbox: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_hasbbox: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       postgis_index_supportfn: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_lib_build_date: {
@@ -1209,7 +1608,9 @@ export interface Database {
         Returns: string;
       };
       postgis_noop: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       postgis_proj_version: {
@@ -1236,20 +1637,26 @@ export interface Database {
         Args: {
           geomname: string;
           coord_dimension: number;
-          use_new_name: boolean;
+          use_new_name?: boolean;
         };
         Returns: string;
       };
       postgis_typmod_dims: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: number;
       };
       postgis_typmod_srid: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: number;
       };
       postgis_typmod_type: {
-        Args: { "": number };
+        Args: {
+          "": number;
+        };
         Returns: string;
       };
       postgis_version: {
@@ -1261,144 +1668,222 @@ export interface Database {
         Returns: string;
       };
       spheroid_in: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       spheroid_out: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_3dclosestpoint: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_3ddistance: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_3dintersects: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_3dlength: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_3dlongestline: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_3dmakebox: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_3dmaxdistance: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_3dperimeter: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_3dshortestline: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_addpoint: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_angle:
         | {
-            Args: { pt1: unknown; pt2: unknown; pt3: unknown; pt4: unknown };
+            Args: {
+              pt1: unknown;
+              pt2: unknown;
+              pt3: unknown;
+              pt4?: unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { line1: unknown; line2: unknown };
+            Args: {
+              line1: unknown;
+              line2: unknown;
+            };
             Returns: number;
           };
       st_area:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog: unknown; use_spheroid: boolean };
+            Args: {
+              geog: unknown;
+              use_spheroid?: boolean;
+            };
             Returns: number;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: number;
           };
       st_area2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_asbinary:
         | {
-            Args: { "": unknown };
-            Returns: string;
-          }
-        | {
-            Args: { "": unknown };
-            Returns: string;
-          };
-      st_asencodedpolyline: {
-        Args: { geom: unknown; nprecision: number };
-        Returns: string;
-      };
-      st_asewkb: {
-        Args: { "": unknown };
-        Returns: string;
-      };
-      st_asewkt:
-        | {
-            Args: { "": unknown };
-            Returns: string;
-          }
-        | {
-            Args: { "": unknown };
-            Returns: string;
-          }
-        | {
-            Args: { "": string };
-            Returns: string;
-          };
-      st_asgeojson:
-        | {
-            Args: { geom: unknown; maxdecimaldigits: number; options: number };
-            Returns: string;
-          }
-        | {
             Args: {
-              r: Record<string, unknown>[];
-              geom_column: string;
-              maxdecimaldigits: number;
-              pretty_bool: boolean;
+              "": unknown;
             };
             Returns: string;
           }
         | {
-            Args: { geog: unknown; maxdecimaldigits: number; options: number };
+            Args: {
+              "": unknown;
+            };
+            Returns: string;
+          };
+      st_asencodedpolyline: {
+        Args: {
+          geom: unknown;
+          nprecision?: number;
+        };
+        Returns: string;
+      };
+      st_asewkb: {
+        Args: {
+          "": unknown;
+        };
+        Returns: string;
+      };
+      st_asewkt:
+        | {
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": unknown;
+            };
+            Returns: string;
+          }
+        | {
+            Args: {
+              "": string;
+            };
+            Returns: string;
+          };
+      st_asgeojson:
+        | {
+            Args: {
+              geom: unknown;
+              maxdecimaldigits?: number;
+              options?: number;
+            };
+            Returns: string;
+          }
+        | {
+            Args: {
+              r: Record<string, unknown>;
+              geom_column?: string;
+              maxdecimaldigits?: number;
+              pretty_bool?: boolean;
+            };
+            Returns: string;
+          }
+        | {
+            Args: {
+              geog: unknown;
+              maxdecimaldigits?: number;
+              options?: number;
+            };
+            Returns: string;
+          }
+        | {
+            Args: {
+              "": string;
+            };
             Returns: string;
           };
       st_asgml:
         | {
-            Args: { geom: unknown; maxdecimaldigits: number; options: number };
+            Args: {
+              geom: unknown;
+              maxdecimaldigits?: number;
+              options?: number;
+            };
             Returns: string;
           }
         | {
             Args: {
               version: number;
               geom: unknown;
-              maxdecimaldigits: number;
-              options: number;
-              nprefix: string;
-              id: string;
+              maxdecimaldigits?: number;
+              options?: number;
+              nprefix?: string;
+              id?: string;
             };
             Returns: string;
           }
@@ -1406,93 +1891,126 @@ export interface Database {
             Args: {
               version: number;
               geog: unknown;
-              maxdecimaldigits: number;
-              options: number;
-              nprefix: string;
-              id: string;
+              maxdecimaldigits?: number;
+              options?: number;
+              nprefix?: string;
+              id?: string;
             };
             Returns: string;
           }
         | {
             Args: {
               geog: unknown;
-              maxdecimaldigits: number;
-              options: number;
-              nprefix: string;
-              id: string;
+              maxdecimaldigits?: number;
+              options?: number;
+              nprefix?: string;
+              id?: string;
             };
             Returns: string;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: string;
           };
       st_ashexewkb: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       st_askml:
         | {
-            Args: { geom: unknown; maxdecimaldigits: number; nprefix: string };
+            Args: {
+              geom: unknown;
+              maxdecimaldigits?: number;
+              nprefix?: string;
+            };
             Returns: string;
           }
         | {
-            Args: { geog: unknown; maxdecimaldigits: number; nprefix: string };
+            Args: {
+              geog: unknown;
+              maxdecimaldigits?: number;
+              nprefix?: string;
+            };
             Returns: string;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: string;
           };
       st_aslatlontext: {
-        Args: { geom: unknown; tmpl: string };
+        Args: {
+          geom: unknown;
+          tmpl?: string;
+        };
         Returns: string;
       };
       st_asmvtgeom: {
         Args: {
           geom: unknown;
           bounds: unknown;
-          extent: number;
-          buffer: number;
-          clip_geom: boolean;
+          extent?: number;
+          buffer?: number;
+          clip_geom?: boolean;
         };
         Returns: unknown;
       };
       st_assvg:
         | {
-            Args: { geom: unknown; rel: number; maxdecimaldigits: number };
+            Args: {
+              geom: unknown;
+              rel?: number;
+              maxdecimaldigits?: number;
+            };
             Returns: string;
           }
         | {
-            Args: { geog: unknown; rel: number; maxdecimaldigits: number };
+            Args: {
+              geog: unknown;
+              rel?: number;
+              maxdecimaldigits?: number;
+            };
             Returns: string;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: string;
           };
       st_astext:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: string;
           };
       st_astwkb:
         | {
             Args: {
               geom: unknown;
-              prec: number;
-              prec_z: number;
-              prec_m: number;
-              with_sizes: boolean;
-              with_boxes: boolean;
+              prec?: number;
+              prec_z?: number;
+              prec_m?: number;
+              with_sizes?: boolean;
+              with_boxes?: boolean;
             };
             Returns: string;
           }
@@ -1500,209 +2018,332 @@ export interface Database {
             Args: {
               geom: unknown[];
               ids: number[];
-              prec: number;
-              prec_z: number;
-              prec_m: number;
-              with_sizes: boolean;
-              with_boxes: boolean;
+              prec?: number;
+              prec_z?: number;
+              prec_m?: number;
+              with_sizes?: boolean;
+              with_boxes?: boolean;
             };
             Returns: string;
           };
       st_asx3d: {
-        Args: { geom: unknown; maxdecimaldigits: number; options: number };
+        Args: {
+          geom: unknown;
+          maxdecimaldigits?: number;
+          options?: number;
+        };
         Returns: string;
       };
       st_azimuth:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: number;
           };
       st_boundary: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_boundingdiagonal: {
-        Args: { geom: unknown; fits: boolean };
+        Args: {
+          geom: unknown;
+          fits?: boolean;
+        };
         Returns: unknown;
       };
       st_buffer:
         | {
-            Args: { geom: unknown; radius: number; options: string };
+            Args: {
+              geom: unknown;
+              radius: number;
+              options?: string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { geom: unknown; radius: number; quadsegs: number };
+            Args: {
+              geom: unknown;
+              radius: number;
+              quadsegs: number;
+            };
             Returns: unknown;
           };
       st_buildarea: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_centroid:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: unknown;
           };
       st_cleangeometry: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_clipbybox2d: {
-        Args: { geom: unknown; box: unknown };
+        Args: {
+          geom: unknown;
+          box: unknown;
+        };
         Returns: unknown;
       };
       st_closestpoint: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_clusterintersecting: {
-        Args: { "": unknown[] };
+        Args: {
+          "": unknown[];
+        };
         Returns: unknown[];
       };
       st_collect:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown[] };
+            Args: {
+              "": unknown[];
+            };
             Returns: unknown;
           };
       st_collectionextract: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_collectionhomogenize: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_concavehull: {
         Args: {
           param_geom: unknown;
           param_pctconvex: number;
-          param_allow_holes: boolean;
+          param_allow_holes?: boolean;
         };
         Returns: unknown;
       };
       st_contains: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_containsproperly: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_convexhull: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_coorddim: {
-        Args: { geometry: unknown };
+        Args: {
+          geometry: unknown;
+        };
         Returns: number;
       };
       st_coveredby:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: boolean;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: boolean;
           };
       st_covers:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: boolean;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: boolean;
           };
       st_crosses: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_curvetoline: {
-        Args: { geom: unknown; tol: number; toltype: number; flags: number };
+        Args: {
+          geom: unknown;
+          tol?: number;
+          toltype?: number;
+          flags?: number;
+        };
         Returns: unknown;
       };
       st_delaunaytriangles: {
-        Args: { g1: unknown; tolerance: number; flags: number };
+        Args: {
+          g1: unknown;
+          tolerance?: number;
+          flags?: number;
+        };
         Returns: unknown;
       };
       st_difference: {
-        Args: { geom1: unknown; geom2: unknown; gridsize: number };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+          gridsize?: number;
+        };
         Returns: unknown;
       };
       st_dimension: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_disjoint: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_distance:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown; use_spheroid: boolean };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+              use_spheroid?: boolean;
+            };
             Returns: number;
           };
       st_distancesphere: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_dump: {
-        Args: { "": unknown };
-        Returns: unknown;
+        Args: {
+          "": unknown;
+        };
+        Returns: Database["public"]["CompositeTypes"]["geometry_dump"][];
       };
       st_dumppoints: {
-        Args: { "": unknown };
-        Returns: unknown;
+        Args: {
+          "": unknown;
+        };
+        Returns: Database["public"]["CompositeTypes"]["geometry_dump"][];
       };
       st_dumprings: {
-        Args: { "": unknown };
-        Returns: unknown;
+        Args: {
+          "": unknown;
+        };
+        Returns: Database["public"]["CompositeTypes"]["geometry_dump"][];
       };
       st_dwithin: {
         Args: {
           geog1: unknown;
           geog2: unknown;
           tolerance: number;
-          use_spheroid: boolean;
+          use_spheroid?: boolean;
         };
         Returns: boolean;
       };
       st_endpoint: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_envelope: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_equals: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_expand:
         | {
-            Args: { box: unknown; dx: number; dy: number };
+            Args: {
+              box: unknown;
+              dx: number;
+              dy: number;
+            };
             Returns: unknown;
           }
         | {
-            Args: { box: unknown; dx: number; dy: number; dz: number };
+            Args: {
+              box: unknown;
+              dx: number;
+              dy: number;
+              dz?: number;
+            };
             Returns: unknown;
           }
         | {
@@ -1710,295 +2351,458 @@ export interface Database {
               geom: unknown;
               dx: number;
               dy: number;
-              dz: number;
-              dm: number;
+              dz?: number;
+              dm?: number;
             };
             Returns: unknown;
           };
       st_exteriorring: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_flipcoordinates: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_force2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_force3d: {
-        Args: { geom: unknown; zvalue: number };
+        Args: {
+          geom: unknown;
+          zvalue?: number;
+        };
         Returns: unknown;
       };
       st_force3dm: {
-        Args: { geom: unknown; mvalue: number };
+        Args: {
+          geom: unknown;
+          mvalue?: number;
+        };
         Returns: unknown;
       };
       st_force3dz: {
-        Args: { geom: unknown; zvalue: number };
+        Args: {
+          geom: unknown;
+          zvalue?: number;
+        };
         Returns: unknown;
       };
       st_force4d: {
-        Args: { geom: unknown; zvalue: number; mvalue: number };
+        Args: {
+          geom: unknown;
+          zvalue?: number;
+          mvalue?: number;
+        };
         Returns: unknown;
       };
       st_forcecollection: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_forcecurve: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_forcepolygonccw: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_forcepolygoncw: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_forcerhr: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_forcesfs: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_generatepoints:
         | {
-            Args: { area: unknown; npoints: number };
+            Args: {
+              area: unknown;
+              npoints: number;
+            };
             Returns: unknown;
           }
         | {
-            Args: { area: unknown; npoints: number; seed: number };
+            Args: {
+              area: unknown;
+              npoints: number;
+              seed: number;
+            };
             Returns: unknown;
           };
       st_geogfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geogfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geographyfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geohash:
         | {
-            Args: { geom: unknown; maxchars: number };
+            Args: {
+              geom: unknown;
+              maxchars?: number;
+            };
             Returns: string;
           }
         | {
-            Args: { geog: unknown; maxchars: number };
+            Args: {
+              geog: unknown;
+              maxchars?: number;
+            };
             Returns: string;
           };
       st_geomcollfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomcollfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geometricmedian: {
         Args: {
           g: unknown;
-          tolerance: number;
-          max_iter: number;
-          fail_if_not_converged: boolean;
+          tolerance?: number;
+          max_iter?: number;
+          fail_if_not_converged?: boolean;
         };
         Returns: unknown;
       };
       st_geometryfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geometrytype: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       st_geomfromewkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromewkt: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromgeojson:
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": Json };
+            Args: {
+              "": Json;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": Json };
+            Args: {
+              "": Json;
+            };
             Returns: unknown;
           };
       st_geomfromgml: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromkml: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromtwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_geomfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_gmltosql: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_hasarc: {
-        Args: { geometry: unknown };
+        Args: {
+          geometry: unknown;
+        };
         Returns: boolean;
       };
       st_hausdorffdistance: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_hexagon: {
-        Args: { size: number; cell_i: number; cell_j: number; origin: unknown };
+        Args: {
+          size: number;
+          cell_i: number;
+          cell_j: number;
+          origin?: unknown;
+        };
         Returns: unknown;
       };
       st_hexagongrid: {
-        Args: { size: number; bounds: unknown };
+        Args: {
+          size: number;
+          bounds: unknown;
+        };
         Returns: Record<string, unknown>[];
       };
       st_interpolatepoint: {
-        Args: { line: unknown; point: unknown };
+        Args: {
+          line: unknown;
+          point: unknown;
+        };
         Returns: number;
       };
       st_intersection: {
-        Args: { geom1: unknown; geom2: unknown; gridsize: number };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+          gridsize?: number;
+        };
         Returns: unknown;
       };
       st_intersects:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: boolean;
           }
         | {
-            Args: { geog1: unknown; geog2: unknown };
+            Args: {
+              geog1: unknown;
+              geog2: unknown;
+            };
             Returns: boolean;
           };
       st_isclosed: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_iscollection: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_isempty: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_ispolygonccw: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_ispolygoncw: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_isring: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_issimple: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_isvalid: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_isvaliddetail: {
-        Args: { geom: unknown; flags: number };
-        Returns: unknown;
+        Args: {
+          geom: unknown;
+          flags?: number;
+        };
+        Returns: Database["public"]["CompositeTypes"]["valid_detail"];
       };
       st_isvalidreason: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       st_isvalidtrajectory: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: boolean;
       };
       st_length:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog: unknown; use_spheroid: boolean };
+            Args: {
+              geog: unknown;
+              use_spheroid?: boolean;
+            };
             Returns: number;
           }
         | {
-            Args: { "": string };
+            Args: {
+              "": string;
+            };
             Returns: number;
           };
       st_length2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_linecrossingdirection: {
-        Args: { line1: unknown; line2: unknown };
+        Args: {
+          line1: unknown;
+          line2: unknown;
+        };
         Returns: number;
       };
       st_linefromencodedpolyline: {
-        Args: { txtin: string; nprecision: number };
+        Args: {
+          txtin: string;
+          nprecision?: number;
+        };
         Returns: unknown;
       };
       st_linefrommultipoint: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_linefromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_linefromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_linelocatepoint: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_linemerge: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_linestringfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_linetocurve: {
-        Args: { geometry: unknown };
+        Args: {
+          geometry: unknown;
+        };
         Returns: unknown;
       };
       st_locatealong: {
-        Args: { geometry: unknown; measure: number; leftrightoffset: number };
+        Args: {
+          geometry: unknown;
+          measure: number;
+          leftrightoffset?: number;
+        };
         Returns: unknown;
       };
       st_locatebetween: {
@@ -2006,331 +2810,518 @@ export interface Database {
           geometry: unknown;
           frommeasure: number;
           tomeasure: number;
-          leftrightoffset: number;
+          leftrightoffset?: number;
         };
         Returns: unknown;
       };
       st_locatebetweenelevations: {
-        Args: { geometry: unknown; fromelevation: number; toelevation: number };
+        Args: {
+          geometry: unknown;
+          fromelevation: number;
+          toelevation: number;
+        };
         Returns: unknown;
       };
       st_longestline: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_m: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_makebox2d: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_makeline:
         | {
-            Args: { "": unknown[] };
+            Args: {
+              "": unknown[];
+            };
             Returns: unknown;
           }
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: unknown;
           };
       st_makepolygon: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_makevalid: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_maxdistance: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: number;
       };
       st_maximuminscribedcircle: {
-        Args: { "": unknown };
-        Returns: Record<string, unknown>[];
+        Args: {
+          "": unknown;
+        };
+        Returns: Record<string, unknown>;
       };
       st_memsize: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_minimumboundingcircle: {
-        Args: { inputgeom: unknown; segs_per_quarter: number };
+        Args: {
+          inputgeom: unknown;
+          segs_per_quarter?: number;
+        };
         Returns: unknown;
       };
       st_minimumboundingradius: {
-        Args: { "": unknown };
-        Returns: Record<string, unknown>[];
+        Args: {
+          "": unknown;
+        };
+        Returns: Record<string, unknown>;
       };
       st_minimumclearance: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_minimumclearanceline: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_mlinefromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_mlinefromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_mpointfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_mpointfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_mpolyfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_mpolyfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multi: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_multilinefromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multilinestringfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multipointfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multipointfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multipolyfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_multipolygonfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_ndims: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_node: {
-        Args: { g: unknown };
+        Args: {
+          g: unknown;
+        };
         Returns: unknown;
       };
       st_normalize: {
-        Args: { geom: unknown };
+        Args: {
+          geom: unknown;
+        };
         Returns: unknown;
       };
       st_npoints: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_nrings: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_numgeometries: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_numinteriorring: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_numinteriorrings: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_numpatches: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_numpoints: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_offsetcurve: {
-        Args: { line: unknown; distance: number; params: string };
+        Args: {
+          line: unknown;
+          distance: number;
+          params?: string;
+        };
         Returns: unknown;
       };
       st_orderingequals: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_orientedenvelope: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_overlaps: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_perimeter:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog: unknown; use_spheroid: boolean };
+            Args: {
+              geog: unknown;
+              use_spheroid?: boolean;
+            };
             Returns: number;
           };
       st_perimeter2d: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_pointfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_pointfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_pointonsurface: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_points: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_polyfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_polyfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_polygonfromtext: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_polygonfromwkb: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_polygonize: {
-        Args: { "": unknown[] };
+        Args: {
+          "": unknown[];
+        };
         Returns: unknown;
       };
       st_project: {
-        Args: { geog: unknown; distance: number; azimuth: number };
+        Args: {
+          geog: unknown;
+          distance: number;
+          azimuth: number;
+        };
         Returns: unknown;
       };
       st_quantizecoordinates: {
         Args: {
           g: unknown;
           prec_x: number;
-          prec_y: number;
-          prec_z: number;
-          prec_m: number;
+          prec_y?: number;
+          prec_z?: number;
+          prec_m?: number;
         };
         Returns: unknown;
       };
       st_reduceprecision: {
-        Args: { geom: unknown; gridsize: number };
+        Args: {
+          geom: unknown;
+          gridsize: number;
+        };
         Returns: unknown;
       };
       st_relate: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: string;
       };
       st_removerepeatedpoints: {
-        Args: { geom: unknown; tolerance: number };
+        Args: {
+          geom: unknown;
+          tolerance?: number;
+        };
         Returns: unknown;
       };
       st_reverse: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_segmentize: {
-        Args: { geog: unknown; max_segment_length: number };
+        Args: {
+          geog: unknown;
+          max_segment_length: number;
+        };
         Returns: unknown;
       };
       st_setsrid:
         | {
-            Args: { geom: unknown; srid: number };
+            Args: {
+              geom: unknown;
+              srid: number;
+            };
             Returns: unknown;
           }
         | {
-            Args: { geog: unknown; srid: number };
+            Args: {
+              geog: unknown;
+              srid: number;
+            };
             Returns: unknown;
           };
       st_sharedpaths: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_shiftlongitude: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_shortestline: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_split: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_square: {
-        Args: { size: number; cell_i: number; cell_j: number; origin: unknown };
+        Args: {
+          size: number;
+          cell_i: number;
+          cell_j: number;
+          origin?: unknown;
+        };
         Returns: unknown;
       };
       st_squaregrid: {
-        Args: { size: number; bounds: unknown };
+        Args: {
+          size: number;
+          bounds: unknown;
+        };
         Returns: Record<string, unknown>[];
       };
       st_srid:
         | {
-            Args: { geom: unknown };
+            Args: {
+              geom: unknown;
+            };
             Returns: number;
           }
         | {
-            Args: { geog: unknown };
+            Args: {
+              geog: unknown;
+            };
             Returns: number;
           };
       st_startpoint: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: unknown;
       };
       st_subdivide: {
-        Args: { geom: unknown; maxvertices: number; gridsize: number };
-        Returns: unknown;
+        Args: {
+          geom: unknown;
+          maxvertices?: number;
+          gridsize?: number;
+        };
+        Returns: unknown[];
       };
       st_summary:
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           }
         | {
-            Args: { "": unknown };
+            Args: {
+              "": unknown;
+            };
             Returns: string;
           };
       st_swapordinates: {
-        Args: { geom: unknown; ords: unknown };
+        Args: {
+          geom: unknown;
+          ords: unknown;
+        };
         Returns: unknown;
       };
       st_symdifference: {
-        Args: { geom1: unknown; geom2: unknown; gridsize: number };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+          gridsize?: number;
+        };
         Returns: unknown;
       };
       st_symmetricdifference: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: unknown;
       };
       st_tileenvelope: {
@@ -2338,111 +3329,177 @@ export interface Database {
           zoom: number;
           x: number;
           y: number;
-          bounds: unknown;
-          margin: number;
+          bounds?: unknown;
+          margin?: number;
         };
         Returns: unknown;
       };
       st_touches: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_transform:
         | {
-            Args: { geom: unknown; to_proj: string };
+            Args: {
+              geom: unknown;
+              to_proj: string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { geom: unknown; from_proj: string; to_proj: string };
+            Args: {
+              geom: unknown;
+              from_proj: string;
+              to_proj: string;
+            };
             Returns: unknown;
           }
         | {
-            Args: { geom: unknown; from_proj: string; to_srid: number };
+            Args: {
+              geom: unknown;
+              from_proj: string;
+              to_srid: number;
+            };
             Returns: unknown;
           };
       st_union:
         | {
-            Args: { geom1: unknown; geom2: unknown };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+            };
             Returns: unknown;
           }
         | {
-            Args: { geom1: unknown; geom2: unknown; gridsize: number };
+            Args: {
+              geom1: unknown;
+              geom2: unknown;
+              gridsize: number;
+            };
             Returns: unknown;
           }
         | {
-            Args: { "": unknown[] };
+            Args: {
+              "": unknown[];
+            };
             Returns: unknown;
           };
       st_voronoilines: {
-        Args: { g1: unknown; tolerance: number; extend_to: unknown };
+        Args: {
+          g1: unknown;
+          tolerance?: number;
+          extend_to?: unknown;
+        };
         Returns: unknown;
       };
       st_voronoipolygons: {
-        Args: { g1: unknown; tolerance: number; extend_to: unknown };
+        Args: {
+          g1: unknown;
+          tolerance?: number;
+          extend_to?: unknown;
+        };
         Returns: unknown;
       };
       st_within: {
-        Args: { geom1: unknown; geom2: unknown };
+        Args: {
+          geom1: unknown;
+          geom2: unknown;
+        };
         Returns: boolean;
       };
       st_wkbtosql: {
-        Args: { wkb: string };
+        Args: {
+          wkb: string;
+        };
         Returns: unknown;
       };
       st_wkttosql: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: unknown;
       };
       st_wrapx: {
-        Args: { geom: unknown; wrap: number; move: number };
+        Args: {
+          geom: unknown;
+          wrap: number;
+          move: number;
+        };
         Returns: unknown;
       };
       st_x: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_xmax: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_xmin: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_y: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_ymax: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_ymin: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_z: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_zmax: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_zmflag: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       st_zmin: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: number;
       };
       text: {
-        Args: { "": unknown };
+        Args: {
+          "": unknown;
+        };
         Returns: string;
       };
       unlockrows: {
-        Args: { "": string };
+        Args: {
+          "": string;
+        };
         Returns: number;
       };
       updategeometrysrid: {
@@ -2483,6 +3540,158 @@ export interface Database {
       staysstatus: "OK" | "CHANGED";
       type_host: "PROFISSIONAL" | "PARTICULAR";
       TypeRoom: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
+    };
+    CompositeTypes: {
+      geometry_dump: {
+        path: unknown;
+        geom: unknown;
+      };
+      valid_detail: {
+        valid: boolean;
+        reason: string;
+        location: unknown;
+      };
+    };
+  };
+  storage: {
+    Tables: {
+      buckets: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          name: string;
+          owner: string | null;
+          public: boolean | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          id: string;
+          name: string;
+          owner?: string | null;
+          public?: boolean | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          name?: string;
+          owner?: string | null;
+          public?: boolean | null;
+          updated_at?: string | null;
+        };
+      };
+      migrations: {
+        Row: {
+          executed_at: string | null;
+          hash: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          executed_at?: string | null;
+          hash: string;
+          id: number;
+          name: string;
+        };
+        Update: {
+          executed_at?: string | null;
+          hash?: string;
+          id?: number;
+          name?: string;
+        };
+      };
+      objects: {
+        Row: {
+          bucket_id: string | null;
+          created_at: string | null;
+          id: string;
+          last_accessed_at: string | null;
+          metadata: Json | null;
+          name: string | null;
+          owner: string | null;
+          path_tokens: string[] | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          bucket_id?: string | null;
+          created_at?: string | null;
+          id?: string;
+          last_accessed_at?: string | null;
+          metadata?: Json | null;
+          name?: string | null;
+          owner?: string | null;
+          path_tokens?: string[] | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          bucket_id?: string | null;
+          created_at?: string | null;
+          id?: string;
+          last_accessed_at?: string | null;
+          metadata?: Json | null;
+          name?: string | null;
+          owner?: string | null;
+          path_tokens?: string[] | null;
+          updated_at?: string | null;
+        };
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      extension: {
+        Args: {
+          name: string;
+        };
+        Returns: string;
+      };
+      filename: {
+        Args: {
+          name: string;
+        };
+        Returns: string;
+      };
+      foldername: {
+        Args: {
+          name: string;
+        };
+        Returns: string[];
+      };
+      get_size_by_bucket: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          size: number;
+          bucket_id: string;
+        }[];
+      };
+      search: {
+        Args: {
+          prefix: string;
+          bucketname: string;
+          limits?: number;
+          levels?: number;
+          offsets?: number;
+          search?: string;
+          sortcolumn?: string;
+          sortorder?: string;
+        };
+        Returns: {
+          name: string;
+          id: string;
+          updated_at: string;
+          created_at: string;
+          last_accessed_at: string;
+          metadata: Json;
+        }[];
+      };
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
     };
   };
 }
