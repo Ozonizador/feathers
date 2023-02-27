@@ -31,12 +31,12 @@ const buttonProps = styled("button", {
       full: tw`rounded-full`,
     },
     disabled: {
-      true: "opacity",
+      true: tw`opacity-60`,
     },
     padding: {
-      sm: "px-3 py-2",
-      md: "px-4 py-3",
-      lg: "px-5 py-4",
+      sm: tw`px-3 py-2`,
+      md: tw`px-4 py-3`,
+      lg: tw`px-5 py-4`,
     },
   },
   defaultVariants: {

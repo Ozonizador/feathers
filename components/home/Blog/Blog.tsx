@@ -36,12 +36,12 @@ export default function BlogSection() {
       {!loading && blogPosts && blogPosts.length > 0 && (
         <div>
           <h2 className="my-10 text-5xl font-bold text-black">Blog</h2>
-          <div className="mx-auto grid gap-2 lg:grid-cols-4">
+          <div className="mx-auto grid gap-6 lg:grid-cols-4">
             {blogPosts.map((blogPost) => {
               return (
                 <Link href={`/blog/${blogPost.slug}`} key={blogPost.id}>
                   <a>
-                    <article className="relative h-96 w-full bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl lg:w-64">
+                    <article className="relative h-96 w-full bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl">
                       <h2 className="absolute bottom-0 left-0 z-50 mb-6 ml-3 text-2xl text-white lg:text-base">
                         {blogPost.title}
                       </h2>
