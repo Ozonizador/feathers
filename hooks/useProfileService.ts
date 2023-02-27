@@ -11,14 +11,14 @@ const useProfileService = () => {
       const { data, error } = await getUserProfile(userID);
 
       if (error || !data)
-        return createProfile(userID, {
+        return createProfile({
           avatar_url: metadata?.avatar_url,
           firstName: metadata?.full_name?.split(" ")[0] || "",
           lastName: metadata?.full_name?.split(" ")[1] || "",
         });
       return { data, error };
     } catch (error) {
-      return createProfile(userID, {
+      return createProfile({
         avatar_url: metadata?.avatar_url,
         firstName: metadata?.full_name?.split(" ")[0] || "",
         lastName: metadata?.full_name?.split(" ")[1] || "",
@@ -26,10 +26,7 @@ const useProfileService = () => {
     }
   };
 
-  const createProfile = async (
-    userID: string,
-    metadata?: { avatar_url?: string; firstName?: string; lastName?: string }
-  ) => {
+  const createProfile = async (metadata?: { avatar_url?: string; firstName?: string; lastName?: string }) => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({
