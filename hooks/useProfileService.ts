@@ -35,6 +35,7 @@ const useProfileService = () => {
         name: metadata.firstName,
         surname: metadata.lastName,
       })
+      .select()
       .single();
     return { data, error };
   };
