@@ -153,7 +153,7 @@ const NextReservationsSection = () => {
     if (user) {
       const { data, error } = await getNextStaysByHostId(user.id);
       if (!error) {
-        setReservations(data);
+        setReservations(data as StayGuest[]);
       }
     }
   }, [user]);
@@ -216,7 +216,7 @@ const AllReservationsSection = () => {
     if (user) {
       const { data, error } = await getAllStaysByHostId(user.id);
       if (!error) {
-        setReservations(data);
+        setReservations(data as StayGuest[]);
       }
     }
   }, [user]);

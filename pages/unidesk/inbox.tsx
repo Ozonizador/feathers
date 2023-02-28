@@ -1,7 +1,7 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useCurrentUser } from "../../context/MainProvider";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useConversationService from "../../hooks/conversationService";
+import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
 import { ConversationWithTenant } from "../../models/conversation";
@@ -39,7 +39,7 @@ const CaixaEntrada = () => {
     if (profile) {
       const { data, error } = await getConversationsFromUser(profile.id);
       if (!error) {
-        setConversations(data);
+        setConversations(data as ConversationComplete[]);
       }
     }
   }, [profile]);
@@ -48,7 +48,7 @@ const CaixaEntrada = () => {
     if (currentConversation) {
       const { data, error } = await getMessagesFromConversationId(currentConversation.id);
       if (!error) {
-        setMessages(data);
+        setMessages(data as MessageWithProfile[]);
       }
     }
   }, [currentConversation]);
@@ -63,7 +63,7 @@ const CaixaEntrada = () => {
 
     const { data, error } = await insertMessageOnConversation(currentMessage, currentConversation.id, profile.id);
     if (!error) {
-      setMessages([...messages, data]);
+      setMessages([...messages, data as MessageWithProfile]);
     }
   };
 

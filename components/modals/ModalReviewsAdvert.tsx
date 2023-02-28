@@ -22,7 +22,7 @@ const ModalReviewsAdvert = () => {
     if (!advertisement) return;
     const { data, error } = await getAveragesByAdvertisementId(advertisement.id);
     if (!error) {
-      setRoomAverages(data);
+      setRoomAverages(data as AdvertisementReviewSummary);
     }
   }, [advertisement]);
 

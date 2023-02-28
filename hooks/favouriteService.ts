@@ -9,6 +9,7 @@ const useFavouriteService = () => {
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .update({ favourite_rooms })
       .eq(PROFILE_COLUMNS.ID, userId)
+      .select()
       .single();
     return { data, error };
   };

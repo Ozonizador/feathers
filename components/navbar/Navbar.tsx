@@ -272,43 +272,43 @@ export const Navbar = () => {
                             {toggleUserType == "TENANT" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNIDESK_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
                                     Uni-desk
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNIDESK_STAY_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_STAY_URL}>
                                     Minha Estadia
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNIDESK_STUDENT_FAVOURITES_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_STUDENT_FAVOURITES_URL}>
                                     Favoritos
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={NOTIFICATIONS_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={ADMIN_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={FAQS_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => logout()}>
+                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>
@@ -317,43 +317,43 @@ export const Navbar = () => {
                             {toggleUserType == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNIDESK_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
                                     Uni-desk
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
                                     Caixa de Entrada
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNIDESK_SENHORIO_PAINEL_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_SENHORIO_PAINEL_URL}>
                                     Anúncios
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={UNICONTROLO_GUESTS_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNICONTROLO_GUESTS_URL}>
                                     Uni-controlo
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={NOTIFICATIONS_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
                                     Notificações
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={ADMIN_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
                                     Conta
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1" href={FAQS_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
                                     Ajuda
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1" onClick={() => logout()}>
+                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
                                     Sair
                                   </div>
                                 </Menu.Item>

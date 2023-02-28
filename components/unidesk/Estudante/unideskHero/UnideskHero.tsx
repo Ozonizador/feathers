@@ -8,7 +8,7 @@ const UnideskHero = ({ title }) => {
           <h1 className="mb-0 text-center text-5xl font-normal leading-snug tracking-widest text-white lg:text-7xl">
             Uni - Desk
           </h1>
-          <h2 className="text-center text-4xl font-normal text-white">{title}</h2>
+          <h2 className="mt-5 text-center text-4xl font-light text-white">{title}</h2>
         </div>
       </div>
     </section>

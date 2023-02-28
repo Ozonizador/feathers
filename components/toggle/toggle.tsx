@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { UserTypes } from "../../models/profile";
 
 interface ToggleProps {

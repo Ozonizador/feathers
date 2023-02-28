@@ -8,6 +8,8 @@ export const REVIEWS_AVERAGE_TABLE_VIEW = "reviewsPerAdvertisement" as const;
 export type Reviews = Database["public"]["Tables"]["reviews"];
 export type Review = Reviews["Row"];
 
+export type ReviewsAverageView = Database["public"]["Views"]["reviewsPerAdvertisement"];
+
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Advertisement;
   tenant: Partial<Profile>;

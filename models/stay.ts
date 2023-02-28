@@ -16,7 +16,6 @@ export const STAY_TABLE = {
   END_DATE: "reservation.end_date",
 } as const;
 
-export type StayWithDate = Database["public"]["Views"]["stays_with_dates"]["Row"];
 export type Stays = Database["public"]["Tables"]["stays"];
 export type Stay = Stays["Row"];
 

@@ -21,12 +21,7 @@ const useStayService = () => {
 
   /* BY HOST ID */
 
-  const getCurrentStaysByHostId = async (
-    hostId: string
-  ): Promise<{
-    data: StayGuest[];
-    error: PostgrestError;
-  }> => {
+  const getCurrentStaysByHostId = async (hostId: string) => {
     const date = new Date().toISOString();
 
     const { data, error } = await supabaseClient
@@ -39,7 +34,7 @@ const useStayService = () => {
     return { data, error };
   };
 
-  const getNextStaysByHostId = async (hostId: string): Promise<{ data: StayGuest[]; error: PostgrestError }> => {
+  const getNextStaysByHostId = async (hostId: string) => {
     const date = new Date().toISOString();
 
     const { data, error } = await supabaseClient
@@ -52,7 +47,7 @@ const useStayService = () => {
     return { data, error };
   };
 
-  const getAllStaysByHostId = async (hostId: string): Promise<{ data: StayGuest[]; error: PostgrestError }> => {
+  const getAllStaysByHostId = async (hostId: string) => {
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)
       .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
