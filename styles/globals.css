@@ -53,8 +53,3 @@
   border-color: #dfdfdf;
   width: 100%;
 }
-
-/* CAROUSEL */
-div[data-testid="carousel-indicator"] {
-  color: #c48b60;
-}

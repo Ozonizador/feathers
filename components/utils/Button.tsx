@@ -1,4 +1,4 @@
-import { styled, tw } from "classname-variants/react";
+import { tw, variantProps } from "classname-variants/react";
 import dynamic from "next/dynamic";
 import React, { ReactNode } from "react";
 
@@ -17,7 +17,7 @@ const Spinner = dynamic(() => import("./Spinner"), {
   ssr: false,
 });
 
-const buttonProps = styled("button", {
+const buttonProps = variantProps({
   base: tw`w-full text-center focus:outline-none focus:ring-0`,
   variants: {
     variant: {

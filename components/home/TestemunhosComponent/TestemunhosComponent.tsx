@@ -45,7 +45,7 @@ const TestemunhosComponent = () => {
             rightControl={
               <BsFillArrowRightCircleFill size={32} className="hidden text-5xl text-white drop-shadow-xl lg:block" />
             }
-            indicators={false}
+            indicators={true}
           >
             {Testemunhos.map((testemunho, index) => {
               return (

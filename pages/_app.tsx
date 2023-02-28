@@ -14,6 +14,18 @@ import { Database } from "../database.types";
 import Maintenance from "../components/maintenance/Maintenance";
 import { CookiesProvider, useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
+
+const theme: CustomFlowbiteTheme = {
+  carousel: {
+    indicators: {
+      active: {
+        off: "bg-primary-100 hover:bg-primary-300 dark:bg-slate-300 dark:hover:bg-slate-500",
+        on: "bg-primary-500 dark:bg-white",
+      },
+    },
+  },
+};
 
 function MyApp({ Component, pageProps }) {
   const [cookies] = useCookies(["test"]);
@@ -36,7 +48,9 @@ function MyApp({ Component, pageProps }) {
                 </Head>
                 <Navbar />
                 <div className="min-h-screen">
-                  <Component {...pageProps} />
+                  <Flowbite theme={{ theme }}>
+                    <Component {...pageProps} />
+                  </Flowbite>
                   <ToastContainer />
                 </div>
                 <Footer />

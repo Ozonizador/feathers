@@ -1,4 +1,11 @@
-import { Review, Reviews, REVIEWS_AVERAGE_TABLE_VIEW, REVIEWS_TABLE_NAME, REVIEW_COLUMNS } from "../models/review";
+import {
+  Review,
+  Reviews,
+  ReviewsAverageView,
+  REVIEWS_AVERAGE_TABLE_VIEW,
+  REVIEWS_TABLE_NAME,
+  REVIEW_COLUMNS,
+} from "../models/review";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const useReviewService = () => {
@@ -29,7 +36,7 @@ const useReviewService = () => {
 
   const getReviewsByHostId = async (hostId: string) => {
     const { data, error } = await supabaseClient
-      .from(REVIEWS_TABLE_NAME)
+      .from<"reviews", Reviews>(REVIEWS_TABLE_NAME)
       .select("*, advertisement:advertisements(id,host_id), tenant:tenant_id(*)")
       .eq(REVIEW_COLUMNS.HOST_ID, hostId)
       .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false });
@@ -43,7 +50,7 @@ const useReviewService = () => {
 
   const getAveragesByAdvertisementId = async (advertisement_id: string) => {
     const { data, error } = await supabaseClient
-      .from(REVIEWS_AVERAGE_TABLE_VIEW)
+      .from<"reviewsPerAdvertisement", ReviewsAverageView>(REVIEWS_AVERAGE_TABLE_VIEW)
       .select()
       .eq(REVIEW_COLUMNS.ADVERTISEMENT_ID, advertisement_id)
       .single();
