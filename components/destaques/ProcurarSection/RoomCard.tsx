@@ -19,6 +19,7 @@ import { useCurrentUser, useSetProfileFavouritesInformation } from "../../../con
 import classNames from "classnames";
 import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
+import { BsDot } from "react-icons/bs";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -73,7 +74,6 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
       return (
         <ul className="pr-3-3 flex gap-5 text-gray-500">
           {amenities.map((amenity, index) => {
-            console.log(index);
             return (
               <li key={index} className={classNames({ "list-none": index === 0 })}>
                 {TypeAmenityLabel[amenity]}
@@ -118,26 +118,29 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   </div>
                 </div>
                 {/* icon with images */}
-                <div className="mb-2 mt-3 flex flex-1 justify-between gap-1 text-gray-500">
+                <div className="mb-2 mt-3 flex flex-1 gap-2 text-gray-500">
                   <div>
                     <RiUserLine className="my-auto inline" />
                     <span className="my-auto text-xs">
                       {advertisement.tenant_number} {advertisement.tenant_number == 1 ? "Hóspede" : "Hóspedes"}
                     </span>
                   </div>
-                  <div className="ml-2">
+                  <div>
+                    <BsDot className="my-auto inline" />
                     <BiBed className="my-auto inline" />
                     <span className="my-auto text-xs">
                       {advertisement.beds} {advertisement.beds == 1 ? "Cama" : "Camas"}
                     </span>
                   </div>
-                  <div className="ml-2">
+                  <div>
+                    <BsDot className="my-auto inline" />
                     <TbBed className="my-auto inline" />
                     <span className="my-auto text-xs">
                       {advertisement.rooms} {advertisement.rooms == 1 ? "Quarto" : "Quartos"}
                     </span>
                   </div>
-                  <div className="text-gra ml-2">
+                  <div>
+                    <BsDot className="my-auto inline" />
                     <GrRestroom className="my-auto inline" />
                     <span className="my-auto text-xs">
                       {advertisement.bathrooms} {advertisement.bathrooms == 1 ? "Casa De Banho" : "Casas De Banho"}
@@ -153,7 +156,11 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
                 <div className="mt-4 flex justify-between">
                   <div className="my-auto">
-                    <Button type="submit" onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}>
+                    <Button
+                      type="submit"
+                      variant="informative"
+                      onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
+                    >
                       <CgHeart
                         className={classNames("inline", {
                           "fill-red-600 text-red-600": isFavourite(),

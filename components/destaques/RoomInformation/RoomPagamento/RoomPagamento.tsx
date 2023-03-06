@@ -68,7 +68,7 @@ export default function RoomPagamento() {
             </div>
             <hr />
 
-            <div className="mt-5 flex flex-wrap gap-4">
+            <div className="mt-5 grid grid-cols-2 gap-4">
               <div className="mb-2 block w-full">
                 <div className="mb-2 block">
                   <Label htmlFor="Entrada" value="Entrada" />

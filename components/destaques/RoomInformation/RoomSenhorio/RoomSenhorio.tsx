@@ -58,7 +58,7 @@ export default function RoomSenhorio() {
               <h1 className="mb-4 text-2xl font-bold">
                 Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
               </h1>
-              <p className="text-secondary-400">{advertisement.host.description}</p>
+              <p className="mb-4 text-secondary-400">{advertisement.host.description}</p>
             </div>
           </div>
 

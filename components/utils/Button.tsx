@@ -8,7 +8,7 @@ interface ButtonProps {
   children: ReactNode;
   loading?: boolean;
   disabled?: boolean;
-  variant?: "primary" | "facebook" | "gmail";
+  variant?: "primary" | "facebook" | "gmail" | "informative";
   rounded?: "xl" | "full";
   padding?: "sm" | "md" | "lg";
 }
@@ -24,6 +24,7 @@ const buttonProps = variantProps({
       facebook: tw`bg-socials-facebook`,
       gmail: tw`bg-socials-gmail`,
       primary: tw`bg-primary-500 text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg`,
+      informative: tw`text-color border border-black`,
     },
     rounded: {
       none: tw`rounded-none`,
