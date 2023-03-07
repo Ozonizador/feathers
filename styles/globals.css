@@ -53,3 +53,12 @@
   border-color: #dfdfdf;
   width: 100%;
 }
+
+/* BLOG */
+
+.bg-notification {
+  background: url(/images/image_notification.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: 17px 7px;  prejudica mobile*/
+}
