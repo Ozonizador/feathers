@@ -9,6 +9,7 @@ interface InputProps {
   label?: string;
   errorMessage?: string;
   disabled?: boolean;
+  placeholder?: string;
   [x: string]: any;
 }
 
@@ -19,6 +20,7 @@ export default function Input({
   labelText = "",
   customCss = "",
   errorMessage = "",
+  placeholder = "",
   disabled = false,
   ...props
 }: InputProps) {
@@ -27,6 +29,7 @@ export default function Input({
       <div>
         {label && <label htmlFor={label}>{labelText}</label>}
         <input
+          placeholder={placeholder}
           className={classNames(
             "block w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-5 shadow-sm",
             `${customCss}`,
