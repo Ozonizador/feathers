@@ -3,7 +3,6 @@ import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
 import { TbBed } from "react-icons/tb";
-import { CgHeart } from "react-icons/cg";
 import { GrRestroom } from "react-icons/gr";
 import { Rating } from "flowbite-react";
 import {
@@ -20,6 +19,7 @@ import classNames from "classnames";
 import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot } from "react-icons/bs";
+import { AiFillHeart } from "react-icons/ai";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -161,7 +161,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       variant="informative"
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
-                      <CgHeart
+                      <AiFillHeart
                         className={classNames("inline", {
                           "fill-red-600 text-red-600": isFavourite(),
                         })}

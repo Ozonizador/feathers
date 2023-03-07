@@ -8,11 +8,13 @@ import { useCallback, useEffect, useState } from "react";
 import useBlogService from "../hooks/blogService";
 import { UserTypes } from "../models/profile";
 import { Spinner } from "flowbite-react";
+import { Dialog } from "@headlessui/react";
 
 {
   /* page 9 XD */
 }
 const Index = () => {
+  let [isOpen, setIsOpen] = useState(true);
   const categories = ["LANDLORD", "TENANT"] as UserTypes[];
   const [category, setCategory] = useState<UserTypes>("LANDLORD");
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -72,10 +74,30 @@ const Index = () => {
               <Image className="h-10" src={notification} alt="" />
             </div>
 
-            <div className="ml-6 text-xl">Receba notificações sempre que houver novidades por aqui</div>
+            <div className="ml-6 text-xl" onClick={() => setIsOpen(true)}>
+              Receba notificações sempre que houver novidades por aqui
+            </div>
           </div>
         </div>
       </>
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+            <Dialog.Panel>
+              <Dialog.Title>Deactivate account</Dialog.Title>
+              <Dialog.Description>This will permanently deactivate your account</Dialog.Description>
+
+              <p>
+                Are you sure you want to deactivate your account? All of your data will be permanently removed. This
+                action cannot be undone.
+              </p>
+
+              <button onClick={() => setIsOpen(false)}>Deactivate</button>
+              <button onClick={() => setIsOpen(false)}>Cancel</button>
+            </Dialog.Panel>
+          </Dialog>
+        </div>
+      </div>
     </>
   );
 };

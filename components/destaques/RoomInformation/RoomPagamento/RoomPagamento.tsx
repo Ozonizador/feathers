@@ -106,7 +106,7 @@ export default function RoomPagamento() {
 
           <div className="flex flex-row justify-between">
             <div
-              className="mb-7 cursor-pointer text-secondary-600 underline underline-offset-1"
+              className="mb-7 cursor-pointer text-[#8A8A8A] underline underline-offset-1"
               onClick={(e) => setIsOpen(true)}
             >
               Detalhes do Pagamento
@@ -137,7 +137,7 @@ export default function RoomPagamento() {
           <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 
           <div
-            className="mb-7 cursor-pointer text-base  text-gray-500 underline underline-offset-8"
+            className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
             onClick={(e) => setIsOpen(true)}
           >
             Detalhes do Pagamento
