@@ -111,12 +111,12 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl text-left align-middle shadow-xl transition-all lg:h-1/2 lg:w-2/3">
+              <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl text-left align-middle shadow-xl transition-all lg:h-2/3 lg:w-2/3">
                 <div className="my-20 mx-10">
                   <div className="w-2/3 rounded-lg bg-white px-5 py-10">
                     <h6>Queremos ser uns fiéis mensageiros!</h6>
                     <Input></Input>
-                    <Button>Notifique-me</Button>
+                    <Button type={"button"}>Notifique-me</Button>
                     <p className="mt-10">
                       Ao carregar em Notifique-me aceita a nossa
                       <br />
