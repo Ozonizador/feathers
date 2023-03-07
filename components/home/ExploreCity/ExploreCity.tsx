@@ -1,35 +1,60 @@
 import React from "react";
+import Image from "next/image";
 
 const ExploreCity = () => {
   return (
     <section>
-      <div className="hidden bg-terciary-300  lg:block">
-        <div className="mx-auto p-4 text-center lg:px-8 lg:py-20">
+      <div className="bg-terciary-300  lg:block">
+        <div className="mx-auto p-4 text-center lg:px-8 lg:py-10">
           <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>
-          <div className="grid gap-8 lg:grid-cols-4">
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-tomar.jpg')] bg-cover bg-no-repeat p-10 align-middle lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Tomar</h3>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <article className="group relative h-60 rounded-2xl bg-black">
+              <Image src="/images/place-tomar.jpg" alt="tomar" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Tomar
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-peniche.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Peniche</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-peniche.jpg" alt="peniche" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Peniche
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-brazil.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Rio Maior</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-brazil.jpg" alt="maior" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Rio Maior
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-santarem.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Santarem</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-santarem.jpg" alt="santarem" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Santarem
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-abrantes.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Abrantes</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-abrantes.jpg" alt="abrantes" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Abrantes
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-leiria.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Leiria</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-leiria.jpg" alt="leiria" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Leiria
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-braga.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Braga</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-braga.jpg" alt="braga" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Braga
+              </div>
             </article>
-            <article className="flex h-60 items-center justify-center rounded-2xl bg-gray-300 bg-[url('/images/place-setubal.jpg')] bg-cover bg-no-repeat p-10 align-middle  lg:px-16 lg:py-28">
-              <h3 className="text-4xl font-bold text-white">Setubal</h3>
+            <article className="group relative h-60 rounded-2xl">
+              <Image src="/images/place-setubal.jpg" alt="setubal" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-8xl group-hover:text-neutral-200">
+                Setubal
+              </div>
             </article>
           </div>
         </div>

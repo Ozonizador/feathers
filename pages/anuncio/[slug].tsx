@@ -28,7 +28,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
         <>
           <ModalReviewsAdvert />
           <ModalDetalhesPagamento />
-          <div className="mx-auto px-2 md:px-20">
+          <div className="container mx-auto px-2 md:px-20">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
               <div className="w-full px-5 lg:w-4/6">
