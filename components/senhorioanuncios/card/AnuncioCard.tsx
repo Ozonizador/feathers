@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
 import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
+import useAdvertisementService from "../../../hooks/advertisementService";
+import { toast } from "react-toastify";
 
 function EditInactiveIcon(props) {
   return (
@@ -54,6 +56,7 @@ interface AnuncioCardProps {
 const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const router = useRouter();
   const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
+  const { removeAdvertisement } = useAdvertisementService();
 
   const editAdvertisement = (event, slug: string) => {
     event.preventDefault();
@@ -61,6 +64,10 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
     router.push(`/unidesk/senhorio/${slug}/details`);
   };
 
+  const deleteAdvertisement = async () => {
+    const { error } = await removeAdvertisement(advertisement.id);
+    error ? toast.error("Erro ao remover anúncio") : toast.success("Successo");
+  };
   return (
     <section>
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
@@ -109,7 +116,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                                 ) : (
                                   <EditInactiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
                                 )}
-                                Edit
+                                Editar
                               </button>
                             )}
                           </Menu.Item>
@@ -118,6 +125,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                           <Menu.Item>
                             {({ active }) => (
                               <button
+                                onClick={() => deleteAdvertisement()}
                                 className={`${
                                   active ? "bg-violet-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -127,7 +135,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
                                 ) : (
                                   <DeleteInactiveIcon className="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
                                 )}
-                                Delete
+                                Apagar
                               </button>
                             )}
                           </Menu.Item>

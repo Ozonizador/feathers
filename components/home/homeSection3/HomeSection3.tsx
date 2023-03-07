@@ -16,6 +16,7 @@ export default function HomeSection3() {
   const getCloseAdvertisements = useCallback(async () => {
     if (currentMapCoordinates) {
       const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
+      debugger;
       if (!error && data) {
         setAdvertisements(data);
       }

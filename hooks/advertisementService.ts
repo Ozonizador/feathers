@@ -119,6 +119,16 @@ const useAdvertisementService = () => {
     return { data, error, count };
   };
 
+  const removeAdvertisement = async (advertisementId: string) => {
+    const query = supabaseClient
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .delete()
+      .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
+
+    const { data, error } = await query;
+    return { data, error };
+  };
+
   const getAdvertisementsForMainPage = async (lat: number, lng: number) => {
     let query = supabaseClient.rpc(CLOSE_ADVERTISEMENTS_TABLE_NAME, { lat, lng }).limit(4);
 
@@ -173,6 +183,7 @@ const useAdvertisementService = () => {
     saveImage,
     getPublicUrlFromImage,
     removePicture,
+    removeAdvertisement,
   };
 };
 
