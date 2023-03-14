@@ -33,7 +33,7 @@ const Login = () => {
       toast.error(error.message);
       return;
     } else {
-      router.push("/");
+      router.push("/auth/profile");
     }
   };
 

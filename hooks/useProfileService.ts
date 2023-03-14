@@ -60,6 +60,16 @@ const useProfileService = () => {
     return { error };
   };
 
+  const setTypeUser = async (userID: string, type: "LANDLORD" | "TENANT") => {
+    const { data, error } = await supabaseClient
+      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+      .update({ type })
+      .eq(PROFILE_COLUMNS.ID, userID)
+      .select()
+      .single();
+    return { data, error };
+  };
+
   const updateAvatarInfo = async (userId: string, avatar_url: string) => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
@@ -162,6 +172,7 @@ const useProfileService = () => {
     updateNotificationEmail,
     updateNotificationMessage,
     getNotificationInfoFromUser,
+    setTypeUser,
   };
 };
 
