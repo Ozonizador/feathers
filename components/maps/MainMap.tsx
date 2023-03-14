@@ -22,8 +22,13 @@ const MainMap = ({
   showCenterMarker = true,
   onChangeMarker,
 }: MainMapProps) => {
-  const [mapCenter] = useState<GEO | null>(currentMapCoords);
+  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
 
+  useEffect(() => {
+    if (currentMapCoords) {
+      setMapCenter(currentMapCoords);
+    }
+  }, [currentMapCoords]);
   return (
     <>
       {mapCenter && (
