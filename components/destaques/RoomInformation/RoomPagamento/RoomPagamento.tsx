@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
 import { BiInfoCircle } from "react-icons/bi";
 import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
@@ -14,8 +13,14 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 import Link from "next/link";
+import Input from "../../../utils/Input";
+import { Controller, useForm } from "react-hook-form";
 
-export default function RoomPagamento() {
+interface FormReservation {
+  number_guests: number;
+}
+
+export const RoomPagamento = () => {
   const { addReservation } = useReservationService();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -26,16 +31,26 @@ export default function RoomPagamento() {
 
   const router = useRouter();
 
-  /* Reservation */
-  const [reservation, setReservation] = useState<Omit<Reservation, "id" | "created_at" | "updated_at">>({
-    start_date: startDate.toDateString(),
-    end_date: endDate.toDateString(),
-    status: ReservationStatus.REQUESTED,
-    advertisement_id: advertisement.id,
-    tenant_id: "",
+  // /* Reservation */
+  // const [reservation, setReservation] = useState<Omit<Reservation, "id" | "created_at" | "updated_at">>({
+  //   start_date: startDate.toDateString(),
+  //   end_date: endDate.toDateString(),
+  //   status: ReservationStatus.REQUESTED,
+  //   advertisement_id: advertisement.id,
+  //   tenant_id: "",
+  // });
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<FormReservation>({
+    defaultValues: {
+      number_guests: 1,
+    },
   });
 
-  const makeReservation = async () => {
+  const makeReservation = async (reservation: any) => {
     if (!profile) {
       router.push("/auth/login");
       return;
@@ -48,7 +63,7 @@ export default function RoomPagamento() {
 
   return (
     <>
-      <div className="w-full" id="reserva">
+      <form className="w-full" id="reserva" onSubmit={handleSubmit(makeReservation)}>
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
@@ -88,7 +103,13 @@ export default function RoomPagamento() {
               <div className="mb-2 block">
                 <Label htmlFor="Hóspedes" value="Hóspedes" />
               </div>
-              <TextInput id="Hóspedes" type="text" sizing="md" />
+              <Controller
+                control={control}
+                name={"number_guests"}
+                render={({ field: { onChange } }) => {
+                  return <Input id="Hóspedes" type="number" onChange={onChange} />;
+                }}
+              ></Controller>
             </div>
           </div>
 
@@ -119,37 +140,38 @@ export default function RoomPagamento() {
             <div>€{advertisement.month_rent}</div>
           </div>
 
-          <div onClick={makeReservation}>
-            <a className="mb-5 flex cursor-pointer items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-              Enviar pedido de reserva
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* MOBILE STYLES */}
-
-      <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
-        <div className="flex flex-col text-left">
-          <h1 className="mt-2 text-2xl font-bold text-black">
-            {advertisement.month_rent}&euro;<span className="text-gray-600">/mês</span>
-          </h1>
-          <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
-
-          <div
-            className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
-            onClick={(e) => setIsOpen(true)}
+          <button
+            type="submit"
+            className="mb-5 flex cursor-pointer items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
           >
-            Detalhes do Pagamento
-          </div>
+            Enviar pedido de reserva
+          </button>
         </div>
+        {/* MOBILE STYLES */}
+        <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
+          <div className="flex flex-col text-left">
+            <h1 className="mt-2 text-2xl font-bold text-black">
+              {advertisement.month_rent}&euro;<span className="text-gray-600">/mês</span>
+            </h1>
+            <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 
-        <Link href="#reserva">
-          <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-            Reserva
-          </a>
-        </Link>
-      </div>
+            <div
+              className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
+              onClick={(e) => setIsOpen(true)}
+            >
+              Detalhes do Pagamento
+            </div>
+          </div>
+
+          <Link href="#reserva">
+            <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+              Reserva
+            </a>
+          </Link>
+        </div>
+      </form>
     </>
   );
-}
+};
+
+export default RoomPagamento;
