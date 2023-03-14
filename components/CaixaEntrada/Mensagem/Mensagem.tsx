@@ -29,7 +29,7 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
                 "ml-2 justify-start": message.profile_id !== currentUser.id,
               })}
             >
-              <Avatar alt="Hóspede" img={profile.avatar_url || "/images/sec6-person1.jpg"} rounded={true} size="sm" />
+              <Avatar alt="Hóspede" img={profile?.avatar_url || "/images/sec6-person1.jpg"} rounded={true} size="sm" />
             </div>
 
             {previousMessage && previousMessage.profile_id !== message.profile_id && (
