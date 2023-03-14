@@ -338,6 +338,7 @@ export interface Database {
           created_at: string;
           end_date: string;
           id: string;
+          number_guests: number;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -348,6 +349,7 @@ export interface Database {
           created_at?: string;
           end_date: string;
           id?: string;
+          number_guests?: number;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -358,6 +360,7 @@ export interface Database {
           created_at?: string;
           end_date?: string;
           id?: string;
+          number_guests?: number;
           start_date?: string;
           status?: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id?: string;

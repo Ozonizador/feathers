@@ -26,7 +26,7 @@ const useStayService = () => {
 
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservations!inner(*)")
       .eq("advertisement.host_id", hostId)
       .gte("reservation.start_date", date)
       .lte("reservation.end_date", date);
@@ -39,7 +39,7 @@ const useStayService = () => {
 
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservations!inner(*)")
       .eq("advertisement.host_id", hostId)
       .gte(STAY_TABLE.START_DATE, date)
       .gte(STAY_TABLE.END_DATE, date);
@@ -50,7 +50,7 @@ const useStayService = () => {
   const getAllStaysByHostId = async (hostId: string) => {
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
+      .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservations!inner(*)")
       .eq("advertisement.host_id", hostId);
 
     return { data, error };

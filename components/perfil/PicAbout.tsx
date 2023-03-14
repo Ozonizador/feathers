@@ -22,7 +22,7 @@ const PicAbout = ({ profile }: PicAboutProps) => {
           <div>
             <label htmlFor="files" className="relative mr-48 cursor-pointer rounded-md bg-white">
               <Avatar
-                img={profile?.avatar_url ? profile.avatar_url : "/images/profile-pic.png"}
+                img={profile?.avatar_url || "/images/profile-pic.png"}
                 rounded={true}
                 size="xl"
                 statusPosition="bottom-right"

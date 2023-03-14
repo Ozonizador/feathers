@@ -5,63 +5,16 @@ import { useUser } from "@supabase/auth-helpers-react";
 import useStayService from "../../hooks/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { StayGuest } from "../../models/stay";
+import Spinner from "../utils/Spinner";
 
 const ReservasSection = () => {
   return (
     <section className="mx-28 pt-20 pb-5">
       <Tab.Group>
         <Tab.List className="mb-10 flex gap-5">
-          <Tab
-            className="nav-link
-            active
-            my-2
-            block
-            border-x-0
-            border-t-0
-            border-b-2 border-transparent px-6 py-3
-            text-xs
-            font-medium
-            uppercase
-            leading-tight hover:border-transparent
-            hover:bg-gray-100
-            focus:border-transparent"
-          >
-            Ativas
-          </Tab>
-          <Tab
-            className="nav-link
-            active
-            my-2
-            block
-            border-x-0
-            border-t-0
-            border-b-2 border-transparent px-6 py-3
-            text-xs
-            font-medium
-            uppercase
-            leading-tight hover:border-transparent
-            hover:bg-gray-100
-            focus:border-transparent"
-          >
-            Próximas
-          </Tab>
-          <Tab
-            className="nav-link
-            active
-            my-2
-            block
-            border-x-0
-            border-t-0
-            border-b-2 border-transparent px-6 py-3
-            text-xs
-            font-medium
-            uppercase
-            leading-tight hover:border-transparent
-            hover:bg-gray-100
-            focus:border-transparent"
-          >
-            Todas
-          </Tab>
+          <Tab className="reservas-tab">Ativas</Tab>
+          <Tab className="reservas-tab">Próximas</Tab>
+          <Tab className="reservas-tab">Todas</Tab>
         </Tab.List>
         <Tab.Panels className="w-full">
           <Tab.Panel>
@@ -80,17 +33,20 @@ const ReservasSection = () => {
 };
 
 const CurrentReservationsSection = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getCurrentStaysByHostId } = useStayService();
   const [stays, setStays] = useState<StayGuest[]>([]);
 
   const getCurrentStays = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getCurrentStaysByHostId(user.id);
-      if (!error) {
-        setStays(data as StayGuest[]);
-      }
+    if (!user) return;
+
+    setLoading(true);
+    const { data, error } = await getCurrentStaysByHostId(user.id);
+    if (!error) {
+      setStays(data as StayGuest[]);
     }
+    setLoading(false);
   }, [user]);
 
   useEffect(() => {
@@ -112,13 +68,20 @@ const CurrentReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!stays ||
-            (stays.length == 0 && (
-              <Table.Row>
-                <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
-              </Table.Row>
-            ))}
-          {stays &&
+          {loading && (
+            <Table.Row className="flex justify-center">
+              <Table.Cell>
+                <Spinner />
+              </Table.Cell>
+            </Table.Row>
+          )}
+          {!loading && (!stays || stays.length == 0) && (
+            <Table.Row>
+              <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
+            </Table.Row>
+          )}
+          {!loading &&
+            stays &&
             stays.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
@@ -145,17 +108,20 @@ const CurrentReservationsSection = () => {
 };
 
 const NextReservationsSection = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getNextStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<StayGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getNextStaysByHostId(user.id);
-      if (!error) {
-        setReservations(data as StayGuest[]);
-      }
+    if (!user) return;
+
+    setLoading(true);
+    const { data, error } = await getNextStaysByHostId(user.id);
+    if (!error) {
+      setReservations(data as StayGuest[]);
     }
+    setLoading(false);
   }, [user]);
 
   useEffect(() => {
@@ -177,11 +143,18 @@ const NextReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!reservations ||
-            (reservations.length == 0 && (
-              <Table.Cell className="flex justify-center py-2">Sem próximas reservas</Table.Cell>
-            ))}
-          {reservations &&
+          {loading && (
+            <Table.Row className="flex justify-center">
+              <Table.Cell>
+                <Spinner />
+              </Table.Cell>
+            </Table.Row>
+          )}
+          {!loading && (!reservations || reservations.length == 0) && (
+            <Table.Cell className="flex justify-center py-2">Sem próximas reservas</Table.Cell>
+          )}
+          {!loading &&
+            reservations &&
             reservations.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
@@ -208,17 +181,20 @@ const NextReservationsSection = () => {
 };
 
 const AllReservationsSection = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getAllStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<StayGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
-    if (user) {
-      const { data, error } = await getAllStaysByHostId(user.id);
-      if (!error) {
-        setReservations(data as StayGuest[]);
-      }
+    if (!user) return;
+
+    setLoading(true);
+    const { data, error } = await getAllStaysByHostId(user.id);
+    if (!error) {
+      setReservations(data as StayGuest[]);
     }
+    setLoading(false);
   }, [user]);
 
   useEffect(() => {
@@ -253,9 +229,18 @@ const AllReservationsSection = () => {
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {!reservations ||
-            (reservations.length == 0 && <Table.Cell className="flex justify-center py-2">Sem reservas</Table.Cell>)}
-          {reservations &&
+          {loading && (
+            <Table.Row className="flex justify-center">
+              <Table.Cell>
+                <Spinner />
+              </Table.Cell>
+            </Table.Row>
+          )}
+          {!loading && (!reservations || reservations.length == 0) && (
+            <Table.Cell className="flex justify-center py-2">Sem reservas</Table.Cell>
+          )}
+          {!loading &&
+            reservations &&
             reservations.map((stay, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>

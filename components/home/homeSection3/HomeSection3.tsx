@@ -16,6 +16,7 @@ export default function HomeSection3() {
   const getCloseAdvertisements = useCallback(async () => {
     if (currentMapCoordinates) {
       const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
+      debugger;
       if (!error && data) {
         setAdvertisements(data);
       }
@@ -55,19 +56,25 @@ export default function HomeSection3() {
                     <Link key={index} href={`anuncio/${advertisement.slug}`}>
                       <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-black bg-cover p-8 transition lg:h-3/4">
                         {advertisement.photos && advertisement.photos[0] ? (
-                          <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
+                          <Image
+                            src={advertisement.photos[0].url}
+                            alt="..."
+                            layout="fill"
+                            objectFit="cover"
+                            className="bg-black opacity-80"
+                          />
                         ) : (
                           <Image
                             src={NoPhotoAvailable}
                             alt="no photo available"
-                            className="rounded-2xl"
+                            className="rounded-2xl bg-black opacity-80"
                             layout="fill"
                             objectFit="cover"
                           />
                         )}
-                        {/* <h2 className="bg-primary-500 p-2 text-xl text-white">
-                        {TYPE_ADVERTISEMENT[advertisement.type]}
-                      </h2> */}
+                        <h2 className="bg-primary-500 p-2 text-xl text-white">
+                          {TYPE_ADVERTISEMENT[advertisement.type]}
+                        </h2>
                         <p className="bold absolute right-4 bottom-6 rounded-full bg-primary-500 p-3 text-white md:right-3.5 lg:right-8 lg:text-4xl">
                           &euro;{advertisement.month_rent}
                         </p>
