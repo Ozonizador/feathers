@@ -33,3 +33,18 @@ ALTER TABLE advertisements DROP COLUMN max_rooms;
 
 --- ALTER TABLE ON DELETE CASCADE. 
 -- advertisements , reviews, reports
+ALTER TABLE "reservations" DROP CONSTRAINT "reservations_advertisement_id_fkey",
+ADD CONSTRAINT reservations_advertisement_id_fkey
+   foreign key (advertisement_id)
+   references advertisements(id)
+   on delete cascade;
+
+ALTER TABLE "reports" DROP CONSTRAINT "reports_advertisement_id_fkey",
+    FOREIGN KEY reports_stay_id_fkey
+    REFERENCES advertisements(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "stays" DROP CONSTRAINT "stays_advertisement_id_fkey",
+    FOREIGN KEY stays_advertisement_id_fkey
+    REFERENCES advertisements(id)
+    ON DELETE CASCADE;
