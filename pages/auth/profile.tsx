@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useCurrentUser, useSetProfileInformation } from "../../context/MainProvider";
 import useProfileService from "../../hooks/useProfileService";
-import { REGISTER_URL } from "../../models/paths";
+import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import { UserTypes } from "../../models/profile";
 
 const TypeCustomerPage = () => {
@@ -21,11 +21,11 @@ const TypeCustomerPage = () => {
     if (error) return toast.error("Erro ea escolher o tipo de utilizador");
 
     setProfile(data);
-    router.push("/");
+    router.push(HOME_URL);
   };
 
   useEffect(() => {
-    if (profile && profile.type) router.push("/");
+    if (profile && profile.type) router.push(HOME_URL);
   }, [profile]);
   return (
     <div className="my-10 flex justify-center">

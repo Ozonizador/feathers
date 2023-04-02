@@ -42,21 +42,6 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         )}
 
         <div>
-          <label className="mb-4 block text-xl font-bold text-gray-700">Quantos quartos tem a habitação?</label>
-          <Controller
-            name={ADVERTISEMENT_PROPERTIES.MAX_ROOMS}
-            control={control}
-            rules={{
-              required: { message: REQUIRED_ERROR_MESSAGE, value: true },
-              min: { value: 1, message: MIN_LENGTH_ERROR_MESSAGE },
-            }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <Input maxLength={10} type="number" value={value} onChange={onChange} errorMessage={error?.message} />
-            )}
-          />
-        </div>
-
-        <div>
           <label htmlFor="about" className="text-2xl font-bold text-gray-700">
             Descreva o seu espaço de forma simples e concisa.
           </label>

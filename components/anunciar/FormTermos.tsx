@@ -6,6 +6,7 @@ import { useAdvertisement, useImageFiles, useSetAdvertisementProperty } from "..
 import { useDecrementStep } from "../../context/AnunciarProvider";
 import useAdvertisementService from "../../hooks/advertisementService";
 import { AdvertisementInfo, AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import { HOME_URL } from "../../models/paths";
 import Button from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
 import FeathersSpinner from "../utils/Spinner";
@@ -45,7 +46,7 @@ const FormTermos = () => {
       if (error) return toast.error(error.message);
 
       toast.success("Registo Bem Sucedido");
-      router.push("/");
+      router.push(HOME_URL);
     } catch (e) {
       toast.error(e.message);
     } finally {

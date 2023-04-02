@@ -11,6 +11,7 @@ export const PROCURAR_ADVERT_URL = "/procurar" as const;
 export const REGISTER_URL = "/auth/register" as const;
 export const LOGIN_URL = "/auth/login" as const;
 export const RECOVER_URL = "/auth/recover" as const;
+export const TYPE_PROFILE_CHOICE_URL = "/auth/profile" as const;
 
 // SHARED UNIDESK
 export const UNIDESK_URL = "/unidesk" as const;

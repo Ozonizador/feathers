@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
-import { RECOVER_URL, REGISTER_URL } from "../../models/paths";
+import { RECOVER_URL, REGISTER_URL, TYPE_PROFILE_CHOICE_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 
@@ -33,7 +33,7 @@ const Login = () => {
       toast.error(error.message);
       return;
     } else {
-      router.push("/auth/profile");
+      router.push(TYPE_PROFILE_CHOICE_URL);
     }
   };
 

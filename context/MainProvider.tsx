@@ -5,6 +5,8 @@ import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
 import useFavouriteService from "../hooks/favouriteService";
 import useProfileService from "../hooks/useProfileService";
+import { useRouter } from "next/router";
+import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
@@ -41,6 +43,7 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
+  const router = useRouter();
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
@@ -61,6 +64,7 @@ export const MainProvider = ({ children }): JSX.Element => {
     if (user) {
       const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
       if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
+      if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
     }
   }, [user]);
 
