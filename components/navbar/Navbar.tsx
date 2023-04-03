@@ -229,12 +229,16 @@ export const Navbar = () => {
                       <Switch
                         checked={true}
                         onChange={toggleSenhorioEstudante}
-                        className="relative inline-flex h-6 w-11 rounded-full bg-primary-500"
+                        className={classNames("relative inline-flex h-6 w-11 rounded-full", {
+                          "bg-primary-500": profile && profile.type === toggleUserType,
+                          "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                        })}
                       >
                         <span
-                          className={`${
-                            toggleUserType === "LANDLORD" ? "translate-x-6" : "translate-x-1"
-                          } absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white`}
+                          className={classNames("absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white", {
+                            "translate-x-6": toggleUserType === "LANDLORD",
+                            "translate-x-1": toggleUserType !== "LANDLORD",
+                          })}
                         />
                       </Switch>
                       <span className="ml-2">Senhorio</span>
