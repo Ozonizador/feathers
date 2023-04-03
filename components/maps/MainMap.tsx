@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { Icon } from "leaflet";
 import { GEO } from "../../models/utils";
+import Button from "../utils/Button";
 
 interface MainMapProps {
   currentMapCoords: GEO;
@@ -23,6 +24,10 @@ const MainMap = ({
   onChangeMarker,
 }: MainMapProps) => {
   const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
+
+  const requestLocation = () => {
+    navigator.geolocation.getCurrentPosition(() => {});
+  };
 
   useEffect(() => {
     if (currentMapCoords) {
@@ -51,6 +56,15 @@ const MainMap = ({
             onChangeMarker={onChangeMarker}
           />
         </MapContainer>
+      )}
+      {!mapCenter && (
+        <div className="flex h-full justify-center self-center">
+          <div className="my-auto w-32">
+            <Button onClick={() => requestLocation()} type="button">
+              Add location permissions
+            </Button>
+          </div>
+        </div>
       )}
     </>
   );

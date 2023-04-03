@@ -34,17 +34,79 @@ ALTER TABLE advertisements DROP COLUMN max_rooms;
 --- ALTER TABLE ON DELETE CASCADE. 
 -- advertisements , reviews, reports
 ALTER TABLE "reservations" DROP CONSTRAINT "reservations_advertisement_id_fkey",
-ADD CONSTRAINT reservations_advertisement_id_fkey
-   foreign key (advertisement_id)
-   references advertisements(id)
-   on delete cascade;
+    ADD CONSTRAINT reservations_advertisement_id_fkey
+    foreign key (advertisement_id)
+    references advertisements(id)
+    on delete cascade;
 
-ALTER TABLE "reports" DROP CONSTRAINT "reports_advertisement_id_fkey",
-    FOREIGN KEY reports_stay_id_fkey
+ALTER TABLE "reservations" DROP CONSTRAINT "reservations_tenant_id_fkey",
+    ADD CONSTRAINT reservations_tenant_id_fkey
+    FOREIGN KEY (tenant_id)
+    REFERENCES profiles(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "stays" DROP CONSTRAINT "stays_reservation_id_fkey",
+    ADD CONSTRAINT stays_reservation_id_fkey
+    FOREIGN KEY (advertisement_id)
+    REFERENCES advertisements(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "stays" DROP CONSTRAINT "stays_tenant_id_fkey",
+    ADD CONSTRAINT stays_tenant_id_fkey
+    FOREIGN KEY (advertisement_id)
     REFERENCES advertisements(id)
     ON DELETE CASCADE;
 
 ALTER TABLE "stays" DROP CONSTRAINT "stays_advertisement_id_fkey",
-    FOREIGN KEY stays_advertisement_id_fkey
+    ADD CONSTRAINT stays_advertisement_id_fkey
+    FOREIGN KEY (advertisement_id)
     REFERENCES advertisements(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "reports" DROP CONSTRAINT "reports_stay_id_fkey",
+    ADD CONSTRAINT reports_stay_id_fkey
+    FOREIGN KEY (stay_id)
+    REFERENCES stays(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "notifications" DROP CONSTRAINT "notifications_profile_id_fkey",
+    ADD CONSTRAINT notifications_profile_id_fkey
+    FOREIGN KEY (profile_id)
+    REFERENCES profiles(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "messages" DROP CONSTRAINT "messages_conversation_id_fkey",
+    ADD CONSTRAINT messages_conversation_id_fkey
+    FOREIGN KEY (conversation_id)
+    REFERENCES conversations(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "messages" DROP CONSTRAINT "messages_profile_id_fkey",
+    ADD CONSTRAINT messages_profile_id_fkey
+    FOREIGN KEY (profile_id)
+    REFERENCES profiles(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "conversations" DROP CONSTRAINT "conversations_host_id_fkey",
+    ADD CONSTRAINT conversations_host_id_fkey
+    FOREIGN KEY (host_id)
+    REFERENCES profiles(id)
+    ON DELETE SET NULL;
+
+ALTER TABLE "conversations" DROP CONSTRAINT "conversations_tenant_id_fkey",
+    ADD CONSTRAINT conversations_tenant_id_fkey
+    FOREIGN KEY (tenant_id)
+    REFERENCES profiles(id)
+    ON DELETE SET NULL;
+
+ALTER TABLE "conversations" DROP CONSTRAINT "conversations_reservation_id_fkey",
+    ADD CONSTRAINT conversations_reservation_id_fkey
+    FOREIGN KEY (reservation_id)
+    REFERENCES reservations(id)
+    ON DELETE CASCADE;
+
+ALTER TABLE "reviews" DROP CONSTRAINT "reviews_stay_id_fkey",
+    ADD CONSTRAINT reviews_stay_id_fkey
+    FOREIGN KEY (stay_id)
+    REFERENCES stays(id)
     ON DELETE CASCADE;

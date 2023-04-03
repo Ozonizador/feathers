@@ -34,6 +34,10 @@ const Anuncios = () => {
     getUserAdvertisements();
   }, [getUserAdvertisements]);
 
+  const refetchAdvertisements = () => {
+    getUserAdvertisements();
+  };
+
   return (
     <section>
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
@@ -50,16 +54,12 @@ const Anuncios = () => {
               {advertisements.map((advertisement) => {
                 return (
                   <div className="w-full" key={advertisement.id}>
-                    <AnuncioCard advertisement={advertisement} />
+                    <AnuncioCard advertisement={advertisement} refetchAdvertisements={refetchAdvertisements} />
                   </div>
                 );
               })}
               {!advertisements || (advertisements.length === 0 && <div>Sem anúncios</div>)}
             </div>
-
-            {/* <div>
-              <DicasCard />
-            </div> */}
           </div>
         </div>
       </div>
