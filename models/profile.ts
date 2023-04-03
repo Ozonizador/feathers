@@ -6,6 +6,7 @@ export const AVATAR_STORAGE_NAME = "avatars" as const;
 
 export type ProfilesResponse = Database["public"]["Tables"]["profiles"];
 export type Profile = ProfilesResponse["Row"];
+export type UserTypes = Database["public"]["Enums"]["profiletype"];
 
 export enum Gender {
   male = 1,
@@ -27,7 +28,7 @@ export const PROFILE_COLUMNS = {
 
 export const spokenLanguages = ["portuguese", "spanish", "english", "italian", "greek", "french", "german", "finnish"];
 
-export type SpokenLanguage = typeof spokenLanguages[number];
+export type SpokenLanguage = (typeof spokenLanguages)[number];
 
 export const LanguageLabel = {
   portuguese: "Português",
@@ -46,5 +47,3 @@ export const getSpokenLanguages = () => {
     return { label, value: language };
   });
 };
-
-export type UserTypes = "LANDLORD" | "TENANT";

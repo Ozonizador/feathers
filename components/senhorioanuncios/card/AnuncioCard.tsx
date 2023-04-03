@@ -51,9 +51,10 @@ function DeleteActiveIcon(props) {
 
 interface AnuncioCardProps {
   advertisement: Advertisement;
+  refetchAdvertisements: () => void;
 }
 
-const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
+const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps) => {
   const router = useRouter();
   const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
   const { removeAdvertisement } = useAdvertisementService();
@@ -67,6 +68,7 @@ const AnuncioCard = ({ advertisement }: AnuncioCardProps) => {
   const deleteAdvertisement = async () => {
     const { error } = await removeAdvertisement(advertisement.id);
     error ? toast.error("Erro ao remover anúncio") : toast.success("Successo");
+    if (!error) refetchAdvertisements();
   };
   return (
     <section>

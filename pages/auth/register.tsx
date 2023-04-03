@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
-import { LOGIN_URL } from "../../models/paths";
+import { HOME_URL, LOGIN_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 
@@ -36,7 +36,7 @@ const Register = () => {
       return;
     } else {
       toast.success("Register successfully");
-      router.push("/");
+      router.push(HOME_URL);
     }
   };
 

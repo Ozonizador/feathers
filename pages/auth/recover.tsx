@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/utils/Input";
-import { REGISTER_URL } from "../../models/paths";
+import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 
@@ -17,7 +17,7 @@ const Recover = () => {
     const { data, error } = await recoverPasswordViaEmail(email);
     setLoading(false);
     if (!error) {
-      router.push("/");
+      router.push(HOME_URL);
     }
   };
 

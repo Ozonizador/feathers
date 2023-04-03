@@ -5,6 +5,8 @@ import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
 import useFavouriteService from "../hooks/favouriteService";
 import useProfileService from "../hooks/useProfileService";
+import { useRouter } from "next/router";
+import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
@@ -41,6 +43,8 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
 export const MainProvider = ({ children }): JSX.Element => {
+  const router = useRouter();
+  const [locationAccess, setLocationAccess] = useState(false);
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
@@ -61,24 +65,40 @@ export const MainProvider = ({ children }): JSX.Element => {
     if (user) {
       const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
       if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
+      if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
     }
   }, [user]);
 
   useEffect(() => {
     checkUserProfile();
 
-    navigator.geolocation.watchPosition(
-      function (pos) {
-        const newUserPos = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        };
-        setUserLocationCoordinates(newUserPos);
-      },
-      function errorCallback(error) {},
-      { maximumAge: 60000, timeout: 5000, enableHighAccuracy: false }
-    );
-  }, [checkUserProfile]);
+    //check user location changes in navigator
+    navigator.permissions.query({ name: "geolocation" }).then((permissionStatus) => {
+      permissionStatus.onchange = () => {
+        setLocationAccess(permissionStatus.state == "granted");
+      };
+
+      if (permissionStatus.state == "granted") {
+        navigator.geolocation.getCurrentPosition(
+          function (pos) {
+            const newUserPos = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            };
+            setUserLocationCoordinates(newUserPos);
+          },
+          function errorCallback(error) {
+            console.log(error);
+          },
+          { maximumAge: 60000, timeout: 5000, enableHighAccuracy: false }
+        );
+      }
+    });
+  }, [checkUserProfile, locationAccess]);
+
+  useEffect(() => {
+    if (!locationAccess) return;
+  }, [locationAccess]);
 
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>

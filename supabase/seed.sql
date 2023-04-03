@@ -11,8 +11,8 @@ INSERT INTO "public"."profiles" ("id", "slug", "name", "surname", "nationality",
 ('c4c7874c-a388-46c1-94db-5cb11839ff7b', 'castelhano', 'castelhano', 'developer', 'portuguese', 'nazare', '2000-01-01', 1, 'BOAS', NULL, NULL, NULL, NULL);
 
 -- advertisements
-INSERT INTO "public"."advertisements" ("id", "slug", "type", "place", "street", "street_number", "floor", "postal_code", "rooms", "max_rooms", "beds", "tenant_number", "bathrooms", "title", "description", "type_flex_host", "type_host", "photos", "house_rules", "about_house", "month_rent", "extra_per_host", "guarantee_value", "expenses", "available", "host_lives_property", "verified", "host_id", "geom", "agreementsinfo") 
-VALUES ('0a54f7fe-2fda-4d30-9767-954796daa5bd','aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', null, '{}');
+INSERT INTO "public"."advertisements" ("id", "slug", "type", "place", "street", "street_number", "floor", "postal_code", "rooms", "beds", "tenant_number", "bathrooms", "title", "description", "type_flex_host", "type_host", "photos", "house_rules", "about_house", "month_rent", "extra_per_host", "guarantee_value", "expenses", "available", "host_lives_property", "verified", "host_id", "geom", "agreementsinfo") 
+VALUES ('0a54f7fe-2fda-4d30-9767-954796daa5bd','aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', null, '{}');
 
 
 -- reservations

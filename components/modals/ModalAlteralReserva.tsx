@@ -21,6 +21,7 @@ const ModalAlterarReserva = () => {
     status: ReservationStatus.CHANGE_REQUESTED,
     advertisement_id: "",
     tenant_id: "",
+    number_guests: 1,
   });
 
   const updateToOldReservation = useCallback(() => {

@@ -1,43 +1,32 @@
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { SiFacebook, SiGmail } from "react-icons/si";
+import router from "next/router";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import Input from "../../components/utils/Input";
-import { RECOVER_URL, REGISTER_URL } from "../../models/paths";
-import useUserService from "../../hooks/userService";
-import Button from "../../components/utils/Button";
+import { useCurrentUser, useSetProfileInformation } from "../../context/MainProvider";
+import useProfileService from "../../hooks/useProfileService";
+import { HOME_URL, REGISTER_URL } from "../../models/paths";
+import { UserTypes } from "../../models/profile";
 
-/* TODO CHANGE HERE FOR THE ESTUDANTE / SENHORIO */
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const TypeCustomerPage = () => {
+  const profile = useCurrentUser();
+  const setProfile = useSetProfileInformation();
+  const { setTypeUser } = useProfileService();
 
-  const router = useRouter();
-  const { login, loginWithFacebook, loginWithGoogle } = useUserService();
+  const setProfileType = async (type: UserTypes) => {
+    if (!profile) return;
 
-  const loginFacebook = async (event) => {
-    event.preventDefault();
-    await loginWithFacebook();
+    const { data, error } = await setTypeUser(profile.id, type);
+    if (error) return toast.error("Erro ea escolher o tipo de utilizador");
+
+    setProfile(data);
+    router.push(HOME_URL);
   };
 
-  /** registar com google */
-  const loginGoogle = async (event) => {
-    event.preventDefault();
-    await loginWithGoogle();
-  };
-
-  const normalLogin = async (event) => {
-    event.preventDefault();
-    const { error } = await login(email, password);
-    if (error) {
-      toast.error(error.message);
-      return;
-    } else {
-      router.push("/");
-    }
-  };
-
+  useEffect(() => {
+    if (profile && profile.type) router.push(HOME_URL);
+  }, [profile]);
   return (
     <div className="my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
@@ -49,57 +38,23 @@ const Login = () => {
             </a>
           </Link>
         </div>
-        <div className="mt-9 p-3">
-          <div className="mb-9 text-xl font-bold">
-            Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
+        <div className="my-5 p-3">
+          <div
+            className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
+            onClick={() => setProfileType("TENANT")}
+          >
+            Sou estudante
           </div>
-          <form onSubmit={(e) => normalLogin(e)}>
-            <div className="mt-3">
-              <div className="mt-2">
-                <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  label="email_input"
-                  labelText="Email"
-                ></Input>
-              </div>
-            </div>
-            <div className="mt-3">
-              <div className="mt-2">
-                <Input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  autoComplete="on"
-                  label="password_input"
-                  labelText="Palavra-passe"
-                ></Input>
-              </div>
-            </div>
-            <div className="my-5">
-              <Button type="submit">Iniciar Sessão</Button>
-            </div>
-          </form>
-          <Link href={RECOVER_URL}>
-            <a aria-label="recover_password">
-              <div className="mt-3 text-center italic text-primary-500">Esqueci-me da palavra-passe</div>
-            </a>
-          </Link>
-
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
-            <span className="mx-4 flex-shrink text-lg font-bold text-gray-400">ou</span>
+            <span className="mx-4 flex-shrink text-lg font-bold">ou</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="mb-3 flex justify-around gap-5">
-            <Button onClick={loginFacebook} type="button" variant="facebook">
-              <SiFacebook className="inline" color="blue" />
-              <span className="my-auto ml-3 inline">Facebook</span>
-            </Button>
-            <Button onClick={loginGoogle} type="button" variant="gmail">
-              <SiGmail color="red" className="inline" />
-              <span className="my-auto ml-3 inline">Gmail</span>
-            </Button>
+          <div
+            className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
+            onClick={() => setProfileType("LANDLORD")}
+          >
+            Sou senhorio
           </div>
         </div>
       </div>
@@ -107,4 +62,28 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default TypeCustomerPage;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};

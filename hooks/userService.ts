@@ -33,7 +33,7 @@ const useUserService = () => {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "facebook",
       options: {
-        redirectTo: `${window.location.origin}`,
+        redirectTo: `${window.location.origin}/auth/profile`,
       },
     });
 
@@ -44,7 +44,7 @@ const useUserService = () => {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}`,
+        redirectTo: `${window.location.origin}/auth/profile`,
       },
     });
 

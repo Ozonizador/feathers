@@ -19,16 +19,17 @@ const FormAnunciarPhotos = () => {
 
   const uploadToClient = (event) => {
     event.preventDefault();
-    if (event.target.files.length < 5) {
-      return;
-    }
     if (event.target.files) {
-      let files = [];
+      let newFiles = [];
       for (let file of event.target.files) {
-        files.push(file);
+        newFiles.push(file);
       }
 
-      setImagesInfo({ files, filesUrl: files.map((file) => URL.createObjectURL(file)) });
+      const newFilesUrl = newFiles.map((file) => URL.createObjectURL(file));
+      setImagesInfo({
+        files: [files, ...newFiles].flat(),
+        filesUrl: [filesUrl, ...newFilesUrl].flat(),
+      });
     }
   };
 

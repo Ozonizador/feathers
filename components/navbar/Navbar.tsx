@@ -63,7 +63,7 @@ export const Navbar = () => {
 
   const logout = () => {
     supabaseClient.auth.signOut();
-    router.push("/");
+    router.push(HOME_URL);
   };
 
   const checkIfUrlActive = (urls: string[]) => {

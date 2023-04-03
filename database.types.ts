@@ -265,6 +265,7 @@ export interface Database {
           slug: string;
           surname: string | null;
           town: string | null;
+          type: Database["public"]["Enums"]["profiletype"] | null;
           updated_at: string;
         };
         Insert: {
@@ -284,6 +285,7 @@ export interface Database {
           slug: string;
           surname?: string | null;
           town?: string | null;
+          type?: Database["public"]["Enums"]["profiletype"] | null;
           updated_at?: string;
         };
         Update: {
@@ -303,6 +305,7 @@ export interface Database {
           slug?: string;
           surname?: string | null;
           town?: string | null;
+          type?: Database["public"]["Enums"]["profiletype"] | null;
           updated_at?: string;
         };
       };
@@ -3532,6 +3535,7 @@ export interface Database {
         | "LANDLORD_COMPLETE_PROFILE"
         | "LANDLORD_COMPLETE_ADVERT"
         | "BLOG";
+      profiletype: "LANDLORD" | "TENANT";
       ReportsType: "IMPRECISE" | "NOT_REALITY" | "SCAM" | "OFFENSIVE" | "OTHER";
       ReservationStatus:
         | "REQUESTED"
