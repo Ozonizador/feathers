@@ -64,7 +64,7 @@ export const MainProvider = ({ children }): JSX.Element => {
   });
 
   const user = useUser();
-  const { checkProfileAndCreate } = useProfileService();
+  const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
   const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
@@ -77,9 +77,24 @@ export const MainProvider = ({ children }): JSX.Element => {
 
   const checkUserNotificationsAndMessages = useCallback(async () => {
     if (!user) return;
-    // todo use functions checkNotificationsNotSeen and checkMessagesNotSeen
-  }, [user]);
 
+    Promise.allSettled([
+      checkMessagesNotSeen(user.id, currentUnihostState.profile.type),
+      checkNotificationsNotSeen(user.id),
+    ]).then(([messagesData, notificationData]) => {
+      if (messagesData.status == "fulfilled") {
+        setCurrentUnihostState((c) => ({ ...c, messagesNumber: messagesData.value }));
+      }
+
+      if (notificationData.status == "fulfilled") {
+        setCurrentUnihostState((c) => ({ ...c, notificationNumber: notificationData.value }));
+      }
+    });
+  }, [currentUnihostState.profile]);
+
+  useEffect(() => {
+    checkUserNotificationsAndMessages();
+  }, [checkUserNotificationsAndMessages]);
   useEffect(() => {
     checkUserProfile();
 

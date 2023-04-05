@@ -301,7 +301,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
                                     <p>Notificações</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
@@ -336,7 +336,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
                                     <p>Caixa de Entrada</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
@@ -356,7 +356,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
                                     <p>Notificações</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">

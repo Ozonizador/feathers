@@ -115,24 +115,30 @@ const useProfileService = () => {
 
   /* Messages */
 
-  // Change this logic. must be from conversation where user_id / tenant_id and opposite to
   const checkMessagesNotSeen = async (userId: string, type?: UserTypes) => {
-    const { data, error, count } = await supabaseClient
+    let query = supabaseClient
       .from<"messages", Messages>(MESSAGE_TABLE_NAME)
-      .select(undefined, { count: "exact" })
+      .select("conversations(*)", { count: "exact" })
       .eq(MESSAGE_TABLE_PROPERTIES.SEEN, false);
 
-    return { count: count || 0 };
+    if (type === "LANDLORD") {
+      query = query.eq("conversations.host_id", userId);
+    } else if (type === "TENANT") {
+      query = query.eq("conversation.tenant_id", userId);
+    }
+
+    const { count } = await query;
+    return count || 0;
   };
 
   /* Notifications */
   const checkNotificationsNotSeen = async (userId: string) => {
-    const { data, error, count } = await supabaseClient
+    const { count } = await supabaseClient
       .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
       .select(undefined, { count: "exact" })
       .eq(MESSAGE_TABLE_PROPERTIES.SEEN, false);
 
-    return { count: count || 0 };
+    return count;
   };
 
   /* Picture */
