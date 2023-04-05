@@ -113,11 +113,13 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl bg-black text-left align-middle shadow-xl transition-all lg:h-4/5 lg:w-2/3">
                 <div className="my-20 mx-10 h-96">
-                  <div className="flex h-full w-1/2 flex-col gap-2 rounded-lg bg-white px-5 py-10">
-                    <h6 className="mb-3 text-3xl">Queremos ser uns fiéis mensageiros!</h6>
+                  <div className="flex h-full w-1/2 flex-col gap-2 rounded-lg bg-white px-10 py-10">
+                    <h6 className="mb-8 text-3xl">Queremos ser uns fiéis mensageiros!</h6>
                     <Input placeholder="E-mail"></Input>
-                    <Button type={"button"}>Notifique-me</Button>
-                    <p className="mt-auto">
+                    <div className="mb-10">
+                      <Button type={"button"}>Notifique-me</Button>
+                    </div>
+                    <p className="mt-auto mb-5 text-center">
                       Ao carregar em Notifique-me aceita a nossa
                       <br />
                       <span className="text-primary-500 underline">política de tratamento de dados.</span>
