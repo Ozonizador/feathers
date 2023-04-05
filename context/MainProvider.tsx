@@ -11,12 +11,16 @@ import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
   profile: Profile | null;
+  notificationNumber: number;
+  messagesNumber: number;
 }
 
 /* Contexts */
 const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
   toggleUserType: "TENANT",
   profile: null,
+  notificationNumber: 0,
+  messagesNumber: 0,
 });
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
 
@@ -49,6 +53,8 @@ export const MainProvider = ({ children }): JSX.Element => {
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
     profile: null,
+    notificationNumber: 0,
+    messagesNumber: 0,
   });
   const [userSearch, setUserSearch] = useState<UserSearchInfo>({
     location: "",
@@ -67,6 +73,11 @@ export const MainProvider = ({ children }): JSX.Element => {
       if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
       if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
     }
+  }, [user]);
+
+  const checkUserNotificationsAndMessages = useCallback(async () => {
+    if (!user) return;
+    // todo use functions checkNotificationsNotSeen and checkMessagesNotSeen
   }, [user]);
 
   useEffect(() => {
@@ -95,10 +106,6 @@ export const MainProvider = ({ children }): JSX.Element => {
       }
     });
   }, [checkUserProfile, locationAccess]);
-
-  useEffect(() => {
-    if (!locationAccess) return;
-  }, [locationAccess]);
 
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>
@@ -176,5 +183,23 @@ export const useSetSearchLocation = () => {
   const setSearch = useContext(SetUserLocationSearchContext);
   return (search: UserSearchInfo) => {
     setSearch(search);
+  };
+};
+
+/**
+ * Notifications and messages
+ */
+
+export const useSetNotificationToBeSeen = () => {
+  const setNotificationNumber = useContext(SetUnihostsWebsiteContext);
+  return (notificationNumber: number) => {
+    setNotificationNumber((currentUnihostState) => ({ ...currentUnihostState, notificationNumber }));
+  };
+};
+
+export const useSetMessagesToBeSeen = () => {
+  const setMessageNumber = useContext(SetUnihostsWebsiteContext);
+  return (messagesNumber: number) => {
+    setMessageNumber((currentUnihostState) => ({ ...currentUnihostState, messagesNumber }));
   };
 };

@@ -45,7 +45,7 @@ export const Navbar = () => {
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-  const { toggleUserType } = useGetUserType();
+  const { toggleUserType, messagesNumber, notificationNumber } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   /* Changing the toggle TENANT estudante */
@@ -291,13 +291,23 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
-                                    Caixa de Entrada
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                    <p>Caixa de Entrada</p>
+                                    {messagesNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {messagesNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
-                                    Notificações
+                                    <p>Notificações</p>
+                                    {notificationNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {notificationNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
@@ -327,7 +337,12 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
-                                    Caixa de Entrada
+                                    <p>Caixa de Entrada</p>
+                                    {messagesNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {messagesNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -342,7 +357,12 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
-                                    Notificações
+                                    <p>Notificações</p>
+                                    {notificationNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {notificationNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>

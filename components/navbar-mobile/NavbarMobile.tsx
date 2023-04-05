@@ -40,7 +40,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
 
-  const { toggleUserType } = useGetUserType();
+  const { toggleUserType, notificationNumber, messagesNumber } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   const toggleSenhorioEstudante = () => {

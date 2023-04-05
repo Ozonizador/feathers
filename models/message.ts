@@ -13,4 +13,5 @@ export const MESSAGE_TABLE_PROPERTIES = {
   MESSAGE: "message",
   CONVERSATION_ID: "conversation_id",
   PROFILE_ID: "profile_id",
+  SEEN: "seen",
 } as const;

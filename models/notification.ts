@@ -17,6 +17,7 @@ export type Notification = NotificationsResponse["Row"];
 export const NOTIFICATION_PROPERTIES = {
   PROFILE_ID: "profile_id",
   ID: "id",
+  SEEN: "seen",
 } as const;
 
 export const NOTIFICATION_LINKS = {
