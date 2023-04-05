@@ -1,6 +1,15 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
-import { AVATAR_STORAGE_NAME, Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
+import { Messages, MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
+import { NotificationsResponse, NOTIFICATION_PROPERTIES, NOTIFICATION_TABLE_NAME } from "../models/notification";
+import {
+  AVATAR_STORAGE_NAME,
+  Profile,
+  ProfilesResponse,
+  PROFILE_COLUMNS,
+  PROFILE_TABLE_NAME,
+  UserTypes,
+} from "../models/profile";
 import { createRandomUniqWord } from "../utils/utils";
 
 const useProfileService = () => {
@@ -104,6 +113,36 @@ const useProfileService = () => {
     }
   };
 
+  /* Messages */
+
+  const checkMessagesNotSeen = async (userId: string, type?: UserTypes) => {
+    let query = supabaseClient
+      .from<"messages", Messages>(MESSAGE_TABLE_NAME)
+      .select("conversations(*)", { count: "exact" })
+      .eq(MESSAGE_TABLE_PROPERTIES.SEEN, false);
+
+    if (type === "LANDLORD") {
+      query = query.eq("conversations.host_id", userId);
+    } else if (type === "TENANT") {
+      query = query.eq("conversation.tenant_id", userId);
+    }
+
+    const { count } = await query;
+    return count || 0;
+  };
+
+  /* Notifications */
+  const checkNotificationsNotSeen = async (userId: string) => {
+    const { count } = await supabaseClient
+      .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
+      .select(undefined, { count: "exact" })
+      .eq(MESSAGE_TABLE_PROPERTIES.SEEN, false);
+
+    return count;
+  };
+
+  /* Picture */
+
   const uploadPicture = async (userId: string, fileName: string, avatarFile: File) => {
     const { data, error } = await supabaseClient.storage
       .from(AVATAR_STORAGE_NAME)
@@ -173,6 +212,8 @@ const useProfileService = () => {
     updateNotificationMessage,
     getNotificationInfoFromUser,
     setTypeUser,
+    checkMessagesNotSeen,
+    checkNotificationsNotSeen,
   };
 };
 

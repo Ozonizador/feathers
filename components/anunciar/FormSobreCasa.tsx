@@ -37,7 +37,7 @@ const FormSobreCasa = () => {
 
   return (
     <FormProvider {...methods}>
-      <section className="mx-auto w-full lg:container lg:w-5/6">
+      <section className="mx-auto w-full px-10 lg:container lg:w-5/6">
         <AdvertisementInfoComponent advertisement={advertisement} />
 
         <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">

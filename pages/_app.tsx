@@ -15,6 +15,7 @@ import Maintenance from "../components/maintenance/Maintenance";
 import { CookiesProvider, useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
+import NextNProgress from "nextjs-progressbar";
 
 const theme: CustomFlowbiteTheme = {
   carousel: {
@@ -49,6 +50,7 @@ function MyApp({ Component, pageProps }) {
                 <Navbar />
                 <div className="min-h-screen">
                   <Flowbite theme={{ theme }}>
+                    <NextNProgress />
                     <Component {...pageProps} />
                   </Flowbite>
                   <ToastContainer />

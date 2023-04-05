@@ -14,7 +14,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
     <div className="my-5 flex flex-col gap-5 px-2">
       <div className="flex gap-2">
         <MdPeopleOutline size={32} />
-        <div className="my-auto flex w-6/12">
+        <div className="my-auto flex w-1/2 lg:w-2/12">
           <h2 className="my-auto ml-5 text-sm font-bold lg:text-base">Capacidade</h2>
         </div>
         <div>
@@ -28,7 +28,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
 
       <div className="flex gap-2">
         <BiBed size={32} />
-        <div className="my-auto flex w-6/12">
+        <div className="my-auto flex w-1/2 lg:w-2/12">
           <h2 className="my-auto ml-5 text-sm font-bold lg:text-base">Camas</h2>
         </div>
         <div>
@@ -42,7 +42,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
 
       <div className="flex gap-2">
         <GiPersonInBed size={32} />
-        <div className="my-auto flex w-6/12">
+        <div className="my-auto flex w-1/2 lg:w-2/12">
           <h2 className="my-auto ml-5 text-sm font-bold lg:text-base">Quartos</h2>
         </div>
         <div>
@@ -56,7 +56,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
 
       <div className="flex gap-2">
         <MdOutlineBathtub size={32} />
-        <div className="my-auto flex w-6/12">
+        <div className="my-auto flex w-1/2 lg:w-2/12">
           <h2 className="my-auto ml-5 text-sm font-bold lg:text-base">Casas de Banho</h2>
         </div>
         <div>

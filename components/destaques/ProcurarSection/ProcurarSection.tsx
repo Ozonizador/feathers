@@ -186,7 +186,7 @@ export default function ProcurarSection() {
             )}
           </div>
 
-          {advertisements && advertisements.length !== 0 && count !== advertisements.length && (
+          {advertisements && advertisements.length !== 0 && count > advertisements.length && (
             <div className="row mb-5">
               <div className="col-md-2"></div>
               <div className="flex flex-1 justify-around px-5">

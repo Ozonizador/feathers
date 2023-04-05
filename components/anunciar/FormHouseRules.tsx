@@ -20,9 +20,11 @@ const FormHouseRules = () => {
   };
 
   return (
-    <section className="container mx-auto my-20 w-full lg:w-5/6">
+    <section className="container mx-auto my-20 w-full px-10 lg:w-5/6">
       <div className="w-full">
-        <div className="mb-28 font-bold text-gray-700 lg:text-2xl">Falemos agora sobre condições e regras da casa</div>
+        <div className="font-bold text-gray-700 lg:mb-28 lg:text-2xl">
+          Falemos agora sobre condições e regras da casa
+        </div>
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 

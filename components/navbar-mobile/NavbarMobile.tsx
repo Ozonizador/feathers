@@ -40,7 +40,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
 
-  const { toggleUserType } = useGetUserType();
+  const { toggleUserType, notificationNumber, messagesNumber } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   const toggleSenhorioEstudante = () => {
@@ -121,7 +121,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <Switch
                   checked={false}
                   onChange={toggleSenhorioEstudante}
-                  className="relative mx-5 mt-2 inline-flex h-8 w-16 items-center rounded-full bg-primary-500"
+                  className={classNames("relative mx-5 mt-2 inline-flex h-8 w-16 items-center rounded-full", {
+                    "bg-primary-500": profile && profile.type === toggleUserType,
+                    "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                  })}
                 >
                   <span
                     className={`${

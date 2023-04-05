@@ -45,7 +45,7 @@ export const Navbar = () => {
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-  const { toggleUserType } = useGetUserType();
+  const { toggleUserType, messagesNumber, notificationNumber } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
   /* Changing the toggle TENANT estudante */
@@ -229,12 +229,16 @@ export const Navbar = () => {
                       <Switch
                         checked={true}
                         onChange={toggleSenhorioEstudante}
-                        className="relative inline-flex h-6 w-11 rounded-full bg-primary-500"
+                        className={classNames("relative inline-flex h-6 w-11 rounded-full", {
+                          "bg-primary-500": profile && profile.type === toggleUserType,
+                          "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                        })}
                       >
                         <span
-                          className={`${
-                            toggleUserType === "LANDLORD" ? "translate-x-6" : "translate-x-1"
-                          } absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white`}
+                          className={classNames("absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white", {
+                            "translate-x-6": toggleUserType === "LANDLORD",
+                            "translate-x-1": toggleUserType !== "LANDLORD",
+                          })}
                         />
                       </Switch>
                       <span className="ml-2">Senhorio</span>
@@ -287,13 +291,23 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
-                                    Caixa de Entrada
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                    <p>Caixa de Entrada</p>
+                                    {messagesNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {messagesNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
-                                    Notificações
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
+                                    <p>Notificações</p>
+                                    {notificationNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {notificationNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
@@ -322,8 +336,13 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={INBOX_URL}>
-                                    Caixa de Entrada
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                    <p>Caixa de Entrada</p>
+                                    {messagesNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {messagesNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -337,8 +356,13 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={NOTIFICATIONS_URL}>
-                                    Notificações
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
+                                    <p>Notificações</p>
+                                    {notificationNumber > 0 && (
+                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                        {notificationNumber}
+                                      </h6>
+                                    )}
                                   </MyLink>
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>

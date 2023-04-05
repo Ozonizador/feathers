@@ -72,7 +72,7 @@ const FormInicio = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <section className="mx-auto flex w-full flex-col justify-center gap-8 lg:my-5 lg:px-32">
+        <section className="mx-auto mt-10 flex w-full flex-col justify-center gap-8 px-10 lg:my-5 lg:px-32">
           <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
         </section>
         <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">

@@ -11,12 +11,16 @@ import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
   profile: Profile | null;
+  notificationNumber: number;
+  messagesNumber: number;
 }
 
 /* Contexts */
 const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
   toggleUserType: "TENANT",
   profile: null,
+  notificationNumber: 0,
+  messagesNumber: 0,
 });
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
 
@@ -49,6 +53,8 @@ export const MainProvider = ({ children }): JSX.Element => {
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
     profile: null,
+    notificationNumber: 0,
+    messagesNumber: 0,
   });
   const [userSearch, setUserSearch] = useState<UserSearchInfo>({
     location: "",
@@ -58,7 +64,7 @@ export const MainProvider = ({ children }): JSX.Element => {
   });
 
   const user = useUser();
-  const { checkProfileAndCreate } = useProfileService();
+  const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
   const checkUserProfile = useCallback(async () => {
     // check if profile exists else create
@@ -69,6 +75,26 @@ export const MainProvider = ({ children }): JSX.Element => {
     }
   }, [user]);
 
+  const checkUserNotificationsAndMessages = useCallback(async () => {
+    if (!user) return;
+
+    Promise.allSettled([
+      checkMessagesNotSeen(user.id, currentUnihostState.profile.type),
+      checkNotificationsNotSeen(user.id),
+    ]).then(([messagesData, notificationData]) => {
+      if (messagesData.status == "fulfilled") {
+        setCurrentUnihostState((c) => ({ ...c, messagesNumber: messagesData.value }));
+      }
+
+      if (notificationData.status == "fulfilled") {
+        setCurrentUnihostState((c) => ({ ...c, notificationNumber: notificationData.value }));
+      }
+    });
+  }, [currentUnihostState.profile]);
+
+  useEffect(() => {
+    checkUserNotificationsAndMessages();
+  }, [checkUserNotificationsAndMessages]);
   useEffect(() => {
     checkUserProfile();
 
@@ -95,10 +121,6 @@ export const MainProvider = ({ children }): JSX.Element => {
       }
     });
   }, [checkUserProfile, locationAccess]);
-
-  useEffect(() => {
-    if (!locationAccess) return;
-  }, [locationAccess]);
 
   return (
     <UnihostsWebsiteContext.Provider value={currentUnihostState}>
@@ -176,5 +198,23 @@ export const useSetSearchLocation = () => {
   const setSearch = useContext(SetUserLocationSearchContext);
   return (search: UserSearchInfo) => {
     setSearch(search);
+  };
+};
+
+/**
+ * Notifications and messages
+ */
+
+export const useSetNotificationToBeSeen = () => {
+  const setNotificationNumber = useContext(SetUnihostsWebsiteContext);
+  return (notificationNumber: number) => {
+    setNotificationNumber((currentUnihostState) => ({ ...currentUnihostState, notificationNumber }));
+  };
+};
+
+export const useSetMessagesToBeSeen = () => {
+  const setMessageNumber = useContext(SetUnihostsWebsiteContext);
+  return (messagesNumber: number) => {
+    setMessageNumber((currentUnihostState) => ({ ...currentUnihostState, messagesNumber }));
   };
 };

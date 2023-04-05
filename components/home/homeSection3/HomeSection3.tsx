@@ -9,13 +9,34 @@ import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 export default function HomeSection3() {
-  const { getAdvertisementsForMainPage } = useAdvertisementService();
+  const { getAdvertisementsForMainPage, getAdvertisementsWithoutCoordinates } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const currentMapCoordinates = useGetUserCoordinates();
 
   const getCloseAdvertisements = useCallback(async () => {
     if (currentMapCoordinates) {
-      const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
+      //const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
+      // TODO : remove this in favor of the function on the top.
+      const { data, error } = await getAdvertisementsWithoutCoordinates(1, {
+        filter: {
+          comodities: [],
+          placeType: "ALL",
+          price: {
+            startRange: null,
+            endRange: null,
+          },
+          coordinates: null,
+          dates: {
+            startDate: null,
+            endDate: null,
+          },
+        },
+        order: {
+          byColumn: "price",
+          type: "asc",
+          isActive: false,
+        },
+      });
       if (!error && data) {
         setAdvertisements(data);
       }
@@ -53,28 +74,28 @@ export default function HomeSection3() {
                 {advertisements.map((advertisement, index) => {
                   return (
                     <Link key={index} href={`anuncio/${advertisement.slug}`}>
-                      <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-black bg-cover p-8 transition lg:h-3/4">
+                      <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-cover p-2 transition lg:h-3/4">
                         {advertisement.photos && advertisement.photos[0] ? (
                           <Image
                             src={advertisement.photos[0].url}
                             alt="..."
                             layout="fill"
                             objectFit="cover"
-                            className="bg-black opacity-80"
+                            className="bg-black opacity-50"
                           />
                         ) : (
                           <Image
                             src={NoPhotoAvailable}
                             alt="no photo available"
-                            className="rounded-2xl bg-black opacity-80"
+                            className="rounded-2xl bg-black opacity-30"
                             layout="fill"
                             objectFit="cover"
                           />
                         )}
-                        <h2 className="bg-primary-500 p-2 text-xl text-white">
+                        <h2 className="absolute top-1 z-50 p-2 text-sm text-white">
                           {TYPE_ADVERTISEMENT[advertisement.type]}
                         </h2>
-                        <p className="bold absolute right-4 bottom-6 rounded-full bg-primary-500 p-3 text-white md:right-3.5 lg:right-8 lg:text-4xl">
+                        <p className="bold absolute right-4 bottom-1 rounded-full p-3 text-4xl text-white lg:right-4">
                           &euro;{advertisement.month_rent}
                         </p>
                       </article>
