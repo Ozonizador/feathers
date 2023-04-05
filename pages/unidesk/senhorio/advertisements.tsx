@@ -12,6 +12,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 
 // icons
 import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
+import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 
 const paths = [{ url: "", label: "Painel" }] as BreadcrumbPath[];
 
@@ -42,12 +43,11 @@ const Anuncios = () => {
     <section>
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
 
-      <div className="container mx-auto my-16 w-5/6 rounded-2xl  bg-terciary-300 py-20 ">
-        <div className="flex flex-col gap-6 lg:flex-row">
-          <div className="flex justify-center lg:block">
-            <MenuSenhorio />
-          </div>
-
+      <UnideskStructure>
+        <UnideskStructure.Menu>
+          <MenuSenhorio />
+        </UnideskStructure.Menu>
+        <UnideskStructure.Content>
           <div className="ml-0 lg:ml-4">
             <div className="my-4">Os meus anúncios</div>
             <div className="flex flex-col gap-4">
@@ -61,8 +61,8 @@ const Anuncios = () => {
               {!advertisements || (advertisements.length === 0 && <div>Sem anúncios</div>)}
             </div>
           </div>
-        </div>
-      </div>
+        </UnideskStructure.Content>
+      </UnideskStructure>
     </section>
   );
 };
