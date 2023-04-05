@@ -205,28 +205,6 @@ const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   return query;
 };
 
-const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
-  let included = 0;
-  let partially = 0;
-  let excluded = 0;
-
-  if (!expenses || expenses.length === 0) {
-    return "";
-  }
-  for (let expense of expenses) {
-    if (expense.included == "INCLUDED") included++;
-    if (expense.included == "PARTIALLY") partially++;
-    if (expense.included == "EXCLUDED") excluded++;
-  }
-
-  if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
-  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluídas";
-  if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
-  if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
-
-  return "Despesas Partialmente Incluídas";
-};
-
 const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
   if (photos && photos.length > 0) {
     let photo = photos.find((photo) => photo.zone == "main");
@@ -236,4 +214,4 @@ const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
   }
 };
 
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, checkIfExpensesIncluded, getMainAdvertPhoto };
+export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, getMainAdvertPhoto };

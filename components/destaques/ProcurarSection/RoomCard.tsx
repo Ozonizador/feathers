@@ -16,10 +16,11 @@ import {
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useCurrentUser, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
-import { checkIfExpensesIncluded, getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
+import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
+import { checkIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;

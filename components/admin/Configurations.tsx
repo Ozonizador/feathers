@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { TextInput } from "flowbite-react/lib/esm/components";
 import { Label } from "flowbite-react/lib/esm/components";
 import useUserService from "../../hooks/userService";
@@ -10,6 +9,7 @@ import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 import Checkbox from "../utils/Checkbox";
+import { FaRegLightbulb } from "react-icons/fa";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
@@ -64,29 +64,27 @@ const Configurations = () => {
               {/* password */}
               <div>
                 <div className="mt-4  mb-8 text-2xl font-bold">Alterar password</div>
-                <div>
-                  <div className="mb-2 block">
-                    <div className="my-3">
-                      <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
-                      <TextInput
-                        id="passwordNew"
-                        type="password"
-                        required={true}
-                        shadow={true}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <Label htmlFor="Repita palavra passe nova" value="Repita palavra passe nova" />
+                <div className="mb-2 block">
+                  <div className="my-3">
+                    <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
                     <TextInput
-                      id="passwordRepeat"
+                      id="passwordNew"
                       type="password"
                       required={true}
                       shadow={true}
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
+                  <Label htmlFor="Repita palavra passe nova" value="Repita palavra passe nova" />
+                  <TextInput
+                    id="passwordRepeat"
+                    type="password"
+                    required={true}
+                    shadow={true}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
                 </div>
                 <div className="flex flex-1">
                   <div className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">

@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import iconfavorito from "../../../public/images/icon-pg14-2.svg";
-import { BiInfoCircle } from "react-icons/bi";
 import { CgHome } from "react-icons/cg";
-import RoomUtilitesPopover from "../../../components/roomUtils/roomUtilitiesPopover";
 import { useCurrentUser } from "../../../context/MainProvider";
 import { useCallback, useEffect, useState } from "react";
 import useAdvertisementService from "../../../hooks/advertisementService";
@@ -12,11 +10,11 @@ import { Spinner } from "flowbite-react";
 /* IMAGES */
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
-import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import { Advertisement } from "../../../models/advertisement";
 import { GetServerSidePropsContext } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
+import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -91,15 +89,7 @@ const UnideskFavoritos = () => {
                           <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
 
                           <div className="mt-auto flex">
-                            <div className="relative mb-2 text-center text-base">
-                              <div className="group flex cursor-pointer gap-2 text-base">
-                                <RoomUtilitesPopover expenses={favourite.expenses} />
-                                <p className="break-words text-left text-xs lg:text-base">
-                                  {checkIfExpensesIncluded(favourite.expenses.services)}
-                                </p>
-                                <BiInfoCircle className="my-auto" />
-                              </div>
-                            </div>
+                            <ExpensesComponent expenses={favourite.expenses} />
                           </div>
                           <Link href={`/anuncio/${favourite.slug}`}>
                             <a className="text-base text-gray-500">Ver mais</a>

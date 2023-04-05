@@ -1,37 +1,35 @@
 import React from "react";
 import { UNIDESK_STAY_URL } from "../../../../models/paths";
-
 import { MenuSectionCard } from "../../components/MenuSectionCard";
+
+const unideskOptions = [
+  {
+    link: UNIDESK_STAY_URL,
+    blocked: false,
+    text: "Informações gerais",
+  },
+  {
+    blocked: true,
+    text: "Renda",
+  },
+  {
+    blocked: true,
+    text: "Reparações",
+  },
+  {
+    blocked: true,
+    text: "Despesas",
+  },
+  {
+    blocked: true,
+    text: "Informações contratuais",
+  },
+] as { link?: string; blocked: boolean; text: string }[];
 
 const UnideskOptions = () => {
   return (
     <section className="container mx-auto my-32 flex flex-col gap-7 lg:flex-row">
-      <MenuSectionCard
-        topIcon={{ text: "Minha estadia", image: "/images/icon-pg14-1.svg" }}
-        options={[
-          {
-            link: UNIDESK_STAY_URL,
-            blocked: false,
-            text: "Informações gerais",
-          },
-          {
-            blocked: true,
-            text: "Renda",
-          },
-          {
-            blocked: true,
-            text: "Reparações",
-          },
-          {
-            blocked: true,
-            text: "Despesas",
-          },
-          {
-            blocked: true,
-            text: "Informações contratuais",
-          },
-        ]}
-      />
+      <MenuSectionCard topIcon={{ text: "Minha estadia", image: "/images/icon-pg14-1.svg" }} options={unideskOptions} />
 
       <MenuSectionCard
         topIcon={{ link: "/unidesk/estudante/favourites", text: "Favoritos", image: "/images/icon-pg14-2.svg" }}
