@@ -56,7 +56,7 @@
 /* BLOG */
 
 .bg-notification {
-  background: url(/images/image_notification.png);
+  background: url(/images/notificationsIcon.svg);
   background-size: cover;
   background-repeat: no-repeat;
   /* background-position: 17px 7px;  prejudica mobile*/

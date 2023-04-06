@@ -17,8 +17,8 @@ const MenuItem = ({ clickOnLink, url, label, activeLink = false, blocked = false
     <>
       <div
         className={classNames("cursor-pointer", {
-          "rounded bg-primary-500 text-white": activeLink,
-          "mt-1 px-2 py-1": !child,
+          "rounded bg-primary-500 font-bold text-white": activeLink,
+          "mt-1 px-4 py-1": !child,
           "my-1": child,
         })}
         onClick={() => clickOnLink(url)}

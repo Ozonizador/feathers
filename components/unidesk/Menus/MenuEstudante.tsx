@@ -16,8 +16,8 @@ const MenuEstudante = () => {
 
   // TODO change colours here.
   return (
-    <div className="rounded-2xl bg-terciary-600 p-4">
-      <div className="rounded-2xl bg-primary-300 p-4">
+    <div className="rounded-2xl bg-primary-50 p-4">
+      <div className="rounded-2xl bg-primary-200 p-4">
         <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
           <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
         </div>

@@ -13,7 +13,7 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
   return (
     <div className="mt-5 flex gap-2 rounded-md bg-white p-2 py-6">
       <div className="flex w-36 flex-col items-center justify-center align-middle">
-        <Avatar alt="Hóspede" img={tenant?.avatar_url || "/images/sec6-person1.jpg"} rounded={true} size="lg" />
+        <Avatar alt="Hóspede" img={tenant?.avatar_url || "/images/user.png"} rounded={true} size="lg" />
 
         <div className="mt-2 font-bold">{tenant.name}</div>
       </div>

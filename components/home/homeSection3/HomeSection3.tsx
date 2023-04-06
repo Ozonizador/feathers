@@ -74,20 +74,14 @@ export default function HomeSection3() {
                 {advertisements.map((advertisement, index) => {
                   return (
                     <Link key={index} href={`anuncio/${advertisement.slug}`}>
-                      <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-cover p-2 transition lg:h-3/4">
+                      <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-black bg-cover p-2 opacity-70 transition lg:h-3/4">
                         {advertisement.photos && advertisement.photos[0] ? (
-                          <Image
-                            src={advertisement.photos[0].url}
-                            alt="..."
-                            layout="fill"
-                            objectFit="cover"
-                            className="bg-black opacity-50"
-                          />
+                          <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
                         ) : (
                           <Image
                             src={NoPhotoAvailable}
                             alt="no photo available"
-                            className="rounded-2xl bg-black opacity-30"
+                            className="rounded-2xl"
                             layout="fill"
                             objectFit="cover"
                           />
