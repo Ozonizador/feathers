@@ -13,7 +13,7 @@ const HomeSection7 = () => {
               Tem Uma
               <br /> Propriedade?
             </h2>
-            <div className="-mb-6 text-2xl text-terciary-400 lg:pb-0">
+            <div className="-mb-6 text-2xl text-secondary-600 lg:pb-0">
               <div className="hidden  lg:mt-2 lg:ml-6 lg:block">
                 Comece já a anunciar e rentabilize
                 <br />o seu imóvel!

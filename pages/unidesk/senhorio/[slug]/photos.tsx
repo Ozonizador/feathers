@@ -20,6 +20,7 @@ import {
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
+import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 
 interface PhotosProps {
   initialSession: Session;
@@ -144,97 +145,94 @@ const Photos = ({ advertisement }: PhotosProps) => {
   }, [advertisement]);
 
   return (
-    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300  pl-0 lg:container lg:my-20 lg:w-full lg:px-0 ">
-      <div className="flex flex-col lg:flex-row">
-        <div className="flex justify-center p-5 lg:border-r lg:p-12">
-          <MenuSenhorio />
-        </div>
-
+    <UnideskStructure>
+      <UnideskStructure.Menu>
+        <MenuSenhorio />
+      </UnideskStructure.Menu>
+      <UnideskStructure.Content>
         {/* FOTOS */}
-        <div className="mx-auto w-4/5  pt-12 text-center lg:ml-12 lg:text-left">
-          <div className="mb-7 text-2xl font-semibold">Fotografias</div>
+        <div className="mb-7 text-2xl font-semibold">Fotografias</div>
 
-          <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
-            <>
-              {photos &&
-                photos.length > 0 &&
-                photos.map((photo, index) => {
-                  return (
+        <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
+          <>
+            {photos &&
+              photos.length > 0 &&
+              photos.map((photo, index) => {
+                return (
+                  <div
+                    className={classNames(
+                      "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
+                      {
+                        "border-4 border-primary-500": isImageSelected(photo.url),
+                      }
+                    )}
+                    key={index}
+                    onClick={(e) => toggleImageSelection(photo)}
+                  >
                     <div
-                      className={classNames(
-                        "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
-                        {
-                          "border-4 border-primary-500": isImageSelected(photo.url),
-                        }
-                      )}
-                      key={index}
-                      onClick={(e) => toggleImageSelection(photo)}
+                      className="absolute right-0 top-0 z-50 cursor-pointer rounded-full border border-red-600 p-1 font-bold text-red-600"
+                      onClick={(e) => deletePhoto(e, photo.url)}
                     >
-                      <div
-                        className="absolute right-0 top-0 z-50 cursor-pointer rounded-full border border-red-600 p-1 font-bold text-red-600"
-                        onClick={(e) => deletePhoto(e, photo.url)}
-                      >
-                        x
+                      x
+                    </div>
+                    {photo.zone !== "other" && (
+                      <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
+                        {HouseZonesLabel[photo.zone]}
                       </div>
-                      {photo.zone !== "other" && (
-                        <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                          {HouseZonesLabel[photo.zone]}
-                        </div>
-                      )}
+                    )}
 
-                      <Image src={photo.url} layout="fill" alt="photo" />
+                    <Image src={photo.url} layout="fill" alt="photo" />
+                  </div>
+                );
+              })}
+            {/* BOTÃO */}
+            <label htmlFor="files" className="relative cursor-pointer">
+              <div className=" flex flex-col items-center justify-center align-middle">
+                <div>
+                  <span className="text-5xl text-primary-300">
+                    <AiOutlinePlusCircle />
+                  </span>
+                </div>
+                <div className="text-gray-500">carregar mais fotos</div>
+              </div>
+            </label>
+
+            <input
+              type="file"
+              id="files"
+              onChange={uploadToClient}
+              multiple
+              accept="image/png, image/gif, image/jpeg"
+              className="hidden"
+            />
+          </>
+        </div>
+        {selectedImages && selectedImages.length !== 0 && (
+          <>
+            <div className="mt-4">
+              <>
+                <h3 className="text-xl text-neutral-400">Associar photos</h3>
+                {Object.keys(HouseZonesLabel).map((zone, index) => {
+                  return (
+                    <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
+                      <input type="radio" id="scales" name="type" value={zone} />
+                      <label htmlFor="scales" className="my-auto ml-1">
+                        {HouseZonesLabel[zone]}
+                      </label>
                     </div>
                   );
                 })}
-              {/* BOTÃO */}
-              <label htmlFor="files" className="relative cursor-pointer">
-                <div className=" flex flex-col items-center justify-center align-middle">
-                  <div>
-                    <span className="text-5xl text-primary-300">
-                      <AiOutlinePlusCircle />
-                    </span>
-                  </div>
-                  <div className="text-gray-500">carregar mais fotos</div>
-                </div>
-              </label>
-
-              <input
-                type="file"
-                id="files"
-                onChange={uploadToClient}
-                multiple
-                accept="image/png, image/gif, image/jpeg"
-                className="hidden"
-              />
-            </>
-          </div>
-          {selectedImages && selectedImages.length !== 0 && (
-            <>
-              <div className="mt-4">
-                <>
-                  <h3 className="text-xl text-neutral-400">Associar photos</h3>
-                  {Object.keys(HouseZonesLabel).map((zone, index) => {
-                    return (
-                      <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
-                        <input type="radio" id="scales" name="type" value={zone} />
-                        <label htmlFor="scales" className="my-auto ml-1">
-                          {HouseZonesLabel[zone]}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </>
-              </div>
-            </>
-          )}
-          <div className="mr-auto mt-5 w-1/2">
-            <Button onClick={saveChanges} type="button">
-              Guardar
-            </Button>
-          </div>
+              </>
+            </div>
+          </>
+        )}
+        <div className="mr-auto mt-5 w-1/2">
+          <Button onClick={saveChanges} type="button">
+            Guardar
+          </Button>
         </div>
-      </div>
-    </div>
+      </UnideskStructure.Content>
+    </UnideskStructure>
   );
 };
 

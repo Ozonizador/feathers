@@ -141,7 +141,7 @@ const CaixaEntrada = () => {
                           <div className="my-4 flex flex-row gap-3">
                             <div>
                               <Avatar
-                                img={currentConversation?.tenant?.avatar_url || "/images/sec6-person1.jpg"}
+                                img={currentConversation?.tenant?.avatar_url || "/images/user.png"}
                                 rounded={true}
                                 status="away"
                                 size="md"

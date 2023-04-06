@@ -1,17 +1,15 @@
 /* PAGINA 51 DO XD */
 import React, { Fragment } from "react";
 import Image from "next/image";
-import { BiInfoCircle } from "react-icons/bi";
 import { Menu, Transition } from "@headlessui/react";
-import RoomUtilitesPopover from "../../roomUtils/roomUtilitiesPopover";
 import { BsThreeDots } from "react-icons/bs";
 import { Advertisement } from "../../../models/advertisement";
 import { useRouter } from "next/router";
 import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
-import { checkIfExpensesIncluded } from "../../../helpers/advertisementHelper";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
+import ExpensesComponent from "../../anuncio/ExpensesComponent";
 
 function EditInactiveIcon(props) {
   return (
@@ -151,14 +149,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
             <div className="w-96">
               <div className="mt-4 mb-1 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
               <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
-              <div>
-                <div className="relative mb-3 mt-1 text-center text-base">
-                  <div className="group flex gap-1 align-middle text-base">
-                    {checkIfExpensesIncluded(advertisement.expenses.services)} <BiInfoCircle className="my-auto" />
-                  </div>
-                  <RoomUtilitesPopover expenses={advertisement.expenses} />
-                </div>
-              </div>
+              <ExpensesComponent expenses={advertisement.expenses} />
             </div>
           </div>
         </div>

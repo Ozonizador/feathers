@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import PricesComponent from "../../../../components/anuncio/PricesComponent";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
+import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 import Button from "../../../../components/utils/Button";
 import {
   useSelectedAnuncioMenuSenhorio,
@@ -41,26 +42,24 @@ const Prices = ({ advertisement }: PricesProps) => {
   }, [advertisement]);
 
   return (
-    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full lg:px-0">
-      <div className="flex flex-col px-5 lg:flex-row">
-        <div className="flex justify-center p-5 lg:border-r lg:p-12">
-          <MenuSenhorio />
-        </div>
-        <div className="mx-auto w-full pt-12 text-center lg:ml-12 lg:text-left">
-          <div className="mb-7 text-2xl font-semibold">Preços</div>
+    <UnideskStructure>
+      <UnideskStructure.Menu>
+        <MenuSenhorio />
+      </UnideskStructure.Menu>
+      <UnideskStructure.Content>
+        <div className="mb-7 text-2xl font-semibold">Preços</div>
 
-          {advertisementContext && (
-            <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
-          )}
+        {advertisementContext && (
+          <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+        )}
 
-          <div className="mr-auto mb-10 w-1/2">
-            <Button onClick={saveChanges} type="button">
-              Guardar
-            </Button>
-          </div>
+        <div className="mr-auto mb-10 w-1/2">
+          <Button onClick={saveChanges} type="button">
+            Guardar
+          </Button>
         </div>
-      </div>
-    </div>
+      </UnideskStructure.Content>
+    </UnideskStructure>
   );
 };
 

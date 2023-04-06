@@ -2,7 +2,7 @@ import BlogCards from "../components/blog/BlogCards/BlogCards";
 import BlogHero from "../components/blog/BlogHero/BlogHero";
 
 import Image from "next/image";
-import notification from "../public/images/notification.png";
+import notification from "../public/images/notificationsIcon.svg";
 import { Blog, BlogCategoryLabel } from "../models/blog";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import useBlogService from "../hooks/blogService";

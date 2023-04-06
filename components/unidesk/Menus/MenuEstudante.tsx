@@ -14,65 +14,68 @@ const MenuEstudante = () => {
     return (href && router.asPath.includes(href)) || false;
   };
 
+  // TODO change colours here.
   return (
-    <div className="rounded-2xl bg-terciary-600 p-2">
-      <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
-        <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
-      </div>
-      <div className="mt-1 flex flex-col justify-start px-2">
-        <div className="flex flex-col">
-          <MenuItem
-            clickOnLink={moveToMenuLink}
-            url={UNIDESK_STAY_URL}
-            label={"Informações gerais"}
-            activeLink={checkActiveLink(UNIDESK_STAY_URL)}
-          />
-          <MenuItem
-            blocked={true}
-            clickOnLink={moveToMenuLink}
-            url={""}
-            label={"Renda"}
-            activeLink={checkActiveLink("")}
-          />
-          <MenuItem
-            blocked={true}
-            clickOnLink={moveToMenuLink}
-            url={""}
-            label={"Reparações"}
-            activeLink={checkActiveLink("")}
-          />
-          <MenuItem
-            blocked={true}
-            clickOnLink={moveToMenuLink}
-            url={""}
-            label={"Despesas"}
-            activeLink={checkActiveLink("")}
-          />
-          <MenuItem
-            blocked={true}
-            clickOnLink={moveToMenuLink}
-            url={""}
-            label={"Informações contratuais"}
-            activeLink={checkActiveLink("")}
-          />
-          <MenuItem
-            clickOnLink={moveToMenuLink}
-            url={"/unidesk/estudante/favourites"}
-            label={"Favoritos"}
-            activeLink={checkActiveLink("/unidesk/estudante/favourites")}
-          />
-          <MenuItem
-            clickOnLink={moveToMenuLink}
-            url={"/unidesk/inbox"}
-            label={"Caixa de Entrada"}
-            activeLink={checkActiveLink("/unidesk/inbox")}
-          />
-          <MenuItem
-            clickOnLink={moveToMenuLink}
-            url={"/unidesk/notifications"}
-            label={"Notificações"}
-            activeLink={checkActiveLink("/unidesk/notifications")}
-          />
+    <div className="rounded-2xl bg-primary-50 p-4">
+      <div className="rounded-2xl bg-primary-200 p-4">
+        <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
+          <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
+        </div>
+        <div className="mt-1 flex flex-col justify-start px-2">
+          <div className="flex flex-col">
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={UNIDESK_STAY_URL}
+              label={"Informações gerais"}
+              activeLink={checkActiveLink(UNIDESK_STAY_URL)}
+            />
+            <MenuItem
+              blocked={true}
+              clickOnLink={moveToMenuLink}
+              url={""}
+              label={"Renda"}
+              activeLink={checkActiveLink("")}
+            />
+            <MenuItem
+              blocked={true}
+              clickOnLink={moveToMenuLink}
+              url={""}
+              label={"Reparações"}
+              activeLink={checkActiveLink("")}
+            />
+            <MenuItem
+              blocked={true}
+              clickOnLink={moveToMenuLink}
+              url={""}
+              label={"Despesas"}
+              activeLink={checkActiveLink("")}
+            />
+            <MenuItem
+              blocked={true}
+              clickOnLink={moveToMenuLink}
+              url={""}
+              label={"Informações contratuais"}
+              activeLink={checkActiveLink("")}
+            />
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={"/unidesk/estudante/favourites"}
+              label={"Favoritos"}
+              activeLink={checkActiveLink("/unidesk/estudante/favourites")}
+            />
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={"/unidesk/inbox"}
+              label={"Caixa de Entrada"}
+              activeLink={checkActiveLink("/unidesk/inbox")}
+            />
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={"/unidesk/notifications"}
+              label={"Notificações"}
+              activeLink={checkActiveLink("/unidesk/notifications")}
+            />
+          </div>
         </div>
       </div>
     </div>

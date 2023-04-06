@@ -8,10 +8,11 @@ import {
   useSetSelectedAnuncioMenuSenhorio,
 } from "../../../../context/MenuSenhorioAnuncioProvider";
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
-import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
-import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES, Advertisement } from "../../../../models/advertisement";
+import { Advertisement, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../../../models/advertisement";
 import { useEffect } from "react";
+import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
+import { GetServerSidePropsContext } from "next";
 
 interface ConditionsProps {
   initialSession: Session;
@@ -43,29 +44,27 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
   }, [advertisement, setAdvertisementContext]);
 
   return (
-    <div className="container mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
-      <div className="flex flex-col lg:flex-row">
-        <div className="flex justify-center p-5 lg:border-r lg:p-12">
-          <MenuSenhorio />
-        </div>
-        <div className="mx-auto w-4/5 pt-12 text-center lg:ml-12 lg:text-left">
-          <div className="mb-2 text-2xl font-semibold">Condições</div>
-          <div className="text-xl text-gray-700">As suas regras</div>
+    <UnideskStructure>
+      <UnideskStructure.Menu>
+        <MenuSenhorio />
+      </UnideskStructure.Menu>
+      <UnideskStructure.Content>
+        <div className="mb-2 text-2xl font-semibold">Condições</div>
+        <div className="text-xl text-gray-700">As suas regras</div>
 
-          {advertisementContext && (
-            <>
-              <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+        {advertisementContext && (
+          <>
+            <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
-              <div className="mb-10 w-1/2">
-                <Button onClick={saveChanges} type="button">
-                  Guardar alterações
-                </Button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+            <div className="mb-10 w-1/2">
+              <Button onClick={saveChanges} type="button">
+                Guardar alterações
+              </Button>
+            </div>
+          </>
+        )}
+      </UnideskStructure.Content>
+    </UnideskStructure>
   );
 };
 

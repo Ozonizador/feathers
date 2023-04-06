@@ -3,7 +3,7 @@ import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
 import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import countryList from "react-select-country-list";
@@ -51,6 +51,7 @@ interface IndexProps {
 }
 
 const Index = ({ user, profileData }: IndexProps) => {
+  const fileRef = useRef(null);
   const { addAvatar, updateUserProfile } = useProfileService();
   const [profile, setProfile] = useState<Profile>(profileData);
 
@@ -127,11 +128,14 @@ const Index = ({ user, profileData }: IndexProps) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">Informações pessoais</div>
-          <div className="mt-5 mb-5 ">
+          <div className="mt-5 mb-5">
             <div className="flex items-center justify-center lg:justify-start">
-              <label htmlFor="files" className="relative cursor-pointer rounded-md text-indigo-500 ">
+              <label
+                htmlFor="files"
+                className="relative cursor-pointer rounded-full border border-primary-500 bg-white p-3 text-indigo-500"
+              >
                 <Avatar
-                  img={profile?.avatar_url || "/images/sec6-person1.jpg"}
+                  img={profile?.avatar_url || "/images/user-general.png"}
                   rounded={true}
                   status="away"
                   size="lg"
@@ -141,12 +145,16 @@ const Index = ({ user, profileData }: IndexProps) => {
               <input
                 type="file"
                 id="files"
+                ref={fileRef}
                 onChange={(e) => uploadAvatar(e)}
                 multiple
                 accept="image/png, image/gif, image/jpeg"
                 className="hidden"
               />
             </div>
+            <h6 className="mx-auto mt-2 cursor-pointer px-3 text-primary-500" onClick={() => fileRef.current.click()}>
+              Mudar foto
+            </h6>
           </div>
 
           {/* LEFT SIDE */}

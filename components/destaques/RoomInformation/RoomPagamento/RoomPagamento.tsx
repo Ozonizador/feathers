@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { Label } from "flowbite-react/lib/esm/components";
-import { BiInfoCircle } from "react-icons/bi";
-import RoomUtilitesPopover from "../../../roomUtils/roomUtilitiesPopover";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { useSetModalDetalhesPagamento } from "../../../../context/ModalShowProvider";
 
 import useReservationService from "../../../../hooks/reservationService";
-import { Reservation, ReservationStatus } from "../../../../models/reservation";
 import { useCurrentUser } from "../../../../context/MainProvider";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { checkIfExpensesIncluded } from "../../../../helpers/advertisementHelper";
 import Link from "next/link";
 import Input from "../../../utils/Input";
 import { Controller, useForm } from "react-hook-form";
+import ExpensesComponent from "../../../anuncio/ExpensesComponent";
 
 interface FormReservation {
   number_guests: number;
@@ -70,17 +67,7 @@ export const RoomPagamento = () => {
               {advertisement.month_rent}&euro;/mês
             </div>
 
-            <div className="relative mb-2 text-center text-base">
-              <div className="flex items-center justify-center gap-2 align-middle">
-                <div className="group flex items-center">
-                  {advertisement && advertisement.expenses && (
-                    <span>{checkIfExpensesIncluded(advertisement.expenses?.services || [])}</span>
-                  )}
-                  <BiInfoCircle className="ml-2" />
-                </div>
-                <RoomUtilitesPopover expenses={advertisement.expenses} />
-              </div>
-            </div>
+            <ExpensesComponent expenses={advertisement.expenses} />
             <hr />
 
             <div className="mt-5 grid grid-cols-2 gap-4">

@@ -18,9 +18,9 @@ const MenuSenhorio = () => {
   };
   return (
     <>
-      <div className="h-fit w-80 rounded-2xl bg-terciary-600 p-2">
-        <div>
-          <div className="flex justify-start border border-b-primary-500 px-2 align-middle">
+      <div className="rounded-2xl bg-primary-50 p-4">
+        <div className="mx-auto h-fit w-80 rounded-2xl bg-primary-200 p-4">
+          <div className="flex justify-start px-2 align-middle">
             <h1 className="py-1 text-xl font-bold">Anúncios</h1>
           </div>
           <div className="mt-2 flex flex-col px-2">
@@ -78,7 +78,7 @@ const MenuSenhorio = () => {
               label={"Caixa de entrada"}
               activeLink={checkActiveLink("/unidesk/inbox")}
             />
-            <div className="mt-1 px-2">
+            <div className="mt-1 px-4">
               <MenuItemCollapsible
                 setOpen={() => setOpenUniControlo(!openUniControlo)}
                 isOpen={openUniControlo}

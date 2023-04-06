@@ -1,9 +1,8 @@
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
-import ReviewInfo from "../../../components/unidesk/Senhorio/Reviews/ReviewInfo/ReviewInfo";
+import ReviewInfo from "../../../components/unidesk/Senhorio/Reviews/ReviewInfo";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 
-//
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../../models/paths";
@@ -28,7 +27,6 @@ interface ReviewsPageProps {
 }
 
 const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: ReviewsPageProps) => {
-  debugger;
   return (
     <>
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
