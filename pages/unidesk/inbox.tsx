@@ -19,6 +19,7 @@ import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
+import { defaultUserProfile } from "../../helpers/imageHelper";
 
 {
   /* page 59 XD */
@@ -141,7 +142,7 @@ const CaixaEntrada = () => {
                           <div className="my-4 flex flex-row gap-3">
                             <div>
                               <Avatar
-                                img={currentConversation?.tenant?.avatar_url || "/images/user.png"}
+                                img={currentConversation?.tenant?.avatar_url || defaultUserProfile}
                                 rounded={true}
                                 status="away"
                                 size="md"
@@ -275,7 +276,7 @@ const MessagesSenderZone = ({ messages, sendMessage, currentMessage, setCurrentM
         })}
       </div>
 
-      <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
+      <div className="-between mt-auto flex w-full flex-row items-center border-t border-terciary-500 pr-4 align-middle">
         <div className="w-10/12">
           <form onSubmit={(e) => sendMessage(e)}>
             <input

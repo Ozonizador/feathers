@@ -1,13 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { Accordion } from "flowbite-react";
-import { Carousel } from "flowbite-react";
 import { CgHome } from "react-icons/cg";
 import { TbBed } from "react-icons/tb";
 import { Gender, Profile } from "../../../models/profile";
 import { Advertisement } from "../../../models/advertisement";
 import Link from "next/link";
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 interface AccordionPerfilProps {
   profile: Profile & { advertisements: Advertisement[] };
 }
@@ -43,15 +41,7 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
                         </Link>
                       </div>
 
-                      <Image
-                        layout="responsive"
-                        src={advertisement.photos[0]?.url || NoPhotoAvailable}
-                        alt=""
-                        objectFit="cover"
-                        height="100%"
-                        width="100%"
-                        className="rounded-3xl opacity-60"
-                      ></Image>
+                      <></>
                     </article>
                   );
                 })}

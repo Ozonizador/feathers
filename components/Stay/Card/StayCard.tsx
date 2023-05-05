@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { StayWithReservation } from "../../../models/stay";
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
 interface StayCardProps {
   stay: StayWithReservation;
@@ -13,15 +12,14 @@ const StayCard = ({ stay }: StayCardProps) => {
     <div className="w-full rounded-lg border-2 border-terciary-200 bg-white p-0 lg:w-1/2">
       <div className="flex">
         <div className="relative h-32 w-28 lg:h-36">
-          <Image
-            src={
-              (advertisement.photos && advertisement.photos.length > 0 && advertisement.photos[0].url) ||
-              NoPhotoAvailable
-            }
-            alt="Foto Quarto"
-            layout="fill"
-            className="rounded-l-lg object-cover"
-          />
+          {advertisement.photos && advertisement.photos.length > 0 && (
+            <Image
+              src={advertisement.photos[0].url}
+              alt="Foto Quarto"
+              layout="fill"
+              className="rounded-l-lg object-cover"
+            />
+          )}
         </div>
         <div className="ml-2 lg:ml-4">
           <div className="flex w-full flex-col justify-between">

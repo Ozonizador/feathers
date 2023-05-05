@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar } from "flowbite-react";
 import { Profile } from "../../../models/profile";
 import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../models/reservation";
+import { defaultUserProfile } from "../../../helpers/imageHelper";
 
 interface CaixaCardProps {
   profile: Profile;
@@ -27,7 +28,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
   return (
     <div className="mb-2 flex gap-5 p-2">
       <div className="flex flex-col items-center justify-center align-middle">
-        <Avatar alt="Hóspede" img={profile?.avatar_url || "/images/user.png"} rounded={true} size="md" />
+        <Avatar alt="Hóspede" img={profile?.avatar_url || defaultUserProfile} rounded={true} size="md" />
         <div className="mt-2 text-xs font-bold">{profile.name}</div>
       </div>
 

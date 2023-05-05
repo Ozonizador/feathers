@@ -5,6 +5,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { Gender } from "../../../../models/profile";
+import { defaultUserProfile } from "../../../../helpers/imageHelper";
 
 export default function RoomSenhorio() {
   const advertisement = useGetSingleAdvertisement();
@@ -28,7 +29,7 @@ export default function RoomSenhorio() {
               <div className="flex flex-col items-center pb-10">
                 <Image
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  src={advertisement?.host?.avatar_url || "/images/user.png"}
+                  src={advertisement?.host?.avatar_url || defaultUserProfile}
                   alt="Bonnie image"
                   height={96}
                   width={96}

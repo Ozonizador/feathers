@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { defaultUserProfile } from "../../helpers/imageHelper";
 
 /*  not being used */
 const ProfileInput = () => {
@@ -18,7 +19,7 @@ const ProfileInput = () => {
           <div className="col-lg-2">
             {/* Avator */}
             <div>
-              <Image src="/images/user.png" className="rounded-circle mb-4" style={{ width: "100px" }} alt="Avatar" />
+              <Image src={defaultUserProfile} className="rounded-circle mb-4" style={{ width: "100px" }} alt="Avatar" />
             </div>
           </div>
           <div className="col">
