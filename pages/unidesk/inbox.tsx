@@ -19,7 +19,6 @@ import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
-import { defaultUserProfile } from "../../helpers/imageHelper";
 
 {
   /* page 59 XD */
@@ -142,7 +141,7 @@ const CaixaEntrada = () => {
                           <div className="my-4 flex flex-row gap-3">
                             <div>
                               <Avatar
-                                img={currentConversation?.tenant?.avatar_url || defaultUserProfile}
+                                img={currentConversation?.tenant?.avatar_url} // || defaultUserProfile
                                 rounded={true}
                                 status="away"
                                 size="md"

@@ -1,0 +1,3 @@
+CREATE TYPE user_type AS ENUM ('NORMAL', 'ADMIN');
+
+ALTER TABLE profiles ADD COLUMN user_type user_type NOT NULL DEFAULT 'NORMAL';

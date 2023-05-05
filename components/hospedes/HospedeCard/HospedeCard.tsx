@@ -3,7 +3,6 @@ import { Avatar } from "flowbite-react";
 import Link from "next/link";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { StayGuest } from "../../../models/stay";
-import { defaultUserProfile } from "../../../helpers/imageHelper";
 
 interface HospedeCardProps {
   stay: StayGuest;
@@ -14,7 +13,7 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
   return (
     <div className="mt-5 flex gap-2 rounded-md bg-white p-2 py-6">
       <div className="flex w-36 flex-col items-center justify-center align-middle">
-        <Avatar alt="Hóspede" img={tenant?.avatar_url || defaultUserProfile} rounded={true} size="lg" />
+        <Avatar alt="Hóspede" img={tenant?.avatar_url || "/icons/user/user.svg"} rounded={true} size="lg" />
 
         <div className="mt-2 font-bold">{tenant.name}</div>
       </div>

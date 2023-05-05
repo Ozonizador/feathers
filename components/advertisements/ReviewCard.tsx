@@ -1,5 +1,4 @@
 import { Avatar, Rating } from "flowbite-react";
-import { defaultUserProfile } from "../../helpers/imageHelper";
 import { Profile } from "../../models/profile";
 import { Review } from "../../models/review";
 import { averageOfArrayNumbers } from "../../utils/utils";
@@ -24,7 +23,7 @@ const ReviewCard = ({ review, tenant }: ReviewCardProps) => {
       <div key={review.id} className="flex flex-col gap-5 rounded-lg border border-terciary-200 p-4">
         <div className="flex gap-5">
           <div>
-            <Avatar alt="Hóspede" img={tenant?.avatar_url || defaultUserProfile} rounded={true} size="sm" />
+            <Avatar alt="Hóspede" img={tenant?.avatar_url || "/icons/user/user.svg"} rounded={true} size="sm" />
           </div>
           <div className="my-auto">{`${tenant.name} ${tenant.surname}`}</div>
           <div className="my-auto ml-auto text-secondary-400">{averageRating.toFixed(2)}</div>
