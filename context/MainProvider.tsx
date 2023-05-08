@@ -205,10 +205,10 @@ export const useSetSearchLocation = () => {
  * Notifications and messages
  */
 
-export const useSetNotificationToBeSeen = () => {
+export const useClearNotifications = () => {
   const setNotificationNumber = useContext(SetUnihostsWebsiteContext);
-  return (notificationNumber: number) => {
-    setNotificationNumber((currentUnihostState) => ({ ...currentUnihostState, notificationNumber }));
+  return () => {
+    setNotificationNumber((currentUnihostState) => ({ ...currentUnihostState, notificationNumber: 0 }));
   };
 };
 

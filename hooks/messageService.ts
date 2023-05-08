@@ -15,7 +15,7 @@ const useMessagesService = () => {
   const getMessagesFromConversationId = async (conversation_id: string) => {
     const { data, error } = await supabaseClient
       .from<"messages", Messages>(MESSAGE_TABLE_NAME)
-      .select()
+      .select("*, profile:profiles(*)")
       .eq(MESSAGE_TABLE_PROPERTIES.CONVERSATION_ID, conversation_id);
     return { data, error };
   };

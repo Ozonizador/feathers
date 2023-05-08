@@ -3,7 +3,7 @@ import { Spinner } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
 import { useCallback, useEffect, useState } from "react";
 import NotificationCard from "../../components/notifications/NotificationCard/NotificationCard";
-import { useCurrentUser } from "../../context/MainProvider";
+import { useCurrentUser, useClearNotifications } from "../../context/MainProvider";
 import { Notification } from "../../models/notification";
 import useNotificationService from "../../hooks/notificationsService";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
@@ -15,6 +15,7 @@ const Notifications = () => {
   const { getNotifications } = useNotificationService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const clearNotifications = useClearNotifications();
   const profile = useCurrentUser();
 
   const getUserNotifications = useCallback(async () => {
@@ -31,10 +32,14 @@ const Notifications = () => {
   useEffect(() => {
     getUserNotifications();
   }, [getUserNotifications]);
+
+  useEffect(() => {
+    clearNotifications();
+  }, []);
   return (
     <div className="mx-5 my-16 rounded-lg border lg:border-none">
       <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
-      <div className="container mx-auto w-full lg:w-4/5">
+      <div className="lg:w-4/5 container mx-auto w-full">
         <>
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">

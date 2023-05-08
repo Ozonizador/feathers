@@ -11,7 +11,7 @@ import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSl
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
 import { AdvertisementComplete, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
-import { ModalDetalhesPagamentoProvider } from "../../context/ModalShowProvider";
+import { ModalAnuncioInfoProvider } from "../../context/ModalShowProvider";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
@@ -24,14 +24,14 @@ interface AnuncioProps {
 const Anuncio = ({ advertisement }: AnuncioProps) => {
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
-      <ModalDetalhesPagamentoProvider>
+      <ModalAnuncioInfoProvider>
         <>
           <ModalReviewsAdvert />
           <ModalDetalhesPagamento />
           <div className="container mx-auto px-2 md:px-20">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
-              <div className="w-full px-5 lg:w-4/6">
+              <div className="lg:w-4/6 w-full px-5">
                 <RoomInformation />
                 <div className="mt-10 flex flex-col gap-4 lg:flex-row">
                   <DescricaoCondicoes />
@@ -45,13 +45,13 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 <RoomSemelhantes />
               </div>
 
-              <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
+              <div className="lg:w-2/6 mb-20 w-full lg:mb-0 lg:px-5">
                 <RoomPagamento />
               </div>
             </div>
           </div>
         </>
-      </ModalDetalhesPagamentoProvider>
+      </ModalAnuncioInfoProvider>
     </ShowingSingleAdvertisementProvider>
   );
 };
