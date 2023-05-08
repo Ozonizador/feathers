@@ -57,12 +57,12 @@ const CaixaEntrada = () => {
     getMessagesFromConversation();
   }, [getMessagesFromConversation]);
 
-  const sendMessage = async (event) => {
+  const sendMessage = async (event, conversationId) => {
     event.preventDefault();
     debugger;
-    if (!currentMessage || !currentConversation) return;
+    if (!currentMessage || !conversationId) return;
 
-    const { data, error } = await insertMessageOnConversation(currentMessage, currentConversation.id, profile.id);
+    const { data, error } = await insertMessageOnConversation(currentMessage, conversationId, profile.id);
     if (!error) {
       setMessages([...messages, data as MessageWithProfile]);
     }
@@ -98,7 +98,7 @@ const CaixaEntrada = () => {
         {conversations && conversations.length > 0 && (
           <>
             <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-              <a className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white">Mensagens</a>
+              <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">Mensagens</a>
 
               <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
               {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
@@ -124,12 +124,13 @@ const CaixaEntrada = () => {
 
                 <MessagesSenderZone
                   messages={messages}
+                  conversationId={currentConversation && currentConversation.id}
                   sendMessage={sendMessage}
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
                 />
                 {currentConversation && currentConversation.host_id === profile.id && (
-                  <div className="border-l border-terciary-500 p-2">
+                  <div className="w-96 border-l border-terciary-500 p-2">
                     {currentConversation && (
                       <>
                         <div className="flex">
@@ -215,7 +216,7 @@ const CaixaEntrada = () => {
       <div className="block lg:hidden">
         <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
           <a
-            className="ml-8 rounded-md bg-primary-500 py-3 px-6 text-white"
+            className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white"
             onClick={() => setCurrentConversation(null)}
           >
             Mensagens
@@ -233,7 +234,7 @@ const CaixaEntrada = () => {
                   <div
                     key={index}
                     onClick={() => setCurrentConversation(conversation)}
-                    className={classNames("w-32 cursor-pointer border p-1 last:rounded-b-xl", {
+                    className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
                       "bg-primary-100": currentConversation?.id === conversation.id,
                     })}
                   >
@@ -245,6 +246,7 @@ const CaixaEntrada = () => {
               <MessagesSenderZone
                 messages={messages}
                 sendMessage={sendMessage}
+                conversationId={currentConversation && currentConversation.id}
                 currentMessage={currentMessage}
                 setCurrentMessage={setCurrentMessage}
               />
@@ -258,12 +260,19 @@ const CaixaEntrada = () => {
 
 interface MessagesSenderZoneProps {
   messages: MessageWithProfile[];
-  sendMessage: (e) => void;
+  sendMessage: (e, conversationId) => void;
   currentMessage: string;
   setCurrentMessage: (e) => void;
+  conversationId: string;
 }
 
-const MessagesSenderZone = ({ messages, sendMessage, currentMessage, setCurrentMessage }: MessagesSenderZoneProps) => {
+const MessagesSenderZone = ({
+  messages,
+  sendMessage,
+  currentMessage,
+  setCurrentMessage,
+  conversationId,
+}: MessagesSenderZoneProps) => {
   return (
     <div className="flex max-h-screen w-full flex-col gap-2">
       <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2 lg:h-96">
@@ -274,7 +283,7 @@ const MessagesSenderZone = ({ messages, sendMessage, currentMessage, setCurrentM
 
       <div className="-between mt-auto flex w-full flex-row items-center border-t border-terciary-500 pr-4 align-middle">
         <div className="w-10/12">
-          <form onSubmit={(e) => sendMessage(e)}>
+          <form onSubmit={(e) => sendMessage(e, conversationId)}>
             <input
               className="w-full border-0 p-4 text-xs outline-0"
               placeholder="Type a message..."

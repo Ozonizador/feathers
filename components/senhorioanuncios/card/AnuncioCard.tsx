@@ -76,7 +76,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
               <Image src={advertisement.photos[0].url} alt="Foto Quarto" layout="fill" objectFit="cover" />
             )}
           </div>
-          <div className="ml-3 py-2">
+          <div className="ml-3 w-full py-2">
             <div className="flex flex-row justify-between pr-2 lg:pr-0">
               <div className="text-xl font-bold">{advertisement.title}</div>
 
@@ -143,7 +143,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
               </div>
             </div>
             <div className="w-96">
-              <div className="mt-4 mb-1 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
+              <div className="mb-1 mt-4 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
               <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
               <ExpensesComponent expenses={advertisement.expenses} />
             </div>

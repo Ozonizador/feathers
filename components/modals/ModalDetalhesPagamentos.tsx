@@ -9,8 +9,17 @@ import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisem
 
 const ModalDetalhesPagamento = () => {
   const advertisement = useGetSingleAdvertisement();
-  let { detailsModalOpen } = useModalDetalhesPagamento();
+  let { detailsModalOpen, selectedDate } = useModalDetalhesPagamento();
   let setIsOpen = useSetModalDetalhesPagamento();
+
+  const formatOnlyMonth = (date: Date) => {
+    if (!date) return "";
+
+    const newDate = new Date(date);
+    return newDate.toLocaleString("PT", {
+      month: "long",
+    });
+  };
 
   return (
     <>
@@ -49,35 +58,38 @@ const ModalDetalhesPagamento = () => {
 
                   <div className="mt-2">
                     <div className="px-8">
-                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-3xl">Via Unihosts</div>
+                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">Via Unihosts</div>
                       {/* Unihosts */}
                       <FeathersAccordion>
                         <div className="flex">
-                          <div className="font-black">Primeira Renda</div>
-                          <div className="ml-auto flex font-black">
-                            <div>{advertisement.month_rent}€</div>
-                            <MdOutlineKeyboardArrowUp className="my-auto" size={24} />
+                          <div className="font-bold">Primeira Renda</div>
+                          <div className="ml-auto flex">
+                            <div className="font-bold">{advertisement.month_rent}€</div>
+                            <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
                         <div className="flex gap-1 text-neutral-600">
-                          <p className="text-sm lg:text-base">Pagamento antecipado respetivo ao mês de Fevereiro</p>
+                          <p className="text-sm lg:text-base">
+                            Pagamento antecipado respetivo ao mês de{" "}
+                            <span className="capitalize">{formatOnlyMonth(selectedDate)}</span>
+                          </p>
                           <AiOutlineInfoCircle className="my-auto" />
                         </div>
                       </FeathersAccordion>
                       {/* SENHORIO */}
-                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-3xl">Ao Senhorio</div>
+                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">Ao Senhorio</div>
                       <FeathersAccordion>
                         <div className="flex">
-                          <h6 className="font-black">No dia do Check-in</h6>
-                          <div className="ml-auto flex font-black">
-                            <div>{advertisement.month_rent}€</div>
-                            <MdOutlineKeyboardArrowUp className="my-auto" size={24} />
+                          <h6 className="font-bold">No dia do Check-in</h6>
+                          <div className="ml-auto flex">
+                            <div className="font-bold">{advertisement.month_rent}€</div>
+                            <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
                         <div className="flex">
                           <div className="flex gap-1 text-neutral-500">
                             <p className="text-sm lg:text-base">Caução</p>
-                            <AiOutlineInfoCircle className="my-auto" />
+                            <AiOutlineInfoCircle className="my-auto" size={18} />
                           </div>
                           <div className="ml-auto mr-6 text-neutral-500">{advertisement.month_rent}€</div>
                         </div>
@@ -87,14 +99,23 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex">
                           <h6>Mensalidade a pagar</h6>
                           <div className="ml-auto">
-                            <MdOutlineKeyboardArrowUp className="my-auto" size={24} />
+                            <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                          <div className="flex text-neutral-500">
-                            <div></div>
-                            <div className="ml-auto mr-6">{advertisement.month_rent}€</div>
-                          </div>
+                        <div className="mt-1 flex flex-col gap-2">
+                          {[1, 2, 3, 4].map((value, index) => {
+                            return (
+                              <div className="flex text-neutral-500" key={index}>
+                                <div>
+                                  Renda Mensal de{" "}
+                                  <span className="capitalize">
+                                    {formatOnlyMonth(new Date(selectedDate.setMonth(selectedDate.getMonth() + value)))}
+                                  </span>
+                                </div>
+                                <div className="ml-auto mr-6">{advertisement.month_rent}€</div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </FeathersAccordion>
                     </div>
@@ -116,5 +137,5 @@ interface FeathersAccordionProps {
 }
 
 const FeathersAccordion = ({ children }: FeathersAccordionProps) => {
-  return <div className="my-5 w-full rounded border border-primary-500 p-2">{children}</div>;
+  return <div className="my-5 w-full rounded-xl border border-primary-500 p-5">{children}</div>;
 };
