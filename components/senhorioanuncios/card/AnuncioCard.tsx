@@ -5,7 +5,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { Advertisement } from "../../../models/advertisement";
 import { useRouter } from "next/router";
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
@@ -73,12 +72,9 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
         <div className="w-full lg:flex">
           <div className="relative hidden h-52 w-52 lg:block">
-            <Image
-              src={(advertisement.photos && advertisement.photos[0]?.url) || NoPhotoAvailable}
-              alt="Foto Quarto"
-              layout="fill"
-              objectFit="cover"
-            />
+            {advertisement.photos && advertisement.photos.length > 0 && (
+              <Image src={advertisement.photos[0].url} alt="Foto Quarto" layout="fill" objectFit="cover" />
+            )}
           </div>
           <div className="ml-3 py-2">
             <div className="flex flex-row justify-between pr-2 lg:pr-0">

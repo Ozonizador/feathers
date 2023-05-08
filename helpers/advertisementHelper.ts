@@ -5,7 +5,6 @@ import {
   ADVERTISEMENT_PROPERTIES,
   HostFlexType,
   TypeAmenity,
-  TypeExpense,
 } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";

@@ -11,6 +11,9 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  compilerOptions: {
+    baseUrl: ".",
+  },
 };
 
 module.exports = withPlugins([[withTM]], nextConfig);

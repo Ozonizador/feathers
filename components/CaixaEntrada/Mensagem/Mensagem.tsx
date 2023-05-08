@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import { Avatar } from "flowbite-react";
 import { useCurrentUser } from "../../../context/MainProvider";
-import { Message, MessageWithProfile } from "../../../models/message";
-
+import { MessageWithProfile } from "../../../models/message";
 interface MessageProps {
   message: MessageWithProfile;
   previousMessage: MessageWithProfile | null;
@@ -29,7 +28,7 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
                 "ml-2 justify-start": message.profile_id !== currentUser.id,
               })}
             >
-              <Avatar alt="Hóspede" img={profile?.avatar_url || "/images/user.png"} rounded={true} size="sm" />
+              <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="sm" />
             </div>
 
             {previousMessage && previousMessage.profile_id !== message.profile_id && (

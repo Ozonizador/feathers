@@ -65,7 +65,7 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
         <div className="flex w-60 flex-col items-center justify-center align-middle">
           <Avatar
             alt="Default avatar with alt text"
-            img={review?.tenant?.avatar_url || "/images/user.png"}
+            img={review?.tenant?.avatar_url || "/icons/user/user.svg"}
             rounded={true}
             size="lg"
           />

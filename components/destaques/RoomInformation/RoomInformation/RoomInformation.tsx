@@ -12,7 +12,7 @@ export default function RoomCard() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex flex-col  align-middle">
                 <div className="flex items-center align-middle">
-                  <Avatar alt="Default avatar with alt text" img={"/images/user.png"} rounded={true} />
+                  <Avatar alt="Default avatar with alt text" img={"/icons/user/user.svg"} rounded={true} />
 
                   <div className="ml-4 flex flex-col">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Shawn Rodgers</h5>
@@ -46,7 +46,7 @@ export default function RoomCard() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex flex-col  align-middle">
                 <div className="flex items-center align-middle">
-                  <Avatar alt="Default avatar with alt text" img={"/images/user.png"} rounded={true} />
+                  <Avatar alt="Default avatar with alt text" img={"/icons/user/user.svg"} rounded={true} />
 
                   <div className="ml-4 flex flex-col">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Shawn Rodgers</h5>
@@ -82,7 +82,7 @@ export default function RoomCard() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex flex-col  align-middle">
                 <div className="flex items-center align-middle">
-                  <Avatar alt="Default avatar with alt text" img={"/images/user.png"} rounded={true} />
+                  <Avatar alt="Default avatar with alt text" img={"/icons/user/user.svg"} rounded={true} />
 
                   <div className="ml-4 flex flex-col">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Shawn Rodgers</h5>
@@ -116,7 +116,7 @@ export default function RoomCard() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex flex-col  align-middle">
                 <div className="flex items-center align-middle">
-                  <Avatar alt="Default avatar with alt text" img={"/images/user.png"} rounded={true} />
+                  <Avatar alt="Default avatar with alt text" img={"/icons/user/user.svg"} rounded={true} />
 
                   <div className="ml-4 flex flex-col">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Shawn Rodgers</h5>

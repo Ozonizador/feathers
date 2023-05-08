@@ -59,6 +59,7 @@ const CaixaEntrada = () => {
 
   const sendMessage = async (event) => {
     event.preventDefault();
+    debugger;
     if (!currentMessage || !currentConversation) return;
 
     const { data, error } = await insertMessageOnConversation(currentMessage, currentConversation.id, profile.id);
@@ -105,22 +106,20 @@ const CaixaEntrada = () => {
 
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <div className="flex w-2/5 flex-col border-r border-terciary-500">
-                  <div>
-                    {conversations.map((conversation, index) => {
-                      return (
-                        <div
-                          key={index}
-                          onClick={() => setCurrentConversation(conversation)}
-                          className={classNames("cursor-pointer p-1", {
-                            "bg-primary-100": currentConversation?.id === conversation.id,
-                          })}
-                        >
-                          <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
-                        </div>
-                      );
-                    })}
-                  </div>
+                <div className="flex w-96 flex-col border-r border-terciary-500">
+                  {conversations.map((conversation, index) => {
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setCurrentConversation(conversation)}
+                        className={classNames("cursor-pointer p-1", {
+                          "bg-primary-100": currentConversation?.id === conversation.id,
+                        })}
+                      >
+                        <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <MessagesSenderZone
@@ -130,85 +129,83 @@ const CaixaEntrada = () => {
                   setCurrentMessage={setCurrentMessage}
                 />
                 {currentConversation && currentConversation.host_id === profile.id && (
-                  <>
-                    <div className="w-1/3 border-l border-terciary-500 p-2">
-                      {currentConversation && (
-                        <>
-                          <div className="flex">
-                            <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
-                            <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                  <div className="border-l border-terciary-500 p-2">
+                    {currentConversation && (
+                      <>
+                        <div className="flex">
+                          <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
+                          <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                        </div>
+                        <div className="my-4 flex flex-row gap-3">
+                          <div>
+                            <Avatar
+                              img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
+                              rounded={true}
+                              status="away"
+                              size="md"
+                              statusPosition="bottom-right"
+                            />
                           </div>
-                          <div className="my-4 flex flex-row gap-3">
-                            <div>
-                              <Avatar
-                                img={currentConversation?.tenant?.avatar_url || "/images/user.png"}
-                                rounded={true}
-                                status="away"
-                                size="md"
-                                statusPosition="bottom-right"
-                              />
-                            </div>
-                            <div>
-                              <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
-                              <div className="text-sm">
-                                {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
+                          <div>
+                            <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
+                            <div className="text-sm">
+                              {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
                         ${currentConversation.reservation.advertisement?.place}`}
-                              </div>
                             </div>
                           </div>
-                          <div className="my-4 flex justify-center">
-                            {`${currentConversation.reservation?.start_date || ""} - ${
-                              currentConversation.reservation?.end_date || ""
-                            }`}
+                        </div>
+                        <div className="my-4 flex justify-center">
+                          {`${currentConversation.reservation?.start_date || ""} - ${
+                            currentConversation.reservation?.end_date || ""
+                          }`}
+                        </div>
+                        {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
+                          <div className="flex justify-around gap-5">
+                            <Button onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)} type="button">
+                              Aceitar
+                            </Button>
+                            <Button onClick={() => updateReservationStatus(ReservationStatus.REJECTED)} type="button">
+                              Rejeitar
+                            </Button>
                           </div>
-                          {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
-                            <div className="flex justify-around gap-5">
-                              <Button onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)} type="button">
-                                Aceitar
-                              </Button>
-                              <Button onClick={() => updateReservationStatus(ReservationStatus.REJECTED)} type="button">
-                                Rejeitar
-                              </Button>
-                            </div>
-                          )}
-                          {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
-                            <div className="flex justify-around">
-                              <Button
-                                onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
-                                type="button"
-                              >
-                                Aceitar
-                              </Button>
-                              <Button
-                                onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
-                                type="button"
-                              >
-                                Rejeitar
-                              </Button>
-                            </div>
-                          )}
-                          {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (
-                            <div className="text-primary-500">Reserva aceite</div>
-                          )}
-                          {currentConversation.reservation.status === ReservationStatus.REJECTED && (
-                            <div>Reserva rejeitada</div>
-                          )}
-                          {currentConversation.reservation.status === ReservationStatus.CHANGE_ACCEPTED && (
-                            <div className="text-primary-500">Alteração reserva aceite</div>
-                          )}
-                          {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
-                            <div>Alteração reserva rejeitada</div>
-                          )}
+                        )}
+                        {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
+                          <div className="flex justify-around">
+                            <Button
+                              onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
+                              type="button"
+                            >
+                              Aceitar
+                            </Button>
+                            <Button
+                              onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
+                              type="button"
+                            >
+                              Rejeitar
+                            </Button>
+                          </div>
+                        )}
+                        {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (
+                          <div className="text-primary-500">Reserva aceite</div>
+                        )}
+                        {currentConversation.reservation.status === ReservationStatus.REJECTED && (
+                          <div>Reserva rejeitada</div>
+                        )}
+                        {currentConversation.reservation.status === ReservationStatus.CHANGE_ACCEPTED && (
+                          <div className="text-primary-500">Alteração reserva aceite</div>
+                        )}
+                        {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
+                          <div>Alteração reserva rejeitada</div>
+                        )}
 
-                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>
-                            <a className="text-small mt-2">
-                              <div>Mostrar perfil de {currentConversation.tenant.name}</div>
-                            </a>
-                          </Link>
-                        </>
-                      )}
-                    </div>
-                  </>
+                        <Link href={`/perfil/${currentConversation.tenant.slug}`}>
+                          <a className="text-small mt-2">
+                            <div>Mostrar perfil de {currentConversation.tenant.name}</div>
+                          </a>
+                        </Link>
+                      </>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -236,7 +233,7 @@ const CaixaEntrada = () => {
                   <div
                     key={index}
                     onClick={() => setCurrentConversation(conversation)}
-                    className={classNames("cursor-pointer border p-1 last:rounded-b-xl", {
+                    className={classNames("w-32 cursor-pointer border p-1 last:rounded-b-xl", {
                       "bg-primary-100": currentConversation?.id === conversation.id,
                     })}
                   >
@@ -275,7 +272,7 @@ const MessagesSenderZone = ({ messages, sendMessage, currentMessage, setCurrentM
         })}
       </div>
 
-      <div className="mt-auto flex w-full flex-row items-center justify-between border-t border-terciary-500 pr-4 align-middle">
+      <div className="-between mt-auto flex w-full flex-row items-center border-t border-terciary-500 pr-4 align-middle">
         <div className="w-10/12">
           <form onSubmit={(e) => sendMessage(e)}>
             <input

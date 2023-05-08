@@ -8,7 +8,6 @@ import useAdvertisementService from "../../../hooks/advertisementService";
 import { Spinner } from "flowbite-react";
 
 /* IMAGES */
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import classNames from "classnames";
 import { Advertisement } from "../../../models/advertisement";
 import { GetServerSidePropsContext } from "next";
@@ -81,7 +80,7 @@ const UnideskFavoritos = () => {
                           {favourite.photos && favourite.photos.length > 0 ? (
                             <Image src={favourite.photos[0].url} alt="Foto de Capa" layout="fill" objectFit="cover" />
                           ) : (
-                            <Image src={NoPhotoAvailable} alt="no photo available" layout="fill" objectFit="cover" />
+                            <></>
                           )}
                         </div>
                         <div className="flex flex-1 flex-col p-2">

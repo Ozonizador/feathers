@@ -13,7 +13,6 @@ import {
 } from "../../../models/advertisement";
 
 /* IMAGES */
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { useCurrentUser, useSetProfileFavouritesInformation } from "../../../context/MainProvider";
 import classNames from "classnames";
 import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
@@ -93,17 +92,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
             <div className="relative h-96 w-full lg:h-56 lg:w-1/3">
-              {getMainPhoto() ? (
-                <Image src={getMainPhoto().url} alt="..." layout="fill" objectFit="cover" />
-              ) : (
-                <Image
-                  src={NoPhotoAvailable}
-                  alt="no photo available"
-                  className="rounded-2xl"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              )}
+              {getMainPhoto() ? <Image src={getMainPhoto().url} alt="..." layout="fill" objectFit="cover" /> : <></>}
             </div>
             <div className="px-5 lg:w-2/3">
               <div className="m-1">

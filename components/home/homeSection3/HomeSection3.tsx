@@ -5,7 +5,6 @@ import useAdvertisementService from "../../../hooks/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
 import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
-import NoPhotoAvailable from "../../../public/images/imageNotAvailable.png";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 export default function HomeSection3() {
@@ -78,13 +77,7 @@ export default function HomeSection3() {
                         {advertisement.photos && advertisement.photos[0] ? (
                           <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
                         ) : (
-                          <Image
-                            src={NoPhotoAvailable}
-                            alt="no photo available"
-                            className="rounded-2xl"
-                            layout="fill"
-                            objectFit="cover"
-                          />
+                          <></>
                         )}
                         <h2 className="absolute top-1 z-50 p-2 text-sm text-white">
                           {TYPE_ADVERTISEMENT[advertisement.type]}

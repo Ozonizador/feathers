@@ -28,7 +28,7 @@ export default function RoomSenhorio() {
               <div className="flex flex-col items-center pb-10">
                 <Image
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  src={advertisement?.host?.avatar_url || "/images/user.png"}
+                  src={advertisement?.host?.avatar_url || "/icons/user/user.svg"}
                   alt="Bonnie image"
                   height={96}
                   width={96}
