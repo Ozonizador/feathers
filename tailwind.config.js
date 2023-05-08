@@ -14,9 +14,6 @@ module.exports = {
         xl: "5rem",
         "2xl": "6rem",
       },
-      // fontSize:{
-      //   sm: "14px",
-      // }
     },
     extend: {
       colors: {
@@ -41,6 +38,10 @@ module.exports = {
           400: "#7D8A97",
           500: "#505046",
           600: "#262E36",
+        },
+        spacing: {
+          100: "25rem",
+          140: "35rem",
         },
         socials: {
           facebook: "#F2F8FF",
