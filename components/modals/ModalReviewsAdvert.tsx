@@ -58,11 +58,11 @@ const ModalReviewsAdvert = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="flex flex-col gap-7 py-3 px-2 lg:flex-row">
-                    <div className="w-full border-r border-r-neutral-400 p-2 lg:w-1/2">
+                  <div className="flex flex-row gap-7 px-2 py-3">
+                    <div className="w-1/2 p-2">
                       <RoomAveragesSection averageRatings={roomAverages} showTopSection={false} />
                     </div>
-                    <div className="w-full lg:w-1/2">
+                    <div className="w-1/2 overflow-y-auto">
                       {stays && stays.length > 0 && (
                         <>
                           <div className="flex max-h-screen flex-col gap-2 overflow-y-auto">
