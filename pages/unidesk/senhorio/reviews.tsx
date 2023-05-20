@@ -14,6 +14,7 @@ import {
   REVIEW_COLUMNS,
 } from "../../../models/review";
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
+import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../../models/conversation";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "Anúncios" },
@@ -75,15 +76,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false })
     .range(0, PAGE_NUMBER_COUNT - 1);
 
-  // adicionar o response rate
-  const { data: hostGeneralInfo, error: hostGeneralError } = await supabase
-    .rpc("average_rating_per_host", { host: user.id })
-    .single();
+  const { count: allConversations, error: allConversationsError } = await supabase
+    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+    .select()
+    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+
+  const { count: repliedConversation, error: repliedConversationError } = await supabase
+    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+    .select("id, messages!inner(id)")
+    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
 
   // adicionar a classificação geral
   const { data: generalClassification, error: classificationError } = await supabase
-    .rpc("average_rating_per_host", { host: user.id })
+    .rpc("average_rating_per_host", { hostid: user.id })
     .single();
+
+  const responseRate =
+    (allConversationsError && repliedConversationError) || !allConversations
+      ? 0
+      : repliedConversation / allConversations;
 
   return {
     props: {
@@ -91,7 +102,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       user: session.user,
       latestReviews: reviewsError ? [] : latestReviews,
       generalClassification: classificationError ? 0 : generalClassification,
-      responseRate: hostGeneralError ? 0 : hostGeneralInfo, // TODO add
+      responseRate,
     },
   };
 };

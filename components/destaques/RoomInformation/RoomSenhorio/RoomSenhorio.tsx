@@ -5,8 +5,12 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { Gender } from "../../../../models/profile";
+import { RiMailSendFill } from "react-icons/ri";
 
-export default function RoomSenhorio() {
+interface RoomSenhorioProps {
+  responseRate: number;
+}
+export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
   const advertisement = useGetSingleAdvertisement();
 
   return (
@@ -26,27 +30,29 @@ export default function RoomSenhorio() {
             <Card>
               <div className="flex justify-end px-4 pt-4"></div>
               <div className="flex flex-col items-center pb-10">
-                <Image
-                  className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  src={advertisement?.host?.avatar_url || "/icons/user/user.svg"}
-                  alt="Bonnie image"
-                  height={96}
-                  width={96}
-                  unoptimized={true}
-                />
-                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
+                <div className="rounded-full shadow-md">
+                  <Image
+                    className="mb-3"
+                    src={advertisement?.host?.avatar_url || "/icons/user/user.svg"}
+                    alt="host"
+                    height={96}
+                    width={96}
+                    unoptimized={true}
+                  />
+                </div>
+                <h5 className="my-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
                 <span className="text-sm text-gray-500 dark:text-gray-400">{`${
                   advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
                 } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
                 <hr />
-                {/* <div className="mt-4 flex items-center space-x-3 lg:mt-6">
+                <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
                     <RiMailSendFill className=" text-4xl text-blue-600 " />
                   </div>
-                  <div className="">
-                    Taxa de resposta <br /> 90%
+                  <div className="text-center">
+                    Taxa de resposta <br /> {responseRate !== 0 ? responseRate : "0"}%
                   </div>
-                </div> */}
+                </div>
               </div>
             </Card>
           </div>

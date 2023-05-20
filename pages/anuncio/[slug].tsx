@@ -10,18 +10,26 @@ import RoomSemelhantes from "../../components/destaques/RoomInformation/RoomsSem
 import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSlider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
-import { AdvertisementComplete, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../models/advertisement";
+import {
+  Advertisement,
+  AdvertisementComplete,
+  Advertisements,
+  ADVERTISEMENT_PROPERTIES,
+  ADVERTISEMENT_TABLE_NAME,
+} from "../../models/advertisement";
 import { ModalAnuncioInfoProvider } from "../../context/ModalShowProvider";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 import ModalReviewsAdvert from "../../components/modals/ModalReviewsAdvert";
+import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../models/conversation";
 
 interface AnuncioProps {
   advertisement: AdvertisementComplete;
+  responseRate: number;
 }
 
-const Anuncio = ({ advertisement }: AnuncioProps) => {
+const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>
@@ -31,7 +39,7 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
           <div className="container mx-auto px-2 md:px-20">
             <SingleRoomGrid />
             <div className="flex flex-col lg:flex-row">
-              <div className="lg:w-4/6 w-full px-5">
+              <div className="w-full px-5 lg:w-4/6">
                 <RoomInformation />
                 <div className="mt-10 flex flex-col gap-4 lg:flex-row">
                   <DescricaoCondicoes />
@@ -41,11 +49,11 @@ const Anuncio = ({ advertisement }: AnuncioProps) => {
                 <RoomSlider />
                 <RoomRating />
                 <RoomMap />
-                <RoomSenhorio />
+                <RoomSenhorio responseRate={responseRate} />
                 <RoomSemelhantes />
               </div>
 
-              <div className="lg:w-2/6 mb-20 w-full lg:mb-0 lg:px-5">
+              <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
                 <RoomPagamento />
               </div>
             </div>
@@ -83,7 +91,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 
   const { data: advertisement, error } = await supabase
-    .from(ADVERTISEMENT_TABLE_NAME)
+    .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
     .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url), reviews(*))`)
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
@@ -94,8 +102,23 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 
   if (advertisement) {
+    const { count: allConversations, error: allConversationsError } = await supabase
+      .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+      .select()
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host);
+
+    const { count: repliedConversation, error: repliedConversationError } = await supabase
+      .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+      .select("id, messages!inner(id)")
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host);
+
+    const responseRate =
+      (allConversationsError && repliedConversationError) || !allConversations
+        ? 0
+        : repliedConversation / allConversations;
+
     return {
-      props: { advertisement, initialSession: session, user: session.user },
+      props: { advertisement, initialSession: session, user: session.user, responseRate },
     };
   } else {
     return {

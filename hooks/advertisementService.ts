@@ -99,7 +99,7 @@ const useAdvertisementService = () => {
         },
         { count: "exact" }
       )
-      .select("*, averages:reviewsPerAdvertisement!left(*)");
+      .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
     query = addFilterAdvertisement(query, filters);
     const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
@@ -110,7 +110,7 @@ const useAdvertisementService = () => {
     let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
     let query = supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select()
+      .select("*, stay:stays(*)")
       .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
     query = addFilterAdvertisement(query, filters);

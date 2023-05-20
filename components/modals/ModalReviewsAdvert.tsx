@@ -7,6 +7,7 @@ import Button from "../utils/Button";
 import useReviewService from "../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../models/review";
 import { RoomAveragesSection } from "../destaques/RoomInformation/RoomRating/RoomRating";
+import { Rating } from "flowbite-react/lib/esm/components/Rating/Rating";
 
 /* PAGINA 7 DO XD */
 const ModalReviewsAdvert = () => {
@@ -58,14 +59,29 @@ const ModalReviewsAdvert = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="flex flex-col gap-7 py-3 px-2 lg:flex-row">
-                    <div className="w-full border-r border-r-neutral-400 p-2 lg:w-1/2">
-                      <RoomAveragesSection averageRatings={roomAverages} showTopSection={false} />
+                  <div className="flex flex-col gap-7 px-2 py-3 lg:flex-row">
+                    <div className="flex w-full flex-col gap-3 p-2 lg:w-1/2">
+                      <div className="border-b border-neutral-100 pb-2 ">
+                        <Rating size="lg">
+                          <h6 className="mr-4 text-3xl text-primary-500">{roomAverages?.overall_average}</h6>
+                          <Rating.Star filled={roomAverages?.overall_average >= 1 ? true : false} />
+                          <Rating.Star filled={roomAverages?.overall_average >= 2 ? true : false} />
+                          <Rating.Star filled={roomAverages?.overall_average >= 3 ? true : false} />
+                          <Rating.Star filled={roomAverages?.overall_average >= 4 ? true : false} />
+                          <Rating.Star filled={roomAverages?.overall_average >= 5 ? true : false} />
+                        </Rating>
+
+                        <p className="my-3">{roomAverages?.review_number} comentários</p>
+                      </div>
+                      <div>
+                        <RoomAveragesSection averageRatings={roomAverages} showTopSection={false} />
+                      </div>
                     </div>
-                    <div className="w-full lg:w-1/2">
+
+                    <div className="w-full overflow-y-auto lg:w-1/2">
                       {stays && stays.length > 0 && (
                         <>
-                          <div className="flex max-h-screen flex-col gap-2 overflow-y-auto">
+                          <div className="flex h-96 flex-col gap-2 pr-4 lg:overflow-y-scroll">
                             {stays.slice(0, 3).map((stay, index) => {
                               const review = stay.reviews && stay.reviews[0];
                               return (

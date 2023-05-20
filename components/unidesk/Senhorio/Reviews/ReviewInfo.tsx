@@ -10,12 +10,10 @@ interface ReviewInfoProps {
 }
 
 const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: ReviewInfoProps) => {
-  const user = useUser();
-
   return (
     <>
       <div className="mx-auto w-11/12 lg:w-full">
-        <h1 className="mt-10 mb-3 text-3xl font-semibold lg:mb-7 lg:mt-10">Reviews</h1>
+        <h1 className="mb-3 mt-10 text-3xl font-semibold lg:mb-7 lg:mt-10">Reviews</h1>
         <p className="mb-12 text-xl text-slate-400 lg:mb-6">Os meus Anúncios</p>
       </div>
 
@@ -23,17 +21,17 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
         <div className="flex h-36 w-60 flex-col items-center justify-center rounded-lg border  border-terciary-500 bg-white align-middle">
           <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
           <Rating>
+            <p className="ml-2 text-xl  text-yellow-300">{generalClassification !== 0 ? generalClassification : "-"}</p>
             <Rating.Star />
-            <p className="ml-2 text-xl  text-yellow-300">{responseRate}</p>
           </Rating>
         </div>
 
-        <div className="mt-3 text-center text-xl font-bold lg:mt-0 lg:ml-7 lg:text-left">
+        <div className="mt-3 text-center text-xl font-bold lg:ml-7 lg:mt-0 lg:text-left">
           Taxa de resposta: {responseRate}%
         </div>
       </div>
 
-      <div className="mt-14 mb-6 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">
+      <div className="mb-6 mt-14 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">
         <div className="text-xl font-bold">Últimas reviews</div>
         <div className="text-secondary-300">Anúncios</div>
       </div>
