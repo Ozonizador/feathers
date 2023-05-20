@@ -63,7 +63,7 @@ const ModalReviewsAdvert = () => {
                     <div className="flex w-full flex-col gap-3 p-2 lg:w-1/2">
                       <div className="border-b border-neutral-100 pb-2 ">
                         <Rating size="lg">
-                          <h6 className="mr-4 text-3xl text-primary-500">{roomAverages?.overall_average}</h6>
+                          <h6 className="mr-4 text-5xl text-primary-500">{roomAverages?.overall_average}</h6>
                           <Rating.Star filled={roomAverages?.overall_average >= 1 ? true : false} />
                           <Rating.Star filled={roomAverages?.overall_average >= 2 ? true : false} />
                           <Rating.Star filled={roomAverages?.overall_average >= 3 ? true : false} />
