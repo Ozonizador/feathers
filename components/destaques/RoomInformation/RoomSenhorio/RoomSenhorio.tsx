@@ -5,8 +5,12 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { Gender } from "../../../../models/profile";
+import { RiMailSendFill } from "react-icons/ri";
 
-export default function RoomSenhorio() {
+interface RoomSenhorioProps {
+  responseRate: number;
+}
+export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
   const advertisement = useGetSingleAdvertisement();
 
   return (
@@ -41,14 +45,14 @@ export default function RoomSenhorio() {
                   advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
                 } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
                 <hr />
-                {/* <div className="mt-4 flex items-center space-x-3 lg:mt-6">
+                <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
                     <RiMailSendFill className=" text-4xl text-blue-600 " />
                   </div>
-                  <div className="">
-                    Taxa de resposta <br /> 90%
+                  <div className="text-center">
+                    Taxa de resposta <br /> {responseRate !== 0 ? responseRate : "0"}%
                   </div>
-                </div> */}
+                </div>
               </div>
             </Card>
           </div>
