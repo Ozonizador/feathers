@@ -11,7 +11,6 @@ import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSl
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
 import {
-  Advertisement,
   AdvertisementComplete,
   Advertisements,
   ADVERTISEMENT_PROPERTIES,

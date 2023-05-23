@@ -110,7 +110,7 @@ const useAdvertisementService = () => {
     let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
     let query = supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select("*, stay:stays(*)")
+      .select("*, stays(*)")
       .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
     query = addFilterAdvertisement(query, filters);

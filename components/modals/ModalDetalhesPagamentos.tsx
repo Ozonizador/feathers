@@ -4,12 +4,14 @@ import { useModalDetalhesPagamento, useSetModalDetalhesPagamento } from "../../c
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
+import { useGetUserDates } from "../../context/MainProvider";
 
 /* PAGINA 7 DO XD */
 
 const ModalDetalhesPagamento = () => {
   const advertisement = useGetSingleAdvertisement();
-  let { detailsModalOpen, selectedDate } = useModalDetalhesPagamento();
+  let { detailsModalOpen } = useModalDetalhesPagamento();
+  let { startDate: selectedDate } = useGetUserDates();
   let setIsOpen = useSetModalDetalhesPagamento();
 
   const formatOnlyMonth = (date: Date) => {
@@ -73,7 +75,15 @@ const ModalDetalhesPagamento = () => {
                             Pagamento antecipado respetivo ao mês de{" "}
                             <span className="capitalize">{formatOnlyMonth(selectedDate)}</span>
                           </p>
-                          <AiOutlineInfoCircle className="my-auto" />
+                          <div className="relative my-auto">
+                            <AiOutlineInfoCircle className="peer my-auto" />
+                            <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
+                              <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
+                                <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
+                                <p>Respectivo a 1 mês completo de renda</p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </FeathersAccordion>
                       {/* SENHORIO */}
@@ -87,9 +97,20 @@ const ModalDetalhesPagamento = () => {
                           </div>
                         </div>
                         <div className="flex">
-                          <div className="flex gap-1 text-neutral-500">
+                          <div className="relative flex gap-1 text-neutral-500">
                             <p className="text-sm lg:text-base">Caução</p>
-                            <AiOutlineInfoCircle className="my-auto" size={18} />
+                            <div className="relative my-auto">
+                              <AiOutlineInfoCircle className="peer my-auto" />
+                              <div className="-bottom-[90px] -right-60 hidden peer-hover:absolute peer-hover:block">
+                                <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
+                                  <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
+                                  <p>
+                                    Valor a ser retido pelo Senhorio a devolvido no final da estadia consoante as
+                                    condições da casa.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <div className="ml-auto mr-6 text-neutral-500">{advertisement.month_rent}€</div>
                         </div>

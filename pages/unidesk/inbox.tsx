@@ -59,7 +59,6 @@ const CaixaEntrada = () => {
 
   const sendMessage = async (event, conversationId) => {
     event.preventDefault();
-    debugger;
     if (!currentMessage || !conversationId) return;
 
     const { data, error } = await insertMessageOnConversation(currentMessage, conversationId, profile.id);
@@ -129,9 +128,10 @@ const CaixaEntrada = () => {
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
                 />
-                {currentConversation && currentConversation.host_id === profile.id && (
-                  <div className="w-96 border-l border-terciary-500 p-2">
-                    {currentConversation && (
+                {currentConversation &&
+                  currentConversation.host_id === profile.id &&
+                  currentConversation.reservation.tenant_id !== profile.id && (
+                    <div className="w-96 border-l border-terciary-500 p-2">
                       <>
                         <div className="flex">
                           <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
@@ -205,9 +205,8 @@ const CaixaEntrada = () => {
                           </a>
                         </Link>
                       </>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
             </div>
           </>

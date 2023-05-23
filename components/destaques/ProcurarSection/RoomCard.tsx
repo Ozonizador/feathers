@@ -88,7 +88,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
   return (
     <div>
-      <div className="mt-10 mb-4 bg-white lg:rounded-xl lg:drop-shadow-2xl">
+      <div className="mb-4 mt-10 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
             <div className="relative h-96 w-full lg:h-56 lg:w-1/3">
@@ -145,7 +145,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                 )}
 
                 <div className="mt-4 flex justify-between">
-                  <div className="my-auto">
+                  <div>
                     <Button
                       type="submit"
                       variant="informative"
@@ -159,15 +159,13 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       <span className="my-auto ml-2">Favoritos</span>
                     </Button>
                   </div>
-                  <div className="">
-                    <div className="text-end">
-                      <h3 className="text-xl font-bold text-primary-500">{advertisement.month_rent} €/mês</h3>
-                      <div className="d-flex">
-                        <p className="mt-1 text-xs lg:text-base">
-                          {checkIfExpensesIncluded(advertisement.expenses.services || [])}
-                        </p>
-                        <i className="fa-solid fa-circle-info m-1"></i>
-                      </div>
+                  <div className="text-end">
+                    <h3 className="text-xl font-bold text-primary-500">{advertisement.month_rent} €/mês</h3>
+                    <div className="d-flex">
+                      <p className="mt-1 text-xs lg:text-base">
+                        {checkIfExpensesIncluded(advertisement.expenses.services || [])}
+                      </p>
+                      <i className="fa-solid fa-circle-info m-1"></i>
                     </div>
                   </div>
                 </div>

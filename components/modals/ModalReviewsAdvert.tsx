@@ -3,7 +3,6 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useModalDetalhesPagamento, useSetModalReviews } from "../../context/ModalShowProvider";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import ReviewCard from "../advertisements/ReviewCard";
-import Button from "../utils/Button";
 import useReviewService from "../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../models/review";
 import { RoomAveragesSection } from "../destaques/RoomInformation/RoomRating/RoomRating";
@@ -82,11 +81,11 @@ const ModalReviewsAdvert = () => {
                       {stays && stays.length > 0 && (
                         <>
                           <div className="flex h-96 flex-col gap-2 pr-4 lg:overflow-y-scroll">
-                            {stays.slice(0, 3).map((stay, index) => {
+                            {stays.slice(0, 3).map((stay) => {
                               const review = stay.reviews && stay.reviews[0];
                               return (
                                 <>
-                                  <ReviewCard review={review} tenant={stay.tenant} key={index} />
+                                  <ReviewCard review={review} tenant={stay.tenant} key={stay.id} />
                                 </>
                               );
                             })}
