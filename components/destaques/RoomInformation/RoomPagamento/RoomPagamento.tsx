@@ -94,7 +94,7 @@ export const RoomPagamento = () => {
                 control={control}
                 name={"number_guests"}
                 render={({ field: { onChange } }) => {
-                  return <Input id="Hóspedes" type="number" onChange={onChange} />;
+                  return <Input id="Hóspedes" type="number" onChange={onChange} value={1} />;
                 }}
               ></Controller>
             </div>

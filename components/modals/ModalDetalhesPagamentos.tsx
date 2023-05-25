@@ -6,6 +6,10 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import { useGetUserDates } from "../../context/MainProvider";
 
+interface formatOpts {
+  monthsAhead?: number;
+}
+
 /* PAGINA 7 DO XD */
 
 const ModalDetalhesPagamento = () => {
@@ -14,10 +18,15 @@ const ModalDetalhesPagamento = () => {
   let { startDate: selectedDate } = useGetUserDates();
   let setIsOpen = useSetModalDetalhesPagamento();
 
-  const formatOnlyMonth = (date: Date) => {
+  const formatOnlyMonth = (date: Date, opts: formatOpts) => {
     if (!date) return "";
+    const { monthsAhead } = opts || { monthsAhead: undefined };
 
     const newDate = new Date(date);
+    if (monthsAhead) {
+      newDate.setMonth(newDate.getMonth() + monthsAhead);
+    }
+
     return newDate.toLocaleString("PT", {
       month: "long",
     });
@@ -73,7 +82,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex gap-1 text-neutral-600">
                           <p className="text-sm lg:text-base">
                             Pagamento antecipado respetivo ao mês de{" "}
-                            <span className="capitalize">{formatOnlyMonth(selectedDate)}</span>
+                            <span className="capitalize">{formatOnlyMonth(selectedDate, {})}</span>
                           </p>
                           <div className="relative my-auto">
                             <AiOutlineInfoCircle className="peer my-auto" />
@@ -130,7 +139,7 @@ const ModalDetalhesPagamento = () => {
                                 <div>
                                   Renda Mensal de{" "}
                                   <span className="capitalize">
-                                    {formatOnlyMonth(new Date(selectedDate.setMonth(selectedDate.getMonth() + value)))}
+                                    {formatOnlyMonth(selectedDate, { monthsAhead: value })}
                                   </span>
                                 </div>
                                 <div className="ml-auto mr-6">{advertisement.month_rent}€</div>

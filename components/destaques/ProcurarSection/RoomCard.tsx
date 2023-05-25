@@ -70,9 +70,9 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     if (advertisement.about_house) {
       const { general, bedRoom, bathRoom, exterior, livingRoom, kitchen } = advertisement.about_house;
 
-      const amenities: TypeAmenity[] = [].concat.apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom]);
+      const amenities: TypeAmenity[] = [].concat.apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom]).filter((opt) => !!opt).slice(0,5);
       return (
-        <ul className="pr-3-3 flex gap-5 text-gray-500">
+        <ul className="pr-3 flex gap-5 text-gray-500">
           {amenities.map((amenity, index) => {
             return (
               <li key={index} className={classNames({ "list-none": index === 0 })}>
@@ -140,7 +140,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
                 {advertisement.about_house && (
                   <>
-                    <div className="mb-1 mt-3 flex text-start text-xs lg:ml-3">{showSomeAmenities}</div>
+                    <div className="mb-1 mt-3 flex text-start text-xs">{showSomeAmenities}</div>
                   </>
                 )}
 
