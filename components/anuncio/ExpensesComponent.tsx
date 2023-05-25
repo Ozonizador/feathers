@@ -60,7 +60,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
     return "Não Incluído";
   };
   return (
-    <div className="absolute -left-32 -bottom-20 z-50 hidden bg-white group-hover:block lg:-left-32">
+    <div className="absolute -bottom-20 -left-32 z-50 hidden bg-white group-hover:block lg:-left-32">
       <div className="mb-2 mt-3 flex flex-row gap-2 rounded-lg p-1 shadow-2xl lg:p-4">
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
           <FaRegLightbulb className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
@@ -118,7 +118,7 @@ export const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
   let excluded = 0;
 
   if (!expenses || expenses.length === 0) {
-    return "";
+    return "Sem Informação Despesas";
   }
   for (let expense of expenses) {
     if (expense.included == "INCLUDED") included++;

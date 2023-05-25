@@ -67,12 +67,11 @@ export const MainProvider = ({ children }): JSX.Element => {
   const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
   const checkUserProfile = useCallback(async () => {
-    // check if profile exists else create
-    if (user) {
-      const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
-      if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
-      if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
-    }
+    if (!user) return;
+
+    const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
+    if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
+    if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
   }, [user]);
 
   const checkUserNotificationsAndMessages = useCallback(async () => {
@@ -179,6 +178,11 @@ export const useSetProfileFavouritesInformation = () => {
 
 export const useGetUserCoordinates = () => {
   return useContext(UserLocationContext);
+};
+
+export const useGetUserDates = () => {
+  const { startDate, endDate } = useContext(UserLocationSearchContext);
+  return { startDate, endDate };
 };
 
 /* SEARCH */

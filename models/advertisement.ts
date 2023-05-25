@@ -109,8 +109,8 @@ export const ADVERTISEMENT_PROPERTIES = {
   AVAILABLE: "available",
   ID: "id",
   GEOM: "geom",
-  STAY_START_DATE: "stay.startDate",
-  STAY_END_DATE: "stay.endDate",
+  STAY_START_DATE: "stays.start_date",
+  STAY_END_DATE: "stays.end_date",
   SLUG: "slug",
 } as const;
 

@@ -11,7 +11,6 @@ import RoomSlider from "../../components/destaques/RoomInformation/Slider/RoomSl
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { ShowingSingleAdvertisementProvider } from "../../context/ShowingSingleAdvertisementProvider";
 import {
-  Advertisement,
   AdvertisementComplete,
   Advertisements,
   ADVERTISEMENT_PROPERTIES,
@@ -30,6 +29,7 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
+  console.log("aaa")
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>

@@ -8,14 +8,12 @@ interface ModalDetalhesPagamentoProps {
 interface ModalAdvertPageProps {
   detailsModalOpen: boolean;
   reviewsModalOpen: boolean;
-  selectedDate: Date;
 }
 
 // Context Modal Open Share
 const ModalsAdvertPageContext = createContext<ModalAdvertPageProps>({
   detailsModalOpen: false,
   reviewsModalOpen: false,
-  selectedDate: new Date(),
 });
 const SetModalsAdvertPageContext = createContext<Dispatch<SetStateAction<ModalAdvertPageProps>>>(() => {});
 
@@ -23,7 +21,6 @@ export const ModalAnuncioInfoProvider = ({ children }: ModalDetalhesPagamentoPro
   const [modalOpen, setModalOpen] = useState<ModalAdvertPageProps>({
     detailsModalOpen: false,
     reviewsModalOpen: false,
-    selectedDate: new Date(),
   });
 
   return (
@@ -49,13 +46,6 @@ export function useSetModalReviews() {
   const setModal = useContext(SetModalsAdvertPageContext);
   return (value: boolean) => {
     setModal((currentValue) => ({ ...currentValue, reviewsModalOpen: value }));
-  };
-}
-
-export function useSetModalDateSelected() {
-  const setModalInfo = useContext(SetModalsAdvertPageContext);
-  return (selectedDate: Date) => {
-    setModalInfo((currentValue) => ({ ...currentValue, selectedDate }));
   };
 }
 

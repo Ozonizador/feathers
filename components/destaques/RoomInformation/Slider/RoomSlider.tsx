@@ -12,9 +12,10 @@ export default function RoomSlider() {
     useMemo(() => {
       return (
         <Carousel>
+
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center font-bold text-primary-500">Comodidades gerais</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-6 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Comodidades gerais</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!general || general.length === 0) && <div>Sem nada a assinalar</div>}
               {general &&
                 general.map((amenity, index) => {
@@ -29,8 +30,8 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center text-primary-500">Quarto</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Quarto</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!bedRoom || bedRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {bedRoom &&
                 bedRoom.map((amenity, index) => {
@@ -45,8 +46,8 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center text-primary-500">Cozinha</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Cozinha</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!kitchen || kitchen.length === 0) && <div>Sem nada a assinalar</div>}
               {kitchen &&
                 kitchen.map((amenity, index) => {
@@ -61,8 +62,8 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center text-primary-500">Casa de Banho</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Casa de Banho</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!bathRoom || bathRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {bathRoom &&
                 bathRoom.map((amenity, index) => {
@@ -77,8 +78,8 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center text-primary-500">Zona de estar</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Zona de estar</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!livingRoom || livingRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {livingRoom &&
                 livingRoom.map((amenity, index) => {
@@ -93,8 +94,8 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex h-full items-center justify-center text-primary-500">Zona Exterior</div>
-            <div className="flex h-full flex-wrap items-center justify-center gap-5 align-middle">
+            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Zona Exterior</div>
+            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
               {(!exterior || exterior.length === 0) && <div>Sem nada a assinalar</div>}
               {exterior &&
                 exterior.map((amenity, index) => {
@@ -113,7 +114,7 @@ export default function RoomSlider() {
     }, []);
 
   return (
-    <div className="mb-32 mt-10 h-40 rounded-xl border lg:mt-40">
+    <div className="mb-32 mt-10 min-h-[300px] h-48 rounded-xl border lg:mt-40">
       <Comodities />
     </div>
   );
