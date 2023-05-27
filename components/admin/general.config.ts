@@ -1,5 +1,5 @@
 export const customStyles = {
-  option: (provided, state) => ({
+  option: (provided: any, state: any) => ({
     ...provided,
     padding: 5,
   }),
@@ -9,7 +9,7 @@ export const customStyles = {
     width: "100%",
     height: "100%",
   }),
-  input: (provided, state) => ({
+  input: (provided: any, state: any) => ({
     ...provided,
   }),
 };

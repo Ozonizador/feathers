@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { AppProps } from "next/app";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
@@ -17,6 +18,8 @@ import { useRouter } from "next/router";
 import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import NextNProgress from "nextjs-progressbar";
 
+import { trpc } from "../utils/trpc";
+
 const theme: CustomFlowbiteTheme = {
   carousel: {
     indicators: {
@@ -28,7 +31,7 @@ const theme: CustomFlowbiteTheme = {
   },
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const [cookies] = useCookies(["test"]);
   const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
   const router = useRouter();
@@ -67,4 +70,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

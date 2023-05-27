@@ -10,12 +10,12 @@ const FormPrices = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = async (e) => {
+  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     incrementStep();
   };
 
-  const changeTypeProperty = (label, value) => {
+  const changeTypeProperty = (label: string, value: any) => {
     setAdvertisementProperty(label, value);
   };
 

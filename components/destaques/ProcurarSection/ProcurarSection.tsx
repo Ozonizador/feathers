@@ -45,7 +45,7 @@ export default function ProcurarSection() {
 
   const locateByQuery = useCallback(() => {
     setFilters({
-      coordinates: (coordinates && coordinates.coordinates) || currentMapCoordinates || null,
+      coordinates: (coordinates && coordinates.coordinates) || currentMapCoordinates || undefined,
       dates: {
         startDate: startDate ? new Date(startDate).toISOString() : "",
         endDate: endDate ? new Date(endDate).toISOString() : "",
@@ -58,7 +58,7 @@ export default function ProcurarSection() {
   }, [locateByQuery]);
 
   // Filters
-  const toggleComododitiesFilter = (options) => {
+  const toggleComododitiesFilter = (options: any[]) => {
     const comoditiesFilter = options.map((option) => option.value);
     setComoditiesFilter(comoditiesFilter);
   };
@@ -119,7 +119,7 @@ export default function ProcurarSection() {
                 {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                   return (
                     <option key={index} value={type}>
-                      {TYPE_ADVERTISEMENT[type]}
+                      {TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT]}
                     </option>
                   );
                 })}
@@ -148,7 +148,7 @@ export default function ProcurarSection() {
                     options={SelectAmenityLabel.map((amenity) => amenity)}
                     isMulti={true}
                     styles={customStyles}
-                    onChange={toggleComododitiesFilter}
+                    onChange={() => toggleComododitiesFilter}
                     className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52"
                   />
                 </div>

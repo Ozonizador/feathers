@@ -127,7 +127,7 @@ export const TYPE_ADVERTISEMENT = {
   ENTIRE_SPACE: "Apartamento Inteiro",
   SHARED_ROOM: "Quarto Partilhado",
   PRIVATE_ROOM: "Quarto Privado",
-};
+} as const;
 
 export type TypeAdvertisement = Database["public"]["Enums"]["TypeRoom"];
 export type HostType = Database["public"]["Enums"]["type_host"];
@@ -265,11 +265,11 @@ export const TypeAmenityLabel = {
   HANGERS_SUPPORT: "Suporte para Cabides",
   HOT_WATER_KETTLE: "Chaleira de água quente",
   POWER_PLUG_NEAR_BED: "Tomada perto da tomada",
-};
+} as const;
 
 /* FOR THE SELECT ON PROCURAR */
 export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((label) => {
-  return { label, value: TypeAmenityLabel[label] };
+  return { label, value: TypeAmenityLabel[label as keyof typeof TypeAmenityLabel] };
 });
 
 /* ADVERT_STATUS */

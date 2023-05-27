@@ -19,7 +19,7 @@ const useAdvertisementService = () => {
 
   const addAdvertisement = async (
     advertisement: Advertisement
-  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .insert(advertisement)
@@ -32,7 +32,7 @@ const useAdvertisementService = () => {
   const updateAdvertisement = async (
     advertisement: Partial<Advertisement>,
     id: string
-  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
@@ -43,7 +43,9 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  const getSingleAdvertisement = async (id: string): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  const getSingleAdvertisement = async (
+    id: string
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -55,7 +57,7 @@ const useAdvertisementService = () => {
 
   const getAdvertisementsFromMultipleId = async (
     ids: string[]
-  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement[] | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -66,7 +68,7 @@ const useAdvertisementService = () => {
 
   const getAdvertismentsFromUserId = async (
     userId: string
-  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement[] | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()

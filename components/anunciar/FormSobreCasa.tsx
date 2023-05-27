@@ -30,7 +30,7 @@ const FormSobreCasa = () => {
     },
   });
 
-  const nextStep = async (data) => {
+  const nextStep = async (data: any) => {
     setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };

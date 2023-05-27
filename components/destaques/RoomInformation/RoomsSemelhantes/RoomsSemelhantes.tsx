@@ -13,7 +13,7 @@ export default function RoomSemelhantes() {
   const { getSimilarAdvertisements } = useAdvertisementService();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [similarAdverts, setSimilarAdverts] = useState<Partial<Advertisement>[]>([]);
+  const [similarAdverts, setSimilarAdverts] = useState<Pick<Advertisement, "photos" | "type" | "place">[]>([]);
 
   const getSimilarAdverts = useCallback(async () => {
     setLoading(true);

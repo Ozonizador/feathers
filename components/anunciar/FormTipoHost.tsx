@@ -10,12 +10,12 @@ const FormTipoHost = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = async (e) => {
+  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     incrementStep();
   };
 
-  const changeTypeProperty = (typeFlex, value) => {
+  const changeTypeProperty = (typeFlex: string, value: any) => {
     setAdvertisementProperty(typeFlex, value);
   };
 

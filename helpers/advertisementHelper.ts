@@ -195,6 +195,14 @@ const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
 
   // Dates
+  query = query.in(
+    "stay_id",
+    supabaseClient
+      .from("stays")
+      .select("id")
+      .filter("start_date", "gte", filter.dates.startDate)
+      .filter("end_date", "lte", filter.dates.endDate)
+  );
 
   filter.dates?.startDate &&
     (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));

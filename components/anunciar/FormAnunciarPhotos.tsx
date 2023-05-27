@@ -11,13 +11,13 @@ const FormAnunciarPhotos = () => {
   const { files, filesUrl } = useImageFiles();
   const setImagesInfo = useSetImageFiles();
 
-  const nextStep = async (e) => {
+  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (files.length < 5) return toast.error("Introduza pelo menos 5 imagens");
     incrementStep();
   };
 
-  const uploadToClient = (event) => {
+  const uploadToClient = (event: any) => {
     event.preventDefault();
     if (event.target.files) {
       let newFiles = [];
@@ -33,7 +33,7 @@ const FormAnunciarPhotos = () => {
     }
   };
 
-  const removeImageFromSelection = (index) => {
+  const removeImageFromSelection = (index: number) => {
     const currentImages = [...files];
     const currentObjectUrls = [...filesUrl];
     currentImages.splice(index, 1);

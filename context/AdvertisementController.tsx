@@ -10,7 +10,7 @@ import {
   TypeAdvertisement,
 } from "../models/advertisement";
 import { v4 as uuidv4 } from "uuid";
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createRandomUniqWord } from "../utils/utils";
 
@@ -79,7 +79,11 @@ interface MemoryFiles {
 const ImageFilesContext = createContext<MemoryFiles>({ files: [], filesUrl: [] });
 const SetImageFilesContext = createContext<Dispatch<SetStateAction<MemoryFiles>>>(() => {});
 
-export const AdvertisementController = ({ children }): JSX.Element => {
+interface AdvertisementControllerProps {
+  children: ReactNode;
+}
+
+export const AdvertisementController = ({ children }: AdvertisementControllerProps): JSX.Element => {
   const user = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
   const [fileInfo, setFileInfo] = useState<MemoryFiles>({ files: [], filesUrl: [] });
