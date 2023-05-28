@@ -35,7 +35,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
     }
   };
 
-  const changeAdvertisementProperty = (property, value) => {
+  const changeAdvertisementProperty = (property: string, value: any) => {
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
