@@ -43,7 +43,7 @@ export const LanguageLabel = {
 
 export const getSpokenLanguages = () => {
   return spokenLanguages.map((language) => {
-    const label = LanguageLabel[language] || _.capitalize(language);
+    const label = LanguageLabel[language as keyof typeof LanguageLabel] || _.capitalize(language);
     return { label, value: language };
   });
 };

@@ -7,7 +7,7 @@ export default function DescricaoCondicoes() {
     <div className="flex flex-col gap-2 lg:w-2/3">
       <div className="flex text-2xl font-bold">Descrição</div>
       <div className="py-2">
-        <div className="text-justify text-base text-secondary-500">{advertisement.description}</div>
+        <div className="text-justify text-base text-secondary-500">{advertisement?.description || ""}</div>
       </div>
     </div>
   );

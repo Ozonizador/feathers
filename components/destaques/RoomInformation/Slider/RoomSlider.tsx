@@ -5,24 +5,38 @@ import { houseAmenities } from "../../../../helpers/advertisementHelper";
 import { TypeAmenityLabel } from "../../../../models/advertisement";
 
 export default function RoomSlider() {
-  const { about_house } = useGetSingleAdvertisement();
+  const { about_house } = useGetSingleAdvertisement() || {
+    general: [],
+    bathRoom: [],
+    bedRoom: [],
+    kitchen: [],
+    livingRoom: [],
+    exterior: [],
+  };
 
-  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = about_house;
+  const { general, bathRoom, bedRoom, kitchen, livingRoom, exterior } = about_house || {
+    general: [],
+    bathRoom: [],
+    bedRoom: [],
+    kitchen: [],
+    livingRoom: [],
+    exterior: [],
+  };
+
   const Comodities = ({}) =>
     useMemo(() => {
       return (
         <Carousel>
-
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Comodidades gerais</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Comodidades gerais</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!general || general.length === 0) && <div>Sem nada a assinalar</div>}
               {general &&
                 general.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="mt-3 text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -30,15 +44,15 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Quarto</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Quarto</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!bedRoom || bedRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {bedRoom &&
                 bedRoom.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -46,15 +60,15 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Cozinha</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Cozinha</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!kitchen || kitchen.length === 0) && <div>Sem nada a assinalar</div>}
               {kitchen &&
                 kitchen.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -62,15 +76,15 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Casa de Banho</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Casa de Banho</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!bathRoom || bathRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {bathRoom &&
                 bathRoom.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -78,15 +92,15 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Zona de estar</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Zona de estar</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!livingRoom || livingRoom.length === 0) && <div>Sem nada a assinalar</div>}
               {livingRoom &&
                 livingRoom.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -94,15 +108,15 @@ export default function RoomSlider() {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-center text-primary-500 mb-auto mt-5">Zona Exterior</div>
-            <div className="flex h-full mx-auto justify-center gap-5 align-middle flex-wrap w-11/12">
+            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Zona Exterior</div>
+            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
               {(!exterior || exterior.length === 0) && <div>Sem nada a assinalar</div>}
               {exterior &&
                 exterior.map((amenity, index) => {
                   const icon = houseAmenities(amenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon({ size: 24 })}
+                      {icon && icon({ size: 24 })}
                       <div className="text-sm">{TypeAmenityLabel[amenity]}</div>
                     </div>
                   );
@@ -114,7 +128,7 @@ export default function RoomSlider() {
     }, []);
 
   return (
-    <div className="mb-32 mt-10 min-h-[300px] h-48 rounded-xl border lg:mt-40">
+    <div className="mb-32 mt-10 h-48 min-h-[300px] rounded-xl border lg:mt-40">
       <Comodities />
     </div>
   );

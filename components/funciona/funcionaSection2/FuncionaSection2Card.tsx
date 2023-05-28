@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
 
-const HomeSection2Cards = ({ img, icon, heading, text }) => {
+interface HomeSection2CardsProps {
+  img: string;
+  icon: string;
+  heading: string;
+  text: string;
+}
+
+const HomeSection2Cards = ({ img, icon, heading, text }: HomeSection2CardsProps) => {
   return (
     <>
       <div className="hidden w-full lg:block">

@@ -30,7 +30,7 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
                   <div className="relative h-8 w-8 lg:h-20 lg:w-20">
                     <Image src={topIcon.image} alt="" layout="fill"></Image>
                   </div>
-                  <h1 className="ml-2 text-center text-xl font-bold text-primary-500 lg:mt-4 lg:ml-0 lg:text-2xl">
+                  <h1 className="ml-2 text-center text-xl font-bold text-primary-500 lg:ml-0 lg:mt-4 lg:text-2xl">
                     {topIcon.text}
                   </h1>
                   {options && options.length > 0 && (
@@ -73,7 +73,7 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
                   <p className="ml-3 text-base font-bold">{option.text}</p>
                 </div>
               ) : (
-                <Link href={option.link} key={index}>
+                <Link href={option.link || ""} key={index}>
                   <a className="text-xl font-bold">{option.text}</a>
                 </Link>
               );

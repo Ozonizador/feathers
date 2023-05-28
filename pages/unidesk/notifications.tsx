@@ -23,7 +23,7 @@ const Notifications = () => {
     if (profile) {
       const { data, error } = await getNotifications(profile.id);
       if (!error) {
-        setNotifications(data);
+        setNotifications(data as Notification[]);
       }
     }
     setIsLoading(false);
@@ -39,7 +39,7 @@ const Notifications = () => {
   return (
     <div className="mx-5 my-16 rounded-lg border lg:border-none">
       <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
-      <div className="lg:w-4/5 container mx-auto w-full">
+      <div className="container mx-auto w-full lg:w-4/5">
         <>
           {isLoading && (
             <div className="mt-32 flex flex-1 justify-center">

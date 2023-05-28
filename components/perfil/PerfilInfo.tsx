@@ -9,7 +9,8 @@ interface PerfilIntoProps {
 
 const PerfilInfo = ({ profile }: PerfilIntoProps) => {
   const getUserLanguages = () => {
-    const languages = profile.languages.map((language) => LanguageLabel[language]).join(", ");
+    const languages =
+      profile.languages?.map((language) => LanguageLabel[language as keyof typeof LanguageLabel]).join(", ") || [];
     return languages;
   };
 
@@ -18,7 +19,7 @@ const PerfilInfo = ({ profile }: PerfilIntoProps) => {
       <div className="flex flex-row items-center justify-end align-middle">
         <div>
           <h2 className="mr-3">
-            É de {profile.town} {countryList().getLabel(profile.nationality)}
+            É de {profile.town} {countryList().getLabel(profile.nationality || "")}
           </h2>
         </div>
         <div>

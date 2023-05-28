@@ -9,13 +9,13 @@ import {
 import Checkbox from "../utils/Checkbox";
 
 interface AboutHouseComponentProps {
-  advertisement?: Advertisement;
-  onChange: (property, value) => void;
+  advertisement: Advertisement;
+  onChange: (property: string, value: any) => void;
 }
 
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
-  const toggleAmmenityProperty = (event, space: AboutHouseSpace) => {
-    const property = event.target.name;
+  const toggleAmmenityProperty = (event: React.ChangeEvent, space: AboutHouseSpace) => {
+    const property = (event.target as HTMLInputElement).name;
     //const checked = event.target.checked;
 
     const { about_house } = advertisement;
@@ -35,7 +35,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     }
 
     if (!foundAmenity) {
-      amenities.push(property);
+      amenities.push(property as TypeAmenity);
     }
 
     onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...about_house, [space]: amenities });
@@ -64,7 +64,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "general")}
@@ -89,7 +89,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "livingRoom")}
@@ -114,7 +114,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "bedRoom")}
@@ -139,7 +139,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "bathRoom")}
@@ -164,7 +164,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "exterior")}
@@ -189,7 +189,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "kitchen")}

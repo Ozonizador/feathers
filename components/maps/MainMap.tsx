@@ -5,7 +5,7 @@ import { GEO } from "../../models/utils";
 import Button from "../utils/Button";
 
 interface MainMapProps {
-  currentMapCoords: GEO | null;
+  currentMapCoords?: GEO;
   showCenterMarker: boolean;
   draggableMarker?: boolean;
   allowZoom?: boolean;
@@ -23,7 +23,7 @@ const MainMap = ({
   showCenterMarker = true,
   onChangeMarker,
 }: MainMapProps) => {
-  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
+  const [mapCenter, setMapCenter] = useState<GEO | undefined>(currentMapCoords);
 
   const requestLocation = () => {
     navigator.geolocation.getCurrentPosition(() => {});
@@ -77,7 +77,7 @@ const MapComponent = ({
   showCenterMarker,
   onChangeMarker,
 }: MainMapProps) => {
-  const [position, setPosition] = useState<GEO | null>(currentMapCoords);
+  const [position, setPosition] = useState<GEO | undefined>(currentMapCoords);
   const map = useMap();
 
   useEffect(() => {

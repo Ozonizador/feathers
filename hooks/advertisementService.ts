@@ -6,6 +6,7 @@ import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import {
   Advertisement,
   Advertisements,
+  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
@@ -86,7 +87,11 @@ const useAdvertisementService = () => {
     lng: number,
     page: number,
     filters: FilterAdvertisements
-  ) => {
+  ): Promise<{
+    data: AdvertisementWithReviewAverage[] | null;
+    error: PostgrestError | null | string;
+    count: number | null;
+  }> => {
     if (!lng || !lat) {
       return { data: null, error: "No latitude or longitude provided", count: null };
     }
@@ -105,7 +110,7 @@ const useAdvertisementService = () => {
     query = addFilterAdvertisement(query, filters);
     const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
-    return { data, error, count };
+    return { data: data as unknown as AdvertisementWithReviewAverage[], error, count };
   };
 
   const getAdvertisementsWithoutCoordinates = async (page: number, filters: FilterAdvertisements) => {

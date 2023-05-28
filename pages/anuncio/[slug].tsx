@@ -29,7 +29,6 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
-  console.log("aaa")
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>
@@ -115,7 +114,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const responseRate =
       (allConversationsError && repliedConversationError) || !allConversations
         ? 0
-        : repliedConversation / allConversations;
+        : repliedConversation || 0 / allConversations;
 
     return {
       props: { advertisement, initialSession: session, user: session.user, responseRate },

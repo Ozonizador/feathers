@@ -14,7 +14,7 @@ const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
 
 interface GeneralAdvertComponentProps {
   advertisement: Advertisement;
-  onChangeMarker?: (lat, lng) => void;
+  onChangeMarker?: (lat: number, lng: number) => void;
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvertComponentProps) => {
@@ -54,14 +54,14 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               control={control}
               render={({ field: { value, onChange } }) => (
                 <select
-                  className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
+                  className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2"
                   value={value}
                   onChange={onChange}
                 >
                   {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                     return (
                       <option key={index} value={type}>
-                        {TYPE_ADVERTISEMENT[type]}
+                        {TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT]}
                       </option>
                     );
                   })}

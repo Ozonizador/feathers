@@ -10,7 +10,7 @@ const FormTipoHost = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
+  const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     incrementStep();
   };

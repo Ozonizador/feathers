@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 interface InputProps {
-  onChange?: (e) => void;
+  onChange?: (e: any) => void;
   value?: string | number;
   customCss?: string;
   labelText?: string;
@@ -31,7 +31,7 @@ export default function Input({
         <input
           placeholder={placeholder}
           className={classNames(
-            "block w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-5 shadow-sm",
+            "block w-full rounded-md border border-solid border-terciary-500 bg-white px-5 py-2 shadow-sm",
             `${customCss}`,
             { "border-red-700": errorMessage },
             { "bg-gray-300": disabled }

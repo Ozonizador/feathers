@@ -8,7 +8,7 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = ({ review, tenant }: ReviewCardProps) => {
-  if (!review) return;
+  if (!review) return <></>;
   const ratings = [
     review.comodities_rating,
     review.landlord_rating,

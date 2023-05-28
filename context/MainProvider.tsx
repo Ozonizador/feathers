@@ -1,5 +1,5 @@
 import { useUser } from "@supabase/auth-helpers-react";
-import { useCallback, useContext, useEffect } from "react";
+import { ReactNode, useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Profile, UserTypes } from "../models/profile";
 import { GEO, MapCoordinates } from "../models/utils";
@@ -25,8 +25,8 @@ const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
 const SetUnihostsWebsiteContext = createContext<Dispatch<SetStateAction<GeneralUnihostInformation>>>(() => {});
 
 /* user location */
-const UserLocationContext = createContext<GEO | null>(null);
-const SetUserLocationContext = createContext<Dispatch<SetStateAction<GEO>>>(() => {});
+const UserLocationContext = createContext<GEO | undefined>(undefined);
+const SetUserLocationContext = createContext<Dispatch<SetStateAction<GEO | undefined>>>(() => {});
 
 type UserSearchInfo = {
   location: string;
@@ -46,10 +46,14 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
 
 const SetUserLocationSearchContext = createContext<Dispatch<SetStateAction<UserSearchInfo>>>(() => {});
 
-export const MainProvider = ({ children }): JSX.Element => {
+interface MainProviderProps {
+  children: ReactNode;
+}
+
+export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const router = useRouter();
   const [locationAccess, setLocationAccess] = useState(false);
-  const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | null>(null);
+  const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | undefined>(undefined);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
     toggleUserType: "TENANT",
     profile: null,
@@ -71,14 +75,14 @@ export const MainProvider = ({ children }): JSX.Element => {
 
     const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
     if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
-    if (data.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
+    if (data?.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
   }, [user]);
 
   const checkUserNotificationsAndMessages = useCallback(async () => {
     if (!user) return;
 
     Promise.allSettled([
-      checkMessagesNotSeen(user.id, currentUnihostState.profile.type),
+      checkMessagesNotSeen(user.id, currentUnihostState?.profile?.type),
       checkNotificationsNotSeen(user.id),
     ]).then(([messagesData, notificationData]) => {
       if (messagesData.status == "fulfilled") {
@@ -86,7 +90,7 @@ export const MainProvider = ({ children }): JSX.Element => {
       }
 
       if (notificationData.status == "fulfilled") {
-        setCurrentUnihostState((c) => ({ ...c, notificationNumber: notificationData.value }));
+        setCurrentUnihostState((c) => ({ ...c, notificationNumber: notificationData.value || 0 }));
       }
     });
   }, [currentUnihostState.profile]);
@@ -167,6 +171,7 @@ export const useSetProfileFavouritesInformation = () => {
   const currentInfo = useContext(UnihostsWebsiteContext);
 
   return async (favouriteRooms: string[]): Promise<void> => {
+    if (!currentInfo || !currentInfo.profile) return;
     const { data, error } = await updateFavouriteFromUser(currentInfo.profile.id, favouriteRooms);
     if (!error) {
       setCurrentInfo((currentStatus) => ({ ...currentStatus, profile: data }));

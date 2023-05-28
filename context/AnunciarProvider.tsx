@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 
 /* STEPS */
 const AnunciarStepContext = createContext<number>(0);
 const SetAnunciarStepContext = createContext<Dispatch<SetStateAction<number>>>(() => {});
 
-export const AnunciarProvider = ({ children }): JSX.Element => {
+interface AnunciarProviderProps {
+  children: ReactNode;
+}
+
+export const AnunciarProvider = ({ children }: AnunciarProviderProps): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   return (
@@ -37,6 +41,6 @@ export const useDecrementStep = () => {
   const setCurrentStep = useContext(SetAnunciarStepContext);
   const currentStep = useContext(AnunciarStepContext);
   return (): void => {
-    setCurrentStep((oldStep) => oldStep !== 0 && oldStep - 1);
+    setCurrentStep((oldStep) => (oldStep !== 0 && oldStep--) || oldStep);
   };
 };

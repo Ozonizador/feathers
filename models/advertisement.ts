@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import { Review } from "./review";
+import { Review, ReviewsAverage } from "./review";
 import { StayWithPublicReview } from "./stay";
 
 // TODO: change the advertisements to listings because of adblocker
@@ -16,7 +16,7 @@ export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];
 
 export type AdvertisementWithReviewAverage = Advertisement & {
-  averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
+  averages: ReviewsAverage[];
 };
 
 export type AdvertisementComplete = Advertisement & {

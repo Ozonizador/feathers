@@ -3,7 +3,7 @@ import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
 import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
-import { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import countryList from "react-select-country-list";
@@ -107,7 +107,7 @@ const Index = ({ user, profileData }: IndexProps) => {
   const options = useMemo(() => countryList().getData(), []);
 
   /* Avatar */
-  const uploadAvatar = async (event) => {
+  const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     if (event.target.files) {
@@ -128,7 +128,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">Informações pessoais</div>
-          <div className="mt-5 mb-5">
+          <div className="mb-5 mt-5">
             <div className="flex items-center justify-center lg:justify-start">
               <label
                 htmlFor="files"
@@ -152,7 +152,10 @@ const Index = ({ user, profileData }: IndexProps) => {
                 className="hidden"
               />
             </div>
-            <h6 className="mx-auto mt-2 cursor-pointer px-3 text-primary-500" onClick={() => fileRef.current.click()}>
+            <h6
+              className="mx-auto mt-2 cursor-pointer px-3 text-primary-500"
+              onClick={() => (fileRef.current as any).click()}
+            >
               Mudar foto
             </h6>
           </div>
@@ -219,7 +222,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                   <div className="flex-1">
                     <select
                       {...register("gender")}
-                      className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3"
+                      className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2"
                     >
                       <option value={Gender.female}>Feminino</option>
                       <option value={Gender.male}>Masculino</option>
@@ -243,7 +246,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           <textarea
             {...register("description")}
             rows={5}
-            className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2  shadow-sm"
+            className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  shadow-sm"
             placeholder="Escreva aqui..."
           />
 
@@ -305,7 +308,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                   type="submit"
                   disabled={!isDirty}
                   className={classNames(
-                    "mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4 px-9 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44",
+                    "mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9 py-4 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44",
                     { "opacity-50": !isDirty }
                   )}
                   onSubmit={handleSubmit(onSubmit)}

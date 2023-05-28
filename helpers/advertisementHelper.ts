@@ -61,7 +61,6 @@ const hostTypeFlexDescription = (type: HostFlexType) => {
     FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
     MODERATE: `Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
     RIGID: `Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
-    "": "",
   }[type];
 };
 
@@ -71,12 +70,11 @@ const hostTranslate = (type: HostFlexType) => {
     FLEX: `Flexível`,
     MODERATE: `Moderado`,
     RIGID: `Rigido`,
-    "": "",
   }[type];
 };
 
 // get the icons to use here
-export const houseAmenities = (type: TypeAmenity): IconType => {
+export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
   switch (type) {
     case "SOFA":
       return TbSofa;
@@ -171,7 +169,7 @@ export const houseAmenities = (type: TypeAmenity): IconType => {
     case "POWER_PLUG_NEAR_BED":
       return BiPlug;
     default:
-      return null;
+      return undefined;
     // case   "COURTYARD": return COURTYARD
     // case   "BLACKOUTS": return typeof
   }
@@ -191,18 +189,18 @@ const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   //   (query = query.filter(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, "in", filter.comodities));
 
   //  Price
-  filter.price.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));
-  filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
+  // filter.price.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));
+  // filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
 
-  // Dates
-  query = query.in(
-    "stay_id",
-    supabaseClient
-      .from("stays")
-      .select("id")
-      .filter("start_date", "gte", filter.dates.startDate)
-      .filter("end_date", "lte", filter.dates.endDate)
-  );
+  // // Dates
+  // query = query.in(
+  //   "stay_id",
+  //   supabaseClient
+  //     .from("stays")
+  //     .select("id")
+  //     .filter("start_date", "gte", filter.dates.startDate)
+  //     .filter("end_date", "lte", filter.dates.endDate)
+  // );
 
   filter.dates?.startDate &&
     (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
@@ -212,13 +210,11 @@ const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
   return query;
 };
 
-const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
-  if (photos && photos.length > 0) {
-    let photo = photos.find((photo) => photo.zone == "main");
-    return photo ? photo : photos[0];
-  } else {
-    return null;
-  }
+const getMainAdvertPhoto = (photos: AdvertisementPhoto[]): AdvertisementPhoto | undefined => {
+  if (!photos || photos.length == 0) return undefined;
+
+  let photo = photos.find((photo) => photo.zone == "main");
+  return photo ? photo : photos[0];
 };
 
 export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, getMainAdvertPhoto };

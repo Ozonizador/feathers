@@ -73,7 +73,7 @@ const Details = ({ advertisement }: DetailsProps) => {
     },
   });
 
-  const saveChanges = async (data) => {
+  const saveChanges = async (data: any) => {
     const { error } = await updateAdvertisement({ ...advertisementContext, ...data }, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
@@ -86,7 +86,7 @@ const Details = ({ advertisement }: DetailsProps) => {
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
-  const onChangeMarker = (lat, lng) => {
+  const onChangeMarker = (lat: number, lng: number) => {
     const coordsArray = coordinatesObjectToArray({ lat, lng });
     let newCoordinates = { type: "Point", coordinates: coordsArray };
 
@@ -146,7 +146,7 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                   <AnuncioDisponivel advertisement={advertisementContext} />
-                  <div className="my-5 mx-auto w-1/2 px-6">
+                  <div className="mx-auto my-5 w-1/2 px-6">
                     <Button onClick={methods.handleSubmit(saveChanges)} type="button">
                       Guardar alterações &#10230;
                     </Button>

@@ -75,7 +75,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex">
                           <div className="font-bold">Primeira Renda</div>
                           <div className="ml-auto flex">
-                            <div className="font-bold">{advertisement.month_rent}€</div>
+                            <div className="font-bold">{advertisement?.month_rent}€</div>
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
@@ -101,7 +101,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex">
                           <h6 className="font-bold">No dia do Check-in</h6>
                           <div className="ml-auto flex">
-                            <div className="font-bold">{advertisement.month_rent}€</div>
+                            <div className="font-bold">{advertisement?.month_rent}€</div>
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
@@ -121,7 +121,7 @@ const ModalDetalhesPagamento = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="ml-auto mr-6 text-neutral-500">{advertisement.month_rent}€</div>
+                          <div className="ml-auto mr-6 text-neutral-500">{advertisement?.month_rent}€</div>
                         </div>
                       </FeathersAccordion>
                       {/* Mensalidade */}
@@ -142,7 +142,7 @@ const ModalDetalhesPagamento = () => {
                                     {formatOnlyMonth(selectedDate, { monthsAhead: value })}
                                   </span>
                                 </div>
-                                <div className="ml-auto mr-6">{advertisement.month_rent}€</div>
+                                <div className="ml-auto mr-6">{advertisement?.month_rent}€</div>
                               </div>
                             );
                           })}

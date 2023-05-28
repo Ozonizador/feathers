@@ -1,5 +1,7 @@
+import React from "react";
+
 interface CheckboxProps {
-  onChange: (e) => void;
+  onChange: (e: React.ChangeEvent<any>) => void;
   checked: boolean;
   name: string;
   [x: string]: any;

@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const HomeSection2Cards = ({ img, heading, text }) => {
+interface HomeSection2CardsProps {
+  img: string;
+  heading: string;
+  text: string;
+}
+
+const HomeSection2Cards = ({ img, heading, text }: HomeSection2CardsProps) => {
   return (
     <article className="flex flex-1 gap-8 p-2 lg:gap-2">
       <div className="relative my-auto pt-1 lg:my-0">

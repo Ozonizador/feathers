@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 
 interface QuantityInputProps {
-  onChange?: (value) => void;
+  onChange?: (value: any) => void;
   initValue: number;
 }
 

@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const FuncionaSection3Card = ({ img, heading, text }) => {
+interface FuncionaSection3CardProps {
+  img: string;
+  heading: string;
+  text: string;
+}
+
+const FuncionaSection3Card = ({ img, heading, text }: FuncionaSection3CardProps) => {
   return (
     <article className="flex flex-col items-start rounded-2xl bg-white p-9 drop-shadow-2xl">
       <div className="rounded-3xl bg-gray-100 p-4">

@@ -29,16 +29,16 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const profile = useCurrentUser();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
   const advertisementOverallRating =
-    (advertisement.averages && advertisement.averages[0] && advertisement.averages[0].overall_average.toFixed(2)) ||
+    (advertisement.averages && advertisement.averages[0] && advertisement.averages[0]?.overall_average?.toFixed(2)) ||
     "-";
 
-  const toggleFavourite = async (e, advertId: string, isFavourite: boolean) => {
+  const toggleFavourite = async (e: React.MouseEvent, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
     if (!profile) return;
     let { favourite_rooms } = profile;
 
     if (isFavourite) {
-      const newFavRooms = favourite_rooms.filter((favourite) => advertId !== favourite);
+      const newFavRooms = favourite_rooms?.filter((favourite) => advertId !== favourite) || [];
       await setFavouriteProfile(newFavRooms);
     } else {
       if (favourite_rooms === null) favourite_rooms = [];
@@ -58,21 +58,21 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     return false;
   }, [advertisement.id, profile]);
 
-  const getMainPhoto = useCallback(() => {
-    if (advertisement) {
-      getMainAdvertPhoto(advertisement.photos);
-    } else {
-      return null;
-    }
+  const getMainPhoto = useMemo(() => {
+    if (!advertisement) return undefined;
+    return getMainAdvertPhoto(advertisement.photos);
   }, [advertisement]);
 
   const showSomeAmenities = useMemo(() => {
     if (advertisement.about_house) {
       const { general, bedRoom, bathRoom, exterior, livingRoom, kitchen } = advertisement.about_house;
 
-      const amenities: TypeAmenity[] = [].concat.apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom]).filter((opt) => !!opt).slice(0,5);
+      const amenities: TypeAmenity[] = ([] as TypeAmenity[]).concat
+        .apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom])
+        .filter((opt) => !!opt)
+        .slice(0, 5);
       return (
-        <ul className="pr-3 flex gap-5 text-gray-500">
+        <ul className="flex gap-5 pr-3 text-gray-500">
           {amenities.map((amenity, index) => {
             return (
               <li key={index} className={classNames({ "list-none": index === 0 })}>
@@ -92,7 +92,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
             <div className="relative h-96 w-full lg:h-56 lg:w-1/3">
-              {getMainPhoto() ? <Image src={getMainPhoto().url} alt="..." layout="fill" objectFit="cover" /> : <></>}
+              {getMainPhoto ? <Image src={getMainPhoto?.url} alt="..." layout="fill" objectFit="cover" /> : <></>}
             </div>
             <div className="px-5 lg:w-2/3">
               <div className="m-1">

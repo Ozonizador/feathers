@@ -9,7 +9,7 @@ const FormAboutHouse = () => {
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
-  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
+  const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     incrementStep();
   };

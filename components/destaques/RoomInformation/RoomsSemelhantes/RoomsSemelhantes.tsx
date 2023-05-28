@@ -57,7 +57,7 @@ export default function RoomSemelhantes() {
               <span className="px-1">
                 <CgHome />
               </span>{" "}
-              em {advertisement.place}
+              em {advertisement?.place || ""}
             </a>
           </Link>
         </section>

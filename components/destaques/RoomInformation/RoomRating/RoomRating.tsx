@@ -10,9 +10,9 @@ import ReviewCard from "../../../advertisements/ReviewCard";
 import classNames from "classnames";
 
 const RoomRating = () => {
-  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
+  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);
   const advertisement = useGetSingleAdvertisement();
-  const { stays } = advertisement;
+  const { stays } = advertisement || { stays: [] };
   const { getAveragesByAdvertisementId } = useReviewService();
   let setModalReviews = useSetModalReviews();
 
@@ -53,7 +53,7 @@ const RoomRating = () => {
 export default RoomRating;
 
 interface RoomAverageSectionProps {
-  averageRatings: AdvertisementReviewSummary;
+  averageRatings?: AdvertisementReviewSummary;
   showTopSection?: boolean;
 }
 

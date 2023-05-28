@@ -10,7 +10,7 @@ const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap")
 export default function RoomMap() {
   const advertisement = useGetSingleAdvertisement();
 
-  const geom = advertisement.geom;
+  const geom = advertisement?.geom || undefined;
 
   const geoCoordinates = (geom && coordinateArrayToLatitude(geom.coordinates)) || null;
 

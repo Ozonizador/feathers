@@ -8,7 +8,7 @@ const DatePicker = dynamic(() => import("react-datepicker"), {
 
 interface FeatherDatePickerProps {
   date: Date;
-  onChange: (date) => void;
+  onChange: (date: any) => void;
   className?: string;
   minDate?: Date;
 }

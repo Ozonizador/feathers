@@ -3,8 +3,10 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementComplete } from "../models/advertisement";
 
 /* STEPS */
-const SingleAdvertisementContext = createContext<AdvertisementComplete>(null);
-const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<AdvertisementComplete>>>(() => {});
+const SingleAdvertisementContext = createContext<AdvertisementComplete | undefined>(undefined);
+const SetSingleAdvertisementContext = createContext<Dispatch<SetStateAction<AdvertisementComplete | undefined>>>(
+  () => {}
+);
 
 interface ShowingSingleAdvertisementProviderProps {
   advertisement: AdvertisementComplete;
@@ -15,7 +17,7 @@ export const ShowingSingleAdvertisementProvider = ({
   advertisement,
   children,
 }: ShowingSingleAdvertisementProviderProps): JSX.Element => {
-  const [singleAdvertisement, setSingleAdvertisement] = useState<AdvertisementComplete>(advertisement);
+  const [singleAdvertisement, setSingleAdvertisement] = useState<AdvertisementComplete | undefined>(advertisement);
 
   return (
     <SingleAdvertisementContext.Provider value={singleAdvertisement}>

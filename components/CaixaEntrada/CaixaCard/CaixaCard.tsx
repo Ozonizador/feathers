@@ -5,7 +5,7 @@ import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../m
 
 interface CaixaCardProps {
   profile: Profile;
-  reservation: Partial<ReservationWithAdvertisement>;
+  reservation: Pick<ReservationWithAdvertisement, "updated_at" | "status" | "advertisement">;
 }
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
@@ -33,12 +33,14 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
 
       <div className="flex w-full flex-col">
         <div className="flex w-full flex-row">
-          <h1 className="text-base font-bold text-green-500">{ReservationStatusLabel[reservation.status]}</h1>
+          <h1 className="text-base font-bold text-green-500">
+            {ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel]}
+          </h1>
           <p className="my-auto ml-auto text-xs">{formatCardDate()}</p>
         </div>
-        <h2 className="mt-2 mb-2 text-xs text-secondary-500 line-clamp-2">{profile.description}</h2>
+        <h2 className="mb-2 mt-2 line-clamp-2 text-xs text-secondary-500">{profile.description}</h2>
 
-        <p className="text-xs font-normal text-secondary-400">{reservation.advertisement.title}</p>
+        <p className="text-xs font-normal text-secondary-400">{reservation.advertisement?.title || ""}</p>
       </div>
     </div>
   );

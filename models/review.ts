@@ -9,6 +9,7 @@ export type Reviews = Database["public"]["Tables"]["reviews"];
 export type Review = Reviews["Row"];
 
 export type ReviewsAverageView = Database["public"]["Views"]["reviewsPerAdvertisement"];
+export type ReviewsAverage = ReviewsAverageView["Row"];
 
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Advertisement;

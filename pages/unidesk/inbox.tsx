@@ -33,7 +33,7 @@ const CaixaEntrada = () => {
   const { getConversationsFromUser } = useConversationService();
 
   const [currentMessage, setCurrentMessage] = useState<string>("");
-  const [currentConversation, setCurrentConversation] = useState<ConversationWithTenant>(null);
+  const [currentConversation, setCurrentConversation] = useState<ConversationWithTenant | null>(null);
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -57,9 +57,9 @@ const CaixaEntrada = () => {
     getMessagesFromConversation();
   }, [getMessagesFromConversation]);
 
-  const sendMessage = async (event, conversationId) => {
+  const sendMessage = async (event, conversationId: string) => {
     event.preventDefault();
-    if (!currentMessage || !conversationId) return;
+    if (!currentMessage || !conversationId || !profile) return;
 
     const { data, error } = await insertMessageOnConversation(currentMessage, conversationId, profile.id);
     if (!error) {
@@ -71,16 +71,19 @@ const CaixaEntrada = () => {
     getUserConversations();
   }, [getUserConversations]);
 
-  const getOtherProfile = (conversation) => {
+  const getOtherProfile = (conversation: ConversationComplete) => {
+    if (!profile) return;
     return conversation.host.id === profile.id ? conversation.tenant : conversation.host;
   };
 
   const updateReservationStatus = async (status: ReservationStatus) => {
-    const { reservation } = currentConversation;
+    const { reservation } = currentConversation || { reservation: undefined };
+    if (!reservation) return;
+
     const { data, error } = await acceptReservation(reservation.id, status);
 
-    if (!error) {
-      setCurrentConversation({ ...currentConversation, reservation: data as Reservation });
+    if (!error || !data) {
+      setCurrentConversation({ ...currentConversation, reservation: data as unknown as Reservation });
     }
   };
 
@@ -129,8 +132,8 @@ const CaixaEntrada = () => {
                   setCurrentMessage={setCurrentMessage}
                 />
                 {currentConversation &&
-                  currentConversation.host_id === profile.id &&
-                  currentConversation.reservation.tenant_id !== profile.id && (
+                  currentConversation.host_id === profile?.id &&
+                  currentConversation.reservation.tenant_id !== profile?.id && (
                     <div className="w-96 border-l border-terciary-500 p-2">
                       <>
                         <div className="flex">
@@ -148,7 +151,11 @@ const CaixaEntrada = () => {
                             />
                           </div>
                           <div>
-                            <div>{ReservationStatusLabel[currentConversation.reservation.status]}</div>
+                            <div>
+                              {(currentConversation.reservation.status &&
+                                ReservationStatusLabel[currentConversation.reservation.status]) ||
+                                ""}
+                            </div>
                             <div className="text-sm">
                               {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
                         ${currentConversation.reservation.advertisement?.place}`}
@@ -259,7 +266,7 @@ const CaixaEntrada = () => {
 
 interface MessagesSenderZoneProps {
   messages: MessageWithProfile[];
-  sendMessage: (e, conversationId) => void;
+  sendMessage: (e, conversationId: string) => void;
   currentMessage: string;
   setCurrentMessage: (e) => void;
   conversationId: string;

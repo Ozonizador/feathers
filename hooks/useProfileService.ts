@@ -1,7 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
 import { Messages, MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
-import { NotificationsResponse, NOTIFICATION_PROPERTIES, NOTIFICATION_TABLE_NAME } from "../models/notification";
+import { NotificationsResponse, NOTIFICATION_TABLE_NAME } from "../models/notification";
 import {
   AVATAR_STORAGE_NAME,
   Profile,
@@ -35,7 +35,7 @@ const useProfileService = () => {
     }
   };
 
-  const createProfile = async (metadata?: { avatar_url?: string; firstName?: string; lastName?: string }) => {
+  const createProfile = async (metadata: { avatar_url?: string; firstName?: string; lastName?: string }) => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({
@@ -115,7 +115,9 @@ const useProfileService = () => {
 
   /* Messages */
 
-  const checkMessagesNotSeen = async (userId: string, type?: UserTypes) => {
+  const checkMessagesNotSeen = async (userId: string, type?: UserTypes | null) => {
+    if (!type) return 0;
+
     let query = supabaseClient
       .from<"messages", Messages>(MESSAGE_TABLE_NAME)
       .select("conversations(*)", { count: "exact" })
@@ -166,7 +168,7 @@ const useProfileService = () => {
   async function updateNotificationEmail(
     userId: string,
     notify: boolean
-  ): Promise<{ data: { accepts_notification_email: boolean }; error: PostgrestError }> {
+  ): Promise<{ data: { accepts_notification_email: boolean } | null; error: PostgrestError | null }> {
     const { error, data } = await supabaseClient
       .from(PROFILE_TABLE_NAME)
       .update({ accepts_notification_email: notify })

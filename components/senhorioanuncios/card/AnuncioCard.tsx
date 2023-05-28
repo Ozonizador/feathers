@@ -10,7 +10,7 @@ import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
 
-function EditInactiveIcon(props) {
+function EditInactiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
@@ -18,7 +18,7 @@ function EditInactiveIcon(props) {
   );
 }
 
-function EditActiveIcon(props) {
+function EditActiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
@@ -26,7 +26,7 @@ function EditActiveIcon(props) {
   );
 }
 
-function DeleteInactiveIcon(props) {
+function DeleteInactiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="5" y="6" width="10" height="10" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
@@ -36,7 +36,7 @@ function DeleteInactiveIcon(props) {
   );
 }
 
-function DeleteActiveIcon(props) {
+function DeleteActiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="5" y="6" width="10" height="10" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
@@ -56,7 +56,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
   const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
   const { removeAdvertisement } = useAdvertisementService();
 
-  const editAdvertisement = (event, slug: string) => {
+  const editAdvertisement = (event: React.MouseEvent, slug: string) => {
     event.preventDefault();
     setMenuSelectedAdvertisement(advertisement);
     router.push(`/unidesk/senhorio/${slug}/details`);
@@ -143,7 +143,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
               </div>
             </div>
             <div className="w-96">
-              <div className="mb-1 mt-4 text-base text-secondary-300 line-clamp-3">{advertisement.description}</div>
+              <div className="mb-1 mt-4 line-clamp-3 text-base text-secondary-300">{advertisement.description}</div>
               <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
               <ExpensesComponent expenses={advertisement.expenses} />
             </div>

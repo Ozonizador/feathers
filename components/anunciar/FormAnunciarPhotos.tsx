@@ -11,7 +11,7 @@ const FormAnunciarPhotos = () => {
   const { files, filesUrl } = useImageFiles();
   const setImagesInfo = useSetImageFiles();
 
-  const nextStep = async (e: React.FormEvent<HTMLFormElement>) => {
+  const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (files.length < 5) return toast.error("Introduza pelo menos 5 imagens");
     incrementStep();

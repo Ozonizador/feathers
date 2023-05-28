@@ -8,14 +8,12 @@ import Image from "next/image";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 export default function HomeSection3() {
-  const { getAdvertisementsForMainPage, getAdvertisementsWithoutCoordinates } = useAdvertisementService();
+  const { getAdvertisementsWithoutCoordinates } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const currentMapCoordinates = useGetUserCoordinates();
 
   const getCloseAdvertisements = useCallback(async () => {
     if (currentMapCoordinates) {
-      //const { data, error } = await getAdvertisementsForMainPage(currentMapCoordinates.lat, currentMapCoordinates.lng);
-      // TODO : remove this in favor of the function on the top.
       const { data, error } = await getAdvertisementsWithoutCoordinates(1, {
         filter: {
           comodities: [],
@@ -24,7 +22,7 @@ export default function HomeSection3() {
             startRange: null,
             endRange: null,
           },
-          coordinates: null,
+          coordinates: undefined,
           dates: {
             startDate: null,
             endDate: null,
@@ -82,7 +80,7 @@ export default function HomeSection3() {
                         <h2 className="absolute top-1 z-50 p-2 text-sm text-white">
                           {TYPE_ADVERTISEMENT[advertisement.type]}
                         </h2>
-                        <p className="bold absolute right-4 bottom-1 rounded-full p-3 text-4xl text-white lg:right-4">
+                        <p className="bold absolute bottom-1 right-4 rounded-full p-3 text-4xl text-white lg:right-4">
                           &euro;{advertisement.month_rent}
                         </p>
                       </article>

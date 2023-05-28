@@ -16,8 +16,8 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
     <>
       <div
         className={classNames("ml-2 flex", {
-          "justify-end": message.profile_id === currentUser.id,
-          "justify-start": message.profile_id !== currentUser.id,
+          "justify-end": message.profile_id === currentUser?.id,
+          "justify-start": message.profile_id !== currentUser?.id,
         })}
       >
         <div className="w-1/2">
@@ -25,8 +25,8 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
             {previousMessage?.profile_id !== message.profile_id && (
               <div
                 className={classNames("flex w-full flex-row align-middle", {
-                  "mr-2 justify-end": message.profile_id === currentUser.id,
-                  "ml-2 justify-start": message.profile_id !== currentUser.id,
+                  "mr-2 justify-end": message.profile_id === currentUser?.id,
+                  "ml-2 justify-start": message.profile_id !== currentUser?.id,
                 })}
               >
                 <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="sm" />
@@ -43,8 +43,8 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
 
           <div
             className={classNames("ml-4 mt-1 rounded-md p-4 text-xs text-white", {
-              "bg-neutral-400": message.profile_id === currentUser.id,
-              "bg-primary-500": message.profile_id !== currentUser.id,
+              "bg-neutral-400": message.profile_id === currentUser?.id,
+              "bg-primary-500": message.profile_id !== currentUser?.id,
             })}
           >
             {message.message}

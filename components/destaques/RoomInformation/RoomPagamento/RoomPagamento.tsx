@@ -64,10 +64,10 @@ export const RoomPagamento = () => {
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
-              {advertisement.month_rent}&euro;/mês
+              {advertisement?.month_rent || 0}&euro;/mês
             </div>
 
-            <ExpensesComponent expenses={advertisement.expenses} />
+            <ExpensesComponent expenses={advertisement?.expenses || {}} />
             <hr />
 
             <div className="mt-5 grid grid-cols-2 gap-4">
@@ -104,7 +104,7 @@ export const RoomPagamento = () => {
 
           <div className="flex flex-row justify-between">
             <div>1ª Renda</div>
-            <div>{`€${advertisement.month_rent}`}</div>
+            <div>{`€${advertisement?.month_rent || 0}`}</div>
           </div>
 
           <div className="my-2 flex flex-row justify-between">
@@ -124,7 +124,7 @@ export const RoomPagamento = () => {
 
           <div className="my-8 flex flex-row justify-between font-bold">
             <div className="text-base">Total</div>
-            <div>€{advertisement.month_rent}</div>
+            <div>€{advertisement?.month_rent || 0}</div>
           </div>
 
           <button
@@ -138,7 +138,7 @@ export const RoomPagamento = () => {
         <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
           <div className="flex flex-col text-left">
             <h1 className="mt-2 text-2xl font-bold text-black">
-              {advertisement.month_rent}&euro;<span className="text-gray-600">/mês</span>
+              {advertisement?.month_rent || 0}&euro;<span className="text-gray-600">/mês</span>
             </h1>
             <h1 className="mt-3  text-xl text-gray-500">Sep 19-24</h1>
 

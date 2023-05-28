@@ -18,10 +18,12 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
       <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
       <div className="block max-w-md lg:hidden">
         <div>
-          <h1 className="mb-4 text-2xl font-bold">
-            Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
-          </h1>
-          <p className="text-secondary-400">{advertisement.host.description}</p>
+          {advertisement && (
+            <h1 className="mb-4 text-2xl font-bold">
+              Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
+            </h1>
+          )}
+          <p className="text-secondary-400">{advertisement && advertisement.host.description}</p>
         </div>
       </div>
       <div className="flex w-full flex-col gap-8 lg:w-11/12 lg:flex-row lg:items-end">
@@ -40,10 +42,14 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                     unoptimized={true}
                   />
                 </div>
-                <h5 className="my-1 text-xl font-medium text-gray-900 dark:text-white">{advertisement.host.name}</h5>
-                <span className="text-sm text-gray-500 dark:text-gray-400">{`${
-                  advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
-                } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
+                <h5 className="my-1 text-xl font-medium text-gray-900 dark:text-white">
+                  {advertisement?.host.name || ""}
+                </h5>
+                {advertisement && (
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{`${
+                    advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
+                  } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
+                )}
                 <hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">
                   <div className="">
@@ -61,10 +67,12 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
         <div className="flex w-full flex-col lg:w-7/12">
           <div className="hidden max-w-md lg:block">
             <div>
-              <h1 className="mb-4 text-2xl font-bold">
-                Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
-              </h1>
-              <p className="mb-4 text-secondary-400">{advertisement.host.description}</p>
+              {advertisement && (
+                <h1 className="mb-4 text-2xl font-bold">
+                  Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
+                </h1>
+              )}
+              <p className="mb-4 text-secondary-400">{advertisement?.host.description || ""}</p>
             </div>
           </div>
 
@@ -75,17 +83,19 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
               <div className="flex flex-row items-start justify-start gap-4 align-top">
                 <div
                   className={classNames("h-5 w-12 rounded-full ", {
-                    "bg-orange-400": advertisement.type_flex_host === "MODERATE",
-                    "bg-yellow-300": advertisement.type_flex_host === "FLEX",
-                    "bg-green-500": advertisement.type_flex_host === "SUPER_FLEX",
-                    "bg-red-600": advertisement.type_flex_host === "RIGID",
+                    "bg-orange-400": advertisement?.type_flex_host === "MODERATE",
+                    "bg-yellow-300": advertisement?.type_flex_host === "FLEX",
+                    "bg-green-500": advertisement?.type_flex_host === "SUPER_FLEX",
+                    "bg-red-600": advertisement?.type_flex_host === "RIGID",
                   })}
                 ></div>
 
                 <div className="flex flex-col">
-                  <h2 className="text-base font-bold">{hostTranslate(advertisement.type_flex_host)}</h2>
+                  <h2 className="text-base font-bold">
+                    {(advertisement && hostTranslate(advertisement?.type_flex_host)) || ""}
+                  </h2>
                   <p className="text-base text-secondary-400">
-                    {hostTypeFlexDescription(advertisement.type_flex_host)}
+                    {advertisement && hostTypeFlexDescription(advertisement?.type_flex_host || "")}
                   </p>
                 </div>
               </div>

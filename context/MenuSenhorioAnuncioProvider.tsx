@@ -1,13 +1,17 @@
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { Advertisement } from "../models/advertisement";
 
 /* Senhorio anuncio context */
-const MenuSenhorioAnuncioContext = createContext<Advertisement>(null);
-const SetMenuSenhorioAnuncioContext = createContext<Dispatch<SetStateAction<Advertisement>>>(() => {});
+const MenuSenhorioAnuncioContext = createContext<Advertisement | undefined>(undefined);
+const SetMenuSenhorioAnuncioContext = createContext<Dispatch<SetStateAction<Advertisement | undefined>>>(() => {});
 
-export const MenuSenhorioProvider = ({ children }): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState<Advertisement>(null);
+interface MenuSenhorioProviderProps {
+  children: ReactNode;
+}
+
+export const MenuSenhorioProvider = ({ children }: MenuSenhorioProviderProps): JSX.Element => {
+  const [currentStep, setCurrentStep] = useState<Advertisement | undefined>(undefined);
 
   return (
     <MenuSenhorioAnuncioContext.Provider value={currentStep}>

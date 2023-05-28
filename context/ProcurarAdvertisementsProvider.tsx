@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { ReactNode, useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
 import { GEO } from "../models/utils";
@@ -18,8 +18,8 @@ export interface FilterOptions {
     endRange: number | null;
   };
   dates: {
-    startDate: string;
-    endDate: string;
+    startDate: string | null;
+    endDate: string | null;
   };
   coordinates: GEO;
 }
@@ -38,7 +38,7 @@ const defaultFilter = {
       startRange: null,
       endRange: null,
     },
-    coordinates: null,
+    coordinates: undefined,
     dates: {
       startDate: null,
       endDate: null,
@@ -74,8 +74,12 @@ const defaultAdvertisements = {
 const AdvertisementsContext = createContext<AdvertisementsOnPage>(defaultAdvertisements);
 const SetAdvertisementsContext = createContext<Dispatch<SetStateAction<AdvertisementsOnPage>>>(() => {});
 
+interface ProcurarAdvertisementsProviderProps {
+  children: ReactNode;
+}
+
 /* Context */
-export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
+export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertisementsProviderProps): JSX.Element => {
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
   const { getAdvertisementsByCloseCoordinatesWithFilters, getAdvertisementsWithoutCoordinates } =
@@ -95,10 +99,11 @@ export const ProcurarAdvertisementsProvider = ({ children }): JSX.Element => {
     // load advertisements
     const { data, error, count } = await callAdvertisementsDB();
 
+    // eslint-disable-next-line
     setAdvertisementsInfo((oldState) => ({
       ...oldState,
-      advertisements: (!error && data) || [],
-      count,
+      advertisements: (!error && (data as unknown as AdvertisementWithReviewAverage[])) || [],
+      count: count || 0,
       loading: false,
     }));
   }, [advertisementsInfo.page, currentFilter]);

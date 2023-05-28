@@ -13,7 +13,7 @@ interface BlogPostSectionProps {
 
 const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const renderers = {
-    p: (props) => <p className="my-2">{props.children}</p>,
+    p: (props: any) => <p className="my-2">{props.children}</p>,
   };
 
   return (
@@ -22,7 +22,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
         <Image layout="fill" src={blog.image} alt="blog" className="opacity-50" objectFit="cover" />
 
         <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:w-full lg:justify-center">
-          <div className="mt-5 mb-7 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">
+          <div className="mb-7 mt-5 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">
             {BlogCategoryLabel[blog.category]}
           </div>
           <h1 className="w-full text-center text-2xl font-bold text-white lg:w-3/4 lg:text-5xl">{blog.title}</h1>
@@ -33,7 +33,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
       <div className="container mx-auto mt-20 px-8 lg:px-32">
         <ReactMarkdown components={renderers}>{blog.description}</ReactMarkdown>
 
-        <div className="mt-20 mb-24 flex items-center gap-4 align-middle">
+        <div className="mb-24 mt-20 flex items-center gap-4 align-middle">
           <div className="text-2xl font-bold ">Partilhar</div>
           <Link href="/">
             <a>

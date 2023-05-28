@@ -7,15 +7,15 @@ import RadioBox from "../utils/Radiobox";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
-  onChange: (property, value) => void;
+  onChange: (property: string, value: any) => void;
 }
 
 const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   // radio yes or no per expense */
-  const toggleTypeExpenses = (event) => {
+  const toggleTypeExpenses = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { expenses } = advertisement;
 
-    const services = expenses && expenses.services.filter((service) => service.name !== event.target.name);
+    const services = (expenses && expenses.services?.filter((service) => service.name !== event.target.name)) || [];
     const newService = { name: event.target.name, max: 0, included: event.target.value } as TypeExpense;
 
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
@@ -24,11 +24,11 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     });
   };
 
-  const setTypeExpenseIncluded = (event) => {
+  const setTypeExpenseIncluded = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { expenses } = advertisement;
     const expenseType = event.target.getAttribute("data-expense");
 
-    const services = expenses && expenses.services.filter((service) => service.name !== expenseType);
+    const services = (expenses && expenses.services?.filter((service) => service.name !== expenseType)) || [];
     const newService = {
       name: expenseType,
       max: 0,
@@ -50,13 +50,13 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     [advertisement]
   );
 
-  const setMaxExpenseValue = (event) => {
+  const setMaxExpenseValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { expenses } = advertisement;
     const expenseType = event.target.getAttribute("data-expense");
 
     const services =
       expenses &&
-      expenses.services.map((service) => {
+      expenses.services?.map((service) => {
         if (service.name === expenseType) {
           return { ...service, max: parseInt(event.target.value) };
         } else {
@@ -164,10 +164,10 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 interface ExpenseSelectionProps {
   expense: ExpenseName;
   title: string;
-  toggleTypeExpenses: (e) => void;
-  setMaxExpenseValue: (e) => void;
-  getExpenseInfoByInfo: (label: string) => TypeExpense;
-  setTypeExpenseIncluded: (e) => void;
+  toggleTypeExpenses: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setMaxExpenseValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  getExpenseInfoByInfo: (label: ExpenseName) => TypeExpense | undefined;
+  setTypeExpenseIncluded: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const ExpenseSelection = ({
@@ -187,7 +187,7 @@ const ExpenseSelection = ({
         </div>
         <div className="my-4 flex flex-col items-center gap-4 lg:flex-row">
           <div className="flex w-full flex-row gap-2 lg:w-1/2 lg:flex-col">
-            <div className="flex w-full flex-row items-center rounded-lg border border-terciary-500 py-3 px-3">
+            <div className="flex w-full flex-row items-center rounded-lg border border-terciary-500 px-3 py-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Sim</div>
                 <RadioBox
@@ -198,7 +198,7 @@ const ExpenseSelection = ({
                 />
               </div>
             </div>
-            <div className="flex w-full flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3">
+            <div className="flex w-full flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Não</div>
                 <RadioBox
@@ -213,16 +213,16 @@ const ExpenseSelection = ({
           <div className="w-full">
             {expenseInfo?.included !== "EXCLUDED" && (
               <div className="flex flex-col gap-2">
-                <div className="flex  flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:w-11/12">
+                <div className="flex  flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:w-11/12">
                   <label htmlFor="all_included">Totalmente incluído.</label>
                   <Checkbox
                     name="all_included"
                     data-expense={expense}
                     onChange={setTypeExpenseIncluded}
-                    checked={expenseInfo && expenseInfo.included === "INCLUDED"}
+                    checked={(expenseInfo && expenseInfo.included === "INCLUDED") || false}
                   />
                 </div>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-2 px-3 lg:w-11/12">
+                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-2 lg:w-11/12">
                   <label className="text-xs" htmlFor="max_value">
                     Incluído até:
                   </label>
