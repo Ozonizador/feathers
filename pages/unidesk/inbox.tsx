@@ -1,6 +1,6 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useCurrentUser } from "../../context/MainProvider";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
@@ -19,13 +19,14 @@ import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
+import { Profile } from "../../models/profile";
 
 {
   /* page 59 XD */
 }
 
 const CaixaEntrada = () => {
-  const [conversations, setConversations] = useState<ConversationWithTenant[]>([]);
+  const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
   const profile = useCurrentUser();
   const { acceptReservation } = useReservationService();
@@ -33,7 +34,7 @@ const CaixaEntrada = () => {
   const { getConversationsFromUser } = useConversationService();
 
   const [currentMessage, setCurrentMessage] = useState<string>("");
-  const [currentConversation, setCurrentConversation] = useState<ConversationWithTenant | null>(null);
+  const [currentConversation, setCurrentConversation] = useState<ConversationComplete | undefined>(undefined);
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -57,7 +58,7 @@ const CaixaEntrada = () => {
     getMessagesFromConversation();
   }, [getMessagesFromConversation]);
 
-  const sendMessage = async (event, conversationId: string) => {
+  const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
     if (!currentMessage || !conversationId || !profile) return;
 
@@ -71,24 +72,27 @@ const CaixaEntrada = () => {
     getUserConversations();
   }, [getUserConversations]);
 
-  const getOtherProfile = (conversation: ConversationComplete) => {
+  const getOtherProfile = (conversation: ConversationComplete): Profile | undefined => {
     if (!profile) return;
     return conversation.host.id === profile.id ? conversation.tenant : conversation.host;
   };
 
   const updateReservationStatus = async (status: ReservationStatus) => {
     const { reservation } = currentConversation || { reservation: undefined };
-    if (!reservation) return;
+    if (!reservation || !reservation.id || !currentConversation) return;
 
-    const { data, error } = await acceptReservation(reservation.id, status);
+    const { error } = await acceptReservation(reservation.id, status);
 
-    if (!error || !data) {
-      setCurrentConversation({ ...currentConversation, reservation: data as unknown as Reservation });
+    if (!error) {
+      setCurrentConversation({
+        ...currentConversation,
+        reservation: { ...reservation, status },
+      });
     }
   };
 
   const clearConversation = () => {
-    setCurrentConversation(null);
+    setCurrentConversation(undefined);
   };
 
   return (
@@ -126,7 +130,7 @@ const CaixaEntrada = () => {
 
                 <MessagesSenderZone
                   messages={messages}
-                  conversationId={currentConversation && currentConversation.id}
+                  conversationId={(currentConversation && currentConversation.id) || ""}
                   sendMessage={sendMessage}
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
@@ -157,7 +161,8 @@ const CaixaEntrada = () => {
                                 ""}
                             </div>
                             <div className="text-sm">
-                              {`${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
+                              {currentConversation.reservation.advertisement &&
+                                `${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
                         ${currentConversation.reservation.advertisement?.place}`}
                             </div>
                           </div>
@@ -223,7 +228,7 @@ const CaixaEntrada = () => {
         <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
           <a
             className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white"
-            onClick={() => setCurrentConversation(null)}
+            onClick={() => setCurrentConversation(undefined)}
           >
             Mensagens
           </a>
@@ -234,14 +239,14 @@ const CaixaEntrada = () => {
         {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
         {conversations && (
           <div>
-            {!currentConversation &&
+            {currentConversation &&
               conversations?.map((conversation, index) => {
                 return (
                   <div
                     key={index}
                     onClick={() => setCurrentConversation(conversation)}
                     className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
-                      "bg-primary-100": currentConversation?.id === conversation.id,
+                      "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
                     })}
                   >
                     <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
@@ -266,9 +271,9 @@ const CaixaEntrada = () => {
 
 interface MessagesSenderZoneProps {
   messages: MessageWithProfile[];
-  sendMessage: (e, conversationId: string) => void;
+  sendMessage: (e: React.FormEvent, conversationId: string) => void;
   currentMessage: string;
-  setCurrentMessage: (e) => void;
+  setCurrentMessage: (e: any) => void;
   conversationId: string;
 }
 

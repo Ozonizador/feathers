@@ -74,6 +74,7 @@ const Details = ({ advertisement }: DetailsProps) => {
   });
 
   const saveChanges = async (data: any) => {
+    if (!advertisementContext) return;
     const { error } = await updateAdvertisement({ ...advertisementContext, ...data }, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
@@ -83,6 +84,7 @@ const Details = ({ advertisement }: DetailsProps) => {
   };
 
   const changeAdvertisementProperty = (property: string, value: unknown) => {
+    if (!advertisementContext) return;
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 

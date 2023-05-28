@@ -35,6 +35,7 @@ const Prices = ({ advertisement }: PricesProps) => {
   };
 
   const changeAdvertisementProperty = (property: string, value: any) => {
+    if (!advertisementContext) return;
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 

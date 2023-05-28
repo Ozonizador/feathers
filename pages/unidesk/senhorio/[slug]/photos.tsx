@@ -39,12 +39,12 @@ const Photos = ({ advertisement }: PhotosProps) => {
   const photos = advertisementContext ? advertisementContext.photos : ([] as AdvertisementPhoto[]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
-    if (!error) {
-    }
+    if (!advertisementContext) return;
+    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
+    if (!error) toast.error("Erro ao guardar fotos");
   };
 
-  const uploadToClient = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadToClient = async (event: any) => {
     event.preventDefault();
     const paths = [] as AdvertisementPhoto[];
     if (!advertisementContext) return;
@@ -72,7 +72,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
       event.target.value = null;
     }
   };
@@ -100,7 +100,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
     }
   };
 
@@ -112,7 +112,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
     [selectedImages]
   );
 
-  const setImagesZone = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setImagesZone = async (event: React.FormEvent<HTMLDivElement>) => {
     if (!advertisementContext) return;
     const value = (event.target as HTMLInputElement).value;
 
@@ -122,24 +122,25 @@ const Photos = ({ advertisement }: PhotosProps) => {
     } else {
       let { photos } = advertisementContext || { photos: [] };
 
-      let newImages = photos.map(async (photo) => {
-        if (await checkIfImageInSelected(photo.url)) {
+      let newImages = photos.map((photo) => {
+        if (checkIfImageInSelected(photo.url)) {
           return { url: photo.url, zone: value } as AdvertisementPhoto;
         } else {
           return photo;
         }
       });
+
       const { data, error } = await updateAdvertisement(
         { ...advertisementContext, photos: newImages },
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
     }
     setSelectedImages([]);
   };
 
-  const checkIfImageInSelected = async (url: string) => {
+  const checkIfImageInSelected = (url: string) => {
     const foundImage = selectedImages.find((image) => image.url == url);
     return foundImage !== undefined;
   };

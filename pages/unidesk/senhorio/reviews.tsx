@@ -94,7 +94,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const responseRate =
     (allConversationsError && repliedConversationError) || !allConversations
       ? 0
-      : repliedConversation / allConversations;
+      : repliedConversation || 0 / allConversations;
 
   return {
     props: {

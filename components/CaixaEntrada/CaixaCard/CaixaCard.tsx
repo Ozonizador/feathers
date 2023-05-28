@@ -4,7 +4,7 @@ import { Profile } from "../../../models/profile";
 import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../models/reservation";
 
 interface CaixaCardProps {
-  profile: Profile;
+  profile?: Profile;
   reservation: Pick<ReservationWithAdvertisement, "updated_at" | "status" | "advertisement">;
 }
 
@@ -28,7 +28,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
     <div className="mb-2 flex w-72 gap-5 p-2">
       <div className="flex w-1/3 flex-col items-center justify-center align-middle">
         <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="md" />
-        <div className="mt-2 text-xs font-bold">{profile.name}</div>
+        <div className="mt-2 text-xs font-bold">{profile?.name || ""}</div>
       </div>
 
       <div className="flex w-full flex-col">
@@ -38,8 +38,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
           </h1>
           <p className="my-auto ml-auto text-xs">{formatCardDate()}</p>
         </div>
-        <h2 className="mb-2 mt-2 line-clamp-2 text-xs text-secondary-500">{profile.description}</h2>
-
+        <h2 className="mb-2 mt-2 line-clamp-2 text-xs text-secondary-500">{profile?.description || ""}</h2>
         <p className="text-xs font-normal text-secondary-400">{reservation.advertisement?.title || ""}</p>
       </div>
     </div>
