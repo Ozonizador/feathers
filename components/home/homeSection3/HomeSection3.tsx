@@ -6,48 +6,47 @@ import { useGetUserCoordinates } from "../../../context/MainProvider";
 import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
+import { trpc } from "../../../utils/trpc";
 
 export default function HomeSection3() {
-  const { getAdvertisementsWithoutCoordinates } = useAdvertisementService();
-  const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const currentMapCoordinates = useGetUserCoordinates();
 
-  const getCloseAdvertisements = useCallback(async () => {
-    if (currentMapCoordinates) {
-      const { data, error } = await getAdvertisementsWithoutCoordinates(1, {
-        filter: {
-          comodities: [],
-          placeType: "ALL",
-          price: {
-            startRange: null,
-            endRange: null,
-          },
-          coordinates: undefined,
-          dates: {
-            startDate: null,
-            endDate: null,
-          },
+  const { data: advertisements, isLoading } = trpc.searchForAdvertisementsWithCoordinates.useQuery(
+    {
+      filter: {
+        comodities: [],
+        placeType: "ALL",
+        price: {
+          startRange: undefined,
+          endRange: undefined,
         },
-        order: {
-          byColumn: "price",
-          type: "asc",
-          isActive: false,
+        coordinates: undefined,
+        dates: {
+          startDate: undefined,
+          endDate: undefined,
         },
-      });
-      if (!error && data) {
-        setAdvertisements(data);
-      }
+      },
+      order: {
+        byColumn: "price",
+        type: "asc",
+        isActive: false,
+      },
+    },
+    {
+      enabled: !!currentMapCoordinates,
+      //getNextPageParam: (lastPage) => lastPage.nextCursor,
+      retry: false, // Twitter API rate limit is very strict, so we don't want to retry
+      cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+      onError: (error) => {
+        console.log(error);
+      },
     }
-  }, [currentMapCoordinates]);
-
-  useEffect(() => {
-    getCloseAdvertisements();
-  }, [getCloseAdvertisements]);
+  );
 
   return (
     <>
       {!advertisements && <></>}
-      {advertisements && advertisements.length > 0 && (
+      {advertisements && advertisements?.data?.length > 0 && (
         <>
           <section>
             <div className="mb-28 mt-5">

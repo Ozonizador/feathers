@@ -2,7 +2,6 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
 
 import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import {
   Advertisement,
   Advertisements,
@@ -78,54 +77,6 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  /*
-  Filtering
-*/
-
-  const getAdvertisementsByCloseCoordinatesWithFilters = async (
-    lat: number,
-    lng: number,
-    page: number,
-    filters: FilterAdvertisements
-  ): Promise<{
-    data: AdvertisementWithReviewAverage[] | null;
-    error: PostgrestError | null | string;
-    count: number | null;
-  }> => {
-    if (!lng || !lat) {
-      return { data: null, error: "No latitude or longitude provided", count: null };
-    }
-
-    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
-    let query = supabaseClient
-      .rpc<"close_advertisements", CloseAdvertisementsFn>(
-        CLOSE_ADVERTISEMENTS_TABLE_NAME,
-        {
-          lat,
-          lng,
-        },
-        { count: "exact" }
-      )
-      .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
-    query = addFilterAdvertisement(query, filters);
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
-
-    return { data: data as unknown as AdvertisementWithReviewAverage[], error, count };
-  };
-
-  const getAdvertisementsWithoutCoordinates = async (page: number, filters: FilterAdvertisements) => {
-    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
-    let query = supabaseClient
-      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select("*, stays(*)")
-      .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
-
-    query = addFilterAdvertisement(query, filters);
-
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
-    return { data, error, count };
-  };
-
   const removeAdvertisement = async (advertisementId: string) => {
     const query = supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
@@ -185,8 +136,6 @@ const useAdvertisementService = () => {
     getAdvertismentsFromUserId,
     getAdvertisementsForMainPage,
     getSimilarAdvertisements,
-    getAdvertisementsByCloseCoordinatesWithFilters,
-    getAdvertisementsWithoutCoordinates,
     saveImage,
     getPublicUrlFromImage,
     removePicture,

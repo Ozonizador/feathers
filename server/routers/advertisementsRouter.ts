@@ -1,12 +1,17 @@
+import { count } from "console";
+import error from "next/error";
 import { z } from "zod";
 import { PAGE_NUMBER_COUNT } from "../../hooks/advertisementService";
 import { supabase } from "../../lib/supabaseClient";
 import {
   Advertisements,
   AdvertisementStatus,
+  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
   AMENITIES,
+  CloseAdvertisementsFn,
+  CLOSE_ADVERTISEMENTS_TABLE_NAME,
   TypeAmenity,
 } from "../../models/advertisement";
 import { Stay, STAYS_TABLE_NAME, STAY_TABLE } from "../../models/stay";
@@ -55,12 +60,34 @@ export const advertisementsRouter = router({
     query = addFilterToSearchAdvertisement(query, filter);
     query = addOrderToSearchAdvertisement(query, order);
 
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
+    // missing tpagination
+    // const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
     return { data, error, count };
   }),
-  searchForAdvertisementsWithCoordinates: procedure.input(advertisementFilterSchema).query(({ input, ctx }) => {
+  searchForAdvertisementsWithCoordinates: procedure.input(advertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order } = input;
-    return;
+    const { coordinates } = filter || { coordinates: undefined };
+    const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
+    if (!lng || !lat) {
+      return { data: null, error: "No latitude or longitude provided", count: null };
+    }
+
+    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
+    let query = supabase
+      .rpc<"close_advertisements", CloseAdvertisementsFn>(
+        CLOSE_ADVERTISEMENTS_TABLE_NAME,
+        {
+          lat,
+          lng,
+        },
+        { count: "exact" }
+      )
+      .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
+    query = addFilterToSearchAdvertisement(query, filter);
+    query = addOrderToSearchAdvertisement(query, order);
+    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
+
+    return { data: data as unknown as AdvertisementWithReviewAverage[], error, count };
   }),
 });
 // export type definition of API
