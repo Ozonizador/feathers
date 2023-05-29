@@ -109,8 +109,6 @@ export const ADVERTISEMENT_PROPERTIES = {
   AVAILABLE: "available",
   ID: "id",
   GEOM: "geom",
-  STAY_START_DATE: "stays.start_date",
-  STAY_END_DATE: "stays.end_date",
   SLUG: "slug",
 } as const;
 
@@ -166,55 +164,59 @@ export interface AboutHouseSections {
 
 export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";
 
-export type TypeAmenity =
-  | "SOFA"
-  | "TV"
-  | "FIREPLACE"
-  | "TABLE"
-  | "CHAIRS"
-  | "WIFI"
-  | "ELEVADOR"
-  | "AIR_CONDITIONING"
-  | "WASHING_MACHINE"
-  | "MIRROR"
-  | "FRIDGE"
-  | "SINGLE_BED"
-  | "DOUBLE_BED"
-  | "MICROWAVE"
-  | "TOASTER"
-  | "COFFEE_MAKER"
-  | "HEATING"
-  | "IRON_BOARD"
-  | "ESTENDAL"
-  | "LIVING_ROOM"
-  | "BALCONY"
-  | "SWIMMING_POOL"
-  | "PARKING_SPOT"
-  | "COURTYARD"
-  | "TERRACE"
-  | "BARBECUE"
-  | "FREEZER"
-  | "OVEN"
-  | "STOVE"
-  | "EXAUSTOR_FAN"
-  | "DRYER"
-  | "BATHTUB"
-  | "SHOWER"
-  | "PRIVATE_BATHROOM"
-  | "SHARED_BATHROOM"
-  | "CUTLERY"
-  | "DESK"
-  | "PILLOWS"
-  | "BED_SHEETS"
-  | "BLACKOUTS"
-  | "GARBAGE_CAN"
-  | "LAUNDRY_MACHINE"
-  | "MEAL_ZONE"
-  | "BASIC_UTILIES"
-  | "KEY_TO_LOCK_DOOR"
-  | "HANGERS_SUPPORT"
-  | "HOT_WATER_KETTLE"
-  | "POWER_PLUG_NEAR_BED";
+export const AMENITIES = [
+  "SOFA",
+  "TV",
+  "FIREPLACE",
+  "TABLE",
+  "CHAIRS",
+  "WIFI",
+  "ELEVADOR",
+  "AIR_CONDITIONING",
+  "WASHING_MACHINE",
+  "MIRROR",
+  "FRIDGE",
+  "SINGLE_BED",
+  "DOUBLE_BED",
+  "MICROWAVE",
+  "TOASTER",
+  "COFFEE_MAKER",
+  "HEATING",
+  "IRON_BOARD",
+  "ESTENDAL",
+  "LIVING_ROOM",
+  "BALCONY",
+  "SWIMMING_POOL",
+  "PARKING_SPOT",
+  "COURTYARD",
+  "TERRACE",
+  "BARBECUE",
+  "FREEZER",
+  "OVEN",
+  "STOVE",
+  "EXAUSTOR_FAN",
+  "DRYER",
+  "BATHTUB",
+  "SHOWER",
+  "PRIVATE_BATHROOM",
+  "SHARED_BATHROOM",
+  "CUTLERY",
+  "DESK",
+  "PILLOWS",
+  "BED_SHEETS",
+  "BLACKOUTS",
+  "GARBAGE_CAN",
+  "LAUNDRY_MACHINE",
+  "MEAL_ZONE",
+  "BASIC_UTILIES",
+  "KEY_TO_LOCK_DOOR",
+  "HANGERS_SUPPORT",
+  "HOT_WATER_KETTLE",
+  "POWER_PLUG_NEAR_BED",
+] as const;
+
+export type Amenity = typeof AMENITIES;
+export type TypeAmenity = Amenity[number];
 
 export const TypeAmenityLabel = {
   SOFA: "Sofa",

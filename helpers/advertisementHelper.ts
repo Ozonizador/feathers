@@ -1,11 +1,4 @@
-import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import {
-  AdvertisementPhoto,
-  AdvertisementStatus,
-  ADVERTISEMENT_PROPERTIES,
-  HostFlexType,
-  TypeAmenity,
-} from "../models/advertisement";
+import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
 import { MdOutlineFireplace } from "react-icons/md";
@@ -175,41 +168,6 @@ export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
   }
 };
 
-const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
-  const { filter, order } = filters;
-
-  // is available
-  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);
-
-  filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
-
-  // comodities not working
-  // filter.comodities &&
-  //   filter.comodities.length !== 0 &&
-  //   (query = query.filter(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, "in", filter.comodities));
-
-  //  Price
-  // filter.price.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));
-  // filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
-
-  // // Dates
-  // query = query.in(
-  //   "stay_id",
-  //   supabaseClient
-  //     .from("stays")
-  //     .select("id")
-  //     .filter("start_date", "gte", filter.dates.startDate)
-  //     .filter("end_date", "lte", filter.dates.endDate)
-  // );
-
-  filter.dates?.startDate &&
-    (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
-  filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_END_DATE, "lte", filter.dates.endDate));
-
-  order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
-  return query;
-};
-
 const getMainAdvertPhoto = (photos: AdvertisementPhoto[]): AdvertisementPhoto | undefined => {
   if (!photos || photos.length == 0) return undefined;
 
@@ -217,4 +175,4 @@ const getMainAdvertPhoto = (photos: AdvertisementPhoto[]): AdvertisementPhoto | 
   return photo ? photo : photos[0];
 };
 
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, getMainAdvertPhoto };
+export { hostTypeFlexDescription, hostTranslate, getMainAdvertPhoto };

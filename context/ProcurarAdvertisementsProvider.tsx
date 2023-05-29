@@ -26,7 +26,7 @@ export interface FilterOptions {
 export interface AdvertOrder {
   byColumn: "price";
   type: "asc" | "desc";
-  isActive: true | false;
+  isActive: boolean;
 }
 
 /* DEFAULT VALUE */
