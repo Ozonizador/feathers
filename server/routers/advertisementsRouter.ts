@@ -50,7 +50,7 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
 export const advertisementsRouter = router({
   searchForAdvertisements: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
-    const { coordinates } = filter || { coordinates: undefined };
+    const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
     const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
 
     let query;
@@ -159,14 +159,14 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   filter.dates &&
     filter.dates.startDate &&
     filter.dates.endDate &&
-    (query = query.not(
+    (query = query.filter(
       "id",
-      "in",
+      "not.in",
       supabase
-        .from<"stays", Stay>(STAYS_TABLE_NAME)
-        .select("advertisement_id, reservation:reservations!inner(*)")
-        .filter(STAY_TABLE.START_DATE, "gte", filter.dates?.startDate)
-        .filter(STAY_TABLE.END_DATE, "lte", filter.dates?.endDate)
+        .from(STAYS_TABLE_NAME)
+        .select("advertisement_id")
+        .filter("reservations.start_date", "gte", filter.dates?.startDate)
+        .filter("reservations.end_date", "lte", filter.dates?.endDate)
     ));
 
   return query;
