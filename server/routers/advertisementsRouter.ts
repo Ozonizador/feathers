@@ -18,7 +18,7 @@ import { Stay, STAYS_TABLE_NAME, STAY_TABLE } from "../../models/stay";
 import { GEO } from "../../models/utils";
 import { procedure, router } from "../trpc";
 
-const advertisementFilterSchema: z.ZodType<FilterAdvertisements> = z.object({
+const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: number }> = z.object({
   filter: z.object({
     comodities: z.array(z.enum(AMENITIES)).optional(),
     placeType: z.enum(["ALL", "ENTIRE_SPACE", "SHARED_ROOM", "PRIVATE_ROOM"]),
@@ -46,11 +46,12 @@ const advertisementFilterSchema: z.ZodType<FilterAdvertisements> = z.object({
     type: z.enum(["asc", "desc"]),
     isActive: z.boolean(),
   }),
+  page: z.number().default(1),
 });
 
 export const advertisementsRouter = router({
-  searchForAdvertisements: procedure.input(advertisementFilterSchema).query(async ({ input, ctx }) => {
-    const { filter, order } = input;
+  searchForAdvertisements: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
+    const { filter, order, page } = input;
 
     let query = supabase
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
@@ -61,18 +62,17 @@ export const advertisementsRouter = router({
     query = addOrderToSearchAdvertisement(query, order);
 
     // missing tpagination
-    // const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
+    let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
+    const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
     return { data, error, count };
   }),
-  searchForAdvertisementsWithCoordinates: procedure.input(advertisementFilterSchema).query(async ({ input, ctx }) => {
-    const { filter, order } = input;
+  searchForAdvertisementsWithCoordinates: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
+    const { filter, order, page } = input;
     const { coordinates } = filter || { coordinates: undefined };
     const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
-    if (!lng || !lat) {
-      return { data: null, error: "No latitude or longitude provided", count: null };
-    }
 
-    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
+    if (!lng || !lat) return { data: null, error: "No latitude or longitude provided", count: null };
+
     let query = supabase
       .rpc<"close_advertisements", CloseAdvertisementsFn>(
         CLOSE_ADVERTISEMENTS_TABLE_NAME,
@@ -85,20 +85,22 @@ export const advertisementsRouter = router({
       .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
     query = addFilterToSearchAdvertisement(query, filter);
     query = addOrderToSearchAdvertisement(query, order);
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
 
-    return { data: data as unknown as AdvertisementWithReviewAverage[], error, count };
+    let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
+    const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
+
+    return { data, error, count };
   }),
 });
 // export type definition of API
 export type AppRouter = typeof advertisementsRouter;
 
 export type FilterAdvertisements = {
-  filter: FilterOptions;
+  filter: AdvertisementsFilterOptions;
   order: AdvertisementOrder;
 };
 
-export type FilterOptions = {
+export type AdvertisementsFilterOptions = {
   comodities?: TypeAmenity[];
   placeType?: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
   price?: {
@@ -112,15 +114,15 @@ export type FilterOptions = {
   coordinates?: GEO;
 };
 
-export interface AdvertisementOrder {
+export type AdvertisementOrder = {
   byColumn: "price";
   type: OrderAscending;
   isActive: boolean;
-}
+};
 
 export type OrderAscending = "asc" | "desc";
 
-const addFilterToSearchAdvertisement = (query: any, filter: FilterOptions) => {
+const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilterOptions) => {
   // availability
   query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);
 

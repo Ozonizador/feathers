@@ -1,15 +1,12 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
 
-import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
 import {
   Advertisement,
   Advertisements,
-  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
-  CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 export const PAGE_NUMBER_COUNT = 10 as number;

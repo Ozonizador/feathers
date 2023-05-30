@@ -1,33 +1,14 @@
 import { ReactNode, useCallback, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
-import { GEO } from "../models/utils";
-import useAdvertisementService from "../hooks/advertisementService";
+import {
+  FilterAdvertisements,
+  AdvertisementsFilterOptions,
+  AdvertisementOrder,
+} from "../server/routers/advertisementsRouter";
+import { trpc } from "../utils/trpc";
 
 /* FILTERS */
-export interface FilterAdvertisements {
-  filter: Partial<FilterOptions>;
-  order: Partial<AdvertOrder>;
-}
-
-export interface FilterOptions {
-  comodities: TypeAmenity[];
-  placeType: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-  price: {
-    startRange: number | null;
-    endRange: number | null;
-  };
-  dates: {
-    startDate: string | null;
-    endDate: string | null;
-  };
-  coordinates: GEO;
-}
-export interface AdvertOrder {
-  byColumn: "price";
-  type: "asc" | "desc";
-  isActive: boolean;
-}
 
 /* DEFAULT VALUE */
 const defaultFilter = {
@@ -35,13 +16,13 @@ const defaultFilter = {
     comodities: [],
     placeType: "ALL",
     price: {
-      startRange: null,
-      endRange: null,
+      startRange: undefined,
+      endRange: undefined,
     },
     coordinates: undefined,
     dates: {
-      startDate: null,
-      endDate: null,
+      startDate: undefined,
+      endDate: undefined,
     },
   },
   order: {
@@ -80,37 +61,30 @@ interface ProcurarAdvertisementsProviderProps {
 
 /* Context */
 export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertisementsProviderProps): JSX.Element => {
-  const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements>(defaultFilter);
+  const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements & { page?: number | null }>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
-  const { getAdvertisementsByCloseCoordinatesWithFilters, getAdvertisementsWithoutCoordinates } =
-    useAdvertisementService();
 
-  const callAdvertisementsDB = async () => {
-    const { lat, lng } = currentFilter?.filter?.coordinates || { lat: null, lng: null };
-    if (lat && lng) {
-      return await getAdvertisementsByCloseCoordinatesWithFilters(lat, lng, advertisementsInfo.page, currentFilter);
+  const { data, error, isLoading } = trpc.searchForAdvertisements.useQuery(
+    { ...currentFilter, page: advertisementsInfo.page },
+    {
+      enabled: !!currentFilter?.filter?.coordinates,
     }
-
-    return await getAdvertisementsWithoutCoordinates(advertisementsInfo.page, currentFilter);
-  };
-
-  const getAdvertisements = useCallback(async () => {
-    setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));
-    // load advertisements
-    const { data, error, count } = await callAdvertisementsDB();
-
-    // eslint-disable-next-line
-    setAdvertisementsInfo((oldState) => ({
-      ...oldState,
-      advertisements: (!error && (data as unknown as AdvertisementWithReviewAverage[])) || [],
-      count: count || 0,
-      loading: false,
-    }));
-  }, [advertisementsInfo.page, currentFilter]);
+  );
 
   useEffect(() => {
-    getAdvertisements();
-  }, [getAdvertisements]);
+    setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));
+  }, [currentFilter, advertisementsInfo.page]);
+
+  useEffect(() => {
+    if (!data) return;
+
+    setAdvertisementsInfo((oldState) => ({
+      ...oldState,
+      advertisements: (!error && data && (data.data as unknown as AdvertisementWithReviewAverage[])) || [],
+      count: data.count || 0,
+      loading: false,
+    }));
+  }, [data]);
 
   return (
     <ProcurarAdvertisementsContext.Provider value={currentFilter}>
@@ -143,14 +117,14 @@ export const useSetPageAdvertisementinfo = () => {
 
 export const useSetFiltersContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
-  return (filters: Partial<FilterOptions>) => {
+  return (filters: Partial<AdvertisementsFilterOptions>) => {
     setFilters((oldFilters) => ({ ...oldFilters, filter: { ...oldFilters.filter, ...filters } }));
   };
 };
 
 export const useSetOrderContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
-  return (order: AdvertOrder) => {
+  return (order: AdvertisementOrder) => {
     setFilters((oldFilters) => ({ ...oldFilters, order }));
   };
 };

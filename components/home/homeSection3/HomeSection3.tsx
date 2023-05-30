@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
-import useAdvertisementService from "../../../hooks/advertisementService";
 import { useGetUserCoordinates } from "../../../context/MainProvider";
-import { Advertisement, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
@@ -11,7 +10,7 @@ import { trpc } from "../../../utils/trpc";
 export default function HomeSection3() {
   const currentMapCoordinates = useGetUserCoordinates();
 
-  const { data: advertisements, isLoading } = trpc.searchForAdvertisementsWithCoordinates.useQuery(
+  const { data: advertisementsData } = trpc.searchForAdvertisementsWithCoordinates.useQuery(
     {
       filter: {
         comodities: [],
@@ -35,18 +34,17 @@ export default function HomeSection3() {
     {
       enabled: !!currentMapCoordinates,
       //getNextPageParam: (lastPage) => lastPage.nextCursor,
-      retry: false, // Twitter API rate limit is very strict, so we don't want to retry
+      retry: false,
       cacheTime: 1000 * 60 * 60 * 24, // 24 hours
-      onError: (error) => {
-        console.log(error);
-      },
     }
   );
+
+  const advertisements = advertisementsData && advertisementsData.data;
 
   return (
     <>
       {!advertisements && <></>}
-      {advertisements && advertisements?.data?.length > 0 && (
+      {advertisements && advertisements.length > 0 && (
         <>
           <section>
             <div className="mb-28 mt-5">
