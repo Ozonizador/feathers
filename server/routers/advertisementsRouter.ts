@@ -159,8 +159,9 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   filter.dates &&
     filter.dates.startDate &&
     filter.dates.endDate &&
-    (query = query.not.in(
+    (query = query.not(
       "id",
+      "in",
       supabase
         .from<"stays", Stay>(STAYS_TABLE_NAME)
         .select("advertisement_id, reservation:reservations!inner(*)")
