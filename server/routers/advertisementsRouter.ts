@@ -4,6 +4,7 @@ import { supabase } from "../../lib/supabaseClient";
 import {
   Advertisements,
   AdvertisementStatus,
+  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
   AMENITIES,
@@ -76,7 +77,11 @@ export const advertisementsRouter = router({
 
     let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
     const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
-    return { data, error, count };
+    return {
+      data: (data as unknown as AdvertisementWithReviewAverage[]) || null,
+      error: error || null,
+      count: (count as number) || null,
+    };
   }),
   searchForAdvertisementsWithCoordinates: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;

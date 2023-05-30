@@ -64,7 +64,7 @@ export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertiseme
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements & { page?: number | null }>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
 
-  const { data, error, isLoading } = trpc.searchForAdvertisements.useQuery(
+  const { data, error } = trpc.searchForAdvertisements.useQuery(
     { ...currentFilter, page: advertisementsInfo.page },
     {
       enabled: !!currentFilter?.filter?.coordinates,
