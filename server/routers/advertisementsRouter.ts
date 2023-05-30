@@ -1,12 +1,9 @@
-import { count } from "console";
-import error from "next/error";
 import { z } from "zod";
 import { PAGE_NUMBER_COUNT } from "../../hooks/advertisementService";
 import { supabase } from "../../lib/supabaseClient";
 import {
   Advertisements,
   AdvertisementStatus,
-  AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
   AMENITIES,
@@ -52,16 +49,31 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
 export const advertisementsRouter = router({
   searchForAdvertisements: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
+    const { coordinates } = filter || { coordinates: undefined };
+    const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
 
-    let query = supabase
-      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select("*, stays(*)")
-      .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
+    let query;
+    if (lng && lat) {
+      query = supabase
+        .rpc<"close_advertisements", CloseAdvertisementsFn>(
+          CLOSE_ADVERTISEMENTS_TABLE_NAME,
+          {
+            lat,
+            lng,
+          },
+          { count: "exact" }
+        )
+        .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
+    } else {
+      query = supabase
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .select("*, stays(*)")
+        .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
-    query = addFilterToSearchAdvertisement(query, filter);
-    query = addOrderToSearchAdvertisement(query, order);
+      query = addFilterToSearchAdvertisement(query, filter);
+      query = addOrderToSearchAdvertisement(query, order);
+    }
 
-    // missing tpagination
     let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
     const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
     return { data, error, count };
