@@ -85,7 +85,7 @@ export const advertisementsRouter = router({
   }),
   searchForAdvertisementsWithCoordinates: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
-    const { coordinates } = filter || { coordinates: undefined };
+    const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
     const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
 
     if (!lng || !lat) return { data: null, error: "No latitude or longitude provided", count: null };
@@ -159,10 +159,8 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   filter.dates &&
     filter.dates.startDate &&
     filter.dates.endDate &&
-    (query = query.filter(
-      "id",
-      "not.in",
-      supabase
+    (query = query.filter("id", "not.in", (query: any) =>
+      query
         .from(STAYS_TABLE_NAME)
         .select("advertisement_id")
         .filter("reservations.start_date", "gte", filter.dates?.startDate)
