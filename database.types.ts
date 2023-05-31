@@ -30,7 +30,7 @@ export interface Database {
   };
   public: {
     Tables: {
-      advertisement_zones: {
+      advertisement_commodities: {
         Row: {
           advertisement_id: string;
           comodity_id: number | null;

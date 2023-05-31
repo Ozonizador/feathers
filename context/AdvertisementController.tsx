@@ -29,14 +29,6 @@ const defaultAdvertisement = {
   title: "",
   description: "",
   host_id: "",
-  about_house: {
-    bathRoom: [],
-    bedRoom: [],
-    kitchen: [],
-    livingRoom: [],
-    exterior: [],
-    general: [],
-  } as AboutHouseSections,
   rooms: 1,
   beds: 1,
   tenant_number: 1,
@@ -63,7 +55,6 @@ const defaultAdvertisement = {
   host_lives_property: false,
   available: "DISABLED" as AdvertisementStatus,
   geom: null,
-  max_rooms: 1,
   agreementsinfo: {},
 } as Advertisement;
 

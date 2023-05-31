@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import { Review, ReviewsAverage } from "./review";
+import { ReviewsAverage } from "./review";
 import { StayWithPublicReview } from "./stay";
 
 // TODO: change the advertisements to listings because of adblocker
@@ -98,7 +98,6 @@ export const ADVERTISEMENT_PROPERTIES = {
   DESCRIPTION: "description",
   PHOTOS: "photos",
   HOUSE_RULES: "house_rules",
-  ABOUT_HOUSE: "about_house",
   MONTH_RENT: "month_rent",
   EXTRA_PER_HOST: "extra_per_host",
   GUARANTEE_VALUE: "guarantee_value",
@@ -291,11 +290,11 @@ export const AboutHouseCommodities = {
     { label: "Casa de banho privada", type: "PRIVATE_BATHROOM" },
     { label: "Casa de banho partilhada", type: "SHARED_BATHROOM" },
   ],
-  livingRoom: [
+  livingroom: [
     { label: "Sofá", type: "SOFA" },
     { label: "Mesa", type: "TABLE" },
   ],
-  bedRoom: [
+  bedroom: [
     { label: "Cama Individual", type: "SINGLE_BED" },
     { label: "Cama Dupla", type: "DOUBLE_BED" },
     { label: "2 camas individuais", type: "ELEVADOR" },
@@ -312,7 +311,7 @@ export const AboutHouseCommodities = {
     { label: "Baldes do Lixo ", type: "GARBAGE_CAN" },
     { label: "Varanda", type: "BALCONY" },
   ],
-  bathRoom: [
+  bathroom: [
     { label: "Secador de Cabelo", type: "DRYER" },
     { label: "Espelho", type: "MIRROR" },
     { label: "Banheira", type: "BATHTUB" },
