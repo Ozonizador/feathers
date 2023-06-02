@@ -39,12 +39,12 @@ const FormInicio = () => {
       place: advertisement.place,
       street_number: advertisement.street_number,
       type: advertisement.type,
-      floor: advertisement.floor,
+      floor: advertisement.floor || undefined,
       postal_code: advertisement.postal_code,
     },
   });
 
-  const nextStep = async (data) => {
+  const nextStep = async (data: any) => {
     setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };

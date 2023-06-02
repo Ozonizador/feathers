@@ -25,7 +25,7 @@ const UnideskFavoritos = () => {
     if (profile && profile.favourite_rooms) {
       const { data, error } = await getAdvertisementsFromMultipleId(profile.favourite_rooms);
       if (!error) {
-        setFavourites(data);
+        setFavourites(data as unknown as Advertisement[]);
       }
     }
     setIsLoading(false);
@@ -103,9 +103,9 @@ const UnideskFavoritos = () => {
             </>
           )}
         </div>
-        <div className="mt-12 mb-20 flex justify-center">
+        <div className="mb-20 mt-12 flex justify-center">
           <Link href={PROCURAR_ADVERT_URL}>
-            <a className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44">
+            <a className="mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44">
               Encontrar{" "}
               <span className="px-1">
                 <CgHome />

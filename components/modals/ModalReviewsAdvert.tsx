@@ -10,9 +10,9 @@ import { Rating } from "flowbite-react/lib/esm/components/Rating/Rating";
 
 /* PAGINA 7 DO XD */
 const ModalReviewsAdvert = () => {
-  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | null>(null);
+  const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);
   const advertisement = useGetSingleAdvertisement();
-  const { stays } = advertisement;
+  const { stays } = advertisement || { stays: [] };
   let { reviewsModalOpen } = useModalDetalhesPagamento();
   let setModalReviewsOpen = useSetModalReviews();
   const { getAveragesByAdvertisementId } = useReviewService();
@@ -63,11 +63,11 @@ const ModalReviewsAdvert = () => {
                       <div className="border-b border-neutral-100 pb-2 ">
                         <Rating size="lg">
                           <h6 className="mr-4 text-5xl text-primary-500">{roomAverages?.overall_average}</h6>
-                          <Rating.Star filled={roomAverages?.overall_average >= 1 ? true : false} />
-                          <Rating.Star filled={roomAverages?.overall_average >= 2 ? true : false} />
-                          <Rating.Star filled={roomAverages?.overall_average >= 3 ? true : false} />
-                          <Rating.Star filled={roomAverages?.overall_average >= 4 ? true : false} />
-                          <Rating.Star filled={roomAverages?.overall_average >= 5 ? true : false} />
+                          <Rating.Star filled={roomAverages && roomAverages.overall_average >= 1 ? true : false} />
+                          <Rating.Star filled={roomAverages && roomAverages.overall_average >= 2 ? true : false} />
+                          <Rating.Star filled={roomAverages && roomAverages.overall_average >= 3 ? true : false} />
+                          <Rating.Star filled={roomAverages && roomAverages.overall_average >= 4 ? true : false} />
+                          <Rating.Star filled={roomAverages && roomAverages.overall_average >= 5 ? true : false} />
                         </Rating>
 
                         <p className="my-3">{roomAverages?.review_number} comentários</p>

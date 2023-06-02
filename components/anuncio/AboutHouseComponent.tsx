@@ -1,53 +1,64 @@
 import { Accordion } from "flowbite-react";
+import { useMemo } from "react";
 import {
   AboutHouseCommodities,
   AboutHouseSpace,
   Advertisement,
   ADVERTISEMENT_PROPERTIES,
+  AMENITIES_DB,
   TypeAmenity,
 } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
 
 interface AboutHouseComponentProps {
-  advertisement?: Advertisement;
-  onChange: (property, value) => void;
+  advertisement: Advertisement;
+  onChange: (property: string, value: any) => void;
 }
 
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
-  const toggleAmmenityProperty = (event, space: AboutHouseSpace) => {
-    const property = event.target.name;
-    //const checked = event.target.checked;
-
-    const { about_house } = advertisement;
-    let amenities = about_house[space];
-
-    if (!amenities) {
-      amenities = [];
-    }
-
+  const toggleAmmenityProperty = (event: React.ChangeEvent, space: AboutHouseSpace) => {
+    const property = (event.target as HTMLInputElement).name;
     let foundAmenity = false;
-    for (let i = 0; i < amenities.length; i++) {
-      if (amenities[i] === property) {
-        foundAmenity = true;
-        amenities.splice(i);
-        return;
+
+    let amenities_zone = AMENITIES_DB[space] as
+      | "livingroom_amenities"
+      | "bathroom_amenities"
+      | "general_amenities"
+      | "bathroom_amenities"
+      | "bedroom_amenities"
+      | "kitchen_amenities";
+
+    let commodities = advertisement[amenities_zone];
+    if (commodities) {
+      for (let i = 0; i < commodities.length; i++) {
+        if (amenities_zone[i] === property) {
+          foundAmenity = true;
+          commodities.splice(i);
+          return;
+        }
       }
     }
 
     if (!foundAmenity) {
-      amenities.push(property);
+      if (!commodities) commodities = [];
+      commodities.push(property as TypeAmenity);
     }
 
-    onChange(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, { ...about_house, [space]: amenities });
+    onChange(amenities_zone, commodities);
   };
 
   const checkIfAboutHousePropertyChecked = (space: AboutHouseSpace, toCheckAmenity: TypeAmenity) => {
-    const amenities = advertisement.about_house[space];
-    if (!amenities) {
-      return false;
-    }
+    let amenities_zone = AMENITIES_DB[space] as
+      | "livingroom_amenities"
+      | "bathroom_amenities"
+      | "general_amenities"
+      | "bathroom_amenities"
+      | "bedroom_amenities"
+      | "kitchen_amenities";
 
-    const found = amenities.find((amenity) => amenity === toCheckAmenity);
+    const commodities = advertisement[amenities_zone];
+    if (!commodities) return false;
+    const found = commodities.find((amenity) => amenity === toCheckAmenity);
     return found !== undefined;
   };
 
@@ -64,7 +75,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "general")}
@@ -83,17 +94,17 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           <Accordion.Title>Sala de estar</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-              {AboutHouseCommodities.livingRoom.map((comodity, index) => {
+              {AboutHouseCommodities.livingroom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "livingRoom")}
-                          checked={checkIfAboutHousePropertyChecked("livingRoom", comodity.type)}
+                          onChange={(e) => toggleAmmenityProperty(e, "livingroom")}
+                          checked={checkIfAboutHousePropertyChecked("livingroom", comodity.type)}
                           name={comodity.type}
                         />
                       </div>
@@ -108,17 +119,17 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           <Accordion.Title>Quarto</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-              {AboutHouseCommodities.bedRoom.map((comodity, index) => {
+              {AboutHouseCommodities.bedroom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "bedRoom")}
-                          checked={checkIfAboutHousePropertyChecked("bedRoom", comodity.type)}
+                          onChange={(e) => toggleAmmenityProperty(e, "bedroom")}
+                          checked={checkIfAboutHousePropertyChecked("bedroom", comodity.type)}
                           name={comodity.type}
                         />
                       </div>
@@ -133,17 +144,17 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           <Accordion.Title>Casa de Banho</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-              {AboutHouseCommodities.bathRoom.map((comodity, index) => {
+              {AboutHouseCommodities.bathroom.map((comodity, index) => {
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "bathRoom")}
-                          checked={checkIfAboutHousePropertyChecked("bathRoom", comodity.type)}
+                          onChange={(e) => toggleAmmenityProperty(e, "bathroom")}
+                          checked={checkIfAboutHousePropertyChecked("bathroom", comodity.type)}
                           name={comodity.type}
                         />
                       </div>
@@ -164,7 +175,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "exterior")}
@@ -189,7 +200,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:w-10 lg:justify-between">
+                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
                         <Checkbox
                           onChange={(e) => toggleAmmenityProperty(e, "kitchen")}

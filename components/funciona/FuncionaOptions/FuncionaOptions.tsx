@@ -7,10 +7,10 @@ import Image from "next/image";
 
 const FuncionaOptions = () => {
   return (
-    <section className="my-20 mx-5 flex flex-col justify-center gap-5 lg:mx-32 lg:flex-1 lg:flex-row lg:gap-12">
+    <section className="mx-5 my-20 flex flex-col justify-center gap-5 lg:mx-32 lg:flex-1 lg:flex-row lg:gap-12">
       <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-[30%]">
         <div>
-          <h1 className="mt-4 mb-9 text-center text-2xl font-bold">Gestão da casa</h1>
+          <h1 className="mb-9 mt-4 text-center text-2xl font-bold">Gestão da casa</h1>
           {optionsCard1.map((option, index) => {
             return (
               <div key={index} className="my-5 flex flex-row gap-1">
@@ -28,7 +28,7 @@ const FuncionaOptions = () => {
 
           <div className="flex flex-1 justify-center">
             <Link href="#">
-              <a className="w-full rounded-md bg-primary-300 py-2 px-7 text-center text-white">Saber mais</a>
+              <a className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">Saber mais</a>
             </Link>
           </div>
         </div>
@@ -36,7 +36,7 @@ const FuncionaOptions = () => {
 
       <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-[30%]">
         <div>
-          <h1 className="mt-4 mb-9 text-center text-2xl font-bold">Gestão da casa premium</h1>
+          <h1 className="mb-9 mt-4 text-center text-2xl font-bold">Gestão da casa premium</h1>
           <div className="flex flex-1 flex-col items-center align-middle">
             <h2 className="text-xl font-bold">Gestão da casa</h2>
             <div className="text-2xl font-bold">+</div>
@@ -58,7 +58,7 @@ const FuncionaOptions = () => {
 
           <div className="flex flex-1 justify-center">
             <Link href="#">
-              <a className="w-full rounded-md bg-primary-300 py-2 px-7 text-center text-white">Saber mais</a>
+              <a className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">Saber mais</a>
             </Link>
           </div>
         </div>

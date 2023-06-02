@@ -56,14 +56,14 @@ interface ModalAvaliarExperienciaProps {
 }
 
 interface ModaAvaliarExperienceContextElements {
-  stay: StayComplete;
+  stay?: StayComplete;
   isOpen: boolean;
   step: number;
 }
 
 const ModalAvaliarExperienciaContext = createContext<ModaAvaliarExperienceContextElements>({
   isOpen: false,
-  stay: null,
+  stay: undefined,
   step: 1,
 });
 const SetModalAvaliarExperienciaContext = createContext<Dispatch<SetStateAction<ModaAvaliarExperienceContextElements>>>(
@@ -73,7 +73,7 @@ const SetModalAvaliarExperienciaContext = createContext<Dispatch<SetStateAction<
 export const ModalApplyShowProvider = ({ children }: ModalAvaliarExperienciaProps): JSX.Element => {
   const [modalInfo, setModalInfo] = useState<ModaAvaliarExperienceContextElements>({
     isOpen: false,
-    stay: null,
+    stay: undefined,
     step: 1,
   });
 
@@ -123,20 +123,20 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  stay: StayComplete;
+  stay?: StayComplete;
   isOpen: boolean;
   step: number;
 }
 
 const ModalReportarAnuncioContext = createContext<ModalReportContextElements>({
   isOpen: false,
-  stay: null,
+  stay: undefined,
   step: 1,
 });
 const SetModalReportarAnuncioContext = createContext<Dispatch<SetStateAction<ModalReportContextElements>>>(() => {});
 
 export const ModalReportarAnuncioProvider = ({ children }: ModalReportAnuncioProps): JSX.Element => {
-  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stay: null, step: 1 });
+  const [modalInfo, setModalInfo] = useState<ModalReportContextElements>({ isOpen: false, stay: undefined, step: 1 });
 
   return (
     <ModalReportarAnuncioContext.Provider value={modalInfo}>
@@ -182,20 +182,20 @@ interface ModalAlterarReversaProps {
 }
 
 interface ModalAlterReservaElements {
-  stay: StayComplete;
+  stay?: StayComplete;
   isOpen: boolean;
   step: number;
 }
 
 const ModalAlterarReservaContext = createContext<ModalAlterReservaElements>({
   isOpen: false,
-  stay: null,
+  stay: undefined,
   step: 1,
 });
 const SetModalAlterarReservaContext = createContext<Dispatch<SetStateAction<ModalAlterReservaElements>>>(() => {});
 
 export const ModalAlterarReservaProvider = ({ children }: ModalAlterarReversaProps): JSX.Element => {
-  const [modalInfo, setModalInfo] = useState<ModalAlterReservaElements>({ isOpen: false, stay: null, step: 1 });
+  const [modalInfo, setModalInfo] = useState<ModalAlterReservaElements>({ isOpen: false, stay: undefined, step: 1 });
 
   return (
     <ModalAlterarReservaContext.Provider value={modalInfo}>

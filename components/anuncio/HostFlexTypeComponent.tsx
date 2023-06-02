@@ -15,7 +15,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <RadioBox
               name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
               value={"SUPER_FLEX" as HostFlexType}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
+              onChange={(e: any) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
               checked={advertisement.type_flex_host === "SUPER_FLEX"}
             />
           </div>
@@ -38,7 +38,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <RadioBox
               name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
               value={"FLEX" as HostFlexType}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
+              onChange={(e: any) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
               checked={advertisement.type_flex_host === "FLEX"}
             />
           </div>
@@ -61,7 +61,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <RadioBox
               name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
               value={"MODERATE" as HostFlexType}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
+              onChange={(e: any) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
               checked={advertisement.type_flex_host === "MODERATE"}
             />
           </div>
@@ -84,7 +84,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
             <RadioBox
               name={ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST}
               value={"RIGID" as HostFlexType}
-              onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
+              onChange={(e: any) => onChange(ADVERTISEMENT_PROPERTIES.TYPE_FLEX_HOST, e.target.value)}
               checked={advertisement.type_flex_host === "RIGID"}
             />
           </div>

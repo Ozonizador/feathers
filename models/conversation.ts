@@ -8,8 +8,8 @@ export type Conversations = Database["public"]["Tables"]["conversations"];
 export type Conversation = Conversations["Row"];
 
 export type ConversationWithTenant = Conversation & {
-  tenant: Partial<Profile>;
-  reservation: Partial<ReservationWithAdvertisement>;
+  tenant: Profile;
+  reservation: ReservationWithAdvertisement;
 };
 
 /* VALUES FOR DB */

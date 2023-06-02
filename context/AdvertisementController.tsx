@@ -10,9 +10,10 @@ import {
   TypeAdvertisement,
 } from "../models/advertisement";
 import { v4 as uuidv4 } from "uuid";
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createRandomUniqWord } from "../utils/utils";
+import { create } from "lodash";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
@@ -29,14 +30,6 @@ const defaultAdvertisement = {
   title: "",
   description: "",
   host_id: "",
-  about_house: {
-    bathRoom: [],
-    bedRoom: [],
-    kitchen: [],
-    livingRoom: [],
-    exterior: [],
-    general: [],
-  } as AboutHouseSections,
   rooms: 1,
   beds: 1,
   tenant_number: 1,
@@ -63,7 +56,6 @@ const defaultAdvertisement = {
   host_lives_property: false,
   available: "DISABLED" as AdvertisementStatus,
   geom: null,
-  max_rooms: 1,
   agreementsinfo: {},
 } as Advertisement;
 
@@ -79,7 +71,11 @@ interface MemoryFiles {
 const ImageFilesContext = createContext<MemoryFiles>({ files: [], filesUrl: [] });
 const SetImageFilesContext = createContext<Dispatch<SetStateAction<MemoryFiles>>>(() => {});
 
-export const AdvertisementController = ({ children }): JSX.Element => {
+interface AdvertisementControllerProps {
+  children: ReactNode;
+}
+
+export const AdvertisementController = ({ children }: AdvertisementControllerProps): JSX.Element => {
   const user = useUser();
   const [advertisement, setAdvertisement] = useState<Advertisement>(defaultAdvertisement);
   const [fileInfo, setFileInfo] = useState<MemoryFiles>({ files: [], filesUrl: [] });
@@ -107,6 +103,8 @@ export const useAdvertisement = (): Advertisement => {
   return useContext(AdvertisementContext);
 };
 
+// advertisement main information
+
 export const useSetAdvertisement = () => {
   const setAdvertisement = useContext(SetAdvertisementContext);
   return (advertisement: Advertisement) => {
@@ -121,6 +119,8 @@ export const useSetAdvertisementProperty = () => {
     setAdvertisement({ ...advertisement, [property]: value });
   };
 };
+
+// images
 
 export const useImageFiles = () => {
   return useContext(ImageFilesContext);

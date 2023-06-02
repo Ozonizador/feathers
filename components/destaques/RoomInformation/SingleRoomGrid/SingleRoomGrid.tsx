@@ -6,10 +6,10 @@ export const SingleRoomGrid = () => {
   const advertisement = useGetSingleAdvertisement();
   return (
     <section className="my-8 w-full">
-      {(advertisement.photos === null || advertisement.photos.length === 0) && (
+      {(advertisement?.photos === null || advertisement?.photos.length === 0) && (
         <div className="flex flex-1 justify-center"></div>
       )}
-      {advertisement.photos && advertisement.photos.length > 0 && (
+      {advertisement?.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
           <div className="relative col-span-6 row-span-2 h-96">
             {advertisement.photos[0] ? (

@@ -27,6 +27,7 @@ const useReservationService = () => {
         reservation_status: status,
         stay_id,
       })
+      .select()
       .single();
 
     return { data, error };

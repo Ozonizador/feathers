@@ -37,7 +37,6 @@ type DetailsForm = Pick<
   Advertisement,
   | "title"
   | "slug"
-  | "max_rooms"
   | "description"
   | "host_lives_property"
   | "type_host"
@@ -60,7 +59,6 @@ const Details = ({ advertisement }: DetailsProps) => {
     defaultValues: {
       title: advertisement.title,
       slug: advertisement.slug,
-      max_rooms: advertisement.max_rooms,
       description: advertisement.description,
       host_lives_property: advertisement.host_lives_property,
       type_host: advertisement.type_host,
@@ -73,7 +71,8 @@ const Details = ({ advertisement }: DetailsProps) => {
     },
   });
 
-  const saveChanges = async (data) => {
+  const saveChanges = async (data: any) => {
+    if (!advertisementContext) return;
     const { error } = await updateAdvertisement({ ...advertisementContext, ...data }, advertisementContext.id);
     if (!error) {
       toast.success("Sucesso");
@@ -83,10 +82,11 @@ const Details = ({ advertisement }: DetailsProps) => {
   };
 
   const changeAdvertisementProperty = (property: string, value: unknown) => {
+    if (!advertisementContext) return;
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
-  const onChangeMarker = (lat, lng) => {
+  const onChangeMarker = (lat: number, lng: number) => {
     const coordsArray = coordinatesObjectToArray({ lat, lng });
     let newCoordinates = { type: "Point", coordinates: coordsArray };
 
@@ -146,7 +146,7 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <h5 className="font-bold">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                   <AnuncioDisponivel advertisement={advertisementContext} />
-                  <div className="my-5 mx-auto w-1/2 px-6">
+                  <div className="mx-auto my-5 w-1/2 px-6">
                     <Button onClick={methods.handleSubmit(saveChanges)} type="button">
                       Guardar alterações &#10230;
                     </Button>

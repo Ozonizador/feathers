@@ -2,6 +2,7 @@ import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvid
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import PricesComponent from "../anuncio/PricesComponent";
 import Button from "../utils/Button";
+import React from "react";
 
 const FormPrices = () => {
   const incrementStep = useIncrementStep();
@@ -10,12 +11,12 @@ const FormPrices = () => {
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
-  const nextStep = async (e) => {
+  const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     incrementStep();
   };
 
-  const changeTypeProperty = (label, value) => {
+  const changeTypeProperty = (label: string, value: any) => {
     setAdvertisementProperty(label, value);
   };
 

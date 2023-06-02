@@ -22,7 +22,7 @@ export const formatDate = (date: Date) => {
   });
 };
 
-export const group = (items, n) =>
+export const group = (items: any[], n: number) =>
   items.reduce((acc, x, i) => {
     const idx = Math.floor(i / n);
     acc[idx] = [...(acc[idx] || []), x];

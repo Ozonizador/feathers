@@ -1,6 +1,10 @@
 import React from "react";
 
-const UnideskHero = ({ title }) => {
+interface UnideskHeroProps {
+  title: string;
+}
+
+const UnideskHero = ({ title }: UnideskHeroProps) => {
   return (
     <section>
       <div className="bg-hero-unidesk flex justify-center py-52 ">

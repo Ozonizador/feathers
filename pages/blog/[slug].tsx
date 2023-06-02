@@ -24,7 +24,7 @@ const BlogPost = ({ blog }: BlogPostProps) => {
 export default BlogPost;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const slug = ctx.params.slug;
+  const slug = ctx.params?.slug;
 
   /* Not Found */
   if (!slug) {

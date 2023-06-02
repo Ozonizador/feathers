@@ -23,14 +23,13 @@ const FormSobreCasa = () => {
   const methods = useForm<FormSobreCasa>({
     defaultValues: {
       title: advertisement.title,
-      max_rooms: advertisement.max_rooms,
       description: advertisement.description,
       host_lives_property: advertisement.host_lives_property,
       type_host: advertisement.type_host || "PARTICULAR",
     },
   });
 
-  const nextStep = async (data) => {
+  const nextStep = async (data: any) => {
     setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };

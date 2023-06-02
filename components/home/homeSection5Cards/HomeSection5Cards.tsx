@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const HomeSection5Cards = ({ img, heading, text }) => {
+interface HomeSection5CardsProps {
+  img: string;
+  heading: string;
+  text: string;
+}
+
+const HomeSection5Cards = ({ img, heading, text }: HomeSection5CardsProps) => {
   return (
     <article className=" rounded-2xl border border-solid border-terciary-200 p-9">
       <Image src={img} alt="" height={64} width={64} />

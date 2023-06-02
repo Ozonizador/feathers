@@ -13,7 +13,7 @@ export default function RoomSemelhantes() {
   const { getSimilarAdvertisements } = useAdvertisementService();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [similarAdverts, setSimilarAdverts] = useState<Partial<Advertisement>[]>([]);
+  const [similarAdverts, setSimilarAdverts] = useState<Pick<Advertisement, "photos" | "type" | "place">[]>([]);
 
   const getSimilarAdverts = useCallback(async () => {
     setLoading(true);
@@ -57,7 +57,7 @@ export default function RoomSemelhantes() {
               <span className="px-1">
                 <CgHome />
               </span>{" "}
-              em {advertisement.place}
+              em {advertisement?.place || ""}
             </a>
           </Link>
         </section>

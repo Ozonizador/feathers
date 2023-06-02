@@ -9,7 +9,9 @@ const useStayService = () => {
     return { data, error };
   };
 
-  const getHistoryStayByTenantId = async (tenantId: string): Promise<{ data: Stay[]; error: PostgrestError }> => {
+  const getHistoryStayByTenantId = async (
+    tenantId: string
+  ): Promise<{ data: Stay[] | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"stays", Stays>(STAYS_TABLE_NAME)
       .select()

@@ -3,7 +3,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 const useUserService = () => {
   const supabaseClient = useSupabaseClient();
 
-  async function register(email, password) {
+  async function register(email: string, password: string) {
     const { error } = await supabaseClient.auth.signUp({
       email,
       password,
@@ -11,7 +11,7 @@ const useUserService = () => {
     return { error };
   }
 
-  async function login(email, password) {
+  async function login(email: string, password: string) {
     const { error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
@@ -20,7 +20,7 @@ const useUserService = () => {
     return { error };
   }
 
-  async function loginWithMagicLink(email) {
+  async function loginWithMagicLink(email: string) {
     const { error } = await supabaseClient.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${window.location.origin}` },

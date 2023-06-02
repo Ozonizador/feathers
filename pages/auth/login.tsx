@@ -15,18 +15,18 @@ const Login = () => {
   const router = useRouter();
   const { login, loginWithFacebook, loginWithGoogle } = useUserService();
 
-  const loginFacebook = async (event) => {
+  const loginFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithFacebook();
   };
 
   /** registar com google */
-  const loginGoogle = async (event) => {
+  const loginGoogle = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithGoogle();
   };
 
-  const normalLogin = async (event) => {
+  const normalLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     const { error } = await login(email, password);
     if (error) {

@@ -1,10 +1,4 @@
-import {
-  HouseRules,
-  AboutHouseSections,
-  HouseExpenses,
-  AdvertisementPhoto,
-  AdvertisementInfo,
-} from "./models/advertisement";
+import { HouseRules, AdvertisementPhoto, HouseExpenses, AdvertisementInfo } from "./models/advertisement";
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
@@ -38,23 +32,27 @@ export interface Database {
     Tables: {
       advertisements: {
         Row: {
-          about_house: AboutHouseSections;
           agreementsinfo: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities: string[] | null;
           bathrooms: number;
+          bedroom_amenities: string[] | null;
           beds: number;
           created_at: string;
           description: string;
           expenses: HouseExpenses;
+          exterior_amenities: string[] | null;
           extra_per_host: number;
           floor: string | null;
+          general_amenities: string[] | null;
           geom: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
           id: string;
-          max_rooms: number;
+          kitchen_amenities: string[] | null;
+          livingroom_amenities: string[] | null;
           month_rent: number;
           photos: AdvertisementPhoto[];
           place: string;
@@ -72,23 +70,27 @@ export interface Database {
           verified: boolean;
         };
         Insert: {
-          about_house: AboutHouseSections;
           agreementsinfo?: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities?: string[] | null;
           bathrooms: number;
+          bedroom_amenities?: string[] | null;
           beds: number;
           created_at?: string;
           description: string;
           expenses: HouseExpenses;
+          exterior_amenities?: string[] | null;
           extra_per_host: number;
           floor?: string | null;
+          general_amenities?: string[] | null;
           geom?: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
           id?: string;
-          max_rooms?: number;
+          kitchen_amenities?: string[] | null;
+          livingroom_amenities?: string[] | null;
           month_rent: number;
           photos?: AdvertisementPhoto[];
           place: string;
@@ -106,23 +108,27 @@ export interface Database {
           verified?: boolean;
         };
         Update: {
-          about_house?: AboutHouseSections;
           agreementsinfo?: AdvertisementInfo | null;
           available?: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities?: string[] | null;
           bathrooms?: number;
+          bedroom_amenities?: string[] | null;
           beds?: number;
           created_at?: string;
           description?: string;
           expenses?: HouseExpenses;
+          exterior_amenities?: string[] | null;
           extra_per_host?: number;
           floor?: string | null;
+          general_amenities?: string[] | null;
           geom?: any | null;
           guarantee_value?: number;
           host_id?: string;
           host_lives_property?: boolean;
           house_rules?: HouseRules;
           id?: string;
-          max_rooms?: number;
+          kitchen_amenities?: string[] | null;
+          livingroom_amenities?: string[] | null;
           month_rent?: number;
           photos?: AdvertisementPhoto[];
           place?: string;
@@ -139,6 +145,14 @@ export interface Database {
           updated_at?: string;
           verified?: boolean;
         };
+        Relationships: [
+          {
+            foreignKeyName: "advertisements_host_id_fkey";
+            columns: ["host_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       blogs: {
         Row: {
@@ -171,6 +185,22 @@ export interface Database {
           title?: string;
           updated_at?: string;
         };
+        Relationships: [];
+      };
+      commodities: {
+        Row: {
+          id: number;
+          value: string | null;
+        };
+        Insert: {
+          id?: number;
+          value?: string | null;
+        };
+        Update: {
+          id?: number;
+          value?: string | null;
+        };
+        Relationships: [];
       };
       conversations: {
         Row: {
@@ -197,6 +227,26 @@ export interface Database {
           tenant_id?: string;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "conversations_host_id_fkey";
+            columns: ["host_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "conversations_reservation_id_fkey";
+            columns: ["reservation_id"];
+            referencedRelation: "reservations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "conversations_tenant_id_fkey";
+            columns: ["tenant_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       messages: {
         Row: {
@@ -205,6 +255,7 @@ export interface Database {
           id: string;
           message: string;
           profile_id: string;
+          seen: boolean;
           updated_at: string;
         };
         Insert: {
@@ -213,6 +264,7 @@ export interface Database {
           id?: string;
           message: string;
           profile_id: string;
+          seen?: boolean;
           updated_at?: string;
         };
         Update: {
@@ -221,14 +273,30 @@ export interface Database {
           id?: string;
           message?: string;
           profile_id?: string;
+          seen?: boolean;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey";
+            columns: ["conversation_id"];
+            referencedRelation: "conversations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "messages_profile_id_fkey";
+            columns: ["profile_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       notifications: {
         Row: {
           created_at: string;
           id: string;
           profile_id: string;
+          seen: boolean;
           type: Database["public"]["Enums"]["NotificationType"];
           updated_at: string;
         };
@@ -236,6 +304,7 @@ export interface Database {
           created_at?: string;
           id?: string;
           profile_id: string;
+          seen?: boolean;
           type: Database["public"]["Enums"]["NotificationType"];
           updated_at?: string;
         };
@@ -243,9 +312,18 @@ export interface Database {
           created_at?: string;
           id?: string;
           profile_id?: string;
+          seen?: boolean;
           type?: Database["public"]["Enums"]["NotificationType"];
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "notifications_profile_id_fkey";
+            columns: ["profile_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       profiles: {
         Row: {
@@ -267,6 +345,7 @@ export interface Database {
           town: string | null;
           type: Database["public"]["Enums"]["profiletype"] | null;
           updated_at: string;
+          user_type: Database["public"]["Enums"]["user_type"];
         };
         Insert: {
           accepts_notification_email?: boolean | null;
@@ -287,6 +366,7 @@ export interface Database {
           town?: string | null;
           type?: Database["public"]["Enums"]["profiletype"] | null;
           updated_at?: string;
+          user_type?: Database["public"]["Enums"]["user_type"];
         };
         Update: {
           accepts_notification_email?: boolean | null;
@@ -307,7 +387,9 @@ export interface Database {
           town?: string | null;
           type?: Database["public"]["Enums"]["profiletype"] | null;
           updated_at?: string;
+          user_type?: Database["public"]["Enums"]["user_type"];
         };
+        Relationships: [];
       };
       reports: {
         Row: {
@@ -334,6 +416,14 @@ export interface Database {
           type?: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "reports_stay_id_fkey";
+            columns: ["stay_id"];
+            referencedRelation: "stays";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       reservations: {
         Row: {
@@ -369,6 +459,20 @@ export interface Database {
           tenant_id?: string;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "reservations_advertisement_id_fkey";
+            columns: ["advertisement_id"];
+            referencedRelation: "advertisements";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reservations_tenant_id_fkey";
+            columns: ["tenant_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       reviews: {
         Row: {
@@ -410,6 +514,14 @@ export interface Database {
           updated_at?: string;
           value_quality_rating?: number;
         };
+        Relationships: [
+          {
+            foreignKeyName: "reviews_stay_id_fkey";
+            columns: ["stay_id"];
+            referencedRelation: "stays";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       spatial_ref_sys: {
         Row: {
@@ -433,6 +545,7 @@ export interface Database {
           srid?: number;
           srtext?: string | null;
         };
+        Relationships: [];
       };
       stays: {
         Row: {
@@ -462,6 +575,26 @@ export interface Database {
           tenant_id?: string;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "stays_advertisement_id_fkey";
+            columns: ["advertisement_id"];
+            referencedRelation: "advertisements";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stays_reservation_id_fkey";
+            columns: ["reservation_id"];
+            referencedRelation: "reservations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stays_tenant_id_fkey";
+            columns: ["tenant_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Views: {
@@ -475,6 +608,7 @@ export interface Database {
           srid: number | null;
           type: string | null;
         };
+        Relationships: [];
       };
       geometry_columns: {
         Row: {
@@ -504,6 +638,7 @@ export interface Database {
           srid?: number | null;
           type?: string | null;
         };
+        Relationships: [];
       };
       reviewsPerAdvertisement: {
         Row: {
@@ -515,6 +650,14 @@ export interface Database {
           review_number: number | null;
           value_quality_average: number | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: "stays_advertisement_id_fkey";
+            columns: ["advertisement_id"];
+            referencedRelation: "advertisements";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Functions: {
@@ -868,8 +1011,7 @@ export interface Database {
           lng: number;
         };
         Returns: {
-          about_house: Json;
-          agreementsinfo: Json | null;
+          agreementsinfo: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
           bathrooms: number;
           beds: number;
@@ -882,11 +1024,10 @@ export interface Database {
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
-          house_rules: Json;
+          house_rules: HouseRules;
           id: string;
-          max_rooms: number;
           month_rent: number;
-          photos: Json;
+          photos: AdvertisementPhoto[];
           place: string;
           postal_code: string;
           rooms: number;
@@ -1421,6 +1562,7 @@ export interface Database {
           created_at: string;
           end_date: string;
           id: string;
+          number_guests: number;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -1455,13 +1597,13 @@ export interface Database {
         Args: {
           "": unknown;
         };
-        Returns: unknown[];
+        Returns: unknown;
       };
       pgis_geometry_clusterwithin_finalfn: {
         Args: {
           "": unknown;
         };
-        Returns: unknown[];
+        Returns: unknown;
       };
       pgis_geometry_collect_finalfn: {
         Args: {
@@ -2128,7 +2270,7 @@ export interface Database {
         Args: {
           "": unknown[];
         };
-        Returns: unknown[];
+        Returns: unknown;
       };
       st_collect:
         | {
@@ -2542,13 +2684,13 @@ export interface Database {
       st_geomfromgeojson:
         | {
             Args: {
-              "": string;
+              "": Json;
             };
             Returns: unknown;
           }
         | {
             Args: {
-              "": Json;
+              "": string;
             };
             Returns: unknown;
           }
@@ -3547,6 +3689,7 @@ export interface Database {
       staysstatus: "OK" | "CHANGED";
       type_host: "PROFISSIONAL" | "PARTICULAR";
       TypeRoom: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
+      user_type: "NORMAL" | "ADMIN";
     };
     CompositeTypes: {
       geometry_dump: {
@@ -3564,7 +3707,10 @@ export interface Database {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null;
+          avif_autodetection: boolean | null;
           created_at: string | null;
+          file_size_limit: number | null;
           id: string;
           name: string;
           owner: string | null;
@@ -3572,7 +3718,10 @@ export interface Database {
           updated_at: string | null;
         };
         Insert: {
+          allowed_mime_types?: string[] | null;
+          avif_autodetection?: boolean | null;
           created_at?: string | null;
+          file_size_limit?: number | null;
           id: string;
           name: string;
           owner?: string | null;
@@ -3580,13 +3729,24 @@ export interface Database {
           updated_at?: string | null;
         };
         Update: {
+          allowed_mime_types?: string[] | null;
+          avif_autodetection?: boolean | null;
           created_at?: string | null;
+          file_size_limit?: number | null;
           id?: string;
           name?: string;
           owner?: string | null;
           public?: boolean | null;
           updated_at?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: "buckets_owner_fkey";
+            columns: ["owner"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       migrations: {
         Row: {
@@ -3607,6 +3767,7 @@ export interface Database {
           id?: number;
           name?: string;
         };
+        Relationships: [];
       };
       objects: {
         Row: {
@@ -3619,6 +3780,7 @@ export interface Database {
           owner: string | null;
           path_tokens: string[] | null;
           updated_at: string | null;
+          version: string | null;
         };
         Insert: {
           bucket_id?: string | null;
@@ -3630,6 +3792,7 @@ export interface Database {
           owner?: string | null;
           path_tokens?: string[] | null;
           updated_at?: string | null;
+          version?: string | null;
         };
         Update: {
           bucket_id?: string | null;
@@ -3641,13 +3804,37 @@ export interface Database {
           owner?: string | null;
           path_tokens?: string[] | null;
           updated_at?: string | null;
+          version?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: "objects_bucketId_fkey";
+            columns: ["bucket_id"];
+            referencedRelation: "buckets";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "objects_owner_fkey";
+            columns: ["owner"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string;
+          name: string;
+          owner: string;
+          metadata: Json;
+        };
+        Returns: undefined;
+      };
       extension: {
         Args: {
           name: string;
@@ -3664,7 +3851,7 @@ export interface Database {
         Args: {
           name: string;
         };
-        Returns: string[];
+        Returns: unknown;
       };
       get_size_by_bucket: {
         Args: Record<PropertyKey, never>;

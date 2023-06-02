@@ -1,11 +1,4 @@
-import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import {
-  AdvertisementPhoto,
-  AdvertisementStatus,
-  ADVERTISEMENT_PROPERTIES,
-  HostFlexType,
-  TypeAmenity,
-} from "../models/advertisement";
+import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
 
 import { TbSofa } from "react-icons/tb";
 import { MdOutlineFireplace } from "react-icons/md";
@@ -61,7 +54,6 @@ const hostTypeFlexDescription = (type: HostFlexType) => {
     FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
     MODERATE: `Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
     RIGID: `Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
-    "": "",
   }[type];
 };
 
@@ -71,12 +63,11 @@ const hostTranslate = (type: HostFlexType) => {
     FLEX: `Flexível`,
     MODERATE: `Moderado`,
     RIGID: `Rigido`,
-    "": "",
   }[type];
 };
 
 // get the icons to use here
-export const houseAmenities = (type: TypeAmenity): IconType => {
+export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
   switch (type) {
     case "SOFA":
       return TbSofa;
@@ -171,46 +162,17 @@ export const houseAmenities = (type: TypeAmenity): IconType => {
     case "POWER_PLUG_NEAR_BED":
       return BiPlug;
     default:
-      return null;
+      return undefined;
     // case   "COURTYARD": return COURTYARD
     // case   "BLACKOUTS": return typeof
   }
 };
 
-const addFilterAdvertisement = (query: any, filters: FilterAdvertisements) => {
-  const { filter, order } = filters;
+const getMainAdvertPhoto = (photos: AdvertisementPhoto[]): AdvertisementPhoto | undefined => {
+  if (!photos || photos.length == 0) return undefined;
 
-  // is available
-  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);
-
-  filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
-
-  // comodities not working
-  // filter.comodities &&
-  //   filter.comodities.length !== 0 &&
-  //   (query = query.filter(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, "in", filter.comodities));
-
-  //  Price
-  filter.price.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));
-  filter.price.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
-
-  // Dates
-
-  filter.dates?.startDate &&
-    (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_START_DATE, "gte", filter.dates.startDate));
-  filter.dates?.endDate && (query = query.not(ADVERTISEMENT_PROPERTIES.STAY_END_DATE, "lte", filter.dates.endDate));
-
-  order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
-  return query;
+  let photo = photos.find((photo) => photo.zone == "main");
+  return photo ? photo : photos[0];
 };
 
-const getMainAdvertPhoto = (photos: AdvertisementPhoto[]) => {
-  if (photos && photos.length > 0) {
-    let photo = photos.find((photo) => photo.zone == "main");
-    return photo ? photo : photos[0];
-  } else {
-    return null;
-  }
-};
-
-export { hostTypeFlexDescription, hostTranslate, addFilterAdvertisement, getMainAdvertPhoto };
+export { hostTypeFlexDescription, hostTranslate, getMainAdvertPhoto };

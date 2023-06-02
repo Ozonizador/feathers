@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import { Review } from "./review";
+import { ReviewsAverage } from "./review";
 import { StayWithPublicReview } from "./stay";
 
 // TODO: change the advertisements to listings because of adblocker
@@ -16,7 +16,7 @@ export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];
 
 export type AdvertisementWithReviewAverage = Advertisement & {
-  averages: Database["public"]["Views"]["reviewsPerAdvertisement"]["Row"];
+  averages: ReviewsAverage[];
 };
 
 export type AdvertisementComplete = Advertisement & {
@@ -98,7 +98,6 @@ export const ADVERTISEMENT_PROPERTIES = {
   DESCRIPTION: "description",
   PHOTOS: "photos",
   HOUSE_RULES: "house_rules",
-  ABOUT_HOUSE: "about_house",
   MONTH_RENT: "month_rent",
   EXTRA_PER_HOST: "extra_per_host",
   GUARANTEE_VALUE: "guarantee_value",
@@ -109,8 +108,6 @@ export const ADVERTISEMENT_PROPERTIES = {
   AVAILABLE: "available",
   ID: "id",
   GEOM: "geom",
-  STAY_START_DATE: "stays.start_date",
-  STAY_END_DATE: "stays.end_date",
   SLUG: "slug",
 } as const;
 
@@ -127,7 +124,7 @@ export const TYPE_ADVERTISEMENT = {
   ENTIRE_SPACE: "Apartamento Inteiro",
   SHARED_ROOM: "Quarto Partilhado",
   PRIVATE_ROOM: "Quarto Privado",
-};
+} as const;
 
 export type TypeAdvertisement = Database["public"]["Enums"]["TypeRoom"];
 export type HostType = Database["public"]["Enums"]["type_host"];
@@ -139,6 +136,23 @@ export enum InclusiveExpenses {
   PARTIALLY = "PARTIALLY",
   EXCLUDED = "EXCLUDED",
 }
+
+export const AMENITIES_DB = {
+  livingroom: "livingroom_amenities",
+  bathroom: "bathroom_amenities",
+  kitchen: "kitchen_amenities",
+  general: "general_amenities",
+  exterior: "exterior_amenities",
+  bedroom: "bedroom_amenities",
+} as unknown as {
+  [x: AboutHouseSpace]:
+    | "livingroom_amenities"
+    | "bathroom_amenities"
+    | "general_amenities"
+    | "bathroom_amenities"
+    | "bedroom_amenities"
+    | "kitchen_amenities";
+};
 
 export type ExpenseName = "GAS" | "LIGHTS" | "WATER" | "INTERNET";
 
@@ -164,57 +178,59 @@ export interface AboutHouseSections {
   general: TypeAmenity[];
 }
 
-export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";
+export const AMENITIES = [
+  "SOFA",
+  "TV",
+  "FIREPLACE",
+  "TABLE",
+  "CHAIRS",
+  "WIFI",
+  "ELEVADOR",
+  "AIR_CONDITIONING",
+  "WASHING_MACHINE",
+  "MIRROR",
+  "FRIDGE",
+  "SINGLE_BED",
+  "DOUBLE_BED",
+  "MICROWAVE",
+  "TOASTER",
+  "COFFEE_MAKER",
+  "HEATING",
+  "IRON_BOARD",
+  "ESTENDAL",
+  "LIVING_ROOM",
+  "BALCONY",
+  "SWIMMING_POOL",
+  "PARKING_SPOT",
+  "COURTYARD",
+  "TERRACE",
+  "BARBECUE",
+  "FREEZER",
+  "OVEN",
+  "STOVE",
+  "EXAUSTOR_FAN",
+  "DRYER",
+  "BATHTUB",
+  "SHOWER",
+  "PRIVATE_BATHROOM",
+  "SHARED_BATHROOM",
+  "CUTLERY",
+  "DESK",
+  "PILLOWS",
+  "BED_SHEETS",
+  "BLACKOUTS",
+  "GARBAGE_CAN",
+  "LAUNDRY_MACHINE",
+  "MEAL_ZONE",
+  "BASIC_UTILIES",
+  "KEY_TO_LOCK_DOOR",
+  "HANGERS_SUPPORT",
+  "HOT_WATER_KETTLE",
+  "POWER_PLUG_NEAR_BED",
+] as const;
 
-export type TypeAmenity =
-  | "SOFA"
-  | "TV"
-  | "FIREPLACE"
-  | "TABLE"
-  | "CHAIRS"
-  | "WIFI"
-  | "ELEVADOR"
-  | "AIR_CONDITIONING"
-  | "WASHING_MACHINE"
-  | "MIRROR"
-  | "FRIDGE"
-  | "SINGLE_BED"
-  | "DOUBLE_BED"
-  | "MICROWAVE"
-  | "TOASTER"
-  | "COFFEE_MAKER"
-  | "HEATING"
-  | "IRON_BOARD"
-  | "ESTENDAL"
-  | "LIVING_ROOM"
-  | "BALCONY"
-  | "SWIMMING_POOL"
-  | "PARKING_SPOT"
-  | "COURTYARD"
-  | "TERRACE"
-  | "BARBECUE"
-  | "FREEZER"
-  | "OVEN"
-  | "STOVE"
-  | "EXAUSTOR_FAN"
-  | "DRYER"
-  | "BATHTUB"
-  | "SHOWER"
-  | "PRIVATE_BATHROOM"
-  | "SHARED_BATHROOM"
-  | "CUTLERY"
-  | "DESK"
-  | "PILLOWS"
-  | "BED_SHEETS"
-  | "BLACKOUTS"
-  | "GARBAGE_CAN"
-  | "LAUNDRY_MACHINE"
-  | "MEAL_ZONE"
-  | "BASIC_UTILIES"
-  | "KEY_TO_LOCK_DOOR"
-  | "HANGERS_SUPPORT"
-  | "HOT_WATER_KETTLE"
-  | "POWER_PLUG_NEAR_BED";
+export type Amenity = typeof AMENITIES;
+export type TypeAmenity = Amenity[number];
 
 export const TypeAmenityLabel = {
   SOFA: "Sofa",
@@ -265,11 +281,11 @@ export const TypeAmenityLabel = {
   HANGERS_SUPPORT: "Suporte para Cabides",
   HOT_WATER_KETTLE: "Chaleira de água quente",
   POWER_PLUG_NEAR_BED: "Tomada perto da tomada",
-};
+} as const;
 
 /* FOR THE SELECT ON PROCURAR */
 export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((label) => {
-  return { label, value: TypeAmenityLabel[label] };
+  return { label, value: TypeAmenityLabel[label as keyof typeof TypeAmenityLabel] };
 });
 
 /* ADVERT_STATUS */
@@ -289,11 +305,11 @@ export const AboutHouseCommodities = {
     { label: "Casa de banho privada", type: "PRIVATE_BATHROOM" },
     { label: "Casa de banho partilhada", type: "SHARED_BATHROOM" },
   ],
-  livingRoom: [
+  livingroom: [
     { label: "Sofá", type: "SOFA" },
     { label: "Mesa", type: "TABLE" },
   ],
-  bedRoom: [
+  bedroom: [
     { label: "Cama Individual", type: "SINGLE_BED" },
     { label: "Cama Dupla", type: "DOUBLE_BED" },
     { label: "2 camas individuais", type: "ELEVADOR" },
@@ -310,7 +326,7 @@ export const AboutHouseCommodities = {
     { label: "Baldes do Lixo ", type: "GARBAGE_CAN" },
     { label: "Varanda", type: "BALCONY" },
   ],
-  bathRoom: [
+  bathroom: [
     { label: "Secador de Cabelo", type: "DRYER" },
     { label: "Espelho", type: "MIRROR" },
     { label: "Banheira", type: "BATHTUB" },
@@ -340,6 +356,11 @@ export const AboutHouseCommodities = {
     { label: "Estacionamento", type: "PARKING_SPOT" },
   ],
 } as unknown as AboutHouseCommoditiesType;
+
+export const SPACES = ["livingroom", "bedroom", "kitchen", "exterior", "general", "bathoom"];
+
+export type AboutHouseSpaces = typeof SPACES;
+export type AboutHouseSpace = AboutHouseSpaces[number];
 
 type AboutHouseCommoditiesType = {
   [x in AboutHouseSpace]: [{ label: string; type: TypeAmenity }];

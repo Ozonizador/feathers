@@ -47,7 +47,7 @@ const FormTermos = () => {
 
       toast.success("Registo Bem Sucedido");
       router.push(HOME_URL);
-    } catch (e) {
+    } catch (e: any) {
       toast.error(e.message);
     } finally {
       setSaving(false);

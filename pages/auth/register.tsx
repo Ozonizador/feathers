@@ -16,17 +16,17 @@ const Register = () => {
   const { register, loginWithFacebook, loginWithGoogle } = useUserService();
 
   /** registar com google */
-  const registerWithGoogle = async (event) => {
+  const registerWithGoogle = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithGoogle();
   };
 
-  const registerWithFacebook = async (event) => {
+  const registerWithFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithFacebook();
   };
 
-  const normalRegister = async (event) => {
+  const normalRegister = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const { error } = await register(email, password);

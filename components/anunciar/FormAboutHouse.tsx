@@ -9,12 +9,12 @@ const FormAboutHouse = () => {
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
-  const nextStep = async (e) => {
+  const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     incrementStep();
   };
 
-  const changeAdvertisementProperty = (label, value) => {
+  const changeAdvertisementProperty = (label: string, value: any) => {
     setAdvertisementProperty(label, value);
   };
 

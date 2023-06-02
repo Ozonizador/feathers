@@ -36,21 +36,21 @@ const ModalDenuncia = () => {
     setModalReportProperty("step", step + 1);
   };
 
-  const changeReportType = (event) => {
-    const type = event.target.value;
+  const changeReportType = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const type = event.target.value as ReportsType;
     setReport({ ...report, type });
   };
 
-  const changeReportDescription = (event) => {
+  const changeReportDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
     const description = event.target.value;
     setReport({ ...report, description });
   };
 
-  const saveReport = async (event) => {
+  const saveReport = async (event: React.MouseEvent) => {
     event.preventDefault();
 
-    if (!profile) return;
+    if (!profile || !stay) return;
     setLoading(true);
     const { data, error } = await addReportOnAdvert(report, stay.id);
     if (!error) nextStep();
@@ -89,7 +89,7 @@ const ModalDenuncia = () => {
                             <h5 className="mt-2 text-xl font-semibold lg:text-2xl">
                               Porque estás a denunciar esta conta?
                             </h5>
-                            <p className="mt-7 mb-10 text-justify lg:text-xl">
+                            <p className="mb-10 mt-7 text-justify lg:text-xl">
                               A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja
                               verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.
                             </p>
@@ -155,7 +155,7 @@ const ModalDenuncia = () => {
                                   id="exampleFormControlTextarea1"
                                   key="description-textarea"
                                   rows={3}
-                                  onChange={(e) => changeReportDescription(e)}
+                                  onChange={changeReportDescription}
                                   placeholder="Conta-nos mais sobre isso"
                                   defaultValue={report.description}
                                 ></textarea>
@@ -163,7 +163,7 @@ const ModalDenuncia = () => {
                               <div className="flex flex-1 justify-center lg:justify-end">
                                 <button
                                   type="button"
-                                  className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
+                                  className="rounded-lg bg-primary-500 px-9 py-2 text-base text-white"
                                   onClick={saveReport}
                                   disabled={loading}
                                 >
@@ -191,7 +191,7 @@ const ModalDenunciaSegundoPasso = () => {
   const reportModal = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
 
-  const closeModal = (event) => {
+  const closeModal = (event: React.MouseEvent) => {
     event.preventDefault();
     setModalReport({ ...reportModal, isOpen: false, step: 1 });
   };
@@ -207,7 +207,7 @@ const ModalDenunciaSegundoPasso = () => {
             </p>
             <button
               type="button"
-              className="rounded-lg bg-primary-500 py-2 px-9 text-base text-white"
+              className="rounded-lg bg-primary-500 px-9 py-2 text-base text-white"
               onClick={closeModal}
             >
               Fechar

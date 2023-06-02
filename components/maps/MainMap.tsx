@@ -5,12 +5,12 @@ import { GEO } from "../../models/utils";
 import Button from "../utils/Button";
 
 interface MainMapProps {
-  currentMapCoords: GEO;
+  currentMapCoords?: GEO;
   showCenterMarker: boolean;
   draggableMarker?: boolean;
   allowZoom?: boolean;
   markers?: GEO[];
-  onChangeMarker?: (lat, lng) => void;
+  onChangeMarker?: (lat: number, lng: number) => void;
 }
 
 let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
@@ -23,7 +23,7 @@ const MainMap = ({
   showCenterMarker = true,
   onChangeMarker,
 }: MainMapProps) => {
-  const [mapCenter, setMapCenter] = useState<GEO | null>(currentMapCoords);
+  const [mapCenter, setMapCenter] = useState<GEO | undefined>(currentMapCoords);
 
   const requestLocation = () => {
     navigator.geolocation.getCurrentPosition(() => {});
@@ -77,7 +77,7 @@ const MapComponent = ({
   showCenterMarker,
   onChangeMarker,
 }: MainMapProps) => {
-  const [position, setPosition] = useState<GEO | null>(currentMapCoords);
+  const [position, setPosition] = useState<GEO | undefined>(currentMapCoords);
   const map = useMap();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const MapComponent = ({
 
   return (
     <>
-      {showCenterMarker && (
+      {showCenterMarker && position && (
         <Marker
           position={{ lat: position.lat, lng: position.lng }}
           icon={icon}
@@ -100,9 +100,8 @@ const MapComponent = ({
             moveend: (e) => {
               try {
                 const { lat, lng } = e.target.getLatLng();
-                onChangeMarker(lat, lng);
+                onChangeMarker && onChangeMarker(lat, lng);
               } catch {}
-              const target = e.type;
             },
           }}
         ></Marker>

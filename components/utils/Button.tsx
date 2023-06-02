@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import React, { ReactNode } from "react";
 
 interface ButtonProps {
-  onClick?: (e) => void;
+  onClick?: (e: React.MouseEvent) => void;
   type: "submit" | "button" | "reset";
   children: ReactNode;
   loading?: boolean;

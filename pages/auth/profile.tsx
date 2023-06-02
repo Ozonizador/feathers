@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useCurrentUser, useSetProfileInformation } from "../../context/MainProvider";
 import useProfileService from "../../hooks/useProfileService";
 import { HOME_URL, REGISTER_URL } from "../../models/paths";
-import { UserTypes } from "../../models/profile";
+import { Profile, UserTypes } from "../../models/profile";
 
 const TypeCustomerPage = () => {
   const profile = useCurrentUser();
@@ -20,7 +20,7 @@ const TypeCustomerPage = () => {
     const { data, error } = await setTypeUser(profile.id, type);
     if (error) return toast.error("Erro ea escolher o tipo de utilizador");
 
-    setProfile(data);
+    setProfile(data as unknown as Profile);
     router.push(HOME_URL);
   };
 

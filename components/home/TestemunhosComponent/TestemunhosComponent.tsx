@@ -3,7 +3,7 @@ import TestemunhoCard from "../TestemunhoCard/TestemunhoCard";
 import { Carousel } from "flowbite-react";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import { Testemunhos } from "../../../models/static";
+import { TestemunhoInfo, Testemunhos } from "../../../models/static";
 import { group } from "../../../utils/utils";
 
 const TestemunhosComponent = () => {
@@ -17,10 +17,10 @@ const TestemunhosComponent = () => {
             rightControl={<BsFillArrowRightCircleFill size={32} className="text-5xl text-white drop-shadow-xl" />}
             indicators={true}
           >
-            {group(Testemunhos, 3).map((children, index) => {
+            {group(Testemunhos, 3).map((children: TestemunhoInfo[], index: number) => {
               return (
                 <div key={index} className="flex gap-6 px-24 lg:justify-center">
-                  {children.map((testemunho, index) => {
+                  {children.map((testemunho: TestemunhoInfo, index: number) => {
                     return (
                       <div key={index}>
                         <TestemunhoCard

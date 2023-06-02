@@ -13,7 +13,7 @@ const FormCapacidade = () => {
   /* Form */
   const methods = useForm();
 
-  const nextStep = async (data) => {
+  const nextStep = async (data: any) => {
     setAdvertisement({ ...advertisement, ...data });
     incrementStep();
   };

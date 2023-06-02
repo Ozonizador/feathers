@@ -27,12 +27,15 @@ const Prices = ({ advertisement }: PricesProps) => {
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
+    if (!advertisementContext) return;
+
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (error) return toast.error(error.message);
     toast.success("Success");
   };
 
-  const changeAdvertisementProperty = (property, value) => {
+  const changeAdvertisementProperty = (property: string, value: any) => {
+    if (!advertisementContext) return;
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
@@ -53,7 +56,7 @@ const Prices = ({ advertisement }: PricesProps) => {
           <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
         )}
 
-        <div className="mr-auto mb-10 w-1/2">
+        <div className="mb-10 mr-auto w-1/2">
           <Button onClick={saveChanges} type="button">
             Guardar
           </Button>

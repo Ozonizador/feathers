@@ -1,5 +1,5 @@
 import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
 import {
@@ -39,14 +39,15 @@ const Photos = ({ advertisement }: PhotosProps) => {
   const photos = advertisementContext ? advertisementContext.photos : ([] as AdvertisementPhoto[]);
 
   const saveChanges = async () => {
-    const { data, error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
-    if (!error) {
-    }
+    if (!advertisementContext) return;
+    const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
+    if (!error) toast.error("Erro ao guardar fotos");
   };
 
-  const uploadToClient = async (event) => {
+  const uploadToClient = async (event: any) => {
     event.preventDefault();
     const paths = [] as AdvertisementPhoto[];
+    if (!advertisementContext) return;
 
     if (event.target.files) {
       let files = [];
@@ -71,12 +72,12 @@ const Photos = ({ advertisement }: PhotosProps) => {
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
       event.target.value = null;
     }
   };
 
-  const toggleImageSelection = (toggledImage) => {
+  const toggleImageSelection = (toggledImage: AdvertisementPhoto) => {
     const index = selectedImages.findIndex((image) => image.url == toggledImage.url);
     let newImageSelection = selectedImages;
     if (index !== -1) {
@@ -89,6 +90,8 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
   const deletePhoto = async (event: React.MouseEvent<HTMLDivElement>, url: string) => {
     event.stopPropagation();
+    if (!advertisementContext) return;
+
     const { error } = await removePicture(advertisementContext.id, url);
     if (!error) {
       const photosAux = advertisementContext.photos.filter((photo) => photo.url !== url);
@@ -97,7 +100,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
     }
   };
 
@@ -109,14 +112,15 @@ const Photos = ({ advertisement }: PhotosProps) => {
     [selectedImages]
   );
 
-  const setImagesZone = async (event) => {
+  const setImagesZone = async (event: React.FormEvent<HTMLDivElement>) => {
+    if (!advertisementContext) return;
     const value = (event.target as HTMLInputElement).value;
 
     if (value === "main" && selectedImages.length !== 1) {
       toast.error("Só pode ter 1 foto de capa");
       return;
     } else {
-      let { photos } = advertisementContext;
+      let { photos } = advertisementContext || { photos: [] };
 
       let newImages = photos.map((photo) => {
         if (checkIfImageInSelected(photo.url)) {
@@ -125,17 +129,18 @@ const Photos = ({ advertisement }: PhotosProps) => {
           return photo;
         }
       });
+
       const { data, error } = await updateAdvertisement(
         { ...advertisementContext, photos: newImages },
         advertisementContext.id
       );
       if (error) return toast.error(error.message);
-      setAdvertisement(data);
+      data && setAdvertisement(data);
     }
     setSelectedImages([]);
   };
 
-  const checkIfImageInSelected = async (url) => {
+  const checkIfImageInSelected = (url: string) => {
     const foundImage = selectedImages.find((image) => image.url == url);
     return foundImage !== undefined;
   };
@@ -176,7 +181,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                       x
                     </div>
                     {photo.zone !== "other" && (
-                      <div className="absolute top-2 left-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
+                      <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
                         {HouseZonesLabel[photo.zone]}
                       </div>
                     )}
@@ -217,7 +222,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                     <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
                       <input type="radio" id="scales" name="type" value={zone} />
                       <label htmlFor="scales" className="my-auto ml-1">
-                        {HouseZonesLabel[zone]}
+                        {HouseZonesLabel[zone as keyof typeof HouseZonesLabel]}
                       </label>
                     </div>
                   );

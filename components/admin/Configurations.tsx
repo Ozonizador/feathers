@@ -31,8 +31,8 @@ const Configurations = () => {
       if (error) throw Error(error.message);
 
       toast.success("Password alterada");
-    } catch (e) {
-      toast.error(e);
+    } catch (e: any) {
+      toast.error(e.message as string);
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ const Configurations = () => {
               <div className="text-3xl font-bold">Configurações</div>
               {/* password */}
               <div>
-                <div className="mt-4  mb-8 text-2xl font-bold">Alterar password</div>
+                <div className="mb-8  mt-4 text-2xl font-bold">Alterar password</div>
                 <div className="mb-2 block">
                   <div className="my-3">
                     <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
@@ -103,7 +103,7 @@ const Configurations = () => {
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
                       <p className="w-32 text-base font-bold">Por email</p>
-                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
+                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
                             <Checkbox checked={true} onChange={toggleUserNotificationEmail} name="notification_email" />
@@ -116,7 +116,7 @@ const Configurations = () => {
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
                       <p className="w-32 text-base font-bold">Por mensagem</p>
-                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:my-0 lg:ml-6">
+                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
                             <Checkbox

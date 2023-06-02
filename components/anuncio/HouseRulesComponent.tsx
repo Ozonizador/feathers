@@ -1,3 +1,4 @@
+import React from "react";
 import { BiDrink } from "react-icons/bi";
 import { GiCigarette, GiBroom } from "react-icons/gi";
 import { MdChecklist, MdOutlinePets } from "react-icons/md";
@@ -12,11 +13,11 @@ import Input from "../utils/Input";
 
 interface HouseRulesProps {
   advertisement: Advertisement;
-  onChange: (property, value) => void;
+  onChange: (property: string, value: any) => void;
 }
 
 const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
-  const toggleHouseRulesProperty = (event) => {
+  const toggleHouseRulesProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { house_rules } = advertisement;
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
@@ -25,7 +26,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
     });
   };
 
-  const changeHouseRulesInput = (event) => {
+  const changeHouseRulesInput = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { house_rules } = advertisement;
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
@@ -44,11 +45,11 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Animais permitidos</p>
         </div>
 
-        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
+        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.animalsAllowed}
+              checked={advertisement.house_rules.animalsAllowed || false}
               name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
             />
           </div>
@@ -62,11 +63,11 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Fumar permitido</p>
         </div>
 
-        <div className="ml-0 flex w-11 justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
+        <div className="ml-0 flex w-11 justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.smokeAllowed}
+              checked={advertisement.house_rules.smokeAllowed || false}
               name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
             />
           </div>
@@ -81,11 +82,11 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <p className="w-40 text-base font-bold">Eventos Permitidos</p>
         </div>
 
-        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 py-3 px-3 md:items-center">
+        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
           <div className="flex h-5 items-center">
             <Checkbox
               onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.eventsAllowed}
+              checked={advertisement.house_rules.eventsAllowed || false}
               name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
             />
           </div>
@@ -105,7 +106,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
               label={HOUSE_RULES_NAMING.OTHER_RULES}
               labelText=""
               customCss="w-full"
-              value={advertisement.house_rules.otherRules}
+              value={advertisement.house_rules.otherRules || ""}
               onChange={(e) => changeHouseRulesInput(e)}
             />
           </div>
@@ -130,7 +131,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
               >
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {
                   return (
-                    <option key={index} value={TYPE_CLEANING_LABELS[type]}>
+                    <option key={index} value={TYPE_CLEANING_LABELS[type as keyof typeof TYPE_CLEANING_LABELS]}>
                       {type}
                     </option>
                   );

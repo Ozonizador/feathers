@@ -58,7 +58,7 @@ const ModalAvaliarExperiencia = () => {
     }
   };
 
-  const setReviwByProperty = (property, value) => {
+  const setReviwByProperty = (property: string, value: any) => {
     setReview({ ...review, [property]: value });
   };
 
@@ -99,7 +99,7 @@ const ModalAvaliarExperiencia = () => {
                     <div className="px-4 ">
                       <div className="" id="model-radius">
                         <div className=" m-4 ">
-                          <p className="text-semibold mt-7 mb-11 text-3xl">Quarto Privado em T3 - Peniche</p>
+                          <p className="text-semibold mb-11 mt-7 text-3xl">Quarto Privado em T3 - Peniche</p>
                           <div className="flex flex-col gap-6">
                             <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">Localização</div>
@@ -209,7 +209,7 @@ const ModalAvaliarExperiencia = () => {
 
                           <p className="my-3 flex justify-end" onClick={() => nextStep()}>
                             <a
-                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 px-6 py-3 text-white"
                               role="button"
                               id="modal-btn"
                             >
@@ -234,7 +234,7 @@ const ModalAvaliarExperiencia = () => {
                     <div className="px-8">
                       <div className="" id="model-radius">
                         {stay && (
-                          <p className="text-semibold mt-7 mb-11 text-3xl">
+                          <p className="text-semibold mb-11 mt-7 text-3xl">
                             {TYPE_ADVERTISEMENT[stay.advertisement.type]} - {stay.advertisement.place}
                           </p>
                         )}
@@ -265,7 +265,7 @@ const ModalAvaliarExperiencia = () => {
                           <div className="my-3 flex justify-end">
                             <button
                               type="button"
-                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                              className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 px-6 py-3 text-white"
                               onClick={saveReview}
                               disabled={loading}
                             >
@@ -306,7 +306,7 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
         >
           <div>
             <h1 className="text-2xl font-semibold">Obrigada pelo teu feedback!</h1>
-            <p className="font-x1 mx-auto mt-7 mb-10 w-2/3 text-center">
+            <p className="font-x1 mx-auto mb-10 mt-7 w-2/3 text-center">
               A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes.
             </p>
           </div>
@@ -314,7 +314,7 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
           <div className="px-8">
             <p className="lead mb-16 mt-7" onClick={() => closeModal()}>
               <a
-                className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 py-3 px-6 text-white"
+                className="btn btn-primary btn-lg mt-10  rounded-md bg-primary-500 px-6 py-3 text-white"
                 role="button"
                 id="modal-btn"
               >

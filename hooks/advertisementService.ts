@@ -1,15 +1,12 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
 
-import { FilterAdvertisements } from "../context/ProcurarAdvertisementsProvider";
-import { addFilterAdvertisement } from "../helpers/advertisementHelper";
 import {
   Advertisement,
   Advertisements,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_STORAGE_BUCKET,
   ADVERTISEMENT_TABLE_NAME,
-  CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
 export const PAGE_NUMBER_COUNT = 10 as number;
@@ -19,7 +16,7 @@ const useAdvertisementService = () => {
 
   const addAdvertisement = async (
     advertisement: Advertisement
-  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .insert(advertisement)
@@ -32,7 +29,7 @@ const useAdvertisementService = () => {
   const updateAdvertisement = async (
     advertisement: Partial<Advertisement>,
     id: string
-  ): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
@@ -43,7 +40,9 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
-  const getSingleAdvertisement = async (id: string): Promise<{ data: Advertisement; error: PostgrestError }> => {
+  const getSingleAdvertisement = async (
+    id: string
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -55,7 +54,7 @@ const useAdvertisementService = () => {
 
   const getAdvertisementsFromMultipleId = async (
     ids: string[]
-  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement[] | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
@@ -66,57 +65,13 @@ const useAdvertisementService = () => {
 
   const getAdvertismentsFromUserId = async (
     userId: string
-  ): Promise<{ data: Advertisement[]; error: PostgrestError }> => {
+  ): Promise<{ data: Advertisement[] | null; error: PostgrestError | null }> => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
 
     return { data, error };
-  };
-
-  /*
-  Filtering
-*/
-
-  const getAdvertisementsByCloseCoordinatesWithFilters = async (
-    lat: number,
-    lng: number,
-    page: number,
-    filters: FilterAdvertisements
-  ) => {
-    if (!lng || !lat) {
-      return { data: null, error: "No latitude or longitude provided", count: null };
-    }
-
-    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
-    let query = supabaseClient
-      .rpc<"close_advertisements", CloseAdvertisementsFn>(
-        CLOSE_ADVERTISEMENTS_TABLE_NAME,
-        {
-          lat,
-          lng,
-        },
-        { count: "exact" }
-      )
-      .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
-    query = addFilterAdvertisement(query, filters);
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
-
-    return { data, error, count };
-  };
-
-  const getAdvertisementsWithoutCoordinates = async (page: number, filters: FilterAdvertisements) => {
-    let initRange = page == 1 ? 0 : (page - 1) * PAGE_NUMBER_COUNT;
-    let query = supabaseClient
-      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select("*, stays(*)")
-      .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
-
-    query = addFilterAdvertisement(query, filters);
-
-    const { data, error, count } = await query.range(initRange, page * PAGE_NUMBER_COUNT - 1);
-    return { data, error, count };
   };
 
   const removeAdvertisement = async (advertisementId: string) => {
@@ -178,8 +133,6 @@ const useAdvertisementService = () => {
     getAdvertismentsFromUserId,
     getAdvertisementsForMainPage,
     getSimilarAdvertisements,
-    getAdvertisementsByCloseCoordinatesWithFilters,
-    getAdvertisementsWithoutCoordinates,
     saveImage,
     getPublicUrlFromImage,
     removePicture,

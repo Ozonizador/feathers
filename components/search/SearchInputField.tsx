@@ -55,7 +55,7 @@ export const SearchInputField = () => {
   );
 
   const setSelectedOption = (value: string) => {
-    const option = addressOptions.find((option) => value === option.place_name);
+    const option = addressOptions?.find((option) => value === option.place_name);
     if (option) {
       const { lat, lng } = coordinateArrayToLatitude(option.geometry.coordinates);
       setAddressOptions([]);
@@ -114,7 +114,7 @@ export const SearchInputField = () => {
         </div>
         <div className="my-2">
           <button onClick={sendQueryRequest} className="h-16 w-full rounded-lg bg-primary-500 px-6 transition lg:w-32">
-            <Image height={32} width={32} src="/images/icon-search.svg" className="my-auto mx-auto" alt="" />
+            <Image height={32} width={32} src="/images/icon-search.svg" className="mx-auto my-auto" alt="" />
           </button>
         </div>
       </div>

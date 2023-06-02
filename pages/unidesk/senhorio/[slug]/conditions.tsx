@@ -27,6 +27,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
 
   const saveChanges = async () => {
+    if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
       toast("Anúncio Atualizado");
@@ -35,7 +36,8 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
     }
   };
 
-  const changeAdvertisementProperty = (property, value) => {
+  const changeAdvertisementProperty = (property: string, value: any) => {
+    if (!advertisementContext) return;
     setAdvertisement({ ...advertisementContext, [property]: value });
   };
 
