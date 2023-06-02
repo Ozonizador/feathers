@@ -64,26 +64,42 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   }, [advertisement]);
 
   const showSomeAmenities = useMemo(() => {
-    if (advertisement.about_house) {
-      const { general, bedRoom, bathRoom, exterior, livingRoom, kitchen } = advertisement.about_house;
+    const {
+      general_amenities,
+      bedroom_amenities,
+      bathroom_amenities,
+      exterior_amenities,
+      livingroom_amenities,
+      kitchen_amenities,
+    } = advertisement;
 
-      const amenities: TypeAmenity[] = ([] as TypeAmenity[]).concat
-        .apply([], [general, exterior, bathRoom, livingRoom, kitchen, bedRoom])
-        .filter((opt) => !!opt)
-        .slice(0, 5);
-      return (
-        <ul className="flex gap-5 pr-3 text-gray-500">
-          {amenities.map((amenity, index) => {
-            return (
-              <li key={index} className={classNames({ "list-none": index === 0 })}>
-                {TypeAmenityLabel[amenity]}
-              </li>
-            );
-          })}
-        </ul>
-      );
-    }
-    return <></>;
+    const amenities: string[] = ([] as string[]).concat
+      .apply(
+        [],
+        [
+          general_amenities || [],
+          bedroom_amenities || [],
+          bathroom_amenities || [],
+          exterior_amenities || [],
+          livingroom_amenities || [],
+          kitchen_amenities || [],
+        ]
+      )
+      .filter((opt) => !!opt)
+      .slice(0, 5);
+
+    if (!amenities) return undefined;
+    return (
+      <ul className="flex gap-5 pr-3 text-gray-500">
+        {amenities.map((amenity, index) => {
+          return (
+            <li key={index} className={classNames({ "list-none": index === 0 })}>
+              {TypeAmenityLabel[amenity as TypeAmenity]}
+            </li>
+          );
+        })}
+      </ul>
+    );
   }, [advertisement]);
 
   return (
@@ -138,7 +154,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   </div>
                 </div>
 
-                {advertisement.about_house && (
+                {showSomeAmenities && (
                   <>
                     <div className="mb-1 mt-3 flex text-start text-xs">{showSomeAmenities}</div>
                   </>

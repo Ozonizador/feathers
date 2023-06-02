@@ -37,7 +37,6 @@ type DetailsForm = Pick<
   Advertisement,
   | "title"
   | "slug"
-  | "max_rooms"
   | "description"
   | "host_lives_property"
   | "type_host"
@@ -60,7 +59,6 @@ const Details = ({ advertisement }: DetailsProps) => {
     defaultValues: {
       title: advertisement.title,
       slug: advertisement.slug,
-      max_rooms: advertisement.max_rooms,
       description: advertisement.description,
       host_lives_property: advertisement.host_lives_property,
       type_host: advertisement.type_host,

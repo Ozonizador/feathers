@@ -137,6 +137,23 @@ export enum InclusiveExpenses {
   EXCLUDED = "EXCLUDED",
 }
 
+export const AMENITIES_DB = {
+  livingroom: "livingroom_amenities",
+  bathroom: "bathroom_amenities",
+  kitchen: "kitchen_amenities",
+  general: "general_amenities",
+  exterior: "exterior_amenities",
+  bedroom: "bedroom_amenities",
+} as unknown as {
+  [x: AboutHouseSpace]:
+    | "livingroom_amenities"
+    | "bathroom_amenities"
+    | "general_amenities"
+    | "bathroom_amenities"
+    | "bedroom_amenities"
+    | "kitchen_amenities";
+};
+
 export type ExpenseName = "GAS" | "LIGHTS" | "WATER" | "INTERNET";
 
 /* CLEANING */
@@ -160,8 +177,6 @@ export interface AboutHouseSections {
   exterior: TypeAmenity[];
   general: TypeAmenity[];
 }
-
-export type AboutHouseSpace = "livingRoom" | "bedRoom" | "kitchen" | "exterior" | "general" | "bathRoom";
 
 export const AMENITIES = [
   "SOFA",
@@ -341,6 +356,11 @@ export const AboutHouseCommodities = {
     { label: "Estacionamento", type: "PARKING_SPOT" },
   ],
 } as unknown as AboutHouseCommoditiesType;
+
+export const SPACES = ["livingroom", "bedroom", "kitchen", "exterior", "general", "bathoom"];
+
+export type AboutHouseSpaces = typeof SPACES;
+export type AboutHouseSpace = AboutHouseSpaces[number];
 
 type AboutHouseCommoditiesType = {
   [x in AboutHouseSpace]: [{ label: string; type: TypeAmenity }];

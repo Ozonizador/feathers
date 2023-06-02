@@ -30,60 +30,29 @@ export interface Database {
   };
   public: {
     Tables: {
-      advertisement_commodities: {
-        Row: {
-          advertisement_id: string;
-          comodity_id: number | null;
-          zone_id: number;
-        };
-        Insert: {
-          advertisement_id: string;
-          comodity_id?: number | null;
-          zone_id: number;
-        };
-        Update: {
-          advertisement_id?: string;
-          comodity_id?: number | null;
-          zone_id?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "advertisement_zones_advertisement_id_fkey";
-            columns: ["advertisement_id"];
-            referencedRelation: "advertisements";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "advertisement_zones_comodity_id_fkey";
-            columns: ["comodity_id"];
-            referencedRelation: "commodities";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "advertisement_zones_zone_id_fkey";
-            columns: ["zone_id"];
-            referencedRelation: "zones";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
       advertisements: {
         Row: {
-          agreementsinfo: Json | null;
+          agreementsinfo: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities: string[] | null;
           bathrooms: number;
+          bedroom_amenities: string[] | null;
           beds: number;
           created_at: string;
           description: string;
-          expenses: Json;
+          expenses: HouseExpenses;
+          exterior_amenities: string[] | null;
           extra_per_host: number;
           floor: string | null;
-          geom: unknown | null;
+          general_amenities: string[] | null;
+          geom: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
           id: string;
+          kitchen_amenities: string[] | null;
+          livingroom_amenities: string[] | null;
           month_rent: number;
           photos: AdvertisementPhoto[];
           place: string;
@@ -103,19 +72,25 @@ export interface Database {
         Insert: {
           agreementsinfo?: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities?: string[] | null;
           bathrooms: number;
+          bedroom_amenities?: string[] | null;
           beds: number;
           created_at?: string;
           description: string;
           expenses: HouseExpenses;
+          exterior_amenities?: string[] | null;
           extra_per_host: number;
           floor?: string | null;
+          general_amenities?: string[] | null;
           geom?: any | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
           id?: string;
+          kitchen_amenities?: string[] | null;
+          livingroom_amenities?: string[] | null;
           month_rent: number;
           photos?: AdvertisementPhoto[];
           place: string;
@@ -135,19 +110,25 @@ export interface Database {
         Update: {
           agreementsinfo?: AdvertisementInfo | null;
           available?: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities?: string[] | null;
           bathrooms?: number;
+          bedroom_amenities?: string[] | null;
           beds?: number;
           created_at?: string;
           description?: string;
           expenses?: HouseExpenses;
+          exterior_amenities?: string[] | null;
           extra_per_host?: number;
           floor?: string | null;
+          general_amenities?: string[] | null;
           geom?: any | null;
           guarantee_value?: number;
           host_id?: string;
           host_lives_property?: boolean;
           house_rules?: HouseRules;
           id?: string;
+          kitchen_amenities?: string[] | null;
+          livingroom_amenities?: string[] | null;
           month_rent?: number;
           photos?: AdvertisementPhoto[];
           place?: string;
@@ -614,21 +595,6 @@ export interface Database {
             referencedColumns: ["id"];
           }
         ];
-      };
-      zones: {
-        Row: {
-          id: number;
-          value: string | null;
-        };
-        Insert: {
-          id?: number;
-          value?: string | null;
-        };
-        Update: {
-          id?: number;
-          value?: string | null;
-        };
-        Relationships: [];
       };
     };
     Views: {
