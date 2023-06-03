@@ -25,12 +25,6 @@ export default function RoomSlider() {
     useMemo(() => {
       return (
         <Carousel>
-          {zones.map((zone, index) => (
-            <div key={index} className="flex flex-col gap-8">
-              <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Comodidades gerais</div>
-              {zone}
-            </div>
-          ))}
           <div className="flex flex-col gap-8">
             <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Comodidades gerais</div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
