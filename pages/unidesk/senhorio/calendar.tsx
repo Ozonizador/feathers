@@ -1,6 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-import React from "react";
+import React, { useState } from "react";
 import { CalendarComponent } from "../../../components/calendar/CalendarComponent";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
@@ -35,7 +35,13 @@ const TEMPO_ANTECEDENCIA = [
   { label: "12 Meses", value: 12 },
 ];
 
-const calendar = () => {
+const Calendar = () => {
+  const [minimumStay, setMinimumStay] = useState<number>(3);
+  const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
+
+  const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
+  const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
+
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
@@ -48,7 +54,11 @@ const calendar = () => {
         <div className="mt-5 flex flex-col gap-4">
           <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
             <label className="mb-2 mt-2 block text-base lg:mb-0">Estadia mínima</label>
-            <select className="ml-20 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60">
+            <select
+              className="ml-20 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60"
+              value={minimumStay}
+              onClick={() => setMinimumStay}
+            >
               {ESTADIA_MINIMA.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -59,7 +69,11 @@ const calendar = () => {
 
           <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
             <label className="mb-2 mt-2 block text-base lg:mb-0">Tempo de antecedência</label>
-            <select className="ml-4 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60">
+            <select
+              className="ml-4 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60"
+              value={timeInAdvance}
+              onClick={() => setTimeInAdvance}
+            >
               {TEMPO_ANTECEDENCIA.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -79,14 +93,28 @@ const calendar = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
               <label className="block text-base lg:mb-0">Desconto trimestral</label>
               <div className="ml-12 w-full lg:w-20">
-                <Input label={""} labelText="" customCss="percent" onChange={() => {}} value={0} />
+                <Input
+                  label={""}
+                  labelText=""
+                  customCss="percent"
+                  onChange={(e) => setTrimesterDiscount(e.target.value)}
+                  value={trimesterDiscount}
+                  pattern="[0-9]+"
+                />
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
               <label className="block text-base lg:mb-0">Desconto semestral</label>
               <div className="ml-12 w-full lg:w-20">
-                <Input label={""} value={0} onChange={() => {}} labelText="" customCss="percent" />
+                <Input
+                  label={""}
+                  value={semesterDiscount}
+                  onChange={(e) => setSemesterDiscount(e.target.value)}
+                  labelText=""
+                  customCss="percent"
+                  pattern="[0-9]+"
+                />
               </div>
             </div>
             <div className="w-96 pb-4">
@@ -101,7 +129,7 @@ const calendar = () => {
   );
 };
 
-export default calendar;
+export default Calendar;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
