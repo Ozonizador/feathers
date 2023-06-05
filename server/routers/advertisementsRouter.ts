@@ -10,11 +10,10 @@ import {
   AMENITIES,
   CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
-  TypeAmenity,
 } from "../../models/advertisement";
 import { STAYS_TABLE_NAME } from "../../models/stay";
-import { GEO } from "../../models/utils";
 import { procedure, router } from "../trpc";
+import { AdvertisementOrder, AdvertisementsFilterOptions, FilterAdvertisements } from "../types/advertisement";
 
 const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: number }> = z.object({
   filter: z.object({
@@ -108,64 +107,16 @@ export const advertisementsRouter = router({
 
     return { data, error, count };
   }),
-
-  // Adicionar os procedure de authenticated
-  updateAdvertisementMinimumStayAndTimeInAdvance: procedure
-    .input(z.object({ minimum: z.number(), timeInAdvance: z.number(), advertisementId: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      const { minimum, timeInAdvance, advertisementId } = input;
-
-      const { data, error } = await supabase
-        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-        .update({ minimum_stay: minimum, time_in_advance: timeInAdvance })
-        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
-
-      return { data, error };
-    }),
-
-  updateAdvertisementDiscounts: procedure
-    .input(z.object({ semesterDiscount: z.number(), trimesterDiscount: z.number(), advertisementId: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      const { trimesterDiscount, semesterDiscount, advertisementId } = input;
-
-      const { data, error } = await supabase
-        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-        .update({ semester_discount: semesterDiscount, trimester_discount: trimesterDiscount })
-        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
-
-      return { data, error };
-    }),
 });
 // export type definition of API
-export type AppRouter = typeof advertisementsRouter;
+export type AdvertisementsRouter = typeof advertisementsRouter;
 
-export type FilterAdvertisements = {
-  filter: AdvertisementsFilterOptions;
-  order: AdvertisementOrder;
-};
-
-export type AdvertisementsFilterOptions = {
-  comodities?: TypeAmenity[];
-  placeType?: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
-  price?: {
-    startRange?: number;
-    endRange?: number;
-  };
-  dates?: {
-    startDate?: string;
-    endDate?: string;
-  };
-  coordinates?: GEO;
-};
-
-export type AdvertisementOrder = {
-  byColumn: "price";
-  type: OrderAscending;
-  isActive: boolean;
-};
-
-export type OrderAscending = "asc" | "desc";
-
+/**
+ * TODO: move this to helpers on server
+ * @param query
+ * @param filter
+ * @returns
+ */
 const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilterOptions) => {
   // availability
   query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);

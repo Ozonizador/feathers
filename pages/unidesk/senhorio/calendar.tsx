@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { CalendarComponent } from "../../../components/calendar/CalendarComponent";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
@@ -47,15 +48,24 @@ const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
   const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
   const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
 
-  const updateAdvertisementTimings = trpc.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
-  const updateAdvertisementDiscounts = trpc.updateAdvertisementDiscounts.useMutation();
+  const updateAdvertisementTimings = trpc.hostPreferences.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
+  const updateAdvertisementDiscounts = trpc.hostPreferences.updateAdvertisementDiscounts.useMutation();
 
   const updateTimings = async () => {
-    await updateAdvertisementTimings.mutateAsync({ advertisementId, minimum: minimumStay, timeInAdvance });
+    debugger;
+    const { error } = await updateAdvertisementTimings.mutateAsync({
+      minimum: minimumStay,
+      timeInAdvance,
+    });
+    error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
   };
 
   const updateDiscounts = async () => {
-    await updateAdvertisementDiscounts.mutateAsync({ advertisementId, semesterDiscount, trimesterDiscount });
+    const { error } = await updateAdvertisementDiscounts.mutateAsync({
+      semesterDiscount,
+      trimesterDiscount,
+    });
+    error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
   };
   return (
     <UnideskStructure>
@@ -72,7 +82,7 @@ const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
             <select
               className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-20 lg:w-60"
               value={minimumStay}
-              onClick={() => setMinimumStay}
+              onChange={() => setMinimumStay}
             >
               {ESTADIA_MINIMA.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -87,7 +97,7 @@ const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
             <select
               className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
               value={timeInAdvance}
-              onClick={() => setTimeInAdvance}
+              onChange={() => setTimeInAdvance}
             >
               {TEMPO_ANTECEDENCIA.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -98,7 +108,7 @@ const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
           </div>
 
           <div className="w-96 pb-4">
-            <Button onClick={updateTimings} type="button">
+            <Button onClick={() => updateTimings()} type="button">
               Guardar alterações
             </Button>
           </div>
