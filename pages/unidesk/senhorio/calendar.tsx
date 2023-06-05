@@ -6,6 +6,7 @@ import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
+import { trpc } from "../../../utils/trpc";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -35,13 +36,27 @@ const TEMPO_ANTECEDENCIA = [
   { label: "12 Meses", value: 12 },
 ];
 
-const Calendar = () => {
+type CalendarPageProps = {
+  advertisementId: string;
+};
+
+const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
   const [minimumStay, setMinimumStay] = useState<number>(3);
   const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
 
   const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
   const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
 
+  const updateAdvertisementTimings = trpc.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
+  const updateAdvertisementDiscounts = trpc.updateAdvertisementDiscounts.useMutation();
+
+  const updateTimings = async () => {
+    await updateAdvertisementTimings.mutateAsync({ advertisementId, minimum: minimumStay, timeInAdvance });
+  };
+
+  const updateDiscounts = async () => {
+    await updateAdvertisementDiscounts.mutateAsync({ advertisementId, semesterDiscount, trimesterDiscount });
+  };
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
@@ -55,7 +70,7 @@ const Calendar = () => {
           <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
             <label className="mb-2 mt-2 block text-base lg:mb-0">Estadia mínima</label>
             <select
-              className="ml-20 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60"
+              className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-20 lg:w-60"
               value={minimumStay}
               onClick={() => setMinimumStay}
             >
@@ -70,7 +85,7 @@ const Calendar = () => {
           <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
             <label className="mb-2 mt-2 block text-base lg:mb-0">Tempo de antecedência</label>
             <select
-              className="ml-4 h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:w-60"
+              className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
               value={timeInAdvance}
               onClick={() => setTimeInAdvance}
             >
@@ -83,7 +98,7 @@ const Calendar = () => {
           </div>
 
           <div className="w-96 pb-4">
-            <Button onClick={() => {}} type="button">
+            <Button onClick={updateTimings} type="button">
               Guardar alterações
             </Button>
           </div>
@@ -92,7 +107,7 @@ const Calendar = () => {
             <div className="mt-4 text-2xl font-bold">Descontos (opcional)</div>
             <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
               <label className="block text-base lg:mb-0">Desconto trimestral</label>
-              <div className="ml-12 w-full lg:w-20">
+              <div className="w-full lg:ml-12 lg:w-20">
                 <Input
                   label={""}
                   labelText=""
@@ -106,7 +121,7 @@ const Calendar = () => {
 
             <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
               <label className="block text-base lg:mb-0">Desconto semestral</label>
-              <div className="ml-12 w-full lg:w-20">
+              <div className="w-full lg:ml-12 lg:w-20">
                 <Input
                   label={""}
                   value={semesterDiscount}
@@ -118,7 +133,7 @@ const Calendar = () => {
               </div>
             </div>
             <div className="w-96 pb-4">
-              <Button onClick={() => {}} type="button">
+              <Button onClick={updateDiscounts} type="button">
                 Guardar alterações
               </Button>
             </div>
@@ -129,7 +144,7 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client

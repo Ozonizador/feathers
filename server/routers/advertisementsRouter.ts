@@ -12,7 +12,7 @@ import {
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
   TypeAmenity,
 } from "../../models/advertisement";
-import { Stay, STAYS_TABLE_NAME, STAY_TABLE } from "../../models/stay";
+import { STAYS_TABLE_NAME } from "../../models/stay";
 import { GEO } from "../../models/utils";
 import { procedure, router } from "../trpc";
 
@@ -108,6 +108,33 @@ export const advertisementsRouter = router({
 
     return { data, error, count };
   }),
+
+  // Adicionar os procedure de authenticated
+  updateAdvertisementMinimumStayAndTimeInAdvance: procedure
+    .input(z.object({ minimum: z.number(), timeInAdvance: z.number(), advertisementId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const { minimum, timeInAdvance, advertisementId } = input;
+
+      const { data, error } = await supabase
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .update({ minimum_stay: minimum, time_in_advance: timeInAdvance })
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
+
+      return { data, error };
+    }),
+
+  updateAdvertisementDiscounts: procedure
+    .input(z.object({ semesterDiscount: z.number(), trimesterDiscount: z.number(), advertisementId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const { trimesterDiscount, semesterDiscount, advertisementId } = input;
+
+      const { data, error } = await supabase
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .update({ semester_discount: semesterDiscount, trimester_discount: trimesterDiscount })
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
+
+      return { data, error };
+    }),
 });
 // export type definition of API
 export type AppRouter = typeof advertisementsRouter;
