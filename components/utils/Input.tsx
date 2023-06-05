@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 interface InputProps {
+  onChange?: (e: any) => void;
   value?: string | number;
   customCss?: string;
   labelText?: string;
