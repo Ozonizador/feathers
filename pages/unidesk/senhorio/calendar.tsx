@@ -57,26 +57,25 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
   const [selectedAdvertisement, setSelectedAdvertisement] = useState<Advertisement | undefined>(
     (advertisements && advertisements[0]) || undefined
   );
-  const [minimumStay, setMinimumStay] = useState<number>(3);
-  const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
-
-  const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
-  const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
 
   const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
   const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
 
-  const updateTimings = async () => {
+  const updateTimings = async (minimumStay: number, timeInAdvance: number) => {
+    if (!selectedAdvertisement) return;
+
     const { error } = await updateAdvertisementTimings.mutateAsync({
       minimum: minimumStay,
       timeInAdvance,
-      advertisementId: "",
+      advertisementId: selectedAdvertisement.id,
       userId: user.id,
     });
     error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
   };
 
-  const updateDiscounts = async () => {
+  const updateDiscounts = async (trimesterDiscount: number, semesterDiscount: number) => {
+    if (!selectedAdvertisement) return;
+
     const { error } = await updateAdvertisementDiscounts.mutateAsync({
       semesterDiscount,
       trimesterDiscount,
@@ -109,81 +108,101 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
         <div className="-ml-4 w-full">
           <CalendarComponent />
         </div>
-        <div className="mt-5 flex flex-col gap-4">
-          <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
-            <label className="mb-2 mt-2 block text-base lg:mb-0">Estadia mínima</label>
-            <select
-              className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-20 lg:w-60"
-              value={minimumStay}
-              onChange={() => setMinimumStay}
-            >
-              {ESTADIA_MINIMA.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
-            <label className="mb-2 mt-2 block text-base lg:mb-0">Tempo de antecedência</label>
-            <select
-              className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
-              value={timeInAdvance}
-              onChange={() => setTimeInAdvance}
-            >
-              {TEMPO_ANTECEDENCIA.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="w-96 pb-4">
-            <Button onClick={() => updateTimings()} type="button">
-              Guardar alterações
-            </Button>
-          </div>
-
-          <div className="mb-5 mt-4 flex flex-col gap-4">
-            <div className="mt-4 text-2xl font-bold">Descontos (opcional)</div>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
-              <label className="block text-base lg:mb-0">Desconto trimestral</label>
-              <div className="w-full lg:ml-12 lg:w-20">
-                <Input
-                  label={""}
-                  labelText=""
-                  customCss="percent"
-                  onChange={(e) => setTrimesterDiscount(e.target.value)}
-                  value={trimesterDiscount}
-                  pattern="[0-9]+"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
-              <label className="block text-base lg:mb-0">Desconto semestral</label>
-              <div className="w-full lg:ml-12 lg:w-20">
-                <Input
-                  label={""}
-                  value={semesterDiscount}
-                  onChange={(e) => setSemesterDiscount(e.target.value)}
-                  labelText=""
-                  customCss="percent"
-                  pattern="[0-9]+"
-                />
-              </div>
-            </div>
-            <div className="w-96 pb-4">
-              <Button onClick={updateDiscounts} type="button">
-                Guardar alterações
-              </Button>
-            </div>
-          </div>
-        </div>
+        <AdvertisementPropertiesComponent updateDiscounts={updateDiscounts} updateTimings={updateTimings} />
       </UnideskStructure.Content>
     </UnideskStructure>
+  );
+};
+
+interface AdvertisementPropertiesComponentProps {
+  updateDiscounts: (trimesterDiscount: number, semesterDiscount: number) => void;
+  updateTimings: (minimumStay: number, timeInAdvance: number) => void;
+}
+
+const AdvertisementPropertiesComponent = ({
+  updateTimings,
+  updateDiscounts,
+}: AdvertisementPropertiesComponentProps) => {
+  const [minimumStay, setMinimumStay] = useState<number>(3);
+  const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
+
+  const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
+  const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
+
+  return (
+    <div className="mt-5 flex flex-col gap-4">
+      <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
+        <label className="mb-2 mt-2 block text-base lg:mb-0">Estadia mínima</label>
+        <select
+          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-20 lg:w-60"
+          value={minimumStay}
+          onChange={(e) => setMinimumStay(Number(e.target.value))}
+        >
+          {ESTADIA_MINIMA.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
+        <label className="mb-2 mt-2 block text-base lg:mb-0">Tempo de antecedência</label>
+        <select
+          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
+          value={timeInAdvance}
+          onChange={(e) => setTimeInAdvance(Number(e.target.value))}
+        >
+          {TEMPO_ANTECEDENCIA.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="w-96 pb-4">
+        <Button onClick={() => updateTimings(minimumStay, timeInAdvance)} type="button">
+          Guardar alterações
+        </Button>
+      </div>
+
+      <div className="mb-5 mt-4 flex flex-col gap-4">
+        <div className="mt-4 text-2xl font-bold">Descontos (opcional)</div>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
+          <label className="block text-base lg:mb-0">Desconto trimestral</label>
+          <div className="w-full lg:ml-12 lg:w-20">
+            <Input
+              label={""}
+              labelText=""
+              customCss="percent"
+              onChange={(e) => setTrimesterDiscount(e.target.value)}
+              value={trimesterDiscount}
+              pattern="[0-9]+"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
+          <label className="block text-base lg:mb-0">Desconto semestral</label>
+          <div className="w-full lg:ml-12 lg:w-20">
+            <Input
+              label={""}
+              value={semesterDiscount}
+              onChange={(e) => setSemesterDiscount(e.target.value)}
+              labelText=""
+              customCss="percent"
+              pattern="[0-9]+"
+            />
+          </div>
+        </div>
+        <div className="w-96 pb-4">
+          <Button onClick={() => updateDiscounts(trimesterDiscount, semesterDiscount)} type="button">
+            Guardar alterações
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
 
