@@ -109,31 +109,28 @@ export const advertisementsRouter = router({
 
       return { data, error, count };
     }),
-  // Adicionar os procedure de authenticated
   updateAdvertisementMinimumStayAndTimeInAdvance: isHostProcedure
-    .input(z.object({ minimum: z.number(), timeInAdvance: z.number() }))
-    .mutation(async ({ input, ctx }) => {
-      const { minimum, timeInAdvance } = input;
-      const { userId } = ctx;
+    .input(z.object({ minimumStay: z.number(), monthsInAdvance: z.number(), advertisementId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { minimumStay, monthsInAdvance, advertisementId } = input;
 
       const { data, error } = await supabase
         .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-        .update({ minimum_stay: minimum, time_in_advance: timeInAdvance })
-        .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+        .update({ minimum_stay: minimumStay, months_notif_in_advance: monthsInAdvance })
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
 
       return { data, error };
     }),
 
   updateAdvertisementDiscounts: isHostProcedure
-    .input(z.object({ semesterDiscount: z.number(), trimesterDiscount: z.number() }))
-    .mutation(async ({ input, ctx }) => {
-      const { trimesterDiscount, semesterDiscount } = input;
-      const { userId } = ctx;
+    .input(z.object({ semesterDiscount: z.number(), trimesterDiscount: z.number(), advertisementId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { trimesterDiscount, semesterDiscount, advertisementId } = input;
 
       const { data, error } = await supabase
         .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
         .update({ semester_discount: semesterDiscount, trimester_discount: trimesterDiscount })
-        .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
 
       return { data, error };
     }),

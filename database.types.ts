@@ -63,7 +63,7 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          time_in_advance: number;
+          months_notif_in_advance: number;
           title: string;
           trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];
@@ -105,7 +105,7 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          time_in_advance?: number;
+          months_notif_in_advance?: number;
           title: string;
           trimester_discount?: number;
           type: Database["public"]["Enums"]["TypeRoom"];
@@ -147,7 +147,7 @@ export interface Database {
           street?: string;
           street_number?: string;
           tenant_number?: number;
-          time_in_advance?: number;
+          months_notif_in_advance?: number;
           title?: string;
           trimester_discount?: number;
           type?: Database["public"]["Enums"]["TypeRoom"];
@@ -1039,7 +1039,7 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          time_in_advance: number;
+          months_notif_in_advance: number;
           title: string;
           trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];

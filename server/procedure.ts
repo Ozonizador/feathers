@@ -2,15 +2,24 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { supabaseAdmin } from "../lib/supabaseAdminClient";
 import { Advertisements, ADVERTISEMENT_TABLE_NAME } from "../models/advertisement";
+import { Profile, PROFILE_TABLE_NAME } from "../models/profile";
 import { publicProcedure } from "./trpc";
 
-export const authorizedProcedure = publicProcedure.input(z.object({ userId: z.string() })).use((opts) => {
-  if (opts.input.userId) {
+export const authorizedProcedure = publicProcedure.input(z.object({ userId: z.string() })).use(async (opts) => {
+  debugger;
+  const { ctx } = opts;
+  const { userId } = ctx;
+
+  const { data, error } = await supabaseAdmin
+    .from<"profiles", Profile>(PROFILE_TABLE_NAME)
+    .select("id")
+    .match({ id: userId });
+
+  if (error || !data)
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: "Not logged in",
+      message: "You need to login.",
     });
-  }
 
   return opts.next();
 });

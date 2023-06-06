@@ -61,16 +61,25 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
   const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
   const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
 
-  const updateTimings = async (minimumStay: number, timeInAdvance: number) => {
+  const updateTimings = async (minimumStay: number, monthsInAdvance: number) => {
     if (!selectedAdvertisement) return;
 
-    const { error } = await updateAdvertisementTimings.mutateAsync({
-      minimum: minimumStay,
-      timeInAdvance,
-      advertisementId: selectedAdvertisement.id,
-      userId: user.id,
-    });
-    error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
+    await updateAdvertisementTimings.mutateAsync(
+      {
+        minimumStay,
+        monthsInAdvance,
+        advertisementId: selectedAdvertisement.id,
+        userId: user.id,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Successo");
+        },
+        onError: () => {
+          toast.error("Erro ao gravar definições");
+        },
+      }
+    );
   };
 
   const updateDiscounts = async (trimesterDiscount: number, semesterDiscount: number) => {
@@ -108,7 +117,11 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
         <div className="-ml-4 w-full">
           <CalendarComponent />
         </div>
-        <AdvertisementPropertiesComponent updateDiscounts={updateDiscounts} updateTimings={updateTimings} />
+        <AdvertisementPropertiesComponent
+          updateDiscounts={updateDiscounts}
+          updateTimings={updateTimings}
+          {...selectedAdvertisement}
+        />
       </UnideskStructure.Content>
     </UnideskStructure>
   );
@@ -117,17 +130,25 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
 interface AdvertisementPropertiesComponentProps {
   updateDiscounts: (trimesterDiscount: number, semesterDiscount: number) => void;
   updateTimings: (minimumStay: number, timeInAdvance: number) => void;
+  trimester_discount?: number;
+  semester_discount?: number;
+  minimum_stay?: number;
+  months_notif_in_advance?: number;
 }
 
 const AdvertisementPropertiesComponent = ({
   updateTimings,
   updateDiscounts,
+  trimester_discount,
+  semester_discount,
+  minimum_stay,
+  months_notif_in_advance,
 }: AdvertisementPropertiesComponentProps) => {
-  const [minimumStay, setMinimumStay] = useState<number>(3);
-  const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
+  const [minimumStay, setMinimumStay] = useState<number>(minimum_stay || 3);
+  const [monthsInAdvance, setMonthsInAdvance] = useState<number>(months_notif_in_advance || 1);
 
-  const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
-  const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
+  const [trimesterDiscount, setTrimesterDiscount] = useState<number>(trimester_discount || 0);
+  const [semesterDiscount, setSemesterDiscount] = useState<number>(semester_discount || 0);
 
   return (
     <div className="mt-5 flex flex-col gap-4">
@@ -150,8 +171,8 @@ const AdvertisementPropertiesComponent = ({
         <label className="mb-2 mt-2 block text-base lg:mb-0">Tempo de antecedência</label>
         <select
           className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
-          value={timeInAdvance}
-          onChange={(e) => setTimeInAdvance(Number(e.target.value))}
+          value={monthsInAdvance}
+          onChange={(e) => setMonthsInAdvance(Number(e.target.value))}
         >
           {TEMPO_ANTECEDENCIA.map((option) => (
             <option key={option.value} value={option.value}>
@@ -162,7 +183,7 @@ const AdvertisementPropertiesComponent = ({
       </div>
 
       <div className="w-96 pb-4">
-        <Button onClick={() => updateTimings(minimumStay, timeInAdvance)} type="button">
+        <Button onClick={() => updateTimings(minimumStay, monthsInAdvance)} type="button">
           Guardar alterações
         </Button>
       </div>
