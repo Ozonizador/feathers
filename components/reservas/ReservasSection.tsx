@@ -9,7 +9,7 @@ import Spinner from "../utils/Spinner";
 
 const ReservasSection = () => {
   return (
-    <section className="mx-28 pt-20 pb-5">
+    <section className="mx-28 pb-5 pt-20">
       <Tab.Group>
         <Tab.List className="mb-10 flex gap-5">
           <Tab className="reservas-tab">Ativas</Tab>
@@ -44,7 +44,7 @@ const CurrentReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getCurrentStaysByHostId(user.id);
     if (!error) {
-      setStays(data as StayGuest[]);
+      setStays(data as unknown as StayGuest[]);
     }
     setLoading(false);
   }, [user]);
@@ -119,7 +119,7 @@ const NextReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getNextStaysByHostId(user.id);
     if (!error) {
-      setReservations(data as StayGuest[]);
+      setReservations(data as unknown as StayGuest[]);
     }
     setLoading(false);
   }, [user]);
@@ -192,7 +192,7 @@ const AllReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getAllStaysByHostId(user.id);
     if (!error) {
-      setReservations(data as StayGuest[]);
+      setReservations(data as unknown as StayGuest[]);
     }
     setLoading(false);
   }, [user]);

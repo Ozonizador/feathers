@@ -1,10 +1,9 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useCurrentUser } from "../../context/MainProvider";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
-import { ConversationWithTenant } from "../../models/conversation";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import { Avatar } from "flowbite-react";
 import { Reservation, ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
@@ -40,7 +39,7 @@ const CaixaEntrada = () => {
     if (profile) {
       const { data, error } = await getConversationsFromUser(profile.id);
       if (!error) {
-        setConversations(data as ConversationComplete[]);
+        setConversations(data as unknown as ConversationComplete[]);
       }
     }
   }, [profile]);

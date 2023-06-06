@@ -19,7 +19,9 @@ export const CalendarComponent = () => {
 
   return (
     <MonthlyCalendar currentMonth={currentMonth} onCurrentMonthChange={(date) => setCurrentMonth(date)} locale={pt}>
-      <MonthlyNav />
+      <div className="px-6">
+        <MonthlyNav />
+      </div>
       <MonthlyBody
         events={[
           { title: "Call John", date: subHours(new Date(), 2) },

@@ -3,7 +3,6 @@ import { PAGE_NUMBER_COUNT } from "../../hooks/advertisementService";
 import { supabase } from "../../lib/supabaseClient";
 import {
   Advertisements,
-  AdvertisementStatus,
   AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
@@ -11,9 +10,10 @@ import {
   CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../../models/advertisement";
-import { STAYS_TABLE_NAME } from "../../models/stay";
-import { procedure, router } from "../trpc";
-import { AdvertisementOrder, AdvertisementsFilterOptions, FilterAdvertisements } from "../types/advertisement";
+import { isHostProcedure } from "../procedure";
+import { publicProcedure, router } from "../trpc";
+import { FilterAdvertisements } from "../types/advertisement";
+import { addFilterToSearchAdvertisement, addOrderToSearchAdvertisement } from "../helpers/advertisementHelper";
 
 const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: number }> = z.object({
   filter: z.object({
@@ -47,7 +47,7 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
 });
 
 export const advertisementsRouter = router({
-  searchForAdvertisements: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
+  searchForAdvertisements: publicProcedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
     const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
     const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
@@ -82,74 +82,62 @@ export const advertisementsRouter = router({
       count: (count as number) || null,
     };
   }),
-  searchForAdvertisementsWithCoordinates: procedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
-    const { filter, order, page } = input;
-    const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
-    const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
+  searchForAdvertisementsWithCoordinates: publicProcedure
+    .input(AdvertisementFilterSchema)
+    .query(async ({ input, ctx }) => {
+      const { filter, order, page } = input;
+      const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
+      const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
 
-    if (!lng || !lat) return { data: null, error: "No latitude or longitude provided", count: null };
+      if (!lng || !lat) return { data: null, error: "No latitude or longitude provided", count: null };
 
-    let query = supabase
-      .rpc<"close_advertisements", CloseAdvertisementsFn>(
-        CLOSE_ADVERTISEMENTS_TABLE_NAME,
-        {
-          lat,
-          lng,
-        },
-        { count: "exact" }
-      )
-      .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
-    query = addFilterToSearchAdvertisement(query, filter);
-    query = addOrderToSearchAdvertisement(query, order);
+      let query = supabase
+        .rpc<"close_advertisements", CloseAdvertisementsFn>(
+          CLOSE_ADVERTISEMENTS_TABLE_NAME,
+          {
+            lat,
+            lng,
+          },
+          { count: "exact" }
+        )
+        .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
+      query = addFilterToSearchAdvertisement(query, filter);
+      query = addOrderToSearchAdvertisement(query, order);
 
-    let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
-    const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
+      let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
+      const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
 
-    return { data, error, count };
-  }),
+      return { data, error, count };
+    }),
+  // Adicionar os procedure de authenticated
+  updateAdvertisementMinimumStayAndTimeInAdvance: isHostProcedure
+    .input(z.object({ minimum: z.number(), timeInAdvance: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const { minimum, timeInAdvance } = input;
+      const { userId } = ctx;
+
+      const { data, error } = await supabase
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .update({ minimum_stay: minimum, time_in_advance: timeInAdvance })
+        .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+
+      return { data, error };
+    }),
+
+  updateAdvertisementDiscounts: isHostProcedure
+    .input(z.object({ semesterDiscount: z.number(), trimesterDiscount: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const { trimesterDiscount, semesterDiscount } = input;
+      const { userId } = ctx;
+
+      const { data, error } = await supabase
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .update({ semester_discount: semesterDiscount, trimester_discount: trimesterDiscount })
+        .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, userId);
+
+      return { data, error };
+    }),
 });
+
 // export type definition of API
 export type AdvertisementsRouter = typeof advertisementsRouter;
-
-/**
- * TODO: move this to helpers on server
- * @param query
- * @param filter
- * @returns
- */
-const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilterOptions) => {
-  // availability
-  query = query.eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE" as AdvertisementStatus);
-
-  // place type
-  filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
-
-  // comodities not working
-  // filter.comodities &&
-  //   filter.comodities.length !== 0 &&
-  //   (query = query.filter(ADVERTISEMENT_PROPERTIES.ABOUT_HOUSE, "in", filter.comodities));
-
-  // Price
-  filter.price?.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));
-  filter.price?.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
-
-  // dates
-  filter.dates &&
-    filter.dates.startDate &&
-    filter.dates.endDate &&
-    (query = query.filter("id", "not.in", (query: any) =>
-      query
-        .from(STAYS_TABLE_NAME)
-        .select("advertisement_id")
-        .filter("reservations.start_date", "gte", filter.dates?.startDate)
-        .filter("reservations.end_date", "lte", filter.dates?.endDate)
-    ));
-
-  return query;
-};
-
-const addOrderToSearchAdvertisement = (query: any, order: AdvertisementOrder) => {
-  order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
-
-  return query;
-};

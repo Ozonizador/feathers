@@ -1,5 +1,3 @@
 export interface LoggedUserContext {
-  user?: {
-    id: string;
-  };
+  userId?: string;
 }

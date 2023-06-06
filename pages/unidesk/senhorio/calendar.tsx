@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient, User } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -7,6 +7,13 @@ import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
+import PopoverSelect, { PopoverOption } from "../../../components/utils/PopoverSelect";
+import {
+  Advertisement,
+  Advertisements,
+  ADVERTISEMENT_PROPERTIES,
+  ADVERTISEMENT_TABLE_NAME,
+} from "../../../models/advertisement";
 import { trpc } from "../../../utils/trpc";
 
 const ESTADIA_MINIMA = [
@@ -38,24 +45,33 @@ const TEMPO_ANTECEDENCIA = [
 ];
 
 type CalendarPageProps = {
-  advertisementId: string;
+  advertisements: Advertisement[];
+  user: User;
 };
 
-const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
+const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
+  const popoverOptions = advertisements.map((advertisement) => ({
+    name: advertisement.title,
+    id: advertisement.id,
+  })) as PopoverOption[];
+  const [selectedAdvertisement, setSelectedAdvertisement] = useState<Advertisement | undefined>(
+    (advertisements && advertisements[0]) || undefined
+  );
   const [minimumStay, setMinimumStay] = useState<number>(3);
   const [timeInAdvance, setTimeInAdvance] = useState<number>(1);
 
   const [trimesterDiscount, setTrimesterDiscount] = useState<number>(0);
   const [semesterDiscount, setSemesterDiscount] = useState<number>(0);
 
-  const updateAdvertisementTimings = trpc.hostPreferences.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
-  const updateAdvertisementDiscounts = trpc.hostPreferences.updateAdvertisementDiscounts.useMutation();
+  const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
+  const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
 
   const updateTimings = async () => {
-    debugger;
     const { error } = await updateAdvertisementTimings.mutateAsync({
       minimum: minimumStay,
       timeInAdvance,
+      advertisementId: "",
+      userId: user.id,
     });
     error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
   };
@@ -64,15 +80,32 @@ const CalendarPage = ({ advertisementId }: CalendarPageProps) => {
     const { error } = await updateAdvertisementDiscounts.mutateAsync({
       semesterDiscount,
       trimesterDiscount,
+      advertisementId: "",
+      userId: user.id,
     });
     error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
   };
+
+  const changeAdvertisementCalendar = (advertisementId: string) => {
+    const selectedAdvertisement = advertisements && advertisements.find((adv) => adv.id == advertisementId);
+    setSelectedAdvertisement(selectedAdvertisement);
+  };
+
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
         <MenuSenhorio />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
+        <div>
+          <div>
+            <PopoverSelect
+              title={selectedAdvertisement?.title || ""}
+              options={popoverOptions || []}
+              onClick={() => changeAdvertisementCalendar}
+            />
+          </div>
+        </div>
         <div className="-ml-4 w-full">
           <CalendarComponent />
         </div>
@@ -164,7 +197,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session)
+  const { user } = session || { user: null };
+
+  if (!session || !user)
     return {
       redirect: {
         destination: "/auth/login",
@@ -172,10 +207,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
+  const { data, error } = await supabase
+    .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+    .select("*, stays(*, reservations(*))")
+    .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, user.id);
+
   return {
     props: {
       initialSession: session,
       user: session.user,
+      advertisements: error || !data ? [] : data,
     },
   };
 };
