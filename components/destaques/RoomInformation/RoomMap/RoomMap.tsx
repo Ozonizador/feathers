@@ -2,6 +2,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import { coordinateArrayToLatitude } from "../../../../utils/map-services";
+import { CoordinatesAsArray } from "../../../../models/utils";
 
 const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap"), {
   ssr: false,
@@ -10,7 +11,7 @@ const MapWithNoSSR = dynamic(() => import("../../../../components/maps/MainMap")
 export default function RoomMap() {
   const advertisement = useGetSingleAdvertisement();
 
-  const geom = advertisement?.geom || undefined;
+  const geom = (advertisement?.geom as { type: string; coordinates: CoordinatesAsArray }) || undefined;
 
   const geoCoordinates = (geom && coordinateArrayToLatitude(geom.coordinates)) || null;
 

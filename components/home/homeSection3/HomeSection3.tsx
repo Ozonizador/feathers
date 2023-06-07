@@ -10,7 +10,7 @@ import { trpc } from "../../../utils/trpc";
 export default function HomeSection3() {
   const currentMapCoordinates = useGetUserCoordinates();
 
-  const { data: advertisementsData } = trpc.searchForAdvertisementsWithCoordinates.useQuery(
+  const { data: advertisementsData } = trpc.advertisements.searchForAdvertisementsWithCoordinates.useQuery(
     {
       filter: {
         comodities: [],

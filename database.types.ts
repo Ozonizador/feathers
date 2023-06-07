@@ -1,5 +1,4 @@
-import { HouseRules, AdvertisementPhoto, HouseExpenses, AdvertisementInfo } from "./models/advertisement";
-
+import { AdvertisementInfo, AdvertisementPhoto, HouseExpenses, HouseRules } from "./models/advertisement";
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
@@ -45,7 +44,7 @@ export interface Database {
           extra_per_host: number;
           floor: string | null;
           general_amenities: string[] | null;
-          geom: any | null;
+          geom: unknown | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
@@ -53,16 +52,20 @@ export interface Database {
           id: string;
           kitchen_amenities: string[] | null;
           livingroom_amenities: string[] | null;
+          minimum_stay: number;
           month_rent: number;
           photos: AdvertisementPhoto[];
           place: string;
           postal_code: string;
           rooms: number;
+          semester_discount: number;
           slug: string;
           street: string;
           street_number: string;
           tenant_number: number;
+          months_notif_in_advance: number;
           title: string;
+          trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
@@ -83,7 +86,7 @@ export interface Database {
           extra_per_host: number;
           floor?: string | null;
           general_amenities?: string[] | null;
-          geom?: any | null;
+          geom?: unknown | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
@@ -91,16 +94,20 @@ export interface Database {
           id?: string;
           kitchen_amenities?: string[] | null;
           livingroom_amenities?: string[] | null;
+          minimum_stay?: number;
           month_rent: number;
           photos?: AdvertisementPhoto[];
           place: string;
           postal_code: string;
           rooms: number;
+          semester_discount?: number;
           slug: string;
           street: string;
           street_number: string;
           tenant_number: number;
+          months_notif_in_advance?: number;
           title: string;
+          trimester_discount?: number;
           type: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];
@@ -121,7 +128,7 @@ export interface Database {
           extra_per_host?: number;
           floor?: string | null;
           general_amenities?: string[] | null;
-          geom?: any | null;
+          geom?: unknown | null;
           guarantee_value?: number;
           host_id?: string;
           host_lives_property?: boolean;
@@ -129,16 +136,20 @@ export interface Database {
           id?: string;
           kitchen_amenities?: string[] | null;
           livingroom_amenities?: string[] | null;
+          minimum_stay?: number;
           month_rent?: number;
           photos?: AdvertisementPhoto[];
           place?: string;
           postal_code?: string;
           rooms?: number;
+          semester_discount?: number;
           slug?: string;
           street?: string;
           street_number?: string;
           tenant_number?: number;
+          months_notif_in_advance?: number;
           title?: string;
+          trimester_discount?: number;
           type?: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host?: Database["public"]["Enums"]["HostFlexType"];
           type_host?: Database["public"]["Enums"]["type_host"];
@@ -184,21 +195,6 @@ export interface Database {
           slug?: string;
           title?: string;
           updated_at?: string;
-        };
-        Relationships: [];
-      };
-      commodities: {
-        Row: {
-          id: number;
-          value: string | null;
-        };
-        Insert: {
-          id?: number;
-          value?: string | null;
-        };
-        Update: {
-          id?: number;
-          value?: string | null;
         };
         Relationships: [];
       };
@@ -1013,29 +1009,39 @@ export interface Database {
         Returns: {
           agreementsinfo: AdvertisementInfo | null;
           available: Database["public"]["Enums"]["AdvertisementStatus"];
+          bathroom_amenities: string[] | null;
           bathrooms: number;
+          bedroom_amenities: string[] | null;
           beds: number;
           created_at: string;
           description: string;
           expenses: Json;
+          exterior_amenities: string[] | null;
           extra_per_host: number;
           floor: string | null;
+          general_amenities: string[] | null;
           geom: unknown | null;
           guarantee_value: number;
           host_id: string;
           host_lives_property: boolean;
           house_rules: HouseRules;
           id: string;
+          kitchen_amenities: string[] | null;
+          livingroom_amenities: string[] | null;
+          minimum_stay: number;
           month_rent: number;
           photos: AdvertisementPhoto[];
           place: string;
           postal_code: string;
           rooms: number;
+          semester_discount: number;
           slug: string;
           street: string;
           street_number: string;
           tenant_number: number;
+          months_notif_in_advance: number;
           title: string;
+          trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];
           type_flex_host: Database["public"]["Enums"]["HostFlexType"];
           type_host: Database["public"]["Enums"]["type_host"];

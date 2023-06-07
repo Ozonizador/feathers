@@ -33,3 +33,7 @@ export const averageOfArrayNumbers = (arr: number[]) => {
   var result = arr.reduce((start, end, index, array) => start + end / array.length, 0);
   return result;
 };
+
+export const isNumeric = (num: any) => {
+  return !isNaN(num);
+};

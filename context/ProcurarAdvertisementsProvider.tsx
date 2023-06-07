@@ -1,11 +1,8 @@
-import { ReactNode, useCallback, useContext, useEffect } from "react";
+import { ReactNode, useContext, useEffect } from "react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertisement";
-import {
-  FilterAdvertisements,
-  AdvertisementsFilterOptions,
-  AdvertisementOrder,
-} from "../server/routers/advertisementsRouter";
+import { FilterAdvertisements, AdvertisementsFilterOptions, AdvertisementOrder } from "../server/types/advertisement";
+
 import { trpc } from "../utils/trpc";
 
 /* FILTERS */
@@ -64,7 +61,10 @@ export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertiseme
   const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements & { page?: number | null }>(defaultFilter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
 
-  const { data, error } = trpc.searchForAdvertisements.useQuery({ ...currentFilter, page: advertisementsInfo.page });
+  const { data, error } = trpc.advertisements.searchForAdvertisements.useQuery({
+    ...currentFilter,
+    page: advertisementsInfo.page,
+  });
 
   useEffect(() => {
     setAdvertisementsInfo((oldState) => ({ ...oldState, loading: true }));
@@ -113,20 +113,23 @@ export const useSetPageAdvertisementinfo = () => {
 export const useSetFiltersContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
   return (filters: Partial<AdvertisementsFilterOptions>) => {
-    setFilters((oldFilters) => ({ ...oldFilters, filter: { ...oldFilters.filter, ...filters } }));
+    setFilters((oldFilters: FilterAdvertisements) => ({ ...oldFilters, filter: { ...oldFilters.filter, ...filters } }));
   };
 };
 
 export const useSetOrderContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
   return (order: AdvertisementOrder) => {
-    setFilters((oldFilters) => ({ ...oldFilters, order }));
+    setFilters((oldFilters: FilterAdvertisements) => ({ ...oldFilters, order }));
   };
 };
 
 export const useSetComoditiesContext = () => {
   const setFilters = useContext(SetProcurarAdvertisementsContext);
   return (comodities: TypeAmenity[]) => {
-    setFilters((oldFilters) => ({ ...oldFilters, filter: { ...oldFilters.filter, comodities: comodities } }));
+    setFilters((oldFilters: FilterAdvertisements) => ({
+      ...oldFilters,
+      filter: { ...oldFilters.filter, comodities: comodities },
+    }));
   };
 };

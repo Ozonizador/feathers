@@ -18,7 +18,7 @@ import {
 } from "../../../context/ProcurarAdvertisementsProvider";
 import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
-import { GEO } from "../../../models/utils";
+import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
@@ -72,7 +72,11 @@ export default function ProcurarSection() {
     const markers: GEO[] = [];
     for (let advertisement of advertisements) {
       if (advertisement.geom) {
-        markers.push(coordinateArrayToLatitude(advertisement.geom.coordinates));
+        markers.push(
+          coordinateArrayToLatitude(
+            (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates
+          )
+        );
       }
     }
     return markers;

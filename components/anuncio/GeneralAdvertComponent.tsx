@@ -23,7 +23,9 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
-      const { lat, lng } = coordinateArrayToLatitude(advertisement.geom.coordinates as CoordinatesAsArray);
+      const { lat, lng } = coordinateArrayToLatitude(
+        (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates as CoordinatesAsArray
+      );
       return { lat, lng };
     } else {
       return userlocation;
