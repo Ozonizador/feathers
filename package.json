@@ -27,6 +27,7 @@
     "date-fns": "^2.30.0",
     "flowbite": "1.6.x",
     "flowbite-react": "0.4.x",
+    "jsonwebtoken": "^9.0.0",
     "leaflet": "^1.9.x",
     "lodash": "^4.17.21",
     "next": "12.3.1",
@@ -49,6 +50,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/leaflet": "^1.7.11",
     "@types/lodash": "^4.14.184",
     "@types/node": "^18.7.6",

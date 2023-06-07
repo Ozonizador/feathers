@@ -6,7 +6,6 @@ import { Profile, PROFILE_TABLE_NAME } from "../models/profile";
 import { publicProcedure } from "./trpc";
 
 export const authorizedProcedure = publicProcedure.input(z.object({ userId: z.string() })).use(async (opts) => {
-  debugger;
   const { ctx } = opts;
   const { userId } = ctx;
 
@@ -31,10 +30,14 @@ export const isHostProcedure = authorizedProcedure
     const { userId } = ctx;
     const { advertisementId } = input;
 
+    if (!advertisementId) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Mising advertisement identifier" });
+    }
+
     const { data, error } = await supabaseAdmin
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select("id")
-      .match({ hostId: userId, id: advertisementId });
+      .match({ host_id: userId, id: advertisementId });
 
     if (error || !data)
       throw new TRPCError({

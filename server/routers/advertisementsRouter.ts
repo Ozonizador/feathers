@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { PAGE_NUMBER_COUNT } from "../../hooks/advertisementService";
-import { supabase } from "../../lib/supabaseClient";
 import {
   Advertisements,
   AdvertisementWithReviewAverage,
@@ -10,10 +9,11 @@ import {
   CloseAdvertisementsFn,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../../models/advertisement";
-import { isHostProcedure } from "../procedure";
 import { publicProcedure, router } from "../trpc";
 import { FilterAdvertisements } from "../types/advertisement";
 import { addFilterToSearchAdvertisement, addOrderToSearchAdvertisement } from "../helpers/advertisementHelper";
+import { isHostProcedure } from "../procedure";
+import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 
 const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: number }> = z.object({
   filter: z.object({
@@ -49,12 +49,12 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
 export const advertisementsRouter = router({
   searchForAdvertisements: publicProcedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
-    const { coordinates } = filter || { coordinates: { lng: undefined, lat: undefined } };
+    const { coordinates } = filter;
     const { lng, lat } = coordinates || { lng: undefined, lat: undefined };
 
     let query;
     if (lng && lat) {
-      query = supabase
+      query = supabaseAdmin
         .rpc<"close_advertisements", CloseAdvertisementsFn>(
           CLOSE_ADVERTISEMENTS_TABLE_NAME,
           {
@@ -65,7 +65,7 @@ export const advertisementsRouter = router({
         )
         .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
     } else {
-      query = supabase
+      query = supabaseAdmin
         .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
         .select("*, stays(*)")
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
@@ -91,7 +91,7 @@ export const advertisementsRouter = router({
 
       if (!lng || !lat) return { data: null, error: "No latitude or longitude provided", count: null };
 
-      let query = supabase
+      let query = supabaseAdmin
         .rpc<"close_advertisements", CloseAdvertisementsFn>(
           CLOSE_ADVERTISEMENTS_TABLE_NAME,
           {
@@ -114,10 +114,11 @@ export const advertisementsRouter = router({
     .mutation(async ({ input }) => {
       const { minimumStay, monthsInAdvance, advertisementId } = input;
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
         .update({ minimum_stay: minimumStay, months_notif_in_advance: monthsInAdvance })
-        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId)
+        .select();
 
       return { data, error };
     }),
@@ -127,7 +128,7 @@ export const advertisementsRouter = router({
     .mutation(async ({ input }) => {
       const { trimesterDiscount, semesterDiscount, advertisementId } = input;
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
         .update({ semester_discount: semesterDiscount, trimester_discount: trimesterDiscount })
         .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);

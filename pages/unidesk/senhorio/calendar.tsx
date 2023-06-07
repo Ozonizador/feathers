@@ -15,6 +15,7 @@ import {
   ADVERTISEMENT_TABLE_NAME,
 } from "../../../models/advertisement";
 import { trpc } from "../../../utils/trpc";
+import { isNumeric } from "../../../utils/utils";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -58,11 +59,17 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
     (advertisements && advertisements[0]) || undefined
   );
 
+  const [loadingButtons, setLoadingButtons] = useState<{ timingsLoading: boolean; discountsLoading: boolean }>({
+    timingsLoading: false,
+    discountsLoading: false,
+  });
+
   const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
   const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
 
   const updateTimings = async (minimumStay: number, monthsInAdvance: number) => {
     if (!selectedAdvertisement) return;
+    setLoadingButtons((oldStatus) => ({ ...oldStatus, timingsLoading: true }));
 
     await updateAdvertisementTimings.mutateAsync(
       {
@@ -72,11 +79,15 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
         userId: user.id,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          if (data.error) return toast.error("Erro ao gravar definições");
           toast.success("Successo");
         },
         onError: () => {
           toast.error("Erro ao gravar definições");
+        },
+        onSettled: () => {
+          setLoadingButtons((oldStatus) => ({ ...oldStatus, timingsLoading: false }));
         },
       }
     );
@@ -84,14 +95,28 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
 
   const updateDiscounts = async (trimesterDiscount: number, semesterDiscount: number) => {
     if (!selectedAdvertisement) return;
+    setLoadingButtons((oldStatus) => ({ ...oldStatus, discountsLoading: true }));
 
-    const { error } = await updateAdvertisementDiscounts.mutateAsync({
-      semesterDiscount,
-      trimesterDiscount,
-      advertisementId: "",
-      userId: user.id,
-    });
-    error ? toast.error("Erro ao gravar definições") : toast.success("Successo");
+    await updateAdvertisementDiscounts.mutateAsync(
+      {
+        semesterDiscount,
+        trimesterDiscount,
+        advertisementId: selectedAdvertisement.id,
+        userId: user.id,
+      },
+      {
+        onSuccess: (data) => {
+          if (data.error) return toast.error("Erro ao gravar definições");
+          toast.success("Successo");
+        },
+        onError: () => {
+          toast.error("Erro ao gravar definições");
+        },
+        onSettled: () => {
+          setLoadingButtons((oldStatus) => ({ ...oldStatus, discountsLoading: false }));
+        },
+      }
+    );
   };
 
   const changeAdvertisementCalendar = (advertisementId: string) => {
@@ -121,6 +146,7 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
           updateDiscounts={updateDiscounts}
           updateTimings={updateTimings}
           {...selectedAdvertisement}
+          {...loadingButtons}
         />
       </UnideskStructure.Content>
     </UnideskStructure>
@@ -130,6 +156,8 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
 interface AdvertisementPropertiesComponentProps {
   updateDiscounts: (trimesterDiscount: number, semesterDiscount: number) => void;
   updateTimings: (minimumStay: number, timeInAdvance: number) => void;
+  timingsLoading: boolean;
+  discountsLoading: boolean;
   trimester_discount?: number;
   semester_discount?: number;
   minimum_stay?: number;
@@ -143,12 +171,28 @@ const AdvertisementPropertiesComponent = ({
   semester_discount,
   minimum_stay,
   months_notif_in_advance,
+  timingsLoading,
+  discountsLoading,
 }: AdvertisementPropertiesComponentProps) => {
   const [minimumStay, setMinimumStay] = useState<number>(minimum_stay || 3);
   const [monthsInAdvance, setMonthsInAdvance] = useState<number>(months_notif_in_advance || 1);
 
   const [trimesterDiscount, setTrimesterDiscount] = useState<number>(trimester_discount || 0);
   const [semesterDiscount, setSemesterDiscount] = useState<number>(semester_discount || 0);
+
+  const changeTrimesterDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    const isNumber = isNumeric(value);
+    if (isNumber) setTrimesterDiscount(Number(value));
+  };
+
+  const changeSemesterDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    const isNumber = isNumeric(value);
+    if (isNumber) setSemesterDiscount(Number(value));
+  };
 
   return (
     <div className="mt-5 flex flex-col gap-4">
@@ -183,7 +227,7 @@ const AdvertisementPropertiesComponent = ({
       </div>
 
       <div className="w-96 pb-4">
-        <Button onClick={() => updateTimings(minimumStay, monthsInAdvance)} type="button">
+        <Button onClick={() => updateTimings(minimumStay, monthsInAdvance)} type="button" loading={timingsLoading}>
           Guardar alterações
         </Button>
       </div>
@@ -197,7 +241,7 @@ const AdvertisementPropertiesComponent = ({
               label={""}
               labelText=""
               customCss="percent"
-              onChange={(e) => setTrimesterDiscount(e.target.value)}
+              onChange={(e) => changeTrimesterDiscount(e)}
               value={trimesterDiscount}
               pattern="[0-9]+"
             />
@@ -210,7 +254,7 @@ const AdvertisementPropertiesComponent = ({
             <Input
               label={""}
               value={semesterDiscount}
-              onChange={(e) => setSemesterDiscount(e.target.value)}
+              onChange={(e) => changeSemesterDiscount(e)}
               labelText=""
               customCss="percent"
               pattern="[0-9]+"
@@ -218,7 +262,11 @@ const AdvertisementPropertiesComponent = ({
           </div>
         </div>
         <div className="w-96 pb-4">
-          <Button onClick={() => updateDiscounts(trimesterDiscount, semesterDiscount)} type="button">
+          <Button
+            onClick={() => updateDiscounts(trimesterDiscount, semesterDiscount)}
+            type="button"
+            loading={discountsLoading}
+          >
             Guardar alterações
           </Button>
         </div>
