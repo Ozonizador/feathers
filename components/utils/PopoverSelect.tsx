@@ -4,9 +4,9 @@ import { Fragment } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 
 export interface PopoverOption {
-  name: string;
+  value: string;
   id: string;
-  description?: string;
+  label: string;
 }
 
 interface PopoverSelectProps {
@@ -53,7 +53,7 @@ const PopoverSelect = ({ title, options, props }: PopoverSelectProps) => {
                           {...props}
                           className="duration-1 flex cursor-pointer items-center rounded-lg bg-gray-50 p-2 transition ease-in-out hover:text-primary-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
-                          <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                          <p className="text-sm font-medium text-gray-900">{item.label}</p>
                         </div>
                       ))}
                   </div>

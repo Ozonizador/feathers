@@ -5,15 +5,29 @@ import { StayWithPublicReview } from "./stay";
 // TODO: change the advertisements to listings because of adblocker
 // - https://www.alibabacloud.com/help/en/object-storage-service/latest/what-do-i-do-if-typeerror-failed-to-fetch-is-displayed
 
-export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
-export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
-export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
-
-export type CloseAdvertisementsFn = Database["public"]["Functions"]["close_advertisements"];
-
 /* MODEL */
 export type Advertisements = Database["public"]["Tables"]["advertisements"];
 export type Advertisement = Advertisements["Row"];
+
+export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
+
+/**
+ * VIEWS
+ */
+
+export const ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME = "advertisements_uniq_amenities" as const;
+export type AdvertisementAggregateView = Database["public"]["Views"]["advertisements_uniq_amenities"];
+export type AdvertisementWithAggregatedAmenities = AdvertisementAggregateView["Row"];
+
+/**
+ * Close Advertisement RPC
+ */
+export const CLOSE_ADVERTISEMENTS_TABLE_NAME = "close_advertisements" as const;
+export type CloseAdvertisementsFn = Database["public"]["Functions"]["close_advertisements"];
+export type CloseAdvertisement = Database["public"]["Functions"]["close_advertisements"]["Returns"];
+
+// STORAGE
+export const ADVERTISEMENT_STORAGE_BUCKET = "advertisements" as const;
 
 export type AdvertisementWithReviewAverage = Advertisement & {
   averages: ReviewsAverage[];
@@ -109,6 +123,13 @@ export const ADVERTISEMENT_PROPERTIES = {
   ID: "id",
   GEOM: "geom",
   SLUG: "slug",
+  LIVINGROOM_AMENITIES: "livingroom_amenities",
+  BEDROOM_AMENITIES: "bedroom_amenities",
+  BATHROOM_AMENITIES: "bathroom_amenities",
+  EXTERIOR_AMENITIES: "exterior_amenities",
+  GENERAL_AMENITIES: "general_amenities",
+  KITCHEN_AMENITIES: "kitchen_amenities",
+  AMENITIES: "amenities",
 } as const;
 
 export const HOUSE_RULES_NAMING = {

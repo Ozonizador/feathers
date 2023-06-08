@@ -594,6 +594,59 @@ export interface Database {
       };
     };
     Views: {
+      advertisements_uniq_amenities: {
+        Row: {
+          agreementsinfo: Json | null;
+          amenities: string[] | null;
+          available: Database["public"]["Enums"]["AdvertisementStatus"] | null;
+          bathroom_amenities: string[] | null;
+          bathrooms: number | null;
+          bedroom_amenities: string[] | null;
+          beds: number | null;
+          created_at: string | null;
+          description: string | null;
+          expenses: Json | null;
+          exterior_amenities: string[] | null;
+          extra_per_host: number | null;
+          floor: string | null;
+          general_amenities: string[] | null;
+          geom: unknown | null;
+          guarantee_value: number | null;
+          host_id: string | null;
+          host_lives_property: boolean | null;
+          house_rules: Json | null;
+          id: string | null;
+          kitchen_amenities: string[] | null;
+          livingroom_amenities: string[] | null;
+          minimum_stay: number | null;
+          month_rent: number | null;
+          months_notif_in_advance: number | null;
+          photos: Json | null;
+          place: string | null;
+          postal_code: string | null;
+          rooms: number | null;
+          semester_discount: number | null;
+          slug: string | null;
+          street: string | null;
+          street_number: string | null;
+          tenant_number: number | null;
+          title: string | null;
+          trimester_discount: number | null;
+          type: Database["public"]["Enums"]["TypeRoom"] | null;
+          type_flex_host: Database["public"]["Enums"]["HostFlexType"] | null;
+          type_host: Database["public"]["Enums"]["type_host"] | null;
+          updated_at: string | null;
+          verified: boolean | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "advertisements_host_id_fkey";
+            columns: ["host_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       geography_columns: {
         Row: {
           coord_dimension: number | null;
@@ -651,6 +704,12 @@ export interface Database {
             foreignKeyName: "stays_advertisement_id_fkey";
             columns: ["advertisement_id"];
             referencedRelation: "advertisements";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stays_advertisement_id_fkey";
+            columns: ["advertisement_id"];
+            referencedRelation: "advertisements_uniq_amenities";
             referencedColumns: ["id"];
           }
         ];
@@ -3827,9 +3886,6 @@ export interface Database {
           }
         ];
       };
-    };
-    Views: {
-      [_ in never]: never;
     };
     Functions: {
       can_insert_object: {
