@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from "next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CalendarComponent } from "../../../components/calendar/CalendarComponent";
-import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
+import MenuCalendar from "../../../components/unidesk/Menus/MenuCalendar";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
@@ -52,7 +52,7 @@ type CalendarPageProps = {
 
 const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
   const popoverOptions = advertisements.map((advertisement) => ({
-    name: advertisement.title,
+    label: advertisement.title,
     id: advertisement.id,
   })) as PopoverOption[];
   const [selectedAdvertisement, setSelectedAdvertisement] = useState<Advertisement | undefined>(
@@ -127,7 +127,7 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuSenhorio />
+        <MenuCalendar activeLink="calendar" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div>
@@ -139,15 +139,21 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
             />
           </div>
         </div>
-        <div className="-ml-4 w-full">
-          <CalendarComponent />
-        </div>
-        <AdvertisementPropertiesComponent
-          updateDiscounts={updateDiscounts}
-          updateTimings={updateTimings}
-          {...selectedAdvertisement}
-          {...loadingButtons}
-        />
+        {selectedAdvertisement && (
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-black text-black">Calendário</h2>
+            <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
+            <div className="-ml-4 w-full">
+              <CalendarComponent />
+            </div>
+            <AdvertisementPropertiesComponent
+              updateDiscounts={updateDiscounts}
+              updateTimings={updateTimings}
+              {...selectedAdvertisement}
+              {...loadingButtons}
+            />
+          </div>
+        )}
       </UnideskStructure.Content>
     </UnideskStructure>
   );

@@ -21,6 +21,7 @@ import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
+import PopoverSelect from "../../utils/PopoverSelect";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -145,16 +146,15 @@ export default function ProcurarSection() {
                 </div>
 
                 <div className="w-1/2">
-                  <Select
-                    id="comodities-select"
-                    instanceId="comodities-select"
-                    placeholder="Comodities"
-                    options={SelectAmenityLabel.map((amenity) => amenity)}
-                    isMulti={true}
-                    styles={customStyles}
-                    onChange={() => toggleComododitiesFilter}
-                    className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:w-52"
-                  />
+                  <PopoverSelect
+                    title={"Comodities"}
+                    options={SelectAmenityLabel.map((amenity) => ({
+                      id: amenity.value,
+                      value: amenity.value,
+                      label: amenity.label,
+                    }))}
+                    onClick={() => toggleComododitiesFilter}
+                  ></PopoverSelect>
                 </div>
               </div>
 

@@ -4,6 +4,7 @@ import {
   Advertisements,
   AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
+  ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME,
   ADVERTISEMENT_TABLE_NAME,
   AMENITIES,
   CloseAdvertisementsFn,
@@ -66,7 +67,7 @@ export const advertisementsRouter = router({
         .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
     } else {
       query = supabaseAdmin
-        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .from<"advertisements_uniq_amenities", Advertisements>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
         .select("*, stays(*)")
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
