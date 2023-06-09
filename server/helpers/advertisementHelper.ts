@@ -16,7 +16,7 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
 
   filter.comodities &&
     filter.comodities.length !== 0 &&
-    (query = query.overlaps(ADVERTISEMENT_PROPERTIES.AMENITIES, filter.comodities));
+    (query = query.contains(ADVERTISEMENT_PROPERTIES.AMENITIES, filter.comodities));
 
   // Price
   filter.price?.startRange && (query = query.gte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.startRange));

@@ -594,7 +594,7 @@ export interface Database {
       };
     };
     Views: {
-      advertisements_uniq_amenities: {
+      advertisements_agg_amenities: {
         Row: {
           agreementsinfo: Json | null;
           amenities: string[] | null;
@@ -709,7 +709,7 @@ export interface Database {
           {
             foreignKeyName: "stays_advertisement_id_fkey";
             columns: ["advertisement_id"];
-            referencedRelation: "advertisements_uniq_amenities";
+            referencedRelation: "advertisements_agg_amenities";
             referencedColumns: ["id"];
           }
         ];

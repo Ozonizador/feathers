@@ -17,7 +17,7 @@ export default function RoomMap() {
 
   return (
     <section className="my-32">
-      {geom !== null && geom.coordinates !== null && (
+      {geom !== null && geom?.coordinates !== null && (
         <>
           <div className="mb-5 text-2xl font-bold">Este espaço localiza-se nesta zona</div>
           <div className="h-72 w-full rounded-md lg:h-64 lg:w-3/5">

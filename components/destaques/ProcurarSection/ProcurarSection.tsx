@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
 import Select from "react-select";
-import { SelectAmenityLabel, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { SelectAmenityLabel, TypeAmenity, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -30,6 +30,7 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 export default function ProcurarSection() {
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
+  const { comodities } = currentFilter;
   const { location, startDate, endDate, coordinates } = useUserSearch();
 
   /* Filters */
@@ -59,9 +60,16 @@ export default function ProcurarSection() {
   }, [locateByQuery]);
 
   // Filters
-  const toggleComododitiesFilter = (options: any[]) => {
-    const comoditiesFilter = options.map((option) => option.value);
-    setComoditiesFilter(comoditiesFilter);
+  const toggleComododitiesFilter = (option: string) => {
+    if (!comodities) return setComoditiesFilter([option as TypeAmenity]);
+
+    const existentComodities = comodities;
+    const existComodity = existentComodities.findIndex((commodity) => commodity === option);
+    if (existComodity === -1) return setComoditiesFilter([...existentComodities, option as TypeAmenity]);
+
+    existentComodities.splice(existComodity, 1);
+    console.log(existentComodities);
+    setComoditiesFilter(existentComodities);
   };
 
   const setPriceChange = _.debounce((value) => {
@@ -153,7 +161,8 @@ export default function ProcurarSection() {
                       value: amenity.value,
                       label: amenity.label,
                     }))}
-                    onClick={() => toggleComododitiesFilter}
+                    onClick={toggleComododitiesFilter}
+                    selectedOptions={comodities}
                   ></PopoverSelect>
                 </div>
               </div>
