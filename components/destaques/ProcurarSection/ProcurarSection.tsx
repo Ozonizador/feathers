@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import RoomCard from "./RoomCard";
-import Select from "react-select";
 import { SelectAmenityLabel, TypeAmenity, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { customStyles } from "./ProcurarSectionConfig";
 import Slider from "rc-slider";
 import _ from "lodash";
 import {

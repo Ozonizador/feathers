@@ -66,7 +66,7 @@ const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: Popo
                           {...props}
                           onClick={(e) => handleClick(e, item.value)}
                           className={classNames(
-                            "duration-1 flex cursor-pointer items-center rounded-lg p-2 transition ease-in-out hover:text-primary-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50",
+                            "duration-1 flex cursor-pointer items-center rounded-lg p-2 transition ease-in-out focus:outline-none focus-visible:ring",
                             {
                               "text-primary-500": isSelectedOption(item),
                               "text-gray-900": !isSelectedOption(item),
