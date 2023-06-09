@@ -1,6 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
+import classNames from "classnames";
 
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 
 export interface PopoverOption {
@@ -13,10 +14,21 @@ interface PopoverSelectProps {
   title: string;
   options: PopoverOption[];
   [x: string]: any;
-  onClick: () => void;
+  onClick: (e: any) => void;
+  selectedOptions?: string[];
 }
 
-const PopoverSelect = ({ title, options, props }: PopoverSelectProps) => {
+const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: PopoverSelectProps) => {
+  const isSelectedOption = (option: PopoverOption) => {
+    if (!selectedOptions || selectedOptions.length === 0) return false;
+
+    return selectedOptions.find((item) => option.value === item) !== undefined;
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>, selectedOption: string) => {
+    e.preventDefault();
+    onClick && onClick(selectedOption);
+  };
   return (
     <div className="w-full px-4">
       <Popover className="relative w-full">
@@ -44,16 +56,24 @@ const PopoverSelect = ({ title, options, props }: PopoverSelectProps) => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute left-1/2 z-10 w-full -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="z-900 h-64 overflow-y-scroll rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="flex flex-col gap-2 py-2">
                     {options &&
                       options.map((item) => (
                         <div
                           key={item.id}
+                          value={item.value}
                           {...props}
-                          className="duration-1 flex cursor-pointer items-center rounded-lg bg-gray-50 p-2 transition ease-in-out hover:text-primary-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={(e) => handleClick(e, item.value)}
+                          className={classNames(
+                            "duration-1 flex cursor-pointer items-center rounded-lg p-2 transition ease-in-out hover:text-primary-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50",
+                            {
+                              "text-primary-500": isSelectedOption(item),
+                              "text-gray-900": !isSelectedOption(item),
+                            }
+                          )}
                         >
-                          <p className="text-sm font-medium text-gray-900">{item.label}</p>
+                          <p className="text-sm font-medium">{item.label}</p>
                         </div>
                       ))}
                   </div>

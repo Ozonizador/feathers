@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { PAGE_NUMBER_COUNT } from "../../hooks/advertisementService";
 import {
+  AdvertisementAggregateView,
   Advertisements,
   AdvertisementWithReviewAverage,
   ADVERTISEMENT_PROPERTIES,
@@ -67,7 +68,7 @@ export const advertisementsRouter = router({
         .select("*, averages:reviewsPerAdvertisement!left(*), stay:stays(*)");
     } else {
       query = supabaseAdmin
-        .from<"advertisements_uniq_amenities", Advertisements>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
+        .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
         .select("*, stays(*)")
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 

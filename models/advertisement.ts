@@ -15,8 +15,8 @@ export const ADVERTISEMENT_TABLE_NAME = "advertisements" as const;
  * VIEWS
  */
 
-export const ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME = "advertisements_uniq_amenities" as const;
-export type AdvertisementAggregateView = Database["public"]["Views"]["advertisements_uniq_amenities"];
+export const ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME = "advertisements_agg_amenities" as const;
+export type AdvertisementAggregateView = Database["public"]["Views"]["advertisements_agg_amenities"];
 export type AdvertisementWithAggregatedAmenities = AdvertisementAggregateView["Row"];
 
 /**
@@ -305,8 +305,8 @@ export const TypeAmenityLabel = {
 } as const;
 
 /* FOR THE SELECT ON PROCURAR */
-export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((label) => {
-  return { label, value: TypeAmenityLabel[label as keyof typeof TypeAmenityLabel] };
+export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((value) => {
+  return { label: TypeAmenityLabel[value as keyof typeof TypeAmenityLabel], value };
 });
 
 /* ADVERT_STATUS */
