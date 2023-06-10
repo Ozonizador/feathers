@@ -74,16 +74,16 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
             <Link href={HOME_URL}>
-              <div className="mb-3 font-bold">Home</div>
+              <div className="mb-3 cursor-pointer font-bold">Home</div>
             </Link>
             <div
-              className="flex flex-1 items-center "
+              className="flex flex-1 cursor-pointer items-center gap-1"
               onClick={() => {
                 setSummary2(!summary2);
               }}
             >
               <div>
-                <p className="">Anuncie a sua propriedade</p>
+                <p>Anuncie a sua propriedade</p>
               </div>
 
               <Image
@@ -94,7 +94,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               />
             </div>
             {summary2 && (
-              <div className="flex ">
+              <div className="flex">
                 <>
                   <div className="flex flex-col gap-2 text-base">
                     <div className="mt-2">
@@ -107,14 +107,14 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 </>
               </div>
             )}
-            <div className="mt-3">
+            <div className="mt-3 cursor-pointer">
               <Link href={BLOG_URL}>Blog</Link>
             </div>
-            <div className="mt-3">
+            <div className="mt-3 cursor-pointer">
               <Link href={CONTACTOS_URL}>Contactos</Link>
             </div>
           </div>
-          <div className="mt-7  rounded-3xl bg-gray-100 py-4 px-8">
+          <div className="mt-7  rounded-3xl bg-gray-100 px-8 py-4">
             <div className="align-center flex flex-1 justify-center">
               <div>
                 <span className="mr-2">Estudante</span>
@@ -161,7 +161,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 </>
               )}
               {!user && (
-                <div className="my-auto flex w-full  justify-center gap-2">
+                <div className="my-auto flex w-full justify-center gap-2">
                   <Link href={REGISTER_URL}>
                     <a className="p-0">
                       <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
@@ -183,13 +183,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
 
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
               {toggleUserType == "TENANT" && (
-                <div className="flex flex-col gap-2 py-3 px-5">
+                <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>Minha Estadia</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>Favoritos</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
-                  <div className="my-3 mx-auto h-[1px] w-full bg-neutral-600"></div>
+                  <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
                     Conta
                   </div>
@@ -202,13 +202,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 </div>
               )}
               {toggleUserType == "LANDLORD" && (
-                <div className="flex flex-col gap-2 py-3 px-5">
+                <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
                   <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>Anúncios</div>
                   <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>Uni-controlo</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
-                  <div className="my-3 mx-auto h-[1px] w-full bg-neutral-600"></div>
+                  <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
                     Conta
                   </div>
