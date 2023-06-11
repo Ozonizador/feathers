@@ -132,7 +132,7 @@ const ModalDetalhesPagamento = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="ml-auto mr-6 text-neutral-500">{setAdvertPrice()}€</div>
+                          <div className="ml-auto mr-6 text-neutral-500">{advertisement?.guarantee_value}€</div>
                         </div>
                       </FeathersAccordion>
                       {/* Mensalidade */}

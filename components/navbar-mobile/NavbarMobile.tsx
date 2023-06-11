@@ -44,9 +44,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const toggleUserTypeContext = useToggleUserType();
 
   const toggleSenhorioEstudante = () => {
-    if (!user) {
-      return;
-    }
+    if (!user) return;
 
     if (toggleUserType !== "TENANT") {
       toggleUserTypeContext("TENANT");
