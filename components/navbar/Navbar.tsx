@@ -138,7 +138,7 @@ export const Navbar = () => {
                 >
                   <Link href="/">Home</Link>
                 </div>
-                <div className="z-900 w-fit">
+                <div className="z-700 w-fit">
                   <Menu as="div" className={classNames("ml-5 w-full")}>
                     <Menu.Button>
                       <div
@@ -294,7 +294,7 @@ export const Navbar = () => {
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
                                     <p>Caixa de Entrada</p>
                                     {messagesNumber > 0 && (
-                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                      <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
                                       </h6>
                                     )}
@@ -304,7 +304,7 @@ export const Navbar = () => {
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
                                     <p>Notificações</p>
                                     {notificationNumber > 0 && (
-                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                      <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
                                       </h6>
                                     )}
@@ -339,7 +339,7 @@ export const Navbar = () => {
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
                                     <p>Caixa de Entrada</p>
                                     {messagesNumber > 0 && (
-                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                      <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
                                       </h6>
                                     )}
@@ -359,7 +359,7 @@ export const Navbar = () => {
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
                                     <p>Notificações</p>
                                     {notificationNumber > 0 && (
-                                      <h6 className="border-1 my-auto rounded-full border border-black py-[0.5px] px-[4px] text-xs">
+                                      <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
                                       </h6>
                                     )}

@@ -26,6 +26,7 @@ export const RESERVATION_TABLE = {
   HOST_ID: "advertisement.host_id",
   START_DATE: "start_date",
   END_DATE: "end_date",
+  NUMBER_GUESTS: "number_guests",
 } as const;
 
 export enum ReservationStatusLabel {

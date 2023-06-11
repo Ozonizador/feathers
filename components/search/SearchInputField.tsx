@@ -9,7 +9,7 @@ import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 
-enum SearchFields {
+export enum SearchFields {
   START_DATE = "startDate",
   END_DATE = "endDate",
   LOCATION = "location",
@@ -102,6 +102,7 @@ export const SearchInputField = () => {
               date={startDate}
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
               onChange={(date) => setSearchInfoProperty(SearchFields.START_DATE, date)}
+              minDate={new Date()}
             />
           </div>
           <div className="z-50 my-2 w-1/2 lg:mx-2">
@@ -109,6 +110,7 @@ export const SearchInputField = () => {
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
+              minDate={new Date()}
             />
           </div>
         </div>

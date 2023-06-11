@@ -5,44 +5,31 @@ import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../context/ModalShowProvider";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
 import { Reservation, ReservationStatus, RESERVATION_TABLE } from "../../models/reservation";
+import Input from "../utils/Input";
 
-/* PAGINA 23 DO XD 
-
-*/
+/**
+ * PAGINA 23 DO XD
+ */
 
 const ModalAlterarReserva = () => {
   const { isOpen, stay } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
 
-  const [newReservation, setNewReservation] = useState<Omit<Reservation, "created_at" | "updated_at">>({
-    id: "",
-    start_date: new Date().toDateString(),
-    end_date: new Date().toDateString(),
+  const [newReservation, setNewReservation] = useState<
+    Omit<Reservation, "id" | "created_at" | "updated_at" | "start_date" | "end_date">
+  >({
     status: ReservationStatus.CHANGE_REQUESTED,
-    advertisement_id: "",
-    tenant_id: "",
-    number_guests: 1,
+    advertisement_id: (stay && stay.advertisement && stay.advertisement_id) || "",
+    tenant_id: (stay && stay.advertisement && stay.tenant_id) || "",
+    number_guests: (stay && stay.reservation && stay.reservation.number_guests) || 1,
   });
 
-  const updateToOldReservation = useCallback(() => {
-    if (stay) {
-      const reservation = stay.reservation;
-      if (reservation && reservation.id !== newReservation.id) {
-        setNewReservation({
-          ...newReservation,
-          start_date: reservation?.start_date || new Date().toDateString(),
-          end_date: reservation?.end_date || new Date().toDateString(),
-          advertisement_id: reservation?.advertisement_id,
-          tenant_id: reservation?.tenant_id,
-          status: ReservationStatus.CHANGE_REQUESTED,
-        });
-      }
-    }
-  }, [newReservation, stay]);
-
-  useEffect(() => {
-    updateToOldReservation();
-  }, [updateToOldReservation]);
+  const [newReservationStartDate, setNewReservationStartDate] = useState<Date>(
+    (stay && stay.reservation && stay.reservation.start_date && new Date(stay.reservation.start_date)) || new Date()
+  );
+  const [newReservationEndDate, setNewReservationEndDate] = useState<Date>(
+    (stay && stay.reservation && stay.reservation.end_date && new Date(stay.reservation.end_date)) || new Date()
+  );
 
   function closeModal() {
     setIsOpen(false);
@@ -54,7 +41,7 @@ const ModalAlterarReserva = () => {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-900" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -89,7 +76,7 @@ const ModalAlterarReserva = () => {
 
                 {/* <!-- Modal --> */}
                 <div
-                  className="modal modal-lg fade  -scrollable   "
+                  className="modal modal-lg fade -scrollable"
                   id="exampleModal"
                   tabIndex={-1}
                   aria-labelledby="exampleModalLabel"
@@ -109,7 +96,7 @@ const ModalAlterarReserva = () => {
                               rows={3}
                             ></textarea>
                           </div>
-                          <p className="mt-8 mb-2 text-xl font-semibold">Reserva Original</p>
+                          <p className="mb-2 mt-8 text-xl font-semibold">Reserva Original</p>
                           {/* left */}
                           {/* começa novo */}
                           <div className="mb-5">
@@ -133,16 +120,15 @@ const ModalAlterarReserva = () => {
                             </div>
                           </div>
                           {newReservation && (
-                            <div className="flex items-center justify-between gap-7 align-middle">
+                            <div className="flex items-center justify-center gap-7 align-middle">
                               <div>
                                 <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                   Entrada
                                 </label>
                                 <FeatherDatePicker
-                                  date={new Date(newReservation.start_date) || new Date()}
-                                  onChange={(e) =>
-                                    changeNewReservationProperty(RESERVATION_TABLE.START_DATE, e.target.value)
-                                  }
+                                  date={newReservationStartDate}
+                                  onChange={(e) => setNewReservationStartDate(e.target.value)}
+                                  minDate={new Date()}
                                 />
                               </div>
 
@@ -156,10 +142,9 @@ const ModalAlterarReserva = () => {
                                 </label>
 
                                 <FeatherDatePicker
-                                  date={new Date(newReservation.end_date) || new Date()}
-                                  onChange={(e) =>
-                                    changeNewReservationProperty(RESERVATION_TABLE.END_DATE, e.target.value)
-                                  }
+                                  date={newReservationEndDate}
+                                  onChange={(e) => setNewReservationEndDate(e.target.value)}
+                                  minDate={new Date()}
                                 />
                               </div>
                             </div>
@@ -170,12 +155,11 @@ const ModalAlterarReserva = () => {
                             {/* HOSPEDES */}
                             <div className="mt-7 flex flex-row justify-between gap-4">
                               <div className="mb-3 mt-3 flex w-full flex-col">
-                                <label htmlFor="exampleInputEmail1" className="form-label">
-                                  Número de hóspedes
-                                </label>
-                                <select className="mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3">
-                                  <option>1 hóspede</option>
-                                </select>
+                                <Input
+                                  label="current_guests"
+                                  labelText="Número de hóspedes"
+                                  value={stay && stay.reservation && stay.reservation.number_guests}
+                                />
                               </div>
 
                               {/* FIM */}
@@ -185,12 +169,15 @@ const ModalAlterarReserva = () => {
 
                               <div className="mb-3  flex w-full flex-col">
                                 <div className="mb-3 mt-3 flex w-full flex-col">
-                                  <label htmlFor="exampleInputEmail1" className="form-label">
-                                    Número de hóspedes
-                                  </label>
-                                  <select className="mt-2 w-full rounded-md border border-solid border-terciary-500 bg-white py-2 px-3">
-                                    <option>1 hóspede</option>
-                                  </select>
+                                  <Input
+                                    label="current_guests"
+                                    labelText="Número de hóspedes"
+                                    pattern="[0-9]+"
+                                    value={newReservation.number_guests}
+                                    onChange={(e) =>
+                                      changeNewReservationProperty(RESERVATION_TABLE.NUMBER_GUESTS, e.target.value)
+                                    }
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -210,7 +197,7 @@ const ModalAlterarReserva = () => {
                           </div>
                           <div className="flex justify-center">
                             <a
-                              className="mx-auto mt-10 mb-6 rounded-md bg-primary-300 py-3 px-6 text-white"
+                              className="mx-auto mb-6 mt-10 rounded-md bg-primary-300 px-6 py-3 text-white"
                               href="#"
                               role="button"
                               id="modal-btn"
