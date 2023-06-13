@@ -17,7 +17,7 @@ import FeathersSpinner from "../utils/Spinner";
 const ModalDenuncia = () => {
   const { addReportOnAdvert } = useReportService();
   const profile = useCurrentUser();
-  const { isOpen, step, stay } = useModalReportAdvertisement();
+  const { isOpen, step, reservation } = useModalReportAdvertisement();
   const setModalReportProperty = useSetModalReportContextProperty();
   const setIsOpen = useSetOpenModalReport();
 
@@ -50,9 +50,9 @@ const ModalDenuncia = () => {
   const saveReport = async (event: React.MouseEvent) => {
     event.preventDefault();
 
-    if (!profile || !stay) return;
+    if (!profile || !reservation) return;
     setLoading(true);
-    const { data, error } = await addReportOnAdvert(report, stay.id);
+    const { data, error } = await addReportOnAdvert(report, reservation.id);
     if (!error) nextStep();
     setLoading(false);
   };

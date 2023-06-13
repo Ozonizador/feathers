@@ -1,17 +1,17 @@
 import HospedesMenu from "../../../components/unidesk/Menus/HospedesMenu";
 import HospedeCard from "../../../components/hospedes/HospedeCard/HospedeCard";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayGuest, Stays, STAYS_TABLE_NAME } from "../../../models/stay";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 
 // Icon
 import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
+import { Reservation, ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 
 const paths = [{ url: "", label: "Hóspedes" }] as BreadcrumbPath[];
 
 interface UniControloHospedesProps {
-  stays: StayGuest[];
+  stays: ReservationGuest[];
 }
 
 const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
@@ -46,7 +46,7 @@ export default UniControloHospedes;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
@@ -64,11 +64,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const date = new Date().toISOString();
 
   const { data, error } = await supabase
-    .from<"stays", Stays>(STAYS_TABLE_NAME)
-    .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*), reservation:reservation_id(*)")
+    .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
+    .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*)")
     .eq("advertisement.host_id", host.id)
-    .gte("reservation.start_date", date)
-    .lte("reservation.end_date", date);
+    .gte("start_date", date)
+    .lte("end_date", date);
 
   return {
     props: {

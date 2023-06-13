@@ -1,5 +1,4 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { PostgrestError } from "@supabase/supabase-js";
 import { Conversation, Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../models/conversation";
 import { Profile } from "../models/profile";
 import { ReservationWithAdvertisement } from "../models/reservation";

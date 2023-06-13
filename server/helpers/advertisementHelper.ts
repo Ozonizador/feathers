@@ -1,5 +1,4 @@
 import { ADVERTISEMENT_PROPERTIES, AdvertisementStatus } from "../../models/advertisement";
-import { STAYS_TABLE_NAME } from "../../models/stay";
 import { AdvertisementsFilterOptions, AdvertisementOrder } from "../types/advertisement";
 
 /**
@@ -23,16 +22,12 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   filter.price?.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
 
   // dates
-  // filter.dates &&
-  //   filter.dates.startDate &&
-  //   filter.dates.endDate &&
-  //   (query = query.filter("id", "not.in", (query: any) =>
-  //     query
-  //       .from(STAYS_TABLE_NAME)
-  //       .select("advertisement_id")
-  //       .filter("reservations.start_date", "gte", filter.dates?.startDate)
-  //       .filter("reservations.end_date", "lte", filter.dates?.endDate)
-  //   ));
+  filter.dates &&
+    filter.dates.startDate &&
+    filter.dates.endDate &&
+    (query = query
+      .gte("reservations.start_date", filter.dates?.startDate)
+      .lte("reservations.end_date", filter.dates?.endDate));
 
   return query;
 };

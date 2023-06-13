@@ -12,8 +12,6 @@ import ModalAvaliarExperiencia from "../../../components/modals/ModalAvaliarExpe
 import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva";
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { StayComplete, Stays, STAYS_TABLE_NAME } from "../../../models/stay";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs from "../../../components/utils/Breadcrumbs";
 
@@ -22,6 +20,8 @@ import IconStay from "../../../public/images/icon-profile.svg";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 import { format } from "date-fns";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
+import { ReservationComplete, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 /* PAGINA 21 do xd */
 
@@ -34,8 +34,8 @@ const EstadiaBreadcrumbs = [
 }[];
 
 interface EstadiaComponentProps {
-  currentStay: StayComplete;
-  nextStays: StayComplete[];
+  currentStay: ReservationComplete;
+  nextStays: ReservationComplete[];
 }
 
 const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
@@ -62,7 +62,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     {currentStay && (
                       <>
                         <StayCard stay={currentStay} />
-                        <StayInfo stay={currentStay} options={{ isNextStay: false }} />
+                        <StayInfo reservation={currentStay} options={{ isNextStay: false }} />
                       </>
                     )}
                     {!currentStay && <div>Não tem estadia programada</div>}
@@ -77,7 +77,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                           return (
                             <div className="flex flex-col gap-7 lg:flex-row lg:gap-10" key={stay.id}>
                               <StayCard stay={stay} />
-                              <StayInfo stay={stay} options={{ isNextStay: true }} />
+                              <StayInfo reservation={stay} options={{ isNextStay: true }} />
                             </div>
                           );
                         })}
@@ -86,7 +86,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
 
                     <div className="flex justify-center">
                       <Link href={PROCURAR_ADVERT_URL}>
-                        <a className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 py-4  px-9 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
+                        <a className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
                           Encontrar
                           <span className="px-1">
                             <CgHome />
@@ -110,7 +110,7 @@ export default EstadiaComponent;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
@@ -131,8 +131,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const getCurrentUserStay = async () => {
     const { data, error } = await supabase
-      .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
+      .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
       .match({ tenant_id: user.id, status: "OK" })
       .lte("reservation.start_date", formattedDate)
       .gte("reservation.end_date", formattedDate)
@@ -143,8 +143,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const getNextStaysForUser = async () => {
     const { data, error } = await supabase
-      .from<"stays", Stays>(STAYS_TABLE_NAME)
-      .select("*, advertisement:advertisement_id(*), reservation:reservation_id(*), reports(id), reviews(id)")
+      .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
+      .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
       .match({ tenant_id: user.id, status: "OK" })
       .gte("reservation.start_date", date)
       .gte("reservation.end_date", date);

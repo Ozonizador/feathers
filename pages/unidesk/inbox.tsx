@@ -6,11 +6,11 @@ import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import { Avatar } from "flowbite-react";
-import { Reservation, ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
+import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import useReservationService from "../../hooks/reservationService";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
@@ -171,42 +171,34 @@ const CaixaEntrada = () => {
                             currentConversation.reservation?.end_date || ""
                           }`}
                         </div>
-                        {currentConversation.reservation.status === ReservationStatus.REQUESTED && (
+                        {currentConversation.reservation.status === "REQUESTED" && (
                           <div className="flex justify-around gap-5">
-                            <Button onClick={() => updateReservationStatus(ReservationStatus.ACCEPTED)} type="button">
+                            <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
                               Aceitar
                             </Button>
-                            <Button onClick={() => updateReservationStatus(ReservationStatus.REJECTED)} type="button">
+                            <Button onClick={() => updateReservationStatus("REJECTED")} type="button">
                               Rejeitar
                             </Button>
                           </div>
                         )}
-                        {currentConversation.reservation.status === ReservationStatus.CHANGE_REQUESTED && (
+                        {currentConversation.reservation.status === "CHANGE_REQUESTED" && (
                           <div className="flex justify-around">
-                            <Button
-                              onClick={() => updateReservationStatus(ReservationStatus.CHANGE_ACCEPTED)}
-                              type="button"
-                            >
+                            <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">
                               Aceitar
                             </Button>
-                            <Button
-                              onClick={() => updateReservationStatus(ReservationStatus.CHANGE_REQUESTED)}
-                              type="button"
-                            >
+                            <Button onClick={() => updateReservationStatus("CHANGE_REQUESTED")} type="button">
                               Rejeitar
                             </Button>
                           </div>
                         )}
-                        {currentConversation.reservation.status === ReservationStatus.ACCEPTED && (
+                        {currentConversation.reservation.status === "ACCEPTED" && (
                           <div className="text-primary-500">Reserva aceite</div>
                         )}
-                        {currentConversation.reservation.status === ReservationStatus.REJECTED && (
-                          <div>Reserva rejeitada</div>
-                        )}
-                        {currentConversation.reservation.status === ReservationStatus.CHANGE_ACCEPTED && (
+                        {currentConversation.reservation.status === "REJECTED" && <div>Reserva rejeitada</div>}
+                        {currentConversation.reservation.status === "CHANGE_ACCEPTED" && (
                           <div className="text-primary-500">Alteração reserva aceite</div>
                         )}
-                        {currentConversation.reservation.status === ReservationStatus.CHANGE_REJECTED && (
+                        {currentConversation.reservation.status === "CHANGE_REJECTED" && (
                           <div>Alteração reserva rejeitada</div>
                         )}
 
@@ -313,7 +305,7 @@ export default CaixaEntrada;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

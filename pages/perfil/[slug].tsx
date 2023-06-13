@@ -2,7 +2,7 @@ import PicAbout from "../../components/perfil/PicAbout";
 import AccordionPerfil from "../../components/perfil/accordioncard/AccordionPerfil";
 import PerfilInfo from "../../components/perfil/PerfilInfo";
 import { GetServerSidePropsContext } from "next/types";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
 import { Advertisement } from "../../models/advertisement";
 {
@@ -29,7 +29,7 @@ export default Index;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

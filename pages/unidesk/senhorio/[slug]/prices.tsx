@@ -1,4 +1,4 @@
-import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -70,7 +70,7 @@ export default Prices;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

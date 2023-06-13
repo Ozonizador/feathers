@@ -11,7 +11,7 @@ import { Spinner } from "flowbite-react";
 import classNames from "classnames";
 import { Advertisement } from "../../../models/advertisement";
 import { GetServerSidePropsContext } from "next";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
 
@@ -123,7 +123,7 @@ export default UnideskFavoritos;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

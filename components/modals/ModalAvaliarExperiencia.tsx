@@ -31,7 +31,7 @@ const startingReview = {
 const ModalAvaliarExperiencia = () => {
   const { addReview } = useReviewService();
   const [loading, setLoading] = useState<boolean>(false);
-  const { isOpen, stay, step } = useModalAvaliarExperiencia();
+  const { isOpen, reservation, step } = useModalAvaliarExperiencia();
   const setModalProperty = useSetModalAvaliarExperienciaContextProperty();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const [review, setReview] = useState<Omit<Review, "created_at" | "updated_at">>(startingReview);
@@ -46,9 +46,9 @@ const ModalAvaliarExperiencia = () => {
 
   const saveReview = async () => {
     setLoading(true);
-    if (!stay) return;
+    if (!reservation) return;
     try {
-      const { error } = await addReview(review, stay.id);
+      const { error } = await addReview(review, reservation.id);
       if (error) return;
 
       nextStep();
@@ -233,9 +233,9 @@ const ModalAvaliarExperiencia = () => {
                   >
                     <div className="px-8">
                       <div className="" id="model-radius">
-                        {stay && (
+                        {reservation && (
                           <p className="text-semibold mb-11 mt-7 text-3xl">
-                            {TYPE_ADVERTISEMENT[stay.advertisement.type]} - {stay.advertisement.place}
+                            {TYPE_ADVERTISEMENT[reservation.advertisement.type]} - {reservation.advertisement.place}
                           </p>
                         )}
                         <div className=" m-4 ">

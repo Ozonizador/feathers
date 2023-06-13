@@ -4,10 +4,10 @@ import { Report, ReportsResponse, REPORTS_TABLE_NAME, REPORT_TABLE } from "../mo
 const useReportService = () => {
   const supabaseClient = useSupabaseClient();
 
-  const addReportOnAdvert = async (report: Pick<Report, "type" | "description">, stayId: string) => {
+  const addReportOnAdvert = async (report: Pick<Report, "type" | "description">, reservationId: string) => {
     const { data, error } = await supabaseClient
       .from<"reports", ReportsResponse>(REPORTS_TABLE_NAME)
-      .insert({ ...report, stay_id: stayId })
+      .insert({ ...report, reservation_id: reservationId })
       .select()
       .single();
 

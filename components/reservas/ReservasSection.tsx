@@ -4,8 +4,8 @@ import { Tab } from "@headlessui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import useStayService from "../../hooks/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
-import { StayGuest } from "../../models/stay";
 import Spinner from "../utils/Spinner";
+import { ReservationGuest } from "../../models/reservation";
 
 const ReservasSection = () => {
   return (
@@ -36,7 +36,7 @@ const CurrentReservationsSection = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getCurrentStaysByHostId } = useStayService();
-  const [stays, setStays] = useState<StayGuest[]>([]);
+  const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
   const getCurrentStays = useCallback(async () => {
     if (!user) return;
@@ -44,7 +44,7 @@ const CurrentReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getCurrentStaysByHostId(user.id);
     if (!error) {
-      setStays(data as unknown as StayGuest[]);
+      setReservations(data as unknown as ReservationGuest[]);
     }
     setLoading(false);
   }, [user]);
@@ -75,29 +75,29 @@ const CurrentReservationsSection = () => {
               </Table.Cell>
             </Table.Row>
           )}
-          {!loading && (!stays || stays.length == 0) && (
+          {!loading && (!reservations || reservations.length == 0) && (
             <Table.Row>
               <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
             </Table.Row>
           )}
           {!loading &&
-            stays &&
-            stays.map((stay, index) => {
+            reservations &&
+            reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {stay.tenant.name}
+                    {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.start_date || ""}
+                    {reservation?.start_date || ""}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.end_date || ""}
+                    {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[stay.advertisement.type]
-                  } em ${stay.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -111,7 +111,7 @@ const NextReservationsSection = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getNextStaysByHostId } = useStayService();
-  const [reservations, setReservations] = useState<StayGuest[]>([]);
+  const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (!user) return;
@@ -119,7 +119,7 @@ const NextReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getNextStaysByHostId(user.id);
     if (!error) {
-      setReservations(data as unknown as StayGuest[]);
+      setReservations(data as unknown as ReservationGuest[]);
     }
     setLoading(false);
   }, [user]);
@@ -155,22 +155,22 @@ const NextReservationsSection = () => {
           )}
           {!loading &&
             reservations &&
-            reservations.map((stay, index) => {
+            reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {stay.tenant.name}
+                    {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.start_date || ""}
+                    {reservation?.start_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.end_date || ""}
+                    {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[stay.advertisement.type]
-                  } em ${stay.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -184,7 +184,7 @@ const AllReservationsSection = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getAllStaysByHostId } = useStayService();
-  const [reservations, setReservations] = useState<StayGuest[]>([]);
+  const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
   const getNextReservations = useCallback(async () => {
     if (!user) return;
@@ -192,7 +192,7 @@ const AllReservationsSection = () => {
     setLoading(true);
     const { data, error } = await getAllStaysByHostId(user.id);
     if (!error) {
-      setReservations(data as unknown as StayGuest[]);
+      setReservations(data as unknown as ReservationGuest[]);
     }
     setLoading(false);
   }, [user]);
@@ -201,14 +201,14 @@ const AllReservationsSection = () => {
     getNextReservations();
   }, [getNextReservations]);
 
-  const checkIntervalForDate = (stay: StayGuest) => {
+  const checkIntervalForDate = (reservation: ReservationGuest) => {
     const currentDate = new Date();
 
-    if (new Date(stay.reservation?.start_date) < currentDate && new Date(stay.reservation?.end_date) >= currentDate)
+    if (new Date(reservation?.start_date) < currentDate && new Date(reservation?.end_date) >= currentDate)
       return "A decorrer estadia";
-    if (new Date(stay.reservation?.start_date) < currentDate && new Date(stay.reservation?.end_date) < currentDate)
+    if (new Date(reservation?.start_date) < currentDate && new Date(reservation?.end_date) < currentDate)
       return "Finalizado";
-    if (new Date(stay.reservation?.start_date) > currentDate && new Date(stay.reservation?.end_date) > currentDate)
+    if (new Date(reservation?.start_date) > currentDate && new Date(reservation?.end_date) > currentDate)
       return "Próxima";
 
     return "";
@@ -241,24 +241,24 @@ const AllReservationsSection = () => {
           )}
           {!loading &&
             reservations &&
-            reservations.map((stay, index) => {
+            reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {checkIntervalForDate(stay)}
+                    {checkIntervalForDate(reservation)}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
-                    {stay.tenant.name}
+                    {reservation.tenant.name}
                   </Table.Cell>
                   <Table.Cell className="text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.start_date || ""}
+                    {reservation?.start_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">
-                    {stay.reservation?.end_date || ""}
+                    {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[stay.advertisement.type]
-                  } em ${stay.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
+                  } em ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}

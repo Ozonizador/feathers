@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../context/ModalShowProvider";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
-import { Reservation, ReservationStatus, RESERVATION_TABLE } from "../../models/reservation";
+import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
 
 /**
@@ -12,23 +12,26 @@ import Input from "../utils/Input";
  */
 
 const ModalAlterarReserva = () => {
-  const { isOpen, stay } = useModalAlterarReserva();
+  const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
 
   const [newReservation, setNewReservation] = useState<
-    Omit<Reservation, "id" | "created_at" | "updated_at" | "start_date" | "end_date">
+    Omit<
+      Reservation,
+      "id" | "created_at" | "updated_at" | "start_date" | "end_date" | "payment_status" | "previous_stay"
+    >
   >({
-    status: ReservationStatus.CHANGE_REQUESTED,
-    advertisement_id: (stay && stay.advertisement && stay.advertisement_id) || "",
-    tenant_id: (stay && stay.advertisement && stay.tenant_id) || "",
-    number_guests: (stay && stay.reservation && stay.reservation.number_guests) || 1,
+    status: "CHANGE_REQUESTED",
+    advertisement_id: (reservation && reservation.advertisement && reservation.advertisement_id) || "",
+    tenant_id: (reservation && reservation.advertisement && reservation.tenant_id) || "",
+    number_guests: (reservation && reservation.number_guests) || 1,
   });
 
   const [newReservationStartDate, setNewReservationStartDate] = useState<Date>(
-    (stay && stay.reservation && stay.reservation.start_date && new Date(stay.reservation.start_date)) || new Date()
+    (reservation && reservation.start_date && new Date(reservation.start_date)) || new Date()
   );
   const [newReservationEndDate, setNewReservationEndDate] = useState<Date>(
-    (stay && stay.reservation && stay.reservation.end_date && new Date(stay.reservation.end_date)) || new Date()
+    (reservation && reservation.end_date && new Date(reservation.end_date)) || new Date()
   );
 
   function closeModal() {
@@ -104,18 +107,16 @@ const ModalAlterarReserva = () => {
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                 Entrada
                               </label>
-                              {stay && (
-                                <div className="ml-3 inline-block">
-                                  {new String(stay.reservation?.start_date || "")}
-                                </div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation?.start_date || "")}</div>
                               )}
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
                                 Saida
                               </label>
-                              {stay && (
-                                <div className="ml-3 inline-block">{new String(stay.reservation?.end_date || "")}</div>
+                              {reservation && (
+                                <div className="ml-3 inline-block">{new String(reservation?.end_date || "")}</div>
                               )}
                             </div>
                           </div>
@@ -158,7 +159,7 @@ const ModalAlterarReserva = () => {
                                 <Input
                                   label="current_guests"
                                   labelText="Número de hóspedes"
-                                  value={stay && stay.reservation && stay.reservation.number_guests}
+                                  value={reservation && reservation.number_guests}
                                 />
                               </div>
 

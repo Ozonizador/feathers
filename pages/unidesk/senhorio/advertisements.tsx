@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Advertisement } from "../../../models/advertisement";
 import { useCurrentUser } from "../../../context/MainProvider";
 import useAdvertisementService from "../../../hooks/advertisementService";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 
@@ -69,7 +69,7 @@ export default Anuncios;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

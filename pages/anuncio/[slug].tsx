@@ -17,7 +17,7 @@ import {
   ADVERTISEMENT_TABLE_NAME,
 } from "../../models/advertisement";
 import { ModalAnuncioInfoProvider } from "../../context/ModalShowProvider";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 import ModalReviewsAdvert from "../../components/modals/ModalReviewsAdvert";
@@ -74,7 +74,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   }
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

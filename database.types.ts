@@ -54,6 +54,7 @@ export interface Database {
           livingroom_amenities: string[] | null;
           minimum_stay: number;
           month_rent: number;
+          months_notif_in_advance: number;
           photos: AdvertisementPhoto[];
           place: string;
           postal_code: string;
@@ -63,7 +64,6 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          months_notif_in_advance: number;
           title: string;
           trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];
@@ -96,6 +96,7 @@ export interface Database {
           livingroom_amenities?: string[] | null;
           minimum_stay?: number;
           month_rent: number;
+          months_notif_in_advance?: number;
           photos?: AdvertisementPhoto[];
           place: string;
           postal_code: string;
@@ -105,7 +106,6 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          months_notif_in_advance?: number;
           title: string;
           trimester_discount?: number;
           type: Database["public"]["Enums"]["TypeRoom"];
@@ -138,6 +138,7 @@ export interface Database {
           livingroom_amenities?: string[] | null;
           minimum_stay?: number;
           month_rent?: number;
+          months_notif_in_advance?: number;
           photos?: AdvertisementPhoto[];
           place?: string;
           postal_code?: string;
@@ -147,7 +148,6 @@ export interface Database {
           street?: string;
           street_number?: string;
           tenant_number?: number;
-          months_notif_in_advance?: number;
           title?: string;
           trimester_discount?: number;
           type?: Database["public"]["Enums"]["TypeRoom"];
@@ -392,7 +392,7 @@ export interface Database {
           created_at: string;
           description: string;
           id: string;
-          stay_id: string;
+          reservation_id: string;
           type: Database["public"]["Enums"]["ReportsType"];
           updated_at: string;
         };
@@ -400,7 +400,7 @@ export interface Database {
           created_at?: string;
           description: string;
           id?: string;
-          stay_id: string;
+          reservation_id: string;
           type: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
         };
@@ -408,15 +408,15 @@ export interface Database {
           created_at?: string;
           description?: string;
           id?: string;
-          stay_id?: string;
+          reservation_id?: string;
           type?: Database["public"]["Enums"]["ReportsType"];
           updated_at?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "reports_stay_id_fkey";
-            columns: ["stay_id"];
-            referencedRelation: "stays";
+            foreignKeyName: "reports_reservation_id_fkey";
+            columns: ["reservation_id"];
+            referencedRelation: "reservations";
             referencedColumns: ["id"];
           }
         ];
@@ -428,6 +428,8 @@ export interface Database {
           end_date: string;
           id: string;
           number_guests: number;
+          payment_status: Database["public"]["Enums"]["payment_status_type"] | null;
+          previous_stay: string | null;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -439,6 +441,8 @@ export interface Database {
           end_date: string;
           id?: string;
           number_guests?: number;
+          payment_status?: Database["public"]["Enums"]["payment_status_type"] | null;
+          previous_stay?: string | null;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -450,6 +454,8 @@ export interface Database {
           end_date?: string;
           id?: string;
           number_guests?: number;
+          payment_status?: Database["public"]["Enums"]["payment_status_type"] | null;
+          previous_stay?: string | null;
           start_date?: string;
           status?: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id?: string;
@@ -460,6 +466,18 @@ export interface Database {
             foreignKeyName: "reservations_advertisement_id_fkey";
             columns: ["advertisement_id"];
             referencedRelation: "advertisements";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reservations_advertisement_id_fkey";
+            columns: ["advertisement_id"];
+            referencedRelation: "advertisements_agg_amenities";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reservations_previous_stay_fkey";
+            columns: ["previous_stay"];
+            referencedRelation: "reservations";
             referencedColumns: ["id"];
           },
           {
@@ -480,7 +498,7 @@ export interface Database {
           overall_rating: number;
           private_review: string;
           public_review: string;
-          stay_id: string;
+          reservation_id: string;
           updated_at: string;
           value_quality_rating: number;
         };
@@ -493,7 +511,7 @@ export interface Database {
           overall_rating: number;
           private_review: string;
           public_review: string;
-          stay_id: string;
+          reservation_id: string;
           updated_at?: string;
           value_quality_rating: number;
         };
@@ -506,15 +524,15 @@ export interface Database {
           overall_rating?: number;
           private_review?: string;
           public_review?: string;
-          stay_id?: string;
+          reservation_id?: string;
           updated_at?: string;
           value_quality_rating?: number;
         };
         Relationships: [
           {
-            foreignKeyName: "reviews_stay_id_fkey";
-            columns: ["stay_id"];
-            referencedRelation: "stays";
+            foreignKeyName: "reviews_reservation_id_fkey";
+            columns: ["reservation_id"];
+            referencedRelation: "reservations";
             referencedColumns: ["id"];
           }
         ];
@@ -542,55 +560,6 @@ export interface Database {
           srtext?: string | null;
         };
         Relationships: [];
-      };
-      stays: {
-        Row: {
-          advertisement_id: string;
-          created_at: string;
-          id: string;
-          reservation_id: string;
-          status: Database["public"]["Enums"]["staysstatus"] | null;
-          tenant_id: string;
-          updated_at: string;
-        };
-        Insert: {
-          advertisement_id: string;
-          created_at?: string;
-          id?: string;
-          reservation_id: string;
-          status?: Database["public"]["Enums"]["staysstatus"] | null;
-          tenant_id: string;
-          updated_at?: string;
-        };
-        Update: {
-          advertisement_id?: string;
-          created_at?: string;
-          id?: string;
-          reservation_id?: string;
-          status?: Database["public"]["Enums"]["staysstatus"] | null;
-          tenant_id?: string;
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "stays_advertisement_id_fkey";
-            columns: ["advertisement_id"];
-            referencedRelation: "advertisements";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "stays_reservation_id_fkey";
-            columns: ["reservation_id"];
-            referencedRelation: "reservations";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "stays_tenant_id_fkey";
-            columns: ["tenant_id"];
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
-          }
-        ];
       };
     };
     Views: {
@@ -701,13 +670,13 @@ export interface Database {
         };
         Relationships: [
           {
-            foreignKeyName: "stays_advertisement_id_fkey";
+            foreignKeyName: "reservations_advertisement_id_fkey";
             columns: ["advertisement_id"];
             referencedRelation: "advertisements";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "stays_advertisement_id_fkey";
+            foreignKeyName: "reservations_advertisement_id_fkey";
             columns: ["advertisement_id"];
             referencedRelation: "advertisements_agg_amenities";
             referencedColumns: ["id"];
@@ -1089,6 +1058,7 @@ export interface Database {
           livingroom_amenities: string[] | null;
           minimum_stay: number;
           month_rent: number;
+          months_notif_in_advance: number;
           photos: AdvertisementPhoto[];
           place: string;
           postal_code: string;
@@ -1098,7 +1068,6 @@ export interface Database {
           street: string;
           street_number: string;
           tenant_number: number;
-          months_notif_in_advance: number;
           title: string;
           trimester_discount: number;
           type: Database["public"]["Enums"]["TypeRoom"];
@@ -1628,6 +1597,8 @@ export interface Database {
           end_date: string;
           id: string;
           number_guests: number;
+          payment_status: Database["public"]["Enums"]["payment_status_type"] | null;
+          previous_stay: string | null;
           start_date: string;
           status: Database["public"]["Enums"]["ReservationStatus"];
           tenant_id: string;
@@ -3742,6 +3713,7 @@ export interface Database {
         | "LANDLORD_COMPLETE_PROFILE"
         | "LANDLORD_COMPLETE_ADVERT"
         | "BLOG";
+      payment_status_type: "NOT_GENERATED" | "PENDING" | "PAID" | "REJECTED";
       profiletype: "LANDLORD" | "TENANT";
       ReportsType: "IMPRECISE" | "NOT_REALITY" | "SCAM" | "OFFENSIVE" | "OTHER";
       ReservationStatus:
@@ -3886,6 +3858,9 @@ export interface Database {
           }
         ];
       };
+    };
+    Views: {
+      [_ in never]: never;
     };
     Functions: {
       can_insert_object: {
