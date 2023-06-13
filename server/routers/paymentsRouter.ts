@@ -58,6 +58,22 @@ export const paymentsRouter = router({
         .then((response) => console.log(response))
         .catch((err) => console.error(err));
     }),
+  checkIfPaymentWasMade: authorizedProcedure
+    .input(z.object({ reference: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const { userId } = ctx;
+      const { reference } = input;
+
+      const body = JSON.stringify({
+        chave: process.env.EUPAGO_API_KEY,
+        referencia: reference,
+      });
+
+      fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body })
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    }),
 });
 
 // export type definition of API
