@@ -303,7 +303,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data, error } = await supabase
     .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-    .select("*, stays(*, reservations(*))")
+    .select("*, reservations(*)")
     .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, user.id);
 
   return {

@@ -7,7 +7,7 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { MainProvider } from "../context/MainProvider";
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { ToastContainer } from "react-toastify";
 import { MenuSenhorioProvider } from "../context/MenuSenhorioAnuncioProvider";
 import { useState } from "react";
@@ -33,7 +33,7 @@ const theme: CustomFlowbiteTheme = {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [cookies] = useCookies(["test"]);
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient<Database>());
+  const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
   const router = useRouter();
 
   return (

@@ -29,6 +29,7 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
+  debugger;
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>
@@ -91,7 +92,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: advertisement, error } = await supabase
     .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-    .select(`*, host:host_id(*), stays(tenant:tenant_id(name, surname, avatar_url), reviews(*))`)
+    .select(`*, host:host_id(*), reservations(tenant:tenant_id(name, surname, avatar_url), reviews(*))`)
     .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug)
     .limit(1)
     .single();

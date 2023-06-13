@@ -1,7 +1,5 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { supabaseAdmin } from "../../lib/supabaseAdminClient";
-import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
 import { createRandomUniqWord } from "../../utils/utils";
 import { getUserPhone } from "../helpers/paymentsHelper";
 import { authorizedProcedure } from "../procedure";
@@ -35,6 +33,7 @@ export const paymentsRouter = router({
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
+        debugger;
         // work here
 
         // {
