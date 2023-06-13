@@ -33,7 +33,6 @@ export const paymentsRouter = router({
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-        debugger;
         // work here
 
         // {

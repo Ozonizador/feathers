@@ -41,7 +41,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
       return;
     }
 
-    setModalReport({ ...modalReportInfo, isOpen: true, ...reservation });
+    setModalReport({ ...modalReportInfo, isOpen: true, reservation: { ...reservation } });
   };
 
   const openModalAvaliarExperiencia = () => {
@@ -51,12 +51,11 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
       return;
     }
 
-    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, ...reservation });
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation: { ...reservation } });
   };
 
   const openModalAlterarReserva = () => {
-    debugger;
-    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, ...reservation });
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation: { ...reservation } });
   };
 
   const reportWasAlreadySent = (): boolean => {
