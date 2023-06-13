@@ -1,5 +1,8 @@
 import { Database } from "../database.types";
 import { Advertisement } from "./advertisement";
+import { Profile } from "./profile";
+import { Report } from "./report";
+import { Review } from "./review";
 
 export const RESERVATION_TABLE_NAME = "reservations" as const;
 export const MODIFY_RESERVATION_FUNCTION = "modify_reservation" as const;
@@ -37,3 +40,26 @@ export enum ReservationStatusLabel {
   CHANGE_REQUESTED = "Alteração de Reserva",
   CHANGE_REJECTED = "Alteração de Reserva Rejeitada",
 }
+
+export type ReservationWithReportsReviews = Reservation & {
+  reports: Report[];
+  reviews: Review[];
+};
+
+export type ReservationWithPrivateReview = Reservation & {
+  reviews: Omit<Review, "public_review" | "id" | "updated_at">;
+  tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
+};
+
+export type ReservationWithPublicReview = Reservation & {
+  reviews: Omit<Review, "private_review" | "stay_id" | "updated_at">[];
+  tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
+};
+
+export type ReservationAndAdvert = Reservation & {
+  advertisement: Advertisement;
+};
+
+export type ReservationGuest = ReservationAndAdvert & {
+  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
+};

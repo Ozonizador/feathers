@@ -25,14 +25,6 @@ INSERT INTO "public"."reservations" ("id", "start_date", "end_date", "advertisem
 ('e899eaeb-0618-4db9-8fe9-3717de5649ad', '2023-01-01', '2025-12-31', 'ab723c81-b13b-47b6-867c-091377e9b418', 'ACCEPTED', '3a21df80-34be-435a-8c61-06da3c9e1caa');
 
 
--- stays
-INSERT INTO "public"."stays" ("id", "advertisement_id", "tenant_id", "reservation_id", "status") VALUES
-('d977b25a-855d-4707-bb12-ca9972abae8e', '0a54f7fe-2fda-4d30-9767-954796daa5bd', 'ab723c81-b13b-47b6-867c-091377e9b418', '629e0125-dd17-46a5-ad3b-11de8f4e1bd6','OK'),
-('0dc9f1a2-566d-4211-92b8-0acee274f595', '0a54f7fe-2fda-4d30-9767-954796daa5bd', 'c4c7874c-a388-46c1-94db-5cb11839ff7b', '53d879c4-23b4-48a7-a89c-f5d25b675db3', 'OK'),
-('e899eaeb-0618-4db9-8fe9-3717de5649ad', 'ab723c81-b13b-47b6-867c-091377e9b418', '3a21df80-34be-435a-8c61-06da3c9e1caa', 'e899eaeb-0618-4db9-8fe9-3717de5649ad', 'OK');
-
-
-
 -- reviews
-INSERT INTO "public"."reviews" ("stay_id", "overall_rating", "location_rating", "value_quality_rating", "landlord_rating", "comodities_rating", "public_review", "private_review") VALUES
-('d977b25a-855d-4707-bb12-ca9972abae8e', 1, 2, 3, 4,5, 'Tudo ok', 'Tudo ok. Obrigado');
+INSERT INTO "public"."reviews" ("reservation_id", "overall_rating", "location_rating", "value_quality_rating", "landlord_rating", "comodities_rating", "public_review", "private_review") VALUES
+('bce866e4-109d-4ca3-852e-1b651190349e', 1, 2, 3, 4,5, 'Tudo ok', 'Tudo ok. Obrigado');

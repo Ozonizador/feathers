@@ -50,9 +50,7 @@ export const Navbar = () => {
 
   /* Changing the toggle TENANT estudante */
   const toggleSenhorioEstudante = () => {
-    if (!user) {
-      return;
-    }
+    if (!user) return;
 
     if (toggleUserType === "LANDLORD") {
       toggleUserTypeContext("TENANT");

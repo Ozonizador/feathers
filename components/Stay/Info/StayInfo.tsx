@@ -13,15 +13,15 @@ import {
 import Link from "next/link";
 import { toast } from "react-toastify";
 import classNames from "classnames";
-import { StayComplete } from "../../../models/stay";
 import { INBOX_URL } from "../../../models/paths";
+import { ReservationWithReportsReviews } from "../../../models/reservation";
 
 interface StayInfoProps {
-  stay: StayComplete;
+  reservation: ReservationWithReportsReviews;
   options: { isNextStay: boolean };
 }
 
-const StayInfo = ({ stay, options }: StayInfoProps) => {
+const StayInfo = ({ reservation, options }: StayInfoProps) => {
   const { isNextStay } = options;
 
   // MODAL REPORT
@@ -41,7 +41,7 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
       return;
     }
 
-    setModalReport({ ...modalReportInfo, isOpen: true, stay });
+    setModalReport({ ...modalReportInfo, isOpen: true, reservation });
   };
 
   const openModalAvaliarExperiencia = () => {
@@ -51,19 +51,19 @@ const StayInfo = ({ stay, options }: StayInfoProps) => {
       return;
     }
 
-    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, stay });
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation });
   };
 
   const openModalAlterarReserva = () => {
-    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, stay });
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation });
   };
 
   const reportWasAlreadySent = (): boolean => {
-    return stay.reports && stay.reports.length > 0 ? true : false;
+    return reservation.reports && reservation.reports.length > 0 ? true : false;
   };
 
   const evaluationWasDone = (): boolean => {
-    return stay.reviews && stay.reviews.length > 0 ? true : false;
+    return reservation.reviews && reservation.reviews.length > 0 ? true : false;
   };
 
   return (

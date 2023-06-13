@@ -194,7 +194,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
                     Ajuda
                   </div>
-                  <div onClick={() => supabaseClient.auth.signOut()} className="text-gray-500">
+                  <div
+                    onClick={() => {
+                      supabaseClient.auth.signOut();
+                      location.reload();
+                    }}
+                    className="text-gray-500"
+                  >
                     Sair
                   </div>
                 </div>
@@ -213,7 +219,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
                     Ajuda
                   </div>
-                  <div onClick={() => supabaseClient.auth.signOut()} className="text-gray-500">
+                  <div
+                    onClick={() => {
+                      supabaseClient.auth.signOut();
+                      location.reload();
+                    }}
+                    className="text-gray-500"
+                  >
                     Sair
                   </div>
                 </div>

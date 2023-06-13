@@ -2,10 +2,10 @@ import React from "react";
 import { Avatar } from "flowbite-react";
 import Link from "next/link";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { StayGuest } from "../../../models/stay";
+import { ReservationGuest } from "../../../models/reservation";
 
 interface HospedeCardProps {
-  stay: StayGuest;
+  stay: ReservationGuest;
 }
 
 const HospedeCard = ({ stay }: HospedeCardProps) => {
@@ -20,7 +20,7 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
 
       <div>
         <h1 className="text-xl font-bold">A hospedar em</h1>
-        <h2 className="mt-2 mb-6 text-base text-secondary-500">
+        <h2 className="mb-6 mt-2 text-base text-secondary-500">
           {TYPE_ADVERTISEMENT[advertisement.type]} em {advertisement.place}
         </h2>
         <Link href={`/anuncio/${advertisement.slug}`}>
