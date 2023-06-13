@@ -47,7 +47,7 @@ export type ReservationWithPrivateReview = Reservation & {
 };
 
 export type ReservationWithPublicReview = Reservation & {
-  reviews: Omit<Review, "private_review" | "stay_id" | "updated_at">[];
+  reviews: Omit<Review, "private_review" | "reservation_id" | "updated_at">[];
   tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
 };
 

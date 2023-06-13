@@ -1,5 +1,4 @@
 import { ADVERTISEMENT_PROPERTIES, AdvertisementStatus } from "../../models/advertisement";
-import { RESERVATION_TABLE } from "../../models/reservation";
 import { AdvertisementsFilterOptions, AdvertisementOrder } from "../types/advertisement";
 
 /**
@@ -23,11 +22,11 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   filter.price?.endRange && (query = query.lte(ADVERTISEMENT_PROPERTIES.MONTH_RENT, filter.price.endRange));
 
   // dates
-  filter.dates && filter.dates.startDate && (query = query.gte("reservations.start_date", filter.dates?.startDate));
-  filter.dates && filter.dates.endDate && (query = query.lte("reservations.end_date", filter.dates?.endDate));
-  filter.dates &&
-    (filter.dates.startDate || filter.dates.endDate) &&
-    (query = query.not(RESERVATION_TABLE.STATUS, "in", '("ACCEPTED", "CHANGE_ACCEPTED")'));
+  filter.dates && filter.dates.startDate && (query = query.gte("reservations.start_date", filter.dates.startDate));
+  filter.dates && filter.dates.endDate && (query = query.lte("reservations.end_date", filter.dates.endDate));
+  // filter.dates &&
+  //   (filter.dates.startDate || filter.dates.endDate) &&
+  //   (query = query.not("reservations.status", "eq", "ACCEPTED"));
 
   return query;
 };

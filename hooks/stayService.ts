@@ -1,5 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
+import { format } from "date-fns";
 import { Reservation, Reservations, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../models/reservation";
 
 const useStayService = () => {
@@ -24,7 +25,7 @@ const useStayService = () => {
   /* BY HOST ID */
 
   const getCurrentStaysByHostId = async (hostId: string) => {
-    const date = new Date().toISOString();
+    const date = format(new Date(), "yyyy-MM-dd");
 
     const { data, error } = await supabaseClient
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
@@ -37,7 +38,7 @@ const useStayService = () => {
   };
 
   const getNextStaysByHostId = async (hostId: string) => {
-    const date = new Date().toISOString();
+    const date = format(new Date(), "yyyy-MM-dd");
 
     const { data, error } = await supabaseClient
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)

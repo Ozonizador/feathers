@@ -65,11 +65,11 @@ export const advertisementsRouter = router({
           },
           { count: "exact" }
         )
-        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!left(id, start_date, end_date)");
+        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!inner(*)");
     } else {
       query = supabaseAdmin
         .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
-        .select("*, reservations(id, start_date, end_date)")
+        .select("*, reservations!left(*)")
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
       query = addFilterToSearchAdvertisement(query, filter);
@@ -80,7 +80,7 @@ export const advertisementsRouter = router({
     query = query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
 
     // select the information I want
-    const { data, error, count } = await query.select("*, averages:reviewsPerAdvertisement!left(*)");
+    const { data, error, count } = await query; //.select("*, averages:reviewsPerAdvertisement!left(*)");
 
     return {
       data: (data as unknown as AdvertisementWithReviewAverage[]) || null,
@@ -107,12 +107,15 @@ export const advertisementsRouter = router({
           },
           { count: "exact" }
         )
-        .select("*, averages:reviewsPerAdvertisement!left(*), reservations(id)");
+        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!inner(id)");
       query = addFilterToSearchAdvertisement(query, filter);
       query = addOrderToSearchAdvertisement(query, order);
 
       let initRange = page == 1 ? 0 : ((page || 1) - 1) * PAGE_NUMBER_COUNT;
-      const { data, error, count } = await query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
+      query = query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
+
+      // select the information I want
+      const { data, error, count } = await query.select("*, averages:reviewsPerAdvertisement!left(*)");
 
       return { data, error, count };
     }),

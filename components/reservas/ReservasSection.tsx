@@ -169,8 +169,8 @@ const NextReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                    TYPE_ADVERTISEMENT[reservation.advertisement?.type] || ""
+                  } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -257,8 +257,8 @@ const AllReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                    reservation.advertisement ? TYPE_ADVERTISEMENT[reservation.advertisement.type] : ""
+                  } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );
             })}

@@ -16,5 +16,5 @@ export enum ReportsType {
 export const REPORT_TABLE = {
   ID: "id",
   ADVERT_ID: "advertisement_id",
-  STAY_ID: "stay_id",
+  RESERVATION_ID: "reservation_id",
 } as const;
