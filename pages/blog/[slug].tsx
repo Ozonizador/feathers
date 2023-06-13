@@ -1,9 +1,9 @@
-import { GetStaticPropsContext, GetServerSidePropsResult, GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext } from "next";
 import React from "react";
 import UltimosArtigos from "../../components/dicas consumo/UltimosArtigos/UltimosArtigos";
 import BlogPostSection from "../../components/dicas consumo/BlogPostSection/BlogPostSection";
 import { Blog, BLOG_PROPERTIES, BLOG_TABLE_NAME } from "../../models/blog";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 type PageParams = {
   slug: string;
@@ -34,7 +34,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

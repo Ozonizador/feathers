@@ -1,4 +1,4 @@
-import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import AdvertisementInfoComponent from "../../../../components/anuncio/AdvertisementInfoComponent";
 import GeneralAdvertComponent from "../../../../components/anuncio/GeneralAdvertComponent";
 import HostFlexTypeComponent from "../../../../components/anuncio/HostFlexTypeComponent";
@@ -165,7 +165,7 @@ export default Details;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

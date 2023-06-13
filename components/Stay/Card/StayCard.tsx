@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
-import { ReservationAndAdvert } from "../../../models/reservation";
+import { ReservationWithAdvertisement } from "../../../models/reservation";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
 interface StayCardProps {
-  stay: ReservationAndAdvert;
+  stay: ReservationWithAdvertisement;
 }
 
 const StayCard = ({ stay }: StayCardProps) => {

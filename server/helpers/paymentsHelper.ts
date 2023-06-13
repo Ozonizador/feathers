@@ -21,7 +21,7 @@ export const updateAdvertisementPayment = async (reservationId?: string) => {
 
   const { data, error } = await supabaseAdmin
     .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
-    .update("payment_status", "GENERATED")
+    .update({ payment_status: "PENDING" })
     .eq(RESERVATION_TABLE.ID, reservationId);
 
   if (error || !data) throw new TRPCError({ message: "Error updating the reservation", code: "BAD_REQUEST" });

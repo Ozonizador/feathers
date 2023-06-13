@@ -1,6 +1,6 @@
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import ReviewInfo from "../../../components/unidesk/Senhorio/Reviews/ReviewInfo";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
@@ -53,7 +53,7 @@ export default ReviewsPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

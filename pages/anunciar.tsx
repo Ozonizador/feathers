@@ -13,7 +13,7 @@ import FormTermos from "../components/anunciar/FormTermos";
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
 import { AdvertisementController } from "../context/AdvertisementController";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 
 export default function Anunciar() {
@@ -55,7 +55,7 @@ const ZonaFormulario = () => {
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

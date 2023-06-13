@@ -12,14 +12,8 @@ export type Reservation = Reservations["Row"];
 
 export type ReservationWithAdvertisement = Reservation & { advertisement: Advertisement };
 
-export enum ReservationStatus {
-  REQUESTED = "REQUESTED",
-  ACCEPTED = "ACCEPTED",
-  REJECTED = "REJECTED",
-  CHANGE_REQUESTED = "CHANGE_REQUESTED",
-  CHANGE_ACCEPTED = "CHANGE_ACCEPTED",
-  CHANGE_REJECTED = "CHANGE_REJECTED",
-}
+export type ReservationPaymentStatys = Database["public"]["Enums"]["payment_status_type"];
+export type ReservationStatus = Database["public"]["Enums"]["ReservationStatus"];
 
 export const RESERVATION_TABLE = {
   ID: "id",
@@ -30,6 +24,7 @@ export const RESERVATION_TABLE = {
   START_DATE: "start_date",
   END_DATE: "end_date",
   NUMBER_GUESTS: "number_guests",
+  PAYMENT_STATUS: "payment_status"
 } as const;
 
 export enum ReservationStatusLabel {
@@ -56,10 +51,11 @@ export type ReservationWithPublicReview = Reservation & {
   tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
 };
 
-export type ReservationAndAdvert = Reservation & {
-  advertisement: Advertisement;
+export type ReservationGuest = ReservationWithAdvertisement & {
+  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
 };
 
-export type ReservationGuest = ReservationAndAdvert & {
-  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
+export type ReservationComplete = ReservationWithAdvertisement & {
+  reviews: Review[];
+  reports: Report[];
 };

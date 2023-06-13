@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { ReservationAndAdvert } from "../models/reservation";
+import { ReservationWithAdvertisement } from "../models/reservation";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -56,7 +56,7 @@ interface ModalAvaliarExperienciaProps {
 }
 
 interface ModaAvaliarExperienceContextElements {
-  reservation?: ReservationAndAdvert;
+  reservation?: ReservationWithAdvertisement;
   isOpen: boolean;
   step: number;
 }
@@ -123,7 +123,7 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  reservation?: ReservationAndAdvert;
+  reservation?: ReservationWithAdvertisement;
   isOpen: boolean;
   step: number;
 }
@@ -186,7 +186,7 @@ interface ModalAlterarReversaProps {
 }
 
 interface ModalAlterReservaElements {
-  reservation?: ReservationAndAdvert;
+  reservation?: ReservationWithAdvertisement;
   isOpen: boolean;
   step: number;
 }

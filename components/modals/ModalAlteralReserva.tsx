@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { VscArrowRight } from "react-icons/vsc";
 import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../context/ModalShowProvider";
 import FeatherDatePicker from "../utils/FeatherDatepicker";
-import { Reservation, ReservationStatus, RESERVATION_TABLE } from "../../models/reservation";
+import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
 
 /**
@@ -21,7 +21,7 @@ const ModalAlterarReserva = () => {
       "id" | "created_at" | "updated_at" | "start_date" | "end_date" | "payment_status" | "previous_stay"
     >
   >({
-    status: ReservationStatus.CHANGE_REQUESTED,
+    status: "CHANGE_REQUESTED",
     advertisement_id: (reservation && reservation.advertisement && reservation.advertisement_id) || "",
     tenant_id: (reservation && reservation.advertisement && reservation.tenant_id) || "",
     number_guests: (reservation && reservation.number_guests) || 1,

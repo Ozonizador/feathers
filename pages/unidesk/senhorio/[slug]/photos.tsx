@@ -1,4 +1,4 @@
-import { createServerSupabaseClient, Session, User } from "@supabase/auth-helpers-nextjs";
+import { createPagesServerClient, Session, User } from "@supabase/auth-helpers-nextjs";
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import MenuSenhorio from "../../../../components/unidesk/Menus/MenuSenhorio";
@@ -245,7 +245,7 @@ export default Photos;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
