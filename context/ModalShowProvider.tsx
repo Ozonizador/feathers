@@ -173,7 +173,8 @@ export function useSetOpenModalReport() {
 export function useSetModalReportAdvertisement() {
   const setModalReport = useContext(SetModalReportarAnuncioContext);
   return (report: ModalReportContextElements) => {
-    setModalReport(report);
+    debugger;
+    setModalReport((oldStatus) => report);
   };
 }
 

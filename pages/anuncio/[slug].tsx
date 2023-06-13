@@ -29,7 +29,6 @@ interface AnuncioProps {
 }
 
 const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
-  debugger;
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>

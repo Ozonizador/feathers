@@ -12,7 +12,7 @@ export type Reservation = Reservations["Row"];
 
 export type ReservationWithAdvertisement = Reservation & { advertisement: Advertisement };
 
-export type ReservationPaymentStatys = Database["public"]["Enums"]["payment_status_type"];
+export type ReservationPaymentStays = Database["public"]["Enums"]["payment_status_type"];
 export type ReservationStatus = Database["public"]["Enums"]["ReservationStatus"];
 
 export const RESERVATION_TABLE = {
@@ -24,7 +24,7 @@ export const RESERVATION_TABLE = {
   START_DATE: "start_date",
   END_DATE: "end_date",
   NUMBER_GUESTS: "number_guests",
-  PAYMENT_STATUS: "payment_status"
+  PAYMENT_STATUS: "payment_status",
 } as const;
 
 export enum ReservationStatusLabel {

@@ -133,9 +133,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const { data, error } = await supabase
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
-      .match({ tenant_id: user.id, status: "OK" })
-      .lte("reservation.start_date", formattedDate)
-      .gte("reservation.end_date", formattedDate)
+      .match({ tenant_id: user.id, status: "ACCEPTED" })
+      .lte("start_date", formattedDate)
+      .gte("end_date", formattedDate)
       .single();
 
     return { data, error };
@@ -145,9 +145,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const { data, error } = await supabase
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
-      .match({ tenant_id: user.id, status: "OK" })
-      .gte("reservation.start_date", date)
-      .gte("reservation.end_date", date);
+      .match({ tenant_id: user.id, status: "ACCEPTED" })
+      .gte("start_date", date)
+      .gte("end_date", date);
 
     return { data, error };
   };
