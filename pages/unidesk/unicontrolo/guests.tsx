@@ -6,7 +6,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 
 // Icon
 import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
-import { Reservation, ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
+import { ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 
 const paths = [{ url: "", label: "Hóspedes" }] as BreadcrumbPath[];
 
