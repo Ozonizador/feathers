@@ -16,12 +16,13 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../models/advertisement";
-import { ModalAnuncioInfoProvider } from "../../context/ModalShowProvider";
+import { ModalAnuncioInfoProvider, ModalGerarReferenciaProvider } from "../../context/ModalShowProvider";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import AdvertConditions from "../../components/destaques/RoomInformation/AdvertConditions/AdvertConditions";
 import ModalReviewsAdvert from "../../components/modals/ModalReviewsAdvert";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../models/conversation";
+import ModalGerarReferencia from "../../components/modals/ModalGerarReferencia";
 
 interface AnuncioProps {
   advertisement: AdvertisementComplete;
@@ -32,32 +33,35 @@ const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
   return (
     <ShowingSingleAdvertisementProvider advertisement={advertisement}>
       <ModalAnuncioInfoProvider>
-        <>
-          <ModalReviewsAdvert />
-          <ModalDetalhesPagamento />
-          <div className="container mx-auto px-2 md:px-20">
-            <SingleRoomGrid />
-            <div className="flex flex-col lg:flex-row">
-              <div className="w-full px-5 lg:w-4/6">
-                <RoomInformation />
-                <div className="mt-10 flex flex-col gap-4 lg:flex-row">
-                  <DescricaoCondicoes />
-                  <AdvertConditions />
+        <ModalGerarReferenciaProvider>
+          <>
+            <ModalGerarReferencia />
+            <ModalReviewsAdvert />
+            <ModalDetalhesPagamento />
+            <div className="container mx-auto px-2 md:px-20">
+              <SingleRoomGrid />
+              <div className="flex flex-col lg:flex-row">
+                <div className="w-full px-5 lg:w-4/6">
+                  <RoomInformation />
+                  <div className="mt-10 flex flex-col gap-4 lg:flex-row">
+                    <DescricaoCondicoes />
+                    <AdvertConditions />
+                  </div>
+
+                  <RoomSlider />
+                  <RoomRating />
+                  <RoomMap />
+                  <RoomSenhorio responseRate={responseRate} />
+                  <RoomSemelhantes />
                 </div>
 
-                <RoomSlider />
-                <RoomRating />
-                <RoomMap />
-                <RoomSenhorio responseRate={responseRate} />
-                <RoomSemelhantes />
-              </div>
-
-              <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
-                <RoomPagamento />
+                <div className="mb-20 w-full lg:mb-0 lg:w-2/6 lg:px-5">
+                  <RoomPagamento />
+                </div>
               </div>
             </div>
-          </div>
-        </>
+          </>
+        </ModalGerarReferenciaProvider>
       </ModalAnuncioInfoProvider>
     </ShowingSingleAdvertisementProvider>
   );
