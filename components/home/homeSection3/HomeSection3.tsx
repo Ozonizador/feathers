@@ -33,7 +33,6 @@ export default function HomeSection3() {
     },
     {
       enabled: !!currentMapCoordinates,
-      //getNextPageParam: (lastPage) => lastPage.nextCursor,
       retry: false,
       cacheTime: 1000 * 60 * 60 * 24, // 24 hours
     }

@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { ReservationWithAdvertisement } from "../models/reservation";
+import { ReservationComplete } from "../models/reservation";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -56,7 +56,7 @@ interface ModalAvaliarExperienciaProps {
 }
 
 interface ModaAvaliarExperienceContextElements {
-  reservation?: ReservationWithAdvertisement;
+  reservation?: ReservationComplete;
   isOpen: boolean;
   step: number;
 }
@@ -123,7 +123,7 @@ interface ModalReportAnuncioProps {
 }
 
 interface ModalReportContextElements {
-  reservation?: ReservationWithAdvertisement;
+  reservation?: ReservationComplete;
   isOpen: boolean;
   step: number;
 }
@@ -173,7 +173,7 @@ export function useSetOpenModalReport() {
 export function useSetModalReportAdvertisement() {
   const setModalReport = useContext(SetModalReportarAnuncioContext);
   return (report: ModalReportContextElements) => {
-    setModalReport(report);
+    setModalReport((oldStatus) => report);
   };
 }
 
@@ -186,7 +186,7 @@ interface ModalAlterarReversaProps {
 }
 
 interface ModalAlterReservaElements {
-  reservation?: ReservationWithAdvertisement;
+  reservation?: ReservationComplete;
   isOpen: boolean;
   step: number;
 }

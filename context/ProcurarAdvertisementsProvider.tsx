@@ -71,11 +71,11 @@ export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertiseme
   }, [currentFilter, advertisementsInfo.page]);
 
   useEffect(() => {
-    if (!data) return;
+    if (error || !data) return;
 
     setAdvertisementsInfo((oldState) => ({
       ...oldState,
-      advertisements: (!error && data && (data.data as unknown as AdvertisementWithReviewAverage[])) || [],
+      advertisements: (data && (data.data as unknown as AdvertisementWithReviewAverage[])) || [],
       count: data.count || 0,
       loading: false,
     }));

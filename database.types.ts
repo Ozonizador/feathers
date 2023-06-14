@@ -421,6 +421,52 @@ export interface Database {
           }
         ];
       };
+      reservation_payments: {
+        Row: {
+          created_at: string;
+          entidade: string | null;
+          estado: Database["public"]["Enums"]["paymentstatus"];
+          id: string;
+          metadata: Json;
+          payment_type: Database["public"]["Enums"]["paymenttype"];
+          referencia: string;
+          reservation_id: string;
+          updated_at: string;
+          valor: number;
+        };
+        Insert: {
+          created_at?: string;
+          entidade?: string | null;
+          estado: Database["public"]["Enums"]["paymentstatus"];
+          id?: string;
+          metadata?: Json;
+          payment_type: Database["public"]["Enums"]["paymenttype"];
+          referencia: string;
+          reservation_id: string;
+          updated_at?: string;
+          valor: number;
+        };
+        Update: {
+          created_at?: string;
+          entidade?: string | null;
+          estado?: Database["public"]["Enums"]["paymentstatus"];
+          id?: string;
+          metadata?: Json;
+          payment_type?: Database["public"]["Enums"]["paymenttype"];
+          referencia?: string;
+          reservation_id?: string;
+          updated_at?: string;
+          valor?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "reservation_payments_reservation_id_fkey";
+            columns: ["reservation_id"];
+            referencedRelation: "reservations";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       reservations: {
         Row: {
           advertisement_id: string;
@@ -3714,6 +3760,8 @@ export interface Database {
         | "LANDLORD_COMPLETE_ADVERT"
         | "BLOG";
       payment_status_type: "NOT_GENERATED" | "PENDING" | "PAID" | "REJECTED";
+      paymentstatus: "GENERATED" | "PAID" | "REJECTED" | "EXPIRED";
+      paymenttype: "MULTIBANCO" | "MBWAY";
       profiletype: "LANDLORD" | "TENANT";
       ReportsType: "IMPRECISE" | "NOT_REALITY" | "SCAM" | "OFFENSIVE" | "OTHER";
       ReservationStatus:

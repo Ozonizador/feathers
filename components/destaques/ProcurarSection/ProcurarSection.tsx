@@ -20,6 +20,7 @@ import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import PopoverSelect from "../../utils/PopoverSelect";
+import { format } from "date-fns";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -47,8 +48,8 @@ export default function ProcurarSection() {
     setFilters({
       coordinates: (coordinates && coordinates.coordinates) || currentMapCoordinates || undefined,
       dates: {
-        startDate: startDate ? new Date(startDate).toISOString() : "",
-        endDate: endDate ? new Date(endDate).toISOString() : "",
+        startDate: startDate ? format(startDate, "yyyy-MM-dd") : "",
+        endDate: endDate ? format(endDate, "yyyy-MM-dd") : "",
       },
     });
   }, [coordinates, startDate, endDate, currentMapCoordinates]);
@@ -66,7 +67,6 @@ export default function ProcurarSection() {
     if (existComodity === -1) return setComoditiesFilter([...existentComodities, option as TypeAmenity]);
 
     existentComodities.splice(existComodity, 1);
-    console.log(existentComodities);
     setComoditiesFilter(existentComodities);
   };
 

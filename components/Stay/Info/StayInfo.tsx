@@ -14,10 +14,10 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import { INBOX_URL } from "../../../models/paths";
-import { ReservationWithReportsReviews } from "../../../models/reservation";
+import { ReservationComplete } from "../../../models/reservation";
 
 interface StayInfoProps {
-  reservation: ReservationWithReportsReviews;
+  reservation: ReservationComplete;
   options: { isNextStay: boolean };
 }
 
@@ -41,7 +41,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
       return;
     }
 
-    setModalReport({ ...modalReportInfo, isOpen: true, ...reservation });
+    setModalReport({ ...modalReportInfo, isOpen: true, reservation });
   };
 
   const openModalAvaliarExperiencia = () => {
@@ -51,11 +51,11 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
       return;
     }
 
-    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, ...reservation });
+    setModalAvaliar({ ...modalAvaliarExperiencia, isOpen: true, reservation });
   };
 
   const openModalAlterarReserva = () => {
-    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, ...reservation });
+    setModalAlterar({ ...modalAlterarReservaInfo, isOpen: true, reservation });
   };
 
   const reportWasAlreadySent = (): boolean => {

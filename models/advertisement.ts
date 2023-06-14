@@ -1,5 +1,5 @@
 import { Database } from "../database.types";
-import { Reservation, ReservationWithPublicReview } from "./reservation";
+import { ReservationWithPublicReview } from "./reservation";
 import { ReviewsAverage } from "./review";
 
 // TODO: change the advertisements to listings because of adblocker

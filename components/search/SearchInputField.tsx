@@ -23,7 +23,8 @@ interface AddressOptionInfo {
 
 export const SearchInputField = () => {
   const router = useRouter();
-  const { location, startDate, endDate } = useUserSearch();
+  const userSearch = useUserSearch();
+  const { location, startDate, endDate } = userSearch;
   const setSearchInfoProperty = useSetSearchLocationByProperty();
   const setSearch = useSetSearchLocation();
 
@@ -101,7 +102,13 @@ export const SearchInputField = () => {
             <FeatherDatePicker
               date={startDate}
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
-              onChange={(date) => setSearchInfoProperty(SearchFields.START_DATE, date)}
+              onChange={(date) => {
+                setSearch({
+                  ...userSearch,
+                  startDate: date,
+                  endDate: endDate.getTime() < date.getTime() ? date : endDate,
+                });
+              }}
               minDate={new Date()}
             />
           </div>
@@ -110,7 +117,7 @@ export const SearchInputField = () => {
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
-              minDate={new Date()}
+              minDate={startDate}
             />
           </div>
         </div>

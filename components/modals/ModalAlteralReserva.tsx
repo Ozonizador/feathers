@@ -159,7 +159,10 @@ const ModalAlterarReserva = () => {
                                 <Input
                                   label="current_guests"
                                   labelText="Número de hóspedes"
-                                  value={reservation && reservation.number_guests}
+                                  pattern="[0-9]+"
+                                  value={(reservation && reservation.number_guests) || 1}
+                                  type="number"
+                                  disabled
                                 />
                               </div>
 
@@ -178,6 +181,7 @@ const ModalAlterarReserva = () => {
                                     onChange={(e) =>
                                       changeNewReservationProperty(RESERVATION_TABLE.NUMBER_GUESTS, e.target.value)
                                     }
+                                    type="number"
                                   />
                                 </div>
                               </div>

@@ -31,10 +31,10 @@ export default function Input({
         <input
           placeholder={placeholder}
           className={classNames(
-            "block w-full rounded-md border border-solid border-terciary-500 bg-white px-5 py-2 shadow-sm",
+            "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 shadow-sm",
             `${customCss}`,
             { "border-red-700": errorMessage },
-            { "bg-gray-300": disabled }
+            { "bg-gray-100": disabled }
           )}
           onChange={onChange}
           name={label}

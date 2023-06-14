@@ -1,7 +1,5 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { supabaseAdmin } from "../../lib/supabaseAdminClient";
-import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
 import { createRandomUniqWord } from "../../utils/utils";
 import { getUserPhone } from "../helpers/paymentsHelper";
 import { authorizedProcedure } from "../procedure";
@@ -33,8 +31,27 @@ export const paymentsRouter = router({
 
     fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/create`, { ...options, body })
       .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
+      .then((response) => {
+        console.log(response);
+        // work here
+
+        // {
+        //   "sucesso": true,
+        //   "estado": 0,
+        //   "resposta": "OK",
+        //   "referencia": "123456789",
+        //   "valor": "0.00000",
+        //   "entidade": "12345",
+        //   "valor_minimo": "5",
+        //   "valor_maximo": "122.5",
+        //   "data_inicio": "2021-10-28",
+        //   "data_fim": "2099-12-31"
+        // }
+      })
+      .catch((err) => {
+        console.log(err);
+        throw new TRPCError({ message: "Error creating the payment reference", code: "INTERNAL_SERVER_ERROR" });
+      });
   }),
   addMbWayPayment: authorizedProcedure
     .input(PaymentSchema.extend({ inputtedPhone: z.string() }))
@@ -55,8 +72,22 @@ export const paymentsRouter = router({
 
       fetch(`${EUPAGO_URL}/clientes/rest_api/mbway/create`, { ...options, body })
         .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
+        .then((response) => {
+          console.log(response);
+
+          // {
+          //   "sucesso": true,
+          //   "estado": 0,
+          //   "resposta": "OK",
+          //   "referencia": 8870231,
+          //   "valor": "12.95000",
+          //   "alias": "351#987654321"
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+          throw new TRPCError({ message: "Error creating the mbway reference", code: "INTERNAL_SERVER_ERROR" });
+        });
     }),
   checkIfPaymentWasMade: authorizedProcedure
     .input(z.object({ reference: z.string() }))
@@ -71,8 +102,25 @@ export const paymentsRouter = router({
 
       fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body })
         .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
+        .then((response) => {
+          // add
+          // {
+          //   "entidade": "12345",
+          //   "referencia": "123456789",
+          //   "identificador": "Exemplo-em-JSON",
+          //   "estado": 0,
+          //   "data_criacao": "2021-10-28",
+          //   "hora_criacao": "14:37:23",
+          //   "estado_referencia": "pendente",
+          //   "arquivada": false,
+          //   "sucesso": true,
+          //   "resposta": "OK"
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+          throw new TRPCError({ message: "Error checking the reference", code: "INTERNAL_SERVER_ERROR" });
+        });
     }),
 });
 

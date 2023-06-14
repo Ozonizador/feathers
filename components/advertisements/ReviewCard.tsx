@@ -3,7 +3,7 @@ import { Profile } from "../../models/profile";
 import { Review } from "../../models/review";
 import { averageOfArrayNumbers } from "../../utils/utils";
 interface ReviewCardProps {
-  review: Omit<Review, "private_review" | "stay_id" | "updated_at">;
+  review: Omit<Review, "private_review" | "reservation_id" | "updated_at">;
   tenant: Pick<Profile, "name" | "surname" | "avatar_url">;
 }
 
