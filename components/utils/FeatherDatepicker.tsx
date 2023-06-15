@@ -20,7 +20,13 @@ const FeatherDatePicker = ({ date, onChange, className, minDate }: FeatherDatePi
         selected={date}
         onChange={onChange}
         dateFormat="yyyy-MM-dd"
-        className={classNames(`${className ? className : ""}`)}
+        className={classNames(
+          `${
+            className
+              ? `focus:border-current focus:outline-0 focus:ring-transparent ${className}`
+              : "focus:border-current focus:outline-0 focus:ring-transparent"
+          }`
+        )}
         minDate={minDate}
       />
     </div>

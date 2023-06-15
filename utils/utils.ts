@@ -37,3 +37,9 @@ export const averageOfArrayNumbers = (arr: number[]) => {
 export const isNumeric = (num: any) => {
   return !isNaN(num);
 };
+
+export const checkMonthsInAdvance = (date: Date) => {
+  const today = new Date(date);
+  today.setMonth(today.getMonth() + +3);
+  return today;
+};

@@ -3759,8 +3759,8 @@ export interface Database {
         | "LANDLORD_COMPLETE_PROFILE"
         | "LANDLORD_COMPLETE_ADVERT"
         | "BLOG";
-      payment_status_type: "NOT_GENERATED" | "PENDING" | "PAID" | "REJECTED";
-      paymentstatus: "GENERATED" | "PAID" | "REJECTED" | "EXPIRED";
+      payment_status_type: "NOT_GENERATED" | "PENDING" | "PAID" | "CANCELED" | "REFUNDED" | "EXPIRED";
+      paymentstatus: "PAID" | "EXPIRED" | "ERROR" | "REFUNDED" | "CANCELED" | "PENDING";
       paymenttype: "MULTIBANCO" | "MBWAY";
       profiletype: "LANDLORD" | "TENANT";
       ReportsType: "IMPRECISE" | "NOT_REALITY" | "SCAM" | "OFFENSIVE" | "OTHER";

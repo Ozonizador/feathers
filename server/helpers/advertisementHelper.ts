@@ -24,9 +24,9 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   // dates
   filter.dates && filter.dates.startDate && (query = query.gte("reservations.start_date", filter.dates.startDate));
   filter.dates && filter.dates.endDate && (query = query.lte("reservations.end_date", filter.dates.endDate));
-  // filter.dates &&
-  //   (filter.dates.startDate || filter.dates.endDate) &&
-  //   (query = query.not("reservations.status", "eq", "ACCEPTED"));
+  filter.dates &&
+    (filter.dates.startDate || filter.dates.endDate) &&
+    (query = query.not("reservations.status", "eq", "ACCEPTED"));
 
   return query;
 };

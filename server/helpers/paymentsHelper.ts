@@ -1,7 +1,12 @@
 import { TRPCError } from "@trpc/server";
 import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../models/profile";
-import { Reservations, RESERVATION_TABLE, RESERVATION_TABLE_NAME } from "../../models/reservation";
+import {
+  ReservationPaymentStays,
+  Reservations,
+  RESERVATION_TABLE,
+  RESERVATION_TABLE_NAME,
+} from "../../models/reservation";
 import {
   PaymentStatus,
   PaymentType,
@@ -25,20 +30,20 @@ export const getUserPhone = async (userId?: string) => {
 export const updateAdvertisementPayment = async (reservationId?: string) => {
   if (!reservationId) throw new TRPCError({ message: "Reservation not found", code: "BAD_REQUEST" });
 
-  const { data, error } = await supabaseAdmin
+  const { error } = await supabaseAdmin
     .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
     .update({ payment_status: "PENDING" })
     .eq(RESERVATION_TABLE.ID, reservationId);
 
-  if (error || !data) throw new TRPCError({ message: "Error updating the reservation", code: "BAD_REQUEST" });
+  if (error) throw new TRPCError({ message: "Error updating the reservation", code: "BAD_REQUEST" });
 
   return { success: true };
 };
 
-type AddReservationPaymentProps = {
+export type AddReservationPaymentProps = {
   reference: string;
   metadata: string;
-  valor: number;
+  valor: string;
   payment_type: PaymentType;
   entidade?: string;
 };
@@ -52,8 +57,8 @@ export const addReservationPayment = async (reservationId: string, paymentInfo: 
       reservation_id: reservationId,
       referencia: reference,
       metadata,
-      estado: "GENERATED",
-      valor,
+      estado: "PENDING",
+      valor: parseFloat(valor),
       payment_type,
       entidade: entidade || null,
     });
@@ -61,7 +66,7 @@ export const addReservationPayment = async (reservationId: string, paymentInfo: 
   if (error)
     throw new TRPCError({ message: "Error adding the payment information of the reservation", code: "BAD_REQUEST" });
 
-  return { success: true };
+  return { error };
 };
 
 export const updateReservationPayment = async (reservationId: string, payment_status: PaymentStatus) => {
@@ -75,3 +80,24 @@ export const updateReservationPayment = async (reservationId: string, payment_st
 
   return { success: true };
 };
+
+export const EU_PAGO_TO_PAYMENT_STATUS = {
+  paga: "PAID",
+  pendente: "PENDING",
+  expirada: "EXPIRED",
+  erro: "ERROR",
+  cancelada: "CANCELED",
+  reembolsada: "REFUNDED",
+} as {
+  [x: string]: PaymentStatus;
+};
+
+export const RESERVATION_PAYMENT_STATUS = {
+  paga: "PAID",
+  pendente: "PENDING",
+  erro: "CANCELED",
+  cancelada: "CANCELED",
+  reembolsada: "REFUNDED",
+  expirada: "EXPIRED",
+  "": "PENDING",
+} as { [x: string]: ReservationPaymentStays };

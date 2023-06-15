@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
+import { checkMonthsInAdvance } from "../../utils/utils";
 
 export enum SearchFields {
   START_DATE = "startDate",
@@ -40,6 +41,11 @@ export const SearchInputField = () => {
       const features = data.features;
       setAddressOptions(features);
     }
+  };
+
+  const checkIfMonthsAhead = (date: Date) => {
+    const minDateEnd = checkMonthsInAdvance(date);
+    return endDate.getTime() < minDateEnd.getTime() ? minDateEnd : endDate;
   };
 
   const setAddressByText = (value: string) => {
@@ -75,15 +81,15 @@ export const SearchInputField = () => {
         <div className="relative my-2 lg:mx-2">
           <div>
             <input
-              type="search"
-              className="bg-terciary-50 h-16 w-full rounded-xl border p-0 px-2 lg:w-72"
+              type="input"
+              className="bg-terciary-50 h-16 w-full rounded-xl border border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder="Encontrar &#x2302; em:"
               value={location}
             />
           </div>
           {addressOptions && addressOptions.length > 0 && (
-            <div className="absolute -bottom-14 -left-2 z-50 mx-2 w-full rounded border bg-white p-2">
+            <div className="absolute -left-2 z-50 mx-2 w-full rounded border bg-white p-2">
               <div className="flex flex-col gap-2">
                 {addressOptions.map((addressOption, index) => {
                   return (
@@ -98,26 +104,26 @@ export const SearchInputField = () => {
         </div>
 
         <div className="flex flex-row gap-2 lg:gap-0">
-          <div className="z-50 my-2 w-1/2 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border border-primary-500 lg:mx-2">
             <FeatherDatePicker
               date={startDate}
-              className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
+              className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
               onChange={(date) => {
                 setSearch({
                   ...userSearch,
                   startDate: date,
-                  endDate: endDate.getTime() < date.getTime() ? date : endDate,
+                  endDate: checkIfMonthsAhead(date),
                 });
               }}
               minDate={new Date()}
             />
           </div>
-          <div className="z-50 my-2 w-1/2 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border border-primary-500 lg:mx-2">
             <FeatherDatePicker
-              className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
+              className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
-              minDate={startDate}
+              minDate={checkMonthsInAdvance(startDate)}
             />
           </div>
         </div>

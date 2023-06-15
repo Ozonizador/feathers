@@ -1,8 +1,16 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { ReservationPayment } from "../../models/reservation_payment";
 import { createRandomUniqWord } from "../../utils/utils";
-import { getUserPhone } from "../helpers/paymentsHelper";
-import { authorizedProcedure } from "../procedure";
+import {
+  addReservationPayment,
+  AddReservationPaymentProps,
+  EU_PAGO_TO_PAYMENT_STATUS,
+  getUserPhone,
+  updateAdvertisementPayment,
+  updateReservationPayment,
+} from "../helpers/paymentsHelper";
+import { authorizedProcedure, isHostProcedure } from "../procedure";
 import { router } from "../trpc";
 
 const options = {
@@ -10,100 +18,125 @@ const options = {
   headers: { accept: "application/json", "content-type": "application/json" },
 };
 
-const EUPAGO_URL = "https://sandbox.eupago.pt";
-
 const PaymentSchema = z.object({ value: z.number(), reservationId: z.string() });
 
 export const paymentsRouter = router({
   addMultibancoPayment: authorizedProcedure.input(PaymentSchema).mutation(async ({ input, ctx }) => {
+    if (!process.env.EUPAGO_API_URL) throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+
     const { userId } = ctx;
     const { value, reservationId } = input;
 
     const { phone } = await getUserPhone(userId);
-    const body = JSON.stringify({
+    const body = {
       chave: process.env.EUPAGO_API_KEY,
       valor: value,
       per_dup: 0,
       // email: "",
       contacto: phone || "",
       id: createRandomUniqWord(),
-    });
+    };
 
-    fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/create`, { ...options, body })
+    fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/create`, {
+      ...options,
+      body: JSON.stringify(body),
+    })
       .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        // work here
+      .then(async (response) => {
+        const { sucesso, entidade, valor, referencia, resposta } = response;
+        if (!sucesso || resposta != "OK")
+          throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
 
-        // {
-        //   "sucesso": true,
-        //   "estado": 0,
-        //   "resposta": "OK",
-        //   "referencia": "123456789",
-        //   "valor": "0.00000",
-        //   "entidade": "12345",
-        //   "valor_minimo": "5",
-        //   "valor_maximo": "122.5",
-        //   "data_inicio": "2021-10-28",
-        //   "data_fim": "2099-12-31"
-        // }
+        const paymentReservationInfo = {
+          entidade,
+          estado: "GENERATED",
+          valor,
+          reference: referencia,
+          reservation_id: reservationId,
+          metadata: response,
+          payment_type: "MULTIBANCO",
+        } as AddReservationPaymentProps;
+
+        await addReservationPayment(reservationId, paymentReservationInfo);
+        await updateAdvertisementPayment(reservationId);
+
+        return { entidade, referencia, valor };
       })
       .catch((err) => {
-        console.log(err);
-        throw new TRPCError({ message: "Error creating the payment reference", code: "INTERNAL_SERVER_ERROR" });
+        throw new TRPCError({ message: err.message, code: "INTERNAL_SERVER_ERROR" });
       });
   }),
   addMbWayPayment: authorizedProcedure
     .input(PaymentSchema.extend({ inputtedPhone: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      if (!process.env.EUPAGO_API_URL)
+        throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+
       const { userId } = ctx;
       const { value, reservationId, inputtedPhone } = input;
 
       const { phone } = await getUserPhone(userId);
-      const body = JSON.stringify({
+      const body = {
         chave: process.env.EUPAGO_API_KEY,
         valor: value,
         id: createRandomUniqWord(),
         descricao: "",
         // email: "",
         contacto: inputtedPhone || "",
-        alias: phone || "",
-      });
+        alias: inputtedPhone || "",
+      };
 
-      fetch(`${EUPAGO_URL}/clientes/rest_api/mbway/create`, { ...options, body })
+      fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/mbway/create`, { ...options, body: JSON.stringify(body) })
         .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
+        .then(async (response) => {
+          const { sucesso, valor, referencia, resposta } = response;
+          if (!sucesso || resposta != "OK")
+            throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
 
-          // {
-          //   "sucesso": true,
-          //   "estado": 0,
-          //   "resposta": "OK",
-          //   "referencia": 8870231,
-          //   "valor": "12.95000",
-          //   "alias": "351#987654321"
-          // }
+          const paymentReservationInfo = {
+            estado: "GENERATED",
+            valor,
+            reference: referencia,
+            reservation_id: reservationId,
+            metadata: response,
+            payment_type: "MBWAY",
+          } as AddReservationPaymentProps;
+
+          await addReservationPayment(reservationId, paymentReservationInfo);
+          await updateAdvertisementPayment(reservationId);
+
+          return { referencia, valor };
         })
         .catch((err) => {
-          console.log(err);
-          throw new TRPCError({ message: "Error creating the mbway reference", code: "INTERNAL_SERVER_ERROR" });
+          throw new TRPCError({ message: err.message, code: "INTERNAL_SERVER_ERROR" });
         });
     }),
-  checkIfPaymentWasMade: authorizedProcedure
-    .input(z.object({ reference: z.string() }))
+  checkIfPaymentWasMade: isHostProcedure
+    .input(z.object({ reference: z.string(), reservationId: z.string() }))
     .query(async ({ input, ctx }) => {
-      const { userId } = ctx;
-      const { reference } = input;
+      if (!process.env.EUPAGO_API_URL)
+        throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
 
-      const body = JSON.stringify({
+      const { reference, reservationId } = input;
+
+      const body = {
         chave: process.env.EUPAGO_API_KEY,
         referencia: reference,
-      });
+      };
 
-      fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body })
+      fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/info`, {
+        ...options,
+        body: JSON.stringify(body),
+      })
         .then((response) => response.json())
-        .then((response) => {
-          // add
+        .then(async (response) => {
+          const { sucesso, referencia, identificador, estado_referencia, entidade, resposta, arquivada } = response;
+          if (!sucesso || resposta != "OK")
+            throw new TRPCError({ message: "Erro ao verificar referência", code: "BAD_REQUEST" });
+
+          const paymentStatus = EU_PAGO_TO_PAYMENT_STATUS[estado_referencia];
+          await updateReservationPayment(reservationId, paymentStatus);
+          // todo finish this
           // {
           //   "entidade": "12345",
           //   "referencia": "123456789",
@@ -118,8 +151,7 @@ export const paymentsRouter = router({
           // }
         })
         .catch((err) => {
-          console.log(err);
-          throw new TRPCError({ message: "Error checking the reference", code: "INTERNAL_SERVER_ERROR" });
+          throw new TRPCError({ message: err.message, code: "INTERNAL_SERVER_ERROR" });
         });
     }),
 });

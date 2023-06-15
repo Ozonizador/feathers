@@ -9,7 +9,13 @@ const FuncionaOndeEstamos = () => {
         <div className="w-full">
           <div className="flex flex-col gap-10 lg:flex-row">
             <div className="lg:min-h-96 relative h-96 w-full lg:w-1/3">
-              <Image src="/images/mapa_unihosts_funciona.jpeg" layout="fill" alt="" className="rounded-lg" />
+              <Image
+                src="/images/mapa_unihosts_funciona.jpeg"
+                layout="fill"
+                alt=""
+                className="rounded-lg"
+                objectFit="initial"
+              />
             </div>
             <div className="sm:w-full lg:w-2/3">
               <h1 className="mb-4 text-center text-3xl font-bold lg:text-left lg:text-5xl">Onde Estamos?</h1>
@@ -26,7 +32,7 @@ const FuncionaOndeEstamos = () => {
                 <div className="ml-2 text-base lg:text-xl">Portugal continental e ilhas</div>
               </div>
 
-              <div className="mt-6 mb-10 text-lg">
+              <div className="mb-10 mt-6 text-lg">
                 Pode anunciar o seu espaço de forma gratuita em todo o território nacional.
                 <br />
                 <br />
@@ -35,7 +41,7 @@ const FuncionaOndeEstamos = () => {
               </div>
 
               <Link href="#">
-                <a className="rounded-md bg-primary-500 py-3 px-11 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
+                <a className="rounded-md bg-primary-500 px-11 py-3 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
                   Saber mais
                 </a>
               </Link>

@@ -38,12 +38,12 @@ const Index = () => {
 
   return (
     <>
-      <section className="container mx-auto pt-20 pb-5">
+      <section className="container mx-auto pb-5 pt-20">
         <div className="flex flex-col items-center justify-center align-middle lg:flex-row lg:justify-between">
           <div className="text-center text-3xl font-bold lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
           <div className="flex h-5 w-full items-center lg:w-44 ">
             <select
-              className="mt-24 w-full  rounded-md border border-solid border-terciary-500 bg-white py-2 px-3 lg:mt-0 lg:w-44"
+              className="mt-24 w-full  rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:mt-0 lg:w-44"
               placeholder="Categoria"
               onChange={(e) => setCategory(e.target.value as UserTypes)}
             >
@@ -71,7 +71,7 @@ const Index = () => {
       )}
       <>
         <div className="container mx-auto">
-          <div className="mx-auto mt-14 mb-44 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
+          <div className="mx-auto mb-44 mt-14 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
             <div className="alert alert-warning con ml-3" role="alert">
               <Image className="h-10" src={notification} alt="" />
             </div>
@@ -98,13 +98,13 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={() => setOpen(false)}>
           <Transition.Child
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-95 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-95 opacity-0"
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
           >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
@@ -112,14 +112,16 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl bg-black text-left align-middle shadow-xl transition-all lg:h-4/5 lg:w-2/3">
-                <div className="my-20 mx-10 h-96">
+                <div className="mx-10 my-20 h-96">
                   <div className="flex h-full w-1/2 flex-col gap-2 rounded-lg bg-white px-10 py-10">
                     <h6 className="mb-8 text-3xl">Queremos ser uns fiéis mensageiros!</h6>
                     <Input placeholder="E-mail"></Input>
                     <div className="mb-10">
-                      <Button type={"button"}>Notifique-me</Button>
+                      <Button type={"button"} onClick={() => setOpen(false)}>
+                        Notifique-me
+                      </Button>
                     </div>
-                    <p className="mt-auto mb-5 text-center">
+                    <p className="mb-5 mt-auto text-center">
                       Ao carregar em Notifique-me aceita a nossa
                       <br />
                       <span className="text-primary-500 underline">política de tratamento de dados.</span>

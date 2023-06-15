@@ -1,5 +1,5 @@
 CREATE TYPE PaymentType AS ENUM ('MULTIBANCO', 'MBWAY');
-CREATE TYPE PaymentStatus AS ENUM ('GENERATED', 'PAID', 'REJECTED', 'EXPIRED');
+CREATE TYPE PaymentStatus AS ENUM ('PAID', 'EXPIRED', 'ERROR', 'REFUNDED', 'CANCELED', 'PENDING');
 
 CREATE TABLE reservation_payments (
     "id" UUID NOT NULL DEFAULT uuid_generate_v4(),

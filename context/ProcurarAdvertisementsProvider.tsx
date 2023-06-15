@@ -27,6 +27,7 @@ const defaultFilter = {
     type: "asc",
     isActive: false,
   },
+  modalMoreFiltersOpen: false,
 } as FilterAdvertisements;
 
 /* Filters */

@@ -250,11 +250,25 @@ interface ModalAlterarReversaProps {
   children: ReactElement;
 }
 
-const ModalGerarReferenciaContext = createContext<Reservation | undefined>(undefined);
-const SetModalGerarReferenciaContext = createContext<Dispatch<SetStateAction<Reservation | undefined>>>(() => {});
+type InfoModalReferencia = {
+  reservation?: Reservation;
+  value?: number;
+  phone?: string;
+};
+
+const ModalGerarReferenciaContext = createContext<InfoModalReferencia>({
+  reservation: undefined,
+  value: undefined,
+  phone: undefined,
+});
+const SetModalGerarReferenciaContext = createContext<Dispatch<SetStateAction<InfoModalReferencia>>>(() => {});
 
 export const ModalGerarReferenciaProvider = ({ children }: ModalAlterarReversaProps): JSX.Element => {
-  const [modalInfo, setModalInfo] = useState<Reservation | undefined>(undefined);
+  const [modalInfo, setModalInfo] = useState<InfoModalReferencia>({
+    reservation: undefined,
+    value: undefined,
+    phone: undefined,
+  });
 
   return (
     <ModalGerarReferenciaContext.Provider value={modalInfo}>
@@ -264,13 +278,37 @@ export const ModalGerarReferenciaProvider = ({ children }: ModalAlterarReversaPr
 };
 
 export function useModalGerarReferencia() {
-  const reservation = useContext(ModalGerarReferenciaContext);
-  return reservation;
+  const modalReferenciaInfo = useContext(ModalGerarReferenciaContext);
+  return modalReferenciaInfo;
+}
+
+export function useSetModalGerarReferenciaInfo() {
+  const setModalInfoReferencia = useContext(SetModalGerarReferenciaContext);
+  return (info: InfoModalReferencia) => {
+    setModalInfoReferencia(info);
+  };
 }
 
 export function useSetModalGerarReferenciaReservation() {
-  const setModalReport = useContext(SetModalGerarReferenciaContext);
-  return (reservation?: Reservation) => {
-    setModalReport(reservation);
+  const modalReferenciaInfo = useContext(ModalGerarReferenciaContext);
+  const setModalInfoReferencia = useContext(SetModalGerarReferenciaContext);
+  return (reservation: Reservation) => {
+    setModalInfoReferencia({ ...modalReferenciaInfo, reservation });
+  };
+}
+
+export function useSetModalGerarReferenciaValue() {
+  const modalReferenciaInfo = useContext(ModalGerarReferenciaContext);
+  const setModalInfoReferencia = useContext(SetModalGerarReferenciaContext);
+  return (value: number) => {
+    setModalInfoReferencia({ ...modalReferenciaInfo, value });
+  };
+}
+
+export function useSetModalGerarReferenciaPhone() {
+  const modalReferenciaInfo = useContext(ModalGerarReferenciaContext);
+  const setModalInfoReferencia = useContext(SetModalGerarReferenciaContext);
+  return (phone: string) => {
+    setModalInfoReferencia({ ...modalReferenciaInfo, phone });
   };
 }

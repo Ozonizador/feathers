@@ -1,6 +1,7 @@
 DROP VIEW IF EXISTS "reviewsPerAdvertisement";
 
-CREATE TYPE payment_status_type AS ENUM ('NOT_GENERATED', 'PENDING', 'PAID', 'REJECTED');
+CREATE TYPE payment_status_type AS ENUM ('NOT_GENERATED' , 'PENDING' , 'PAID' , 'CANCELED' , 'REFUNDED' , 'EXPIRED');
+
 
 ALTER TABLE reports DROP CONSTRAINT "reports_stay_id_fkey";
 

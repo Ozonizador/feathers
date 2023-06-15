@@ -31,7 +31,7 @@ export default function Input({
         <input
           placeholder={placeholder}
           className={classNames(
-            "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 shadow-sm",
+            "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 shadow-sm focus:outline-none",
             `${customCss}`,
             { "border-red-700": errorMessage },
             { "bg-gray-100": disabled }

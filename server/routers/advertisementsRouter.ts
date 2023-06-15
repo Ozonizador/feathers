@@ -65,11 +65,11 @@ export const advertisementsRouter = router({
           },
           { count: "exact" }
         )
-        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!inner(*)");
+        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!left(id)");
     } else {
       query = supabaseAdmin
         .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
-        .select("*, reservations!left(*)")
+        .select("*, reservations!left(id)", { count: "exact" })
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
       query = addFilterToSearchAdvertisement(query, filter);
@@ -80,7 +80,7 @@ export const advertisementsRouter = router({
     query = query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
 
     // select the information I want
-    const { data, error, count } = await query; //.select("*, averages:reviewsPerAdvertisement!left(*)");
+    const { data, error, count } = await query;
 
     return {
       data: (data as unknown as AdvertisementWithReviewAverage[]) || null,
@@ -107,7 +107,7 @@ export const advertisementsRouter = router({
           },
           { count: "exact" }
         )
-        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!inner(id)");
+        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!left(id)");
       query = addFilterToSearchAdvertisement(query, filter);
       query = addOrderToSearchAdvertisement(query, order);
 

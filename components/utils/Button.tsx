@@ -11,6 +11,7 @@ interface ButtonProps {
   variant?: "primary" | "facebook" | "gmail" | "informative";
   rounded?: "xl" | "full";
   padding?: "sm" | "md" | "lg";
+  [x: string]: any;
 }
 
 const Spinner = dynamic(() => import("./Spinner"), {

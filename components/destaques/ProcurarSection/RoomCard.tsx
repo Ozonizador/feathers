@@ -64,27 +64,10 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   }, [advertisement]);
 
   const showSomeAmenities = useMemo(() => {
-    const {
-      general_amenities,
-      bedroom_amenities,
-      bathroom_amenities,
-      exterior_amenities,
-      livingroom_amenities,
-      kitchen_amenities,
-    } = advertisement;
+    const { general_amenities } = advertisement;
 
     const amenities: string[] = ([] as string[]).concat
-      .apply(
-        [],
-        [
-          general_amenities || [],
-          bedroom_amenities || [],
-          bathroom_amenities || [],
-          exterior_amenities || [],
-          livingroom_amenities || [],
-          kitchen_amenities || [],
-        ]
-      )
+      .apply([], [general_amenities || []])
       .filter((opt) => !!opt)
       .slice(0, 5);
 
