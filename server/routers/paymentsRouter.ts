@@ -83,7 +83,7 @@ export const paymentsRouter = router({
         descricao: "",
         // email: "",
         contacto: inputtedPhone || "",
-        alias: phone || "",
+        alias: inputtedPhone || "",
       };
 
       fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/mbway/create`, { ...options, body: JSON.stringify(body) })
@@ -92,9 +92,6 @@ export const paymentsRouter = router({
           const { sucesso, valor, referencia, resposta } = response;
           if (!sucesso || resposta != "OK")
             throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
-
-          debugger;
-          console.log(response);
 
           const paymentReservationInfo = {
             estado: "GENERATED",

@@ -30,12 +30,12 @@ export const getUserPhone = async (userId?: string) => {
 export const updateAdvertisementPayment = async (reservationId?: string) => {
   if (!reservationId) throw new TRPCError({ message: "Reservation not found", code: "BAD_REQUEST" });
 
-  const { data, error } = await supabaseAdmin
+  const { error } = await supabaseAdmin
     .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
     .update({ payment_status: "PENDING" })
     .eq(RESERVATION_TABLE.ID, reservationId);
 
-  if (error || !data) throw new TRPCError({ message: "Error updating the reservation", code: "BAD_REQUEST" });
+  if (error) throw new TRPCError({ message: "Error updating the reservation", code: "BAD_REQUEST" });
 
   return { success: true };
 };

@@ -11,10 +11,12 @@ import Button from "../utils/Button";
 import { trpc } from "../../utils/trpc";
 import { useUser } from "@supabase/auth-helpers-react";
 import FeathersSpinner from "../utils/Spinner";
+import Input from "../utils/Input";
 
 const ModalGerarReferencia = () => {
   const user = useUser();
   const [loadingReference, setLoadingReference] = useState<boolean>(false);
+  const [phone, setPhone] = useState<string>("");
   const [selectedPayment, setSelectedPayment] = useState<"multibanco" | "mbway">("multibanco");
   const { generateReferenceModalOpen } = useModaisAnuncioDetalhes();
   const { reservation, value } = useModalGerarReferencia();
@@ -38,7 +40,7 @@ const ModalGerarReferencia = () => {
         {
           reservationId: reservation.id,
           value,
-          inputtedPhone: "",
+          inputtedPhone: phone,
         },
         {
           onSuccess: (data) => {
@@ -129,6 +131,11 @@ const ModalGerarReferencia = () => {
                         <Image src="/icons/mbway.svg" alt="mbway" objectFit="contain" height={64} width={64}></Image>
                       </div>
                     </div>
+                    {selectedPayment === "mbway" && (
+                      <div className="my-5 flex justify-center">
+                        <Input onChange={(e) => setPhone(e.target.value)} value={phone} />
+                      </div>
+                    )}
                     <div className="mb-5 flex justify-center">
                       <div className="w-40">
                         <Button type={"button"} disabled={loadingReference} onClick={generateReference}>
