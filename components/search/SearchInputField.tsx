@@ -8,6 +8,7 @@ import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
+import { checkMonthsInAdvance } from "../../utils/utils";
 
 export enum SearchFields {
   START_DATE = "startDate",
@@ -40,12 +41,6 @@ export const SearchInputField = () => {
       const features = data.features;
       setAddressOptions(features);
     }
-  };
-
-  const checkMonthsInAdvance = (date: Date) => {
-    const today = new Date(date);
-    today.setMonth(today.getMonth() + +3);
-    return today;
   };
 
   const checkIfMonthsAhead = (date: Date) => {

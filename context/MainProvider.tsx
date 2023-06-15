@@ -7,6 +7,7 @@ import useFavouriteService from "../hooks/favouriteService";
 import useProfileService from "../hooks/useProfileService";
 import { useRouter } from "next/router";
 import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
+import { checkMonthsInAdvance } from "../utils/utils";
 
 interface GeneralUnihostInformation {
   toggleUserType: UserTypes;
@@ -63,7 +64,7 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const [userSearch, setUserSearch] = useState<UserSearchInfo>({
     location: "",
     startDate: new Date(),
-    endDate: new Date(),
+    endDate: checkMonthsInAdvance(new Date()),
     coordinates: null,
   });
 
