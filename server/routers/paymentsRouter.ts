@@ -20,20 +20,22 @@ export const paymentsRouter = router({
     const { value, reservationId } = input;
 
     const { phone } = await getUserPhone(userId);
-    const body = JSON.stringify({
+    const body = {
       chave: process.env.EUPAGO_API_KEY,
       valor: value,
       per_dup: 0,
       // email: "",
       contacto: phone || "",
       id: createRandomUniqWord(),
-    });
+    };
 
-    fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/create`, { ...options, body })
+    debugger;
+    fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/create`, { ...options, body: JSON.stringify(body) })
       .then((response) => response.json())
       .then((response) => {
+        const { successo } = response;
+        if (!successo) throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
         console.log(response);
-        // work here
 
         // {
         //   "sucesso": true,
@@ -60,7 +62,7 @@ export const paymentsRouter = router({
       const { value, reservationId, inputtedPhone } = input;
 
       const { phone } = await getUserPhone(userId);
-      const body = JSON.stringify({
+      const body = {
         chave: process.env.EUPAGO_API_KEY,
         valor: value,
         id: createRandomUniqWord(),
@@ -68,11 +70,15 @@ export const paymentsRouter = router({
         // email: "",
         contacto: inputtedPhone || "",
         alias: phone || "",
-      });
+      };
 
-      fetch(`${EUPAGO_URL}/clientes/rest_api/mbway/create`, { ...options, body })
+      debugger;
+      fetch(`${EUPAGO_URL}/clientes/rest_api/mbway/create`, { ...options, body: JSON.stringify(body) })
         .then((response) => response.json())
         .then((response) => {
+          const { successo } = response;
+          if (!successo) throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
+          debugger;
           console.log(response);
 
           // {
@@ -95,14 +101,17 @@ export const paymentsRouter = router({
       const { userId } = ctx;
       const { reference } = input;
 
-      const body = JSON.stringify({
+      const body = {
         chave: process.env.EUPAGO_API_KEY,
         referencia: reference,
-      });
+      };
 
-      fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body })
+      fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body: JSON.stringify(body) })
         .then((response) => response.json())
         .then((response) => {
+          const { successo } = response;
+          if (!successo) throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
+
           // add
           // {
           //   "entidade": "12345",

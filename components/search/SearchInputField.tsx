@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -40,6 +40,17 @@ export const SearchInputField = () => {
       const features = data.features;
       setAddressOptions(features);
     }
+  };
+
+  const checkMonthsInAdvance = (date: Date) => {
+    const today = new Date(date);
+    today.setMonth(today.getMonth() + +3);
+    return today;
+  };
+
+  const checkIfMonthsAhead = (date: Date) => {
+    const minDateEnd = checkMonthsInAdvance(date);
+    return endDate.getTime() < minDateEnd.getTime() ? minDateEnd : endDate;
   };
 
   const setAddressByText = (value: string) => {
@@ -106,7 +117,7 @@ export const SearchInputField = () => {
                 setSearch({
                   ...userSearch,
                   startDate: date,
-                  endDate: endDate.getTime() < date.getTime() ? date : endDate,
+                  endDate: checkIfMonthsAhead(date),
                 });
               }}
               minDate={new Date()}
@@ -117,7 +128,7 @@ export const SearchInputField = () => {
               className="bg-terciary-50 h-16 w-full rounded-xl border lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
-              minDate={startDate}
+              minDate={checkMonthsInAdvance(startDate)}
             />
           </div>
         </div>
