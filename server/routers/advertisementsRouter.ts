@@ -115,7 +115,7 @@ export const advertisementsRouter = router({
       query = query.range(initRange, (page || 1) * PAGE_NUMBER_COUNT - 1);
 
       // select the information I want
-      const { data, error, count } = await query.select("*, averages:reviewsPerAdvertisement!left(*)");
+      const { data, error, count } = await query;
 
       return { data, error, count };
     }),
