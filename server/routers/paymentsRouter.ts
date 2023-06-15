@@ -1,7 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { ReservationPayment } from "../../models/reservation_payment";
 import { createRandomUniqWord } from "../../utils/utils";
-import { getUserPhone } from "../helpers/paymentsHelper";
+import { addReservationPayment, AddReservationPaymentProps, getUserPhone } from "../helpers/paymentsHelper";
 import { authorizedProcedure } from "../procedure";
 import { router } from "../trpc";
 
@@ -10,12 +11,12 @@ const options = {
   headers: { accept: "application/json", "content-type": "application/json" },
 };
 
-const EUPAGO_URL = "https://sandbox.eupago.pt";
-
 const PaymentSchema = z.object({ value: z.number(), reservationId: z.string() });
 
 export const paymentsRouter = router({
   addMultibancoPayment: authorizedProcedure.input(PaymentSchema).mutation(async ({ input, ctx }) => {
+    if (!process.env.EUPAGO_API_URL) throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+
     const { userId } = ctx;
     const { value, reservationId } = input;
 
@@ -29,26 +30,29 @@ export const paymentsRouter = router({
       id: createRandomUniqWord(),
     };
 
-    debugger;
-    fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/create`, { ...options, body: JSON.stringify(body) })
+    fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/create`, {
+      ...options,
+      body: JSON.stringify(body),
+    })
       .then((response) => response.json())
-      .then((response) => {
-        const { successo } = response;
-        if (!successo) throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
-        console.log(response);
+      .then(async (response) => {
+        const { successo, entidade, estado, valor, referencia, resposta } = response;
+        if (!successo || resposta != "OK")
+          throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
 
-        // {
-        //   "sucesso": true,
-        //   "estado": 0,
-        //   "resposta": "OK",
-        //   "referencia": "123456789",
-        //   "valor": "0.00000",
-        //   "entidade": "12345",
-        //   "valor_minimo": "5",
-        //   "valor_maximo": "122.5",
-        //   "data_inicio": "2021-10-28",
-        //   "data_fim": "2099-12-31"
-        // }
+        const paymentReservationInfo = {
+          entidade,
+          estado: "GENERATED",
+          valor,
+          reference: referencia,
+          reservation_id: reservationId,
+          metadata: response,
+          payment_type: "MULTIBANCO",
+        } as AddReservationPaymentProps;
+
+        await addReservationPayment(reservationId, paymentReservationInfo);
+
+        return { entidade, referencia, valor };
       })
       .catch((err) => {
         console.log(err);
@@ -58,6 +62,9 @@ export const paymentsRouter = router({
   addMbWayPayment: authorizedProcedure
     .input(PaymentSchema.extend({ inputtedPhone: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      if (!process.env.EUPAGO_API_URL)
+        throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+
       const { userId } = ctx;
       const { value, reservationId, inputtedPhone } = input;
 
@@ -73,7 +80,7 @@ export const paymentsRouter = router({
       };
 
       debugger;
-      fetch(`${EUPAGO_URL}/clientes/rest_api/mbway/create`, { ...options, body: JSON.stringify(body) })
+      fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/mbway/create`, { ...options, body: JSON.stringify(body) })
         .then((response) => response.json())
         .then((response) => {
           const { successo } = response;
@@ -98,6 +105,9 @@ export const paymentsRouter = router({
   checkIfPaymentWasMade: authorizedProcedure
     .input(z.object({ reference: z.string() }))
     .query(async ({ input, ctx }) => {
+      if (!process.env.EUPAGO_API_URL)
+        throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+
       const { userId } = ctx;
       const { reference } = input;
 
@@ -106,7 +116,10 @@ export const paymentsRouter = router({
         referencia: reference,
       };
 
-      fetch(`${EUPAGO_URL}/clientes/rest_api/multibanco/info`, { ...options, body: JSON.stringify(body) })
+      fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/info`, {
+        ...options,
+        body: JSON.stringify(body),
+      })
         .then((response) => response.json())
         .then((response) => {
           const { successo } = response;

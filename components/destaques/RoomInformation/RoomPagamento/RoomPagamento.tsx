@@ -6,7 +6,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import {
   useSetModalDetalhesPagamento,
   useSetModalGerarReferencia,
-  useSetModalGerarReferenciaReservation,
+  useSetModalGerarReferenciaInfo,
 } from "../../../../context/ModalShowProvider";
 
 import { useCurrentUser, useGetUserDates, useSetSearchLocationByProperty } from "../../../../context/MainProvider";
@@ -28,7 +28,7 @@ interface FormReservation {
 export const RoomPagamento = () => {
   const router = useRouter();
   const profile = useCurrentUser();
-  const setReservationOnModal = useSetModalGerarReferenciaReservation();
+  const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
   const setModalGerarRef = useSetModalGerarReferencia();
 
   let { startDate: userSelectedStartDate, endDate: userSelectedEndDate } = useGetUserDates();
@@ -117,7 +117,7 @@ export const RoomPagamento = () => {
         if (error || !data)
           return toast.error("There was a error making the reservation. Contact the Unihosts support.");
 
-        setReservationOnModal(data);
+        setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
         setModalGerarRef(true);
         toast.success("Reservation requested.");
       },
@@ -230,7 +230,7 @@ export const RoomPagamento = () => {
 
           <div className="my-8 flex flex-row justify-between font-bold">
             <div className="text-base">Total</div>
-            <div>€{advertisement?.month_rent || 0}</div>
+            <div>€{setAdvertPrice() || 0}</div>
           </div>
 
           <button

@@ -1,3 +1,5 @@
+DROP VIEW "advertisements_agg_amenities";
+
 CREATE VIEW "advertisements_agg_amenities" AS
     SELECT 
         advertisements.*, 

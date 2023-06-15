@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import RoomCard from "./RoomCard";
-import { SelectAmenityLabel, TypeAmenity, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { TypeAmenity, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -21,6 +21,8 @@ import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import { format } from "date-fns";
 import Button from "../../utils/Button";
+import { useSetModalMaisFiltros } from "../../../context/ModalMaisFiltrosProvider";
+import ModalMaisFiltros from "../../modals/ModalMaisFiltros";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -37,6 +39,9 @@ export default function ProcurarSection() {
   const setComoditiesFilter = useSetComoditiesContext();
   const setPage = useSetPageAdvertisementinfo();
   const currentMapCoordinates = useGetUserCoordinates();
+
+  // Modal mais filtros
+  const setModalMaisFiltros = useSetModalMaisFiltros();
 
   const router = useRouter();
 
@@ -97,6 +102,7 @@ export default function ProcurarSection() {
 
   return (
     <>
+      <ModalMaisFiltros />
       <div className="mt-5 flex flex-1 px-10">
         <div className="w-full lg:w-1/2">
           <div className="w-full lg:w-full">
@@ -135,7 +141,7 @@ export default function ProcurarSection() {
                   );
                 })}
               </select>
-              <div className="flex h-20 flex-row justify-start gap-4">
+              <div className="flex h-20 w-full flex-row justify-start gap-4">
                 <div className="w-1/2 lg:w-52">
                   <div className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white p-1 text-sm lg:w-52">
                     <div className="mb-1 text-sm">Preço</div>
@@ -151,8 +157,10 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="w-full flex-1">
-                  <Button type="button">Mais Filtros</Button>
+                <div className="my-auto ml-auto">
+                  <Button type="button" onClick={() => setModalMaisFiltros(true)}>
+                    Mais Filtros
+                  </Button>
                 </div>
               </div>
 

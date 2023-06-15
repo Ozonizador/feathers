@@ -35,7 +35,7 @@ export const updateAdvertisementPayment = async (reservationId?: string) => {
   return { success: true };
 };
 
-type AddReservationPaymentProps = {
+export type AddReservationPaymentProps = {
   reference: string;
   metadata: string;
   valor: number;
@@ -61,7 +61,7 @@ export const addReservationPayment = async (reservationId: string, paymentInfo: 
   if (error)
     throw new TRPCError({ message: "Error adding the payment information of the reservation", code: "BAD_REQUEST" });
 
-  return { success: true };
+  return { error };
 };
 
 export const updateReservationPayment = async (reservationId: string, payment_status: PaymentStatus) => {

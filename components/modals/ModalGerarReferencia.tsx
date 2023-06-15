@@ -15,7 +15,7 @@ const ModalGerarReferencia = () => {
   const user = useUser();
   const [selectedPayment, setSelectedPayment] = useState<"multibanco" | "mbway">("multibanco");
   const { generateReferenceModalOpen } = useModaisAnuncioDetalhes();
-  const reservation = useModalGerarReferencia();
+  const { reservation, value } = useModalGerarReferencia();
   const setModalProperty = useSetModalGerarReferencia();
 
   // trpc methods
@@ -28,16 +28,16 @@ const ModalGerarReferencia = () => {
   }
 
   const generateReference = async () => {
-    if (!reservation || !user) return;
+    if (!reservation || !user || !value) return;
 
     if (selectedPayment === "mbway") {
       await addMbWayReference.mutateAsync({
         reservationId: reservation.id,
-        value: 0,
+        value,
         inputtedPhone: "",
       });
     } else {
-      await addMultibancoReference.mutateAsync({ reservationId: reservation.id, value: 0 });
+      await addMultibancoReference.mutateAsync({ reservationId: reservation.id, value });
     }
   };
 
