@@ -9,7 +9,6 @@ import {
   useSetModalGerarReferenciaReservation,
 } from "../../../../context/ModalShowProvider";
 
-import useReservationService from "../../../../hooks/reservationService";
 import { useCurrentUser, useGetUserDates, useSetSearchLocationByProperty } from "../../../../context/MainProvider";
 import FeatherDatePicker from "../../../utils/FeatherDatepicker";
 import { useRouter } from "next/router";
@@ -121,6 +120,9 @@ export const RoomPagamento = () => {
         setReservationOnModal(data);
         setModalGerarRef(true);
         toast.success("Reservation requested.");
+      },
+      onError: (error) => {
+        toast.error(error.message);
       },
     });
   };

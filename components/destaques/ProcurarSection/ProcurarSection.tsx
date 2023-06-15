@@ -19,7 +19,6 @@ import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
-import PopoverSelect from "../../utils/PopoverSelect";
 import { format } from "date-fns";
 import Button from "../../utils/Button";
 

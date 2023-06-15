@@ -7,7 +7,8 @@ export async function createContext({ req, res }: trpcNext.CreateNextContextOpti
   // Will be available as `ctx` in all your resolvers
   // This is just an example of something you might want to do in your ctx fn
   async function getUserFromHeader() {
-    const userAuth = req.cookies["supabase-auth-token"];
+    const userAuth = req.cookies["sb-localhost-auth-token"];
+
     if (!userAuth || !process.env.NEXT_PUBLIC_SUPABASE_JWT_SECRET) return undefined;
 
     const parsedAuth = JSON.parse(userAuth);

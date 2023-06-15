@@ -76,7 +76,7 @@ export const SearchInputField = () => {
           <div>
             <input
               type="search"
-              className="bg-terciary-50 h-16 w-full rounded-xl border p-0 px-2 lg:w-72"
+              className="bg-terciary-50 h-16 w-full rounded-xl border-none p-0 px-2 focus:ring-transparent lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder="Encontrar &#x2302; em:"
               value={location}

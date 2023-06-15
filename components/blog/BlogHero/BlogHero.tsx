@@ -16,11 +16,11 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
             return (
               <Link href={`/blog/${blog.slug}`} key={blog.id}>
                 <article className=" relative h-96 w-full cursor-pointer rounded-3xl bg-black px-7 lg:w-2/6">
-                  <Image src={blog.image} layout="fill" alt="" className="rounded-3xl opacity-50" />
+                  <Image src={blog.image} layout="fill" alt="" objectFit="cover" className="rounded-3xl opacity-50" />
 
                   <div className="absolute bottom-8 left-4 w-11/12">
                     <h2 className="bold  mb-2 text-2xl font-normal capitalize text-white">{blog.title}</h2>
-                    <p className="bold  text-base font-normal normal-case text-white line-clamp-2">
+                    <p className="bold  line-clamp-2 text-base font-normal normal-case text-white">
                       {blog.description}
                     </p>
                     <div className="mt-8 flex flex-row justify-between">

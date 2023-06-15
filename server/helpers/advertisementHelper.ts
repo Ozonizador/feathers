@@ -13,6 +13,7 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
   // place type
   filter.placeType && filter.placeType !== "ALL" && (query = query.eq(ADVERTISEMENT_PROPERTIES.TYPE, filter.placeType));
 
+  debugger;
   filter.comodities &&
     filter.comodities.length !== 0 &&
     (query = query.contains(ADVERTISEMENT_PROPERTIES.AMENITIES, filter.comodities));
