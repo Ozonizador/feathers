@@ -9,12 +9,12 @@ export async function createContext({ req, res }: trpcNext.CreateNextContextOpti
   async function getUserFromHeader() {
     const userAuth = req.cookies["sb-localhost-auth-token"];
 
-    if (!userAuth || !process.env.NEXT_PUBLIC_SUPABASE_JWT_SECRET) return undefined;
+    if (!userAuth || !process.env.SUPABASE_JWT_SECRET) return undefined;
 
     const parsedAuth = JSON.parse(userAuth);
     const token = parsedAuth[0];
     try {
-      var decoded = jwt.verify(token, process.env.NEXT_PUBLIC_SUPABASE_JWT_SECRET) as jwt.JwtPayload;
+      var decoded = jwt.verify(token, process.env.SUPABASE_JWT_SECRET) as jwt.JwtPayload;
       var userId = decoded.sub;
       return userId;
     } catch (err) {
