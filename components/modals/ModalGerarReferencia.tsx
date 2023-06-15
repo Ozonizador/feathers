@@ -10,9 +10,11 @@ import classNames from "classnames";
 import Button from "../utils/Button";
 import { trpc } from "../../utils/trpc";
 import { useUser } from "@supabase/auth-helpers-react";
+import FeathersSpinner from "../utils/Spinner";
 
 const ModalGerarReferencia = () => {
   const user = useUser();
+  const [loadingReference, setLoadingReference] = useState<boolean>(false);
   const [selectedPayment, setSelectedPayment] = useState<"multibanco" | "mbway">("multibanco");
   const { generateReferenceModalOpen } = useModaisAnuncioDetalhes();
   const { reservation, value } = useModalGerarReferencia();
@@ -30,14 +32,31 @@ const ModalGerarReferencia = () => {
   const generateReference = async () => {
     if (!reservation || !user || !value) return;
 
+    setLoadingReference(true);
     if (selectedPayment === "mbway") {
-      await addMbWayReference.mutateAsync({
-        reservationId: reservation.id,
-        value,
-        inputtedPhone: "",
-      });
+      await addMbWayReference.mutateAsync(
+        {
+          reservationId: reservation.id,
+          value,
+          inputtedPhone: "",
+        },
+        {
+          onSuccess: (data) => {
+            console.log(data);
+          },
+          onSettled: () => setLoadingReference(false),
+        }
+      );
     } else {
-      await addMultibancoReference.mutateAsync({ reservationId: reservation.id, value });
+      await addMultibancoReference.mutateAsync(
+        { reservationId: reservation.id, value },
+        {
+          onSuccess: (data) => {
+            console.log(data);
+          },
+          onSettled: () => setLoadingReference(false),
+        }
+      );
     }
   };
 
@@ -112,8 +131,8 @@ const ModalGerarReferencia = () => {
                     </div>
                     <div className="mb-5 flex justify-center">
                       <div className="w-40">
-                        <Button type={"button"} disabled={false} onClick={generateReference}>
-                          Gerar Referencia
+                        <Button type={"button"} disabled={loadingReference} onClick={generateReference}>
+                          {loadingReference ? <FeathersSpinner /> : "Gerar Referencia"}
                         </Button>
                       </div>
                     </div>
