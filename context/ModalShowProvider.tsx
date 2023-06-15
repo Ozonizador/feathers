@@ -1,5 +1,5 @@
 import { Dispatch, ReactElement, SetStateAction, createContext, useContext, useState } from "react";
-import { ReservationComplete } from "../models/reservation";
+import { Reservation, ReservationComplete } from "../models/reservation";
 
 interface ModalDetalhesPagamentoProps {
   children: ReactElement;
@@ -8,12 +8,14 @@ interface ModalDetalhesPagamentoProps {
 interface ModalAdvertPageProps {
   detailsModalOpen: boolean;
   reviewsModalOpen: boolean;
+  generateReferenceModalOpen: boolean;
 }
 
 // Context Modal Open Share
 const ModalsAdvertPageContext = createContext<ModalAdvertPageProps>({
   detailsModalOpen: false,
   reviewsModalOpen: false,
+  generateReferenceModalOpen: false,
 });
 const SetModalsAdvertPageContext = createContext<Dispatch<SetStateAction<ModalAdvertPageProps>>>(() => {});
 
@@ -21,6 +23,7 @@ export const ModalAnuncioInfoProvider = ({ children }: ModalDetalhesPagamentoPro
   const [modalOpen, setModalOpen] = useState<ModalAdvertPageProps>({
     detailsModalOpen: false,
     reviewsModalOpen: false,
+    generateReferenceModalOpen: false,
   });
 
   return (
@@ -30,7 +33,7 @@ export const ModalAnuncioInfoProvider = ({ children }: ModalDetalhesPagamentoPro
   );
 };
 
-export function useModalDetalhesPagamento() {
+export function useModaisAnuncioDetalhes() {
   const modalOpen = useContext(ModalsAdvertPageContext);
   return modalOpen;
 }
@@ -46,6 +49,13 @@ export function useSetModalReviews() {
   const setModal = useContext(SetModalsAdvertPageContext);
   return (value: boolean) => {
     setModal((currentValue) => ({ ...currentValue, reviewsModalOpen: value }));
+  };
+}
+
+export function useSetModalGerarReferencia() {
+  const setModal = useContext(SetModalsAdvertPageContext);
+  return (value: boolean) => {
+    setModal((currentValue) => ({ ...currentValue, generateReferenceModalOpen: value }));
   };
 }
 
@@ -229,5 +239,38 @@ export function useSetModalAlterarReserva() {
   const setModalReport = useContext(SetModalAlterarReservaContext);
   return (report: ModalAlterReservaElements) => {
     setModalReport(report);
+  };
+}
+
+/**
+ * Modal Gerar Referencia
+ */
+
+interface ModalAlterarReversaProps {
+  children: ReactElement;
+}
+
+const ModalGerarReferenciaContext = createContext<Reservation | undefined>(undefined);
+const SetModalGerarReferenciaContext = createContext<Dispatch<SetStateAction<Reservation | undefined>>>(() => {});
+
+export const ModalGerarReferenciaProvider = ({ children }: ModalAlterarReversaProps): JSX.Element => {
+  const [modalInfo, setModalInfo] = useState<Reservation | undefined>(undefined);
+
+  return (
+    <ModalGerarReferenciaContext.Provider value={modalInfo}>
+      <SetModalGerarReferenciaContext.Provider value={setModalInfo}>{children}</SetModalGerarReferenciaContext.Provider>
+    </ModalGerarReferenciaContext.Provider>
+  );
+};
+
+export function useModalGerarReferencia() {
+  const reservation = useContext(ModalGerarReferenciaContext);
+  return reservation;
+}
+
+export function useSetModalGerarReferenciaReservation() {
+  const setModalReport = useContext(SetModalGerarReferenciaContext);
+  return (reservation?: Reservation) => {
+    setModalReport(reservation);
   };
 }

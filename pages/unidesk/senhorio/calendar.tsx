@@ -76,7 +76,6 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
         minimumStay,
         monthsInAdvance,
         advertisementId: selectedAdvertisement.id,
-        userId: user.id,
       },
       {
         onSuccess: (data) => {
@@ -102,7 +101,6 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
         semesterDiscount,
         trimesterDiscount,
         advertisementId: selectedAdvertisement.id,
-        userId: user.id,
       },
       {
         onSuccess: (data) => {

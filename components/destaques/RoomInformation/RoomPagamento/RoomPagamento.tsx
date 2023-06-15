@@ -3,7 +3,11 @@ import { differenceInMonths } from "date-fns";
 
 import { Label } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import { useSetModalDetalhesPagamento } from "../../../../context/ModalShowProvider";
+import {
+  useSetModalDetalhesPagamento,
+  useSetModalGerarReferencia,
+  useSetModalGerarReferenciaReservation,
+} from "../../../../context/ModalShowProvider";
 
 import useReservationService from "../../../../hooks/reservationService";
 import { useCurrentUser, useGetUserDates, useSetSearchLocationByProperty } from "../../../../context/MainProvider";
@@ -15,6 +19,8 @@ import Input from "../../../utils/Input";
 import { Controller, useForm } from "react-hook-form";
 import ExpensesComponent from "../../../anuncio/ExpensesComponent";
 import { SearchFields } from "../../../search/SearchInputField";
+import { Reservation } from "../../../../models/reservation";
+import { trpc } from "../../../../utils/trpc";
 
 interface FormReservation {
   number_guests: number;
@@ -23,12 +29,15 @@ interface FormReservation {
 export const RoomPagamento = () => {
   const router = useRouter();
   const profile = useCurrentUser();
-  const { addReservation } = useReservationService();
+  const setReservationOnModal = useSetModalGerarReferenciaReservation();
+  const setModalGerarRef = useSetModalGerarReferencia();
 
   let { startDate: userSelectedStartDate, endDate: userSelectedEndDate } = useGetUserDates();
   const setSearchInfoProperty = useSetSearchLocationByProperty();
   const advertisement = useGetSingleAdvertisement();
   let setIsOpen = useSetModalDetalhesPagamento();
+
+  const addReservation = trpc.reservations.addReservation.useMutation();
 
   const { month_rent, semester_discount, trimester_discount, months_notif_in_advance, minimum_stay } =
     advertisement || {
@@ -92,10 +101,28 @@ export const RoomPagamento = () => {
       router.push("/auth/login");
       return;
     }
+
+    if (!advertisement) return;
+
+    const newReservation = {
+      ...reservation,
+      start_date: startDate,
+      end_date: endDate,
+      advertisement_id: advertisement.id,
+    } as Reservation;
+
     // get the reservation
-    const { error } = await addReservation(reservation, profile.id);
-    if (error) return toast.error("There was a error making the reservation. Contact the Unihosts support.");
-    toast.success("Reservation requested.");
+    await addReservation.mutateAsync(newReservation, {
+      onSuccess: (info) => {
+        const { data, error } = info;
+        if (error || !data)
+          return toast.error("There was a error making the reservation. Contact the Unihosts support.");
+
+        setReservationOnModal(data);
+        setModalGerarRef(true);
+        toast.success("Reservation requested.");
+      },
+    });
   };
 
   const mobileRangeDates = () => {

@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { useModalDetalhesPagamento, useSetModalReviews } from "../../context/ModalShowProvider";
+import { useModaisAnuncioDetalhes, useSetModalReviews } from "../../context/ModalShowProvider";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import ReviewCard from "../advertisements/ReviewCard";
 import useReviewService from "../../hooks/reviewService";
@@ -13,7 +13,7 @@ const ModalReviewsAdvert = () => {
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);
   const advertisement = useGetSingleAdvertisement();
   const { stays } = advertisement || { stays: [] };
-  let { reviewsModalOpen } = useModalDetalhesPagamento();
+  let { reviewsModalOpen } = useModaisAnuncioDetalhes();
   let setModalReviewsOpen = useSetModalReviews();
   const { getAveragesByAdvertisementId } = useReviewService();
 

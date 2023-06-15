@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { useModalDetalhesPagamento, useSetModalDetalhesPagamento } from "../../context/ModalShowProvider";
+import { useModaisAnuncioDetalhes, useSetModalDetalhesPagamento } from "../../context/ModalShowProvider";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
@@ -15,7 +15,7 @@ interface formatOpts {
 
 const ModalDetalhesPagamento = () => {
   const advertisement = useGetSingleAdvertisement();
-  let { detailsModalOpen } = useModalDetalhesPagamento();
+  let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
   let setIsOpen = useSetModalDetalhesPagamento();
 
