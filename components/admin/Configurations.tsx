@@ -9,7 +9,6 @@ import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 import Checkbox from "../utils/Checkbox";
-import { FaRegLightbulb } from "react-icons/fa";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];

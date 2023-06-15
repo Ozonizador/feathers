@@ -5,9 +5,15 @@ import { Advertisements, ADVERTISEMENT_TABLE_NAME } from "../models/advertisemen
 import { Profile, PROFILE_TABLE_NAME } from "../models/profile";
 import { publicProcedure } from "./trpc";
 
-export const authorizedProcedure = publicProcedure.input(z.object({ userId: z.string() })).use(async (opts) => {
+export const authorizedProcedure = publicProcedure.use(async (opts) => {
   const { ctx } = opts;
   const { userId } = ctx;
+
+  if (!userId)
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Missing userId",
+    });
 
   const { data, error } = await supabaseAdmin
     .from<"profiles", Profile>(PROFILE_TABLE_NAME)

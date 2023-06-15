@@ -20,6 +20,7 @@ import { Controller, useForm } from "react-hook-form";
 import ExpensesComponent from "../../../anuncio/ExpensesComponent";
 import { SearchFields } from "../../../search/SearchInputField";
 import { Reservation } from "../../../../models/reservation";
+import { trpc } from "../../../../utils/trpc";
 
 interface FormReservation {
   number_guests: number;
@@ -28,7 +29,6 @@ interface FormReservation {
 export const RoomPagamento = () => {
   const router = useRouter();
   const profile = useCurrentUser();
-  const { addReservation } = useReservationService();
   const setReservationOnModal = useSetModalGerarReferenciaReservation();
   const setModalGerarRef = useSetModalGerarReferencia();
 
@@ -36,6 +36,8 @@ export const RoomPagamento = () => {
   const setSearchInfoProperty = useSetSearchLocationByProperty();
   const advertisement = useGetSingleAdvertisement();
   let setIsOpen = useSetModalDetalhesPagamento();
+
+  const addReservation = trpc.reservations.addReservation.useMutation();
 
   const { month_rent, semester_discount, trimester_discount, months_notif_in_advance, minimum_stay } =
     advertisement || {
@@ -107,17 +109,20 @@ export const RoomPagamento = () => {
       start_date: startDate,
       end_date: endDate,
       advertisement_id: advertisement.id,
-      status: "REQUESTED",
     } as Reservation;
 
     // get the reservation
-    const { data, error } = await addReservation(newReservation, profile.id);
-    debugger;
-    if (error || !data) return toast.error("There was a error making the reservation. Contact the Unihosts support.");
+    await addReservation.mutateAsync(newReservation, {
+      onSuccess: (info) => {
+        const { data, error } = info;
+        if (error || !data)
+          return toast.error("There was a error making the reservation. Contact the Unihosts support.");
 
-    setReservationOnModal(data);
-    setModalGerarRef(true);
-    toast.success("Reservation requested.");
+        setReservationOnModal(data);
+        setModalGerarRef(true);
+        toast.success("Reservation requested.");
+      },
+    });
   };
 
   const mobileRangeDates = () => {

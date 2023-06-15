@@ -18,7 +18,7 @@ const Spinner = dynamic(() => import("./Spinner"), {
 });
 
 const buttonProps = variantProps({
-  base: tw`w-full text-center focus:outline-none focus:ring-0 cursor-pointer`,
+  base: tw`w-full text-center focus:outline-none focus:ring-0`,
   variants: {
     variant: {
       facebook: tw`bg-socials-facebook`,
@@ -32,7 +32,8 @@ const buttonProps = variantProps({
       full: tw`rounded-full`,
     },
     disabled: {
-      true: tw`opacity-60`,
+      true: tw`opacity-60 cursor-none`,
+      false: tw`cursor-pointer`,
     },
     padding: {
       sm: tw`px-3 py-2`,

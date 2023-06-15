@@ -21,6 +21,7 @@ import { coordinateArrayToLatitude } from "../../../utils/map-services";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import PopoverSelect from "../../utils/PopoverSelect";
 import { format } from "date-fns";
+import Button from "../../utils/Button";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -136,7 +137,7 @@ export default function ProcurarSection() {
                 })}
               </select>
               <div className="flex h-20 flex-row justify-start gap-4">
-                <div className="w-1/2">
+                <div className="w-1/2 lg:w-52">
                   <div className="h-full w-full rounded-md border border-solid border-terciary-500 bg-white p-1 text-sm lg:w-52">
                     <div className="mb-1 text-sm">Preço</div>
                     <Slider
@@ -151,17 +152,8 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="w-1/2">
-                  <PopoverSelect
-                    title={"Comodities"}
-                    options={SelectAmenityLabel.map((amenity) => ({
-                      id: amenity.value,
-                      value: amenity.value,
-                      label: amenity.label,
-                    }))}
-                    onClick={toggleComododitiesFilter}
-                    selectedOptions={comodities}
-                  ></PopoverSelect>
+                <div className="w-full flex-1">
+                  <Button type="button">Mais Filtros</Button>
                 </div>
               </div>
 

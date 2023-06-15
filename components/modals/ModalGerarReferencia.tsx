@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import {
@@ -6,18 +6,39 @@ import {
   useModalGerarReferencia,
   useSetModalGerarReferencia,
 } from "../../context/ModalShowProvider";
+import classNames from "classnames";
+import Button from "../utils/Button";
+import { trpc } from "../../utils/trpc";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const ModalGerarReferencia = () => {
+  const user = useUser();
+  const [selectedPayment, setSelectedPayment] = useState<"multibanco" | "mbway">("multibanco");
   const { generateReferenceModalOpen } = useModaisAnuncioDetalhes();
   const reservation = useModalGerarReferencia();
   const setModalProperty = useSetModalGerarReferencia();
+
+  // trpc methods
+
+  const addMultibancoReference = trpc.payments.addMultibancoPayment.useMutation();
+  const addMbWayReference = trpc.payments.addMbWayPayment.useMutation();
 
   function closeModal() {
     setModalProperty(false);
   }
 
-  const generateReference = () => {
-    if (!reservation) return;
+  const generateReference = async () => {
+    if (!reservation || !user) return;
+
+    if (selectedPayment === "mbway") {
+      await addMbWayReference.mutateAsync({
+        reservationId: reservation.id,
+        value: 0,
+        inputtedPhone: "",
+      });
+    } else {
+      await addMultibancoReference.mutateAsync({ reservationId: reservation.id, value: 0 });
+    }
   };
 
   return (
@@ -47,9 +68,12 @@ const ModalGerarReferencia = () => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
-                <Dialog.Title as="h3" className="flex bg-primary-300 p-5 text-lg font-medium leading-6 text-gray-900">
+                <Dialog.Title
+                  as="h3"
+                  className="flex gap-3 bg-primary-300 p-5 text-lg font-medium leading-6 text-white"
+                >
                   <Image className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
-                  <span>Gerar referencia</span>
+                  <span className="my-auto">Gerar referencia</span>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -60,12 +84,38 @@ const ModalGerarReferencia = () => {
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
                 >
-                  <div className="flex justify-center gap-5 py-10">
-                    <div className="my-auto">
-                      <Image src="/icons/multibanco.svg" alt="multibanco" width={54} height={42}></Image>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-center gap-5 py-10">
+                      <div
+                        className={classNames("relative h-24 px-4 py-4", {
+                          "my-auto cursor-pointer border-b border-primary-500": selectedPayment === "multibanco",
+                        })}
+                        onClick={() => setSelectedPayment("multibanco")}
+                      >
+                        <Image
+                          className="py-3"
+                          src="/icons/multibanco.svg"
+                          alt="multibanco"
+                          objectFit="contain"
+                          height={64}
+                          width={48}
+                        ></Image>
+                      </div>
+                      <div
+                        onClick={() => setSelectedPayment("mbway")}
+                        className={classNames("relative h-24 px-4 py-4", {
+                          "cursor-pointer border-b border-primary-500": selectedPayment === "mbway",
+                        })}
+                      >
+                        <Image src="/icons/mbway.svg" alt="mbway" objectFit="contain" height={64} width={64}></Image>
+                      </div>
                     </div>
-                    <div>
-                      <Image src="/icons/mbway.svg" alt="mbway" width={114} height={64}></Image>
+                    <div className="mb-5 flex justify-center">
+                      <div className="w-40">
+                        <Button type={"button"} disabled={false} onClick={generateReference}>
+                          Gerar Referencia
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>

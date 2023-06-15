@@ -15,7 +15,7 @@ const EUPAGO_URL = "https://sandbox.eupago.pt";
 const PaymentSchema = z.object({ value: z.number(), reservationId: z.string() });
 
 export const paymentsRouter = router({
-  addMultibancoPayment: authorizedProcedure.input(PaymentSchema).query(async ({ input, ctx }) => {
+  addMultibancoPayment: authorizedProcedure.input(PaymentSchema).mutation(async ({ input, ctx }) => {
     const { userId } = ctx;
     const { value, reservationId } = input;
 
@@ -55,7 +55,7 @@ export const paymentsRouter = router({
   }),
   addMbWayPayment: authorizedProcedure
     .input(PaymentSchema.extend({ inputtedPhone: z.string() }))
-    .query(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       const { userId } = ctx;
       const { value, reservationId, inputtedPhone } = input;
 
