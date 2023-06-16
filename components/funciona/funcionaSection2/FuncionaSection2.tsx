@@ -6,7 +6,7 @@ import { ANUNCIAR_PROP_URL } from "../../../models/paths";
 
 const FuncionaSection2 = () => {
   return (
-    <section className="container my-20  lg:mx-auto">
+    <section className="max-width my-20">
       <div className="container mx-auto flex flex-row justify-between  ">
         <FuncionaSection2Card
           img="/images/img1.png"

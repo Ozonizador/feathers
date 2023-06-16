@@ -18,14 +18,14 @@ const HomeSection2Cards = ({ img, icon, heading, text }: HomeSection2CardsProps)
             <Image src={icon} alt="" height={48} width={48}></Image>
           </div>
           <div className="w-full">
-            <h2 className="mb-4 text-2xl font-bold text-secondary-600">{heading}</h2>
-            <p className="text-secondary-400">{text}</p>
+            <h2 className="mb-4 text-xl font-bold text-secondary-600">{heading}</h2>
+            <p className="text-sm text-secondary-400">{text}</p>
           </div>
         </article>
       </div>
 
       <div className="block lg:hidden">
-        <article className="card  mb-8 w-full rounded-2xl bg-white p-5 drop-shadow-xl">
+        <article className="card mb-8 w-full rounded-2xl bg-white p-5 drop-shadow-xl">
           <Image src={img} alt="" height={109} width={109}></Image>
           <div className="mt-2 flex flex-col">
             <div className="flex flex-row items-center align-middle">

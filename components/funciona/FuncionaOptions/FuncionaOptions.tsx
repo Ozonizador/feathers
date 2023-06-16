@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const FuncionaOptions = () => {
   return (
-    <section className="mx-5 my-20 flex flex-col justify-center gap-5 lg:mx-32 lg:flex-1 lg:flex-row lg:gap-12">
+    <section className="max-width mx-5 my-20 flex flex-col justify-center gap-5 lg:flex-row lg:gap-12">
       <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-[30%]">
         <div>
           <h1 className="mb-9 mt-4 text-center text-2xl font-bold">Gestão da casa</h1>

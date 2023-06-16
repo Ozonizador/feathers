@@ -9,13 +9,11 @@ import FuncionaOndeEstamos from "../components/funciona/FuncionaOndeEstamos/Func
 export default function Home() {
   return (
     <div>
-      <div>
-        <FuncionaSection1 />
-        <FuncionaSection2 />
-        <FuncionaUniPackages />
-        <FuncionaOptions />
-        <FuncionaOndeEstamos />
-      </div>
+      <FuncionaSection1 />
+      <FuncionaSection2 />
+      <FuncionaUniPackages />
+      <FuncionaOptions />
+      <FuncionaOndeEstamos />
     </div>
   );
 }
