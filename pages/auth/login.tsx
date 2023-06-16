@@ -38,8 +38,8 @@ const Login = () => {
   };
 
   return (
-    <div className="my-10 flex justify-center">
-      <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
+    <div className="max-width my-10 flex justify-center">
+      <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-7/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
           <Link href={REGISTER_URL}>
@@ -48,7 +48,7 @@ const Login = () => {
             </a>
           </Link>
         </div>
-        <div className="mt-9 p-3">
+        <div className="mt-9 px-10 py-5">
           <div className="mb-9 text-xl font-bold">
             Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
           </div>

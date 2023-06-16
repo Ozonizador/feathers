@@ -82,7 +82,7 @@ export const SearchInputField = () => {
           <div>
             <input
               type="input"
-              className="bg-terciary-50 h-16 w-full rounded-xl border border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
+              className="bg-terciary-50 h-16 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder="Encontrar &#x2302; em:"
               value={location}
@@ -104,7 +104,7 @@ export const SearchInputField = () => {
         </div>
 
         <div className="flex flex-row gap-2 lg:gap-0">
-          <div className="z-50 my-2 w-1/2 rounded-xl border border-primary-500 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
               date={startDate}
               className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
@@ -118,7 +118,7 @@ export const SearchInputField = () => {
               minDate={new Date()}
             />
           </div>
-          <div className="z-50 my-2 w-1/2 rounded-xl border border-primary-500 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
               className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
               date={endDate}
