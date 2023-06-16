@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ExploreCity = () => {
   return (
-    <section>
+    <section className="max-width">
       <div className="bg-terciary-300  lg:block">
         <div className="mx-auto p-4 text-center lg:px-8 lg:py-10">
           <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>

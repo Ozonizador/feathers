@@ -9,7 +9,7 @@ interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   variant?: "primary" | "facebook" | "gmail" | "informative";
-  rounded?: "xl" | "full";
+  rounded?: "xl" | "full" | "none";
   padding?: "sm" | "md" | "lg";
   [x: string]: any;
 }
