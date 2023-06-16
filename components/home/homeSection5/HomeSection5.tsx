@@ -7,9 +7,9 @@ import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 
 const HomeSection5 = () => {
   return (
-    <section>
-      <div className="pt-24 pb-36">
-        <h2 className="mb-12 text-3xl font-bold lg:text-5xl">Como Funciona?</h2>
+    <section className="max-width">
+      <div className="pb-36 pt-24">
+        <h2 className="mb-12 text-3xl font-black lg:text-5xl">Como Funciona?</h2>
         <div className="mb-24 grid gap-10 lg:grid-cols-3">
           <HomeSection5Cards
             img="/images/homeSection2-3.svg"

@@ -10,8 +10,8 @@ const FaqEstudante = () => {
 
   return (
     <>
-      <section className="px-4 lg:px-0">
-        <div className=" mx-auto mb-5 w-10/12 ">
+      <section className="max-width px-4 lg:px-0">
+        <div className=" mx-auto mb-5">
           <h1 className="mt-24 text-center text-6xl font-bold">FAQ</h1>
         </div>
 
@@ -23,7 +23,7 @@ const FaqEstudante = () => {
           <div className="form-check form-switch"></div>
         </div>
 
-        <div className="mb-32 lg:px-96">
+        <div className="mb-32">
           {/* Estudante */}
           {selectedFaq === "TENANT" && (
             <Accordion>

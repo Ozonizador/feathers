@@ -15,6 +15,7 @@ import Button from "../components/utils/Button";
 {
   /* page 9 XD */
 }
+
 const Index = () => {
   let [isOpen, setIsOpen] = useState(false);
   const categories = ["LANDLORD", "TENANT"] as UserTypes[];
@@ -37,13 +38,13 @@ const Index = () => {
   }, [getBlogPosts]);
 
   return (
-    <>
-      <section className="container mx-auto pb-5 pt-20">
-        <div className="flex flex-col items-center justify-center align-middle lg:flex-row lg:justify-between">
-          <div className="text-center text-3xl font-bold lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
+    <section className="max-width mt-36">
+      <div>
+        <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
+          <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
           <div className="flex h-5 w-full items-center lg:w-44 ">
             <select
-              className="mt-24 w-full  rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:mt-0 lg:w-44"
+              className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 lg:mt-0 lg:w-44"
               placeholder="Categoria"
               onChange={(e) => setCategory(e.target.value as UserTypes)}
             >
@@ -57,9 +58,9 @@ const Index = () => {
             </select>
           </div>
         </div>
-      </section>
+      </div>
       {loading && (
-        <div className="flex justify-center">
+        <div className="mt-14 flex justify-center">
           <Spinner color="info" aria-label="loading" size="lg" />
         </div>
       )}
@@ -70,7 +71,7 @@ const Index = () => {
         </>
       )}
       <>
-        <div className="container mx-auto">
+        <div className="mx-auto py-6">
           <div className="mx-auto mb-44 mt-14 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
             <div className="alert alert-warning con ml-3" role="alert">
               <Image className="h-10" src={notification} alt="" />
@@ -83,7 +84,7 @@ const Index = () => {
         </div>
       </>
       <ModalNotification setOpen={setIsOpen} isOpen={isOpen} />
-    </>
+    </section>
   );
 };
 

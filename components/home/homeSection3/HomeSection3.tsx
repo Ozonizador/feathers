@@ -41,7 +41,7 @@ export default function HomeSection3() {
   const advertisements = advertisementsData && advertisementsData.data;
 
   return (
-    <>
+    <div className="max-width">
       {!advertisements && <></>}
       {advertisements && advertisements.length > 0 && (
         <>
@@ -101,6 +101,6 @@ export default function HomeSection3() {
           </section>
         </>
       )}
-    </>
+    </div>
   );
 }

@@ -17,8 +17,7 @@ import { useCurrentUser, useSetProfileFavouritesInformation } from "../../../con
 import classNames from "classnames";
 import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
-import { BsDot } from "react-icons/bs";
-import { AiFillHeart } from "react-icons/ai";
+import { BsDot, BsHeart } from "react-icons/bs";
 import { checkIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 
 interface RoomCardProps {
@@ -48,14 +47,12 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   };
 
   const isFavourite = useCallback(() => {
-    if (profile) {
-      const { favourite_rooms } = profile;
-      if (favourite_rooms) {
-        const index = favourite_rooms.findIndex((room) => advertisement.id == room);
-        return index !== -1;
-      }
-    }
-    return false;
+    if (!profile) return false;
+
+    const { favourite_rooms } = profile;
+    if (!favourite_rooms) return false;
+    const index = favourite_rooms.findIndex((room) => advertisement.id == room);
+    return index !== -1;
   }, [advertisement.id, profile]);
 
   const getMainPhoto = useMemo(() => {
@@ -150,11 +147,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       variant="informative"
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
-                      <AiFillHeart
-                        className={classNames("inline", {
-                          "fill-red-600 text-red-600": isFavourite(),
-                        })}
-                      />
+                      <BsHeart className={classNames("inline")} color={isFavourite() == false ? "black" : "red"} />
                       <span className="my-auto ml-2">Favoritos</span>
                     </Button>
                   </div>

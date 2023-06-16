@@ -8,7 +8,7 @@ import valoresImage from "../public/images/sobre_nos_valores.jpg";
 
 const AboutUs = () => {
   return (
-    <>
+    <div className="max-width">
       <div className="hidden w-full bg-black lg:block">
         <Image layout="intrinsic" src={headerImage} alt="Sobre Nos" className=" opacity-60"></Image>
       </div>
@@ -25,13 +25,13 @@ const AboutUs = () => {
         ></Image>
       </div>
 
-      <div className="mt-10 px-3 lg:px-60">
+      <div className="mt-10 px-3">
         <div className="mb-5 px-4">
           <h4 className="text-left text-5xl font-bold">Sobre Nós</h4>
           <h6 className="mb-10 mt-16 text-4xl lg:mb-11 lg:mt-16">
             Uma plataforma que facilita o aluguer à velocidade do agora!
           </h6>
-          <p className="mt-5 mb-24 text-justify lg:mb-28">
+          <p className="mb-24 mt-5 text-justify lg:mb-28">
             Fomos estudantes que ainda hoje relembram memórias, pessoas e experiências que marcaram o nosso percurso.
             Somos gratos por esses momentos. O nosso propósito serve para inspirar e contribuir para que essa jornada
             académica seja rotulada pelo alojamento ideal.
@@ -83,7 +83,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

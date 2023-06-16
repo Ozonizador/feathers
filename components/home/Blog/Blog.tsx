@@ -27,7 +27,7 @@ export default function BlogSection() {
   }, [getLatestBlogs]);
 
   return (
-    <section className="pb-10">
+    <section className="max-width pb-10">
       {loading && (
         <>
           <Spinner color="info" aria-label="loading" size="lg" />

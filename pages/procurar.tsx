@@ -9,10 +9,10 @@ const Procurar = () => {
     <ModalMaisFiltrosProvider>
       <ProcurarAdvertisementsProvider>
         <div>
-          <div className="flex flex-col justify-center px-5 lg:flex-row lg:px-0">
+          <div className="max-width flex flex-col justify-center px-5 lg:flex-row lg:px-0">
             <SearchInputField />
           </div>
-          <div className="my-10">
+          <div className="max-width my-10">
             <ProcurarSection />
           </div>
         </div>

@@ -4,14 +4,14 @@ import FuncionaSection3Card from "./FuncionaSection3Card";
 
 const FuncionaUniPackages = () => {
   return (
-    <section className="container-fluid bg-terciary-300 pt-10 pb-1">
+    <section className="max-width bg-terciary-300 pb-1 pt-10">
       <div className="container mx-auto mt-14 text-center">
         <p className="mb-10 text-primary-500 underline underline-offset-1">
           Não tem tempo ou não está perto da sua propriedade? A UniHosts tem a solução!
         </p>
         <h1 className="text-5xl font-bold lg:text-6xl">Conheça Os Nossos Unipackages</h1>
 
-        <div className="mt-16 mb-5 grid grid-cols-1 flex-row gap-10 lg:grid-cols-3">
+        <div className="mb-5 mt-16 grid grid-cols-1 flex-row gap-10 lg:grid-cols-3">
           <FuncionaSection3Card
             img="/images/image1.png"
             heading="Nós somos o senhorio por si!"

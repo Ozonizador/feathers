@@ -8,7 +8,7 @@ import { group } from "../../../utils/utils";
 
 const TestemunhosComponent = () => {
   return (
-    <section>
+    <section className="max-width">
       <div className="w-full bg-terciary-300">
         <h6 className="py-8 text-center text-3xl font-black">Testemunhos</h6>
         <div className="hidden h-96 lg:flex">

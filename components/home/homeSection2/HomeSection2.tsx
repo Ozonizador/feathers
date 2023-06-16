@@ -3,7 +3,7 @@ import HomeSection2Cards from "../homeSection2Cards/HomeSection2Cards";
 
 export default function HomeSection2() {
   return (
-    <section>
+    <section className="max-width">
       <div className="mx-auto flex w-10/12 flex-col gap-8 py-20 lg:flex-row lg:gap-4">
         <HomeSection2Cards
           img="/images/homeSection new-1.png"
