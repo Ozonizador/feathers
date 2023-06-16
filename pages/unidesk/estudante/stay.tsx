@@ -44,7 +44,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            <div className="lg:mx-5">
+            <div className="max-width md:px-4">
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <UnideskStructure>
                 <UnideskStructure.Menu>
@@ -67,10 +67,8 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     )}
                     {!currentStay && <div>Não tem estadia programada</div>}
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="mt-2">
-                      <h6 className="text-xl text-gray-600">Próximas estadias</h6>
-                    </div>
+                  <div className="mt-5 flex flex-col gap-3">
+                    <h6 className="text-xl text-gray-600">Próximas estadias</h6>
                     <>
                       {nextStays &&
                         nextStays.map((stay) => {

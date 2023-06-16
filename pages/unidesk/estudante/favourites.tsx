@@ -37,7 +37,7 @@ const UnideskFavoritos = () => {
   }, [getUserFavourites, profile]);
 
   return (
-    <section>
+    <section className="max-width">
       <div className="ml-8 mt-24 flex w-4/6 lg:mx-28 lg:items-center lg:align-middle">
         <div>
           <Image src={iconfavorito} alt="Favoritos" height={55} width={55} />
@@ -48,7 +48,7 @@ const UnideskFavoritos = () => {
         </div>
       </div>
 
-      <div className="container mx-auto mb-32 mt-12 w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32 lg:w-4/6">
+      <div className="container mx-auto mb-32 mt-12 w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32">
         <div className="flex flex-col items-center justify-center align-middle">
           <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
           <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
@@ -69,7 +69,7 @@ const UnideskFavoritos = () => {
               <div
                 className={classNames({
                   "w-11/12 lg:flex lg:w-1/2 lg:justify-center": favourites && favourites.length == 1,
-                  "gap-5 lg:grid lg:grid-cols-2": favourites && favourites.length > 1,
+                  "flex w-full flex-col gap-6 lg:grid lg:grid-cols-2": favourites && favourites.length > 1,
                 })}
               >
                 {favourites.map((favourite, index) => {
@@ -83,15 +83,15 @@ const UnideskFavoritos = () => {
                             <></>
                           )}
                         </div>
-                        <div className="flex flex-1 flex-col p-2">
-                          <div className="text-lg font-bold">{favourite.title}</div>
+                        <div className="flex w-full flex-col p-2">
+                          <div className="mt-5 text-lg font-bold">{favourite.title}</div>
                           <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
 
                           <div className="mt-auto flex">
                             <ExpensesComponent expenses={favourite.expenses} />
                           </div>
                           <Link href={`/anuncio/${favourite.slug}`}>
-                            <a className="text-base text-gray-500">Ver mais</a>
+                            <a className="pb-3 text-base text-gray-500">Ver mais</a>
                           </Link>
                         </div>
                       </div>
