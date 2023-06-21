@@ -1,13 +1,22 @@
-import { Accordion } from "flowbite-react";
+import classNames from "classnames";
 import React, { useState } from "react";
+import { TiPlus, TiMinus } from "react-icons/ti";
 import Toggle from "../components/toggle/toggle";
 import { useGetUserType } from "../context/MainProvider";
 import { UserTypes } from "../models/profile";
+import { trpc } from "../utils/trpc";
 
 const Faqs = () => {
   const { toggleUserType } = useGetUserType();
   const [selectedFaq, setSelectedFaq] = useState<UserTypes>(toggleUserType);
 
+  const { data } = trpc.faqs.getFaqs.useQuery(undefined, {
+    retry: false,
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  });
+
+  const tenantFaqs = data && data.data && data.data.filter((faq) => faq.type === "TENANT");
+  const landlordFaqs = data && data.data && data.data.filter((faq) => faq.type === "LANDLORD");
   return (
     <>
       <section className="max-width px-4 lg:px-0">
@@ -26,58 +35,28 @@ const Faqs = () => {
         <div className="mb-32">
           {/* Estudante */}
           {selectedFaq === "TENANT" && (
-            <Accordion>
-              <Accordion.Panel>
-                <Accordion.Title>What is Flowbite?</Accordion.Title>
-                <Accordion.Content>
-                  <p className="mb-2 text-secondary-300 ">
-                    Flowbite is an open-source library of interactive components built on top of Tailwind CSS including
-                    buttons, dropdowns, modals, navbars, and more.
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to </p>
-                </Accordion.Content>
-              </Accordion.Panel>
-              <Accordion.Panel>
-                <Accordion.Title>Is there a Figma file available?</Accordion.Title>
-                <Accordion.Content>
-                  <p className="mb-2 text-secondary-300">
-                    Flowbite is first conceptualized and designed using the Figma software so everything you see in the
-                    library has a design equivalent in our Figma file.
-                  </p>
-                  <p className="text-secondary-300">Check out the </p>
-                </Accordion.Content>
-              </Accordion.Panel>
-              <Accordion.Panel>
-                <Accordion.Title>What are the differences between Flowbite and Tailwind UI?</Accordion.Title>
-                <Accordion.Content>
-                  <p className="mb-2 text-secondary-300">
-                    The main difference is that the core components from Flowbite are open source under the MIT license,
-                    whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and
-                    standalone components, whereas Tailwind UI offers sections of pages.
-                  </p>
-                  <p className="mb-2 text-gray-500 dark:text-gray-400">
-                    However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is
-                    no technical reason stopping you from using the best of two worlds.
-                  </p>
-                  <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
-                  <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                    <li></li>
-                    <li>
-                      <a
-                        href="https://tailwindui.com/"
-                        rel="nofollow"
-                        className="text-blue-600 hover:underline dark:text-blue-500"
-                      >
-                        Tailwind UI
-                      </a>
-                    </li>
-                  </ul>
-                </Accordion.Content>
-              </Accordion.Panel>
-            </Accordion>
+            <>
+              {tenantFaqs && tenantFaqs.length > 0 && (
+                <div className="flex flex-col gap-4">
+                  {tenantFaqs.map((faq) => (
+                    <FaqQuestion key={faq.id} answer={faq.answer} question={faq.question} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
           {/* SENHORIO */}
-          {selectedFaq === "LANDLORD" && <div>Colocar aqui cenas para o senhorio</div>}
+          {selectedFaq === "LANDLORD" && (
+            <>
+              {landlordFaqs && landlordFaqs.length > 0 && (
+                <div className="flex flex-col gap-4">
+                  {landlordFaqs.map((faq) => (
+                    <FaqQuestion key={faq.id} answer={faq.answer} question={faq.question} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
     </>
@@ -85,3 +64,39 @@ const Faqs = () => {
 };
 
 export default Faqs;
+
+type FaqQuestionProps = {
+  question: string;
+  answer: string;
+};
+
+const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
+  const [answerShown, setAnswerShown] = useState<boolean>(false);
+
+  const toggleAnswerShown = () => {
+    setAnswerShown(!answerShown);
+  };
+  return (
+    <div className="flex flex-col gap-4 rounded-md border p-4">
+      <div className="flex">
+        <h6
+          className={classNames("text-lg", {
+            "font-normal": !answerShown,
+            "font-bold subpixel-antialiased": answerShown,
+          })}
+        >
+          {question}
+        </h6>
+        <div className="ml-auto mr-4" onClick={() => toggleAnswerShown()}>
+          {!answerShown ? <TiPlus size={24} /> : <TiMinus size={24} />}
+        </div>
+      </div>
+      {answerShown && (
+        <div className="flex">
+          <p className="text-justify">{answer}</p>
+          <div className="ml-auto mr-4 pr-10"></div>
+        </div>
+      )}
+    </div>
+  );
+};

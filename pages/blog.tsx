@@ -38,7 +38,7 @@ const Index = () => {
   }, [getBlogPosts]);
 
   return (
-    <section className="max-width mt-36 px-5 lg:px-0">
+    <section className="max-width mt-36 px-5">
       <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
         <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
         <div className="flex h-5 w-full items-center lg:w-44 ">

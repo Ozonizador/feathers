@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     name="description"
                     content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
                   ></meta>
+                  <meta name="viewport" content="width=device-width, initial-scale=1" />
                 </Head>
                 <Navbar />
                 <div className="min-h-screen">
