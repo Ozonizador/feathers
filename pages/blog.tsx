@@ -38,25 +38,23 @@ const Index = () => {
   }, [getBlogPosts]);
 
   return (
-    <section className="max-width mt-36">
-      <div>
-        <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
-          <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
-          <div className="flex h-5 w-full items-center lg:w-44 ">
-            <select
-              className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 lg:mt-0 lg:w-44"
-              placeholder="Categoria"
-              onChange={(e) => setCategory(e.target.value as UserTypes)}
-            >
-              {categories.map((option, index) => {
-                return (
-                  <option value={option} key={index}>
-                    {BlogCategoryLabel[option]}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+    <section className="max-width mt-36 px-5">
+      <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
+        <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
+        <div className="flex h-5 w-full items-center lg:w-44 ">
+          <select
+            className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 lg:mt-0 lg:w-44"
+            placeholder="Categoria"
+            onChange={(e) => setCategory(e.target.value as UserTypes)}
+          >
+            {categories.map((option, index) => {
+              return (
+                <option value={option} key={index}>
+                  {BlogCategoryLabel[option]}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
       {loading && (
@@ -114,7 +112,7 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl bg-black text-left align-middle shadow-xl transition-all lg:h-4/5 lg:w-2/3">
                 <div className="mx-10 my-20 h-96">
-                  <div className="flex h-full w-1/2 flex-col gap-2 rounded-lg bg-white px-10 py-10">
+                  <div className="flex h-full flex-col gap-2 rounded-lg bg-white px-10 py-10 lg:w-1/2">
                     <h6 className="mb-8 text-3xl">Queremos ser uns fiéis mensageiros!</h6>
                     <Input placeholder="E-mail"></Input>
                     <div className="mb-10">

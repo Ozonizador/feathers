@@ -21,17 +21,18 @@ const ExploreCity = () => {
               </div>
             </article>
             <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-brazil.jpg" alt="maior" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Rio Maior
+              <Image src="/images/place-leiria.jpg" alt="leiria" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
+                Leiria
               </div>
             </article>
             <article className="group relative h-60 rounded-2xl">
               <Image src="/images/place-santarem.jpg" alt="santarem" layout="fill" className="rounded-2xl" />
               <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Santarem
+                Coimbra
               </div>
             </article>
+            {/* second row */}
             <article className="group relative h-60 rounded-2xl">
               <Image src="/images/place-abrantes.jpg" alt="abrantes" layout="fill" className="rounded-2xl" />
               <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
@@ -39,21 +40,21 @@ const ExploreCity = () => {
               </div>
             </article>
             <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-leiria.jpg" alt="leiria" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Leiria
+              <Image src="/images/place-brazil.jpg" alt="maior" layout="fill" className="rounded-2xl" />
+              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
+                Rio Maior
               </div>
             </article>
             <article className="group relative h-60 rounded-2xl">
               <Image src="/images/place-braga.jpg" alt="braga" layout="fill" className="rounded-2xl" />
               <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Braga
+                Porto
               </div>
             </article>
             <article className="group relative h-60 rounded-2xl">
               <Image src="/images/place-setubal.jpg" alt="setubal" layout="fill" className="rounded-2xl" />
               <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Setubal
+                Caldas da Rainha
               </div>
             </article>
           </div>

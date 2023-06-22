@@ -21,6 +21,7 @@ export async function createContext({ req, res }: trpcNext.CreateNextContextOpti
       return undefined;
     }
   }
+
   const userId = await getUserFromHeader();
   return {
     userId,

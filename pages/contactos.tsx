@@ -49,11 +49,11 @@ const Contactos = () => {
           <div className="mt-10 w-full lg:mt-0 lg:w-2/3">
             <div className="mb-10 text-3xl font-bold">Deixe-nos uma mensagem!</div>
             <div className="w-90">
-              <Input value={name} onChange={(e) => setName(e.target.value)} labelText="Nome" label="name" />
+              <Input value={name} onChange={(e) => setName(e.target.value)} labelText="Nome" name="name" />
             </div>
 
             <div className="w-90 my-10">
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} labelText="Email" label="email" />
+              <Input value={email} onChange={(e) => setEmail(e.target.value)} labelText="Email" name="email" />
             </div>
 
             <div>

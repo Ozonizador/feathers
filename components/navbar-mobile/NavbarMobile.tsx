@@ -94,7 +94,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
             {summary2 && (
               <div className="flex">
                 <>
-                  <div className="flex flex-col gap-2 text-base">
+                  <div className="flex flex-col gap-2 pl-5 text-base">
                     <div className="mt-2">
                       <Link href={COMO_FUNCIONA_URL}>Como funciona?</Link>
                     </div>

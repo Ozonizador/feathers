@@ -157,7 +157,7 @@ const ModalAlterarReserva = () => {
                             <div className="mt-7 flex flex-row justify-between gap-4">
                               <div className="mb-3 mt-3 flex w-full flex-col">
                                 <Input
-                                  label="current_guests"
+                                  name="current_guests"
                                   labelText="Número de hóspedes"
                                   pattern="[0-9]+"
                                   value={(reservation && reservation.number_guests) || 1}
@@ -174,7 +174,7 @@ const ModalAlterarReserva = () => {
                               <div className="mb-3  flex w-full flex-col">
                                 <div className="mb-3 mt-3 flex w-full flex-col">
                                   <Input
-                                    label="current_guests"
+                                    name="current_guests"
                                     labelText="Número de hóspedes"
                                     pattern="[0-9]+"
                                     value={newReservation.number_guests}

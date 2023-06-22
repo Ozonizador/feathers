@@ -5,9 +5,6 @@ import BlogPostSection from "../../components/dicas consumo/BlogPostSection/Blog
 import { Blog, BLOG_PROPERTIES, BLOG_TABLE_NAME } from "../../models/blog";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
-type PageParams = {
-  slug: string;
-};
 interface BlogPostProps {
   blog: Blog;
 }

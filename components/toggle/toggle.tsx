@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { UserTypes } from "../../models/profile";
 
 interface ToggleProps {
@@ -8,12 +9,23 @@ interface ToggleProps {
 export default function Toggle({ selectedValue, onChange }: ToggleProps) {
   return (
     <div className="mx-auto mb-20 py-10">
-      <div className="relative flex h-14 w-80 items-center justify-between rounded-full bg-primary-100 px-12 lg:h-16 lg:w-96 lg:px-16">
-        <div className="absolute left-1 h-12 w-3/6 rounded-full bg-primary-300 lg:left-2"></div>
-        <div className="z-50" onClick={() => onChange("TENANT")}>
-          Estudante
+      <div className="relative flex h-14 w-80 items-center rounded-full bg-primary-100 p-1 lg:h-16 lg:w-96">
+        <div
+          className={classNames("z-50 h-full flex-1 rounded-full", {
+            "bg-primary-300 text-white": selectedValue == "TENANT",
+          })}
+          onClick={() => onChange("TENANT")}
+        >
+          <h6 className="pt-3 text-center lg:pt-5">Estudante</h6>
         </div>
-        <div onClick={() => onChange("LANDLORD")}>Senhorio</div>
+        <div
+          className={classNames("z-50 h-full flex-1 rounded-full", {
+            "bg-primary-300 text-white": selectedValue == "LANDLORD",
+          })}
+          onClick={() => onChange("LANDLORD")}
+        >
+          <h6 className="pt-3 text-center lg:pt-5">Senhorio</h6>
+        </div>
       </div>
     </div>
   );

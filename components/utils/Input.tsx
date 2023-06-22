@@ -6,7 +6,7 @@ interface InputProps {
   value?: string | number;
   customCss?: string;
   labelText?: string;
-  label?: string;
+  name?: string;
   errorMessage?: string;
   disabled?: boolean;
   placeholder?: string;
@@ -16,7 +16,7 @@ interface InputProps {
 export default function Input({
   onChange,
   value,
-  label = "",
+  name = "",
   labelText = "",
   customCss = "",
   errorMessage = "",
@@ -27,7 +27,7 @@ export default function Input({
   return (
     <div className="my-2">
       <div>
-        {label && <label htmlFor={label}>{labelText}</label>}
+        {name && <label htmlFor={name}>{labelText}</label>}
         <input
           placeholder={placeholder}
           className={classNames(
@@ -37,9 +37,9 @@ export default function Input({
             { "bg-gray-100": disabled }
           )}
           onChange={onChange}
-          name={label}
+          name={name}
           value={value}
-          aria-labelledby={label}
+          aria-labelledby={name}
           disabled={disabled}
           {...props}
         ></input>

@@ -79,7 +79,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
-              label={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
+              name={ADVERTISEMENT_PROPERTIES.MONTH_RENT}
               labelText=""
               customCss="euro"
               value={String(advertisement.month_rent)}
@@ -95,7 +95,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
-              label={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
+              name={ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST}
               labelText=""
               customCss="euro"
               value={String(advertisement.extra_per_host)}
@@ -111,7 +111,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
-              label={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
+              name={ADVERTISEMENT_PROPERTIES.GUARANTEE_VALUE}
               labelText=""
               customCss="euro"
               value={String(advertisement.guarantee_value)}

@@ -4,7 +4,8 @@ import { Blog } from "../../../models/blog";
 import useBlogService from "../../../hooks/blogService";
 import { UserTypes } from "../../../models/profile";
 import Link from "next/link";
-
+import { format, parseISO } from "date-fns";
+import { pt } from "date-fns/locale";
 interface UltimosArtigosProps {
   slug: string;
   category: UserTypes;
@@ -39,10 +40,14 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
                       <Image className="rounded-lg" src={blog.image} alt="" layout="fill" objectFit="cover"></Image>
                     </div>
                     <div className="my-4 w-full  text-xl lg:w-full lg:text-xl">{blog.title}</div>
-                    <div className="w-full line-clamp-5 lg:w-full  lg:text-base">{blog.description}</div>
+                    <div className="line-clamp-5 w-full lg:w-full  lg:text-base">{blog.description}</div>
 
-                    <div className="mt-5 mb-10 flex w-full justify-between text-sm text-gray-400 lg:mt-10 lg:mb-0 lg:w-full">
-                      <div>{blog.created_at}</div>
+                    <div className="mb-10 mt-5 flex w-full justify-between text-sm text-gray-400 lg:mb-0 lg:mt-10 lg:w-full">
+                      <div className="capitalize">
+                        {format(parseISO(blog.created_at), "dd MMMM yyyy", {
+                          locale: pt,
+                        })}
+                      </div>
                       <div>By Unihosts</div>
                     </div>
                   </a>

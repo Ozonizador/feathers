@@ -21,7 +21,7 @@ export default function Anunciar() {
     <>
       <AnunciarProvider>
         <AdvertisementController>
-          <div className="mx-2 my-10 rounded-2xl border border-terciary-700 px-2 py-5 lg:my-20 lg:px-10">
+          <div className="mx-5 my-10 rounded-2xl border border-terciary-700 px-2 py-5 lg:my-20 lg:px-10">
             <h1 className="text-center text-2xl font-bold leading-snug lg:text-6xl">
               Anunciar a sua propriedade é rápido e fácil!
             </h1>

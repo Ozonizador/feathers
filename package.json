@@ -27,6 +27,7 @@
     "date-fns": "^2.30.0",
     "flowbite": "1.6.x",
     "flowbite-react": "0.4.x",
+    "jose": "^4.14.4",
     "jsonwebtoken": "^9.0.0",
     "leaflet": "^1.9.x",
     "lodash": "^4.17.21",

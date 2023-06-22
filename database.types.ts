@@ -244,6 +244,33 @@ export interface Database {
           }
         ];
       };
+      faqs: {
+        Row: {
+          answer: string;
+          created_at: string;
+          id: string;
+          question: string;
+          type: Database["public"]["Enums"]["BlogCategory"];
+          updated_at: string;
+        };
+        Insert: {
+          answer: string;
+          created_at?: string;
+          id?: string;
+          question: string;
+          type: Database["public"]["Enums"]["BlogCategory"];
+          updated_at?: string;
+        };
+        Update: {
+          answer?: string;
+          created_at?: string;
+          id?: string;
+          question?: string;
+          type?: Database["public"]["Enums"]["BlogCategory"];
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       messages: {
         Row: {
           conversation_id: string;

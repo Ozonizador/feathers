@@ -45,7 +45,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
           />
         </div>
       </>
-      <div className="my-5 flex w-full flex-col justify-between gap-5 lg:flex-row">
+      <div className="my-5 flex w-full flex-col justify-between lg:flex-row lg:gap-5">
         {/* col left */}
         <div className="mt-2 w-full ">
           <div>
@@ -80,7 +80,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
-                  label="street"
+                  name="street"
                   labelText="Rua *"
                   value={value}
                   onChange={onChange}
@@ -96,7 +96,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               control={control}
               render={({ field: { value, onChange } }) => (
-                <Input label="floor" labelText="Andar" onChange={onChange} value={value} />
+                <Input name="floor" labelText="Andar" onChange={onChange} value={value} />
               )}
             />
           </div>
@@ -112,7 +112,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
-                  label="place"
+                  name="place"
                   labelText="Localidade *"
                   customCss="icon"
                   value={value}
@@ -131,7 +131,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
-                  label="street_number"
+                  name="street_number"
                   labelText="Número *"
                   value={value}
                   onChange={onChange}
@@ -149,7 +149,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
-                  label="postal_code"
+                  name="postal_code"
                   labelText="Código Postal *"
                   value={value}
                   onChange={onChange}
