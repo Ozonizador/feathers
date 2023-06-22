@@ -5,20 +5,12 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const userAuth = request.cookies.get("sb-localhost-auth-token");
 
-  if (!userAuth || !process.env.SUPABASE_JWT_SECRET)
-    return new NextResponse(JSON.stringify({ success: false, message: "authentication failed" }), {
-      status: 401,
-      headers: { "content-type": "application/json" },
-    });
+  if (!userAuth || !process.env.SUPABASE_JWT_SECRET) return NextResponse.redirect(new URL("/", request.url));
 
   const parsedAuth = JSON.parse(userAuth);
   const token = parsedAuth[0];
 
-  if (!token)
-    return new NextResponse(JSON.stringify({ success: false, message: "authentication failed" }), {
-      status: 401,
-      headers: { "content-type": "application/json" },
-    });
+  if (!token) return NextResponse.redirect(new URL("/", request.url));
 
   return NextResponse.next();
 }

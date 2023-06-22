@@ -16,8 +16,20 @@ export const faqsRouter = router({
 
     return { data, error };
   }),
-  addFaq: superAdminProcedure.input(AddFaqSchema).mutation(async ({ input, ctx }) => {
+  addFaq: superAdminProcedure.input(AddFaqSchema).mutation(async ({ input }) => {
     const { data, error } = await supabaseAdmin.from<"faqs", Faqs>(FAQS_TABLE_NAME).insert(input);
+
+    return { data, error };
+  }),
+  editFaq: superAdminProcedure.input(z.object({ faq: AddFaqSchema, faqId: z.string() })).mutation(async ({ input }) => {
+    const { faqId, faq } = input;
+    const { data, error } = await supabaseAdmin.from<"faqs", Faqs>(FAQS_TABLE_NAME).update(faq).eq("id", faqId);
+
+    return { data, error };
+  }),
+  removeFaq: superAdminProcedure.input(z.object({ faqId: z.string() })).mutation(async ({ input }) => {
+    const { faqId } = input;
+    const { data, error } = await supabaseAdmin.from<"faqs", Faqs>(FAQS_TABLE_NAME).delete().eq("id", faqId);
 
     return { data, error };
   }),

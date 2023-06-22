@@ -12,13 +12,3 @@ export default function FourOhFour() {
     </div>
   );
 }
-
-// This function gets called at build time
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts
-  return {
-    redirect: {
-      destination: "/",
-    },
-  };
-}

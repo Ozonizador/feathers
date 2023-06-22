@@ -28,10 +28,6 @@ const Faqs = () => {
           <Toggle selectedValue={selectedFaq} onChange={setSelectedFaq} />
         </div>
 
-        <div className="flex justify-center">
-          <div className="form-check form-switch"></div>
-        </div>
-
         <div className="mb-32">
           {/* Estudante */}
           {selectedFaq === "TENANT" && (

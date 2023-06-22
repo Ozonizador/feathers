@@ -13,7 +13,6 @@ import { v4 as uuidv4 } from "uuid";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createRandomUniqWord } from "../utils/utils";
-import { create } from "lodash";
 
 /* ADVERTISEMENT */
 const defaultAdvertisement = {
