@@ -103,7 +103,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         <div className=" ml-0 flex flex-1 flex-row lg:items-center">
           <div className="w-full text-base lg:w-3/4">
             <Input
-              label={HOUSE_RULES_NAMING.OTHER_RULES}
+              name={HOUSE_RULES_NAMING.OTHER_RULES}
               labelText=""
               customCss="w-full"
               value={advertisement.house_rules.otherRules || ""}

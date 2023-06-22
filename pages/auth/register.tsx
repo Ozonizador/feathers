@@ -55,14 +55,14 @@ const Register = () => {
           </div>
           <form onSubmit={normalRegister}>
             <div className="mt-3">
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} label="email" labelText="Email:"></Input>
+              <Input value={email} onChange={(e) => setEmail(e.target.value)} name="email" labelText="Email:"></Input>
             </div>
             <div className="mt-3">
               <Input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                label="password"
+                name="password"
                 labelText="Palavra-passe:"
               ></Input>
             </div>

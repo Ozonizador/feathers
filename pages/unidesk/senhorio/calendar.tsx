@@ -242,7 +242,7 @@ const AdvertisementPropertiesComponent = ({
           <label className="block text-base lg:mb-0">Desconto trimestral</label>
           <div className="w-full lg:ml-12 lg:w-20">
             <Input
-              label={""}
+              name={""}
               labelText=""
               customCss="percent"
               onChange={(e) => changeTrimesterDiscount(e)}
@@ -256,7 +256,7 @@ const AdvertisementPropertiesComponent = ({
           <label className="block text-base lg:mb-0">Desconto semestral</label>
           <div className="w-full lg:ml-12 lg:w-20">
             <Input
-              label={""}
+              name={""}
               value={semesterDiscount}
               onChange={(e) => changeSemesterDiscount(e)}
               labelText=""

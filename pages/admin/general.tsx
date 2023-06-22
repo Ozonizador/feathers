@@ -167,7 +167,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <Input value={value} onChange={onChange} label="nome" labelText="Nome" />
+                    <Input value={value} onChange={onChange} name="nome" labelText="Nome" />
                   )}
                   name="name"
                 ></Controller>
@@ -210,7 +210,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <Input value={value} onChange={onChange} label="Apelido" labelText="Apelido" />
+                    <Input value={value} onChange={onChange} name="Apelido" labelText="Apelido" />
                   )}
                   name="surname"
                 />
@@ -235,7 +235,7 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <Input onChange={onChange} value={value} label="localidade" labelText="Localidade" />
+                  <Input onChange={onChange} value={value} name="localidade" labelText="Localidade" />
                 )}
                 name="town"
               ></Controller>
