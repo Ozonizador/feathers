@@ -36,3 +36,5 @@ export const CONFIGURATIONS_URL = "/admin/configurations" as const;
 
 // UNI CONTROLO
 export const UNICONTROLO_GUESTS_URL = "/unidesk/unicontrolo/guests" as const;
+
+// SUPERADMIN
