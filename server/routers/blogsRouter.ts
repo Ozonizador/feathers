@@ -3,7 +3,7 @@ import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 import { Blog, BlogsResponse, BLOG_TABLE_NAME } from "../../models/blog";
 import { createRandomUniqWord } from "../../utils/utils";
 import { superAdminProcedure } from "../procedure";
-import { router } from "../trpc";
+import { publicProcedure, router } from "../trpc";
 
 const AddBlogSchema: z.ZodType<Pick<Blog, "category" | "title" | "description">> = z.object({
   description: z.string(),
@@ -12,14 +12,29 @@ const AddBlogSchema: z.ZodType<Pick<Blog, "category" | "title" | "description">>
 });
 
 export const blogsRouter = router({
-  // TODO: missing image and logic for that
-  addBlogPost: superAdminProcedure.input(AddBlogSchema).mutation(async ({ input, ctx }) => {
+  getBlogs: publicProcedure.query(async () => {
+    const { data, error } = await supabaseAdmin.from<"blogs", BlogsResponse>(BLOG_TABLE_NAME).select();
+
+    return { data, error };
+  }),
+  addBlogPost: superAdminProcedure.input(AddBlogSchema).mutation(async ({ input }) => {
     const { data, error } = await supabaseAdmin
       .from<"blogs", BlogsResponse>(BLOG_TABLE_NAME)
       .insert({ ...input, slug: createRandomUniqWord(), image: "" });
 
     return { data, error };
   }),
+  updateBlogPost: superAdminProcedure
+    .input(z.object({ blog: AddBlogSchema, blogId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { blog, blogId } = input;
+      const { data, error } = await supabaseAdmin
+        .from<"blogs", BlogsResponse>(BLOG_TABLE_NAME)
+        .update({ ...blog })
+        .eq("id", blogId);
+
+      return { data, error };
+    }),
 });
 
 // export type definition of API

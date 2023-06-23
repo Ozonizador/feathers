@@ -3,40 +3,41 @@ import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import { supabaseAdmin } from "../../../lib/supabaseAdminClient";
-import { Faq } from "../../../models/faq";
 import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../../models/profile";
 import { trpc } from "../../../utils/trpc";
 import { FormProvider, useForm } from "react-hook-form";
-import Button from "../../../components/utils/Button";
 import Link from "next/link";
-import FaqFormContainer, { FaqAdminForm } from "../../../components/superadmin/FaqFormContainer";
 import { TfiPlus } from "react-icons/tfi";
+import BlogFormContainer, { BlogAdminForm } from "../../../components/superadmin/BlogFormContainer";
+import { Blog } from "../../../models/blog";
+import { toast } from "react-toastify";
 
 const FaqSuperAdminPage = () => {
   const [selectedFaq, setSelectedFaq] = useState<"TENANT" | "LANDLORD">("LANDLORD");
-  const { data, refetch } = trpc.faqs.getFaqs.useQuery();
+  const { data, refetch } = trpc.blogs.getBlogs.useQuery();
 
-  const addFaq = trpc.faqs.addFaq.useMutation();
-  const removeFaq = trpc.faqs.removeFaq.useMutation();
+  const addBlog = trpc.blogs.addBlogPost.useMutation();
 
-  const tenantFaqs = data && data.data && data.data.filter((faq) => faq.type === "TENANT");
-  const landlordFaqs = data && data.data && data.data.filter((faq) => faq.type === "LANDLORD");
+  const tenantBlogs = data && data.data && data.data.filter((faq) => faq.category === "TENANT");
+  const landlordBlogs = data && data.data && data.data.filter((faq) => faq.category === "LANDLORD");
 
   const methods = useForm();
 
-  const { reset } = useForm<FaqAdminForm>({
-    defaultValues: { answer: "", question: "", type: "LANDLORD" },
+  const { reset } = useForm<BlogAdminForm>({
+    defaultValues: { title: "", description: "", category: "LANDLORD" },
   });
 
   const addFormSubmit = async (data: any) => {
-    await addFaq.mutateAsync({ ...data });
+    await addBlog.mutateAsync(
+      { ...data },
+      {
+        onSuccess: () => {
+          toast.info("Sucesso");
+        },
+      }
+    );
     refetch();
     reset();
-  };
-
-  const removerFaq = async (faqId: string) => {
-    await removeFaq.mutateAsync({ faqId });
-    refetch();
   };
 
   return (
@@ -55,26 +56,27 @@ const FaqSuperAdminPage = () => {
           Senhorio
         </div>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col">
         {selectedFaq === "LANDLORD" &&
-          (landlordFaqs ? (
-            landlordFaqs.map((faq) => <SuperAdminFaqItem removerFaq={removerFaq} key={faq.id} {...faq} />)
+          (landlordBlogs ? (
+            landlordBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
           ) : (
             <p>Não tem faqs.</p>
           ))}
         {selectedFaq === "TENANT" &&
-          (tenantFaqs ? (
-            tenantFaqs.map((faq) => <SuperAdminFaqItem removerFaq={removerFaq} key={faq.id} {...faq} />)
+          (tenantBlogs ? (
+            tenantBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
           ) : (
             <p>Não tem faqs.</p>
           ))}
       </div>
+      <div className="my-5 text-primary-500">Adicionar Blog Post</div>
       <FormProvider {...methods}>
-        <FaqFormContainer onSubmit={addFormSubmit}>
+        <BlogFormContainer onSubmit={addFormSubmit}>
           <div className="rounded-full border border-primary-500 p-2">
             <TfiPlus size={32} className="text-primary-500" />
           </div>
-        </FaqFormContainer>
+        </BlogFormContainer>
       </FormProvider>
     </div>
   );
@@ -84,25 +86,19 @@ const FaqSuperAdminPage = () => {
  * Super Admin Faq Items
  */
 
-type SuperAdminFaqItemProps = Pick<Faq, "answer" | "question" | "id"> & {
-  removerFaq: (id: string) => void;
-};
+type SuperAdminBlogItemProps = Pick<Blog, "title" | "description" | "id">;
 
-const SuperAdminFaqItem = ({ answer, question, id, removerFaq }: SuperAdminFaqItemProps) => {
+const SuperAdminBlogItem = ({ title, description, id }: SuperAdminBlogItemProps) => {
   return (
     <div className="flex w-full border-b border-t border-neutral-100">
       <div className="flex flex-col gap-1 py-5">
-        <h6 className="text-xl font-black">{question}</h6>
-        <p>{answer}</p>
-      </div>
-      <div className="my-auto ml-auto flex h-10 gap-3">
-        <div className="cursor-pointer rounded-xl border border-primary-500 p-2 px-4 text-primary-500">
-          <Link href={`/unihosts/superadmin/faq/${id}`}>Edit</Link>
+        <div className="mb-5 flex gap-3">
+          <h6 className="text-xl font-black">{title}</h6>
+          <div className="my-auto ml-auto flex h-10 cursor-pointer gap-3 rounded-xl border border-primary-500 p-2 px-4 text-primary-500">
+            <Link href={`/unihosts/superadmin/blog/${id}`}>Edit</Link>
+          </div>
         </div>
-
-        <Button type={"button"} onClick={() => removerFaq(id)}>
-          Remover
-        </Button>
+        <p className="line-clamp-5">{description}</p>
       </div>
     </div>
   );

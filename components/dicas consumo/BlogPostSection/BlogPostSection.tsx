@@ -1,6 +1,5 @@
 import React from "react";
 import { RiFacebookCircleLine } from "react-icons/ri";
-import { IoLogoInstagram } from "react-icons/io";
 import { GrTwitter } from "react-icons/gr";
 import { Blog, BlogCategoryLabel } from "../../../models/blog";
 import ReactMarkdown from "react-markdown";
@@ -16,6 +15,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const router = useRouter();
   const renderers = {
     p: (props: any) => <p className="my-2">{props.children}</p>,
+    h1: (props: any) => <h1 className="text-primary-500">{props.children}</h1>,
   };
 
   const shareOnTwitter = () => {

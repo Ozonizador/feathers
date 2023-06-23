@@ -1,10 +1,9 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
-import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { FormProvider, useForm } from "react-hook-form";
-import { TfiPlus } from "react-icons/tfi";
 import FaqFormContainer, { FaqAdminForm } from "../../../../components/superadmin/FaqFormContainer";
 import { Faq, Faqs, FAQS_TABLE_NAME } from "../../../../models/faq";
+import { SUPERADMIN_FAQS_URL } from "../../../../models/paths";
 import { trpc } from "../../../../utils/trpc";
 
 type FaqIdPageProps = {
@@ -52,7 +51,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const { data } = await supabase.from<"faqs", Faqs>(FAQS_TABLE_NAME).select().eq("id", faqId).single();
-  if (!data) return { redirect: { destination: "/unihosts/superadmin/blogs", permanent: false } };
+  if (!data) return { redirect: { destination: SUPERADMIN_FAQS_URL, permanent: false } };
 
   return {
     props: {

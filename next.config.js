@@ -1,5 +1,6 @@
 const withTM = require("next-transpile-modules")(["flowbite-react"]);
 const withPlugins = require("next-compose-plugins");
+const removeImports = require("next-remove-imports")();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,4 +17,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([[withTM]], nextConfig);
+module.exports = removeImports(withPlugins([[withTM]], nextConfig));
