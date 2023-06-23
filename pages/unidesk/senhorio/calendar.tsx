@@ -14,6 +14,7 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../../models/advertisement";
+import { Reservation } from "../../../models/reservation";
 import { trpc } from "../../../utils/trpc";
 import { isNumeric } from "../../../utils/utils";
 
@@ -45,24 +46,26 @@ const TEMPO_ANTECEDENCIA = [
   { label: "12 Meses", value: 12 },
 ];
 
+type AdvertisementWithReservation = Advertisement & { reservations: Reservation[] };
+
 type CalendarPageProps = {
-  advertisements: Advertisement[];
+  advertisements: AdvertisementWithReservation[];
   user: User;
 };
 
-const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
-  const popoverOptions = advertisements.map((advertisement) => ({
-    label: advertisement.title,
-    id: advertisement.id,
-  })) as PopoverOption[];
-  const [selectedAdvertisement, setSelectedAdvertisement] = useState<Advertisement | undefined>(
+const CalendarPage = ({ advertisements }: CalendarPageProps) => {
+  const [selectedAdvertisement, setSelectedAdvertisement] = useState<AdvertisementWithReservation | undefined>(
     (advertisements && advertisements[0]) || undefined
   );
-
   const [loadingButtons, setLoadingButtons] = useState<{ timingsLoading: boolean; discountsLoading: boolean }>({
     timingsLoading: false,
     discountsLoading: false,
   });
+
+  const popoverOptions = advertisements.map((advertisement) => ({
+    label: advertisement.title,
+    id: advertisement.id,
+  })) as PopoverOption[];
 
   const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
   const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
@@ -142,7 +145,7 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
             <h2 className="text-2xl font-black text-black">Calendário</h2>
             <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
             <div className="mt-5 w-full">
-              <CalendarComponent />
+              <CalendarComponent reservations={selectedAdvertisement.reservations} />
             </div>
             <AdvertisementPropertiesComponent
               updateDiscounts={updateDiscounts}
