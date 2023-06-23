@@ -127,7 +127,7 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            <div className="mr-0 gap-2 lg:flex lg:flex-row">
+            <div className="mt-4 gap-2 lg:flex lg:flex-row">
               <select
                 defaultValue={currentFilter.placeType}
                 className="mb-2 w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:mb-0 lg:w-52"
@@ -157,21 +157,11 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="my-auto ml-auto">
+                <div className="h-full w-full">
                   <Button type="button" onClick={() => setModalMaisFiltros(true)}>
                     Mais Filtros
                   </Button>
                 </div>
-              </div>
-
-              <div className="my-2 ml-auto mt-0 hidden">
-                <Link href={PROCURAR_ADVERT_URL}>
-                  <a>
-                    <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">
-                      Mais Filtros
-                    </button>
-                  </a>
-                </Link>
               </div>
             </div>
 

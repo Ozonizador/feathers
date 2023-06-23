@@ -14,7 +14,7 @@ export type BreadcrumbPath = {
 const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
   const numberUrls = paths.length;
   return (
-    <div className="container mx-auto my-20 mt-24 flex w-11/12 items-center pl-0 align-middle lg:container lg:my-20 lg:w-full  lg:px-0 ">
+    <div className="container mx-auto my-20 mt-24 flex w-11/12 items-center pl-0 align-middle lg:my-20 lg:w-full lg:px-20 ">
       <div>{icon && <Image src={icon} alt="Favoritos" height={55} width={55} />}</div>
       <div className="ml-4 flex gap-2 text-xl">
         {paths &&

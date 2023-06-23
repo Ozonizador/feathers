@@ -27,7 +27,7 @@ const MenuCalendar = ({ activeLink }: MenuCalendarProps) => {
       </Link>
       <Link href={UNIDESK_SENHORIO_PAINEL_URL}>
         <div
-          className={classNames("flex gap-2 rounded-2xl px-4 py-5", {
+          className={classNames("flex cursor-pointer gap-2 rounded-2xl px-4 py-5", {
             "bg-primary-300": activeLink == "listings",
           })}
         >
@@ -39,7 +39,7 @@ const MenuCalendar = ({ activeLink }: MenuCalendarProps) => {
       </Link>
       <Link href={UNIDESK_SENHORIO_CALENDAR_URL}>
         <div
-          className={classNames("flex gap-2 rounded-2xl px-4 py-5", {
+          className={classNames("flex cursor-pointer gap-2 rounded-2xl px-4 py-5", {
             "bg-primary-300": activeLink == "calendar",
           })}
         >
@@ -51,7 +51,7 @@ const MenuCalendar = ({ activeLink }: MenuCalendarProps) => {
       </Link>
       <Link href={UNIDESK_SENHORIO_REVIEWS_URL}>
         <div
-          className={classNames("flex gap-2 rounded-2xl px-4 py-5", {
+          className={classNames("flex cursor-pointer gap-2 rounded-2xl px-4 py-5", {
             "bg-primary-300": activeLink == "reviews",
           })}
         >

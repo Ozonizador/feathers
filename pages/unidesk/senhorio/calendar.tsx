@@ -138,10 +138,10 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
           </div>
         </div>
         {selectedAdvertisement && (
-          <div className="flex flex-col gap-2">
+          <div className="-ml-8 flex flex-col gap-2 px-2">
             <h2 className="text-2xl font-black text-black">Calendário</h2>
             <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
-            <div className="-ml-4 w-full">
+            <div className="mt-5 w-full">
               <CalendarComponent />
             </div>
             <AdvertisementPropertiesComponent
