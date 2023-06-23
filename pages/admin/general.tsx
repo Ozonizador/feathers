@@ -294,7 +294,12 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <PhoneInput defaultCountry="PT" placeholder="Enter phone number" value={value} onChange={onChange} />
+                  <PhoneInput
+                    defaultCountry="PT"
+                    placeholder="Enter phone number"
+                    value={value}
+                    onChange={() => onChange}
+                  />
                 )}
                 name="phone"
               ></Controller>
