@@ -32,7 +32,7 @@ const paths = [
   { url: "", label: "Informações pessoais" },
 ] as BreadcrumbPath[];
 
-interface ProfileEdition {
+type ProfileEdition = {
   name: string;
   surname: string;
   gender: number;
@@ -42,7 +42,7 @@ interface ProfileEdition {
   description: string;
   birth_date: Date;
   languages: string[];
-}
+};
 
 interface IndexProps {
   initialSession: Session;

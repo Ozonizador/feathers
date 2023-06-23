@@ -14,14 +14,14 @@ import { coordinatesObjectToArray } from "../../utils/map-services";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../utils/Button";
 
-interface FormInicioProps {
+type FormInicioProps = {
   street: string;
   place: string;
   street_number: string;
   postal_code: string;
   type: string;
   floor: string;
-}
+};
 
 const FormInicio = () => {
   /* STEPS */

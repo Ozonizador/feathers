@@ -1,5 +1,4 @@
 import { Accordion } from "flowbite-react";
-import { useMemo } from "react";
 import {
   AboutHouseCommodities,
   AboutHouseSpace,

@@ -1,5 +1,3 @@
-import { TextInput } from "flowbite-react/lib/esm/components";
-import { Label } from "flowbite-react/lib/esm/components";
 import useUserService from "../../hooks/userService";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -9,6 +7,7 @@ import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 import Checkbox from "../utils/Checkbox";
+import { Label, TextInput } from "flowbite-react";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];

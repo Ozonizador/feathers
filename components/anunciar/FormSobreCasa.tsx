@@ -4,13 +4,13 @@ import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
 
-interface FormSobreCasa {
+type FormSobreCasa = {
   title: string;
   max_rooms: number;
   description: string;
   host_lives_property: boolean;
   type_host: "PARTICULAR" | "PROFISSIONAL";
-}
+};
 
 const FormSobreCasa = () => {
   // contexts
