@@ -29,7 +29,7 @@ const FormPrices = () => {
 
       <div className="mt-5 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
         <div className="mx-auto w-5/6 lg:w-2/3">
-          <Button onClick={(e) => decrementStep()} type="button">
+          <Button onClick={decrementStep} type="button">
             Voltar Atrás
           </Button>
         </div>

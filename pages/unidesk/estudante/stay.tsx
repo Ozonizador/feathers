@@ -13,7 +13,7 @@ import ModalAlterarReserva from "../../../components/modals/ModalAlteralReserva"
 import ModalDenuncia from "../../../components/modals/ModalDenuncia";
 import StayInfo from "../../../components/Stay/Info/StayInfo";
 import { GetServerSidePropsContext } from "next";
-import Breadcrumbs from "../../../components/utils/Breadcrumbs";
+import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 
 // icons
 import IconStay from "../../../public/images/icon-profile.svg";
@@ -26,12 +26,9 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 /* PAGINA 21 do xd */
 
 const EstadiaBreadcrumbs = [
-  { url: UNIDESK_URL, label: "Perfil" },
-  { url: "", label: "Informações" },
-] as {
-  url: string;
-  label: string;
-}[];
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: "", label: "Minha estadia" },
+] as BreadcrumbPath[];
 
 interface EstadiaComponentProps {
   currentStay: ReservationComplete;
@@ -44,7 +41,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            <div className="max-width md:px-4">
+            <div className="max-width">
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <UnideskStructure>
                 <UnideskStructure.Menu>

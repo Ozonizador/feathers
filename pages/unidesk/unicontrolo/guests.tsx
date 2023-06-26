@@ -7,8 +7,13 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 // Icon
 import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
 import { ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
+import { UNIDESK_URL } from "../../../models/paths";
 
-const paths = [{ url: "", label: "Hóspedes" }] as BreadcrumbPath[];
+const paths = [
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "Uni-Controlo" },
+  { url: "", label: "Hóspedes" },
+] as BreadcrumbPath[];
 
 interface UniControloHospedesProps {
   stays: ReservationGuest[];
@@ -16,7 +21,7 @@ interface UniControloHospedesProps {
 
 const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
   return (
-    <section>
+    <section className="max-width">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
 
       <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">

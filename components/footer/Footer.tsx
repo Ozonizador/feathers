@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <footer>
       <div>
-        <div className="grid grid-cols-1 gap-1 bg-secondary-300 py-4 px-12 lg:grid-cols-5 lg:gap-5 lg:pt-20">
+        <div className="grid grid-cols-1 gap-1 bg-secondary-300 px-12 py-4 lg:grid-cols-5 lg:gap-5 lg:pt-20">
           <div className="relative my-auto flex lg:mx-auto lg:-mt-16">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
@@ -34,7 +34,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className="py-1">
-              <Link href={HOME_URL} className="fs-300 clr-white">
+              <Link href={CONTACTOS_URL} className="fs-300 clr-white">
                 Torne-se um parceiro
               </Link>
             </div>
@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-secondary-300 px-20">
-          <p className="border-t border-terciary-100 pt-8 pb-7 text-center text-terciary-100">Unihosts</p>
+          <p className="border-t border-terciary-100 pb-7 pt-8 text-center text-terciary-100">Unihosts</p>
         </div>
       </div>
     </footer>

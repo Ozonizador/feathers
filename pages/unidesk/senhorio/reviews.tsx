@@ -5,7 +5,7 @@ import { GetServerSidePropsContext } from "next";
 
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
-import { UNIDESK_URL } from "../../../models/paths";
+import { UNIDESK_SENHORIO_PAINEL_URL, UNIDESK_URL } from "../../../models/paths";
 import {
   Review,
   Reviews,
@@ -17,7 +17,8 @@ import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../../models/conversation";
 
 const breadcrumbPaths = [
-  { url: UNIDESK_URL, label: "Anúncios" },
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_SENHORIO_PAINEL_URL, label: "Anúncios" },
   { url: "", label: "Detalhes dos Anúncios" },
 ] as BreadcrumbPath[];
 

@@ -32,9 +32,20 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
 };
 
 const addOrderToSearchAdvertisement = (query: any, order: AdvertisementOrder) => {
-  order.isActive && (query = query.order(ADVERTISEMENT_PROPERTIES.MONTH_RENT, { ascending: order.type == "asc" }));
+  if (!order.isActive) return query;
+
+  let ascending = order.type == "asc";
+  let property = ORDER_FILTER[order.byColumn];
+
+  query = query.order(property, { ascending: ascending });
 
   return query;
 };
+
+const ORDER_FILTER = {
+  price: "month_rent",
+  rating: "overall_average",
+  time: "created_at",
+} as const;
 
 export { addFilterToSearchAdvertisement, addOrderToSearchAdvertisement };

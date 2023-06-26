@@ -25,7 +25,7 @@ export type AdvertisementsFilterOptions = {
 export type OrderAscending = "asc" | "desc";
 
 export type AdvertisementOrder = {
-  byColumn: "price";
+  byColumn: "price" | "rating" | "time";
   type: OrderAscending;
   isActive: boolean;
 };

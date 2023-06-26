@@ -123,6 +123,7 @@ export const ADVERTISEMENT_PROPERTIES = {
   ID: "id",
   GEOM: "geom",
   SLUG: "slug",
+  CREATED_AT: "created_at",
   LIVINGROOM_AMENITIES: "livingroom_amenities",
   BEDROOM_AMENITIES: "bedroom_amenities",
   BATHROOM_AMENITIES: "bathroom_amenities",

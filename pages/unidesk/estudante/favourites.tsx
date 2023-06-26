@@ -14,6 +14,12 @@ import { GetServerSidePropsContext } from "next";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
+import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
+
+const FavouritesBreadcrumbs = [
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: "", label: "Favoritos" },
+] as BreadcrumbPath[];
 
 const UnideskFavoritos = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,16 +44,7 @@ const UnideskFavoritos = () => {
 
   return (
     <section className="max-width">
-      <div className="ml-8 mt-24 flex w-4/6 lg:mx-28 lg:items-center lg:align-middle">
-        <div>
-          <Image src={iconfavorito} alt="Favoritos" height={55} width={55} />
-        </div>
-        <div className="ml-4 text-xl">
-          <Link href={UNIDESK_URL}>Unidesk</Link>
-          {" > Favoritos"}
-        </div>
-      </div>
-
+      <Breadcrumbs icon={iconfavorito} paths={FavouritesBreadcrumbs} />
       <div className="container mx-auto mb-32 mt-12 w-11/12 rounded-2xl border border-terciary-500 pt-20 lg:my-32">
         <div className="flex flex-col items-center justify-center align-middle">
           <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
