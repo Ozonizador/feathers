@@ -7,7 +7,7 @@ import { UNIDESK_SENHORIO_CALENDAR_URL, UNIDESK_SENHORIO_REVIEWS_URL } from "../
 
 const MenuSenhorio = () => {
   const router = useRouter();
-  const [openUniControlo, setOpenUniControlo] = useState(true);
+  const [openUniControlo, setOpenUniControlo] = useState(false);
   const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
 
   const moveToMenuLink = (href: string) => {

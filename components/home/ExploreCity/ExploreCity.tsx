@@ -53,7 +53,7 @@ const ExploreCity = () => {
             </article>
             <article className="group relative h-60 rounded-2xl">
               <Image src="/images/place-setubal.jpg" alt="setubal" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
+              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
                 Caldas da Rainha
               </div>
             </article>

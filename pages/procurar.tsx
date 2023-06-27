@@ -3,6 +3,7 @@ import ProcurarSection from "../components/destaques/ProcurarSection/ProcurarSec
 import SearchInputField from "../components/search/SearchInputField";
 import { ModalMaisFiltrosProvider } from "../context/ModalMaisFiltrosProvider";
 import { ProcurarAdvertisementsProvider } from "../context/ProcurarAdvertisementsProvider";
+import { GetServerSidePropsContext } from "next";
 
 const Procurar = () => {
   return (
@@ -22,3 +23,14 @@ const Procurar = () => {
 };
 
 export default Procurar;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const query = ctx.query;
+
+  // TODO: adding city
+  const { city } = query;
+
+  return {
+    props: {},
+  };
+};

@@ -6,6 +6,7 @@ import { CalendarComponent } from "../../../components/calendar/CalendarComponen
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
+import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import PopoverSelect, { PopoverOption } from "../../../components/utils/PopoverSelect";
 import {
   Advertisement,
@@ -13,10 +14,12 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../../models/advertisement";
-import { Reservation, ReservationWithTenant } from "../../../models/reservation";
+import { ReservationWithTenant } from "../../../models/reservation";
 import { trpc } from "../../../utils/trpc";
 import { isNumeric } from "../../../utils/utils";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
+import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
+import { UNIDESK_URL } from "../../../models/paths";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -45,6 +48,11 @@ const TEMPO_ANTECEDENCIA = [
   { label: "11 Meses", value: 11 },
   { label: "12 Meses", value: 12 },
 ];
+
+const breadcrumbPaths = [
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: "", label: "Calendar" },
+] as BreadcrumbPath[];
 
 type AdvertisementWithReservation = Advertisement & { reservations: ReservationWithTenant[] };
 
@@ -126,37 +134,40 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   };
 
   return (
-    <UnideskStructure>
-      <UnideskStructure.Menu>
-        <MenuSenhorio />
-      </UnideskStructure.Menu>
-      <UnideskStructure.Content>
-        <div>
+    <section className="max-width">
+      <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
+      <UnideskStructure>
+        <UnideskStructure.Menu>
+          <MenuSenhorio />
+        </UnideskStructure.Menu>
+        <UnideskStructure.Content>
           <div>
-            <PopoverSelect
-              title={selectedAdvertisement?.title || ""}
-              options={popoverOptions || []}
-              onClick={() => changeAdvertisementCalendar}
-            />
-          </div>
-        </div>
-        {selectedAdvertisement && (
-          <div className="flex flex-col gap-2 px-2">
-            <h2 className="text-2xl font-black text-black">Calendário</h2>
-            <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
-            <div className="mt-5 w-full">
-              <CalendarComponent reservations={selectedAdvertisement.reservations} />
+            <div>
+              <PopoverSelect
+                title={selectedAdvertisement?.title || ""}
+                options={popoverOptions || []}
+                onClick={() => changeAdvertisementCalendar}
+              />
             </div>
-            <AdvertisementPropertiesComponent
-              updateDiscounts={updateDiscounts}
-              updateTimings={updateTimings}
-              {...selectedAdvertisement}
-              {...loadingButtons}
-            />
           </div>
-        )}
-      </UnideskStructure.Content>
-    </UnideskStructure>
+          {selectedAdvertisement && (
+            <div className="flex flex-col gap-2 px-2">
+              <h2 className="text-2xl font-black text-black">Calendário</h2>
+              <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
+              <div className="mt-5 w-full">
+                <CalendarComponent reservations={selectedAdvertisement.reservations} />
+              </div>
+              <AdvertisementPropertiesComponent
+                updateDiscounts={updateDiscounts}
+                updateTimings={updateTimings}
+                {...selectedAdvertisement}
+                {...loadingButtons}
+              />
+            </div>
+          )}
+        </UnideskStructure.Content>
+      </UnideskStructure>
+    </section>
   );
 };
 
