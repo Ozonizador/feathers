@@ -7,8 +7,8 @@ export default function Stepper() {
   return (
     <>
       {/* DESKTOP */}
-      <div className="hidden p-5 lg:block">
-        <div className="mx-4 p-4">
+      <div className="hidden pb-2 pt-8 lg:block">
+        <div>
           <div className="flex items-center justify-center">
             <div className="flex-auto border-t-2 border-primary-500"></div>
 
@@ -100,14 +100,14 @@ const StepIcon = ({ stepNumber, text }: StepIconProps) => {
   return (
     <div className="relative flex items-center text-white">
       <div
-        className={classNames("h-12 w-12 rounded-full py-3 text-center", {
+        className={classNames("h-10 w-10 rounded-full py-2 text-center", {
           "bg-primary-500": currentStep >= stepNumber,
           "bg-terciary-200": stepNumber > currentStep,
         })}
       >
         &#10004;
       </div>
-      <div className="absolute top-0 -ml-10 mt-16 w-32 text-center text-xs font-medium uppercase text-terciary-200">
+      <div className="absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase text-terciary-200">
         {text}
       </div>
     </div>
