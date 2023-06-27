@@ -25,7 +25,7 @@ export default function Input({
   ...props
 }: InputProps) {
   return (
-    <div className="my-2">
+    <div>
       <div>
         {name && <label htmlFor={name}>{labelText}</label>}
         <input

@@ -22,19 +22,19 @@ const FormHouseRules = () => {
   return (
     <section className="container mx-auto my-20 w-full px-10 lg:w-5/6">
       <div className="w-full">
-        <div className="font-bold text-gray-700 lg:mb-28 lg:text-2xl">
+        <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
           Falemos agora sobre condições e regras da casa
         </div>
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>
 
-      <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
-        <div className="mx-auto w-5/6 lg:w-2/3">
+      <div className="mt-2 flex gap-5">
+        <div className="w-48">
           <Button onClick={decrementStep} type="button">
             Voltar Atrás
           </Button>
         </div>
-        <div className="mx-auto w-5/6 lg:w-2/3">
+        <div className="w-48">
           <Button onClick={nextStep} type="button">
             Seguinte &#8594;
           </Button>

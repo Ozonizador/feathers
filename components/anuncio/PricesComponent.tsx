@@ -73,7 +73,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   return (
     <>
       <div className="flex flex-col gap-3">
-        <div className="flex flex-col md:mx-5 md:flex-row md:gap-2 lg:items-center">
+        <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
             <p className="items-start text-base font-bold">Valor Mensal</p>
           </div>
@@ -89,7 +89,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col md:mx-5 md:flex-row md:gap-2 lg:items-center">
+        <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
             <p className="items-start text-base font-bold">Preço por pessoa extra</p>
           </div>
@@ -105,7 +105,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col md:mx-5 md:flex-row md:gap-2 lg:items-center">
+        <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
             <p className="items-start text-base font-bold">Caução</p>
           </div>
@@ -121,7 +121,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         </div>
 
         <div>
-          <div className="my-8 flex flex-col lg:grid lg:grid-cols-2">
+          <div className="my-8 flex flex-col gap-3 md:grid md:grid-cols-2">
             <ExpenseSelection
               expense={"GAS"}
               title="Gás"
@@ -182,12 +182,12 @@ const ExpenseSelection = ({
   return (
     <>
       <div>
-        <div className="mb-auto flex justify-center py-4 lg:justify-start">
-          <p className="text-base font-bold">{title}</p>
+        <div className="mb-auto flex justify-start py-4">
+          <p className="text-lg font-black italic text-primary-500">{title}</p>
         </div>
-        <div className="my-4 flex flex-col items-center gap-4 lg:flex-row">
-          <div className="flex w-full flex-row gap-2 lg:w-1/2 lg:flex-col">
-            <div className="flex w-full flex-row items-center rounded-lg border border-terciary-500 px-3 py-3">
+        <div className="my-4 flex flex-col gap-4 lg:flex-row">
+          <div className="flex w-fit flex-row gap-2 lg:flex-col">
+            <div className="flex w-fit flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3">
               <div className="flex h-full items-center">
                 <div className="mr-3">Sim</div>
                 <RadioBox
@@ -198,8 +198,8 @@ const ExpenseSelection = ({
                 />
               </div>
             </div>
-            <div className="flex w-full flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3">
-              <div className="flex h-full items-center">
+            <div className="flex w-fit flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3">
+              <div className="flex h-fit items-center">
                 <div className="mr-3">Não</div>
                 <RadioBox
                   name={expense}
@@ -210,20 +210,11 @@ const ExpenseSelection = ({
               </div>
             </div>
           </div>
-          <div className="w-full">
+          <div className="w-fit">
             {expenseInfo?.included !== "EXCLUDED" && (
-              <div className="flex flex-col gap-2">
-                <div className="flex  flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:w-11/12">
-                  <label htmlFor="all_included">Totalmente incluído.</label>
-                  <Checkbox
-                    name="all_included"
-                    data-expense={expense}
-                    onChange={setTypeExpenseIncluded}
-                    checked={(expenseInfo && expenseInfo.included === "INCLUDED") || false}
-                  />
-                </div>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-2 lg:w-11/12">
-                  <label className="text-xs" htmlFor="max_value">
+              <div className="flex h-full flex-col gap-4 rounded-lg border border-terciary-500 px-2 py-3">
+                <div className="flex flex-row gap-3 rounded-lg lg:w-11/12">
+                  <label className="my-auto w-1/2 text-base" htmlFor="max_value">
                     Incluído até:
                   </label>
                   <input
@@ -233,10 +224,21 @@ const ExpenseSelection = ({
                     value={expenseInfo?.max || 0}
                     disabled={!expenseInfo || (expenseInfo && expenseInfo.included === "INCLUDED")}
                     onChange={setMaxExpenseValue}
-                    className={classNames("ml-2 w-1/2 rounded border border-terciary-500 p-1 pl-2 lg:w-full", {
+                    className={classNames("w-1/2 rounded border border-terciary-500 lg:ml-4", {
                       "bg-gray-200": !expenseInfo || expenseInfo?.included === "INCLUDED",
                     })}
                   ></input>
+                </div>
+                <div className="flex items-center">
+                  <label htmlFor="all_included" className="mr-1 w-1/2 text-xs">
+                    Totalmente incluído?
+                  </label>
+                  <Checkbox
+                    name="all_included"
+                    data-expense={expense}
+                    onChange={setTypeExpenseIncluded}
+                    checked={(expenseInfo && expenseInfo.included === "INCLUDED") || false}
+                  />
                 </div>
               </div>
             )}

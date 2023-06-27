@@ -7,7 +7,7 @@ export default function Stepper() {
   return (
     <>
       {/* DESKTOP */}
-      <div className="hidden pb-2 pt-8 lg:block">
+      <div className="hidden pb-4 pt-8 lg:block">
         <div>
           <div className="flex items-center justify-center">
             <div className="flex-auto border-t-2 border-primary-500"></div>
