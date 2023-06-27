@@ -1,11 +1,11 @@
 import React from "react";
-import { Card } from "flowbite-react/lib/esm/components";
 import Image from "next/image";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import classNames from "classnames";
 import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/advertisementHelper";
 import { Gender } from "../../../../models/profile";
 import { RiMailSendFill } from "react-icons/ri";
+import { Card } from "flowbite-react";
 
 interface RoomSenhorioProps {
   responseRate: number;

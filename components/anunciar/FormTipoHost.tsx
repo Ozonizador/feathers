@@ -30,7 +30,7 @@ const FormTipoHost = () => {
       <div className="mt-10 w-full">
         <div className="flex gap-2">
           <div className="w-1/2">
-            <Button onClick={(e) => decrementStep()} type="button">
+            <Button onClick={decrementStep} type="button">
               Voltar Atrás
             </Button>
           </div>

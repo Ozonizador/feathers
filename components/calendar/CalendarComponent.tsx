@@ -1,47 +1,32 @@
-import { format, subHours, startOfMonth } from "date-fns";
-import {
-  MonthlyBody,
-  MonthlyDay,
-  MonthlyCalendar,
-  MonthlyNav,
-  DefaultMonthlyEventItem,
-} from "@zach.codes/react-calendar";
-import { useState } from "react";
-import { pt } from "date-fns/locale";
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import { Reservation, ReservationStatus, ReservationWithTenant } from "../../models/reservation";
 
-type EventType = {
-  title: string;
-  date: Date;
+type CalendarComponentProps = {
+  reservations: ReservationWithTenant[];
 };
 
-export const CalendarComponent = () => {
-  let [currentMonth, setCurrentMonth] = useState<Date>(startOfMonth(new Date()));
+const statusToColor = {
+  ACCEPTED: "green",
+  CHANGE_ACCEPTED: "green",
+  CHANGE_REQUESTED: "yellow",
+  REQUESTED: "yellow",
+} as StatusToColor;
 
-  return (
-    <MonthlyCalendar currentMonth={currentMonth} onCurrentMonthChange={(date) => setCurrentMonth(date)} locale={pt}>
-      <div className="px-6">
-        <MonthlyNav />
-      </div>
-      <MonthlyBody
-        events={[
-          { title: "Call John", date: subHours(new Date(), 2) },
-          { title: "Call John", date: subHours(new Date(), 1) },
-          { title: "Meeting with Bob", date: new Date() },
-        ]}
-      >
-        <MonthlyDay<EventType>
-          renderDay={(data) =>
-            data.map((item, index) => (
-              <DefaultMonthlyEventItem
-                key={index}
-                title={item.title}
-                // Format the date here to be in the format you prefer
-                date={format(item.date, "k:mm")}
-              />
-            ))
-          }
-        />
-      </MonthlyBody>
-    </MonthlyCalendar>
-  );
+type StatusToColor = {
+  [x in ReservationStatus]: string;
+};
+
+export const CalendarComponent = ({ reservations }: CalendarComponentProps) => {
+  const events = reservations
+    .filter((reservation) =>
+      ["ACCEPTED", "CHANGE_ACCEPTED", "CHANGE_REQUESTED", "REQUESTED"].includes(reservation.status)
+    )
+    .map((reservation) => ({
+      start: reservation.start_date,
+      end: reservation.end_date,
+      color: statusToColor[reservation.status],
+      title: reservation.tenant.name || undefined,
+    }));
+  return <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" events={events} />;
 };

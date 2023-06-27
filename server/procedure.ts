@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { supabaseAdmin } from "../lib/supabaseAdminClient";
 import { Advertisements, ADVERTISEMENT_TABLE_NAME } from "../models/advertisement";
-import { Profile, PROFILE_TABLE_NAME } from "../models/profile";
+import { ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../models/profile";
 import { publicProcedure } from "./trpc";
 
 export const authorizedProcedure = publicProcedure.use(async (opts) => {
@@ -16,7 +16,7 @@ export const authorizedProcedure = publicProcedure.use(async (opts) => {
     });
 
   const { data, error } = await supabaseAdmin
-    .from<"profiles", Profile>(PROFILE_TABLE_NAME)
+    .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
     .select("id")
     .match({ id: userId });
 
@@ -66,9 +66,9 @@ export const superAdminProcedure = publicProcedure.use(async (opts) => {
     });
 
   const { data, error } = await supabaseAdmin
-    .from<"profiles", Profile>(PROFILE_TABLE_NAME)
+    .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
     .select("id, user_type")
-    .match({ id: userId })
+    .eq(PROFILE_COLUMNS.ID, userId)
     .single();
 
   if (error || !data)

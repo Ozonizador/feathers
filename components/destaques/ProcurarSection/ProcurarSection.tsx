@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import RoomCard from "./RoomCard";
-import { TypeAmenity, TYPE_ADVERTISEMENT } from "../../../models/advertisement";
+import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Slider from "rc-slider";
@@ -10,19 +9,19 @@ import _ from "lodash";
 import {
   useAdvertisementInfo,
   useCurrentProcurarAdvertisementContext,
-  useSetComoditiesContext,
   useSetFiltersContext,
+  useSetOrderContext,
   useSetPageAdvertisementinfo,
 } from "../../../context/ProcurarAdvertisementsProvider";
 import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinateArrayToLatitude } from "../../../utils/map-services";
-import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import { format } from "date-fns";
 import Button from "../../utils/Button";
 import { useSetModalMaisFiltros } from "../../../context/ModalMaisFiltrosProvider";
 import ModalMaisFiltros from "../../modals/ModalMaisFiltros";
+import { AdvertisementOrder } from "../../../server/types/advertisement";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -31,12 +30,11 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 export default function ProcurarSection() {
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
-  const { comodities } = currentFilter;
   const { location, startDate, endDate, coordinates } = useUserSearch();
 
   /* Filters */
   const setFilters = useSetFiltersContext();
-  const setComoditiesFilter = useSetComoditiesContext();
+  const setOrderFilter = useSetOrderContext();
   const setPage = useSetPageAdvertisementinfo();
   const currentMapCoordinates = useGetUserCoordinates();
 
@@ -63,18 +61,6 @@ export default function ProcurarSection() {
     locateByQuery();
   }, [locateByQuery]);
 
-  // Filters
-  const toggleComododitiesFilter = (option: string) => {
-    if (!comodities) return setComoditiesFilter([option as TypeAmenity]);
-
-    const existentComodities = comodities;
-    const existComodity = existentComodities.findIndex((commodity) => commodity === option);
-    if (existComodity === -1) return setComoditiesFilter([...existentComodities, option as TypeAmenity]);
-
-    existentComodities.splice(existComodity, 1);
-    setComoditiesFilter(existentComodities);
-  };
-
   const setPriceChange = _.debounce((value) => {
     const [startRange, endRange] = value;
     setFilters({ price: { startRange, endRange } });
@@ -100,6 +86,18 @@ export default function ProcurarSection() {
     } else return 1;
   };
 
+  const changeOrderFilter = (event: React.ChangeEvent<any>) => {
+    const optionValue = event.target.value as string;
+    const arr = optionValue.split("-");
+
+    let ascending = arr[0] === "price" ? arr[1] : arr[0] === "rating" ? "desc" : "asc";
+    setOrderFilter({
+      byColumn: arr[0],
+      isActive: true,
+      type: ascending,
+    } as AdvertisementOrder);
+  };
+
   return (
     <>
       <ModalMaisFiltros />
@@ -119,15 +117,20 @@ export default function ProcurarSection() {
                 )}
               </div>
               <div className="mb-2">
-                <select className="w-36 rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm lg:w-60">
+                <select
+                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm"
+                  onChange={changeOrderFilter}
+                >
                   <option>Ordenar por:</option>
-                  <option value="asc">Preço (crescente)</option>
-                  <option value="desc">Preço (descrescente)</option>
+                  <option value="price-asc">Preço (crescente)</option>
+                  <option value="price-desc">Preço (descrescente)</option>
+                  <option value="rating">Melhor classificação</option>
+                  <option value="time">Mais recente</option>
                 </select>
               </div>
             </div>
 
-            <div className="mr-0 gap-2 lg:flex lg:flex-row">
+            <div className="mt-4 gap-2 lg:flex lg:flex-row">
               <select
                 defaultValue={currentFilter.placeType}
                 className="mb-2 w-full rounded-md border border-solid border-terciary-500 bg-white text-sm lg:mb-0 lg:w-52"
@@ -157,21 +160,11 @@ export default function ProcurarSection() {
                   </div>
                 </div>
 
-                <div className="my-auto ml-auto">
+                <div className="h-full w-full">
                   <Button type="button" onClick={() => setModalMaisFiltros(true)}>
                     Mais Filtros
                   </Button>
                 </div>
-              </div>
-
-              <div className="my-2 ml-auto mt-0 hidden">
-                <Link href={PROCURAR_ADVERT_URL}>
-                  <a>
-                    <button className="mt-4  h-14 w-1/2 rounded-lg bg-primary-500 px-6 text-white transition lg:mt-0 lg:w-full">
-                      Mais Filtros
-                    </button>
-                  </a>
-                </Link>
               </div>
             </div>
 

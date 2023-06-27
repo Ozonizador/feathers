@@ -4,13 +4,13 @@ import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
 
-interface FormSobreCasa {
+type FormSobreCasa = {
   title: string;
   max_rooms: number;
   description: string;
   host_lives_property: boolean;
   type_host: "PARTICULAR" | "PROFISSIONAL";
-}
+};
 
 const FormSobreCasa = () => {
   // contexts
@@ -41,7 +41,7 @@ const FormSobreCasa = () => {
 
         <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
           <div className="mx-auto w-5/6 lg:w-2/3">
-            <Button onClick={(e) => decrementStep()} type="button">
+            <Button onClick={decrementStep} type="button">
               Voltar Atrás
             </Button>
           </div>

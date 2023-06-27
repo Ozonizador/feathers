@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CalendarComponent } from "../../../components/calendar/CalendarComponent";
-import MenuCalendar from "../../../components/unidesk/Menus/MenuCalendar";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
@@ -14,8 +13,10 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../../models/advertisement";
+import { Reservation, ReservationWithTenant } from "../../../models/reservation";
 import { trpc } from "../../../utils/trpc";
 import { isNumeric } from "../../../utils/utils";
+import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -45,24 +46,26 @@ const TEMPO_ANTECEDENCIA = [
   { label: "12 Meses", value: 12 },
 ];
 
+type AdvertisementWithReservation = Advertisement & { reservations: ReservationWithTenant[] };
+
 type CalendarPageProps = {
-  advertisements: Advertisement[];
+  advertisements: AdvertisementWithReservation[];
   user: User;
 };
 
-const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
-  const popoverOptions = advertisements.map((advertisement) => ({
-    label: advertisement.title,
-    id: advertisement.id,
-  })) as PopoverOption[];
-  const [selectedAdvertisement, setSelectedAdvertisement] = useState<Advertisement | undefined>(
+const CalendarPage = ({ advertisements }: CalendarPageProps) => {
+  const [selectedAdvertisement, setSelectedAdvertisement] = useState<AdvertisementWithReservation | undefined>(
     (advertisements && advertisements[0]) || undefined
   );
-
   const [loadingButtons, setLoadingButtons] = useState<{ timingsLoading: boolean; discountsLoading: boolean }>({
     timingsLoading: false,
     discountsLoading: false,
   });
+
+  const popoverOptions = advertisements.map((advertisement) => ({
+    label: advertisement.title,
+    id: advertisement.id,
+  })) as PopoverOption[];
 
   const updateAdvertisementTimings = trpc.advertisements.updateAdvertisementMinimumStayAndTimeInAdvance.useMutation();
   const updateAdvertisementDiscounts = trpc.advertisements.updateAdvertisementDiscounts.useMutation();
@@ -125,7 +128,7 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuCalendar activeLink="calendar" />
+        <MenuSenhorio />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div>
@@ -138,11 +141,11 @@ const CalendarPage = ({ advertisements, user }: CalendarPageProps) => {
           </div>
         </div>
         {selectedAdvertisement && (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 px-2">
             <h2 className="text-2xl font-black text-black">Calendário</h2>
             <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
-            <div className="-ml-4 w-full">
-              <CalendarComponent />
+            <div className="mt-5 w-full">
+              <CalendarComponent reservations={selectedAdvertisement.reservations} />
             </div>
             <AdvertisementPropertiesComponent
               updateDiscounts={updateDiscounts}
@@ -301,7 +304,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data, error } = await supabase
     .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-    .select("*, reservations(*)")
+    .select("*, reservations(*, tenant:tenant_id(*))")
     .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, user.id);
 
   return {

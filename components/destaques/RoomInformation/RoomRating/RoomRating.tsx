@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Rating } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import useReviewService from "../../../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../../../models/review";
@@ -8,6 +7,7 @@ import { averageOfArrayNumbers } from "../../../../utils/utils";
 import { useSetModalReviews } from "../../../../context/ModalShowProvider";
 import ReviewCard from "../../../advertisements/ReviewCard";
 import classNames from "classnames";
+import { Rating } from "flowbite-react";
 
 const RoomRating = () => {
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);

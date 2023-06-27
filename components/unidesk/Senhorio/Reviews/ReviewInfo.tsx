@@ -1,6 +1,4 @@
-import { Rating } from "flowbite-react/lib/esm/components";
-import { Avatar } from "flowbite-react";
-import { useUser } from "@supabase/auth-helpers-react";
+import { Avatar, Rating } from "flowbite-react";
 import { ReviewWithTenantAndAdvertisement } from "../../../../models/review";
 
 interface ReviewInfoProps {
@@ -36,7 +34,10 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
         <div className="text-secondary-300">Anúncios</div>
       </div>
 
-      {!latestReviews || (latestReviews.length === 0 && <div className="mb-5">Não existem reviews para mostrar</div>)}
+      {!latestReviews ||
+        (latestReviews.length === 0 && (
+          <div className="mb-3 text-center lg:text-left">Não existem reviews para mostrar</div>
+        ))}
       {/* CARD */}
       {latestReviews &&
         latestReviews.map((review, index) => {

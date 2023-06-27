@@ -1,7 +1,5 @@
 import React from "react";
-import { Card } from "flowbite-react/lib/esm/components";
-import { Rating } from "flowbite-react/lib/esm/components";
-import { Avatar } from "flowbite-react";
+import { Avatar, Card, Rating } from "flowbite-react";
 
 export default function RoomCard() {
   return (

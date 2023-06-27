@@ -1,10 +1,8 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import {
   MODIFY_RESERVATION_FUNCTION,
-  Reservation,
   Reservations,
   ReservationStatus,
-  RESERVATION_TABLE_NAME,
 } from "../models/reservation";
 
 const useReservationService = () => {

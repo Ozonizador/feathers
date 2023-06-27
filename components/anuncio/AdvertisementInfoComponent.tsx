@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import { Controller, useFormContext } from "react-hook-form";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, HostType } from "../../models/advertisement";
-import { MIN_LENGTH_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE } from "../../models/error";
+import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
 import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
 import RadioBox from "../utils/Radiobox";
 
-interface PricesComponentProps {
+type PricesComponentProps = {
   advertisement: Advertisement;
   showInternalName?: boolean;
-}
+};
 
 const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }: PricesComponentProps) => {
   const { control } = useFormContext();
@@ -55,7 +55,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
                   <textarea
                     rows={5}
                     className={classNames(
-                      "mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white py-3 px-2 shadow-sm",
+                      "mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3 shadow-sm",
                       { "border-red-700": error }
                     )}
                     placeholder="Descreva o seu espaço em 500 palavras"
@@ -73,7 +73,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         <div className="flex flex-row lg:items-center">
           <p className="my-auto mb-3 text-base font-bold lg:w-44">Vive na propriedade?</p>
 
-          <div className="ml-2 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 p-3 lg:ml-6 lg:mb-0">
+          <div className="ml-2 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 p-3 lg:mb-0 lg:ml-6">
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
@@ -91,7 +91,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
             <p className="my-auto text-base font-bold lg:w-44">Tipo de senhorio</p>
           </div>
 
-          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6 lg:mb-0">
+          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:mb-0 lg:ml-6">
             <div className="mr-16 text-base">Particular</div>
             <div className="flex h-5 items-center">
               <Controller
@@ -109,7 +109,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
             </div>
           </div>
 
-          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 py-3 px-3 lg:ml-6">
+          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6">
             <div className="mr-16 text-base">Profissional</div>
             <div className="flex h-5 items-center">
               <Controller

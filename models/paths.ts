@@ -25,7 +25,7 @@ export const UNIDESK_STUDENT_FAVOURITES_URL = "/unidesk/estudante/favourites" as
 // UNIDESK SENHORIO
 export const UNIDESK_SENHORIO_PAINEL_URL = "/unidesk/senhorio/advertisements" as const;
 export const UNIDESK_SENHORIO_RESERVAS_URL = "/unidesk/senhorio/reservas" as const;
-export const UNIDESK_SENHORIO_CALENDAR_URL = "unidesk/senhorio/calendar" as const;
+export const UNIDESK_SENHORIO_CALENDAR_URL = "/unidesk/senhorio/calendar" as const;
 export const UNIDESK_SENHORIO_REVIEWS_URL = "/unidesk/senhorio/reviews" as const;
 
 // ADMIN
@@ -36,3 +36,7 @@ export const CONFIGURATIONS_URL = "/admin/configurations" as const;
 
 // UNI CONTROLO
 export const UNICONTROLO_GUESTS_URL = "/unidesk/unicontrolo/guests" as const;
+
+// SUPERADMIN
+export const SUPERADMIN_BLOGS_URL = "/unihosts/superadmin/blogs" as const;
+export const SUPERADMIN_FAQS_URL = "/unihosts/superadmin/faqs" as const;

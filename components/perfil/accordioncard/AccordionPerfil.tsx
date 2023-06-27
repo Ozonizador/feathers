@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Accordion } from "flowbite-react";
 import { CgHome } from "react-icons/cg";
 import { TbBed } from "react-icons/tb";

@@ -18,7 +18,7 @@ import { GetServerSidePropsContext } from "next";
 
 export default function Anunciar() {
   return (
-    <>
+    <div className="max-width">
       <AnunciarProvider>
         <AdvertisementController>
           <div className="mx-5 my-10 rounded-2xl border border-terciary-700 px-2 py-5 lg:my-20 lg:px-10">
@@ -32,7 +32,7 @@ export default function Anunciar() {
           </div>
         </AdvertisementController>
       </AnunciarProvider>
-    </>
+    </div>
   );
 }
 

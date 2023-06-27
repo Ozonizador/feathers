@@ -13,8 +13,12 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 // icons
 import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
+import { UNIDESK_URL } from "../../../models/paths";
 
-const paths = [{ url: "", label: "Painel" }] as BreadcrumbPath[];
+const paths = [
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: "", label: "Painel" },
+] as BreadcrumbPath[];
 
 const Anuncios = () => {
   const { getAdvertismentsFromUserId } = useAdvertisementService();
@@ -38,7 +42,7 @@ const Anuncios = () => {
   };
 
   return (
-    <section>
+    <section className="max-width">
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
 
       <UnideskStructure>

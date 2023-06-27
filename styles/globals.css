@@ -7,7 +7,7 @@
 
 @media (-webkit-device-pixel-ratio: 1.25) {
   * {
-    zoom: 0.8;
+    zoom: 0.95;
   }
 }
 
@@ -69,6 +69,10 @@
 
 .react-datepicker__input-container input {
   border-color: #dfdfdf;
+  width: 100%;
+}
+
+.react-datepicker-wrapper {
   width: 100%;
 }
 

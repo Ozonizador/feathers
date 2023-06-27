@@ -172,7 +172,7 @@ const CaixaEntrada = () => {
                           }`}
                         </div>
                         {currentConversation.reservation.status === "REQUESTED" && (
-                          <div className="flex justify-around gap-5">
+                          <div className="flex flex-col justify-around gap-3">
                             <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
                               Aceitar
                             </Button>
@@ -182,7 +182,7 @@ const CaixaEntrada = () => {
                           </div>
                         )}
                         {currentConversation.reservation.status === "CHANGE_REQUESTED" && (
-                          <div className="flex justify-around">
+                          <div className="flex flex-col justify-around gap-3">
                             <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">
                               Aceitar
                             </Button>
@@ -202,11 +202,9 @@ const CaixaEntrada = () => {
                           <div>Alteração reserva rejeitada</div>
                         )}
 
-                        <Link href={`/perfil/${currentConversation.tenant.slug}`}>
-                          <a className="text-small mt-2">
-                            <div>Mostrar perfil de {currentConversation.tenant.name}</div>
-                          </a>
-                        </Link>
+                        <div className="text-small pt-5 text-center">
+                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>Mostrar perfil</Link>
+                        </div>
                       </>
                     </div>
                   )}

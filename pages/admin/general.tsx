@@ -32,7 +32,7 @@ const paths = [
   { url: "", label: "Informações pessoais" },
 ] as BreadcrumbPath[];
 
-interface ProfileEdition {
+type ProfileEdition = {
   name: string;
   surname: string;
   gender: number;
@@ -42,7 +42,7 @@ interface ProfileEdition {
   description: string;
   birth_date: Date;
   languages: string[];
-}
+};
 
 interface IndexProps {
   initialSession: Session;
@@ -294,7 +294,12 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <PhoneInput defaultCountry="PT" placeholder="Enter phone number" value={value} onChange={onChange} />
+                  <PhoneInput
+                    defaultCountry="PT"
+                    placeholder="Enter phone number"
+                    value={value}
+                    onChange={() => onChange}
+                  />
                 )}
                 name="phone"
               ></Controller>

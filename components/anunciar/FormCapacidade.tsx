@@ -25,7 +25,7 @@ const FormCapacidade = () => {
 
         <div className="mt-1 flex flex-col gap-5 lg:flex-row">
           <div className="w-5/6 lg:w-40">
-            <Button onClick={(e) => decrementStep()} type="button">
+            <Button onClick={decrementStep} type="button">
               Voltar Atrás
             </Button>
           </div>

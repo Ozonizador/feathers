@@ -59,3 +59,5 @@ export type ReservationComplete = ReservationWithAdvertisement & {
   reviews: Review[];
   reports: Report[];
 };
+
+export type ReservationWithTenant = Reservation & { tenant: Pick<Profile, "id" | "name"> };

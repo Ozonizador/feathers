@@ -41,7 +41,7 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
       .optional(),
   }),
   order: z.object({
-    byColumn: z.enum(["price"]),
+    byColumn: z.enum(["price", "rating", "time"]),
     type: z.enum(["asc", "desc"]),
     isActive: z.boolean(),
   }),
@@ -69,7 +69,7 @@ export const advertisementsRouter = router({
     } else {
       query = supabaseAdmin
         .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
-        .select("*, reservations!left(id)", { count: "exact" })
+        .select("*, reservations!left(id), averages:reviewsPerAdvertisement!left(*)", { count: "exact" })
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
       query = addFilterToSearchAdvertisement(query, filter);

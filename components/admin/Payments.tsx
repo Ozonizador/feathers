@@ -25,8 +25,8 @@ const Payments = () => {
 
             {/* BOTÕES*/}
             <div className=" mb-20 mt-10 flex flex-col gap-4 lg:my-20 lg:flex-row">
-              <button className="rounded-xl bg-primary-500 py-4 px-12 text-xl text-white">Pagamentos</button>
-              <button className="rounded-xl bg-terciary-500 py-4 px-12 text-xl text-secondary-400">Recebimentos</button>
+              <button className="rounded-xl bg-primary-500 px-12 py-4 text-xl text-white">Pagamentos</button>
+              <button className="rounded-xl bg-terciary-500 px-12 py-4 text-xl text-secondary-400">Recebimentos</button>
             </div>
 
             {/* ADICIONAR CARTÕES LINK */}
@@ -34,7 +34,7 @@ const Payments = () => {
             <div className="font-base">Cartões</div>
             <div className="flex w-full flex-row gap-4 lg:w-3/5">
               {/* CARTÃO 1 */}
-              <div className=" mt-5 flex h-5 flex-1  items-center justify-center rounded-md border-2 border-dashed border-terciary-500 pt-9 pb-16 lg:py-28">
+              <div className=" mt-5 flex h-5 flex-1  items-center justify-center rounded-md border-2 border-dashed border-terciary-500 pb-16 pt-9 lg:py-28">
                 <div className="space-y-1 text-center">
                   <div className="flex  text-terciary-700">
                     <label className="relative cursor-pointer rounded-md text-8xl text-secondary-400">
@@ -45,7 +45,7 @@ const Payments = () => {
                 </div>
               </div>
               {/* CARTÃO 2 */}
-              <div className=" mt-5 flex h-5 flex-1  items-center justify-center rounded-md border-2 border-dashed border-terciary-500 pt-9 pb-16 lg:py-28">
+              <div className=" mt-5 flex h-5 flex-1  items-center justify-center rounded-md border-2 border-dashed border-terciary-500 pb-16 pt-9 lg:py-28">
                 <div className="space-y-1 text-center">
                   <div className="flex  text-terciary-700">
                     <label className="relative cursor-pointer rounded-md text-8xl text-secondary-400">

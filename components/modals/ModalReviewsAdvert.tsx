@@ -6,7 +6,7 @@ import ReviewCard from "../advertisements/ReviewCard";
 import useReviewService from "../../hooks/reviewService";
 import { AdvertisementReviewSummary } from "../../models/review";
 import { RoomAveragesSection } from "../destaques/RoomInformation/RoomRating/RoomRating";
-import { Rating } from "flowbite-react/lib/esm/components/Rating/Rating";
+import { Rating } from "flowbite-react";
 
 /* PAGINA 7 DO XD */
 const ModalReviewsAdvert = () => {

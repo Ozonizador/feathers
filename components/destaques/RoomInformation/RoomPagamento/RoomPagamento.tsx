@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { differenceInMonths } from "date-fns";
 
-import { Label } from "flowbite-react/lib/esm/components";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import {
   useSetModalDetalhesPagamento,
@@ -20,10 +19,11 @@ import ExpensesComponent from "../../../anuncio/ExpensesComponent";
 import { SearchFields } from "../../../search/SearchInputField";
 import { Reservation } from "../../../../models/reservation";
 import { trpc } from "../../../../utils/trpc";
+import { Label } from "flowbite-react";
 
-interface FormReservation {
+type FormReservation = {
   number_guests: number;
-}
+};
 
 export const RoomPagamento = () => {
   const router = useRouter();
