@@ -16,7 +16,7 @@ const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
   return (
     <div className="mx-auto my-20 mt-24 flex items-center px-5 align-middle lg:my-20 lg:w-full lg:px-3">
       <div>{icon && <Image src={icon} alt="Favoritos" height={55} width={55} />}</div>
-      <div className="ml-4 flex gap-2 text-xl">
+      <div className="ml-3 flex gap-2 lg:ml-4 lg:text-xl">
         {paths &&
           paths.map((path, index) => {
             const mainInfo = path.url ? (

@@ -327,10 +327,6 @@ export const AboutHouseCommodities = {
     { label: "Casa de banho privada", type: "PRIVATE_BATHROOM" },
     { label: "Casa de banho partilhada", type: "SHARED_BATHROOM" },
   ],
-  livingroom: [
-    { label: "Sofá", type: "SOFA" },
-    { label: "Mesa", type: "TABLE" },
-  ],
   bedroom: [
     { label: "Cama Individual", type: "SINGLE_BED" },
     { label: "Cama Dupla", type: "DOUBLE_BED" },

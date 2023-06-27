@@ -13,7 +13,7 @@ import {
   ADVERTISEMENT_PROPERTIES,
   ADVERTISEMENT_TABLE_NAME,
 } from "../../../models/advertisement";
-import { Reservation } from "../../../models/reservation";
+import { Reservation, ReservationWithTenant } from "../../../models/reservation";
 import { trpc } from "../../../utils/trpc";
 import { isNumeric } from "../../../utils/utils";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
@@ -46,7 +46,7 @@ const TEMPO_ANTECEDENCIA = [
   { label: "12 Meses", value: 12 },
 ];
 
-type AdvertisementWithReservation = Advertisement & { reservations: Reservation[] };
+type AdvertisementWithReservation = Advertisement & { reservations: ReservationWithTenant[] };
 
 type CalendarPageProps = {
   advertisements: AdvertisementWithReservation[];
@@ -141,7 +141,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
           </div>
         </div>
         {selectedAdvertisement && (
-          <div className="-ml-8 flex flex-col gap-2 px-2">
+          <div className="flex flex-col gap-2 px-2">
             <h2 className="text-2xl font-black text-black">Calendário</h2>
             <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
             <div className="mt-5 w-full">
@@ -304,7 +304,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data, error } = await supabase
     .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-    .select("*, reservations(*)")
+    .select("*, reservations(*, tenant:tenant_id(*))")
     .eq(ADVERTISEMENT_PROPERTIES.HOST_ID, user.id);
 
   return {

@@ -6,20 +6,14 @@ import { HouseZonesLabel, TypeAmenity, TypeAmenityLabel } from "../../../../mode
 
 export default function RoomSlider() {
   const zones = Object.keys(HouseZonesLabel);
-  const {
-    general_amenities,
-    bathroom_amenities,
-    bedroom_amenities,
-    kitchen_amenities,
-    livingroom_amenities,
-    exterior_amenities,
-  } = useGetSingleAdvertisement() || {
-    general_amenities: [],
-    bathroom_amenities: [],
-    bedroom_amenities: [],
-    kitchen_amenities: [],
-    exterior_amenities: [],
-  };
+  const { general_amenities, bathroom_amenities, bedroom_amenities, kitchen_amenities, exterior_amenities } =
+    useGetSingleAdvertisement() || {
+      general_amenities: [],
+      bathroom_amenities: [],
+      bedroom_amenities: [],
+      kitchen_amenities: [],
+      exterior_amenities: [],
+    };
 
   const Comodities = ({}) =>
     useMemo(() => {
@@ -79,22 +73,6 @@ export default function RoomSlider() {
               {(!bathroom_amenities || bathroom_amenities.length === 0) && <div>Sem nada a assinalar</div>}
               {bathroom_amenities &&
                 bathroom_amenities.map((amenity: string, index: number) => {
-                  const icon = houseAmenities(amenity as TypeAmenity);
-                  return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-          <div className="flex flex-col gap-8">
-            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">Zona de estar</div>
-            <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!livingroom_amenities || livingroom_amenities.length === 0) && <div>Sem nada a assinalar</div>}
-              {livingroom_amenities &&
-                livingroom_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
