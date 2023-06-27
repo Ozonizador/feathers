@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
 import { useRouter } from "next/router";
 import { MenuItem, MenuItemCollapsible } from "../../menu/Menu";
+import { UNIDESK_SENHORIO_CALENDAR_URL, UNIDESK_SENHORIO_REVIEWS_URL } from "../../../models/paths";
 
 const MenuSenhorio = () => {
   const router = useRouter();
@@ -30,7 +31,6 @@ const MenuSenhorio = () => {
               label={"Painel"}
               activeLink={checkActiveLink("/unidesk/senhorio/advertisements")}
             />
-
             {currentAdvertisement && (
               <div className="flex flex-col px-2">
                 <div className="mt-2 flex flex-1 items-center justify-between">
@@ -71,7 +71,18 @@ const MenuSenhorio = () => {
                 </div>
               </div>
             )}
-
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={UNIDESK_SENHORIO_CALENDAR_URL}
+              label={"Calendário"}
+              activeLink={checkActiveLink(UNIDESK_SENHORIO_CALENDAR_URL)}
+            />
+            <MenuItem
+              clickOnLink={moveToMenuLink}
+              url={UNIDESK_SENHORIO_REVIEWS_URL}
+              label={"Reviews"}
+              activeLink={checkActiveLink(UNIDESK_SENHORIO_REVIEWS_URL)}
+            />
             <MenuItem
               clickOnLink={moveToMenuLink}
               url={"/unidesk/inbox"}

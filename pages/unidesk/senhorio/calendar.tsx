@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CalendarComponent } from "../../../components/calendar/CalendarComponent";
-import MenuCalendar from "../../../components/unidesk/Menus/MenuCalendar";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import Button from "../../../components/utils/Button";
 import Input from "../../../components/utils/Input";
@@ -17,6 +16,7 @@ import {
 import { Reservation } from "../../../models/reservation";
 import { trpc } from "../../../utils/trpc";
 import { isNumeric } from "../../../utils/utils";
+import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -128,7 +128,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuCalendar activeLink="calendar" />
+        <MenuSenhorio />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div>
