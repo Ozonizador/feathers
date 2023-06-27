@@ -5,7 +5,7 @@ import { GetServerSidePropsContext } from "next";
 
 import IconReviews from "../../../public/images/icon-pg37-1.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
-import { UNIDESK_SENHORIO_PAINEL_URL, UNIDESK_URL } from "../../../models/paths";
+import { UNIDESK_URL } from "../../../models/paths";
 import {
   Review,
   Reviews,
@@ -15,11 +15,11 @@ import {
 } from "../../../models/review";
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../../models/conversation";
+import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: UNIDESK_SENHORIO_PAINEL_URL, label: "Anúncios" },
-  { url: "", label: "Detalhes dos Anúncios" },
+  { url: "", label: "Reviews" },
 ] as BreadcrumbPath[];
 
 interface ReviewsPageProps {
@@ -30,23 +30,21 @@ interface ReviewsPageProps {
 
 const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: ReviewsPageProps) => {
   return (
-    <>
+    <section className="max-width">
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
-      <div className="mx-auto my-20 w-11/12 rounded-2xl border border-terciary-700 bg-terciary-300 px-0  pl-0 lg:container lg:my-20 lg:w-full  lg:px-0 ">
-        <div className="flex flex-col lg:flex-row">
-          <div className="block p-5 lg:border-r lg:p-12">
-            <MenuSenhorio />
-          </div>
-          <div className="mx-auto w-full lg:ml-20 lg:pr-10">
-            <ReviewInfo
-              latestReviews={latestReviews as ReviewWithTenantAndAdvertisement[]}
-              generalClassification={generalClassification}
-              responseRate={responseRate}
-            />
-          </div>
-        </div>
-      </div>
-    </>
+      <UnideskStructure>
+        <UnideskStructure.Menu>
+          <MenuSenhorio />
+        </UnideskStructure.Menu>
+        <UnideskStructure.Content>
+          <ReviewInfo
+            latestReviews={latestReviews as ReviewWithTenantAndAdvertisement[]}
+            generalClassification={generalClassification}
+            responseRate={responseRate}
+          />
+        </UnideskStructure.Content>
+      </UnideskStructure>
+    </section>
   );
 };
 

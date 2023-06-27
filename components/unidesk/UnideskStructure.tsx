@@ -15,11 +15,11 @@ const Structure = ({ children }: UnideskStructureProps) => {
 };
 
 const Menu = ({ children }: UnideskStructureProps) => (
-  <div className="mx-auto w-10/12 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12">{children}</div>
+  <div className="mx-auto w-fit p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12">{children}</div>
 );
 
 const Content = ({ children }: UnideskStructureProps) => {
-  return <div className="mx-auto flex flex-col gap-3 px-3 pt-12 lg:ml-12 lg:w-4/5">{children}</div>;
+  return <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5">{children}</div>;
 };
 
 export const UnideskStructure = Object.assign(Structure, {

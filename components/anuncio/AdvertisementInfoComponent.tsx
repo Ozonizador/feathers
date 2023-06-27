@@ -73,7 +73,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         <div className="flex flex-row lg:items-center">
           <p className="my-auto mb-3 text-base font-bold lg:w-44">Vive na propriedade?</p>
 
-          <div className="ml-2 flex w-11 flex-row items-center justify-between rounded-lg border border-terciary-500 p-3 lg:mb-0 lg:ml-6">
+          <div className="ml-3 flex w-fit flex-row items-center justify-between rounded-lg border border-terciary-500 p-3 lg:mb-0 lg:ml-6">
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
@@ -86,12 +86,10 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-          <div className="flex">
-            <p className="my-auto text-base font-bold lg:w-44">Tipo de senhorio</p>
-          </div>
+        <div className="flex flex-col gap-3 md:flex-row lg:items-center">
+          <p className="my-auto text-base font-bold lg:w-44">Tipo de senhorio</p>
 
-          <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:mb-0 lg:ml-6">
+          <div className="flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 md:ml-7 lg:mb-0 lg:ml-3">
             <div className="mr-16 text-base">Particular</div>
             <div className="flex h-5 items-center">
               <Controller

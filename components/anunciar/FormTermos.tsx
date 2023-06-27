@@ -68,12 +68,12 @@ const FormTermos = () => {
   return (
     <>
       {!saving ? (
-        <form className="container mx-auto my-20 lg:w-5/6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-10 text-2xl font-bold text-gray-700">
+        <form className="container mx-auto flex flex-col lg:w-5/6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
             Está quase pronto! Leia e aceite os seguintes documentos.
           </div>
 
-          <div className="mt-20 flex flex-col gap-5">
+          <div className="mt-10 flex flex-col gap-5">
             <div className="flex flex-row items-center align-middle">
               <div className="flex flex-row items-center gap-4">
                 <Controller
@@ -133,15 +133,15 @@ const FormTermos = () => {
             </div>
           </div>
 
-          <div className="mt-1 flex flex-col justify-center gap-5 lg:flex-row lg:px-32">
-            <div className="mx-auto w-5/6 lg:w-2/3">
+          <div className="mt-6 flex gap-5 pt-5 lg:flex-row">
+            <div className="w-48">
               <Button onClick={decrementStep} type="button">
                 Voltar Atrás
               </Button>
             </div>
-            <div className="mx-auto w-5/6 lg:w-2/3">
+            <div className="w-48">
               <Button type="submit" disabled={!isValid}>
-                <span className="uppercase leading-tight">Gravar Anúncio</span>
+                <span className="leading-tight">Gravar Anúncio</span>
               </Button>
             </div>
           </div>

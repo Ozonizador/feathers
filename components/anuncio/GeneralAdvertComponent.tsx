@@ -7,6 +7,7 @@ import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
 import { CoordinatesAsArray } from "../../models/utils";
 import { coordinateArrayToLatitude } from "../../utils/map-services";
 import Input from "../utils/Input";
+import classNames from "classnames";
 
 const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
   ssr: false,
@@ -35,7 +36,11 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
   return (
     <>
       <>
-        <div className="h-96 w-full px-1">
+        <div
+          className={classNames("w-full px-1", {
+            "h-96": !!createCurrentMapLocation(),
+          })}
+        >
           <MapWithNoSSR
             currentMapCoords={createCurrentMapLocation()}
             draggableMarker={true}
@@ -47,7 +52,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
       </>
       <div className="my-5 flex w-full flex-col justify-between lg:flex-row lg:gap-5">
         {/* col left */}
-        <div className="mt-2 w-full ">
+        <div className="mt-2 flex w-full flex-col gap-2 lg:mt-0">
           <div>
             <label className="mb-1">Qual o seu tipo de espaço?</label>
             <Controller
@@ -103,7 +108,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
         </div>
 
         {/* col right */}
-        <div className="w-full">
+        <div className="flex w-full flex-col gap-2">
           <div>
             <Controller
               name={ADVERTISEMENT_PROPERTIES.PLACE}

@@ -315,7 +315,7 @@ export const SelectAmenityLabel = Object.keys(TypeAmenityLabel).map((value) => {
 export const AboutHouseCommodities = {
   general: [
     { label: "Wifi", type: "WIFI" },
-    { label: "TV", type: "TV" },
+    { label: "Televisão", type: "TV" },
     { label: "Elevador", type: "ELEVADOR" },
     { label: "Ar condicionado", type: "AIR_CONDITIONING" },
     { label: "Máquina de Lavar Roupa", type: "LAUNDRY_MACHINE" },
@@ -324,8 +324,8 @@ export const AboutHouseCommodities = {
     { label: "Estendal para a Roupa", type: "ESTENDAL" },
     { label: "Sala de Estar", type: "LIVING_ROOM" },
     { label: "Lareira Interior", type: "FIREPLACE" },
-    { label: "Casa de banho privada", type: "PRIVATE_BATHROOM" },
-    { label: "Casa de banho partilhada", type: "SHARED_BATHROOM" },
+    { label: "Sofá na Sala de Estar", type: "SOFA" },
+    { label: "Mesa de Refeições da Sala de Estar", type: "TABLE" },
   ],
   bedroom: [
     { label: "Cama Individual", type: "SINGLE_BED" },
@@ -345,6 +345,8 @@ export const AboutHouseCommodities = {
     { label: "Varanda", type: "BALCONY" },
   ],
   bathroom: [
+    { label: "Casa de banho privada", type: "PRIVATE_BATHROOM" },
+    { label: "Casa de banho partilhada", type: "SHARED_BATHROOM" },
     { label: "Secador de Cabelo", type: "DRYER" },
     { label: "Espelho", type: "MIRROR" },
     { label: "Banheira", type: "BATHTUB" },
@@ -363,7 +365,7 @@ export const AboutHouseCommodities = {
     { label: "Utensílios básicos de cozinha (Panelas, tachos...)", type: "BASIC_UTILIES" },
     { label: "Congelador", type: "FREEZER" },
     { label: "Chaleira de água quente", type: "HOT_WATER_KETTLE" },
-    { label: "Mesa", type: "TABLE" },
+    { label: "Mesa de refeições", type: "TABLE" },
   ],
   exterior: [
     { label: "Pátio", type: "COURTYARD" },

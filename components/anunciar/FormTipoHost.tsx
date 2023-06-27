@@ -20,8 +20,8 @@ const FormTipoHost = () => {
   };
 
   return (
-    <section className="container mx-auto my-20 w-5/6">
-      <div className="my-28 text-2xl font-bold text-gray-700 lg:text-4xl">
+    <section className="container mx-auto my-10 w-5/6">
+      <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
         Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.
       </div>
 
@@ -29,12 +29,12 @@ const FormTipoHost = () => {
 
       <div className="mt-10 w-full">
         <div className="flex gap-2">
-          <div className="w-1/2">
+          <div className="w-48">
             <Button onClick={decrementStep} type="button">
               Voltar Atrás
             </Button>
           </div>
-          <div className="w-1/2">
+          <div className="w-48">
             <Button onClick={nextStep} type="button">
               Seguinte &#8594;
             </Button>

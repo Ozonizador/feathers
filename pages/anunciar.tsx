@@ -18,15 +18,15 @@ import { GetServerSidePropsContext } from "next";
 
 export default function Anunciar() {
   return (
-    <div className="max-width">
+    <div className="max-width flex justify-center px-5">
       <AnunciarProvider>
         <AdvertisementController>
-          <div className="mx-5 my-10 rounded-2xl border border-terciary-700 px-2 py-5 lg:my-20 lg:px-10">
-            <h1 className="text-center text-2xl font-bold leading-snug lg:text-6xl">
+          <div className="my-5 w-full rounded-xl border border-terciary-700 px-2 pb-4 pt-8 lg:my-20 lg:w-3/4">
+            <h1 className="text-center text-3xl font-black leading-snug lg:text-4xl">
               Anunciar a sua propriedade é rápido e fácil!
             </h1>
             <Stepper />
-            <div>
+            <div className="pt-4">
               <ZonaFormulario></ZonaFormulario>
             </div>
           </div>
