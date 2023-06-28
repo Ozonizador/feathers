@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 /* import person image */
-import { useGetUserType, useCurrentUser, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useCurrentUser } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
@@ -41,7 +41,6 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const router = useRouter();
 
   const { toggleUserType, notificationNumber, messagesNumber } = useGetUserType();
-  const toggleUserTypeContext = useToggleUserType();
 
   const [summary2, setSummary2] = useState(false);
   const [menuaberto, setMenuaberto] = useState(false);
@@ -51,6 +50,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
     setMenuaberto(false);
   };
 
+  console.log("NavbarMobile", toggleUserType);
   return (
     <>
       <div

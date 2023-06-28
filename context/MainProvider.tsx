@@ -53,7 +53,7 @@ interface MainProviderProps {
 
 export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const router = useRouter();
-  const toggleUserTypeContext = useToggleUserType();
+  const user = useUser();
   const [locationAccess, setLocationAccess] = useState(false);
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | undefined>(undefined);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
@@ -69,19 +69,15 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     coordinates: null,
   });
 
-  const user = useUser();
   const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
   const checkUserProfile = useCallback(async () => {
     if (!user) return;
 
     const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
-    if (data?.type) {
-      toggleUserTypeContext(data.type);
-    }
-
-    if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
-    if (data?.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
+    !error && setCurrentUnihostState((c) => ({ ...c, profile: data }));
+    data?.type && setCurrentUnihostState((currentInfo) => ({ ...currentInfo, useToggleUserType: data.type }));
+    data?.type === null && router.push(TYPE_PROFILE_CHOICE_URL);
   }, [user]);
 
   const checkUserNotificationsAndMessages = useCallback(async () => {
@@ -160,6 +156,7 @@ export const useCurrentUser = () => {
 export const useToggleUserType = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   return (userType: UserTypes): void => {
+    console.log("in here", userType);
     setCurrentInfo((currentStatus) => ({ ...currentStatus, toggleUserType: userType }));
   };
 };

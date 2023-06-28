@@ -24,7 +24,6 @@ const useProfileService = () => {
 
     try {
       const { data, error } = await getUserProfile(userID);
-
       if (error || !data) return createProfile(obj);
       return { data, error };
     } catch (error) {

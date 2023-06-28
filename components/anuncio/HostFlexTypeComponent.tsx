@@ -8,8 +8,8 @@ interface HostFlexTypeComponentProps {
 
 const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
   return (
-    <div>
-      <div className="flex flex-col items-baseline gap-2 lg:flex-row">
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-row items-baseline gap-2">
         <div className="my-5 flex flex-row items-center align-middle">
           <div>
             <RadioBox
@@ -25,14 +25,14 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-xl font-bold">Host Super Flex</div>
-          <div className="mt-2 text-sm text-secondary-300 lg:text-base">
+          <div className="text-start text-xl font-bold">Host Super Flex</div>
+          <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
             Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes
             , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-baseline gap-2 lg:flex-row">
+      <div className="flex flex-row items-baseline gap-2">
         <div className="my-5 flex flex-row items-center align-middle">
           <div>
             <RadioBox
@@ -48,14 +48,14 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-xl font-bold">Host Flex</div>
-          <div className="mt-2 text-sm text-secondary-300 lg:text-base">
+          <div className="text-start text-xl font-bold">Host Flex</div>
+          <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
             Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes
             , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-baseline gap-2 lg:flex-row">
+      <div className="flex flex-row items-baseline gap-2">
         <div className="my-5 flex flex-row items-center align-middle">
           <div>
             <RadioBox
@@ -71,14 +71,14 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-xl font-bold">Host Moderado</div>
-          <div className="mt-2 text-sm text-secondary-300 lg:text-base">
+          <div className="text-start text-xl font-bold">Host Moderado</div>
+          <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
             Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias
             antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-baseline gap-2 lg:flex-row">
+      <div className="flex flex-row items-baseline gap-2">
         <div className="my-5 flex flex-row items-center align-middle">
           <div>
             <RadioBox
@@ -94,8 +94,8 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-xl font-bold">Host Rígido</div>
-          <div className="mt-2 text-sm text-secondary-300 lg:text-base">
+          <div className="text-start text-xl font-bold">Host Rígido</div>
+          <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
             Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias
             antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
           </div>
