@@ -16,22 +16,19 @@ const useProfileService = () => {
   const supabaseClient = useSupabaseClient();
 
   const checkProfileAndCreate = async (userID: string, metadata: any) => {
+    let obj = {
+      avatar_url: metadata?.avatar_url || "",
+      firstName: metadata?.full_name?.split(" ")[0] || "",
+      lastName: metadata?.full_name?.split(" ")[1] || "",
+    };
+
     try {
       const { data, error } = await getUserProfile(userID);
 
-      if (error || !data)
-        return createProfile({
-          avatar_url: metadata?.avatar_url,
-          firstName: metadata?.full_name?.split(" ")[0] || "",
-          lastName: metadata?.full_name?.split(" ")[1] || "",
-        });
+      if (error || !data) return createProfile(obj);
       return { data, error };
     } catch (error) {
-      return createProfile({
-        avatar_url: metadata?.avatar_url,
-        firstName: metadata?.full_name?.split(" ")[0] || "",
-        lastName: metadata?.full_name?.split(" ")[1] || "",
-      });
+      return createProfile(obj);
     }
   };
 
