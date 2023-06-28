@@ -11,7 +11,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
-import { useGetUserType, useCurrentUser, useToggleUserType } from "../../context/MainProvider";
+import { useGetUserType, useCurrentUser } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
