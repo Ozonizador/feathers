@@ -5,7 +5,7 @@ import { useGetUserCoordinates } from "../../context/MainProvider";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { REQUIRED_ERROR_MESSAGE } from "../../models/error";
 import { CoordinatesAsArray } from "../../models/utils";
-import { coordinateArrayToLatitude } from "../../utils/map-services";
+import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import Input from "../utils/Input";
 import classNames from "classnames";
 
@@ -24,7 +24,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
   const createCurrentMapLocation = useCallback(() => {
     if (advertisement.geom) {
-      const { lat, lng } = coordinateArrayToLatitude(
+      const { lat, lng } = coordinatesArrayToGeoPoint(
         (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates as CoordinatesAsArray
       );
       return { lat, lng };

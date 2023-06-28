@@ -7,7 +7,7 @@ import { giveSearchByLocationSearch } from "../../hooks/mapService";
 import _ from "lodash";
 import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
-import { coordinateArrayToLatitude } from "../../utils/map-services";
+import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
 
 export enum SearchFields {
@@ -62,17 +62,18 @@ export const SearchInputField = () => {
   );
 
   const setSelectedOption = (value: string) => {
-    const option = addressOptions?.find((option) => value === option.place_name);
-    if (option) {
-      const { lat, lng } = coordinateArrayToLatitude(option.geometry.coordinates);
-      setAddressOptions([]);
-      setSearch({
-        startDate,
-        endDate,
-        coordinates: { type: option.geometry.type, coordinates: { lat, lng } },
-        location: option.place_name,
-      });
-    }
+    if (!addressOptions) return;
+    const option = addressOptions.find((option) => value === option.place_name);
+    if (!option) return;
+
+    const { lat, lng } = coordinatesArrayToGeoPoint(option.geometry.coordinates);
+    setAddressOptions([]);
+    setSearch({
+      startDate,
+      endDate,
+      coordinates: { type: option.geometry.type, coordinates: { lat, lng } },
+      location: option.place_name,
+    });
   };
 
   return (

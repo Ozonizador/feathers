@@ -1,3 +1,4 @@
+DROP FUNCTION close_advertisements(float, float);
 DROP VIEW "advertisements_agg_amenities";
 
 CREATE VIEW "advertisements_agg_amenities" AS
@@ -18,3 +19,19 @@ CREATE VIEW "advertisements_agg_amenities" AS
         FROM advertisements ) as amenities_agg 
         ON amenities_agg.id = advertisements.id 
         GROUP BY advertisements.id;
+
+CREATE OR REPLACE FUNCTION close_advertisements (lat float, lng float)
+	RETURNS SETOF public.advertisements_agg_amenities
+	LANGUAGE plpgsql
+	AS $$
+BEGIN
+	RETURN query (
+		SELECT
+			*
+		FROM
+			advertisements_agg_amenities
+		WHERE
+			ST_DWithin (geom, ST_SetSRID (ST_MakePoint (lng, lat), 4326), 10000));
+END;
+$$
+SECURITY DEFINER SET search_path = extensions, public, pg_temp;

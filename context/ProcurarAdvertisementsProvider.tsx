@@ -7,19 +7,18 @@ import { trpc } from "../utils/trpc";
 
 /* FILTERS */
 
-/* DEFAULT VALUE */
-const defaultFilter = {
+export const defaultFilter = {
   filter: {
     comodities: [],
     placeType: "ALL",
     price: {
-      startRange: undefined,
-      endRange: undefined,
+      startRange: null,
+      endRange: null,
     },
-    coordinates: undefined,
+    coordinates: null,
     dates: {
-      startDate: undefined,
-      endDate: undefined,
+      startDate: null,
+      endDate: null,
     },
   },
   order: {
@@ -54,12 +53,16 @@ const AdvertisementsContext = createContext<AdvertisementsOnPage>(defaultAdverti
 const SetAdvertisementsContext = createContext<Dispatch<SetStateAction<AdvertisementsOnPage>>>(() => {});
 
 interface ProcurarAdvertisementsProviderProps {
+  filter: FilterAdvertisements;
   children: ReactNode;
 }
 
 /* Context */
-export const ProcurarAdvertisementsProvider = ({ children }: ProcurarAdvertisementsProviderProps): JSX.Element => {
-  const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements & { page?: number | null }>(defaultFilter);
+export const ProcurarAdvertisementsProvider = ({
+  children,
+  filter,
+}: ProcurarAdvertisementsProviderProps): JSX.Element => {
+  const [currentFilter, setCurrentFilter] = useState<FilterAdvertisements & { page?: number | null }>(filter);
   const [advertisementsInfo, setAdvertisementsInfo] = useState<AdvertisementsOnPage>(defaultAdvertisements);
 
   const { data, error } = trpc.advertisements.searchForAdvertisements.useQuery({
