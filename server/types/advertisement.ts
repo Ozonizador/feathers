@@ -11,14 +11,14 @@ export type AdvertisementsFilterOptions = {
   comodities?: TypeAmenity[];
   placeType?: "ALL" | "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";
   price?: {
-    startRange?: number;
-    endRange?: number;
+    startRange?: number | null;
+    endRange?: number | null;
   };
   dates?: {
-    startDate?: string;
-    endDate?: string;
+    startDate?: string | null;
+    endDate?: string | null;
   };
-  coordinates?: GEO;
+  coordinates?: GEO | null;
 };
 
 /* Ordering */

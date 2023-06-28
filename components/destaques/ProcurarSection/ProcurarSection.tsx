@@ -16,7 +16,7 @@ import {
 import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvider";
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { CoordinatesAsArray, GEO } from "../../../models/utils";
-import { coordinateArrayToLatitude } from "../../../utils/map-services";
+import { coordinatesArrayToGeoPoint } from "../../../utils/map-services";
 import { format } from "date-fns";
 import Button from "../../utils/Button";
 import { useSetModalMaisFiltros } from "../../../context/ModalMaisFiltrosProvider";
@@ -71,7 +71,7 @@ export default function ProcurarSection() {
     for (let advertisement of advertisements) {
       if (advertisement.geom) {
         markers.push(
-          coordinateArrayToLatitude(
+          coordinatesArrayToGeoPoint(
             (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates
           )
         );

@@ -23,14 +23,14 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
     placeType: z.enum(["ALL", "ENTIRE_SPACE", "SHARED_ROOM", "PRIVATE_ROOM"]),
     price: z
       .object({
-        startRange: z.number().optional(),
-        endRange: z.number().optional(),
+        startRange: z.number().optional().nullable(),
+        endRange: z.number().optional().nullable(),
       })
       .optional(),
     dates: z
       .object({
-        startDate: z.string().optional(),
-        endDate: z.string().optional(),
+        startDate: z.string().optional().nullable(),
+        endDate: z.string().optional().nullable(),
       })
       .optional(),
     coordinates: z

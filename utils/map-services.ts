@@ -14,7 +14,7 @@ export const mapServices = [
   },
 ];
 
-export const coordinateArrayToLatitude = (coordinates: number[]) => {
+export const coordinatesArrayToGeoPoint = (coordinates: number[]) => {
   return { lat: coordinates[1], lng: coordinates[0] };
 };
 
