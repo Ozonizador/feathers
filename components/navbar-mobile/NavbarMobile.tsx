@@ -43,16 +43,6 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const { toggleUserType, notificationNumber, messagesNumber } = useGetUserType();
   const toggleUserTypeContext = useToggleUserType();
 
-  const toggleSenhorioEstudante = () => {
-    if (!user) return;
-
-    if (toggleUserType !== "TENANT") {
-      toggleUserTypeContext("TENANT");
-    } else {
-      toggleUserTypeContext("LANDLORD");
-    }
-  };
-
   const [summary2, setSummary2] = useState(false);
   const [menuaberto, setMenuaberto] = useState(false);
 
@@ -118,11 +108,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <span className="mr-2">Estudante</span>
                 <Switch
                   checked={false}
-                  onChange={toggleSenhorioEstudante}
-                  className={classNames("relative mx-5 mt-2 inline-flex h-8 w-16 items-center rounded-full", {
-                    "bg-primary-500": profile && profile.type === toggleUserType,
-                    "bg-secondary-300": !profile || profile.type !== toggleUserType,
-                  })}
+                  className={classNames(
+                    "relative mx-5 mt-2 inline-flex h-8 w-16 cursor-default items-center rounded-full",
+                    {
+                      "bg-primary-500": profile && profile.type === toggleUserType,
+                      "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                    }
+                  )}
                 >
                   <span
                     className={`${

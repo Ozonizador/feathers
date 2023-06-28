@@ -6,28 +6,46 @@ import useStayService from "../../hooks/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import Spinner from "../utils/Spinner";
 import { ReservationGuest } from "../../models/reservation";
+import MenuEstudante from "../unidesk/Menus/MenuEstudante";
+import { UnideskStructure } from "../unidesk/UnideskStructure";
+import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
+import { UNIDESK_URL } from "../../models/paths";
+import IconAnuncios from "../../public/images/icons8_laptop_computer.svg";
+
+const paths = [
+  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: "", label: "Reservas" },
+] as BreadcrumbPath[];
 
 const ReservasSection = () => {
   return (
-    <section className="mx-28 pb-5 pt-20">
-      <Tab.Group>
-        <Tab.List className="mb-10 flex gap-5">
-          <Tab className="reservas-tab">Ativas</Tab>
-          <Tab className="reservas-tab">Próximas</Tab>
-          <Tab className="reservas-tab">Todas</Tab>
-        </Tab.List>
-        <Tab.Panels className="w-full">
-          <Tab.Panel>
-            <CurrentReservationsSection />
-          </Tab.Panel>
-          <Tab.Panel>
-            <NextReservationsSection />
-          </Tab.Panel>
-          <Tab.Panel>
-            <AllReservationsSection />
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+    <section className="max-width px-5">
+      <Breadcrumbs icon={IconAnuncios} paths={paths} />
+      <UnideskStructure>
+        <UnideskStructure.Menu>
+          <MenuEstudante />
+        </UnideskStructure.Menu>
+        <UnideskStructure.Content>
+          <Tab.Group>
+            <Tab.List className="mb-5 flex gap-5 border-b border-primary-200">
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Ativas</Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Próximas</Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Todas</Tab>
+            </Tab.List>
+            <Tab.Panels className="w-full">
+              <Tab.Panel>
+                <CurrentReservationsSection />
+              </Tab.Panel>
+              <Tab.Panel>
+                <NextReservationsSection />
+              </Tab.Panel>
+              <Tab.Panel>
+                <AllReservationsSection />
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
+        </UnideskStructure.Content>
+      </UnideskStructure>
     </section>
   );
 };
@@ -57,8 +75,8 @@ const CurrentReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
-            <div className="my-5"> Estado</div>
+          <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
+            <div className="my-5">Estado</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
@@ -85,17 +103,17 @@ const CurrentReservationsSection = () => {
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
                     {reservation.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{`${
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   } em ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
@@ -158,17 +176,17 @@ const NextReservationsSection = () => {
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
                     {reservation.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
                   </Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className=" text-lg text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
+                  <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     TYPE_ADVERTISEMENT[reservation.advertisement?.type] || ""
                   } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
@@ -218,7 +236,7 @@ const AllReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
+          <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
             <div className="my-5"> Estado</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
@@ -244,19 +262,19 @@ const AllReservationsSection = () => {
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {checkIntervalForDate(reservation)}
                   </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
                     {reservation.tenant.name}
                   </Table.Cell>
-                  <Table.Cell className="text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
                   </Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">
+                  <Table.Cell className=" text-lg text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className=" text-xl text-gray-700 dark:text-white">{`${
+                  <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     reservation.advertisement ? TYPE_ADVERTISEMENT[reservation.advertisement.type] : ""
                   } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
