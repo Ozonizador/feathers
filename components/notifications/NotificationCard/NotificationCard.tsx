@@ -19,7 +19,7 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
           <p className="text-base text-gray-400 ">{NOTIFICATION_TYPES_INFORMATION[notification.type].description}</p>
         </div>
 
-        <div className="w-1/2">
+        <div className="w-fit min-w-[300px]">
           <Link href={NOTIFICATION_LINKS[notification.type]}>
             <a>
               <Button rounded="full" type="button">

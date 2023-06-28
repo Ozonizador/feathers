@@ -7,9 +7,17 @@ import { useCurrentUser, useClearNotifications } from "../../context/MainProvide
 import { Notification } from "../../models/notification";
 import useNotificationService from "../../hooks/notificationsService";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
+import iconfavorito from "../../public/images/icon-pg37-1.svg";
 
 // image
 import IconNotification from "../../public/images/notificationsIcon.svg";
+import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
+import { UNIDESK_URL } from "../../models/paths";
+
+const paths = [
+  { url: UNIDESK_URL, label: "Unidesk" },
+  { url: "", label: "Caixa de Entrada" },
+] as BreadcrumbPath[];
 
 const Notifications = () => {
   const { getNotifications } = useNotificationService();
@@ -36,8 +44,12 @@ const Notifications = () => {
   useEffect(() => {
     clearNotifications();
   }, []);
+
   return (
     <div className="mx-5 my-16 rounded-lg border lg:border-none">
+      <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
+        <Breadcrumbs icon={iconfavorito} paths={paths} />
+      </div>
       <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
       <div className="container mx-auto w-full lg:w-4/5">
         <>

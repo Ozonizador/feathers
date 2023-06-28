@@ -46,18 +46,6 @@ export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   const { toggleUserType, messagesNumber, notificationNumber } = useGetUserType();
-  const toggleUserTypeContext = useToggleUserType();
-
-  /* Changing the toggle TENANT estudante */
-  const toggleSenhorioEstudante = () => {
-    if (!user) return;
-
-    if (toggleUserType === "LANDLORD") {
-      toggleUserTypeContext("TENANT");
-    } else {
-      toggleUserTypeContext("LANDLORD");
-    }
-  };
 
   const logout = () => {
     supabaseClient.auth.signOut();
@@ -226,8 +214,7 @@ export const Navbar = () => {
                       <span className="mr-2">Estudante</span>
                       <Switch
                         checked={true}
-                        onChange={toggleSenhorioEstudante}
-                        className={classNames("relative inline-flex h-6 w-11 rounded-full", {
+                        className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full", {
                           "bg-primary-500": profile && profile.type === toggleUserType,
                           "bg-secondary-300": !profile || profile.type !== toggleUserType,
                         })}

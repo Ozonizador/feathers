@@ -53,6 +53,7 @@ interface MainProviderProps {
 
 export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const router = useRouter();
+  const toggleUserTypeContext = useToggleUserType();
   const [locationAccess, setLocationAccess] = useState(false);
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | undefined>(undefined);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
@@ -75,6 +76,10 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     if (!user) return;
 
     const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
+    if (data?.type) {
+      toggleUserTypeContext(data.type);
+    }
+
     if (!error) setCurrentUnihostState((c) => ({ ...c, profile: data }));
     if (data?.type === null) router.push(TYPE_PROFILE_CHOICE_URL);
   }, [user]);

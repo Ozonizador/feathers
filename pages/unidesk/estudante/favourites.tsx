@@ -15,7 +15,6 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { PROCURAR_ADVERT_URL, UNIDESK_URL } from "../../../models/paths";
 import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
-import { redirect } from "next/dist/server/api-utils";
 import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 
