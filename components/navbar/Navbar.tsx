@@ -60,9 +60,9 @@ export const Navbar = () => {
   return (
     <header>
       {/* DESKTOP */}
-      <nav className="mx-6 mb-5 lg:mx-28">
+      <nav>
         <div>
-          <div className="hidden flex-wrap border-b border-terciary-700 py-2 lg:flex">
+          <div className="border-terciary-400 hidden flex-wrap border-b py-2 lg:flex lg:px-28">
             <div className="flex">
               <div className="my-auto mr-3 flex">
                 <ImPhone className="mr-1 self-center" />
@@ -92,7 +92,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="my-5 flex lg:gap-5">
+          <div className="border-terciary-400 mt-5 flex h-20 border-b lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
                 <a aria-label="home">
