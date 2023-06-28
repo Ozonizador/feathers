@@ -29,14 +29,14 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
         </div>
       </div>
 
-      <div className="mb-6 mt-14 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">
+      <div className="mt-14 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">
         <div className="text-xl font-bold">Últimas reviews</div>
         <div className="text-secondary-300">Anúncios</div>
       </div>
 
       {!latestReviews ||
         (latestReviews.length === 0 && (
-          <div className="mb-3 text-center lg:text-left">Não existem reviews para mostrar</div>
+          <div className="pb-5 text-center lg:text-left">Não existem reviews para mostrar</div>
         ))}
       {/* CARD */}
       {latestReviews &&

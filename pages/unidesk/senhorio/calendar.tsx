@@ -71,6 +71,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   });
 
   const popoverOptions = advertisements.map((advertisement) => ({
+    value: advertisement.slug,
     label: advertisement.title,
     id: advertisement.id,
   })) as PopoverOption[];
@@ -147,11 +148,12 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
                 title={selectedAdvertisement?.title || ""}
                 options={popoverOptions || []}
                 onClick={() => changeAdvertisementCalendar}
+                selectedOption={selectedAdvertisement?.slug}
               />
             </div>
           </div>
           {selectedAdvertisement && (
-            <div className="flex flex-col gap-2 px-2">
+            <div className="mt-4 flex flex-col gap-2 px-2">
               <h2 className="text-2xl font-black text-black">Calendário</h2>
               <h4 className="text-xl text-primary-500">Não se esqueça de manter o seu calendário atualizado</h4>
               <div className="mt-5 w-full">
