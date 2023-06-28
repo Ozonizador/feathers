@@ -8,9 +8,9 @@ interface AnuncioDisponivelProps {
 
 const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
   return (
-    <div>
-      <div className="my-20 flex flex-col">
-        <div className="mb-6 text-xl text-gray-600 ">Estado do anúncio</div>
+    <div className="flex flex-col gap-6">
+      <div className="mb-10 mt-20 flex flex-col">
+        <div className="mb-6 text-2xl text-gray-600">Estado do anúncio</div>
         <div className="my-6 flex flex-row items-baseline">
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
@@ -35,13 +35,13 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-xl font-bold">Não publicado</div>
-            <div className="mt-2 text-base text-secondary-300">
+            <div className="text-start text-lg font-bold">Não publicado</div>
+            <div className="mt-2 text-start text-base text-secondary-300">
               O seu anúncio não pode ser reservado e não vai aparecer nos resultados de pesquisa.
             </div>
           </div>
         </div>
-        <div className="my-6 flex flex-row items-baseline">
+        <div className="flex flex-row items-baseline">
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
               <div>
@@ -65,8 +65,8 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-xl font-bold">Pausado</div>
-            <div className="mt-2 text-base text-secondary-300">
+            <div className="text-start text-lg font-bold">Pausado</div>
+            <div className="mt-2 text-start text-base text-secondary-300">
               O seu anúncio vai ficar pausado de forma temporária.
             </div>
           </div>
@@ -96,8 +96,10 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-xl font-bold">Disponível</div>
-            <div className="mt-2 text-base text-secondary-300">O seu anúncio está disponível para reserva.</div>
+            <div className="text-start text-lg font-bold">Disponível</div>
+            <div className="mt-2 text-start text-base text-secondary-300">
+              O seu anúncio está disponível para reserva.
+            </div>
           </div>
         </div>
       </div>

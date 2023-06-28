@@ -11,7 +11,7 @@ interface PopoverSelectProps {
 const PopoverGeneric = ({ title, children }: PopoverSelectProps) => {
   return (
     <div>
-      <Popover className="relative z-900 w-full">
+      <Popover className="relative z-700 w-full">
         {({ open }) => (
           <>
             <Popover.Button
@@ -35,7 +35,7 @@ const PopoverGeneric = ({ title, children }: PopoverSelectProps) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-1/2 z-900 mt-5 w-full -translate-x-1/2 transform bg-white px-4 sm:px-0 lg:max-w-3xl">
+              <Popover.Panel className="absolute left-1/2 z-700 mt-5 w-full -translate-x-1/2 transform bg-white px-4 sm:px-0 lg:max-w-3xl">
                 {children}
               </Popover.Panel>
             </Transition>

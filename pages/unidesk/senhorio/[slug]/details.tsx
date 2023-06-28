@@ -143,7 +143,7 @@ const Details = ({ advertisement }: DetailsProps) => {
                     </Button>
                   </div>
 
-                  <h5 className="font-bold">Política de Cancelamento</h5>
+                  <h5 className="mt-6 text-2xl font-black">Política de Cancelamento</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                   <AnuncioDisponivel advertisement={advertisementContext} />
                   <div className="mx-auto my-5 w-1/2 px-6">
