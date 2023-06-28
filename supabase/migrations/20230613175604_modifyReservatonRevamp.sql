@@ -23,8 +23,10 @@ $$
 SECURITY DEFINER SET search_path = extensions, public, pg_temp;
 
 
+DROP FUNCTION close_advertisements(float, float);
+
 CREATE OR REPLACE FUNCTION close_advertisements (lat float, lng float)
-	RETURNS SETOF public.advertisements
+	RETURNS SETOF public.advertisements_agg_amenities
 	LANGUAGE plpgsql
 	AS $$
 BEGIN

@@ -38,7 +38,8 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
         lat: z.number(),
         lng: z.number(),
       })
-      .optional(),
+      .optional()
+      .nullable(),
   }),
   order: z.object({
     byColumn: z.enum(["price", "rating", "time"]),
@@ -65,7 +66,7 @@ export const advertisementsRouter = router({
           },
           { count: "exact" }
         )
-        .select("*, averages:reviewsPerAdvertisement!left(*), reservations!left(id)");
+        .select("*, reservations!left(id), averages:reviewsPerAdvertisement!left(*)");
     } else {
       query = supabaseAdmin
         .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
@@ -83,9 +84,9 @@ export const advertisementsRouter = router({
     const { data, error, count } = await query;
 
     return {
-      data: (data as unknown as AdvertisementWithReviewAverage[]) || null,
+      data: (data as unknown as AdvertisementWithReviewAverage[]) || [],
       error: error || null,
-      count: (count as number) || null,
+      count: (count as number) || 0,
     };
   }),
 
@@ -117,7 +118,7 @@ export const advertisementsRouter = router({
       // select the information I want
       const { data, error, count } = await query;
 
-      return { data, error, count };
+      return { data: data || [], error, count: count || 0 };
     }),
 
   updateAdvertisementMinimumStayAndTimeInAdvance: isHostProcedure

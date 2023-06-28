@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProcurarSection from "../components/destaques/ProcurarSection/ProcurarSection";
-import SearchInputField from "../components/search/SearchInputField";
+import SearchInputField, { SearchFields } from "../components/search/SearchInputField";
 import { ModalMaisFiltrosProvider } from "../context/ModalMaisFiltrosProvider";
 import { ProcurarAdvertisementsProvider, defaultFilter } from "../context/ProcurarAdvertisementsProvider";
 import { GetServerSidePropsContext } from "next";
 import { FilterAdvertisements } from "../server/types/advertisement";
 import { giveSearchByLocationSearch } from "../hooks/mapService";
-import { coordinatesArrayToGeoPoint } from "../utils/map-services";
+import { coordinatesArrayToGeoPoint, coordinatesObjectToArray } from "../utils/map-services";
+import { useSetSearchLocationByProperty } from "../context/MainProvider";
 
 type ProcurarProps = {
   filter: FilterAdvertisements;
 };
 
 const Procurar = ({ filter }: ProcurarProps) => {
+  const setSearchInfoProperty = useSetSearchLocationByProperty();
+  useEffect(() => {
+    const currentFilter = filter.filter;
+    currentFilter.coordinates &&
+      setSearchInfoProperty(SearchFields.COORDINATES, { type: "Point", coordinates: currentFilter.coordinates });
+  }, []);
+
   return (
     <ModalMaisFiltrosProvider>
       <ProcurarAdvertisementsProvider filter={filter}>
@@ -38,22 +46,26 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { filter, order } = serverFilter;
 
   const { city } = query;
-  if (city) {
-    const { data, error } = await giveSearchByLocationSearch(city as string);
-    if (!error && data) {
-      const firstSearch = data.features[0];
-      const coordinates = coordinatesArrayToGeoPoint(firstSearch.center);
-      return {
-        props: { filter: { filter: { ...filter, coordinates }, order } },
-      };
-    }
+  if (!city) {
+    return {
+      props: {
+        filter: serverFilter,
+      },
+    };
   }
 
-  // map box query
+  const { data, error } = await giveSearchByLocationSearch(city as string);
+  if (error || !data || data.length === 0) {
+    return {
+      props: {
+        filter: serverFilter,
+      },
+    };
+  }
 
+  const firstSearch = data.features[0];
+  const coordinates = firstSearch ? coordinatesArrayToGeoPoint(firstSearch.center) : null;
   return {
-    props: {
-      filter: serverFilter,
-    },
+    props: { filter: { filter: { ...filter, coordinates }, order } },
   };
 };

@@ -30,7 +30,7 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 export default function ProcurarSection() {
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
-  const { location, startDate, endDate, coordinates } = useUserSearch();
+  const { location, coordinates } = useUserSearch();
 
   /* Filters */
   const setFilters = useSetFiltersContext();
@@ -46,20 +46,6 @@ export default function ProcurarSection() {
   const goToAdvert = (id: string) => {
     router.push(`/anuncio/${id}`);
   };
-
-  const locateByQuery = useCallback(() => {
-    setFilters({
-      coordinates: (coordinates && coordinates.coordinates) || currentMapCoordinates || undefined,
-      dates: {
-        startDate: startDate ? format(startDate, "yyyy-MM-dd") : "",
-        endDate: endDate ? format(endDate, "yyyy-MM-dd") : "",
-      },
-    });
-  }, [coordinates, startDate, endDate, currentMapCoordinates]);
-
-  useEffect(() => {
-    locateByQuery();
-  }, [locateByQuery]);
 
   const setPriceChange = _.debounce((value) => {
     const [startRange, endRange] = value;
@@ -184,6 +170,8 @@ export default function ProcurarSection() {
                         </div>
                       );
                     })}
+                  {!advertisements ||
+                    (advertisements.length == 0 && <div className="mt-5">Não tem espaços disponíveis</div>)}
                 </div>
               </>
             )}

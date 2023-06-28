@@ -1,5 +1,56 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { config } from "process";
+
+type CityProps = {
+  image: string;
+  title: string;
+  url: string;
+};
+
+const CONFIG = [
+  {
+    title: "Tomar",
+    image: "/images/place-tomar.jpg",
+    url: "/procurar?city=Tomar",
+  },
+  {
+    title: "Peniche",
+    image: "/images/peniche.jpg",
+    url: "/procurar?city=Peniche",
+  },
+  {
+    title: "Leiria",
+    image: "/images/place-leiria.jpg",
+    url: "/procurar?city=Leiria",
+  },
+  {
+    title: "Coimbra",
+    image: "/images/place-santarem.jpg",
+    url: "/procurar?city=Coimbra",
+  },
+  {
+    title: "Abrantes",
+    image: "/images/place-abrantes.jpg",
+    url: "/procurar?city=Abrantes",
+  },
+  {
+    title: "Rio Maior",
+    image: "/images/place-brazil.jpg",
+    url: `/procurar?city=Rio Maior`,
+  },
+  {
+    title: "Porto",
+    image: "/images/place-braga.jpg",
+    url: "/procurar?city=Porto",
+  },
+  {
+    title: "Caldas da Rainha",
+    image: "/images/place-setubal.jpg",
+    url: "/procurar?city=Caldas da Rainha",
+  },
+] as CityProps[];
 
 const ExploreCity = () => {
   return (
@@ -8,59 +59,26 @@ const ExploreCity = () => {
         <div className="mx-auto p-4 text-center lg:px-8 lg:py-10">
           <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <article className="group relative h-60 rounded-2xl bg-black">
-              <Image src="/images/place-tomar.jpg" alt="tomar" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Tomar
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/peniche.jpg" alt="peniche" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Peniche
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-leiria.jpg" alt="leiria" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Leiria
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-santarem.jpg" alt="santarem" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Coimbra
-              </div>
-            </article>
-            {/* second row */}
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-abrantes.jpg" alt="abrantes" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Abrantes
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-brazil.jpg" alt="maior" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Rio Maior
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-braga.jpg" alt="braga" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Porto
-              </div>
-            </article>
-            <article className="group relative h-60 rounded-2xl">
-              <Image src="/images/place-setubal.jpg" alt="setubal" layout="fill" className="rounded-2xl" />
-              <div className="absolute flex h-full w-full flex-col justify-center break-words align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
-                Caldas da Rainha
-              </div>
-            </article>
+            {CONFIG.map((city, index) => (
+              <ExploreCityItem key={index} title={city.title} image={city.image} url={city.url} />
+            ))}
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const ExploreCityItem = ({ title, url, image }: CityProps) => {
+  return (
+    <Link href={url}>
+      <article className="group relative h-60 cursor-pointer rounded-2xl bg-black">
+        <Image src={image} alt="tomar" layout="fill" className="rounded-2xl" />
+        <div className="absolute flex h-full w-full flex-col justify-center break-all align-middle text-3xl font-bold text-white group-hover:text-7xl group-hover:text-neutral-200">
+          {title}
+        </div>
+      </article>
+    </Link>
   );
 };
 
