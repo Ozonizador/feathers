@@ -19,10 +19,17 @@ import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
 import { Profile } from "../../models/profile";
+import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
+import { ADMIN_URL } from "../../models/paths";
 
 {
   /* page 59 XD */
 }
+
+const paths = [
+  { url: ADMIN_URL, label: "Conta" },
+  { url: "", label: "Pagamentos e Recebimentos" },
+] as BreadcrumbPath[];
 
 const CaixaEntrada = () => {
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
@@ -96,6 +103,8 @@ const CaixaEntrada = () => {
 
   return (
     <div className="mx-5 h-full rounded-xl border lg:border-none">
+      <Breadcrumbs paths={paths} />
+      <div className="mb-5"></div>
       <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
       {/* DESKTOP */}
       <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
