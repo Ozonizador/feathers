@@ -84,6 +84,12 @@ export default function ProcurarSection() {
     } as AdvertisementOrder);
   };
 
+  useEffect(() => {
+    if (!coordinates || !coordinates.coordinates) return setFilters({ coordinates: undefined });
+
+    setFilters({ coordinates: coordinates.coordinates });
+  }, [coordinates]);
+
   return (
     <>
       <ModalMaisFiltros />

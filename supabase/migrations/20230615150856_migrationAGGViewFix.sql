@@ -31,7 +31,8 @@ BEGIN
 		FROM
 			advertisements_agg_amenities
 		WHERE
-			ST_DWithin (geom, ST_SetSRID (ST_MakePoint (lng, lat), 4326), 10000));
+        
+			ST_DWithin (geom::geography, ST_SetSRID (ST_MakePoint (lng, lat), 4326)::geography, 10000));
 END;
 $$
 SECURITY DEFINER SET search_path = extensions, public, pg_temp;

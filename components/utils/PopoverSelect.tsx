@@ -15,14 +15,13 @@ interface PopoverSelectProps {
   options: PopoverOption[];
   [x: string]: any;
   onClick: (e: any) => void;
-  selectedOptions?: string[];
+  selectedOption?: string;
 }
 
-const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: PopoverSelectProps) => {
+const PopoverSelect = ({ title, options, selectedOption, onClick, props }: PopoverSelectProps) => {
   const isSelectedOption = (option: PopoverOption) => {
-    if (!selectedOptions || selectedOptions.length === 0) return false;
-
-    return selectedOptions.find((item) => option.value === item) !== undefined;
+    if (!selectedOption) return false;
+    return selectedOption == option.value;
   };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>, selectedOption: string) => {
@@ -30,14 +29,14 @@ const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: Popo
     onClick && onClick(selectedOption);
   };
   return (
-    <div className="w-full px-4">
-      <Popover className="relative w-full">
+    <div className="w-full">
+      <Popover className="relative z-900 w-full">
         {({ open }) => (
           <>
             <Popover.Button
               className={`
                 ${open ? "" : "text-opacity-90"}
-                flex w-full justify-between p-3`}
+                flex w-full justify-between rounded-xl border border-primary-300 p-3`}
             >
               <span className="text-xl">{title}</span>
               <BsFillCaretDownFill
@@ -55,8 +54,8 @@ const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: Popo
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-1/2 z-10 w-full -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className="z-900 h-64 overflow-y-scroll rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+              <Popover.Panel className="absolute left-1/2 z-900 w-full -translate-x-1/2 transform bg-white px-4 sm:px-0 lg:max-w-3xl">
+                <div className="h-64 overflow-y-auto rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="flex flex-col gap-2 py-2">
                     {options &&
                       options.map((item) => (
@@ -73,7 +72,7 @@ const PopoverSelect = ({ title, options, selectedOptions, onClick, props }: Popo
                             }
                           )}
                         >
-                          <p className="text-sm font-medium">{item.label}</p>
+                          <p className="px-2 text-sm font-medium">{item.label}</p>
                         </div>
                       ))}
                   </div>

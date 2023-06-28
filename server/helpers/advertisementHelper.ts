@@ -32,13 +32,19 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
 };
 
 const addOrderToSearchAdvertisement = (query: any, order: AdvertisementOrder) => {
-  if (!order.isActive) return query;
+  // foreign table ordering does not work yet
+  if (!order.isActive || order.byColumn === "rating") return query;
 
   let ascending = order.type == "asc";
   let property = ORDER_FILTER[order.byColumn];
 
-  query = query.order(property, { ascending: ascending });
+  let opts = {
+    ascending: ascending,
+    nullsFirst: false,
+    // foreignTable: order.byColumn == "rating" ? "reviewsPerAdvertisement" : undefined,
+  };
 
+  query = query.order(property, { ascending: ascending, nullsFirst: false });
   return query;
 };
 

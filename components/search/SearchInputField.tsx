@@ -37,10 +37,13 @@ export const SearchInputField = () => {
 
   const getSearchByText = async (value: string) => {
     const { data, error } = await giveSearchByLocationSearch(value);
-    if (!error && data) {
-      const features = data.features;
-      setAddressOptions(features);
+    if (error || !data || data.length > 0) return;
+
+    const features = data.features;
+    if (features && features.length > 0) {
+      return setAddressOptions(features);
     }
+    setSearchInfoProperty(SearchFields.COORDINATES, undefined);
   };
 
   const checkIfMonthsAhead = (date: Date) => {
