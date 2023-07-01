@@ -152,7 +152,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuSenhorio />
+        <MenuSenhorio activeSection="single_advert" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         {/* FOTOS */}

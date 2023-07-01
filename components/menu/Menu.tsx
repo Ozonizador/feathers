@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 import { TiLockClosed } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ type MenuProps = {
 };
 
 const Menu = ({ children }: MenuProps) => {
-  return <div className="rounded-2xl bg-primary-50 p-4">{children}</div>;
+  return <div className="w-full rounded-2xl bg-primary-50 p-4 lg:w-full">{children}</div>;
 };
 
 type MenuOptionProps = {
@@ -63,7 +63,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isOpen, setOpen, isCollap
         "rounded-xl bg-primary-200 p-4": selectedGroup,
       })}
     >
-      <div className="b border-b border-primary-500 p-2" onClick={setOpen && setOpen}>
+      <div className={classNames({ "border-b border-primary-500 p-2": selectedGroup })} onClick={setOpen && setOpen}>
         <div className="flex">
           <div>
             <p>{title}</p>
@@ -79,7 +79,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isOpen, setOpen, isCollap
           )}
         </div>
       </div>
-      {children && <div className="flex flex-col">{children}</div>}
+      {children && <div className="flex flex-col pt-2">{children}</div>}
     </div>
   );
 };

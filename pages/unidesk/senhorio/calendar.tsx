@@ -139,7 +139,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuSenhorio />
+          <MenuSenhorio activeSection="uni-controlo" />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div>

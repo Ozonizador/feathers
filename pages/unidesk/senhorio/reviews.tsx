@@ -34,7 +34,7 @@ const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: Rev
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuSenhorio />
+          <MenuSenhorio activeSection="uni-controlo" />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <ReviewInfo
