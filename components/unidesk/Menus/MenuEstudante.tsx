@@ -1,5 +1,4 @@
 import React from "react";
-import { MenuItem } from "../../menu/Menu";
 import { useRouter } from "next/router";
 import { UNIDESK_STAY_URL } from "../../../models/paths";
 
@@ -14,7 +13,6 @@ const MenuEstudante = () => {
     return (href && router.asPath.includes(href)) || false;
   };
 
-  // TODO change colours here.
   return (
     <div className="rounded-2xl bg-primary-50 p-4">
       <div className="rounded-2xl bg-primary-200 p-4">
