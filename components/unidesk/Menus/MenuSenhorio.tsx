@@ -4,80 +4,95 @@ import { useSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnu
 import { useRouter } from "next/router";
 import Menu, { MenuGrouper, MenuOption } from "../../menu/Menu";
 import {
+  INBOX_URL,
+  NOTIFICATIONS_URL,
   UNICONTROLO_GUESTS_URL,
   UNIDESK_SENHORIO_CALENDAR_URL,
+  UNIDESK_SENHORIO_PAINEL_URL,
   UNIDESK_SENHORIO_REVIEWS_URL,
 } from "../../../models/paths";
 
 type MenuSenhorioProps = {
   activeSection: "adverts" | "single_advert" | "inbox" | "uni-controlo" | "notifications";
+  activeUrl:
+    | "calendar"
+    | "reviews"
+    | "guests"
+    | "advert_prices"
+    | "advert_details"
+    | "advert_photos"
+    | "advert_conditions"
+    | "main_panel";
 };
 
-const MenuSenhorio = ({ activeSection }: MenuSenhorioProps) => {
-  const router = useRouter();
-  const [openUniControlo, setOpenUniControlo] = useState(false);
+const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
   const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
 
-  const checkActiveLink = (href: string) => {
-    return router.asPath.includes(href);
-  };
   return (
     <>
       <Menu>
-        <MenuGrouper
-          title={"Anúncios"}
-          selectedGroup={activeSection === "adverts"}
-          isCollapsible={false}
-          isOpen={false}
-        >
+        <MenuGrouper title={"Anúncios"} selectedGroup={activeSection === "adverts"} isCollapsible={true}>
           <MenuOption
-            url={"/unidesk/senhorio/advertisements"}
+            url={UNIDESK_SENHORIO_PAINEL_URL}
             label={"Painel"}
-            activeLink={checkActiveLink("/unidesk/senhorio/advertisements")}
+            activeLink={activeUrl === "main_panel"}
           ></MenuOption>
         </MenuGrouper>
         {currentAdvertisement && (
           <MenuGrouper
-            title={`Anúncio - {currentAdvertisement.title || "#"}`}
+            title={`Anúncio - ${currentAdvertisement.title || "#"}`}
             selectedGroup={activeSection === "single_advert"}
             isCollapsible={true}
-            isOpen={false}
           >
             <MenuOption
               url={`/unidesk/senhorio/${currentAdvertisement.slug}/details`}
               label="Detalhes do anúncio"
+              activeLink={activeUrl === "advert_details"}
             ></MenuOption>
             <MenuOption
-              url={`/unidesk/senhorio/${currentAdvertisement.slug}/details`}
-              label="Detalhes do anúncio"
+              url={`/unidesk/senhorio/${currentAdvertisement.slug}/photos`}
+              label="Fotos"
+              activeLink={activeUrl === "advert_photos"}
             ></MenuOption>
-            <MenuOption url={`/unidesk/senhorio/${currentAdvertisement.slug}/photos`} label="Fotos"></MenuOption>
             <MenuOption
               url={`/unidesk/senhorio/${currentAdvertisement.slug}/conditions`}
               label="Condições e regras"
+              activeLink={activeUrl === "advert_conditions"}
             ></MenuOption>
-            <MenuOption url={`/unidesk/senhorio/${currentAdvertisement.slug}/prices`} label="Preços"></MenuOption>
+            <MenuOption
+              url={`/unidesk/senhorio/${currentAdvertisement.slug}/prices`}
+              label="Preços"
+              activeLink={activeUrl === "advert_prices"}
+            ></MenuOption>
             <MenuOption url={""} label="Informações contratuais" blocked={true}></MenuOption>
           </MenuGrouper>
         )}
 
         <MenuGrouper
           title={"Caixa de entrada"}
-          url={"/unidesk/inbox"}
+          url={INBOX_URL}
           selectedGroup={activeSection === "inbox"}
           isCollapsible={false}
-          isOpen={false}
         />
-        <MenuGrouper
-          isCollapsible={true}
-          setOpen={() => setOpenUniControlo(!openUniControlo)}
-          isOpen={openUniControlo}
-          title={"Uni-controlo"}
-          selectedGroup={activeSection === "uni-controlo"}
-        >
-          <MenuOption blocked={false} url={UNIDESK_SENHORIO_CALENDAR_URL} label="Calendário" activeLink={false} />
-          <MenuOption blocked={false} url={UNIDESK_SENHORIO_REVIEWS_URL} label="Reviews" activeLink={false} />
-          <MenuOption blocked={false} url={UNICONTROLO_GUESTS_URL} label="Hóspedes" activeLink={false} />
+        <MenuGrouper isCollapsible={true} title={"Uni-controlo"} selectedGroup={activeSection === "uni-controlo"}>
+          <MenuOption
+            blocked={false}
+            url={UNIDESK_SENHORIO_CALENDAR_URL}
+            label="Calendário"
+            activeLink={activeUrl === "calendar"}
+          />
+          <MenuOption
+            blocked={false}
+            url={UNIDESK_SENHORIO_REVIEWS_URL}
+            label="Reviews"
+            activeLink={activeUrl === "reviews"}
+          />
+          <MenuOption
+            blocked={false}
+            url={UNICONTROLO_GUESTS_URL}
+            label="Hóspedes"
+            activeLink={activeUrl === "guests"}
+          />
           <MenuOption blocked={true} url="" label="Transações" activeLink={false} />
           <MenuOption blocked={true} url="" label="Despesas" activeLink={false} />
           <MenuOption blocked={true} url="" label="Reparações" activeLink={false} />
@@ -86,8 +101,7 @@ const MenuSenhorio = ({ activeSection }: MenuSenhorioProps) => {
           title={"Notificações"}
           selectedGroup={activeSection === "notifications"}
           isCollapsible={false}
-          isOpen={false}
-          url={"/unidesk/notifications"}
+          url={NOTIFICATIONS_URL}
         />
       </Menu>
     </>

@@ -47,7 +47,7 @@ const Prices = ({ advertisement }: PricesProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuSenhorio activeSection="single_advert" />
+        <MenuSenhorio activeSection="single_advert" activeUrl="advert_prices" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div className="mb-7 text-2xl font-semibold">Preços</div>

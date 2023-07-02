@@ -113,7 +113,7 @@ const Details = ({ advertisement }: DetailsProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuSenhorio activeSection="single_advert" />
+        <MenuSenhorio activeSection="single_advert" activeUrl="advert_details" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div className="mx-6 pt-12 text-center lg:text-left">

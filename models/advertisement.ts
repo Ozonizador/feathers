@@ -243,6 +243,7 @@ export const AMENITIES = [
   "BLACKOUTS",
   "GARBAGE_CAN",
   "LAUNDRY_MACHINE",
+  "CLOSET",
   "MEAL_ZONE",
   "BASIC_UTILIES",
   "KEY_TO_LOCK_DOOR",
@@ -256,6 +257,7 @@ export type TypeAmenity = Amenity[number];
 
 export const TypeAmenityLabel = {
   SOFA: "Sofa",
+  CLOSET: "Roupeiro",
   TV: "TV",
   FIREPLACE: "Lareira",
   TABLE: "Mesa",
@@ -331,7 +333,7 @@ export const AboutHouseCommodities = {
     { label: "Cama Individual", type: "SINGLE_BED" },
     { label: "Cama Dupla", type: "DOUBLE_BED" },
     { label: "2 camas individuais", type: "ELEVADOR" },
-    { label: "Roupeiro", type: "AIR_CONDITIONING" },
+    { label: "Roupeiro", type: "CLOSET" },
     { label: "Secretária", type: "DESK" },
     { label: "Televisão", type: "TV" },
     { label: "Espelho", type: "MIRROR" },

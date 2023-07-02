@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { TiLockClosed } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ type MenuProps = {
 };
 
 const Menu = ({ children }: MenuProps) => {
-  return <div className="w-full rounded-2xl bg-primary-50 p-4 lg:w-full">{children}</div>;
+  return <div className="flex w-full flex-col gap-1 rounded-2xl bg-primary-50 p-4 lg:w-full">{children}</div>;
 };
 
 type MenuOptionProps = {
@@ -27,18 +27,16 @@ const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps
 
   return (
     <div
-      className={classNames("cursor-pointer", {
-        "rounded bg-primary-500 font-bold text-white": activeLink,
+      className={classNames("cursor-pointer px-3 py-2", {
+        "rounded bg-primary-500 font-black text-white": activeLink,
       })}
       onClick={() => goToUrl()}
     >
       {blocked ? (
-        <>
-          <div className="flex">
-            <TiLockClosed className="my-auto" />
-            <span className="ml-2">{label}</span>
-          </div>
-        </>
+        <div className="flex">
+          <TiLockClosed className="my-auto" />
+          <span className="ml-2">{label}</span>
+        </div>
       ) : (
         label
       )}
@@ -50,36 +48,54 @@ type MenuGrouperProps = {
   title: string;
   selectedGroup: boolean;
   isCollapsible?: boolean;
-  setOpen?: () => void;
-  isOpen?: boolean;
   children?: ReactNode;
   url?: string;
 };
 
-const MenuGrouper = ({ title, children, selectedGroup, isOpen, setOpen, isCollapsible }: MenuGrouperProps) => {
+const MenuGrouper = ({ title, children, selectedGroup, isCollapsible, url }: MenuGrouperProps) => {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <div
       className={classNames("flex flex-col", {
-        "rounded-xl bg-primary-200 p-4": selectedGroup,
+        "rounded-xl bg-primary-200": selectedGroup,
       })}
     >
-      <div className={classNames({ "border-b border-primary-500 p-2": selectedGroup })} onClick={setOpen && setOpen}>
-        <div className="flex">
+      <div
+        className={classNames("cursor-pointer px-3", {
+          "pb-1 pt-3": selectedGroup,
+          "py-1": !selectedGroup,
+          "border-b border-primary-500": isOpen && children,
+        })}
+        onClick={() => (url ? router.push(url) : setIsOpen(!isOpen))}
+      >
+        <div className="flex w-full">
           <div>
             <p>{title}</p>
           </div>
           {isCollapsible && (
-            <Image
-              className="ml-auto"
-              src={isOpen ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
-              height={32}
-              width={32}
-              alt=""
-            />
+            <div className="ml-auto">
+              <Image
+                src={isOpen ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+                height={24}
+                width={24}
+                alt=""
+              />
+            </div>
           )}
         </div>
       </div>
-      {children && <div className="flex flex-col pt-2">{children}</div>}
+      {isOpen && children && (
+        <div
+          className={classNames("flex flex-col", {
+            "mb-2 mt-3 px-4": selectedGroup,
+            "px-2": !selectedGroup,
+          })}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 };
