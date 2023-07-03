@@ -45,7 +45,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <UnideskStructure>
                 <UnideskStructure.Menu>
-                  <MenuEstudante />
+                  <MenuEstudante activeSection={"stay"} activeUrl={"general"} />
                 </UnideskStructure.Menu>
                 <UnideskStructure.Content>
                   <div className="mb-4 text-2xl font-semibold">Informações gerais</div>
