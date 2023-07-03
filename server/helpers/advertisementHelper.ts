@@ -28,6 +28,22 @@ const addFilterToSearchAdvertisement = (query: any, filter: AdvertisementsFilter
     (filter.dates.startDate || filter.dates.endDate) &&
     (query = query.not("reservations.status", "eq", "ACCEPTED"));
 
+  // verified
+  filter.verified && (query = query.eq(ADVERTISEMENT_PROPERTIES.VERIFIED, true));
+
+  // activities
+  if (filter.animalsAllowed || filter.eventsAllowed || filter.smokingAllowed) {
+    let obj = {} as { [x: string]: boolean };
+    filter.smokingAllowed && (query = query.eq(ADVERTISEMENT_PROPERTIES.VERIFIED, true));
+    obj["smokeAllowed"] = true;
+    filter.eventsAllowed && (obj["eventsAllowed"] = true);
+    filter.animalsAllowed && (obj["animalsAllowed"] = true);
+
+    query = query.containedBy("house_rules", obj);
+  }
+
+  filter.includesCleaning && (query = query.not("house_rules", "containedBy", "{cleaning: 'N/A'}"));
+
   return query;
 };
 

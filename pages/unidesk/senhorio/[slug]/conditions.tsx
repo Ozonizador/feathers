@@ -48,7 +48,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
   return (
     <UnideskStructure>
       <UnideskStructure.Menu>
-        <MenuSenhorio />
+        <MenuSenhorio activeSection="single_advert" activeUrl="advert_conditions" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div className="mb-2 text-2xl font-semibold">Condições</div>

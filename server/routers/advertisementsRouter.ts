@@ -40,6 +40,12 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
       })
       .optional()
       .nullable(),
+    verified: z.boolean().optional(),
+    eventsAllowed: z.boolean().optional(),
+    smokingAllowed: z.boolean().optional(),
+    animalsAllowed: z.boolean().optional(),
+    includesCleaning: z.boolean().optional(),
+    expensesIncluded: z.boolean().optional(),
   }),
   order: z.object({
     byColumn: z.enum(["price", "rating", "time"]),

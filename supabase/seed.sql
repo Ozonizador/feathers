@@ -12,7 +12,7 @@ INSERT INTO "public"."profiles" ("id", "slug", "name", "surname", "nationality",
 
 -- advertisements
 INSERT INTO "public"."advertisements" ("id", "slug", "type", "place", "street", "street_number", "floor", "postal_code", "rooms", "beds", "tenant_number", "bathrooms", "title", "description", "type_flex_host", "type_host", "photos", "house_rules", "month_rent", "extra_per_host", "guarantee_value", "expenses", "available", "host_lives_property", "verified", "host_id", "geom", "agreementsinfo", "livingroom_amenities", "bedroom_amenities") 
-VALUES ('0a54f7fe-2fda-4d30-9767-954796daa5bd','aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', "SRID=4326;POINT(-8.71022 41.6652696)", '{}', '{SOFA, BED}', '{SOFA}'),
+VALUES ('0a54f7fe-2fda-4d30-9767-954796daa5bd','aaaa', 'ENTIRE_SPACE', 'Nazare', 'Rua de Teste', '1', '1', '9999-111', 1, 1, 1, 1, 'Test de Anuncio', 'Description de Anuncio', 'FLEX', 'PROFISSIONAL', '[]', '{}', 300, 80, 100, '{}', 'AVAILABLE', false, false, '3a21df80-34be-435a-8c61-06da3c9e1caa', null, '{}', '{SOFA, BED}', '{WIFI}'), -- "SRID=4326;POINT(-8.71022 41.6652696)"
 ('ab723c81-b13b-47b6-867c-091377e9b418', 'bbbb', 'ENTIRE_SPACE', 'Porto', 'Rua de Teste SATAY', '2', '1', '0000-111', 1, 1, 2, 3, 'Teste de Estadia', 'Descricao', 'FLEX','PROFISSIONAL', '[]', '{}', 400, 30, 50, '{}', 'AVAILABLE', false, false, 'ab723c81-b13b-47b6-867c-091377e9b418', null, '{}', '{}', '{}');
 
 

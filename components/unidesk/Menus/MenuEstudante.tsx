@@ -1,84 +1,53 @@
 import React from "react";
-import { MenuItem } from "../../menu/Menu";
 import { useRouter } from "next/router";
-import { UNIDESK_STAY_URL } from "../../../models/paths";
+import { INBOX_URL, NOTIFICATIONS_URL, UNIDESK_STAY_URL, UNIDESK_STUDENT_FAVOURITES_URL } from "../../../models/paths";
+import Menu, { MenuGrouper, MenuOption } from "../../menu/Menu";
 
-const MenuEstudante = () => {
+type MenuEstudanteProps = {
+  activeSection: "stay" | "favourites" | "inbox" | "notifications";
+  activeUrl: "general" | "repairs" | "favourites";
+};
+
+const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
   const router = useRouter();
 
-  const moveToMenuLink = (href: string) => {
-    href && router.push(href);
-  };
-
-  const checkActiveLink = (href: string) => {
-    return (href && router.asPath.includes(href)) || false;
-  };
-
-  // TODO change colours here.
   return (
-    <div className="rounded-2xl bg-primary-50 p-4">
-      <div className="rounded-2xl bg-primary-200 p-4">
-        <div className="flex justify-start border-b border-b-primary-500 px-2 align-middle">
-          <h1 className="py-1 pl-1 text-xl font-bold">Minha estadia</h1>
-        </div>
-        <div className="mt-1 flex flex-col justify-start px-2">
-          <div className="flex flex-col">
-            <MenuItem
-              clickOnLink={moveToMenuLink}
-              url={UNIDESK_STAY_URL}
-              label={"Informações gerais"}
-              activeLink={checkActiveLink(UNIDESK_STAY_URL)}
-            />
-            <MenuItem
-              blocked={true}
-              clickOnLink={moveToMenuLink}
-              url={""}
-              label={"Renda"}
-              activeLink={checkActiveLink("")}
-            />
-            <MenuItem
-              blocked={true}
-              clickOnLink={moveToMenuLink}
-              url={""}
-              label={"Reparações"}
-              activeLink={checkActiveLink("")}
-            />
-            <MenuItem
-              blocked={true}
-              clickOnLink={moveToMenuLink}
-              url={""}
-              label={"Despesas"}
-              activeLink={checkActiveLink("")}
-            />
-            <MenuItem
-              blocked={true}
-              clickOnLink={moveToMenuLink}
-              url={""}
-              label={"Informações contratuais"}
-              activeLink={checkActiveLink("")}
-            />
-            <MenuItem
-              clickOnLink={moveToMenuLink}
-              url={"/unidesk/estudante/favourites"}
-              label={"Favoritos"}
-              activeLink={checkActiveLink("/unidesk/estudante/favourites")}
-            />
-            <MenuItem
-              clickOnLink={moveToMenuLink}
-              url={"/unidesk/inbox"}
-              label={"Caixa de Entrada"}
-              activeLink={checkActiveLink("/unidesk/inbox")}
-            />
-            <MenuItem
-              clickOnLink={moveToMenuLink}
-              url={"/unidesk/notifications"}
-              label={"Notificações"}
-              activeLink={checkActiveLink("/unidesk/notifications")}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Menu>
+      <MenuGrouper
+        title={"Minha estadia"}
+        selectedGroup={activeSection === "stay"}
+        isCollapsed={true}
+        defaultOpen={activeSection === "stay"}
+      >
+        <MenuOption
+          url={UNIDESK_STAY_URL}
+          label={"Informações gerais"}
+          activeLink={activeUrl == "general"}
+        ></MenuOption>
+        <MenuOption blocked={true} url={""} label={"Renda"} />
+        <MenuOption blocked={true} url={""} label={"Reparações"} />
+        <MenuOption blocked={true} url={""} label={"Despesas"} />
+        <MenuOption blocked={true} url={""} label={"Informações contratuais"} />
+      </MenuGrouper>
+      <MenuGrouper
+        url={UNIDESK_STUDENT_FAVOURITES_URL}
+        title={"Favoritos"}
+        selectedGroup={activeSection == "favourites"}
+        isCollapsed={false}
+      />
+      <MenuGrouper
+        title={"Caixa de entrada"}
+        url={INBOX_URL}
+        selectedGroup={activeSection === "inbox"}
+        isCollapsed={false}
+      />
+      <MenuGrouper
+        title={"Notificações"}
+        selectedGroup={activeSection === "notifications"}
+        isCollapsed={false}
+        url={NOTIFICATIONS_URL}
+      />
+    </Menu>
   );
 };
 

@@ -22,7 +22,7 @@ const InfoPessoais = () => {
             <div className="my-4 flex flex-row gap-7">
               <div className="w-2/6 ">
                 {/* <Menu /> */}
-                <MenuEstudante />
+                <MenuEstudante activeSection={"stay"} activeUrl={"general"} />
               </div>
 
               <div className="flex w-full flex-col  px-6">
@@ -49,7 +49,7 @@ const InfoPessoais = () => {
                       <div className="mb-1 text-xl">O pagamento está em atraso</div>
                     </div>
                     <div className="mt-1">
-                      <button className="mr-2 mb-2 rounded-lg bg-red-700 px-12 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300">
+                      <button className="mb-2 mr-2 rounded-lg bg-red-700 px-12 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300">
                         Pagar renda
                       </button>
                     </div>

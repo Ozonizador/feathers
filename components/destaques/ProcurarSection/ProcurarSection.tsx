@@ -17,7 +17,6 @@ import { useGetUserCoordinates, useUserSearch } from "../../../context/MainProvi
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { CoordinatesAsArray, GEO } from "../../../models/utils";
 import { coordinatesArrayToGeoPoint } from "../../../utils/map-services";
-import { format } from "date-fns";
 import Button from "../../utils/Button";
 import { useSetModalMaisFiltros } from "../../../context/ModalMaisFiltrosProvider";
 import ModalMaisFiltros from "../../modals/ModalMaisFiltros";

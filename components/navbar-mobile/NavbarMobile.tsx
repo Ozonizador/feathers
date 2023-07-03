@@ -50,7 +50,6 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
     setMenuaberto(false);
   };
 
-  console.log("NavbarMobile", toggleUserType);
   return (
     <>
       <div

@@ -58,7 +58,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header>
+    <header className="px-5 lg:px-0">
       {/* DESKTOP */}
       <nav>
         <div>

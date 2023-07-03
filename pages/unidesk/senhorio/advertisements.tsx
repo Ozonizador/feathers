@@ -47,7 +47,7 @@ const Anuncios = () => {
 
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuSenhorio />
+          <MenuSenhorio activeSection="adverts" activeUrl="main_panel" />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div className="ml-0 p-5">

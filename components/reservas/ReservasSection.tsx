@@ -11,6 +11,7 @@ import { UnideskStructure } from "../unidesk/UnideskStructure";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
 import IconAnuncios from "../../public/images/icons8_laptop_computer.svg";
+import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -23,7 +24,7 @@ const ReservasSection = () => {
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuEstudante />
+          <MenuSenhorio activeSection={"adverts"} activeUrl={"reservations"} />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <Tab.Group>

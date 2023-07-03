@@ -68,6 +68,7 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     endDate: checkMonthsInAdvance(new Date()),
     coordinates: null,
   });
+  console.log(currentUnihostState);
 
   const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
@@ -76,8 +77,13 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
 
     const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
     !error && setCurrentUnihostState((c) => ({ ...c, profile: data }));
-    data?.type && setCurrentUnihostState((currentInfo) => ({ ...currentInfo, useToggleUserType: data.type }));
-    data?.type === null && router.push(TYPE_PROFILE_CHOICE_URL);
+    if (!data) return;
+    if (data.type === null) {
+      return router.push(TYPE_PROFILE_CHOICE_URL);
+    }
+
+    data.type !== null &&
+      setCurrentUnihostState((currentInfo) => ({ ...currentInfo, toggleUserType: data.type || "TENANT" }));
   }, [user]);
 
   const checkUserNotificationsAndMessages = useCallback(async () => {

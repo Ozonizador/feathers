@@ -19,6 +19,12 @@ export type AdvertisementsFilterOptions = {
     endDate?: string | null;
   };
   coordinates?: GEO | null;
+  verified?: boolean;
+  eventsAllowed?: boolean;
+  smokingAllowed?: boolean;
+  animalsAllowed?: boolean;
+  includesCleaning?: boolean;
+  expensesIncluded?: boolean;
 };
 
 /* Ordering */

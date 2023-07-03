@@ -1,52 +1,48 @@
-import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
-
-import { TbSofa } from "react-icons/tb";
-import { MdOutlineFireplace } from "react-icons/md";
-import { GiTable } from "react-icons/gi";
-import { BiChair } from "react-icons/bi";
-import { AiOutlineWifi } from "react-icons/ai";
-import { GiElevator } from "react-icons/gi";
-import { GiComputerFan } from "react-icons/gi";
-import { GiWashingMachine } from "react-icons/gi";
-import { GiMirrorMirror } from "react-icons/gi";
-import { GiRiceCooker } from "react-icons/gi";
-import { TbBed } from "react-icons/tb";
-import { MdOutlineBed } from "react-icons/md";
-import { MdOutlineMicrowave } from "react-icons/md";
-import { GiToaster } from "react-icons/gi";
-import { MdOutlineCoffeeMaker } from "react-icons/md";
-import { GiThermometerHot } from "react-icons/gi";
-import { MdOutlineIron } from "react-icons/md";
-import { GiClothesline } from "react-icons/gi";
-import { MdOutlineLiving } from "react-icons/md";
-import { MdBalcony } from "react-icons/md";
-import { MdPool } from "react-icons/md";
-import { FaParking } from "react-icons/fa";
-import { MdOutlineDeck } from "react-icons/md";
-import { GiBarbecue } from "react-icons/gi";
-import { GiIceBolt } from "react-icons/gi";
-import { GiFurnace } from "react-icons/gi";
-import { CgSmartHomeCooker } from "react-icons/cg";
-import { GrFan } from "react-icons/gr";
-import { MdOutlineLocalLaundryService } from "react-icons/md";
-import { MdOutlineBathtub } from "react-icons/md";
-import { GiShower } from "react-icons/gi";
-import { FaRestroom } from "react-icons/fa";
-import { GrRestroomMen } from "react-icons/gr";
-import { GiForkKnifeSpoon } from "react-icons/gi";
-import { GiDesk } from "react-icons/gi";
-import { GiPillow } from "react-icons/gi";
-import { MdOutlineBedroomChild } from "react-icons/md";
-import { BsTrash } from "react-icons/bs";
-import { MdLocalLaundryService } from "react-icons/md";
-import { GiHotMeal } from "react-icons/gi";
-import { BiBold } from "react-icons/bi";
-import { BsKey } from "react-icons/bs";
-import { TbHanger } from "react-icons/tb";
-import { GiCoffeePot } from "react-icons/gi";
-import { BiPlug } from "react-icons/bi";
-import { FiMonitor } from "react-icons/fi";
 import { IconType } from "react-icons";
+import { AiOutlineWifi } from "react-icons/ai";
+import { BiChair, BiBold, BiPlug, BiCloset } from "react-icons/bi";
+import { BsTrash, BsKey } from "react-icons/bs";
+import { CgSmartHomeCooker } from "react-icons/cg";
+import { FaParking, FaRestroom } from "react-icons/fa";
+import {
+  GiTable,
+  GiElevator,
+  GiComputerFan,
+  GiWashingMachine,
+  GiMirrorMirror,
+  GiRiceCooker,
+  GiToaster,
+  GiThermometerHot,
+  GiClothesline,
+  GiBarbecue,
+  GiIceBolt,
+  GiFurnace,
+  GiShower,
+  GiForkKnifeSpoon,
+  GiDesk,
+  GiPillow,
+  GiHotMeal,
+  GiCoffeePot,
+} from "react-icons/gi";
+import { GrFan, GrRestroomMen } from "react-icons/gr";
+import {
+  MdOutlineFireplace,
+  MdOutlineBed,
+  MdOutlineMicrowave,
+  MdOutlineCoffeeMaker,
+  MdOutlineIron,
+  MdOutlineLiving,
+  MdBalcony,
+  MdPool,
+  MdOutlineDeck,
+  MdOutlineLocalLaundryService,
+  MdOutlineBathtub,
+  MdOutlineBedroomChild,
+  MdLocalLaundryService,
+} from "react-icons/md";
+import { TbSofa, TbBed, TbHanger } from "react-icons/tb";
+import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
+import { FiMonitor } from "react-icons/fi";
 
 const hostTypeFlexDescription = (type: HostFlexType) => {
   return {
@@ -161,6 +157,8 @@ export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
       return GiCoffeePot;
     case "POWER_PLUG_NEAR_BED":
       return BiPlug;
+    case "CLOSET":
+      return BiCloset;
     default:
       return undefined;
     // case   "COURTYARD": return COURTYARD
