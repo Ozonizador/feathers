@@ -26,6 +26,12 @@ export const defaultFilter = {
     type: "asc",
     isActive: false,
   },
+  verified: false,
+  eventsAllowed: false,
+  smokingAllowed: false,
+  animalsAllowed: false,
+  includesCleaning: false,
+  expensesIncluded: false,
   modalMoreFiltersOpen: false,
 } as FilterAdvertisements;
 

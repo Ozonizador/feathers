@@ -6,6 +6,7 @@ import Checkbox from "../utils/Checkbox";
 import {
   useCurrentProcurarAdvertisementContext,
   useSetComoditiesContext,
+  useSetFiltersContext,
 } from "../../context/ProcurarAdvertisementsProvider";
 import { TypeAmenity } from "../../models/advertisement";
 
@@ -13,16 +14,41 @@ const ModalMaisFiltros = () => {
   const isOpen = useGetModalMaisFiltros();
   const setModalMaisFiltros = useSetModalMaisFiltros();
   const setComoditiesFilters = useSetComoditiesContext();
+  const setFilters = useSetFiltersContext();
   const { filter } = useCurrentProcurarAdvertisementContext();
-  const { comodities } = filter;
+  const { comodities, smokingAllowed, eventsAllowed, verified, animalsAllowed, includesCleaning, expensesIncluded } =
+    filter;
 
   const closeModal = () => {
     setModalMaisFiltros(false);
   };
 
   const checkIfComodityIsChecked = (value: TypeAmenity) => {
-    if (!comodities || comodities.length > 0) return false;
-    return comodities.find((comodity) => comodity == value) === undefined;
+    if (!comodities || comodities.length == 0) return false;
+    return comodities.find((comodity) => comodity == value) !== undefined;
+  };
+
+  const toggleComodityChecked = (value: TypeAmenity) => {
+    if (!comodities || comodities.length == 0) return setComoditiesFilters([value]);
+
+    const existCommodity = comodities.findIndex((comodity) => comodity == value);
+    if (existCommodity == -1) return setComoditiesFilters([...comodities, value]);
+    const removedWithComodities = comodities;
+    removedWithComodities.splice(existCommodity, 1);
+    setComoditiesFilters(removedWithComodities);
+  };
+
+  const toggleFiltersProperty = (
+    property:
+      | "verified"
+      | "eventsAllowed"
+      | "smokingAllowed"
+      | "animalsAllowed"
+      | "includesCleaning"
+      | "expensesIncluded",
+    value: boolean
+  ) => {
+    setFilters({ [property]: value });
   };
 
   return (
@@ -71,52 +97,44 @@ const ModalMaisFiltros = () => {
                     <div className="mt-5 text-2xl text-primary-500">Características da Casa</div>
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("WIFI")}
                         label={"Wifi"}
                         checked={checkIfComodityIsChecked("WIFI")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("AIR_CONDITIONING")}
                         label={"Ar condicionado"}
                         checked={checkIfComodityIsChecked("AIR_CONDITIONING")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("LIVING_ROOM")}
                         label={"Sala de Estar"}
                         checked={checkIfComodityIsChecked("LIVING_ROOM")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("TV")}
                         label={"Televisão"}
                         checked={checkIfComodityIsChecked("TV")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("LAUNDRY_MACHINE")}
                         label={"Máquina de Lavar Roupa"}
                         checked={checkIfComodityIsChecked("LAUNDRY_MACHINE")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("WASHING_MACHINE")}
                         label={"Máquina Lavar Loiça"}
                         checked={checkIfComodityIsChecked("WASHING_MACHINE")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("TERRACE")}
                         label={"Pátio/Terraço"}
                         checked={checkIfComodityIsChecked("TERRACE")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("MEAL_ZONE")}
                         label={"Zona de Refeições ao ar livre"}
                         checked={checkIfComodityIsChecked("MEAL_ZONE")}
-                        name={""}
                       />
                     </div>
                   </div>
@@ -124,64 +142,80 @@ const ModalMaisFiltros = () => {
                     <div className="mt-5 text-2xl text-primary-500">Comodidades</div>
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("PRIVATE_BATHROOM")}
                         label={"Casa de banho privada"}
                         checked={checkIfComodityIsChecked("PRIVATE_BATHROOM")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("SINGLE_BED")}
                         label={"Cama individual"}
                         checked={checkIfComodityIsChecked("SINGLE_BED")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("DOUBLE_BED")}
                         label={"Cama Dupla"}
                         checked={checkIfComodityIsChecked("DOUBLE_BED")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("TWO_BEDS")}
                         label={"2 Camas Individuais"}
-                        checked={checkIfComodityIsChecked("DOUBLE_BED")}
-                        name={""}
+                        checked={checkIfComodityIsChecked("TWO_BEDS")}
                       />
                       <GridItem
-                        onChange={() => {}}
-                        label={"Roupeiro"} // TODO: change this
+                        onChange={() => toggleComodityChecked("CLOSET")}
+                        label={"Roupeiro"}
                         checked={checkIfComodityIsChecked("CLOSET")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("DESK")}
                         label={"Secretária"}
                         checked={checkIfComodityIsChecked("DESK")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("BED_SHEETS")}
                         label={"Roupas de Cama"}
                         checked={checkIfComodityIsChecked("BED_SHEETS")}
-                        name={""}
                       />
                       <GridItem
-                        onChange={() => {}}
+                        onChange={() => toggleComodityChecked("BALCONY")}
                         label={"Varanda"}
                         checked={checkIfComodityIsChecked("BALCONY")}
-                        name={""}
                       />
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
                     <div className="mt-5 text-2xl text-primary-500">Condições e Regras</div>
                     <div className="grid grid-cols-2 gap-3">
-                      <GridItem onChange={() => {}} label={"Permitido fumar"} checked={false} name={""} />
-                      <GridItem onChange={() => {}} label={"Permitido animais"} checked={false} name={""} />
-                      <GridItem onChange={() => {}} label={"Permitido eventos"} checked={false} name={""} />
-                      <GridItem onChange={() => {}} label={"Serviço de limpeza"} checked={false} name={""} />
-                      <GridItem onChange={() => {}} label={"Despesas incluídas"} checked={false} name={""} />
-                      <GridItem onChange={() => {}} label={"Casa Verificada"} checked={false} name={""} />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("smokingAllowed", !smokingAllowed)}
+                        label={"Permitido fumar"}
+                        checked={smokingAllowed || false}
+                      />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("animalsAllowed", !animalsAllowed)}
+                        label={"Permitido animais"}
+                        checked={animalsAllowed || false}
+                      />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("eventsAllowed", !eventsAllowed)}
+                        label={"Permitido eventos"}
+                        checked={eventsAllowed || false}
+                      />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("includesCleaning", !includesCleaning)}
+                        label={"Serviço de limpeza"}
+                        checked={includesCleaning || false}
+                      />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("expensesIncluded", !expensesIncluded)}
+                        label={"Despesas incluídas"}
+                        checked={expensesIncluded || false}
+                      />
+                      <GridItem
+                        onChange={() => toggleFiltersProperty("verified", !verified)}
+                        label={"Casa Verificada"}
+                        checked={verified || false}
+                      />
                     </div>
                   </div>
                 </div>
@@ -200,15 +234,14 @@ type GridItemProps = {
   onChange: () => void;
   label: string;
   checked: boolean;
-  name: string;
 };
 
-const GridItem = ({ onChange, label, checked, name }: GridItemProps) => {
+const GridItem = ({ onChange, label, checked }: GridItemProps) => {
   return (
     <div className="my-2 flex flex-1 items-center gap-2 px-1">
       <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:w-10 lg:justify-between">
         <div className="flex h-5 items-center">
-          <Checkbox onChange={onChange} checked={checked} name={name} />
+          <Checkbox onChange={onChange} checked={checked} name="" />
         </div>
       </div>
       <div className="ml-1 w-full flex-1">

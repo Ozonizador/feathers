@@ -33,7 +33,7 @@ const theme: CustomFlowbiteTheme = {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [cookies] = useCookies(["test"]);
-  const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
+  const [supabaseClient] = useState(() => createPagesBrowserClient<Database>({}));
   const router = useRouter();
 
   return (

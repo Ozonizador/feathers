@@ -131,6 +131,7 @@ export const ADVERTISEMENT_PROPERTIES = {
   GENERAL_AMENITIES: "general_amenities",
   KITCHEN_AMENITIES: "kitchen_amenities",
   AMENITIES: "amenities",
+  VERIFIED: "verified",
 } as const;
 
 export const HOUSE_RULES_NAMING = {
@@ -250,6 +251,7 @@ export const AMENITIES = [
   "HANGERS_SUPPORT",
   "HOT_WATER_KETTLE",
   "POWER_PLUG_NEAR_BED",
+  "TWO_BEDS",
 ] as const;
 
 export type Amenity = typeof AMENITIES;
@@ -305,6 +307,7 @@ export const TypeAmenityLabel = {
   HANGERS_SUPPORT: "Suporte para Cabides",
   HOT_WATER_KETTLE: "Chaleira de água quente",
   POWER_PLUG_NEAR_BED: "Tomada perto da tomada",
+  TWO_BEDS: "2 camas individuais",
 } as const;
 
 /* FOR THE SELECT ON PROCURAR */
@@ -332,7 +335,7 @@ export const AboutHouseCommodities = {
   bedroom: [
     { label: "Cama Individual", type: "SINGLE_BED" },
     { label: "Cama Dupla", type: "DOUBLE_BED" },
-    { label: "2 camas individuais", type: "ELEVADOR" },
+    { label: "2 camas individuais", type: "TWO_BEDS" },
     { label: "Roupeiro", type: "CLOSET" },
     { label: "Secretária", type: "DESK" },
     { label: "Televisão", type: "TV" },
