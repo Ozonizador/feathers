@@ -47,14 +47,15 @@ const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps
 type MenuGrouperProps = {
   title: string;
   selectedGroup: boolean;
-  isCollapsible?: boolean;
+  isCollapsed?: boolean;
   children?: ReactNode;
+  defaultOpen?: boolean;
   url?: string;
 };
 
-const MenuGrouper = ({ title, children, selectedGroup, isCollapsible, url }: MenuGrouperProps) => {
+const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, defaultOpen = false }: MenuGrouperProps) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
   return (
     <div
@@ -64,8 +65,9 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsible, url }: Men
     >
       <div
         className={classNames("cursor-pointer px-3", {
-          "pb-1 pt-3": selectedGroup,
+          "pb-1 pt-3": selectedGroup && isCollapsed,
           "py-1": !selectedGroup,
+          "py-3": selectedGroup && !isCollapsed,
           "border-b border-primary-500": isOpen && children,
         })}
         onClick={() => (url ? router.push(url) : setIsOpen(!isOpen))}
@@ -74,7 +76,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsible, url }: Men
           <div>
             <p>{title}</p>
           </div>
-          {isCollapsible && (
+          {isCollapsed && (
             <div className="ml-auto">
               <Image
                 src={isOpen ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}

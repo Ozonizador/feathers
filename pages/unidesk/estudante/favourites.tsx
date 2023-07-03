@@ -49,7 +49,7 @@ const UnideskFavoritos = () => {
       <Breadcrumbs icon={iconfavorito} paths={FavouritesBreadcrumbs} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuEstudante activeSection={"favourites"} activeUrl={"general"} />
+          <MenuEstudante activeSection={"favourites"} activeUrl={"favourites"} />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div>

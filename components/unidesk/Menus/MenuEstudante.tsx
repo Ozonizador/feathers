@@ -1,12 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { INBOX_URL, NOTIFICATIONS_URL, UNIDESK_STAY_URL, UNIDESK_STUDENT_FAVOURITES_URL } from "../../../models/paths";
-import { Menu } from "@headlessui/react";
-import { MenuGrouper, MenuOption } from "../../menu/Menu";
+import Menu, { MenuGrouper, MenuOption } from "../../menu/Menu";
 
 type MenuEstudanteProps = {
   activeSection: "stay" | "favourites" | "inbox" | "notifications";
-  activeUrl: "general" | "repairs";
+  activeUrl: "general" | "repairs" | "favourites";
 };
 
 const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
@@ -14,7 +13,12 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
 
   return (
     <Menu>
-      <MenuGrouper title={"Minha estadia"} selectedGroup={activeSection === "stay"} isCollapsible={true}>
+      <MenuGrouper
+        title={"Minha estadia"}
+        selectedGroup={activeSection === "stay"}
+        isCollapsed={true}
+        defaultOpen={activeSection === "stay"}
+      >
         <MenuOption
           url={UNIDESK_STAY_URL}
           label={"Informações gerais"}
@@ -29,18 +33,18 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
         url={UNIDESK_STUDENT_FAVOURITES_URL}
         title={"Favoritos"}
         selectedGroup={activeSection == "favourites"}
-        isCollapsible={false}
+        isCollapsed={false}
       />
       <MenuGrouper
         title={"Caixa de entrada"}
         url={INBOX_URL}
         selectedGroup={activeSection === "inbox"}
-        isCollapsible={false}
+        isCollapsed={false}
       />
       <MenuGrouper
         title={"Notificações"}
         selectedGroup={activeSection === "notifications"}
-        isCollapsible={false}
+        isCollapsed={false}
         url={NOTIFICATIONS_URL}
       />
     </Menu>

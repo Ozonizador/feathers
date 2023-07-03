@@ -29,7 +29,12 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
 
   return (
     <Menu>
-      <MenuGrouper title={"Anúncios"} selectedGroup={activeSection === "adverts"} isCollapsible={true}>
+      <MenuGrouper
+        title={"Anúncios"}
+        selectedGroup={activeSection === "adverts"}
+        isCollapsed={true}
+        defaultOpen={activeSection === "adverts"}
+      >
         <MenuOption
           url={UNIDESK_SENHORIO_PAINEL_URL}
           label={"Painel"}
@@ -40,7 +45,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         <MenuGrouper
           title={`Anúncio - ${currentAdvertisement.title || "#"}`}
           selectedGroup={activeSection === "single_advert"}
-          isCollapsible={true}
+          isCollapsed={true}
         >
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/details`}
@@ -70,9 +75,14 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         title={"Caixa de entrada"}
         url={INBOX_URL}
         selectedGroup={activeSection === "inbox"}
-        isCollapsible={false}
+        isCollapsed={false}
       />
-      <MenuGrouper isCollapsible={true} title={"Uni-controlo"} selectedGroup={activeSection === "uni-controlo"}>
+      <MenuGrouper
+        isCollapsed={true}
+        title={"Uni-controlo"}
+        selectedGroup={activeSection === "uni-controlo"}
+        defaultOpen={activeSection === "uni-controlo"}
+      >
         <MenuOption
           blocked={false}
           url={UNIDESK_SENHORIO_CALENDAR_URL}
@@ -93,7 +103,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
       <MenuGrouper
         title={"Notificações"}
         selectedGroup={activeSection === "notifications"}
-        isCollapsible={false}
+        isCollapsed={false}
         url={NOTIFICATIONS_URL}
       />
     </Menu>
