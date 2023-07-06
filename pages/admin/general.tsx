@@ -59,6 +59,7 @@ const Index = ({ user, profileData }: IndexProps) => {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { isDirty },
   } = useForm<ProfileEdition>({
     defaultValues: {
@@ -85,7 +86,7 @@ const Index = ({ user, profileData }: IndexProps) => {
     birth_date,
     languages,
   }: ProfileEdition) => {
-    const { error } = await updateUserProfile(user.id, {
+    const { data, error } = await updateUserProfile(user.id, {
       ...profile,
       name,
       surname,
@@ -98,9 +99,9 @@ const Index = ({ user, profileData }: IndexProps) => {
       languages,
     });
 
-    if (!error) {
-      toast.success("OK");
-    }
+    if (error) return toast.error("Erro ao editar informações");
+    toast.success("Editado com sucesso");
+    reset({ name, surname, gender, phone, town, nationality, description, birth_date, languages });
   };
 
   /* Country */
@@ -294,12 +295,14 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <PhoneInput
-                    defaultCountry="PT"
-                    placeholder="Enter phone number"
-                    value={value}
-                    onChange={() => onChange}
-                  />
+                  <div>
+                    <PhoneInput
+                      defaultCountry="PT"
+                      placeholder="Enter phone number"
+                      value={value}
+                      onChange={(value) => onChange(value as string)}
+                    />
+                  </div>
                 )}
                 name="phone"
               ></Controller>

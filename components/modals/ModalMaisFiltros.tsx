@@ -239,7 +239,7 @@ type GridItemProps = {
 const GridItem = ({ onChange, label, checked }: GridItemProps) => {
   return (
     <div className="my-2 flex flex-1 items-center gap-2 px-1">
-      <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:w-10 lg:justify-between">
+      <div className="ml-auto flex flex-row items-center rounded-lg px-3 py-3 lg:w-10 lg:justify-between">
         <div className="flex h-5 items-center">
           <Checkbox onChange={onChange} checked={checked} name="" />
         </div>

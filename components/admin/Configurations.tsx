@@ -1,29 +1,45 @@
 import useUserService from "../../hooks/userService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FeathersButton from "../utils/Button";
-import { useUser } from "@supabase/auth-helpers-react";
-import useProfileService from "../../hooks/useProfileService";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { ADMIN_URL } from "../../models/paths";
 import Checkbox from "../utils/Checkbox";
 import { Label, TextInput } from "flowbite-react";
+import { trpc } from "../../utils/trpc";
+import Button from "../utils/Button";
+import { boolean } from "zod";
+import { Profile, UserTypes } from "../../models/profile";
+import { profile } from "console";
+import Toggle from "../toggle/toggle";
+import { Switch } from "@headlessui/react";
+import RadioBox from "../utils/Radiobox";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
 
 const Configurations = () => {
-  const user = useUser();
   const [loading, setLoading] = useState<boolean>(false);
+  const [profileConfigs, setProfileConfigs] = useState<
+    Pick<Profile, "accepts_notification_email" | "accepts_notification_message" | "prefered_unidesk_state">
+  >({
+    accepts_notification_email: false,
+    accepts_notification_message: false,
+    prefered_unidesk_state: "TENANT",
+  });
+  const [currentPassword, setCurrentPassword] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { updateUserPassword } = useUserService();
-  const { updateNotificationEmail, updateNotificationMessage } = useProfileService();
+
+  const { data, refetch } = trpc.profile.getProfileConfigurations.useQuery();
+  const updateProfileConfigurations = trpc.profile.updateProfileConfigurations.useMutation();
 
   const updatePassword = async () => {
     setLoading(true);
     try {
       if (password !== confirmPassword) throw Error("Palavras passe não coincidem.");
+      if (currentPassword === password) throw Error("Nova palavra passe e palavra passe atual são as mesmas");
 
       const { error } = await updateUserPassword(password);
       if (error) throw Error(error.message);
@@ -36,20 +52,20 @@ const Configurations = () => {
     }
   };
 
-  const toggleUserNotificationEmail = async () => {
-    if (user) {
-      // modify this
-      const { data, error } = await updateNotificationEmail(user.id, false);
-    }
+  const updateConfigurations = async () => {
+    await updateProfileConfigurations.mutateAsync(
+      { ...profileConfigs },
+      {
+        onSuccess: () => {
+          toast.success("Editado com successo");
+        },
+      }
+    );
   };
 
-  const toggleUserNotificationMessage = async () => {
-    if (user) {
-      // modify this
-      const { data, error } = await updateNotificationMessage(user.id, false);
-    }
-  };
-
+  useEffect(() => {
+    data && setProfileConfigs({ ...data });
+  }, [data]);
   return (
     <>
       <div className="container mx-auto mb-20 lg:w-10/12 ">
@@ -63,6 +79,18 @@ const Configurations = () => {
               <div>
                 <div className="mb-8  mt-4 text-2xl font-bold">Alterar password</div>
                 <div className="mb-2 block">
+                  <div className="my-3">
+                    <Label htmlFor="Palavra passe atual" value="Palavra passe atual" />
+                    <TextInput
+                      id="passwordNew"
+                      type="password"
+                      required={true}
+                      shadow={true}
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                    />
+                  </div>
+
                   <div className="my-3">
                     <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
                     <TextInput
@@ -104,7 +132,16 @@ const Configurations = () => {
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
-                            <Checkbox checked={true} onChange={toggleUserNotificationEmail} name="notification_email" />
+                            <Checkbox
+                              checked={profileConfigs.accepts_notification_email || false}
+                              onChange={() =>
+                                setProfileConfigs({
+                                  ...profileConfigs,
+                                  accepts_notification_email: !profileConfigs.accepts_notification_email,
+                                })
+                              }
+                              name="notification_email"
+                            />
                           </div>
                         </div>
                       </div>
@@ -118,8 +155,13 @@ const Configurations = () => {
                         <div>
                           <div className="flex h-5 items-center">
                             <Checkbox
-                              checked={true}
-                              onChange={toggleUserNotificationMessage}
+                              checked={profileConfigs.accepts_notification_message || false}
+                              onChange={() =>
+                                setProfileConfigs({
+                                  ...profileConfigs,
+                                  accepts_notification_message: !profileConfigs.accepts_notification_message,
+                                })
+                              }
                               name="notification_message"
                             />
                           </div>
@@ -127,6 +169,50 @@ const Configurations = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="my-2 flex flex-col lg:flex-row lg:items-center">
+                    <div className="flex items-center">
+                      <p className="w-32 text-base font-bold">Preferência Unidesk</p>
+                      <div className="flex gap-3">
+                        <div className="flex gap-2">
+                          <label className="my-auto">Estudante</label>
+                          <div className="my-auto">
+                            <RadioBox
+                              name="prefered_unidesk_state"
+                              onChange={() =>
+                                setProfileConfigs({
+                                  ...profileConfigs,
+                                  prefered_unidesk_state: "TENANT",
+                                })
+                              }
+                              value={"TENANT" as UserTypes}
+                              checked={profileConfigs.prefered_unidesk_state == ("TENANT" as UserTypes)}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <label className="my-auto">Senhorio</label>
+                          <div className="my-auto">
+                            <RadioBox
+                              name="prefered_unidesk_state"
+                              onChange={() =>
+                                setProfileConfigs({
+                                  ...profileConfigs,
+                                  prefered_unidesk_state: "LANDLORD",
+                                })
+                              }
+                              value={"LANDLORD" as UserTypes}
+                              checked={profileConfigs.prefered_unidesk_state == ("LANDLORD" as UserTypes)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <Button type={"button"} onClick={() => updateConfigurations()}>
+                    Salvar
+                  </Button>
                 </div>
               </div>
             </div>
