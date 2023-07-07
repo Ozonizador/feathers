@@ -68,7 +68,6 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     endDate: checkMonthsInAdvance(new Date()),
     coordinates: null,
   });
-  console.log(currentUnihostState);
 
   const { checkProfileAndCreate, checkMessagesNotSeen, checkNotificationsNotSeen } = useProfileService();
 
@@ -162,7 +161,6 @@ export const useCurrentUser = () => {
 export const useToggleUserType = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   return (userType: UserTypes): void => {
-    console.log("in here", userType);
     setCurrentInfo((currentStatus) => ({ ...currentStatus, toggleUserType: userType }));
   };
 };

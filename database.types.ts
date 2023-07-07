@@ -387,7 +387,7 @@ export interface Database {
           name?: string | null;
           nationality?: string | null;
           phone?: string | null;
-          prefered_unidesk_state: Database["public"]["Enums"]["profiletype"];
+          prefered_unidesk_state?: Database["public"]["Enums"]["profiletype"];
           slug: string;
           surname?: string | null;
           town?: string | null;
