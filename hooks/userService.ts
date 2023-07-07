@@ -62,6 +62,15 @@ const useUserService = () => {
     return { data, error };
   }
 
+  async function resendVerification(email: string) {
+    const { data, error } = await supabaseClient.auth.resend({
+      type: "signup",
+      email,
+    });
+
+    return { data, error };
+  }
+
   async function updateUserPassword(password: string) {
     const { error } = await supabaseClient.auth.updateUser({ password });
     return { error };

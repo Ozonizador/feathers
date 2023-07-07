@@ -136,19 +136,6 @@ export const paymentsRouter = router({
 
           const paymentStatus = EU_PAGO_TO_PAYMENT_STATUS[estado_referencia];
           await updateReservationPayment(reservationId, paymentStatus);
-          // todo finish this
-          // {
-          //   "entidade": "12345",
-          //   "referencia": "123456789",
-          //   "identificador": "Exemplo-em-JSON",
-          //   "estado": 0,
-          //   "data_criacao": "2021-10-28",
-          //   "hora_criacao": "14:37:23",
-          //   "estado_referencia": "pendente",
-          //   "arquivada": false,
-          //   "sucesso": true,
-          //   "resposta": "OK"
-          // }
         })
         .catch((err) => {
           throw new TRPCError({ message: err.message, code: "INTERNAL_SERVER_ERROR" });

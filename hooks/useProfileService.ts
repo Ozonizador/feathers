@@ -57,12 +57,14 @@ const useProfileService = () => {
   };
 
   const updateUserProfile = async (userID: string, profile: Profile) => {
-    const { error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .update({ ...profile })
-      .eq(PROFILE_COLUMNS.ID, userID);
+      .eq(PROFILE_COLUMNS.ID, userID)
+      .select()
+      .single();
 
-    return { error };
+    return { data, error };
   };
 
   const setTypeUser = async (userID: string, type: "LANDLORD" | "TENANT") => {
@@ -161,31 +163,6 @@ const useProfileService = () => {
     return { data, error };
   };
 
-  async function updateNotificationEmail(
-    userId: string,
-    notify: boolean
-  ): Promise<{ data: { accepts_notification_email: boolean } | null; error: PostgrestError | null }> {
-    const { error, data } = await supabaseClient
-      .from(PROFILE_TABLE_NAME)
-      .update({ accepts_notification_email: notify })
-      .eq(PROFILE_COLUMNS.ID, userId)
-      .select("accepts_notification_email")
-      .single();
-
-    return { error, data };
-  }
-
-  async function updateNotificationMessage(userId: string, notify: boolean) {
-    const { error, data } = await supabaseClient
-      .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-      .update({ accepts_notification_message: notify })
-      .eq(PROFILE_COLUMNS.ID, userId)
-      .select("accepts_notification_message")
-      .single();
-
-    return { error, data };
-  }
-
   async function getNotificationInfoFromUser(userId: string) {
     const { error, data } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
@@ -206,8 +183,6 @@ const useProfileService = () => {
     addAvatar,
     updateUserProfile,
     getUserProfile,
-    updateNotificationEmail,
-    updateNotificationMessage,
     getNotificationInfoFromUser,
     setTypeUser,
     checkMessagesNotSeen,

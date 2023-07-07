@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { SiFacebook, SiGmail } from "react-icons/si";
+import { SiFacebook } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import { RECOVER_URL, REGISTER_URL, TYPE_PROFILE_CHOICE_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -96,7 +97,7 @@ const Login = () => {
               <span className="my-auto ml-3 inline">Facebook</span>
             </Button>
             <Button onClick={loginGoogle} type="button" variant="gmail">
-              <SiGmail color="red" className="inline" />
+              <FcGoogle color="red" className="inline" />
               <span className="my-auto ml-3 inline">Gmail</span>
             </Button>
           </div>

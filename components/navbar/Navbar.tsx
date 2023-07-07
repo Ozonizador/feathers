@@ -27,6 +27,7 @@ import {
   INBOX_URL,
   LOGIN_URL,
   NOTIFICATIONS_URL,
+  PROCURAR_ADVERT_URL,
   REGISTER_URL,
   UNICONTROLO_GUESTS_URL,
   UNIDESK_SENHORIO_PAINEL_URL,
@@ -119,50 +120,67 @@ export const Navbar = () => {
               <div className="flex gap-1">
                 <div
                   className={classNames({
-                    "border-b-4 border-primary-500 font-black": checkIfUrlActive([HOME_URL]) == true,
+                    "border-b-4 border-primary-500 font-black":
+                      checkIfUrlActive([toggleUserType === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  <Link href="/">Home</Link>
+                  {toggleUserType === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
                 </div>
-                <div className="z-700 w-fit">
-                  <Menu as="div" className={classNames("ml-5 w-full")}>
-                    <Menu.Button>
-                      <div
-                        className={classNames("flex", {
-                          "border-b-4 border-primary-500 font-black":
-                            checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
+                {toggleUserType === "LANDLORD" && (
+                  <div className="z-700 w-fit">
+                    <Menu as="div" className={classNames("ml-5 w-full")}>
+                      <Menu.Button>
+                        <div
+                          className={classNames("flex", {
+                            "border-b-4 border-primary-500 font-black":
+                              checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
+                          })}
+                        >
+                          <h6>Anuncie a sua propriedade</h6>
+                          <div className="my-auto">
+                            <VscTriangleDown className="w-8 text-[#2C3E50]" />
+                          </div>
+                        </div>
+                      </Menu.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
+                          <Menu.Item>
+                            <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
+                              Como funciona?
+                            </MyLink>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
+                              Anunciar!
+                            </MyLink>
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                )}
+                {toggleUserType == "TENANT" && (
+                  <div className="my-auto px-5">
+                    <Link href={PROCURAR_ADVERT_URL}>
+                      <a
+                        className={classNames({
+                          "border-b-4 border-primary-500 pb-2 font-black":
+                            checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
                         })}
                       >
-                        <h6>Anuncie a sua propriedade</h6>
-                        <div className="my-auto">
-                          <VscTriangleDown className="w-8 text-[#2C3E50]" />
-                        </div>
-                      </div>
-                    </Menu.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
-                        <Menu.Item>
-                          <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
-                            Como funciona?
-                          </MyLink>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
-                            Anunciar!
-                          </MyLink>
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </div>
+                        Encontrar Espaço
+                      </a>
+                    </Link>
+                  </div>
+                )}
                 <div className="my-auto px-5">
                   <Link href={BLOG_URL}>
                     <a
@@ -193,7 +211,7 @@ export const Navbar = () => {
                   <div className="my-auto flex gap-2">
                     <Link href={REGISTER_URL}>
                       <a className="p-0">
-                        <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                        <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                           Registar
                         </div>
                       </a>
@@ -201,7 +219,7 @@ export const Navbar = () => {
 
                     <Link href={LOGIN_URL}>
                       <a className="p-0">
-                        <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                        <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
                           Iniciar sessão
                         </div>
                       </a>

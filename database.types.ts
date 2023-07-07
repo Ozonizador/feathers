@@ -356,6 +356,7 @@ export interface Database {
           birth_date: string | null;
           created_at: string;
           description: string | null;
+          email: string | null;
           favourite_rooms: string[] | null;
           gender: number | null;
           id: string;
@@ -363,6 +364,7 @@ export interface Database {
           name: string | null;
           nationality: string | null;
           phone: string | null;
+          prefered_unidesk_state: Database["public"]["Enums"]["profiletype"];
           slug: string;
           surname: string | null;
           town: string | null;
@@ -377,6 +379,7 @@ export interface Database {
           birth_date?: string | null;
           created_at?: string;
           description?: string | null;
+          email?: string | null;
           favourite_rooms?: string[] | null;
           gender?: number | null;
           id?: string;
@@ -384,6 +387,7 @@ export interface Database {
           name?: string | null;
           nationality?: string | null;
           phone?: string | null;
+          prefered_unidesk_state?: Database["public"]["Enums"]["profiletype"];
           slug: string;
           surname?: string | null;
           town?: string | null;
@@ -398,6 +402,7 @@ export interface Database {
           birth_date?: string | null;
           created_at?: string;
           description?: string | null;
+          email?: string | null;
           favourite_rooms?: string[] | null;
           gender?: number | null;
           id?: string;
@@ -405,6 +410,7 @@ export interface Database {
           name?: string | null;
           nationality?: string | null;
           phone?: string | null;
+          prefered_unidesk_state?: Database["public"]["Enums"]["profiletype"];
           slug?: string;
           surname?: string | null;
           town?: string | null;
