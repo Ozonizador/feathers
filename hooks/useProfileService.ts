@@ -70,7 +70,7 @@ const useProfileService = () => {
   const setTypeUser = async (userID: string, type: "LANDLORD" | "TENANT") => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-      .update({ type })
+      .update({ type, prefered_unidesk_state: type })
       .eq(PROFILE_COLUMNS.ID, userID)
       .select()
       .single();

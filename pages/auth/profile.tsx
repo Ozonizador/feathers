@@ -4,14 +4,14 @@ import Link from "next/link";
 import router from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import { useCurrentUser, useSetProfileInformation, useToggleUserType } from "../../context/MainProvider";
+import { useCurrentUser, useSetProfileInformation, useToggleAppUserMode } from "../../context/MainProvider";
 import useProfileService from "../../hooks/useProfileService";
 import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import { Profile, UserTypes } from "../../models/profile";
 
 const TypeCustomerPage = () => {
   const profile = useCurrentUser();
-  const toggleUserTypeContext = useToggleUserType();
+  const toggleUserTypeContext = useToggleAppUserMode();
   const setProfile = useSetProfileInformation();
   const { setTypeUser } = useProfileService();
 

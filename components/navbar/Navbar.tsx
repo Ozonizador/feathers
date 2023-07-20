@@ -11,7 +11,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
-import { useGetUserType, useCurrentUser } from "../../context/MainProvider";
+import { useGetUserType, useCurrentUser, useToggleAppUserMode } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
 import NavbarMobile from "../navbar-mobile/NavbarMobile";
@@ -46,7 +46,8 @@ export const Navbar = () => {
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
-  const { toggleUserType, messagesNumber, notificationNumber } = useGetUserType();
+  const { userAppMode, messagesNumber, notificationNumber } = useGetUserType();
+  const setWebUserMode = useToggleAppUserMode();
 
   const logout = () => {
     supabaseClient.auth.signOut();
@@ -56,6 +57,10 @@ export const Navbar = () => {
   const checkIfUrlActive = (urls: string[]) => {
     const path = router.asPath;
     return urls.includes(path);
+  };
+
+  const toggleUserMode = () => {
+    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (
@@ -121,12 +126,12 @@ export const Navbar = () => {
                 <div
                   className={classNames({
                     "border-b-4 border-primary-500 font-black":
-                      checkIfUrlActive([toggleUserType === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
+                      checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  {toggleUserType === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
+                  {userAppMode === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
                 </div>
-                {toggleUserType === "LANDLORD" && (
+                {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
                     <Menu as="div" className={classNames("ml-5 w-full")}>
                       <Menu.Button>
@@ -167,7 +172,7 @@ export const Navbar = () => {
                     </Menu>
                   </div>
                 )}
-                {toggleUserType == "TENANT" && (
+                {userAppMode == "TENANT" && (
                   <div className="my-auto px-5">
                     <Link href={PROCURAR_ADVERT_URL}>
                       <a
@@ -233,14 +238,15 @@ export const Navbar = () => {
                       <Switch
                         checked={true}
                         className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full", {
-                          "bg-primary-500": profile && profile.type === toggleUserType,
-                          "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                          "bg-primary-500": profile && profile.type === userAppMode,
+                          "bg-secondary-300": !profile || profile.type !== userAppMode,
                         })}
+                        onClick={() => toggleUserMode()}
                       >
                         <span
                           className={classNames("absolute top-1 inline-block h-4 w-4 transform rounded-full bg-white", {
-                            "translate-x-6": toggleUserType === "LANDLORD",
-                            "translate-x-1": toggleUserType !== "LANDLORD",
+                            "translate-x-6": userAppMode === "LANDLORD",
+                            "translate-x-1": userAppMode !== "LANDLORD",
                           })}
                         />
                       </Switch>
@@ -276,7 +282,7 @@ export const Navbar = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute z-50 flex flex-col rounded-lg bg-white p-2 px-4 shadow-md">
-                            {toggleUserType == "TENANT" && (
+                            {userAppMode == "TENANT" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
@@ -331,7 +337,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                               </>
                             )}
-                            {toggleUserType == "LANDLORD" && (
+                            {userAppMode == "LANDLORD" && (
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>

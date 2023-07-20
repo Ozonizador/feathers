@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 /* import person image */
-import { useGetUserType, useCurrentUser } from "../../context/MainProvider";
+import { useGetUserType, useCurrentUser, useToggleAppUserMode } from "../../context/MainProvider";
 import { Switch } from "@headlessui/react";
 import classNames from "classnames";
 import { Database } from "../../database.types";
@@ -40,7 +40,8 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
 
-  const { toggleUserType, notificationNumber, messagesNumber } = useGetUserType();
+  const { userAppMode, notificationNumber, messagesNumber } = useGetUserType();
+  const setWebUserMode = useToggleAppUserMode();
 
   const [summary2, setSummary2] = useState(false);
   const [menuaberto, setMenuaberto] = useState(false);
@@ -48,6 +49,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const selectMenuButton = (href: string) => {
     href && router.push(href);
     setMenuaberto(false);
+  };
+
+  const toggleUserMode = () => {
+    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (
@@ -60,9 +65,9 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
       >
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
-            <Link href={HOME_URL}>
-              <div className="mb-3 cursor-pointer font-bold">Home</div>
-            </Link>
+            <div className="mb-3 cursor-pointer font-bold">
+              {userAppMode === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
+            </div>
             <div
               className="flex flex-1 cursor-pointer items-center gap-1"
               onClick={() => {
@@ -107,17 +112,18 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <span className="mr-2">Estudante</span>
                 <Switch
                   checked={false}
+                  onClick={() => toggleUserMode()}
                   className={classNames(
                     "relative mx-5 mt-2 inline-flex h-8 w-16 cursor-default items-center rounded-full",
                     {
-                      "bg-primary-500": profile && profile.type === toggleUserType,
-                      "bg-secondary-300": !profile || profile.type !== toggleUserType,
+                      "bg-primary-500": profile && profile.type === userAppMode,
+                      "bg-secondary-300": !profile || profile.type !== userAppMode,
                     }
                   )}
                 >
                   <span
                     className={`${
-                      toggleUserType === "LANDLORD" ? "translate-x-11" : "translate-x-1"
+                      userAppMode === "LANDLORD" ? "translate-x-11" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
@@ -171,7 +177,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
             </div>
 
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
-              {toggleUserType == "TENANT" && (
+              {userAppMode == "TENANT" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>Minha Estadia</div>
@@ -196,7 +202,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   </div>
                 </div>
               )}
-              {toggleUserType == "LANDLORD" && (
+              {userAppMode == "LANDLORD" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
