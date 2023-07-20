@@ -7,8 +7,8 @@ import { UserTypes } from "../models/profile";
 import { trpc } from "../utils/trpc";
 
 const Faqs = () => {
-  const { toggleUserType } = useGetUserType();
-  const [selectedFaq, setSelectedFaq] = useState<UserTypes>(toggleUserType);
+  const { userAppMode } = useGetUserType();
+  const [selectedFaq, setSelectedFaq] = useState<UserTypes>(userAppMode);
 
   const { data } = trpc.faqs.getFaqs.useQuery(undefined, {
     retry: false,

@@ -14,7 +14,7 @@ interface BlogPostSectionProps {
 const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const router = useRouter();
   const renderers = {
-    p: (props: any) => <p className="my-2">{props.children}</p>,
+    p: (props: any) => <p className="my-2 leading-8">{props.children}</p>,
     h1: (props: any) => <h1 className="text-primary-500">{props.children}</h1>,
   };
 

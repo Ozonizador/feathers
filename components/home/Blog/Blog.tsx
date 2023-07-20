@@ -8,19 +8,19 @@ import Link from "next/link";
 
 export default function BlogSection() {
   const { getBlogs } = useBlogService();
-  const { toggleUserType } = useGetUserType();
+  const { userAppMode } = useGetUserType();
   const [loading, setLoading] = useState<boolean>(false);
   const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
 
   const getLatestBlogs = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await getBlogs(toggleUserType, 4);
+    const { data, error } = await getBlogs(userAppMode, 4);
     if (!error && data) {
       setBlogPosts(data);
     }
 
     setLoading(false);
-  }, [toggleUserType]);
+  }, [userAppMode]);
 
   useEffect(() => {
     getLatestBlogs();

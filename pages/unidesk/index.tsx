@@ -8,11 +8,11 @@ import UnideskSenhorioOptions from "../../components/unidesk/Senhorio/UnideskOpt
 import { useGetUserType } from "../../context/MainProvider";
 
 export default function Unidesk() {
-  const { toggleUserType } = useGetUserType();
+  const { userAppMode } = useGetUserType();
   return (
     <div>
-      {toggleUserType === "LANDLORD" && <UnideskSenhorio />}
-      {toggleUserType === "TENANT" && <UnideskEstudante />}
+      {userAppMode === "LANDLORD" && <UnideskSenhorio />}
+      {userAppMode === "TENANT" && <UnideskEstudante />}
     </div>
   );
 }

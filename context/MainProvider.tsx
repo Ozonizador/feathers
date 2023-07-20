@@ -10,7 +10,7 @@ import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 import { checkMonthsInAdvance } from "../utils/utils";
 
 interface GeneralUnihostInformation {
-  toggleUserType: UserTypes;
+  userAppMode: UserTypes;
   profile: Profile | null;
   notificationNumber: number;
   messagesNumber: number;
@@ -18,7 +18,7 @@ interface GeneralUnihostInformation {
 
 /* Contexts */
 const UnihostsWebsiteContext = createContext<GeneralUnihostInformation>({
-  toggleUserType: "TENANT",
+  userAppMode: "TENANT",
   profile: null,
   notificationNumber: 0,
   messagesNumber: 0,
@@ -57,7 +57,7 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const [locationAccess, setLocationAccess] = useState(false);
   const [userLocationCoordinates, setUserLocationCoordinates] = useState<GEO | undefined>(undefined);
   const [currentUnihostState, setCurrentUnihostState] = useState<GeneralUnihostInformation>({
-    toggleUserType: "TENANT",
+    userAppMode: "TENANT",
     profile: null,
     notificationNumber: 0,
     messagesNumber: 0,
@@ -82,7 +82,10 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     }
 
     data.type !== null &&
-      setCurrentUnihostState((currentInfo) => ({ ...currentInfo, toggleUserType: data.type || "TENANT" }));
+      setCurrentUnihostState((currentInfo) => ({
+        ...currentInfo,
+        userAppMode: data.prefered_unidesk_state || "TENANT",
+      }));
   }, [user]);
 
   const checkUserNotificationsAndMessages = useCallback(async () => {
@@ -158,10 +161,10 @@ export const useCurrentUser = () => {
   return profile;
 };
 
-export const useToggleUserType = () => {
+export const useToggleAppUserMode = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   return (userType: UserTypes): void => {
-    setCurrentInfo((currentStatus) => ({ ...currentStatus, toggleUserType: userType }));
+    setCurrentInfo((currentStatus) => ({ ...currentStatus, userAppMode: userType }));
   };
 };
 
