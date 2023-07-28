@@ -52,7 +52,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   };
 
   const toggleUserMode = () => {
-    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (

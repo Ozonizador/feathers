@@ -60,7 +60,7 @@ export const Navbar = () => {
   };
 
   const toggleUserMode = () => {
-    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (
