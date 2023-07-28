@@ -35,8 +35,8 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
                     <article className="relative h-48 w-48 rounded-lg" key={advertisement.id}>
                       <div className="absolute bottom-4 left-2 z-50">
                         <p className="bold text-sm font-bold text-white">{advertisement.title}</p>
-                        <Link href={`/anuncio/${advertisement.slug}`}>
-                          <a className="bold text-sm text-white">Ver mais</a>
+                        <Link href={`/anuncio/${advertisement.slug}`} className="bold text-sm text-white">
+                          Ver mais
                         </Link>
                       </div>
 

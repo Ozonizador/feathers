@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { appWithTranslation } from "next-i18next";
 
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -71,4 +72,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default trpc.withTRPC(MyApp);
+export default trpc.withTRPC(appWithTranslation(MyApp));

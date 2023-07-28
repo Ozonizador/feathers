@@ -44,8 +44,8 @@ const Register = () => {
     <div className="max-width my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-7/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <Link href={LOGIN_URL}>
-            <a className="p-3 text-center">Iniciar Sessão</a>
+          <Link href={LOGIN_URL} className="p-3 text-center">
+            Iniciar Sessão
           </Link>
           <div className="border-l border-terciary-100 p-3 text-center text-primary-500">Registar</div>
         </div>
@@ -90,15 +90,11 @@ const Register = () => {
           <div className="mt-4 text-center text-sm italic">
             {`Ao registar-se está a concordar com os nossos `}
             <Link href="#">
-              <a>
-                <span className="italic text-primary-500">termos e condições</span>
-                {` e `}
-              </a>
+              <span className="italic text-primary-500">termos e condições</span>
+              {` e `}
             </Link>
             <Link href="#">
-              <a>
-                <span className="italic text-primary-500">política de privacidade.</span>
-              </a>
+              <span className="italic text-primary-500">política de privacidade.</span>
             </Link>
           </div>
         </div>

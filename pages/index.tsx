@@ -7,6 +7,12 @@ import HomeSection3 from "../components/home/homeSection3/HomeSection3";
 import HomeSection5 from "../components/home/homeSection5/HomeSection5";
 import TestemunhosComponent from "../components/home/TestemunhosComponent/TestemunhosComponent";
 import HomeSection7 from "../components/home/HomeSection7/HomeSection7";
+import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+type Props = {
+  // Add custom props here
+};
 
 const Home = () => {
   return (
@@ -27,3 +33,12 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps<Props> = async ({ locale }) => {
+  console.log(locale);
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+    },
+  };
+};

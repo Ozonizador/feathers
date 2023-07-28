@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Menu, Switch, Transition } from "@headlessui/react";
 import MyLink from "../utils/MyLink";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { useTranslation } from "next-i18next";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
@@ -39,6 +40,7 @@ import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
 
 export const Navbar = () => {
+  const { t } = useTranslation("navbar");
   const user = useUser();
   const profile = useCurrentUser();
   const router = useRouter();
@@ -89,10 +91,11 @@ export const Navbar = () => {
                 <div className="my-auto mt-3 h-7 w-7">
                   <Image src={ukFlag} alt="" />
                 </div>
-                <select className="ml-2 border-none">
-                  <option value="eng" disabled>
-                    EN
-                  </option>
+                <select
+                  className="ml-2 border-none"
+                  onChange={(event) => router.push(router.asPath, undefined, { locale: event.target.value })}
+                >
+                  <option value="en">EN</option>
                   <option value="pt">PT</option>
                 </select>
               </div>
@@ -101,17 +104,15 @@ export const Navbar = () => {
           <div className="border-terciary-400 mt-5 flex h-20 border-b lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
-                <a aria-label="home">
-                  <div className="relative h-full w-52">
-                    <Image
-                      src="/images/logo1.png"
-                      alt=""
-                      className="cursor-pointer"
-                      objectFit="contain"
-                      layout="fill"
-                    ></Image>
-                  </div>
-                </a>
+                <div className="relative h-full w-52">
+                  <Image
+                    src="/images/logo1.png"
+                    alt=""
+                    className="cursor-pointer"
+                    objectFit="contain"
+                    layout="fill"
+                  ></Image>
+                </div>
               </Link>
             </div>
             <div
@@ -129,7 +130,11 @@ export const Navbar = () => {
                       checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  {userAppMode === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
+                  {userAppMode === "TENANT" ? (
+                    <Link href="/">{t("home")}</Link>
+                  ) : (
+                    <Link href={UNIDESK_URL}>{t("unidesk")}</Link>
+                  )}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
@@ -174,38 +179,35 @@ export const Navbar = () => {
                 )}
                 {userAppMode == "TENANT" && (
                   <div className="my-auto px-5">
-                    <Link href={PROCURAR_ADVERT_URL}>
-                      <a
-                        className={classNames({
-                          "border-b-4 border-primary-500 pb-2 font-black":
-                            checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
-                        })}
-                      >
-                        Encontrar Espaço
-                      </a>
+                    <Link
+                      href={PROCURAR_ADVERT_URL}
+                      className={classNames({
+                        "border-b-4 border-primary-500 pb-2 font-black":
+                          checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
+                      })}
+                    >
+                      Encontrar Espaço
                     </Link>
                   </div>
                 )}
                 <div className="my-auto px-5">
-                  <Link href={BLOG_URL}>
-                    <a
-                      className={classNames({
-                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
-                      })}
-                    >
-                      Blog
-                    </a>
+                  <Link
+                    href={BLOG_URL}
+                    className={classNames({
+                      "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
+                    })}
+                  >
+                    Blog
                   </Link>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href={CONTACTOS_URL}>
-                    <a
-                      className={classNames({
-                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
-                      })}
-                    >
-                      Contactos
-                    </a>
+                  <Link
+                    href={CONTACTOS_URL}
+                    className={classNames({
+                      "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
+                    })}
+                  >
+                    Contactos
                   </Link>
                 </div>
               </div>
@@ -214,20 +216,16 @@ export const Navbar = () => {
               <div>
                 {!user && (
                   <div className="my-auto flex gap-2">
-                    <Link href={REGISTER_URL}>
-                      <a className="p-0">
-                        <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                          Registar
-                        </div>
-                      </a>
+                    <Link href={REGISTER_URL} className="p-0">
+                      <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                        Registar
+                      </div>
                     </Link>
 
-                    <Link href={LOGIN_URL}>
-                      <a className="p-0">
-                        <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
-                          Iniciar sessão
-                        </div>
-                      </a>
+                    <Link href={LOGIN_URL} className="p-0">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
+                        Iniciar sessão
+                      </div>
                     </Link>
                   </div>
                 )}

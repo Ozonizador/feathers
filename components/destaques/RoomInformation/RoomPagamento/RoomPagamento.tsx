@@ -256,10 +256,11 @@ export const RoomPagamento = () => {
             </div>
           </div>
 
-          <Link href="#reserva">
-            <a className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-              Reserva
-            </a>
+          <Link
+            href="#reserva"
+            className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
+          >
+            Reserva
           </Link>
         </div>
       </form>

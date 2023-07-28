@@ -51,13 +51,14 @@ export default function HomeSection3() {
                 <div className="mb-12 flex justify-between align-middle">
                   <h2 className="text-5xl font-bold text-black">Os quartos em destaque na tua área</h2>
 
-                  <Link href={PROCURAR_ADVERT_URL}>
-                    <a className="flex items-center rounded-full bg-primary-300 px-4 align-middle">
-                      Ver Mais
-                      <div>
-                        <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
-                      </div>
-                    </a>
+                  <Link
+                    href={PROCURAR_ADVERT_URL}
+                    className="flex items-center rounded-full bg-primary-300 px-4 align-middle"
+                  >
+                    Ver Mais
+                    <div>
+                      <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
+                    </div>
                   </Link>
                 </div>
               </div>
@@ -87,13 +88,14 @@ export default function HomeSection3() {
 
               <div className="block lg:hidden">
                 <div className="mx-auto mb-12 mt-10 flex w-1/2 justify-center align-middle">
-                  <Link href={PROCURAR_ADVERT_URL}>
-                    <a className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle">
-                      Ver Mais
-                      <div>
-                        <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
-                      </div>
-                    </a>
+                  <Link
+                    href={PROCURAR_ADVERT_URL}
+                    className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle"
+                  >
+                    Ver Mais
+                    <div>
+                      <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
+                    </div>
                   </Link>
                 </div>
               </div>

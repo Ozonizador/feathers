@@ -34,23 +34,21 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
           {similarBlogs &&
             similarBlogs.map((blog, index) => {
               return (
-                <Link href={`/blog/${blog.slug}`} key={index}>
-                  <a className="flex flex-1 flex-col">
-                    <div className="relative block h-[350px] w-full  px-4 lg:flex lg:h-[350px] lg:w-full">
-                      <Image className="rounded-lg" src={blog.image} alt="" layout="fill" objectFit="cover"></Image>
-                    </div>
-                    <div className="my-4 w-full  text-xl lg:w-full lg:text-xl">{blog.title}</div>
-                    <div className="line-clamp-5 w-full lg:w-full  lg:text-base">{blog.description}</div>
+                <Link href={`/blog/${blog.slug}`} key={index} className="flex flex-1 flex-col">
+                  <div className="relative block h-[350px] w-full  px-4 lg:flex lg:h-[350px] lg:w-full">
+                    <Image className="rounded-lg" src={blog.image} alt="" layout="fill" objectFit="cover"></Image>
+                  </div>
+                  <div className="my-4 w-full  text-xl lg:w-full lg:text-xl">{blog.title}</div>
+                  <div className="line-clamp-5 w-full lg:w-full  lg:text-base">{blog.description}</div>
 
-                    <div className="mb-10 mt-5 flex w-full justify-between text-sm text-gray-400 lg:mb-0 lg:mt-10 lg:w-full">
-                      <div className="capitalize">
-                        {format(parseISO(blog.created_at), "dd MMMM yyyy", {
-                          locale: pt,
-                        })}
-                      </div>
-                      <div>By Unihosts</div>
+                  <div className="mb-10 mt-5 flex w-full justify-between text-sm text-gray-400 lg:mb-0 lg:mt-10 lg:w-full">
+                    <div className="capitalize">
+                      {format(parseISO(blog.created_at), "dd MMMM yyyy", {
+                        locale: pt,
+                      })}
                     </div>
-                  </a>
+                    <div>By Unihosts</div>
+                  </div>
                 </Link>
               );
             })}

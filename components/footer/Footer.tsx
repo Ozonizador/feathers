@@ -92,11 +92,9 @@ const Footer = () => {
               </Link>
             </div>
             <Link href={ANUNCIAR_PROP_URL} className="transition">
-              <a>
-                <div className="my-3 mt-7">
-                  <span className="rounded-full bg-primary-500 p-3">Anuncie a sua propriedade</span>
-                </div>
-              </a>
+              <div className="my-3 mt-7 flex w-fit rounded-full bg-primary-500 p-3 text-center">
+                Anuncie a sua propriedade
+              </div>
             </Link>
           </div>
           <div className="flex flex-1 justify-start py-5 lg:justify-center">

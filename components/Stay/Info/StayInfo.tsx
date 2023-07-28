@@ -86,16 +86,14 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
 
       <div>
         <Link href={INBOX_URL}>
-          <a>
-            <div className="w-18 flex cursor-pointer flex-col items-center gap-1">
-              <RiMailSendLine className="mb-2 text-4xl text-green-400" size={32} />
-              <div className="text-center text-xs lg:text-sm">
-                Enviar
-                <br />
-                mensagem
-              </div>
+          <div className="w-18 flex cursor-pointer flex-col items-center gap-1">
+            <RiMailSendLine className="mb-2 text-4xl text-green-400" size={32} />
+            <div className="text-center text-xs lg:text-sm">
+              Enviar
+              <br />
+              mensagem
             </div>
-          </a>
+          </div>
         </Link>
       </div>
 

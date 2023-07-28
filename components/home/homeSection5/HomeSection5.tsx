@@ -28,14 +28,15 @@ const HomeSection5 = () => {
           />
         </div>
         <span className="hidden justify-center lg:flex">
-          <Link href={PROCURAR_ADVERT_URL}>
-            <a className="hover: flex w-1/5 items-center justify-center  rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-              Encontrar{" "}
-              <span className="px-1">
-                <CgHome />
-              </span>{" "}
-              em...
-            </a>
+          <Link
+            href={PROCURAR_ADVERT_URL}
+            className="w-1/5 items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
+          >
+            Encontrar{" "}
+            <span className="px-1">
+              <CgHome />
+            </span>{" "}
+            em...
           </Link>
         </span>
       </div>
