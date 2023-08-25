@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { useUser } from "@supabase/auth-helpers-react";
 import { useGetModalMaisFiltros, useSetModalMaisFiltros } from "../../context/ModalMaisFiltrosProvider";
 import Checkbox from "../utils/Checkbox";
 import {

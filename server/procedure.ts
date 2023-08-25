@@ -26,7 +26,7 @@ export const authorizedProcedure = publicProcedure.use(async (opts) => {
       message: "You need to login.",
     });
 
-  return opts.next();
+  return opts.next({ ctx: { userId }});
 });
 
 export const isHostProcedure = authorizedProcedure

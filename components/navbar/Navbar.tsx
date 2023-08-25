@@ -1,3 +1,4 @@
+"use client";
 import React, { Fragment, useState } from "react";
 import { ImPhone } from "react-icons/im";
 import { GrMail } from "react-icons/gr";
@@ -8,7 +9,6 @@ import Image from "next/image";
 import { Menu, Switch, Transition } from "@headlessui/react";
 import MyLink from "../utils/MyLink";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { useTranslation } from "next-i18next";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
@@ -38,6 +38,7 @@ import {
 } from "../../models/paths";
 import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
   const { t } = useTranslation("navbar");
@@ -93,7 +94,9 @@ export const Navbar = () => {
                 </div>
                 <select
                   className="ml-2 border-none"
-                  onChange={(event) => router.push(router.asPath, undefined, { locale: event.target.value })}
+                  onChange={(event) => {
+                    // i18n && i18n.changeLanguage(event.target.value);
+                  }}
                 >
                   <option value="en">EN</option>
                   <option value="pt">PT</option>
@@ -131,9 +134,11 @@ export const Navbar = () => {
                   })}
                 >
                   {userAppMode === "TENANT" ? (
-                    <Link href="/">{t("home")}</Link>
+                    //<Link href="/">{t("home")}</Link>
+                    <Link href="/">Home</Link>
                   ) : (
-                    <Link href={UNIDESK_URL}>{t("unidesk")}</Link>
+                    //<Link href={UNIDESK_URL}>{t("unidesk")}</Link>
+                    <></>
                   )}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (

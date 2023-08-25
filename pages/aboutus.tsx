@@ -19,8 +19,6 @@ const AboutUs = () => {
             src="/images/sobre_nos.jpg"
             alt="sobre nos image"
             objectFit="cover"
-            height="100%"
-            width="100%"
             className="opacity-60"
           ></Image>
         </div>

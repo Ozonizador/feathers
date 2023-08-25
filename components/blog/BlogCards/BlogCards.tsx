@@ -23,11 +23,10 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                         <div className="w-full rounded-3xl lg:w-80">
                           <Image
                             layout="responsive"
+                            fill
                             src={blog.image}
                             alt=""
                             objectFit="cover"
-                            height="100%"
-                            width="100%"
                             className="rounded-3xl"
                           ></Image>
                         </div>

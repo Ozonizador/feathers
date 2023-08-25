@@ -84,7 +84,7 @@ const ModalAvaliarExperiencia = () => {
                 as="h3"
                 className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
               >
-                <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32px" height="32px" />{" "}
+                <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32" height="32" />{" "}
                 <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
               </Dialog.Title>
               {step === 1 && (
