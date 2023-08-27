@@ -12,89 +12,89 @@ import {
   HOME_URL,
   LOGIN_URL,
 } from "../../models/paths";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation("footer");
   return (
     <footer>
       <div>
         <div className="grid grid-cols-1 gap-1 bg-secondary-300 px-12 py-4 lg:grid-cols-5 lg:gap-5 lg:pt-20">
-          <div className="relative my-auto flex lg:mx-auto lg:-mt-16">
+          <div className="relative mb-auto flex pt-5 lg:mx-auto">
             <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
           </div>
           <div className="ml-0 py-5 text-left text-terciary-100 lg:ml-5 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
             <div className="py-1">
               <Link href={ABOUT_US_URL} className="fs-300 clr-white">
-                Sobre nós
+                {t("about")}
               </Link>
             </div>
             <div className="py-1">
               <Link href={BLOG_URL} className="fs-300 clr-white">
-                Blog
+                {t("blog")}
               </Link>
             </div>
             <div className="py-1">
               <Link href={CONTACTOS_URL} className="fs-300 clr-white">
-                Torne-se um parceiro
+                {t("partner")}
               </Link>
             </div>
             <div className="py-1">
               <Link href={HOME_URL} className="fs-300 clr-white">
-                Termos e condições
+                {t("terms")}
               </Link>
             </div>
             <div className="py-1">
               <Link href={HOME_URL} className="fs-300 clr-white">
-                Política de cookies
+                {t("cookie_policy")}
               </Link>
             </div>
             <div className="py-1">
               <Link href={CONTACTOS_URL} className="fs-300 clr-white">
-                Fale connosco
+                {t("talk_with_us")}
               </Link>
             </div>
           </div>
           <div className="py-5 text-left text-terciary-100 lg:text-left">
-            <h3 className="mb-3 text-lg font-bold">Estudantes</h3>
+            <h3 className="mb-3 text-lg font-bold">{t("student.title")}</h3>
             <div className="py-1">
               <Link href={HOME_URL} className="fs-300 clr-white">
-                Como alugar
+                {t("student.how_to_rent")}
               </Link>
             </div>
 
             <div className="py-1">
               <Link href={FAQS_URL} className="fs-300 clr-white">
-                Ajuda para os Estudantes
+                {t("student.help")}
               </Link>
             </div>
 
             <div className="py-1">
               <Link href={LOGIN_URL} className="fs-300 clr-white">
-                Iniciar sessão/Registar
+                {t("login")}
               </Link>
             </div>
           </div>
           <div className="py-5 text-left text-terciary-100 lg:text-left">
-            <h3 className="mb-3 text-lg font-bold">Senhorios</h3>
+            <h3 className="mb-3 text-lg font-bold">{t("landlord.title")}</h3>
 
             <div className="py-1">
-              <Link href={COMO_FUNCIONA_URL}>Como funciona</Link>
+              <Link href={COMO_FUNCIONA_URL}>{t("landlord.how_to")}</Link>
             </div>
             <div className="py-1">
               <Link href={FAQS_URL} className="fs-300 clr-white">
-                Ajuda para os senhorios
+                {t("landlord.help")}
               </Link>
             </div>
 
             <div className="py-1">
               <Link href={LOGIN_URL} className="fs-300 clr-white">
-                Iniciar sessão/ Registar
+                {t("login")}
               </Link>
             </div>
             <Link href={ANUNCIAR_PROP_URL} className="transition">
-              <div className="my-3 mt-7 flex w-fit rounded-full bg-primary-500 p-3 text-center">
-                Anuncie a sua propriedade
-              </div>
+              <div className="my-3 mt-7 flex w-fit rounded-full bg-primary-500 p-3 text-center">{t("announce")}</div>
             </Link>
           </div>
           <div className="flex flex-1 justify-start py-5 lg:justify-center">

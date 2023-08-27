@@ -1,4 +1,15 @@
 {
   "unidesk": "Unidesk",
-  "home": "Home PT"
+  "home": "Início",
+  "how_it_works": "Como funciona",
+  "announce": "Anunciar!",
+  "announce_property": "Anuncie a sua propriedade",
+  "find_place": "Encontrar Espaço",
+  "blog": "Blog",
+  "contacts": "Contactos",
+  "login": "Iniciar Sessão",
+  "register": "Registar",
+  "menu": {
+    "student": ""
+  }
 }

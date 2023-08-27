@@ -1,4 +1,3 @@
-const withPlugins = require("next-compose-plugins");
 const removeImports = require("next-remove-imports")();
 const { i18n } = require("./next-i18next.config");
 
@@ -15,5 +14,4 @@ const nextConfig = {
   transpilePackages: ["flowbite-react"],
 };
 
-module.exports = removeImports(withPlugins([], nextConfig));
-//module.exports = nextConfig;
+module.exports = removeImports(nextConfig);

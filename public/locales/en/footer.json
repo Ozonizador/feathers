@@ -1,0 +1,20 @@
+{
+  "about": "About us",
+  "blog": "Blog",
+  "be_partner": "Be a partner",
+  "terms": "Terms and conditions",
+  "cookie_policy": "Cookie Policy",
+  "talk_with_us": "Talk with us",
+  "student": {
+    "title": "Students",
+    "how_to_rent": "How to rent",
+    "help": "Help for Students"
+  },
+  "landlord": {
+    "title": "Landlords",
+    "how_to": "How it works",
+    "help": "Help for Landlords"
+  },
+  "login": "Login/Register",
+  "announce": "Announce your property"
+}

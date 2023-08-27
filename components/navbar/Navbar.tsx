@@ -12,6 +12,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
+import ptFlag from "../../public/icons/portugal-flag.svg";
 import { useGetUserType, useCurrentUser, useToggleAppUserMode } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
@@ -90,12 +91,12 @@ export const Navbar = () => {
               </div>
               <div className="flex pl-2">
                 <div className="my-auto mt-3 h-7 w-7">
-                  <Image src={ukFlag} alt="" />
+                  <Image src={router.locale === "en" ? ukFlag : ptFlag} alt="" />
                 </div>
                 <select
                   className="ml-2 border-none"
                   onChange={(event) => {
-                    // i18n && i18n.changeLanguage(event.target.value);
+                    router.push(router.pathname, undefined, { locale: event.target.value });
                   }}
                 >
                   <option value="en">EN</option>
@@ -134,11 +135,9 @@ export const Navbar = () => {
                   })}
                 >
                   {userAppMode === "TENANT" ? (
-                    //<Link href="/">{t("home")}</Link>
-                    <Link href="/">Home</Link>
+                    <Link href="/">{t("home")}</Link>
                   ) : (
-                    //<Link href={UNIDESK_URL}>{t("unidesk")}</Link>
-                    <></>
+                    <Link href={UNIDESK_URL}>{t("unidesk")}</Link>
                   )}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
@@ -151,7 +150,7 @@ export const Navbar = () => {
                               checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
                           })}
                         >
-                          <h6>Anuncie a sua propriedade</h6>
+                          <h6>{t("announce_property")}</h6>
                           <div className="my-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />
                           </div>
@@ -169,12 +168,12 @@ export const Navbar = () => {
                         <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                           <Menu.Item>
                             <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
-                              Como funciona?
+                              {t("how_it_works")}
                             </MyLink>
                           </Menu.Item>
                           <Menu.Item>
                             <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
-                              Anunciar!
+                              {t("announce")}
                             </MyLink>
                           </Menu.Item>
                         </Menu.Items>
@@ -191,7 +190,7 @@ export const Navbar = () => {
                           checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
                       })}
                     >
-                      Encontrar Espaço
+                      {t("find_place")}
                     </Link>
                   </div>
                 )}
@@ -202,7 +201,7 @@ export const Navbar = () => {
                       "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
                     })}
                   >
-                    Blog
+                    {t("blog")}
                   </Link>
                 </div>
                 <div className="my-auto px-5">
@@ -212,7 +211,7 @@ export const Navbar = () => {
                       "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
                     })}
                   >
-                    Contactos
+                    {t("contacts")}
                   </Link>
                 </div>
               </div>
@@ -223,13 +222,13 @@ export const Navbar = () => {
                   <div className="my-auto flex gap-2">
                     <Link href={REGISTER_URL} className="p-0">
                       <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                        Registar
+                        {t("register")}
                       </div>
                     </Link>
 
                     <Link href={LOGIN_URL} className="p-0">
                       <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
-                        Iniciar sessão
+                        {t("login")}
                       </div>
                     </Link>
                   </div>

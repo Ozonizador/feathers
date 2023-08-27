@@ -30,8 +30,7 @@ const Home = () => {
 
 export default Home;
 
-export async function getServerSideProps({ params, locale }: GetServerSidePropsContext) {
-  console.log("paulotest", locale);
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
