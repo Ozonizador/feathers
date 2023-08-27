@@ -37,10 +37,12 @@ const TypeCustomerPage = () => {
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
-          <Link href={REGISTER_URL}>
-            <a aria-label="register_password" className="border-l border-terciary-100 p-3 text-center">
-              Registar
-            </a>
+          <Link
+            href={REGISTER_URL}
+            aria-label="register_password"
+            className="border-l border-terciary-100 p-3 text-center"
+          >
+            Registar
           </Link>
         </div>
         <div className="my-5 p-3">

@@ -27,8 +27,8 @@ const Recover = () => {
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center">Iniciar sessão</div>
 
-          <Link href={REGISTER_URL}>
-            <a className="border-l border-terciary-100 p-3 text-center">Registar</a>
+          <Link href={REGISTER_URL} className="border-l border-terciary-100 p-3 text-center">
+            Registar
           </Link>
         </div>
         <div className="p-3">

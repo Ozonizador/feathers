@@ -51,14 +51,15 @@ export default function RoomSemelhantes() {
               })}
           </div>
 
-          <Link href={PROCURAR_ADVERT_URL}>
-            <a className="hover: lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96">
-              Encontrar mais
-              <span className="px-1">
-                <CgHome />
-              </span>{" "}
-              em {advertisement?.place || ""}
-            </a>
+          <Link
+            href={PROCURAR_ADVERT_URL}
+            className="hover:lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96"
+          >
+            Encontrar mais
+            <span className="px-1">
+              <CgHome />
+            </span>{" "}
+            em {advertisement?.place || ""}
           </Link>
         </section>
       )}

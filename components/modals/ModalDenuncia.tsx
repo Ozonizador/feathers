@@ -77,7 +77,7 @@ const ModalDenuncia = () => {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
-                  <Image src="/images/flag.png" alt="" width="40px" height="30px" />
+                  <Image src="/images/flag.png" alt="" width="40" height="30" />
                   <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">Reportar anúncio</span>
                 </Dialog.Title>
                 {step === 1 && (

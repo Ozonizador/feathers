@@ -6,9 +6,7 @@ export default function FourOhFour() {
   return (
     <div className="p-28">
       <h1>Pagina não encontrada</h1>
-      <Link href={HOME_URL}>
-        <a>Go back home</a>
-      </Link>
+      <Link href={HOME_URL}>Go back home</Link>
     </div>
   );
 }

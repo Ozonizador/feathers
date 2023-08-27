@@ -22,10 +22,11 @@ const HomeSection7 = () => {
               <div className="mb-20 block lg:hidden">Comece já a anunciar e rentabilize o seu imóvel!</div>
             </div>
             <div className="mb-14 mt-8 lg:mb-20 lg:mt-0 lg:pt-16">
-              <Link href={ANUNCIAR_PROP_URL}>
-                <a className="rounded-full bg-primary-500 px-16 py-4 text-white  duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl lg:ml-6 lg:px-9">
-                  Anunciar
-                </a>
+              <Link
+                href={ANUNCIAR_PROP_URL}
+                className="rounded-full bg-primary-500 px-16 py-4 text-white  duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl lg:ml-6 lg:px-9"
+              >
+                Anunciar
               </Link>
             </div>
           </div>
@@ -35,10 +36,11 @@ const HomeSection7 = () => {
                 <Image src="/images/house-key.jpg" layout="fill" alt="" className="rounded-3xl"></Image>
               </div>
               <div className="absolute bottom-10  right-20  mb-6 lg:bottom-6 lg:right-8">
-                <Link href={COMO_FUNCIONA_URL}>
-                  <a className=" mb-9 rounded-full  border-2 border-solid border-white bg-black/30 px-8 py-4 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                    Quero saber mais...
-                  </a>
+                <Link
+                  href={COMO_FUNCIONA_URL}
+                  className=" mb-9 rounded-full  border-2 border-solid border-white bg-black/30 px-8 py-4 text-white duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl"
+                >
+                  Quero saber mais...
                 </Link>
               </div>
             </div>

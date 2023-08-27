@@ -80,14 +80,15 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     </>
 
                     <div className="flex justify-center">
-                      <Link href={PROCURAR_ADVERT_URL}>
-                        <a className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
-                          Encontrar
-                          <span className="px-1">
-                            <CgHome />
-                          </span>
-                          em...
-                        </a>
+                      <Link
+                        href={PROCURAR_ADVERT_URL}
+                        className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
+                      >
+                        Encontrar
+                        <span className="px-1">
+                          <CgHome />
+                        </span>
+                        em...
                       </Link>
                     </div>
                   </div>

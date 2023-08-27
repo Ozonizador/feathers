@@ -24,9 +24,7 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
           {TYPE_ADVERTISEMENT[advertisement.type]} em {advertisement.place}
         </h2>
         <Link href={`/anuncio/${advertisement.slug}`}>
-          <a>
-            <p className="text-base font-normal text-primary-500">+ informações</p>
-          </a>
+          <p className="text-base font-normal text-primary-500">+ informações</p>
         </Link>
       </div>
     </div>

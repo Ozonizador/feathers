@@ -40,10 +40,11 @@ const FuncionaOndeEstamos = () => {
                 e Rio Maior.
               </div>
 
-              <Link href="#">
-                <a className="w-fit rounded-md bg-primary-500 px-11 py-3 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl">
-                  Saber mais
-                </a>
+              <Link
+                href="#"
+                className="w-fit rounded-md bg-primary-500 px-11 py-3 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
+              >
+                Saber mais
               </Link>
             </div>
           </div>

@@ -15,8 +15,6 @@ const HomeParceiros = () => {
                   src="/images/brand1.jpg"
                   alt="brand1"
                   objectFit="contain"
-                  height="100%"
-                  width="100%"
                 ></Image>
               </div>
               <div className="flex-1">
@@ -25,8 +23,7 @@ const HomeParceiros = () => {
                   src="/images/brand2.jpg"
                   alt="brand2"
                   objectFit="contain"
-                  height="100%"
-                  width="100%"
+
                 ></Image>
               </div>
             </div>
@@ -38,8 +35,7 @@ const HomeParceiros = () => {
                   src="/images/brand3.jpg"
                   alt="brand3"
                   objectFit="contain"
-                  height="50%"
-                  width="50%"
+
                 ></Image>
               </div>
               <div className="flex-1">
@@ -48,8 +44,7 @@ const HomeParceiros = () => {
                   src="/images/brand4.jpg"
                   alt="brand4"
                   objectFit="contain"
-                  height="50%"
-                  width="50%"
+
                 ></Image>
               </div>
               <div className="flex-1">
@@ -58,8 +53,7 @@ const HomeParceiros = () => {
                   src="/images/brand5.jpg"
                   alt="brand5"
                   objectFit="contain"
-                  height="50%"
-                  width="50%"
+
                 ></Image>
               </div>
             </div>
@@ -71,8 +65,7 @@ const HomeParceiros = () => {
                   src="/images/brand6.jpg"
                   alt="brand6"
                   objectFit="contain"
-                  height="100%"
-                  width="100%"
+
                 ></Image>
               </div>
             </div>
@@ -89,8 +82,7 @@ const HomeParceiros = () => {
               src="/images/brand1.jpg"
               alt="brand1"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
 
             <Image
@@ -98,8 +90,7 @@ const HomeParceiros = () => {
               src="/images/brand2.jpg"
               alt="brand2"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
 
             <Image
@@ -107,8 +98,7 @@ const HomeParceiros = () => {
               src="/images/brand3.jpg"
               alt="brand3"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
 
             <Image
@@ -116,8 +106,7 @@ const HomeParceiros = () => {
               src="/images/brand4.jpg"
               alt="brand4"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
 
             <Image
@@ -125,8 +114,7 @@ const HomeParceiros = () => {
               src="/images/brand5.jpg"
               alt="brand5"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
 
             <Image
@@ -134,8 +122,7 @@ const HomeParceiros = () => {
               src="/images/brand6.jpg"
               alt="brand6"
               objectFit="contain"
-              height="50%"
-              width="50%"
+
             ></Image>
           </div>
         </div>

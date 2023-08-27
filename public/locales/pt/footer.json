@@ -1,0 +1,20 @@
+{
+  "about": "Sobre nós",
+  "blog": "Blog",
+  "be_partner": "Torne-se um parceiro",
+  "terms": "Termos e condições",
+  "cookie_policy": "Política de cookies",
+  "talk_with_us": "Fale connosco",
+  "student": {
+    "title": "Estudantes",
+    "how_to_rent": "Como alugar",
+    "help": "Ajuda para os Estudantes"
+  },
+  "landlord": {
+    "title": "Senhorios",
+    "how_to": "Como funciona",
+    "help": "Ajuda para os senhorios"
+  },
+  "login": "Iniciar sessão/Registar",
+  "announce": "Anuncie a sua propriedade"
+}

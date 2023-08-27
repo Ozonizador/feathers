@@ -45,6 +45,8 @@ const useProfileService = () => {
     return { data, error };
   };
 
+  //nome - ok, apelido- ok, date de nascimento -nao tem, nacionalidade - nao tem e localidade -nao tem, foto (se existir)
+
   /* FOR THE REGULAR APP */
 
   const getUserProfile = async (userID: string) => {

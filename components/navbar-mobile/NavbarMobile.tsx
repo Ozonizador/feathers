@@ -52,7 +52,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   };
 
   const toggleUserMode = () => {
-    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (
@@ -157,20 +157,16 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               )}
               {!user && (
                 <div className="my-auto flex w-full justify-center gap-2">
-                  <Link href={REGISTER_URL}>
-                    <a className="p-0">
-                      <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                        Registar
-                      </div>
-                    </a>
+                  <Link href={REGISTER_URL} className="p-0">
+                    <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                      Registar
+                    </div>
                   </Link>
 
-                  <Link href={LOGIN_URL}>
-                    <a className="p-0">
-                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
-                        Iniciar sessão
-                      </div>
-                    </a>
+                  <Link href={LOGIN_URL} className="p-0">
+                    <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                      Iniciar sessão
+                    </div>
                   </Link>
                 </div>
               )}

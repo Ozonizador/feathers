@@ -21,11 +21,9 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
 
         <div className="w-fit min-w-[300px]">
           <Link href={NOTIFICATION_LINKS[notification.type]}>
-            <a>
-              <Button rounded="full" type="button">
-                {BUTTON_MESSAGE_LABEL[notification.type]}
-              </Button>
-            </a>
+            <Button rounded="full" type="button">
+              {BUTTON_MESSAGE_LABEL[notification.type]}
+            </Button>
           </Link>
         </div>
       </div>

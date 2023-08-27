@@ -40,15 +40,13 @@ export default function BlogSection() {
             {blogPosts.map((blogPost) => {
               return (
                 <Link href={`/blog/${blogPost.slug}`} key={blogPost.id}>
-                  <a>
-                    <article className="relative h-96 w-full bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl">
-                      <h2 className="absolute bottom-0 left-0 z-50 mb-6 ml-3 text-2xl text-white lg:text-base">
-                        {blogPost.title}
-                      </h2>
+                  <article className="relative h-96 w-full bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl">
+                    <h2 className="absolute bottom-0 left-0 z-50 mb-6 ml-3 text-2xl text-white lg:text-base">
+                      {blogPost.title}
+                    </h2>
 
-                      <Image layout="fill" src={blogPost.image} alt="blog" className="opacity-60" objectFit="cover" />
-                    </article>
-                  </a>
+                    <Image layout="fill" src={blogPost.image} alt="blog" className="opacity-60" objectFit="cover" />
+                  </article>
                 </Link>
               );
             })}

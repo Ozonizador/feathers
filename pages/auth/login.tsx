@@ -43,10 +43,12 @@ const Login = () => {
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-7/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
           <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
-          <Link href={REGISTER_URL}>
-            <a aria-label="register_password" className="border-l border-terciary-100 p-3 text-center">
-              Registar
-            </a>
+          <Link
+            href={REGISTER_URL}
+            aria-label="register_password"
+            className="border-l border-terciary-100 p-3 text-center"
+          >
+            Registar
           </Link>
         </div>
         <div className="mt-9 px-10 py-5">
@@ -80,10 +82,8 @@ const Login = () => {
               <Button type="submit">Iniciar Sessão</Button>
             </div>
           </form>
-          <Link href={RECOVER_URL}>
-            <a aria-label="recover_password">
-              <div className="mt-3 text-center italic text-primary-500">Esqueci-me da palavra-passe</div>
-            </a>
+          <Link href={RECOVER_URL} aria-label="recover_password">
+            <div className="mt-3 text-center italic text-primary-500">Esqueci-me da palavra-passe</div>
           </Link>
 
           <div className="relative flex items-center py-5">

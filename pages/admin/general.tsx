@@ -5,12 +5,14 @@ import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
 import React, { useState, useMemo, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import PhoneInput from "react-phone-number-input";
 import countryList from "react-select-country-list";
 import { toast } from "react-toastify";
+import "react-phone-number-input/style.css";
+import Input, { parsePhoneNumber } from "react-phone-number-input/input";
+
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import FeatherDatePicker from "../../components/utils/FeatherDatepicker";
-import Input from "../../components/utils/Input";
+import FeathersInput from "../../components/utils/Input";
 import Select2 from "react-select";
 import {
   Profile,
@@ -23,9 +25,10 @@ import {
 import useProfileService from "../../hooks/useProfileService";
 import { dateToFormat } from "../../utils/utils";
 
-import "react-phone-number-input/style.css";
 import { ADMIN_URL } from "../../models/paths";
 import { customStyles } from "../../components/admin/general.config";
+import PhoneCountrySelect from "../../components/utils/PhoneInput";
+import { CountryCode } from "libphonenumber-js/types";
 
 const paths = [
   { url: ADMIN_URL, label: "Conta" },
@@ -51,9 +54,12 @@ interface IndexProps {
 }
 
 const Index = ({ user, profileData }: IndexProps) => {
+  const phoneNumber = profileData && profileData.phone && parsePhoneNumber(profileData.phone);
+
   const fileRef = useRef(null);
   const { addAvatar, updateUserProfile } = useProfileService();
   const [profile, setProfile] = useState<Profile>(profileData);
+  const [country, setCountry] = useState((phoneNumber && phoneNumber.country) || "PT");
 
   const {
     register,
@@ -168,7 +174,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <Input value={value} onChange={onChange} name="nome" labelText="Nome" />
+                    <FeathersInput value={value} onChange={onChange} name="nome" labelText="Nome" />
                   )}
                   name="name"
                 ></Controller>
@@ -211,7 +217,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <Input value={value} onChange={onChange} name="Apelido" labelText="Apelido" />
+                    <FeathersInput value={value} onChange={onChange} name="Apelido" labelText="Apelido" />
                   )}
                   name="surname"
                 />
@@ -236,7 +242,7 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <Input onChange={onChange} value={value} name="localidade" labelText="Localidade" />
+                  <FeathersInput onChange={onChange} value={value} name="localidade" labelText="Localidade" />
                 )}
                 name="town"
               ></Controller>
@@ -295,10 +301,11 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <div>
-                    <PhoneInput
-                      defaultCountry="PT"
-                      placeholder="Enter phone number"
+                  <div className="flex gap-3">
+                    <PhoneCountrySelect country={country} setCountry={setCountry} />
+                    <Input
+                      country={(country as CountryCode) || "PT"}
+                      placeholder="XXX XXX XXX"
                       value={value}
                       onChange={(value) => onChange(value as string)}
                     />

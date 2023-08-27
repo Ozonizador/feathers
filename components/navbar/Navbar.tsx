@@ -1,3 +1,4 @@
+"use client";
 import React, { Fragment, useState } from "react";
 import { ImPhone } from "react-icons/im";
 import { GrMail } from "react-icons/gr";
@@ -11,6 +12,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 /* import person image */
 import ukFlag from "../../public/images/icon-uk.jpg";
+import ptFlag from "../../public/icons/portugal-flag.svg";
 import { useGetUserType, useCurrentUser, useToggleAppUserMode } from "../../context/MainProvider";
 import { useRouter } from "next/router";
 import { CgMenuLeft } from "react-icons/cg";
@@ -37,8 +39,10 @@ import {
 } from "../../models/paths";
 import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
+  const { t } = useTranslation("navbar");
   const user = useUser();
   const profile = useCurrentUser();
   const router = useRouter();
@@ -60,7 +64,7 @@ export const Navbar = () => {
   };
 
   const toggleUserMode = () => {
-    setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   return (
@@ -87,12 +91,15 @@ export const Navbar = () => {
               </div>
               <div className="flex pl-2">
                 <div className="my-auto mt-3 h-7 w-7">
-                  <Image src={ukFlag} alt="" />
+                  <Image src={router.locale === "en" ? ukFlag : ptFlag} alt="" />
                 </div>
-                <select className="ml-2 border-none">
-                  <option value="eng" disabled>
-                    EN
-                  </option>
+                <select
+                  className="ml-2 border-none"
+                  onChange={(event) => {
+                    router.push(router.pathname, undefined, { locale: event.target.value });
+                  }}
+                >
+                  <option value="en">EN</option>
                   <option value="pt">PT</option>
                 </select>
               </div>
@@ -101,17 +108,15 @@ export const Navbar = () => {
           <div className="border-terciary-400 mt-5 flex h-20 border-b lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
-                <a aria-label="home">
-                  <div className="relative h-full w-52">
-                    <Image
-                      src="/images/logo1.png"
-                      alt=""
-                      className="cursor-pointer"
-                      objectFit="contain"
-                      layout="fill"
-                    ></Image>
-                  </div>
-                </a>
+                <div className="relative h-full w-52">
+                  <Image
+                    src="/images/logo1.png"
+                    alt=""
+                    className="cursor-pointer"
+                    objectFit="contain"
+                    layout="fill"
+                  ></Image>
+                </div>
               </Link>
             </div>
             <div
@@ -129,7 +134,11 @@ export const Navbar = () => {
                       checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  {userAppMode === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
+                  {userAppMode === "TENANT" ? (
+                    <Link href="/">{t("home")}</Link>
+                  ) : (
+                    <Link href={UNIDESK_URL}>{t("unidesk")}</Link>
+                  )}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
@@ -141,7 +150,7 @@ export const Navbar = () => {
                               checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
                           })}
                         >
-                          <h6>Anuncie a sua propriedade</h6>
+                          <h6>{t("announce_property")}</h6>
                           <div className="my-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />
                           </div>
@@ -159,12 +168,12 @@ export const Navbar = () => {
                         <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                           <Menu.Item>
                             <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
-                              Como funciona?
+                              {t("how_it_works")}
                             </MyLink>
                           </Menu.Item>
                           <Menu.Item>
                             <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
-                              Anunciar!
+                              {t("announce")}
                             </MyLink>
                           </Menu.Item>
                         </Menu.Items>
@@ -174,38 +183,35 @@ export const Navbar = () => {
                 )}
                 {userAppMode == "TENANT" && (
                   <div className="my-auto px-5">
-                    <Link href={PROCURAR_ADVERT_URL}>
-                      <a
-                        className={classNames({
-                          "border-b-4 border-primary-500 pb-2 font-black":
-                            checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
-                        })}
-                      >
-                        Encontrar Espaço
-                      </a>
+                    <Link
+                      href={PROCURAR_ADVERT_URL}
+                      className={classNames({
+                        "border-b-4 border-primary-500 pb-2 font-black":
+                          checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
+                      })}
+                    >
+                      {t("find_place")}
                     </Link>
                   </div>
                 )}
                 <div className="my-auto px-5">
-                  <Link href={BLOG_URL}>
-                    <a
-                      className={classNames({
-                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
-                      })}
-                    >
-                      Blog
-                    </a>
+                  <Link
+                    href={BLOG_URL}
+                    className={classNames({
+                      "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
+                    })}
+                  >
+                    {t("blog")}
                   </Link>
                 </div>
                 <div className="my-auto px-5">
-                  <Link href={CONTACTOS_URL}>
-                    <a
-                      className={classNames({
-                        "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
-                      })}
-                    >
-                      Contactos
-                    </a>
+                  <Link
+                    href={CONTACTOS_URL}
+                    className={classNames({
+                      "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
+                    })}
+                  >
+                    {t("contacts")}
                   </Link>
                 </div>
               </div>
@@ -214,20 +220,16 @@ export const Navbar = () => {
               <div>
                 {!user && (
                   <div className="my-auto flex gap-2">
-                    <Link href={REGISTER_URL}>
-                      <a className="p-0">
-                        <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                          Registar
-                        </div>
-                      </a>
+                    <Link href={REGISTER_URL} className="p-0">
+                      <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                        {t("register")}
+                      </div>
                     </Link>
 
-                    <Link href={LOGIN_URL}>
-                      <a className="p-0">
-                        <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
-                          Iniciar sessão
-                        </div>
-                      </a>
+                    <Link href={LOGIN_URL} className="p-0">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
+                        {t("login")}
+                      </div>
                     </Link>
                   </div>
                 )}

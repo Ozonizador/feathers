@@ -58,13 +58,11 @@ const Payments = () => {
 
           {/* ADICIONAR CARTÕES */}
           <Link href="#">
-            <a>
-              <div className="my-5 flex flex-row items-center align-middle">
-                <div className="mt-16 text-2xl text-primary-500 lg:mt-0">
-                  <span className=" mr-3">Adicionar outro método de pagamento</span> &#129062;
-                </div>
+            <div className="my-5 flex flex-row items-center align-middle">
+              <div className="mt-16 text-2xl text-primary-500 lg:mt-0">
+                <span className=" mr-3">Adicionar outro método de pagamento</span> &#129062;
               </div>
-            </a>
+            </div>
           </Link>
         </div>
       </div>

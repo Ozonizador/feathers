@@ -73,8 +73,8 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
                   <p className="ml-3 text-base font-bold">{option.text}</p>
                 </div>
               ) : (
-                <Link href={option.link || ""} key={index}>
-                  <a className="text-xl font-bold">{option.text}</a>
+                <Link href={option.link || ""} key={index} className="text-xl font-bold">
+                  {option.text}
                 </Link>
               );
             })}

@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
 
   if (!userAuth || !process.env.SUPABASE_JWT_SECRET) return NextResponse.redirect(new URL("/", request.url));
 
-  const parsedAuth = JSON.parse(userAuth);
+  const parsedAuth = JSON.parse(userAuth.value);
   const token = parsedAuth[0];
 
   if (!token) return NextResponse.redirect(new URL("/", request.url));

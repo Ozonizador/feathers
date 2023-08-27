@@ -27,8 +27,8 @@ const FuncionaOptions = () => {
           <h1 className="mb-8 text-center text-2xl font-bold">Preço Sob Consulta</h1>
 
           <div className="flex flex-1 justify-center">
-            <Link href="#">
-              <a className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">Saber mais</a>
+            <Link href="#" className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">
+              Saber mais
             </Link>
           </div>
         </div>
@@ -57,8 +57,8 @@ const FuncionaOptions = () => {
           <h1 className="mb-8 text-center text-2xl font-bold">Preço Sob Consulta</h1>
 
           <div className="flex flex-1 justify-center">
-            <Link href="#">
-              <a className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">Saber mais</a>
+            <Link href="#" className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">
+              Saber mais
             </Link>
           </div>
         </div>
