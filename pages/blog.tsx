@@ -11,6 +11,9 @@ import { Spinner } from "flowbite-react";
 import { Dialog, Transition } from "@headlessui/react";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
+import { useTranslation } from "next-i18next";
+import { GetServerSidePropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 {
   /* page 9 XD */
@@ -22,6 +25,7 @@ const Index = () => {
   const [category, setCategory] = useState<UserTypes>("LANDLORD");
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const { getBlogs } = useBlogService();
   const getBlogPosts = useCallback(async () => {
@@ -50,7 +54,7 @@ const Index = () => {
             {categories.map((option, index) => {
               return (
                 <option value={option} key={index}>
-                  {BlogCategoryLabel[option]}
+                  {t(BlogCategoryLabel[option])}
                 </option>
               );
             })}
@@ -137,3 +141,11 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
 };
 
 export default Index;
+
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common"])),
+    },
+  };
+}

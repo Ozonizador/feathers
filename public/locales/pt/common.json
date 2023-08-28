@@ -1,1 +1,15 @@
-{}
+{
+  "login": "Iniciar Sessão",
+  "register": "Registar",
+  "forgot_pw": "Esqueci-me da palavra-passe",
+  "or": "ou",
+  "password": "Palavra-passe",
+  "welcome_to": "Bem-vindo à",
+  "continue_with": "Continue com o",
+  "send": "Enviar",
+  "landlord": "Senhorio",
+  "landlords": "Senhorios",
+  "student": "Estudante",
+  "students": "Estudantes",
+  "find_in": "Encontrar &#x2302; em:"
+}

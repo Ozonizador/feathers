@@ -98,6 +98,7 @@ export const Navbar = () => {
                   onChange={(event) => {
                     router.push(router.pathname, undefined, { locale: event.target.value });
                   }}
+                  value={router.locale || "pt"}
                 >
                   <option value="en">EN</option>
                   <option value="pt">PT</option>

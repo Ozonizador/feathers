@@ -1,1 +1,15 @@
-{}
+{
+  "login": "Login",
+  "register": "Register",
+  "forgot_pw": "Forgot password",
+  "or": "or",
+  "password": "Password",
+  "welcome_to": "Welcome to",
+  "continue_with": "Continue with",
+  "send": "Send",
+  "landlord": "Landlord",
+  "landlords": "Landlords",
+  "student": "Student",
+  "students": "Students",
+  "find_in": "Find &#x2302; at:"
+}

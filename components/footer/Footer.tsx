@@ -101,7 +101,7 @@ const Footer = () => {
             <Socials type="secondary" size="md" />
           </div>
         </div>
-        <div className="bg-secondary-300 px-20">
+        <div className="bg-secondary-300 px-10 lg:px-20">
           <p className="border-t border-terciary-100 pb-7 pt-8 text-center text-terciary-100">Unihosts</p>
         </div>
       </div>

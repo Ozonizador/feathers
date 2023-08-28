@@ -8,11 +8,7 @@ import Checkbox from "../utils/Checkbox";
 import { Label, TextInput } from "flowbite-react";
 import { trpc } from "../../utils/trpc";
 import Button from "../utils/Button";
-import { boolean } from "zod";
 import { Profile, UserTypes } from "../../models/profile";
-import { profile } from "console";
-import Toggle from "../toggle/toggle";
-import { Switch } from "@headlessui/react";
 import RadioBox from "../utils/Radiobox";
 // PÁGINA 36
 

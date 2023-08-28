@@ -9,6 +9,7 @@ import { CoordinatesAsArray } from "../../models/utils";
 import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } from "../../context/MainProvider";
 import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
+import { useTranslation } from "next-i18next";
 
 export enum SearchFields {
   START_DATE = "startDate",
@@ -23,6 +24,7 @@ interface AddressOptionInfo {
 }
 
 export const SearchInputField = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const userSearch = useUserSearch();
   const { location, startDate, endDate } = userSearch;
@@ -88,7 +90,7 @@ export const SearchInputField = () => {
               type="input"
               className="bg-terciary-50 h-16 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
-              placeholder="Encontrar &#x2302; em:"
+              placeholder={t("find_in")}
               value={location}
             />
           </div>
