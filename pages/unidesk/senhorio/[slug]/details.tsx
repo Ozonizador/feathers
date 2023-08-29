@@ -22,6 +22,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -164,7 +165,7 @@ const Details = ({ advertisement }: DetailsProps) => {
 export default Details;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -211,6 +212,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

@@ -4,6 +4,7 @@ import UltimosArtigos from "../../components/dicas consumo/UltimosArtigos/Ultimo
 import BlogPostSection from "../../components/dicas consumo/BlogPostSection/BlogPostSection";
 import { Blog, BLOG_PROPERTIES, BLOG_TABLE_NAME } from "../../models/blog";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface BlogPostProps {
   blog: Blog;
@@ -22,6 +23,7 @@ export default BlogPost;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const slug = ctx.params?.slug;
+  const locale = ctx.locale;
 
   /* Not Found */
   if (!slug) {
@@ -59,7 +61,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   if (blog) {
     return {
-      props: { blog },
+      props: { blog, ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])) },
     };
   } else {
     return {

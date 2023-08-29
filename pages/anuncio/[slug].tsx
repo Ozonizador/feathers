@@ -23,6 +23,7 @@ import AdvertConditions from "../../components/destaques/RoomInformation/AdvertC
 import ModalReviewsAdvert from "../../components/modals/ModalReviewsAdvert";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../models/conversation";
 import ModalGerarReferencia from "../../components/modals/ModalGerarReferencia";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface AnuncioProps {
   advertisement: AdvertisementComplete;
@@ -70,6 +71,7 @@ const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
 export default Anuncio;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   const slug = ctx.params?.slug;
   /* Not Found */
   if (!slug) {
@@ -121,7 +123,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         : repliedConversation || 0 / allConversations;
 
     return {
-      props: { advertisement, initialSession: session, user: session.user, responseRate },
+      props: {
+        advertisement,
+        initialSession: session,
+        user: session.user,
+        responseRate,
+        ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      },
     };
   } else {
     return {

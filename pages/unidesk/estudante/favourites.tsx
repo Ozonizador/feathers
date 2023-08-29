@@ -17,6 +17,7 @@ import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const FavouritesBreadcrumbs = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -134,6 +135,7 @@ const UnideskFavoritos = () => {
 export default UnideskFavoritos;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -153,6 +155,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

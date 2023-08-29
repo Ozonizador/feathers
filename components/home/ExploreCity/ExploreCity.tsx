@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { config } from "process";
+import { useTranslation } from "next-i18next";
 
 type CityProps = {
   image: string;
@@ -53,11 +53,12 @@ const CONFIG = [
 ] as CityProps[];
 
 const ExploreCity = () => {
+  const { t } = useTranslation("index");
   return (
     <section className="max-width">
       <div className="bg-terciary-300  lg:block">
         <div className="mx-auto p-4 text-center lg:px-8 lg:py-10">
-          <h2 className="pb-20 text-5xl font-bold">Explore as nossas cidades + populares!</h2>
+          <h2 className="pb-20 text-5xl font-bold">{t("explore_city")}</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {CONFIG.map((city, index) => (
               <ExploreCityItem key={index} title={city.title} image={city.image} url={city.url} />

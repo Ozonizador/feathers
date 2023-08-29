@@ -237,7 +237,7 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div className="my-auto flex">
-                      <span className="mr-2">Estudante</span>
+                      <span className="mr-2">{t("student")}</span>
                       <Switch
                         checked={true}
                         className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full", {
@@ -253,7 +253,7 @@ export const Navbar = () => {
                           })}
                         />
                       </Switch>
-                      <span className="ml-2">Senhorio</span>
+                      <span className="ml-2">{t("landlord")}</span>
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
@@ -299,12 +299,12 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_STUDENT_FAVOURITES_URL}>
-                                    Favoritos
+                                    {t("favourites")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
-                                    <p>Caixa de Entrada</p>
+                                    <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
@@ -314,7 +314,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
-                                    <p>Notificações</p>
+                                    <p>{t("notifications")}</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
@@ -325,17 +325,17 @@ export const Navbar = () => {
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
-                                    Conta
+                                    {t("account")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
-                                    Ajuda
+                                    {t("help")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
-                                    Sair
+                                    {t("leave")}
                                   </div>
                                 </Menu.Item>
                               </>
@@ -349,7 +349,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
-                                    <p>Caixa de Entrada</p>
+                                    <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
@@ -369,7 +369,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
-                                    <p>Notificações</p>
+                                    <p>{t("notifications")}</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
@@ -380,17 +380,17 @@ export const Navbar = () => {
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
-                                    Conta
+                                    {t("account")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
-                                    Ajuda
+                                    {t("help")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
-                                    Sair
+                                    {t("leave")}
                                   </div>
                                 </Menu.Item>
                               </>

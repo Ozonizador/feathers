@@ -8,6 +8,7 @@ import { useCurrentUser, useSetProfileInformation, useToggleAppUserMode } from "
 import useProfileService from "../../hooks/useProfileService";
 import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import { Profile, UserTypes } from "../../models/profile";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const TypeCustomerPage = () => {
   const profile = useCurrentUser();
@@ -72,6 +73,7 @@ const TypeCustomerPage = () => {
 export default TypeCustomerPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -91,6 +93,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

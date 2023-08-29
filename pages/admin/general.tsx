@@ -29,6 +29,8 @@ import { ADMIN_URL } from "../../models/paths";
 import { customStyles } from "../../components/admin/general.config";
 import PhoneCountrySelect from "../../components/utils/PhoneInput";
 import { CountryCode } from "libphonenumber-js/types";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: ADMIN_URL, label: "Conta" },
@@ -54,6 +56,7 @@ interface IndexProps {
 }
 
 const Index = ({ user, profileData }: IndexProps) => {
+  const { t } = useTranslation();
   const phoneNumber = profileData && profileData.phone && parsePhoneNumber(profileData.phone);
 
   const fileRef = useRef(null);
@@ -328,7 +331,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                   )}
                   onSubmit={handleSubmit(onSubmit)}
                 >
-                  Salvar
+                  {t("save")}
                 </button>
               </div>
             </div>
@@ -342,6 +345,7 @@ const Index = ({ user, profileData }: IndexProps) => {
 export default Index;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -369,6 +373,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: user,
       profileData: profile,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

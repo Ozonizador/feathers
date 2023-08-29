@@ -13,6 +13,7 @@ import {
 
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES, Advertisement } from "../../../../models/advertisement";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface PricesProps {
   initialSession: Session;
@@ -69,7 +70,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 export default Prices;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -116,6 +117,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

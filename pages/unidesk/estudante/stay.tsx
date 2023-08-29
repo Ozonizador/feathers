@@ -22,6 +22,7 @@ import { format } from "date-fns";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { ReservationComplete, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 /* PAGINA 21 do xd */
 
@@ -105,6 +106,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
 export default EstadiaComponent;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -158,6 +160,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       user: session.user,
       currentStay: !currentStayError && currentStay ? currentStay : null,
       nextStays: !nextStaysError && nextStays ? nextStays : [],
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

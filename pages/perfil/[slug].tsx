@@ -5,6 +5,7 @@ import { GetServerSidePropsContext } from "next/types";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { Profile, ProfilesResponse, PROFILE_COLUMNS, PROFILE_TABLE_NAME } from "../../models/profile";
 import { Advertisement } from "../../models/advertisement";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 {
   /* page 61 - 62 XD */
 }
@@ -28,6 +29,7 @@ const Index = ({ profile }: IndexProps) => {
 export default Index;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -68,6 +70,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       profile: profile,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

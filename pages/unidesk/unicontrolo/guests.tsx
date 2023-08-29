@@ -8,6 +8,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
 import { ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 import { UNIDESK_URL } from "../../../models/paths";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -50,7 +51,7 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
 export default UniControloHospedes;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -80,6 +81,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       stays: error ? [] : data,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

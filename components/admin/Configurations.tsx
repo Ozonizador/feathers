@@ -10,11 +10,13 @@ import { trpc } from "../../utils/trpc";
 import Button from "../utils/Button";
 import { Profile, UserTypes } from "../../models/profile";
 import RadioBox from "../utils/Radiobox";
+import { useTranslation } from "next-i18next";
 // PÁGINA 36
 
 const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
 
 const Configurations = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const [profileConfigs, setProfileConfigs] = useState<
     Pick<Profile, "accepts_notification_email" | "accepts_notification_message" | "prefered_unidesk_state">
@@ -28,7 +30,7 @@ const Configurations = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { updateUserPassword } = useUserService();
 
-  const { data, refetch } = trpc.profile.getProfileConfigurations.useQuery();
+  const { data } = trpc.profile.getProfileConfigurations.useQuery();
   const updateProfileConfigurations = trpc.profile.updateProfileConfigurations.useMutation();
 
   const updatePassword = async () => {
@@ -70,10 +72,10 @@ const Configurations = () => {
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-0 lg:px-32">
             <div className="mx-auto w-full px-5 lg:w-1/2">
-              <div className="text-3xl font-bold">Configurações</div>
+              <div className="text-3xl font-bold">{t("admin:configurations")}</div>
               {/* password */}
               <div>
-                <div className="mb-8  mt-4 text-2xl font-bold">Alterar password</div>
+                <div className="mb-8  mt-4 text-2xl font-bold">{t("admin:change_password")}</div>
                 <div className="mb-2 block">
                   <div className="my-3">
                     <Label htmlFor="Palavra passe atual" value="Palavra passe atual" />
@@ -111,7 +113,7 @@ const Configurations = () => {
                 <div className="flex flex-1">
                   <div className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56">
                     <FeathersButton loading={loading} onClick={updatePassword} type={"button"}>
-                      Alterar password
+                      {t("admin:change_password")}
                     </FeathersButton>
                   </div>
                 </div>
@@ -119,7 +121,7 @@ const Configurations = () => {
 
               {/* Notificações */}
               <div className="mt-10">
-                <div className="my-4 text-2xl font-bold">Notificações</div>
+                <div className="my-4 text-2xl font-bold">{t("admin:notifications")}</div>
                 <h6>Receber notificações de Unihosts</h6>
                 <div className="my-3 flex flex-1 flex-col">
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
@@ -170,7 +172,7 @@ const Configurations = () => {
                       <p className="w-32 text-base font-bold">Preferência Unidesk</p>
                       <div className="flex gap-3">
                         <div className="flex gap-2">
-                          <label className="my-auto">Estudante</label>
+                          <label className="my-auto">{t("student")}</label>
                           <div className="my-auto">
                             <RadioBox
                               name="prefered_unidesk_state"
@@ -186,7 +188,7 @@ const Configurations = () => {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <label className="my-auto">Senhorio</label>
+                          <label className="my-auto">{t("landlord")}</label>
                           <div className="my-auto">
                             <RadioBox
                               name="prefered_unidesk_state"
@@ -207,7 +209,7 @@ const Configurations = () => {
                 </div>
                 <div>
                   <Button type={"button"} onClick={() => updateConfigurations()}>
-                    Salvar
+                    {t("save")}
                   </Button>
                 </div>
               </div>

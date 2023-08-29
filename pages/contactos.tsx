@@ -5,7 +5,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Socials from "../components/socials/Socials";
 import Button from "../components/utils/Button";
-import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
+import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 

@@ -22,6 +22,8 @@ import Link from "next/link";
 import { Profile } from "../../models/profile";
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
+import { t } from "i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 {
   /* page 59 XD */
@@ -29,7 +31,7 @@ import { UNIDESK_URL } from "../../models/paths";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
-  { url: "", label: "Caixa de Entrada" },
+  { url: "", label: "inbox" },
 ] as BreadcrumbPath[];
 
 const CaixaEntrada = () => {
@@ -108,7 +110,7 @@ const CaixaEntrada = () => {
         <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
-        <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
+        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
         {/* DESKTOP */}
         <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
           {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
@@ -315,6 +317,7 @@ const MessagesSenderZone = ({
 export default CaixaEntrada;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -334,6 +337,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

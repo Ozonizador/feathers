@@ -11,5 +11,12 @@
   "landlords": "Landlords",
   "student": "Student",
   "students": "Students",
-  "find_in": "Find &#x2302; at:"
+  "find_in": "Find &#x2302; at:",
+  "save": "Save",
+  "leave": "Logout",
+  "help": "Help",
+  "account": "Acoount",
+  "notifications": "Notifications",
+  "favourites": "Favourites",
+  "inbox": "Inbox"
 }

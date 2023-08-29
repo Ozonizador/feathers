@@ -21,6 +21,7 @@ import {
 import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface PhotosProps {
   initialSession: Session;
@@ -244,7 +245,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
 export default Photos;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -291,6 +292,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

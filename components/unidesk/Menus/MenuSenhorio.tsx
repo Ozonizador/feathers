@@ -9,6 +9,7 @@ import {
   UNIDESK_SENHORIO_PAINEL_URL,
   UNIDESK_SENHORIO_REVIEWS_URL,
 } from "../../../models/paths";
+import { useTranslation } from "next-i18next";
 
 type MenuSenhorioProps = {
   activeSection: "adverts" | "single_advert" | "inbox" | "uni-controlo" | "notifications";
@@ -26,6 +27,7 @@ type MenuSenhorioProps = {
 
 const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
   const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
+  const { t } = useTranslation();
 
   return (
     <Menu>
@@ -71,12 +73,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         </MenuGrouper>
       )}
 
-      <MenuGrouper
-        title={"Caixa de entrada"}
-        url={INBOX_URL}
-        selectedGroup={activeSection === "inbox"}
-        isCollapsed={false}
-      />
+      <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
         isCollapsed={true}
         title={"Uni-controlo"}

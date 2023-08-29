@@ -14,7 +14,6 @@ import {
   COMO_FUNCIONA_URL,
   CONTACTOS_URL,
   FAQS_URL,
-  HOME_URL,
   INBOX_URL,
   LOGIN_URL,
   NOTIFICATIONS_URL,
@@ -28,6 +27,7 @@ import {
 import { BsPerson } from "react-icons/bs";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 interface NavbarMobileProps {
   open: boolean;
@@ -35,6 +35,7 @@ interface NavbarMobileProps {
 }
 
 export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
+  const { t } = useTranslation();
   const user = useUser();
   const profile = useCurrentUser();
   const supabaseClient = useSupabaseClient<Database>();
@@ -109,7 +110,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
           <div className="mt-7  rounded-3xl bg-gray-100 px-8 py-4">
             <div className="align-center flex flex-1 justify-center">
               <div>
-                <span className="mr-2">Estudante</span>
+                <span className="mr-2">{t("student")}</span>
                 <Switch
                   checked={false}
                   onClick={() => toggleUserMode()}
@@ -127,7 +128,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
-                <span className="ml-2">Senhorio</span>
+                <span className="ml-2">{t("landlord")}</span>
               </div>
             </div>
             <div className="my-10 flex">
@@ -177,15 +178,15 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>Minha Estadia</div>
-                  <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>Favoritos</div>
-                  <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
-                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>{t("favourites")}</div>
+                  <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
+                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
-                    Conta
+                    {t("acoount")}
                   </div>
                   <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
-                    Ajuda
+                    {t("help")}
                   </div>
                   <div
                     onClick={() => {
@@ -194,23 +195,23 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     }}
                     className="text-gray-500"
                   >
-                    Sair
+                    {t("leave")}
                   </div>
                 </div>
               )}
               {userAppMode == "LANDLORD" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
-                  <div onClick={() => selectMenuButton(INBOX_URL)}>Caixa de Entrada</div>
+                  <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>Anúncios</div>
                   <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>Uni-controlo</div>
-                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>Notificações</div>
+                  <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
-                    Conta
+                    {t("account")}
                   </div>
                   <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
-                    Ajuda
+                    {t("help")}
                   </div>
                   <div
                     onClick={() => {
@@ -219,7 +220,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     }}
                     className="text-gray-500"
                   >
-                    Sair
+                    {t("leave")}
                   </div>
                 </div>
               )}

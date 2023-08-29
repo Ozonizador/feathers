@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { INBOX_URL, NOTIFICATIONS_URL, UNIDESK_STAY_URL, UNIDESK_STUDENT_FAVOURITES_URL } from "../../../models/paths";
 import Menu, { MenuGrouper, MenuOption } from "../../menu/Menu";
+import { useTranslation } from "next-i18next";
 
 type MenuEstudanteProps = {
   activeSection: "stay" | "favourites" | "inbox" | "notifications";
@@ -9,7 +10,7 @@ type MenuEstudanteProps = {
 };
 
 const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
-  const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <Menu>
@@ -35,14 +36,9 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
         selectedGroup={activeSection == "favourites"}
         isCollapsed={false}
       />
+      <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
-        title={"Caixa de entrada"}
-        url={INBOX_URL}
-        selectedGroup={activeSection === "inbox"}
-        isCollapsed={false}
-      />
-      <MenuGrouper
-        title={"Notificações"}
+        title={t("notifications")}
         selectedGroup={activeSection === "notifications"}
         isCollapsed={false}
         url={NOTIFICATIONS_URL}

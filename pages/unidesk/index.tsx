@@ -6,6 +6,7 @@ import UnideskHero from "../../components/unidesk/Estudante/unideskHero/UnideskH
 import UnideskOptions from "../../components/unidesk/Estudante/unideskOptions/UnideskOptions";
 import UnideskSenhorioOptions from "../../components/unidesk/Senhorio/UnideskOptionsSenhorio/UnideskSenhorioOptions";
 import { useGetUserType } from "../../context/MainProvider";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Unidesk() {
   const { userAppMode } = useGetUserType();
@@ -40,6 +41,7 @@ const UnideskEstudante = () => {
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -59,6 +61,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

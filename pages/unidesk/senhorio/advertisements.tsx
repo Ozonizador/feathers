@@ -14,6 +14,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { UNIDESK_URL } from "../../../models/paths";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -72,6 +73,7 @@ const Anuncios = () => {
 export default Anuncios;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -91,6 +93,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };
