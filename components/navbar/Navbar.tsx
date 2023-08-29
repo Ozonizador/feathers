@@ -42,7 +42,7 @@ import classNames from "classnames";
 import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
-  const { t } = useTranslation("navbar");
+  const { t } = useTranslation();
   const user = useUser();
   const profile = useCurrentUser();
   const router = useRouter();
@@ -294,7 +294,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_STAY_URL}>
-                                    Minha Estadia
+                                    {t("my_stay")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>

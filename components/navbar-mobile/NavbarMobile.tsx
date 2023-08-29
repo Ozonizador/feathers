@@ -160,13 +160,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <div className="my-auto flex w-full justify-center gap-2">
                   <Link href={REGISTER_URL} className="p-0">
                     <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                      Registar
+                      {t("register")}
                     </div>
                   </Link>
 
                   <Link href={LOGIN_URL} className="p-0">
                     <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
-                      Iniciar sessão
+                      {t("login")}
                     </div>
                   </Link>
                 </div>
@@ -177,7 +177,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {userAppMode == "TENANT" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
-                  <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>Minha Estadia</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>{t("my_stay")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>{t("favourites")}</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>

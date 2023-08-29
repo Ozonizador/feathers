@@ -18,5 +18,8 @@
   "account": "Acoount",
   "notifications": "Notifications",
   "favourites": "Favourites",
-  "inbox": "Inbox"
+  "inbox": "Inbox",
+  "my_stay": "My Stay",
+  "guest_one": "Guest",
+  "guest_other": "Guests"
 }

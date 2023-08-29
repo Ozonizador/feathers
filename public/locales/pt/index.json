@@ -1,3 +1,21 @@
 {
-  "explore_city": "Explore as nossas cidades + populares!"
+  "explore_city": "Explore as nossas cidades + populares!",
+  "section": {
+    "how_it_works": {
+      "title": "Como Funciona?",
+      "find_at": "Encontrar <house/> em..",
+      "search": {
+        "title": "Pesquisa",
+        "description": "De forma intuitiva defina a localização, datas e características que pretende para um estadia ideal!"
+      },
+      "reservation": {
+        "title": "Reserva",
+        "description": "Assim que o pedido for confirmado irás agilizar e esclarecer com o senhorio a data de mudança e entrega das chaves."
+      },
+      "change": {
+        "title": "Mudança",
+        "description": "O primeiro pagamento só será transferido após verificares a casa, estamos aqui para qualquer questão. Boa estadia!"
+      }
+    }
+  }
 }

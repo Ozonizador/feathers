@@ -20,12 +20,14 @@ import { SearchFields } from "../../../search/SearchInputField";
 import { Reservation } from "../../../../models/reservation";
 import { trpc } from "../../../../utils/trpc";
 import { Label } from "flowbite-react";
+import { useTranslation } from "next-i18next";
 
 type FormReservation = {
   number_guests: number;
 };
 
 export const RoomPagamento = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const profile = useCurrentUser();
   const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
@@ -194,7 +196,7 @@ export const RoomPagamento = () => {
 
             <div className="mb-2 block">
               <div className="mb-2 block">
-                <Label htmlFor="Hóspedes" value="Hóspedes" />
+                <Label htmlFor="Hóspedes" value={t("guest", { count: 2 })} />
               </div>
               <Controller
                 control={control}

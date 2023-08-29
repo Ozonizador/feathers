@@ -15,7 +15,7 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
   return (
     <Menu>
       <MenuGrouper
-        title={"Minha estadia"}
+        title={t("my_stay")}
         selectedGroup={activeSection === "stay"}
         isCollapsed={true}
         defaultOpen={activeSection === "stay"}

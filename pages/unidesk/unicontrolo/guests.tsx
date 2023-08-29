@@ -9,11 +9,12 @@ import IconAHospedes from "../../../public/images/icon-pg37-1.svg";
 import { ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
   { url: UNIDESK_URL, label: "Uni-Controlo" },
-  { url: "", label: "Hóspedes" },
+  { url: "", label: "guest_other" },
 ] as BreadcrumbPath[];
 
 interface UniControloHospedesProps {
@@ -21,6 +22,7 @@ interface UniControloHospedesProps {
 }
 
 const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
+  const { t } = useTranslation();
   return (
     <section className="max-width">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
@@ -33,7 +35,7 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
 
           <div className="ml-10">
             <>
-              <div className="mb-7 text-3xl font-semibold">Hóspedes</div>
+              <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
               <div className="mb-5 font-bold">Hóspedes Atuais</div>
               {!stays || (stays.length === 0 && <div>Sem hospedes</div>)}
               {stays &&

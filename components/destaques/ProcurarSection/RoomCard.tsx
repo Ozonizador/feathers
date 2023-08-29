@@ -19,12 +19,14 @@ import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot, BsHeart } from "react-icons/bs";
 import { checkIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
+import { useTranslation } from "next-i18next";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
+  const { t } = useTranslation();
   const profile = useCurrentUser();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
   const advertisementOverallRating =
@@ -108,7 +110,8 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   <div>
                     <RiUserLine className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.tenant_number} {advertisement.tenant_number == 1 ? "Hóspede" : "Hóspedes"}
+                      {advertisement.tenant_number}{" "}
+                      {advertisement.tenant_number == 1 ? t("guest", { count: 1 }) : t("guest", { count: 2 })}
                     </span>
                   </div>
                   <div>
@@ -148,7 +151,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
                       <BsHeart className={classNames("inline")} color={isFavourite() == false ? "black" : "red"} />
-                      <span className="my-auto ml-2">Favoritos</span>
+                      <span className="my-auto ml-2">{t("favourites")}</span>
                     </Button>
                   </div>
                   <div className="text-end">

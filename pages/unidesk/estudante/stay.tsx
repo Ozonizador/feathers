@@ -28,7 +28,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EstadiaBreadcrumbs = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: "", label: "Minha estadia" },
+  { url: "", label: "my_stay" },
 ] as BreadcrumbPath[];
 
 interface EstadiaComponentProps {

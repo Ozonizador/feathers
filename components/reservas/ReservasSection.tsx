@@ -12,6 +12,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
 import IconAnuncios from "../../public/images/icons8_laptop_computer.svg";
 import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
+import { useTranslation } from "next-i18next";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -52,6 +53,7 @@ const ReservasSection = () => {
 };
 
 const CurrentReservationsSection = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getCurrentStaysByHostId } = useStayService();
@@ -79,7 +81,7 @@ const CurrentReservationsSection = () => {
           <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
             <div className="my-5">Estado</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
@@ -127,6 +129,7 @@ const CurrentReservationsSection = () => {
 };
 
 const NextReservationsSection = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getNextStaysByHostId } = useStayService();
@@ -154,7 +157,7 @@ const NextReservationsSection = () => {
           <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
             <div className="my-5"> Estado</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
@@ -200,6 +203,7 @@ const NextReservationsSection = () => {
 };
 
 const AllReservationsSection = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const { getAllStaysByHostId } = useStayService();
@@ -240,7 +244,7 @@ const AllReservationsSection = () => {
           <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
             <div className="my-5"> Estado</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Hóspedes</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>

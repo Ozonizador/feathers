@@ -31,7 +31,7 @@ const UnideskOptions = () => {
   const { t } = useTranslation();
   return (
     <section className="container mx-auto my-32 flex flex-col gap-7 lg:flex-row">
-      <MenuSectionCard topIcon={{ text: "Minha estadia", image: "/images/icon-pg14-1.svg" }} options={unideskOptions} />
+      <MenuSectionCard topIcon={{ text: t("my_stay"), image: "/images/icon-pg14-1.svg" }} options={unideskOptions} />
 
       <MenuSectionCard
         topIcon={{ link: "/unidesk/estudante/favourites", text: t("favourites"), image: "/images/icon-pg14-2.svg" }}

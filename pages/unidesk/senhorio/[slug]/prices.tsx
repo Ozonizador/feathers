@@ -14,6 +14,7 @@ import {
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES, Advertisement } from "../../../../models/advertisement";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 interface PricesProps {
   initialSession: Session;
@@ -22,6 +23,7 @@ interface PricesProps {
 }
 
 const Prices = ({ advertisement }: PricesProps) => {
+  const { t } = useTranslation();
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -59,7 +61,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 
         <div className="mb-10 mr-auto w-1/2">
           <Button onClick={saveChanges} type="button">
-            Guardar
+            {t("save")}
           </Button>
         </div>
       </UnideskStructure.Content>

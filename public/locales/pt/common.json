@@ -18,5 +18,7 @@
   "account": "Conta",
   "notifications": "Notificações",
   "favourites": "Favoritos",
-  "inbox": "Caixa de entrada"
+  "inbox": "Caixa de entrada",
+  "guest_one": "Hóspede",
+  "guest_other": "Hóspedes"
 }

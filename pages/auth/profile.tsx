@@ -9,8 +9,10 @@ import useProfileService from "../../hooks/useProfileService";
 import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import { Profile, UserTypes } from "../../models/profile";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const TypeCustomerPage = () => {
+  const { t } = useTranslation();
   const profile = useCurrentUser();
   const toggleUserTypeContext = useToggleAppUserMode();
   const setProfile = useSetProfileInformation();
@@ -37,13 +39,13 @@ const TypeCustomerPage = () => {
     <div className="my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
+          <div className="p-3 text-center text-primary-500">{t("login")}</div>
           <Link
             href={REGISTER_URL}
             aria-label="register_password"
             className="border-l border-terciary-100 p-3 text-center"
           >
-            Registar
+            {t("register")}
           </Link>
         </div>
         <div className="my-5 p-3">

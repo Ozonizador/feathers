@@ -22,6 +22,7 @@ import { GetServerSidePropsContext } from "next";
 import Button from "../../../../components/utils/Button";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 interface PhotosProps {
   initialSession: Session;
@@ -30,6 +31,7 @@ interface PhotosProps {
 }
 
 const Photos = ({ advertisement }: PhotosProps) => {
+  const { t } = useTranslation();
   const { removePicture, saveImage, updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -234,7 +236,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
         )}
         <div className="mr-auto mt-5 w-1/2">
           <Button onClick={saveChanges} type="button">
-            Guardar
+            {t("save")}
           </Button>
         </div>
       </UnideskStructure.Content>

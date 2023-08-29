@@ -1,1 +1,5 @@
-{}
+{
+  "configurations": "Configurações",
+  "change": "Alterar {name}",
+  "recover": "Recuperar {name}"
+}
