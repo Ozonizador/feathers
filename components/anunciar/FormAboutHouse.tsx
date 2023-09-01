@@ -1,9 +1,11 @@
+import { useTranslation } from "next-i18next";
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import AboutHouseComponent from "../anuncio/AboutHouseComponent";
 import Button from "../utils/Button";
 
 const FormAboutHouse = () => {
+  const { t } = useTranslation();
   const advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
   const incrementStep = useIncrementStep();
@@ -28,12 +30,12 @@ const FormAboutHouse = () => {
       <div className="mt-5 flex gap-5">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">
-            Voltar Atrás
+            {t("go_back")}
           </Button>
         </div>
         <div className="w-48">
           <Button onClick={nextStep} type="button">
-            Seguinte &#8594;
+            {t("next_step")} &#8594;
           </Button>
         </div>
       </div>

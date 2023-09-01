@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const FuncionaOndeEstamos = () => {
+  const { t } = useTranslation();
   return (
     <section className="max-width my-60 flex rounded-2xl bg-terciary-600 px-10 py-20">
       <div className="flex flex-1 flex-col justify-center align-middle">
@@ -44,7 +46,7 @@ const FuncionaOndeEstamos = () => {
                 href="#"
                 className="w-fit rounded-md bg-primary-500 px-11 py-3 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
               >
-                Saber mais
+                {t("index:know_more")}
               </Link>
             </div>
           </div>

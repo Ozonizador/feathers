@@ -28,7 +28,6 @@ const unideskOptions = [
 ] as { link?: string; blocked: boolean; text: string }[];
 
 const UnideskOptions = () => {
-  debugger;
   const { t } = useTranslation();
   return (
     <section className="container mx-auto my-32 flex flex-col gap-7 lg:flex-row">

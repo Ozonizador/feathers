@@ -13,7 +13,10 @@ import RadioBox from "../utils/Radiobox";
 import { useTranslation } from "next-i18next";
 // PÁGINA 36
 
-const paths = [{ url: ADMIN_URL, label: "Conta" }] as BreadcrumbPath[];
+const paths = [
+  { url: ADMIN_URL, label: "account" },
+  { url: "", label: "admin:configurations" },
+] as BreadcrumbPath[];
 
 const Configurations = () => {
   const { t } = useTranslation();
@@ -78,7 +81,7 @@ const Configurations = () => {
                 <div className="mb-8  mt-4 text-2xl font-bold">{t("admin:change_password")}</div>
                 <div className="mb-2 block">
                   <div className="my-3">
-                    <Label htmlFor="Palavra passe atual" value="Palavra passe atual" />
+                    <Label htmlFor="Palavra passe atual" value={t("admin:config.current_pw")} />
                     <TextInput
                       id="passwordNew"
                       type="password"
@@ -90,7 +93,7 @@ const Configurations = () => {
                   </div>
 
                   <div className="my-3">
-                    <Label htmlFor="Palavra passe nova" value="Palavra passe nova" />
+                    <Label htmlFor="Palavra passe nova" value={t("admin:config.new_pw")} />
                     <TextInput
                       id="passwordNew"
                       type="password"
@@ -100,7 +103,7 @@ const Configurations = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <Label htmlFor="Repita palavra passe nova" value="Repita palavra passe nova" />
+                  <Label htmlFor="Repita palavra passe nova" value={t("admin:config.new_pw_again")} />
                   <TextInput
                     id="passwordRepeat"
                     type="password"
@@ -121,12 +124,12 @@ const Configurations = () => {
 
               {/* Notificações */}
               <div className="mt-10">
-                <div className="my-4 text-2xl font-bold">{t("admin:notifications")}</div>
-                <h6>Receber notificações de Unihosts</h6>
+                <div className="my-4 text-2xl font-bold">{t("notifications")}</div>
+                <h6>{t("adnin:config.receive_notifications_again")}</h6>
                 <div className="my-3 flex flex-1 flex-col">
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
-                      <p className="w-32 text-base font-bold">Por email</p>
+                      <p className="w-32 text-base font-bold">{t("admin:config.by_email")}</p>
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
@@ -148,7 +151,7 @@ const Configurations = () => {
 
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
-                      <p className="w-32 text-base font-bold">Por mensagem</p>
+                      <p className="w-32 text-base font-bold">{t("admin:config.by_message")}</p>
                       <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
                         <div>
                           <div className="flex h-5 items-center">
@@ -167,12 +170,12 @@ const Configurations = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="my-2 flex flex-col lg:flex-row lg:items-center">
-                    <div className="flex items-center">
-                      <p className="w-32 text-base font-bold">Preferência Unidesk</p>
+                  <div className="my-5 flex flex-col lg:flex-row lg:items-center">
+                    <div className="flex flex-col gap-2">
+                      <p className="text-base font-bold">Preferência Unidesk</p>
                       <div className="flex gap-3">
                         <div className="flex gap-2">
-                          <label className="my-auto">{t("student")}</label>
+                          <label className="my-auto">{t("student", { count: 1 })}</label>
                           <div className="my-auto">
                             <RadioBox
                               name="prefered_unidesk_state"

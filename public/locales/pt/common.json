@@ -39,5 +39,7 @@
   "details": "Detalhes",
   "state": "Estado",
   "accept": "Aceitar",
-  "decline": "Rejeitar"
+  "decline": "Rejeitar",
+  "go_back": "Voltar Atrás",
+  "next_step": "Seguinte"
 }

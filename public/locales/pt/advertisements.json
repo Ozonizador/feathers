@@ -36,5 +36,12 @@
   },
   "price_one": "Preço",
   "price_other": "Preços",
-  "price_month": "{{price}}€/mês"
+  "price_month": "{{price}}€/mês",
+  "zones": {
+    "general": "Comodidades Gerais",
+    "bathroom": "Casa de Banho",
+    "bedroom": "Quarto",
+    "kitchen": "Cozinha",
+    "exterior": "Zona Exterior"
+  }
 }

@@ -16,7 +16,7 @@
   "save": "Save",
   "leave": "Logout",
   "help": "Help",
-  "account": "Acoount",
+  "account": "Account",
   "notifications": "Notifications",
   "favourites_other": "Favourites",
   "favourites_zero": "No Favourites",
@@ -39,5 +39,8 @@
   "details": "Details",
   "state": "State",
   "accept": "Accept",
-  "decline": "Decline"
+  "decline": "Decline",
+  "go_back": "Go Back",
+  "next_step": "Next Step",
+  "update_map": "Atualizar No Mapa"
 }

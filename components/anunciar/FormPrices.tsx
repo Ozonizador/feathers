@@ -2,9 +2,11 @@ import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvid
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import PricesComponent from "../anuncio/PricesComponent";
 import Button from "../utils/Button";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const FormPrices = () => {
+  const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
@@ -30,12 +32,12 @@ const FormPrices = () => {
       <div className="mt-5 flex gap-5">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">
-            Voltar Atrás
+            {t("go_back")}
           </Button>
         </div>
         <div className="w-48">
           <Button onClick={nextStep} type="button">
-            Seguinte &#8594;
+            {t("next_step")} &#8594;
           </Button>
         </div>
       </div>

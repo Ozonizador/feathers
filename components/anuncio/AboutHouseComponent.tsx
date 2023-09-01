@@ -8,6 +8,7 @@ import {
   TypeAmenity,
 } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
+import { useTranslation } from "next-i18next";
 
 interface AboutHouseComponentProps {
   advertisement: Advertisement;
@@ -15,6 +16,7 @@ interface AboutHouseComponentProps {
 }
 
 const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentProps) => {
+  const { t } = useTranslation();
   const toggleAmmenityProperty = (event: React.ChangeEvent, space: AboutHouseSpace) => {
     const property = (event.target as HTMLInputElement).name;
     let foundAmenity = false;
@@ -65,7 +67,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
     <>
       <Accordion>
         <Accordion.Panel>
-          <Accordion.Title>Comodidades Gerais</Accordion.Title>
+          <Accordion.Title>{t("advertisements:zones.general")}</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.general.map((comodity, index) => {
@@ -90,7 +92,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
-          <Accordion.Title>Quarto</Accordion.Title>
+          <Accordion.Title>{t("advertisements:zones.bedroom")}</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bedroom.map((comodity, index) => {
@@ -116,7 +118,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         </Accordion.Panel>
 
         <Accordion.Panel>
-          <Accordion.Title>Casa de Banho</Accordion.Title>
+          <Accordion.Title>{t("advertisements:zones.bathroom")}</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bathroom.map((comodity, index) => {
@@ -141,7 +143,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
           </Accordion.Content>
         </Accordion.Panel>
         <Accordion.Panel>
-          <Accordion.Title>Cozinha</Accordion.Title>
+          <Accordion.Title>{t("advertisements:zones.kitchen")}</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.kitchen.map((comodity, index) => {
@@ -167,7 +169,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         </Accordion.Panel>
 
         <Accordion.Panel>
-          <Accordion.Title>Zona Exterior</Accordion.Title>
+          <Accordion.Title>{t("advertisements:zones.exterior")}</Accordion.Title>
           <Accordion.Content>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.exterior.map((comodity, index) => {

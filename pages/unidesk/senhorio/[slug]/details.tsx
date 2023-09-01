@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -50,6 +51,7 @@ type DetailsForm = Pick<
 >;
 
 const Details = ({ advertisement }: DetailsProps) => {
+  const { t } = useTranslation();
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -140,7 +142,7 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
                   <div className="mr-auto w-1/3">
                     <Button type="button" onClick={checkPossibilites}>
-                      Atualizar No Mapa
+                      {t("update_map")}
                     </Button>
                   </div>
 

@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useImageFiles, useSetImageFiles } from "../../context/AdvertisementController";
@@ -5,6 +6,7 @@ import { toast } from "react-toastify";
 import Button from "../utils/Button";
 
 const FormAnunciarPhotos = () => {
+  const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
@@ -110,12 +112,12 @@ const FormAnunciarPhotos = () => {
       <div className="mt-10 flex  justify-center gap-5 lg:px-32">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">
-            Voltar Atrás
+            {t("go_back")}
           </Button>
         </div>
         <div className="w-48">
           <Button onClick={nextStep} type="button">
-            Seguinte &#8594;
+            {t("next_step")} &#8594;
           </Button>
         </div>
       </div>

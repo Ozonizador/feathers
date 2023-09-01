@@ -5,7 +5,7 @@ import { Blog, BlogCategoryLabel } from "../../../models/blog";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
-import { pt } from "date-fns/locale";
+import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 interface BlogPostSectionProps {
@@ -45,7 +45,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
             By Unihosts at{" "}
             <span className="capitalize">
               {format(parseISO(blog.created_at), "dd MMMM yyyy", {
-                locale: pt,
+                locale: router.locale === "pt" ? pt : enGB,
               })}
             </span>
           </p>

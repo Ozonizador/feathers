@@ -33,8 +33,8 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
-  { url: ADMIN_URL, label: "Conta" },
-  { url: "", label: "Informações pessoais" },
+  { url: ADMIN_URL, label: "account" },
+  { url: "", label: "admin:config.general" },
 ] as BreadcrumbPath[];
 
 type ProfileEdition = {

@@ -2,8 +2,10 @@ import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvid
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import HostFlexTypeComponent from "../anuncio/HostFlexTypeComponent";
 import Button from "../utils/Button";
+import { useTranslation } from "next-i18next";
 
 const FormTipoHost = () => {
+  const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
@@ -31,12 +33,12 @@ const FormTipoHost = () => {
         <div className="flex gap-2">
           <div className="w-48">
             <Button onClick={decrementStep} type="button">
-              Voltar Atrás
+              {t("go_back")}
             </Button>
           </div>
           <div className="w-48">
             <Button onClick={nextStep} type="button">
-              Seguinte &#8594;
+              {t("next_step", { interpolation: { escapeValue: false } })}
             </Button>
           </div>
         </div>

@@ -4,8 +4,10 @@ import { optionsCard2 } from "./FuncionaCard2.config";
 import Link from "next/link";
 
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const FuncionaOptions = () => {
+  const { t } = useTranslation();
   return (
     <section className="max-width mx-5 my-20 flex flex-col justify-center gap-5 lg:flex-row lg:gap-12">
       <div className="flex flex-col rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-[30%]">
@@ -28,7 +30,7 @@ const FuncionaOptions = () => {
 
           <div className="flex flex-1 justify-center">
             <Link href="#" className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">
-              Saber mais
+              {t("index:know_more")}
             </Link>
           </div>
         </div>
@@ -58,7 +60,7 @@ const FuncionaOptions = () => {
 
           <div className="flex flex-1 justify-center">
             <Link href="#" className="w-full rounded-md bg-primary-300 px-7 py-2 text-center text-white">
-              Saber mais
+              {t("index:know_more")}
             </Link>
           </div>
         </div>

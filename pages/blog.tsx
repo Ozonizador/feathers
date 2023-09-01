@@ -76,7 +76,7 @@ const Index = () => {
         <div className="mx-auto py-6">
           <div className="mx-auto mb-44 mt-14 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
             <div className="alert alert-warning con ml-3" role="alert">
-              <Image className="h-10" src={notification} alt="" />
+              <Image height="40" src={notification} alt="" />
             </div>
 
             <div className="ml-6 cursor-pointer text-xl" onClick={() => setIsOpen(true)}>
@@ -145,7 +145,7 @@ export default Index;
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 }

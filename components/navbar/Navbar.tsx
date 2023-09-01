@@ -96,7 +96,6 @@ export const Navbar = () => {
                 <select
                   className="ml-2 border-none"
                   onChange={(event) => {
-                    debugger;
                     router.push(router.asPath, undefined, { locale: event.target.value });
                   }}
                   value={router.locale || "pt"}
