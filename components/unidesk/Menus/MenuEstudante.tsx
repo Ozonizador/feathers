@@ -32,7 +32,7 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
       </MenuGrouper>
       <MenuGrouper
         url={UNIDESK_STUDENT_FAVOURITES_URL}
-        title={t("favourites")}
+        title={t("favourites", { count: 2 })}
         selectedGroup={activeSection == "favourites"}
         isCollapsed={false}
       />

@@ -96,7 +96,8 @@ export const Navbar = () => {
                 <select
                   className="ml-2 border-none"
                   onChange={(event) => {
-                    router.push(router.pathname, undefined, { locale: event.target.value });
+                    debugger;
+                    router.push(router.asPath, undefined, { locale: event.target.value });
                   }}
                   value={router.locale || "pt"}
                 >
@@ -114,8 +115,8 @@ export const Navbar = () => {
                     src="/images/logo1.png"
                     alt=""
                     className="cursor-pointer"
-                    objectFit="contain"
-                    layout="fill"
+                    style={{ objectFit: "contain" }}
+                    fill
                   ></Image>
                 </div>
               </Link>
@@ -299,7 +300,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_STUDENT_FAVOURITES_URL}>
-                                    {t("favourites")}
+                                    {t("favourites", { count: 2 })}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>

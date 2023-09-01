@@ -16,7 +16,7 @@ import { useTranslation } from "next-i18next";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: "", label: "Reservas" },
+  { url: "", label: "reservation_other" },
 ] as BreadcrumbPath[];
 
 const ReservasSection = () => {
@@ -79,7 +79,7 @@ const CurrentReservationsSection = () => {
       <Table className="w-full">
         <Table.Head>
           <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
-            <div className="my-5">Estado</div>
+            <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
@@ -157,7 +157,7 @@ const NextReservationsSection = () => {
       <Table className="w-full">
         <Table.Head>
           <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
-            <div className="my-5"> Estado</div>
+            <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
@@ -246,7 +246,7 @@ const AllReservationsSection = () => {
       <Table className="w-full">
         <Table.Head>
           <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
-            <div className="my-5"> Estado</div>
+            <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>

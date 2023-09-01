@@ -150,11 +150,13 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
                       <BsHeart className={classNames("inline")} color={isFavourite() == false ? "black" : "red"} />
-                      <span className="my-auto ml-2">{t("favourites")}</span>
+                      <span className="my-auto ml-2">{t("favourites", { count: 2 })}</span>
                     </Button>
                   </div>
                   <div className="text-end">
-                    <h3 className="text-xl font-bold text-primary-500">{advertisement.month_rent} €/mês</h3>
+                    <h3 className="text-xl font-bold text-primary-500">
+                      {t("advertisements:price_month", { price: advertisement.month_rent })}
+                    </h3>
                     <div className="d-flex">
                       <p className="mt-1 text-xs lg:text-base">
                         {checkIfExpensesIncluded(advertisement.expenses.services || [])}

@@ -22,5 +22,21 @@
       "reviews": "Reviews",
       "transactions": "Transactions"
     }
+  },
+  "messages": "Messages",
+  "config": {
+    "general": "General Information",
+    "phone_contact": "Phone Number",
+    "spoken_languages": "Spoken Languages",
+    "about_me": "About me",
+    "nationality": "Nationality",
+    "location": "Location",
+    "gender": "Gender",
+    "name": "Name",
+    "surname": "Surname",
+    "birth_date": "Birth Date",
+    "change_photo": "Change Photo",
+    "select_nationality": "Select a nationality",
+    "add_language": "Add a Language"
   }
 }

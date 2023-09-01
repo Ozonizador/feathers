@@ -18,7 +18,8 @@
   "help": "Help",
   "account": "Acoount",
   "notifications": "Notifications",
-  "favourites": "Favourites",
+  "favourites_other": "Favourites",
+  "favourites_zero": "No Favourites",
   "inbox": "Inbox",
   "my_stay": "My Stay",
   "guest_one": "Guest",
@@ -35,5 +36,8 @@
   "payment_details": "Payment Details",
   "start": "Start",
   "end": "End",
-  "details": "Details"
+  "details": "Details",
+  "state": "State",
+  "accept": "Accept",
+  "decline": "Decline"
 }

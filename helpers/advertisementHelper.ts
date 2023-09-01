@@ -46,19 +46,19 @@ import { FiMonitor } from "react-icons/fi";
 
 const hostTypeFlexDescription = (type: HostFlexType) => {
   return {
-    SUPER_FLEX: `advertisements:host_type.super_flex`,
-    FLEX: `advertisements:host_type.flex`,
-    MODERATE: `advertisements:host_type.moderate`,
-    RIGID: `advertisements:host_type.rigid`,
+    SUPER_FLEX: `advertisements:host_type.super_flex_description`,
+    FLEX: `advertisements:host_type.flex_description`,
+    MODERATE: `advertisements:host_type.moderate_description`,
+    RIGID: `advertisements:host_type.rigid_description`,
   }[type];
 };
 
 const hostTranslate = (type: HostFlexType) => {
   return {
-    SUPER_FLEX: `Super Flexível`,
-    FLEX: `Flexível`,
-    MODERATE: `Moderado`,
-    RIGID: `Rigido`,
+    SUPER_FLEX: `advertisements:host_type.super_flex`,
+    FLEX: `advertisements:host_type.flex`,
+    MODERATE: `advertisements:host_type.moderate`,
+    RIGID: `advertisements:host_type.rigid`,
   }[type];
 };
 

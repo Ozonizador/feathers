@@ -53,7 +53,7 @@ const Notifications = () => {
       <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
         <Breadcrumbs icon={iconfavorito} paths={paths} />
       </div>
-      <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
+      <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
       <div className="container mx-auto w-full lg:w-4/5">
         <>
           {isLoading && (

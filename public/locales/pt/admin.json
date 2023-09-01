@@ -7,7 +7,7 @@
   "im_landlord": "Sou senhorio",
   "unidesk": {
     "common": {
-      "panel": "Panel",
+      "panel": "Painel",
       "contracts": "Informações contratuais",
       "calendar": "Calendário"
     },
@@ -22,5 +22,21 @@
       "reviews": "Reviews",
       "transactions": "Transações"
     }
+  },
+  "messages": "Mensagens",
+  "config": {
+    "general": "Informações pessoais",
+    "phone_contact": "Contacto telefónico",
+    "spoken_languages": "Línguas faladas",
+    "about_me": "Sobre mim",
+    "nationality": "Nacionalidade",
+    "location": "Localidade",
+    "gender": "Género",
+    "name": "Nome",
+    "surname": "Apelido",
+    "birth_date": "Data de Nascimento",
+    "change_photo": "Mudar Foto",
+    "select_nationality": "Selecionar uma nacionalidade",
+    "add_language": "Adicionar Língua"
   }
 }

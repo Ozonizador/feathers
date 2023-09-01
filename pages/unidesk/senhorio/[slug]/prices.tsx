@@ -53,7 +53,7 @@ const Prices = ({ advertisement }: PricesProps) => {
         <MenuSenhorio activeSection="single_advert" activeUrl="advert_prices" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
-        <div className="mb-7 text-2xl font-semibold">Preços</div>
+        <div className="mb-7 text-2xl font-semibold">{t("advertisements:price", { count: 2 })}</div>
 
         {advertisementContext && (
           <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />

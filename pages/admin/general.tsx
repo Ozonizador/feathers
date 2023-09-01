@@ -137,7 +137,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 lg:px-32"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">Informações pessoais</div>
+          <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">{t("admin:config.general")}</div>
           <div className="mb-5 mt-5">
             <div className="flex items-center justify-center lg:justify-start">
               <label
@@ -166,7 +166,7 @@ const Index = ({ user, profileData }: IndexProps) => {
               className="mx-auto mt-2 cursor-pointer px-3 text-primary-500"
               onClick={() => (fileRef.current as any).click()}
             >
-              Mudar foto
+              {t("admin:config.change_photo")}
             </h6>
           </div>
 
@@ -177,12 +177,12 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <FeathersInput value={value} onChange={onChange} name="nome" labelText="Nome" />
+                    <FeathersInput value={value} onChange={onChange} name="nome" labelText={t("admin:config.name")} />
                   )}
                   name="name"
                 ></Controller>
               </div>
-              <div className="mb-1">Data de nascimento</div>
+              <div className="mb-1">{t("admin:config.birth_date")}</div>
               <div className="flex flex-row gap-4">
                 <Controller
                   control={control}
@@ -194,13 +194,13 @@ const Index = ({ user, profileData }: IndexProps) => {
               </div>
 
               <div className="my-10">
-                <label className="mt-2 block">Nacionalidade</label>
+                <label className="mt-2 block">{t("admin:config.nationality")}</label>
                 <Controller
                   control={control}
                   name="nationality"
                   render={({ field: { onChange, value } }) => (
                     <Select value={value} onChange={onChange}>
-                      <option value="">Selecione uma nacionalidade</option>
+                      <option value="">{t("admin:config.select_nationality")}</option>
                       {options.map((option, index) => {
                         return (
                           <option key={index} value={option.value}>
@@ -220,14 +220,19 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <FeathersInput value={value} onChange={onChange} name="Apelido" labelText="Apelido" />
+                    <FeathersInput
+                      value={value}
+                      onChange={onChange}
+                      name="Apelido"
+                      labelText={t("admin:config.surname")}
+                    />
                   )}
                   name="surname"
                 />
               </div>
 
               <div className="my-10">
-                <div className="mb-1">Género</div>
+                <div className="mb-1">{t("admin:config.gender")}</div>
                 <div className="flex flex-row gap-4">
                   <div className="flex-1">
                     <select
@@ -245,14 +250,19 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <FeathersInput onChange={onChange} value={value} name="localidade" labelText="Localidade" />
+                  <FeathersInput
+                    onChange={onChange}
+                    value={value}
+                    name="localidade"
+                    labelText={t("admin:config.location")}
+                  />
                 )}
                 name="town"
               ></Controller>
             </div>
           </div>
 
-          <div className="mb-1">Sobre mim</div>
+          <div className="mb-1">{t("admin:config.about_me")}</div>
           <textarea
             {...register("description")}
             rows={5}
@@ -261,7 +271,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           />
 
           {/* LÍNGUAS FALADAS */}
-          <div className="mb-1">Línguas faladas</div>
+          <div className="mb-1">{t("admin:config.spoken_languages")}</div>
           <div className="flex flex-row">
             <Controller
               control={control}
@@ -271,7 +281,7 @@ const Index = ({ user, profileData }: IndexProps) => {
 
                 return (
                   <Select2
-                    placeholder="Adicionar línguas"
+                    placeholder={t("admin:config.add_language")}
                     value={options.filter((option) => value.includes(option.value))}
                     onChange={(val) => onChange(val.map((c) => c.value))}
                     isMulti
@@ -299,7 +309,7 @@ const Index = ({ user, profileData }: IndexProps) => {
 
           {/* CONTATO TELEFONICO */}
           <div className="my-8">
-            <div>Contacto telefónico</div>
+            <div className="mb-1">{t("admin:config.phone_contact")}</div>
             <div>
               <Controller
                 control={control}
@@ -373,7 +383,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: user,
       profileData: profile,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

@@ -14,10 +14,27 @@
   "electricity": "Eletricidade",
   "gas": "Gás",
   "water": "Água",
+  "photo_one": "Foto",
+  "photo_other": "Fotos",
   "host_type": {
-    "super_flex": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
-    "flex": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
-    "moderate": "Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
-    "rigid": "Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral."
-  }
+    "super_flex": "Super Flexível",
+    "flex": "Flexível",
+    "moderate": "Moderado",
+    "rigid": "Rígido",
+    "super_flex_description": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "flex_description": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "moderate_description": "Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "rigid_description": "Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral."
+  },
+  "reservation_status": {
+    "accepted": "Reserva Aceite",
+    "requested": "Pedido de Reserva",
+    "rejected": "Reserva Rejeitada",
+    "change_accepted": "Booking Amendment Accepted",
+    "change_requested": "Booking Amendment Requested",
+    "change_rejected": "Booking Amendment Rejected"
+  },
+  "price_one": "Preço",
+  "price_other": "Preços",
+  "price_month": "{{price}}€/mês"
 }

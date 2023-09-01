@@ -19,6 +19,7 @@
   "account": "Conta",
   "notifications": "Notificações",
   "favourites": "Favoritos",
+  "favourites_zero": "Sem Favoritos",
   "my_stay": "Minha Estadia",
   "inbox": "Caixa de entrada",
   "guest_one": "Hóspede",
@@ -35,5 +36,8 @@
   "payment_details": "Detalhes Pagamento",
   "start": "Entrada",
   "end": "Saída",
-  "details": "Detalhes"
+  "details": "Detalhes",
+  "state": "Estado",
+  "accept": "Aceitar",
+  "decline": "Rejeitar"
 }

@@ -9,6 +9,7 @@ import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorio
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
+import { useTranslation } from "next-i18next";
 
 function EditInactiveIcon(props: any) {
   return (
@@ -52,6 +53,7 @@ interface AnuncioCardProps {
 }
 
 const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const setMenuSelectedAdvertisement = useSetSelectedAnuncioMenuSenhorio();
   const { removeAdvertisement } = useAdvertisementService();
@@ -144,7 +146,9 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
             </div>
             <div className="w-96">
               <div className="mb-1 mt-4 line-clamp-3 text-base text-secondary-300">{advertisement.description}</div>
-              <div className="text-xl font-bold text-primary-500">{`${advertisement.month_rent}€/mês`}</div>
+              <div className="text-xl font-bold text-primary-500">
+                {t("advertisements:price_month", { price: advertisement.month_rent })}
+              </div>
               <ExpensesComponent expenses={advertisement.expenses} />
             </div>
           </div>

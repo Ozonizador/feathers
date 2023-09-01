@@ -178,7 +178,9 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>{t("my_stay")}</div>
-                  <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>{t("favourites")}</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>
+                    {t("favourites", { count: 2 })}
+                  </div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>

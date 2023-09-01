@@ -94,7 +94,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
 
                 <div className="flex flex-col">
                   <h2 className="text-base font-bold">
-                    {(advertisement && hostTranslate(advertisement?.type_flex_host)) || ""}
+                    {(advertisement && t(hostTranslate(advertisement?.type_flex_host))) || ""}
                   </h2>
                   <p className="text-base text-secondary-400">
                     {advertisement && t(hostTypeFlexDescription(advertisement?.type_flex_host || ""))}

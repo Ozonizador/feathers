@@ -8,8 +8,10 @@ import personalInformationImage from "../../public/images/mainmenu_1.png";
 import paymentsImage from "../../public/images/mainmenu_2.png";
 import configurationsImage from "../../public/images/mainmenu_3.png";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const Index = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="mb-3 flex flex-1 justify-center">
@@ -25,7 +27,7 @@ const Index = () => {
                   <Image src={personalInformationImage} alt="Informações pessoais" height={96} width={96} />
                 </div>
                 <div className="ml-3 lg:ml-5">
-                  <div className="mb-2 text-xl font-bold lg:text-2xl">Informações pessoais</div>
+                  <div className="mb-2 text-xl font-bold lg:text-2xl">{t("admin:config.general")}</div>
                   <div>Forneça os dados sobre si e como o podemos contactar.</div>
                 </div>
               </div>
@@ -57,7 +59,7 @@ const Index = () => {
                   <Image src={configurationsImage} alt="Configurações" height={96} width={96} />
                 </div>
                 <div className="ml-3 lg:ml-5">
-                  <div className="mb-2 text-xl font-bold lg:text-2xl">Configurações</div>
+                  <div className="mb-2 text-xl font-bold lg:text-2xl">{t("configurations")}</div>
                   <div>Atualize a sua palavra-passe e controle as notificações.</div>
                 </div>
               </div>
@@ -92,7 +94,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };
