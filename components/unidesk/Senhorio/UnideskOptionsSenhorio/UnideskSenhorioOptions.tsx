@@ -6,26 +6,26 @@ const optionAnuncios = [
   {
     link: "unidesk/senhorio/advertisements",
     blocked: false,
-    text: "Painel",
+    text: "admin:unidesk.common.panel",
   },
   {
     blocked: true,
-    text: "Informações contratuais",
+    text: "admin:unidesk.common.contracts",
   },
   {
     link: "/unidesk/senhorio/reservas",
     blocked: false,
-    text: "Reservas",
+    text: "reservation_two",
   },
   {
     link: "unidesk/senhorio/calendar",
     blocked: false,
-    text: "Calendário",
+    text: "admin:unidesk.common.calendar",
   },
   {
     link: "unidesk/senhorio/reviews",
     blocked: false,
-    text: "Reviews",
+    text: "admin:unidesk.landlord.reviews",
   },
 ] as { link?: string; blocked: boolean; text: string }[];
 
@@ -33,19 +33,19 @@ const optionUniControl = [
   {
     link: "/unidesk/unicontrolo/guests",
     blocked: false,
-    text: "Hóspedes",
+    text: "guest_other",
   },
   {
     blocked: true,
-    text: "Transações",
+    text: "admin:unidesk.landlord.transactions",
   },
   {
     blocked: true,
-    text: "Despesas",
+    text: "admin:unidesk.student.expenses",
   },
   {
     blocked: true,
-    text: "Reparações",
+    text: "admin:unidesk.student.repairs",
   },
 ] as { link?: string; blocked: boolean; text: string }[];
 

@@ -4,9 +4,11 @@ import { GrRestroom } from "react-icons/gr";
 import { RiUserLine } from "react-icons/ri";
 import { TbBed } from "react-icons/tb";
 import { useGetSingleAdvertisement } from "../../../context/ShowingSingleAdvertisementProvider";
+import { useTranslation } from "next-i18next";
 
 export default function RoomInformation() {
   const advertisement = useGetSingleAdvertisement();
+  const { t } = useTranslation();
   return (
     <div>
       <div className="mb-8 text-5xl font-bold">{advertisement?.title || ""}</div>
@@ -15,10 +17,7 @@ export default function RoomInformation() {
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <RiUserLine className="text-4xl" />
           <div className="mt-3 text-base ">
-            {(advertisement &&
-              (advertisement.tenant_number > 1
-                ? `${advertisement.tenant_number} Hóspedes`
-                : `${advertisement.tenant_number} Hóspede`)) ||
+            {(advertisement && advertisement.tenant_number > 1 && t("guest", { count: advertisement.tenant_number })) ||
               ""}
           </div>
         </div>
@@ -26,17 +25,14 @@ export default function RoomInformation() {
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <BiBed className="text-4xl" />
           <div className="mt-3 text-base">
-            {(advertisement &&
-              (advertisement.beds > 1 ? `${advertisement.beds} Camas` : `${advertisement.beds} Cama`)) ||
-              ""}
+            {(advertisement && advertisement.beds > 1 && t("advertisements:bed", { count: advertisement.beds })) || ""}
           </div>
         </div>
 
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <TbBed className="text-4xl" />
           <div className="mt-3 text-base">
-            {(advertisement &&
-              (advertisement.rooms > 1 ? `${advertisement.rooms} Quartos` : `${advertisement.rooms} Quarto`)) ||
+            {(advertisement && advertisement.rooms > 1 && t("advertisements:room", { count: advertisement.rooms })) ||
               ""}
           </div>
         </div>
@@ -45,9 +41,8 @@ export default function RoomInformation() {
           <GrRestroom className="text-4xl" />
           <div className="mt-3 text-base">
             {(advertisement &&
-              (advertisement.bathrooms > 1
-                ? `${advertisement.bathrooms} Casas de Banho`
-                : `${advertisement.bathrooms} Casa de Banho`)) ||
+              advertisement.bathrooms > 1 &&
+              t("advertisements:bathrooms", { count: advertisement.bathrooms })) ||
               ""}
           </div>
         </div>

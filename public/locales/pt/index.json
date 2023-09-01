@@ -16,6 +16,15 @@
         "title": "Mudança",
         "description": "O primeiro pagamento só será transferido após verificares a casa, estamos aqui para qualquer questão. Boa estadia!"
       }
+    },
+    "testemonials": {
+      "title": "Testemunhos",
+      "property_owner": "Proprietário Unihosts"
+    },
+    "have_property": {
+      "title": "Tem uma \n propriedade?",
+      "description": "Comece já a anunciar e rentabilize \n o seu imóvel!",
+      "know_more": "Quero saber mais"
     }
   }
 }

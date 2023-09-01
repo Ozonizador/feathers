@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CgArrowDown, CgArrowRight } from "react-icons/cg";
 import { FcLock } from "react-icons/fc";
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 type UnideskMenuSectionOption = {
   blocked: boolean;
@@ -18,6 +19,7 @@ interface SectionCardProps {
 
 export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
   const [openMenu, setOpenMenu] = useState<boolean>(true);
+  const { t } = useTranslation();
 
   return (
     <div className="flex cursor-pointer flex-col gap-5 rounded-2xl bg-white p-5 drop-shadow-2xl lg:w-2/6 lg:pb-10">
@@ -70,11 +72,11 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
               return option.blocked ? (
                 <div className="flex flex-1 items-center" key={index}>
                   <FcLock size="24" />
-                  <p className="ml-3 text-base font-bold">{option.text}</p>
+                  <p className="ml-3 text-base font-bold">{t(option.text)}</p>
                 </div>
               ) : (
                 <Link href={option.link || ""} key={index} className="text-xl font-bold">
-                  {option.text}
+                  {t(option.text)}
                 </Link>
               );
             })}

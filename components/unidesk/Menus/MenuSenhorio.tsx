@@ -69,7 +69,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
             label="Preços"
             activeLink={activeUrl === "advert_prices"}
           ></MenuOption>
-          <MenuOption url={""} label="Informações contratuais" blocked={true}></MenuOption>
+          <MenuOption url={""} label="admin:unidesk.common.contracts" blocked={true}></MenuOption>
         </MenuGrouper>
       )}
 
@@ -83,7 +83,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         <MenuOption
           blocked={false}
           url={UNIDESK_SENHORIO_CALENDAR_URL}
-          label="Calendário"
+          label="admin:unidesk.common.calendar"
           activeLink={activeUrl === "calendar"}
         />
         <MenuOption

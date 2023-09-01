@@ -1,4 +1,5 @@
 {
+  "announce": "Announce",
   "login": "Login",
   "register": "Register",
   "forgot_pw": "Forgot password",
@@ -7,10 +8,10 @@
   "welcome_to": "Welcome to",
   "continue_with": "Continue with",
   "send": "Send",
-  "landlord": "Landlord",
-  "landlords": "Landlords",
-  "student": "Student",
-  "students": "Students",
+  "landlord_one": "Landlord",
+  "landlord_other": "Landlords",
+  "student_one": "Student",
+  "student_other": "Students",
   "find_in": "Find &#x2302; at:",
   "save": "Save",
   "leave": "Logout",
@@ -21,5 +22,13 @@
   "inbox": "Inbox",
   "my_stay": "My Stay",
   "guest_one": "Guest",
-  "guest_other": "Guests"
+  "guest_other": "Guests",
+  "guestWithCount_one": "{{count}} Guest",
+  "guestWithCount_other": "{{count}} Guests",
+  "terms_and_conditions": "terms and conditions",
+  "privacy_policy": "privacy policy",
+  "advertisement_one": "Advert",
+  "advertisement_other": "Adverts",
+  "reservation_one": "Reservation",
+  "reservation_other": "Reservations"
 }

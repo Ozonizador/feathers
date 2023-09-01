@@ -53,7 +53,7 @@ const TypeCustomerPage = () => {
             className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
             onClick={() => setProfileType("TENANT")}
           >
-            Sou estudante
+            {t("admin:im_student")}
           </div>
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
@@ -64,7 +64,7 @@ const TypeCustomerPage = () => {
             className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
             onClick={() => setProfileType("LANDLORD")}
           >
-            Sou senhorio
+            {t("admin:im_landlord")}
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "admin"])),
     },
   };
 };

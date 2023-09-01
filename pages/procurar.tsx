@@ -52,7 +52,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       props: {
         filter: serverFilter,
-        ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "contacts", "common"])),
+        ...(await serverSideTranslations(locale ?? "pt")),
       },
     };
   }
@@ -62,7 +62,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       props: {
         filter: serverFilter,
-        ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "contacts", "common"])),
+        ...(await serverSideTranslations(locale ?? "pt")),
       },
     };
   }
@@ -72,7 +72,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       filter: { filter: { ...filter, coordinates }, order },
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "contacts", "common"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

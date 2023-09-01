@@ -1,0 +1,17 @@
+{
+  "bed_one": "Cama",
+  "bed_other": "Camas",
+  "bedWithCount_one": "{{count}} Cama",
+  "bedWithCount_other": "{{count}} Camas",
+  "room_one": "Cama",
+  "room_other": "Camas",
+  "roomWithCount_one": "{{count}} Cama",
+  "roomWithCount_other": "{{count}} Camas",
+  "bathroom_one": "Casa de Banho",
+  "bathroom_other": "Casas de Banho",
+  "bathroomWithCount_one": "{{count}} Casa de Banho",
+  "bathroomWithCount_other": "{{count}} Casas de Banhos",
+  "electricity": "Eletricidade",
+  "gas": "Gás",
+  "water": "Água"
+}

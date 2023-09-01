@@ -110,7 +110,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
           <div className="mt-7  rounded-3xl bg-gray-100 px-8 py-4">
             <div className="align-center flex flex-1 justify-center">
               <div>
-                <span className="mr-2">{t("student")}</span>
+                <span className="mr-2">{t("student", { count: 1 })}</span>
                 <Switch
                   checked={false}
                   onClick={() => toggleUserMode()}
@@ -128,7 +128,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
-                <span className="ml-2">{t("landlord")}</span>
+                <span className="ml-2">{t("landlord", { count: 1 })}</span>
               </div>
             </div>
             <div className="my-10 flex">
@@ -183,7 +183,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">
-                    {t("acoount")}
+                    {t("account")}
                   </div>
                   <div onClick={() => selectMenuButton(FAQS_URL)} className="text-gray-500">
                     {t("help")}
@@ -203,7 +203,9 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
-                  <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>Anúncios</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>
+                    {t("advertisement", { count: 2 })}
+                  </div>
                   <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>Uni-controlo</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>

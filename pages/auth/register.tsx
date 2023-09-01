@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
 import { HOME_URL, LOGIN_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -92,14 +92,17 @@ const Register = () => {
             </Button>
           </div>
           <div className="mt-4 text-center text-sm italic">
-            {`Ao registar-se está a concordar com os nossos `}
-            <Link href="/terms_and_conditions.pdf" target="_blank">
-              <span className="italic text-primary-500">termos e condições</span>
-              {` e `}
-            </Link>
-            <Link href="/gdpr_unihosts.pdf" target="_blank">
-              <span className="italic text-primary-500">política de privacidade.</span>
-            </Link>
+            <Trans
+              t={t}
+              i18nKey="admin:agree_terms"
+              values={{ terms: t("terms_and_conditions"), privacy: t("privacy_policy") }}
+              components={{
+                lnk1: (
+                  <Link href="/terms_and_conditions.pdf" target="_blank" className="italic text-primary-500"></Link>
+                ),
+                lnk2: <Link href="/gdpr_unihosts.pdf" target="_blank" className="italic text-primary-500"></Link>,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -112,7 +115,7 @@ export default Register;
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common"])),
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "admin"])),
     },
   };
 }

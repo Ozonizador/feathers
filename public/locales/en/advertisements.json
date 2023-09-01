@@ -1,0 +1,17 @@
+{
+  "bed_one": "Bed",
+  "bed_other": "Beds",
+  "bedWithCount_one": "{{count}} Bed",
+  "bedWithCount_other": "{{count}} Beds",
+  "room_one": "Room",
+  "room_other": "Rooms",
+  "roomWithCount_one": "{{count}} Room",
+  "roomWithCount_other": "{{count}} Rooms",
+  "bathroom_one": "Bathroom",
+  "bathroom_other": "Bathrooms",
+  "bathroomWithCount_one": "{{count}} Bathroom",
+  "bathroomWithCount_other": "{{count}} Bathrooms",
+  "electricity": "Electricity",
+  "gas": "Gas",
+  "water": "Water"
+}

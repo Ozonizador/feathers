@@ -22,17 +22,17 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
       >
         <MenuOption
           url={UNIDESK_STAY_URL}
-          label={"Informações gerais"}
+          label={"admin:unidesk.student.general"}
           activeLink={activeUrl == "general"}
         ></MenuOption>
-        <MenuOption blocked={true} url={""} label={"Renda"} />
-        <MenuOption blocked={true} url={""} label={"Reparações"} />
-        <MenuOption blocked={true} url={""} label={"Despesas"} />
-        <MenuOption blocked={true} url={""} label={"Informações contratuais"} />
+        <MenuOption blocked={true} url={""} label={"admin:unidesk.student.rent"} />
+        <MenuOption blocked={true} url={""} label={"admin:unidesk.student.repairs"} />
+        <MenuOption blocked={true} url={""} label={"admin:unidesk.student.expenses"} />
+        <MenuOption blocked={true} url={""} label={"admin:unidesk.common.contracts"} />
       </MenuGrouper>
       <MenuGrouper
         url={UNIDESK_STUDENT_FAVOURITES_URL}
-        title={"Favoritos"}
+        title={t("favourites")}
         selectedGroup={activeSection == "favourites"}
         isCollapsed={false}
       />

@@ -128,7 +128,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         initialSession: session,
         user: session.user,
         responseRate,
-        ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+        ...(await serverSideTranslations(locale ?? "pt")),
       },
     };
   } else {

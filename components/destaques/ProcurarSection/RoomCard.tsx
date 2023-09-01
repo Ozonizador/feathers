@@ -110,29 +110,28 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   <div>
                     <RiUserLine className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.tenant_number}{" "}
-                      {advertisement.tenant_number == 1 ? t("guest", { count: 1 }) : t("guest", { count: 2 })}
+                      {t("guestWithCount", { count: advertisement.tenant_number })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <BiBed className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.beds} {advertisement.beds == 1 ? "Cama" : "Camas"}
+                      {t("advertisements:bedWithCount", { count: advertisement.beds })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <TbBed className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.rooms} {advertisement.rooms == 1 ? "Quarto" : "Quartos"}
+                      {t("advertisements:roomWithCount", { count: advertisement.rooms })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <GrRestroom className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.bathrooms} {advertisement.bathrooms == 1 ? "Casa De Banho" : "Casas De Banho"}
+                      {t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })}
                     </span>
                   </div>
                 </div>

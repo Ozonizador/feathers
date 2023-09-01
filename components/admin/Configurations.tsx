@@ -188,7 +188,7 @@ const Configurations = () => {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <label className="my-auto">{t("landlord")}</label>
+                          <label className="my-auto">{t("landlord", { count: 1 })}</label>
                           <div className="my-auto">
                             <RadioBox
                               name="prefered_unidesk_state"

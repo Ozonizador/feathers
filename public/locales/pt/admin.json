@@ -1,5 +1,26 @@
 {
   "configurations": "Configurações",
   "change_password": "Alterar password",
-  "recover_password": "Recuperar password"
+  "recover_password": "Recuperar password",
+  "agree_terms": "Ao registar-se está a concordar com os nossos <lnk1>{{terms}}</lnk1> and <lnk2>{{privacy}}</lnk2>.",
+  "im_student": "Sou estudante",
+  "im_landlord": "Sou senhorio",
+  "unidesk": {
+    "common": {
+      "panel": "Panel",
+      "contracts": "Informações contratuais",
+      "calendar": "Calendário"
+    },
+    "student": {
+      "general": "Informações gerais",
+      "rent": "Renda",
+      "repairs": "Reparações",
+      "expenses": "Despesas",
+      "contracts": "Informações contratuais"
+    },
+    "landlord": {
+      "reviews": "Reviews",
+      "transactions": "Transações"
+    }
+  }
 }

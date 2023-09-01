@@ -18,13 +18,15 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const FavouritesBreadcrumbs = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: "", label: "Favoritos" },
+  { url: "", label: "favourites" },
 ] as BreadcrumbPath[];
 
 const UnideskFavoritos = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
   const profile = useCurrentUser();
@@ -56,7 +58,7 @@ const UnideskFavoritos = () => {
           <div>
             <div className="flex flex-col items-center justify-center align-middle">
               <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
-              <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
+              <div className="mt-9 text-2xl font-bold text-primary-500">{t("favourites")}</div>
             </div>
 
             <div
@@ -155,7 +157,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

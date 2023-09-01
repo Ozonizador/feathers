@@ -1,4 +1,5 @@
 {
+  "announce": "Announce",
   "login": "Iniciar Sessão",
   "register": "Registar",
   "forgot_pw": "Esqueci-me da palavra-passe",
@@ -7,10 +8,10 @@
   "welcome_to": "Bem-vindo à",
   "continue_with": "Continue com o",
   "send": "Enviar",
-  "landlord": "Senhorio",
-  "landlords": "Senhorios",
-  "student": "Estudante",
-  "students": "Estudantes",
+  "landlord_one": "Senhorio",
+  "landlord_other": "Senhorios",
+  "student_one": "Estudante",
+  "student_other": "Estudantes",
   "find_in": "Encontrar &#x2302; em:",
   "save": "Salvar",
   "leave": "Sair",
@@ -18,7 +19,16 @@
   "account": "Conta",
   "notifications": "Notificações",
   "favourites": "Favoritos",
+  "my_stay": "Minha Estadia",
   "inbox": "Caixa de entrada",
   "guest_one": "Hóspede",
-  "guest_other": "Hóspedes"
+  "guest_other": "Hóspedes",
+  "guestWithCount_one": "{{count}} Hóspede",
+  "guestWithCount_other": "{{count}} Hóspedes",
+  "terms_and_conditions": "termos e condições",
+  "privacy_policy": "politica de privacidade",
+  "advertisement_one": "Anúncio",
+  "advertisement_other": "Anúncios",
+  "reservation_one": "Reserva",
+  "reservation_two": "Reservas"
 }

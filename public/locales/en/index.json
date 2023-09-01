@@ -16,6 +16,15 @@
         "title": "Change",
         "description": "The first payment will only be transferred after checking the house, we are here for any question. Good stay!"
       }
+    },
+    "testemonials": {
+      "title": "Testemonials",
+      "property_owner": "Unihosts owner"
+    },
+    "have_property": {
+      "title": "Have a \n property?",
+      "description": "Start advertising now and \nmonetize your property!",
+      "know_more": "Want to know more"
     }
   }
 }

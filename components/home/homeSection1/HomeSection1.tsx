@@ -10,7 +10,7 @@ const HomeSection1 = () => {
           <h1 className="mb-5 ml-2 text-4xl font-bold leading-snug  text-white lg:mx-0 lg:mb-0 lg:text-6xl">
             A tua{" "}
             <Image
-              className="display: top-40;  relative  left-0 inline-block"
+              className="display: top-40; relative left-0 inline-block"
               src="/images/icon-home.svg"
               alt=""
               height={64}

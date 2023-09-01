@@ -1,33 +1,34 @@
 import React from "react";
 import { UNIDESK_STAY_URL } from "../../../../models/paths";
 import { MenuSectionCard } from "../../components/MenuSectionCard";
-import { useTranslation } from "next-i18next";
+import { i18n, useTranslation } from "next-i18next";
 
 const unideskOptions = [
   {
     link: UNIDESK_STAY_URL,
     blocked: false,
-    text: "Informações gerais",
+    text: "admin:unidesk.student.general",
   },
   {
     blocked: true,
-    text: "Renda",
+    text: "admin:unidesk.student.rent",
   },
   {
     blocked: true,
-    text: "Reparações",
+    text: "admin:unidesk.student.repairs",
   },
   {
     blocked: true,
-    text: "Despesas",
+    text: "admin:unidesk.student.expenses",
   },
   {
     blocked: true,
-    text: "Informações contratuais",
+    text: "admin:unidesk.common.contracts",
   },
 ] as { link?: string; blocked: boolean; text: string }[];
 
 const UnideskOptions = () => {
+  debugger;
   const { t } = useTranslation();
   return (
     <section className="container mx-auto my-32 flex flex-col gap-7 lg:flex-row">
