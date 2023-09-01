@@ -13,5 +13,11 @@
   "bathroomWithCount_other": "{{count}} Bathrooms",
   "electricity": "Electricity",
   "gas": "Gas",
-  "water": "Water"
+  "water": "Water",
+  "host_type": {
+    "super_flex": "Up to 30 days before check-in: 100% of the rental amount is refunded. After this period and up to 2 days before, the amount refunded is 50%. After this period payment is in full.",
+    "flex": "Up to 30 days before check-in: 100% of the rental amount is refunded. After this period and up to 7 days before, the amount refunded is 50%. After this period payment is in full.",
+    "moderate": "Up to 60 days before check-in: 100% of the rental amount is refunded. After this period and up to 15 days before, the amount refunded is 50%. After this period payment is in full.",
+    "rigid": "Up to 90 days before check-in: 100% of the rental amount is refunded. After that period and up to 30 days before, the amount refunded is 50%. After this period payment is in full."
+  }
 }

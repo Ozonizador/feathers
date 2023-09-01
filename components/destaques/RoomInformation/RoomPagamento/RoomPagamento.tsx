@@ -167,7 +167,7 @@ export const RoomPagamento = () => {
             <div className="mt-5 grid grid-cols-2 gap-4">
               <div className="mb-2 block w-full">
                 <div className="mb-2 block">
-                  <Label htmlFor="Entrada" value="Entrada" />
+                  <Label htmlFor="Entrada" value={t("start")} />
                 </div>
                 <FeatherDatePicker
                   minDate={checkMonthsInAdvance()}
@@ -225,7 +225,7 @@ export const RoomPagamento = () => {
               className="mb-7 cursor-pointer text-[#8A8A8A] underline underline-offset-1"
               onClick={(e) => setIsOpen(true)}
             >
-              Detalhes do Pagamento
+              {t("payment_details")}
             </div>
           </div>
           <hr />
@@ -254,7 +254,7 @@ export const RoomPagamento = () => {
               className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
               onClick={(e) => setIsOpen(true)}
             >
-              Detalhes do Pagamento
+              {t("payment_details")}
             </div>
           </div>
 

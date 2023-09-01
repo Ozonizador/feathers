@@ -30,5 +30,10 @@
   "advertisement_one": "Anúncio",
   "advertisement_other": "Anúncios",
   "reservation_one": "Reserva",
-  "reservation_two": "Reservas"
+  "reservation_two": "Reservas",
+  "payment": "Pagamento",
+  "payment_details": "Detalhes Pagamento",
+  "start": "Entrada",
+  "end": "Saída",
+  "details": "Detalhes"
 }

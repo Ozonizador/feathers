@@ -82,9 +82,11 @@ const CurrentReservationsSection = () => {
             <div className="my-5">Estado</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">
+            {t("advertisement", { count: 1 })}
+          </Table.HeadCell>
 
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
@@ -158,9 +160,11 @@ const NextReservationsSection = () => {
             <div className="my-5"> Estado</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">
+            {t("advertisement", { count: 1 })}
+          </Table.HeadCell>
 
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>
@@ -245,9 +249,11 @@ const AllReservationsSection = () => {
             <div className="my-5"> Estado</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Entrada</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Saída</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">Anúncio</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className="text-xl font-normal text-gray-900">
+            {t("advertisement", { count: 1 })}
+          </Table.HeadCell>
 
           <Table.HeadCell></Table.HeadCell>
         </Table.Head>

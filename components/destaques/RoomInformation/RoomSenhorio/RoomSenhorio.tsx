@@ -6,11 +6,13 @@ import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/adve
 import { Gender } from "../../../../models/profile";
 import { RiMailSendFill } from "react-icons/ri";
 import { Card } from "flowbite-react";
+import { useTranslation } from "next-i18next";
 
 interface RoomSenhorioProps {
   responseRate: number;
 }
 export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
+  const { t } = useTranslation();
   const advertisement = useGetSingleAdvertisement();
 
   return (
@@ -95,7 +97,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                     {(advertisement && hostTranslate(advertisement?.type_flex_host)) || ""}
                   </h2>
                   <p className="text-base text-secondary-400">
-                    {advertisement && hostTypeFlexDescription(advertisement?.type_flex_host || "")}
+                    {advertisement && t(hostTypeFlexDescription(advertisement?.type_flex_host || ""))}
                   </p>
                 </div>
               </div>

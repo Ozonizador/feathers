@@ -30,5 +30,10 @@
   "advertisement_one": "Advert",
   "advertisement_other": "Adverts",
   "reservation_one": "Reservation",
-  "reservation_other": "Reservations"
+  "reservation_other": "Reservations",
+  "payment": "Payment",
+  "payment_details": "Payment Details",
+  "start": "Start",
+  "end": "End",
+  "details": "Details"
 }
