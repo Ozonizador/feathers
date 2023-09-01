@@ -42,5 +42,6 @@
   "decline": "Decline",
   "go_back": "Go Back",
   "next_step": "Next Step",
-  "update_map": "Atualizar No Mapa"
+  "update_map": "Atualizar No Mapa",
+  "response_rate": "Taxa de resposta"
 }

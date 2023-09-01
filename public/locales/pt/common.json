@@ -41,5 +41,6 @@
   "accept": "Aceitar",
   "decline": "Rejeitar",
   "go_back": "Voltar Atrás",
-  "next_step": "Seguinte"
+  "next_step": "Seguinte",
+  "response_rate": "Response Rate"
 }

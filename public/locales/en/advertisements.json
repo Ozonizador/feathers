@@ -43,5 +43,6 @@
     "bedroom": "Bedroom",
     "kitchen": "Kitchen",
     "exterior": "Exterior Area"
-  }
+  },
+  "no_comodities": "No comodities"
 }

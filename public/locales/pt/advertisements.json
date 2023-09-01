@@ -43,5 +43,6 @@
     "bedroom": "Quarto",
     "kitchen": "Cozinha",
     "exterior": "Zona Exterior"
-  }
+  },
+  "no_comodities": "Sem comodidades"
 }

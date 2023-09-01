@@ -7,13 +7,17 @@ import { Advertisement, TYPE_ADVERTISEMENT } from "../../../../models/advertisem
 import { Spinner } from "flowbite-react";
 import Image from "next/image";
 import { PROCURAR_ADVERT_URL } from "../../../../models/paths";
+import { useTranslation } from "next-i18next";
 
 export default function RoomSemelhantes() {
+  const { t } = useTranslation();
   const advertisement = useGetSingleAdvertisement();
   const { getSimilarAdvertisements } = useAdvertisementService();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [similarAdverts, setSimilarAdverts] = useState<Pick<Advertisement, "photos" | "type" | "place">[]>([]);
+  const [similarAdverts, setSimilarAdverts] = useState<
+    Pick<Advertisement, "photos" | "type" | "place" | "month_rent">[]
+  >([]);
 
   const getSimilarAdverts = useCallback(async () => {
     setLoading(true);
@@ -44,7 +48,9 @@ export default function RoomSemelhantes() {
                     <article className="relative h-56 w-40 rounded-lg lg:h-56  lg:w-48">
                       <Image src={advert.photos[0].url} alt="" layout="responsive" height="200" width="200" />
                       <h2 className=" mt-3 p-3 text-base text-white">{TYPE_ADVERTISEMENT[advert.type]}</h2>
-                      <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">320&euro;/mês</p>
+                      <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">
+                        {t("advertisements:price_month", { price: advert.month_rent })}
+                      </p>
                     </article>
                   </div>
                 );

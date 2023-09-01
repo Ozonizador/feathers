@@ -6,7 +6,7 @@ import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/adve
 import { Gender } from "../../../../models/profile";
 import { RiMailSendFill } from "react-icons/ri";
 import { Card } from "flowbite-react";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 interface RoomSenhorioProps {
   responseRate: number;
@@ -58,7 +58,8 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                     <RiMailSendFill className=" text-4xl text-blue-600 " />
                   </div>
                   <div className="text-center">
-                    Taxa de resposta <br /> {responseRate !== 0 ? responseRate : "0"}%
+                    {t("response_rate")}
+                    <br /> {responseRate !== 0 ? responseRate : "0"}%
                   </div>
                 </div>
               </div>

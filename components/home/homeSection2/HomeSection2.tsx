@@ -1,24 +1,26 @@
 import React from "react";
 import HomeSection2Cards from "../homeSection2Cards/HomeSection2Cards";
+import { useTranslation } from "next-i18next";
 
 export default function HomeSection2() {
+  const { t } = useTranslation();
   return (
     <section className="max-width">
       <div className="mx-auto flex w-10/12 flex-col gap-8 py-20 lg:flex-row lg:gap-4">
         <HomeSection2Cards
           img="/images/homeSection new-1.png"
-          heading="Seguro e Verificado"
-          text="Valorizamos e protegemos a integridade das listas"
+          heading={t("index:section.values.first_title")}
+          text={t("index:section.values.first_title")}
         />
         <HomeSection2Cards
           img="/images/homeSection new-2.png"
-          heading="Proteção dos inquilinos"
-          text="Tens 24h após a entrada para confirmar se a casa que reservaste corresponde."
+          heading={t("index:section.values.second_title")}
+          text={t("index:section.values.second_description")}
         />
         <HomeSection2Cards
           img="/images/homeSection new-3.png"
-          heading="Procura rápida e inteligente"
-          text="De forma simplificada encontra o teu espaço ideal."
+          heading={t("index:section.values.third_title")}
+          text={t("index:section.values.third_description")}
         />
       </div>
     </section>

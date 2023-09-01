@@ -56,7 +56,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
         <ReactMarkdown components={renderers}>{blog.description}</ReactMarkdown>
 
         <div className="mb-24 mt-20 flex items-center gap-4 align-middle">
-          <div className="text-2xl font-bold ">Partilhar</div>
+          <div className="text-2xl font-bold ">{t("blog:share")}</div>
           <div onClick={shareOnFacebook}>
             <RiFacebookCircleLine className=" text-3xl text-primary-500" />
           </div>

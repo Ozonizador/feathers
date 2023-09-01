@@ -90,7 +90,7 @@ export const SearchInputField = () => {
               type="input"
               className="bg-terciary-50 h-16 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
-              placeholder={t("find_in", { interpolation: { escapeValue: false } })}
+              placeholder={t("find_in")}
               value={location}
             />
           </div>

@@ -11,9 +11,10 @@ import { Spinner } from "flowbite-react";
 import { Dialog, Transition } from "@headlessui/react";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
 
 {
   /* page 9 XD */
@@ -44,7 +45,7 @@ const Index = () => {
   return (
     <section className="max-width mt-36 px-5">
       <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
-        <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">Pertence Onde Tu Quiseres!</div>
+        <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">{t("blog:title")}</div>
         <div className="flex h-5 w-full items-center lg:w-44 ">
           <select
             className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 lg:mt-0 lg:w-44"
@@ -80,7 +81,7 @@ const Index = () => {
             </div>
 
             <div className="ml-6 cursor-pointer text-xl" onClick={() => setIsOpen(true)}>
-              Receba notificações sempre que houver novidades por aqui
+              {t("blog:notification_info")}
             </div>
           </div>
         </div>
@@ -96,6 +97,7 @@ interface ModalNotificationProps {
 }
 
 const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
+  const { t } = useTranslation();
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -117,17 +119,29 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
               <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl bg-black text-left align-middle shadow-xl transition-all lg:h-4/5 lg:w-2/3">
                 <div className="mx-10 my-20 h-96">
                   <div className="flex h-full flex-col gap-2 rounded-lg bg-white px-10 py-10 lg:w-1/2">
-                    <h6 className="mb-8 text-3xl">Queremos ser uns fiéis mensageiros!</h6>
+                    <h6 className="mb-8 text-3xl">{t("blog:modal_notifications_title")}</h6>
                     <Input placeholder="E-mail"></Input>
                     <div className="mb-10">
                       <Button type={"button"} onClick={() => setOpen(false)}>
-                        Notifique-me
+                        {t("blog:notify")}
                       </Button>
                     </div>
                     <p className="mb-5 mt-auto text-center">
-                      Ao carregar em Notifique-me aceita a nossa
-                      <br />
-                      <span className="text-primary-500 underline">política de tratamento de dados.</span>
+                      <Trans
+                        t={t}
+                        i18nKey="blog:agree_notify"
+                        values={{ policy: t("blog:processing_policy") }}
+                        components={{
+                          lnk1: (
+                            <Link
+                              href="/terms_and_conditions.pdf"
+                              locale="pt"
+                              target="_blank"
+                              className="text-primary-500 underline"
+                            ></Link>
+                          ),
+                        }}
+                      />
                     </p>
                   </div>
                 </div>

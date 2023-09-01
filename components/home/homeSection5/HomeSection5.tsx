@@ -34,16 +34,11 @@ const HomeSection5 = () => {
             href={PROCURAR_ADVERT_URL}
             className="flex items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
           >
-            <Trans
-              i18nKey={"index:section.how_it_works.find_at"}
-              components={{
-                house: (
-                  <span className="px-1">
-                    <CgHome />
-                  </span>
-                ),
-              }}
-            ></Trans>
+            {t("section.how_it_works.find")}{" "}
+            <span className="px-1">
+              <CgHome />
+            </span>
+            {t("section.how_it_works.at")}
           </Link>
         </span>
       </div>

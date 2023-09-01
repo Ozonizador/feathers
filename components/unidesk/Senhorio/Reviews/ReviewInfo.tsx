@@ -1,5 +1,6 @@
 import { Avatar, Rating } from "flowbite-react";
 import { ReviewWithTenantAndAdvertisement } from "../../../../models/review";
+import { useTranslation } from "next-i18next";
 
 interface ReviewInfoProps {
   generalClassification: number;
@@ -8,6 +9,7 @@ interface ReviewInfoProps {
 }
 
 const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: ReviewInfoProps) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="mx-auto w-11/12 lg:w-full">
@@ -25,7 +27,7 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
         </div>
 
         <div className="mt-3 text-center text-xl font-bold lg:ml-7 lg:mt-0 lg:text-left">
-          Taxa de resposta: {responseRate}%
+          {t("response_rate")}: {responseRate || 0}%
         </div>
       </div>
 
