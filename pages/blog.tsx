@@ -11,6 +11,9 @@ import { Spinner } from "flowbite-react";
 import { Dialog, Transition } from "@headlessui/react";
 import Input from "../components/utils/Input";
 import Button from "../components/utils/Button";
+import { useTranslation } from "next-i18next";
+import { GetServerSidePropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 {
   /* page 9 XD */
@@ -22,6 +25,7 @@ const Index = () => {
   const [category, setCategory] = useState<UserTypes>("LANDLORD");
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const { getBlogs } = useBlogService();
   const getBlogPosts = useCallback(async () => {
@@ -50,7 +54,7 @@ const Index = () => {
             {categories.map((option, index) => {
               return (
                 <option value={option} key={index}>
-                  {BlogCategoryLabel[option]}
+                  {t(BlogCategoryLabel[option])}
                 </option>
               );
             })}
@@ -72,7 +76,7 @@ const Index = () => {
         <div className="mx-auto py-6">
           <div className="mx-auto mb-44 mt-14 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
             <div className="alert alert-warning con ml-3" role="alert">
-              <Image className="h-10" src={notification} alt="" />
+              <Image height="40" src={notification} alt="" />
             </div>
 
             <div className="ml-6 cursor-pointer text-xl" onClick={() => setIsOpen(true)}>
@@ -137,3 +141,11 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
 };
 
 export default Index;
+
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "pt")),
+    },
+  };
+}

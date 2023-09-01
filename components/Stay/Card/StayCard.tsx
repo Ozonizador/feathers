@@ -2,11 +2,13 @@ import Image from "next/image";
 import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import { ReservationWithAdvertisement } from "../../../models/reservation";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
+import { useTranslation } from "next-i18next";
 interface StayCardProps {
   stay: ReservationWithAdvertisement;
 }
 
 const StayCard = ({ stay }: StayCardProps) => {
+  const { t } = useTranslation();
   const { advertisement } = stay;
   return (
     <div className="w-full rounded-lg border-2 border-terciary-200 bg-white p-0 lg:w-1/2">
@@ -26,7 +28,9 @@ const StayCard = ({ stay }: StayCardProps) => {
             <div className="mb-1 mt-1 text-sm font-bold lg:mb-3 lg:mt-3 lg:text-base">
               {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
             </div>
-            <div className="mb-1 text-base font-bold text-primary-500 lg:text-xl">{advertisement.month_rent}€/mês</div>
+            <div className="mb-1 text-base font-bold text-primary-500 lg:text-xl">
+              {t("advertisements:price_month", { price: advertisement.month_rent })}
+            </div>
             <ExpensesComponent expenses={advertisement.expenses} />
           </div>
         </div>

@@ -4,39 +4,46 @@ import Link from "next/link";
 
 import { CgHome } from "react-icons/cg";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
+import { Trans, useTranslation } from "next-i18next";
 
 const HomeSection5 = () => {
+  const { t } = useTranslation("index");
   return (
     <section className="max-width">
       <div className="pb-36 pt-24">
-        <h2 className="mb-12 text-3xl font-black lg:text-5xl">Como Funciona?</h2>
+        <h2 className="mb-12 text-3xl font-black lg:text-5xl">{t("section.how_it_works.title")}</h2>
         <div className="mb-24 grid gap-10 lg:grid-cols-3">
           <HomeSection5Cards
             img="/images/homeSection2-3.svg"
-            heading="Pesquisa"
-            text="De forma intuitiva defina a localização, datas e características que pretende para um estadia ideal!"
+            heading={t("section.how_it_works.search.title")}
+            text={t("section.how_it_works.search.description")}
           />
           <HomeSection5Cards
             img="/images/homeSection5-2.svg"
-            heading="Reserva"
-            text="Assim que o pedido for confirmado irás agilizar e esclarecer com o senhorio a data de mudança e entrega das chaves."
+            heading={t("section.how_it_works.reservation.title")}
+            text={t("section.how_it_works.reservation.description")}
           />
           <HomeSection5Cards
             img="/images/homeSection5-3.svg"
-            heading="Mudança"
-            text="O primeiro pagamento só será transferido após verificares a casa, estamos aqui para qualquer questão. Boa estadia!"
+            heading={t("section.how_it_works.change.title")}
+            text={t("section.how_it_works.change.description")}
           />
         </div>
         <span className="hidden justify-center lg:flex">
           <Link
             href={PROCURAR_ADVERT_URL}
-            className="w-1/5 items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
+            className="flex items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
           >
-            Encontrar{" "}
-            <span className="px-1">
-              <CgHome />
-            </span>{" "}
-            em...
+            <Trans
+              i18nKey={"index:section.how_it_works.find_at"}
+              components={{
+                house: (
+                  <span className="px-1">
+                    <CgHome />
+                  </span>
+                ),
+              }}
+            ></Trans>
           </Link>
         </span>
       </div>

@@ -19,12 +19,14 @@ import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot, BsHeart } from "react-icons/bs";
 import { checkIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
+import { useTranslation } from "next-i18next";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
 }
 
 export default function RoomCard({ advertisement }: RoomCardProps) {
+  const { t } = useTranslation();
   const profile = useCurrentUser();
   const setFavouriteProfile = useSetProfileFavouritesInformation();
   const advertisementOverallRating =
@@ -108,28 +110,28 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   <div>
                     <RiUserLine className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.tenant_number} {advertisement.tenant_number == 1 ? "Hóspede" : "Hóspedes"}
+                      {t("guestWithCount", { count: advertisement.tenant_number })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <BiBed className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.beds} {advertisement.beds == 1 ? "Cama" : "Camas"}
+                      {t("advertisements:bedWithCount", { count: advertisement.beds })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <TbBed className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.rooms} {advertisement.rooms == 1 ? "Quarto" : "Quartos"}
+                      {t("advertisements:roomWithCount", { count: advertisement.rooms })}
                     </span>
                   </div>
                   <div>
                     <BsDot className="my-auto inline" />
                     <GrRestroom className="my-auto inline" />
                     <span className="my-auto text-xs">
-                      {advertisement.bathrooms} {advertisement.bathrooms == 1 ? "Casa De Banho" : "Casas De Banho"}
+                      {t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })}
                     </span>
                   </div>
                 </div>
@@ -148,11 +150,13 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
                       <BsHeart className={classNames("inline")} color={isFavourite() == false ? "black" : "red"} />
-                      <span className="my-auto ml-2">Favoritos</span>
+                      <span className="my-auto ml-2">{t("favourites", { count: 2 })}</span>
                     </Button>
                   </div>
                   <div className="text-end">
-                    <h3 className="text-xl font-bold text-primary-500">{advertisement.month_rent} €/mês</h3>
+                    <h3 className="text-xl font-bold text-primary-500">
+                      {t("advertisements:price_month", { price: advertisement.month_rent })}
+                    </h3>
                     <div className="d-flex">
                       <p className="mt-1 text-xs lg:text-base">
                         {checkIfExpensesIncluded(advertisement.expenses.services || [])}

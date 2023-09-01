@@ -39,7 +39,6 @@ const BlogIdPage = ({ blog }: BlogIdPageProps) => {
 export default BlogIdPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
   const blogId = ctx.params?.id;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session

@@ -11,6 +11,8 @@ const paths = [
   { url: "", label: "Informações pessoais" },
 ] as BreadcrumbPath[];
 
+// TODO: this is not being used
+
 const InfoPessoais = () => {
   return (
     <section>
@@ -32,7 +34,7 @@ const InfoPessoais = () => {
                   <div className="flex-1">
                     <div className="mb-1 text-xl">Valor Mensal Outubro</div>
                     <div className="text-2xl font-bold">
-                      400€/<span className="text-base ">mês</span>
+                      400€/<span className="text-base">mês</span>
                     </div>
                   </div>
 

@@ -20,12 +20,14 @@ import { SearchFields } from "../../../search/SearchInputField";
 import { Reservation } from "../../../../models/reservation";
 import { trpc } from "../../../../utils/trpc";
 import { Label } from "flowbite-react";
+import { useTranslation } from "next-i18next";
 
 type FormReservation = {
   number_guests: number;
 };
 
 export const RoomPagamento = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const profile = useCurrentUser();
   const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
@@ -157,7 +159,9 @@ export const RoomPagamento = () => {
       <form className="w-full" id="reserva" onSubmit={handleSubmit(makeReservation)}>
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
           <div className="flex flex-col justify-center gap-4 ">
-            <div className="mt-2 text-center text-2xl font-bold text-primary-500">{setAdvertPrice()}&euro;/mês</div>
+            <div className="mt-2 text-center text-2xl font-bold text-primary-500">
+              {t("advertisements:price_month", { price: setAdvertPrice() })}
+            </div>
 
             <ExpensesComponent expenses={advertisement?.expenses || {}} />
             <hr />
@@ -165,7 +169,7 @@ export const RoomPagamento = () => {
             <div className="mt-5 grid grid-cols-2 gap-4">
               <div className="mb-2 block w-full">
                 <div className="mb-2 block">
-                  <Label htmlFor="Entrada" value="Entrada" />
+                  <Label htmlFor="Entrada" value={t("start")} />
                 </div>
                 <FeatherDatePicker
                   minDate={checkMonthsInAdvance()}
@@ -194,7 +198,7 @@ export const RoomPagamento = () => {
 
             <div className="mb-2 block">
               <div className="mb-2 block">
-                <Label htmlFor="Hóspedes" value="Hóspedes" />
+                <Label htmlFor="Hóspedes" value={t("guest", { count: 2 })} />
               </div>
               <Controller
                 control={control}
@@ -206,7 +210,7 @@ export const RoomPagamento = () => {
             </div>
           </div>
 
-          <div className="mb-3 mt-4 text-xl font-bold">Pagamento</div>
+          <div className="mb-3 mt-4 text-xl font-bold">{t("payment")}</div>
 
           <div className="flex flex-row justify-between">
             <div>1ª Renda</div>
@@ -223,7 +227,7 @@ export const RoomPagamento = () => {
               className="mb-7 cursor-pointer text-[#8A8A8A] underline underline-offset-1"
               onClick={(e) => setIsOpen(true)}
             >
-              Detalhes do Pagamento
+              {t("payment_details")}
             </div>
           </div>
           <hr />
@@ -244,7 +248,7 @@ export const RoomPagamento = () => {
         <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
           <div className="flex flex-col text-left">
             <h1 className="mt-2 text-2xl font-bold text-black">
-              {setAdvertPrice()}&euro;<span className="text-gray-600">/mês</span>
+              {t("advertisements:price_month", { price: setAdvertPrice() })}
             </h1>
             <h1 className="mt-3  text-xl text-gray-500">{mobileRangeDates()}</h1>
 
@@ -252,7 +256,7 @@ export const RoomPagamento = () => {
               className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
               onClick={(e) => setIsOpen(true)}
             >
-              Detalhes do Pagamento
+              {t("payment_details")}
             </div>
           </div>
 

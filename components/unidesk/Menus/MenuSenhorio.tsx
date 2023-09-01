@@ -9,6 +9,7 @@ import {
   UNIDESK_SENHORIO_PAINEL_URL,
   UNIDESK_SENHORIO_REVIEWS_URL,
 } from "../../../models/paths";
+import { useTranslation } from "next-i18next";
 
 type MenuSenhorioProps = {
   activeSection: "adverts" | "single_advert" | "inbox" | "uni-controlo" | "notifications";
@@ -26,18 +27,19 @@ type MenuSenhorioProps = {
 
 const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
   const currentAdvertisement = useSelectedAnuncioMenuSenhorio();
+  const { t } = useTranslation();
 
   return (
     <Menu>
       <MenuGrouper
-        title={"Anúncios"}
+        title={t("advertisement", { count: 2 })}
         selectedGroup={activeSection === "adverts"}
         isCollapsed={true}
         defaultOpen={activeSection === "adverts"}
       >
         <MenuOption
           url={UNIDESK_SENHORIO_PAINEL_URL}
-          label={"Painel"}
+          label={t("admin:unidesk.common.panel")}
           activeLink={activeUrl === "main_panel"}
         ></MenuOption>
       </MenuGrouper>
@@ -54,7 +56,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           ></MenuOption>
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/photos`}
-            label="Fotos"
+            label={t("advertisements:photo", { count: 2 })}
             activeLink={activeUrl === "advert_photos"}
           ></MenuOption>
           <MenuOption
@@ -64,19 +66,14 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           ></MenuOption>
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/prices`}
-            label="Preços"
+            label={t("advertisements:price", { count: 2 })}
             activeLink={activeUrl === "advert_prices"}
           ></MenuOption>
-          <MenuOption url={""} label="Informações contratuais" blocked={true}></MenuOption>
+          <MenuOption url={""} label="admin:unidesk.common.contracts" blocked={true}></MenuOption>
         </MenuGrouper>
       )}
 
-      <MenuGrouper
-        title={"Caixa de entrada"}
-        url={INBOX_URL}
-        selectedGroup={activeSection === "inbox"}
-        isCollapsed={false}
-      />
+      <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
         isCollapsed={true}
         title={"Uni-controlo"}
@@ -86,22 +83,27 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         <MenuOption
           blocked={false}
           url={UNIDESK_SENHORIO_CALENDAR_URL}
-          label="Calendário"
+          label="admin:unidesk.common.calendar"
           activeLink={activeUrl === "calendar"}
         />
         <MenuOption
           blocked={false}
           url={UNIDESK_SENHORIO_REVIEWS_URL}
-          label="Reviews"
+          label={t("admin:unidesk.landlord.reviews")}
           activeLink={activeUrl === "reviews"}
         />
-        <MenuOption blocked={false} url={UNICONTROLO_GUESTS_URL} label="Hóspedes" activeLink={activeUrl === "guests"} />
+        <MenuOption
+          blocked={false}
+          url={UNICONTROLO_GUESTS_URL}
+          label={t("guest", { count: 2 })}
+          activeLink={activeUrl === "guests"}
+        />
         <MenuOption blocked={true} url="" label="Transações" activeLink={false} />
         <MenuOption blocked={true} url="" label="Despesas" activeLink={false} />
         <MenuOption blocked={true} url="" label="Reparações" activeLink={false} />
       </MenuGrouper>
       <MenuGrouper
-        title={"Notificações"}
+        title={t("notifications")}
         selectedGroup={activeSection === "notifications"}
         isCollapsed={false}
         url={NOTIFICATIONS_URL}

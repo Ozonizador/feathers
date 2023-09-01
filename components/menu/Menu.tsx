@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import { TiLockClosed } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 type MenuProps = {
   children: ReactNode;
@@ -21,6 +22,7 @@ type MenuOptionProps = {
 
 const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps) => {
   const router = useRouter();
+  const { t } = useTranslation();
   const goToUrl = () => {
     url && router.push(url);
   };
@@ -35,10 +37,10 @@ const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps
       {blocked ? (
         <div className="flex">
           <TiLockClosed className="my-auto" />
-          <span className="ml-2">{label}</span>
+          <span className="ml-2">{t(label)}</span>
         </div>
       ) : (
-        label
+        t(label)
       )}
     </div>
   );

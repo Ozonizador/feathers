@@ -1,0 +1,30 @@
+{
+  "explore_city": "Explore our most popular cities!",
+  "section": {
+    "how_it_works": {
+      "title": "How it works?",
+      "find_at": "Find <house/> at..",
+      "search": {
+        "title": "Search",
+        "description": "Define the location, dates and features you want for an ideal stay!"
+      },
+      "reservation": {
+        "title": "Reservation",
+        "description": "Once the order is confirmed, you will expedite and clarify with the landlord the date of change and delivery of the keys."
+      },
+      "change": {
+        "title": "Change",
+        "description": "The first payment will only be transferred after checking the house, we are here for any question. Good stay!"
+      }
+    },
+    "testemonials": {
+      "title": "Testemonials",
+      "property_owner": "Unihosts owner"
+    },
+    "have_property": {
+      "title": "Have a \n property?",
+      "description": "Start advertising now and \nmonetize your property!",
+      "know_more": "Want to know more"
+    }
+  }
+}

@@ -5,14 +5,16 @@ import { Blog, BlogCategoryLabel } from "../../../models/blog";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
-import { pt } from "date-fns/locale";
+import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 interface BlogPostSectionProps {
   blog: Blog;
 }
 
 const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const router = useRouter();
+  const { t } = useTranslation();
   const renderers = {
     p: (props: any) => <p className="my-2 leading-8">{props.children}</p>,
     h1: (props: any) => <h1 className="text-primary-500">{props.children}</h1>,
@@ -36,14 +38,14 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
 
         <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:w-full lg:justify-center">
           <div className="mb-7 mt-5 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">
-            {BlogCategoryLabel[blog.category]}
+            {t(BlogCategoryLabel[blog.category])}
           </div>
           <h1 className="w-full text-center text-2xl font-bold text-white lg:w-3/4 lg:text-5xl">{blog.title}</h1>
           <p className="text-x1 mt-6  text-center text-white lg:mt-14 lg:text-2xl">
             By Unihosts at{" "}
             <span className="capitalize">
               {format(parseISO(blog.created_at), "dd MMMM yyyy", {
-                locale: pt,
+                locale: router.locale === "pt" ? pt : enGB,
               })}
             </span>
           </p>

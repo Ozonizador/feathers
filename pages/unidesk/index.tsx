@@ -6,6 +6,8 @@ import UnideskHero from "../../components/unidesk/Estudante/unideskHero/UnideskH
 import UnideskOptions from "../../components/unidesk/Estudante/unideskOptions/UnideskOptions";
 import UnideskSenhorioOptions from "../../components/unidesk/Senhorio/UnideskOptionsSenhorio/UnideskSenhorioOptions";
 import { useGetUserType } from "../../context/MainProvider";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 export default function Unidesk() {
   const { userAppMode } = useGetUserType();
@@ -18,10 +20,11 @@ export default function Unidesk() {
 }
 
 const UnideskSenhorio = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <div>
-        <UnideskHero title="Senhorio" />
+        <UnideskHero title={t("landlord", { count: 1 })} />
         <UnideskSenhorioOptions />
       </div>
     </div>
@@ -29,10 +32,11 @@ const UnideskSenhorio = () => {
 };
 
 const UnideskEstudante = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <div>
-        <UnideskHero title="Estudante" />
+        <UnideskHero title={t("student", { count: 1 })} />
         <UnideskOptions />
       </div>
     </div>
@@ -40,6 +44,7 @@ const UnideskEstudante = () => {
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -59,6 +64,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

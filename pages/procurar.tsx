@@ -8,6 +8,7 @@ import { FilterAdvertisements } from "../server/types/advertisement";
 import { giveSearchByLocationSearch } from "../hooks/mapService";
 import { coordinatesArrayToGeoPoint, coordinatesObjectToArray } from "../utils/map-services";
 import { useSetSearchLocationByProperty } from "../context/MainProvider";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 type ProcurarProps = {
   filter: FilterAdvertisements;
@@ -41,6 +42,7 @@ export default Procurar;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const query = ctx.query;
+  const locale = ctx.locale;
 
   let serverFilter: FilterAdvertisements = defaultFilter;
   const { filter, order } = serverFilter;
@@ -50,6 +52,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       props: {
         filter: serverFilter,
+        ...(await serverSideTranslations(locale ?? "pt")),
       },
     };
   }
@@ -59,6 +62,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       props: {
         filter: serverFilter,
+        ...(await serverSideTranslations(locale ?? "pt")),
       },
     };
   }
@@ -66,6 +70,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const firstSearch = data.features[0];
   const coordinates = firstSearch ? coordinatesArrayToGeoPoint(firstSearch.center) : null;
   return {
-    props: { filter: { filter: { ...filter, coordinates }, order } },
+    props: {
+      filter: { filter: { ...filter, coordinates }, order },
+      ...(await serverSideTranslations(locale ?? "pt")),
+    },
   };
 };

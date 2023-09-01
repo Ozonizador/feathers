@@ -22,6 +22,8 @@ import Link from "next/link";
 import { Profile } from "../../models/profile";
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 {
   /* page 59 XD */
@@ -29,10 +31,11 @@ import { UNIDESK_URL } from "../../models/paths";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
-  { url: "", label: "Caixa de Entrada" },
+  { url: "", label: "inbox" },
 ] as BreadcrumbPath[];
 
 const CaixaEntrada = () => {
+  const { t } = useTranslation();
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
   const profile = useCurrentUser();
@@ -108,14 +111,14 @@ const CaixaEntrada = () => {
         <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
-        <BreadcrumbMiddle title="Caixa de Entrada" icon={IconCaixa} />
+        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
         {/* DESKTOP */}
         <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
           {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
           {conversations && conversations.length > 0 && (
             <>
               <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-                <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">Mensagens</a>
+                <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">{t("admin:messages")}</a>
 
                 <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
                 {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
@@ -168,7 +171,7 @@ const CaixaEntrada = () => {
                             <div>
                               <div>
                                 {(currentConversation.reservation.status &&
-                                  ReservationStatusLabel[currentConversation.reservation.status]) ||
+                                  t(ReservationStatusLabel[currentConversation.reservation.status])) ||
                                   ""}
                               </div>
                               <div className="text-sm">
@@ -186,34 +189,36 @@ const CaixaEntrada = () => {
                           {currentConversation.reservation.status === "REQUESTED" && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
-                                Aceitar
+                                {t("accept")}
                               </Button>
                               <Button onClick={() => updateReservationStatus("REJECTED")} type="button">
-                                Rejeitar
+                                {t("decline")}
                               </Button>
                             </div>
                           )}
                           {currentConversation.reservation.status === "CHANGE_REQUESTED" && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">
-                                Aceitar
+                                {t("accept")}
                               </Button>
                               <Button onClick={() => updateReservationStatus("CHANGE_REQUESTED")} type="button">
-                                Rejeitar
+                                {t("decline")}
                               </Button>
                             </div>
                           )}
-                          {currentConversation.reservation.status === "ACCEPTED" && (
-                            <div className="text-primary-500">Reserva aceite</div>
-                          )}
-                          {currentConversation.reservation.status === "REJECTED" && <div>Reserva rejeitada</div>}
-                          {currentConversation.reservation.status === "CHANGE_ACCEPTED" && (
-                            <div className="text-primary-500">Alteração reserva aceite</div>
-                          )}
-                          {currentConversation.reservation.status === "CHANGE_REJECTED" && (
-                            <div>Alteração reserva rejeitada</div>
-                          )}
-
+                          <div
+                            className={classNames("my-1", {
+                              "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
+                                currentConversation.reservation.status
+                              ),
+                            })}
+                          >
+                            {t(
+                              ReservationStatusLabel[
+                                currentConversation.reservation.status as keyof typeof ReservationStatusLabel
+                              ]
+                            )}
+                          </div>
                           <div className="text-small pt-5 text-center">
                             <Link href={`/perfil/${currentConversation.tenant.slug}`}>Mostrar perfil</Link>
                           </div>
@@ -231,7 +236,7 @@ const CaixaEntrada = () => {
               className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white"
               onClick={() => setCurrentConversation(undefined)}
             >
-              Mensagens
+              {t("admin:messages")}
             </a>
 
             <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
@@ -315,6 +320,7 @@ const MessagesSenderZone = ({
 export default CaixaEntrada;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -334,6 +340,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

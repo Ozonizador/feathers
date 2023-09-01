@@ -3,6 +3,7 @@ import { useAdvertisement, useSetAdvertisement } from "../../context/Advertiseme
 import AdvertisementInfoComponent from "../anuncio/AdvertisementInfoComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 type FormSobreCasa = {
   title: string;
@@ -13,6 +14,7 @@ type FormSobreCasa = {
 };
 
 const FormSobreCasa = () => {
+  const { t } = useTranslation();
   // contexts
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
@@ -42,12 +44,12 @@ const FormSobreCasa = () => {
         <div className="mt-2 flex gap-5">
           <div className="w-48">
             <Button onClick={decrementStep} type="button">
-              Voltar Atrás
+              {t("go_back")}
             </Button>
           </div>
           <div className="w-48">
             <Button onClick={methods.handleSubmit(nextStep)} type="button">
-              Seguinte &#8594;
+              {t("next_step")} &#8594;
             </Button>
           </div>
         </div>

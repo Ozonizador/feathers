@@ -8,8 +8,12 @@ import { RECOVER_URL, REGISTER_URL, TYPE_PROFILE_CHOICE_URL } from "../../models
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 import { FcGoogle } from "react-icons/fc";
+import { useTranslation } from "next-i18next";
+import { GetServerSidePropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,18 +46,18 @@ const Login = () => {
     <div className="max-width my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-7/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
+          <div className="p-3 text-center text-primary-500">{t("login")}</div>
           <Link
             href={REGISTER_URL}
             aria-label="register_password"
             className="border-l border-terciary-100 p-3 text-center"
           >
-            Registar
+            {t("register")}
           </Link>
         </div>
         <div className="mt-9 px-10 py-5">
           <div className="mb-9 text-xl font-bold">
-            Bem-vindo à <span className="text-primary-500">Unihosts.pt</span>
+            {t("welcome_to")} <span className="text-primary-500">Unihosts.pt</span>
           </div>
           <form onSubmit={(e) => normalLogin(e)}>
             <div className="mt-3">
@@ -74,21 +78,21 @@ const Login = () => {
                   type="password"
                   autoComplete="on"
                   name="password_input"
-                  labelText="Palavra-passe"
+                  labelText={t("password")}
                 ></Input>
               </div>
             </div>
             <div className="my-5">
-              <Button type="submit">Iniciar Sessão</Button>
+              <Button type="submit">{t("login")}</Button>
             </div>
           </form>
           <Link href={RECOVER_URL} aria-label="recover_password">
-            <div className="mt-3 text-center italic text-primary-500">Esqueci-me da palavra-passe</div>
+            <div className="mt-3 text-center italic text-primary-500">{t("forgot_pw")}</div>
           </Link>
 
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
-            <span className="mx-4 flex-shrink text-lg font-bold text-gray-400">ou</span>
+            <span className="mx-4 flex-shrink text-lg font-bold text-gray-400">{t("or")}</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
           <div className="mb-3 flex justify-around gap-5">
@@ -108,3 +112,11 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common"])),
+    },
+  };
+}

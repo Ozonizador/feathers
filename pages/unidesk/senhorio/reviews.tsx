@@ -16,6 +16,7 @@ import {
 import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../../models/conversation";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
@@ -51,6 +52,7 @@ const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: Rev
 export default ReviewsPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -102,6 +104,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       latestReviews: reviewsError ? [] : latestReviews,
       generalClassification: classificationError ? 0 : generalClassification,
       responseRate,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

@@ -12,6 +12,6 @@ export const BLOG_PROPERTIES = {
 } as const;
 
 export const BlogCategoryLabel = {
-  LANDLORD: "Senhorio",
-  TENANT: "Estudante",
+  LANDLORD: "landlord",
+  TENANT: "student",
 };

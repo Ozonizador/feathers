@@ -42,7 +42,7 @@ import classNames from "classnames";
 import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
-  const { t } = useTranslation("navbar");
+  const { t } = useTranslation();
   const user = useUser();
   const profile = useCurrentUser();
   const router = useRouter();
@@ -96,8 +96,9 @@ export const Navbar = () => {
                 <select
                   className="ml-2 border-none"
                   onChange={(event) => {
-                    router.push(router.pathname, undefined, { locale: event.target.value });
+                    router.push(router.asPath, undefined, { locale: event.target.value });
                   }}
+                  value={router.locale || "pt"}
                 >
                   <option value="en">EN</option>
                   <option value="pt">PT</option>
@@ -113,8 +114,8 @@ export const Navbar = () => {
                     src="/images/logo1.png"
                     alt=""
                     className="cursor-pointer"
-                    objectFit="contain"
-                    layout="fill"
+                    style={{ objectFit: "contain" }}
+                    fill
                   ></Image>
                 </div>
               </Link>
@@ -135,9 +136,9 @@ export const Navbar = () => {
                   })}
                 >
                   {userAppMode === "TENANT" ? (
-                    <Link href="/">{t("home")}</Link>
+                    <Link href="/">{t("navbar:home")}</Link>
                   ) : (
-                    <Link href={UNIDESK_URL}>{t("unidesk")}</Link>
+                    <Link href={UNIDESK_URL}>Unidesk</Link>
                   )}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
@@ -150,7 +151,7 @@ export const Navbar = () => {
                               checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
                           })}
                         >
-                          <h6>{t("announce_property")}</h6>
+                          <h6>{t("navbar:announce_property")}</h6>
                           <div className="my-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />
                           </div>
@@ -168,12 +169,12 @@ export const Navbar = () => {
                         <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                           <Menu.Item>
                             <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
-                              {t("how_it_works")}
+                              {t("navbar:how_it_works")}
                             </MyLink>
                           </Menu.Item>
                           <Menu.Item>
                             <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
-                              {t("announce")}
+                              {t("navbar:announce")}
                             </MyLink>
                           </Menu.Item>
                         </Menu.Items>
@@ -190,7 +191,7 @@ export const Navbar = () => {
                           checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
                       })}
                     >
-                      {t("find_place")}
+                      {t("navbar:find_place")}
                     </Link>
                   </div>
                 )}
@@ -201,7 +202,7 @@ export const Navbar = () => {
                       "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([BLOG_URL]) == true,
                     })}
                   >
-                    {t("blog")}
+                    {t("navbar:blog")}
                   </Link>
                 </div>
                 <div className="my-auto px-5">
@@ -211,7 +212,7 @@ export const Navbar = () => {
                       "border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([CONTACTOS_URL]) == true,
                     })}
                   >
-                    {t("contacts")}
+                    {t("navbar:contacts")}
                   </Link>
                 </div>
               </div>
@@ -236,7 +237,7 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div className="my-auto flex">
-                      <span className="mr-2">Estudante</span>
+                      <span className="mr-2">{t("student", { count: 1 })}</span>
                       <Switch
                         checked={true}
                         className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full", {
@@ -252,7 +253,7 @@ export const Navbar = () => {
                           })}
                         />
                       </Switch>
-                      <span className="ml-2">Senhorio</span>
+                      <span className="ml-2">{t("landlord", { count: 1 })}</span>
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
@@ -293,17 +294,17 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_STAY_URL}>
-                                    Minha Estadia
+                                    {t("my_stay")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_STUDENT_FAVOURITES_URL}>
-                                    Favoritos
+                                    {t("favourites", { count: 2 })}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
-                                    <p>Caixa de Entrada</p>
+                                    <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
@@ -313,7 +314,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
-                                    <p>Notificações</p>
+                                    <p>{t("notifications")}</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
@@ -324,17 +325,17 @@ export const Navbar = () => {
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
-                                    Conta
+                                    {t("account")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
-                                    Ajuda
+                                    {t("help")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
-                                    Sair
+                                    {t("leave")}
                                   </div>
                                 </Menu.Item>
                               </>
@@ -348,7 +349,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
-                                    <p>Caixa de Entrada</p>
+                                    <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {messagesNumber}
@@ -358,7 +359,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_SENHORIO_PAINEL_URL}>
-                                    Anúncios
+                                    {t("advertisement", { count: 2 })}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -368,7 +369,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
-                                    <p>Notificações</p>
+                                    <p>{t("notifications")}</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
                                         {notificationNumber}
@@ -379,17 +380,17 @@ export const Navbar = () => {
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
-                                    Conta
+                                    {t("account")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
-                                    Ajuda
+                                    {t("help")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
                                   <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
-                                    Sair
+                                    {t("leave")}
                                   </div>
                                 </Menu.Item>
                               </>

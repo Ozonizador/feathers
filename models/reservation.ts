@@ -28,12 +28,12 @@ export const RESERVATION_TABLE = {
 } as const;
 
 export enum ReservationStatusLabel {
-  REQUESTED = "Pedido de Reserva",
-  ACCEPTED = "Reserva Aceite",
-  REJECTED = "Reserva Rejeitada",
-  CHANGE_ACCEPTED = "Alteração de Reserva Aceite",
-  CHANGE_REQUESTED = "Alteração de Reserva",
-  CHANGE_REJECTED = "Alteração de Reserva Rejeitada",
+  REQUESTED = "advertisements:reservation_status.requested",
+  ACCEPTED = "advertisements:reservation_status.accepted",
+  REJECTED = "advertisements:reservation_status.rejected",
+  CHANGE_ACCEPTED = "advertisements:reservation_status.change_accepted",
+  CHANGE_REQUESTED = "advertisements:reservation_status.change_requested",
+  CHANGE_REJECTED = "advertisements:reservation_status.change_rejected",
 }
 
 export type ReservationWithReportsReviews = Reservation & {

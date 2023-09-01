@@ -6,6 +6,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import { useGetUserDates } from "../../context/MainProvider";
 import differenceInMonths from "date-fns/differenceInMonths";
+import { useTranslation } from "next-i18next";
 
 interface formatOpts {
   monthsAhead?: number;
@@ -14,6 +15,7 @@ interface formatOpts {
 /* PAGINA 7 DO XD */
 
 const ModalDetalhesPagamento = () => {
+  const { t } = useTranslation();
   const advertisement = useGetSingleAdvertisement();
   let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
@@ -75,7 +77,7 @@ const ModalDetalhesPagamento = () => {
                     as="h3"
                     className="mb-16 mt-6 text-center text-3xl font-bold leading-6 text-gray-900 lg:text-5xl"
                   >
-                    Detalhes do Pagamento
+                    {t("payment_details")}
                   </Dialog.Title>
 
                   <div className="mt-2">

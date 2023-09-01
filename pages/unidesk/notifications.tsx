@@ -13,13 +13,16 @@ import iconfavorito from "../../public/images/icon-pg37-1.svg";
 import IconNotification from "../../public/images/notificationsIcon.svg";
 import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
-  { url: "", label: "Caixa de Entrada" },
+  { url: "", label: "inbox" },
 ] as BreadcrumbPath[];
 
 const Notifications = () => {
+  const { t } = useTranslation();
   const { getNotifications } = useNotificationService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -50,7 +53,7 @@ const Notifications = () => {
       <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
         <Breadcrumbs icon={iconfavorito} paths={paths} />
       </div>
-      <BreadcrumbMiddle icon={IconNotification} title="Notificações" />
+      <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
       <div className="container mx-auto w-full lg:w-4/5">
         <>
           {isLoading && (
@@ -76,6 +79,7 @@ const Notifications = () => {
 export default Notifications;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -95,6 +99,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

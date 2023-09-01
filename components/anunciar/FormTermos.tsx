@@ -10,8 +10,10 @@ import { HOME_URL } from "../../models/paths";
 import Button from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
 import FeathersSpinner from "../utils/Spinner";
+import { useTranslation } from "next-i18next";
 
 const FormTermos = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const decrementStep = useDecrementStep();
   const [saving, setSaving] = useState<boolean>(false);
@@ -136,7 +138,7 @@ const FormTermos = () => {
           <div className="mt-6 flex gap-5 pt-5 lg:flex-row">
             <div className="w-48">
               <Button onClick={decrementStep} type="button">
-                Voltar Atrás
+                {t("go_back")}
               </Button>
             </div>
             <div className="w-48">

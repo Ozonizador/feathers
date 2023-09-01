@@ -2,8 +2,10 @@ import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvid
 import { useAdvertisement, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import HouseRulesComponent from "../anuncio/HouseRulesComponent";
 import Button from "../utils/Button";
+import { useTranslation } from "next-i18next";
 
 const FormHouseRules = () => {
+  const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
@@ -31,12 +33,12 @@ const FormHouseRules = () => {
       <div className="mt-2 flex gap-5">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">
-            Voltar Atrás
+            {t("go_back")}
           </Button>
         </div>
         <div className="w-48">
           <Button onClick={nextStep} type="button">
-            Seguinte &#8594;
+            {t("next_step")} &#8594;
           </Button>
         </div>
       </div>

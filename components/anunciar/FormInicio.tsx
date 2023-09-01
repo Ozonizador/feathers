@@ -1,5 +1,6 @@
 import React from "react";
 import { useIncrementStep } from "../../context/AnunciarProvider";
+import { useTranslation } from "next-i18next";
 import {
   useAdvertisement,
   useSetAdvertisement,
@@ -26,6 +27,7 @@ type FormInicioProps = {
 const FormInicio = () => {
   /* STEPS */
   const incrementStep = useIncrementStep();
+  const { t } = useTranslation();
 
   /* ADVERTISEMENT */
   const advertisement = useAdvertisement();
@@ -79,12 +81,12 @@ const FormInicio = () => {
           <div className="flex flex-row gap-5">
             <div className="w-48 lg:w-1/3">
               <Button onClick={checkPossibilites} type="button">
-                Atualizar No Mapa
+                {t("update_map")}
               </Button>
             </div>
             <div className="w-48 lg:w-1/3">
               <Button type="button" onClick={methods.handleSubmit(nextStep)}>
-                Seguinte &#8594;
+                {t("next_step")} &#8594;
               </Button>
             </div>
           </div>

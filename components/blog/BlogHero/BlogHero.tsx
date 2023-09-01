@@ -1,13 +1,15 @@
 import { Blog } from "../../../models/blog";
 import Image from "next/image";
-import { pt } from "date-fns/locale";
+import { pt, enGB } from "date-fns/locale";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
+import { useRouter } from "next/router";
 interface BlogHeroProps {
   blogs: Blog[];
 }
 
 export default function BlogHero({ blogs }: BlogHeroProps) {
+  const router = useRouter();
   return (
     <section className="mx-auto py-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
@@ -15,9 +17,15 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
         {blogs &&
           blogs.map((blog) => {
             return (
-              <Link href={`/blog/${blog.slug}`} key={blog.id}>
-                <article className="relative h-[500px] w-full cursor-pointer rounded-3xl bg-black px-7 lg:w-2/6">
-                  <Image src={blog.image} layout="fill" alt="" objectFit="cover" className="rounded-3xl opacity-50" />
+              <Link href={`/blog/${blog.slug}`} key={blog.id} className="w-full">
+                <article className="relative h-[500px] w-full cursor-pointer rounded-3xl bg-black px-7">
+                  <Image
+                    src={blog.image}
+                    fill
+                    alt=""
+                    style={{ objectFit: "cover" }}
+                    className="rounded-3xl opacity-50"
+                  />
 
                   <div className="absolute bottom-8 left-4 w-11/12">
                     <h2 className="bold mb-4 text-xl font-normal capitalize text-white">{blog.title}</h2>
@@ -26,7 +34,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                       <div>
                         <p className="normal-case text-gray-300">
                           {format(parseISO(blog.created_at), "dd MMMM yyyy", {
-                            locale: pt,
+                            locale: router.locale === "pt" ? pt : enGB,
                           })}
                         </p>
                       </div>

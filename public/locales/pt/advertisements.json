@@ -1,0 +1,47 @@
+{
+  "bed_one": "Cama",
+  "bed_other": "Camas",
+  "bedWithCount_one": "{{count}} Cama",
+  "bedWithCount_other": "{{count}} Camas",
+  "room_one": "Cama",
+  "room_other": "Camas",
+  "roomWithCount_one": "{{count}} Cama",
+  "roomWithCount_other": "{{count}} Camas",
+  "bathroom_one": "Casa de Banho",
+  "bathroom_other": "Casas de Banho",
+  "bathroomWithCount_one": "{{count}} Casa de Banho",
+  "bathroomWithCount_other": "{{count}} Casas de Banhos",
+  "electricity": "Eletricidade",
+  "gas": "Gás",
+  "water": "Água",
+  "photo_one": "Foto",
+  "photo_other": "Fotos",
+  "host_type": {
+    "super_flex": "Super Flexível",
+    "flex": "Flexível",
+    "moderate": "Moderado",
+    "rigid": "Rígido",
+    "super_flex_description": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "flex_description": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "moderate_description": "Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
+    "rigid_description": "Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral."
+  },
+  "reservation_status": {
+    "accepted": "Reserva Aceite",
+    "requested": "Pedido de Reserva",
+    "rejected": "Reserva Rejeitada",
+    "change_accepted": "Booking Amendment Accepted",
+    "change_requested": "Booking Amendment Requested",
+    "change_rejected": "Booking Amendment Rejected"
+  },
+  "price_one": "Preço",
+  "price_other": "Preços",
+  "price_month": "{{price}}€/mês",
+  "zones": {
+    "general": "Comodidades Gerais",
+    "bathroom": "Casa de Banho",
+    "bedroom": "Quarto",
+    "kitchen": "Cozinha",
+    "exterior": "Zona Exterior"
+  }
+}

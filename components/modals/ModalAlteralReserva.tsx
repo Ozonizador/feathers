@@ -6,12 +6,14 @@ import { useModalAlterarReserva, useSetOpenModalAlterarReserva } from "../../con
 import FeatherDatePicker from "../utils/FeatherDatepicker";
 import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
+import { useTranslation } from "next-i18next";
 
 /**
  * PAGINA 23 DO XD
  */
 
 const ModalAlterarReserva = () => {
+  const { t } = useTranslation();
   const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
 
@@ -105,7 +107,7 @@ const ModalAlterarReserva = () => {
                           <div className="mb-5">
                             <div className="inline-block">
                               <label htmlFor="exampleInputEmail1" className="form-label  text-base">
-                                Entrada
+                                {t("start")}
                               </label>
                               {reservation && (
                                 <div className="ml-3 inline-block">{new String(reservation?.start_date || "")}</div>
@@ -113,7 +115,7 @@ const ModalAlterarReserva = () => {
                             </div>
                             <div>
                               <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                Saida
+                                {t("end")}
                               </label>
                               {reservation && (
                                 <div className="ml-3 inline-block">{new String(reservation?.end_date || "")}</div>
@@ -124,7 +126,7 @@ const ModalAlterarReserva = () => {
                             <div className="flex items-center justify-center gap-7 align-middle">
                               <div>
                                 <label htmlFor="exampleInputEmail1" className="form-label  text-base">
-                                  Entrada
+                                  {t("start")}
                                 </label>
                                 <FeatherDatePicker
                                   date={newReservationStartDate}
@@ -139,7 +141,7 @@ const ModalAlterarReserva = () => {
 
                               <div>
                                 <label htmlFor="exampleInputEmail1" className="form-label mb-2 text-base">
-                                  Saida
+                                  {t("end")}
                                 </label>
 
                                 <FeatherDatePicker
@@ -191,12 +193,12 @@ const ModalAlterarReserva = () => {
                             <div className="mx-auto flex w-8/12 justify-between ">
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Pagamento Original</h5>
-                                <p className="underline underline-offset-8">Detalhes</p>
+                                <p className="underline underline-offset-8">{t("details")}</p>
                               </div>
 
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">Novo Pagamento</h5>
-                                <p className="underline underline-offset-8">Detalhes</p>
+                                <p className="underline underline-offset-8">{t("details")}</p>
                               </div>
                             </div>
                           </div>

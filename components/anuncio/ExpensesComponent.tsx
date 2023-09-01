@@ -2,7 +2,8 @@ import { AiOutlineFire, AiOutlineWifi } from "react-icons/ai";
 import { BiInfoCircle } from "react-icons/bi";
 import { BsWater } from "react-icons/bs";
 import { FaRegLightbulb } from "react-icons/fa";
-import { Advertisement, ExpenseName, HouseExpenses, TypeExpense } from "../../models/advertisement";
+import { ExpenseName, HouseExpenses, TypeExpense } from "../../models/advertisement";
+import { useTranslation } from "next-i18next";
 
 /**
  * Expenses Logic
@@ -47,6 +48,7 @@ interface RoomExpensesPopover {
 }
 
 const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
+  const { t } = useTranslation();
   const checkIfIncluded = (type: ExpenseName) => {
     if (!expenses || !expenses.services || expenses.services.length === 0) return false;
     const selectedExpense = expenses.services.find((expense) => expense.name === type);
@@ -66,7 +68,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           <FaRegLightbulb className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm">
             <>
-              Eletricidade
+              {t("advertisements:electricity")}
               <br />
               {checkIfIncluded("LIGHTS")}
             </>
@@ -76,7 +78,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           <AiOutlineFire className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
-              Gás
+              {t("advertisements:gas")}
               <br />
               {checkIfIncluded("GAS")}
             </>
@@ -97,7 +99,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           <BsWater className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
-              Água
+              {t("advertisements:water")}
               <br />
               {checkIfIncluded("WATER")}
             </>

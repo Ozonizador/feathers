@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar } from "flowbite-react";
 import { Profile } from "../../../models/profile";
 import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../models/reservation";
+import { useTranslation } from "next-i18next";
 
 interface CaixaCardProps {
   profile?: Profile;
@@ -9,6 +10,7 @@ interface CaixaCardProps {
 }
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
+  const { t } = useTranslation();
   const formatCardDate = () => {
     if (!reservation?.updated_at) return "";
     const now = new Date();
@@ -34,7 +36,7 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
       <div className="flex w-full flex-col">
         <div className="flex w-full flex-row">
           <h1 className="text-base font-bold text-green-500">
-            {ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel]}
+            {t(ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel])}
           </h1>
           <p className="my-auto ml-auto text-xs">{formatCardDate()}</p>
         </div>

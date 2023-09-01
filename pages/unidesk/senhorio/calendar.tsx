@@ -20,6 +20,7 @@ import { isNumeric } from "../../../utils/utils";
 import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../../models/paths";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ESTADIA_MINIMA = [
   { label: "3 Meses", value: 3 },
@@ -298,6 +299,7 @@ const AdvertisementPropertiesComponent = ({
 export default CalendarPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -325,6 +327,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisements: error || !data ? [] : data,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

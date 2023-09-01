@@ -1,0 +1,47 @@
+{
+  "bed_one": "Bed",
+  "bed_other": "Beds",
+  "bedWithCount_one": "{{count}} Bed",
+  "bedWithCount_other": "{{count}} Beds",
+  "room_one": "Room",
+  "room_other": "Rooms",
+  "roomWithCount_one": "{{count}} Room",
+  "roomWithCount_other": "{{count}} Rooms",
+  "bathroom_one": "Bathroom",
+  "bathroom_other": "Bathrooms",
+  "bathroomWithCount_one": "{{count}} Bathroom",
+  "bathroomWithCount_other": "{{count}} Bathrooms",
+  "electricity": "Electricity",
+  "gas": "Gas",
+  "water": "Water",
+  "photo_one": "Photo",
+  "photo_other": "Photos",
+  "host_type": {
+    "super_flex": "Super Flexible",
+    "flex": "Flexible",
+    "moderate": "Moderate",
+    "rigid": "Rigid",
+    "super_flex_description": "Up to 30 days before check-in: 100% of the rental amount is refunded. After this period and up to 2 days before, the amount refunded is 50%. After this period payment is in full.",
+    "flex_description": "Up to 30 days before check-in: 100% of the rental amount is refunded. After this period and up to 7 days before, the amount refunded is 50%. After this period payment is in full.",
+    "moderate_description": "Up to 60 days before check-in: 100% of the rental amount is refunded. After this period and up to 15 days before, the amount refunded is 50%. After this period payment is in full.",
+    "rigid_description": "Up to 90 days before check-in: 100% of the rental amount is refunded. After that period and up to 30 days before, the amount refunded is 50%. After this period payment is in full."
+  },
+  "reservation_status": {
+    "accepted": "Reservation Accepted",
+    "requested": "Reservation Requested",
+    "rejected": "Reservation Rejected",
+    "change_accepted": "Ongoing new Reservation Accepted",
+    "change_requested": "Alteração de Reserva",
+    "change_rejected": "Alteração de Reserva Rejeitada"
+  },
+  "price_one": "Price",
+  "price_other": "Price",
+  "price_month": "{{price}}€/month",
+  "zones": {
+    "general": "General Amenities",
+    "bathroom": "Bathroom",
+    "bedroom": "Bedroom",
+    "kitchen": "Kitchen",
+    "exterior": "Exterior Area"
+  }
+}

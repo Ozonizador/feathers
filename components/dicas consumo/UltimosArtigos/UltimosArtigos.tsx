@@ -5,13 +5,15 @@ import useBlogService from "../../../hooks/blogService";
 import { UserTypes } from "../../../models/profile";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { pt } from "date-fns/locale";
+import { pt, enGB } from "date-fns/locale";
+import { useRouter } from "next/router";
 interface UltimosArtigosProps {
   slug: string;
   category: UserTypes;
 }
 
 const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
+  const router = useRouter();
   const { getSimilarBlogPosts } = useBlogService();
   const [similarBlogs, setSimilarBlogs] = useState<Blog[]>([]);
 
@@ -44,7 +46,7 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
                   <div className="mb-10 mt-5 flex w-full justify-between text-sm text-gray-400 lg:mb-0 lg:mt-10 lg:w-full">
                     <div className="capitalize">
                       {format(parseISO(blog.created_at), "dd MMMM yyyy", {
-                        locale: pt,
+                        locale: router.locale === "pt" ? pt : enGB,
                       })}
                     </div>
                     <div>By Unihosts</div>

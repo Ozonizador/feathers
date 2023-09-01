@@ -19,7 +19,7 @@ const Spinner = dynamic(() => import("./Spinner"), {
 });
 
 const buttonProps = variantProps({
-  base: tw`text-center focus:outline-none focus:ring-0`,
+  base: tw`text-center focus:outline-none focus:ring-0 capitalize`,
   variants: {
     variant: {
       facebook: tw`bg-socials-facebook`,

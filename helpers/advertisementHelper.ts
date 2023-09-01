@@ -46,19 +46,19 @@ import { FiMonitor } from "react-icons/fi";
 
 const hostTypeFlexDescription = (type: HostFlexType) => {
   return {
-    SUPER_FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
-    FLEX: `Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
-    MODERATE: `Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
-    RIGID: `Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.`,
+    SUPER_FLEX: `advertisements:host_type.super_flex_description`,
+    FLEX: `advertisements:host_type.flex_description`,
+    MODERATE: `advertisements:host_type.moderate_description`,
+    RIGID: `advertisements:host_type.rigid_description`,
   }[type];
 };
 
 const hostTranslate = (type: HostFlexType) => {
   return {
-    SUPER_FLEX: `Super Flexível`,
-    FLEX: `Flexível`,
-    MODERATE: `Moderado`,
-    RIGID: `Rigido`,
+    SUPER_FLEX: `advertisements:host_type.super_flex`,
+    FLEX: `advertisements:host_type.flex`,
+    MODERATE: `advertisements:host_type.moderate`,
+    RIGID: `advertisements:host_type.rigid`,
   }[type];
 };
 

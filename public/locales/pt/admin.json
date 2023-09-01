@@ -1,0 +1,54 @@
+{
+  "configurations": "Configurações",
+  "change_password": "Alterar password",
+  "recover_password": "Recuperar password",
+  "agree_terms": "Ao registar-se está a concordar com os nossos <lnk1>{{terms}}</lnk1> and <lnk2>{{privacy}}</lnk2>.",
+  "im_student": "Sou estudante",
+  "im_landlord": "Sou senhorio",
+  "unidesk": {
+    "common": {
+      "panel": "Painel",
+      "contracts": "Informações contratuais",
+      "calendar": "Calendário"
+    },
+    "student": {
+      "general": "Informações gerais",
+      "rent": "Renda",
+      "repairs": "Reparações",
+      "expenses": "Despesas",
+      "contracts": "Informações contratuais"
+    },
+    "landlord": {
+      "reviews": "Reviews",
+      "transactions": "Transações"
+    }
+  },
+  "messages": "Mensagens",
+  "config": {
+    "general": "Informações pessoais",
+    "phone_contact": "Contacto telefónico",
+    "spoken_languages": "Línguas faladas",
+    "about_me": "Sobre mim",
+    "nationality": "Nacionalidade",
+    "location": "Localidade",
+    "gender": "Género",
+    "name": "Nome",
+    "surname": "Apelido",
+    "birth_date": "Data de Nascimento",
+    "change_photo": "Mudar Foto",
+    "select_nationality": "Selecionar uma nacionalidade",
+    "add_language": "Adicionar Língua",
+    "payment_and_receiving": "Pagamentos e Recebimentos",
+    "by_email": "Por email",
+    "by_message": "Por mensagem",
+    "current_pw": "Palavra passe atual",
+    "new_pw": "Palavra passe nova",
+    "new_pw_again": "Repita palavra passe nova",
+    "receive_notifications_again": "Receber notificações de Unihost"
+  },
+  "descriptions": {
+    "general": "Forneça os dados sobre si e como o podemos contactar.",
+    "payment_receiving": "Defina como vai receber/pagar as transações que efectuar.",
+    "configurations": "Atualize a sua palavra-passe e controle as notificações."
+  }
+}

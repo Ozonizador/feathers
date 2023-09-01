@@ -7,12 +7,15 @@ import Image from "next/image";
 import personalInformationImage from "../../public/images/mainmenu_1.png";
 import paymentsImage from "../../public/images/mainmenu_2.png";
 import configurationsImage from "../../public/images/mainmenu_3.png";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const Index = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="mb-3 flex flex-1 justify-center">
-        <h5 className="my-12 text-5xl font-bold">Conta</h5>
+        <h5 className="my-12 text-5xl font-bold">{t("account")}</h5>
       </div>
 
       <div className="flex flex-col items-center justify-center gap-12 px-4 pb-10 align-middle">
@@ -24,8 +27,8 @@ const Index = () => {
                   <Image src={personalInformationImage} alt="Informações pessoais" height={96} width={96} />
                 </div>
                 <div className="ml-3 lg:ml-5">
-                  <div className="mb-2 text-xl font-bold lg:text-2xl">Informações pessoais</div>
-                  <div>Forneça os dados sobre si e como o podemos contactar.</div>
+                  <div className="mb-2 text-xl font-bold lg:text-2xl">{t("admin:config.general")}</div>
+                  <div>{t("admin:descriptions.general")}</div>
                 </div>
               </div>
             </div>
@@ -40,8 +43,8 @@ const Index = () => {
                   <Image src={paymentsImage} alt="Pagamentos" height={96} width={96} />
                 </div>
                 <div className="ml-3 lg:ml-5">
-                  <div className="mb-2 text-xl font-bold lg:text-2xl">Pagamentos e recebimentos</div>
-                  <div>Defina como vai receber/pagar as transações que efectuar.</div>
+                  <div className="mb-2 text-xl font-bold lg:text-2xl">{t("admin:config.payment_and_receiving")}</div>
+                  <div>{t("admin:descriptions.payment_receiving")}</div>
                 </div>
               </div>
             </div>
@@ -56,8 +59,8 @@ const Index = () => {
                   <Image src={configurationsImage} alt="Configurações" height={96} width={96} />
                 </div>
                 <div className="ml-3 lg:ml-5">
-                  <div className="mb-2 text-xl font-bold lg:text-2xl">Configurações</div>
-                  <div>Atualize a sua palavra-passe e controle as notificações.</div>
+                  <div className="mb-2 text-xl font-bold lg:text-2xl">{t("admin:configurations")}</div>
+                  <div>{t("admin:descriptions.configurations")}</div>
                 </div>
               </div>
             </div>
@@ -71,6 +74,7 @@ const Index = () => {
 export default Index;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -90,6 +94,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

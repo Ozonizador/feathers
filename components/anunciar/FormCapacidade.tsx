@@ -3,8 +3,10 @@ import { useAdvertisement, useSetAdvertisement } from "../../context/Advertiseme
 import HouseCapacityComponent from "../anuncio/HouseCapacityComponent";
 import Button from "../utils/Button";
 import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "next-i18next";
 
 const FormCapacidade = () => {
+  const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
   const advertisement = useAdvertisement();
@@ -26,12 +28,12 @@ const FormCapacidade = () => {
         <div className="flex flex-row gap-5 lg:flex-row">
           <div className="w-48">
             <Button onClick={decrementStep} type="button">
-              Voltar Atrás
+              {t("go_back")}
             </Button>
           </div>
           <div className="w-48">
             <Button type="button" onClick={methods.handleSubmit(nextStep)}>
-              Seguinte &#8594;
+              {t("next_step")} &#8594;
             </Button>
           </div>
         </div>

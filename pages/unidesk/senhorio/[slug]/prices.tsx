@@ -13,6 +13,8 @@ import {
 
 import useAdvertisementService from "../../../../hooks/advertisementService";
 import { ADVERTISEMENT_TABLE_NAME, ADVERTISEMENT_PROPERTIES, Advertisement } from "../../../../models/advertisement";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 interface PricesProps {
   initialSession: Session;
@@ -21,6 +23,7 @@ interface PricesProps {
 }
 
 const Prices = ({ advertisement }: PricesProps) => {
+  const { t } = useTranslation();
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -50,7 +53,7 @@ const Prices = ({ advertisement }: PricesProps) => {
         <MenuSenhorio activeSection="single_advert" activeUrl="advert_prices" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
-        <div className="mb-7 text-2xl font-semibold">Preços</div>
+        <div className="mb-7 text-2xl font-semibold">{t("advertisements:price", { count: 2 })}</div>
 
         {advertisementContext && (
           <PricesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
@@ -58,7 +61,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 
         <div className="mb-10 mr-auto w-1/2">
           <Button onClick={saveChanges} type="button">
-            Guardar
+            {t("save")}
           </Button>
         </div>
       </UnideskStructure.Content>
@@ -69,7 +72,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 export default Prices;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -116,6 +119,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

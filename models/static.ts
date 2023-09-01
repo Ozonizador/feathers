@@ -43,7 +43,7 @@ eficiente e eficaz encher a minha casa!`,
     sistema das notificações está muito claro. É uma plataforma que merece oportunidade pois
     está idealizada para harmonizar a procura de quarto entre o estudante e proprietário.`,
     image: "/images/testemunhos/6.jpg",
-    host: "",
-    job: "Mónica Lourenço",
+    host: "Mónica Lourenço",
+    job: "",
   },
 ];

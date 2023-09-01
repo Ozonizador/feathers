@@ -8,8 +8,11 @@ import { useCurrentUser, useSetProfileInformation, useToggleAppUserMode } from "
 import useProfileService from "../../hooks/useProfileService";
 import { HOME_URL, REGISTER_URL } from "../../models/paths";
 import { Profile, UserTypes } from "../../models/profile";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const TypeCustomerPage = () => {
+  const { t } = useTranslation();
   const profile = useCurrentUser();
   const toggleUserTypeContext = useToggleAppUserMode();
   const setProfile = useSetProfileInformation();
@@ -36,13 +39,13 @@ const TypeCustomerPage = () => {
     <div className="my-10 flex justify-center">
       <div className="my-5 w-11/12 rounded-lg border border-terciary-100 lg:w-5/12">
         <div className="grid grid-cols-2 justify-around border-b border-terciary-100">
-          <div className="p-3 text-center text-primary-500">Iniciar sessão</div>
+          <div className="p-3 text-center text-primary-500">{t("login")}</div>
           <Link
             href={REGISTER_URL}
             aria-label="register_password"
             className="border-l border-terciary-100 p-3 text-center"
           >
-            Registar
+            {t("register")}
           </Link>
         </div>
         <div className="my-5 p-3">
@@ -50,7 +53,7 @@ const TypeCustomerPage = () => {
             className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
             onClick={() => setProfileType("TENANT")}
           >
-            Sou estudante
+            {t("admin:im_student")}
           </div>
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
@@ -61,7 +64,7 @@ const TypeCustomerPage = () => {
             className="mx-5 flex cursor-pointer justify-center rounded-md border-2 border-primary-500 py-3 text-primary-500"
             onClick={() => setProfileType("LANDLORD")}
           >
-            Sou senhorio
+            {t("admin:im_landlord")}
           </div>
         </div>
       </div>
@@ -72,6 +75,7 @@ const TypeCustomerPage = () => {
 export default TypeCustomerPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -91,6 +95,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "admin"])),
     },
   };
 };

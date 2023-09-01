@@ -22,6 +22,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import AnuncioDisponivel from "../../../../components/anuncio/AnuncioDisponivel";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const Spinner = dynamic(() => import("../../../../components/utils/Spinner"), {
   ssr: false,
@@ -49,6 +51,7 @@ type DetailsForm = Pick<
 >;
 
 const Details = ({ advertisement }: DetailsProps) => {
+  const { t } = useTranslation();
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -139,7 +142,7 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
                   <div className="mr-auto w-1/3">
                     <Button type="button" onClick={checkPossibilites}>
-                      Atualizar No Mapa
+                      {t("update_map")}
                     </Button>
                   </div>
 
@@ -164,7 +167,7 @@ const Details = ({ advertisement }: DetailsProps) => {
 export default Details;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
+  const locale = ctx.locale;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
@@ -211,6 +214,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
+      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
     },
   };
 };

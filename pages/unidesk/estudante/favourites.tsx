@@ -17,13 +17,16 @@ import ExpensesComponent from "../../../components/anuncio/ExpensesComponent";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const FavouritesBreadcrumbs = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: "", label: "Favoritos" },
+  { url: "", label: "favourites_other" },
 ] as BreadcrumbPath[];
 
 const UnideskFavoritos = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favourites, setFavourites] = useState<Advertisement[]>([]);
   const profile = useCurrentUser();
@@ -55,7 +58,7 @@ const UnideskFavoritos = () => {
           <div>
             <div className="flex flex-col items-center justify-center align-middle">
               <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
-              <div className="mt-9 text-2xl font-bold text-primary-500">Favoritos</div>
+              <div className="mt-9 text-2xl font-bold text-primary-500">{t("favourites", { count: 2 })}</div>
             </div>
 
             <div
@@ -94,7 +97,9 @@ const UnideskFavoritos = () => {
                             </div>
                             <div className="flex w-full flex-col p-2">
                               <div className="mt-5 text-lg font-bold">{favourite.title}</div>
-                              <div className="text-md mb-1 font-bold text-primary-500">{favourite.month_rent}€/mês</div>
+                              <div className="text-md mb-1 font-bold text-primary-500">
+                                {t("advertisements:price_month", { price: favourite.month_rent })}
+                              </div>
 
                               <div className="mt-auto flex">
                                 <ExpensesComponent expenses={favourite.expenses} />
@@ -108,7 +113,7 @@ const UnideskFavoritos = () => {
                       );
                     })}
                   </div>
-                  {(!favourites || favourites.length === 0) && <div>Sem Favoritos</div>}
+                  {(!favourites || favourites.length === 0) && <div>{t("favourites", { count: 0 })}</div>}
                 </>
               )}
             </div>
@@ -134,6 +139,7 @@ const UnideskFavoritos = () => {
 export default UnideskFavoritos;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -153,6 +159,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

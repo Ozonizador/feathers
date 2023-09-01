@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +13,7 @@ export type BreadcrumbPath = {
 };
 
 const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
+  const { t } = useTranslation();
   const numberUrls = paths.length;
   return (
     <div className="mx-auto my-20 mt-24 flex items-center px-5 align-middle lg:my-20 lg:w-full lg:px-3">
@@ -21,10 +23,10 @@ const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
           paths.map((path, index) => {
             const mainInfo = path.url ? (
               <Link className="inline cursor-pointer" href={path.url}>
-                {path.label}
+                {t(path.label)}
               </Link>
             ) : (
-              <div className="inline">{path.label}</div>
+              <div className="inline">{t(path.label)}</div>
             );
             return (
               <div key={index} className="flex gap-2">

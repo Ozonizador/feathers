@@ -5,6 +5,8 @@ import Toggle from "../components/toggle/toggle";
 import { useGetUserType } from "../context/MainProvider";
 import { UserTypes } from "../models/profile";
 import { trpc } from "../utils/trpc";
+import { GetStaticProps, GetStaticPropsContext } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Faqs = () => {
   const { userAppMode } = useGetUserType();
@@ -96,3 +98,11 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
     </div>
   );
 };
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "pt")),
+    },
+  };
+}
