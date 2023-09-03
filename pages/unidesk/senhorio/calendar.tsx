@@ -24,31 +24,31 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const ESTADIA_MINIMA = [
-  { label: "3 Meses", value: 3 },
-  { label: "4 Meses", value: 4 },
-  { label: "5 Meses", value: 5 },
-  { label: "6 Meses", value: 6 },
-  { label: "7 Meses", value: 7 },
-  { label: "8 Meses", value: 8 },
-  { label: "9 Meses", value: 9 },
-  { label: "10 Meses", value: 10 },
-  { label: "11 Meses", value: 11 },
-  { label: "12 Meses", value: 12 },
+  { value: 3 },
+  { value: 4 },
+  { value: 5 },
+  { value: 6 },
+  { value: 7 },
+  { value: 8 },
+  { value: 9 },
+  { value: 10 },
+  { value: 11 },
+  { value: 12 },
 ];
 
 const TEMPO_ANTECEDENCIA = [
-  { label: "1 Meses", value: 1 },
-  { label: "2 Meses", value: 2 },
-  { label: "3 Meses", value: 3 },
-  { label: "4 Meses", value: 4 },
-  { label: "5 Meses", value: 5 },
-  { label: "6 Meses", value: 6 },
-  { label: "7 Meses", value: 7 },
-  { label: "8 Meses", value: 8 },
-  { label: "9 Meses", value: 9 },
-  { label: "10 Meses", value: 10 },
-  { label: "11 Meses", value: 11 },
-  { label: "12 Meses", value: 12 },
+  { value: 1 },
+  { value: 2 },
+  { value: 3 },
+  { value: 4 },
+  { value: 5 },
+  { value: 6 },
+  { value: 7 },
+  { value: 8 },
+  { value: 9 },
+  { value: 10 },
+  { value: 11 },
+  { value: 12 },
 ];
 
 const breadcrumbPaths = [
@@ -229,7 +229,7 @@ const AdvertisementPropertiesComponent = ({
         >
           {ESTADIA_MINIMA.map((option) => (
             <option key={option.value} value={option.value}>
-              {option.label}
+              {t("admin:calendar.monthWithCount", { count: option.value })}
             </option>
           ))}
         </select>
@@ -244,7 +244,7 @@ const AdvertisementPropertiesComponent = ({
         >
           {TEMPO_ANTECEDENCIA.map((option) => (
             <option key={option.value} value={option.value}>
-              {option.label}
+              {t("admin:calendar.monthWithCount", { count: option.value })}
             </option>
           ))}
         </select>

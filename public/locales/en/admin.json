@@ -68,6 +68,8 @@
     "advance_time": "Advance Time",
     "trimester_discount": "Trimester Discount",
     "semester_discount": "Semester Discount",
-    "discounts": "Discounts"
+    "discounts": "Discounts",
+    "monthWithCount_one": "{{count}} Month",
+    "monthWithCount_other": "{{count}} Months"
   }
 }
