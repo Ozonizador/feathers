@@ -33,9 +33,9 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
-      toast("Anúncio Atualizado");
+      toast("messages:success.advert_was_updated");
     } else {
-      toast("Erro ao atualizar anúncio");
+      toast(t("messages:errors.advert_not_updated"));
     }
   };
 

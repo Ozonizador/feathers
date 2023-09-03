@@ -39,7 +39,7 @@ const Register = () => {
       toast.error(error.message);
       return;
     } else {
-      toast.success("Register successfully");
+      toast.success(t("messages:success.register_done"));
       router.push(HOME_URL);
     }
   };

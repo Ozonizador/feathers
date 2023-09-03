@@ -121,7 +121,7 @@ export const RoomPagamento = () => {
 
         setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
         setModalGerarRef(true);
-        toast.success("Reservation requested.");
+        toast.success(t("messages:success.reservation_requested"));
       },
       onError: (error) => {
         toast.error(error.message);

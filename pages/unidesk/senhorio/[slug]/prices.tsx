@@ -34,7 +34,7 @@ const Prices = ({ advertisement }: PricesProps) => {
 
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (error) return toast.error(error.message);
-    toast.success("Success");
+    toast.success(t("messages:success.success"));
   };
 
   const changeAdvertisementProperty = (property: string, value: any) => {

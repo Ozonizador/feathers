@@ -95,7 +95,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       {
         onSuccess: (data) => {
           if (data.error) return toast.error("Erro ao gravar definições");
-          toast.success("Successo");
+          toast.success(t("messages:success.success"));
         },
         onError: () => {
           toast.error("Erro ao gravar definições");
@@ -120,7 +120,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       {
         onSuccess: (data) => {
           if (data.error) return toast.error("Erro ao gravar definições");
-          toast.success("Successo");
+          toast.success(t("messages:success.success"));
         },
         onError: () => {
           toast.error("Erro ao gravar definições");

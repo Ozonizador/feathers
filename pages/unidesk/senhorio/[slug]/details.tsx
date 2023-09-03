@@ -78,7 +78,7 @@ const Details = ({ advertisement }: DetailsProps) => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement({ ...advertisementContext, ...data }, advertisementContext.id);
     if (!error) {
-      toast.success("Sucesso");
+      toast.success(t("messages:success.success"));
     } else {
       toast.error("Error saving the advertisement");
     }
