@@ -66,7 +66,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
 
   const deleteAdvertisement = async () => {
     const { error } = await removeAdvertisement(advertisement.id);
-    error ? toast.error("Erro ao remover anúncio") : toast.success("Successo");
+    error ? toast.error("Erro ao remover anúncio") : toast.success(t("messages:success.success"));
     if (!error) refetchAdvertisements();
   };
   return (

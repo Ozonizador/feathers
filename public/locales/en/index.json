@@ -3,7 +3,8 @@
   "section": {
     "how_it_works": {
       "title": "How it works?",
-      "find_at": "Find <house/> at..",
+      "find": "Find",
+      "at": "at..",
       "search": {
         "title": "Search",
         "description": "Define the location, dates and features you want for an ideal stay!"
@@ -25,6 +26,14 @@
       "title": "Have a \n property?",
       "description": "Start advertising now and \nmonetize your property!",
       "know_more": "Want to know more"
+    },
+    "values": {
+      "first_title": "Secure and Verified",
+      "first_description": "We value and protect the integrity of listings.",
+      "second_title": "Tenant Protection",
+      "second_description": "You have 24 hours after entry to confirm that the house you booked matches.",
+      "third_title": "Fast and smart search",
+      "third_description": "Simply find your ideal space."
     }
   }
 }

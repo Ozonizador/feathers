@@ -8,8 +8,10 @@ import {
   useSetFiltersContext,
 } from "../../context/ProcurarAdvertisementsProvider";
 import { TypeAmenity } from "../../models/advertisement";
+import { useTranslation } from "next-i18next";
 
 const ModalMaisFiltros = () => {
+  const { t } = useTranslation();
   const isOpen = useGetModalMaisFiltros();
   const setModalMaisFiltros = useSetModalMaisFiltros();
   const setComoditiesFilters = useSetComoditiesContext();
@@ -212,7 +214,7 @@ const ModalMaisFiltros = () => {
                       />
                       <GridItem
                         onChange={() => toggleFiltersProperty("verified", !verified)}
-                        label={"Casa Verificada"}
+                        label={t("advertisements:verified_house")}
                         checked={verified || false}
                       />
                     </div>

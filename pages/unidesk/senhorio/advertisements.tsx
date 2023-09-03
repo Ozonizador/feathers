@@ -18,7 +18,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: "", label: "Painel" },
+  { url: "", label: "admin:unidesk.common.panel" },
 ] as BreadcrumbPath[];
 
 const Anuncios = () => {

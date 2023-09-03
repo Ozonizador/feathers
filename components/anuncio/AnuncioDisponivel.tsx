@@ -1,16 +1,18 @@
 import { Controller } from "react-hook-form";
 import { Advertisement, AdvertisementStatus, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import RadioBox from "../utils/Radiobox";
+import { useTranslation } from "next-i18next";
 
 interface AnuncioDisponivelProps {
   advertisement: Advertisement;
 }
 
 const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-6">
       <div className="mb-10 mt-20 flex flex-col">
-        <div className="mb-6 text-2xl text-gray-600">Estado do anúncio</div>
+        <div className="mb-6 text-2xl text-gray-600">{t("advertisements:house_state.title")}</div>
         <div className="my-6 flex flex-row items-baseline">
           <div>
             <div className="my-5 flex flex-row items-center align-middle">
@@ -35,9 +37,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-start text-lg font-bold">Não publicado</div>
+            <div className="text-start text-lg font-bold">{t("advertisements:house_state.not_published")}</div>
             <div className="mt-2 text-start text-base text-secondary-300">
-              O seu anúncio não pode ser reservado e não vai aparecer nos resultados de pesquisa.
+              {t("advertisements:house_state.not_published_description")}
             </div>
           </div>
         </div>
@@ -65,9 +67,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-start text-lg font-bold">Pausado</div>
+            <div className="text-start text-lg font-bold">{t("advertisements:house_state.paused")}</div>
             <div className="mt-2 text-start text-base text-secondary-300">
-              O seu anúncio vai ficar pausado de forma temporária.
+              {t("advertisements:house_state.paused_description")}
             </div>
           </div>
         </div>
@@ -96,9 +98,9 @@ const AnuncioDisponivel = ({ advertisement }: AnuncioDisponivelProps) => {
           </div>
 
           <div className="flex flex-col">
-            <div className="text-start text-lg font-bold">Disponível</div>
+            <div className="text-start text-lg font-bold">{t("advertisements:house_state.available")}</div>
             <div className="mt-2 text-start text-base text-secondary-300">
-              O seu anúncio está disponível para reserva.
+              {t("advertisements:house_state.available_description")}
             </div>
           </div>
         </div>

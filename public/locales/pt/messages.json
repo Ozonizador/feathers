@@ -1,0 +1,12 @@
+{
+  "errors": {
+    "advert_not_updated": "Erro ao atualizar anúncio"
+  },
+  "success": {
+    "success": "Sucesso",
+    "advert_was_updated": "Anúncio Atualizado",
+    "updated_password": "Password alterada",
+    "register_done": "Registo Bem Sucedido",
+    "reservation_requested": "Reserva criada"
+  }
+}

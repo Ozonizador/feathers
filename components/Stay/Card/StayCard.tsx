@@ -26,7 +26,7 @@ const StayCard = ({ stay }: StayCardProps) => {
         <div className="ml-2 lg:ml-4">
           <div className="flex w-full flex-col justify-between">
             <div className="mb-1 mt-1 text-sm font-bold lg:mb-3 lg:mt-3 lg:text-base">
-              {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
+              {t(TYPE_ADVERTISEMENT[advertisement.type])} - {advertisement.title}
             </div>
             <div className="mb-1 text-base font-bold text-primary-500 lg:text-xl">
               {t("advertisements:price_month", { price: advertisement.month_rent })}

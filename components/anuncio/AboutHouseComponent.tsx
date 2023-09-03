@@ -3,9 +3,9 @@ import {
   AboutHouseCommodities,
   AboutHouseSpace,
   Advertisement,
-  ADVERTISEMENT_PROPERTIES,
   AMENITIES_DB,
   TypeAmenity,
+  TypeAmenityLabel,
 } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
 import { useTranslation } from "next-i18next";
@@ -74,7 +74,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
+                        {t(TypeAmenityLabel[comodity.type])}
+                      </p>
                     </div>
                     <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
@@ -99,7 +101,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
+                        {t(TypeAmenityLabel[comodity.type])}
+                      </p>
                     </div>
                     <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
@@ -125,7 +129,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
+                        {t(TypeAmenityLabel[comodity.type])}
+                      </p>
                     </div>
                     <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
@@ -150,7 +156,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
+                        {t(TypeAmenityLabel[comodity.type])}
+                      </p>
                     </div>
                     <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">
@@ -176,7 +184,9 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                 return (
                   <div className="mt-10 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
-                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">{comodity.label}</p>
+                      <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
+                        {t(TypeAmenityLabel[comodity.type])}
+                      </p>
                     </div>
                     <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
                       <div className="flex h-5 items-center">

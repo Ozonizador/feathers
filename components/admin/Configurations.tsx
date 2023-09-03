@@ -45,7 +45,7 @@ const Configurations = () => {
       const { error } = await updateUserPassword(password);
       if (error) throw Error(error.message);
 
-      toast.success("Password alterada");
+      toast.success(t("messages:success.updated_password"));
     } catch (e: any) {
       toast.error(e.message as string);
     } finally {
@@ -58,7 +58,7 @@ const Configurations = () => {
       { ...profileConfigs },
       {
         onSuccess: () => {
-          toast.success("Editado com successo");
+          toast.success(t("messages:success.success"));
         },
       }
     );

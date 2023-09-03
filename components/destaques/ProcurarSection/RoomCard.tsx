@@ -96,7 +96,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
               <div className="m-1">
                 <div className="flex flex-1">
                   <h6 className="mb-0 text-xl font-bold">
-                    {TYPE_ADVERTISEMENT[advertisement.type]} - {advertisement.title}
+                    {t(TYPE_ADVERTISEMENT[advertisement.type])} - {advertisement.title}
                   </h6>
                   <div className="ml-2 flex items-center align-middle">
                     <Rating className="">

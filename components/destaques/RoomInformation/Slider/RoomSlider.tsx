@@ -25,7 +25,7 @@ export default function RoomSlider() {
               {t("advertisements:zones.general")}
             </div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!general_amenities || general_amenities.length === 0) && <div>Sem nada a assinalar</div>}
+              {(!general_amenities || general_amenities.length === 0) && <div>{t("advertisements:no_comodities")}</div>}
               {general_amenities &&
                 general_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
@@ -43,7 +43,7 @@ export default function RoomSlider() {
               {t("advertisements:zones.bedroom")}
             </div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!bedroom_amenities || bedroom_amenities.length === 0) && <div>Sem nada a assinalar</div>}
+              {(!bedroom_amenities || bedroom_amenities.length === 0) && <div>{t("advertisements:no_comodities")}</div>}
               {bedroom_amenities &&
                 bedroom_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
@@ -61,7 +61,7 @@ export default function RoomSlider() {
               {t("advertisements:zones.kitchen")}
             </div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!kitchen_amenities || kitchen_amenities.length === 0) && <div>Sem nada a assinalar</div>}
+              {(!kitchen_amenities || kitchen_amenities.length === 0) && <div>{t("advertisements:no_comodities")}</div>}
               {kitchen_amenities &&
                 kitchen_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
@@ -79,7 +79,9 @@ export default function RoomSlider() {
               {t("advertisements:zones.bathroom")}
             </div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!bathroom_amenities || bathroom_amenities.length === 0) && <div>Sem nada a assinalar</div>}
+              {(!bathroom_amenities || bathroom_amenities.length === 0) && (
+                <div>{t("advertisements:no_comodities")}</div>
+              )}
               {bathroom_amenities &&
                 bathroom_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
@@ -97,7 +99,9 @@ export default function RoomSlider() {
               {t("advertisements:zones.exterior")}
             </div>
             <div className="mx-auto flex h-full w-11/12 flex-wrap justify-center gap-5 align-middle">
-              {(!exterior_amenities || exterior_amenities.length === 0) && <div>Sem nada a assinalar</div>}
+              {(!exterior_amenities || exterior_amenities.length === 0) && (
+                <div>{t("advertisements:no_comodities")}</div>
+              )}
               {exterior_amenities &&
                 exterior_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);

@@ -61,7 +61,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   if (blog) {
     return {
-      props: { blog, ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])) },
+      props: { blog, ...(await serverSideTranslations(locale ?? "pt")) },
     };
   } else {
     return {
