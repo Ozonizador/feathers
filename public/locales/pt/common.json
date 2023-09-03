@@ -31,7 +31,7 @@
   "advertisement_one": "Anúncio",
   "advertisement_other": "Anúncios",
   "reservation_one": "Reserva",
-  "reservation_two": "Reservas",
+  "reservation_other": "Reservas",
   "payment": "Pagamento",
   "payment_details": "Detalhes Pagamento",
   "start": "Entrada",
@@ -42,5 +42,12 @@
   "decline": "Rejeitar",
   "go_back": "Voltar Atrás",
   "next_step": "Seguinte",
-  "response_rate": "Response Rate"
+  "update_map": "Atualizar Mapa",
+  "response_rate": "Taxa de Resposta",
+  "save_changes": "Guardar alterações",
+  "more_filters": "More Filters",
+  "active": "Ativa",
+  "all": "Todas",
+  "next": "Próximas",
+  "location": "Localização"
 }

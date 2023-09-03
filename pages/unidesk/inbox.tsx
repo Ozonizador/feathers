@@ -176,7 +176,7 @@ const CaixaEntrada = () => {
                               </div>
                               <div className="text-sm">
                                 {currentConversation.reservation.advertisement &&
-                                  `${TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type]} em
+                                  `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
                               </div>
                             </div>

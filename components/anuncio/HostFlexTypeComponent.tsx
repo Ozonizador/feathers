@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, HostFlexType } from "../../models/advertisement";
 import RadioBox from "../utils/Radiobox";
 
@@ -7,6 +8,7 @@ interface HostFlexTypeComponentProps {
 }
 
 const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponentProps) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row items-baseline gap-2">
@@ -25,10 +27,11 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">Host Super Flex</div>
+          <div className="text-start text-xl font-bold">
+            {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.super_flex") })}
+          </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
-            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 2 dias antes
-            , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
+            {t("advertisements:host_type.super_flex_description")}
           </div>
         </div>
       </div>
@@ -48,10 +51,11 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">Host Flex</div>
+          <div className="text-start text-xl font-bold">
+            {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.flex") })}
+          </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
-            Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes
-            , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
+            {t("advertisements:host_type.flex_description")}
           </div>
         </div>
       </div>
@@ -71,10 +75,11 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">Host Moderado</div>
+          <div className="text-start text-xl font-bold">
+            {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.moderate") })}
+          </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
-            Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias
-            antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
+            {t("advertisements:host_type.moderate_description")}
           </div>
         </div>
       </div>
@@ -94,10 +99,11 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">Host Rígido</div>
+          <div className="text-start text-xl font-bold">
+            {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.rigid") })}
+          </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
-            Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias
-            antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.
+            {t("advertisements:host_type.rigid_description")}
           </div>
         </div>
       </div>

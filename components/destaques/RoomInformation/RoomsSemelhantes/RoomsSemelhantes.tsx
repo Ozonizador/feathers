@@ -47,7 +47,7 @@ export default function RoomSemelhantes() {
                   <div key={index}>
                     <article className="relative h-56 w-40 rounded-lg lg:h-56  lg:w-48">
                       <Image src={advert.photos[0].url} alt="" layout="responsive" height="200" width="200" />
-                      <h2 className=" mt-3 p-3 text-base text-white">{TYPE_ADVERTISEMENT[advert.type]}</h2>
+                      <h2 className=" mt-3 p-3 text-base text-white">{t(TYPE_ADVERTISEMENT[advert.type])}</h2>
                       <p className="bold absolute bottom-3 right-4 text-2xl font-bold text-white">
                         {t("advertisements:price_month", { price: advert.month_rent })}
                       </p>

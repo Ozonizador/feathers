@@ -104,7 +104,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       latestReviews: reviewsError ? [] : latestReviews,
       generalClassification: classificationError ? 0 : generalClassification,
       responseRate,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

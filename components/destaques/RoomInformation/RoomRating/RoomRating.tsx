@@ -8,6 +8,7 @@ import { useSetModalReviews } from "../../../../context/ModalShowProvider";
 import ReviewCard from "../../../advertisements/ReviewCard";
 import classNames from "classnames";
 import { Rating } from "flowbite-react";
+import { useTranslation } from "next-i18next";
 
 const RoomRating = () => {
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);
@@ -58,6 +59,7 @@ interface RoomAverageSectionProps {
 }
 
 export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: RoomAverageSectionProps) => {
+  const { t } = useTranslation();
   const averageOfAll = () => {
     if (!averageRatings) return 0;
 
@@ -101,7 +103,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
           >
             {/* COL 1 */}
             <div className="flex flex-row gap-1">
-              <div className="flex-1 text-xl font-bold">Localização</div>
+              <div className="flex-1 text-xl font-bold">{t("location")}</div>
               <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
                 {`(${averageRatings.location_average.toFixed(2)})`}
               </p>

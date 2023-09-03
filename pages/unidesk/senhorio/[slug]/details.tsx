@@ -135,10 +135,10 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <AdvertisementInfoComponent advertisement={advertisementContext} showInternalName={true} />
                   <HouseCapacityComponent advertisement={advertisementContext} />
 
-                  <h5 className="text-xl text-gray-600">Sobre a sua casa</h5>
+                  <h5 className="text-xl text-gray-600">{t("advertisements:add_advert.about_house_title")}</h5>
                   <AboutHouseComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
-                  <h5 className="text-xl text-gray-600">Localização</h5>
+                  <h5 className="text-xl text-gray-600">{t("location")}</h5>
                   <GeneralAdvertComponent advertisement={advertisementContext} onChangeMarker={onChangeMarker} />
                   <div className="mr-auto w-1/3">
                     <Button type="button" onClick={checkPossibilites}>
@@ -146,12 +146,12 @@ const Details = ({ advertisement }: DetailsProps) => {
                     </Button>
                   </div>
 
-                  <h5 className="mt-6 text-2xl font-black">Política de Cancelamento</h5>
+                  <h5 className="mt-6 text-2xl font-black">{t("advertisements:add_advert.cancellation_policy")}</h5>
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                   <AnuncioDisponivel advertisement={advertisementContext} />
                   <div className="mx-auto my-5 w-1/2 px-6">
                     <Button onClick={methods.handleSubmit(saveChanges)} type="button">
-                      Guardar alterações &#10230;
+                      {t("save_changes")} &#10230;
                     </Button>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

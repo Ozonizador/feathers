@@ -17,6 +17,7 @@
   "photo_one": "Foto",
   "photo_other": "Fotos",
   "host_type": {
+    "compose_host": "Host {{type}}",
     "super_flex": "Super Flexível",
     "flex": "Flexível",
     "moderate": "Moderado",
@@ -25,6 +26,11 @@
     "flex_description": "Até 30 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 7 dias antes, o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
     "moderate_description": "Até 60 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 15 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral.",
     "rigid_description": "Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral."
+  },
+  "type": {
+    "entire_place": "Apartamento Inteiro",
+    "shared_room": "Quarto Partilhado",
+    "private_room": "Quarto Privado"
   },
   "reservation_status": {
     "accepted": "Reserva Aceite",
@@ -42,7 +48,45 @@
     "bathroom": "Casa de Banho",
     "bedroom": "Quarto",
     "kitchen": "Cozinha",
-    "exterior": "Zona Exterior"
+    "exterior": "Zona Exterior",
+    "main": "Capa"
   },
-  "no_comodities": "Sem comodidades"
+  "no_comodities": "Sem comodidades",
+  "conditions": "Condições",
+  "verified_house": "Casa Verificada",
+  "details": {
+    "type_house_title": "Qual o seu tipo de espaço?"
+  },
+  "house_state": {
+    "title": "Estado do anúncio",
+    "not_published": "Não publicado",
+    "not_published_description": "O seu anúncio não pode ser reservado e não vai aparecer nos resultados de pesquisa.",
+    "paused": "Pausado",
+    "paused_description": "O seu anúncio vai ficar pausado de forma temporária.",
+    "available": "Disponível",
+    "available_description": "O seu anúncio está disponível para reserva.",
+    "capacity": "Capacidade"
+  },
+  "add_advert": {
+    "step": "Passo {{count}}",
+    "title_start": "Anunciar a sua propriedade é rápido e fácil!",
+    "floor": "Andar",
+    "street": "Rua",
+    "place": "Location",
+    "street_number": "Número Porta",
+    "postal_code": "Código Postal",
+    "title_advert": "Título do Anúncio",
+    "title_input_description": "Máximo de 50 palavras",
+    "internal_name": "Nome Interno",
+    "description_title": "Descreva o seu espaço de forma simples e concisa.",
+    "description_placeholder": "Descreva o seu espaço em 500 palavras",
+    "owner_lives_property_title": "Vive na propriedade?",
+    "owner_type": "Tipo de senhorio",
+    "private_owner": "Particular",
+    "profissional_owner": "Profissional",
+    "about_house_title": "Sobre a sua casa",
+    "cancellation_policy": "Política de Cancelamento"
+  }
 }
+
+Cancellation Policy

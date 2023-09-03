@@ -7,7 +7,7 @@
   "im_landlord": "Im a landlord",
   "unidesk": {
     "common": {
-      "panel": "Painel",
+      "panel": "Main Panel",
       "contracts": "Contractual Information",
       "calendar": "Calendar"
     },
@@ -50,5 +50,24 @@
     "general": "Provide details about yourself and how we can contact you.",
     "payment_receiving": "Define how you will receive/pay the transactions you carry out.",
     "configurations": "Update your password and control notifications."
+  },
+  "reviews": {
+    "my_adverts": "My Adverts",
+    "main_score": "Overall rating",
+    "last_reviews": "Last reviews",
+    "no_reviews": "No reviews to be shown"
+  },
+  "guests": {
+    "current_guests": "Current Guests",
+    "no_guests": "No Guests"
+  },
+  "calendar": {
+    "calendar": "Calendar",
+    "description_update": "Don't forget to keep your calendar updated.",
+    "minimum_stay": "Minimum Stay",
+    "advance_time": "Advance Time",
+    "trimester_discount": "Trimester Discount",
+    "semester_discount": "Semester Discount",
+    "discounts": "Discounts"
   }
 }

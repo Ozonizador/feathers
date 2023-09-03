@@ -42,6 +42,12 @@
   "decline": "Decline",
   "go_back": "Go Back",
   "next_step": "Next Step",
-  "update_map": "Atualizar No Mapa",
-  "response_rate": "Taxa de resposta"
+  "update_map": "Update Map",
+  "response_rate": "Response Rate",
+  "save_changes": "Save changes",
+  "more_filters": "Mais Filtros",
+  "active": "Active",
+  "all": "All",
+  "next": "Incoming",
+  "location": "Location"
 }

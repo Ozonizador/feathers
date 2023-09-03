@@ -36,8 +36,8 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
           <div className="ml-10">
             <>
               <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
-              <div className="mb-5 font-bold">Hóspedes Atuais</div>
-              {!stays || (stays.length === 0 && <div>Sem hospedes</div>)}
+              <div className="mb-5 font-bold">{t("admin:guests.current_guests")}</div>
+              {!stays || (stays.length === 0 && <div>{t("admin:guests.no_guests")}</div>)}
               {stays &&
                 stays.map((stay, index) => {
                   return <HospedeCard stay={stay} key={index} />;

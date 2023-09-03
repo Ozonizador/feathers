@@ -6,8 +6,10 @@ import { TYPE_ADVERTISEMENT } from "../../../models/advertisement";
 import Image from "next/image";
 import { PROCURAR_ADVERT_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
+import { useTranslation } from "next-i18next";
 
 export default function HomeSection3() {
+  const { t } = useTranslation();
   const currentMapCoordinates = useGetUserCoordinates();
 
   const { data: advertisementsData } = trpc.advertisements.searchForAdvertisementsWithCoordinates.useQuery(
@@ -75,7 +77,7 @@ export default function HomeSection3() {
                           <></>
                         )}
                         <h2 className="absolute top-1 z-50 p-2 text-sm text-white">
-                          {TYPE_ADVERTISEMENT[advertisement.type]}
+                          {t(TYPE_ADVERTISEMENT[advertisement.type])}
                         </h2>
                         <p className="bold absolute bottom-1 right-4 rounded-full p-3 text-4xl text-white lg:right-4">
                           &euro;{advertisement.month_rent}

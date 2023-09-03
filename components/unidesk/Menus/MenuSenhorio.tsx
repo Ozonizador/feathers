@@ -98,9 +98,9 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           label={t("guest", { count: 2 })}
           activeLink={activeUrl === "guests"}
         />
-        <MenuOption blocked={true} url="" label="Transações" activeLink={false} />
-        <MenuOption blocked={true} url="" label="Despesas" activeLink={false} />
-        <MenuOption blocked={true} url="" label="Reparações" activeLink={false} />
+        <MenuOption blocked={true} url="" label={t("admin:unidesk.landlord.transactions")} activeLink={false} />
+        <MenuOption blocked={true} url="" label={t("admin:unidesk.student.expenses")} activeLink={false} />
+        <MenuOption blocked={true} url="" label={t("admin:unidesk.student.repairs")} activeLink={false} />
       </MenuGrouper>
       <MenuGrouper
         title={t("notifications")}

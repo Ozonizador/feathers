@@ -14,12 +14,12 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
     <>
       <div className="mx-auto w-11/12 lg:w-full">
         <h1 className="mb-3 mt-10 text-3xl font-semibold lg:mb-7 lg:mt-10">Reviews</h1>
-        <p className="mb-12 text-xl text-slate-400 lg:mb-6">Os meus Anúncios</p>
+        <p className="mb-12 text-xl text-slate-400 lg:mb-6">{t("admin:reviews.my_adverts")}</p>
       </div>
 
       <div className="flex flex-col items-center lg:flex-row">
         <div className="flex h-36 w-60 flex-col items-center justify-center rounded-lg border  border-terciary-500 bg-white align-middle">
-          <h1 className="mb-7 text-center text-xl font-bold lg:text-left">Classificação geral</h1>
+          <h1 className="mb-7 text-center text-xl font-bold lg:text-left">{t("admin:reviews.main_score")}</h1>
           <Rating>
             <p className="ml-2 text-xl  text-yellow-300">{generalClassification !== 0 ? generalClassification : "-"}</p>
             <Rating.Star />
@@ -32,13 +32,13 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
       </div>
 
       <div className="mt-14 flex flex-row items-center justify-center gap-5 align-middle lg:justify-start">
-        <div className="text-xl font-bold">Últimas reviews</div>
-        <div className="text-secondary-300">Anúncios</div>
+        <div className="text-xl font-bold">{t("admin:reviews.last_reviews")}</div>
+        <div className="text-secondary-300">{t("advertisement", { count: 2 })}</div>
       </div>
 
       {!latestReviews ||
         (latestReviews.length === 0 && (
-          <div className="pb-5 text-center lg:text-left">Não existem reviews para mostrar</div>
+          <div className="pb-5 text-center lg:text-left">{t("admin:reviews.no_reviews")}</div>
         ))}
       {/* CARD */}
       {latestReviews &&

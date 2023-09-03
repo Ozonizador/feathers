@@ -8,6 +8,7 @@ import { CoordinatesAsArray } from "../../models/utils";
 import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import Input from "../utils/Input";
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 const MapWithNoSSR = dynamic(() => import("../../components/maps/MainMap"), {
   ssr: false,
@@ -19,6 +20,7 @@ interface GeneralAdvertComponentProps {
 }
 
 const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvertComponentProps) => {
+  const { t } = useTranslation();
   const userlocation = useGetUserCoordinates();
   const { control } = useFormContext();
 
@@ -54,7 +56,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
         {/* col left */}
         <div className="mt-2 flex w-full flex-col gap-2 lg:mt-0">
           <div>
-            <label className="mb-1">Qual o seu tipo de espaço?</label>
+            <label className="mb-1">{t("advertisements:details.type_house_title")}</label>
             <Controller
               name={ADVERTISEMENT_PROPERTIES.TYPE}
               defaultValue={"ENTIRE_SPACE"}
@@ -68,7 +70,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
                   {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                     return (
                       <option key={index} value={type}>
-                        {TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT]}
+                        {t(TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT])}
                       </option>
                     );
                   })}
@@ -86,7 +88,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="street"
-                  labelText="Rua *"
+                  labelText={`${t("advertisements:add_advert.street")} *`}
                   value={value}
                   onChange={onChange}
                   errorMessage={error?.message}
@@ -101,7 +103,12 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               defaultValue=""
               control={control}
               render={({ field: { value, onChange } }) => (
-                <Input name="floor" labelText="Andar" onChange={onChange} value={value} />
+                <Input
+                  name="floor"
+                  labelText={t("advertisements:add_advert.floor")}
+                  onChange={onChange}
+                  value={value}
+                />
               )}
             />
           </div>
@@ -118,7 +125,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="place"
-                  labelText="Localidade *"
+                  labelText={`${t("advertisements:add_advert.place")} *`}
                   customCss="icon"
                   value={value}
                   onChange={onChange}
@@ -137,7 +144,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="street_number"
-                  labelText="Número *"
+                  labelText={`${t("advertisements:add_advert.street_number")} *`}
                   value={value}
                   onChange={onChange}
                   errorMessage={error?.message}
@@ -155,7 +162,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="postal_code"
-                  labelText="Código Postal *"
+                  labelText={`${t("advertisements:add_advert.postal_code")} *`}
                   value={value}
                   onChange={onChange}
                   errorMessage={error?.message}

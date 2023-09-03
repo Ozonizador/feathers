@@ -50,5 +50,26 @@
     "general": "Forneça os dados sobre si e como o podemos contactar.",
     "payment_receiving": "Defina como vai receber/pagar as transações que efectuar.",
     "configurations": "Atualize a sua palavra-passe e controle as notificações."
+  },
+  "reviews": {
+    "my_adverts": "Os meus anúncios",
+    "main_score": "Classificação geral",
+    "last_reviews": "Últimas reviews",
+    "no_reviews": "Não existem reviews para serem mostradas"
+  },
+  "guests": {
+    "current_guests": "Hóspedes Atuais",
+    "no_guests": "Sem Hóspedes"
+  },
+  "calendar": {
+    "calendar": "Calendário",
+    "description_update": "Não se esqueça de manter o seu calendário atualizado.",
+    "minimum_stay": "Estadia Mínima",
+    "advance_time": "Tempo de Antecedência",
+    "trimester_discount": "Desconto Trimestral",
+    "semester_discount": "Desconto Semestral",
+    "discounts": "Descontos",
+    "monthWithCount_one": "{{count}} Mês",
+    "monthWithCount_other": "{{count}} Meses"
   }
 }

@@ -15,7 +15,7 @@ const optionAnuncios = [
   {
     link: "/unidesk/senhorio/reservas",
     blocked: false,
-    text: "reservation_two",
+    text: "reservation_other",
   },
   {
     link: "unidesk/senhorio/calendar",

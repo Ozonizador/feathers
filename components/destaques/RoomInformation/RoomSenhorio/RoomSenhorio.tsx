@@ -81,7 +81,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
 
           <div className="w-full">
             <Card>
-              <h1 className="text-xl font-bold">Política de Cancelamento</h1>
+              <h1 className="text-xl font-bold">{t("advertisements:add_advert.cancellation_policy")}</h1>
 
               <div className="flex flex-row items-start justify-start gap-4 align-top">
                 <div

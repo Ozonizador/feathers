@@ -23,12 +23,14 @@ import ModalMaisFiltros from "../../modals/ModalMaisFiltros";
 import { AdvertisementOrder } from "../../../server/types/advertisement";
 import PopoverGeneric from "../../utils/PopoverGeneric";
 import classNames from "classnames";
+import { useTranslation } from "next-i18next";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
 });
 
 export default function ProcurarSection() {
+  const { t } = useTranslation();
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
   const { location, coordinates } = useUserSearch();
@@ -144,7 +146,7 @@ export default function ProcurarSection() {
                           "text-primary-500": currentFilter.placeType === type,
                         })}
                       >
-                        {TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT]}
+                        {t(TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT])}
                       </div>
                     );
                   })}

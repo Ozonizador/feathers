@@ -12,6 +12,7 @@ import {
   useSetOpenModalAvaliarExperiencia,
 } from "../../context/ModalShowProvider";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { useTranslation } from "next-i18next";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -29,6 +30,7 @@ const startingReview = {
 } as Omit<Review, "created_at" | "updated_at">;
 
 const ModalAvaliarExperiencia = () => {
+  const { t } = useTranslation();
   const { addReview } = useReviewService();
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, reservation, step } = useModalAvaliarExperiencia();
@@ -102,7 +104,7 @@ const ModalAvaliarExperiencia = () => {
                           <p className="text-semibold mb-11 mt-7 text-3xl">MUDAR AQUI Quarto Privado em T3 - Peniche</p>
                           <div className="flex flex-col gap-6">
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Localização</div>
+                              <div className="text-2xl text-secondary-300">{t("location")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LOCATION_RATING, 1)}>
                                   <Rating.Star filled={review.location_rating >= 1 ? true : false} />
@@ -235,7 +237,7 @@ const ModalAvaliarExperiencia = () => {
                       <div className="" id="model-radius">
                         {reservation && (
                           <p className="text-semibold mb-11 mt-7 text-3xl">
-                            {TYPE_ADVERTISEMENT[reservation.advertisement.type]} - {reservation.advertisement.place}
+                            {t(TYPE_ADVERTISEMENT[reservation.advertisement.type])} - {reservation.advertisement.place}
                           </p>
                         )}
                         <div className=" m-4 ">

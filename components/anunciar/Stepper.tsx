@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 import { useCurrentStep } from "../../context/AnunciarProvider";
+import { useTranslation } from "next-i18next";
 
 export default function Stepper() {
+  const { t } = useTranslation();
   const currentStep = useCurrentStep();
   return (
     <>
@@ -13,7 +15,7 @@ export default function Stepper() {
             <div className="flex-auto border-t-2 border-primary-500"></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={1} text="Passo 1" />
+            <StepIcon stepNumber={1} text={t("advertisements:add_advert.step", { count: 1 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 1,
@@ -22,7 +24,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={2} text="Passo 2" />
+            <StepIcon stepNumber={2} text={t("advertisements:add_advert.step", { count: 2 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 2,
@@ -31,7 +33,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={3} text="Passo 3" />
+            <StepIcon stepNumber={3} text={t("advertisements:add_advert.step", { count: 3 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 3,
@@ -40,7 +42,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={4} text="Passo 4" />
+            <StepIcon stepNumber={4} text={t("advertisements:add_advert.step", { count: 4 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 4,
@@ -49,7 +51,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={5} text="Passo 5" />
+            <StepIcon stepNumber={5} text={t("advertisements:add_advert.step", { count: 5 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 5,
@@ -58,7 +60,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={6} text="Passo 6" />
+            <StepIcon stepNumber={6} text={t("advertisements:add_advert.step", { count: 6 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 6,
@@ -67,7 +69,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={7} text="Passo 7" />
+            <StepIcon stepNumber={7} text={t("advertisements:add_advert.step", { count: 7 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 7,

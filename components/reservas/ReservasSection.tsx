@@ -20,6 +20,7 @@ const paths = [
 ] as BreadcrumbPath[];
 
 const ReservasSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="max-width px-5">
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
@@ -30,9 +31,11 @@ const ReservasSection = () => {
         <UnideskStructure.Content>
           <Tab.Group>
             <Tab.List className="mb-5 flex gap-5 border-b border-primary-200">
-              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Ativas</Tab>
-              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Próximas</Tab>
-              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">Todas</Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("active")}</Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">
+                {t("incoming")}
+              </Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("all")}</Tab>
             </Tab.List>
             <Tab.Panels className="w-full">
               <Tab.Panel>
@@ -118,9 +121,9 @@ const CurrentReservationsSection = () => {
                   <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{`${
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{`${t(
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  } em ${reservation.advertisement.place}`}</Table.Cell>
+                  )} em ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -195,7 +198,7 @@ const NextReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
-                    TYPE_ADVERTISEMENT[reservation.advertisement?.type] || ""
+                    t(TYPE_ADVERTISEMENT[reservation.advertisement?.type]) || ""
                   } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );
@@ -286,7 +289,7 @@ const AllReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
-                    reservation.advertisement ? TYPE_ADVERTISEMENT[reservation.advertisement.type] : ""
+                    reservation.advertisement ? t(TYPE_ADVERTISEMENT[reservation.advertisement.type]) : ""
                   } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );

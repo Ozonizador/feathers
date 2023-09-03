@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 interface ConditionsProps {
   initialSession: Session;
@@ -22,6 +23,7 @@ interface ConditionsProps {
 }
 
 const Conditions = ({ advertisement }: ConditionsProps) => {
+  const { t } = useTranslation();
   const { updateAdvertisement } = useAdvertisementService();
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
@@ -52,7 +54,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
         <MenuSenhorio activeSection="single_advert" activeUrl="advert_conditions" />
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
-        <div className="mb-2 text-2xl font-semibold">Condições</div>
+        <div className="mb-2 text-2xl font-semibold">{t("advertisements:conditions")}</div>
         <div className="text-xl text-gray-700">As suas regras</div>
 
         {advertisementContext && (
@@ -61,7 +63,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
 
             <div className="mb-10 w-1/2">
               <Button onClick={saveChanges} type="button">
-                Guardar alterações
+                {t("save_changes")}
               </Button>
             </div>
           </>
@@ -121,7 +123,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       advertisement: advertisement,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

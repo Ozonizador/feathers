@@ -17,6 +17,7 @@
   "photo_one": "Photo",
   "photo_other": "Photos",
   "host_type": {
+    "compose_host": "{{type}} Host",
     "super_flex": "Super Flexible",
     "flex": "Flexible",
     "moderate": "Moderate",
@@ -25,6 +26,11 @@
     "flex_description": "Up to 30 days before check-in: 100% of the rental amount is refunded. After this period and up to 7 days before, the amount refunded is 50%. After this period payment is in full.",
     "moderate_description": "Up to 60 days before check-in: 100% of the rental amount is refunded. After this period and up to 15 days before, the amount refunded is 50%. After this period payment is in full.",
     "rigid_description": "Up to 90 days before check-in: 100% of the rental amount is refunded. After that period and up to 30 days before, the amount refunded is 50%. After this period payment is in full."
+  },
+  "type": {
+    "entire_place": "Entire place",
+    "shared_room": "Shared Room",
+    "private_room": "Private Room"
   },
   "reservation_status": {
     "accepted": "Reservation Accepted",
@@ -42,7 +48,44 @@
     "bathroom": "Bathroom",
     "bedroom": "Bedroom",
     "kitchen": "Kitchen",
-    "exterior": "Exterior Area"
+    "exterior": "Exterior Area",
+    "main": "Main"
   },
-  "no_comodities": "No comodities"
+  "no_comodities": "No comodities",
+  "conditions": "Conditions",
+  "verified_house": "Verified House",
+  "details": {
+    "type_house_title": "What is your type of space?"
+  },
+
+  "house_state": {
+    "title": "Ad status",
+    "not_published": "Not published",
+    "not_published_description": "Your listing is non-bookable and will not appear in search results.",
+    "paused": "Paused",
+    "paused_description": "Your ad will be temporarily paused.",
+    "available": "Available",
+    "available_description": "Your listing is available for booking.",
+    "capacity": "Capacity"
+  },
+  "add_advert": {
+    "step": "Step {{count}}",
+    "title_start": "Advertising your property is quick and easy!",
+    "floor": "Floor",
+    "street": "Street",
+    "place": "Place",
+    "street_number": "Street Number",
+    "postal_code": "Postal Code",
+    "title_advert": "Advert Title",
+    "title_input_description": "Maximum of 50 words",
+    "internal_name": "Internal Name",
+    "description_title": "Describe your space simply and concisely.",
+    "description_placeholder": "Describe your space in 500 words",
+    "owner_lives_property_title": "Do you live on the property?",
+    "owner_type": "Type of landlord",
+    "private_owner": "Private",
+    "profissional_owner": "Profissional",
+    "about_house_title": "About your house",
+    "cancellation_policy": "Cancellation Policy"
+  }
 }
