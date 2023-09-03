@@ -92,7 +92,7 @@ export default Contactos;
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "contacts", "common"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 }

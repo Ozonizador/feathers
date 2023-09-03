@@ -57,7 +57,7 @@ const TypeCustomerPage = () => {
           </div>
           <div className="relative flex items-center py-5">
             <div className="flex-grow border-t border-gray-400"></div>
-            <span className="mx-4 flex-shrink text-lg font-bold">ou</span>
+            <span className="mx-4 flex-shrink text-lg font-bold">{t("or")}</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
           <div
@@ -95,7 +95,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "admin"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

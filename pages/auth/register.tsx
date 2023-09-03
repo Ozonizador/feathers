@@ -115,7 +115,7 @@ export default Register;
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "admin"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 }

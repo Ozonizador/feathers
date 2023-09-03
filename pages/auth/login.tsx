@@ -116,7 +116,7 @@ export default Login;
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 }
