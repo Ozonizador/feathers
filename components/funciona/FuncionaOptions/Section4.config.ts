@@ -1,7 +1,7 @@
 export const optionsCard1 = [
-  { text: "Comunicação e representação do proprietário" },
-  { text: "Gestão de rendas e avisos de pagamento" },
-  { text: "Coordenação de manutenção e reparações" },
-  { text: "Gestão de despesas" },
-  { text: "Check-in/check-out dos estudantes." },
+  { text: "funciona:communication_representation" },
+  { text: "funciona:rent_management_and_payments" },
+  { text: "funciona:coordination_maintenemt_repairs" },
+  { text: "funciona:expenses_management" },
+  { text: "funciona:check_in_out" },
 ];

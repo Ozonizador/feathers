@@ -5,7 +5,7 @@ import FuncionaSection2 from "../components/funciona/funcionaSection2/FuncionaSe
 import FuncionaUniPackages from "../components/funciona/FuncionaSection3/FuncionaUniPackages";
 import FuncionaOptions from "../components/funciona/FuncionaOptions/FuncionaOptions";
 import FuncionaOndeEstamos from "../components/funciona/FuncionaOndeEstamos/FuncionaOndeEstamos";
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Home() {

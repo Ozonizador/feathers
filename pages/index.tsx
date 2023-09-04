@@ -33,7 +33,7 @@ export default Home;
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer", "common", "index"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 }

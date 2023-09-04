@@ -160,7 +160,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       user: session.user,
       currentStay: !currentStayError && currentStay ? currentStay : null,
       nextStays: !nextStaysError && nextStays ? nextStays : [],
-      ...(await serverSideTranslations(locale ?? "pt", ["navbar", "footer"])),
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

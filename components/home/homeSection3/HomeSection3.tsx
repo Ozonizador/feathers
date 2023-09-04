@@ -57,7 +57,7 @@ export default function HomeSection3() {
                     href={PROCURAR_ADVERT_URL}
                     className="flex items-center rounded-full bg-primary-300 px-4 align-middle"
                   >
-                    Ver Mais
+                    {t("see_more")}
                     <div>
                       <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
                     </div>
@@ -94,7 +94,7 @@ export default function HomeSection3() {
                     href={PROCURAR_ADVERT_URL}
                     className="flex w-full items-center justify-center rounded-full bg-primary-300 px-4 py-3 align-middle"
                   >
-                    Ver Mais
+                    {t("see_more")}
                     <div>
                       <BsArrowRightShort className="ml-2 rounded-full bg-white text-primary-500" />
                     </div>
