@@ -1,34 +1,36 @@
 import React from "react";
 
 import FuncionaSection3Card from "./FuncionaSection3Card";
+import { useTranslation } from "next-i18next";
 
 const FuncionaUniPackages = () => {
+  const { t } = useTranslation("funciona");
   return (
-    <section className="max-width bg-terciary-300 pb-1 pt-10">
-      <div className="container mx-auto mt-14 text-center">
-        <p className="mb-10 text-primary-500 underline underline-offset-1">
-          Não tem tempo ou não está perto da sua propriedade? A UniHosts tem a solução!
-        </p>
-        <h1 className="text-5xl font-bold lg:text-6xl">Conheça Os Nossos Unipackages</h1>
+    <section className="mx-5 lg:mx-0">
+      <div className="max-width bg-terciary-300 pb-1 pt-10">
+        <div className="container mx-auto mt-14 text-center">
+          <p className="mb-10 text-primary-500 underline underline-offset-1">{t("uni_packages_title")}</p>
+          <h1 className="text-5xl font-bold lg:text-6xl">{t("uni_packages")}</h1>
 
-        <div className="mb-5 mt-16 grid grid-cols-1 flex-row gap-10 lg:grid-cols-3">
-          <FuncionaSection3Card
-            img="/images/image1.png"
-            heading="Nós somos o senhorio por si!"
-            text="De forma a libertar as preocupações durante o ano letivo, asseguramos o acompanhamento personalizado aos estudantes, de modo a garantir a manutenção da casa e respetiva harmonia entre os inquilinos."
-          />
+          <div className="mb-5 mt-16 grid grid-cols-1 flex-row gap-10 lg:grid-cols-3">
+            <FuncionaSection3Card
+              img="/images/image1.png"
+              heading={t("uni_packages_advantage_title_1")}
+              text={t("uni_packages_advantage_description_1")}
+            />
 
-          <FuncionaSection3Card
-            img="/images/image2.png"
-            heading="Pagamentos seguros"
-            text="Os pagamentos das rendas dos inquilinos são feitos de forma segura e transparente. Temos também uma proteção contra saídas antecipadas do hóspede para que não haja imprevistos!"
-          />
+            <FuncionaSection3Card
+              img="/images/image2.png"
+              heading={t("uni_packages_advantage_title_2")}
+              text={t("uni_packages_advantage_description_2")}
+            />
 
-          <FuncionaSection3Card
-            img="/images/image3.png"
-            heading="Acesso total à UniDesk"
-            text="Através da nossa plataforma poderá verificar os hospedes atuais, respetivas informações contratuais, todas as transações, eventuais reparações existentes e adicionar despesas se aplicável"
-          />
+            <FuncionaSection3Card
+              img="/images/image3.png"
+              heading={t("uni_packages_advantage_title_3")}
+              text={t("uni_packages_advantage_description_3")}
+            />
+          </div>
         </div>
       </div>
     </section>
