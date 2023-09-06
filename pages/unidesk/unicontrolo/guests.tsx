@@ -12,8 +12,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const paths = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
-  { url: UNIDESK_URL, label: "Uni-Controlo" },
+  { url: UNIDESK_URL, label: "uni-desk" },
+  { url: UNIDESK_URL, label: "uni-controlo" },
   { url: "", label: "guest_other" },
 ] as BreadcrumbPath[];
 

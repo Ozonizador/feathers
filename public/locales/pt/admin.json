@@ -9,14 +9,20 @@
     "common": {
       "panel": "Painel",
       "contracts": "Informações contratuais",
-      "calendar": "Calendário"
+      "calendar": "Calendário",
+      "send_message": "Enviar\n Messagem"
     },
     "student": {
       "general": "Informações gerais",
       "rent": "Renda",
       "repairs": "Reparações",
       "expenses": "Despesas",
-      "contracts": "Informações contratuais"
+      "contracts": "Informações contratuais",
+      "report_advert": "Reportar<1/> Anúncio",
+      "change_reservation": "Alterar<1/> Reserva",
+      "evaluate_exp": "Avaliar<1/> Experiência",
+      "next_stays": "Próximas estadias",
+      "current_stay": "Current Stay"
     },
     "landlord": {
       "reviews": "Reviews",

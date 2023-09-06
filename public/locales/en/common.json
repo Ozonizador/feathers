@@ -60,5 +60,19 @@
   "most_recent": "Most recent",
   "allowed": "Allowed",
   "not_allowed": "Not Allowed",
-  "close": "Close"
+  "close": "Close",
+  "new_payment": "New Payment",
+  "original_oayment": "Original Payment",
+  "imprecive_advert": "Is inaccurate or incorrect",
+  "report_advert": "Report Advertisement",
+  "not_like_photos": "Doesn't match reality",
+  "is_ofensive": "Is offensive",
+  "is_other_thing": "Is other thing",
+  "is_scam": "It's a scam",
+  "evaluate_experience": "Evaluate Experience",
+  "give_private_feedback": "Leave your private feedback to the landlord",
+  "give_public_feedback": "Give your feedback public",
+  "overall_rating": "Overall Rating",
+  "uni-desk": "Uni-desk",
+  "uni-controlo": "Uni-Control"
 }

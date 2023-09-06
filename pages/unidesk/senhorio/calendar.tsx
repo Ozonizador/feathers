@@ -52,7 +52,7 @@ const TEMPO_ANTECEDENCIA = [
 ];
 
 const breadcrumbPaths = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "admin:calendar.calendar" },
 ] as BreadcrumbPath[];
 

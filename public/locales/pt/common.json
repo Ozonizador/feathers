@@ -1,5 +1,5 @@
 {
-  "announce": "Announce",
+  "announce": "Anunciar",
   "login": "Iniciar Sessão",
   "register": "Registar",
   "forgot_pw": "Esqueci-me da palavra-passe",
@@ -60,5 +60,19 @@
   "most_recent": "Mais recente",
   "allowed": "Permitido",
   "not_allowed": "Não Permitido",
-  "close": "Fechar"
+  "close": "Fechar",
+  "new_payment": "Novo Pagamento",
+  "original_payment": "Pagamento Original",
+  "imprecive_advert": "É impreciso ou incorreto",
+  "report_advert": "Reportar anúncio",
+  "not_like_photos": "Não corresponde à realidade",
+  "is_ofensive": "É ofensivo",
+  "is_other_thing": "É outra coisa",
+  "is_scam": "È um esquema",
+  "evaluate_experience": "Avaliar experiência",
+  "give_private_feedback": "Deixa o teu feedback privado ao senhorio",
+  "give_public_feedback": "Deixa o teu feedback público",
+  "overall_rating": "Avaliação Geral",
+  "uni-desk": "Uni-desk",
+  "uni-controlo": "Uni-Controlo"
 }

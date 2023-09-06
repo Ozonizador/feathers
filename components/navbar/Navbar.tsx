@@ -289,7 +289,7 @@ export const Navbar = () => {
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
-                                    Uni-desk
+                                    {t("uni-desk")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -344,7 +344,7 @@ export const Navbar = () => {
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
-                                    Uni-desk
+                                    {t("uni-desk")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -364,7 +364,7 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNICONTROLO_GUESTS_URL}>
-                                    Uni-controlo
+                                    {t("uni-controlo")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>

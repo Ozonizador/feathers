@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import classNames from "classnames";
 import { INBOX_URL } from "../../../models/paths";
 import { ReservationComplete } from "../../../models/reservation";
+import { Trans, useTranslation } from "next-i18next";
 
 interface StayInfoProps {
   reservation: ReservationComplete;
@@ -22,6 +23,7 @@ interface StayInfoProps {
 }
 
 const StayInfo = ({ reservation, options }: StayInfoProps) => {
+  const { t } = useTranslation();
   const { isNextStay } = options;
 
   // MODAL REPORT
@@ -77,9 +79,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
             })}
           />
           <div className="text-center text-xs lg:text-sm">
-            Reportar
-            <br />
-            anúncio
+            <Trans i18nKey="admin:unidesk.student.report_advert" components={{ 1: <br /> }} />
           </div>
         </div>
       )}
@@ -89,9 +89,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
           <div className="w-18 flex cursor-pointer flex-col items-center gap-1">
             <RiMailSendLine className="mb-2 text-4xl text-green-400" size={32} />
             <div className="text-center text-xs lg:text-sm">
-              Enviar
-              <br />
-              mensagem
+              <Trans i18nKey="admin:unidesk.common.send_message" components={{ 1: <br /> }} />
             </div>
           </div>
         </Link>
@@ -100,9 +98,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
       <div className="w-18 flex cursor-pointer flex-col items-center gap-1" onClick={() => openModalAlterarReserva()}>
         <TbRefresh className="mb-2 text-4xl text-amber-700" size={32} />
         <div className="text-center text-xs lg:text-sm">
-          Alterar
-          <br />
-          reserva
+          <Trans i18nKey="admin:unidesk.student.change_reservation" components={{ 1: <br /> }} />
         </div>
       </div>
 
@@ -118,9 +114,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
             })}
           />
           <div className="text-center text-xs lg:text-sm">
-            Avaliar
-            <br />
-            experiência
+            <Trans i18nKey="admin:unidesk.student.evaluate_exp" components={{ 1: <br /> }} />
           </div>
         </div>
       )}

@@ -192,12 +192,12 @@ const ModalAlterarReserva = () => {
 
                             <div className="mx-auto flex w-8/12 justify-between ">
                               <div className="text-center">
-                                <h5 className="mb-3 font-bold">Pagamento Original</h5>
+                                <h5 className="mb-3 font-bold">{t("original_payment")})</h5>
                                 <p className="underline underline-offset-8">{t("details")}</p>
                               </div>
 
                               <div className="text-center">
-                                <h5 className="mb-3 font-bold">Novo Pagamento</h5>
+                                <h5 className="mb-3 font-bold">{t("new_payment")}</h5>
                                 <p className="underline underline-offset-8">{t("details")}</p>
                               </div>
                             </div>

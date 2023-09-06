@@ -9,14 +9,20 @@
     "common": {
       "panel": "Main Panel",
       "contracts": "Contractual Information",
-      "calendar": "Calendar"
+      "calendar": "Calendar",
+      "send_message": "Send<1/> Message"
     },
     "student": {
       "general": "General Information",
       "rent": "Rent",
       "repairs": "Repairs",
       "expenses": "Expenses",
-      "contracts": "Contractual Information"
+      "contracts": "Contractual Information",
+      "report_advert": "Report<1/> Advertisement",
+      "change_reservation": "Change<1/> Reservation",
+      "evaluate_exp": "Evaluate<1/> Experience",
+      "next_stays": "Next Stays",
+      "current_stay": "Current Stay"
     },
     "landlord": {
       "reviews": "Reviews",

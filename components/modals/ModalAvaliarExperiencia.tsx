@@ -87,7 +87,7 @@ const ModalAvaliarExperiencia = () => {
                 className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
               >
                 <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32" height="32" />{" "}
-                <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
+                <span className="ml-3 text-3xl font-bold">{t("evaluate_experience")}</span>
               </Dialog.Title>
               {step === 1 && (
                 <>
@@ -188,7 +188,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Avaliação Geral</div>
+                              <div className="text-2xl text-secondary-300">{t("overall_rating")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 1)}>
                                   <Rating.Star filled={review.overall_rating >= 1 ? true : false} />
@@ -215,7 +215,7 @@ const ModalAvaliarExperiencia = () => {
                               role="button"
                               id="modal-btn"
                             >
-                              Seguinte
+                              {t("next_step")}
                             </a>
                           </p>
                         </div>
@@ -241,7 +241,7 @@ const ModalAvaliarExperiencia = () => {
                           </p>
                         )}
                         <div className=" m-4 ">
-                          <p className="mb-3 text-base">Deixa o teu feedback público</p>
+                          <p className="mb-3 text-base">{t("give_public_feedback")}</p>
                           <div className="mb-3 bg-slate-200">
                             <textarea
                               className="form-control w-full rounded-md border border-terciary-500 bg-white"
@@ -252,7 +252,7 @@ const ModalAvaliarExperiencia = () => {
                             ></textarea>
                           </div>
                           <div className="mb-3 mt-10">
-                            <p className="mb-3 text-base">Deixa o teu feedback privado ao senhorio</p>
+                            <p className="mb-3 text-base">{t("give_private_feedback")}</p>
                             <div className="mb-3 bg-slate-200">
                               <textarea
                                 className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
@@ -271,7 +271,7 @@ const ModalAvaliarExperiencia = () => {
                               onClick={saveReview}
                               disabled={loading}
                             >
-                              {loading ? <Spinner /> : "Seguinte"}
+                              {loading ? <Spinner /> : t("next_step")}
                             </button>
                           </div>
                         </div>

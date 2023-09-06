@@ -16,6 +16,7 @@ import { useTranslation } from "next-i18next";
 /* PAGINA 21-22 DO XD */
 
 const ModalDenuncia = () => {
+  const { t } = useTranslation();
   const { addReportOnAdvert } = useReportService();
   const profile = useCurrentUser();
   const { isOpen, step, reservation } = useModalReportAdvertisement();
@@ -79,7 +80,7 @@ const ModalDenuncia = () => {
               <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image src="/images/flag.png" alt="" width="40" height="30" />
-                  <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">Reportar anúncio</span>
+                  <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">{t("report_advert")}</span>
                 </Dialog.Title>
                 {step === 1 && (
                   <>
@@ -104,7 +105,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.IMPRECISE}
                                   onChange={changeReportType}
                                 />
-                                <label>É impreciso ou incorreto</label>
+                                <label>{t("imprecive_advert")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -115,7 +116,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.NOT_REALITY}
                                   onChange={changeReportType}
                                 />
-                                <label>Não corresponde à realidade</label>
+                                <label>{t("not_like_photos")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -126,7 +127,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.SCAM}
                                   onChange={changeReportType}
                                 />
-                                <label>É um esquema</label>
+                                <label>{t("is_other_thing")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -137,7 +138,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.OFFENSIVE}
                                   onChange={changeReportType}
                                 />
-                                <label>É ofensivo</label>
+                                <label>{t("is_ofensive")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -148,7 +149,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.OTHER}
                                   onChange={changeReportType}
                                 />
-                                <label>É outra coisa</label>
+                                <label>{t("is_other_thing")}</label>
                               </div>
                               <div className="mt-3 w-full">
                                 <textarea
@@ -168,7 +169,7 @@ const ModalDenuncia = () => {
                                   onClick={saveReport}
                                   disabled={loading}
                                 >
-                                  {loading ? <FeathersSpinner /> : "Seguinte"}
+                                  {loading ? <FeathersSpinner /> : t("next_step")}
                                 </button>
                               </div>
                             </div>

@@ -61,7 +61,7 @@ const UnideskOptions = () => {
       />
 
       <MenuSectionCard
-        topIcon={{ text: "Uni-controlo", image: "/images/icon-pg37-2.svg" }}
+        topIcon={{ text: t("uni-controlo"), image: "/images/icon-pg37-2.svg" }}
         options={optionUniControl}
       />
 

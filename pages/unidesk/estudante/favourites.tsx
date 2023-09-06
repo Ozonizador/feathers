@@ -21,7 +21,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const FavouritesBreadcrumbs = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "favourites_other" },
 ] as BreadcrumbPath[];
 
@@ -105,7 +105,7 @@ const UnideskFavoritos = () => {
                                 <ExpensesComponent expenses={favourite.expenses} />
                               </div>
                               <Link href={`/anuncio/${favourite.slug}`} className="pb-3 text-base text-gray-500">
-                                Ver mais
+                                {t("see_more")}
                               </Link>
                             </div>
                           </div>
@@ -122,11 +122,11 @@ const UnideskFavoritos = () => {
                 href={PROCURAR_ADVERT_URL}
                 className="mt-10 flex w-fit items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44"
               >
-                Encontrar{" "}
+                {t("find")}{" "}
                 <span className="px-1">
                   <CgHome />
                 </span>{" "}
-                em...
+                {t("at")}
               </Link>
             </div>
           </div>
