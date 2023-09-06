@@ -59,5 +59,6 @@
   "best_classification": "Best Rating",
   "most_recent": "Most recent",
   "allowed": "Allowed",
-  "not_allowed": "Not Allowed"
+  "not_allowed": "Not Allowed",
+  "close": "Close"
 }

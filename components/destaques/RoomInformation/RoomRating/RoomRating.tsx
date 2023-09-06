@@ -131,7 +131,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
             </div>
 
             <div className="flex flex-row gap-1">
-              <div className="flex-1 text-xl font-bold">Comodidades</div>
+              <div className="flex-1 text-xl font-bold">{t("advertisements:amenities")}</div>
               <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
                 {`(${averageRatings.comodities_average.toFixed(2)})`}
               </p>

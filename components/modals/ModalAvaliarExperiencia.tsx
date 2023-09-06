@@ -146,7 +146,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Comodidades</div>
+                              <div className="text-2xl text-secondary-300">{t("advertisements:amenities")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 1)}>
                                   <Rating.Star filled={review.comodities_rating >= 1 ? true : false} />
@@ -290,6 +290,7 @@ const ModalAvaliarExperiencia = () => {
 };
 
 const ModalAvaliarExperienciaTerceiroPasso = () => {
+  const { t } = useTranslation();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const closeModal = () => {
     setIsOpen(false);
@@ -320,7 +321,7 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
                 role="button"
                 id="modal-btn"
               >
-                Fechar
+                {t("close")}
               </a>
             </p>
           </div>

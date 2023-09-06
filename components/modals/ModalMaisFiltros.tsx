@@ -95,7 +95,7 @@ const ModalMaisFiltros = () => {
                   aria-hidden="true"
                 >
                   <div className="flex flex-col gap-3">
-                    <div className="mt-5 text-2xl text-primary-500">Características da Casa</div>
+                    <div className="mt-5 text-2xl text-primary-500">{t("advertisements:house_characteristcs")}</div>
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
                         onChange={() => toggleComodityChecked("WIFI")}
@@ -140,7 +140,7 @@ const ModalMaisFiltros = () => {
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <div className="mt-5 text-2xl text-primary-500">Comodidades</div>
+                    <div className="mt-5 text-2xl text-primary-500">{t("advertisements:amenities")}</div>
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
                         onChange={() => toggleComodityChecked("PRIVATE_BATHROOM")}
@@ -185,7 +185,7 @@ const ModalMaisFiltros = () => {
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <div className="mt-5 text-2xl text-primary-500">Condições e Regras</div>
+                    <div className="mt-5 text-2xl text-primary-500">{t("advertisements:conditions_and_rules")}</div>
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
                         onChange={() => toggleFiltersProperty("smokingAllowed", !smokingAllowed)}

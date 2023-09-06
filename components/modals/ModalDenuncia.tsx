@@ -11,6 +11,7 @@ import { Report, ReportsType } from "../../models/report";
 import { useCurrentUser } from "../../context/MainProvider";
 import useReportService from "../../hooks/reportService";
 import FeathersSpinner from "../utils/Spinner";
+import { useTranslation } from "next-i18next";
 
 /* PAGINA 21-22 DO XD */
 
@@ -188,6 +189,7 @@ const ModalDenuncia = () => {
 };
 
 const ModalDenunciaSegundoPasso = () => {
+  const { t } = useTranslation();
   const reportModal = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
 
@@ -210,7 +212,7 @@ const ModalDenunciaSegundoPasso = () => {
               className="rounded-lg bg-primary-500 px-9 py-2 text-base text-white"
               onClick={closeModal}
             >
-              Fechar
+              {t("close")}
             </button>
           </div>
         </div>

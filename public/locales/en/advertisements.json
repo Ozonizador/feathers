@@ -87,5 +87,9 @@
     "profissional_owner": "Profissional",
     "about_house_title": "About your house",
     "cancellation_policy": "Cancellation Policy"
-  }
+  },
+  "house_conditions": "House Conditions",
+  "house_characteristcs": "House Characteristics",
+  "conditions_and_rules": "Conditions and Rules",
+  "amenities": "Amenities"
 }
