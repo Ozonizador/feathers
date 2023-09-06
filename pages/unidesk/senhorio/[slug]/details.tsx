@@ -177,8 +177,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
 
@@ -188,8 +189,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!slug) {
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
   }
@@ -204,8 +206,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (error) {
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
   }

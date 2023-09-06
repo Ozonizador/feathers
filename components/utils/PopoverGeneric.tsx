@@ -35,7 +35,7 @@ const PopoverGeneric = ({ title, children }: PopoverSelectProps) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-1/2 z-700 mt-5 w-full -translate-x-1/2 transform bg-white px-4 sm:px-0 lg:max-w-3xl">
+              <Popover.Panel className="absolute left-1/2 z-700 mt-5 w-full -translate-x-1/2 transform rounded-lg border border-primary-500 bg-white px-4 sm:px-0 lg:w-fit">
                 {children}
               </Popover.Panel>
             </Transition>
