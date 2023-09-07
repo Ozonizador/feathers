@@ -61,7 +61,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           ></MenuOption>
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/conditions`}
-            label="Condições e regras"
+            label={t("advertisements:conditions_and_rules")}
             activeLink={activeUrl === "advert_conditions"}
           ></MenuOption>
           <MenuOption
@@ -76,7 +76,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
       <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
         isCollapsed={true}
-        title={"Uni-controlo"}
+        title={"uni-controlo"}
         selectedGroup={activeSection === "uni-controlo"}
         defaultOpen={activeSection === "uni-controlo"}
       >

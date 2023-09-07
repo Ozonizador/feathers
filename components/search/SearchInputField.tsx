@@ -81,6 +81,7 @@ export const SearchInputField = () => {
     });
   };
 
+  const placeholderFind = t("find") + " " + t("at");
   return (
     <>
       <div className="flex-row justify-center lg:mt-7 lg:flex">
@@ -90,7 +91,7 @@ export const SearchInputField = () => {
               type="input"
               className="bg-terciary-50 h-16 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
-              placeholder={t("find_in")}
+              placeholder={placeholderFind}
               value={location}
             />
           </div>

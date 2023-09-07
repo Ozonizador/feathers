@@ -24,7 +24,9 @@ const FormPrices = () => {
 
   return (
     <section className="mx-auto my-10 w-full px-5 lg:w-5/6 lg:px-0">
-      <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">Vamos a valores!</div>
+      <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
+        {t("advertisements:add_advert.prices_title")}
+      </div>
       <div className="flex flex-col">
         <PricesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>

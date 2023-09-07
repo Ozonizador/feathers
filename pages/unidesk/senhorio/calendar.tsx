@@ -52,7 +52,7 @@ const TEMPO_ANTECEDENCIA = [
 ];
 
 const breadcrumbPaths = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "admin:calendar.calendar" },
 ] as BreadcrumbPath[];
 
@@ -315,8 +315,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session || !user)
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
 

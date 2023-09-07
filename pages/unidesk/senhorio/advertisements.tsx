@@ -15,13 +15,15 @@ import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const paths = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "admin:unidesk.common.panel" },
 ] as BreadcrumbPath[];
 
 const Anuncios = () => {
+  const { t } = useTranslation();
   const { getAdvertismentsFromUserId } = useAdvertisementService();
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
@@ -52,7 +54,7 @@ const Anuncios = () => {
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div className="ml-0 p-5">
-            <div className="my-4">Os meus anúncios</div>
+            <div className="my-4">{t("admin:reviews.my_adverts")}</div>
             <div className="flex flex-col gap-4">
               {advertisements.map((advertisement) => {
                 return (
@@ -61,7 +63,7 @@ const Anuncios = () => {
                   </div>
                 );
               })}
-              {!advertisements || (advertisements.length === 0 && <div>Sem anúncios</div>)}
+              {!advertisements || (advertisements.length === 0 && <div>{t("advertisement", { count: 0 })}</div>)}
             </div>
           </div>
         </UnideskStructure.Content>
@@ -84,8 +86,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
 

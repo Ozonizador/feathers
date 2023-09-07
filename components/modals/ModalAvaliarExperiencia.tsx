@@ -87,7 +87,7 @@ const ModalAvaliarExperiencia = () => {
                 className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
               >
                 <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32" height="32" />{" "}
-                <span className="ml-3 text-3xl font-bold">Avaliar experiência</span>
+                <span className="ml-3 text-3xl font-bold">{t("evaluate_experience")}</span>
               </Dialog.Title>
               {step === 1 && (
                 <>
@@ -125,7 +125,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Qualidade - preço</div>
+                              <div className="text-2xl text-secondary-300">{t("quality_price")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 1)}>
                                   <Rating.Star filled={review.value_quality_rating >= 1 ? true : false} />
@@ -146,7 +146,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Comodidades</div>
+                              <div className="text-2xl text-secondary-300">{t("advertisements:amenities")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.COMODITIES_RATING, 1)}>
                                   <Rating.Star filled={review.comodities_rating >= 1 ? true : false} />
@@ -167,7 +167,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Senhorio</div>
+                              <div className="text-2xl text-secondary-300">{t("landlord", { count: 1 })}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 1)}>
                                   <Rating.Star filled={review.landlord_rating >= 1 ? true : false} />
@@ -188,7 +188,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Avaliação Geral</div>
+                              <div className="text-2xl text-secondary-300">{t("overall_rating")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.OVERALL_RATING, 1)}>
                                   <Rating.Star filled={review.overall_rating >= 1 ? true : false} />
@@ -215,7 +215,7 @@ const ModalAvaliarExperiencia = () => {
                               role="button"
                               id="modal-btn"
                             >
-                              Seguinte
+                              {t("next_step")}
                             </a>
                           </p>
                         </div>
@@ -241,7 +241,7 @@ const ModalAvaliarExperiencia = () => {
                           </p>
                         )}
                         <div className=" m-4 ">
-                          <p className="mb-3 text-base">Deixa o teu feedback público</p>
+                          <p className="mb-3 text-base">{t("give_public_feedback")}</p>
                           <div className="mb-3 bg-slate-200">
                             <textarea
                               className="form-control w-full rounded-md border border-terciary-500 bg-white"
@@ -252,7 +252,7 @@ const ModalAvaliarExperiencia = () => {
                             ></textarea>
                           </div>
                           <div className="mb-3 mt-10">
-                            <p className="mb-3 text-base">Deixa o teu feedback privado ao senhorio</p>
+                            <p className="mb-3 text-base">{t("give_private_feedback")}</p>
                             <div className="mb-3 bg-slate-200">
                               <textarea
                                 className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
@@ -271,7 +271,7 @@ const ModalAvaliarExperiencia = () => {
                               onClick={saveReview}
                               disabled={loading}
                             >
-                              {loading ? <Spinner /> : "Seguinte"}
+                              {loading ? <Spinner /> : t("next_step")}
                             </button>
                           </div>
                         </div>
@@ -290,6 +290,7 @@ const ModalAvaliarExperiencia = () => {
 };
 
 const ModalAvaliarExperienciaTerceiroPasso = () => {
+  const { t } = useTranslation();
   const setIsOpen = useSetOpenModalAvaliarExperiencia();
   const closeModal = () => {
     setIsOpen(false);
@@ -307,9 +308,9 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
           aria-hidden="true"
         >
           <div>
-            <h1 className="text-2xl font-semibold">Obrigada pelo teu feedback!</h1>
+            <h1 className="mt-5 text-2xl font-semibold">{t("admin:reviews.thanks_for_feedback")}</h1>
             <p className="font-x1 mx-auto mb-10 mt-7 w-2/3 text-center">
-              A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes.
+              {t("admin:reviews.thanks_for_feedback_description")}
             </p>
           </div>
 
@@ -320,7 +321,7 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
                 role="button"
                 id="modal-btn"
               >
-                Fechar
+                {t("close")}
               </a>
             </p>
           </div>

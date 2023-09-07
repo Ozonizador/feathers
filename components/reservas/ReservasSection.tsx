@@ -15,7 +15,7 @@ import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 import { useTranslation } from "next-i18next";
 
 const paths = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "reservation_other" },
 ] as BreadcrumbPath[];
 

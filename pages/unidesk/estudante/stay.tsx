@@ -23,11 +23,12 @@ import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { ReservationComplete, Reservations, RESERVATION_TABLE_NAME } from "../../../models/reservation";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 /* PAGINA 21 do xd */
 
 const EstadiaBreadcrumbs = [
-  { url: UNIDESK_URL, label: "Uni-Desk" },
+  { url: UNIDESK_URL, label: "uni-desk" },
   { url: "", label: "my_stay" },
 ] as BreadcrumbPath[];
 
@@ -37,6 +38,7 @@ interface EstadiaComponentProps {
 }
 
 const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
+  const { t } = useTranslation();
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
@@ -49,8 +51,8 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                   <MenuEstudante activeSection={"stay"} activeUrl={"general"} />
                 </UnideskStructure.Menu>
                 <UnideskStructure.Content>
-                  <div className="mb-4 text-2xl font-semibold">Informações gerais</div>
-                  <h6 className="text-left text-xl text-gray-600">Estadia atual</h6>
+                  <div className="mb-4 text-2xl font-semibold">{t("admin:unidesk.student.general")}</div>
+                  <h6 className="text-left text-xl text-gray-600">{t("admin:unidesk.student.current_stay")}</h6>
                   {/* Modais */}
                   <ModalDenuncia />
                   <ModalAvaliarExperiencia />
@@ -66,7 +68,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     {!currentStay && <div>Não tem estadia programada</div>}
                   </div>
                   <div className="mt-5 flex flex-col gap-3">
-                    <h6 className="text-xl text-gray-600">Próximas estadias</h6>
+                    <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_stays")}</h6>
                     <>
                       {nextStays &&
                         nextStays.map((stay) => {
@@ -83,13 +85,13 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     <div className="flex justify-center">
                       <Link
                         href={PROCURAR_ADVERT_URL}
-                        className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center uppercase  leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
+                        className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
                       >
-                        Encontrar
+                        {t("find")}
                         <span className="px-1">
                           <CgHome />
                         </span>
-                        em...
+                        {t("at")}
                       </Link>
                     </div>
                   </div>
@@ -117,8 +119,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session) {
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: `auth/login`,
         permanent: false,
+        locale: locale,
       },
     };
   }

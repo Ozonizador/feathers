@@ -9,14 +9,20 @@
     "common": {
       "panel": "Painel",
       "contracts": "Informações contratuais",
-      "calendar": "Calendário"
+      "calendar": "Calendário",
+      "send_message": "Enviar\n Messagem"
     },
     "student": {
       "general": "Informações gerais",
       "rent": "Renda",
       "repairs": "Reparações",
       "expenses": "Despesas",
-      "contracts": "Informações contratuais"
+      "contracts": "Informações contratuais",
+      "report_advert": "Reportar<1/> Anúncio",
+      "change_reservation": "Alterar<1/> Reserva",
+      "evaluate_exp": "Avaliar<1/> Experiência",
+      "next_stays": "Próximas estadias",
+      "current_stay": "Current Stay"
     },
     "landlord": {
       "reviews": "Reviews",
@@ -55,7 +61,9 @@
     "my_adverts": "Os meus anúncios",
     "main_score": "Classificação geral",
     "last_reviews": "Últimas reviews",
-    "no_reviews": "Não existem reviews para serem mostradas"
+    "no_reviews": "Não existem reviews para serem mostradas",
+    "thanks_for_feedback": "Obrigada pelo teu feedback!",
+    "thanks_for_feedback_description": "A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes."
   },
   "guests": {
     "current_guests": "Hóspedes Atuais",
@@ -71,5 +79,11 @@
     "discounts": "Descontos",
     "monthWithCount_one": "{{count}} Mês",
     "monthWithCount_other": "{{count}} Meses"
+  },
+  "report": {
+    "title": "Porque estás a denunciar esta conta?",
+    "description": "A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.",
+    "success_description": "Vamos averiguar a situação. Obrigada por teres denunciado e tornado<1/>a nosssa comunidade unihosts num lugar melhor!",
+    "success_title": "A UniHosts agradece!"
   }
 }

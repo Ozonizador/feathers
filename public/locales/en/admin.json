@@ -9,14 +9,20 @@
     "common": {
       "panel": "Main Panel",
       "contracts": "Contractual Information",
-      "calendar": "Calendar"
+      "calendar": "Calendar",
+      "send_message": "Send<1/> Message"
     },
     "student": {
       "general": "General Information",
       "rent": "Rent",
       "repairs": "Repairs",
       "expenses": "Expenses",
-      "contracts": "Contractual Information"
+      "contracts": "Contractual Information",
+      "report_advert": "Report<1/> Advertisement",
+      "change_reservation": "Change<1/> Reservation",
+      "evaluate_exp": "Evaluate<1/> Experience",
+      "next_stays": "Next Stays",
+      "current_stay": "Current Stay"
     },
     "landlord": {
       "reviews": "Reviews",
@@ -55,7 +61,9 @@
     "my_adverts": "My Adverts",
     "main_score": "Overall rating",
     "last_reviews": "Last reviews",
-    "no_reviews": "No reviews to be shown"
+    "no_reviews": "No reviews to be shown",
+    "thanks_for_feedback": "Thanks for your feedback!",
+    "thanks_for_feedback_description": "Your opinion is an asset to the unihosts community, it will certainly help other students."
   },
   "guests": {
     "current_guests": "Current Guests",
@@ -71,5 +79,11 @@
     "discounts": "Discounts",
     "monthWithCount_one": "{{count}} Month",
     "monthWithCount_other": "{{count}} Months"
+  },
+  "report": {
+    "title": "Why are you reporting this account?",
+    "description": "Your report is anonymous and you should bear in mind that it may harm others if it is not true. If this advertisement is inappropriate or does not match reality, please report it.",
+    "success_description": "We are going to look into the situation. Thank you for reporting<1/> and making our unihosts community a better place!",
+    "success_title": "UniHosts thanks you!"
   }
 }

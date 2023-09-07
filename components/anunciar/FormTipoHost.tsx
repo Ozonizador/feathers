@@ -24,7 +24,7 @@ const FormTipoHost = () => {
   return (
     <section className="container mx-auto my-10 w-5/6">
       <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
-        Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.
+        {t("advertisements:add_advert.type_host_title")}
       </div>
 
       <HostFlexTypeComponent advertisement={advertisement} onChange={changeTypeProperty} />

@@ -12,6 +12,15 @@ const nextConfig = {
     baseUrl: ".",
   },
   transpilePackages: ["flowbite-react"],
+  // output: "standalone",
+  generateBuildId: async () => {
+    if (process.env.BUILD_ID) {
+      return process.env.BUILD_ID;
+    } else {
+      return `${new Date().getTime()}`;
+    }
+  },
+  distDir: ".next",
 };
 
 module.exports = removeImports(nextConfig);

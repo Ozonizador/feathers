@@ -14,13 +14,13 @@ const RoomUtilitesPopover = ({ expenses }: roomUtilitesPopoverProps) => {
     if (!expenses || !expenses.services || expenses.services.length === 0) return false;
     const selectedExpense = expenses.services.find((expense) => expense.name === type);
     if (selectedExpense !== null) {
-      if (selectedExpense?.included === "INCLUDED") return "Incluído";
-      if (selectedExpense?.included === "EXCLUDED") return "Não Incluído";
-      if (selectedExpense?.max) return `Despesas até ${selectedExpense.max}€`;
-      return "Sem informação";
+      if (selectedExpense?.included === "INCLUDED") return t("advertisements:included");
+      if (selectedExpense?.included === "EXCLUDED") return t("advertisements:not_included");
+      if (selectedExpense?.max) return t("advertisements:expenses_up_to", { value: selectedExpense.max });
+      return t("no_information");
     }
 
-    return "Não Incluído";
+    return t("advertisements:not_included");
   };
   return (
     <div className="absolute -bottom-20 -left-32 z-50 hidden bg-white group-hover:block lg:-left-32">

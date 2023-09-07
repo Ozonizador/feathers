@@ -67,7 +67,15 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
             <div className="mb-3 cursor-pointer font-bold">
-              {userAppMode === "TENANT" ? <Link href="/">Home</Link> : <Link href={UNIDESK_URL}>Unidesk</Link>}
+              {userAppMode === "TENANT" ? (
+                <Link href="/" locale={router.locale}>
+                  Home
+                </Link>
+              ) : (
+                <Link href={UNIDESK_URL} locale={router.locale}>
+                  Unidesk
+                </Link>
+              )}
             </div>
             <div
               className="flex flex-1 cursor-pointer items-center gap-1"
@@ -76,7 +84,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               }}
             >
               <div>
-                <p>Anuncie a sua propriedade</p>
+                <p>{t("navbar:announce")}</p>
               </div>
 
               <Image
@@ -91,20 +99,28 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 <>
                   <div className="flex flex-col gap-2 pl-5 text-base">
                     <div className="mt-2">
-                      <Link href={COMO_FUNCIONA_URL}>Como funciona?</Link>
+                      <Link href={COMO_FUNCIONA_URL} locale={router.locale}>
+                        {t("funciona:title")}
+                      </Link>
                     </div>
                     <div>
-                      <Link href={ANUNCIAR_PROP_URL}>Anunciar!</Link>
+                      <Link href={ANUNCIAR_PROP_URL} locale={router.locale}>
+                        {t("navbar:announce_property")}
+                      </Link>
                     </div>
                   </div>
                 </>
               </div>
             )}
             <div className="mt-3 cursor-pointer">
-              <Link href={BLOG_URL}>Blog</Link>
+              <Link href={BLOG_URL} locale={router.locale}>
+                {t("navbar:blog")}
+              </Link>
             </div>
             <div className="mt-3 cursor-pointer">
-              <Link href={CONTACTOS_URL}>Contactos</Link>
+              <Link href={CONTACTOS_URL} locale={router.locale}>
+                {t("navbar:contacts")}
+              </Link>
             </div>
           </div>
           <div className="mt-7  rounded-3xl bg-gray-100 px-8 py-4">
@@ -148,7 +164,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                       <BsPerson size={32} />
                     )}
 
-                    <div className="my-auto ml-2">{profile?.name}</div>
+                    <div className="my-auto ml-2 capitalize">{profile?.name}</div>
                   </div>
 
                   <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
@@ -158,13 +174,13 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               )}
               {!user && (
                 <div className="my-auto flex w-full justify-center gap-2">
-                  <Link href={REGISTER_URL} className="p-0">
+                  <Link href={REGISTER_URL} locale={router.locale} className="p-0">
                     <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                       {t("register")}
                     </div>
                   </Link>
 
-                  <Link href={LOGIN_URL} className="p-0">
+                  <Link href={LOGIN_URL} locale={router.locale} className="p-0">
                     <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                       {t("login")}
                     </div>
@@ -176,7 +192,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
               {userAppMode == "TENANT" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
-                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>{t("uni-desk")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>{t("my_stay")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>
                     {t("favourites", { count: 2 })}
@@ -203,12 +219,12 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               )}
               {userAppMode == "LANDLORD" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
-                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>Uni-desk</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>{t("uni-desk")}</div>
                   <div onClick={() => selectMenuButton(INBOX_URL)}>{t("inbox")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_SENHORIO_PAINEL_URL)}>
                     {t("advertisement", { count: 2 })}
                   </div>
-                  <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>Uni-controlo</div>
+                  <div onClick={() => selectMenuButton(UNICONTROLO_GUESTS_URL)}>{t("uni-controlo")}</div>
                   <div onClick={() => selectMenuButton(NOTIFICATIONS_URL)}>{t("notifications")}</div>
                   <div className="mx-auto my-3 h-[1px] w-full bg-neutral-600"></div>
                   <div onClick={() => selectMenuButton(ADMIN_URL)} className="text-gray-500">

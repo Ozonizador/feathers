@@ -61,7 +61,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
   const editAdvertisement = (event: React.MouseEvent, slug: string) => {
     event.preventDefault();
     setMenuSelectedAdvertisement(advertisement);
-    router.push(`/unidesk/senhorio/${slug}/details`);
+    router.push(`unidesk/senhorio/${slug}/details`, undefined, { locale: router.locale });
   };
 
   const deleteAdvertisement = async () => {
@@ -114,7 +114,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                 ) : (
                                   <EditInactiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
                                 )}
-                                Editar
+                                {t("edit")}
                               </button>
                             )}
                           </Menu.Item>
@@ -133,7 +133,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                 ) : (
                                   <DeleteInactiveIcon className="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
                                 )}
-                                Apagar
+                                {t("delete")}
                               </button>
                             )}
                           </Menu.Item>

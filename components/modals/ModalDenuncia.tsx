@@ -11,10 +11,12 @@ import { Report, ReportsType } from "../../models/report";
 import { useCurrentUser } from "../../context/MainProvider";
 import useReportService from "../../hooks/reportService";
 import FeathersSpinner from "../utils/Spinner";
+import { Trans, useTranslation } from "next-i18next";
 
 /* PAGINA 21-22 DO XD */
 
 const ModalDenuncia = () => {
+  const { t } = useTranslation();
   const { addReportOnAdvert } = useReportService();
   const profile = useCurrentUser();
   const { isOpen, step, reservation } = useModalReportAdvertisement();
@@ -78,7 +80,7 @@ const ModalDenuncia = () => {
               <Dialog.Panel className="w-full transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-xl transition-all lg:w-1/2">
                 <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image src="/images/flag.png" alt="" width="40" height="30" />
-                  <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">Reportar anúncio</span>
+                  <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">{t("report_advert")}</span>
                 </Dialog.Title>
                 {step === 1 && (
                   <>
@@ -86,13 +88,8 @@ const ModalDenuncia = () => {
                       <div tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div id="model-radius">
                           <div>
-                            <h5 className="mt-2 text-xl font-semibold lg:text-2xl">
-                              Porque estás a denunciar esta conta?
-                            </h5>
-                            <p className="mb-10 mt-7 text-justify lg:text-xl">
-                              A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja
-                              verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.
-                            </p>
+                            <h5 className="mt-2 text-xl font-semibold lg:text-2xl">{t("admin:report.title")}</h5>
+                            <p className="mb-10 mt-7 text-justify lg:text-xl">{t("admin:report.description")}</p>
                             <div className="flex flex-col gap-3">
                               <div className="flex gap-3">
                                 <input
@@ -103,7 +100,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.IMPRECISE}
                                   onChange={changeReportType}
                                 />
-                                <label>É impreciso ou incorreto</label>
+                                <label>{t("imprecive_advert")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -114,7 +111,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.NOT_REALITY}
                                   onChange={changeReportType}
                                 />
-                                <label>Não corresponde à realidade</label>
+                                <label>{t("not_like_photos")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -125,7 +122,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.SCAM}
                                   onChange={changeReportType}
                                 />
-                                <label>É um esquema</label>
+                                <label>{t("is_other_thing")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -136,7 +133,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.OFFENSIVE}
                                   onChange={changeReportType}
                                 />
-                                <label>É ofensivo</label>
+                                <label>{t("is_ofensive")}</label>
                               </div>
                               <div className="flex gap-3">
                                 <input
@@ -147,7 +144,7 @@ const ModalDenuncia = () => {
                                   checked={report.type === ReportsType.OTHER}
                                   onChange={changeReportType}
                                 />
-                                <label>É outra coisa</label>
+                                <label>{t("is_other_thing")}</label>
                               </div>
                               <div className="mt-3 w-full">
                                 <textarea
@@ -167,7 +164,7 @@ const ModalDenuncia = () => {
                                   onClick={saveReport}
                                   disabled={loading}
                                 >
-                                  {loading ? <FeathersSpinner /> : "Seguinte"}
+                                  {loading ? <FeathersSpinner /> : t("next_step")}
                                 </button>
                               </div>
                             </div>
@@ -188,6 +185,7 @@ const ModalDenuncia = () => {
 };
 
 const ModalDenunciaSegundoPasso = () => {
+  const { t } = useTranslation();
   const reportModal = useModalReportAdvertisement();
   const setModalReport = useSetModalReportAdvertisement();
 
@@ -200,17 +198,16 @@ const ModalDenunciaSegundoPasso = () => {
       <div className="container p-6">
         <div>
           <div className="jumbotron m-4 p-4 text-center">
-            <h5 className="text-xl font-bold">A UniHosts agradece!</h5>
+            <h5 className="text-xl font-bold">{t("admin:report.sucess_title")}</h5>
             <p className="my-7">
-              Vamos averiguar a situação. Obrigada por teres denunciado e tornado
-              <br />a nosssa comunidade unihosts num lugar melhor!
+              <Trans i18nKey="admin:report.success_description" components={{ 1: <br /> }} />
             </p>
             <button
               type="button"
               className="rounded-lg bg-primary-500 px-9 py-2 text-base text-white"
               onClick={closeModal}
             >
-              Fechar
+              {t("close")}
             </button>
           </div>
         </div>

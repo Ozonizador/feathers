@@ -8,5 +8,5 @@ module.exports = {
     reloadOnPrerender: process.env.NODE_ENV === "development",
   },
   fallbackLng: "pt",
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
 };

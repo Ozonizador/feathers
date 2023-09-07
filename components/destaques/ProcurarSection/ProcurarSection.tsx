@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import RoomCard from "./RoomCard";
 import { TYPE_ADVERTISEMENT, TypeAdvertisement } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
@@ -47,7 +47,7 @@ export default function ProcurarSection() {
   const router = useRouter();
 
   const goToAdvert = (id: string) => {
-    router.push(`/anuncio/${id}`);
+    router.push(`/anuncio/${id}`, undefined, { locale: router.locale });
   };
 
   const setPriceChange = _.debounce((value) => {
@@ -117,33 +117,35 @@ export default function ProcurarSection() {
                   onChange={changeOrderFilter}
                   value={currentOrder.byColumn}
                 >
-                  <option>Ordenar por:</option>
-                  <option value="price-asc">Preço (crescente)</option>
-                  <option value="price-desc">Preço (descrescente)</option>
-                  <option value="rating">Melhor classificação</option>
-                  <option value="time">Mais recente</option>
+                  <option>{t("order_by")}</option>
+                  <option value="price-asc">{t("order_price_asc")}</option>
+                  <option value="price-desc">{t("order_price_desc")}</option>
+                  <option value="rating">{t("best_classification")}</option>
+                  <option value="time">{t("most_recent")}</option>
                 </select>
               </div>
             </div>
 
             <div className="mt-4 flex gap-2">
               <PopoverGeneric title={"Tipo de Espaço"}>
-                <div className="grid w-96 grid-cols-2 gap-4 rounded-md border border-neutral-300 p-3 text-neutral-500">
+                <div className="grid w-96 grid-cols-2 gap-4 bg-white p-3 text-neutral-500">
                   <div
-                    className={classNames("my-auto rounded-lg border border-neutral-400 p-3 text-xs", {
-                      "text-primary-500": currentFilter.placeType === "ALL",
+                    className={classNames("my-auto rounded-xl border p-3 text-xs", {
+                      "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
+                      "border-neutral-500": currentFilter.placeType !== "ALL",
                     })}
                     onClick={() => setFilters({ placeType: "ALL" as TypeAdvertisement })}
                   >
-                    Qualquer Espaço
+                    {t("any_space")}
                   </div>
                   {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
                     return (
                       <div
                         key={index}
                         onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
-                        className={classNames("my-auto rounded-lg border border-neutral-400 p-3 text-xs", {
-                          "text-primary-500": currentFilter.placeType === type,
+                        className={classNames("my-auto rounded-xl border p-3 text-xs", {
+                          "border-primary-500 text-primary-500": currentFilter.placeType === type,
+                          "border-neutral-500": currentFilter.placeType !== type,
                         })}
                       >
                         {t(TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT])}
@@ -152,8 +154,8 @@ export default function ProcurarSection() {
                   })}
                 </div>
               </PopoverGeneric>
-              <PopoverGeneric title={"Preço"}>
-                <div className="w-64">
+              <PopoverGeneric title={t("advertisements:price", { count: 1 })}>
+                <div className="w-fit">
                   <Slider
                     range
                     marks={{ 0: "0€", 1000: "1000€", 3000: "3000€" }}
@@ -161,14 +163,14 @@ export default function ProcurarSection() {
                     onChange={setPriceChange}
                     min={0}
                     max={3000}
-                    className="mx-auto my-auto w-3/4"
+                    className="mx-5 my-auto w-64 py-10"
                   ></Slider>
                 </div>
               </PopoverGeneric>
 
               <div className="ml-auto h-full w-fit">
                 <Button type="button" onClick={() => setModalMaisFiltros(true)} padding="md">
-                  Mais Filtros
+                  {t("more_filters")}
                 </Button>
               </div>
             </div>
