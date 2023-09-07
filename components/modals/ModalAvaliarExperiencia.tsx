@@ -167,7 +167,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Senhorio</div>
+                              <div className="text-2xl text-secondary-300">{t("landlord", { count: 1 })}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.LANDLORD_RATING, 1)}>
                                   <Rating.Star filled={review.landlord_rating >= 1 ? true : false} />

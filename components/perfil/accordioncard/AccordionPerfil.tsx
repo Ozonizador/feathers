@@ -5,11 +5,13 @@ import { TbBed } from "react-icons/tb";
 import { Gender, Profile } from "../../../models/profile";
 import { Advertisement } from "../../../models/advertisement";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 interface AccordionPerfilProps {
   profile: Profile & { advertisements: Advertisement[] };
 }
 
 function AccordionPerfil({ profile }: AccordionPerfilProps) {
+  const { t } = useTranslation();
   return (
     <div className="mb-20">
       <Accordion alwaysOpen={true}>
@@ -27,7 +29,7 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
             </div>
           </Accordion.Title>
           <Accordion.Content>
-            <h1 className="my-3 text-xl">{profile.advertisements.length} anúncios</h1>
+            <h1 className="my-3 text-xl">{t("advertisementWithCount", { count: profile.advertisements.length })}</h1>
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
               <div className="grid h-full grid-cols-2 flex-wrap items-center gap-2 dark:text-white md:grid-cols-3 lg:flex">
                 {profile.advertisements.map((advertisement) => {
@@ -36,7 +38,7 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
                       <div className="absolute bottom-4 left-2 z-50">
                         <p className="bold text-sm font-bold text-white">{advertisement.title}</p>
                         <Link href={`/anuncio/${advertisement.slug}`} className="bold text-sm text-white">
-                          Ver mais
+                          {t("see_more")}
                         </Link>
                       </div>
 

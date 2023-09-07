@@ -25,7 +25,7 @@ const FormHouseRules = () => {
     <section className="container mx-auto my-20 w-full px-10 lg:w-5/6">
       <div className="w-full">
         <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
-          Falemos agora sobre condições e regras da casa
+          {t("advertisements:add_advert.house_rules_title")}
         </div>
         <HouseRulesComponent advertisement={advertisement} onChange={changeTypeProperty} />
       </div>

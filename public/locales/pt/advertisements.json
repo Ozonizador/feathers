@@ -1,4 +1,17 @@
 {
+  "included": "Incluído",
+  "not_included": "Não Incluído",
+  "expenses_included": "Despesas Incluídas",
+  "expenses_partially_included": "Despesas Partialmente Incluídas",
+  "expenses_not_included": "Despesas Excluídas",
+  "no_expenses_information": "Sem Informação Despesas",
+  "expenses_up_to": "Despesas até {{value}}€",
+  "animals_allowed": "Animais Permitidos",
+  "smoking_allowed": "Permitido Fumar",
+  "events_allowed": "Eventos Permitidos",
+  "other_rule": "Outra Regra",
+  "your_rules": "As suas regras",
+  "cleaning": "Serviço de limpeza",
   "bed_one": "Cama",
   "bed_other": "Camas",
   "bedWithCount_one": "{{count}} Cama",
@@ -85,10 +98,21 @@
     "private_owner": "Particular",
     "profissional_owner": "Profissional",
     "about_house_title": "Sobre a sua casa",
-    "cancellation_policy": "Política de Cancelamento"
+    "cancellation_policy": "Política de Cancelamento",
+    "house_rules_title": "Falemos agora sobre condições e regras da casa",
+    "prices_title": "Vamos a valores!",
+    "save_advert": "Gravar Anúncio",
+    "final_step_title": "Está quase pronto! Leia e aceite os seguintes documentos.",
+    "calendar_check_updated": "Acordo em manter o meu calendário atualizado",
+    "confirm_valid_info": "As informações que providencio são verdadeiras",
+    "type_host_title": "Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.",
+    "photos_title": "Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.<1/> (min 5 fotos)",
+    "add_photo": "Adicionar Foto"
   },
   "house_conditions": "Condições da casa",
   "house_characteristcs": "Características da Casa",
   "conditions_and_rules": "Condições e Regras",
-  "amenities": "Comodidades"
+  "amenities": "Comodidades",
+  "guest_number": "Número de hóspedes",
+  "current_reservation": "Reserva Original"
 }

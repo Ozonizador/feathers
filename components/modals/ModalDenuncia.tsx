@@ -11,7 +11,7 @@ import { Report, ReportsType } from "../../models/report";
 import { useCurrentUser } from "../../context/MainProvider";
 import useReportService from "../../hooks/reportService";
 import FeathersSpinner from "../utils/Spinner";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 /* PAGINA 21-22 DO XD */
 
@@ -88,13 +88,8 @@ const ModalDenuncia = () => {
                       <div tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div id="model-radius">
                           <div>
-                            <h5 className="mt-2 text-xl font-semibold lg:text-2xl">
-                              Porque estás a denunciar esta conta?
-                            </h5>
-                            <p className="mb-10 mt-7 text-justify lg:text-xl">
-                              A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja
-                              verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.
-                            </p>
+                            <h5 className="mt-2 text-xl font-semibold lg:text-2xl">{t("admin:report.title")}</h5>
+                            <p className="mb-10 mt-7 text-justify lg:text-xl">{t("admin:report.description")}</p>
                             <div className="flex flex-col gap-3">
                               <div className="flex gap-3">
                                 <input
@@ -203,10 +198,9 @@ const ModalDenunciaSegundoPasso = () => {
       <div className="container p-6">
         <div>
           <div className="jumbotron m-4 p-4 text-center">
-            <h5 className="text-xl font-bold">A UniHosts agradece!</h5>
+            <h5 className="text-xl font-bold">{t("admin:report.sucess_title")}</h5>
             <p className="my-7">
-              Vamos averiguar a situação. Obrigada por teres denunciado e tornado
-              <br />a nosssa comunidade unihosts num lugar melhor!
+              <Trans i18nKey="admin:report.success_description" components={{ 1: <br /> }} />
             </p>
             <button
               type="button"

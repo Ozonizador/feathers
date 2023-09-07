@@ -55,7 +55,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         <div className="mb-2 text-2xl font-semibold">{t("advertisements:conditions")}</div>
-        <div className="text-xl text-gray-700">As suas regras</div>
+        <div className="text-xl text-gray-700">{t("advertisements:your_rules")}</div>
 
         {advertisementContext && (
           <>

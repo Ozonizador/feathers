@@ -29,8 +29,11 @@
   "guestWithCount_other": "{{count}} Guests",
   "terms_and_conditions": "terms and conditions",
   "privacy_policy": "privacy policy",
-  "advertisement_one": "Advert",
-  "advertisement_other": "Adverts",
+  "advertisementWithCount_one": "{{count}} Advertisement",
+  "advertisementWithCount_other": "{{count}} Advertisements",
+  "advertisement_zero": "No Advertisement",
+  "advertisement_one": "Advertement",
+  "advertisement_other": "Advertements",
   "reservation_one": "Reservation",
   "reservation_other": "Reservations",
   "payment": "Payment",
@@ -74,5 +77,10 @@
   "give_public_feedback": "Give your feedback public",
   "overall_rating": "Overall Rating",
   "uni-desk": "Uni-desk",
-  "uni-controlo": "Uni-Control"
+  "uni-controlo": "Uni-Control",
+  "change_reservation": "Change Reservation",
+  "reason_change_reservation": "Tell your landlord why you want to change your reservation",
+  "send_change_request": "Submit change request",
+  "no_information": "No Information",
+  "no_reviews": "No Reviews"
 }

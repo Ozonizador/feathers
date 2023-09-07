@@ -10,6 +10,7 @@ import {
 } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
+import { useTranslation } from "next-i18next";
 
 interface HouseRulesProps {
   advertisement: Advertisement;
@@ -17,6 +18,7 @@ interface HouseRulesProps {
 }
 
 const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
+  const { t } = useTranslation();
   const toggleHouseRulesProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { house_rules } = advertisement;
 
@@ -42,7 +44,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <div>
             <MdOutlinePets className="mr-3 text-2xl" />
           </div>
-          <p className="w-40 text-base font-bold">Animais permitidos</p>
+          <p className="w-40 text-base font-bold">{t("advertisements:animals_allowed")}</p>
         </div>
 
         <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
@@ -60,7 +62,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <div>
             <GiCigarette className="mr-3 text-2xl" />
           </div>
-          <p className="w-40 text-base font-bold">Fumar permitido</p>
+          <p className="w-40 text-base font-bold">{t("advertisements:smoking_allowed")}</p>
         </div>
 
         <div className="ml-0 flex w-11 justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
@@ -79,7 +81,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <div>
             <BiDrink className="mr-3 text-2xl" />
           </div>
-          <p className="w-40 text-base font-bold">Eventos Permitidos</p>
+          <p className="w-40 text-base font-bold">{t("advertisements:events_allowed")}</p>
         </div>
 
         <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
@@ -98,7 +100,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <div>
             <MdChecklist className="mr-3 text-2xl" />
           </div>
-          <p className="w-40 text-base font-bold">Outra Regra</p>
+          <p className="w-40 text-base font-bold">{t("advertisements:other_rule")}</p>
         </div>
         <div className=" ml-0 flex flex-1 flex-row lg:items-center">
           <div className="w-full text-base lg:w-3/4">
@@ -119,7 +121,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           <div>
             <GiBroom className="mr-3 text-2xl" />
           </div>
-          <p className="mb-6 w-40 text-base font-bold lg:mb-0">Limpeza</p>
+          <p className="mb-6 w-40 text-base font-bold lg:mb-0">{t("advertisements:cleaning")}</p>
         </div>
         <div className="flex w-full flex-row items-center justify-between lg:w-3/4">
           <div className="w-full lg:w-3/4">

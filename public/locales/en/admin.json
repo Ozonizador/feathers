@@ -77,5 +77,11 @@
     "discounts": "Discounts",
     "monthWithCount_one": "{{count}} Month",
     "monthWithCount_other": "{{count}} Months"
+  },
+  "report": {
+    "title": "Porque estás a denunciar esta conta?",
+    "description": "A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.",
+    "success_description": "Vamos averiguar a situação. Obrigada por teres denunciado e tornado<1/>a nosssa comunidade unihosts num lugar melhor!",
+    "success_title": "A UniHosts agradece!"
   }
 }

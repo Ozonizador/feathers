@@ -27,6 +27,8 @@
   "guest_other": "Hóspedes",
   "guestWithCount_one": "{{count}} Hóspede",
   "guestWithCount_other": "{{count}} Hóspedes",
+  "advertisementWithCount_one": "{{count}} Anúncio",
+  "advertisementWithCount_other": "{{count}} Anúncios",
   "terms_and_conditions": "termos e condições",
   "privacy_policy": "politica de privacidade",
   "advertisement_one": "Anúncio",
@@ -74,5 +76,10 @@
   "give_public_feedback": "Deixa o teu feedback público",
   "overall_rating": "Avaliação Geral",
   "uni-desk": "Uni-desk",
-  "uni-controlo": "Uni-Controlo"
+  "uni-controlo": "Uni-Controlo",
+  "change_reservation": "Alterar reserva",
+  "reason_change_reservation": "Diz ao teu senhorio porque queres alterar a tua reserva",
+  "send_change_request": "Enviar pedido de alteração",
+  "no_information": "Sem Informação",
+  "no_reviews": "Não existem reviews de momento"
 }

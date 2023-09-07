@@ -1,4 +1,4 @@
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
 import Image from "next/image";
 import { useImageFiles, useSetImageFiles } from "../../context/AdvertisementController";
@@ -49,9 +49,7 @@ const FormAnunciarPhotos = () => {
     <section className="container mx-auto my-10 w-full lg:w-5/6">
       <div className="w-full">
         <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left lg:text-2xl">
-          Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.
-          <br />
-          (mín. 5 fotos)
+          <Trans i18nKey="advertisements:add_advert.photos_title" components={{ 1: <br /> }} />
         </div>
 
         <div>
@@ -75,7 +73,7 @@ const FormAnunciarPhotos = () => {
                   </svg>
 
                   <p className="px-2 text-base text-neutral-600">
-                    Adicionar Fotos <span className="text-blue-500">Download</span>
+                    {t("advertisements:add_advert.add_photo")} <span className="text-blue-500">Download</span>
                   </p>
                 </label>
                 <input

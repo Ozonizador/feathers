@@ -61,7 +61,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           ></MenuOption>
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/conditions`}
-            label="Condições e regras"
+            label={t("advertisements:conditions_and_rules")}
             activeLink={activeUrl === "advert_conditions"}
           ></MenuOption>
           <MenuOption

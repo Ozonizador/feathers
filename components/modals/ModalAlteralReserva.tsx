@@ -76,7 +76,7 @@ const ModalAlterarReserva = () => {
                   className="flex items-center bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900"
                 >
                   <Image className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
-                  <span className="ml-3 text-3xl font-bold">Alterar reserva</span>
+                  <span className="ml-3 text-3xl font-bold">{t("change_reservation")}</span>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -91,9 +91,7 @@ const ModalAlterarReserva = () => {
                     <div className="" id="model-radius">
                       <div className=" m-4 p-5">
                         <div className="jumbotron">
-                          <p className="mb-8 text-xl font-semibold">
-                            Diz ao teu senhorio porque queres alterar a tua reserva
-                          </p>
+                          <p className="mb-8 text-xl font-semibold">{t("reason_change_reservation")}</p>
                           <div className="mb-3 bg-slate-200">
                             <textarea
                               className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
@@ -101,7 +99,7 @@ const ModalAlterarReserva = () => {
                               rows={3}
                             ></textarea>
                           </div>
-                          <p className="mb-2 mt-8 text-xl font-semibold">Reserva Original</p>
+                          <p className="mb-2 mt-8 text-xl font-semibold">{t("advertisements:current_reservation")}</p>
                           {/* left */}
                           {/* começa novo */}
                           <div className="mb-5">
@@ -160,7 +158,7 @@ const ModalAlterarReserva = () => {
                               <div className="mb-3 mt-3 flex w-full flex-col">
                                 <Input
                                   name="current_guests"
-                                  labelText="Número de hóspedes"
+                                  labelText={t("advertisements:guest_number")}
                                   pattern="[0-9]+"
                                   value={(reservation && reservation.number_guests) || 1}
                                   type="number"
@@ -177,7 +175,7 @@ const ModalAlterarReserva = () => {
                                 <div className="mb-3 mt-3 flex w-full flex-col">
                                   <Input
                                     name="current_guests"
-                                    labelText="Número de hóspedes"
+                                    labelText={t("advertisements:guest_number")}
                                     pattern="[0-9]+"
                                     value={newReservation.number_guests}
                                     onChange={(e) =>
@@ -209,7 +207,7 @@ const ModalAlterarReserva = () => {
                               role="button"
                               id="modal-btn"
                             >
-                              Enviar pedido de alteração
+                              {t("send_change_request")}
                             </a>
                           </div>
                         </div>

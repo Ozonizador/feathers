@@ -1,4 +1,17 @@
 {
+  "included": "Included",
+  "not_included": "Not Included",
+  "expenses_included": "Expenses Included",
+  "expenses_partially_included": "Expenses Partially Included",
+  "expenses_not_included": "Expenses Not Included",
+  "no_expenses_information": "No Information about expenses",
+  "expenses_up_to": "Expenses up to {{value}}€",
+  "animals_allowed": "Animals allowed",
+  "smoking_allowed": "Smoking allowed",
+  "events_allowed": "Events allowed",
+  "other_rule": "Other Rules",
+  "your_rules": "Your Rules",
+  "cleaning": "Cleaning Service",
   "bed_one": "Bed",
   "bed_other": "Beds",
   "bedWithCount_one": "{{count}} Bed",
@@ -86,10 +99,21 @@
     "private_owner": "Private",
     "profissional_owner": "Profissional",
     "about_house_title": "About your house",
-    "cancellation_policy": "Cancellation Policy"
+    "cancellation_policy": "Cancellation Policy",
+    "house_rules_title": "Now let's talk about conditions and house rules",
+    "prices_title": "Let's go to pricing!",
+    "save_advert": "Save Advertisement",
+    "final_step_title": "It's almost ready! Read and accept the following documents.",
+    "calendar_check_updated": "I agree to keep my calendar up to date",
+    "confirm_valid_info": "The information I provide is valid.",
+    "type_host_title": "Bad luck happens and we have to be prepared. Establish your cancellation policy.",
+    "photos_title": "Upload photos so your ad is more appealing and the student knows exactly what to expect.<1/> (min 5 photos)",
+    "add_photo": "Add Photo"
   },
   "house_conditions": "House Conditions",
   "house_characteristcs": "House Characteristics",
   "conditions_and_rules": "Conditions and Rules",
-  "amenities": "Amenities"
+  "amenities": "Amenities",
+  "guest_number": "Guest Number",
+  "current_reservation": "Current Reservation"
 }

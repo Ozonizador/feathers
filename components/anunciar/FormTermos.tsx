@@ -72,7 +72,7 @@ const FormTermos = () => {
       {!saving ? (
         <form className="container mx-auto flex flex-col lg:w-5/6" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
-            Está quase pronto! Leia e aceite os seguintes documentos.
+            {t("advertisements:add_advert.final_step_title")}
           </div>
 
           <div className="mt-10 flex flex-col gap-5">
@@ -86,7 +86,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-xl">Termos e condições</div>
+                <div className="text-xl capitalize">{t("terms_and_conditions")}</div>
               </div>
             </div>
 
@@ -101,7 +101,7 @@ const FormTermos = () => {
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
 
-                <div className="text-xl">Política de privacidade</div>
+                <div className="text-xl capitalize">{t("privacy_policy")}</div>
               </div>
             </div>
 
@@ -115,7 +115,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-xl">Acordo em manter o meu calendário atualizado</div>{" "}
+                <div className="text-xl">{t("advertisements:add_advert.calendar_check_updated")}</div>{" "}
               </div>
             </div>
 
@@ -130,7 +130,7 @@ const FormTermos = () => {
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
 
-                <div className="text-xl">As informações que providencio são verdadeiras</div>
+                <div className="text-xl">{t("advertisements:add_advert.confirm_valid_info")}</div>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ const FormTermos = () => {
             </div>
             <div className="w-48">
               <Button type="submit" disabled={!isValid}>
-                <span className="leading-tight">Gravar Anúncio</span>
+                <span className="leading-tight">{t("advertisements:add_advert.save_adver")}</span>
               </Button>
             </div>
           </div>

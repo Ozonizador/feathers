@@ -189,27 +189,27 @@ const ModalMaisFiltros = () => {
                     <div className="grid grid-cols-2 gap-3">
                       <GridItem
                         onChange={() => toggleFiltersProperty("smokingAllowed", !smokingAllowed)}
-                        label={"Permitido fumar"}
+                        label={t("advertisements:smoking_allowed")}
                         checked={smokingAllowed || false}
                       />
                       <GridItem
                         onChange={() => toggleFiltersProperty("animalsAllowed", !animalsAllowed)}
-                        label={"Permitido animais"}
+                        label={t("advertisements:animals_allowed")}
                         checked={animalsAllowed || false}
                       />
                       <GridItem
                         onChange={() => toggleFiltersProperty("eventsAllowed", !eventsAllowed)}
-                        label={"Permitido eventos"}
+                        label={t("advertisements:events_allowed")}
                         checked={eventsAllowed || false}
                       />
                       <GridItem
                         onChange={() => toggleFiltersProperty("includesCleaning", !includesCleaning)}
-                        label={"Serviço de limpeza"}
+                        label={t("advertisements:cleaning")}
                         checked={includesCleaning || false}
                       />
                       <GridItem
                         onChange={() => toggleFiltersProperty("expensesIncluded", !expensesIncluded)}
-                        label={"Despesas incluídas"}
+                        label={t("advertisements:expenses_included")}
                         checked={expensesIncluded || false}
                       />
                       <GridItem

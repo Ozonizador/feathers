@@ -4,6 +4,7 @@ import { BsWater } from "react-icons/bs";
 import { FaRegLightbulb } from "react-icons/fa";
 import { ExpenseName, HouseExpenses, TypeExpense } from "../../models/advertisement";
 import { useTranslation } from "next-i18next";
+import { t } from "i18next";
 
 /**
  * Expenses Logic
@@ -53,13 +54,13 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
     if (!expenses || !expenses.services || expenses.services.length === 0) return false;
     const selectedExpense = expenses.services.find((expense) => expense.name === type);
     if (selectedExpense !== null) {
-      if (selectedExpense?.included === "INCLUDED") return "Incluído";
-      if (selectedExpense?.included === "EXCLUDED") return "Não Incluído";
-      if (selectedExpense?.max) return `Despesas até ${selectedExpense.max}€`;
-      return "Sem informação";
+      if (selectedExpense?.included === "INCLUDED") return t("advertisements:included");
+      if (selectedExpense?.included === "EXCLUDED") return t("advertisements:not_included");
+      if (selectedExpense?.max) return t("advertisements:expenses_up_to", { value: selectedExpense.max });
+      return t("no_information");
     }
 
-    return "Não Incluído";
+    return t("advertisements:not_included");
   };
   return (
     <div className="absolute -bottom-20 -left-32 z-50 hidden bg-white group-hover:block lg:-left-32">
@@ -89,7 +90,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           <AiOutlineWifi className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
           <div className="mt-2 text-xs lg:text-sm ">
             <>
-              Internet
+              {t("amenities:wifi")}
               <br />
               {checkIfIncluded("INTERNET")}
             </>
@@ -120,7 +121,7 @@ export const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
   let excluded = 0;
 
   if (!expenses || expenses.length === 0) {
-    return "Sem Informação Despesas";
+    return "";
   }
   for (let expense of expenses) {
     if (expense.included == "INCLUDED") included++;
@@ -128,12 +129,12 @@ export const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
     if (expense.included == "EXCLUDED") excluded++;
   }
 
-  if (included === 0 && partially === 0 && excluded === 0) return "Sem Informação Despesas";
-  if (included !== 0 && partially === 0 && excluded === 0) return "Despesas Incluídas";
-  if (included === 0 && partially !== 0 && excluded === 0) return "Despesas Partialmente Incluídas";
-  if (included === 0 && partially === 0 && excluded !== 0) return "Despesas Excluídas";
+  if (included === 0 && partially === 0 && excluded === 0) return t("advertisements:no_expenses_information");
+  if (included !== 0 && partially === 0 && excluded === 0) return t("advertisements:expenses_included");
+  if (included === 0 && partially !== 0 && excluded === 0) return t("advertisements:expenses_partially_included");
+  if (included === 0 && partially === 0 && excluded !== 0) return t("advertisements:expenses_not_included");
 
-  return "Despesas Partialmente Incluídas";
+  return t("advertisements:expenses_partially_included");
 };
 
 export default ExpensesComponent;
