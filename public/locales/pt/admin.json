@@ -61,7 +61,9 @@
     "my_adverts": "Os meus anúncios",
     "main_score": "Classificação geral",
     "last_reviews": "Últimas reviews",
-    "no_reviews": "Não existem reviews para serem mostradas"
+    "no_reviews": "Não existem reviews para serem mostradas",
+    "thanks_for_feedback": "Obrigada pelo teu feedback!",
+    "thanks_for_feedback_description": "A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes."
   },
   "guests": {
     "current_guests": "Hóspedes Atuais",

@@ -308,9 +308,9 @@ const ModalAvaliarExperienciaTerceiroPasso = () => {
           aria-hidden="true"
         >
           <div>
-            <h1 className="text-2xl font-semibold">Obrigada pelo teu feedback!</h1>
+            <h1 className="mt-5 text-2xl font-semibold">{t("admin:reviews.thanks_for_feedback")}</h1>
             <p className="font-x1 mx-auto mb-10 mt-7 w-2/3 text-center">
-              A tua opinião é uma mais valia para a comunidade unihosts, com certeza vai ajudar outros estudantes.
+              {t("admin:reviews.thanks_for_feedback_description")}
             </p>
           </div>
 
