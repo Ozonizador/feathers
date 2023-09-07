@@ -66,7 +66,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
 
   const deleteAdvertisement = async () => {
     const { error } = await removeAdvertisement(advertisement.id);
-    error ? toast.error("Erro ao remover anúncio") : toast.success(t("messages:success.success"));
+    error ? toast.error(t("messages:error.removing_advert")) : toast.success(t("messages:success.success"));
     if (!error) refetchAdvertisements();
   };
   return (
@@ -75,7 +75,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
         <div className="w-full lg:flex">
           <div className="relative hidden h-52 w-52 lg:block">
             {advertisement.photos && advertisement.photos.length > 0 && (
-              <Image src={advertisement.photos[0].url} alt="Foto Quarto" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[0].url} alt="Foto Quarto" fill style={{ objectFit: "cover" }} />
             )}
           </div>
           <div className="ml-3 w-full py-2">

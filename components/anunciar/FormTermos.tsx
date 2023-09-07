@@ -35,6 +35,7 @@ const FormTermos = () => {
   const onSubmit = async ({ terms, politica, trustInformation, calendarUpdated }: AdvertisementInfo) => {
     try {
       setSaving(true);
+      debugger;
       if (!isValid) return;
 
       // saving images
@@ -143,7 +144,7 @@ const FormTermos = () => {
             </div>
             <div className="w-48">
               <Button type="submit" disabled={!isValid}>
-                <span className="leading-tight">{t("advertisements:add_advert.save_adver")}</span>
+                <span className="leading-tight">{t("advertisements:add_advert.save_advert")}</span>
               </Button>
             </div>
           </div>

@@ -35,7 +35,7 @@ const Login = () => {
     event.preventDefault();
     const { error } = await login(email, password);
     if (error) {
-      toast.error("Utilizador ou palavra passe errados.");
+      toast.error(t("messages:errors.user_pass_incorrect"));
       return;
     } else {
       router.push(TYPE_PROFILE_CHOICE_URL);

@@ -21,12 +21,12 @@ const HospedeCard = ({ stay }: HospedeCardProps) => {
       </div>
 
       <div>
-        <h1 className="text-xl font-bold">A hospedar em</h1>
+        <h1 className="text-xl font-bold">{t("admin:guests.hosting_at")}</h1>
         <h2 className="mb-6 mt-2 text-base text-secondary-500">
-          {t(TYPE_ADVERTISEMENT[advertisement.type])} em {advertisement.place}
+          {t(TYPE_ADVERTISEMENT[advertisement.type])} {t("in")} {advertisement.place}
         </h2>
         <Link href={`/anuncio/${advertisement.slug}`}>
-          <p className="text-base font-normal text-primary-500">+ informações</p>
+          <p className="text-base font-normal text-primary-500">+ {t("informations")}</p>
         </Link>
       </div>
     </div>

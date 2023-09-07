@@ -67,7 +67,9 @@
   },
   "guests": {
     "current_guests": "Hóspedes Atuais",
-    "no_guests": "Sem Hóspedes"
+    "no_guests": "Sem Hóspedes",
+    "hosting_at": "A hospedar em",
+    "currently_hosting": "Atualmente a hospedar"
   },
   "calendar": {
     "calendar": "Calendário",

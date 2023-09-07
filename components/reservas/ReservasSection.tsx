@@ -6,7 +6,6 @@ import useStayService from "../../hooks/stayService";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import Spinner from "../utils/Spinner";
 import { ReservationGuest } from "../../models/reservation";
-import MenuEstudante from "../unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../unidesk/UnideskStructure";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
@@ -101,17 +100,15 @@ const CurrentReservationsSection = () => {
               </Table.Cell>
             </Table.Row>
           )}
-          {!loading && (!reservations || reservations.length == 0) && (
-            <Table.Row>
-              <Table.Cell className="flex justify-center py-2">Sem reservas de momento</Table.Cell>
-            </Table.Row>
-          )}
+          {!loading && (!reservations || reservations.length == 0) && <Table.Row>Sem reservas de momento</Table.Row>}
           {!loading &&
             reservations &&
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">Atualmente a hospedar</Table.Cell>
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
+                    {t("admin:guests.currently_hosting")}
+                  </Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
                     {reservation.tenant.name}
                   </Table.Cell>
@@ -123,7 +120,7 @@ const CurrentReservationsSection = () => {
                   </Table.Cell>
                   <Table.Cell className="text-lg text-gray-700 dark:text-white">{`${t(
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  )} em ${reservation.advertisement.place}`}</Table.Cell>
+                  )} ${t("in")} ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -179,9 +176,7 @@ const NextReservationsSection = () => {
               </Table.Cell>
             </Table.Row>
           )}
-          {!loading && (!reservations || reservations.length == 0) && (
-            <Table.Cell className="flex justify-center py-2">Sem próximas reservas</Table.Cell>
-          )}
+          {!loading && (!reservations || reservations.length == 0) && <Table.Row>Sem próximas reservas</Table.Row>}
           {!loading &&
             reservations &&
             reservations.map((reservation, index) => {
@@ -199,7 +194,7 @@ const NextReservationsSection = () => {
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     t(TYPE_ADVERTISEMENT[reservation.advertisement?.type]) || ""
-                  } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                  } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );
             })}
@@ -268,9 +263,7 @@ const AllReservationsSection = () => {
               </Table.Cell>
             </Table.Row>
           )}
-          {!loading && (!reservations || reservations.length == 0) && (
-            <Table.Cell className="flex justify-center py-2">Sem reservas</Table.Cell>
-          )}
+          {!loading && (!reservations || reservations.length == 0) && <Table.Row>Sem reservas</Table.Row>}
           {!loading &&
             reservations &&
             reservations.map((reservation, index) => {
@@ -290,7 +283,7 @@ const AllReservationsSection = () => {
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     reservation.advertisement ? t(TYPE_ADVERTISEMENT[reservation.advertisement.type]) : ""
-                  } em ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                  } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
                 </Table.Row>
               );
             })}

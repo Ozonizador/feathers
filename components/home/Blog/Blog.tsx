@@ -45,7 +45,7 @@ export default function BlogSection() {
                       {blogPost.title}
                     </h2>
 
-                    <Image layout="fill" src={blogPost.image} alt="blog" className="opacity-60" objectFit="cover" />
+                    <Image fill src={blogPost.image} alt="blog" className="opacity-60" style={{ objectFit: "cover" }} />
                   </article>
                 </Link>
               );

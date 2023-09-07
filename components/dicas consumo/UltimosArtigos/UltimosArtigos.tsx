@@ -38,7 +38,7 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
               return (
                 <Link href={`/blog/${blog.slug}`} key={index} className="flex flex-1 flex-col">
                   <div className="relative block h-[350px] w-full  px-4 lg:flex lg:h-[350px] lg:w-full">
-                    <Image className="rounded-lg" src={blog.image} alt="" layout="fill" objectFit="cover"></Image>
+                    <Image className="rounded-lg" src={blog.image} alt="" fill style={{ objectFit: "cover" }}></Image>
                   </div>
                   <div className="my-4 w-full  text-xl lg:w-full lg:text-xl">{blog.title}</div>
                   <div className="line-clamp-5 w-full lg:w-full  lg:text-base">{blog.description}</div>

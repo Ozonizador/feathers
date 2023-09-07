@@ -39,8 +39,8 @@ const Configurations = () => {
   const updatePassword = async () => {
     setLoading(true);
     try {
-      if (password !== confirmPassword) throw Error("Palavras passe não coincidem.");
-      if (currentPassword === password) throw Error("Nova palavra passe e palavra passe atual são as mesmas");
+      if (password !== confirmPassword) throw Error(t("messages:errors.no_matching_password"));
+      if (currentPassword === password) throw Error(t("messages:errors.new_pw_same_as_before"));
 
       const { error } = await updateUserPassword(password);
       if (error) throw Error(error.message);

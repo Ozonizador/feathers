@@ -34,7 +34,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   return (
     <section>
       <div className="relative h-[650px] bg-black">
-        <Image layout="fill" src={blog.image} alt="blog" className="opacity-50" objectFit="cover" />
+        <Image fill src={blog.image} alt="blog" className="opacity-50" style={{ objectFit: "cover" }} />
 
         <div className="absolute top-1/4 z-50 flex flex-col items-center justify-start py-4 align-middle lg:w-full lg:justify-center">
           <div className="mb-7 mt-5 rounded-full bg-primary-300 px-7 py-3 text-xl text-white lg:mt-0">

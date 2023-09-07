@@ -88,8 +88,8 @@ const UnideskFavoritos = () => {
                                 <Image
                                   src={favourite.photos[0].url}
                                   alt="Foto de Capa"
-                                  layout="fill"
-                                  objectFit="cover"
+                                  fill
+                                  style={{ objectFit: "cover" }}
                                 />
                               ) : (
                                 <></>

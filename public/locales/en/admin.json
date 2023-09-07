@@ -67,7 +67,9 @@
   },
   "guests": {
     "current_guests": "Current Guests",
-    "no_guests": "No Guests"
+    "no_guests": "No Guests",
+    "hosting_at": "Hosting at",
+    "currently_hosting": "Currently Hosting"
   },
   "calendar": {
     "calendar": "Calendar",

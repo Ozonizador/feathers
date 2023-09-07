@@ -14,10 +14,10 @@ const FuncionaOndeEstamos = () => {
               <div className="lg:min-h-96 relative h-96 w-full lg:w-1/3">
                 <Image
                   src="/images/mapa_unihosts_funciona.jpeg"
-                  layout="fill"
+                  fill
                   alt=""
                   className="rounded-lg"
-                  objectFit="initial"
+                  style={{ objectFit: "initial" }}
                 />
               </div>
               <div className="flex flex-col gap-3 sm:w-full lg:w-3/5">

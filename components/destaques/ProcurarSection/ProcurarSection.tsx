@@ -127,8 +127,8 @@ export default function ProcurarSection() {
             </div>
 
             <div className="mt-4 flex gap-2">
-              <PopoverGeneric title={"Tipo de Espaço"}>
-                <div className="grid w-96 grid-cols-2 gap-4 bg-white p-3 text-neutral-500">
+              <PopoverGeneric title={t("advertisements:type_house")}>
+                <div className="grid w-96 grid-cols-2 gap-4 rounded-lg bg-white p-3 text-neutral-500">
                   <div
                     className={classNames("my-auto rounded-xl border p-3 text-xs", {
                       "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",

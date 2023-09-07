@@ -80,7 +80,7 @@ const Details = ({ advertisement }: DetailsProps) => {
     if (!error) {
       toast.success(t("messages:success.success"));
     } else {
-      toast.error("Error saving the advertisement");
+      toast.error(t("messages:errors.saving_advert"));
     }
   };
 

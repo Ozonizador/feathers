@@ -117,7 +117,7 @@ const ModalGerarReferencia = () => {
                           className="py-3"
                           src="/icons/multibanco.svg"
                           alt="multibanco"
-                          objectFit="contain"
+                          style={{ objectFit: "contain" }}
                           height={64}
                           width={48}
                         ></Image>
@@ -128,7 +128,13 @@ const ModalGerarReferencia = () => {
                           "cursor-pointer border-b border-primary-500": selectedPayment === "mbway",
                         })}
                       >
-                        <Image src="/icons/mbway.svg" alt="mbway" objectFit="contain" height={64} width={64}></Image>
+                        <Image
+                          src="/icons/mbway.svg"
+                          alt="mbway"
+                          style={{ objectFit: "contain" }}
+                          height={64}
+                          width={64}
+                        ></Image>
                       </div>
                     </div>
                     {selectedPayment === "mbway" && (

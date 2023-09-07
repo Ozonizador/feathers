@@ -74,7 +74,7 @@ const ExploreCityItem = ({ title, url, image }: CityProps) => {
   return (
     <Link href={url}>
       <article className="group relative h-60 cursor-pointer rounded-2xl bg-black">
-        <Image src={image} alt="tomar" layout="fill" className="rounded-2xl" />
+        <Image src={image} alt="tomar" fill className="rounded-2xl" />
         <div className="break-none absolute flex h-full w-full flex-col justify-center align-middle text-3xl font-bold text-white group-hover:text-6xl group-hover:text-neutral-200">
           {title}
         </div>

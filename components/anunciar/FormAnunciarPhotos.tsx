@@ -15,7 +15,7 @@ const FormAnunciarPhotos = () => {
 
   const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (files.length < 5) return toast.error("Introduza pelo menos 5 imagens");
+    if (files.length < 5) return toast.error(t("messages:errors.minimum_5_images"));
     incrementStep();
   };
 
@@ -101,7 +101,7 @@ const FormAnunciarPhotos = () => {
               >
                 x
               </div>
-              <Image src={object} className="h-28 w-28" layout="fill" objectFit="cover" alt="advert-image" />
+              <Image src={object} className="h-28 w-28" fill style={{ objectFit: "cover" }} alt="advert-image" />
             </div>
           );
         })}

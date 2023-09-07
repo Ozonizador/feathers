@@ -17,7 +17,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
 
   return (
     <section className="my-20">
-      <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
+      <div className="mb-5 text-2xl font-bold">{t("about_landlord")}</div>
       <div className="block max-w-md lg:hidden">
         <div>
           {advertisement && (

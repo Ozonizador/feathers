@@ -1,6 +1,7 @@
 import React from "react";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 
+// not being used
 export default function RoomPedido() {
   return (
     <section className="mt-8 w-full">

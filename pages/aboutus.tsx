@@ -18,7 +18,7 @@ const AboutUs = () => {
             layout="responsive"
             src="/images/sobre_nos.jpg"
             alt="sobre nos image"
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
             className="opacity-60"
           ></Image>
         </div>

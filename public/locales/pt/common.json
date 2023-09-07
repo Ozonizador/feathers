@@ -88,5 +88,19 @@
   "see_all_comments": "Ver todos os comentários",
   "quality_price": "Qualidade/Preço",
   "edit": "Editar",
-  "delete": "Apagar"
+  "delete": "Apagar",
+  "information": "informações",
+  "similar_adverts": "Casas semelhantes",
+  "in": "em",
+  "find_more": "Encontrar mais",
+  "no_conversations": "Não existem conversações",
+  "reservation_details": "Detalhes da reserva",
+  "show_profile": "Mostrar perfil",
+  "write_message": "Escreva uma mensagem...",
+  "go_back_home": "Voltar à página inicial ",
+  "page_not_found": "Pagina não encontrada",
+  "commentsWithCount_zero": "Sem comentários",
+  "commentsWithCount_one": "{{count}} comentário",
+  "commentsWithCount_others": "{{count}} comentários",
+  "about_landlord": "Sobre o seu senhorio"
 }

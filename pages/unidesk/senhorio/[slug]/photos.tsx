@@ -44,7 +44,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
   const saveChanges = async () => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
-    if (!error) toast.error("Erro ao guardar fotos");
+    if (!error) toast.error(t("messages:errors.saving_photos"));
   };
 
   const uploadToClient = async (event: any) => {
@@ -120,7 +120,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
     const value = (event.target as HTMLInputElement).value;
 
     if (value === "main" && selectedImages.length !== 1) {
-      toast.error("Só pode ter 1 foto de capa");
+      toast.error(t("messages:errors.only_one_main_photo"));
       return;
     } else {
       let { photos } = advertisementContext || { photos: [] };
@@ -189,7 +189,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                       </div>
                     )}
 
-                    <Image src={photo.url} layout="fill" alt="photo" />
+                    <Image src={photo.url} fill alt="photo" />
                   </div>
                 );
               })}

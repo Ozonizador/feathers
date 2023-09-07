@@ -116,8 +116,7 @@ export const RoomPagamento = () => {
     await addReservation.mutateAsync(newReservation, {
       onSuccess: (info) => {
         const { data, error } = info;
-        if (error || !data)
-          return toast.error("There was a error making the reservation. Contact the Unihosts support.");
+        if (error || !data) return toast.error(t("messages:errors.making_reservation"));
 
         setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
         setModalGerarRef(true);
@@ -264,7 +263,7 @@ export const RoomPagamento = () => {
             href="#reserva"
             className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
           >
-            {t("index:reservation.title")}
+            {t("index:section.how_it_works.reservation.title")}
           </Link>
         </div>
       </form>

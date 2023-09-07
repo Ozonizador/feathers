@@ -51,7 +51,7 @@ export default function HomeSection3() {
             <div className="mb-28 mt-5">
               <div className="hidden lg:block">
                 <div className="mb-12 flex justify-between align-middle">
-                  <h2 className="text-5xl font-bold text-black">Os quartos em destaque na tua área</h2>
+                  <h2 className="text-5xl font-bold text-black">{t("index:featured_room_near_your")}</h2>
 
                   <Link
                     href={PROCURAR_ADVERT_URL}
@@ -64,7 +64,7 @@ export default function HomeSection3() {
                   </Link>
                 </div>
               </div>
-              <h2 className="mb-8 text-4xl font-bold text-black lg:hidden">Os quartos em destaque na tua área</h2>
+              <h2 className="mb-8 text-4xl font-bold text-black lg:hidden">{t("index:featured_room_near_your")}</h2>
 
               <div className="grid gap-8 lg:h-96 lg:grid-cols-4">
                 {advertisements.map((advertisement, index) => {
@@ -72,7 +72,7 @@ export default function HomeSection3() {
                     <Link key={index} href={`anuncio/${advertisement.slug}`}>
                       <article className="min-h-96 relative h-96 cursor-pointer rounded-3xl bg-black bg-cover p-2 opacity-70 transition lg:h-3/4">
                         {advertisement.photos && advertisement.photos[0] ? (
-                          <Image src={advertisement.photos[0].url} alt="..." layout="fill" objectFit="cover" />
+                          <Image src={advertisement.photos[0].url} alt="..." fill style={{ objectFit: "cover" }} />
                         ) : (
                           <></>
                         )}

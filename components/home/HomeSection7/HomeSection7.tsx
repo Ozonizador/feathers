@@ -31,7 +31,7 @@ const HomeSection7 = () => {
           <div className="lg:min-h-96 h-96 w-full rounded-3xl lg:basis-2/4">
             <div className="relative h-full w-full">
               <div className="absolute h-full w-full">
-                <Image src="/images/house-key.jpg" layout="fill" alt="" className="rounded-3xl"></Image>
+                <Image src="/images/house-key.jpg" fill alt="" className="rounded-3xl"></Image>
               </div>
               <div className="absolute bottom-10  right-20  mb-6 lg:bottom-6 lg:right-8">
                 <Link

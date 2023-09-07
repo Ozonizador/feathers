@@ -114,7 +114,7 @@ const CaixaEntrada = () => {
         <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
         {/* DESKTOP */}
         <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
-          {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
+          {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
           {conversations && conversations.length > 0 && (
             <>
               <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
@@ -155,7 +155,7 @@ const CaixaEntrada = () => {
                       <div className="w-96 border-l border-terciary-500 p-2">
                         <>
                           <div className="flex">
-                            <div className="text-xl font-bold text-primary-500">Detalhes da reserva</div>
+                            <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
                             <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
                           </div>
                           <div className="my-4 flex flex-row gap-3">
@@ -220,7 +220,7 @@ const CaixaEntrada = () => {
                             )}
                           </div>
                           <div className="text-small pt-5 text-center">
-                            <Link href={`/perfil/${currentConversation.tenant.slug}`}>Mostrar perfil</Link>
+                            <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
                           </div>
                         </>
                       </div>
@@ -242,7 +242,7 @@ const CaixaEntrada = () => {
             <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
             {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
           </div>
-          {(!conversations || conversations.length === 0) && <div className="p-4">Não existem conversações</div>}
+          {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
           {conversations && (
             <div>
               {currentConversation &&
@@ -291,6 +291,7 @@ const MessagesSenderZone = ({
   setCurrentMessage,
   conversationId,
 }: MessagesSenderZoneProps) => {
+  const { t } = useTranslation();
   return (
     <div className="flex max-h-screen w-full flex-col gap-2">
       <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2 lg:h-96">
@@ -304,7 +305,7 @@ const MessagesSenderZone = ({
           <form onSubmit={(e) => sendMessage(e, conversationId)}>
             <input
               className="w-full border-0 p-4 text-xs outline-0"
-              placeholder="Type a message..."
+              placeholder={t("write_message")}
               type="text"
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}

@@ -94,11 +94,11 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       },
       {
         onSuccess: (data) => {
-          if (data.error) return toast.error("Erro ao gravar definições");
+          if (data.error) return toast.error(t("messages:errors.saving_user_info"));
           toast.success(t("messages:success.success"));
         },
         onError: () => {
-          toast.error("Erro ao gravar definições");
+          toast.error(t("messages:errors.saving_user_info"));
         },
         onSettled: () => {
           setLoadingButtons((oldStatus) => ({ ...oldStatus, timingsLoading: false }));
@@ -119,11 +119,11 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       },
       {
         onSuccess: (data) => {
-          if (data.error) return toast.error("Erro ao gravar definições");
+          if (data.error) return toast.error(t("messages:errors.saving_user_info"));
           toast.success(t("messages:success.success"));
         },
         onError: () => {
-          toast.error("Erro ao gravar definições");
+          toast.error(t("messages:errors.saving_user_info"));
         },
         onSettled: () => {
           setLoadingButtons((oldStatus) => ({ ...oldStatus, discountsLoading: false }));
