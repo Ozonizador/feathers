@@ -116,6 +116,8 @@ export const Navbar = () => {
                     className="cursor-pointer"
                     style={{ objectFit: "contain" }}
                     fill
+                    priority
+                    sizes="(max-width: 768px) 300px, (max-width: 1200px) 864px, 864px"
                   ></Image>
                 </div>
               </Link>

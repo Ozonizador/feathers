@@ -17,40 +17,28 @@ export default function RoomInformation() {
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <RiUserLine className="text-4xl" />
           <div className="mt-3 text-base ">
-            {(advertisement &&
-              advertisement.tenant_number > 1 &&
-              t("guestWithCount", { count: advertisement.tenant_number })) ||
-              ""}
+            {advertisement && t("guestWithCount", { count: advertisement.tenant_number })}
           </div>
         </div>
 
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <BiBed className="text-4xl" />
           <div className="mt-3 text-base">
-            {(advertisement &&
-              advertisement.beds > 1 &&
-              t("advertisements:bedWithCount", { count: advertisement.beds })) ||
-              ""}
+            {advertisement && t("advertisements:bedWithCount", { count: advertisement.beds })}
           </div>
         </div>
 
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <TbBed className="text-4xl" />
           <div className="mt-3 text-base">
-            {(advertisement &&
-              advertisement.rooms > 1 &&
-              t("advertisements:roomWithCount", { count: advertisement.rooms })) ||
-              ""}
+            {advertisement && t("advertisements:roomWithCount", { count: advertisement.rooms })}
           </div>
         </div>
 
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <GrRestroom className="text-4xl" />
           <div className="mt-3 text-base">
-            {(advertisement &&
-              advertisement.bathrooms > 1 &&
-              t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })) ||
-              ""}
+            {advertisement && t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })}
           </div>
         </div>
       </div>

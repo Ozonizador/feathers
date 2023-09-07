@@ -159,7 +159,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         {/* FOTOS */}
-        <div className="mb-7 text-2xl font-semibold">Fotografias</div>
+        <div className="mb-7 text-2xl font-semibold">{t("admin:photo_other")}</div>
 
         <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
           <>

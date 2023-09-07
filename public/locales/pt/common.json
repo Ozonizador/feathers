@@ -102,5 +102,12 @@
   "commentsWithCount_zero": "Sem comentários",
   "commentsWithCount_one": "{{count}} comentário",
   "commentsWithCount_others": "{{count}} comentários",
-  "about_landlord": "Sobre o seu senhorio"
+  "about_landlord": "Sobre o seu senhorio",
+  "where_space_is": "Este espaço localiza-se nesta zona",
+  "location_not_available": "Localização não disponível",
+  "no_languages": "Sem informação de linguas",
+  "landlord_since_male": "Senhorio desde {{year)}",
+  "landlord_since_female": "Senhoria desde {{year}}",
+  "hello_im_male": "Olá, sou o {{name}}!",
+  "hello_im_female": "Olá, sou a {{name}}!"
 }

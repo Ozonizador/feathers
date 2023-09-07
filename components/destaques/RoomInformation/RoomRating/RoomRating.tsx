@@ -41,7 +41,7 @@ const RoomRating = () => {
               return <ReviewCard review={review} tenant={stay.tenant} key={index} />;
             })}
           </div>
-          <div className="mx-auto flex w-1/2 justify-center">
+          <div className="mx-auto flex w-1/2 cursor-pointer justify-center">
             <Button type="button" onClick={() => setModalReviews(true)}>
               {t("see_all_comments")}
             </Button>
@@ -177,7 +177,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
       )}
       {!averageRatings && (
         <>
-          <div>{t("admin:no_reviews")}</div>
+          <div>{t("no_reviews")}</div>
         </>
       )}
     </div>

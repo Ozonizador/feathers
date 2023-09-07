@@ -5,6 +5,13 @@
   "agree_terms": "By registering you are agreeing with our <lnk1>{{terms}}</lnk1> and <lnk2>{{privacy}}</lnk2>.",
   "im_student": "Im a student",
   "im_landlord": "Im a landlord",
+  "is_student_since": "Is student since {{year}}",
+  "is_landlord_since_male": "Is landlord since {{year}}",
+  "is_landlord_since_female": "Is landlord since {{year}}",
+  "profile_male": "Profile of {{name}}",
+  "profile_female": "Profile of {{name}}",
+  "speaks": "Speaks",
+  "photo_other": "Photos",
   "unidesk": {
     "common": {
       "panel": "Main Panel",

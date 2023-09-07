@@ -103,5 +103,12 @@
   "commentsWithCount_zero": "No comments",
   "commentsWithCount_one": "{{count}} comments",
   "commentsWithCount_others": "{{count}} comments",
-  "about_landlord": "About the landlord"
+  "about_landlord": "About the Landlord",
+  "where_space_is": "This space is located in this area",
+  "location_not_available": "Location Not Available",
+  "no_languages": "No Information on languages",
+  "landlord_since_male": "Landlord since {{year}}",
+  "landlord_since_female": "Landlord since {{year}}",
+  "hello_im_male": "Hello, I'm {{name}}!",
+  "hello_im_female": "Hello, I'm {{name}}!"
 }

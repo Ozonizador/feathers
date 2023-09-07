@@ -2,15 +2,17 @@ import React, { useMemo } from "react";
 import Image from "next/image";
 import { LanguageLabel, Profile } from "../../models/profile";
 import countryList from "react-select-country-list";
+import { useTranslation } from "next-i18next";
 
 interface PerfilIntoProps {
   profile: Profile;
 }
 
 const PerfilInfo = ({ profile }: PerfilIntoProps) => {
+  const { t } = useTranslation();
   const getUserLanguages = () => {
     const languages =
-      profile.languages?.map((language) => LanguageLabel[language as keyof typeof LanguageLabel]).join(", ") || [];
+      profile.languages?.map((language) => t(LanguageLabel[language as keyof typeof LanguageLabel])).join(", ") || [];
     return languages;
   };
 
@@ -30,9 +32,11 @@ const PerfilInfo = ({ profile }: PerfilIntoProps) => {
       <div className="my-6 flex flex-row items-center justify-end align-middle">
         <div className="mr-3">
           {profile.languages && profile.languages.length > 0 ? (
-            <h2>Fala {getUserLanguages()}</h2>
+            <h2>
+              {t("admin:speaks")} {getUserLanguages()}
+            </h2>
           ) : (
-            <h2>Sem informação de linguas</h2>
+            <h2>{t("no_languages")}</h2>
           )}
         </div>
         <div>

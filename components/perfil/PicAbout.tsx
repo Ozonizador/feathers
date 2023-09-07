@@ -1,21 +1,20 @@
 import React from "react";
 import { Avatar } from "flowbite-react";
 import { Profile } from "../../models/profile";
+import { useTranslation } from "next-i18next";
 
 interface PicAboutProps {
   profile: Profile;
 }
 
 const PicAbout = ({ profile }: PicAboutProps) => {
-  const returnGenderPronoum = () => {
-    return profile?.gender == 2 ? "da" : "do";
-  };
+  const { t } = useTranslation();
 
   return (
     <>
       <section className="mb-10">
         <h1 className="mb-14 text-center text-5xl font-semibold lg:text-left">
-          Perfil {returnGenderPronoum()} {profile.name}
+          {t("admin:profile", { name: profile.name, context: profile.gender == 1 ? "male" : "female" })}
         </h1>
 
         <div className="flex w-full flex-col items-center justify-center  align-middle lg:flex-row lg:justify-between">
@@ -30,7 +29,7 @@ const PicAbout = ({ profile }: PicAboutProps) => {
             </label>
           </div>
 
-          <div className="mt-1 mb-6 block w-full rounded-md border border-solid border-terciary-500 bg-white py-5 px-2 shadow-sm">
+          <div className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-5 shadow-sm">
             {profile.description}
           </div>
         </div>
