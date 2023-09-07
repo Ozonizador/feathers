@@ -8,10 +8,13 @@
   "is_student_since": "É estudante desde {{year}}",
   "is_landlord_since_male": "É senhorio desde {{year}}",
   "is_landlord_since_female": "É senhoria desde {{year}}",
+  "is_from": "É de {{town}}",
   "profile_male": "Perfil do {{name}}",
   "profile_female": "Perfil da {{name}}",
   "speaks": "Fala",
   "photo_other": "Fotografias",
+  "load_more_photos": "carregar mais fotos",
+  "associate_photos": "Associar photos",
   "unidesk": {
     "common": {
       "panel": "Painel",

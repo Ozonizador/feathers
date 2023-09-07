@@ -109,5 +109,15 @@
   "landlord_since_male": "Senhorio desde {{year)}",
   "landlord_since_female": "Senhoria desde {{year}}",
   "hello_im_male": "Olá, sou o {{name}}!",
-  "hello_im_female": "Olá, sou a {{name}}!"
+  "hello_im_female": "Olá, sou a {{name}}!",
+  "tell_us_more_about": "Conta-nos mais sobre isso",
+  "to_landlord": "Ao Senhorio",
+  "value_retained_description": "Valor a ser retido pelo Senhorio a devolvido no final da estadia consoante as condições da casa.",
+  "rent_month_paid": "Mensalidade a pagar",
+  "rent_of_month": "Renda Mensal de {{month}}",
+  "deposit": "Caução",
+  "on_check_day": "No dia do Check-in",
+  "first_rent": "Primeira Renda",
+  "first_rent_description": "Respectivo a 1 mês completo de renda",
+  "first_payment_description": "Pagamento antecipado respetivo ao mês de <1/>"
 }

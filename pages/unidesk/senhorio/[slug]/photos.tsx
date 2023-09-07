@@ -201,7 +201,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                     <AiOutlinePlusCircle />
                   </span>
                 </div>
-                <div className="text-gray-500">carregar mais fotos</div>
+                <div className="text-gray-500"></div>
               </div>
             </label>
 
@@ -219,7 +219,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
           <>
             <div className="mt-4">
               <>
-                <h3 className="text-xl text-neutral-400">Associar photos</h3>
+                <h3 className="text-xl text-neutral-400">{t("admin:associate_photos")}</h3>
                 {Object.keys(HouseZonesLabel).map((zone, index) => {
                   return (
                     <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>

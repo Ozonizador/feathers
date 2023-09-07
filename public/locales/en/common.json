@@ -110,5 +110,15 @@
   "landlord_since_male": "Landlord since {{year}}",
   "landlord_since_female": "Landlord since {{year}}",
   "hello_im_male": "Hello, I'm {{name}}!",
-  "hello_im_female": "Hello, I'm {{name}}!"
+  "hello_im_female": "Hello, I'm {{name}}!",
+  "tell_us_more_about": "Tell us more about",
+  "to_landlord": "To the landlord",
+  "value_retained_description": "Amount to be retained by the Landlord and returned at the end of the stay depending on the house conditions.",
+  "rent_month_paid": "Monthly fee payable",
+  "rent_of_month": "Rent of {{month}} Month",
+  "deposit": "Deposit",
+  "on_check_day": " On the day of check-in",
+  "first_rent": "Primeira Rent",
+  "first_rent_description": "Respectivo a 1 mês completo de renda",
+  "first_payment_description": "Advance payment for the month of <1/>"
 }

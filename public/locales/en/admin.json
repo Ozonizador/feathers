@@ -8,10 +8,13 @@
   "is_student_since": "Is student since {{year}}",
   "is_landlord_since_male": "Is landlord since {{year}}",
   "is_landlord_since_female": "Is landlord since {{year}}",
+  "is_from": "Is from {{town}}",
   "profile_male": "Profile of {{name}}",
   "profile_female": "Profile of {{name}}",
   "speaks": "Speaks",
   "photo_other": "Photos",
+  "load_more_photos": "Load more photos",
+  "associate_photos": "Connect photos",
   "unidesk": {
     "common": {
       "panel": "Main Panel",

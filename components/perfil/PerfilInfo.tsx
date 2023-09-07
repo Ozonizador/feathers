@@ -21,7 +21,7 @@ const PerfilInfo = ({ profile }: PerfilIntoProps) => {
       <div className="flex flex-row items-center justify-end align-middle">
         <div>
           <h2 className="mr-3">
-            É de {profile.town} {countryList().getLabel(profile.nationality || "")}
+            {t("admin:is_from", { town: profile.town })} {countryList().getLabel(profile.nationality || "")}
           </h2>
         </div>
         <div>
