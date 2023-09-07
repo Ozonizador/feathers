@@ -80,6 +80,13 @@
   "change_reservation": "Alterar reserva",
   "reason_change_reservation": "Diz ao teu senhorio porque queres alterar a tua reserva",
   "send_change_request": "Enviar pedido de alteração",
+  "send_request_reservation": "Enviar pedido de reserva",
+  "service_fee": "Taxa de Serviço",
   "no_information": "Sem Informação",
-  "no_reviews": "Não existem reviews de momento"
+  "no_reviews": "Não existem reviews de momento",
+  "description": "Descrição",
+  "see_all_comments": "Ver todos os comentários",
+  "quality_price": "Qualidade/Preço",
+  "edit": "Editar",
+  "delete": "Apagar"
 }

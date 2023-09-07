@@ -125,7 +125,7 @@ const ModalAvaliarExperiencia = () => {
                             </div>
 
                             <div className="flex w-full flex-row justify-between">
-                              <div className="text-2xl text-secondary-300">Qualidade - preço</div>
+                              <div className="text-2xl text-secondary-300">{t("quality_price")}</div>
                               <Rating>
                                 <div onClick={(e) => setReviwByProperty(REVIEW_COLUMNS.VALUE_QUALITY_RATING, 1)}>
                                   <Rating.Star filled={review.value_quality_rating >= 1 ? true : false} />

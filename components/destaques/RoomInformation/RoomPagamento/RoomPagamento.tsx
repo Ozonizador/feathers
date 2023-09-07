@@ -218,7 +218,7 @@ export const RoomPagamento = () => {
           </div>
 
           <div className="my-2 flex flex-row justify-between">
-            <div className="text-base">Taxa de Serviço</div>
+            <div className="text-base">{t("service_fee")}</div>
             <div>€0</div>
           </div>
 
@@ -241,7 +241,7 @@ export const RoomPagamento = () => {
             type="submit"
             className="mb-5 flex cursor-pointer items-center justify-center rounded-md bg-primary-500 p-3 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
           >
-            Enviar pedido de reserva
+            {t("send_request_reservation")}
           </button>
         </div>
         {/* MOBILE STYLES */}
@@ -264,7 +264,7 @@ export const RoomPagamento = () => {
             href="#reserva"
             className="flex cursor-pointer items-center justify-center rounded-md bg-primary-500 px-5 py-3 text-xl text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
           >
-            Reserva
+            {t("index:reservation.title")}
           </Link>
         </div>
       </form>

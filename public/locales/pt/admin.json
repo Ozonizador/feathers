@@ -79,9 +79,9 @@
     "monthWithCount_other": "{{count}} Meses"
   },
   "report": {
-    "title": "Why are you reporting this account?",
-    "description": "Your report is anonymous and you should bear in mind that it may harm others if it is not true. If this advertisement is inappropriate or does not match reality, please report it.",
-    "success_description": "We are going to look into the situation. Thank you for reporting<1/> and making our unihosts community a better place!",
-    "success_title": "UniHosts thanks you!"
+    "title": "Porque estás a denunciar esta conta?",
+    "description": "A tua denúncia é anónima e deves ter em conta que pode prejudicar outros caso não seja verdadeira. Se este anúncio é impróprio ou não condiz com a realidade por favor reporta.",
+    "success_description": "Vamos averiguar a situação. Obrigada por teres denunciado e tornado<1/>a nosssa comunidade unihosts num lugar melhor!",
+    "success_title": "A UniHosts agradece!"
   }
 }

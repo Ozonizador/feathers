@@ -32,8 +32,8 @@
   "advertisementWithCount_one": "{{count}} Advertisement",
   "advertisementWithCount_other": "{{count}} Advertisements",
   "advertisement_zero": "No Advertisement",
-  "advertisement_one": "Advertement",
-  "advertisement_other": "Advertements",
+  "advertisement_one": "Advertisement",
+  "advertisement_other": "Advertiments",
   "reservation_one": "Reservation",
   "reservation_other": "Reservations",
   "payment": "Payment",
@@ -81,6 +81,13 @@
   "change_reservation": "Change Reservation",
   "reason_change_reservation": "Tell your landlord why you want to change your reservation",
   "send_change_request": "Submit change request",
+  "send_request_reservation": "Send reservation request",
+  "service_fee": "Service Fee",
   "no_information": "No Information",
-  "no_reviews": "No Reviews"
+  "no_reviews": "No Reviews",
+  "description": "Description",
+  "see_all_comments": "See all comments",
+  "quality_price": "Quality/Price",
+  "edit": "Edit",
+  "delete": "Delete"
 }

@@ -6,7 +6,7 @@ import { hostTranslate, hostTypeFlexDescription } from "../../../../helpers/adve
 import { Gender } from "../../../../models/profile";
 import { RiMailSendFill } from "react-icons/ri";
 import { Card } from "flowbite-react";
-import { Trans, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 interface RoomSenhorioProps {
   responseRate: number;

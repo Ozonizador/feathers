@@ -11,6 +11,7 @@ import { Rating } from "flowbite-react";
 import { useTranslation } from "next-i18next";
 
 const RoomRating = () => {
+  const { t } = useTranslation();
   const [roomAverages, setRoomAverages] = useState<AdvertisementReviewSummary | undefined>(undefined);
   const advertisement = useGetSingleAdvertisement();
   const { stays } = advertisement || { stays: [] };
@@ -42,7 +43,7 @@ const RoomRating = () => {
           </div>
           <div className="mx-auto flex w-1/2 justify-center">
             <Button type="button" onClick={() => setModalReviews(true)}>
-              Ver todos os comentários
+              {t("see_all_comments")}
             </Button>
           </div>
         </div>
@@ -117,7 +118,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
             </div>
 
             <div className="flex flex-row gap-1">
-              <div className="flex-1 text-xl font-bold">Qualidade - preço</div>
+              <div className="flex-1 text-xl font-bold">{t("quality_price")}</div>
               <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
                 {`(${averageRatings.value_quality_average.toFixed(2)})`}
               </p>
@@ -145,7 +146,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
             </div>
 
             <div className="flex flex-row gap-1">
-              <div className="flex-1 text-xl font-bold">Senhorio</div>
+              <div className="flex-1 text-xl font-bold">{t("landlord", { count: 1 })}</div>
               <p className="my-auto ml-2 mr-3 w-7 font-medium text-secondary-500">
                 {`(${averageRatings.landlord_average.toFixed(2)})`}
               </p>

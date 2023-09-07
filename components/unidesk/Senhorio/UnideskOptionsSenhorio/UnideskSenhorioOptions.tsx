@@ -54,7 +54,7 @@ const UnideskOptions = () => {
   return (
     <section className="container mx-auto my-32 flex flex-col gap-7 lg:flex-row">
       <MenuSectionCard
-        topIcon={{ text: t("advertisements_other"), image: "/images/icon-pg37-1.svg" }}
+        topIcon={{ text: t("advertisement_other"), image: "/images/icon-pg37-1.svg" }}
         options={optionAnuncios}
       />
 

@@ -32,7 +32,7 @@ export default function RoomSlider() {
                   return (
                     <div className="mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
                       {icon && icon({ size: 24 })}
-                      <div className="mt-3 text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
+                      <div className="mt-3 text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
                     </div>
                   );
                 })}
@@ -50,7 +50,7 @@ export default function RoomSlider() {
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
                       {icon && icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
+                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
                     </div>
                   );
                 })}
@@ -68,7 +68,7 @@ export default function RoomSlider() {
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
                       {icon && icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
+                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
                     </div>
                   );
                 })}
@@ -88,7 +88,7 @@ export default function RoomSlider() {
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
                       {icon && icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
+                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
                     </div>
                   );
                 })}
@@ -108,7 +108,7 @@ export default function RoomSlider() {
                   return (
                     <div className="flex flex-col items-center justify-center align-middle" key={index}>
                       {icon && icon({ size: 24 })}
-                      <div className="text-sm">{TypeAmenityLabel[amenity as TypeAmenity]}</div>
+                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
                     </div>
                   );
                 })}

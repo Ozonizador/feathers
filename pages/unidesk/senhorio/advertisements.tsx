@@ -54,7 +54,7 @@ const Anuncios = () => {
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div className="ml-0 p-5">
-            <div className="my-4">{t("admin:my_adverts")}</div>
+            <div className="my-4">{t("admin:reviews.my_adverts")}</div>
             <div className="flex flex-col gap-4">
               {advertisements.map((advertisement) => {
                 return (

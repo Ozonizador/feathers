@@ -68,7 +68,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                     {!currentStay && <div>Não tem estadia programada</div>}
                   </div>
                   <div className="mt-5 flex flex-col gap-3">
-                    <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_reservations")}</h6>
+                    <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_stays")}</h6>
                     <>
                       {nextStays &&
                         nextStays.map((stay) => {
