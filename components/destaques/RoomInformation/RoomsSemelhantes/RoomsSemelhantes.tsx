@@ -59,7 +59,7 @@ export default function RoomSemelhantes() {
 
           <Link
             href={PROCURAR_ADVERT_URL}
-            className="hover:lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96"
+            className="hover:lg_mt-0 mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96"
           >
             {t("find_more")}
             <span className="px-1">

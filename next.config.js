@@ -21,6 +21,7 @@ const nextConfig = {
     }
   },
   distDir: ".next",
+  output: "standalone",
 };
 
 module.exports = removeImports(nextConfig);

@@ -105,7 +105,7 @@ export default function ProcurarSection() {
                   i18nKey="available_options"
                   values={{ count: count }}
                   components={{
-                    1: <span className="font-normal text-gray-400">{t("available")}</span>,
+                    1: <strong className="font-normal text-gray-400">{t("available")}</strong>,
                   }}
                 />
                 {location ? (
