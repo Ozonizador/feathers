@@ -24,6 +24,7 @@ const useUserService = () => {
     const { error } = await supabaseClient.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${window.location.origin}` },
+      email_confirm: true,
     });
 
     return { error };

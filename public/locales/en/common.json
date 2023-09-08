@@ -119,6 +119,11 @@
   "deposit": "Deposit",
   "on_check_day": " On the day of check-in",
   "first_rent": "Primeira Rent",
-  "first_rent_description": "Respectivo a 1 mês completo de renda",
-  "first_payment_description": "Advance payment for the month of <1/>"
+  "first_rent_description": "Respective to 1 full month of income",
+  "first_payment_description": "Advance payment for the month of <1/>",
+  "available_options": "{{count}} <1/>",
+  "available": "spaces available",
+  "for": "for",
+  "in_area": "in area",
+  "no_available_spaces": "No available spaces"
 }

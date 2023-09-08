@@ -23,7 +23,7 @@ import ModalMaisFiltros from "../../modals/ModalMaisFiltros";
 import { AdvertisementOrder } from "../../../server/types/advertisement";
 import PopoverGeneric from "../../utils/PopoverGeneric";
 import classNames from "classnames";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -101,14 +101,20 @@ export default function ProcurarSection() {
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
-                {count} espaços <span className="font-normal text-gray-400">disponíveis</span>
+                <Trans
+                  i18nKey="available_options"
+                  values={{ count: count }}
+                  components={{
+                    1: <span className="font-normal text-gray-400">{t("available")}</span>,
+                  }}
+                />
                 {location ? (
                   <>
-                    <span className="font-normal text-gray-400">{" para "}</span>
+                    <span className="font-normal text-gray-400">{t("for")}</span>
                     <span className="font-normal capitalize text-gray-400">{location.split(",")[0]}</span>
                   </>
                 ) : (
-                  <>{" na area"}</>
+                  <>{t("in_area")}</>
                 )}
               </div>
               <div className="mb-2">
@@ -192,7 +198,7 @@ export default function ProcurarSection() {
                       );
                     })}
                   {!advertisements ||
-                    (advertisements.length == 0 && <div className="mt-5">Não tem espaços disponíveis</div>)}
+                    (advertisements.length == 0 && <div className="mt-5">{t("no_available_spaces")}</div>)}
                 </div>
               </>
             )}

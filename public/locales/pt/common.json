@@ -119,5 +119,10 @@
   "on_check_day": "No dia do Check-in",
   "first_rent": "Primeira Renda",
   "first_rent_description": "Respectivo a 1 mês completo de renda",
-  "first_payment_description": "Pagamento antecipado respetivo ao mês de <1/>"
+  "first_payment_description": "Pagamento antecipado respetivo ao mês de <1/>",
+  "available_options": "{{count}} <1/>",
+  "available": "anúncios disponíveis",
+  "for": "para",
+  "in_area": "na zona",
+  "no_available_spaces": "Não tem espaços disponíveis"
 }
