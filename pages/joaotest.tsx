@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import Button from "../components/utils/Button";
 
+// TODO - remove this when production is live so it unlocks.
+
 const JoaoTest = () => {
   const [cookies, setCookie] = useCookies(["test"]);
   useEffect(() => {
