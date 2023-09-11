@@ -39,7 +39,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
   const openModalReport = () => {
     // check if there are any reports already sent.
     if (reportWasAlreadySent()) {
-      toast.error("Report was already sent");
+      toast.error(t("messsages:errors.report_already_sent"));
       return;
     }
 
@@ -49,7 +49,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
   const openModalAvaliarExperiencia = () => {
     // check if there are any reviews already sent.
     if (evaluationWasDone()) {
-      toast.error("Review was already done");
+      toast.error(t("messsages:errors.review_already_sent"));
       return;
     }
 

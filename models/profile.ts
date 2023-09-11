@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { Database } from "../database.types";
 import _ from "lodash";
 
@@ -31,19 +32,19 @@ export const spokenLanguages = ["portuguese", "spanish", "english", "italian", "
 export type SpokenLanguage = (typeof spokenLanguages)[number];
 
 export const LanguageLabel = {
-  portuguese: "Português",
-  spanish: "Spanish",
-  english: "English",
-  italian: "Italian",
-  greek: "Greek",
-  french: "French",
-  german: "German",
-  finnish: "Finnish",
+  portuguese: "languages:portuguese",
+  spanish: "languages:spanish",
+  english: "languages:english",
+  italian: "languages:italian",
+  greek: "languages:greek",
+  french: "languages:french",
+  german: "languages:german",
+  finnish: "languages:finnish",
 };
 
 export const getSpokenLanguages = () => {
   return spokenLanguages.map((language) => {
     const label = LanguageLabel[language as keyof typeof LanguageLabel] || _.capitalize(language);
-    return { label, value: language };
+    return { label: t(label), value: language };
   });
 };

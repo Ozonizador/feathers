@@ -90,7 +90,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
             <div className="relative h-96 w-full lg:h-56 lg:w-1/3">
-              {getMainPhoto ? <Image src={getMainPhoto?.url} alt="..." layout="fill" objectFit="cover" /> : <></>}
+              {getMainPhoto ? <Image src={getMainPhoto?.url} alt="..." fill style={{ objectFit: "cover" }} /> : <></>}
             </div>
             <div className="px-5 lg:w-2/3">
               <div className="m-1">

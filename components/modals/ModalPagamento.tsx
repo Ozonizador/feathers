@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 /* Pagina 34 XD
   para chamar na pagina => <ModalPagamento defaultOpen={false} /> 
@@ -13,6 +14,7 @@ interface ModalPagamentoProps {
 }
 
 const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
+  const { t } = useTranslation();
   let [isOpen, setIsOpen] = useState(defaultOpen);
 
   function closeModal() {
@@ -90,7 +92,7 @@ const ModalPagamento = ({ defaultOpen }: ModalPagamentoProps) => {
                                   type="text"
                                   className="form-control"
                                   id="inputAddress2"
-                                  placeholder="Código postal"
+                                  placeholder={t("advertisements:add_advert.postal_code")}
                                 />
                               </div>
 

@@ -153,7 +153,7 @@ const ModalDenuncia = () => {
                                   key="description-textarea"
                                   rows={3}
                                   onChange={changeReportDescription}
-                                  placeholder="Conta-nos mais sobre isso"
+                                  placeholder={t("tell_us_more_about")}
                                   defaultValue={report.description}
                                 ></textarea>
                               </div>

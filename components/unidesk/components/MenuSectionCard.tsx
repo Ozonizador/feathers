@@ -30,7 +30,7 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
               <Link href={topIcon.link}>
                 <div className="flex w-full flex-row items-center align-middle lg:flex-col lg:pt-12">
                   <div className="relative h-8 w-8 lg:h-20 lg:w-20">
-                    <Image src={topIcon.image} alt="" layout="fill"></Image>
+                    <Image src={topIcon.image} alt="" fill></Image>
                   </div>
                   <h1 className="ml-2 text-center text-xl font-bold text-primary-500 lg:ml-0 lg:mt-4 lg:text-2xl">
                     {topIcon.text}
@@ -46,7 +46,7 @@ export const MenuSectionCard = ({ topIcon, options }: SectionCardProps) => {
             ) : (
               <div className="flex w-full flex-row justify-center lg:flex-col lg:pt-12">
                 <div className="relative h-8 w-8 lg:mx-auto lg:h-20 lg:w-20">
-                  <Image src={topIcon.image} alt="" layout="fill"></Image>
+                  <Image src={topIcon.image} alt="" fill></Image>
                 </div>
                 <h1 className="my-auto ml-2 text-center text-xl font-bold text-primary-500 lg:ml-0 lg:mt-4 lg:text-2xl">
                   {topIcon.text}

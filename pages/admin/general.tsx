@@ -108,7 +108,7 @@ const Index = ({ user, profileData }: IndexProps) => {
       languages,
     });
 
-    if (error) return toast.error("Erro ao editar informações");
+    if (error) return toast.error(t("messages:errors.editing_info"));
     toast.success(t("messages:success.success"));
     reset({ name, surname, gender, phone, town, nationality, description, birth_date, languages });
   };

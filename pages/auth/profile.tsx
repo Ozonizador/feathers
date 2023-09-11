@@ -22,7 +22,7 @@ const TypeCustomerPage = () => {
     if (!profile) return;
 
     const { data, error } = await setTypeUser(profile.id, type);
-    if (error) return toast.error("Erro ea escolher o tipo de utilizador");
+    if (error) return toast.error(t("messages:errors.picking_type_user"));
 
     setProfile(data as unknown as Profile);
     toggleUserTypeContext(type);

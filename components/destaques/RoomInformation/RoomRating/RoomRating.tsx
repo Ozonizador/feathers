@@ -41,7 +41,7 @@ const RoomRating = () => {
               return <ReviewCard review={review} tenant={stay.tenant} key={index} />;
             })}
           </div>
-          <div className="mx-auto flex w-1/2 justify-center">
+          <div className="mx-auto flex w-1/2 cursor-pointer justify-center">
             <Button type="button" onClick={() => setModalReviews(true)}>
               {t("see_all_comments")}
             </Button>
@@ -90,7 +90,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
                 <Rating.Star filled={averageOfAll() >= 5 ? true : false} />
               </Rating>
               <p className="text-xl font-medium text-secondary-500 lg:text-2xl">
-                {averageRatings.review_number} comentários
+                {t("commentsWithCount", { count: averageRatings.review_number })}
               </p>
               <hr />
             </>
@@ -177,7 +177,7 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
       )}
       {!averageRatings && (
         <>
-          <div>Não há reviews para este anuncio</div>
+          <div>{t("no_reviews")}</div>
         </>
       )}
     </div>

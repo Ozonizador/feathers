@@ -1,4 +1,26 @@
 {
-  "errors": {},
-  "success": {}
+  "errors": {
+    "advert_not_updated": "Error updating ad",
+    "report_already_sent": "The report has already been sent",
+    "review_already_sent": "Review has already been completed",
+    "no_matching_password": "Passwords do not match.",
+    "new_pw_same_as_before": "New password and current password are the same",
+    "minimum_5_images": "Enter at least 5 images",
+    "making_reservation": "Error making reservation. Contact Unihosts.",
+    "deleting_advert": "Error removing ad",
+    "saving_user_info": "Error saving settings",
+    "editing_info": "Error editing information",
+    "user_pass_incorrect": "Incorrect username or password.",
+    "saving_photos": "Error saving photos",
+    "saving_advert": "Error saving ad",
+    "picking_type_user": "Error choosing user type",
+    "only_one_main_photo": "Can only have 1 cover photo"
+  },
+  "success": {
+    "success": "Success",
+    "advert_was_updated": "Advert Updated",
+    "updated_password": "Password changed",
+    "register_done": "Registration Successful",
+    "reservation_requested": "Reservation created"
+  }
 }

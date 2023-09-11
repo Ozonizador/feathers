@@ -22,9 +22,10 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
                 <CgHome />
               </div>
               <h1 className="text-base font-bold lg:text-xl">
-                {`${profile.gender === Gender.female ? "Senhoria" : "Senhorio"} Unihosts desde ${new Date(
-                  profile.created_at
-                ).getFullYear()}`}
+                {t("admin:is_landlord_since", {
+                  year: new Date(profile.created_at).getFullYear(),
+                  context: profile.gender === Gender.female ? "female" : "male",
+                })}
               </h1>
             </div>
           </Accordion.Title>
@@ -57,9 +58,9 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
               <div className="mr-2 text-4xl">
                 <TbBed />
               </div>
-              <h1 className="text-base font-bold lg:text-xl">{`É estudante unihosts desde ${new Date(
-                profile.created_at
-              ).getFullYear()}`}</h1>
+              <h1 className="text-base font-bold lg:text-xl">
+                {t("admin:is_student_since", { year: new Date(profile.created_at).getFullYear() })}
+              </h1>
             </div>
           </Accordion.Title>
           <Accordion.Content></Accordion.Content>

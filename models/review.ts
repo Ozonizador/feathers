@@ -11,6 +11,8 @@ export type Review = Reviews["Row"];
 export type ReviewsAverageView = Database["public"]["Views"]["reviewsPerAdvertisement"];
 export type ReviewsAverage = ReviewsAverageView["Row"];
 
+export type ReviewWithAdvertisement = Review & { advertisement: Advertisement };
+
 export type ReviewWithTenantAndAdvertisement = Review & {
   advertisment: Advertisement;
   tenant: Partial<Profile>;

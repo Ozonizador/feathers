@@ -6,7 +6,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import { useGetUserDates } from "../../context/MainProvider";
 import differenceInMonths from "date-fns/differenceInMonths";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 interface formatOpts {
   monthsAhead?: number;
@@ -86,7 +86,7 @@ const ModalDetalhesPagamento = () => {
                       {/* Unihosts */}
                       <FeathersAccordion>
                         <div className="flex">
-                          <div className="font-bold">Primeira Renda</div>
+                          <div className="font-bold">{t("first_rent")}</div>
                           <div className="ml-auto flex">
                             <div className="font-bold">{setAdvertPrice()}€</div>
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
@@ -94,25 +94,29 @@ const ModalDetalhesPagamento = () => {
                         </div>
                         <div className="flex gap-1 text-neutral-600">
                           <p className="text-sm lg:text-base">
-                            Pagamento antecipado respetivo ao mês de{" "}
-                            <span className="capitalize">{formatOnlyMonth(selectedDate, {})}</span>
+                            <Trans
+                              i18nKey="first_payment_description"
+                              components={{
+                                1: <span className="capitalize">{formatOnlyMonth(selectedDate, {})}</span>,
+                              }}
+                            />
                           </p>
                           <div className="relative my-auto">
                             <AiOutlineInfoCircle className="peer my-auto" size={14} />
                             <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
                               <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
                                 <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
-                                <p>Respectivo a 1 mês completo de renda</p>
+                                <p>{t("first_rent_description")}</p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </FeathersAccordion>
                       {/* SENHORIO */}
-                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">Ao Senhorio</div>
+                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">{t("to_landlord")}</div>
                       <FeathersAccordion>
                         <div className="flex">
-                          <h6 className="font-bold">No dia do Check-in</h6>
+                          <h6 className="font-bold">{t("on_check_day")}</h6>
                           <div className="ml-auto flex">
                             <div className="font-bold">{setAdvertPrice()}€</div>
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
@@ -120,16 +124,13 @@ const ModalDetalhesPagamento = () => {
                         </div>
                         <div className="flex">
                           <div className="relative mt-1 flex gap-1 text-neutral-500">
-                            <p className="my-auto text-sm lg:text-base">Caução</p>
+                            <p className="my-auto text-sm lg:text-base">{t("deposit")}</p>
                             <div className="relative mt-1">
                               <AiOutlineInfoCircle className="peer my-auto" size={14} />
                               <div className="-bottom-[90px] -right-60 hidden peer-hover:absolute peer-hover:block">
                                 <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
                                   <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
-                                  <p>
-                                    Valor a ser retido pelo Senhorio a devolvido no final da estadia consoante as
-                                    condições da casa.
-                                  </p>
+                                  <p>{t("value_retained_description")}</p>
                                 </div>
                               </div>
                             </div>
@@ -140,7 +141,7 @@ const ModalDetalhesPagamento = () => {
                       {/* Mensalidade */}
                       <FeathersAccordion>
                         <div className="flex">
-                          <h6>Mensalidade a pagar</h6>
+                          <h6>{t("rent_month_paid")}</h6>
                           <div className="ml-auto">
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
@@ -150,10 +151,7 @@ const ModalDetalhesPagamento = () => {
                             return (
                               <div className="flex text-sm text-neutral-500" key={index}>
                                 <div>
-                                  Renda Mensal de{" "}
-                                  <span className="capitalize">
-                                    {formatOnlyMonth(selectedDate, { monthsAhead: value })}
-                                  </span>
+                                  {t("rent_of_month", { month: formatOnlyMonth(selectedDate, { monthsAhead: value }) })}
                                 </div>
                                 <div className="ml-auto mr-6">{setAdvertPrice()}€</div>
                               </div>

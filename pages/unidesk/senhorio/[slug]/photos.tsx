@@ -44,7 +44,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
   const saveChanges = async () => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
-    if (!error) toast.error("Erro ao guardar fotos");
+    if (!error) toast.error(t("messages:errors.saving_photos"));
   };
 
   const uploadToClient = async (event: any) => {
@@ -120,7 +120,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
     const value = (event.target as HTMLInputElement).value;
 
     if (value === "main" && selectedImages.length !== 1) {
-      toast.error("Só pode ter 1 foto de capa");
+      toast.error(t("messages:errors.only_one_main_photo"));
       return;
     } else {
       let { photos } = advertisementContext || { photos: [] };
@@ -159,7 +159,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
       </UnideskStructure.Menu>
       <UnideskStructure.Content>
         {/* FOTOS */}
-        <div className="mb-7 text-2xl font-semibold">Fotografias</div>
+        <div className="mb-7 text-2xl font-semibold">{t("admin:photo_other")}</div>
 
         <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
           <>
@@ -189,7 +189,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                       </div>
                     )}
 
-                    <Image src={photo.url} layout="fill" alt="photo" />
+                    <Image src={photo.url} fill alt="photo" />
                   </div>
                 );
               })}
@@ -201,7 +201,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                     <AiOutlinePlusCircle />
                   </span>
                 </div>
-                <div className="text-gray-500">carregar mais fotos</div>
+                <div className="text-gray-500"></div>
               </div>
             </label>
 
@@ -219,7 +219,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
           <>
             <div className="mt-4">
               <>
-                <h3 className="text-xl text-neutral-400">Associar photos</h3>
+                <h3 className="text-xl text-neutral-400">{t("admin:associate_photos")}</h3>
                 {Object.keys(HouseZonesLabel).map((zone, index) => {
                   return (
                     <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>

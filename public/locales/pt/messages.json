@@ -1,6 +1,20 @@
 {
   "errors": {
-    "advert_not_updated": "Erro ao atualizar anúncio"
+    "advert_not_updated": "Erro ao atualizar anúncio",
+    "report_already_sent": "A denúncia ja foi enviada",
+    "review_already_sent": "Avaliação já foi efetuada",
+    "no_matching_password": "Palavras passe não coincidem.",
+    "new_pw_same_as_before": "Nova palavra passe e palavra passe atual são as mesmas",
+    "minimum_5_images": "Introduza pelo menos 5 imagens",
+    "making_reservation": "Erro a realizar a marcação. Contact a Unihosts.",
+    "deleting_advert": "Erro ao remover anúncio",
+    "saving_user_info": "Erro ao gravar definições",
+    "editing_info": "Erro ao editar informações",
+    "user_pass_incorrect": "Utilizador ou palavra passe errados.",
+    "saving_photos": "Erro ao guardar fotos",
+    "saving_advert": "Error ao gravar o anúncio",
+    "picking_type_user": "Erro ao escolher o tipo de utilizador",
+    "only_one_main_photo": "Só pode ter 1 foto de capa"
   },
   "success": {
     "success": "Sucesso",

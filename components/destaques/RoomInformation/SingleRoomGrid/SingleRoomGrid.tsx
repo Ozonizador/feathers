@@ -13,35 +13,35 @@ export const SingleRoomGrid = () => {
         <div className="grid grid-cols-12 gap-2">
           <div className="relative col-span-6 row-span-2 h-96">
             {advertisement.photos[0] ? (
-              <Image src={advertisement.photos[0].url} alt="no photo available" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[0].url} alt="no photo available" fill style={{ objectFit: "cover" }} />
             ) : (
               <></>
             )}
           </div>
           <div className="relative col-span-2">
             {advertisement.photos[1] ? (
-              <Image src={advertisement.photos[1].url} alt="no photo available" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[1].url} alt="no photo available" fill style={{ objectFit: "cover" }} />
             ) : (
               <></>
             )}
           </div>
           <div className="relative col-span-4">
             {advertisement.photos[2] ? (
-              <Image src={advertisement.photos[2].url} alt="no photo available" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[2].url} alt="no photo available" fill style={{ objectFit: "cover" }} />
             ) : (
               <></>
             )}
           </div>
           <div className="relative col-span-4">
             {advertisement.photos[3] ? (
-              <Image src={advertisement.photos[3].url} alt="no photo available" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[3].url} alt="no photo available" fill style={{ objectFit: "cover" }} />
             ) : (
               <></>
             )}
           </div>
           <div className="relative col-span-2">
             {advertisement.photos[4] ? (
-              <Image src={advertisement.photos[4].url} alt="no photo available" layout="fill" objectFit="cover" />
+              <Image src={advertisement.photos[4].url} alt="no photo available" fill style={{ objectFit: "cover" }} />
             ) : (
               <></>
             )}

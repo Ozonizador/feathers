@@ -5,6 +5,16 @@
   "agree_terms": "Ao registar-se está a concordar com os nossos <lnk1>{{terms}}</lnk1> and <lnk2>{{privacy}}</lnk2>.",
   "im_student": "Sou estudante",
   "im_landlord": "Sou senhorio",
+  "is_student_since": "É estudante desde {{year}}",
+  "is_landlord_since_male": "É senhorio desde {{year}}",
+  "is_landlord_since_female": "É senhoria desde {{year}}",
+  "is_from": "É de {{town}}",
+  "profile_male": "Perfil do {{name}}",
+  "profile_female": "Perfil da {{name}}",
+  "speaks": "Fala",
+  "photo_other": "Fotografias",
+  "load_more_photos": "carregar mais fotos",
+  "associate_photos": "Associar photos",
   "unidesk": {
     "common": {
       "panel": "Painel",
@@ -67,7 +77,9 @@
   },
   "guests": {
     "current_guests": "Hóspedes Atuais",
-    "no_guests": "Sem Hóspedes"
+    "no_guests": "Sem Hóspedes",
+    "hosting_at": "A hospedar em",
+    "currently_hosting": "Atualmente a hospedar"
   },
   "calendar": {
     "calendar": "Calendário",

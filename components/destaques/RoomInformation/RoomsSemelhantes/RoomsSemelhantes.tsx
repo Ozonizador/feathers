@@ -39,7 +39,7 @@ export default function RoomSemelhantes() {
       )}
       {!loading && similarAdverts && similarAdverts.length > 0 && (
         <section className="mb-40">
-          <div className="mb-5 text-2xl font-bold">Casas semelhantes</div>
+          <div className="mb-5 text-2xl font-bold">{t("similar_adverts")}</div>
           <div className="flex flex-col lg:flex-row">
             {similarAdverts &&
               similarAdverts.map((advert, index) => {
@@ -59,13 +59,13 @@ export default function RoomSemelhantes() {
 
           <Link
             href={PROCURAR_ADVERT_URL}
-            className="hover:lg_mt-0 mt-10 flex w-full items-center justify-center  rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96"
+            className="hover:lg_mt-0 mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 p-5 text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl lg:w-96"
           >
-            Encontrar mais
+            {t("find_more")}
             <span className="px-1">
               <CgHome />
             </span>{" "}
-            em {advertisement?.place || ""}
+            {t("in")} {advertisement?.place || ""}
           </Link>
         </section>
       )}

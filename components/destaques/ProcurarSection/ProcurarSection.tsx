@@ -23,7 +23,7 @@ import ModalMaisFiltros from "../../modals/ModalMaisFiltros";
 import { AdvertisementOrder } from "../../../server/types/advertisement";
 import PopoverGeneric from "../../utils/PopoverGeneric";
 import classNames from "classnames";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -101,14 +101,20 @@ export default function ProcurarSection() {
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
-                {count} espaços <span className="font-normal text-gray-400">disponíveis</span>
+                <Trans
+                  i18nKey="available_options"
+                  values={{ count: count }}
+                  components={{
+                    1: <strong className="font-normal text-gray-400">{t("available")}</strong>,
+                  }}
+                />
                 {location ? (
                   <>
-                    <span className="font-normal text-gray-400">{" para "}</span>
+                    <span className="font-normal text-gray-400">{t("for")}</span>
                     <span className="font-normal capitalize text-gray-400">{location.split(",")[0]}</span>
                   </>
                 ) : (
-                  <>{" na area"}</>
+                  <>{t("in_area")}</>
                 )}
               </div>
               <div className="mb-2">
@@ -127,8 +133,8 @@ export default function ProcurarSection() {
             </div>
 
             <div className="mt-4 flex gap-2">
-              <PopoverGeneric title={"Tipo de Espaço"}>
-                <div className="grid w-96 grid-cols-2 gap-4 bg-white p-3 text-neutral-500">
+              <PopoverGeneric title={t("advertisements:type_house")}>
+                <div className="grid w-96 grid-cols-2 gap-4 rounded-lg bg-white p-3 text-neutral-500">
                   <div
                     className={classNames("my-auto rounded-xl border p-3 text-xs", {
                       "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
@@ -192,7 +198,7 @@ export default function ProcurarSection() {
                       );
                     })}
                   {!advertisements ||
-                    (advertisements.length == 0 && <div className="mt-5">Não tem espaços disponíveis</div>)}
+                    (advertisements.length == 0 && <div className="mt-5">{t("no_available_spaces")}</div>)}
                 </div>
               </>
             )}

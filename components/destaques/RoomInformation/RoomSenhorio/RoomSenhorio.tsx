@@ -17,12 +17,15 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
 
   return (
     <section className="my-20">
-      <div className="mb-5 text-2xl font-bold">Sobre o seu senhorio</div>
+      <div className="mb-5 text-2xl font-bold">{t("about_landlord")}</div>
       <div className="block max-w-md lg:hidden">
         <div>
           {advertisement && (
             <h1 className="mb-4 text-2xl font-bold">
-              Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
+              {t("hello_im", {
+                context: advertisement.host.gender == 2 ? "female" : "male",
+                name: advertisement.host.name,
+              })}
             </h1>
           )}
           <p className="text-secondary-400">{advertisement && advertisement.host.description}</p>
@@ -48,9 +51,12 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                   {advertisement?.host.name || ""}
                 </h5>
                 {advertisement && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{`${
-                    advertisement.host.gender === Gender.female ? "Senhoria" : "Senhorio"
-                  } desde ${new Date(advertisement.host.created_at).getFullYear()}`}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {t("landlord_since", {
+                      year: new Date(advertisement.host.created_at).getFullYear(),
+                      context: advertisement.host.gender === Gender.female ? "female" : "male",
+                    })}
+                  </span>
                 )}
                 <hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">
@@ -72,7 +78,10 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
             <div>
               {advertisement && (
                 <h1 className="mb-4 text-2xl font-bold">
-                  Olá, sou {advertisement.host.gender == 2 ? "a" : "o"} {advertisement.host.name}!
+                  {t("hello_im", {
+                    context: advertisement.host.gender == 2 ? "female" : "male",
+                    name: advertisement.host.name,
+                  })}
                 </h1>
               )}
               <p className="mb-4 text-secondary-400">{advertisement?.host.description || ""}</p>

@@ -3,6 +3,7 @@ import { Avatar } from "flowbite-react";
 import { Profile } from "../../../models/profile";
 import { ReservationStatusLabel, ReservationWithAdvertisement } from "../../../models/reservation";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 interface CaixaCardProps {
   profile?: Profile;
@@ -11,6 +12,8 @@ interface CaixaCardProps {
 
 const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
   const { t } = useTranslation();
+  const router = useRouter();
+
   const formatCardDate = () => {
     if (!reservation?.updated_at) return "";
     const now = new Date();
@@ -19,12 +22,12 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
 
     const daysBetweenDates = msBetweenDates / (60 * 60 * 1000 * 24);
     if (daysBetweenDates < 1) {
-      return `${reservationDate.toLocaleTimeString("en-GB", {
+      return `${reservationDate.toLocaleTimeString(router.locale, {
         hour: "2-digit",
         minute: "2-digit",
       })}`;
     }
-    return `${reservationDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })}`;
+    return `${reservationDate.toLocaleDateString(router.locale, { day: "2-digit", month: "short" })}`;
   };
   return (
     <div className="mb-2 flex w-72 gap-5 p-2">
@@ -38,9 +41,9 @@ const CaixaCard = ({ profile, reservation }: CaixaCardProps) => {
           <h1 className="text-base font-bold text-green-500">
             {t(ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel])}
           </h1>
-          <p className="my-auto ml-auto text-xs">{formatCardDate()}</p>
         </div>
-        <h2 className="mb-2 mt-2 line-clamp-2 text-xs text-secondary-500">{profile?.description || ""}</h2>
+        <p className="my-auto mr-auto text-xs">{formatCardDate()}</p>
+        <h2 className="mb-2 mt-4 line-clamp-2 text-xs text-secondary-500">{profile?.description || ""}</h2>
         <p className="text-xs font-normal text-secondary-400">{reservation.advertisement?.title || ""}</p>
       </div>
     </div>
