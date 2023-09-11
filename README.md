@@ -32,3 +32,66 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# GCLOUD
+
+## serviços usados
+
+### google artifacts - onde a imagem docker fica
+
+### google run - onde corre a versão
+
+### ip - google config
+
+## para colocar live.
+
+### gerar build
+
+gcloud builds submit --tag europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1
+
+## deploy build
+
+gcloud run deploy --image=europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1
+
+# providers - facebook , google
+
+- https://developers.facebook.com/
+  ativar facebook login or business
+
+- https://developers.google.com/identity
+
+# supabase
+
+supabase cli
+
+- supabase start
+
+  - cria um docker com tudo incluindo seed
+
+- supabase migration list
+
+  - compara instancia remota com local
+
+- supabase migration new <filename>
+
+  - cria um fihciero com timestamp + filename
+
+- supabase db push
+
+  - puxar migracoes para a db remota
+
+- supabase gen types
+  - gera os tipos typescript da base de dados.
+
+## REMOTE.
+
+- criar projeto
+- linkar com supabase
+- ativar providers facebook e google.
+
+## metodos de pagamentos
+
+- mbway
+- multibanco
+
+atenção em modo produção ambos.
