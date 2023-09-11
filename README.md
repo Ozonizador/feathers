@@ -57,8 +57,10 @@ gcloud run deploy --image=europe-west3-docker.pkg.dev/projectbuild-398321/feathe
 
 - https://developers.facebook.com/
   ativar facebook login or business
+  how to: https://supabase.com/docs/guides/auth/social-login/auth-facebook
 
 - https://developers.google.com/identity
+  how to: https://supabase.com/docs/guides/auth/social-login/auth-google
 
 # supabase
 
