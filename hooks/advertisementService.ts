@@ -99,6 +99,7 @@ const useAdvertisementService = () => {
   /* IMAGE */
 
   const saveImage = async (advertisementID: string, fileName: string, file: File) => {
+    fileName = fileName.replace(/([^a-z0-9 ]+)/gi, '-');
     const { data, error } = await supabaseClient.storage
       .from(ADVERTISEMENT_STORAGE_BUCKET)
       .upload(`${advertisementID}/${fileName}`, file, { cacheControl: "3600", upsert: false });

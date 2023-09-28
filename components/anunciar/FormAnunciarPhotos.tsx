@@ -10,6 +10,7 @@ const FormAnunciarPhotos = () => {
   const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
+  
   const advertisement = useAdvertisement();
   const setAdvertisement = useSetAdvertisement();
 
@@ -19,6 +20,7 @@ const FormAnunciarPhotos = () => {
   const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (files.length < 5) return toast.error(t("messages:errors.minimum_5_images"));
+    
     const newAdvertisementPhotos: { url: string; zone: HouseZones; }[] = []
     files.forEach(file => {
       newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "other"});
@@ -26,6 +28,7 @@ const FormAnunciarPhotos = () => {
 
     advertisement.photos =  newAdvertisementPhotos;
     setAdvertisement(advertisement);
+
     incrementStep();
   };
 

@@ -31,7 +31,8 @@ const Anuncios = () => {
 
   const getUserAdvertisements = useCallback(async () => {
     if (profile) {
-      const { data, error } = await getAdvertismentsFromUserId(profile.id);
+      // @ts-ignore
+      const { data, error } = await getAdvertismentsFromUserId(profile[0].id);
       if (!error) data && setAdvertisements(data);
     }
   }, [profile]);
