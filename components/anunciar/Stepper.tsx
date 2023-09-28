@@ -15,7 +15,7 @@ export default function Stepper() {
             <div className="flex-auto border-t-2 border-primary-500"></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={1} text={t("advertisements:add_advert.step", { count: 1 })} />
+            <StepIcon stepNumber={0} text={t("advertisements:add_advert.step", { count: 1 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 1,
@@ -24,7 +24,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={2} text={t("advertisements:add_advert.step", { count: 2 })} />
+            <StepIcon stepNumber={1} text={t("advertisements:add_advert.step", { count: 2 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 2,
@@ -33,7 +33,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={3} text={t("advertisements:add_advert.step", { count: 3 })} />
+            <StepIcon stepNumber={2} text={t("advertisements:add_advert.step", { count: 3 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 3,
@@ -42,7 +42,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={4} text={t("advertisements:add_advert.step", { count: 4 })} />
+            <StepIcon stepNumber={3} text={t("advertisements:add_advert.step", { count: 4 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 4,
@@ -51,7 +51,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={5} text={t("advertisements:add_advert.step", { count: 5 })} />
+            <StepIcon stepNumber={4} text={t("advertisements:add_advert.step", { count: 5 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 5,
@@ -60,7 +60,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={6} text={t("advertisements:add_advert.step", { count: 6 })} />
+            <StepIcon stepNumber={5} text={t("advertisements:add_advert.step", { count: 6 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 6,
@@ -69,7 +69,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={7} text={t("advertisements:add_advert.step", { count: 7 })} />
+            <StepIcon stepNumber={6} text={t("advertisements:add_advert.step", { count: 7 })} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 7,

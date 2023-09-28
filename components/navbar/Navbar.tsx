@@ -239,13 +239,11 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div className="my-auto flex">
-                      <span className="mr-2">{t("student", { count: 1 })}</span>
+                      <span className={classNames("mr=2",
+                      {"text-primary-500": userAppMode == "TENANT"})}>{t("student", { count: 1 })}</span>
                       <Switch
                         checked={true}
-                        className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full", {
-                          "bg-primary-500": profile && profile.type === userAppMode,
-                          "bg-secondary-300": !profile || profile.type !== userAppMode,
-                        })}
+                        className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full bg-primary-500")}
                         onClick={() => toggleUserMode()}
                       >
                         <span
@@ -255,7 +253,8 @@ export const Navbar = () => {
                           })}
                         />
                       </Switch>
-                      <span className="ml-2">{t("landlord", { count: 1 })}</span>
+                      <span className={classNames("mr=2",
+                      {"text-primary-500": userAppMode == "LANDLORD"})}>{t("landlord", { count: 1 })}</span>
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">

@@ -38,19 +38,6 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
   return (
     <>
       <>
-        <div
-          className={classNames("w-full px-1", {
-            "h-96": !!createCurrentMapLocation(),
-          })}
-        >
-          <MapWithNoSSR
-            currentMapCoords={createCurrentMapLocation()}
-            draggableMarker={true}
-            showCenterMarker={true}
-            onChangeMarker={onChangeMarker}
-            allowZoom={true}
-          />
-        </div>
       </>
       <div className="my-5 flex w-full flex-col justify-between lg:flex-row lg:gap-5">
         {/* col left */}

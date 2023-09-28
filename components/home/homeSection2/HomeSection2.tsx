@@ -10,7 +10,7 @@ export default function HomeSection2() {
         <HomeSection2Cards
           img="/images/homeSection new-1.png"
           heading={t("index:section.values.first_title")}
-          text={t("index:section.values.first_title")}
+          text={t("index:section.values.first_description")}
         />
         <HomeSection2Cards
           img="/images/homeSection new-2.png"

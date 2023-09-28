@@ -56,6 +56,7 @@ const defaultAdvertisement = {
   available: "DISABLED" as AdvertisementStatus,
   geom: null,
   agreementsinfo: {},
+  photos: {}
 } as Advertisement;
 
 const AdvertisementContext = createContext<Advertisement>(defaultAdvertisement);

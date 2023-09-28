@@ -20,18 +20,20 @@ const useProfileService = () => {
       avatar_url: metadata?.avatar_url || "",
       firstName: metadata?.full_name?.split(" ")[0] || "",
       lastName: metadata?.full_name?.split(" ")[1] || "",
+      userID: userID
     };
 
     try {
       const { data, error } = await getUserProfile(userID);
-      if (error || !data) return createProfile(obj);
+      if (error || data?.length == 0) return createProfile(obj);
       return { data, error };
     } catch (error) {
       return createProfile(obj);
     }
   };
 
-  const createProfile = async (metadata: { avatar_url?: string; firstName?: string; lastName?: string }) => {
+  const createProfile = async (metadata: { avatar_url?: string; firstName?: string; lastName?: string; userID?: string }) => {
+    console.log(' test');
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({
@@ -39,6 +41,7 @@ const useProfileService = () => {
         avatar_url: metadata.avatar_url,
         name: metadata.firstName,
         surname: metadata.lastName,
+        id: metadata.userID,
       })
       .select()
       .single();
@@ -53,8 +56,7 @@ const useProfileService = () => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .select()
-      .eq(PROFILE_COLUMNS.ID, userID)
-      .single();
+      .eq(PROFILE_COLUMNS.ID, userID);
     return { data, error };
   };
 
@@ -65,7 +67,7 @@ const useProfileService = () => {
       .eq(PROFILE_COLUMNS.ID, userID)
       .select()
       .single();
-
+      
     return { data, error };
   };
 
@@ -73,9 +75,7 @@ const useProfileService = () => {
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .update({ type, prefered_unidesk_state: type })
-      .eq(PROFILE_COLUMNS.ID, userID)
-      .select()
-      .single();
+      .eq(PROFILE_COLUMNS.ID, userID);
     return { data, error };
   };
 
