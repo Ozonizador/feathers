@@ -225,7 +225,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                     <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
                       <input type="radio" id="scales" name="type" value={zone} />
                       <label htmlFor="scales" className="my-auto ml-1">
-                        {HouseZonesLabel[zone as keyof typeof HouseZonesLabel]}
+                        {t(HouseZonesLabel[zone as keyof typeof HouseZonesLabel])}
                       </label>
                     </div>
                   );
