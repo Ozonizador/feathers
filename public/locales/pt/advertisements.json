@@ -45,7 +45,7 @@
     "rigid_description": "Até 90 dias antes do check-in: 100% do valor da renda é reembolsado. Depois desse período e até 30 dias antes , o valor reembolsado é de 50%. Após esse período o pagamento é integral."
   },
   "type": {
-    "entire_place": "Apartamento Inteiro",
+    "entire_place": "Espaço Inteiro",
     "shared_room": "Quarto Partilhado",
     "private_room": "Quarto Privado"
   },
