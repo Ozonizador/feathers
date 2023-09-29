@@ -75,15 +75,19 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     if (!user) return;
 
     const { data, error } = await checkProfileAndCreate(user.id, user.user_metadata);
+    // @ts-ignore
     !error && setCurrentUnihostState((c) => ({ ...c, profile: data }));
     if (!data) return;
+    // @ts-ignore
     if (data.type === null) {
       return router.push(TYPE_PROFILE_CHOICE_URL);
     }
 
+    // @ts-ignore
     data.type !== null &&
       setCurrentUnihostState((currentInfo) => ({
         ...currentInfo,
+        // @ts-ignore
         userAppMode: data.prefered_unidesk_state || "TENANT",
       }));
   }, [user]);

@@ -47,7 +47,8 @@ const useUserService = () => {
         redirectTo: `${window.location.origin}/auth/profile`,
       },
     });
-
+    debugger;
+    console.log(window.location.origin);
     return { error };
   }
 

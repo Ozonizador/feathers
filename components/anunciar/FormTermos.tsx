@@ -41,6 +41,9 @@ const FormTermos = () => {
       // saving images
       await saveImages();
 
+      // set advertisement as available
+      setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
+
       // adding advertisements
       const { error } = await addAdvertisement({
         ...advertisement,
