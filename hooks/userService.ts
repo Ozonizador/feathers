@@ -41,8 +41,7 @@ const useUserService = () => {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
     });
-    debugger;
-    console.log(window.location.origin);
+    
     return { error };
   }
 

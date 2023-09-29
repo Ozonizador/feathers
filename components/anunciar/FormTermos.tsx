@@ -68,7 +68,7 @@ const FormTermos = () => {
         paths.push({ url: data.publicUrl, zone: "other" });
       }
     }
-    setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.PHOTOS, paths);
+    advertisement.photos = paths;
   };
 
   return (
