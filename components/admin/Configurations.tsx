@@ -125,7 +125,7 @@ const Configurations = () => {
               {/* Notificações */}
               <div className="mt-10">
                 <div className="my-4 text-2xl font-bold">{t("notifications")}</div>
-                <h6>{t("adnin:config.receive_notifications_again")}</h6>
+                <h6>{t("admin:config.receive_notifications_again")}</h6>
                 <div className="my-3 flex flex-1 flex-col">
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">

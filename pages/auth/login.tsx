@@ -23,12 +23,14 @@ const Login = () => {
   const loginFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithFacebook();
+    router.push(TYPE_PROFILE_CHOICE_URL);
   };
 
   /** registar com google */
   const loginGoogle = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithGoogle();
+    router.push(TYPE_PROFILE_CHOICE_URL);
   };
 
   const normalLogin = async (event: React.FormEvent) => {

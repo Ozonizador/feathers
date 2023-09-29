@@ -32,9 +32,6 @@ const useUserService = () => {
   async function loginWithFacebook() {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "facebook",
-      options: {
-        redirectTo: `${window.location.origin}/auth/profile`,
-      },
     });
 
     return { error };
@@ -43,9 +40,6 @@ const useUserService = () => {
   async function loginWithGoogle() {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/profile`,
-      },
     });
     debugger;
     console.log(window.location.origin);
