@@ -61,7 +61,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
   const editAdvertisement = (event: React.MouseEvent, slug: string) => {
     event.preventDefault();
     setMenuSelectedAdvertisement(advertisement);
-    router.push(`unidesk/senhorio/${slug}/details`, undefined, { locale: router.locale });
+    router.push(`${slug}/details`, undefined, { locale: router.locale });
   };
 
   const deleteAdvertisement = async () => {
