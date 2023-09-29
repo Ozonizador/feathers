@@ -67,7 +67,8 @@
     "kitchen": "Kitchen",
     "livingroom": "Living Room",
     "exterior": "Exterior Area",
-    "main": "Main"
+    "main": "Main",
+    "other": "Other"
   },
   "no_comodities": "No comodities",
   "conditions": "Conditions",
