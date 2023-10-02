@@ -21,7 +21,9 @@ const TypeCustomerPage = () => {
   const setProfileType = async (type: UserTypes) => {
     if (!profile) return;
     
-    // Linha abaixo apresenta erro mas só funciona assim (erro de ts)
+    // @ts-ignore
+    if (profile !== Array) return;
+
     // @ts-ignore
     const { data, error } = await setTypeUser(profile[0].id, type);
     if (error) return toast.error(t("messages:errors.picking_type_user"));
