@@ -12,15 +12,22 @@ import { trpc } from "../../utils/trpc";
 import { useUser } from "@supabase/auth-helpers-react";
 import FeathersSpinner from "../utils/Spinner";
 import Input from "../utils/Input";
+import {
+  AddReservationPaymentProps,
+} from "../../server/helpers/paymentsHelper";
+import { useTranslation } from "react-i18next";
 
 const ModalGerarReferencia = () => {
   const user = useUser();
   const [loadingReference, setLoadingReference] = useState<boolean>(false);
+  const [loadedReference, setLoadedReference] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
   const [selectedPayment, setSelectedPayment] = useState<"multibanco" | "mbway">("multibanco");
+  const [data, setData] = useState<AddReservationPaymentProps>();
   const { generateReferenceModalOpen } = useModaisAnuncioDetalhes();
   const { reservation, value } = useModalGerarReferencia();
   const setModalProperty = useSetModalGerarReferencia();
+  const {t} = useTranslation();
 
   // trpc methods
 
@@ -32,11 +39,11 @@ const ModalGerarReferencia = () => {
   }
 
   const generateReference = async () => {
-    if (!reservation || !user || !value) return;
+    if (!reservation || !user || value == undefined) return;
 
     setLoadingReference(true);
     if (selectedPayment === "mbway") {
-      await addMbWayReference.mutateAsync(
+       let Reference = await addMbWayReference.mutateAsync(
         {
           reservationId: reservation.id,
           value,
@@ -45,20 +52,25 @@ const ModalGerarReferencia = () => {
         {
           onSuccess: (data) => {
             console.log(data);
+            setLoadedReference(true);
           },
           onSettled: () => setLoadingReference(false),
         }
       );
+      setData(Reference);
     } else {
-      await addMultibancoReference.mutateAsync(
-        { reservationId: reservation.id, value },
+      let Reference = await addMultibancoReference.mutateAsync(
+        {value, reservationId: reservation.id},
         {
           onSuccess: (data) => {
             console.log(data);
+            setLoadedReference(true);
           },
           onSettled: () => setLoadingReference(false),
         }
       );
+
+      setData(Reference);
     }
   };
 
@@ -149,6 +161,13 @@ const ModalGerarReferencia = () => {
                         </Button>
                       </div>
                     </div>
+                      {loadedReference &&
+                        <div className="mb-5 flex justify-center column">
+                          {t("advertisements:entity", {entity: data?.entidade})}
+                          <span>{t("advertisements:reference")}{data?.reference}</span>
+                          <span>{t("advertisements:amount")}{data?.valor}</span>
+                        </div>
+                      }
                   </div>
                 </div>
               </Dialog.Panel>

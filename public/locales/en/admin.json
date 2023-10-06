@@ -89,8 +89,8 @@
     "trimester_discount": "Trimester Discount",
     "semester_discount": "Semester Discount",
     "discounts": "Discounts",
-    "monthWithCount_one": "%{count} Month",
-    "monthWithCount_other": "%{count} Months"
+    "monthWithCount_one": "{{count}} Month",
+    "monthWithCount_other": "{{count}} Months"
   },
   "report": {
     "title": "Why are you reporting this account?",

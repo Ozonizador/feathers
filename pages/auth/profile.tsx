@@ -20,9 +20,9 @@ const TypeCustomerPage = () => {
 
   const setProfileType = async (type: UserTypes) => {
     if (!profile) return;
-    
+
     // @ts-ignore
-    if (profile !== Array) return;
+    if (profile == Array) return console.log(profile);
 
     // @ts-ignore
     const { data, error } = await setTypeUser(profile[0].id, type);

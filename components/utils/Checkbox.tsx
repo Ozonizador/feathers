@@ -15,6 +15,8 @@ const Checkbox = ({ onChange, checked, name, ...props }: CheckboxProps) => {
       className="h-4 w-4 rounded-sm border border-gray-300 accent-primary-500 checked:border-primary-500 checked:bg-primary-500 focus:border-primary-500 focus:outline-none focus:ring-0"
       onChange={onChange}
       name={name}
+      height={40}
+      width={40}
       {...props}
     />
   );

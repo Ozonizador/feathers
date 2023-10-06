@@ -12,18 +12,19 @@ import {
 } from "../helpers/paymentsHelper";
 import { authorizedProcedure, isHostProcedure } from "../procedure";
 import { router } from "../trpc";
+import { test } from "node:test";
 
 const options = {
   method: "POST",
   headers: { accept: "application/json", "content-type": "application/json" },
 };
 
-const PaymentSchema = z.object({ value: z.number(), reservationId: z.string() });
+const PaymentSchema = z.object({ reservationId: z.string(), value: z.number()});
 
 export const paymentsRouter = router({
   addMultibancoPayment: authorizedProcedure.input(PaymentSchema).mutation(async ({ input, ctx }) => {
-    if (!process.env.EUPAGO_API_URL) throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
-
+    if (!process.env.EUPAGO_API_KEY) throw new TRPCError({ message: "Missing API KEY", code: "INTERNAL_SERVER_ERROR" });
+    if (!process.env.EUPAGO_API_URL) throw new TRPCError({ message: "Missing URL", code: "INTERNAL_SERVER_ERROR" });
     const { userId } = ctx;
     const { value, reservationId } = input;
 
@@ -60,7 +61,8 @@ export const paymentsRouter = router({
         await addReservationPayment(reservationId, paymentReservationInfo);
         await updateAdvertisementPayment(reservationId);
 
-        return { entidade, referencia, valor };
+        console.log(paymentReservationInfo)
+        return (paymentReservationInfo);
       })
       .catch((err) => {
         throw new TRPCError({ message: err.message, code: "INTERNAL_SERVER_ERROR" });

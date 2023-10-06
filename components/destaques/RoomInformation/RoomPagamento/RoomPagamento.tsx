@@ -86,6 +86,7 @@ export const RoomPagamento = () => {
 
   const [startDate, setStartDate] = useState(setInicialStartValue());
   const [endDate, setEndDate] = useState(setInicialEndValue());
+  const [guests = 1, setGuestsNumber] = useState();
 
   const {
     control,
@@ -106,10 +107,11 @@ export const RoomPagamento = () => {
     if (!advertisement) return;
 
     const newReservation = {
-      ...reservation,
       start_date: startDate,
       end_date: endDate,
       advertisement_id: advertisement.id,
+      number_guests: guests,
+      ...reservation,
     } as Reservation;
 
     // get the reservation
@@ -117,7 +119,7 @@ export const RoomPagamento = () => {
       onSuccess: (info) => {
         const { data, error } = info;
         if (error || !data) return toast.error(t("messages:errors.making_reservation"));
-        
+
         setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
         setModalGerarRef(true);
         toast.success(t("messages:success.reservation_requested"));
@@ -148,9 +150,9 @@ export const RoomPagamento = () => {
     if (!advertisement) return 0;
 
     const advertDiferenceInMonths = differenceInMonths(endDate, startDate);
-    if (advertDiferenceInMonths < 3) return month_rent;
-    if (advertDiferenceInMonths >= 6) return month_rent * (1 - semester_discount / 100);
-    return month_rent * (1 - trimester_discount / 100);
+    if (advertDiferenceInMonths < 3) return month_rent + (advertisement.extra_per_host * (guests - 1));
+    if (advertDiferenceInMonths >= 6) return (month_rent + (advertisement.extra_per_host * (guests - 1))) * (1 - semester_discount / 100);
+    return (month_rent + (advertisement.extra_per_host * (guests - 1))) * (1 - trimester_discount / 100);
   };
 
   return (
@@ -203,7 +205,8 @@ export const RoomPagamento = () => {
                 control={control}
                 name={"number_guests"}
                 render={({ field: { onChange } }) => {
-                  return <Input id="Hóspedes" type="number" onChange={onChange} value={1} />;
+                  return <Input id="Hóspedes" type="number" value={guests || 1} 
+                    onChange={(e)=>setGuestsNumber(e.target.value)} min={1} max={advertisement!.beds * 2}/>;
                 }}
               ></Controller>
             </div>

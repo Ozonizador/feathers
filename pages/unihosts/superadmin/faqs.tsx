@@ -120,7 +120,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: "/blogs",
         permanent: false,
       },
     };
@@ -132,10 +132,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .eq(PROFILE_COLUMNS.ID, user.id)
     .single();
 
+    console.log(error, data?.user_type);
+
   if (error || !data || data.user_type !== "ADMIN")
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: "/blogs",
         permanent: false,
       },
     };

@@ -121,5 +121,8 @@
   "conditions_and_rules": "Conditions and Rules",
   "amenities": "Amenities",
   "guest_number": "Guest Number",
-  "current_reservation": "Current Reservation"
+  "current_reservation": "Current Reservation",
+  "entity": "Entity:",
+  "reference": "Reference:",
+  "amount": "Amount:"
 }

@@ -62,11 +62,11 @@ export const addReservationPayment = async (reservationId: string, paymentInfo: 
       payment_type,
       entidade: entidade || null,
     });
-
+    console.log(error)
   if (error)
     throw new TRPCError({ message: "Error adding the payment information of the reservation", code: "BAD_REQUEST" });
 
-  return { error };
+  return { sucess: true };
 };
 
 export const updateReservationPayment = async (reservationId: string, payment_status: PaymentStatus) => {

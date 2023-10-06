@@ -16,18 +16,18 @@
   "bed_one": "Cama",
   "bed_other": "Camas",
   "bedWithCount_zero": "Sem Camas",
-  "bedWithCount_one": "%{count} Cama",
-  "bedWithCount_other": "%{count} Camas",
+  "bedWithCount_one": "{{count}} Cama",
+  "bedWithCount_other": "{{count}} Camas",
   "room_one": "Cama",
   "room_other": "Camas",
   "roomWithCount_zero": "Sem Camas",
-  "roomWithCount_one": "%{count} Cama",
-  "roomWithCount_other": "%{count} Camas",
+  "roomWithCount_one": "{{count}} Cama",
+  "roomWithCount_other": "{{count}} Camas",
   "bathroom_one": "Casa de Banho",
   "bathroom_other": "Casas de Banho",
   "bathroomWithCount_zero": "Sem Casa de Banho",
-  "bathroomWithCount_one": "%{count} Casa de Banho",
-  "bathroomWithCount_other": "%{count} Casas de Banhos",
+  "bathroomWithCount_one": "{{count}} Casa de Banho",
+  "bathroomWithCount_other": "{{count}} Casas de Banhos",
   "electricity": "Eletricidade",
   "gas": "Gás",
   "water": "Água",
@@ -87,7 +87,7 @@
     "capacity": "Capacidade"
   },
   "add_advert": {
-    "step": "Passo %{count}",
+    "step": "Passo {{count}}",
     "title_start": "Anunciar a sua propriedade é rápido e fácil!",
     "floor": "Andar",
     "street": "Rua",
@@ -120,5 +120,8 @@
   "conditions_and_rules": "Condições e Regras",
   "amenities": "Comodidades",
   "guest_number": "Número de hóspedes",
-  "current_reservation": "Reserva Original"
+  "current_reservation": "Reserva Original",
+  "entity": "Entidade: %{entity}",
+  "reference": "Referência: %{reference}",
+  "amount": "Valor: %{amount}"
 }
