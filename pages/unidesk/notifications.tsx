@@ -32,7 +32,8 @@ const Notifications = () => {
   const getUserNotifications = useCallback(async () => {
     setIsLoading(true);
     if (profile) {
-      const { data, error } = await getNotifications(profile.id);
+      // @ts-ignore
+      const { data, error } = await getNotifications(profile[0].id);
       if (!error) {
         setNotifications(data as Notification[]);
       }

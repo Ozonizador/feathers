@@ -59,7 +59,7 @@ const Footer = () => {
           <div className="py-5 text-left text-terciary-100 lg:text-left">
             <h3 className="mb-3 text-lg font-bold">{t("student", { count: 3 })}</h3>
             <div className="py-1">
-              <Link href={HOME_URL} className="fs-300 clr-white">
+              <Link href={HOME_URL + "#howTo"} className="fs-300 clr-white">
                 {t("footer:student.how_to_rent")}
               </Link>
             </div>

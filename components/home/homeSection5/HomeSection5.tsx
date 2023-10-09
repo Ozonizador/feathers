@@ -9,7 +9,7 @@ import { Trans, useTranslation } from "next-i18next";
 const HomeSection5 = () => {
   const { t } = useTranslation("index");
   return (
-    <section className="max-width">
+    <section className="max-width" id="howTo">
       <div className="pb-36 pt-24">
         <h2 className="mb-12 text-3xl font-black lg:text-5xl">{t("section.how_it_works.title")}</h2>
         <div className="mb-24 grid gap-10 lg:grid-cols-3">

@@ -34,7 +34,7 @@
   "photo_one": "Foto",
   "photo_other": "Fotos",
   "host_type": {
-    "compose_host": "Host %{type}",
+    "compose_host": "Host {{type}}",
     "super_flex": "Super Flexível",
     "flex": "Flexível",
     "moderate": "Moderado",

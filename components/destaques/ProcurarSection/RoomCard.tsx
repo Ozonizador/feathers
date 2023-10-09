@@ -63,22 +63,46 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   }, [advertisement]);
 
   const showSomeAmenities = useMemo(() => {
-    const { general_amenities } = advertisement;
+    const { general_amenities, bedroom_amenities, bathroom_amenities } = advertisement;
 
     const amenities: string[] = ([] as string[]).concat
       .apply([], [general_amenities || []])
       .filter((opt) => !!opt)
       .slice(0, 5);
 
-    if (!amenities) return undefined;
+    const bedroomAmenities: string[] = ([] as string[]).concat
+    .apply([], [bedroom_amenities || []])
+    .filter((opt) => !!opt)
+    .slice(0, 5);
+    
+    const bathroomAmenities: string[] = ([] as string[]).concat
+    .apply([], [bathroom_amenities || []])
+    .filter((opt) => !!opt)
+    .slice(0, 5);
+
+    const allAmenities = [...amenities, ...bedroomAmenities, ...bathroomAmenities];
+    console.log(allAmenities)
+
+    if (!allAmenities) return undefined;
     return (
       <ul className="flex gap-5 pr-3 text-gray-500">
-        {amenities.map((amenity, index) => {
-          return (
-            <li key={index} className={classNames({ "list-none": index === 0 })}>
-              {TypeAmenityLabel[amenity as TypeAmenity]}
-            </li>
-          );
+        {allAmenities.map((amenity, index) => {
+          switch (amenity) {
+            case "SINGLE_BED":
+            case "DOUBLE_BED":
+            case "TWO_BEDS":
+            case "CLOSET":
+            case "DESK":
+            case "PRIVATE_BATHROOM":
+              return (
+                <li key={index} className={classNames({ "list-none": index === 0 })}>
+                  {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                </li>
+              );
+
+              default:
+                break;
+          }
         })}
       </ul>
     );

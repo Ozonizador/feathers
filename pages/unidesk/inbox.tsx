@@ -48,7 +48,8 @@ const CaixaEntrada = () => {
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
-      const { data, error } = await getConversationsFromUser(profile.id);
+      // @ts-ignore
+      const { data, error } = await getConversationsFromUser(profile[0].id);
       if (!error) {
         setConversations(data as unknown as ConversationComplete[]);
       }
@@ -70,12 +71,15 @@ const CaixaEntrada = () => {
 
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
-    if (!currentMessage || !conversationId || !profile) return;
+    if (!currentMessage || !conversationId || !profile || currentMessage == "") return;
 
-    const { data, error } = await insertMessageOnConversation(currentMessage, conversationId, profile.id);
+    // @ts-ignore
+    const { data, error } = await insertMessageOnConversation(currentMessage, conversationId, profile[0].id);
     if (!error) {
       setMessages([...messages, data as MessageWithProfile]);
     }
+
+    setCurrentMessage("");
   };
 
   useEffect(() => {
@@ -150,8 +154,10 @@ const CaixaEntrada = () => {
                     setCurrentMessage={setCurrentMessage}
                   />
                   {currentConversation &&
-                    currentConversation.host_id === profile?.id &&
-                    currentConversation.reservation.tenant_id !== profile?.id && (
+                    // @ts-ignore
+                    currentConversation.host_id === profile[0].id &&
+                    // @ts-ignore
+                    currentConversation.reservation.tenant_id !== profile[0].id && (
                       <div className="w-96 border-l border-terciary-500 p-2">
                         <>
                           <div className="flex">
