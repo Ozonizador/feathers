@@ -6,7 +6,7 @@
   "expenses_partially_included": "Despesas Partialmente Incluídas",
   "expenses_not_included": "Despesas Excluídas",
   "no_expenses_information": "Sem Informação Despesas",
-  "expenses_up_to": "Despesas até %{value}€",
+  "expenses_up_to": "Despesas até {{value}}€",
   "animals_allowed": "Animais Permitidos",
   "smoking_allowed": "Permitido Fumar",
   "events_allowed": "Eventos Permitidos",
@@ -121,7 +121,7 @@
   "amenities": "Comodidades",
   "guest_number": "Número de hóspedes",
   "current_reservation": "Reserva Original",
-  "entity": "Entidade: %{entity}",
-  "reference": "Referência: %{reference}",
-  "amount": "Valor: %{amount}"
+  "entity": "Entidade: {{entity}}",
+  "reference": "Referência: {{reference}}",
+  "amount": "Valor: {{amount}}"
 }

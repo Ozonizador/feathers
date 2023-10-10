@@ -107,7 +107,7 @@
   "where_space_is": "Este espaço localiza-se nesta zona",
   "location_not_available": "Localização não disponível",
   "no_languages": "Sem informação de linguas",
-  "landlord_since_male": "Senhorio desde %{year)}",
+  "landlord_since_male": "Senhorio desde {{year)}",
   "landlord_since_female": "Senhoria desde {{year}}",
   "hello_im_male": "Olá, sou o {{name}}!",
   "hello_im_female": "Olá, sou a {{name}}!",
@@ -115,7 +115,7 @@
   "to_landlord": "Ao Senhorio",
   "value_retained_description": "Valor a ser retido pelo Senhorio a devolvido no final da estadia consoante as condições da casa.",
   "rent_month_paid": "Mensalidade a pagar",
-  "rent_of_month": "Renda Mensal de %{month}",
+  "rent_of_month": "Renda Mensal de {{month}",
   "deposit": "Caução",
   "on_check_day": "No dia do Check-in",
   "first_rent": "Primeira Renda",
@@ -125,5 +125,6 @@
   "available": "anúncios disponíveis",
   "for": "para",
   "in_area": "na zona",
-  "no_available_spaces": "Não tem espaços disponíveis"
+  "no_available_spaces": "Não tem espaços disponíveis",
+  "date": "{{date}}"
 }
