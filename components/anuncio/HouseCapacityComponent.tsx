@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import { BiBed } from "react-icons/bi";
-import { GiPersonInBed } from "react-icons/gi";
+import { GiDesk } from "react-icons/gi";
 import { MdPeopleOutline, MdOutlineBathtub } from "react-icons/md";
 import { Advertisement, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
 import QuantityInput from "../utils/QuantityInput";
@@ -43,7 +43,7 @@ const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) 
       </div>
 
       <div className="flex gap-2">
-        <GiPersonInBed size={32} />
+        <GiDesk size={32} />
         <div className="my-auto flex w-3/12 lg:w-2/12">
           <h2 className="my-auto ml-5 text-sm font-bold lg:text-base">{t("room", { count: 2 })}</h2>
         </div>

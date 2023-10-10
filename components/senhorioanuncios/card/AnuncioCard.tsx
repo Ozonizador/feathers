@@ -10,6 +10,7 @@ import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
+import { CONTACTOS_URL } from "../../../models/paths";
 
 function EditInactiveIcon(props: any) {
   return (
@@ -24,6 +25,12 @@ function EditActiveIcon(props: any) {
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
     </svg>
+  );
+}
+
+function VerifyActiveIcon(props:any) {
+  return (
+    <img {...props} src="/images/homeSection2-1.svg" alt="" />
   );
 }
 
@@ -69,6 +76,12 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
     error ? toast.error(t("messages:error.removing_advert")) : toast.success(t("messages:success.success"));
     if (!error) refetchAdvertisements();
   };
+
+  const verifyAdvertisement = (event: React.MouseEvent) => {
+    event.preventDefault();
+    router.push(CONTACTOS_URL);
+  };
+
   return (
     <section>
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
@@ -123,15 +136,15 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                onClick={(e) => console.log("verify")}
+                                onClick={(e) => verifyAdvertisement(e)}
                                 className={`${
                                   active ? "bg-violet-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
                                  {active ? (
-                                  <EditActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
+                                  <VerifyActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
                                 ) : (
-                                  <EditInactiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
+                                  <VerifyActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
                                 )}
                                 {t("verify")}
                                 </button>
