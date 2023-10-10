@@ -11,6 +11,10 @@ import { toast } from "react-toastify";
 import ExpensesComponent from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 import { CONTACTOS_URL } from "../../../models/paths";
+import { AiOutlineFire, AiOutlineWifi } from "react-icons/ai";
+import { BsWater } from "react-icons/bs";
+import { FaRegLightbulb } from "react-icons/fa";
+import { TypeExpense } from "../../../models/advertisement"
 
 function EditInactiveIcon(props: any) {
   return (
@@ -80,6 +84,16 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
   const verifyAdvertisement = (event: React.MouseEvent) => {
     event.preventDefault();
     router.push(CONTACTOS_URL);
+  };
+  
+  console.log(advertisement.expenses)
+
+  const checkIfExpensesIncluded =  (expense: TypeExpense) => {
+    if (expense?.included === "INCLUDED") return t("advertisements:included");
+    if (expense?.included === "EXCLUDED") return t("advertisements:not_included");
+    if (expense?.max) return t("advertisements:expenses_up_to", { value: expense.max });
+    
+    return t("no_information");
   };
 
   return (
@@ -181,8 +195,45 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
               <div className="text-xl font-bold text-primary-500">
                 {t("advertisements:price_month", { price: advertisement.month_rent })}
               </div>
-              <ExpensesComponent expenses={advertisement.expenses} />
             </div>
+            <div className="relative flex object-fill">
+              {advertisement.expenses.services?.map((expense) => {
+                switch (expense.name) {
+                  case "LIGHTS":
+                    return( 
+                      <div className="flex flex-col justify-center items-center p-2">
+                        <FaRegLightbulb size={40}></FaRegLightbulb>
+                        <div>{checkIfExpensesIncluded(expense)}</div>
+                      </div>
+                    )
+
+                  case "GAS":
+                    return( 
+                      <div className="flex flex-col justify-center items-center p-2">
+                        <AiOutlineFire size={40}></AiOutlineFire>
+                        <div>{checkIfExpensesIncluded(expense)}</div>
+                      </div>
+                    )
+
+                  case "INTERNET":
+                    return( 
+                      <div className="flex flex-col justify-center items-center p-2">
+                        <AiOutlineWifi size={40}></AiOutlineWifi>
+                        <div>{checkIfExpensesIncluded(expense)}</div>
+                      </div>
+                    )
+
+                  case "WATER":
+                    return (
+                      <div className="flex flex-col justify-center items-center p-2">
+                        <BsWater size={40}></BsWater>
+                        <div>{checkIfExpensesIncluded(expense)}</div>
+                      </div>
+                    );
+                }
+              })}
+            </div>
+          
           </div>
         </div>
       </div>
