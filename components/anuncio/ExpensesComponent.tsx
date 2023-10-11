@@ -16,7 +16,6 @@ interface ExpensesComponentProps {
 }
 
 const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
-  if (!expenses) return <></>;
   const [popupState, setPopupState] = useState<boolean>(false);
 
   const containsExpenses = () => {
@@ -32,12 +31,12 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}>
             <div className="group flex items-center relative">
-              <span>{checkIfExpensesIncluded(expenses?.services || [])}</span>
+              <span>{CheckIfExpensesIncluded(expenses?.services || [])}</span>
               <BiInfoCircle className="ml-2"/>
             </div>
           </div>
           <div className={`transition-opacity ease-in duration-700 ${popupState ? "opacity-100" : "opacity-0"}`}>
-                <RoomUtilitesPopover expenses={expenses}/>
+                <RoomUtilitesPopover expenses={expenses!}/>
               </div>
         </div>
       )}
@@ -120,7 +119,7 @@ const RoomUtilitesPopover = ({ expenses}: RoomExpensesPopover) => {
  * Aux functions
  */
 
-export const checkIfExpensesIncluded = (expenses: TypeExpense[]) => {
+export const CheckIfExpensesIncluded = (expenses: TypeExpense[]) => {
   const { t } = useTranslation();
   let included = 0;
   let partially = 0;

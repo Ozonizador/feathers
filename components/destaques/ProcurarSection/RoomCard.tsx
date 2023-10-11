@@ -18,7 +18,7 @@ import classNames from "classnames";
 import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot, BsHeart } from "react-icons/bs";
-import { checkIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
+import { CheckIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 
 interface RoomCardProps {
@@ -183,7 +183,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </h3>
                     <div className="d-flex">
                       <p className="mt-1 text-xs lg:text-base">
-                        {checkIfExpensesIncluded(advertisement.expenses.services || [])}
+                        {CheckIfExpensesIncluded(advertisement.expenses.services || [])}
                       </p>
                       <i className="fa-solid fa-circle-info m-1"></i>
                     </div>
