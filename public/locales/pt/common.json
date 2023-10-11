@@ -107,7 +107,7 @@
   "where_space_is": "Este espaço localiza-se nesta zona",
   "location_not_available": "Localização não disponível",
   "no_languages": "Sem informação de linguas",
-  "landlord_since_male": "Senhorio desde {{year)}",
+  "landlord_since_male": "Senhorio desde {{year}}",
   "landlord_since_female": "Senhoria desde {{year}}",
   "hello_im_male": "Olá, sou o {{name}}!",
   "hello_im_female": "Olá, sou a {{name}}!",

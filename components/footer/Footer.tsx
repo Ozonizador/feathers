@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
 
             <div className="py-1">
-              <Link href={FAQS_URL} className="fs-300 clr-white">
+              <Link href={FAQS_URL + "?TENANT"} className="fs-300 clr-white">
                 {t("footer:student.help")}
               </Link>
             </div>
@@ -83,7 +83,7 @@ const Footer = () => {
               <Link href={COMO_FUNCIONA_URL}>{t("footer:landlord.how_to")}</Link>
             </div>
             <div className="py-1">
-              <Link href={FAQS_URL} className="fs-300 clr-white">
+              <Link href={FAQS_URL + "?LANDLORD"} className="fs-300 clr-white">
                 {t("footer:landlord.help")}
               </Link>
             </div>

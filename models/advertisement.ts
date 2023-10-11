@@ -373,7 +373,6 @@ export const AboutHouseCommodities = {
     { type: "TABLE" },
   ],
   exterior: [
-    { type: "COURTYARD" },
     { type: "TERRACE" },
     { type: "BARBECUE" },
     { type: "MEAL_ZONE" },

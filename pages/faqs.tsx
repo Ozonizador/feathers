@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TiPlus, TiMinus } from "react-icons/ti";
 import Toggle from "../components/toggle/toggle";
 import { useGetUserType } from "../context/MainProvider";
@@ -11,6 +11,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const Faqs = () => {
   const { userAppMode } = useGetUserType();
   const [selectedFaq, setSelectedFaq] = useState<UserTypes>(userAppMode);
+
+  useEffect(() => {
+    const queryString = window.location.search.slice(1);
+    if (queryString == "TENANT" || queryString == "LANDLORD") {
+      setSelectedFaq(queryString as UserTypes);
+    }
+  })
 
   const { data } = trpc.faqs.getFaqs.useQuery(undefined, {
     retry: false,
