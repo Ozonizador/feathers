@@ -38,6 +38,7 @@ const CaixaEntrada = () => {
   const { t } = useTranslation();
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
+  const [allMessages, setAllMessages] = useState<MessageWithProfile[]>([]);
   const profile = useCurrentUser();
   const { acceptReservation } = useReservationService();
   const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
@@ -55,6 +56,18 @@ const CaixaEntrada = () => {
       }
     }
   }, [profile]);
+
+  const getAllMessages = async () => {
+    let messages = [];
+    if (conversations != null) {
+      for (let conversation of conversations) {
+        const { data, error } = await getMessagesFromConversationId(conversation.id);
+        messages.push(data);
+      }
+
+      setAllMessages(messages as unknown as MessageWithProfile[]);
+    }
+  }
 
   const getMessagesFromConversation = useCallback(async () => {
     if (currentConversation) {
@@ -132,6 +145,9 @@ const CaixaEntrada = () => {
                 <div className="flex flex-row">
                   <div className="flex w-96 flex-col border-r border-terciary-500">
                     {conversations.map((conversation, index) => {
+                      if(allMessages.length < 1) {
+                        getAllMessages();
+                      }
                       return (
                         <div
                           key={index}
@@ -140,7 +156,9 @@ const CaixaEntrada = () => {
                             "bg-primary-100": currentConversation?.id === conversation.id,
                           })}
                         >
-                          <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
+                          <CaixaCard profile={getOtherProfile(conversation)} 
+                            // @ts-ignore
+                            reservation={conversation.reservation} messages={allMessages[index]}/>
                         </div>
                       );
                     })}
@@ -253,6 +271,9 @@ const CaixaEntrada = () => {
             <div>
               {currentConversation &&
                 conversations?.map((conversation, index) => {
+                  if(allMessages.length < 1) {
+                    getAllMessages();
+                  }
                   return (
                     <div
                       key={index}
@@ -261,7 +282,9 @@ const CaixaEntrada = () => {
                         "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
                       })}
                     >
-                      <CaixaCard profile={getOtherProfile(conversation)} reservation={conversation.reservation} />
+                      <CaixaCard profile={getOtherProfile(conversation)} 
+                        // @ts-ignore
+                        reservation={conversation.reservation} messages={allMessages[index]}/>
                     </div>
                   );
                 })}
