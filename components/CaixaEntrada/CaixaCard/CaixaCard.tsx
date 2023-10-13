@@ -69,10 +69,10 @@ const CaixaCard = ({ profile, messagerProfile,reservation, messages }: CaixaCard
   const lastMessage = () => {
     if (messages != undefined && messages.length > 0) {
       if(profile?.id != messages[messages.length - 1].profile_id) {
-        return <h5>{`${messages[messages.length - 1].profile.name}: ${messages[messages.length - 1].message}`}</h5>
+        return <h5>{`${messages[messages.length - 1].profile.name}: ${messages[messages.length - 1].message.slice(0,20)}`}</h5>
       }
       
-      return <h5>{`${t("you")}: ${messages[messages.length - 1].message}`}</h5>
+      return <h5>{`${t("you")}: ${messages[messages.length - 1].message.slice(0,20)}`}</h5>
     }
   }
 

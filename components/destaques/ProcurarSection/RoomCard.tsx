@@ -18,7 +18,7 @@ import classNames from "classnames";
 import { getMainAdvertPhoto } from "../../../helpers/advertisementHelper";
 import Button from "../../utils/Button";
 import { BsDot, BsHeart } from "react-icons/bs";
-import { CheckIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
+import ExpensesComponent, { CheckIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 
 interface RoomCardProps {
@@ -81,11 +81,11 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     .slice(0, 5);
 
     const allAmenities = [...amenities, ...bedroomAmenities, ...bathroomAmenities];
-    console.log(allAmenities)
 
     if (!allAmenities) return undefined;
+    let count = 0;
     return (
-      <ul className="flex gap-5 pr-3 text-gray-500">
+      <ul className="flex gap-2 pr-3 text-gray-500 flex-wrap">
         {allAmenities.map((amenity, index) => {
           switch (amenity) {
             case "SINGLE_BED":
@@ -94,8 +94,10 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
             case "CLOSET":
             case "DESK":
             case "PRIVATE_BATHROOM":
+              count++;
               return (
-                <li key={index} className={classNames({ "list-none": index === 0 })}>
+                <li key={index} className={classNames({ "list-none": index === 0}) + " flex gap-2 items-center"}>
+                  {count > 1 && count != 5 && <BsDot className=""/>}
                   {t(TypeAmenityLabel[amenity as TypeAmenity])}
                 </li>
               );
@@ -183,7 +185,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </h3>
                     <div className="d-flex">
                       <p className="mt-1 text-xs lg:text-base">
-                        {CheckIfExpensesIncluded(advertisement.expenses.services || [])}
+                        <ExpensesComponent expenses={advertisement.expenses}></ExpensesComponent>
                       </p>
                       <i className="fa-solid fa-circle-info m-1"></i>
                     </div>

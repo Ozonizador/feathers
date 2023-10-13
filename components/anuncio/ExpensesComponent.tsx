@@ -31,7 +31,7 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}>
             <div className="group flex items-center relative">
-              <span>{CheckIfExpensesIncluded(expenses?.services || [])}</span>
+              <span className="text-xs">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
               <BiInfoCircle className="ml-2"/>
             </div>
           </div>

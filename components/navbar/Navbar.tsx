@@ -238,7 +238,7 @@ export const Navbar = () => {
                 )}
                 {user && (
                   <div className="flex flex-1">
-                    <div className="my-auto flex">
+                    <div className="my-auto flex gap-2">
                       <span className={classNames("mr=2",
                       {"text-primary-500": userAppMode == "TENANT"})}>{t("student", { count: 1 })}</span>
                       <Switch
