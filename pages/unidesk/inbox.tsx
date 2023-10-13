@@ -156,7 +156,7 @@ const CaixaEntrada = () => {
                             "bg-primary-100": currentConversation?.id === conversation.id,
                           })}
                         >
-                          <CaixaCard profile={getOtherProfile(conversation)} 
+                          <CaixaCard profile={getOtherProfile(conversation)} messagerProfile={conversation.tenant}
                             // @ts-ignore
                             reservation={conversation.reservation} messages={allMessages[index]}/>
                         </div>
@@ -282,7 +282,7 @@ const CaixaEntrada = () => {
                         "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
                       })}
                     >
-                      <CaixaCard profile={getOtherProfile(conversation)} 
+                      <CaixaCard profile={getOtherProfile(conversation)} messagerProfile={conversation.tenant}
                         // @ts-ignore
                         reservation={conversation.reservation} messages={allMessages[index]}/>
                     </div>

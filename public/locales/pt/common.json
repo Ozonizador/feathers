@@ -126,5 +126,6 @@
   "for": "para",
   "in_area": "na zona",
   "no_available_spaces": "Não tem espaços disponíveis",
-  "date": "{{date}}"
+  "date": "{{date}}",
+  "you": "Você"
 }
