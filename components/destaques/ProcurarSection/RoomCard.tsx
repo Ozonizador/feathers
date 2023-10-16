@@ -102,7 +102,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     return (
       <ul className="flex flex-wrap pr-3 text-gray-500">
         {foundAmenities.map((amenity, index) => (
-          <li className={"flex items-center gap-1"}>
+          <li key={index} className={"flex items-center gap-1"}>
             {index > 0 && <BsDot className="" />}
             {t(TypeAmenityLabel[amenity as TypeAmenity])}
           </li>
