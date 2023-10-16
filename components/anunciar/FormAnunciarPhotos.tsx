@@ -127,7 +127,6 @@ const FormAnunciarPhotos = () => {
 
   const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (files.length < 5) return toast.error(t("messages:errors.minimum_5_images"));
     
     const newAdvertisementPhotos: { url: string; zone: HouseZones; }[] = []
     coverImages.forEach(file => {
@@ -153,6 +152,8 @@ const FormAnunciarPhotos = () => {
     otherImages.forEach(file => {
       newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "other"})
     })
+
+    if (newAdvertisementPhotos.length < 5) return toast.error(t("messages:errors.minimum_5_images"));
 
     advertisement.photos =  newAdvertisementPhotos;
     setAdvertisement(advertisement);
