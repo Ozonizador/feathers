@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import { RiUserLine } from "react-icons/ri";
 import { BiBed } from "react-icons/bi";
@@ -65,47 +65,48 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const showSomeAmenities = useMemo(() => {
     const { general_amenities, bedroom_amenities, bathroom_amenities } = advertisement;
 
+    console.log(bedroom_amenities);
+
     const amenities: string[] = ([] as string[]).concat
       .apply([], [general_amenities || []])
       .filter((opt) => !!opt)
-      .slice(0, 5);
+      .slice(0);
 
     const bedroomAmenities: string[] = ([] as string[]).concat
-    .apply([], [bedroom_amenities || []])
-    .filter((opt) => !!opt)
-    .slice(0, 5);
-    
+      .apply([], [bedroom_amenities || []])
+      .filter((opt) => !!opt)
+      .slice(0);
+
     const bathroomAmenities: string[] = ([] as string[]).concat
-    .apply([], [bathroom_amenities || []])
-    .filter((opt) => !!opt)
-    .slice(0, 5);
+      .apply([], [bathroom_amenities || []])
+      .filter((opt) => !!opt)
+      .slice(0);
 
     const allAmenities = [...amenities, ...bedroomAmenities, ...bathroomAmenities];
+    let foundAmenities: TypeAmenity[] = [];
+
+    const priorityAmenities = () => {
+      let found = 0;
+      let amenities = ["SINGLE_BED", "DOUBLE_BED", "PRIVATE_BATHROOM", "CLOSET", "BALCONY", "BED_SHEETS", "TWO_BEDS"];
+
+      amenities.map((amenity) => {
+        if (allAmenities.includes(amenity) && found < 4) {
+          found++;
+          foundAmenities.push(amenity as TypeAmenity);
+        }
+      });
+    };
 
     if (!allAmenities) return undefined;
-    let count = 0;
+    priorityAmenities();
     return (
-      <ul className="flex gap-2 pr-3 text-gray-500 flex-wrap">
-        {allAmenities.map((amenity, index) => {
-          switch (amenity) {
-            case "SINGLE_BED":
-            case "DOUBLE_BED":
-            case "TWO_BEDS":
-            case "CLOSET":
-            case "DESK":
-            case "PRIVATE_BATHROOM":
-              count++;
-              return (
-                <li key={index} className={classNames({ "list-none": index === 0}) + " flex gap-2 items-center"}>
-                  {count > 1 && count != 5 && <BsDot className=""/>}
-                  {t(TypeAmenityLabel[amenity as TypeAmenity])}
-                </li>
-              );
-
-              default:
-                break;
-          }
-        })}
+      <ul className="flex flex-wrap pr-3 text-gray-500">
+        {foundAmenities.map((amenity, index) => (
+          <li className={"flex items-center gap-1"}>
+            {index > 0 && <BsDot className="" />}
+            {t(TypeAmenityLabel[amenity as TypeAmenity])}
+          </li>
+        ))}
       </ul>
     );
   }, [advertisement]);
