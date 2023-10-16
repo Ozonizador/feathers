@@ -5,11 +5,119 @@ import { useAdvertisement, useImageFiles, useSetAdvertisement, useSetImageFiles 
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { HouseZones } from "../../models/advertisement";
+import React, { useState } from 'react';
 
 const FormAnunciarPhotos = () => {
   const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
+  const [coverImages, setCoverImages] = useState<File[]>([]);
+  const [bedroomImages, setBedroomImages] = useState<File[]>([]);
+  const [bathroomImages, setBathroomImages] = useState<File[]>([]);
+  const [livingRoomImages, setLivingRoomImages] = useState<File[]>([]);
+  const [kitchenImages, setKitchenImages] = useState<File[]>([]);
+  const [otherImages, setOtherImages] = useState<File[]>([]);
+
+  // Code to remove from one array and move to another
+  const handleDrop = (
+    event: React.DragEvent<HTMLDivElement>,
+    container: HouseZones,
+  ) => {
+    event.preventDefault();
+    const files = Array.from(event.dataTransfer.files);
+
+    const imageName = event.dataTransfer.getData("id");
+
+    const newFiles: File[] = [];
+
+    for (let file of files) {
+      const blob = file.slice(0, file.size, 'image/png'); 
+      newFiles.push(new File([blob], imageName));
+    }
+
+    switch (container) {
+      case "main":
+        setCoverImages(newFiles);
+        removeFromArrays(container, newFiles);
+        break;
+      case "bedroom":
+        setBedroomImages((prevImages) => [...prevImages, ...newFiles]);
+        removeFromArrays(container, newFiles);
+        break;
+      case "bathroom":
+        setBathroomImages((prevImages) => [...prevImages, ...newFiles]);
+        removeFromArrays(container, newFiles);
+        break;
+      case "livingroom":
+        setLivingRoomImages((prevImages) => [...prevImages, ...newFiles]);
+        removeFromArrays(container, newFiles);
+        break;
+      case "kitchen":
+        setKitchenImages((prevImages) => [...prevImages, ...newFiles]);
+        removeFromArrays(container, newFiles);
+        break;
+      case "other":
+        setOtherImages((prevImages) => [...prevImages, ...newFiles]);
+        removeFromArrays(container, newFiles);
+        break;
+    }
+  }
+
+  const removeFromArrays = (target: string, files: File[]) => {
+
+    if (target != 'main') {
+      setCoverImages((prevImages) =>
+      prevImages.filter(
+        (img) => !files.some((file) => file.name === img.name)
+      )
+    );
+    } 
+    
+    if (target != 'bedroom') {
+      setBedroomImages((prevImages) =>
+        prevImages.filter(
+          (img) => !files.some((file) => file.name === img.name)
+        )
+      );
+    } 
+
+    if (target != 'bathroom') {
+      setBathroomImages((prevImages) =>
+        prevImages.filter(
+          (img) => !files.some((file) => file.name === img.name)
+        )
+      );
+    } 
+
+    if (target != 'kitchen') {
+      setKitchenImages((prevImages) =>
+        prevImages.filter(
+          (img) => !files.some((file) => file.name === img.name)
+        )
+      );
+    }
+    
+    if (target != 'livingroom') {
+      setLivingRoomImages((prevImages) =>
+        prevImages.filter(
+          (img) => !files.some((file) => file.name === img.name)
+        )
+      );
+    }
+
+    if (target != 'other') {
+      setOtherImages((prevImages) =>
+        prevImages.filter(
+          (img) => !files.some((file) => file.name === img.name)
+        )
+      );
+
+      if (otherImages.length == 1) {
+        setOtherImages([])
+      }
+    }
+  }
+
   
   const advertisement = useAdvertisement();
   const setAdvertisement = useSetAdvertisement();
@@ -22,9 +130,29 @@ const FormAnunciarPhotos = () => {
     if (files.length < 5) return toast.error(t("messages:errors.minimum_5_images"));
     
     const newAdvertisementPhotos: { url: string; zone: HouseZones; }[] = []
-    files.forEach(file => {
-      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "other"});
+    coverImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "main"});
     });
+
+    bedroomImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "bedroom"});
+    });
+
+    bathroomImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "bathroom"});
+    });
+    
+    livingRoomImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "livingroom"});
+    });
+
+    kitchenImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "kitchen"});
+    })
+
+    otherImages.forEach(file => {
+      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "other"})
+    })
 
     advertisement.photos =  newAdvertisementPhotos;
     setAdvertisement(advertisement);
@@ -35,27 +163,33 @@ const FormAnunciarPhotos = () => {
   const uploadToClient = (event: any) => {
     event.preventDefault();
     if (event.target.files) {
-      let newFiles = [];
+      let newFiles: any[] = [];
       for (let file of event.target.files) {
         newFiles.push(file);
       }
 
-      const newFilesUrl = newFiles.map((file) => URL.createObjectURL(file));
-      setImagesInfo({
-        files: [files, ...newFiles].flat(),
-        filesUrl: [filesUrl, ...newFilesUrl].flat(),
-      });
+      setOtherImages((prevImages) => [...prevImages, ...newFiles]);
     }
   };
 
-  const removeImageFromSelection = (index: number) => {
-    const currentImages = [...files];
-    const currentObjectUrls = [...filesUrl];
+  const removeImageFromSelection = (index: number, origin: any, arrayName: string) => {
+    const currentImages = [...origin];
     currentImages.splice(index, 1);
-    currentObjectUrls.splice(index, 1);
 
-    // save
-    setImagesInfo({ files: currentImages, filesUrl: currentObjectUrls });
+    switch(arrayName) {
+      case "main":
+        setCoverImages(currentImages);
+      case "bedroom":
+        setBedroomImages(currentImages);
+      case "bathroom":
+        setBathroomImages(currentImages);
+      case "livingroom":
+        setLivingRoomImages(currentImages);
+      case "kitchen":
+        setKitchenImages(currentImages);
+      case "other":
+        setOtherImages(currentImages);
+    }
   };
 
   return (
@@ -101,25 +235,99 @@ const FormAnunciarPhotos = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* FALTA GALERIA DE FOTOS */}
-      <div className="mt-3 flex flex-1 flex-wrap gap-1">
-        {filesUrl.map((object, index) => {
-          return (
-            <div className="relative h-28 w-full lg:h-28 lg:w-28" key={index}>
-              <div
-                className="absolute right-1 top-1 z-50 rounded-xl border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
-                onClick={(e) => removeImageFromSelection(index)}
+        <div
+        className="drop-container"
+        onDrop={(event) => handleDrop(event, 'main', )}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:cover")}</h2>
+        {coverImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, coverImages, "main")}
               >
                 x
               </div>
-              <Image src={object} className="h-28 w-28" fill style={{ objectFit: "cover" }} alt="advert-image" />
-            </div>
-          );
-        })}
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
       </div>
-
+      <div
+        className="drop-container"
+        onDrop={(event) => handleDrop(event, 'bedroom')}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:zones:bedroom")}</h2>
+        {bedroomImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, bedroomImages, 'bedroom')}
+              >
+                x
+              </div>
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        className="drop-container"
+        onDrop={(event) => handleDrop(event, 'bathroom')}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:zones:bathroom")}</h2>
+        {bathroomImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, bathroomImages , 'bathroom')}
+              >
+                x
+              </div>
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        className="drop-container"
+        onDrop={(event) => handleDrop(event, 'other')}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:zones:other")}</h2>
+        {otherImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, otherImages, 'other')}
+              >
+                x
+              </div>
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
       <div className="mt-10 flex  justify-center gap-5 lg:px-32">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">

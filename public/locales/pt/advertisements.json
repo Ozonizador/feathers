@@ -123,5 +123,6 @@
   "current_reservation": "Reserva Original",
   "entity": "Entidade: {{entity}}",
   "reference": "Referência: {{reference}}",
-  "amount": "Valor: {{amount}}"
+  "amount": "Valor: {{amount}}",
+  "cover": "Foto de capa"
 }

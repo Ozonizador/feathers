@@ -124,5 +124,6 @@
   "current_reservation": "Current Reservation",
   "entity": "Entity:",
   "reference": "Reference:",
-  "amount": "Amount:"
+  "amount": "Amount:",
+  "cover": "Cover Photo"
 }
