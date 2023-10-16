@@ -235,7 +235,8 @@ const FormAnunciarPhotos = () => {
             </div>
           </div>
         </div>
-        <div
+      <section>
+      <div
         className="drop-container"
         onDrop={(event) => handleDrop(event, 'main', )}
         onDragOver={(event) => event.preventDefault()}
@@ -306,6 +307,52 @@ const FormAnunciarPhotos = () => {
       </div>
       <div
         className="drop-container"
+        onDrop={(event) => handleDrop(event, 'livingroom')}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:zones:livingroom")}</h2>
+        {livingRoomImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, livingRoomImages , 'livingroom')}
+              >
+                x
+              </div>
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        className="drop-container"
+        onDrop={(event) => handleDrop(event, 'kitchen')}
+        onDragOver={(event) => event.preventDefault()}
+      >
+        <h2>{t("advertisements:zones:kitchen")}</h2>
+        {kitchenImages.map((file, index) => (
+          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
+            <div
+                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
+                onClick={(e) => removeImageFromSelection(index, kitchenImages , 'kitchen')}
+              >
+                x
+              </div>
+            <img
+              className="image"
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+              id={`${file.name}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        className="drop-container"
         onDrop={(event) => handleDrop(event, 'other')}
         onDragOver={(event) => event.preventDefault()}
       >
@@ -327,6 +374,7 @@ const FormAnunciarPhotos = () => {
           </div>
         ))}
       </div>
+      </section>
     </div>
       <div className="mt-10 flex  justify-center gap-5 lg:px-32">
         <div className="w-48">
