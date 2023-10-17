@@ -82,6 +82,7 @@ jobs:
         id: deploy
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
+          service: 'hello-cloud-run'
           image: 'europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1'
 
       - name: Run on Cloud
