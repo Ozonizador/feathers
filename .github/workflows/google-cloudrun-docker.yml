@@ -85,9 +85,6 @@ jobs:
           service: 'nextjs-docker-image'
           image: 'europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1'
 
-      - name: Run on Cloud
-        id: run
-        run: gcloud run deploy --image=europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
