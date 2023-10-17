@@ -80,7 +80,9 @@ jobs:
           
       - name: Deploy to Cloud Run
         id: deploy
-        run: gcloud builds submit --tag europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          image: 'europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1'
 
       - name: Run on Cloud
         id: run
