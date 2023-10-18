@@ -18,7 +18,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
-  { url: "", label: "inbox" },
+  { url: "", label: "notifications" },
 ] as BreadcrumbPath[];
 
 const Notifications = () => {
