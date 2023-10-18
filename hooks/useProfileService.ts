@@ -1,7 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
 import { Messages, MESSAGE_TABLE_NAME, MESSAGE_TABLE_PROPERTIES } from "../models/message";
-import { NotificationsResponse, NOTIFICATION_TABLE_NAME } from "../models/notification";
+import { NotificationsResponse, NOTIFICATION_TABLE_NAME, NOTIFICATION_PROPERTIES } from "../models/notification";
 import {
   AVATAR_STORAGE_NAME,
   Profile,
@@ -143,6 +143,15 @@ const useProfileService = () => {
     return count;
   };
 
+  const makeNotificationSeen = async (notificationId: string) => {
+    const {data, error} = await supabaseClient
+      .from(NOTIFICATION_TABLE_NAME)
+      .update({seen: true})
+      .eq(NOTIFICATION_PROPERTIES.ID, notificationId);
+
+    return {error, data};
+  }
+
   /* Picture */
 
   const uploadPicture = async (userId: string, fileName: string, avatarFile: File) => {
@@ -186,6 +195,7 @@ const useProfileService = () => {
     updateUserProfile,
     getUserProfile,
     getNotificationInfoFromUser,
+    makeNotificationSeen,
     setTypeUser,
     checkMessagesNotSeen,
     checkNotificationsNotSeen,

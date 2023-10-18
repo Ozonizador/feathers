@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
-import Gallery from "../../../gallery/gallery";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
@@ -19,8 +18,7 @@ export const SingleRoomGrid = () => {
         src: photo.url,
       });
     });
-
-    console.log("test");
+    
     return slideImages;
   };
 

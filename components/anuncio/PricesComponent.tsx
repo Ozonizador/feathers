@@ -84,10 +84,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
     setSelectedOption(included);
 
-    console.log(expenses.services)
-
     if (included == "INCLUDED" || included == "EXCLUDED") {
-      console.log(1)
       const services =
       expenses &&
       expenses.services?.map((service) => {
@@ -99,7 +96,6 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
       services,
     });
     }
-    console.log(expenses.services)
   }
 
   return (

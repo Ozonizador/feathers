@@ -65,8 +65,6 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const showSomeAmenities = useMemo(() => {
     const { general_amenities, bedroom_amenities, bathroom_amenities } = advertisement;
 
-    console.log(bedroom_amenities);
-
     const amenities: string[] = ([] as string[]).concat
       .apply([], [general_amenities || []])
       .filter((opt) => !!opt)

@@ -5,12 +5,19 @@ import {
   NOTIFICATION_LINKS,
   NOTIFICATION_TYPES_INFORMATION,
 } from "../../../models/notification";
-import Button from "../../utils/Button";
+import Button from "../../utils/Button"
+import { useCallback } from "react";
+import useProfileService from "../../../hooks/useProfileService"
 interface NotificationCardProps {
   notification: Notification;
 }
 
 export const NotificationCard = ({ notification }: NotificationCardProps) => {
+  const profileService = useProfileService();
+
+  const handleClick = useCallback(() => {
+    profileService.makeNotificationSeen(notification.id);
+  }, [notification.id])
   return (
     <>
       <div className="mb-5 flex w-full flex-col justify-between gap-5 rounded-md border border-gray-200 p-4 lg:flex-row lg:items-center">
@@ -20,7 +27,7 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
         </div>
 
         <div className="w-fit min-w-[300px]">
-          <Link href={NOTIFICATION_LINKS[notification.type]}>
+          <Link href={NOTIFICATION_LINKS[notification.type]} onClick={() => handleClick()}>
             <Button rounded="full" type="button">
               {BUTTON_MESSAGE_LABEL[notification.type]}
             </Button>

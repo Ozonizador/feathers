@@ -51,7 +51,6 @@ const ModalGerarReferencia = () => {
         },
         {
           onSuccess: (data) => {
-            console.log(data);
             setLoadedReference(true);
           },
           onSettled: () => setLoadingReference(false),
@@ -63,7 +62,6 @@ const ModalGerarReferencia = () => {
         {value, reservationId: reservation.id},
         {
           onSuccess: (data) => {
-            console.log(data);
             setLoadedReference(true);
           },
           onSettled: () => setLoadingReference(false),

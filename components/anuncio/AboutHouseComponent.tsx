@@ -29,10 +29,6 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
       | "bedroom_amenities"
       | "kitchen_amenities";
 
-      console.log(space);
-      console.log(property);
-      console.log(amenities_zone);
-
     let commodities = advertisement[amenities_zone];
     if (commodities) {
       for (let i = 0; i < commodities.length; i++) {

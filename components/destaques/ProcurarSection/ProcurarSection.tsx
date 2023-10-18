@@ -97,7 +97,7 @@ export default function ProcurarSection() {
     <>
       <ModalMaisFiltros />
       <div className="mt-5 flex flex-1 px-10">
-        <div className="w-full lg:w-1/2">
+        <div className={`w-full ${location ? "lg:w-1/2" : ""}`}>
           <div className="w-full lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
@@ -111,7 +111,7 @@ export default function ProcurarSection() {
                 {location ? (
                   <>
                     <span className="font-normal text-gray-400">{t("for")}</span>
-                    <span className="font-normal capitalize text-gray-400">{location.split(",")[0]}</span>
+                    <span className="font-normal capitalize text-gray-400"> {location.split(",")[0]}</span>
                   </>
                 ) : (
                   <>{t("in_area")}</>
