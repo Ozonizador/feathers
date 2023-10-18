@@ -1,5 +1,7 @@
 import classNames from "classnames";
-import React, { ReactElement } from "react";
+import { set } from "lodash";
+import React, { ReactElement, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface InputProps {
   onChange?: (e: any) => void;
@@ -9,13 +11,11 @@ interface InputProps {
   name?: string;
   errorMessage?: string;
   disabled?: boolean;
-  icons?: ReactElement,
-  handleClick?: any,
   placeholder?: string;
   [x: string]: any;
 }
 
-export default function Input({
+export default function InputPassword({
   onChange,
   value,
   name = "",
@@ -24,10 +24,14 @@ export default function Input({
   errorMessage = "",
   placeholder = "",
   disabled = false,
-  icons,
-  handleClick,
   ...props
 }: InputProps) {
+  const [type, setType] = useState<boolean>(true);
+
+  const handleClick = () => {
+    setType(!type);
+  };
+
   return (
     <div>
       {name && <label htmlFor={name}>{labelText}</label>}
@@ -45,9 +49,11 @@ export default function Input({
           value={value}
           aria-labelledby={name}
           disabled={disabled}
+          type={type ? "password" : "text"}
           {...props}
         ></input>
-        {icons}
+        {type && <FaEye className="absolute right-5 top-3" onClick={handleClick}></FaEye>}
+        {type == false && <FaEyeSlash className="absolute right-5 top-3" onClick={handleClick}></FaEyeSlash>}
         {errorMessage && <small className="text-red-700">{errorMessage}</small>}
       </div>
     </div>

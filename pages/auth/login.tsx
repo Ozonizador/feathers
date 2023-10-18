@@ -11,6 +11,8 @@ import { FcGoogle } from "react-icons/fc";
 import { useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { FaEye} from "react-icons/fa"
+import InputPassword from "../../components/utils/InputPassword";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -74,14 +76,13 @@ const Login = () => {
             </div>
             <div className="mt-3">
               <div className="mt-2">
-                <Input
+                <InputPassword
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  type="password"
                   autoComplete="on"
                   name="password_input"
                   labelText={t("password")}
-                ></Input>
+                ></InputPassword>
               </div>
             </div>
             <div className="my-5">
