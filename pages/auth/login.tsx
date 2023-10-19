@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SiFacebook } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
-import { RECOVER_URL, REGISTER_URL, TYPE_PROFILE_CHOICE_URL } from "../../models/paths";
+import { HOME_URL, RECOVER_URL, REGISTER_URL, TYPE_PROFILE_CHOICE_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 import { FcGoogle } from "react-icons/fc";
@@ -32,7 +32,7 @@ const Login = () => {
   const loginGoogle = async (event: React.MouseEvent) => {
     event.preventDefault();
     await loginWithGoogle();
-    router.push(TYPE_PROFILE_CHOICE_URL);
+    router.push(HOME_URL);
   };
 
   const normalLogin = async (event: React.FormEvent) => {
@@ -42,7 +42,7 @@ const Login = () => {
       toast.error(t("messages:errors.user_pass_incorrect"));
       return;
     } else {
-      router.push(TYPE_PROFILE_CHOICE_URL);
+      router.push(HOME_URL);
     }
   };
 

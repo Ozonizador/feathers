@@ -22,7 +22,7 @@ import { useTranslation } from "next-i18next";
 
 const FavouritesBreadcrumbs = [
   { url: UNIDESK_URL, label: "uni-desk" },
-  { url: "", label: "favourites_other" },
+  { url: "", label: "favourites" },
 ] as BreadcrumbPath[];
 
 const UnideskFavoritos = () => {
