@@ -239,11 +239,14 @@ export const Navbar = () => {
                 {user && (
                   <div className="flex flex-1">
                     <div className="my-auto flex gap-2">
-                      <span className={classNames("mr=2",
-                      {"text-primary-500": userAppMode == "TENANT"})}>{t("student", { count: 1 })}</span>
+                      <span className={classNames("mr=2", { "text-primary-500": userAppMode == "TENANT" })}>
+                        {t("student", { count: 1 })}
+                      </span>
                       <Switch
                         checked={true}
-                        className={classNames("relative inline-flex h-6 w-11 cursor-default rounded-full bg-primary-500")}
+                        className={classNames(
+                          "relative inline-flex h-6 w-11 cursor-default rounded-full bg-primary-500"
+                        )}
                         onClick={() => toggleUserMode()}
                       >
                         <span
@@ -253,25 +256,35 @@ export const Navbar = () => {
                           })}
                         />
                       </Switch>
-                      <span className={classNames("mr=2",
-                      {"text-primary-500": userAppMode == "LANDLORD"})}>{t("landlord", { count: 1 })}</span>
+                      <span className={classNames("mr=2", { "text-primary-500": userAppMode == "LANDLORD" })}>
+                        {t("landlord", { count: 1 })}
+                      </span>
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
                         <Menu.Button className="flex flex-1">
-                          {profile?.avatar_url ? (
-                            <Image
-                              unoptimized={true}
-                              src={profile?.avatar_url}
-                              height={32}
-                              width={32}
-                              alt="profile-avatar"
-                              className="rounded-full"
-                            />
-                          ) : (
-                            <BsPerson size={28} />
-                          )}
-                          <p className="my-auto ml-2">{profile?.name}</p>
+                          {
+                            // @ts-ignore
+                            profile[0].avatar_url ? (
+                              <Image
+                                unoptimized={true}
+                                // @ts-ignore
+                                src={profile[0]?.avatar_url}
+                                height={32}
+                                width={40}
+                                alt="profile-avatar"
+                                className="rounded-full h-[40px]"
+                              />
+                            ) : (
+                              <BsPerson size={28} />
+                            )
+                          }
+                          <p className="my-auto ml-2">
+                            {
+                              // @ts-ignore
+                              profile[0]?.name
+                            }
+                          </p>
                           <div className="my-auto ml-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />
                           </div>
