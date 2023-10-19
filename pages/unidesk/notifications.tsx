@@ -68,7 +68,7 @@ const Notifications = () => {
                 return <NotificationCard key={index} notification={notification} />;
               })}
               {!notifications ||
-                (notifications.length == 0 && <div className="flex justify-center text-xl">Sem notificações.</div>)}
+                (notifications.length == 0 && <div className="flex justify-center text-xl">{t("adimn:unidesk.no_notifications")}</div>)}
             </div>
           )}
         </>

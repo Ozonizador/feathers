@@ -20,7 +20,9 @@
       "panel": "Main Panel",
       "contracts": "Contractual Information",
       "calendar": "Calendar",
-      "send_message": "Send<1/> Message"
+      "send_message": "Send<1/> Message",
+      "no_notifications": "No notifications.",
+      "preference": "Unidesk Preference"
     },
     "student": {
       "general": "General Information",

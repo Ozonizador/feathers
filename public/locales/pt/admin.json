@@ -20,7 +20,9 @@
       "panel": "Painel",
       "contracts": "Informações contratuais",
       "calendar": "Calendário",
-      "send_message": "Enviar\n Messagem"
+      "send_message": "Enviar\n Messagem",
+      "no_notifications": "Sem notificações.",
+      "preference": "Preferência Unidesk"
     },
     "student": {
       "general": "Informações gerais",

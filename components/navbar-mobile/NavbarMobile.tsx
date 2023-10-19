@@ -133,8 +133,12 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   className={classNames(
                     "relative mx-5 mt-2 inline-flex h-8 w-16 cursor-default items-center rounded-full",
                     {
-                      "bg-primary-500": profile && profile.type === userAppMode,
-                      "bg-secondary-300": !profile || profile.type !== userAppMode,
+                      "bg-primary-500":
+                        profile && // @ts-ignore
+                        profile[0].type === userAppMode,
+                      "bg-secondary-300":
+                        !profile || // @ts-ignore
+                        profile[0].type !== userAppMode,
                     }
                   )}
                 >
@@ -151,10 +155,14 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               {user && (
                 <>
                   <div className="flex">
-                    {profile?.avatar_url ? (
+                    {profile != null && // @ts-ignore
+                    profile[0]?.avatar_url ? (
                       <Image
                         unoptimized={true}
-                        src={profile?.avatar_url}
+                        src={
+                          // @ts-ignore
+                          profile[0]?.avatar_url
+                        }
                         height={36}
                         width={36}
                         alt="profile-avatar"
@@ -164,7 +172,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                       <BsPerson size={32} />
                     )}
 
-                    <div className="my-auto ml-2 capitalize">{profile?.name}</div>
+                    <div className="my-auto ml-2 capitalize">
+                      {profile != null && // @ts-ignore
+                        profile?.name}
+                    </div>
                   </div>
 
                   <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>

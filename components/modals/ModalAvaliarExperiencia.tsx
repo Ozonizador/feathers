@@ -101,7 +101,7 @@ const ModalAvaliarExperiencia = () => {
                     <div className="px-4 ">
                       <div className="" id="model-radius">
                         <div className=" m-4 ">
-                          <p className="text-semibold mb-11 mt-7 text-3xl">MUDAR AQUI Quarto Privado em T3 - Peniche</p>
+                          <p className="text-semibold mb-11 mt-7 text-3xl">{reservation?.advertisement.title}</p>
                           <div className="flex flex-col gap-6">
                             <div className="flex w-full flex-row justify-between">
                               <div className="text-2xl text-secondary-300">{t("location")}</div>
