@@ -263,27 +263,25 @@ export const Navbar = () => {
                     <div>
                       <Menu as="div" className="ml-5">
                         <Menu.Button className="flex flex-1">
-                          {
-                            // @ts-ignore
-                            profile[0].avatar_url ? (
-                              <Image
-                                unoptimized={true}
-                                // @ts-ignore
-                                src={profile[0]?.avatar_url}
-                                height={32}
-                                width={40}
-                                alt="profile-avatar"
-                                className="rounded-full h-[40px]"
-                              />
-                            ) : (
-                              <BsPerson size={28} />
-                            )
-                          }
-                          <p className="my-auto ml-2">
-                            {
+                          {profile != null &&
+                          // @ts-ignore
+                          profile[0]?.avatar_url ? (
+                            <Image
+                              unoptimized={true}
                               // @ts-ignore
-                              profile[0]?.name
-                            }
+                              src={profile[0]?.avatar_url}
+                              height={32}
+                              width={40}
+                              alt="profile-avatar"
+                              className="h-[40px] rounded-full"
+                            />
+                          ) : (
+                            <BsPerson size={28} />
+                          )}
+                          <p className="my-auto ml-2">
+                            {profile != null &&
+                              // @ts-ignore
+                              profile[0]?.name}
                           </p>
                           <div className="my-auto ml-auto">
                             <VscTriangleDown className="w-8 text-[#2C3E50]" />

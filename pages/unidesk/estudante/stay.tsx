@@ -65,7 +65,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                         <StayInfo reservation={currentStay} options={{ isNextStay: false }} />
                       </>
                     )}
-                    {!currentStay && <div>Não tem estadia programada</div>}
+                    {!currentStay && <div>{t("admin:unidesk.student.no_stay")}</div>}
                   </div>
                   <div className="mt-5 flex flex-col gap-3">
                     <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_stays")}</h6>
@@ -79,7 +79,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                             </div>
                           );
                         })}
-                      <div className="mt-12 text-center text-base text-primary-500">Não tem + estadias programadas</div>
+                      <div className="mt-12 text-center text-base text-primary-500">{t("admin:unidesk.student.no_next_stay")}</div>
                     </>
 
                     <div className="flex justify-center">

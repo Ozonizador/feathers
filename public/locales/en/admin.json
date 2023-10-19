@@ -32,7 +32,9 @@
       "change_reservation": "Change<1/> Reservation",
       "evaluate_exp": "Evaluate<1/> Experience",
       "next_stays": "Next Stays",
-      "current_stay": "Current Stay"
+      "current_stay": "Current Stay",
+      "no_stay": "No scheduled stay",
+      "no_next_stay": "No more scheduled stays"
     },
     "landlord": {
       "reviews": "Reviews",
