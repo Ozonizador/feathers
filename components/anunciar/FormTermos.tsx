@@ -122,7 +122,6 @@ const FormTermos = () => {
                 <div className="text-xl">{t("advertisements:add_advert.calendar_check_updated")}</div>{" "}
               </div>
             </div>
-
             <div className="flex flex-row items-center align-middle">
               <div className="flex flex-row items-center gap-4">
                 <Controller
@@ -133,7 +132,6 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-
                 <div className="text-xl">{t("advertisements:add_advert.confirm_valid_info")}</div>
               </div>
             </div>

@@ -130,21 +130,18 @@ const Configurations = () => {
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
                       <p className="w-32 text-base font-bold">{t("admin:config.by_email")}</p>
-                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
-                        <div>
-                          <div className="flex h-5 items-center">
-                            <Checkbox
-                              checked={profileConfigs.accepts_notification_email || false}
-                              onChange={() =>
-                                setProfileConfigs({
-                                  ...profileConfigs,
-                                  accepts_notification_email: !profileConfigs.accepts_notification_email,
-                                })
-                              }
-                              name="notification_email"
-                            />
-                          </div>
-                        </div>
+
+                      <div className="flex h-5 items-center">
+                        <Checkbox
+                          checked={profileConfigs.accepts_notification_email || false}
+                          onChange={() =>
+                            setProfileConfigs({
+                              ...profileConfigs,
+                              accepts_notification_email: !profileConfigs.accepts_notification_email,
+                            })
+                          }
+                          name="notification_email"
+                        />
                       </div>
                     </div>
                   </div>
@@ -152,21 +149,17 @@ const Configurations = () => {
                   <div className="my-2 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex items-center">
                       <p className="w-32 text-base font-bold">{t("admin:config.by_message")}</p>
-                      <div className="flex flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:my-0 lg:ml-6">
-                        <div>
-                          <div className="flex h-5 items-center">
-                            <Checkbox
-                              checked={profileConfigs.accepts_notification_message || false}
-                              onChange={() =>
-                                setProfileConfigs({
-                                  ...profileConfigs,
-                                  accepts_notification_message: !profileConfigs.accepts_notification_message,
-                                })
-                              }
-                              name="notification_message"
-                            />
-                          </div>
-                        </div>
+                      <div className="flex h-5 items-center">
+                        <Checkbox
+                          checked={profileConfigs.accepts_notification_message || false}
+                          onChange={() =>
+                            setProfileConfigs({
+                              ...profileConfigs,
+                              accepts_notification_message: !profileConfigs.accepts_notification_message,
+                            })
+                          }
+                          name="notification_message"
+                        />
                       </div>
                     </div>
                   </div>

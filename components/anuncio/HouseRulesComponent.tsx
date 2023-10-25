@@ -46,15 +46,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
           <p className="w-40 text-base font-bold">{t("advertisements:animals_allowed")}</p>
         </div>
-
-        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
-          <div className="flex h-5 items-center">
-            <Checkbox
-              onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.animalsAllowed || false}
-              name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
-            />
-          </div>
+        <div className="flex h-5 items-center">
+          <Checkbox
+            onChange={(e) => toggleHouseRulesProperty(e)}
+            checked={advertisement.house_rules.animalsAllowed || false}
+            name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
+          />
         </div>
       </div>
       <div className="my-8 flex gap-2 md:flex-row lg:items-center">
@@ -64,15 +61,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
           <p className="w-40 text-base font-bold">{t("advertisements:smoking_allowed")}</p>
         </div>
-
-        <div className="ml-0 flex w-11 justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
-          <div className="flex h-5 items-center">
-            <Checkbox
-              onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.smokeAllowed || false}
-              name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
-            />
-          </div>
+        <div className="flex h-5 items-center">
+          <Checkbox
+            onChange={(e) => toggleHouseRulesProperty(e)}
+            checked={advertisement.house_rules.smokeAllowed || false}
+            name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
+          />
         </div>
       </div>
 
@@ -83,15 +77,12 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
           </div>
           <p className="w-40 text-base font-bold">{t("advertisements:events_allowed")}</p>
         </div>
-
-        <div className="ml-0 flex w-11 flex-row justify-between rounded-lg border border-terciary-500 px-3 py-3 md:items-center">
-          <div className="flex h-5 items-center">
-            <Checkbox
-              onChange={(e) => toggleHouseRulesProperty(e)}
-              checked={advertisement.house_rules.eventsAllowed || false}
-              name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
-            />
-          </div>
+        <div className="flex h-5 items-center">
+          <Checkbox
+            onChange={(e) => toggleHouseRulesProperty(e)}
+            checked={advertisement.house_rules.eventsAllowed || false}
+            name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
+          />
         </div>
       </div>
 

@@ -44,7 +44,7 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
       commodities.push(property as TypeAmenity);
     } else {
       let checkbox = document.getElementsByName(property)[0];
-      checkbox.removeAttribute('checked');
+      checkbox.removeAttribute("checked");
     }
 
     onChange(amenities_zone, commodities);
@@ -80,14 +80,13 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                         {t(TypeAmenityLabel[comodity.type])}
                       </p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
-                      <div className="flex h-5 items-center">
-                        <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "general")}
-                          checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
-                          name={comodity.type}
-                        />
-                      </div>
+
+                    <div className="flex h-5 items-center">
+                      <Checkbox
+                        onChange={(e) => toggleAmmenityProperty(e, "general")}
+                        checked={checkIfAboutHousePropertyChecked("general", comodity.type)}
+                        name={comodity.type}
+                      />
                     </div>
                   </div>
                 );
@@ -107,14 +106,12 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                         {t(TypeAmenityLabel[comodity.type])}
                       </p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
-                      <div className="flex h-5 items-center">
-                        <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "bedroom")}
-                          checked={checkIfAboutHousePropertyChecked("bedroom", comodity.type)}
-                          name={comodity.type}
-                        />
-                      </div>
+                    <div className="flex h-5 items-center">
+                      <Checkbox
+                        onChange={(e) => toggleAmmenityProperty(e, "bedroom")}
+                        checked={checkIfAboutHousePropertyChecked("bedroom", comodity.type)}
+                        name={comodity.type}
+                      />
                     </div>
                   </div>
                 );
@@ -135,14 +132,12 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                         {t(TypeAmenityLabel[comodity.type])}
                       </p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
-                      <div className="flex h-5 items-center">
-                        <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "bathroom")}
-                          checked={checkIfAboutHousePropertyChecked("bathroom", comodity.type)}
-                          name={comodity.type}
-                        />
-                      </div>
+                    <div className="flex h-5 items-center">
+                      <Checkbox
+                        onChange={(e) => toggleAmmenityProperty(e, "bathroom")}
+                        checked={checkIfAboutHousePropertyChecked("bathroom", comodity.type)}
+                        name={comodity.type}
+                      />
                     </div>
                   </div>
                 );
@@ -162,14 +157,12 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                         {t(TypeAmenityLabel[comodity.type])}
                       </p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
-                      <div className="flex h-5 items-center">
-                        <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "kitchen")}
-                          checked={checkIfAboutHousePropertyChecked("kitchen", comodity.type)}
-                          name={comodity.type}
-                        />
-                      </div>
+                    <div className="flex h-5 items-center">
+                      <Checkbox
+                        onChange={(e) => toggleAmmenityProperty(e, "kitchen")}
+                        checked={checkIfAboutHousePropertyChecked("kitchen", comodity.type)}
+                        name={comodity.type}
+                      />
                     </div>
                   </div>
                 );
@@ -190,14 +183,12 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
                         {t(TypeAmenityLabel[comodity.type])}
                       </p>
                     </div>
-                    <div className="ml-auto flex flex-row items-center rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6 lg:w-10 lg:justify-between">
-                      <div className="flex h-5 items-center">
-                        <Checkbox
-                          onChange={(e) => toggleAmmenityProperty(e, "exterior")}
-                          checked={checkIfAboutHousePropertyChecked("exterior", comodity.type)}
-                          name={comodity.type}
-                        />
-                      </div>
+                    <div className="flex h-5 items-center">
+                      <Checkbox
+                        onChange={(e) => toggleAmmenityProperty(e, "exterior")}
+                        checked={checkIfAboutHousePropertyChecked("exterior", comodity.type)}
+                        name={comodity.type}
+                      />
                     </div>
                   </div>
                 );
