@@ -78,7 +78,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={7} text={t("advertisements:add_addvert.step", {count: 8})} />
+            <StepIcon stepNumber={7} text={t("advertisements:add_advert.step", {count: 8})} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 8,
@@ -87,7 +87,7 @@ export default function Stepper() {
             ></div>
 
             {/* PASSO */}
-            <StepIcon stepNumber={8} text={t("advertisements:add_addvert.step", {count: 9})} />
+            <StepIcon stepNumber={8} text={t("advertisements:add_advert.step", {count: 9})} />
             <div
               className={classNames("flex-auto border-t-2", {
                 "border-terciary-500": currentStep < 9,
