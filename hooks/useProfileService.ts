@@ -145,7 +145,7 @@ const useProfileService = () => {
 
   const makeNotificationSeen = async (notificationId: string) => {
     const {data, error} = await supabaseClient
-      .from(NOTIFICATION_TABLE_NAME)
+      .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
       .update({seen: true})
       .eq(NOTIFICATION_PROPERTIES.ID, notificationId);
 

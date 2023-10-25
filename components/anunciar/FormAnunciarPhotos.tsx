@@ -12,10 +12,6 @@ const FormAnunciarPhotos = () => {
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
   const [coverImages, setCoverImages] = useState<File[]>([]);
-  const [bedroomImages, setBedroomImages] = useState<File[]>([]);
-  const [bathroomImages, setBathroomImages] = useState<File[]>([]);
-  const [livingRoomImages, setLivingRoomImages] = useState<File[]>([]);
-  const [kitchenImages, setKitchenImages] = useState<File[]>([]);
   const [otherImages, setOtherImages] = useState<File[]>([]);
 
   // Code to remove from one array and move to another
@@ -40,22 +36,6 @@ const FormAnunciarPhotos = () => {
         setCoverImages(newFiles);
         removeFromArrays(container, newFiles);
         break;
-      case "bedroom":
-        setBedroomImages((prevImages) => [...prevImages, ...newFiles]);
-        removeFromArrays(container, newFiles);
-        break;
-      case "bathroom":
-        setBathroomImages((prevImages) => [...prevImages, ...newFiles]);
-        removeFromArrays(container, newFiles);
-        break;
-      case "livingroom":
-        setLivingRoomImages((prevImages) => [...prevImages, ...newFiles]);
-        removeFromArrays(container, newFiles);
-        break;
-      case "kitchen":
-        setKitchenImages((prevImages) => [...prevImages, ...newFiles]);
-        removeFromArrays(container, newFiles);
-        break;
       case "other":
         setOtherImages((prevImages) => [...prevImages, ...newFiles]);
         removeFromArrays(container, newFiles);
@@ -72,38 +52,6 @@ const FormAnunciarPhotos = () => {
       )
     );
     } 
-    
-    if (target != 'bedroom') {
-      setBedroomImages((prevImages) =>
-        prevImages.filter(
-          (img) => !files.some((file) => file.name === img.name)
-        )
-      );
-    } 
-
-    if (target != 'bathroom') {
-      setBathroomImages((prevImages) =>
-        prevImages.filter(
-          (img) => !files.some((file) => file.name === img.name)
-        )
-      );
-    } 
-
-    if (target != 'kitchen') {
-      setKitchenImages((prevImages) =>
-        prevImages.filter(
-          (img) => !files.some((file) => file.name === img.name)
-        )
-      );
-    }
-    
-    if (target != 'livingroom') {
-      setLivingRoomImages((prevImages) =>
-        prevImages.filter(
-          (img) => !files.some((file) => file.name === img.name)
-        )
-      );
-    }
 
     if (target != 'other') {
       setOtherImages((prevImages) =>
@@ -122,9 +70,6 @@ const FormAnunciarPhotos = () => {
   const advertisement = useAdvertisement();
   const setAdvertisement = useSetAdvertisement();
 
-  const { files, filesUrl } = useImageFiles();
-  const setImagesInfo = useSetImageFiles();
-
   const nextStep = async (e: React.MouseEvent) => {
     e.preventDefault();
     
@@ -132,22 +77,6 @@ const FormAnunciarPhotos = () => {
     coverImages.forEach(file => {
       newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "main"});
     });
-
-    bedroomImages.forEach(file => {
-      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "bedroom"});
-    });
-
-    bathroomImages.forEach(file => {
-      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "bathroom"});
-    });
-    
-    livingRoomImages.forEach(file => {
-      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "livingroom"});
-    });
-
-    kitchenImages.forEach(file => {
-      newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "kitchen"});
-    })
 
     otherImages.forEach(file => {
       newAdvertisementPhotos.push({"url": URL.createObjectURL(file), zone: "other"})
@@ -180,14 +109,6 @@ const FormAnunciarPhotos = () => {
     switch(arrayName) {
       case "main":
         setCoverImages(currentImages);
-      case "bedroom":
-        setBedroomImages(currentImages);
-      case "bathroom":
-        setBathroomImages(currentImages);
-      case "livingroom":
-        setLivingRoomImages(currentImages);
-      case "kitchen":
-        setKitchenImages(currentImages);
       case "other":
         setOtherImages(currentImages);
     }
@@ -248,98 +169,6 @@ const FormAnunciarPhotos = () => {
             <div
                 className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
                 onClick={(e) => removeImageFromSelection(index, coverImages, "main")}
-              >
-                x
-              </div>
-            <img
-              className="image"
-              src={URL.createObjectURL(file)}
-              alt={`Image ${index}`}
-              id={`${file.name}`}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="drop-container"
-        onDrop={(event) => handleDrop(event, 'bedroom')}
-        onDragOver={(event) => event.preventDefault()}
-      >
-        <h2>{t("advertisements:zones:bedroom")}</h2>
-        {bedroomImages.map((file, index) => (
-          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
-            <div
-                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
-                onClick={(e) => removeImageFromSelection(index, bedroomImages, 'bedroom')}
-              >
-                x
-              </div>
-            <img
-              className="image"
-              src={URL.createObjectURL(file)}
-              alt={`Image ${index}`}
-              id={`${file.name}`}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="drop-container"
-        onDrop={(event) => handleDrop(event, 'bathroom')}
-        onDragOver={(event) => event.preventDefault()}
-      >
-        <h2>{t("advertisements:zones:bathroom")}</h2>
-        {bathroomImages.map((file, index) => (
-          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
-            <div
-                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
-                onClick={(e) => removeImageFromSelection(index, bathroomImages , 'bathroom')}
-              >
-                x
-              </div>
-            <img
-              className="image"
-              src={URL.createObjectURL(file)}
-              alt={`Image ${index}`}
-              id={`${file.name}`}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="drop-container"
-        onDrop={(event) => handleDrop(event, 'livingroom')}
-        onDragOver={(event) => event.preventDefault()}
-      >
-        <h2>{t("advertisements:zones:livingroom")}</h2>
-        {livingRoomImages.map((file, index) => (
-          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
-            <div
-                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
-                onClick={(e) => removeImageFromSelection(index, livingRoomImages , 'livingroom')}
-              >
-                x
-              </div>
-            <img
-              className="image"
-              src={URL.createObjectURL(file)}
-              alt={`Image ${index}`}
-              id={`${file.name}`}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="drop-container"
-        onDrop={(event) => handleDrop(event, 'kitchen')}
-        onDragOver={(event) => event.preventDefault()}
-      >
-        <h2>{t("advertisements:zones:kitchen")}</h2>
-        {kitchenImages.map((file, index) => (
-          <div className="image-box relative h-28 w-full lg:h-28 lg:w-28" key={index}>
-            <div
-                className="absolute right-1 top-1 z-50 rounded-full border border-primary-500 bg-primary-500 p-1 font-bold text-red-600"
-                onClick={(e) => removeImageFromSelection(index, kitchenImages , 'kitchen')}
               >
                 x
               </div>
