@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { differenceInMonths } from "date-fns";
+import { addMonths, differenceInMonths, isSameMonth } from "date-fns";
 
 import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdvertisementProvider";
 import {
@@ -155,6 +155,10 @@ export const RoomPagamento = () => {
     return (month_rent + (advertisement.extra_per_host * (guests - 1))) * (1 - trimester_discount / 100);
   };
 
+  const setAdvertDatesOpenModal = () => {
+    setIsOpen(true);
+  }
+
   return (
     <>
       <form className="w-full" id="reserva" onSubmit={handleSubmit(makeReservation)}>
@@ -227,7 +231,11 @@ export const RoomPagamento = () => {
           <div className="flex flex-row justify-between">
             <div
               className="mb-7 cursor-pointer text-[#8A8A8A] underline underline-offset-1"
-              onClick={(e) => setIsOpen(true)}
+              onClick={() => {
+                setSearchInfoProperty(SearchFields.START_DATE, startDate);
+                setSearchInfoProperty(SearchFields.END_DATE, endDate);
+                setAdvertDatesOpenModal();
+              }}
             >
               {t("payment_details")}
             </div>
@@ -256,7 +264,7 @@ export const RoomPagamento = () => {
 
             <div
               className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
-              onClick={(e) => setIsOpen(true)}
+              onClick={() => setIsOpen(true)}
             >
               {t("payment_details")}
             </div>

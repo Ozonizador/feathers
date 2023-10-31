@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { ImPhone } from "react-icons/im";
 import { GrMail } from "react-icons/gr";
 import { VscTriangleDown } from "react-icons/vsc";
@@ -53,8 +53,8 @@ export const Navbar = () => {
   const { userAppMode, messagesNumber, notificationNumber } = useGetUserType();
   const setWebUserMode = useToggleAppUserMode();
 
-  const logout = () => {
-    supabaseClient.auth.signOut();
+  const logout = async () => {
+    await supabaseClient.auth.signOut();
     router.push(HOME_URL);
   };
 
@@ -66,6 +66,13 @@ export const Navbar = () => {
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
+
+  useEffect(() => {
+    // @ts-ignore
+    if (profile != null && profile[0].type === "LANDLORD") {
+      toggleUserMode();
+    };
+  }, []);
 
   return (
     <header className="px-5 lg:px-0">

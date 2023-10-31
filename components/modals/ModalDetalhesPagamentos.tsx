@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode } from "react";
+import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import { useModaisAnuncioDetalhes, useSetModalDetalhesPagamento } from "../../context/ModalShowProvider";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -6,11 +6,20 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useGetSingleAdvertisement } from "../../context/ShowingSingleAdvertisementProvider";
 import { useGetUserDates } from "../../context/MainProvider";
 import differenceInMonths from "date-fns/differenceInMonths";
+import addMonths from "date-fns/addMonths";
 import { Trans, useTranslation } from "next-i18next";
+import { getDate, getDaysInMonth, isLastDayOfMonth } from "date-fns";
 
 interface formatOpts {
   monthsAhead?: number;
 }
+
+interface MonthPrice {
+  month: string;
+  price: number;
+}
+
+
 
 /* PAGINA 7 DO XD */
 
@@ -20,6 +29,8 @@ const ModalDetalhesPagamento = () => {
   let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
   let setIsOpen = useSetModalDetalhesPagamento();
+  const [checkedDates, setCheckedDates] = useState<Boolean>(false);
+  const [months, setMonths] = useState<Array<MonthPrice>>([]);
 
   const formatOnlyMonth = (date: Date, opts: formatOpts) => {
     if (!date) return "";
@@ -35,6 +46,90 @@ const ModalDetalhesPagamento = () => {
     });
   };
 
+  const closeModal = () => {
+    setCheckedDates(false);
+    setIsOpen(false);
+  };
+
+  const getMonths = () => {
+    if (!checkedDates) {
+      setCheckedDates(true);
+
+      const monthDiference = differenceInMonths(endDate, selectedDate);
+      if (!advertisement) return 0;
+      const { month_rent } = advertisement;
+
+      const totalDaysOfMonth = getDaysInMonth(addMonths(selectedDate, 1));
+      const getDaysTillEndMonth = totalDaysOfMonth - getDate(selectedDate);
+
+      let arrayOfMonths: any[] = [];
+      const pricePerDay = month_rent / 30;
+
+      console.log(getDaysTillEndMonth);
+
+      if (getDaysTillEndMonth > 0) {
+        if (getDaysTillEndMonth >= 30) {
+          let selectedMonth = addMonths(selectedDate, 1);
+          const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+          arrayOfMonths.push({ month: monthLong, price: month_rent });
+        } else {
+          let priceAdjustment = pricePerDay * getDaysTillEndMonth;
+          arrayOfMonths.push({ Ajuste: priceAdjustment });
+        }
+
+        if (isLastDayOfMonth(endDate)) {
+          while (arrayOfMonths.length < monthDiference) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: month_rent });
+          }
+        } else {
+          console.log(monthDiference);
+          //TODO: Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
+          while (arrayOfMonths.length < monthDiference - 1) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: month_rent });
+          }
+
+          let endDay = getDate(endDate);
+
+          arrayOfMonths.push({
+            month: endDate.toLocaleString("default", { month: "long" }),
+            price: endDay * pricePerDay,
+          });
+        }
+
+        setMonths(arrayOfMonths);
+      } else {
+        if (isLastDayOfMonth(endDate)) {
+          while (arrayOfMonths.length < monthDiference) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: month_rent });
+          }
+        } else {
+          // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
+          while (arrayOfMonths.length < monthDiference - 1) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: month_rent });
+
+            let endDay = getDate(endDate);
+
+            arrayOfMonths.push({
+              month: endDate.toLocaleString("default", { month: "long" }),
+              price: endDay * pricePerDay,
+            });
+          }
+        }
+        setMonths(arrayOfMonths);
+      }
+
+      console.log(arrayOfMonths);
+    }
+  };
+
   const setAdvertPrice = () => {
     if (!advertisement) return 0;
     const { month_rent, semester_discount, trimester_discount } = advertisement;
@@ -45,10 +140,12 @@ const ModalDetalhesPagamento = () => {
     return month_rent * (1 - trimester_discount / 100);
   };
 
+  getMonths();
+  
   return (
     <>
       <Transition appear show={detailsModalOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-900" onClose={() => setIsOpen(false)}>
+        <Dialog as="div" className="relative z-900" onClose={() => closeModal()}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -82,11 +179,20 @@ const ModalDetalhesPagamento = () => {
 
                   <div className="mt-2">
                     <div className="px-8">
-                      <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">Via Unihosts</div>
+                      <div className="padding-2 my-6 text-xl font-bold text-primary-500 lg:text-2xl">Via Unihosts</div>
                       {/* Unihosts */}
                       <FeathersAccordion>
                         <div className="flex">
                           <div className="font-bold">{t("first_rent")}</div>
+                          <div className="relative my-auto ml-1">
+                            <AiOutlineInfoCircle className="peer my-auto" size={14} />
+                            <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
+                              <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
+                                <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
+                                <p>{t("first_rent_description")}</p>
+                              </div>
+                            </div>
+                          </div>
                           <div className="ml-auto flex">
                             <div className="font-bold">{setAdvertPrice()}€</div>
                             <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
@@ -101,15 +207,6 @@ const ModalDetalhesPagamento = () => {
                               }}
                             />
                           </p>
-                          <div className="relative my-auto">
-                            <AiOutlineInfoCircle className="peer my-auto" size={14} />
-                            <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
-                              <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
-                                <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
-                                <p>{t("first_rent_description")}</p>
-                              </div>
-                            </div>
-                          </div>
                         </div>
                       </FeathersAccordion>
                       {/* SENHORIO */}
@@ -147,13 +244,11 @@ const ModalDetalhesPagamento = () => {
                           </div>
                         </div>
                         <div className="mt-2 flex flex-col gap-1">
-                          {[1, 2, 3, 4].map((value, index) => {
+                          {checkedDates && months.map((value, index) => {
                             return (
                               <div className="flex text-sm text-neutral-500" key={index}>
-                                <div>
-                                  {t("rent_of_month", { month: formatOnlyMonth(selectedDate, { monthsAhead: value }) })}
-                                </div>
-                                <div className="ml-auto mr-6">{setAdvertPrice()}€</div>
+                                <div>{t("rent_of_month", { month: value.month })}</div>
+                                <div className="ml-auto mr-6">{value.price}€</div>
                               </div>
                             );
                           })}
