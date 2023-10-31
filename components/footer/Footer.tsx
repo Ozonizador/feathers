@@ -11,6 +11,8 @@ import {
   FAQS_URL,
   HOME_URL,
   LOGIN_URL,
+  POLICIES,
+  TERMS,
 } from "../../models/paths";
 import { useTranslation } from "next-i18next";
 
@@ -41,12 +43,12 @@ const Footer = () => {
               </Link>
             </div>
             <div className="py-1">
-              <Link href={HOME_URL} className="fs-300 clr-white">
+              <Link href={TERMS} className="fs-300 clr-white">
                 {t("footer:terms")}
               </Link>
             </div>
             <div className="py-1">
-              <Link href={HOME_URL} className="fs-300 clr-white">
+              <Link href={POLICIES} className="fs-300 clr-white">
                 {t("footer:cookie_policy")}
               </Link>
             </div>

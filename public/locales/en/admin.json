@@ -64,7 +64,7 @@
     "current_pw": "Current password",
     "new_pw": "Type new password",
     "new_pw_again": "Type new password again",
-    "receive_notifications_again": "Receive notifications from Unihost"
+    "receive_notifications_again": "Receive notifications from Unihosts"
   },
   "descriptions": {
     "general": "Provide details about yourself and how we can contact you.",

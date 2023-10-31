@@ -6,6 +6,8 @@ export const CONTACTOS_URL = "/contactos" as const;
 export const ABOUT_US_URL = "/aboutus" as const;
 export const FAQS_URL = "/faqs" as const;
 export const PROCURAR_ADVERT_URL = "/procurar" as const;
+export const TERMS = "/terms" as const;
+export const POLICIES = "/policies" as const;
 
 // AUTH
 export const REGISTER_URL = "/auth/register" as const;
