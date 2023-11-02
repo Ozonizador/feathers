@@ -3803,7 +3803,8 @@ export interface Database {
         | "REJECTED"
         | "CHANGE_REQUESTED"
         | "CHANGE_ACCEPTED"
-        | "CHANGE_REJECTED";
+        | "CHANGE_REJECTED"
+        | "EXPIRED";
       staysstatus: "OK" | "CHANGED";
       type_host: "PROFISSIONAL" | "PARTICULAR";
       TypeRoom: "ENTIRE_SPACE" | "SHARED_ROOM" | "PRIVATE_ROOM";

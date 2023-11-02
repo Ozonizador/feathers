@@ -24,6 +24,8 @@ import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs"
 import { UNIDESK_URL } from "../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { differenceInCalendarDays, parseISO } from "date-fns";
+import { update } from "lodash";
 
 {
   /* page 59 XD */
@@ -67,7 +69,7 @@ const CaixaEntrada = () => {
 
       setAllMessages(messages as unknown as MessageWithProfile[]);
     }
-  }
+  };
 
   const getMessagesFromConversation = useCallback(async () => {
     if (currentConversation) {
@@ -78,9 +80,24 @@ const CaixaEntrada = () => {
     }
   }, [currentConversation]);
 
+  const getConversationsTests = async () => {
+    for (let conversation of conversations) {
+      if (conversation.reservation.status == "REQUESTED" || conversation.reservation.status == "CHANGE_REQUESTED") {
+        let updateDate = parseISO(conversation.reservation.updated_at);
+        let date = new Date();
+
+        if (differenceInCalendarDays(date, updateDate) > 2) {
+          const {data, error} = await acceptReservation(conversation.reservation_id, "EXPIRED");
+          console.log(error);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     getMessagesFromConversation();
-  }, [getMessagesFromConversation]);
+    getConversationsTests();
+  }, [getMessagesFromConversation, getConversationsTests]);
 
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
@@ -145,7 +162,7 @@ const CaixaEntrada = () => {
                 <div className="flex flex-row">
                   <div className="flex w-96 flex-col border-r border-terciary-500">
                     {conversations.map((conversation, index) => {
-                      if(allMessages.length < 1) {
+                      if (allMessages.length < 1) {
                         getAllMessages();
                       }
                       return (
@@ -156,9 +173,13 @@ const CaixaEntrada = () => {
                             "bg-primary-100": currentConversation?.id === conversation.id,
                           })}
                         >
-                          <CaixaCard profile={getOtherProfile(conversation)} messagerProfile={conversation.tenant}
+                          <CaixaCard
+                            profile={getOtherProfile(conversation)}
+                            messagerProfile={conversation.tenant}
                             // @ts-ignore
-                            reservation={conversation.reservation} messages={allMessages[index]}/>
+                            reservation={conversation.reservation}
+                            messages={allMessages[index]}
+                          />
                         </div>
                       );
                     })}
@@ -271,7 +292,7 @@ const CaixaEntrada = () => {
             <div>
               {currentConversation &&
                 conversations?.map((conversation, index) => {
-                  if(allMessages.length < 1) {
+                  if (allMessages.length < 1) {
                     getAllMessages();
                   }
                   return (
@@ -282,9 +303,13 @@ const CaixaEntrada = () => {
                         "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
                       })}
                     >
-                      <CaixaCard profile={getOtherProfile(conversation)} messagerProfile={conversation.tenant}
+                      <CaixaCard
+                        profile={getOtherProfile(conversation)}
+                        messagerProfile={conversation.tenant}
                         // @ts-ignore
-                        reservation={conversation.reservation} messages={allMessages[index]}/>
+                        reservation={conversation.reservation}
+                        messages={allMessages[index]}
+                      />
                     </div>
                   );
                 })}

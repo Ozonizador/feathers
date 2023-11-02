@@ -20,7 +20,7 @@ const useReservationService = () => {
 
     return { data, error };
   };
-
+  
   return { acceptReservation };
 };
 

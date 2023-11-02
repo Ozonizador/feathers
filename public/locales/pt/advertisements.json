@@ -55,7 +55,8 @@
     "rejected": "Reserva Rejeitada",
     "change_accepted": "Booking Amendment Accepted",
     "change_requested": "Booking Amendment Requested",
-    "change_rejected": "Booking Amendment Rejected"
+    "change_rejected": "Booking Amendment Rejected",
+    "expired": "Reserva Expirou"
   },
   "price_one": "Preço",
   "price_other": "Preços",

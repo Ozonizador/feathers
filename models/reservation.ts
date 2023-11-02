@@ -34,6 +34,7 @@ export enum ReservationStatusLabel {
   CHANGE_ACCEPTED = "advertisements:reservation_status.change_accepted",
   CHANGE_REQUESTED = "advertisements:reservation_status.change_requested",
   CHANGE_REJECTED = "advertisements:reservation_status.change_rejected",
+  EXPIRED = "advertisements:reservation_status.expired",
 }
 
 export type ReservationWithReportsReviews = Reservation & {
