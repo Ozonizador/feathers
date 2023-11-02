@@ -88,7 +88,6 @@ const CaixaEntrada = () => {
 
         if (differenceInCalendarDays(date, updateDate) > 2) {
           const {data, error} = await acceptReservation(conversation.reservation_id, "EXPIRED");
-          console.log(error);
         }
       }
     }
@@ -178,6 +177,7 @@ const CaixaEntrada = () => {
                             messagerProfile={conversation.tenant}
                             // @ts-ignore
                             reservation={conversation.reservation}
+                            // @ts-ignore
                             messages={allMessages[index]}
                           />
                         </div>
@@ -308,6 +308,7 @@ const CaixaEntrada = () => {
                         messagerProfile={conversation.tenant}
                         // @ts-ignore
                         reservation={conversation.reservation}
+                        // @ts-ignore
                         messages={allMessages[index]}
                       />
                     </div>
