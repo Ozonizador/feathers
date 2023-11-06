@@ -49,6 +49,21 @@
   }
 }
 
+.advert-image {
+  transition: 1s ease;
+}
+.advert-image-box:hover {
+  .advert-image {
+    background-color: black !important;
+    opacity: 0.7;
+    transition: 1s ease;
+  }
+ 
+  .plus-icon {
+    z-index: 2;
+  }
+}
+
 .bg-hero-unidesk {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.671)), url(/images/bed14.jpg);
   background-size: cover;

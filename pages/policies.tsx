@@ -3,7 +3,7 @@ import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
-const Terms = () => {
+const Policies = () => {
   const { t } = useTranslation(["contacts", "common"]);
 
   return (
@@ -26,7 +26,7 @@ const Terms = () => {
   );
 };
 
-export default Terms;
+export default Policies;
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {

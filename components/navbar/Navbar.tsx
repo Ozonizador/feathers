@@ -71,7 +71,7 @@ export const Navbar = () => {
     // @ts-ignore
     if (profile != null && profile[0].type === "LANDLORD") {
       toggleUserMode();
-    };
+    }
   }, []);
 
   return (
@@ -144,11 +144,7 @@ export const Navbar = () => {
                       checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  {userAppMode === "TENANT" ? (
-                    <Link href="/">{t("navbar:home")}</Link>
-                  ) : (
-                    <Link href={UNIDESK_URL}>Unidesk</Link>
-                  )}
+                  <Link href="/">{t("navbar:home")}</Link>
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
@@ -362,7 +358,7 @@ export const Navbar = () => {
                             {userAppMode == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={HOME_URL}>
                                     {t("uni-desk")}
                                   </MyLink>
                                 </Menu.Item>

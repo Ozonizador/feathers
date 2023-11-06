@@ -1,0 +1,14 @@
+{
+    "title": "Deactivate Account",
+    "description": "What made you deactivate?",
+    "reason_1": "I have doubts about safety and/or privacy.",
+    "reason_2": "I have no more necessity to host/rent",
+    "reason_3": "I have difficulties using the platform.",
+    "other": "Other reason.",
+    "continue": "Continue",
+    "selectedError": "Please choose one of the options.",
+    "contact": "Contact us at:",
+    "warning_1": "The profile and advertisements associated to this account will disappear.",
+    "warning_2": "Won't be able to access account information or past reservations.",
+    "previous": "Previous"
+}

@@ -1,5 +1,6 @@
 {
   "configurations": "Configurações",
+  "delete_account": "Precisa de desativar a sua conta?",
   "change_password": "Alterar password",
   "recover_password": "Recuperar password",
   "agree_terms": "Ao registar-se está a concordar com os nossos <lnk1>{{terms}}</lnk1> and <lnk2>{{privacy}}</lnk2>.",

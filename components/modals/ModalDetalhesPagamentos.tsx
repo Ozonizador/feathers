@@ -140,7 +140,10 @@ const ModalDetalhesPagamento = () => {
     return month_rent * (1 - trimester_discount / 100);
   };
 
-  getMonths();
+  useEffect(()=> {
+    getMonths();
+
+  }, [getMonths])
   
   return (
     <>

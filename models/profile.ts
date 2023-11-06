@@ -4,8 +4,10 @@ import _ from "lodash";
 
 export const PROFILE_TABLE_NAME = "profiles" as const;
 export const AVATAR_STORAGE_NAME = "avatars" as const;
+export const DEACTIVATE_TABLE_NAME = "deactivation" as const;
 
 export type ProfilesResponse = Database["public"]["Tables"]["profiles"];
+export type DeactivationResponse = Database["public"]["Tables"]["deactivation"];
 export type Profile = ProfilesResponse["Row"];
 export type UserTypes = Database["public"]["Enums"]["profiletype"];
 
@@ -25,6 +27,12 @@ export const PROFILE_COLUMNS = {
   DESCRIPTION: "description",
   PHONE: "phone",
   SLUG: "slug",
+} as const;
+
+
+export const DEACTIVATION_COLUMNS = {
+  ID: "id",
+  REASON: "reason"
 } as const;
 
 export const spokenLanguages = ["portuguese", "spanish", "english", "italian", "greek", "french", "german", "finnish"];

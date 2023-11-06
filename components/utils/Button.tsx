@@ -1,6 +1,7 @@
 import { tw, variantProps } from "classname-variants/react";
 import dynamic from "next/dynamic";
 import React, { ReactNode } from "react";
+import { toast } from "react-toastify";
 
 interface ButtonProps {
   onClick?: (e: React.MouseEvent) => void;
@@ -8,7 +9,7 @@ interface ButtonProps {
   children: ReactNode;
   loading?: boolean;
   disabled?: boolean;
-  variant?: "primary" | "facebook" | "gmail" | "informative";
+  variant?: "primary" | "facebook" | "gmail" | "informative" | "disabled";
   rounded?: "xl" | "full" | "none";
   padding?: "sm" | "md" | "lg";
   [x: string]: any;
@@ -26,6 +27,7 @@ const buttonProps = variantProps({
       gmail: tw`bg-socials-gmail`,
       primary: tw`bg-primary-500 text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg`,
       informative: tw`text-color border border-black`,
+      disabled: tw`bg-primary-300 text-white shadow-md`
     },
     rounded: {
       none: tw`rounded-none`,

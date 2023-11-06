@@ -420,6 +420,24 @@ export interface Database {
         };
         Relationships: [];
       };
+      deactivation: {
+        Row: {
+          id: string;
+          reason: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          reason: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          reason: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       reports: {
         Row: {
           created_at: string;

@@ -36,7 +36,6 @@ const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
       <ModalAnuncioInfoProvider>
         <ModalGerarReferenciaProvider>
           <>
-            <ModalGerarReferencia />
             <ModalReviewsAdvert />
             <ModalDetalhesPagamento />
             <div className="container mx-auto px-2 md:px-20">

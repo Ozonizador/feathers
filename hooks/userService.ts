@@ -1,4 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { DEACTIVATE_TABLE_NAME, DEACTIVATION_COLUMNS, DeactivationResponse } from "../models/profile";
 
 const useUserService = () => {
   const supabaseClient = useSupabaseClient();
@@ -41,7 +42,7 @@ const useUserService = () => {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
     });
-    
+
     return { error };
   }
 
@@ -70,6 +71,16 @@ const useUserService = () => {
     return { error };
   }
 
+  async function deleteUserAccount(reason: string) {
+    const { error } = await supabaseClient
+      .from<"deactivation", DeactivationResponse>(DEACTIVATE_TABLE_NAME)
+      .insert({ reason });
+
+    if (error) {
+      return error;
+    }
+  }
+
   return {
     loginWithFacebook,
     recoverPasswordViaEmail,
@@ -79,6 +90,7 @@ const useUserService = () => {
     register,
     login,
     updateUserPassword,
+    deleteUserAccount
   };
 };
 

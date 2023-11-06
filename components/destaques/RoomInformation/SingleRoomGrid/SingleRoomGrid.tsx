@@ -5,6 +5,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { number } from "zod";
+import { BiPlusCircle } from "react-icons/bi";
 
 export const SingleRoomGrid = () => {
   const advertisement = useGetSingleAdvertisement();
@@ -86,7 +87,8 @@ export const SingleRoomGrid = () => {
               <></>
             )}
           </div>
-          <div className="relative col-span-2">
+          <div className="relative col-span-2 advert-image-box">
+            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black"/>
             {advertisement.photos[4] ? (
               <Image
                 src={advertisement.photos[4].url}
@@ -94,6 +96,7 @@ export const SingleRoomGrid = () => {
                 fill
                 style={{ objectFit: "cover" }}
                 onClick={() => handelClick(4)}
+                className="advert-image"
               />
             ) : (
               <></>

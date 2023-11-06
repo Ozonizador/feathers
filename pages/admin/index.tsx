@@ -1,7 +1,7 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
-import { GENERAL_ADMIN_URL, PAYMENTS_URL, CONFIGURATIONS_URL } from "../../models/paths";
+import { GENERAL_ADMIN_URL, PAYMENTS_URL, CONFIGURATIONS_URL, DEACTIVATE_URL } from "../../models/paths";
 import Image from "next/image";
 /* Images */
 import personalInformationImage from "../../public/images/mainmenu_1.png";
@@ -64,6 +64,12 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </Link>
+        </div>
+
+        <div>
+          <Link href={DEACTIVATE_URL}>
+            <div>{t("admin:delete_account")}</div>
           </Link>
         </div>
       </div>

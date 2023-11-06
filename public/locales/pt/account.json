@@ -1,0 +1,13 @@
+{
+    "title": "Desativar Conta",
+    "description": "O que o lveou a desativar?",
+    "reason_1": "Tenho dúvidas sobre segurança ou privacidade.",
+    "reason_2": "Não tenho mais necessidade de hospedar/acomodar-me.",
+    "reason_3": "Tive dificuldades na utilização da plataforma",
+    "other": "Outro.",
+    "continue": "Continuar",
+    "selectedError": "Por favor escolha uma das opções",
+    "contact": "contacte-nos:",
+    "warning_1": "O perfil e anúncios associados irão desaparecer.",
+    "warning_2": "Não vai poder ter acesso às informações de conta nem a reservas passadas."
+}
