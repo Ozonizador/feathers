@@ -54,13 +54,33 @@
 }
 .advert-image-box:hover {
   .advert-image {
-    background-color: black !important;
     opacity: 0.7;
     transition: 1s ease;
   }
- 
+}
+
+.plus-icon {
+  opacity: 1;
+}
+
+.col-span-2 {
   .plus-icon {
-    z-index: 2;
+    top: 45%;
+    left: 45%;
+  }
+}
+
+.col-span-4 {
+  .plus-icon {
+    top: 45%;
+    left: 47%;
+  }
+}
+
+.col-span-6 {
+  .plus-icon {
+    top: 47%;
+    left: 47%;
   }
 }
 

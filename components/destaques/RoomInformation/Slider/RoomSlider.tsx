@@ -4,6 +4,7 @@ import { useGetSingleAdvertisement } from "../../../../context/ShowingSingleAdve
 import { houseAmenities } from "../../../../helpers/advertisementHelper";
 import { TypeAmenity, TypeAmenityLabel } from "../../../../models/advertisement";
 import { useTranslation } from "next-i18next";
+import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 
 export default function RoomSlider() {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ export default function RoomSlider() {
   const Comodities = ({}) =>
     useMemo(() => {
       return (
-        <Carousel>
+        <Carousel leftControl={<BiLeftArrowAlt/>} rightControl={<BiRightArrowAlt/>}>
           <div className="flex flex-col gap-8">
             <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">
               {t("advertisements:zones.general")}

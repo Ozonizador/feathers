@@ -22,5 +22,6 @@
     "updated_password": "Password alterada",
     "register_done": "Registo Bem Sucedido",
     "reservation_requested": "Reserva criada"
-  }
+  },
+  "default_message": "A sua reserva está a ser analisada"
 }

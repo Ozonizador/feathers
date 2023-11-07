@@ -116,12 +116,12 @@ export const RoomPagamento = () => {
 
     // get the reservation
     await addReservation.mutateAsync(newReservation, {
-      onSuccess: (info) => {
+      onSuccess: async (info) => {
         const { data, error } = info;
         if (error || !data) return toast.error(t("messages:errors.making_reservation"));
 
         setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
-        setModalGerarRef(true);
+        setModalGerarRef(false);
         toast.success(t("messages:success.reservation_requested"));
       },
       onError: (error) => {
@@ -150,14 +150,15 @@ export const RoomPagamento = () => {
     if (!advertisement) return 0;
 
     const advertDiferenceInMonths = differenceInMonths(endDate, startDate);
-    if (advertDiferenceInMonths < 3) return month_rent + (advertisement.extra_per_host * (guests - 1));
-    if (advertDiferenceInMonths >= 6) return (month_rent + (advertisement.extra_per_host * (guests - 1))) * (1 - semester_discount / 100);
-    return (month_rent + (advertisement.extra_per_host * (guests - 1))) * (1 - trimester_discount / 100);
+    if (advertDiferenceInMonths < 3) return month_rent + advertisement.extra_per_host * (guests - 1);
+    if (advertDiferenceInMonths >= 6)
+      return (month_rent + advertisement.extra_per_host * (guests - 1)) * (1 - semester_discount / 100);
+    return (month_rent + advertisement.extra_per_host * (guests - 1)) * (1 - trimester_discount / 100);
   };
 
   const setAdvertDatesOpenModal = () => {
     setIsOpen(true);
-  }
+  };
 
   return (
     <>
@@ -209,8 +210,16 @@ export const RoomPagamento = () => {
                 control={control}
                 name={"number_guests"}
                 render={({ field: { onChange } }) => {
-                  return <Input id="Hóspedes" type="number" value={guests || 1} 
-                    onChange={(e)=>setGuestsNumber(e.target.value)} min={1} max={advertisement!.beds * 2}/>;
+                  return (
+                    <Input
+                      id="Hóspedes"
+                      type="number"
+                      value={guests || 1}
+                      onChange={(e) => setGuestsNumber(e.target.value)}
+                      min={1}
+                      max={advertisement!.beds * 2}
+                    />
+                  );
                 }}
               ></Controller>
             </div>

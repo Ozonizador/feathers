@@ -22,5 +22,6 @@
     "updated_password": "Password changed",
     "register_done": "Registration Successful",
     "reservation_requested": "Reservation created"
-  }
+  },
+  "default_message": "The host is reviewing the reservation"
 }

@@ -35,7 +35,8 @@ export const SingleRoomGrid = () => {
       )}
       {advertisement?.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
-          <div className="relative col-span-6 row-span-2 h-96">
+          <div className="relative col-span-6 row-span-2 h-96 advert-image-box">
+          <BiPlusCircle size={30} color="white" className="plus-icon relative bg-black rounded-full"/>
             {advertisement.photos[0] ? (
               <Image
                 src={advertisement.photos[0].url}
@@ -43,12 +44,14 @@ export const SingleRoomGrid = () => {
                 fill
                 style={{ objectFit: "cover" }}
                 onClick={() => handelClick(0)}
+                className="advert-image"
               />
             ) : (
               <></>
             )}
           </div>
-          <div className="relative col-span-2">
+          <div className="relative col-span-2 advert-image-box">
+          <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black rounded-full"/>
             {advertisement.photos[1] ? (
               <Image
                 src={advertisement.photos[1].url}
@@ -56,12 +59,14 @@ export const SingleRoomGrid = () => {
                 fill
                 style={{ objectFit: "cover" }}
                 onClick={() => handelClick(1)}
+                className="advert-image"
               />
             ) : (
               <></>
             )}
           </div>
-          <div className="relative col-span-4">
+          <div className="relative col-span-4 advert-image-box">
+          <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black rounded-full"/>
             {advertisement.photos[2] ? (
               <Image
                 src={advertisement.photos[2].url}
@@ -69,12 +74,14 @@ export const SingleRoomGrid = () => {
                 fill
                 style={{ objectFit: "cover" }}
                 onClick={() => handelClick(2)}
+                className="advert-image"
               />
             ) : (
               <></>
             )}
           </div>
-          <div className="relative col-span-4">
+          <div className="relative col-span-4 advert-image-box">
+          <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black rounded-full"/>
             {advertisement.photos[3] ? (
               <Image
                 src={advertisement.photos[3].url}
@@ -82,13 +89,14 @@ export const SingleRoomGrid = () => {
                 fill
                 style={{ objectFit: "cover" }}
                 onClick={() => handelClick(3)}
+                className="advert-image"
               />
             ) : (
               <></>
             )}
           </div>
           <div className="relative col-span-2 advert-image-box">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black"/>
+            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 bg-black rounded-full"/>
             {advertisement.photos[4] ? (
               <Image
                 src={advertisement.photos[4].url}

@@ -65,7 +65,7 @@ const ModalDetalhesPagamento = () => {
       let arrayOfMonths: any[] = [];
       const pricePerDay = month_rent / 30;
 
-      console.log(getDaysTillEndMonth);
+      console.log(getDaysTillEndMonth, "days till end");
 
       if (getDaysTillEndMonth > 0) {
         if (getDaysTillEndMonth >= 30) {
@@ -74,7 +74,7 @@ const ModalDetalhesPagamento = () => {
           arrayOfMonths.push({ month: monthLong, price: month_rent });
         } else {
           let priceAdjustment = pricePerDay * getDaysTillEndMonth;
-          arrayOfMonths.push({ Ajuste: priceAdjustment });
+          arrayOfMonths.push({ month: "Ajuste", price: priceAdjustment });
         }
 
         if (isLastDayOfMonth(endDate)) {
@@ -140,13 +140,13 @@ const ModalDetalhesPagamento = () => {
     return month_rent * (1 - trimester_discount / 100);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     getMonths();
-
-  }, [getMonths])
+  }, [checkedDates, selectedDate, endDate, advertisement]);
   
   return (
     <>
+    {getMonths()}
       <Transition appear show={detailsModalOpen} as={Fragment}>
         <Dialog as="div" className="relative z-900" onClose={() => closeModal()}>
           <Transition.Child
@@ -278,3 +278,5 @@ interface FeathersAccordionProps {
 const FeathersAccordion = ({ children }: FeathersAccordionProps) => {
   return <div className="my-5 w-full rounded-xl border border-primary-500 p-5">{children}</div>;
 };
+
+
