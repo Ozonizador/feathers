@@ -6,6 +6,7 @@ import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
 import RadioBox from "../utils/Radiobox";
 import { useTranslation } from "next-i18next";
+import QuantityInput from "../utils/QuantityInput";
 
 type PricesComponentProps = {
   advertisement: Advertisement;
@@ -74,13 +75,26 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
 
         <div className="flex flex-row lg:items-center">
           <p className="my-auto text-base font-bold lg:w-44">{t("add_advert.owner_lives_property_title")}</p>
+          <Controller
+            name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox onChange={onChange} checked={value} name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY} />
+            )}
+          />
+        </div>
+
+        <div className="flex flex-row lg:items-center">
+          <p className="my-auto text-base font-bold lg:w-44">{t("add_advert.room_count")}</p>
+          <div className="w-1/4">
             <Controller
-              name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
+              name={ADVERTISEMENT_PROPERTIES.ROOMS}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Checkbox onChange={onChange} checked={value} name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY} />
+                <QuantityInput initValue={1} onChange={onChange}></QuantityInput>
               )}
-            />
+            ></Controller>
+          </div>
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row lg:items-center">

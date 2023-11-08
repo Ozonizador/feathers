@@ -102,6 +102,7 @@
     "description_title": "Describe your space simply and concisely.",
     "description_placeholder": "Describe your space in 500 words",
     "owner_lives_property_title": "Do you live on the property?",
+    "room_count": "How many rooms exist?",
     "owner_type": "Type of landlord",
     "private_owner": "Private",
     "profissional_owner": "Profissional",
@@ -126,5 +127,6 @@
   "entity": "Entity:",
   "reference": "Reference:",
   "amount": "Amount:",
-  "cover": "Cover Photo"
+  "cover": "Cover Photo",
+  "house_verified": "Verified House"
 }

@@ -101,6 +101,7 @@
     "description_title": "Descreva o seu espaço de forma simples e concisa.",
     "description_placeholder": "Descreva o seu espaço em 500 palavras",
     "owner_lives_property_title": "Vive na propriedade?",
+    "room_count": "Quantos quartos existem na casa?",
     "owner_type": "Tipo de senhorio",
     "private_owner": "Particular",
     "profissional_owner": "Profissional",
@@ -125,5 +126,6 @@
   "entity": "Entidade: {{entity}}",
   "reference": "Referência: {{reference}}",
   "amount": "Valor: {{amount}}",
-  "cover": "Foto de capa"
+  "cover": "Foto de capa",
+  "house_verified": "Verified House"
 }

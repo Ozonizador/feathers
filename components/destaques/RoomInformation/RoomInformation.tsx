@@ -11,8 +11,15 @@ export default function RoomInformation() {
   const { t } = useTranslation();
   return (
     <div>
-      <div className="mb-8 text-5xl font-bold">{advertisement?.title || ""}</div>
-
+      <div className="mb-8 flex font-bold">
+        <div className="text-5xl pr-2">{advertisement?.title || ""} </div>
+        {advertisement?.verified && (
+          <div className="text-md flex h-10 flex-bottom">
+            <p className="text-md">{t("advertisements:house_verified")}</p>
+            <img className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
+          </div>
+        )}
+      </div>
       <div className="my-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <RiUserLine className="text-4xl" />
