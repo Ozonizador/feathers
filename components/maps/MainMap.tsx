@@ -60,9 +60,6 @@ const MainMap = ({
       {!mapCenter && (
         <div className="flex h-full justify-center self-center">
           <div className="my-auto w-32">
-            <Button onClick={() => requestLocation()} type="button">
-              Add location permissions
-            </Button>
           </div>
         </div>
       )}

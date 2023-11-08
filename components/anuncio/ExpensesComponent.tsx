@@ -26,12 +26,12 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
   return (
     <>
       {containsExpenses() && (
-        <div className="relative mb-2 text-center text-base">
+        <div className="relative mb-2 text-center">
           <div className="flex items-center justify-center gap-2 align-middle" 
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}>
             <div className="group flex items-center relative">
-              <span className="text-xs">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
+              <span className="md:max-md:text-xs lg:text-sm">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
               <BiInfoCircle className="ml-2"/>
             </div>
           </div>
@@ -67,7 +67,7 @@ const RoomUtilitesPopover = ({ expenses}: RoomExpensesPopover) => {
     return t("advertisements:not_included");
   };
   return (
-    <div className={`absolute bottom-0 z-50 bg-white rounded-lg group-hover:block scale-50 -left-28`}>
+    <div className={`absolute bottom-0 z-50 bg-white rounded-lg group-hover:block md:scale-75 2xl:scale-90 -left-28`}>
       <div className="mb-2 mt-3 flex flex-row gap-2 rounded-lg p-1 shadow-2xl lg:p-4">
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
           <FaRegLightbulb className="h-2 w-2 lg:h-12 lg:w-12 lg:p-2" />

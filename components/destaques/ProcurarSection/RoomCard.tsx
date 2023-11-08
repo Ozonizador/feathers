@@ -183,7 +183,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                       {t("advertisements:price_month", { price: advertisement.month_rent })}
                     </h3>
                     <div className="d-flex">
-                      <p className="mt-1 text-xs lg:text-base">
+                      <p className="mt-1 text-xs lg:text-xl">
                         <ExpensesComponent expenses={advertisement.expenses}></ExpensesComponent>
                       </p>
                       <i className="fa-solid fa-circle-info m-1"></i>
