@@ -1,4 +1,4 @@
-import { t } from "i18next";
+import { useTranslation } from "next-i18next";
 import { Database } from "../database.types";
 import _ from "lodash";
 
@@ -51,6 +51,7 @@ export const LanguageLabel = {
 };
 
 export const getSpokenLanguages = () => {
+  const {t} = useTranslation();
   return spokenLanguages.map((language) => {
     const label = LanguageLabel[language as keyof typeof LanguageLabel] || _.capitalize(language);
     return { label: t(label), value: language };

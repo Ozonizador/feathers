@@ -286,7 +286,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                     onChange={(val) => onChange(val.map((c) => c.value))}
                     isMulti
                     options={options}
-                    className="mr-3 flex w-full items-center rounded-xl bg-socials-gmail px-3 py-2 text-primary-500"
+                    className="mr-3 flex w-full items-center border border-gray-200 rounded-xl bg-white-100 px-3 py-2 text-primary-500"
                     styles={customStyles}
                   />
                 );
