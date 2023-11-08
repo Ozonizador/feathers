@@ -33,7 +33,7 @@ const Faqs = () => {
           <h1 className="mt-24 text-center text-6xl font-bold">FAQ</h1>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center cursor-pointer">
           <Toggle selectedValue={selectedFaq} onChange={setSelectedFaq} />
         </div>
 
