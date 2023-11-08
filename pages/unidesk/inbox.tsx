@@ -315,6 +315,7 @@ const CaixaEntrada = () => {
                   );
                 })}
               {currentConversation && (
+                <div className="tests">
                 <MessagesSenderZone
                   messages={messages}
                   sendMessage={sendMessage}
@@ -322,6 +323,7 @@ const CaixaEntrada = () => {
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
                 />
+                </div>
               )}
             </div>
           )}

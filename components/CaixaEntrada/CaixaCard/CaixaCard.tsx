@@ -31,6 +31,10 @@ const CaixaCard = ({ profile, messagerProfile,reservation, messages }: CaixaCard
         return (<h1 className="text-base font-bold text-red-500">
           {t(ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel])}
         </h1>);
+      case "EXPIRED":
+        return (<h1 className="text-base font-bold text-gray-400">
+          {t(ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel])}
+        </h1>);
       case "CHANGE_REQUESTED":
       case "CHANGE_ACCEPTED":
       case "CHANGE_REJECTED":
@@ -38,6 +42,7 @@ const CaixaCard = ({ profile, messagerProfile,reservation, messages }: CaixaCard
         return (<h1 className="text-base font-bold text-yellow-500">
           {t(ReservationStatusLabel[reservation.status as keyof typeof ReservationStatusLabel])}
         </h1>);
+
     }
   };
 
