@@ -8,7 +8,8 @@ import { useGetUserDates } from "../../context/MainProvider";
 import differenceInMonths from "date-fns/differenceInMonths";
 import addMonths from "date-fns/addMonths";
 import { Trans, useTranslation } from "next-i18next";
-import { getDate, getDaysInMonth, isLastDayOfMonth } from "date-fns";
+import { getDate, getDaysInMonth, isLastDayOfMonth, isToday } from "date-fns";
+import { has } from "lodash";
 
 interface formatOpts {
   monthsAhead?: number;
@@ -18,8 +19,6 @@ interface MonthPrice {
   month: string;
   price: number;
 }
-
-
 
 /* PAGINA 7 DO XD */
 
@@ -31,6 +30,7 @@ const ModalDetalhesPagamento = () => {
   let setIsOpen = useSetModalDetalhesPagamento();
   const [checkedDates, setCheckedDates] = useState<Boolean>(false);
   const [months, setMonths] = useState<Array<MonthPrice>>([]);
+  const [ hasRunOnce, setHasRunOnce ] = useState<boolean>(false);
 
   const formatOnlyMonth = (date: Date, opts: formatOpts) => {
     if (!date) return "";
@@ -65,8 +65,6 @@ const ModalDetalhesPagamento = () => {
       let arrayOfMonths: any[] = [];
       const pricePerDay = month_rent / 30;
 
-      console.log(getDaysTillEndMonth, "days till end");
-
       if (getDaysTillEndMonth > 0) {
         if (getDaysTillEndMonth >= 30) {
           let selectedMonth = addMonths(selectedDate, 1);
@@ -84,13 +82,8 @@ const ModalDetalhesPagamento = () => {
             arrayOfMonths.push({ month: monthLong, price: month_rent });
           }
         } else {
-          console.log(monthDiference);
           //TODO: Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
-          while (arrayOfMonths.length < monthDiference - 1) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: month_rent });
-          }
+
 
           let endDay = getDate(endDate);
 
@@ -125,8 +118,6 @@ const ModalDetalhesPagamento = () => {
         }
         setMonths(arrayOfMonths);
       }
-
-      console.log(arrayOfMonths);
     }
   };
 
@@ -141,8 +132,14 @@ const ModalDetalhesPagamento = () => {
   };
 
   useEffect(() => {
-    getMonths();
-  }, [checkedDates, selectedDate, endDate, advertisement]);
+    if (!hasRunOnce) {
+      if (isToday(selectedDate)) {
+        selectedDate = addMonths(selectedDate, advertisement?.months_notif_in_advance as number);
+      }
+      getMonths();
+      setHasRunOnce(true);
+    }
+  }, [checkedDates, selectedDate, endDate, advertisement, months, getMonths, hasRunOnce, setMonths]);
   
   return (
     <>
@@ -247,7 +244,7 @@ const ModalDetalhesPagamento = () => {
                           </div>
                         </div>
                         <div className="mt-2 flex flex-col gap-1">
-                          {checkedDates && months.map((value, index) => {
+                          {checkedDates && hasRunOnce && months.map((value, index) => {
                             return (
                               <div className="flex text-sm text-neutral-500" key={index}>
                                 <div>{t("rent_of_month", { month: value.month })}</div>

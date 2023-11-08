@@ -8,11 +8,12 @@ import DesativarContaPoliciesForm from "../components/desativar/policies";
 
 const DesativarConta = () => {
   const { t } = useTranslation();
+  const currentStep = useCurrentStep();
 
   return (
     <section className="max-width mt-10 px-5">
       <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
-        <div className="text-center text-3xl font-black lg:text-left lg:text-5xl">{t("account:title")}</div>
+        <div className="text-center text-3xl font-black lg:text-left lg:text-5xl">{currentStep == 0 ? t("account:subtitle") : t("account:title")}</div>
       </div>
       <div className="text-md lg:text-md mt-4 text-center font-black lg:text-left"></div>
       <DesativarProvider>

@@ -24,6 +24,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const ESTADIA_MINIMA = [
+  { value: 2 },
   { value: 3 },
   { value: 4 },
   { value: 5 },
