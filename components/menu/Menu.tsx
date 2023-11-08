@@ -10,7 +10,7 @@ type MenuProps = {
 };
 
 const Menu = ({ children }: MenuProps) => {
-  return <div className="flex w-full flex-col gap-1 rounded-2xl bg-primary-50 p-4 lg:w-full">{children}</div>;
+  return <div className="flex w-full flex-col gap-1 rounded-2xl bg-primary-200 p-4 lg:w-full">{children}</div>;
 };
 
 type MenuOptionProps = {
