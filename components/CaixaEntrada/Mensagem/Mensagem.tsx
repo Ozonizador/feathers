@@ -16,8 +16,10 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
     <>
       <div
         className={classNames("ml-2 flex", {
-          "justify-end": message.profile_id === currentUser?.id,
-          "justify-start": message.profile_id !== currentUser?.id,
+          // @ts-ignore
+          "justify-end": message.profile_id === currentUser[0]?.id,
+          // @ts-ignore
+          "justify-start": message.profile_id !== currentUser[0]?.id,
         })}
       >
         <div className="w-1/2">
@@ -25,8 +27,10 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
             {previousMessage?.profile_id !== message.profile_id && (
               <div
                 className={classNames("flex w-full flex-row align-middle", {
-                  "mr-2 justify-end": message.profile_id === currentUser?.id,
-                  "ml-2 justify-start": message.profile_id !== currentUser?.id,
+                  // @ts-ignore
+                  "mr-2 justify-end": message.profile_id === currentUser[0]?.id,
+                  // @ts-ignore
+                  "ml-2 justify-start": message.profile_id !== currentUser[0]?.id,
                 })}
               >
                 <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="sm" />
@@ -42,9 +46,11 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
           </div>
 
           <div
-            className={classNames("ml-4 mt-1 rounded-md p-4 text-xs text-white", {
-              "bg-neutral-400": message.profile_id === currentUser?.id,
-              "bg-primary-500": message.profile_id !== currentUser?.id,
+            className={classNames("ml-4 mt-1 rounded-md p-4 text-xs", {
+              // @ts-ignore
+              "bg-neutral-300 text-black": message.profile_id === currentUser[0]?.id,
+              // @ts-ignore
+              "bg-primary-500 text-white": message.profile_id !== currentUser[0]?.id,
             })}
           >
             {message.message}

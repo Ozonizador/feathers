@@ -26,6 +26,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
+import { IoSend } from "react-icons/io5";
 
 {
   /* page 59 XD */
@@ -87,7 +88,7 @@ const CaixaEntrada = () => {
         let date = new Date();
 
         if (differenceInCalendarDays(date, updateDate) > 2) {
-          const {data, error} = await acceptReservation(conversation.reservation_id, "EXPIRED");
+          const { data, error } = await acceptReservation(conversation.reservation_id, "EXPIRED");
         }
       }
     }
@@ -316,13 +317,13 @@ const CaixaEntrada = () => {
                 })}
               {currentConversation && (
                 <div className="tests">
-                <MessagesSenderZone
-                  messages={messages}
-                  sendMessage={sendMessage}
-                  conversationId={currentConversation && currentConversation.id}
-                  currentMessage={currentMessage}
-                  setCurrentMessage={setCurrentMessage}
-                />
+                  <MessagesSenderZone
+                    messages={messages}
+                    sendMessage={sendMessage}
+                    conversationId={currentConversation && currentConversation.id}
+                    currentMessage={currentMessage}
+                    setCurrentMessage={setCurrentMessage}
+                  />
                 </div>
               )}
             </div>
@@ -357,9 +358,9 @@ const MessagesSenderZone = ({
         })}
       </div>
 
-      <div className="-between mt-auto flex w-full flex-row items-center border-t border-terciary-500 pr-4 align-middle">
-        <div className="w-10/12">
-          <form onSubmit={(e) => sendMessage(e, conversationId)}>
+      <div className="-between mt-auto flex w-full items-center border-t border-terciary-500 pr-4 align-middle">
+        <div className="mr-2 w-full">
+          <form onSubmit={(e) => sendMessage(e, conversationId)} className="flex items-center">
             <input
               className="w-full border-0 p-4 text-xs outline-0"
               placeholder={t("write_message")}
@@ -367,7 +368,16 @@ const MessagesSenderZone = ({
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}
             />
-            <input type="submit" className="hidden" />
+            <input type="submit" className="hidden"/>
+            <div
+              className="rounded-full bg-primary-400 p-2"
+              onClick={(e) => {
+                e.preventDefault();
+                sendMessage(e, conversationId);
+              }}
+            >
+              <IoSend color="white" />
+            </div>
           </form>
         </div>
       </div>

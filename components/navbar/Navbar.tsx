@@ -359,7 +359,7 @@ export const Navbar = () => {
                             {userAppMode == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={HOME_URL}>
+                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
                                     {t("uni-desk")}
                                   </MyLink>
                                 </Menu.Item>
