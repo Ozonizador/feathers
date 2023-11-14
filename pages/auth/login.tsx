@@ -24,8 +24,9 @@ const Login = () => {
 
   const loginFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();
-    await loginWithFacebook();
-    router.push(TYPE_PROFILE_CHOICE_URL);
+    const {error} = await loginWithFacebook();
+    console.log(error);
+    router.push(HOME_URL);
   };
 
   /** registar com google */
