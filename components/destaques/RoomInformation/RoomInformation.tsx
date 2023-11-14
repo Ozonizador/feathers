@@ -11,10 +11,10 @@ export default function RoomInformation() {
   const { t } = useTranslation();
   return (
     <div>
-      <div className="mb-8 flex font-bold">
-        <div className="text-5xl pr-2">{advertisement?.title || ""} </div>
+      <div className="mb-8 flex flex-wrap font-bold">
+        <div className="text-5xl pr-2 break-words break-all">{advertisement?.title || ""} </div>
         {advertisement?.verified && (
-          <div className="text-md flex h-10 flex-bottom">
+          <div className="text-md flex items-end">
             <p className="text-md">{t("advertisements:house_verified")}</p>
             <img className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
           </div>

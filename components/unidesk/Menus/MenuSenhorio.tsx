@@ -48,6 +48,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           title={`Anúncio - ${currentAdvertisement.title || "#"}`}
           selectedGroup={activeSection === "single_advert"}
           isCollapsed={true}
+          defaultOpen={activeSection === "single_advert"}
         >
           <MenuOption
             url={`/unidesk/senhorio/${currentAdvertisement.slug}/details`}

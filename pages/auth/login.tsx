@@ -13,6 +13,7 @@ import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { FaEye} from "react-icons/fa"
 import InputPassword from "../../components/utils/InputPassword";
+import { useCurrentUser } from "../../context/MainProvider";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
-  const { login, loginWithFacebook, loginWithGoogle } = useUserService();
+  const { login, loginWithFacebook, loginWithGoogle,  } = useUserService();
 
   const loginFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();

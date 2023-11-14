@@ -89,7 +89,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
         <div className="w-full lg:flex">
           <div className="relative hidden h-52 w-52 lg:block">
             {advertisement.photos && advertisement.photos.length > 0 && (
-              <Image src={advertisement.photos[0].url} alt="Foto Quarto" fill style={{ objectFit: "cover" }} />
+              <Image src={advertisement.photos[0].url} alt="Foto Quarto" fill style={{ objectFit: "cover" }} onClick={(e) => editAdvertisement(e, advertisement.slug)}/>
             )}
           </div>
           <div className="ml-3 w-full py-2 relative">

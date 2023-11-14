@@ -120,24 +120,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/blogs",
+        destination: "/faqs",
         permanent: false,
       },
     };
 
   const user = session.user;
+  console.log(session.user)
   const { data, error } = await supabaseAdmin
     .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
     .select("id, user_type")
     .eq(PROFILE_COLUMNS.ID, user.id)
     .single();
 
-    console.log(error, data?.user_type);
+  console.log(error, data?.user_type);
 
   if (error || !data || data.user_type !== "ADMIN")
     return {
       redirect: {
-        destination: "/blogs",
+        destination: "/faqs",
         permanent: false,
       },
     };

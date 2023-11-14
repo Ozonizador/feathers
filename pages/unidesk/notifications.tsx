@@ -15,6 +15,8 @@ import Breadcrumbs, { BreadcrumbPath } from "../../components/utils/Breadcrumbs"
 import { UNIDESK_URL } from "../../models/paths";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { UnideskStructure } from "../../components/unidesk/UnideskStructure";
+import MenuSenhorio from "../../components/unidesk/Menus/MenuSenhorio";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
@@ -50,30 +52,40 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className="mx-5 my-16 rounded-lg border lg:border-none">
+    <section>
       <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
         <Breadcrumbs icon={iconfavorito} paths={paths} />
       </div>
-      <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
-      <div className="container mx-auto w-full lg:w-4/5">
-        <>
-          {isLoading && (
-            <div className="mt-32 flex flex-1 justify-center">
-              <Spinner color="info" aria-label="loading" size="lg" />
-            </div>
-          )}
-          {!isLoading && (
-            <div className="flex flex-col gap-1">
-              {notifications.map((notification, index) => {
-                return <NotificationCard key={index} notification={notification} />;
-              })}
-              {!notifications ||
-                (notifications.length == 0 && <div className="flex justify-center text-xl">{t("adimn:unidesk.no_notifications")}</div>)}
-            </div>
-          )}
-        </>
-      </div>
-    </div>
+      <UnideskStructure>
+        <UnideskStructure.Menu>
+          <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />
+        </UnideskStructure.Menu>
+
+        <div className="mx-5 my-16 rounded-lg border lg:border-none">
+        <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
+          <div className="container mx-auto w-full">
+            <>
+              {isLoading && (
+                <div className="mt-32 flex flex-1 justify-center">
+                  <Spinner color="info" aria-label="loading" size="lg" />
+                </div>
+              )}
+              {!isLoading && (
+                <div className="flex flex-col gap-1">
+                  {notifications.map((notification, index) => {
+                    return <NotificationCard key={index} notification={notification} />;
+                  })}
+                  {!notifications ||
+                    (notifications.length == 0 && (
+                      <div className="flex justify-center text-xl">{t("adimn:unidesk.no_notifications")}</div>
+                    ))}
+                </div>
+              )}
+            </>
+          </div>
+        </div>
+      </UnideskStructure>
+    </section>
   );
 };
 

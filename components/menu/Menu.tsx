@@ -62,7 +62,9 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
   return (
     <div
       className={classNames("flex flex-col", {
-        "rounded-xl bg-primary-300": selectedGroup,
+        "rounded-xl": selectedGroup,
+        "bg-primary-500 text-white": !isCollapsed && selectedGroup,
+        "bg-primary-300": isCollapsed && selectedGroup
       })}
     >
       <div
