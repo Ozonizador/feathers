@@ -25,7 +25,7 @@ const paths = [
 
 const Notifications = () => {
   const { t } = useTranslation();
-  const { getNotifications } = useNotificationService();
+  const { getNotifications, setAsSeen } = useNotificationService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const clearNotifications = useClearNotifications();
@@ -38,6 +38,8 @@ const Notifications = () => {
       const { data, error } = await getNotifications(profile[0].id);
       if (!error) {
         setNotifications(data as Notification[]);
+        // @ts-ignore
+        setAsSeen(profile[0].id);
       }
     }
     setIsLoading(false);

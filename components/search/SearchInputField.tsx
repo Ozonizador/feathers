@@ -10,6 +10,8 @@ import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } f
 import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
+import { CgHome } from "react-icons/cg";
+
 
 export enum SearchFields {
   START_DATE = "startDate",
