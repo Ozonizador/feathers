@@ -41,6 +41,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     let { favourite_rooms } = isArray(profile) ? profile[0] : profile;
 
     if (isFavourite) {
+      // @ts-ignore
       const newFavRooms = favourite_rooms?.filter((favourite) => advertId !== favourite) || [];
       await setFavouriteProfile(newFavRooms);
     } else {

@@ -39,6 +39,8 @@ interface EstadiaComponentProps {
 
 const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
   const { t } = useTranslation();
+
+  console.log(currentStay, nextStays)
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
@@ -146,7 +148,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const { data, error } = await supabase
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
-      .match({ tenant_id: user.id, status: "ACCEPTED" });
+      .match({ tenant_id: user.id, status: "ACCEPTED" })
+      .gte("start_date", formattedDate)
+      .gte("end_date", formattedDate);
+
+      console.log(data)
 
     return { data, error };
   };
