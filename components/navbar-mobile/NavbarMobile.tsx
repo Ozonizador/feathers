@@ -135,10 +135,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     {
                       "bg-primary-500":
                         profile && // @ts-ignore
-                        profile[0].type === userAppMode,
+                        profile.type === userAppMode,
                       "bg-secondary-300":
                         !profile || // @ts-ignore
-                        profile[0].type !== userAppMode,
+                        profile.type !== userAppMode,
                     }
                   )}
                 >

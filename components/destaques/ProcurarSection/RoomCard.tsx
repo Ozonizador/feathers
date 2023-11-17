@@ -20,6 +20,7 @@ import Button from "../../utils/Button";
 import { BsDot, BsHeart } from "react-icons/bs";
 import ExpensesComponent, { CheckIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
+import { isArray } from "lodash";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -36,7 +37,8 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const toggleFavourite = async (e: React.MouseEvent, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
     if (!profile) return;
-    let { favourite_rooms } = profile;
+    console.log(profile)
+    let { favourite_rooms } = isArray(profile) ? profile[0] : profile;
 
     if (isFavourite) {
       const newFavRooms = favourite_rooms?.filter((favourite) => advertId !== favourite) || [];
@@ -51,8 +53,9 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const isFavourite = useCallback(() => {
     if (!profile) return false;
 
-    const { favourite_rooms } = profile;
+    const { favourite_rooms } = isArray(profile) ? profile[0] : profile;
     if (!favourite_rooms) return false;
+    // @ts-ignore
     const index = favourite_rooms.findIndex((room) => advertisement.id == room);
     return index !== -1;
   }, [advertisement.id, profile]);

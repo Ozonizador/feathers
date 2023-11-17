@@ -8,6 +8,8 @@ import useProfileService from "../hooks/useProfileService";
 import { useRouter } from "next/router";
 import { TYPE_PROFILE_CHOICE_URL } from "../models/paths";
 import { checkMonthsInAdvance } from "../utils/utils";
+import { isArray } from "lodash";
+import { profile } from "console";
 
 interface GeneralUnihostInformation {
   userAppMode: UserTypes;
@@ -183,10 +185,14 @@ export const useSetProfileFavouritesInformation = () => {
   const { updateFavouriteFromUser } = useFavouriteService();
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   const currentInfo = useContext(UnihostsWebsiteContext);
+  let profile: any = null;
+  isArray(currentInfo.profile) ? profile =  currentInfo.profile[0]: profile = currentInfo.profile;
 
   return async (favouriteRooms: string[]): Promise<void> => {
     if (!currentInfo || !currentInfo.profile) return;
-    const { data, error } = await updateFavouriteFromUser(currentInfo.profile.id, favouriteRooms);
+
+    // @ts-ignore
+    const { data, error } = await updateFavouriteFromUser(profile.id, favouriteRooms);
     if (!error) {
       setCurrentInfo((currentStatus) => ({ ...currentStatus, profile: data }));
     }

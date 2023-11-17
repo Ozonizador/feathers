@@ -27,19 +27,11 @@ const useNotificationService = () => {
     return { data, error };
   };
 
-  const setNotificationAsSeen = async (id: string) => {
-    const { data, error } = await supabaseClient
-    .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
-    .update({seen: true})
-    .eq(NOTIFICATION_PROPERTIES.ID, id);
-    return { data, error };
-  }
-
   const setAsSeen = async (profile_id: string) => {
     const {data, error} = await supabaseClient.rpc("notification_seen", profile_id);
   }
 
-  return { addNotification, getNotifications, setNotificationAsSeen, setAsSeen };
+  return { addNotification, getNotifications, setAsSeen };
 };
 
 export default useNotificationService;

@@ -146,9 +146,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const { data, error } = await supabase
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .select("*, advertisement:advertisement_id(*), reports(id), reviews(id)")
-      .match({ tenant_id: user.id, status: "ACCEPTED" })
-      .gte("start_date", date)
-      .gte("end_date", date);
+      .match({ tenant_id: user.id, status: "ACCEPTED" });
 
     return { data, error };
   };
@@ -157,6 +155,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { data: currentStay, error: currentStayError } = currentUserStay;
   const { data: nextStays, error: nextStaysError } = nextUserStays;
 
+  
   return {
     props: {
       initialSession: session,

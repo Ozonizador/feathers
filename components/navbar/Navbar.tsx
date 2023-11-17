@@ -70,7 +70,8 @@ export const Navbar = () => {
 
   useEffect(() => {
     // @ts-ignore
-    if (profile != null && profile[0].type && !hasRunOnce) {
+    console.log(profile)
+    if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
       setHasRunOnce(true);
     }
