@@ -12,9 +12,9 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home = () => {
   return (
-    <div className="pr-20 pl-20">
+    <div className="px-8 xl:pl-20 xl:pr-20">
       <HomeSection1 />
-      <div className="px-5 lg:px-8 xl:mx-32">
+      <div className="lg:px-8 xl:mx-32 xl:px-5">
         <HomeSection2 />
         <HomeSection3 />
         <ExploreCity />

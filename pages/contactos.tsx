@@ -21,10 +21,10 @@ const Contactos = () => {
 
   return (
     <div className="max-width px-10">
-      <div className="my-10 lg:my-20">
+      <div className="my-24 lg:my-20 xl:my-10">
         <div className="flex flex-col lg:flex-row ">
           <div className="flex w-full lg:w-1/3">
-            <div className="mt-20 flex flex-col gap-3">
+            <div className="flex flex-col gap-3 xl:mt-20">
               <div className="py-3">
                 <CgFileDocument className="inline text-2xl" />
                 <div className="my-auto ml-3 inline">{t("help_student")}</div>
