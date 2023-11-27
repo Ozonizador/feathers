@@ -30,7 +30,7 @@ const FormTipoHost = () => {
       <HostFlexTypeComponent advertisement={advertisement} onChange={changeTypeProperty} />
 
       <div className="mt-10 w-full">
-        <div className="flex gap-2">
+        <div className="flex flex-col items-center gap-2 xl:flex-row">
           <div className="w-48">
             <Button onClick={decrementStep} type="button">
               {t("go_back")}

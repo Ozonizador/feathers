@@ -6,7 +6,7 @@ export default function HomeSection2() {
   const { t } = useTranslation();
   return (
     <section className="max-width">
-      <div className="mx-auto flex w-10/12 flex-col gap-8 py-20 lg:flex-row lg:gap-4">
+      <div className="mx-auto flex w-full flex-col gap-8 py-20 lg:flex-row lg:gap-4 xl:w-10/12">
         <HomeSection2Cards
           img="/images/homeSection new-1.png"
           heading={t("index:section.values.first_title")}

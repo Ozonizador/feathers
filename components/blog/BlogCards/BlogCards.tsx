@@ -12,7 +12,7 @@ interface BlogCardsProps {
 export default function BlogCards({ blogs }: BlogCardsProps) {
   const router = useRouter();
   return (
-    <section className="mx-auto pb-5 pt-20">
+    <section className="mx-auto pb-5 xl:pt-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
         <div className="flex flex-col gap-8 lg:flex-row ">
           {blogs &&
