@@ -41,7 +41,7 @@ const FormSobreCasa = () => {
       <section className="mx-auto w-full px-5 lg:w-5/6 lg:px-0">
         <AdvertisementInfoComponent advertisement={advertisement} />
 
-        <div className="mt-2 flex gap-5">
+        <div className="mt-2 flex flex-col items-center gap-5 xl:flex-row">
           <div className="w-48">
             <Button onClick={decrementStep} type="button">
               {t("go_back")}

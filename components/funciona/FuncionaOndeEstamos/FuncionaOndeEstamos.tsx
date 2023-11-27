@@ -7,7 +7,7 @@ const FuncionaOndeEstamos = () => {
   const { t } = useTranslation();
   return (
     <section className="mx-4 lg:mx-0">
-      <div className="max-width my-60 flex rounded-2xl bg-terciary-600 px-10 py-20">
+      <div className="max-width my-10 flex rounded-2xl bg-terciary-600 px-10 py-12 xl:my-60 xl:py-20">
         <div className="flex flex-1 flex-col justify-center align-middle">
           <div className="w-full">
             <div className="flex flex-col gap-14 lg:flex-row">

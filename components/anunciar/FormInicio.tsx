@@ -78,7 +78,7 @@ const FormInicio = () => {
           <section className="mt-10 flex w-full flex-col justify-center gap-8 lg:my-5">
             <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
           </section>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col items-center gap-5 xl:flex-row">
             <div className="w-48 lg:w-1/3">
               <Button onClick={checkPossibilites} type="button">
                 {t("update_map")}

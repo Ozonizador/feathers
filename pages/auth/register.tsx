@@ -10,6 +10,7 @@ import Button from "../../components/utils/Button";
 import { Trans, useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -81,13 +82,13 @@ const Register = () => {
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
 
-          <div className="flex flex-1 flex-col justify-around gap-5">
+          <div className="mb-3 flex flex-col justify-around gap-5 xl:flex-row">
             <Button variant="facebook" onClick={(event) => registerWithFacebook(event)} type={"button"}>
-              <SiFacebook className="inline " color="blue" size={36} />
+              <SiFacebook className="inline " color="blue" />
               <span className="my-auto ml-3 inline">{t("continue_with")} Facebook</span>
             </Button>
             <Button variant="gmail" onClick={(event) => registerWithGoogle(event)} type={"button"}>
-              <SiGmail color="red" className="inline" size={36} />
+              <FcGoogle color="red" className="inline" />
               <span className="my-auto ml-3 inline">{t("continue_with")} Google</span>
             </Button>
           </div>

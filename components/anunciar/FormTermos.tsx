@@ -137,7 +137,7 @@ const FormTermos = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex gap-5 pt-5 lg:flex-row">
+          <div className="mt-6 flex flex-col items-center gap-5 pt-5 lg:flex-row xl:flex-row">
             <div className="w-48">
               <Button onClick={decrementStep} type="button">
                 {t("go_back")}

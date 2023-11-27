@@ -195,7 +195,7 @@ const FormAnunciarPhotos = () => {
           </div>
         </section>
       </div>
-      <div className="mt-10 flex  justify-center gap-5 lg:px-32">
+      <div className="mt-10 flex flex-col items-center justify-center gap-5 lg:px-32 xl:flex-row">
         <div className="w-48">
           <Button onClick={decrementStep} type="button">
             {t("go_back")}

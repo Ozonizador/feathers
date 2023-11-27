@@ -132,7 +132,7 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex items-center gap-2">
               <PopoverGeneric title={t("advertisements:type_house")}>
                 <div className="grid w-96 grid-cols-2 gap-4 rounded-lg bg-white p-3 text-neutral-500">
                   <div
