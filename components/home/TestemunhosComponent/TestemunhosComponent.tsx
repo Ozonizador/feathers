@@ -21,7 +21,7 @@ const TestemunhosComponent = () => {
           >
             {group(Testemunhos, 3).map((children: TestemunhoInfo[], index: number) => {
               return (
-                <div key={index} className="flex gap-6 px-24 lg:justify-center">
+                <div key={index} className="flex gap-6 px-6 lg:justify-center">
                   {children.map((testemunho: TestemunhoInfo, index: number) => {
                     return (
                       <div key={index}>

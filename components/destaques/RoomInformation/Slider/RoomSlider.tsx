@@ -20,7 +20,7 @@ export default function RoomSlider() {
   const Comodities = ({}) =>
     useMemo(() => {
       return (
-        <Carousel leftControl={<BiLeftArrowAlt/>} rightControl={<BiRightArrowAlt/>}>
+        <Carousel leftControl={<BiLeftArrowAlt />} rightControl={<BiRightArrowAlt />}>
           <div className="flex flex-col gap-8">
             <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">
               {t("advertisements:zones.general")}
@@ -31,9 +31,11 @@ export default function RoomSlider() {
                 general_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
-                    <div className="mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="mt-3 text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
+                    <div className="group mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
+                      {icon && icon({ size: 62 })}
+                      <div className="mt-3 text-sm opacity-0 group-hover:opacity-100">
+                        {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                      </div>
                     </div>
                   );
                 })}
@@ -49,9 +51,11 @@ export default function RoomSlider() {
                 bedroom_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
+                    <div className="group flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon && icon({ size: 62 })}
+                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                        {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                      </div>
                     </div>
                   );
                 })}
@@ -67,9 +71,11 @@ export default function RoomSlider() {
                 kitchen_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
+                    <div className="group flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon && icon({ size: 62 })}
+                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                        {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                      </div>
                     </div>
                   );
                 })}
@@ -87,9 +93,11 @@ export default function RoomSlider() {
                 bathroom_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
+                    <div className="group flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon && icon({ size: 62 })}
+                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                        {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                      </div>
                     </div>
                   );
                 })}
@@ -107,9 +115,11 @@ export default function RoomSlider() {
                 exterior_amenities.map((amenity: string, index: number) => {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
-                    <div className="flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 24 })}
-                      <div className="text-sm">{t(TypeAmenityLabel[amenity as TypeAmenity])}</div>
+                    <div className="group flex flex-col items-center justify-center align-middle" key={index}>
+                      {icon && icon({ size: 62 })}
+                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                        {t(TypeAmenityLabel[amenity as TypeAmenity])}
+                      </div>
                     </div>
                   );
                 })}
@@ -120,7 +130,7 @@ export default function RoomSlider() {
     }, []);
 
   return (
-    <div className="mb-32 mt-10 h-48 min-h-[300px] rounded-xl border lg:mt-40">
+    <div className="mb-32 mt-10 h-48 min-h-[400px] rounded-xl border lg:mt-40">
       <Comodities />
     </div>
   );
