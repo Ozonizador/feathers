@@ -32,8 +32,8 @@ export default function RoomSlider() {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="group mb-10 flex  flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 62 })}
-                      <div className="mt-3 text-sm opacity-0 group-hover:opacity-100">
+                      {icon && icon({ size: 40 })}
+                      <div className="mt-3 truncate text-sm opacity-0 hover:text-clip group-hover:opacity-100">
                         {t(TypeAmenityLabel[amenity as TypeAmenity])}
                       </div>
                     </div>
@@ -52,8 +52,8 @@ export default function RoomSlider() {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="group flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 62 })}
-                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                      {icon && icon({ size: 40 })}
+                      <div className="truncate text-sm opacity-0 hover:text-clip group-hover:opacity-100">
                         {t(TypeAmenityLabel[amenity as TypeAmenity])}
                       </div>
                     </div>
@@ -72,8 +72,8 @@ export default function RoomSlider() {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="group flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 62 })}
-                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                      {icon && icon({ size: 40 })}
+                      <div className="truncate text-sm opacity-0 hover:text-clip group-hover:opacity-100">
                         {t(TypeAmenityLabel[amenity as TypeAmenity])}
                       </div>
                     </div>
@@ -94,8 +94,8 @@ export default function RoomSlider() {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="group flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 62 })}
-                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                      {icon && icon({ size: 40 })}
+                      <div className="truncate text-sm opacity-0 hover:text-clip group-hover:opacity-100">
                         {t(TypeAmenityLabel[amenity as TypeAmenity])}
                       </div>
                     </div>
@@ -116,8 +116,8 @@ export default function RoomSlider() {
                   const icon = houseAmenities(amenity as TypeAmenity);
                   return (
                     <div className="group flex flex-col items-center justify-center align-middle" key={index}>
-                      {icon && icon({ size: 62 })}
-                      <div className="text-sm opacity-0 group-hover:opacity-100">
+                      {icon && icon({ size: 40 })}
+                      <div className="truncate text-sm opacity-0 hover:text-clip group-hover:opacity-100">
                         {t(TypeAmenityLabel[amenity as TypeAmenity])}
                       </div>
                     </div>

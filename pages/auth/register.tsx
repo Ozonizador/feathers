@@ -82,14 +82,14 @@ const Register = () => {
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
 
-          <div className="mb-3 flex flex-col justify-around gap-5 xl:flex-row">
+          <div className="mb-3 flex justify-around gap-5">
             <Button variant="facebook" onClick={(event) => registerWithFacebook(event)} type={"button"}>
               <SiFacebook className="inline " color="blue" />
-              <span className="my-auto ml-3 inline">{t("continue_with")} Facebook</span>
+              <span className="my-auto ml-3 inline"> Facebook</span>
             </Button>
             <Button variant="gmail" onClick={(event) => registerWithGoogle(event)} type={"button"}>
               <FcGoogle color="red" className="inline" />
-              <span className="my-auto ml-3 inline">{t("continue_with")} Google</span>
+              <span className="my-auto ml-3 inline"> Google</span>
             </Button>
           </div>
           <div className="mt-4 text-center text-sm italic">
