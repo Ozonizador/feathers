@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="px-8 xl:pl-20 xl:pr-20">
       <HomeSection1 />
-      <div className="lg:px-8 xl:mx-32 xl:px-5">
+      <div className="lg:px-8 xl:mx-24 xl:px-5">
         <HomeSection2 />
         <HomeSection3 />
         <ExploreCity />
