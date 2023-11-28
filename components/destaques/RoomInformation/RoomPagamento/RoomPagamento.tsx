@@ -120,6 +120,17 @@ export const RoomPagamento = () => {
         const { data, error } = info;
         if (error || !data) return toast.error(t("messages:errors.making_reservation"));
 
+        if (!advertisement) return;
+        let formData = {
+          email: advertisement.host.email,
+          templateId: "d-49ee6df771af4f01b4a69997fa02b192",
+        };
+
+        await fetch("/api/mail", {
+          method: "POST",
+          body: JSON.stringify(formData),
+        });
+
         setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
         setModalGerarRef(false);
         toast.success(t("messages:success.reservation_requested"));
