@@ -132,6 +132,10 @@
   width: 100%;
 }
 
+.react-datepicker__day--selected {
+  background-color: #c28b62 !important;
+}
+
 /* BLOG */
 
 .bg-notification {
