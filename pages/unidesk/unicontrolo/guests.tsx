@@ -10,6 +10,7 @@ import { ReservationGuest, Reservations, RESERVATION_TABLE_NAME } from "../../..
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 const paths = [
   { url: UNIDESK_URL, label: "uni-desk" },

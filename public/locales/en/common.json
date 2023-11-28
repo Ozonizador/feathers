@@ -129,5 +129,6 @@
   "in_area": "in area",
   "no_available_spaces": "No available spaces",
   "date": "{{date}}",
-  "you": "You"
+  "you": "You",
+  "on_date": "{{val, datetime}}"
 }
