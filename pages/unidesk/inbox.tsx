@@ -27,6 +27,9 @@ import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
 import { IoSend } from "react-icons/io5";
+import { formatWithOptions } from 'date-fns/fp'
+import { enGB, pt } from 'date-fns/locale'
+import Locale from "react-phone-number-input/locale/en.json";
 
 {
   /* page 59 XD */
@@ -193,11 +196,7 @@ const CaixaEntrada = () => {
                     currentMessage={currentMessage}
                     setCurrentMessage={setCurrentMessage}
                   />
-                  {currentConversation &&
-                    // @ts-ignore
-                    currentConversation.host_id === profile[0].id &&
-                    // @ts-ignore
-                    currentConversation.reservation.tenant_id !== profile[0].id && (
+                  {currentConversation && (
                       <div className="w-96 border-l border-terciary-500 p-2">
                         <>
                           <div className="flex">
@@ -228,9 +227,17 @@ const CaixaEntrada = () => {
                             </div>
                           </div>
                           <div className="my-4 flex justify-center">
-                            {`${currentConversation.reservation?.start_date || ""} - ${
-                              currentConversation.reservation?.end_date || ""
-                            }`}
+                            {`${t("common:on_date", {
+                              val: new Date(currentConversation.reservation?.start_date),
+                              formatParams: {
+                                val: { day: 'numeric', year: 'numeric', month: 'long' },
+                              },
+                            })} - ${t("common:on_date", {
+                              val: new Date(currentConversation.reservation?.end_date),
+                              formatParams: {
+                                val: { day: 'numeric', year: 'numeric', month: 'long' },
+                              },
+                            })}`}
                           </div>
                           {currentConversation.reservation.status === "REQUESTED" && (
                             <div className="flex flex-col justify-around gap-3">
@@ -368,7 +375,7 @@ const MessagesSenderZone = ({
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}
             />
-            <input type="submit" className="hidden"/>
+            <input type="submit" className="hidden" />
             <div
               className="rounded-full bg-primary-400 p-2"
               onClick={(e) => {

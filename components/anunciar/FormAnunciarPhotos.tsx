@@ -79,6 +79,8 @@ const FormAnunciarPhotos = () => {
     advertisement.photos = newAdvertisementPhotos;
     setAdvertisement(advertisement);
 
+    console.log(advertisement, "advertisement");
+
     incrementStep();
   };
 

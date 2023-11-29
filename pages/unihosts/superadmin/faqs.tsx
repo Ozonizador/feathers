@@ -126,7 +126,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const user = session.user;
-  console.log(session.user)
   const { data, error } = await supabaseAdmin
     .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
     .select("id, user_type")
