@@ -41,6 +41,10 @@ const FormTermos = () => {
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
+      if(advertisement.rooms == null) {
+        setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.ROOMS, 1);
+      }
+
       // adding advertisements
       const { error } = await addAdvertisement({
         ...advertisement,
