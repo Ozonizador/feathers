@@ -38,9 +38,6 @@ const FormTermos = () => {
       debugger;
       if (!isValid) return;
 
-      // saving images
-      await saveImages();
-
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
