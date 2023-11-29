@@ -16,8 +16,8 @@ export default function TestemunhoCard({ img, testimonial, name }: TestemunhoCar
           <p className="text-sm">{testimonial}</p>
         </div>
       </div>
-      <div className="mt-6 flex">
-        <Image height={64} width={64} src={img} alt="" className="h-20 w-16 rounded-lg" />
+      <div className="mt-6 flex items-center">
+        <Image height={64} width={64} src={img} alt="" className="h-[64px] w-[64px] rounded-lg object-cover" />
         <div className="ml-2">
           <p className="mb-0 text-xl font-bold">{name}</p>
           <p className="mb-0">Proprietário Unihosts</p>

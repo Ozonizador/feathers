@@ -12,14 +12,16 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home = () => {
   return (
-    <div className="px-8 xl:pl-20 xl:pr-20">
+    <div className="">
       <HomeSection1 />
       <div className="lg:px-8 xl:mx-24 xl:px-5">
         <HomeSection2 />
         <HomeSection3 />
         <ExploreCity />
         <HomeSection5 />
-        <TestemunhosComponent />
+      </div>
+      <TestemunhosComponent />
+      <div className="lg:px-8 xl:mx-24 xl:px-5">
         <HomeSection7 />
         <BlogSection />
         {/* <HomeParceiros /> */}

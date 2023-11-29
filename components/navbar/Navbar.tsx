@@ -47,7 +47,7 @@ export const Navbar = () => {
   const profile = useCurrentUser();
   const router = useRouter();
   const supabaseClient = useSupabaseClient<Database>();
-  const [ hasRunOnce , setHasRunOnce] = useState<boolean>(false);
+  const [hasRunOnce, setHasRunOnce] = useState<boolean>(false);
 
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
@@ -70,7 +70,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     // @ts-ignore
-    console.log(profile)
+    console.log(profile);
     if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
       setHasRunOnce(true);
@@ -115,7 +115,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="border-terciary-400 mt-5 flex h-20 border-b lg:gap-5 lg:px-28">
+          <div className="border-terciary-400 mt-5 flex h-20 lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
                 <div className="relative h-full w-52">
