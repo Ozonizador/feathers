@@ -40,7 +40,6 @@ interface EstadiaComponentProps {
 const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
   const { t } = useTranslation();
 
-  console.log(currentStay, nextStays)
   return (
     <ModalApplyShowProvider>
       <ModalReportarAnuncioProvider>
@@ -151,8 +150,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       .match({ tenant_id: user.id, status: "ACCEPTED" })
       .gte("start_date", formattedDate)
       .gte("end_date", formattedDate);
-
-      console.log(data)
 
     return { data, error };
   };
