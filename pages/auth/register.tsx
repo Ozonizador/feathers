@@ -82,7 +82,7 @@ const Register = () => {
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
 
-          <div className="mb-3 flex justify-around gap-5">
+          <div className="mb-3 flex flex-col justify-around gap-5 xl:flex-row">
             <Button variant="facebook" onClick={(event) => registerWithFacebook(event)} type={"button"}>
               <SiFacebook className="inline " color="blue" />
               <span className="my-auto ml-3 inline"> Facebook</span>

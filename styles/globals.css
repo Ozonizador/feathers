@@ -143,6 +143,16 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.testimonial-block button.group {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;
