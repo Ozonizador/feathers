@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { FaEye} from "react-icons/fa"
+import { FaEye } from "react-icons/fa";
 import InputPassword from "../../components/utils/InputPassword";
 import { useCurrentUser } from "../../context/MainProvider";
 
@@ -21,11 +21,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
-  const { login, loginWithFacebook, loginWithGoogle,  } = useUserService();
+  const { login, loginWithFacebook, loginWithGoogle } = useUserService();
 
   const loginFacebook = async (event: React.MouseEvent) => {
     event.preventDefault();
-    const {error} = await loginWithFacebook();
+    const { error } = await loginWithFacebook();
     console.log(error);
     router.push(HOME_URL);
   };
@@ -100,7 +100,7 @@ const Login = () => {
             <span className="mx-4 flex-shrink text-lg font-bold text-gray-400">{t("or")}</span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="mb-3 flex justify-around gap-5">
+          <div className="mb-3 flex flex-col justify-around gap-5 xl:flex-row">
             <Button onClick={loginFacebook} type="button" variant="facebook">
               <SiFacebook className="inline" color="blue" />
               <span className="my-auto ml-3 inline">Facebook</span>

@@ -12,7 +12,7 @@ export default function RoomInformation() {
   return (
     <div>
       <div className="mb-8 flex flex-wrap font-bold">
-        <div className="text-5xl pr-2 break-words break-all">{advertisement?.title || ""} </div>
+        <div className="break-words break-all pr-2 text-5xl">{advertisement?.title || ""} </div>
         {advertisement?.verified && (
           <div className="text-md flex items-end">
             <p className="text-md">{t("advertisements:house_verified")}</p>
@@ -20,7 +20,7 @@ export default function RoomInformation() {
           </div>
         )}
       </div>
-      <div className="my-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="my-3 grid grid-cols-2 gap-3 lg:grid-cols-5">
         <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
           <RiUserLine className="text-4xl" />
           <div className="mt-3 text-base ">

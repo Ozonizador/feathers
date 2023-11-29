@@ -40,12 +40,18 @@ export default function BlogSection() {
             {blogPosts.map((blogPost) => {
               return (
                 <Link href={`/blog/${blogPost.slug}`} key={blogPost.id}>
-                  <article className="relative h-96 w-full bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl">
+                  <article className="relative h-96 w-full rounded-xl bg-black bg-cover bg-center duration-200 ease-in hover:drop-shadow-xl">
                     <h2 className="absolute bottom-0 left-0 z-50 mb-6 ml-3 text-2xl text-white lg:text-base">
                       {blogPost.title}
                     </h2>
 
-                    <Image fill src={blogPost.image} alt="blog" className="opacity-60" style={{ objectFit: "cover" }} />
+                    <Image
+                      fill
+                      src={blogPost.image}
+                      alt="blog"
+                      className="rounded-xl opacity-60"
+                      style={{ objectFit: "cover" }}
+                    />
                   </article>
                 </Link>
               );
