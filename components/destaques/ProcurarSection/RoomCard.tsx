@@ -37,7 +37,6 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
   const toggleFavourite = async (e: React.MouseEvent, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
     if (!profile) return;
-    console.log(profile)
     let { favourite_rooms } = isArray(profile) ? profile[0] : profile;
 
     if (isFavourite) {
