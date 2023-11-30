@@ -5,7 +5,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { number } from "zod";
-import { BiPlusCircle } from "react-icons/bi";
+import { HiOutlineMagnifyingGlassCircle } from "react-icons/hi2";
 
 export const SingleRoomGrid = () => {
   const advertisement = useGetSingleAdvertisement();
@@ -36,7 +36,7 @@ export const SingleRoomGrid = () => {
       {advertisement?.photos && advertisement.photos.length > 0 && (
         <div className="grid grid-cols-12 gap-2">
           <div className="advert-image-box relative col-span-6 row-span-2 h-96">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative rounded-full bg-black" />
+            <HiOutlineMagnifyingGlassCircle size={30} color="white" className="plus-icon relative rounded-full bg-black" />
             {advertisement.photos[0] ? (
                 <Image
                   src={advertisement.photos[0].url}
@@ -50,7 +50,7 @@ export const SingleRoomGrid = () => {
             )}
           </div>
           <div className="advert-image-box relative col-span-2">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
+            <HiOutlineMagnifyingGlassCircle  size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
             {advertisement.photos[1] ? (
               <Image
                 src={advertisement.photos[1].url}
@@ -64,7 +64,7 @@ export const SingleRoomGrid = () => {
             )}
           </div>
           <div className="advert-image-box relative col-span-4">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
+            <HiOutlineMagnifyingGlassCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
             {advertisement.photos[2] ? (
               <Image
                 src={advertisement.photos[2].url}
@@ -78,7 +78,7 @@ export const SingleRoomGrid = () => {
             )}
           </div>
           <div className="advert-image-box relative col-span-4">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
+            <HiOutlineMagnifyingGlassCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
             {advertisement.photos[3] ? (
               <Image
                 src={advertisement.photos[3].url}
@@ -92,7 +92,7 @@ export const SingleRoomGrid = () => {
             )}
           </div>
           <div className="advert-image-box relative col-span-2">
-            <BiPlusCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
+            <HiOutlineMagnifyingGlassCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
             {advertisement.photos[4] ? (
               <Image
                 src={advertisement.photos[4].url}
