@@ -90,6 +90,7 @@ export const SingleRoomGrid = () => {
             ) : (
               <></>
             )}
+            {/* bnb */}
           </div>
           <div className="advert-image-box relative col-span-2">
             <HiOutlineMagnifyingGlassCircle size={30} color="white" className="plus-icon relative inset-1/2 rounded-full bg-black" />
