@@ -1,6 +1,5 @@
 import { Trans, useTranslation } from "next-i18next";
 import { useDecrementStep, useIncrementStep } from "../../context/AnunciarProvider";
-import Image from "next/image";
 import {
   useAdvertisement,
   useImageFiles,
@@ -10,14 +9,30 @@ import {
 import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { HouseZones } from "../../models/advertisement";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const FormAnunciarPhotos = () => {
   const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
+
+  const { files, filesUrl } = useImageFiles();
+  const setImagesInfo = useSetImageFiles();
+
   const [coverImages, setCoverImages] = useState<File[]>([]);
   const [otherImages, setOtherImages] = useState<File[]>([]);
+
+  useEffect(() => {
+    if (coverImages.length == 0 && otherImages.length == 0) {
+      files.map((file, index) => {
+        if (index == 0) {
+          coverImages.push(file);
+        } else {
+          otherImages.push(file);
+        }
+      });
+    }
+  }, [coverImages, otherImages, files]);
 
   // Code to remove from one array and move to another
   const handleDrop = (event: React.DragEvent<HTMLDivElement>, container: HouseZones) => {
@@ -79,12 +94,10 @@ const FormAnunciarPhotos = () => {
     advertisement.photos = newAdvertisementPhotos;
     setAdvertisement(advertisement);
 
-    console.log(advertisement, "advertisement");
-
     incrementStep();
   };
 
-  const uploadToClient = (event: any) => {
+  const uploadToClient = async (event: any) => {
     event.preventDefault();
     if (event.target.files) {
       let newFiles: any[] = [];
@@ -92,6 +105,8 @@ const FormAnunciarPhotos = () => {
         newFiles.push(file);
       }
 
+      const newFilesUrl = newFiles.map((file) => URL.createObjectURL(file));
+      setImagesInfo({ files: [files, ...newFiles].flat(), filesUrl: [filesUrl, ...newFilesUrl].flat() });
       setOtherImages((prevImages) => [...prevImages, ...newFiles]);
     }
   };

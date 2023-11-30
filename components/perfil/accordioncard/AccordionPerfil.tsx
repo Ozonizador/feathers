@@ -12,6 +12,7 @@ interface AccordionPerfilProps {
 
 function AccordionPerfil({ profile }: AccordionPerfilProps) {
   const { t } = useTranslation();
+  console.log(profile, 'testsetse')
   return (
     <div className="mb-20">
       <Accordion alwaysOpen={true}>
@@ -33,19 +34,21 @@ function AccordionPerfil({ profile }: AccordionPerfilProps) {
             <h1 className="my-3 text-xl">{t("advertisementWithCount", { count: profile.advertisements.length })}</h1>
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
               <div className="grid h-full grid-cols-2 flex-wrap items-center gap-2 dark:text-white md:grid-cols-3 lg:flex">
-                {profile.advertisements.map((advertisement) => {
-                  return (
-                    <article className="relative h-48 w-48 rounded-lg" key={advertisement.id}>
-                      <div className="absolute bottom-4 left-2 z-50">
-                        <p className="bold text-sm font-bold text-white">{advertisement.title}</p>
-                        <Link href={`/anuncio/${advertisement.slug}`} className="bold text-sm text-white">
-                          {t("see_more")}
-                        </Link>
-                      </div>
-
-                      <></>
-                    </article>
-                  );
+                {profile.advertisements.map((advertisement, index) => {
+                  if (index <= 4) {
+                    return (
+                      <article className="relative h-48 w-48 rounded-lg" key={advertisement.id}>
+                        <div className="absolute bottom-4 left-2 z-50">
+                          <p className="bold text-sm font-bold text-black">{advertisement.title}</p>
+                          <Link href={`/anuncio/${advertisement.slug}`} className="bold text-sm text-white">
+                            {t("see_more")}
+                          </Link>
+                        </div>
+  
+                        <></>
+                      </article>
+                    );
+                  }
                 })}
               </div>
             </div>

@@ -41,9 +41,12 @@ const FormTermos = () => {
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
-      if(advertisement.rooms == null) {
-        setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.ROOMS, 1);
+      console.log(advertisement.rooms)
+      if(advertisement.rooms == null || advertisement.rooms == undefined) {
+       advertisement.rooms = 1;
       }
+
+      await saveImages();
 
       // adding advertisements
       const { error } = await addAdvertisement({
@@ -63,11 +66,16 @@ const FormTermos = () => {
 
   const saveImages = async () => {
     const paths = [] as AdvertisementPhoto[];
+    let i = 0;
     for (let image of files) {
       const { data } = await saveImage(advertisement.id, image.name, image);
-      if (data) {
+      if (data && i == 0) {
+        paths.push({ url: data.publicUrl, zone: "main" });
+      } else if (data) {
         paths.push({ url: data.publicUrl, zone: "other" });
       }
+
+      i++;
     }
     advertisement.photos = paths;
   };
