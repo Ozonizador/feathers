@@ -25,7 +25,6 @@ export default function RoomSlider() {
         <Carousel
           leftControl={<IoIosArrowDropleft className="h-7 w-7" />}
           rightControl={<IoIosArrowDropright className="h-7 w-7" />}
-          slide={false}
         >
           <div className="flex flex-col gap-8">
             <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">
