@@ -23,7 +23,8 @@
       "calendar": "Calendar",
       "send_message": "Send<1/> Message",
       "no_notifications": "No notifications.",
-      "preference": "Unidesk Preference"
+      "preference": "Unidesk Preference",
+      "reservations": "Reservations"
     },
     "student": {
       "general": "General Information",
