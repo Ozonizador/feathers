@@ -11,6 +11,7 @@ import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
+import MenuSenhorio from "../../../components/unidesk/Menus/MenuSenhorio";
 
 const paths = [
   { url: UNIDESK_URL, label: "uni-desk" },
@@ -31,7 +32,7 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
       <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">
         <div className="flex flex-col gap-10 px-12 lg:flex-row">
           <div className="flex justify-center">
-            <HospedesMenu activeLink="guests" />
+            <MenuSenhorio activeSection="uni-controlo" activeUrl="guests"/>
           </div>
 
           <div className="ml-10">
