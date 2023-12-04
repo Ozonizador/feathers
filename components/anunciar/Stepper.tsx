@@ -125,7 +125,8 @@ const StepIcon = ({ stepNumber, text }: StepIconProps) => {
       >
         &#10004;
       </div>
-      <div className="absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase text-terciary-200">
+      <div className={`absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase ${
+       currentStep >= stepNumber ? "text-black" : "text-terciary-200"}`}>
         {text}
       </div>
     </div>
