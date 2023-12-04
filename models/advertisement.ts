@@ -80,7 +80,7 @@ export type AdvertisementPhoto = {
   zone: HouseZones;
 };
 
-export type HouseZones = "bedroom" | "bathroom" | "livingroom" | "kitchen" | "other" | "main";
+export type HouseZones = "bedroom" | "bathroom" | "livingroom" | "kitchen" | "other" | "main" ;
 
 export enum HouseZonesLabel {
   "bedroom" = "advertisements:zones.bedroom",

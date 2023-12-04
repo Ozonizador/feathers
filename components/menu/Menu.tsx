@@ -62,9 +62,9 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
   return (
     <div
       className={classNames("flex flex-col", {
-        "rounded-xl": selectedGroup,
+        "rounded-xl": selectedGroup || isOpen ,
         "bg-primary-500 text-white": !isCollapsed && selectedGroup,
-        "bg-primary-300": isCollapsed && selectedGroup
+        "bg-primary-300": isOpen
       })}
     >
       <div
@@ -83,7 +83,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
           {isCollapsed && (
             <div className="ml-auto">
               <Image
-                src={isOpen ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+                src={isOpen ? "/images/icons8-sort-up-30.png" : "/images/icons8-sort-down-30.png"}
                 height={24}
                 width={24}
                 alt=""

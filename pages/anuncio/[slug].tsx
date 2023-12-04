@@ -41,7 +41,7 @@ const Anuncio = ({ advertisement, responseRate }: AnuncioProps) => {
             <div className="container mx-auto px-2 md:px-20">
               <SingleRoomGrid />
               <div className="flex flex-col lg:flex-row">
-                <div className="w-full px-5 lg:w-4/6">
+                <div className="w-full px-5 lg:w-4/6 ">
                   <RoomInformation />
                   <div className="mt-10 flex flex-col gap-4 lg:flex-row">
                     <DescricaoCondicoes />

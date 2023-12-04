@@ -8,7 +8,7 @@ const AdvertConditions = () => {
   const { t } = useTranslation();
   const advertisement = useGetSingleAdvertisement();
   return (
-    <div className="mt-3 flex flex-col gap-3 rounded-lg px-3 py-2 shadow-2xl lg:mt-0">
+    <div className="mt-3 flex flex-col gap-3 rounded-lg px-3 py-2 h-fit shadow-md lg:mt-0">
       <div className="flex w-full justify-center text-2xl font-bold">{t("advertisements:house_conditions")}</div>
       <div className="mb-2 flex w-full flex-row justify-center gap-2">
         <div className="flex flex-col items-center p-1 align-middle text-secondary-500">
