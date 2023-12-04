@@ -141,7 +141,7 @@ const CaixaEntrada = () => {
   const clearConversation = () => {
     setCurrentConversation(undefined);
   };
-  
+
   return (
     <div className="mx-5 h-full rounded-xl border lg:border-none">
       <>
@@ -240,6 +240,7 @@ const CaixaEntrada = () => {
                           })}`}
                         </div>
                         {currentConversation.reservation.status === "REQUESTED" &&
+                          // @ts-ignore
                           currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
@@ -251,6 +252,7 @@ const CaixaEntrada = () => {
                             </div>
                           )}
                         {currentConversation.reservation.status === "CHANGE_REQUESTED" &&
+                          // @ts-ignore
                           currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">

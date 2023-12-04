@@ -306,7 +306,7 @@ export const Navbar = () => {
                               <>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
-                                    {t("uni-desk")}
+                                    {t("common:uni-desk")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
