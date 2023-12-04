@@ -107,6 +107,15 @@
   background-size: 10px;
   background-position: 95%;
 }
+/* .w-full.flex-shrink-0.transform.cursor-grab.snap-center:not([class="testjkjk"]) [class*="testjkjk"],
+.w-full.flex-shrink-0.transform.cursor-grab.snap-center:not([class="testjkjk"]) [class="testjkjk"] {
+  display: none;
+} */
+
+.w-full.flex-shrink-0.transform.cursor-grab.snap-center > div[style*="display: none;"] {
+  display: none;
+}
+
 
 .percent {
   background: url(/images/percent.png) no-repeat;

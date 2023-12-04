@@ -20,30 +20,30 @@ export default function RoomInformation() {
           </div>
         )}
       </div>
-      <div className="my-3 grid grid-cols-2 gap-3 lg:grid-cols-5">
-        <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
+      <div className="my-3 grid grid-cols-2 gap-5 lg:grid-cols-5 w-screen" style={{ width: '-webkit-fill-available' }}>
+        <div className="mx-auto mb-10 flex h-32 w-40 lg:w-full flex-col items-center shadow-md justify-center rounded-lg align-middle text-secondary-500 lg:mx-0">
           <RiUserLine className="text-4xl" />
           <div className="mt-3 text-base ">
             {advertisement && t("guestWithCount", { count: advertisement.tenant_number })}
           </div>
         </div>
 
-        <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
+        <div className="mx-auto mb-10 flex h-32 w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0">
           <BiBed className="text-4xl" />
           <div className="mt-3 text-base">
             {advertisement && t("advertisements:bedWithCount", { count: advertisement.beds })}
           </div>
         </div>
 
-        <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
+        <div className="mx-auto mb-10 flex h-32 w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0">
           <TbBed className="text-4xl" />
           <div className="mt-3 text-base">
             {advertisement && t("advertisements:roomWithCount", { count: advertisement.rooms })}
           </div>
         </div>
 
-        <div className="mx-auto mb-10 flex h-32 w-40 flex-col items-center justify-center rounded-lg align-middle text-secondary-500  shadow-2xl lg:mx-0">
-          <GrRestroom className="text-4xl" />
+        <div className="mx-auto mb-10 flex h-32 w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0">
+          <GrRestroom className="text-4xl  text-secondary-500" />
           <div className="mt-3 text-base">
             {advertisement && t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })}
           </div>

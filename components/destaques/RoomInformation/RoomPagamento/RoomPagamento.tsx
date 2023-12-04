@@ -25,6 +25,10 @@ import { useTranslation } from "next-i18next";
 type FormReservation = {
   number_guests: number;
 };
+const options = [
+  { value: 1, label: "1" },
+  { value: 2, label: "2" },
+];
 
 export const RoomPagamento = () => {
   const { t } = useTranslation();
@@ -87,7 +91,7 @@ export const RoomPagamento = () => {
   const [startDate, setStartDate] = useState(setInicialStartValue());
   const [endDate, setEndDate] = useState(setInicialEndValue());
   const [guests = 1, setGuestsNumber] = useState();
-
+// console.log(typeof(guests),'type')
   const {
     control,
     handleSubmit,
@@ -223,12 +227,10 @@ export const RoomPagamento = () => {
                 render={({ field: { onChange } }) => {
                   return (
                     <Input
-                      id="Hóspedes"
-                      type="number"
-                      value={guests || 1}
-                      onChange={(e) => setGuestsNumber(e.target.value)}
-                      min={1}
-                      max={advertisement!.beds * 2}
+                    id="Hóspedes"
+                    options={options}
+                    onChange={(e) => setGuestsNumber(e.target.value)}
+                    value={guests || "1"}
                     />
                   );
                 }}
