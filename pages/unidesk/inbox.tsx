@@ -27,8 +27,8 @@ import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
 import { IoSend } from "react-icons/io5";
-import { formatWithOptions } from 'date-fns/fp'
-import { enGB, pt } from 'date-fns/locale'
+import { formatWithOptions } from "date-fns/fp";
+import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
 
 {
@@ -141,7 +141,7 @@ const CaixaEntrada = () => {
   const clearConversation = () => {
     setCurrentConversation(undefined);
   };
-
+  
   return (
     <div className="mx-5 h-full rounded-xl border lg:border-none">
       <>
@@ -197,49 +197,50 @@ const CaixaEntrada = () => {
                     setCurrentMessage={setCurrentMessage}
                   />
                   {currentConversation && (
-                      <div className="w-96 border-l border-terciary-500 p-2">
-                        <>
-                          <div className="flex">
-                            <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
-                            <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                    <div className="w-96 border-l border-terciary-500 p-2">
+                      <>
+                        <div className="flex">
+                          <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
+                          <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                        </div>
+                        <div className="my-4 flex flex-row gap-3">
+                          <div>
+                            <Avatar
+                              img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
+                              rounded={true}
+                              status="away"
+                              size="md"
+                              statusPosition="bottom-right"
+                            />
                           </div>
-                          <div className="my-4 flex flex-row gap-3">
+                          <div>
                             <div>
-                              <Avatar
-                                img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
-                                rounded={true}
-                                status="away"
-                                size="md"
-                                statusPosition="bottom-right"
-                              />
+                              {(currentConversation.reservation.status &&
+                                t(ReservationStatusLabel[currentConversation.reservation.status])) ||
+                                ""}
                             </div>
-                            <div>
-                              <div>
-                                {(currentConversation.reservation.status &&
-                                  t(ReservationStatusLabel[currentConversation.reservation.status])) ||
-                                  ""}
-                              </div>
-                              <div className="text-sm">
-                                {currentConversation.reservation.advertisement &&
-                                  `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
+                            <div className="text-sm">
+                              {currentConversation.reservation.advertisement &&
+                                `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
-                              </div>
                             </div>
                           </div>
-                          <div className="my-4 flex justify-center">
-                            {`${t("common:on_date", {
-                              val: new Date(currentConversation.reservation?.start_date),
-                              formatParams: {
-                                val: { day: 'numeric', year: 'numeric', month: 'long' },
-                              },
-                            })} - ${t("common:on_date", {
-                              val: new Date(currentConversation.reservation?.end_date),
-                              formatParams: {
-                                val: { day: 'numeric', year: 'numeric', month: 'long' },
-                              },
-                            })}`}
-                          </div>
-                          {currentConversation.reservation.status === "REQUESTED" && (
+                        </div>
+                        <div className="my-4 flex justify-center">
+                          {`${t("common:on_date", {
+                            val: new Date(currentConversation.reservation?.start_date),
+                            formatParams: {
+                              val: { day: "numeric", year: "numeric", month: "long" },
+                            },
+                          })} - ${t("common:on_date", {
+                            val: new Date(currentConversation.reservation?.end_date),
+                            formatParams: {
+                              val: { day: "numeric", year: "numeric", month: "long" },
+                            },
+                          })}`}
+                        </div>
+                        {currentConversation.reservation.status === "REQUESTED" &&
+                          currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
                                 {t("accept")}
@@ -249,7 +250,8 @@ const CaixaEntrada = () => {
                               </Button>
                             </div>
                           )}
-                          {currentConversation.reservation.status === "CHANGE_REQUESTED" && (
+                        {currentConversation.reservation.status === "CHANGE_REQUESTED" &&
+                          currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">
                                 {t("accept")}
@@ -259,25 +261,25 @@ const CaixaEntrada = () => {
                               </Button>
                             </div>
                           )}
-                          <div
-                            className={classNames("my-1", {
-                              "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
-                                currentConversation.reservation.status
-                              ),
-                            })}
-                          >
-                            {t(
-                              ReservationStatusLabel[
-                                currentConversation.reservation.status as keyof typeof ReservationStatusLabel
-                              ]
-                            )}
-                          </div>
-                          <div className="text-small pt-5 text-center">
-                            <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
-                          </div>
-                        </>
-                      </div>
-                    )}
+                        <div
+                          className={classNames("my-1", {
+                            "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
+                              currentConversation.reservation.status
+                            ),
+                          })}
+                        >
+                          {t(
+                            ReservationStatusLabel[
+                              currentConversation.reservation.status as keyof typeof ReservationStatusLabel
+                            ]
+                          )}
+                        </div>
+                        <div className="text-small pt-5 text-center">
+                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
+                        </div>
+                      </>
+                    </div>
+                  )}
                 </div>
               </div>
             </>
