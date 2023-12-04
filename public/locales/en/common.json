@@ -131,5 +131,6 @@
   "no_available_spaces": "No available spaces",
   "date": "{{date}}",
   "you": "You",
-  "on_date": "{{val, datetime}}"
+  "on_date": "{{val, datetime}}",
+  "file-size": "One of the Files is too big. (Max. 2Mb)"
 }

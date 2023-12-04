@@ -21,6 +21,7 @@ import { BsDot, BsHeart } from "react-icons/bs";
 import ExpensesComponent, { CheckIfExpensesIncluded } from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 import { isArray } from "lodash";
+import router from "next/router";
 
 interface RoomCardProps {
   advertisement: AdvertisementWithReviewAverage;
@@ -36,7 +37,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
 
   const toggleFavourite = async (e: React.MouseEvent, advertId: string, isFavourite: boolean) => {
     e.stopPropagation();
-    if (!profile) return;
+    if (!profile) router.push("/auth/login");
     let { favourite_rooms } = isArray(profile) ? profile[0] : profile;
 
     if (isFavourite) {

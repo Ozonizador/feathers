@@ -102,7 +102,12 @@ const FormAnunciarPhotos = () => {
     if (event.target.files) {
       let newFiles: any[] = [];
       for (let file of event.target.files) {
-        newFiles.push(file);
+        if (file.size < 2097152) {
+          newFiles.push(file);
+        } else {
+          toast.error(t("common.file-size"));
+          break;
+        }
       }
 
       const newFilesUrl = newFiles.map((file) => URL.createObjectURL(file));
