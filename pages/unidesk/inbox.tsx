@@ -52,6 +52,9 @@ const CaixaEntrada = () => {
 
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [currentConversation, setCurrentConversation] = useState<ConversationComplete | undefined>(undefined);
+  const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
+    undefined
+  );
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -76,13 +79,14 @@ const CaixaEntrada = () => {
   };
 
   const getMessagesFromConversation = useCallback(async () => {
-    if (currentConversation) {
-      const { data, error } = await getMessagesFromConversationId(currentConversation.id);
-      if (!error) {
-        setMessages(data as MessageWithProfile[]);
+      if (currentConversation && currentConversation != currentConversationCompare) {
+        const { data, error } = await getMessagesFromConversationId(currentConversation.id);
+        if (!error) {
+          setMessages(data as MessageWithProfile[]);
+          setCurrentConversationCompare(currentConversation);
+        }
       }
-    }
-  }, [currentConversation]);
+  }, [currentConversation, currentConversationCompare, setCurrentConversationCompare]);
 
   const getConversationsTests = async () => {
     for (let conversation of conversations) {

@@ -74,17 +74,21 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
 
   const avatar = () => {
     if (messages != undefined && messages.length > 0) {
-      return (
-        <Avatar
-          alt="Hóspede"
-          img={profile?.avatar_url || messages[0].profile.avatar_url || "/icons/user/user.svg"}
-          rounded={true}
-          size="md"
-        />
-      );
+      for (let message of messages) {
+        if (message.id != reservation.advertisement.host_id) {
+          return (
+            <Avatar
+              alt="Hóspede"
+              img={ message.profile.avatar_url || "/icons/user/user.svg"}
+              rounded={true}
+              size="md"
+            />
+          );
+        }
+      }
     }
 
-    return <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="md" />;
+    return <Avatar alt="Hóspede" img={messagerProfile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="md" />;
   };
 
   const lastMessage = () => {
