@@ -48,9 +48,9 @@ export default function RoomSlider() {
         return amenitiesChunks.map((chunk, chunkIndex) => (
           <div key={`${zoneIndex}-${chunkIndex}`} className="flex flex-col gap-8">
             <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">
-              {chunkIndex==1? zone.label+ " "+ t("advertisements:more"):zone.label}
+              {chunkIndex==1? t("advertisements:More")+ " "+ zone.label:zone.label}
             </div>
-            <div className="mx-auto flex h-full w-11/12 flex-wrap lg:flex-nowrap justify-center gap-4 align-middle">
+            <div className="mx-auto pb-5 lg:pb-20 flex h-full w-11/12 flex-wrap lg:flex-nowrap justify-center gap-4 align-middle">
               {chunk.map((amenity, index) => {
                 const icon = houseAmenities(amenity as TypeAmenity);
                 return (

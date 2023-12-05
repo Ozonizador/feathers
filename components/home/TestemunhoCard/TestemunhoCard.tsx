@@ -9,7 +9,7 @@ interface TestemunhoCardProps {
 
 export default function TestemunhoCard({ img, testimonial, name }: TestemunhoCardProps) {
   return (
-    <article className="mx-auto w-fit max-w-[300px] rounded-xl bg-white px-4 py-2 lg:mb-8 lg:h-80 lg:w-full">
+    <article className="mx-auto w-fit max-w-[320px] rounded-xl bg-white px-4 py-2 lg:mb-8 lg:h-80 lg:w-full">
       <div className="h-2/3">
         <div>
           <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" className="rounded-lg py-4" />

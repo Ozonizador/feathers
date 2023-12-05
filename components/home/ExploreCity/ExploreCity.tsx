@@ -73,7 +73,7 @@ const ExploreCity = () => {
 const ExploreCityItem = ({ title, url, image }: CityProps) => {
   return (
     <Link href={url}>
-      <article className="group relative h-60 cursor-pointer rounded-2xl bg-black">
+      <article className="group relative mx-auto w-60 h-60 cursor-pointer rounded-2xl bg-black">
         <Image src={image} alt="tomar" fill className="rounded-2xl" />
         <div className="break-none absolute flex h-full w-full flex-col justify-center align-middle text-3xl font-bold text-white transition-all group-hover:text-[55px] group-hover:leading-none group-hover:text-neutral-200 group-hover:opacity-40">
           {title}
@@ -82,5 +82,6 @@ const ExploreCityItem = ({ title, url, image }: CityProps) => {
     </Link>
   );
 };
+
 
 export default ExploreCity;

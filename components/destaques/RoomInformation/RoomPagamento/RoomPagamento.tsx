@@ -26,8 +26,8 @@ type FormReservation = {
   number_guests: number;
 };
 const options = [
-  { value: 1, label: "1" },
-  { value: 2, label: "2" },
+  { value: 1, label: "1 person" },
+  { value: 2, label: "2 person" },
 ];
 
 export const RoomPagamento = () => {

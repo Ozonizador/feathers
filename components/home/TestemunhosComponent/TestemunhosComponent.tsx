@@ -18,7 +18,7 @@ const TestemunhosComponent = () => {
   const { t } = useTranslation();
   return (
     <section className="bg-terciary-300">
-      <div className="max-width">
+      <div className="max-width" style={{maxWidth: '90rem'}}>
         <div className="w-full">
           <h6 className="py-8 text-center text-3xl font-black">{t("index:section.testemonials.title")}</h6>
           <div className="testimonial-block hidden h-96 lg:flex">
@@ -29,7 +29,7 @@ const TestemunhosComponent = () => {
             >
               {group(Testemunhos, 3).map((children: TestemunhoInfo[], index: number) => {
                 return (
-                  <div key={index} className="flex gap-6 px-6 lg:justify-center">
+                  <div key={index} className="flex gap-6 px-6 lg:justify-evenly lg:py-100 ">
                     {children.map((testemunho: TestemunhoInfo, index: number) => {
                       return (
                         <div key={index}>
