@@ -40,6 +40,6 @@ export const isNumeric = (num: any) => {
 
 export const checkMonthsInAdvance = (date: Date) => {
   const today = new Date(date);
-  today.setMonth(today.getMonth() + +3);
+  today.setMonth(today.getMonth() + +2);
   return today;
 };

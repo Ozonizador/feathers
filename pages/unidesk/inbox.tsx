@@ -27,6 +27,10 @@ import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
 import { IoSend } from "react-icons/io5";
+import { formatWithOptions } from "date-fns/fp";
+import { enGB, pt } from "date-fns/locale";
+import Locale from "react-phone-number-input/locale/en.json";
+import router from "next/router";
 
 {
   /* page 59 XD */
@@ -49,6 +53,9 @@ const CaixaEntrada = () => {
 
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [currentConversation, setCurrentConversation] = useState<ConversationComplete | undefined>(undefined);
+  const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
+    undefined
+  );
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -73,13 +80,14 @@ const CaixaEntrada = () => {
   };
 
   const getMessagesFromConversation = useCallback(async () => {
-    if (currentConversation) {
+    if (currentConversation && currentConversation != currentConversationCompare) {
       const { data, error } = await getMessagesFromConversationId(currentConversation.id);
       if (!error) {
         setMessages(data as MessageWithProfile[]);
+        setCurrentConversationCompare(currentConversation);
       }
     }
-  }, [currentConversation]);
+  }, [currentConversation, currentConversationCompare, setCurrentConversationCompare]);
 
   const getConversationsTests = async () => {
     for (let conversation of conversations) {
@@ -193,46 +201,66 @@ const CaixaEntrada = () => {
                     currentMessage={currentMessage}
                     setCurrentMessage={setCurrentMessage}
                   />
-                  {currentConversation &&
-                    // @ts-ignore
-                    currentConversation.host_id === profile[0].id &&
-                    // @ts-ignore
-                    currentConversation.reservation.tenant_id !== profile[0].id && (
-                      <div className="w-96 border-l border-terciary-500 p-2">
-                        <>
-                          <div className="flex">
-                            <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
-                            <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                  {currentConversation && (
+                    <div className="w-96 border-l border-terciary-500 p-2">
+                      <>
+                        <div className="flex">
+                          <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
+                          <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                        </div>
+                        <div className="my-4 flex flex-row gap-3">
+                          <div>
+                            <Avatar
+                              img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
+                              rounded={true}
+                              status="away"
+                              size="md"
+                              statusPosition="bottom-right"
+                            />
                           </div>
-                          <div className="my-4 flex flex-row gap-3">
+                          <div>
                             <div>
-                              <Avatar
-                                img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
-                                rounded={true}
-                                status="away"
-                                size="md"
-                                statusPosition="bottom-right"
-                              />
+                              {(currentConversation.reservation.status &&
+                                t(ReservationStatusLabel[currentConversation.reservation.status])) ||
+                                ""}
                             </div>
-                            <div>
-                              <div>
-                                {(currentConversation.reservation.status &&
-                                  t(ReservationStatusLabel[currentConversation.reservation.status])) ||
-                                  ""}
-                              </div>
-                              <div className="text-sm">
-                                {currentConversation.reservation.advertisement &&
-                                  `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
+                            <div
+                              className="cursor-pointer text-sm"
+                              onClick={() =>
+                                router.push(`/anuncio/${currentConversation.reservation.advertisement.slug}`)
+                              }
+                            >
+                              {currentConversation.reservation.advertisement &&
+                                `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
-                              </div>
                             </div>
                           </div>
-                          <div className="my-4 flex justify-center">
-                            {`${currentConversation.reservation?.start_date || ""} - ${
-                              currentConversation.reservation?.end_date || ""
-                            }`}
-                          </div>
-                          {currentConversation.reservation.status === "REQUESTED" && (
+                        </div>
+                        <div className="my-4 flex justify-center">
+                          {`${t("common:on_date", {
+                            val: new Date(currentConversation.reservation?.start_date),
+                            formatParams: {
+                              val: { day: "numeric", month: "short" },
+                            },
+                          })} - ${t("common:on_date", {
+                            val: new Date(currentConversation.reservation?.end_date),
+                            formatParams: {
+                              val: { day: "numeric", year: "numeric", month: "short" },
+                            },
+                          })}`}
+                          <br />
+                          <br />
+                          {`${
+                            currentConversation.reservation.number_guests != 1
+                              ? t("common:guests", { val: currentConversation.reservation.number_guests })
+                              : t("common:guest")
+                          } - ${currentConversation.reservation.advertisement.month_rent}€`}
+                          <br />
+                          {`(${t("common:monthly_rent")})`}
+                        </div>
+                        {currentConversation.reservation.status === "REQUESTED" &&
+                          // @ts-ignore
+                          currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("ACCEPTED")} type="button">
                                 {t("accept")}
@@ -242,7 +270,9 @@ const CaixaEntrada = () => {
                               </Button>
                             </div>
                           )}
-                          {currentConversation.reservation.status === "CHANGE_REQUESTED" && (
+                        {currentConversation.reservation.status === "CHANGE_REQUESTED" &&
+                          // @ts-ignore
+                          currentConversation.host_id == profile[0]?.id && (
                             <div className="flex flex-col justify-around gap-3">
                               <Button onClick={() => updateReservationStatus("CHANGE_ACCEPTED")} type="button">
                                 {t("accept")}
@@ -252,25 +282,25 @@ const CaixaEntrada = () => {
                               </Button>
                             </div>
                           )}
-                          <div
-                            className={classNames("my-1", {
-                              "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
-                                currentConversation.reservation.status
-                              ),
-                            })}
-                          >
-                            {t(
-                              ReservationStatusLabel[
-                                currentConversation.reservation.status as keyof typeof ReservationStatusLabel
-                              ]
-                            )}
-                          </div>
-                          <div className="text-small pt-5 text-center">
-                            <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
-                          </div>
-                        </>
-                      </div>
-                    )}
+                        <div
+                          className={classNames("my-1", {
+                            "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
+                              currentConversation.reservation.status
+                            ),
+                          })}
+                        >
+                          {t(
+                            ReservationStatusLabel[
+                              currentConversation.reservation.status as keyof typeof ReservationStatusLabel
+                            ]
+                          )}
+                        </div>
+                        <div className="text-small pt-5 text-center">
+                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
+                        </div>
+                      </>
+                    </div>
+                  )}
                 </div>
               </div>
             </>
@@ -368,7 +398,7 @@ const MessagesSenderZone = ({
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}
             />
-            <input type="submit" className="hidden"/>
+            <input type="submit" className="hidden" />
             <div
               className="rounded-full bg-primary-400 p-2"
               onClick={(e) => {

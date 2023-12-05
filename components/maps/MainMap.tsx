@@ -1,16 +1,23 @@
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, Tooltip } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { Icon } from "leaflet";
 import { GEO } from "../../models/utils";
 import Button from "../utils/Button";
+import router from "next/router";
 
 interface MainMapProps {
   currentMapCoords?: GEO;
   showCenterMarker: boolean;
   draggableMarker?: boolean;
   allowZoom?: boolean;
-  markers?: GEO[];
+  markers?: Marker[];
   onChangeMarker?: (lat: number, lng: number) => void;
+}
+
+interface Marker {
+  title: string;
+  link: string;
+  geo: GEO;
 }
 
 let icon = new Icon({ iconUrl: "/icons/marker.svg", iconSize: [25, 41], iconAnchor: [12, 41] });
@@ -59,8 +66,7 @@ const MainMap = ({
       )}
       {!mapCenter && (
         <div className="flex h-full justify-center self-center">
-          <div className="my-auto w-32">
-          </div>
+          <div className="my-auto w-32"></div>
         </div>
       )}
     </>
@@ -101,15 +107,18 @@ const MapComponent = ({
               } catch {}
             },
           }}
-        ></Marker>
+        >
+        </Marker>
       )}
       {markers &&
         markers.map((marker, index) => {
           if (marker) {
-            const { lat, lng } = marker;
+            const { lat, lng } = marker.geo;
             return (
               <>
-                <Marker position={{ lat, lng: lng }} key={index} icon={icon}></Marker>
+                <Marker position={{ lat, lng: lng }} key={index} icon={icon} eventHandlers={{ click: (e) => {router.push(marker.link);} }}>
+                  <Tooltip>{marker.title}</Tooltip>
+                </Marker>
               </>
             );
           }

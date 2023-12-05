@@ -78,6 +78,7 @@
   "give_public_feedback": "Give your feedback public",
   "overall_rating": "Overall Rating",
   "uni-desk": "Uni-desk",
+  "Unidesk": "Uni-desk",
   "uni-controlo": "Uni-Control",
   "change_reservation": "Change Reservation",
   "reason_change_reservation": "Tell your landlord why you want to change your reservation",
@@ -120,6 +121,7 @@
   "rent_of_month": "Rent of {{month}} Month",
   "deposit": "Deposit",
   "on_check_day": " On the day of check-in",
+  "monthly_rent": "Monthly rent",
   "first_rent": "Primeira Rent",
   "first_rent_description": "Respective to 1 full month of income",
   "first_payment_description": "Advance payment for the month of <1/>",
@@ -129,5 +131,9 @@
   "in_area": "in area",
   "no_available_spaces": "No available spaces",
   "date": "{{date}}",
-  "you": "You"
+  "you": "You",
+  "on_date": "{{val, datetime}}",
+  "file-size": "The file {{name}} is too big. (Max. 2Mb)",
+  "guest": "1 guest",
+  "guests": "{{val}} guests."
 }

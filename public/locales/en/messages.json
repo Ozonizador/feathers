@@ -21,7 +21,7 @@
     "advert_was_updated": "Advert Updated",
     "updated_password": "Password changed",
     "register_done": "Registration Successful",
-    "reservation_requested": "Reservation created"
+    "reservation_requested": "Reservation request created"
   },
   "default_message": "The host is reviewing the reservation"
 }

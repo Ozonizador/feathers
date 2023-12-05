@@ -56,14 +56,17 @@ export default function ProcurarSection() {
   }, 400);
 
   const getAdvertisementsMarkers = () => {
-    const markers: GEO[] = [];
+    const markers: { title: string; link: string; geo: GEO }[] = [];
     for (let advertisement of advertisements) {
       if (advertisement.geom) {
-        markers.push(
-          coordinatesArrayToGeoPoint(
+        let marker = {
+          title: advertisement.title,
+          link: `/anuncio/${advertisement.slug}`,
+          geo: coordinatesArrayToGeoPoint(
             (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates
-          )
-        );
+          ),
+        };
+        markers.push(marker);
       }
     }
     return markers;
@@ -216,7 +219,13 @@ export default function ProcurarSection() {
         </div>
         <div className="z-10 hidden w-1/2 px-5 lg:block lg:h-[500px]">
           <MapWithNoSSR
-            currentMapCoords={coordinates ? coordinates.coordinates : currentMapCoordinates}
+            currentMapCoords={
+              coordinates
+                ? coordinates.coordinates
+                : currentMapCoordinates
+                ? currentMapCoordinates
+                : { lat: 38.707751, lng: -9.136592 }
+            }
             markers={getAdvertisementsMarkers()}
             showCenterMarker={false}
           />

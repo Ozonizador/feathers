@@ -77,6 +77,7 @@
   "give_public_feedback": "Deixa o teu feedback público",
   "overall_rating": "Avaliação Geral",
   "uni-desk": "Uni-desk",
+  "Unidesk": "Uni-desk",
   "uni-controlo": "Uni-Controlo",
   "change_reservation": "Alterar reserva",
   "reason_change_reservation": "Diz ao teu senhorio porque queres alterar a tua reserva",
@@ -120,6 +121,7 @@
   "deposit": "Caução",
   "on_check_day": "No dia do Check-in",
   "first_rent": "Primeira Renda",
+  "monthly_rent": "Renda mensal",
   "first_rent_description": "Respectivo a 1 mês completo de renda",
   "first_payment_description": "Pagamento antecipado respetivo ao mês de <1/>",
   "available_options": "{{count}} <1/>",
@@ -128,5 +130,9 @@
   "in_area": "na zona",
   "no_available_spaces": "Não tem espaços disponíveis",
   "date": "{{date}}",
-  "you": "Você"
+  "you": "Você",
+  "on_date": "{{val, datetime}}",
+  "file-size": "O ficheiro {{name}} é demasiado grande. (Max. 2Mb)",
+  "guest": "1 hóspede",
+  "guests": "{{val}} hóspedes."
 }

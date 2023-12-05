@@ -7,6 +7,7 @@ import {
   UNICONTROLO_GUESTS_URL,
   UNIDESK_SENHORIO_CALENDAR_URL,
   UNIDESK_SENHORIO_PAINEL_URL,
+  UNIDESK_SENHORIO_RESERVAS_URL,
   UNIDESK_SENHORIO_REVIEWS_URL,
 } from "../../../models/paths";
 import { useTranslation } from "next-i18next";
@@ -41,7 +42,24 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           url={UNIDESK_SENHORIO_PAINEL_URL}
           label={t("admin:unidesk.common.panel")}
           activeLink={activeUrl === "main_panel"}
-        ></MenuOption>
+        />
+        <MenuOption
+          url={UNIDESK_SENHORIO_RESERVAS_URL}
+          label={t("admin:unidesk.common.reservations")}
+          activeLink={activeUrl === "reservations"}
+        />
+        <MenuOption
+          blocked={false}
+          url={UNIDESK_SENHORIO_CALENDAR_URL}
+          label="admin:unidesk.common.calendar"
+          activeLink={activeUrl === "calendar"}
+        />
+        <MenuOption
+          blocked={false}
+          url={UNIDESK_SENHORIO_REVIEWS_URL}
+          label={t("admin:unidesk.landlord.reviews")}
+          activeLink={activeUrl === "reviews"}
+        />
       </MenuGrouper>
       {currentAdvertisement && (
         <MenuGrouper
@@ -81,18 +99,6 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
         selectedGroup={activeSection === "uni-controlo"}
         defaultOpen={activeSection === "uni-controlo"}
       >
-        <MenuOption
-          blocked={false}
-          url={UNIDESK_SENHORIO_CALENDAR_URL}
-          label="admin:unidesk.common.calendar"
-          activeLink={activeUrl === "calendar"}
-        />
-        <MenuOption
-          blocked={false}
-          url={UNIDESK_SENHORIO_REVIEWS_URL}
-          label={t("admin:unidesk.landlord.reviews")}
-          activeLink={activeUrl === "reviews"}
-        />
         <MenuOption
           blocked={false}
           url={UNICONTROLO_GUESTS_URL}

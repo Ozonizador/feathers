@@ -203,7 +203,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
               {userAppMode == "TENANT" && (
                 <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
-                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>{t("uni-desk")}</div>
+                  <div onClick={() => selectMenuButton(UNIDESK_URL)}>{t("common:uni-desk")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>{t("my_stay")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>
                     {t("favourites", { count: 2 })}
