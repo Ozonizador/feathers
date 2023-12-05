@@ -1,10 +1,10 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import { FormProvider, useForm } from "react-hook-form";
-import FaqFormContainer, { FaqAdminForm } from "../../../../components/superadmin/FaqFormContainer";
-import { Faq, Faqs, FAQS_TABLE_NAME } from "../../../../models/faq";
-import { SUPERADMIN_FAQS_URL } from "../../../../models/paths";
-import { trpc } from "../../../../utils/trpc";
+import FaqFormContainer, { FaqAdminForm } from "../../../components/superadmin/FaqFormContainer";
+import { Faq, Faqs, FAQS_TABLE_NAME } from "../../../models/faq";
+import { SUPERADMIN_FAQS_URL } from "../../../models/paths";
+import { trpc } from "../../../utils/trpc";
 
 type FaqIdPageProps = {
   faq: Faq;

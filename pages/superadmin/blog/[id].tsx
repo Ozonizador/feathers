@@ -1,10 +1,10 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import { useForm, FormProvider } from "react-hook-form";
-import BlogFormContainer, { BlogAdminForm } from "../../../../components/superadmin/BlogFormContainer";
-import { Blog, BlogsResponse, BLOG_TABLE_NAME } from "../../../../models/blog";
-import { SUPERADMIN_BLOGS_URL } from "../../../../models/paths";
-import { trpc } from "../../../../utils/trpc";
+import BlogFormContainer, { BlogAdminForm } from "../../../components/superadmin/BlogFormContainer";
+import { Blog, BlogsResponse, BLOG_TABLE_NAME } from "../../../models/blog";
+import { SUPERADMIN_BLOGS_URL } from "../../../models/paths";
+import { trpc } from "../../../utils/trpc";
 
 type BlogIdPageProps = {
   blog: Blog;
