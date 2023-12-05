@@ -1,5 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
+import imageCompression from 'browser-image-compression';
 
 import {
   Advertisement,
@@ -100,11 +101,26 @@ const useAdvertisementService = () => {
 
   const saveImage = async (advertisementID: string, fileName: string, file: File) => {
     fileName = fileName.replace(/([^a-z0-9 ]+)/gi, '-');
+
+    const options = {
+      maxSizeMB: 1
+    }
+    try {
+      file = await imageCompression(file, options);
+    } catch (error) {
+      console.log(error);
+    }
+
     const { data, error } = await supabaseClient.storage
       .from(ADVERTISEMENT_STORAGE_BUCKET)
       .upload(`${advertisementID}/${fileName}`, file, { cacheControl: "3600", upsert: false });
 
     if (error) {
+      if (error.name == "Duplicate") {
+        await supabaseClient.storage
+      .from(ADVERTISEMENT_STORAGE_BUCKET)
+      .upload(`${advertisementID}/${fileName}`, file, { cacheControl: "3600", upsert: false });
+      }
       return { data: null, error };
     }
     return getPublicUrlFromImage(data.path);
