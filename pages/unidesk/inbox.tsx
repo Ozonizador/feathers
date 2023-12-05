@@ -30,6 +30,7 @@ import { IoSend } from "react-icons/io5";
 import { formatWithOptions } from "date-fns/fp";
 import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
+import router from "next/router";
 
 {
   /* page 59 XD */
@@ -79,13 +80,13 @@ const CaixaEntrada = () => {
   };
 
   const getMessagesFromConversation = useCallback(async () => {
-      if (currentConversation && currentConversation != currentConversationCompare) {
-        const { data, error } = await getMessagesFromConversationId(currentConversation.id);
-        if (!error) {
-          setMessages(data as MessageWithProfile[]);
-          setCurrentConversationCompare(currentConversation);
-        }
+    if (currentConversation && currentConversation != currentConversationCompare) {
+      const { data, error } = await getMessagesFromConversationId(currentConversation.id);
+      if (!error) {
+        setMessages(data as MessageWithProfile[]);
+        setCurrentConversationCompare(currentConversation);
       }
+    }
   }, [currentConversation, currentConversationCompare, setCurrentConversationCompare]);
 
   const getConversationsTests = async () => {
@@ -223,7 +224,12 @@ const CaixaEntrada = () => {
                                 t(ReservationStatusLabel[currentConversation.reservation.status])) ||
                                 ""}
                             </div>
-                            <div className="text-sm">
+                            <div
+                              className="cursor-pointer text-sm"
+                              onClick={() =>
+                                router.push(`/anuncio/${currentConversation.reservation.advertisement.slug}`)
+                              }
+                            >
                               {currentConversation.reservation.advertisement &&
                                 `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
@@ -234,14 +240,23 @@ const CaixaEntrada = () => {
                           {`${t("common:on_date", {
                             val: new Date(currentConversation.reservation?.start_date),
                             formatParams: {
-                              val: { day: "numeric", year: "numeric", month: "long" },
+                              val: { day: "numeric", month: "short" },
                             },
                           })} - ${t("common:on_date", {
                             val: new Date(currentConversation.reservation?.end_date),
                             formatParams: {
-                              val: { day: "numeric", year: "numeric", month: "long" },
+                              val: { day: "numeric", year: "numeric", month: "short" },
                             },
                           })}`}
+                          <br />
+                          <br />
+                          {`${
+                            currentConversation.reservation.number_guests != 1
+                              ? t("common:guests", { val: currentConversation.reservation.number_guests })
+                              : t("common:guest")
+                          } - ${currentConversation.reservation.advertisement.month_rent}€`}
+                          <br />
+                          {`(${t("common:monthly_rent")})`}
                         </div>
                         {currentConversation.reservation.status === "REQUESTED" &&
                           // @ts-ignore

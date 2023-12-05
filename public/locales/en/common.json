@@ -121,6 +121,7 @@
   "rent_of_month": "Rent of {{month}} Month",
   "deposit": "Deposit",
   "on_check_day": " On the day of check-in",
+  "monthly_rent": "Monthly rent",
   "first_rent": "Primeira Rent",
   "first_rent_description": "Respective to 1 full month of income",
   "first_payment_description": "Advance payment for the month of <1/>",
@@ -132,5 +133,7 @@
   "date": "{{date}}",
   "you": "You",
   "on_date": "{{val, datetime}}",
-  "file-size": "The file {{name}} is too big. (Max. 2Mb)"
+  "file-size": "The file {{name}} is too big. (Max. 2Mb)",
+  "guest": "1 guest",
+  "guests": "{{val}} guests."
 }
