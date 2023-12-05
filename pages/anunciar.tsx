@@ -1,5 +1,4 @@
 import React from "react";
-
 import FormInicio from "../components/anunciar/FormInicio";
 import FormCapacidade from "../components/anunciar/FormCapacidade";
 import FormSobreCasa from "../components/anunciar/FormSobreCasa";
@@ -9,7 +8,6 @@ import FormAboutHouse from "../components/anunciar/FormAboutHouse";
 import FormPrices from "../components/anunciar/FormPrices";
 import FormTipoHost from "../components/anunciar/FormTipoHost";
 import FormTermos from "../components/anunciar/FormTermos";
-
 import Stepper from "../components/anunciar/Stepper";
 import { AnunciarProvider, useCurrentStep } from "../context/AnunciarProvider";
 import { AdvertisementController } from "../context/AdvertisementController";
