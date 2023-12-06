@@ -31,7 +31,7 @@ function EditActiveIcon(props: any) {
 
 function VerifyActiveIcon(props:any) {
   return (
-    <img {...props} src="/images/homeSection2-1.svg" alt="" />
+    <Image width={80} height={80} {...props} src="/images/homeSection2-1.svg" alt="" />
   );
 }
 

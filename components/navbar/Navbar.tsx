@@ -69,13 +69,11 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    // @ts-ignore
-    console.log(profile);
     if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
       setHasRunOnce(true);
     }
-  }, [userAppMode, profile]);
+  }, [userAppMode, profile, hasRunOnce]);
 
   return (
     <header className="px-5 lg:px-0">

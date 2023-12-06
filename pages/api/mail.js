@@ -2,7 +2,7 @@ const mail = require("@sendgrid/mail");
 
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
-export default async (req, res) => {
+const sendMail = async (req, res) => {
   const body = JSON.parse(req.body);
   try {
     await mail.send({
@@ -20,3 +20,5 @@ export default async (req, res) => {
     res.status(400).json({ status: "ERROR", message: error.message });
   }
 };
+
+export default sendMail;

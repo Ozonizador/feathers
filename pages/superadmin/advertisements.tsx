@@ -45,6 +45,7 @@ const FaqSuperAdminPage = () => {
           if ((currentPage - 1) * totalPerPage < index && index < currentPage * totalPerPage) {
             return (
               <div
+                key={index}
                 className={
                   index != totalPerPage - 1 + (currentPage - 1) * totalPerPage
                     ? "gap-1 border-b border-neutral-100"
@@ -52,6 +53,7 @@ const FaqSuperAdminPage = () => {
                 }
               >
                 <SuperAdminAdvertisementItem
+                  key={advertisement.id}
                   id={advertisement.id}
                   title={advertisement.title}
                   place={advertisement.place}

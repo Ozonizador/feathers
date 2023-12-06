@@ -5,6 +5,7 @@ import { RiUserLine } from "react-icons/ri";
 import { TbBed } from "react-icons/tb";
 import { useGetSingleAdvertisement } from "../../../context/ShowingSingleAdvertisementProvider";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
 
 export default function RoomInformation() {
   const advertisement = useGetSingleAdvertisement();
@@ -16,7 +17,7 @@ export default function RoomInformation() {
         {advertisement?.verified && (
           <div className="text-md flex items-end">
             <p className="text-md">{t("advertisements:house_verified")}</p>
-            <img className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
+            <Image className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
           </div>
         )}
       </div>

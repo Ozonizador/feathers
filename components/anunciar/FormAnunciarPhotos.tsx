@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import Button from "../utils/Button";
 import { HouseZones } from "../../models/advertisement";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 const FormAnunciarPhotos = () => {
   const { t } = useTranslation();
@@ -189,7 +190,7 @@ const FormAnunciarPhotos = () => {
                 >
                   x
                 </div>
-                <img className="image" src={URL.createObjectURL(file)} alt={`Image ${index}`} id={`${file.name}`} />
+                <Image className="image" src={URL.createObjectURL(file)} alt={`Image ${index}`} id={`${file.name}`} />
               </div>
             ))}
           </div>
@@ -208,7 +209,7 @@ const FormAnunciarPhotos = () => {
                   >
                     x
                   </div>
-                  <img
+                  <Image
                     className="image h-full w-full"
                     src={URL.createObjectURL(file)}
                     alt={`Image ${index}`}
