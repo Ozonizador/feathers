@@ -4,12 +4,10 @@ import { SetStateAction, useEffect, useState } from "react";
 import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS, Profile } from "../../models/profile";
 import { trpc } from "../../utils/trpc";
-import Checkbox from "../../components/utils/Checkbox";
 import { useTranslation } from "react-i18next";
 import { Pagination } from "flowbite-react";
 import Button from "../../components/utils/Button";
-import { RiH6 } from "react-icons/ri";
-import Image from "next/image";
+import { FaUser } from "react-icons/fa6";
 
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.profile.getAllProfiles.useQuery();
@@ -77,14 +75,20 @@ const SuperAdminProfileItem = ({
   surname,
   birth_date,
   nationality,
-  email
+  email,
 }: SuperAdminProfileItemProps) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
   return (
     <div className="flex w-full">
       <div className="flex flex-col gap-1 py-5">
-        <img width={80} height={80} src={avatar_url != null ? avatar_url : ""} alt="Foto de Perfil"/>
-        <h6 className="text-xl font-black">{name + " " + surname}</h6>
+        <div className="flex">
+          {avatar_url != null && avatar_url != undefined && avatar_url != "" ? (
+            <img src={avatar_url!} alt="Foto de Perfil" className="h-10 w-10 rounded-full bg-cover" />
+          ) : (
+            <div className="h-10 w-10 border rounded-full flex items-center justify-center"><FaUser color="gray"/></div>
+          )}
+          <h6 className="ml-4 flex items-center text-xl font-black">{name + " " + surname}</h6>
+        </div>
         {showInfo && (
           <div className="">
             {birth_date != null ? <h6>Data de nascimento: {nationality}</h6> : ""}
@@ -93,9 +97,9 @@ const SuperAdminProfileItem = ({
           </div>
         )}
       </div>
-      <div className="my-auto ml-auto flex h-10 gap-3">
+      <div className="ml-auto mt-5 flex h-10 gap-3">
         <Button type={"button"} onClick={() => setShowInfo(!showInfo)}>
-          Mostrar Info
+          {showInfo ? "Esconder Info" : "Mostrar Info"}
         </Button>
       </div>
     </div>
@@ -115,7 +119,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/faqs",
+        destination: "/",
         permanent: false,
       },
     };
