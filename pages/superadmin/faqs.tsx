@@ -2,19 +2,21 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
-import { supabaseAdmin } from "../../../lib/supabaseAdminClient";
-import { Faq } from "../../../models/faq";
-import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../../models/profile";
-import { trpc } from "../../../utils/trpc";
+import { supabaseAdmin } from "../../lib/supabaseAdminClient";
+import { Faq } from "../../models/faq";
+import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../models/profile";
+import { trpc } from "../../utils/trpc";
 import { FormProvider, useForm } from "react-hook-form";
-import Button from "../../../components/utils/Button";
+import Button from "../../components/utils/Button";
 import Link from "next/link";
-import FaqFormContainer, { FaqAdminForm } from "../../../components/superadmin/FaqFormContainer";
+import FaqFormContainer, { FaqAdminForm } from "../../components/superadmin/FaqFormContainer";
 import { TfiPlus } from "react-icons/tfi";
+import { useTranslation } from "react-i18next";
 
 const FaqSuperAdminPage = () => {
   const [selectedFaq, setSelectedFaq] = useState<"TENANT" | "LANDLORD">("LANDLORD");
   const { data, refetch } = trpc.faqs.getFaqs.useQuery();
+  const { t } = useTranslation();
 
   const addFaq = trpc.faqs.addFaq.useMutation();
   const removeFaq = trpc.faqs.removeFaq.useMutation();
@@ -44,13 +46,13 @@ const FaqSuperAdminPage = () => {
           onClick={() => setSelectedFaq("TENANT")}
           className={classNames({ "text-primary-500": selectedFaq === "TENANT" })}
         >
-          Estudante
+          {t("common:student_one")}
         </div>
         <div
           onClick={() => setSelectedFaq("LANDLORD")}
           className={classNames({ "text-primary-500": selectedFaq === "LANDLORD" })}
         >
-          Senhorio
+          {t("common:landlord_one")}
         </div>
       </div>
       <div className="flex flex-col">
@@ -96,7 +98,7 @@ const SuperAdminFaqItem = ({ answer, question, id, removerFaq }: SuperAdminFaqIt
       </div>
       <div className="my-auto ml-auto flex h-10 gap-3">
         <div className="cursor-pointer rounded-xl border border-primary-500 p-2 px-4 text-primary-500">
-          <Link href={`/unihosts/superadmin/faq/${id}`}>Edit</Link>
+          <Link href={`/superadmin/faq/${id}`}>Edit</Link>
         </div>
 
         <Button type={"button"} onClick={() => removerFaq(id)}>
@@ -117,6 +119,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     data: { session },
   } = await supabase.auth.getSession();
 
+
   if (!session)
     return {
       redirect: {
@@ -132,7 +135,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .eq(PROFILE_COLUMNS.ID, user.id)
     .single();
 
-  console.log(error, data?.user_type);
 
   if (error || !data || data.user_type !== "ADMIN")
     return {

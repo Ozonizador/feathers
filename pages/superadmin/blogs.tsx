@@ -2,19 +2,21 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
-import { supabaseAdmin } from "../../../lib/supabaseAdminClient";
-import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../../models/profile";
-import { trpc } from "../../../utils/trpc";
+import { supabaseAdmin } from "../../lib/supabaseAdminClient";
+import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../models/profile";
+import { trpc } from "../../utils/trpc";
 import { FormProvider, useForm } from "react-hook-form";
 import Link from "next/link";
 import { TfiPlus } from "react-icons/tfi";
-import BlogFormContainer, { BlogAdminForm } from "../../../components/superadmin/BlogFormContainer";
-import { Blog } from "../../../models/blog";
+import BlogFormContainer, { BlogAdminForm } from "../../components/superadmin/BlogFormContainer";
+import { Blog } from "../../models/blog";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const FaqSuperAdminPage = () => {
   const [selectedFaq, setSelectedFaq] = useState<"TENANT" | "LANDLORD">("LANDLORD");
   const { data, refetch } = trpc.blogs.getBlogs.useQuery();
+  const { t } = useTranslation();
 
   const addBlog = trpc.blogs.addBlogPost.useMutation();
 
@@ -95,7 +97,7 @@ const SuperAdminBlogItem = ({ title, description, id }: SuperAdminBlogItemProps)
         <div className="mb-5 flex gap-3">
           <h6 className="text-xl font-black">{title}</h6>
           <div className="my-auto ml-auto flex h-10 cursor-pointer gap-3 rounded-xl border border-primary-500 p-2 px-4 text-primary-500">
-            <Link href={`/unihosts/superadmin/blog/${id}`}>Edit</Link>
+            <Link href={`/superadmin/blog/${id}`}>Edit</Link>
           </div>
         </div>
         <p className="line-clamp-5">{description}</p>
@@ -132,7 +134,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (error || !data || data.user_type !== "ADMIN")
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: "/blog",
         permanent: false,
       },
     };
