@@ -96,7 +96,8 @@
     "semester_discount": "Semester Discount",
     "discounts": "Discounts",
     "monthWithCount_one": "{{count}} Month",
-    "monthWithCount_other": "{{count}} Months"
+    "monthWithCount_other": "{{count}} Months",
+    "show_reservation_request": "Show Reservation requests?"
   },
   "report": {
     "title": "Why are you reporting this account?",

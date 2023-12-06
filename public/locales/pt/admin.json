@@ -96,7 +96,8 @@
     "semester_discount": "Desconto Semestral",
     "discounts": "Descontos",
     "monthWithCount_one": "{{count}} Mês",
-    "monthWithCount_other": "{{count}} Meses"
+    "monthWithCount_other": "{{count}} Meses",
+    "show_reservation_request": "Mostrar Pedidos de Reserva?"
   },
   "report": {
     "title": "Porque estás a denunciar esta conta?",
