@@ -23,6 +23,7 @@ import {
   GiPillow,
   GiHotMeal,
   GiCoffeePot,
+  GiTowel
 } from "react-icons/gi";
 import { GrFan, GrRestroomMen } from "react-icons/gr";
 import {
@@ -43,6 +44,7 @@ import {
 import { TbSofa, TbBed, TbHanger } from "react-icons/tb";
 import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
 import { FiMonitor } from "react-icons/fi";
+import { LuBedSingle } from "react-icons/lu";
 
 const hostTypeFlexDescription = (type: HostFlexType) => {
   return {
@@ -147,7 +149,7 @@ export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
       return MdLocalLaundryService;
     case "MEAL_ZONE":
       return GiHotMeal;
-    case "BASIC_UTILIES":
+    case "BASIC_UTILITIES":
       return BiBold;
     case "KEY_TO_LOCK_DOOR":
       return BsKey;
@@ -159,6 +161,12 @@ export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
       return BiPlug;
     case "CLOSET":
       return BiCloset;
+    case "BLACKOUTS":
+      return BiCloset;
+    case "TOWELS":
+      return GiTowel;
+    case "BED_LINEN":
+      return LuBedSingle;
     default:
       return undefined;
     // case   "COURTYARD": return COURTYARD

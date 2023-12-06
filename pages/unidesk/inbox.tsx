@@ -164,11 +164,11 @@ const CaixaEntrada = () => {
 
                 <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
                 {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
-              </div>
+              </div>  
 
               <div className="flex flex-col">
                 <div className="flex flex-row">
-                  <div className="flex w-96 flex-col border-r border-terciary-500">
+                  <div className="flex w-96 flex-col border-r border-terciary-500 overflow-y-scroll" style={{ height: '40rem', minWidth: '285px'}} id="left-scroll">
                     {conversations.map((conversation, index) => {
                       if (allMessages.length < 1) {
                         getAllMessages();
@@ -202,12 +202,13 @@ const CaixaEntrada = () => {
                     setCurrentMessage={setCurrentMessage}
                   />
                   {currentConversation && (
-                    <div className="w-96 border-l border-terciary-500 p-2">
+                    <div className="border-l border-terciary-500 p-2" style={{minWidth: '17rem'}}>
                       <>
                         <div className="flex">
                           <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
                           <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
                         </div>
+                        <div className="p-2">
                         <div className="my-4 flex flex-row gap-3">
                           <div>
                             <Avatar
@@ -218,8 +219,8 @@ const CaixaEntrada = () => {
                               statusPosition="bottom-right"
                             />
                           </div>
-                          <div>
-                            <div>
+                          <div className="pl-2 text-start">
+                            <div className="font-bold">
                               {(currentConversation.reservation.status &&
                                 t(ReservationStatusLabel[currentConversation.reservation.status])) ||
                                 ""}
@@ -233,10 +234,8 @@ const CaixaEntrada = () => {
                               {currentConversation.reservation.advertisement &&
                                 `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="my-4 flex justify-center">
+                              </div>
+                              <div className="my-4 flex justify-start text-left text-sm">
                           {`${t("common:on_date", {
                             val: new Date(currentConversation.reservation?.start_date),
                             formatParams: {
@@ -258,6 +257,9 @@ const CaixaEntrada = () => {
                           <br />
                           {`(${t("common:monthly_rent")})`}
                         </div>
+                          </div>
+                        </div>
+                  
                         {currentConversation.reservation.status === "REQUESTED" &&
                           // @ts-ignore
                           currentConversation.host_id == profile[0]?.id && (
@@ -283,7 +285,7 @@ const CaixaEntrada = () => {
                             </div>
                           )}
                         <div
-                          className={classNames("my-1", {
+                          className={classNames("my-1 text-center", {
                             "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
                               currentConversation.reservation.status
                             ),
@@ -294,10 +296,12 @@ const CaixaEntrada = () => {
                               currentConversation.reservation.status as keyof typeof ReservationStatusLabel
                             ]
                           )}
-                        </div>
+                          </div>
+                          {/* ======= */}
                         <div className="text-small pt-5 text-center">
                           <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
-                        </div>
+                          </div>
+                          </div>
                       </>
                     </div>
                   )}
@@ -382,13 +386,13 @@ const MessagesSenderZone = ({
   const { t } = useTranslation();
   return (
     <div className="flex max-h-screen w-full flex-col gap-2">
-      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2 lg:h-96">
+      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{height:'40rem'}} id='right-scroll'>
         {messages.map((message, index, array) => {
           return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
         })}
       </div>
 
-      <div className="-between mt-auto flex w-full items-center border-t border-terciary-500 pr-4 align-middle">
+      <div className="-between flex w-full items-center border-t border-terciary-500 pr-4 align-middle">
         <div className="mr-2 w-full">
           <form onSubmit={(e) => sendMessage(e, conversationId)} className="flex items-center">
             <input

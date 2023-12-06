@@ -25,13 +25,13 @@ import { useTranslation } from "next-i18next";
 type FormReservation = {
   number_guests: number;
 };
-const options = [
-  { value: 1, label: "1 person" },
-  { value: 2, label: "2 person" },
-];
 
 export const RoomPagamento = () => {
   const { t } = useTranslation();
+  const options = [
+    { value: 1, label: 1 +' '+ t("advertisements:person") },
+    { value: 2, label: 2 +' '+ t("advertisements:person") },
+  ];
   const router = useRouter();
   const profile = useCurrentUser();
   const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
