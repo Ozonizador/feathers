@@ -130,5 +130,6 @@
   "amount": "Amount:",
   "cover": "Cover Photo",
   "other": "Other Photos",
-  "house_verified": "Verified House"
+  "house_verified": "Verified House",
+  "person": "person"
 }

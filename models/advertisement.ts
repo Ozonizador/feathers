@@ -246,12 +246,14 @@ export const AMENITIES = [
   "LAUNDRY_MACHINE",
   "CLOSET",
   "MEAL_ZONE",
-  "BASIC_UTILIES",
+  "BASIC_UTILITIES",
   "KEY_TO_LOCK_DOOR",
   "HANGERS_SUPPORT",
   "HOT_WATER_KETTLE",
   "POWER_PLUG_NEAR_BED",
   "TWO_BEDS",
+  "TOWELS",
+  "BED_LINEN"
 ] as const;
 
 export type Amenity = typeof AMENITIES;
@@ -302,12 +304,14 @@ export const TypeAmenityLabel = {
   GARBAGE_CAN: "amenities:garbage_can",
   LAUNDRY_MACHINE: "amenities:laundry_machine",
   MEAL_ZONE: "amenities:meal_zone",
-  BASIC_UTILIES: "amenities:basic_utilities",
+  BASIC_UTILITIES: "amenities:basic_utilities",
+  TOWELS: "amenities:towels",
   KEY_TO_LOCK_DOOR: "amenities:key_to_lock_door",
   HANGERS_SUPPORT: "amenities:hangers_support",
   HOT_WATER_KETTLE: "amenities:hot_water_kettle",
   POWER_PLUG_NEAR_BED: "amenities:power_plug_near_bed",
   TWO_BEDS: "amenities:two_beds",
+  BED_LINEN: "amenities:bed_linen"
 } as const;
 
 /* FOR THE SELECT ON PROCURAR */
@@ -331,6 +335,7 @@ export const AboutHouseCommodities = {
     { type: "FIREPLACE" },
     { type: "SOFA" },
     { type: "TABLE" },
+    { type: "BED_LINEN"}
   ],
   bedroom: [
     { type: "SINGLE_BED" },
@@ -356,6 +361,7 @@ export const AboutHouseCommodities = {
     { type: "MIRROR" },
     { type: "BATHTUB" },
     { type: "SHOWER" },
+    { type: "TOWELS" }
   ],
   kitchen: [
     { type: "FRIDGE" },
@@ -367,7 +373,7 @@ export const AboutHouseCommodities = {
     { type: "WASHING_MACHINE" },
     { type: "EXAUSTOR_FAN" },
     { type: "CUTLERY" },
-    { type: "BASIC_UTILIES" },
+    { type: "BASIC_UTILITIES" },
     { type: "FREEZER" },
     { type: "HOT_WATER_KETTLE" },
     { type: "TABLE" },

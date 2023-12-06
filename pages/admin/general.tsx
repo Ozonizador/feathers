@@ -119,16 +119,28 @@ const Index = ({ user, profileData }: IndexProps) => {
   /* Avatar */
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-
-    if (event.target.files) {
-      let file = event.target.files[0] as File;
-      const { data, error } = await addAvatar(profile.id, file.name, file);
-      if (!error) {
-        setProfile({ ...profile, avatar_url: data });
-      }
+  
+    const files = event.target.files;
+  
+    if (!files || files.length === 0) {
+      // No files selected
+      return;
+    }
+  
+    const file = files[0];
+  
+    if (!file || !file.name) {
+      // Invalid or missing file object
+      return;
+    }
+  
+    const { data, error } = await addAvatar(profile.id, file.name, file);
+  console.log(error,"data")
+    if (!error) {
+      setProfile({ ...profile, avatar_url: data });
     }
   };
-
+  
   return (
     <div className="mx-auto mb-20 w-full sm:container lg:w-10/12">
       <Breadcrumbs paths={paths} />
@@ -139,10 +151,10 @@ const Index = ({ user, profileData }: IndexProps) => {
         >
           <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">{t("admin:config.general")}</div>
           <div className="mb-5 mt-5">
-            <div className="flex items-center justify-center lg:justify-start">
+            <div className="flex items-center justify-center lg:justify-start" id="profile">
               <label
                 htmlFor="files"
-                className="relative cursor-pointer rounded-full border border-primary-500 bg-white p-3 text-indigo-500"
+                className="relative cursor-pointer rounded-full border border-primary-500 bg-white text-indigo-500"
               >
                 <Avatar
                   img={profile?.avatar_url || "/images/user-general.png"}

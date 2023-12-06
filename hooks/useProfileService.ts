@@ -90,6 +90,7 @@ const useProfileService = () => {
   };
 
   const addAvatar = async (userId: string, fileName: string, file: File) => {
+    console.log(userId,fileName,file,"filefilefilefilefile" )
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .select("avatar_url")
@@ -99,7 +100,10 @@ const useProfileService = () => {
     const currentAvatarUrl = data && data.avatar_url;
     // upload new picture
     const { publicUrl, error: avatarError } = await uploadPicture(userId, fileName, file);
+
+    console.log(avatarError,"avatarError")
     if (!avatarError) {
+
       await updateAvatarInfo(userId, publicUrl);
 
       // remove old picture

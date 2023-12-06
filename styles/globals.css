@@ -92,7 +92,38 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+#order-drop:focus{
+  --tw-ring-color: none;
+  --tw-ring-shadow: none
+}
+#profile img{
+  height: 100px;
+  width: 100px;
+}
+#profile span{
+  right:3px;
+  bottom: 9px;
+}
+.parent-div button{
+  color: black;
+  border-width: 0px;
+  font-weight: bold;
+}
+.parent-div button:disabled{
+  opacity: 0;
+}
+#left-scroll::-webkit-scrollbar, #right-scroll::-webkit-scrollbar{
+  display: none;
+} 
+/* .parent-div button:hover{
+  background-color: #c48b60;
+  color: white;
+} */
+.parent-div li[aria-current="page"] button{
+  background-color: #c48b60;
+  color: white;
+  border-radius: 10px;
+}
 .modal-w {
   width: 100%;
 }

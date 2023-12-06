@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
 import { TYPE_ADVERTISEMENT, TypeAdvertisement } from "../../../models/advertisement";
 import { Pagination, Spinner } from "flowbite-react";
@@ -24,6 +24,7 @@ import { AdvertisementOrder } from "../../../server/types/advertisement";
 import PopoverGeneric from "../../utils/PopoverGeneric";
 import classNames from "classnames";
 import { Trans, useTranslation } from "next-i18next";
+import { IoIosArrowBack } from "react-icons/io";
 
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
@@ -122,12 +123,13 @@ export default function ProcurarSection() {
               </div>
               <div className="mb-2">
                 <select
-                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm"
+                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm focus:border-terciary-500"
                   onChange={changeOrderFilter}
                   value={currentOrder.byColumn}
+                  id="order-drop"
                 >
                   <option>{t("order_by")}</option>
-                  <option value="price-asc">{t("order_price_asc")}</option>
+                  <option value="price-asc" className="hover:bg-primary-300">{t("order_price_asc")}</option>
                   <option value="price-desc">{t("order_price_desc")}</option>
                   <option value="rating">{t("best_classification")}</option>
                   <option value="time">{t("most_recent")}</option>
@@ -210,8 +212,8 @@ export default function ProcurarSection() {
           {advertisements && advertisements.length !== 0 && count > advertisements.length && (
             <div className="row mb-5">
               <div className="col-md-2"></div>
-              <div className="flex flex-1 justify-around px-5">
-                <Pagination currentPage={page} totalPages={getTotalPages()} onPageChange={(page) => setPage(page)} />
+              <div className="flex flex-1 justify-around px-5 parent-div">
+                <Pagination previousLabel="<"  nextLabel=">" currentPage={page} totalPages={getTotalPages()} onPageChange={(page) => setPage(page)} />
               </div>
               <div className="col-md-5"></div>
             </div>
