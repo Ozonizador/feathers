@@ -166,7 +166,11 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
 
             <div className="flex items-center pt-4">
               <h4 className="pr-4 text-xl">{t("admin:calendar.show_reservation_request")}</h4>
-              <Checkbox name={'calendar'} checked={showRequested as boolean} onChange={() => setShowRequested(!showRequested)}/>
+              <Checkbox
+                name={"calendar"}
+                checked={showRequested as boolean}
+                onChange={() => setShowRequested(!showRequested)}
+              />
             </div>
           </div>
           {selectedAdvertisement && (

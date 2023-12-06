@@ -17,7 +17,7 @@ export default function RoomInformation() {
         {advertisement?.verified && (
           <div className="text-md flex items-end">
             <p className="text-md">{t("advertisements:house_verified")}</p>
-            <Image className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
+            <img className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
           </div>
         )}
       </div>

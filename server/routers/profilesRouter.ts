@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { authorizedProcedure } from "../procedure";
+import { authorizedProcedure, superAdminProcedure } from "../procedure";
 import { router } from "../trpc";
 import { PROFILE_COLUMNS, PROFILE_TABLE_NAME, Profile, ProfilesResponse, UserTypes } from "../../models/profile";
 import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 import { TRPCError } from "@trpc/server";
+import { supabase } from "../../lib/supabaseClient";
 
 const ProfileConfigSchema: z.ZodType<
   Pick<Profile, "accepts_notification_email" | "accepts_notification_message" | "prefered_unidesk_state">
@@ -29,6 +30,13 @@ export const profilesRouter = router({
       code: "BAD_REQUEST",
       message: "An unexpected error occurred, please try again later.",
     });
+  }),
+  getAllProfiles: superAdminProcedure.query(async () => {
+    const {data, error} = await supabaseAdmin
+    .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
+    .select("*");
+
+    return {data, error};
   }),
   getProfileConfigurations: authorizedProcedure.query(async ({ input, ctx }) => {
     const { userId } = ctx;
