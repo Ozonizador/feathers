@@ -14,7 +14,7 @@ import {
 import { publicProcedure, router } from "../trpc";
 import { FilterAdvertisements } from "../types/advertisement";
 import { addFilterToSearchAdvertisement, addOrderToSearchAdvertisement } from "../helpers/advertisementHelper";
-import { isHostProcedure } from "../procedure";
+import { isHostProcedure, superAdminProcedure } from "../procedure";
 import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 
 const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: number }> = z.object({
@@ -56,6 +56,36 @@ const AdvertisementFilterSchema: z.ZodType<FilterAdvertisements & { page?: numbe
 });
 
 export const advertisementsRouter = router({
+  getAdvertisements: publicProcedure.query(async () => {
+    const { data, error } = await supabaseAdmin
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .select();
+
+    return { data, error };
+  }),
+  removeAdvertisement: superAdminProcedure
+    .input(z.object({ advertisementId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { advertisementId } = input;
+      const { data, error } = await supabaseAdmin
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .delete()
+        .eq("id", advertisementId);
+
+      return { data, error };
+    }),
+  verifyAdvertisement: superAdminProcedure
+    .input(z.object({ advertisementId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { advertisementId } = input;
+
+      const { data, error } = await supabaseAdmin
+        .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+        .update({ verified: true })
+        .eq(ADVERTISEMENT_PROPERTIES.ID, advertisementId);
+
+      return { data, error };
+    }),
   searchForAdvertisements: publicProcedure.input(AdvertisementFilterSchema).query(async ({ input, ctx }) => {
     const { filter, order, page } = input;
     const { coordinates } = filter;
