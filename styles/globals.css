@@ -5,11 +5,11 @@
 @import "leaflet/dist/leaflet.css";
 @import "rc-slider/assets/index.css";
 
-@media (-webkit-device-pixel-ratio: 1.25) {
+/* @media (-webkit-device-pixel-ratio: 1.25) {
   * {
     zoom: 0.96;
   }
-}
+} */
 
 @keyframes fade-in {
   from {
@@ -124,10 +124,17 @@
   color: white;
   border-radius: 10px;
 }
+.date-parent>div,.date-parent>div>:first-child,.date-parent>div>:first-child>div{
+  height: 100%;
+}
 .modal-w {
   width: 100%;
 }
-
+@media only screen and (max-width: 2200px) {
+  .react-datepicker-popper{
+    transform: translate3d(936px, 95px,0);
+  }
+}
 .icon {
   background: url(/images/location.png) no-repeat 6px;
   background-size: 10px;
@@ -193,6 +200,7 @@
   align-items: center;
   justify-content: center;
 }
+
 
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;

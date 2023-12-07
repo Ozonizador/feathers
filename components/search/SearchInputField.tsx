@@ -113,10 +113,10 @@ export const SearchInputField = () => {
         </div>
 
         <div className="flex flex-row gap-2 lg:gap-0">
-          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
             <FeatherDatePicker
               date={startDate}
-              className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
+              className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
               onChange={(date) => {
                 setSearch({
                   ...userSearch,
@@ -127,9 +127,9 @@ export const SearchInputField = () => {
               minDate={new Date()}
             />
           </div>
-          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
+          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
             <FeatherDatePicker
-              className="bg-terciary-50 h-16 w-full rounded-xl border-none lg:w-52"
+              className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
               minDate={checkMonthsInAdvance(startDate)}

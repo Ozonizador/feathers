@@ -150,7 +150,7 @@ const CaixaEntrada = () => {
   return (
     <div className="mx-5 h-full rounded-xl border lg:border-none">
       <>
-        <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
+        <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
         <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
@@ -259,7 +259,10 @@ const CaixaEntrada = () => {
                         </div>
                           </div>
                         </div>
-                  
+                        {/* {currentConversation?.reservation?.status && (
+                            <div>{currentConversation.host_id == profile[0]?.id}</div>
+                        )} */}
+
                         {currentConversation.reservation.status === "REQUESTED" &&
                           // @ts-ignore
                           currentConversation.host_id == profile[0]?.id && (
@@ -298,7 +301,7 @@ const CaixaEntrada = () => {
                           )}
                           </div>
                           {/* ======= */}
-                        <div className="text-small pt-5 text-center">
+                        <div className="rounded-md px-4 bg-primary-500 w-fit py-2 text-white text-center mx-auto mt-3">
                           <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
                           </div>
                           </div>
@@ -385,8 +388,8 @@ const MessagesSenderZone = ({
 }: MessagesSenderZoneProps) => {
   const { t } = useTranslation();
   return (
-    <div className="flex max-h-screen w-full flex-col gap-2">
-      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{height:'40rem'}} id='right-scroll'>
+    <div className="flex w-full flex-col gap-2" style={{ height: '40rem'}}>
+      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{ height: '-webkit-fill-available'}} id='right-scroll'>
         {messages.map((message, index, array) => {
           return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
         })}

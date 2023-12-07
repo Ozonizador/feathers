@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 interface TestemunhoCardProps {
@@ -13,7 +13,7 @@ export default function TestemunhoCard({ img, testimonial, name }: TestemunhoCar
       <div className="h-2/3">
         <div>
           <Image height={32} width={32} src="/images/icon-quotest.svg" alt="" className="rounded-lg py-4" />
-          <p className="text-sm">{testimonial}</p>
+          <p className="2xl:text-sm lg:text-[15px] text-[15px] ">{testimonial}</p>
         </div>
       </div>
       <div className="mt-6 flex items-center">

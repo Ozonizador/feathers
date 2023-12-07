@@ -9,7 +9,7 @@ import { ReservationGuest } from "../../models/reservation";
 import { UnideskStructure } from "../unidesk/UnideskStructure";
 import Breadcrumbs, { BreadcrumbPath } from "../utils/Breadcrumbs";
 import { UNIDESK_URL } from "../../models/paths";
-import IconAnuncios from "../../public/images/icons8_laptop_computer.svg";
+import IconAnuncios from "../../public/images/icon-pg37-1.svg";
 import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 import { useTranslation } from "next-i18next";
 

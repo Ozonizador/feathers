@@ -11,7 +11,7 @@ import { GetServerSidePropsContext } from "next";
 import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrumbs";
 
 // icons
-import IconAnuncios from "../../../public/images/icons8_laptop_computer.svg";
+import IconAnuncios from "../../../public/images/icon-pg37-1.svg";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
