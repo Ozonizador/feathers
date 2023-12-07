@@ -40,6 +40,7 @@ import {
   MdOutlineBathtub,
   MdOutlineBedroomChild,
   MdLocalLaundryService,
+  MdDarkMode
 } from "react-icons/md";
 import { TbSofa, TbBed, TbHanger } from "react-icons/tb";
 import { AdvertisementPhoto, HostFlexType, TypeAmenity } from "../models/advertisement";
@@ -162,7 +163,7 @@ export const houseAmenities = (type: TypeAmenity): IconType | undefined => {
     case "CLOSET":
       return BiCloset;
     case "BLACKOUTS":
-      return BiCloset;
+      return MdDarkMode;
     case "TOWELS":
       return GiTowel;
     case "BED_LINEN":

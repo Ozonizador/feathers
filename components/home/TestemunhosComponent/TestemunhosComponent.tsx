@@ -29,7 +29,7 @@ const TestemunhosComponent = () => {
             >
               {group(Testemunhos, 3).map((children: TestemunhoInfo[], index: number) => {
                 return (
-                  <div key={index} className="flex gap-6 px-6 lg:justify-evenly lg:py-100 ">
+                  <div key={index} className="flex gap-6 px-6 lg:justify-evenly lg:py-100 md:px-12">
                     {children.map((testemunho: TestemunhoInfo, index: number) => {
                       return (
                         <div key={index}>
