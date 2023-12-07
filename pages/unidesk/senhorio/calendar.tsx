@@ -22,6 +22,7 @@ import Breadcrumbs, { BreadcrumbPath } from "../../../components/utils/Breadcrum
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Checkbox from "../../../components/utils/Checkbox";
 
 const ESTADIA_MINIMA = [
   { value: 2 },
@@ -65,7 +66,9 @@ type CalendarPageProps = {
 };
 
 const CalendarPage = ({ advertisements }: CalendarPageProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+  const [showRequested, setShowRequested] = useState<Boolean>(false);
   const [selectedAdvertisement, setSelectedAdvertisement] = useState<AdvertisementWithReservation | undefined>(
     (advertisements && advertisements[0]) || undefined
   );
@@ -75,7 +78,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   });
 
   const popoverOptions = advertisements.map((advertisement) => ({
-    value: advertisement.slug,
+    value: advertisement.id,
     label: advertisement.title,
     id: advertisement.id,
   })) as PopoverOption[];
@@ -134,6 +137,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   };
 
   const changeAdvertisementCalendar = (advertisementId: string) => {
+    console.log(1);
     const selectedAdvertisement = advertisements && advertisements.find((adv) => adv.id == advertisementId);
     setSelectedAdvertisement(selectedAdvertisement);
   };
@@ -147,21 +151,36 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div>
+            <h2 className="text-2xl font-black text-black">{t("admin:calendar.calendar")}</h2>
+            <h4 className="text-xl text-primary-500">{t("admin:calendar.description_update")}</h4>
+            {language}
+            <br />
             <div>
               <PopoverSelect
                 title={selectedAdvertisement?.title || ""}
                 options={popoverOptions || []}
-                onClick={() => changeAdvertisementCalendar}
-                selectedOption={selectedAdvertisement?.slug}
+                onClick={(e) => changeAdvertisementCalendar(e)}
+                selectedOption={selectedAdvertisement?.id}
+              />
+            </div>
+
+            <div className="flex items-center pt-4">
+              <h4 className="pr-4 text-xl">{t("admin:calendar.show_reservation_request")}</h4>
+              <Checkbox
+                name={"calendar"}
+                checked={showRequested as boolean}
+                onChange={() => setShowRequested(!showRequested)}
               />
             </div>
           </div>
           {selectedAdvertisement && (
-            <div className="mt-4 flex flex-col gap-2 px-2">
-              <h2 className="text-2xl font-black text-black">{t("admin:calendar.calendar")}</h2>
-              <h4 className="text-xl text-primary-500">{t("admin:calendar.description_update")}</h4>
+            <div className="flex flex-col gap-2 px-2">
               <div className="mt-5 w-full">
-                <CalendarComponent reservations={selectedAdvertisement.reservations} />
+                <CalendarComponent
+                  reservations={selectedAdvertisement.reservations}
+                  showRequested={showRequested as boolean}
+                  language={language}
+                />
               </div>
               <AdvertisementPropertiesComponent
                 updateDiscounts={updateDiscounts}

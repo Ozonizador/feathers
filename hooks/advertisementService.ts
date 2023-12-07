@@ -85,6 +85,13 @@ const useAdvertisementService = () => {
     return { data, error };
   };
 
+  const getAllAdvertisements = async () => {
+    const { data, error } = await supabaseClient
+    .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+    .select();
+    return {data, error};
+  }
+
   const getAdvertisementsForMainPage = async (lat: number, lng: number) => {
     let query = supabaseClient.rpc(CLOSE_ADVERTISEMENTS_TABLE_NAME, { lat, lng }).limit(4);
 
@@ -148,6 +155,7 @@ const useAdvertisementService = () => {
     getSingleAdvertisement,
     getAdvertisementsFromMultipleId,
     getAdvertismentsFromUserId,
+    getAllAdvertisements,
     getAdvertisementsForMainPage,
     getSimilarAdvertisements,
     saveImage,

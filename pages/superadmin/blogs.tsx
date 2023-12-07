@@ -12,6 +12,7 @@ import BlogFormContainer, { BlogAdminForm } from "../../components/superadmin/Bl
 import { Blog } from "../../models/blog";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const FaqSuperAdminPage = () => {
   const [selectedFaq, setSelectedFaq] = useState<"TENANT" | "LANDLORD">("LANDLORD");
@@ -109,6 +110,7 @@ const SuperAdminBlogItem = ({ title, description, id }: SuperAdminBlogItemProps)
 export default FaqSuperAdminPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -121,6 +123,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/auth/login",
         permanent: false,
+        locale: locale
       },
     };
 
@@ -136,6 +139,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/blog",
         permanent: false,
+        locale: locale
       },
     };
 
@@ -143,6 +147,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

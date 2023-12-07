@@ -5,6 +5,7 @@ import BlogFormContainer, { BlogAdminForm } from "../../../components/superadmin
 import { Blog, BlogsResponse, BLOG_TABLE_NAME } from "../../../models/blog";
 import { SUPERADMIN_BLOGS_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 type BlogIdPageProps = {
   blog: Blog;
@@ -39,6 +40,7 @@ const BlogIdPage = ({ blog }: BlogIdPageProps) => {
 export default BlogIdPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   const blogId = ctx.params?.id;
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -51,6 +53,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/auth/login",
         permanent: false,
+        locale: locale,
       },
     };
 
@@ -63,6 +66,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       blog: data,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

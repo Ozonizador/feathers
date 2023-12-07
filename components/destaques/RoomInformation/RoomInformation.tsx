@@ -5,6 +5,7 @@ import { RiUserLine } from "react-icons/ri";
 import { TbBed } from "react-icons/tb";
 import { useGetSingleAdvertisement } from "../../../context/ShowingSingleAdvertisementProvider";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
 
 export default function RoomInformation() {
   const advertisement = useGetSingleAdvertisement();
