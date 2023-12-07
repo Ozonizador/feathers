@@ -314,6 +314,40 @@ export interface Database {
           }
         ];
       };
+      payment_methods: {
+        Row: {
+          created_at: string;
+          id: string;
+          iban: string;
+          swift: string;
+          profile_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          swift?: string;
+          profile_id: string;
+          iban?: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          swift?: string;
+          profile_id?: string;
+          iban?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "messages_profile_id_fkey";
+            columns: ["profile_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       notifications: {
         Row: {
           created_at: string;

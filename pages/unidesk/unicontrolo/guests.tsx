@@ -21,10 +21,12 @@ const paths = [
 
 interface UniControloHospedesProps {
   stays: ReservationGuest[];
+  error: any;
 }
 
-const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
+const UniControloHospedes = ({ stays, error }: UniControloHospedesProps) => {
   const { t } = useTranslation();
+  console.log(error)
   return (
     <section className="max-width">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
@@ -72,19 +74,21 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const host = session.user;
-  const date = new Date().toISOString();
+  const date = new Date().toISOString().split('T')[0];
 
   const { data, error } = await supabase
     .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
     .select("*, tenant:tenant_id(*), advertisement:advertisement_id(*)")
     .eq("advertisement.host_id", host.id)
-    .gte("start_date", date)
-    .lte("end_date", date);
+    .eq("status", "ACCEPTED")
+    .lte("start_date", date)
+    .gte("end_date", date);
 
   return {
     props: {
       initialSession: session,
       user: session.user,
+      error: data,
       stays: error ? [] : data,
       ...(await serverSideTranslations(locale ?? "pt")),
     },
