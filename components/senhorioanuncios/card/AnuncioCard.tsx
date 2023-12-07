@@ -16,7 +16,7 @@ import { TypeExpense } from "../../../models/advertisement"
 function EditInactiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
+      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#ffffff" stroke="#000000" strokeWidth="2" />
     </svg>
   );
 }
@@ -24,7 +24,7 @@ function EditInactiveIcon(props: any) {
 function EditActiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
+      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#c48b60" stroke="#ffffff" strokeWidth="2" />
     </svg>
   );
 }
@@ -38,9 +38,9 @@ function VerifyActiveIcon(props:any) {
 function DeleteInactiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="6" width="10" height="10" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M3 6H17" stroke="#A78BFA" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#A78BFA" strokeWidth="2" />
+      <rect x="5" y="6" width="10" height="10" fill="#EDE9FE" stroke="#000000" strokeWidth="2" />
+      <path d="M3 6H17" stroke="#000000" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#000000" strokeWidth="2" />
     </svg>
   );
 }
@@ -48,9 +48,9 @@ function DeleteInactiveIcon(props: any) {
 function DeleteActiveIcon(props: any) {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="6" width="10" height="10" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M3 6H17" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#C4B5FD" strokeWidth="2" />
+      <rect x="5" y="6" width="10" height="10" fill="#c48b60" stroke="#ffffff" strokeWidth="2" />
+      <path d="M3 6H17" stroke="#ffffff" strokeWidth="2" />
+      <path d="M8 6V4H12V6" stroke="#ffffff" strokeWidth="2" />
     </svg>
   );
 }
@@ -120,11 +120,11 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                               <button
                                 onClick={(e) => editAdvertisement(e, advertisement.slug)}
                                 className={`${
-                                  active ? "bg-violet-500 text-white" : "text-gray-900"
+                                  active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
                                 {active ? (
-                                  <EditActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
+                                  <EditActiveIcon className="mr-2 h-5 w-5 text-black" aria-hidden="true" />
                                 ) : (
                                   <EditInactiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
                                 )}
@@ -139,7 +139,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                 <button
                                 onClick={(e) => verifyAdvertisement(e)}
                                 className={`${
-                                  active ? "bg-violet-500 text-white" : "text-gray-900"
+                                  active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
                                  {active ? (
@@ -158,13 +158,13 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                               <button
                                 onClick={() => deleteAdvertisement()}
                                 className={`${
-                                  active ? "bg-violet-500 text-white" : "text-gray-900"
+                                  active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
                                 {active ? (
-                                  <DeleteActiveIcon className="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
+                                  <DeleteActiveIcon className="mr-2 h-5 w-5 text-black " aria-hidden="true" />
                                 ) : (
-                                  <DeleteInactiveIcon className="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
+                                  <DeleteInactiveIcon className="mr-2 h-5 w-5 text-black" aria-hidden="true" />
                                 )}
                                 {t("delete")}
                               </button>

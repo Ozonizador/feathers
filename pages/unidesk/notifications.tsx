@@ -55,7 +55,7 @@ const Notifications = () => {
 
   return (
     <section>
-      <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-10">
+      <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full lg:px-0">
         <Breadcrumbs icon={iconfavorito} paths={paths} />
       </div>
       <UnideskStructure>

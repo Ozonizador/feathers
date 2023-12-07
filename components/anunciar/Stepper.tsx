@@ -14,12 +14,17 @@ export default function Stepper() {
       array.slice(i * size, i * size + size)
     );
   }
-  const chunk = chunkArray(steps, 3)
+  const chunkSteps = Array.from({ length: 8 }, (_, index) => index +1);
+  const chunk = chunkArray(chunkSteps, 2)
   // console.log(steps,'step')
   // console.log(chunk, 'chunkss')
-  // console.log('current', currentStep)
+  console.log('current', currentStep)
   let chunkIndex
-  currentStep <= 2 ? chunkIndex = 0 : ((currentStep > 2 && currentStep <= 5 )? chunkIndex = 1: chunkIndex=2)
+  currentStep < 2 ? chunkIndex = 0 : 
+  (currentStep >= 2 && currentStep < 4) ? chunkIndex = 1 : 
+  (currentStep >= 4 && currentStep < 6) ? chunkIndex = 2 : 
+  chunkIndex = 3;
+
   return (
     <>
       {/* DESKTOP */}
@@ -103,7 +108,7 @@ const StepIcon = ({ stepNumber, text }: StepIconProps) => {
       </div>
       <div className={`absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase ${
        currentStep >= stepNumber ||stepNumber === 10 ? "text-black" : "text-terciary-200"}`}>
-        {text}
+        {stepNumber===10?"STEP 9":text}
       </div>
     </div>
   );
