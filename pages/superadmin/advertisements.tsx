@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { Advertisement } from "../../models/advertisement";
 import { Pagination } from "flowbite-react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.advertisements.getAdvertisements.useQuery();
@@ -125,6 +126,7 @@ const SuperAdminAdvertisementItem = ({
 export default FaqSuperAdminPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -137,6 +139,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/faqs",
         permanent: false,
+        locale: locale
       },
     };
 
@@ -152,6 +155,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/",
         permanent: false,
+        locale: locale
       },
     };
 
@@ -159,6 +163,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };

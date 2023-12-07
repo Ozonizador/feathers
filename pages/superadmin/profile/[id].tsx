@@ -7,6 +7,7 @@ import { SUPERADMIN_FAQS_URL, SUPERADMIN_PROFILES_URL } from "../../../models/pa
 import { trpc } from "../../../utils/trpc";
 import { PROFILE_TABLE_NAME, Profile, ProfilesResponse } from "../../../models/profile";
 import { profile } from "console";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 type FaqIdPageProps = {
   faq: Faq;
@@ -25,6 +26,7 @@ const FaqIdPage = ({ faq }: FaqIdPageProps) => {
 export default FaqIdPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const locale = ctx.locale;
   // Create authenticated Supabase Client
   const profileId = ctx.params?.id;
   const supabase = createPagesServerClient(ctx);
@@ -38,6 +40,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/auth/login",
         permanent: false,
+        locale: locale
       },
     };
 
@@ -49,6 +52,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       initialSession: session,
       user: session.user,
       faq: data ? data : [],
+      ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
 };
