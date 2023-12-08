@@ -119,28 +119,28 @@ const Index = ({ user, profileData }: IndexProps) => {
   /* Avatar */
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-  
+
     const files = event.target.files;
-  
+
     if (!files || files.length === 0) {
       // No files selected
       return;
     }
-  
+
     const file = files[0];
-  
+
     if (!file || !file.name) {
       // Invalid or missing file object
       return;
     }
-  
+
     const { data, error } = await addAvatar(profile.id, file.name, file);
-  console.log(error,"data")
+    console.log(error, "data");
     if (!error) {
       setProfile({ ...profile, avatar_url: data });
     }
   };
-  
+
   return (
     <div className="mx-auto mb-20 w-full sm:container lg:w-10/12">
       <Breadcrumbs paths={paths} />
@@ -298,7 +298,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                     onChange={(val) => onChange(val.map((c) => c.value))}
                     isMulti
                     options={options}
-                    className="mr-3 flex w-full items-center border border-gray-200 rounded-xl bg-white-100 px-3 py-2 text-primary-500"
+                    className="bg-white-100 mr-3 flex w-full items-center rounded-xl border border-gray-200 px-3 py-2 text-primary-500"
                     styles={customStyles}
                   />
                 );

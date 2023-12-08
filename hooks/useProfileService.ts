@@ -9,6 +9,8 @@ import {
   PROFILE_COLUMNS,
   PROFILE_TABLE_NAME,
   UserTypes,
+  PaymentMethods,
+  PAYMENT_METHODS_TABLE_NAME,
 } from "../models/profile";
 import { createRandomUniqWord } from "../utils/utils";
 
@@ -20,7 +22,7 @@ const useProfileService = () => {
       avatar_url: metadata?.avatar_url || "",
       firstName: metadata?.full_name?.split(" ")[0] || "",
       lastName: metadata?.full_name?.split(" ")[1] || "",
-      userID: userID
+      userID: userID,
     };
 
     try {
@@ -32,8 +34,13 @@ const useProfileService = () => {
     }
   };
 
-  const createProfile = async (metadata: { avatar_url?: string; firstName?: string; lastName?: string; userID?: string }) => {
-    console.log(' test');
+  const createProfile = async (metadata: {
+    avatar_url?: string;
+    firstName?: string;
+    lastName?: string;
+    userID?: string;
+  }) => {
+    console.log(" test");
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({
@@ -67,7 +74,7 @@ const useProfileService = () => {
       .eq(PROFILE_COLUMNS.ID, userID)
       .select()
       .single();
-      
+
     return { data, error };
   };
 
@@ -90,7 +97,7 @@ const useProfileService = () => {
   };
 
   const addAvatar = async (userId: string, fileName: string, file: File) => {
-    console.log(userId,fileName,file,"filefilefilefilefile" )
+    console.log(userId, fileName, file, "filefilefilefilefile");
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .select("avatar_url")
@@ -101,9 +108,8 @@ const useProfileService = () => {
     // upload new picture
     const { publicUrl, error: avatarError } = await uploadPicture(userId, fileName, file);
 
-    console.log(avatarError,"avatarError")
+    console.log(avatarError, "avatarError");
     if (!avatarError) {
-
       await updateAvatarInfo(userId, publicUrl);
 
       // remove old picture
@@ -116,6 +122,27 @@ const useProfileService = () => {
       return { data: null, error };
     }
   };
+
+  /* Paymenth Methods*/
+  const addPaymentMethods = async (userId: string, iban: string, swift: string) => {
+    const {data, error} = await supabaseClient
+    .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
+    .insert({profile_id: userId, iban, swift})
+    .select()
+    .single()
+
+    return {data, error}
+  };
+
+  const getUserPaymentMethods = async (userId: string) => {
+    const { data, error } = await supabaseClient
+    .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
+    .select()
+    .eq("profile_id", userId)
+    .single()
+
+    return {data, error};
+  }
 
   /* Messages */
 
@@ -148,13 +175,13 @@ const useProfileService = () => {
   };
 
   const makeNotificationSeen = async (notificationId: string) => {
-    const {data, error} = await supabaseClient
+    const { data, error } = await supabaseClient
       .from<"notifications", NotificationsResponse>(NOTIFICATION_TABLE_NAME)
-      .update({seen: true})
+      .update({ seen: true })
       .eq(NOTIFICATION_PROPERTIES.ID, notificationId);
 
-    return {error, data};
-  }
+    return { error, data };
+  };
 
   /* Picture */
 
@@ -203,6 +230,8 @@ const useProfileService = () => {
     setTypeUser,
     checkMessagesNotSeen,
     checkNotificationsNotSeen,
+    addPaymentMethods,
+    getUserPaymentMethods,
   };
 };
 
