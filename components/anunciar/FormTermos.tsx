@@ -54,11 +54,9 @@ const FormTermos = () => {
       debugger;
       if (!isValid) return;
 
-      const slugString = `${advertisement.title}%${await checkSlugExists(advertisement.title)}`;
+      const slugString = `${advertisement.title} ${await checkSlugExists(advertisement.title)}`;
 
-      const slug = encodeURI(slugString);
-
-      setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.SLUG, slug);
+      advertisement.slug = slugString;
 
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");

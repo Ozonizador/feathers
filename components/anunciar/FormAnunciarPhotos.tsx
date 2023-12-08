@@ -109,8 +109,7 @@ const FormAnunciarPhotos = () => {
           }
           newFiles.push(file);
         } else {
-          toast.error(t("common.file-size", {name: file.name}));
-          break;
+          toast.error(t("common.file-size", { name: file.name }));
         }
       }
 
@@ -190,7 +189,14 @@ const FormAnunciarPhotos = () => {
                 >
                   x
                 </div>
-                <Image width={80} height={80} className="image" src={URL.createObjectURL(file)} alt={`Image ${index}`} id={`${file.name}`} />
+                <Image
+                  width={80}
+                  height={80}
+                  className="image"
+                  src={URL.createObjectURL(file)}
+                  alt={`Image ${index}`}
+                  id={`${file.name}`}
+                />
               </div>
             ))}
           </div>
