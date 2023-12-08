@@ -130,9 +130,9 @@
 .modal-w {
   width: 100%;
 }
-@media only screen and (max-width: 2200px) {
-  .react-datepicker-popper{
-    transform: translate3d(936px, 95px,0);
+@media only screen and (min-width: 1024px) {
+  .test-card{
+    height: 21rem;
   }
 }
 .icon {

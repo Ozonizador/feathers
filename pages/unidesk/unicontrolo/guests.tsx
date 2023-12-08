@@ -29,13 +29,14 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
     <section className="max-width">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
 
-      <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">
-        <div className="flex flex-col gap-10 px-12 lg:flex-row">
-          <div className="flex justify-center">
+      <div className="mx-7 my-16 w-full bg-terciary-300">
+        <div>
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex justify-center lg:py-12 lg:px-6 ">
             <MenuSenhorio activeSection="uni-controlo" activeUrl="guests"/>
-          </div>
+          </div>  
 
-          <div className="ml-10">
+          <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5">
             <>
               <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
               <div className="mb-5 font-bold">{t("admin:guests.current_guests")}</div>
@@ -45,6 +46,7 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
                   return <HospedeCard stay={stay} key={index} />;
                 })}
             </>
+          </div>
           </div>
         </div>
       </div>
