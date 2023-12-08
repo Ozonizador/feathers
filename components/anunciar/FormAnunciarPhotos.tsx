@@ -190,7 +190,7 @@ const FormAnunciarPhotos = () => {
                 >
                   x
                 </div>
-                <Image className="image" src={URL.createObjectURL(file)} alt={`Image ${index}`} id={`${file.name}`} />
+                <Image width={80} height={80} className="image" src={URL.createObjectURL(file)} alt={`Image ${index}`} id={`${file.name}`} />
               </div>
             ))}
           </div>
@@ -210,6 +210,8 @@ const FormAnunciarPhotos = () => {
                     x
                   </div>
                   <Image
+                    width={80}
+                    height={80}
                     className="image h-full w-full"
                     src={URL.createObjectURL(file)}
                     alt={`Image ${index}`}
