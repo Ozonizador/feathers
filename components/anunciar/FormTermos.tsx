@@ -5,12 +5,19 @@ import { toast } from "react-toastify";
 import { useAdvertisement, useImageFiles, useSetAdvertisementProperty } from "../../context/AdvertisementController";
 import { useDecrementStep } from "../../context/AnunciarProvider";
 import useAdvertisementService from "../../hooks/advertisementService";
-import { AdvertisementInfo, AdvertisementPhoto, ADVERTISEMENT_PROPERTIES } from "../../models/advertisement";
+import {
+  AdvertisementInfo,
+  AdvertisementPhoto,
+  ADVERTISEMENT_PROPERTIES,
+  Advertisement,
+  ADVERTISEMENT_TABLE_NAME,
+} from "../../models/advertisement";
 import { HOME_URL } from "../../models/paths";
 import Button from "../utils/Button";
 import Checkbox from "../utils/Checkbox";
 import FeathersSpinner from "../utils/Spinner";
 import { useTranslation } from "next-i18next";
+import { supabase } from "../../lib/supabaseClient";
 
 const FormTermos = () => {
   const { t } = useTranslation();
@@ -28,6 +35,15 @@ const FormTermos = () => {
 
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
+  const checkSlugExists = async (slug: string) => {
+    const { data, error, count } = await supabase
+      .from<"advertisements", Advertisement>(ADVERTISEMENT_TABLE_NAME)
+      .select('*', { count: 'exact', head: true })
+      .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug);
+
+    return count;
+  };
+
   /* Services */
   const { addAdvertisement, saveImage } = useAdvertisementService();
   const { files } = useImageFiles();
@@ -38,12 +54,16 @@ const FormTermos = () => {
       debugger;
       if (!isValid) return;
 
+      const slugString = `${advertisement.title} ${await checkSlugExists(advertisement.title)}`;
+
+      advertisement.slug = slugString;
+
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
-      console.log(advertisement.rooms)
-      if(advertisement.rooms == null || advertisement.rooms == undefined) {
-       advertisement.rooms = 1;
+      console.log(advertisement.rooms);
+      if (advertisement.rooms == null || advertisement.rooms == undefined) {
+        advertisement.rooms = 1;
       }
 
       await saveImages();

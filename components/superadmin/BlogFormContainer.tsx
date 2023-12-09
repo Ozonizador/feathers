@@ -41,7 +41,7 @@ const BlogFormContainer = ({ onSubmit, children }: FormProps) => {
           render={({ field: { onChange, value } }) => {
             return (
               <div data-color-mode="light">
-                <MDEditor value={value} onChange={onChange} />
+                <MDEditor value={value} onChange={onChange} height={400}/>
               </div>
             );
           }}

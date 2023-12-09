@@ -6,13 +6,15 @@ import { Blog, BlogsResponse, BLOG_TABLE_NAME } from "../../../models/blog";
 import { SUPERADMIN_BLOGS_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { toast } from "react-toastify";
+import { er } from "@fullcalendar/core/internal-common";
 
 type BlogIdPageProps = {
   blog: Blog;
 };
 
 const BlogIdPage = ({ blog }: BlogIdPageProps) => {
-  const updateFaq = trpc.blogs.updateBlogPost.useMutation();
+  const updateBlog = trpc.blogs.updateBlogPost.useMutation();
 
   const methods = useForm<BlogAdminForm>({
     defaultValues: {
@@ -23,7 +25,16 @@ const BlogIdPage = ({ blog }: BlogIdPageProps) => {
   });
 
   const updateFaqForm = async (data: any) => {
-    await updateFaq.mutateAsync({ blog: { ...data }, blogId: blog.id });
+    const { data: dataUpdate, error } = await updateBlog.mutateAsync({ blog: { ...data }, blogId: blog.id });
+
+    if (error) {
+      toast.error("Erro ao dar Update " + error.code);
+      console.log(error);
+    }
+
+    if (!error) {
+      toast.success("Blog post guardado!");
+    }
   };
 
   return (

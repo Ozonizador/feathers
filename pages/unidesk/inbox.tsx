@@ -126,7 +126,8 @@ const CaixaEntrada = () => {
 
   const getOtherProfile = (conversation: ConversationComplete): Profile | undefined => {
     if (!profile) return;
-    return conversation.host.id === profile.id ? conversation.tenant : conversation.host;
+    // @ts-ignore
+    return conversation.host.id === profile[0].id ? conversation.tenant : conversation.host;
   };
 
   const updateReservationStatus = async (status: ReservationStatus) => {
@@ -212,7 +213,7 @@ const CaixaEntrada = () => {
                         <div className="my-4 flex flex-row gap-3">
                           <div>
                             <Avatar
-                              img={currentConversation?.tenant?.avatar_url || "/icons/user/user.svg"}
+                              img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
                               rounded={true}
                               status="away"
                               size="md"

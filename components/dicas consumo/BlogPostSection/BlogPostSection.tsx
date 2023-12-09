@@ -8,6 +8,7 @@ import { format, parseISO } from "date-fns";
 import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { isString } from "lodash";
 interface BlogPostSectionProps {
   blog: Blog;
 }
@@ -16,8 +17,9 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const router = useRouter();
   const { t } = useTranslation();
   const renderers = {
-    p: (props: any) => <p className="my-2 leading-8">{props.children}</p>,
+    p: (props: any) => <p className={"leading-8 " + (isString(props.children[0]) ? "mb-2": "mt-8 mb-2")}>{props.children}</p>,
     h1: (props: any) => <h1 className="text-primary-500">{props.children}</h1>,
+    strong: (props: any) => <strong className="font-extrabold text-xl my-5">{props.children}</strong>
   };
 
   const shareOnTwitter = () => {

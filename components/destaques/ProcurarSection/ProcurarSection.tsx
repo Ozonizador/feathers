@@ -62,7 +62,7 @@ export default function ProcurarSection() {
       if (advertisement.geom) {
         let marker = {
           title: advertisement.title,
-          link: `/anuncio/${advertisement.slug}`,
+          link: `/anuncio/${encodeURI(advertisement.slug)}`,
           geo: coordinatesArrayToGeoPoint(
             (advertisement.geom as { type: string; coordinates: CoordinatesAsArray }).coordinates
           ),
@@ -197,7 +197,7 @@ export default function ProcurarSection() {
                   {advertisements &&
                     advertisements.map((advertisement, index) => {
                       return (
-                        <div className="cursor-pointer" onClick={() => goToAdvert(advertisement.slug)} key={index}>
+                        <div className="cursor-pointer" onClick={() => goToAdvert(encodeURI(advertisement.slug))} key={index}>
                           <RoomCard advertisement={advertisement} />
                         </div>
                       );
