@@ -1,6 +1,6 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useCurrentUser } from "../../context/MainProvider";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef} from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
@@ -387,9 +387,17 @@ const MessagesSenderZone = ({
   conversationId,
 }: MessagesSenderZoneProps) => {
   const { t } = useTranslation();
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    // Scroll to the bottom of the chat container when new messages are added
+    const chatContainer = chatContainerRef.current as HTMLDivElement | null;
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [messages]);
   return (
-    <div className="flex w-full flex-col gap-2" style={{ height: '40rem'}}>
-      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{ height: '-webkit-fill-available'}} id='right-scroll'>
+    <div className="flex w-full flex-col gap-2" style={{ height: '40rem', overflowY: 'auto'}}>
+      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{ height: '-webkit-fill-available'}} id='right-scroll'  ref={chatContainerRef}>
         {messages.map((message, index, array) => {
           return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
         })}
