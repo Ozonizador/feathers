@@ -38,9 +38,9 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
             )}
 
             {previousMessage && previousMessage.profile_id !== message.profile_id && (
-              <div className="flex w-full flex-row justify-between text-xs">
+              <div className="flex w-full flex-row justify-between text-xs flex-wrap md:pr-8  ">
                 <div>{message.profile?.name || ""}</div>
-                <div>{new Date(message.created_at).toDateString()}</div>
+                <div className="flex flex-shrink-0">{new Date(message.created_at).toDateString()}</div>
               </div>
             )}
           </div>

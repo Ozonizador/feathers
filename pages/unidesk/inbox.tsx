@@ -1,5 +1,5 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
-import { useCurrentUser } from "../../context/MainProvider";
+import { useCurrentUser, useGetUserType } from "../../context/MainProvider";
 import React, { useCallback, useEffect, useState, useRef} from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
@@ -30,7 +30,10 @@ import { IoSend } from "react-icons/io5";
 import { formatWithOptions } from "date-fns/fp";
 import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
-import router from "next/router";
+import router, { useRouter } from "next/router";
+import { UnideskStructure } from "../../components/unidesk/UnideskStructure";
+import MenuEstudante from "../../components/unidesk/Menus/MenuEstudante";
+import MenuSenhorio from "../../components/unidesk/Menus/MenuSenhorio";
 
 {
   /* page 59 XD */
@@ -43,6 +46,38 @@ const paths = [
 
 const CaixaEntrada = () => {
   const { t } = useTranslation();
+  const { userAppMode } = useGetUserType();
+  const router = useRouter()
+  const { menu } = router.query 
+  console.log(menu,'menu')
+  return (
+    <div className="mx-5 h-full rounded-xl border lg:border-none">
+      <>
+        <div className="my-20 rounded-2xl lg:my-20 lg:w-full ">
+          <Breadcrumbs icon={iconfavorito} paths={paths} />
+        </div>
+        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />  
+        {menu==='yes'? (<UnideskStructure>
+          <UnideskStructure.Menu>
+            {userAppMode === 'TENANT' ? (
+              <MenuEstudante activeSection={"inbox"} activeUrl={"inbox"} />
+            ) : userAppMode === 'LANDLORD' ? (
+              <MenuSenhorio activeSection={"inbox"} activeUrl={"inbox"} />
+            ) : null}
+        </UnideskStructure.Menu>
+          {/* DESKTOP */}
+          <CaixaExtradaContent menu={menu} />
+        </UnideskStructure>) :
+          menu === undefined ? (<CaixaExtradaContent/>): null}
+      </>
+    </div>
+  );
+};
+interface CaixaExtradaContentProps {
+  menu?: string;
+}
+const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
+  const { t } = useTranslation();
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
   const [allMessages, setAllMessages] = useState<MessageWithProfile[]>([]);
@@ -50,13 +85,11 @@ const CaixaEntrada = () => {
   const { acceptReservation } = useReservationService();
   const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
   const { getConversationsFromUser } = useConversationService();
-
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [currentConversation, setCurrentConversation] = useState<ConversationComplete | undefined>(undefined);
   const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
     undefined
   );
-
   const getUserConversations = useCallback(async () => {
     if (profile) {
       // @ts-ignore
@@ -147,16 +180,11 @@ const CaixaEntrada = () => {
   const clearConversation = () => {
     setCurrentConversation(undefined);
   };
-
   return (
-    <div className="mx-5 h-full rounded-xl border lg:border-none">
-      <>
-        <div className="max-width my-20 rounded-2xl lg:container lg:my-20 lg:w-full ">
-          <Breadcrumbs icon={iconfavorito} paths={paths} />
-        </div>
-        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
-        {/* DESKTOP */}
-        <div className="mx-auto my-16 hidden w-5/6 rounded-2xl border border-terciary-500 lg:block ">
+    <>
+      <div className={classNames("mx-auto hidden w-5/6 lg:block", {
+  "my-16 rounded-2xl border border-terciary-500": menu !== 'yes',
+})}>
           {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
           {conversations && conversations.length > 0 && (
             <>
@@ -203,7 +231,7 @@ const CaixaEntrada = () => {
                     setCurrentMessage={setCurrentMessage}
                   />
                   {currentConversation && (
-                    <div className="border-l border-terciary-500 p-2" style={{minWidth: '17rem'}}>
+                    <div className="border-l border-terciary-500 p-2" style={{ minWidth: menu === 'yes' ? '14rem' : '17rem' }}>
                       <>
                         <div className="flex">
                           <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
@@ -260,9 +288,7 @@ const CaixaEntrada = () => {
                         </div>
                           </div>
                         </div>
-                        {/* {currentConversation?.reservation?.status && (
-                            <div>{currentConversation.host_id == profile[0]?.id}</div>
-                        )} */}
+                     
 
                         {currentConversation.reservation.status === "REQUESTED" &&
                           // @ts-ignore
@@ -301,7 +327,7 @@ const CaixaEntrada = () => {
                             ]
                           )}
                           </div>
-                          {/* ======= */}
+                         
                         <div className="rounded-md px-4 bg-primary-500 w-fit py-2 text-white text-center mx-auto mt-3">
                           <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
                           </div>
@@ -366,12 +392,10 @@ const CaixaEntrada = () => {
               )}
             </div>
           )}
-        </div>
-      </>
-    </div>
-  );
-};
-
+            </div>
+    </>
+  )
+}
 interface MessagesSenderZoneProps {
   messages: MessageWithProfile[];
   sendMessage: (e: React.FormEvent, conversationId: string) => void;

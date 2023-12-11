@@ -58,6 +58,12 @@ type MenuGrouperProps = {
 const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, defaultOpen = false }: MenuGrouperProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+  const goToUrl = (url: string) => {
+    const isUrlInbox = url === '/unidesk/inbox';
+    const menuPropValue = isUrlInbox ? 'yes' : 'no';
+    const urlWithProp = isUrlInbox ? `/unidesk/inbox?menu=${menuPropValue}` : url;
+    router.push(urlWithProp)  
+  };
 
   return (
     <div
@@ -74,7 +80,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
           "py-3": selectedGroup && !isCollapsed,
           "border-b border-primary-500": isOpen && children,
         })}
-        onClick={() => (url ? router.push(url) : setIsOpen(!isOpen))}
+        onClick={() => (url ? goToUrl(url) : setIsOpen(!isOpen))}
       >
         <div className="flex w-full">
           <div>

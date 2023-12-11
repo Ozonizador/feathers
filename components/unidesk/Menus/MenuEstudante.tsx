@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 
 type MenuEstudanteProps = {
   activeSection: "stay" | "favourites" | "inbox" | "notifications";
-  activeUrl: "general" | "repairs" | "favourites";
+  activeUrl: "general" | "repairs" | "favourites" | "inbox";
 };
 
 const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {

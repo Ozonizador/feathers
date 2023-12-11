@@ -113,7 +113,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="border-terciary-400 mt-5 flex h-20 lg:gap-5 lg:px-28">
+          <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-10">
             <div className="lg:block">
               <Link href={HOME_URL}>
                 <div className="relative h-full w-52">
