@@ -195,7 +195,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 ></Controller>
               </div>
               <div className="mb-1">{t("admin:config.birth_date")}</div>
-              <div className="flex flex-row gap-4">
+              <div className="flex flex-row gap-4 birth-picker">
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (

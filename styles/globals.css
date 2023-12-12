@@ -197,11 +197,11 @@
   justify-content: center;
 }
 
-.react-datepicker__input-container input:focus, #nationality-drop select:focus, #phone-input input:focus, #lang-drop:focus{
+.birth-picker .react-datepicker__input-container input:focus, #nationality-drop select:focus, #phone-input input:focus, #lang-drop:focus{
 border-color: #c48b60;
 --tw-ring-shadow:0
 }
-.react-datepicker__input-container input,  #nationality-drop select, #phone-input input, #lang-drop{
+.birth-picker .react-datepicker__input-container input,  #nationality-drop select, #phone-input input, #lang-drop{
   border-color: #dfdfdf;
   border-radius: 0.375rem;
   background-color: #ffffff;
