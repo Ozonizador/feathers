@@ -92,10 +92,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-#order-drop:focus{
-  --tw-ring-color: none;
-  --tw-ring-shadow: none
-}
+
 #profile img{
   height: 100px;
   width: 100px;
@@ -154,7 +151,6 @@
   display: none;
 }
 
-
 .percent {
   background: url(/images/percent.png) no-repeat;
   background-size: 20px;
@@ -201,7 +197,20 @@
   justify-content: center;
 }
 
-
+.react-datepicker__input-container input:focus, #nationality-drop select:focus, #phone-input input:focus, #lang-drop:focus{
+border-color: #c48b60;
+--tw-ring-shadow:0
+}
+.react-datepicker__input-container input,  #nationality-drop select, #phone-input input, #lang-drop{
+  border-color: #dfdfdf;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+}
+#lang-drop input:focus{
+  --tw-ring-color: none !important;
+  --tw-ring-shadow: 0 !important;
+  border: 0 !important;
+}
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;
 }

@@ -101,7 +101,7 @@ export const Navbar = () => {
                   <Image src={router.locale === "en" ? ukFlag : ptFlag} alt="" />
                 </div>
                 <select
-                  className="ml-2 border-none"
+                  className="ml-2 border-none focus:border-outline-none focus:border-primary-500 focus:ring-0"
                   onChange={(event) => {
                     router.push(router.asPath, undefined, { locale: event.target.value });
                   }}

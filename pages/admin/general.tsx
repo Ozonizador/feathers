@@ -205,7 +205,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                 ></Controller>
               </div>
 
-              <div className="my-10">
+              <div className="my-10" id="nationality-drop">
                 <label className="mt-2 block">{t("admin:config.nationality")}</label>
                 <Controller
                   control={control}
@@ -249,7 +249,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                   <div className="flex-1">
                     <select
                       {...register("gender")}
-                      className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2"
+                      className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 focus:border-primary-500 focus:ring-0"
                     >
                       <option value={Gender.female}>Feminino</option>
                       <option value={Gender.male}>Masculino</option>
@@ -278,7 +278,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           <textarea
             {...register("description")}
             rows={5}
-            className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  shadow-sm"
+            className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  focus:border-primary-500 focus:outline-none focus:ring-0 shadow-sm"
             placeholder="Escreva aqui..."
           />
 
@@ -298,8 +298,9 @@ const Index = ({ user, profileData }: IndexProps) => {
                     onChange={(val) => onChange(val.map((c) => c.value))}
                     isMulti
                     options={options}
-                    className="bg-white-100 mr-3 flex w-full items-center rounded-xl border border-gray-200 px-3 py-2 text-primary-500"
+                    className="bg-white-100 mr-3 flex w-full items-center rounded-xl border border-gray-200 focus:border-primary-500 px-3 py-2"
                     styles={customStyles}
+                    id="lang-drop"
                   />
                 );
               }}
@@ -326,7 +327,7 @@ const Index = ({ user, profileData }: IndexProps) => {
               <Controller
                 control={control}
                 render={({ field: { onChange, value } }) => (
-                  <div className="flex gap-3">
+                  <div className="flex gap-3" id="phone-input">
                     <PhoneCountrySelect country={country} setCountry={setCountry} />
                     <Input
                       country={(country as CountryCode) || "PT"}
