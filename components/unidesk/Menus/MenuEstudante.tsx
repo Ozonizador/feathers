@@ -28,7 +28,7 @@ const MenuEstudante = ({ activeSection, activeUrl }: MenuEstudanteProps) => {
         <MenuOption blocked={true} url={""} label={"admin:unidesk.student.rent"} />
         <MenuOption blocked={true} url={""} label={"admin:unidesk.student.repairs"} />
         <MenuOption blocked={true} url={""} label={"admin:unidesk.student.expenses"} />
-        <MenuOption blocked={true} url={""} label={"admin:unidesk.common.contracts"} />
+        <MenuOption blocked={true} url={""} label={"admin:unidesk.general.contracts"} />
       </MenuGrouper>
       <MenuGrouper
         url={UNIDESK_STUDENT_FAVOURITES_URL}

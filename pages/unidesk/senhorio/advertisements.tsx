@@ -19,7 +19,7 @@ import { useTranslation, i18n} from "next-i18next";
 
 const paths = [
   { url: UNIDESK_URL, label: "uni-desk" },
-  { url: "", label: "admin:unidesk.common.panel" },
+  { url: "", label: "admin:unidesk.general.panel" },
 ] as BreadcrumbPath[];
 
 const Anuncios = () => {
