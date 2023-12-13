@@ -40,7 +40,6 @@ const useProfileService = () => {
     lastName?: string;
     userID?: string;
   }) => {
-    console.log(" test");
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .insert({

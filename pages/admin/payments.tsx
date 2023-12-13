@@ -31,7 +31,6 @@ interface PaymentsProps {
 const Index = ({ user, payment_method }: PaymentsProps) => {
   const [state, setState] = useState<string>("Recebimentos");
   const { t } = useTranslation();
-  console.log()
   const {
     control,
     handleSubmit,
@@ -43,7 +42,6 @@ const Index = ({ user, payment_method }: PaymentsProps) => {
     const { data, error } = await addPaymentMethods(user.id, iban, swift);
 
     if (error) {
-      console.log(1);
       return toast.error(t("messages:errors.editing_info"));
     }
   };

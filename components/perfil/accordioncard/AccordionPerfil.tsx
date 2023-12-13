@@ -12,7 +12,6 @@ interface AccordionPerfilProps {
 
 function AccordionPerfil({ profile }: AccordionPerfilProps) {
   const { t } = useTranslation();
-  console.log(profile, 'testsetse')
   return (
     <div className="mb-20">
       <Accordion alwaysOpen={true}>

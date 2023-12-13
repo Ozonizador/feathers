@@ -135,5 +135,9 @@
   "on_date": "{{val, datetime}}",
   "file-size": "The file {{name}} is too big. (Max. 2Mb)",
   "guest": "1 guest",
-  "guests": "{{val}} guests."
+  "guests": "{{val}} guests.",
+  "Guests": "Guests",
+  "Transactions": "Transactions",
+  "Expenses": "Expenses",
+  "Repairs": "Repairs"
 }
