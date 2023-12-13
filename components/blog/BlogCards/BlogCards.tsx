@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Blog } from "../../../models/blog";
 import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
+import ReactMarkdown from "react-markdown";
+import { isString } from "lodash";
 
 interface BlogCardsProps {
   blogs: Blog[];
@@ -11,6 +13,11 @@ interface BlogCardsProps {
 
 export default function BlogCards({ blogs }: BlogCardsProps) {
   const router = useRouter();
+  const renderers = {
+    p: (props: any) => (
+      <p className={"leading-8 "}>{props.children}</p>
+    ),
+  };
   return (
     <section className="mx-auto pb-5 xl:pt-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
@@ -34,7 +41,10 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
 
                         <div className="ml-3 flex w-full flex-col">
                           <div className="mb-2 mt-3 text-xl lg:mt-0">{blog.title}</div>
-                          <div className="mt-1 line-clamp-2 text-sm">{blog.description}</div>
+                          <div className="mt-1 line-clamp-2 text-sm">
+                            {" "}
+                            <ReactMarkdown components={renderers}>{blog.description}</ReactMarkdown>
+                          </div>
 
                           <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full">
                             <div className=" text-sm text-gray-400">

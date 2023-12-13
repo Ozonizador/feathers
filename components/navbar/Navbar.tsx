@@ -40,6 +40,7 @@ import {
 import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
+import { setCookie, getCookie } from "cookies-next";
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -66,6 +67,7 @@ export const Navbar = () => {
 
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    setCookie('navbar', userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
   };
 
   useEffect(() => {
@@ -73,6 +75,8 @@ export const Navbar = () => {
       setWebUserMode("LANDLORD");
       setHasRunOnce(true);
     }
+    let navbarState = getCookie('navbar'); 
+    setWebUserMode(navbarState == "LANDLORD" ? "LANDLORD" : "TENANT")
   }, [userAppMode, profile, hasRunOnce]);
 
   return (
