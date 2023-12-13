@@ -67,7 +67,7 @@ const Contactos = () => {
               <div className="mt-1">
                 <textarea
                   rows={5}
-                  className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  shadow-sm"
+                  className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white focus:border-primary-500 focus:outline-none focus:ring-0  px-2 py-3  shadow-sm"
                   placeholder={t("your_message")}
                   maxLength={500}
                   value={message}

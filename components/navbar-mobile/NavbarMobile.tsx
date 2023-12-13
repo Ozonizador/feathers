@@ -88,7 +88,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               </div>
 
               <Image
-                src={summary2 ? "/images/icons8-sort-down-30.png" : "/images/icons8-sort-up-30.png"}
+                src={summary2 ? "/images/icons8-sort-up-30.png" : "/images/icons8-sort-down-30.png"}
                 height={32}
                 width={32}
                 alt=""
@@ -166,7 +166,8 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                         height={36}
                         width={36}
                         alt="profile-avatar"
-                        className="rounded-full"
+                          className="rounded-full"
+                          style={{ maxWidth: 'none', width: '36px', height: '36px' }}
                       />
                     ) : (
                       <BsPerson size={32} />

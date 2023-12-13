@@ -28,25 +28,28 @@ const UniControloHospedes = ({ stays, error }: UniControloHospedesProps) => {
   const { t } = useTranslation();
   console.log(error)
   return (
-    <section className="max-width">
+    <section className="">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
 
-      <div className="mx-auto my-16 w-11/12 rounded-2xl bg-terciary-300 py-20 lg:w-4/6 ">
-        <div className="flex flex-col gap-10 px-12 lg:flex-row">
-          <div className="flex justify-center">
+      <div className="mx-7 my-16 w-full">
+        <div className="my-20 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full lg:px-0">
+        <div className="flex flex-col lg:flex-row">
+            <div className="mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 ">
+            {/* mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 */}
             <MenuSenhorio activeSection="uni-controlo" activeUrl="guests"/>
-          </div>
+          </div>  
 
-          <div className="ml-10">
-            <>
-              <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
-              <div className="mb-5 font-bold">{t("admin:guests.current_guests")}</div>
-              {!stays || (stays.length === 0 && <div>{t("admin:guests.no_guests")}</div>)}
-              {stays &&
-                stays.map((stay, index) => {
-                  return <HospedeCard stay={stay} key={index} />;
-                })}
-            </>
+            <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5">
+              <>
+                <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
+                <div className="mb-5 font-bold">{t("admin:guests.current_guests")}</div>
+                {!stays || (stays.length === 0 && <div>{t("admin:guests.no_guests")}</div>)}
+                {stays &&
+                  stays.map((stay, index) => {
+                    return <HospedeCard stay={stay} key={index} />;
+                  })}
+              </>
+            </div>
           </div>
         </div>
       </div>

@@ -48,7 +48,7 @@ const Index = () => {
         <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">{t("blog:title")}</div>
         <div className="flex h-5 w-full items-center lg:w-44 ">
           <select
-            className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 lg:mt-0 lg:w-44"
+            className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white focus:border-primary-500 focus:outline-none focus:ring-0 px-3 py-4 lg:mt-0 lg:w-44"
             placeholder="Categoria"
             onChange={(e) => setCategory(e.target.value as UserTypes)}
           >

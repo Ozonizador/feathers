@@ -11,7 +11,7 @@ const PhoneCountrySelect = ({ country, setCountry }: PhoneCountrySelectProps) =>
     <select
       value={country}
       onChange={(event) => setCountry(event.target.value || undefined)}
-      className="flex w-32 justify-between rounded-xl border border-primary-300 p-3"
+      className="flex w-32 justify-between rounded-xl border border-terciary-500 p-3 focus:border-primary-500 focus:ring-0"
     >
       {getCountries().map((country) => (
         <option key={country} value={country}>

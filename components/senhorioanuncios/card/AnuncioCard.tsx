@@ -2,7 +2,8 @@
 import React, { Fragment } from "react";
 import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
-import { BsThreeDots } from "react-icons/bs";
+import { BsFillHouseCheckFill, BsThreeDots } from "react-icons/bs";
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import { Advertisement } from "../../../models/advertisement";
 import { useRouter } from "next/router";
 import { useSetSelectedAnuncioMenuSenhorio } from "../../../context/MenuSenhorioAnuncioProvider";
@@ -12,48 +13,6 @@ import ExpensesComponent from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 import { CONTACTOS_URL } from "../../../models/paths";
 import { TypeExpense } from "../../../models/advertisement"
-
-function EditInactiveIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#ffffff" stroke="#000000" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function EditActiveIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#c48b60" stroke="#ffffff" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function VerifyActiveIcon(props:any) {
-  return (
-    <Image width={80} height={80} {...props} src="/images/homeSection2-1.svg" alt="" />
-  );
-}
-
-function DeleteInactiveIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="6" width="10" height="10" fill="#EDE9FE" stroke="#000000" strokeWidth="2" />
-      <path d="M3 6H17" stroke="#000000" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#000000" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function DeleteActiveIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="6" width="10" height="10" fill="#c48b60" stroke="#ffffff" strokeWidth="2" />
-      <path d="M3 6H17" stroke="#ffffff" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#ffffff" strokeWidth="2" />
-    </svg>
-  );
-}
 
 interface AnuncioCardProps {
   advertisement: Advertisement;
@@ -123,11 +82,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                   active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
-                                {active ? (
-                                  <EditActiveIcon className="mr-2 h-5 w-5 text-black" aria-hidden="true" />
-                                ) : (
-                                  <EditInactiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
-                                )}
+                                 <MdModeEdit className="mr-2 h-5 w-5" aria-hidden="true" />
                                 {t("edit")}
                               </button>
                             )}
@@ -142,11 +97,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                   active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
-                                 {active ? (
-                                  <VerifyActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
-                                ) : (
-                                  <VerifyActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
-                                )}
+                                  <BsFillHouseCheckFill className="mr-2 h-5 w-5" aria-hidden="true" />
                                 {t("verify")}
                                 </button>
                               )}
@@ -161,11 +112,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                                   active ? "bg-primary-500 text-white" : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                               >
-                                {active ? (
-                                  <DeleteActiveIcon className="mr-2 h-5 w-5 text-black " aria-hidden="true" />
-                                ) : (
-                                  <DeleteInactiveIcon className="mr-2 h-5 w-5 text-black" aria-hidden="true" />
-                                )}
+                               <MdDelete className="mr-2 h-5 w-5" aria-hidden="true" />
                                 {t("delete")}
                               </button>
                             )}

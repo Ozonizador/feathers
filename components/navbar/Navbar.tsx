@@ -101,7 +101,7 @@ export const Navbar = () => {
                   <Image src={router.locale === "en" ? ukFlag : ptFlag} alt="" />
                 </div>
                 <select
-                  className="ml-2 border-none"
+                  className="ml-2 border-none focus:border-outline-none focus:border-primary-500 focus:ring-0"
                   onChange={(event) => {
                     router.push(router.asPath, undefined, { locale: event.target.value });
                   }}
@@ -113,7 +113,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="border-terciary-400 mt-5 flex h-20 lg:gap-5 lg:px-28">
+          <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-10">
             <div className="lg:block">
               <Link href={HOME_URL}>
                 <div className="relative h-full w-52">
@@ -136,7 +136,7 @@ export const Navbar = () => {
               <CgMenuLeft size={28} />
             </div>
 
-            <div className="mx-auto my-auto hidden lg:block">
+            <div className="mx-auto my-auto hidden lg:block xl:px-5">
               <div className="flex gap-1">
                 <div
                   className={classNames({
@@ -188,7 +188,7 @@ export const Navbar = () => {
                   </div>
                 )}
                 {userAppMode == "TENANT" && (
-                  <div className="my-auto px-5">
+                  <div className="my-auto px-2 flex flex-shrink-0 xl:px-5">
                     <Link
                       href={PROCURAR_ADVERT_URL}
                       className={classNames({
@@ -200,7 +200,7 @@ export const Navbar = () => {
                     </Link>
                   </div>
                 )}
-                <div className="my-auto px-5">
+                <div className="my-auto px-2 xl:px-5">
                   <Link
                     href={BLOG_URL}
                     className={classNames({
@@ -210,7 +210,7 @@ export const Navbar = () => {
                     {t("navbar:blog")}
                   </Link>
                 </div>
-                <div className="my-auto px-5">
+                <div className="my-auto px-2 xl:px-5">
                   <Link
                     href={CONTACTOS_URL}
                     className={classNames({

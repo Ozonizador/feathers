@@ -58,7 +58,7 @@ const Anuncios = () => {
   const str2 = arr.join(" ");
 
   return (
-    <section className="max-width">
+    <section className="">
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
 
       <UnideskStructure>

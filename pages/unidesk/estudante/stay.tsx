@@ -45,7 +45,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
       <ModalReportarAnuncioProvider>
         <ModalAlterarReservaProvider>
           <>
-            <div className="max-width">
+            <div className="">
               <Breadcrumbs icon={IconStay} paths={EstadiaBreadcrumbs} />
               <UnideskStructure>
                 <UnideskStructure.Menu>

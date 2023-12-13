@@ -123,7 +123,7 @@ export default function ProcurarSection() {
               </div>
               <div className="mb-2">
                 <select
-                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white px-3 text-sm focus:border-terciary-500"
+                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white  px-3 text-sm focus:border-primary-500 focus:outline-none focus:ring-0 "
                   onChange={changeOrderFilter}
                   value={currentOrder.byColumn}
                   id="order-drop"

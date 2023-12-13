@@ -23,7 +23,8 @@ type MenuSenhorioProps = {
     | "advert_photos"
     | "advert_conditions"
     | "main_panel"
-    | "reservations";
+  | "reservations"
+  |"inbox";
 };
 
 const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
@@ -91,6 +92,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
           <MenuOption url={""} label="admin:unidesk.common.contracts" blocked={true}></MenuOption>
         </MenuGrouper>
       )}
+
 
       <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
