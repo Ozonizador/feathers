@@ -68,11 +68,15 @@ export const Navbar = () => {
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
     setCookie('navbar', userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    if (router.pathname.includes("unidesk/")) {
+      router.push(UNIDESK_URL);
+    }
   };
 
   useEffect(() => {
     if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
+      
       setHasRunOnce(true);
     }
     let navbarState = getCookie('navbar'); 
