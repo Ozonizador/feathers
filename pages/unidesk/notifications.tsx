@@ -61,7 +61,7 @@ const Notifications = () => {
           <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />
         </UnideskStructure.Menu>
 
-        <div className="mx-5 my-16 rounded-lg border lg:border-none">
+        <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12">
         <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
           <div className="container mx-auto w-full">
             <>

@@ -377,7 +377,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={modifiedURL}>
                                     <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">

@@ -29,7 +29,7 @@ const Procurar = ({ filter }: ProcurarProps) => {
           <div className="max-width flex flex-col justify-center px-5 lg:flex-row lg:px-0">
             <SearchInputField />
           </div>
-          <div className="max-width my-10">
+          <div className="my-10 lg:px-28">
             <ProcurarSection />
           </div>
         </div>

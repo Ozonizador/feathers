@@ -12,7 +12,7 @@ interface HospedeCardProps {
 const HospedeCard = ({ stay }: HospedeCardProps) => {
   const { t } = useTranslation();
   const { advertisement, tenant } = stay;
-  console.log(advertisement.slug)
+  // console.log(advertisement.slug)
   return (
     <div className="mt-5 flex gap-2 rounded-md bg-white p-2 py-6">
       <div className="flex w-36 flex-col items-center justify-center align-middle">

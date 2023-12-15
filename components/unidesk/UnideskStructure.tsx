@@ -19,7 +19,7 @@ const Menu = ({ children }: UnideskStructureProps) => (
 );
 
 const Content = ({ children }: UnideskStructureProps) => {
-  return <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5">{children}</div>;
+  return <div className="flex w-2/3 flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-8">{children}</div>;
 };
 
 export const UnideskStructure = Object.assign(Structure, {

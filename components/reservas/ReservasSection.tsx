@@ -21,7 +21,7 @@ const paths = [
 const ReservasSection = () => {
   const { t } = useTranslation();
   return (
-    <section className="max-width px-5">
+    <section className="px-5">
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
       <UnideskStructure>
         <UnideskStructure.Menu>
@@ -80,13 +80,13 @@ const CurrentReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
+          <Table.HeadCell className="mb-5 text-md font-normal text-gray-900">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">
+          <Table.HeadCell className="text-md font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
+          <Table.HeadCell className="text-md font-normal text-gray-900">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className="text-md font-normal text-gray-900">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className="text-md font-normal text-gray-900">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
 
@@ -156,13 +156,13 @@ const NextReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-10 text-xl font-normal text-gray-900">
+          <Table.HeadCell className="mb-10 text-md font-normal text-gray-900 table_head">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">
+          <Table.HeadCell className=" lg:text-base text-[14px] font-normal text-gray-900 table_head">{t("guest", { count: 2 })}</Table.HeadCell>
+          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
 
@@ -243,13 +243,13 @@ const AllReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-5 text-xl font-normal text-gray-900">
+          <Table.HeadCell className="mb-5 text-md font-normal text-gray-900 table_head">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("start")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">{t("end")}</Table.HeadCell>
-          <Table.HeadCell className="text-xl font-normal text-gray-900">
+          <Table.HeadCell className="md:text-base text-[14px] font-normal text-gray-900 table_head">{t("guest", { count: 2 })}</Table.HeadCell>
+          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">{t("start")}</Table.HeadCell>
+          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">{t("end")}</Table.HeadCell>
+          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
 
