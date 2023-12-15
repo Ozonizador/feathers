@@ -79,7 +79,7 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
           return (
             <Avatar
               alt="Hóspede"
-              img={ message.profile.avatar_url || "/icons/user/user.svg"}
+              img={ profile?.avatar_url || "/icons/user/user.svg"}
               rounded={true}
               size="md"
             />
@@ -88,7 +88,7 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
       }
     }
 
-    return <Avatar alt="Hóspede" img={messagerProfile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="md" />;
+    return <Avatar alt="Hóspede" img={profile?.avatar_url || "/icons/user/user.svg"} rounded={true} size="md" />;
   };
 
   const lastMessage = () => {
@@ -110,7 +110,7 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
     <div className="mb-2 flex w-72 gap-5 p-2">
       <div className="flex w-1/3 flex-col items-center justify-center align-middle">
         {avatar()}
-        <div className="mt-2 text-xs font-bold">{messagerProfile?.name || ""}</div>
+        <div className="mt-2 text-xs font-bold">{profile?.name || ""}</div>
       </div>
 
       <div className="flex w-full flex-col">

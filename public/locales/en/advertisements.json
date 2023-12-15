@@ -125,7 +125,7 @@
   "amenities": "Amenities",
   "guest_number": "Guest Number",
   "current_reservation": "Current Reservation",
-  "entity": "Entity:",
+  "entity": "Entity: {{entity}}",
   "reference": "Reference:",
   "amount": "Amount:",
   "cover": "Cover Photo",
