@@ -11,7 +11,11 @@ import {
   UNIDESK_SENHORIO_REVIEWS_URL,
 } from "../../../models/paths";
 import { useTranslation } from "next-i18next";
+const isUrlInbox = INBOX_URL;
+const menuPropValue = isUrlInbox ? 'yes' : 'no';
+const modifiedURL = isUrlInbox ? `${INBOX_URL}?menu=${menuPropValue}` : INBOX_URL;
 
+console.log(modifiedURL, "modified URL");
 type MenuSenhorioProps = {
   activeSection: "adverts" | "single_advert" | "inbox" | "uni-controlo" | "notifications";
   activeUrl:
@@ -94,7 +98,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
       )}
 
 
-      <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
+      <MenuGrouper title={t("inbox")} url={modifiedURL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
         isCollapsed={true}
         title={"uni-controlo"}

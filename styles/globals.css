@@ -211,6 +211,9 @@ border-color: #c48b60;
   --tw-ring-shadow: 0 !important;
   border: 0 !important;
 }
+.table_head{
+  font-size: 12px !important;
+}
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;
 }

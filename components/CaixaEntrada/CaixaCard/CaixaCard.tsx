@@ -107,7 +107,7 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
   };
 
   return (
-    <div className="mb-2 flex w-72 gap-5 p-2">
+    <div className="mb-2 flex gap-5 p-2">
       <div className="flex w-1/3 flex-col items-center justify-center align-middle">
         {avatar()}
         <div className="mt-2 text-xs font-bold">{profile?.name || ""}</div>

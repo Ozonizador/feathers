@@ -48,7 +48,7 @@ const UnideskFavoritos = () => {
   }, [getUserFavourites, profile]);
 
   return (
-    <section className="px-5">
+    <section className="">
       <Breadcrumbs icon={iconfavorito} paths={FavouritesBreadcrumbs} />
       <UnideskStructure>
         <UnideskStructure.Menu>

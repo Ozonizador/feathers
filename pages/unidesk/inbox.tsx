@@ -64,7 +64,7 @@ const CaixaEntrada = () => {
   const { userAppMode } = useGetUserType();
   const router = useRouter();
   return (
-    <div className="mx-5 h-full rounded-xl border lg:border-none">
+    <div className="h-full rounded-xl border lg:border-none">
       <>
         <div className="my-20 rounded-2xl lg:my-20 lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
@@ -168,7 +168,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
         }
       }
     }
-  };
+  };  
 
   useEffect(() => {
     getMessagesFromConversation();
@@ -233,10 +233,10 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
             </div>
 
             <div className="flex flex-col">
-              <div className="flex flex-row">
+              <div className="flex flex-row w-[100%]">
                 <div
-                  className="flex w-96 flex-col overflow-y-scroll border-r border-terciary-500"
-                  style={{ height: "40rem", minWidth: "285px" }}
+                  className="flex flex-col w-[33.33%] overflow-y-scroll border-r border-terciary-500"
+                  style={{ height: "40rem"}}
                   id="left-scroll"
                 >
                   {conversations.map((conversation, index) => {
@@ -274,8 +274,8 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                 />
                 {currentConversation && (
                   <div
-                    className="border-l border-terciary-500 p-2"
-                    style={{ minWidth: menu === "yes" ? "14rem" : "17rem" }}
+                    className="border-l border-terciary-500 p-2 w-[33.33%]"
+                    // style={{ minWidth: menu === "yes" ? "14rem" : "17rem" }}
                   >
                     <>
                       <div className="flex">
@@ -493,10 +493,10 @@ const MessagesSenderZone = ({
     }
   }, [messages]);
   return (
-    <div className="flex w-full flex-col gap-2" style={{ height: "40rem", overflowY: "auto" }}>
+    <div className="flex flex-col gap-2" style={{ height: "40rem", overflowY: "auto" }}>
       <div
-        className="flex h-96 flex-col gap-1 overflow-y-auto p-2"
-        style={{ height: "-webkit-fill-available" }}
+        className="flex h-96 flex-col gap-1 overflow-y-auto p-2 "
+        style={{ height: "-webkit-fill-available", width:"-webkit-fill-available" }}
         id="right-scroll"
         ref={chatContainerRef}
       >

@@ -47,14 +47,14 @@ export default function RoomSlider() {
 
         return amenitiesChunks.map((chunk, chunkIndex) => (
           <div key={`${zoneIndex}-${chunkIndex}`} className="flex flex-col gap-8">
-            <div className="mb-auto mt-5 flex items-center justify-center text-primary-500">
+            <div className="mb-auto mt-5 pt-5 flex items-center justify-center text-2xl font-bold">
               {chunkIndex==1? t("advertisements:more")+ " "+ zone.label:zone.label}
             </div>
-            <div className="mx-auto pb-5 lg:pb-20 flex h-full w-11/12 flex-wrap lg:flex-nowrap justify-center align-middle">
+            <div className="mx-auto pb-5 pt-2 lg:pb-20 flex h-full w-11/12 flex-wrap lg:flex-nowrap justify-center align-middle">
               {chunk.map((amenity, index) => {
                 const icon = houseAmenities(amenity as TypeAmenity);
                 return (
-                  <div className="group flex w-[90px]  flex-col items-center justify-center align-middle" key={index}>
+                  <div className="group flex w-[90px] flex-col items-center justify-center align-middle" key={index}>
                     {icon && icon({ size: 40, color: "#505046" })}
                     <div className="mt-3 truncate text-[16px] font-medium text-[#576068] opacity-0 hover:text-clip group-hover:opacity-100">
                       {t(TypeAmenityLabel[amenity as TypeAmenity])}
