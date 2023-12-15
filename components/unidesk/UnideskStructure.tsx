@@ -6,8 +6,8 @@ export type UnideskStructureProps = PropsWithChildren<{
 
 const Structure = ({ children }: UnideskStructureProps) => {
   return (
-    <div className="px-5 lg:px-9">
-      <div className="my-20 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:container lg:my-20 lg:w-full lg:px-0">
+    <div className="px-5 lg:px-28">
+      <div className="my-20 w-full rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:my-20 ">
         <div className="flex flex-col lg:flex-row">{children}</div>
       </div>
     </div>

@@ -41,6 +41,12 @@ import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
 
+const isUrlInbox = INBOX_URL;
+const menuPropValue = isUrlInbox ? 'yes' : 'no';
+const modifiedURL = isUrlInbox ? `${INBOX_URL}?menu=${menuPropValue}` : INBOX_URL;
+
+console.log(modifiedURL, "modified URL");
+
 export const Navbar = () => {
   const { t } = useTranslation();
   const user = useUser();
@@ -113,7 +119,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-10">
+          <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
                 <div className="relative h-full w-52">
@@ -318,7 +324,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={modifiedURL}>
                                     <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">

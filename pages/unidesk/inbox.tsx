@@ -51,7 +51,7 @@ const CaixaEntrada = () => {
   const { menu } = router.query 
   console.log(menu,'menu')
   return (
-    <div className="mx-5 h-full rounded-xl border lg:border-none">
+    <div className="h-full rounded-xl border lg:border-none">
       <>
         <div className="my-20 rounded-2xl lg:my-20 lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
@@ -68,7 +68,7 @@ const CaixaEntrada = () => {
           {/* DESKTOP */}
           <CaixaExtradaContent menu={menu} />
         </UnideskStructure>) :
-          menu === undefined ? (<CaixaExtradaContent/>): null}
+          menu === "no" ? (<CaixaExtradaContent/>): null}
       </>
     </div>
   );
@@ -133,7 +133,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
         }
       }
     }
-  };
+  };  
 
   useEffect(() => {
     getMessagesFromConversation();
