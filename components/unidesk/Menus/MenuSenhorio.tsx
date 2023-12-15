@@ -41,18 +41,18 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
       >
         <MenuOption
           url={UNIDESK_SENHORIO_PAINEL_URL}
-          label={t("admin:unidesk.common.panel")}
+          label={t("admin:unidesk.general.panel")}
           activeLink={activeUrl === "main_panel"}
         />
         <MenuOption
           url={UNIDESK_SENHORIO_RESERVAS_URL}
-          label={t("admin:unidesk.common.reservations")}
+          label={t("admin:unidesk.general.reservations")}
           activeLink={activeUrl === "reservations"}
         />
         <MenuOption
           blocked={false}
           url={UNIDESK_SENHORIO_CALENDAR_URL}
-          label="admin:unidesk.common.calendar"
+          label="admin:unidesk.general.calendar"
           activeLink={activeUrl === "calendar"}
         />
         <MenuOption
@@ -89,7 +89,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
             label={t("advertisements:price", { count: 2 })}
             activeLink={activeUrl === "advert_prices"}
           ></MenuOption>
-          <MenuOption url={""} label="admin:unidesk.common.contracts" blocked={true}></MenuOption>
+          <MenuOption url={""} label="admin:unidesk.general.contracts" blocked={true}></MenuOption>
         </MenuGrouper>
       )}
 

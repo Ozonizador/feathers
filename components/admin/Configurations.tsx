@@ -165,7 +165,7 @@ const Configurations = () => {
                   </div>
                   <div className="my-5 flex flex-col lg:flex-row lg:items-center">
                     <div className="flex flex-col gap-2">
-                      <p className="text-base font-bold">{t("admin:unidesk.common.preference")}</p>
+                      <p className="text-base font-bold">{t("admin:unidesk.general.preference")}</p>
                       <div className="flex gap-3">
                         <div className="flex gap-2">
                           <label className="my-auto">{t("student", { count: 1 })}</label>

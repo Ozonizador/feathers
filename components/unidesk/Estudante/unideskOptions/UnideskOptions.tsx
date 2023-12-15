@@ -23,7 +23,7 @@ const unideskOptions = [
   },
   {
     blocked: true,
-    text: "admin:unidesk.common.contracts",
+    text: "admin:unidesk.general.contracts",
   },
 ] as { link?: string; blocked: boolean; text: string }[];
 

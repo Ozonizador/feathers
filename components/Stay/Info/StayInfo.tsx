@@ -89,7 +89,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
           <div className="w-18 flex cursor-pointer flex-col items-center gap-1">
             <RiMailSendLine className="mb-2 text-4xl text-green-400" size={32} />
             <div className="text-center text-xs lg:text-sm">
-              <Trans i18nKey="admin:unidesk.common.send_message" components={{ 1: <br /> }} />
+              <Trans i18nKey="admin:unidesk.general.send_message" components={{ 1: <br /> }} />
             </div>
           </div>
         </Link>

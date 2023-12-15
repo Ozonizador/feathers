@@ -6,11 +6,11 @@ const optionAnuncios = [
   {
     link: "unidesk/senhorio/advertisements",
     blocked: false,
-    text: "admin:unidesk.common.panel",
+    text: "admin:unidesk.general.panel",
   },
   {
     blocked: true,
-    text: "admin:unidesk.common.contracts",
+    text: "admin:unidesk.general.contracts",
   },
   {
     link: "/unidesk/senhorio/reservas",
@@ -20,7 +20,7 @@ const optionAnuncios = [
   {
     link: "unidesk/senhorio/calendar",
     blocked: false,
-    text: "admin:unidesk.common.calendar",
+    text: "admin:unidesk.general.calendar",
   },
   {
     link: "unidesk/senhorio/reviews",

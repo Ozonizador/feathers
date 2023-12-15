@@ -40,6 +40,7 @@ import {
 import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
+import { setCookie, getCookie } from "cookies-next";
 
 const isUrlInbox = INBOX_URL;
 const menuPropValue = isUrlInbox ? 'yes' : 'no';
@@ -72,13 +73,20 @@ export const Navbar = () => {
 
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    setCookie('navbar', userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    if (router.pathname.includes("unidesk/")) {
+      router.push(UNIDESK_URL);
+    }
   };
 
   useEffect(() => {
     if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
+      
       setHasRunOnce(true);
     }
+    let navbarState = getCookie('navbar'); 
+    setWebUserMode(navbarState == "LANDLORD" ? "LANDLORD" : "TENANT")
   }, [userAppMode, profile, hasRunOnce]);
 
   return (

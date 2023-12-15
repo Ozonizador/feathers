@@ -21,12 +21,10 @@ const paths = [
 
 interface UniControloHospedesProps {
   stays: ReservationGuest[];
-  error: any;
 }
 
-const UniControloHospedes = ({ stays, error }: UniControloHospedesProps) => {
+const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
   const { t } = useTranslation();
-  console.log(error)
   return (
     <section className="">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
@@ -91,7 +89,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       initialSession: session,
       user: session.user,
-      error: data,
       stays: error ? [] : data,
       ...(await serverSideTranslations(locale ?? "pt")),
     },

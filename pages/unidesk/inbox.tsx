@@ -1,6 +1,6 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
 import { useCurrentUser, useGetUserType } from "../../context/MainProvider";
-import React, { useCallback, useEffect, useState, useRef} from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
 import { MessageWithProfile } from "../../models/message";
@@ -34,6 +34,9 @@ import router, { useRouter } from "next/router";
 import { UnideskStructure } from "../../components/unidesk/UnideskStructure";
 import MenuEstudante from "../../components/unidesk/Menus/MenuEstudante";
 import MenuSenhorio from "../../components/unidesk/Menus/MenuSenhorio";
+import { useSetModalDetalhesPagamento, useSetModalGerarReferencia } from "../../context/ModalShowProvider";
+import { truncate } from "fs";
+import { useSetAdvertisement } from "../../context/AdvertisementController";
 
 {
   /* page 59 XD */
@@ -47,9 +50,9 @@ const paths = [
 const CaixaEntrada = () => {
   const { t } = useTranslation();
   const { userAppMode } = useGetUserType();
-  const router = useRouter()
-  const { menu } = router.query 
-  console.log(menu,'menu')
+  const router = useRouter();
+  const { menu } = router.query;
+  console.log(menu, "menu");
   return (
     <div className="h-full rounded-xl border lg:border-none">
       <>
@@ -90,6 +93,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
   const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
     undefined
   );
+  let setIsOpen = useSetModalDetalhesPagamento();
   const getUserConversations = useCallback(async () => {
     if (profile) {
       // @ts-ignore
@@ -182,62 +186,71 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
   };
   return (
     <>
-      <div className={classNames("mx-auto hidden w-5/6 lg:block", {
-  "my-16 rounded-2xl border border-terciary-500": menu !== 'yes',
-})}>
-          {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
-          {conversations && conversations.length > 0 && (
-            <>
-              <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-                <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">{t("admin:messages")}</a>
+      <div
+        className={classNames("mx-auto hidden w-5/6 lg:block", {
+          "my-16 rounded-2xl border border-terciary-500": menu !== "yes",
+        })}
+      >
+        {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
+        {conversations && conversations.length > 0 && (
+          <>
+            <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
+              <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">{t("admin:messages")}</a>
 
-                <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
-                {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
-              </div>  
+              <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
+              {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
+            </div>
 
-              <div className="flex flex-col">
-                <div className="flex flex-row">
-                  <div className="flex w-96 flex-col border-r border-terciary-500 overflow-y-scroll" style={{ height: '40rem', minWidth: '285px'}} id="left-scroll">
-                    {conversations.map((conversation, index) => {
-                      if (allMessages.length < 1) {
-                        getAllMessages();
-                      }
-                      return (
-                        <div
-                          key={index}
-                          onClick={() => setCurrentConversation(conversation)}
-                          className={classNames("cursor-pointer p-1", {
-                            "bg-primary-100": currentConversation?.id === conversation.id,
-                          })}
-                        >
-                          <CaixaCard
-                            profile={getOtherProfile(conversation)}
-                            messagerProfile={conversation.tenant}
-                            // @ts-ignore
-                            reservation={conversation.reservation}
-                            // @ts-ignore
-                            messages={allMessages[index]}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
+            <div className="flex flex-col">
+              <div className="flex flex-row">
+                <div
+                  className="flex w-96 flex-col overflow-y-scroll border-r border-terciary-500"
+                  style={{ height: "40rem", minWidth: "285px" }}
+                  id="left-scroll"
+                >
+                  {conversations.map((conversation, index) => {
+                    if (allMessages.length < 1) {
+                      getAllMessages();
+                    }
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setCurrentConversation(conversation)}
+                        className={classNames("cursor-pointer p-1", {
+                          "bg-primary-100": currentConversation?.id === conversation.id,
+                        })}
+                      >
+                        <CaixaCard
+                          profile={getOtherProfile(conversation)}
+                          messagerProfile={conversation.tenant}
+                          // @ts-ignore
+                          reservation={conversation.reservation}
+                          // @ts-ignore
+                          messages={allMessages[index]}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
 
-                  <MessagesSenderZone
-                    messages={messages}
-                    conversationId={(currentConversation && currentConversation.id) || ""}
-                    sendMessage={sendMessage}
-                    currentMessage={currentMessage}
-                    setCurrentMessage={setCurrentMessage}
-                  />
-                  {currentConversation && (
-                    <div className="border-l border-terciary-500 p-2" style={{ minWidth: menu === 'yes' ? '14rem' : '17rem' }}>
-                      <>
-                        <div className="flex">
-                          <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
-                          <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
-                        </div>
-                        <div className="p-2">
+                <MessagesSenderZone
+                  messages={messages}
+                  conversationId={(currentConversation && currentConversation.id) || ""}
+                  sendMessage={sendMessage}
+                  currentMessage={currentMessage}
+                  setCurrentMessage={setCurrentMessage}
+                />
+                {currentConversation && (
+                  <div
+                    className="border-l border-terciary-500 p-2"
+                    style={{ minWidth: menu === "yes" ? "14rem" : "17rem" }}
+                  >
+                    <>
+                      <div className="flex">
+                        <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
+                        <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
+                      </div>
+                      <div className="p-2">
                         <div className="my-4 flex flex-row gap-3">
                           <div>
                             <Avatar
@@ -263,32 +276,31 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                               {currentConversation.reservation.advertisement &&
                                 `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
-                              </div>
-                              <div className="my-4 flex justify-start text-left text-sm">
-                          {`${t("common:on_date", {
-                            val: new Date(currentConversation.reservation?.start_date),
-                            formatParams: {
-                              val: { day: "numeric", month: "short" },
-                            },
-                          })} - ${t("common:on_date", {
-                            val: new Date(currentConversation.reservation?.end_date),
-                            formatParams: {
-                              val: { day: "numeric", year: "numeric", month: "short" },
-                            },
-                          })}`}
-                          <br />
-                          <br />
-                          {`${
-                            currentConversation.reservation.number_guests != 1
-                              ? t("common:guests", { val: currentConversation.reservation.number_guests })
-                              : t("common:guest")
-                          } - ${currentConversation.reservation.advertisement.month_rent}€`}
-                          <br />
-                          {`(${t("common:monthly_rent")})`}
-                        </div>
+                            </div>
+                            <div className="my-4 flex justify-start text-left text-sm">
+                              {`${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.start_date),
+                                formatParams: {
+                                  val: { day: "numeric", month: "short" },
+                                },
+                              })} - ${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.end_date),
+                                formatParams: {
+                                  val: { day: "numeric", year: "numeric", month: "short" },
+                                },
+                              })}`}
+                              <br />
+                              <br />
+                              {`${
+                                currentConversation.reservation.number_guests != 1
+                                  ? t("common:guests", { val: currentConversation.reservation.number_guests })
+                                  : t("common:guest")
+                              } - ${currentConversation.reservation.advertisement.month_rent}€`}
+                              <br />
+                              {`(${t("common:monthly_rent")})`}
+                            </div>
                           </div>
                         </div>
-                     
 
                         {currentConversation.reservation.status === "REQUESTED" &&
                           // @ts-ignore
@@ -326,76 +338,88 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                               currentConversation.reservation.status as keyof typeof ReservationStatusLabel
                             ]
                           )}
-                          </div>
-                         
-                        <div className="rounded-md px-4 bg-primary-500 w-fit py-2 text-white text-center mx-auto mt-3">
-                          <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
-                          </div>
-                          </div>
-                      </>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="block lg:hidden">
-          <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-            <a
-              className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white"
-              onClick={() => setCurrentConversation(undefined)}
-            >
-              {t("admin:messages")}
-            </a>
+                        </div>
+                        <div>{currentConversation.reservation.payment_status}</div>
+                        {currentConversation.reservation.status == "ACCEPTED" &&
+                          currentConversation.reservation.payment_status == "NOT_GENERATED" && (
+                            <div></div>
+                          )}
 
-            <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
-            {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
+                        <div className="mx-auto mt-3 w-fit rounded-md bg-primary-500 px-4 py-2 text-center text-white">
+                          {
+                            // @ts-ignore
+                            profile[0].id == currentConversation.host_id ? (
+                              <Link href={`/perfil/${currentConversation.tenant.slug}`}>{t("show_profile")}</Link>
+                            ) : (
+                              <Link href={`/perfil/${currentConversation.host.slug}`}>{t("show_profile")}</Link>
+                            )
+                          }
+                        </div>
+                      </div>
+                    </>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="block lg:hidden">
+        <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
+          <a
+            className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white"
+            onClick={() => setCurrentConversation(undefined)}
+          >
+            {t("admin:messages")}
+          </a>
+
+          <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
+          {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
+        </div>
+        {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
+        {conversations && (
+          <div>
+            {currentConversation &&
+              conversations?.map((conversation, index) => {
+                if (allMessages.length < 1) {
+                  getAllMessages();
+                }
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setCurrentConversation(conversation)}
+                    className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
+                      "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
+                    })}
+                  >
+                    <CaixaCard
+                      profile={getOtherProfile(conversation)}
+                      messagerProfile={conversation.tenant}
+                      // @ts-ignore
+                      reservation={conversation.reservation}
+                      // @ts-ignore
+                      messages={allMessages[index]}
+                    />
+                  </div>
+                );
+              })}
+            {currentConversation && (
+              <div className="tests">
+                <MessagesSenderZone
+                  messages={messages}
+                  sendMessage={sendMessage}
+                  conversationId={currentConversation && currentConversation.id}
+                  currentMessage={currentMessage}
+                  setCurrentMessage={setCurrentMessage}
+                />
+              </div>
+            )}
           </div>
-          {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
-          {conversations && (
-            <div>
-              {currentConversation &&
-                conversations?.map((conversation, index) => {
-                  if (allMessages.length < 1) {
-                    getAllMessages();
-                  }
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setCurrentConversation(conversation)}
-                      className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
-                        "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
-                      })}
-                    >
-                      <CaixaCard
-                        profile={getOtherProfile(conversation)}
-                        messagerProfile={conversation.tenant}
-                        // @ts-ignore
-                        reservation={conversation.reservation}
-                        // @ts-ignore
-                        messages={allMessages[index]}
-                      />
-                    </div>
-                  );
-                })}
-              {currentConversation && (
-                <div className="tests">
-                  <MessagesSenderZone
-                    messages={messages}
-                    sendMessage={sendMessage}
-                    conversationId={currentConversation && currentConversation.id}
-                    currentMessage={currentMessage}
-                    setCurrentMessage={setCurrentMessage}
-                  />
-                </div>
-              )}
-            </div>
-          )}
-            </div>
+        )}
+      </div>
     </>
-  )
-}
+  );
+};
 interface MessagesSenderZoneProps {
   messages: MessageWithProfile[];
   sendMessage: (e: React.FormEvent, conversationId: string) => void;
@@ -421,8 +445,13 @@ const MessagesSenderZone = ({
     }
   }, [messages]);
   return (
-    <div className="flex w-full flex-col gap-2" style={{ height: '40rem', overflowY: 'auto'}}>
-      <div className="flex h-96 flex-col gap-1 overflow-y-auto p-2" style={{ height: '-webkit-fill-available'}} id='right-scroll'  ref={chatContainerRef}>
+    <div className="flex w-full flex-col gap-2" style={{ height: "40rem", overflowY: "auto" }}>
+      <div
+        className="flex h-96 flex-col gap-1 overflow-y-auto p-2"
+        style={{ height: "-webkit-fill-available" }}
+        id="right-scroll"
+        ref={chatContainerRef}
+      >
         {messages.map((message, index, array) => {
           return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
         })}

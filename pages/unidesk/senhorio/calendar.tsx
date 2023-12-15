@@ -137,7 +137,6 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   };
 
   const changeAdvertisementCalendar = (advertisementId: string) => {
-    console.log(1);
     const selectedAdvertisement = advertisements && advertisements.find((adv) => adv.id == advertisementId);
     setSelectedAdvertisement(selectedAdvertisement);
   };
@@ -147,13 +146,12 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuSenhorio activeSection="uni-controlo" activeUrl="calendar" />
+          <MenuSenhorio activeSection="adverts" activeUrl="calendar" />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div>
             <h2 className="text-2xl font-black text-black">{t("admin:calendar.calendar")}</h2>
             <h4 className="text-xl text-primary-500">{t("admin:calendar.description_update")}</h4>
-            {language}
             <br />
             <div>
               <PopoverSelect
