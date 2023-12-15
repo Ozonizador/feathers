@@ -34,8 +34,6 @@ export const RoomPagamento = () => {
   ];
   const router = useRouter();
   const profile = useCurrentUser();
-  const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
-  const setModalGerarRef = useSetModalGerarReferencia();
 
   let { startDate: userSelectedStartDate, endDate: userSelectedEndDate } = useGetUserDates();
   const setSearchInfoProperty = useSetSearchLocationByProperty();
@@ -120,7 +118,7 @@ export const RoomPagamento = () => {
 
     // get the reservation
     await addReservation.mutateAsync(newReservation, {
-      onSuccess: async (info) => {
+      onSuccess: async (info: any) => {
         const { data, error } = info;
         if (error || !data) return toast.error(t("messages:errors.making_reservation"));
 
@@ -130,13 +128,12 @@ export const RoomPagamento = () => {
           templateId: "d-49ee6df771af4f01b4a69997fa02b192",
         };
 
+        /*
         await fetch("/api/mail", {
           method: "POST",
           body: JSON.stringify(formData),
-        });
+        });*/
 
-        setModalGerarReferenciaInfo({ reservation: data, value: setAdvertPrice() });
-        setModalGerarRef(false);
         toast.success(t("messages:success.reservation_requested"));
       },
       onError: (error) => {
