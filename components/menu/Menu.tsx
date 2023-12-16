@@ -59,10 +59,7 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
   const goToUrl = (url: string) => {
-    const isUrlInbox = url === '/unidesk/inbox';
-    const menuPropValue = isUrlInbox ? 'yes' : 'no';
-    const urlWithProp = isUrlInbox ? `/unidesk/inbox?menu=${menuPropValue}` : url;
-    router.push(urlWithProp)  
+    router.push(url)  
   };
 
   return (

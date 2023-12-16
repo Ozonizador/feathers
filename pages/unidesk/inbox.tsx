@@ -15,7 +15,6 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
-
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
@@ -50,9 +49,7 @@ const paths = [
 const CaixaEntrada = () => {
   const { t } = useTranslation();
   const { userAppMode } = useGetUserType();
-  const router = useRouter();
-  const { menu } = router.query;
-  console.log(menu, "menu");
+
   return (
     <div className="h-full rounded-xl border lg:border-none">
       <>
@@ -60,7 +57,7 @@ const CaixaEntrada = () => {
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
         <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />  
-        {menu==='yes'? (<UnideskStructure>
+        <UnideskStructure>
           <UnideskStructure.Menu>
             {userAppMode === 'TENANT' ? (
               <MenuEstudante activeSection={"inbox"} activeUrl={"inbox"} />
@@ -69,17 +66,14 @@ const CaixaEntrada = () => {
             ) : null}
         </UnideskStructure.Menu>
           {/* DESKTOP */}
-          <CaixaExtradaContent menu={menu} />
-        </UnideskStructure>) :
-          menu === "no" ? (<CaixaExtradaContent/>): null}
+          <CaixaExtradaContent/>
+        </UnideskStructure>
       </>
     </div>
   );
 };
-interface CaixaExtradaContentProps {
-  menu?: string;
-}
-const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
+
+const CaixaExtradaContent= () => {
   const { t } = useTranslation();
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
@@ -187,9 +181,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
   return (
     <>
       <div
-        className={classNames("mx-auto hidden w-5/6 lg:block", {
-          "my-16 rounded-2xl border border-terciary-500": menu !== "yes",
-        })}
+        className={classNames("mx-auto hidden w-5/6 lg:block")}
       >
         {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
         {conversations && conversations.length > 0 && (
@@ -204,7 +196,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
             <div className="flex flex-col">
               <div className="flex flex-row w-[100%]">
                 <div
-                  className="flex flex-col w-[33.33%] overflow-y-scroll border-r border-terciary-500"
+                  className="flex flex-col w-[30rem] overflow-y-scroll border-r border-terciary-500"
                   style={{ height: "40rem"}}
                   id="left-scroll"
                 >
@@ -242,8 +234,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                 />
                 {currentConversation && (
                   <div
-                    className="border-l border-terciary-500 p-2 w-[33.33%]"
-                    // style={{ minWidth: menu === "yes" ? "14rem" : "17rem" }}
+                    className="border-l border-terciary-500 p-2 w-[50%] popup" 
                   >
                     <>
                       <div className="flex">
@@ -262,7 +253,13 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                             />
                           </div>
                           <div className="pl-2 text-start">
-                            <div className="font-bold">
+                            <div className={classNames("font-bold", {
+                              "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
+                              "text-green-500": currentConversation.reservation.status === "ACCEPTED",
+                              "text-red-500": currentConversation.reservation.status === "REJECTED",
+                              "text-gray-400": currentConversation.reservation.status === "EXPIRED"
+                              
+                            })}>
                               {(currentConversation.reservation.status &&
                                 t(ReservationStatusLabel[currentConversation.reservation.status])) ||
                                 ""}
@@ -445,10 +442,10 @@ const MessagesSenderZone = ({
     }
   }, [messages]);
   return (
-    <div className="flex flex-col gap-2" style={{ height: "40rem", overflowY: "auto" }}>
+    <div className="flex flex-col gap-2" style={{ height: "40rem", overflowY: "auto", width:"-webkit-fill-available" }}>
       <div
         className="flex h-96 flex-col gap-1 overflow-y-auto p-2 "
-        style={{ height: "-webkit-fill-available", width:"-webkit-fill-available" }}
+        style={{ height: "-webkit-fill-available" }}
         id="right-scroll"
         ref={chatContainerRef}
       >
@@ -461,7 +458,7 @@ const MessagesSenderZone = ({
         <div className="mr-2 w-full">
           <form onSubmit={(e) => sendMessage(e, conversationId)} className="flex items-center">
             <input
-              className="w-full border-0 p-4 text-xs outline-0"
+              className="w-full border-0 p-4 text-xs outline-0 focus:ring-0"
               placeholder={t("write_message")}
               type="text"
               value={currentMessage}
