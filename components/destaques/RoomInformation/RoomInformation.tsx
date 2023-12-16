@@ -22,30 +22,30 @@ export default function RoomInformation() {
         )}
       </div>
       <div className="my-3 grid grid-cols-2 gap-5 lg:grid-cols-5 w-screen" style={{ width: '-webkit-fill-available' }}>
-  <div className="mx-auto mb-10 flex w-40 lg:w-full flex-col items-center shadow-md justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
-    <RiUserLine className="text-4xl" />
-    <div className="mt-3 text-base ">
+  <div className="mx-auto mb-10 flex xl:w-[125px] xl:h-[125px] w-40 h-40 lg:w-24 lg:h-24 flex-col items-center shadow-md justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
+    <RiUserLine className="xl:text-4xl lg:text-2xl text-4xl" />
+    <div className="mt-3 xl:text-[13px] lg:text-[10px] text-base">
       {advertisement && t("guestWithCount", { count: advertisement.tenant_number })}
     </div>
   </div>
 
-  <div className="mx-auto mb-10 flex w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
-    <BiBed className="text-4xl" />
-    <div className="mt-3 text-base">
+  <div className="mx-auto mb-10 flex xl:w-[125px] xl:h-[125px] w-40 h-40 lg:w-24 lg:h-24  flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
+    <BiBed className="xl:text-4xl lg:text-2xl text-4xl"/>
+    <div className="mt-3 xl:text-[13px] lg:text-[10px] text-base">
       {advertisement && t("advertisements:bedWithCount", { count: advertisement.beds })}
     </div>
   </div>
 
-  <div className="mx-auto mb-10 flex w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
-    <TbBed className="text-4xl" />
-    <div className="mt-3 text-base">
+  <div className="mx-auto mb-10 flex xl:w-[125px] xl:h-[125px] w-40 h-40 lg:w-24 lg:h-24  flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
+    <TbBed className="xl:text-4xl lg:text-2xl text-4xl" />
+    <div className="mt-3 xl:text-[13px] lg:text-[10px] text-base">
       {advertisement && t("advertisements:roomWithCount", { count: advertisement.rooms })}
     </div>
   </div>
 
-  <div className="mx-auto mb-10 flex w-40 lg:w-full flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
-    <GrRestroom className="text-4xl text-secondary-500" />
-    <div className="mt-3 text-base">
+  <div className="mx-auto mb-10 flex xl:w-[125px] xl:h-[125px] w-40 h-40 lg:w-24 lg:h-24  flex-col shadow-md items-center justify-center rounded-lg align-middle text-secondary-500 lg:mx-0 aspect-w-1 aspect-h-1">
+    <GrRestroom className="xl:text-4xl lg:text-2xl text-4xl text-secondary-500" />
+    <div className="mt-3 xl:text-[13px] lg:text-[10px] text-base">
       {advertisement && t("advertisements:bathroomWithCount", { count: advertisement.bathrooms })}
     </div>
   </div>

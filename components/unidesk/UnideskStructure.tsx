@@ -15,7 +15,7 @@ const Structure = ({ children }: UnideskStructureProps) => {
 };
 
 const Menu = ({ children }: UnideskStructureProps) => (
-  <div className="mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12">{children}</div>
+  <div className="w-full lg:mx-auto p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12">{children}</div>
 );
 
 const Content = ({ children }: UnideskStructureProps) => {
