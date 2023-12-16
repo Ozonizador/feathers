@@ -33,9 +33,21 @@ import router, { useRouter } from "next/router";
 import { UnideskStructure } from "../../components/unidesk/UnideskStructure";
 import MenuEstudante from "../../components/unidesk/Menus/MenuEstudante";
 import MenuSenhorio from "../../components/unidesk/Menus/MenuSenhorio";
-import { useSetModalDetalhesPagamento, useSetModalGerarReferencia } from "../../context/ModalShowProvider";
+import {
+  ModalAnuncioInfoProvider,
+  ModalGerarReferenciaProvider,
+  useSetModalDetalhesPagamento,
+  useSetModalGerarReferencia,
+  useSetModalGerarReferenciaInfo,
+} from "../../context/ModalShowProvider";
 import { truncate } from "fs";
 import { useSetAdvertisement } from "../../context/AdvertisementController";
+import ModalGerarReferencia from "../../components/modals/ModalGerarReferencia";
+import {
+  ShowingSingleAdvertisementProvider,
+  useSetSingleAdvertisement,
+} from "../../context/ShowingSingleAdvertisementProvider";
+import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 
 {
   /* page 59 XD */
@@ -59,12 +71,12 @@ const CaixaEntrada = () => {
         <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />  
         <UnideskStructure>
           <UnideskStructure.Menu>
-            {userAppMode === 'TENANT' ? (
+            {userAppMode === "TENANT" ? (
               <MenuEstudante activeSection={"inbox"} activeUrl={"inbox"} />
-            ) : userAppMode === 'LANDLORD' ? (
+            ) : userAppMode === "LANDLORD" ? (
               <MenuSenhorio activeSection={"inbox"} activeUrl={"inbox"} />
             ) : null}
-        </UnideskStructure.Menu>
+          </UnideskStructure.Menu>
           {/* DESKTOP */}
           <CaixaExtradaContent/>
         </UnideskStructure>
@@ -81,13 +93,17 @@ const CaixaExtradaContent= () => {
   const profile = useCurrentUser();
   const { acceptReservation } = useReservationService();
   const { getMessagesFromConversationId, insertMessageOnConversation } = useMessagesService();
+  const setModalGerarReferenciaInfo = useSetModalGerarReferenciaInfo();
+  const setModalGerarRef = useSetModalGerarReferencia();
   const { getConversationsFromUser } = useConversationService();
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [currentConversation, setCurrentConversation] = useState<ConversationComplete | undefined>(undefined);
   const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
     undefined
   );
-  let setIsOpen = useSetModalDetalhesPagamento();
+  const setIsOpen = useSetModalDetalhesPagamento();
+  const setAdvertisement = useSetSingleAdvertisement();
+
   const getUserConversations = useCallback(async () => {
     if (profile) {
       // @ts-ignore
@@ -108,6 +124,16 @@ const CaixaExtradaContent= () => {
 
       setAllMessages(messages as unknown as MessageWithProfile[]);
     }
+  };
+
+  const openPaymentModal = (reservation: any, value: number) => {
+    setModalGerarReferenciaInfo({ reservation: reservation, value: value });
+    setModalGerarRef(true);
+  };
+
+  const openDetailsModal = (advertisement: any) => {
+    setAdvertisement(advertisement);
+    setIsOpen(true);
   };
 
   const getMessagesFromConversation = useCallback(async () => {
@@ -231,6 +257,7 @@ const CaixaExtradaContent= () => {
                   sendMessage={sendMessage}
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
+                  reservationStatus={currentConversation?.reservation?.status!}
                 />
                 {currentConversation && (
                   <div
@@ -274,7 +301,7 @@ const CaixaExtradaContent= () => {
                                 `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
                         ${currentConversation.reservation.advertisement?.place}`}
                             </div>
-                            <div className="my-4 flex justify-start text-left text-sm">
+                            <div className="my-4 flex flex-col justify-start text-left text-sm">
                               {`${t("common:on_date", {
                                 val: new Date(currentConversation.reservation?.start_date),
                                 formatParams: {
@@ -295,6 +322,13 @@ const CaixaExtradaContent= () => {
                               } - ${currentConversation.reservation.advertisement.month_rent}€`}
                               <br />
                               {`(${t("common:monthly_rent")})`}
+                              <br />
+                              <span
+                                className="text-center text-gray-500 underline"
+                                onClick={() => openDetailsModal(currentConversation.reservation.advertisement)}
+                              >
+                                Detalhes de Pagamento
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -323,23 +357,19 @@ const CaixaExtradaContent= () => {
                               </Button>
                             </div>
                           )}
-                        <div
-                          className={classNames("my-1 text-center", {
-                            "text-primary-500": ["ACCEPTED", "CHANGE_ACCEPTED"].includes(
-                              currentConversation.reservation.status
-                            ),
-                          })}
-                        >
-                          {t(
-                            ReservationStatusLabel[
-                              currentConversation.reservation.status as keyof typeof ReservationStatusLabel
-                            ]
-                          )}
-                        </div>
-                        <div>{currentConversation.reservation.payment_status}</div>
                         {currentConversation.reservation.status == "ACCEPTED" &&
-                          currentConversation.reservation.payment_status == "NOT_GENERATED" && (
-                            <div></div>
+                          currentConversation.reservation.payment_status != "PAID" && (
+                            <div
+                              className="w-2/3 rounded border border-primary-500 text-center m-auto py-1"
+                              onClick={() =>
+                                openPaymentModal(
+                                  currentConversation.reservation,
+                                  currentConversation.reservation.advertisement.month_rent
+                                )
+                              }
+                            >
+                              {t("messages:payment")}
+                            </div>
                           )}
 
                         <div className="mx-auto mt-3 w-fit rounded-md bg-primary-500 px-4 py-2 text-center text-white">
@@ -401,13 +431,14 @@ const CaixaExtradaContent= () => {
                 );
               })}
             {currentConversation && (
-              <div className="tests">
+              <div>
                 <MessagesSenderZone
                   messages={messages}
                   sendMessage={sendMessage}
                   conversationId={currentConversation && currentConversation.id}
                   currentMessage={currentMessage}
                   setCurrentMessage={setCurrentMessage}
+                  reservationStatus={currentConversation.reservation.status}
                 />
               </div>
             )}
@@ -423,6 +454,7 @@ interface MessagesSenderZoneProps {
   currentMessage: string;
   setCurrentMessage: (e: any) => void;
   conversationId: string;
+  reservationStatus: string;
 }
 
 const MessagesSenderZone = ({
@@ -431,6 +463,7 @@ const MessagesSenderZone = ({
   currentMessage,
   setCurrentMessage,
   conversationId,
+  reservationStatus,
 }: MessagesSenderZoneProps) => {
   const { t } = useTranslation();
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
@@ -449,6 +482,18 @@ const MessagesSenderZone = ({
         id="right-scroll"
         ref={chatContainerRef}
       >
+        {conversationId != "" && (
+          <div className="my-2 text-center text-gray-400 underline">
+            {reservationStatus == "ACCEPTED"
+              ? t("messages:reservation_accepted")
+              : reservationStatus == "REQUESTED"
+              ? t("messages:default_message")
+              : reservationStatus == "REJECTED"
+              ? t("messages:reservation_rejected")
+              : ""}
+          </div>
+        )}
+
         {messages.map((message, index, array) => {
           return <Mensagem key={index} message={message} previousMessage={array[index - 1]} />;
         })}

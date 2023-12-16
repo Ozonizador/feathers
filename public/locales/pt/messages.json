@@ -23,5 +23,8 @@
     "register_done": "Registo Bem Sucedido",
     "reservation_requested": "Pedido de Reserva criado"
   },
-  "default_message": "A sua reserva está a ser analisada"
+  "default_message": "A sua reserva está a ser analisada",
+  "reservation_accepted": "A sua reserva foi aceite",
+  "reservation_rejected": "A sua reserva foi rejeitada",
+  "payment": "Pagar"
 }

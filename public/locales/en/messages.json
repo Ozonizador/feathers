@@ -23,5 +23,8 @@
     "register_done": "Registration Successful",
     "reservation_requested": "Reservation request created"
   },
-  "default_message": "The host is reviewing the reservation"
+  "default_message": "The host is reviewing the reservation",
+  "reservation_accepted": "The host accepted the reservation",
+  "reservation_rejected": "The host has rejected the reservation",
+  "payment": "Pay"
 }
