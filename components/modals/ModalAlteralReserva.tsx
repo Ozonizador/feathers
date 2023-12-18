@@ -7,6 +7,7 @@ import FeatherDatePicker from "../utils/FeatherDatepicker";
 import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
 import { useTranslation } from "next-i18next";
+import { addMonths } from "date-fns";
 
 /**
  * PAGINA 23 DO XD
@@ -30,10 +31,10 @@ const ModalAlterarReserva = () => {
   });
 
   const [newReservationStartDate, setNewReservationStartDate] = useState<Date>(
-    (reservation && reservation.start_date && new Date(reservation.start_date)) || new Date()
+    new Date(reservation?.start_date as string) || new Date()
   );
   const [newReservationEndDate, setNewReservationEndDate] = useState<Date>(
-    (reservation && reservation.end_date && new Date(reservation.end_date)) || new Date()
+    new Date(reservation?.end_date as string) || new Date()
   );
 
   function closeModal() {
@@ -128,7 +129,7 @@ const ModalAlterarReserva = () => {
                                 </label>
                                 <FeatherDatePicker
                                   date={newReservationStartDate}
-                                  onChange={(e) => setNewReservationStartDate(e.target.value)}
+                                  onChange={(e) => setNewReservationStartDate(e)}
                                   minDate={new Date()}
                                 />
                               </div>
@@ -144,8 +145,11 @@ const ModalAlterarReserva = () => {
 
                                 <FeatherDatePicker
                                   date={newReservationEndDate}
-                                  onChange={(e) => setNewReservationEndDate(e.target.value)}
-                                  minDate={new Date()}
+                                  onChange={(e) => setNewReservationEndDate(e)}
+                                  minDate={addMonths(
+                                    newReservationStartDate,
+                                    reservation?.advertisement?.minimum_stay as number
+                                  )}
                                 />
                               </div>
                             </div>
@@ -181,13 +185,15 @@ const ModalAlterarReserva = () => {
                                     onChange={(e) =>
                                       changeNewReservationProperty(RESERVATION_TABLE.NUMBER_GUESTS, e.target.value)
                                     }
+                                    min={1}
+                                    max={reservation?.advertisement.tenant_number}
                                     type="number"
                                   />
                                 </div>
                               </div>
                             </div>
                             {/* HOSPEDES */}
-
+                            {/*
                             <div className="mx-auto flex w-8/12 justify-between ">
                               <div className="text-center">
                                 <h5 className="mb-3 font-bold">{t("original_payment")})</h5>
@@ -199,6 +205,7 @@ const ModalAlterarReserva = () => {
                                 <p className="underline underline-offset-8">{t("details")}</p>
                               </div>
                             </div>
+                            */}
                           </div>
                           <div className="flex justify-center">
                             <a
