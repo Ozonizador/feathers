@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
@@ -17,6 +17,7 @@ import {
   INBOX_URL,
   LOGIN_URL,
   NOTIFICATIONS_URL,
+  PROCURAR_ADVERT_URL,
   REGISTER_URL,
   UNICONTROLO_GUESTS_URL,
   UNIDESK_SENHORIO_PAINEL_URL,
@@ -28,6 +29,7 @@ import { BsPerson } from "react-icons/bs";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { getCookie, setCookie } from "cookies-next";
 
 interface NavbarMobileProps {
   open: boolean;
@@ -40,6 +42,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
   const profile = useCurrentUser();
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
+  const [hasRunOnce, setHasRunOnce] = useState<boolean>(false);
 
   const { userAppMode, notificationNumber, messagesNumber } = useGetUserType();
   const setWebUserMode = useToggleAppUserMode();
@@ -54,7 +57,26 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
 
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    setCookie("navbar", userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    if (router.pathname.includes("unidesk/")) {
+      router.push(UNIDESK_URL);
+    }
   };
+
+  const checkIfUrlActive = (urls: string[]) => {
+    const path = router.asPath;
+    return urls.includes(path);
+  };
+
+  useEffect(() => {
+    if (profile != null && profile.type && !hasRunOnce) {
+      setWebUserMode("LANDLORD");
+
+      setHasRunOnce(true);
+    }
+    let navbarState = getCookie("navbar");
+    setWebUserMode(navbarState == "LANDLORD" ? "LANDLORD" : "TENANT");
+  }, [userAppMode, profile, hasRunOnce]);
 
   return (
     <>
@@ -67,34 +89,31 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
         <div className="mt-8 flex flex-col">
           <div className="mt-3">
             <div className="mb-3 cursor-pointer font-bold">
-              {userAppMode === "TENANT" ? (
-                <Link href="/" locale={router.locale}>
-                  Home
-                </Link>
-              ) : (
-                <Link href={UNIDESK_URL} locale={router.locale}>
-                  Unidesk
-                </Link>
-              )}
+              <Link href="/" locale={router.locale}>
+                Home
+              </Link>
             </div>
-            <div
-              className="flex flex-1 cursor-pointer items-center gap-1"
-              onClick={() => {
-                setSummary2(!summary2);
-              }}
-            >
-              <div>
-                <p>{t("navbar:announce")}</p>
-              </div>
+            {userAppMode == "LANDLORD" && (
+              <div
+                className="flex flex-1 cursor-pointer items-center gap-1"
+                onClick={() => {
+                  setSummary2(!summary2);
+                }}
+              >
+                <div>
+                  <p>{t("navbar:announce")}</p>
+                </div>
 
-              <Image
-                src={summary2 ? "/images/icons8-sort-up-30.png" : "/images/icons8-sort-down-30.png"}
-                height={32}
-                width={32}
-                alt=""
-              />
-            </div>
-            {summary2 && (
+                <Image
+                  src={summary2 ? "/images/icons8-sort-up-30.png" : "/images/icons8-sort-down-30.png"}
+                  height={32}
+                  width={32}
+                  alt=""
+                />
+              </div>
+            )}
+
+            {summary2 && userAppMode && (
               <div className="flex">
                 <>
                   <div className="flex flex-col gap-2 pl-5 text-base">
@@ -112,6 +131,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 </>
               </div>
             )}
+            {userAppMode == "TENANT" && <Link href={PROCURAR_ADVERT_URL}>{t("navbar:find_place")}</Link>}
             <div className="mt-3 cursor-pointer">
               <Link href={BLOG_URL} locale={router.locale}>
                 {t("navbar:blog")}
@@ -124,22 +144,40 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
             </div>
           </div>
           <div className="mt-7 rounded-3xl bg-gray-100 px-8 py-4">
-            <div className="align-center flex flex-1 justify-center">
-              <div className="flex">
+            {user && (
+              <div className="flex flex-col items-center">
+                {profile != null && // @ts-ignore
+                profile[0]?.avatar_url ? (
+                  <Image
+                    unoptimized={true}
+                    src={
+                      // @ts-ignore
+                      profile[0]?.avatar_url
+                    }
+                    height={36}
+                    width={36}
+                    alt="profile-avatar"
+                    className="rounded-full"
+                    style={{ maxWidth: "none", width: "80px", height: "80px" }}
+                  />
+                ) : (
+                  <BsPerson size={32} />
+                )}
+
+                <div className="my-auto py-2 capitalize font-black text-xl mb-2">
+                  {profile != null && // @ts-ignore
+                    profile[0]?.name}
+                </div>
+              </div>
+            )}
+            <div className="flex flex-1">
+              <div className="flex mb-3">
                 <span className="mr-2 self-center">{t("student", { count: 1 })}</span>
                 <Switch
                   checked={false}
                   onClick={() => toggleUserMode()}
                   className={classNames(
-                    "relative mx-5 mt-2 inline-flex h-8 w-16 cursor-default items-center rounded-full",
-                    {
-                      "bg-primary-500":
-                        profile && // @ts-ignore
-                        profile.type === userAppMode,
-                      "bg-secondary-300":
-                        !profile || // @ts-ignore
-                        profile.type !== userAppMode,
-                    }
+                    "relative mx-5 inline-flex h-8 w-16 cursor-default items-center rounded-full bg-primary-500"
                   )}
                 >
                   <span
@@ -150,60 +188,17 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                 </Switch>
                 <span className="ml-2 self-center">{t("landlord", { count: 1 })}</span>
               </div>
-            </div>
-            <div className="my-10 flex">
               {user && (
                 <>
-                  <div className="flex">
-                    {profile != null && // @ts-ignore
-                    profile[0]?.avatar_url ? (
-                      <Image
-                        unoptimized={true}
-                        src={
-                          // @ts-ignore
-                          profile[0]?.avatar_url
-                        }
-                        height={36}
-                        width={36}
-                        alt="profile-avatar"
-                          className="rounded-full"
-                          style={{ maxWidth: 'none', width: '36px', height: '36px' }}
-                      />
-                    ) : (
-                      <BsPerson size={32} />
-                    )}
-
-                    <div className="my-auto ml-2 capitalize">
-                      {profile != null && // @ts-ignore
-                        profile?.name}
-                    </div>
-                  </div>
-
-                  <div className="ml-auto" onClick={() => setMenuaberto(!menuaberto)}>
+                  <div className="ml-auto mt-1" onClick={() => setMenuaberto(!menuaberto)}>
                     {!menuaberto ? <AiOutlineDown size={24} /> : <AiOutlineUp size={24} />}
                   </div>
                 </>
               )}
-              {!user && (
-                <div className="my-auto flex w-full justify-center gap-2">
-                  <Link href={REGISTER_URL} locale={router.locale} className="p-0">
-                    <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
-                      {t("register")}
-                    </div>
-                  </Link>
-
-                  <Link href={LOGIN_URL} locale={router.locale} className="p-0">
-                    <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-3 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
-                      {t("login")}
-                    </div>
-                  </Link>
-                </div>
-              )}
             </div>
-
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
               {userAppMode == "TENANT" && (
-                <div className="flex cursor-pointer flex-col gap-2 px-5 py-3">
+                <div className="flex cursor-pointer flex-col gap-2 py-3 pl-5">
                   <div onClick={() => selectMenuButton(UNIDESK_URL)}>{t("common:uni-desk")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STAY_URL)}>{t("my_stay")}</div>
                   <div onClick={() => selectMenuButton(UNIDESK_STUDENT_FAVOURITES_URL)}>
