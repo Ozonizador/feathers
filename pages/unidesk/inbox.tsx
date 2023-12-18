@@ -78,7 +78,13 @@ const CaixaEntrada = () => {
             ) : null}
           </UnideskStructure.Menu>
           {/* DESKTOP */}
-          <CaixaExtradaContent/>
+          <ModalAnuncioInfoProvider>
+            <>
+              <ModalGerarReferencia/>
+              <ModalDetalhesPagamento/>
+              <CaixaExtradaContent/>
+            </>
+          </ModalAnuncioInfoProvider>
         </UnideskStructure>
       </>
     </div>
@@ -132,8 +138,8 @@ const CaixaExtradaContent= () => {
     setModalGerarRef(true);
   };
 
-  const openDetailsModal = (advertisement: any) => {
-    setAdvertisement(advertisement);
+  const openDetailsModal = async (advertisement: any) => {
+    await setAdvertisement(advertisement);
     setIsOpen(true);
   };
 
@@ -233,7 +239,7 @@ const CaixaExtradaContent= () => {
                 >
                   {conversations.map((conversation, index) => {
                     if (allMessages.length < 1) {
-                      getAllMessages();
+                      
                     }
                     return (
                       <div
@@ -462,7 +468,6 @@ const CaixaExtradaContent= () => {
               if (allMessages.length < 1) {
                 getAllMessages();
               }
-              console.log(conversation, 'convo')
               return (
                 <>
                   {!selected && <div

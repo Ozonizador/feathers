@@ -70,9 +70,6 @@ export const paymentsRouter = router({
       await addReservationPayment(reservationId, paymentReservationInfo);
       await updateAdvertisementPayment(reservationId);
 
-      // Log the payment information
-      console.log(paymentReservationInfo);
-
       return paymentReservationInfo;
     } catch (error: any) {
       // Log the error
@@ -126,9 +123,6 @@ export const paymentsRouter = router({
 
         await addReservationPayment(reservationId, paymentReservationInfo);
         await updateAdvertisementPayment(reservationId);
-
-        // Log successful payment information
-        console.log(paymentReservationInfo);
 
         return paymentReservationInfo;
       } catch (err: any) {
