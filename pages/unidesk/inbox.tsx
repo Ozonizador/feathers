@@ -368,7 +368,10 @@ const CaixaExtradaContent= () => {
                               </Button>
                             </div>
                           )}
-                        {currentConversation.reservation.status == "ACCEPTED" &&
+                          
+                        { // @ts-ignore
+                          currentConversation.host_id != profile[0]?.id &&
+                          currentConversation.reservation.status == "ACCEPTED" &&
                           currentConversation.reservation.payment_status != "PAID" && (
                             <div
                               className="w-2/3 rounded border border-primary-500 text-center m-auto py-1"
