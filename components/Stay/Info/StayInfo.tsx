@@ -69,7 +69,7 @@ const StayInfo = ({ reservation, options }: StayInfoProps) => {
   };
 
   return (
-    <div className="my-auto flex w-full flex-row gap-5 py-1 lg:w-1/2 lg:gap-5 lg:px-2">
+    <div className="my-auto flex flex-wrap w-full flex-row gap-5 py-1 lg:w-1/2 lg:gap-5 lg:px-2">
       {!reportWasAlreadySent() && (
         <div className="w-18 flex cursor-pointer flex-col items-center gap-1" onClick={() => openModalReport()}>
           <BsFlag

@@ -214,6 +214,34 @@ border-color: #c48b60;
 .table_head{
   font-size: 12px !important;
 }
+@media only screen and (min-width: 1023px) and (max-width: 1200px)  {
+  .img_div{
+    width: 10rem
+  }
+  .nav_text{
+    font-size: 17px;
+  }
+  .find_text{
+    width: 75px;
+    text-align: center;
+  }
+  .nav_text > div{
+    display: flex;
+  }
+  .nav_home{
+    align-self: center;
+    display: flex !important;
+  }
+  .stay_div{
+    gap: 0.5rem !important;
+  }
+  #left-scroll{
+    width: 65%;
+  }
+  .popup{
+    width: 30%;
+  }
+}
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;
 }

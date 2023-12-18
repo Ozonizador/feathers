@@ -142,7 +142,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
   };
 
   return (
-    <section className="max-width">
+    <section className="">
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
       <UnideskStructure>
         <UnideskStructure.Menu>

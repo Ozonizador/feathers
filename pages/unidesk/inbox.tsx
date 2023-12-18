@@ -15,7 +15,6 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import BreadcrumbMiddle from "../../components/utils/BreadcrumbMiddle";
-
 import IconCaixa from "../../public/images/iconCaixa.svg";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
@@ -26,7 +25,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
-import { IoSend } from "react-icons/io5";
+import { IoArrowBackOutline, IoSend } from "react-icons/io5";
 import { formatWithOptions } from "date-fns/fp";
 import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
@@ -62,14 +61,14 @@ const paths = [
 const CaixaEntrada = () => {
   const { t } = useTranslation();
   const { userAppMode } = useGetUserType();
-  const router = useRouter();
+
   return (
     <div className="h-full rounded-xl border lg:border-none">
       <>
         <div className="my-20 rounded-2xl lg:my-20 lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
-        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
+        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />  
         <UnideskStructure>
           <UnideskStructure.Menu>
             {userAppMode === "TENANT" ? (
@@ -79,24 +78,14 @@ const CaixaEntrada = () => {
             ) : null}
           </UnideskStructure.Menu>
           {/* DESKTOP */}
-          <ModalAnuncioInfoProvider>
-            <ModalGerarReferenciaProvider>
-              <>
-                <ModalGerarReferencia />
-                <ModalDetalhesPagamento />
-                <CaixaExtradaContent menu={"yes"} />
-              </>
-            </ModalGerarReferenciaProvider>
-          </ModalAnuncioInfoProvider>
+          <CaixaExtradaContent/>
         </UnideskStructure>
       </>
     </div>
   );
 };
-interface CaixaExtradaContentProps {
-  menu?: string;
-}
-const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
+
+const CaixaExtradaContent= () => {
   const { t } = useTranslation();
   const [conversations, setConversations] = useState<ConversationComplete[]>([]);
   const [messages, setMessages] = useState<MessageWithProfile[]>([]);
@@ -114,7 +103,8 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
   );
   const setIsOpen = useSetModalDetalhesPagamento();
   const setAdvertisement = useSetSingleAdvertisement();
-
+  const [selected, setSelected] = useState<boolean>(false)
+ 
   const getUserConversations = useCallback(async () => {
     if (profile) {
       // @ts-ignore
@@ -174,7 +164,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
     getMessagesFromConversation();
     getConversationsTests();
   }, [getMessagesFromConversation, getConversationsTests]);
-
+  
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
     if (!currentMessage || !conversationId || !profile || currentMessage == "") return;
@@ -215,12 +205,14 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
   const clearConversation = () => {
     setCurrentConversation(undefined);
   };
+  const conversationClickhandle = (conversation:any) => {
+    setCurrentConversation(conversation)
+    setSelected(true)
+  }
   return (
     <>
       <div
-        className={classNames("mx-auto hidden w-5/6 lg:block", {
-          "my-16 rounded-2xl border border-terciary-500": menu !== "yes",
-        })}
+        className={classNames("mx-auto hidden w-5/6 lg:block")}
       >
         {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
         {conversations && conversations.length > 0 && (
@@ -235,7 +227,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
             <div className="flex flex-col">
               <div className="flex flex-row w-[100%]">
                 <div
-                  className="flex flex-col w-[33.33%] overflow-y-scroll border-r border-terciary-500"
+                  className="flex flex-col w-[30rem] overflow-y-scroll border-r border-terciary-500"
                   style={{ height: "40rem"}}
                   id="left-scroll"
                 >
@@ -274,8 +266,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                 />
                 {currentConversation && (
                   <div
-                    className="border-l border-terciary-500 p-2 w-[33.33%]"
-                    // style={{ minWidth: menu === "yes" ? "14rem" : "17rem" }}
+                    className="border-l border-terciary-500 p-2 w-[50%] popup" 
                   >
                     <>
                       <div className="flex">
@@ -294,17 +285,13 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                             />
                           </div>
                           <div className="pl-2 text-start">
-                            <div
-                              className={`font-bold ${
-                                currentConversation.reservation.status == "ACCEPTED"
-                                  ? "text-green-500"
-                                  : currentConversation.reservation.status == "EXPIRED"
-                                  ? "text-gray-500"
-                                  : currentConversation.reservation.status == "REJECTED"
-                                  ? "text-red-500"
-                                  : ""
-                              }`}
-                            >
+                            <div className={classNames("font-bold", {
+                              "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
+                              "text-green-500": currentConversation.reservation.status === "ACCEPTED",
+                              "text-red-500": currentConversation.reservation.status === "REJECTED",
+                              "text-gray-400": currentConversation.reservation.status === "EXPIRED"
+                              
+                            })}>
                               {(currentConversation.reservation.status &&
                                 t(ReservationStatusLabel[currentConversation.reservation.status])) ||
                                 ""}
@@ -342,7 +329,7 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
                               {`(${t("common:monthly_rent")})`}
                               <br />
                               <span
-                                className="text-center text-gray-500 underline"
+                                className="text-start text-gray-500 underline"
                                 onClick={() => openDetailsModal(currentConversation.reservation.advertisement)}
                               >
                                 Detalhes de Pagamento
@@ -419,37 +406,86 @@ const CaixaExtradaContent: React.FC<CaixaExtradaContentProps> = ({ menu }) => {
           </a>
 
           <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
-          {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
         </div>
         {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
+        {conversations && selected && currentConversation && 
+          <div className="flex p-5 justify-normal border-b border-terciary-500">
+            <div onClick={() => setSelected(false)} className="flex justify-center pt-2 mr-5"><IoArrowBackOutline  style={{ fontSize: '24px' }}/></div>
+            <div > <Avatar
+              alt="Hóspede"
+              img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
+              rounded={true}
+              size="md"
+            /></div>
+            <div className="ml-3">
+               <div className={classNames("font-bold", {
+                              "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
+                              "text-green-500": currentConversation.reservation.status === "ACCEPTED",
+                              "text-red-500": currentConversation.reservation.status === "REJECTED",
+                              "text-gray-400": currentConversation.reservation.status === "EXPIRED"
+                              
+                            })}>
+                              {(currentConversation.reservation.status &&
+                                t(ReservationStatusLabel[currentConversation.reservation.status])) ||
+                                ""}
+                            </div>
+                              <div className="mt-2 text-xs font-bold">{getOtherProfile(currentConversation)?.name || ""}</div>
+                              <div
+                              className="cursor-pointer mt-2 text-sm"
+                              onClick={() =>
+                                router.push(`/anuncio/${currentConversation.reservation.advertisement.slug}`)
+                              }
+                            >
+                              {currentConversation.reservation.advertisement &&
+                                `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
+                        ${currentConversation.reservation.advertisement?.place}`}
+                            </div>
+                            <div className="mt-2 flex flex-col justify-start text-left text-sm">
+                              {`${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.start_date),
+                                formatParams: {
+                                  val: { day: "numeric", month: "short" },
+                                },
+                              })} - ${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.end_date),
+                                formatParams: {
+                                  val: { day: "numeric", year: "numeric", month: "short" },
+                                },
+                              })}`}
+                            </div>
+              </div>
+
+          </div>}
         {conversations && (
           <div>
-            {currentConversation &&
-              conversations?.map((conversation, index) => {
-                if (allMessages.length < 1) {
-                  getAllMessages();
-                }
-                return (
-                  <div
+            {conversations?.map((conversation, index) => {
+              if (allMessages.length < 1) {
+                getAllMessages();
+              }
+              console.log(conversation, 'convo')
+              return (
+                <>
+                  {!selected && <div
                     key={index}
-                    onClick={() => setCurrentConversation(conversation)}
-                    className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
-                      "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
-                    })}
+                  onClick={() => conversationClickhandle(conversation)}
+                  className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
+                    "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
+                  })}
                   >
-                    <CaixaCard
-                      profile={getOtherProfile(conversation)}
-                      messagerProfile={conversation.tenant}
-                      // @ts-ignore
-                      reservation={conversation.reservation}
-                      // @ts-ignore
-                      messages={allMessages[index]}
-                    />
-                  </div>
+                  <CaixaCard
+                    profile={getOtherProfile(conversation)}
+                    messagerProfile={conversation.tenant}
+                    // @ts-ignore
+                    reservation={conversation.reservation}
+                    // @ts-ignore
+                    messages={allMessages[index]}
+                  />
+                  </div>}
+                </>
                 );
               })}
             {currentConversation && (
-              <div>
+              <div className={selected ? 'lg:block' : 'hidden lg:block'}>
                 <MessagesSenderZone
                   messages={messages}
                   sendMessage={sendMessage}
@@ -493,10 +529,10 @@ const MessagesSenderZone = ({
     }
   }, [messages]);
   return (
-    <div className="flex flex-col gap-2" style={{ height: "40rem", overflowY: "auto" }}>
+    <div className="flex flex-col gap-2" style={{ height: "40rem", overflowY: "auto", width:"-webkit-fill-available" }}>
       <div
         className="flex h-96 flex-col gap-1 overflow-y-auto p-2 "
-        style={{ height: "-webkit-fill-available", width:"-webkit-fill-available" }}
+        style={{ height: "-webkit-fill-available" }}
         id="right-scroll"
         ref={chatContainerRef}
       >
@@ -521,7 +557,7 @@ const MessagesSenderZone = ({
         <div className="mr-2 w-full">
           <form onSubmit={(e) => sendMessage(e, conversationId)} className="flex items-center">
             <input
-              className="w-full border-0 p-4 text-xs outline-0"
+              className="w-full border-0 p-4 text-xs outline-0 focus:ring-0"
               placeholder={t("write_message")}
               type="text"
               value={currentMessage}

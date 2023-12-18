@@ -42,12 +42,6 @@ import classNames from "classnames";
 import { useTranslation } from "next-i18next";
 import { setCookie, getCookie } from "cookies-next";
 
-const isUrlInbox = INBOX_URL;
-const menuPropValue = isUrlInbox ? 'yes' : 'no';
-const modifiedURL = isUrlInbox ? `${INBOX_URL}?menu=${menuPropValue}` : INBOX_URL;
-
-console.log(modifiedURL, "modified URL");
-
 export const Navbar = () => {
   const { t } = useTranslation();
   const user = useUser();
@@ -130,7 +124,7 @@ export const Navbar = () => {
           <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
-                <div className="relative h-full w-52">
+                <div className="relative h-full w-52 img_div">
                   <Image
                     src="/images/logo1.png"
                     alt=""
@@ -151,14 +145,14 @@ export const Navbar = () => {
             </div>
 
             <div className="mx-auto my-auto hidden lg:block xl:px-5">
-              <div className="flex gap-1">
+              <div className="flex gap-1 nav_text">
                 <div
                   className={classNames({
-                    "border-b-4 border-primary-500 font-black":
+                    "border-b-4 border-primary-500 font-black flex":
                       checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                   })}
                 >
-                  <Link href="/">{t("navbar:home")}</Link>
+                  <Link href="/" className="nav_home flex">{t("navbar:home")}</Link>
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
@@ -202,13 +196,14 @@ export const Navbar = () => {
                   </div>
                 )}
                 {userAppMode == "TENANT" && (
-                  <div className="my-auto px-2 flex flex-shrink-0 xl:px-5">
+                  <div className="my-auto px-2 flex flex-shrink-0 xl:px-5 nav_text">
                     <Link
                       href={PROCURAR_ADVERT_URL}
                       className={classNames({
-                        "border-b-4 border-primary-500 pb-2 font-black":
-                          checkIfUrlActive([PROCURAR_ADVERT_URL]) == true,
+                        'find_text': true,
+                        'border-b-4 border-primary-500 pb-2 font-black': checkIfUrlActive([PROCURAR_ADVERT_URL]) === true,
                       })}
+                      
                     >
                       {t("navbar:find_place")}
                     </Link>
@@ -255,7 +250,7 @@ export const Navbar = () => {
                 )}
                 {user && (
                   <div className="flex flex-1">
-                    <div className="my-auto flex gap-2">
+                    <div className="my-auto flex gap-2 nav_text">
                       <span className={classNames("mr=2", { "text-primary-500": userAppMode == "TENANT" })}>
                         {t("student", { count: 1 })}
                       </span>
@@ -332,7 +327,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={modifiedURL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
                                     <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
@@ -377,7 +372,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={modifiedURL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
                                     <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">

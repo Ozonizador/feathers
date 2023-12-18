@@ -74,7 +74,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                       {nextStays &&
                         nextStays.map((stay) => {
                           return (
-                            <div className="flex flex-col gap-7 lg:flex-row lg:gap-10" key={stay.id}>
+                            <div className="flex flex-col gap-7 lg:flex-row lg:gap-10 stay_div" key={stay.id}>
                               <StayCard stay={stay} />
                               <StayInfo reservation={stay} options={{ isNextStay: true }} />
                             </div>
