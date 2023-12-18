@@ -25,7 +25,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
-import { IoSend } from "react-icons/io5";
+import { IoArrowBackOutline, IoSend } from "react-icons/io5";
 import { formatWithOptions } from "date-fns/fp";
 import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
@@ -103,7 +103,8 @@ const CaixaExtradaContent= () => {
   );
   const setIsOpen = useSetModalDetalhesPagamento();
   const setAdvertisement = useSetSingleAdvertisement();
-
+  const [selected, setSelected] = useState<boolean>(false)
+ 
   const getUserConversations = useCallback(async () => {
     if (profile) {
       // @ts-ignore
@@ -163,7 +164,7 @@ const CaixaExtradaContent= () => {
     getMessagesFromConversation();
     getConversationsTests();
   }, [getMessagesFromConversation, getConversationsTests]);
-
+  
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
     if (!currentMessage || !conversationId || !profile || currentMessage == "") return;
@@ -204,6 +205,10 @@ const CaixaExtradaContent= () => {
   const clearConversation = () => {
     setCurrentConversation(undefined);
   };
+  const conversationClickhandle = (conversation:any) => {
+    setCurrentConversation(conversation)
+    setSelected(true)
+  }
   return (
     <>
       <div
@@ -324,7 +329,7 @@ const CaixaExtradaContent= () => {
                               {`(${t("common:monthly_rent")})`}
                               <br />
                               <span
-                                className="text-center text-gray-500 underline"
+                                className="text-start text-gray-500 underline"
                                 onClick={() => openDetailsModal(currentConversation.reservation.advertisement)}
                               >
                                 Detalhes de Pagamento
@@ -401,37 +406,86 @@ const CaixaExtradaContent= () => {
           </a>
 
           <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
-          {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
         </div>
         {(!conversations || conversations.length === 0) && <div className="p-4">{t("no_conversations")}</div>}
+        {conversations && selected && currentConversation && 
+          <div className="flex p-5 justify-normal border-b border-terciary-500">
+            <div onClick={() => setSelected(false)} className="flex justify-center pt-2 mr-5"><IoArrowBackOutline  style={{ fontSize: '24px' }}/></div>
+            <div > <Avatar
+              alt="Hóspede"
+              img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
+              rounded={true}
+              size="md"
+            /></div>
+            <div className="ml-3">
+               <div className={classNames("font-bold", {
+                              "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
+                              "text-green-500": currentConversation.reservation.status === "ACCEPTED",
+                              "text-red-500": currentConversation.reservation.status === "REJECTED",
+                              "text-gray-400": currentConversation.reservation.status === "EXPIRED"
+                              
+                            })}>
+                              {(currentConversation.reservation.status &&
+                                t(ReservationStatusLabel[currentConversation.reservation.status])) ||
+                                ""}
+                            </div>
+                              <div className="mt-2 text-xs font-bold">{getOtherProfile(currentConversation)?.name || ""}</div>
+                              <div
+                              className="cursor-pointer mt-2 text-sm"
+                              onClick={() =>
+                                router.push(`/anuncio/${currentConversation.reservation.advertisement.slug}`)
+                              }
+                            >
+                              {currentConversation.reservation.advertisement &&
+                                `${t(TYPE_ADVERTISEMENT[currentConversation.reservation.advertisement?.type])} em
+                        ${currentConversation.reservation.advertisement?.place}`}
+                            </div>
+                            <div className="mt-2 flex flex-col justify-start text-left text-sm">
+                              {`${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.start_date),
+                                formatParams: {
+                                  val: { day: "numeric", month: "short" },
+                                },
+                              })} - ${t("common:on_date", {
+                                val: new Date(currentConversation.reservation?.end_date),
+                                formatParams: {
+                                  val: { day: "numeric", year: "numeric", month: "short" },
+                                },
+                              })}`}
+                            </div>
+              </div>
+
+          </div>}
         {conversations && (
           <div>
-            {currentConversation &&
-              conversations?.map((conversation, index) => {
-                if (allMessages.length < 1) {
-                  getAllMessages();
-                }
-                return (
-                  <div
+            {conversations?.map((conversation, index) => {
+              if (allMessages.length < 1) {
+                getAllMessages();
+              }
+              console.log(conversation, 'convo')
+              return (
+                <>
+                  {!selected && <div
                     key={index}
-                    onClick={() => setCurrentConversation(conversation)}
-                    className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
-                      "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
-                    })}
+                  onClick={() => conversationClickhandle(conversation)}
+                  className={classNames("w-full cursor-pointer border p-1 last:rounded-b-xl", {
+                    "bg-primary-100": currentConversation?.id && currentConversation.id === conversation.id,
+                  })}
                   >
-                    <CaixaCard
-                      profile={getOtherProfile(conversation)}
-                      messagerProfile={conversation.tenant}
-                      // @ts-ignore
-                      reservation={conversation.reservation}
-                      // @ts-ignore
-                      messages={allMessages[index]}
-                    />
-                  </div>
+                  <CaixaCard
+                    profile={getOtherProfile(conversation)}
+                    messagerProfile={conversation.tenant}
+                    // @ts-ignore
+                    reservation={conversation.reservation}
+                    // @ts-ignore
+                    messages={allMessages[index]}
+                  />
+                  </div>}
+                </>
                 );
               })}
             {currentConversation && (
-              <div>
+              <div className={selected ? 'lg:block' : 'hidden lg:block'}>
                 <MessagesSenderZone
                   messages={messages}
                   sendMessage={sendMessage}

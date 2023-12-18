@@ -123,10 +123,10 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               </Link>
             </div>
           </div>
-          <div className="mt-7  rounded-3xl bg-gray-100 px-8 py-4">
+          <div className="mt-7 rounded-3xl bg-gray-100 px-8 py-4">
             <div className="align-center flex flex-1 justify-center">
-              <div>
-                <span className="mr-2">{t("student", { count: 1 })}</span>
+              <div className="flex">
+                <span className="mr-2 self-center">{t("student", { count: 1 })}</span>
                 <Switch
                   checked={false}
                   onClick={() => toggleUserMode()}
@@ -143,12 +143,12 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   )}
                 >
                   <span
-                    className={`${
+                    className={` ${
                       userAppMode === "LANDLORD" ? "translate-x-11" : "translate-x-1"
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
-                <span className="ml-2">{t("landlord", { count: 1 })}</span>
+                <span className="ml-2 self-center">{t("landlord", { count: 1 })}</span>
               </div>
             </div>
             <div className="my-10 flex">

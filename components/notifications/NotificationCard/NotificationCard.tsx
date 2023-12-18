@@ -26,9 +26,9 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
           <p className="text-base text-gray-400 ">{NOTIFICATION_TYPES_INFORMATION[notification.type].description}</p>
         </div>
 
-        <div className="w-fit min-w-[300px]">
+        <div className="w-fit lg:min-w-[300px]">
           <Link href={NOTIFICATION_LINKS[notification.type]} onClick={() => handleClick()}>
-            <Button rounded="full" type="button">
+            <Button rounded="full" type="button" className="lg:full">
               {BUTTON_MESSAGE_LABEL[notification.type]}
             </Button>
           </Link>

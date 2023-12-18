@@ -31,7 +31,7 @@ interface ReviewsPageProps {
 
 const ReviewsPage = ({ latestReviews, generalClassification, responseRate }: ReviewsPageProps) => {
   return (
-    <section className="max-width">
+    <section className="">
       <Breadcrumbs paths={breadcrumbPaths} icon={IconReviews} />
       <UnideskStructure>
         <UnideskStructure.Menu>
