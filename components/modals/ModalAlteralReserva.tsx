@@ -7,7 +7,7 @@ import FeatherDatePicker from "../utils/FeatherDatepicker";
 import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
 import { useTranslation } from "next-i18next";
-import { addMonths } from "date-fns";
+import { addMonths, isSameDay } from "date-fns";
 
 /**
  * PAGINA 23 DO XD
@@ -31,15 +31,24 @@ const ModalAlterarReserva = () => {
   });
 
   const [newReservationStartDate, setNewReservationStartDate] = useState<Date>(
-    new Date(reservation?.start_date as string) || new Date()
+    (reservation?.start_date && new Date(reservation?.start_date as string)) || new Date()
   );
   const [newReservationEndDate, setNewReservationEndDate] = useState<Date>(
-    new Date(reservation?.end_date as string) || new Date()
+    (reservation?.end_date && new Date(reservation?.end_date as string)) || new Date()
   );
 
   function closeModal() {
     setIsOpen(false);
   }
+
+  useEffect(()=> {
+    if(isSameDay(newReservationStartDate, new Date())) {
+      if (reservation) {
+        setNewReservationStartDate(new Date(reservation.start_date))
+        setNewReservationEndDate(addMonths(newReservationStartDate, reservation.advertisement.minimum_stay))
+      }
+    }
+  })
 
   const changeNewReservationProperty = (property: string, value: any) => {
     setNewReservation({ ...newReservation, [property]: value });
@@ -95,7 +104,7 @@ const ModalAlterarReserva = () => {
                           <p className="mb-8 text-xl font-semibold">{t("reason_change_reservation")}</p>
                           <div className="mb-3 bg-slate-200">
                             <textarea
-                              className="form-control w-full rounded-md border border-solid border-terciary-500 bg-white"
+                              className="form-control w-full rounded-md border border-solid bg-white focus:border-primary-500"
                               id="exampleFormControlTextarea1"
                               rows={3}
                             ></textarea>

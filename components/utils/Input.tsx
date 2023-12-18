@@ -40,7 +40,7 @@ export default function Input({
           <select
             placeholder={placeholder}
             className={classNames(
-              "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 focus:border-primary-500 focus:outline-0 focus:ring-transparent",
+              "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 focus:border focus:border-primary-500 focus:outline-0 focus:ring-transparent",
               { "border-red-700": errorMessage },
               { "bg-gray-100": disabled }
             )}
