@@ -61,7 +61,6 @@ const FormTermos = () => {
       // set advertisement as available
       setAdvertisementProperty(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
-      console.log(advertisement.rooms);
       if (advertisement.rooms == null || advertisement.rooms == undefined) {
         advertisement.rooms = 1;
       }
