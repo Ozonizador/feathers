@@ -45,21 +45,22 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
   return (
     <section>
       <div className="rounded-lg border-2 border-terciary-200 bg-white">
-        <div className="w-full lg:flex">
-          <div className="relative hidden h-52 w-52 lg:block">
+        <div className="w-full md:flex md:min-h-[220px] ">
+          <div className="relative md:w-[40%] sm:w-[100%] block">
+            <div className="h-52 w-[100%]">
             {advertisement.photos && advertisement.photos.length > 0 && (
               <Image src={advertisement.photos[0].url} className="rounded-tl-lg rounded-bl-lg" alt="Foto Quarto" fill style={{ objectFit: "cover" }} onClick={(e) => editAdvertisement(e, advertisement.slug)}/>
-            )}
+              )}
+              </div>
           </div>
-          <div className="ml-3 w-full py-2 relative">
+          <div className="ml-3 md:w-[60%] sm:w-[100%] py-2 relative   min-h-[184px]">
             <div className="flex flex-row justify-between pr-2 lg:pr-0">
               <div className="text-xl font-bold">{advertisement.title}</div>
-
               <div>
                 <div className="text-right">
                   <Menu as="div" className="relative inline-block text-left">
-                    <div>
-                      <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                    <div className="right-side-menu relative">
+                      <Menu.Button className="inline-flex w-full justify-end rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                         <BsThreeDots />
                       </Menu.Button>
                     </div>
@@ -72,8 +73,8 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="px-1 py-1">
+                      <Menu.Items className="right-0 absolute z-20 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:w-56 w-[193px]">
+                        <div className="md:px-1 px-0 py-1">
                           <Menu.Item>
                             {({ active }) => (
                               <button
@@ -124,9 +125,9 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
                 </div>
               </div>
             </div>
-            <div className="w-96">
+            <div className="">
               <div className="mb-1 mt-4 line-clamp-3 text-base text-secondary-300">{advertisement.description}</div>
-              <div className="text-xl font-bold absolute bottom-3">
+              <div className="text-xl font-bold">
                 <div className="text-primary-500">
                   {t("advertisements:price_month", { price: advertisement.month_rent })}
                 </div>

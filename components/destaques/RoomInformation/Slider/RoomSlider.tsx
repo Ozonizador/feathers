@@ -56,7 +56,7 @@ export default function RoomSlider() {
                 return (
                   <div className="group flex w-[90px] flex-col items-center justify-center align-middle" key={index}>
                     {icon && icon({ size: 40, color: "#505046" })}
-                    <div className="mt-3 truncate text-[16px] font-medium text-[#576068] opacity-0 hover:text-clip group-hover:opacity-100">
+                    <div className="mt-3 truncate text-[12px] md:text-[16px] font-medium text-[#576068] opacity-0 hover:text-clip group-hover:opacity-100 overflow">
                       {t(TypeAmenityLabel[amenity as TypeAmenity])}
                     </div>
                   </div>
@@ -72,7 +72,7 @@ export default function RoomSlider() {
 
 
   return (
-    <div className="mb-32 mt-10 h-48 min-h-[300px] lg:min-h-[200px] rounded-xl border lg:mt-10">
+    <div className="mb-32 mt-10 h-48 min-h-[400px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[200px] rounded-xl border lg:mt-10">
       <Comodities />
     </div>
   );

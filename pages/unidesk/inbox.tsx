@@ -209,6 +209,7 @@ const CaixaExtradaContent= () => {
     setCurrentConversation(conversation)
     setSelected(true)
   }
+
   return (
     <>
       <div
@@ -274,7 +275,7 @@ const CaixaExtradaContent= () => {
                         <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
                       </div>
                       <div className="p-2">
-                        <div className="my-4 flex flex-row gap-3">
+                        <div className="my-4 flex flex-row gap-3 popup_div">
                           <div>
                             <Avatar
                               img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
@@ -411,12 +412,25 @@ const CaixaExtradaContent= () => {
         {conversations && selected && currentConversation && 
           <div className="flex p-5 justify-normal border-b border-terciary-500">
             <div onClick={() => setSelected(false)} className="flex justify-center pt-2 mr-5"><IoArrowBackOutline  style={{ fontSize: '24px' }}/></div>
-            <div > <Avatar
-              alt="Hóspede"
-              img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
-              rounded={true}
-              size="md"
-            /></div>
+            <div >
+            {profile && (
+    <Link
+                  href={
+                    // @ts-ignore
+        profile[0].id === currentConversation.host_id
+          ? `/perfil/${currentConversation.tenant.slug}`
+          : `/perfil/${currentConversation.host.slug}`
+      }
+    >
+      <Avatar
+        alt="Hóspede"
+        img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
+        rounded={true}
+        size="md"
+      />
+    </Link>
+  )}
+            </div>
             <div className="ml-3">
                <div className={classNames("font-bold", {
                               "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
