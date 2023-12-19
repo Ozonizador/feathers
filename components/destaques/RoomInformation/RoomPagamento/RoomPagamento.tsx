@@ -89,7 +89,7 @@ export const RoomPagamento = () => {
   const [startDate, setStartDate] = useState(setInicialStartValue());
   const [endDate, setEndDate] = useState(setInicialEndValue());
   const [guests = 1, setGuestsNumber] = useState();
-// console.log(typeof(guests),'type')
+  
   const {
     control,
     handleSubmit,

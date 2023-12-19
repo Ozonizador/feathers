@@ -18,7 +18,6 @@ export default function RoomSlider() {
       kitchen_amenities: [],
       exterior_amenities: [],
     };
-  console.log(general_amenities, bedroom_amenities, kitchen_amenities, bathroom_amenities, exterior_amenities, 'am')
 
   function chunkArray(array: string[], size: number) {
     return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>

@@ -16,9 +16,6 @@ export default function Stepper() {
   }
   const chunkSteps = Array.from({ length: 8 }, (_, index) => index +1);
   const chunk = chunkArray(chunkSteps, 2)
-  // console.log(steps,'step')
-  // console.log(chunk, 'chunkss')
-  console.log('current', currentStep)
   let chunkIndex
   currentStep < 2 ? chunkIndex = 0 : 
   (currentStep >= 2 && currentStep < 4) ? chunkIndex = 1 : 

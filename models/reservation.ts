@@ -53,7 +53,7 @@ export type ReservationWithPublicReview = Reservation & {
 };
 
 export type ReservationGuest = ReservationWithAdvertisement & {
-  tenant: Pick<Profile, "id" | "name" | "avatar_url">;
+  tenant: Pick<Profile, "id" | "name" | "avatar_url" | "slug">;
 };
 
 export type ReservationComplete = ReservationWithAdvertisement & {

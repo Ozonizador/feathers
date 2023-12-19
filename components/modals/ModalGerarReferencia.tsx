@@ -49,7 +49,6 @@ const ModalGerarReferencia = () => {
       { reservation_id: reservation.id },
       {
         onSuccess: (data: any) => {
-          console.log(data);
           if (data) {
             setData({
               reference: data.referencia,

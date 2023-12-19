@@ -96,7 +96,6 @@ const useProfileService = () => {
   };
 
   const addAvatar = async (userId: string, fileName: string, file: File) => {
-    console.log(userId, fileName, file, "filefilefilefilefile");
     const { data, error } = await supabaseClient
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
       .select("avatar_url")
