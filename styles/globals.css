@@ -241,6 +241,13 @@ border-color: #c48b60;
   .popup{
     width: 30%;
   }
+  .popup_div{
+    flex-direction: column !important;
+  }
+}
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
 }
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;

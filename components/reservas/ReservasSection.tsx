@@ -12,6 +12,11 @@ import { UNIDESK_URL } from "../../models/paths";
 import IconAnuncios from "../../public/images/icon-pg37-1.svg";
 import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 import { useTranslation } from "next-i18next";
+import dynamic from 'next/dynamic';
+
+const DynamicTabPanels = dynamic(() => import('@headlessui/react').then((headlessui) => headlessui.Tab.Panels), {
+  ssr: false,
+});
 
 const paths = [
   { url: UNIDESK_URL, label: "uni-desk" },
@@ -36,7 +41,7 @@ const ReservasSection = () => {
               </Tab>
               <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("all")}</Tab>
             </Tab.List>
-            <Tab.Panels className="w-full">
+            <Tab.Panels as={DynamicTabPanels}  className="w-full overflow-x-auto" suppressHydrationWarning>
               <Tab.Panel>
                 <CurrentReservationsSection />
               </Tab.Panel>
@@ -78,7 +83,7 @@ const CurrentReservationsSection = () => {
 
   return (
     <>
-      <Table className="w-full">
+      <Table className="w-full" >
         <Table.Head>
           <Table.HeadCell className="mb-5 text-md font-normal text-gray-900">
             <div className="my-5">{t("state")}</div>

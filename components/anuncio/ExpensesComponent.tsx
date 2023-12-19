@@ -28,12 +28,12 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
       {containsExpenses() && (
         <div className="relative mb-2 text-center">
           <div
-            className="flex items-center justify-center gap-2 align-middle"
+            className="flex items-center justify-center gap-2 align-middle md:mt-[18px] mt-0"
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}
           >
             <div className="group relative flex items-center">
-              <span className="md:max-md:text-xs lg:text-sm">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
+              <span className="md:text-[20px] text-[16px]">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
               <BiInfoCircle className="ml-2"/>
             </div>
           </div>
@@ -69,11 +69,11 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
     return t("advertisements:not_included");
   };
   return (
-    <div className={`absolute -left-28 bottom-0 z-50 rounded-lg bg-white group-hover:block md:scale-75 2xl:scale-90`}>
-      <div className="mb-2 mt-3 flex flex-row gap-2 rounded-lg p-1 shadow-2xl lg:p-4">
-        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
-          <FaRegLightbulb className="h-2 w-2 lg:h-12 lg:w-12 lg:p-2" />
-          <div className="mt-2 text-xs lg:text-sm">
+    <div className={`absolute xl:right-[11px] lg:right-[-45px] lg:bottom-0 md:right-[7px] md:bottom-[60%] sm:right-[100px] right-[-20px]  z-50 rounded-lg bg-white group-hover:block md:scale-75 2xl:scale-90`}>
+      <div className="my-2 flex flex-row gap-2 rounded-lg  shadow-2xl md:p-1">
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
+          <FaRegLightbulb className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("advertisements:electricity")}
               <br />
@@ -81,9 +81,9 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
             </>
           </div>
         </div>
-        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
-          <AiOutlineFire className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
-          <div className="mt-2 text-xs lg:text-sm ">
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
+          <AiOutlineFire className=" lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("advertisements:gas")}
               <br />
@@ -92,9 +92,9 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           </div>
         </div>
 
-        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
-          <AiOutlineWifi className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
-          <div className="mt-2 text-xs lg:text-sm ">
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
+          <AiOutlineWifi className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("amenities:wifi")}
               <br />
@@ -102,9 +102,9 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
             </>
           </div>
         </div>
-        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-4 lg:px-4">
-          <BsWater className="h-4 w-4 lg:h-12 lg:w-12 lg:p-2" />
-          <div className="mt-2 text-xs lg:text-sm ">
+        <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
+          <BsWater className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px]  ">
             <>
               {t("advertisements:water")}
               <br />
