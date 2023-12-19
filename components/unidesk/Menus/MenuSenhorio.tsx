@@ -97,7 +97,7 @@ const MenuSenhorio = ({ activeSection, activeUrl }: MenuSenhorioProps) => {
       <MenuGrouper title={t("inbox")} url={INBOX_URL} selectedGroup={activeSection === "inbox"} isCollapsed={false} />
       <MenuGrouper
         isCollapsed={true}
-        title={"uni-controlo"}
+        title={t("uni-controlo")}
         selectedGroup={activeSection === "uni-controlo"}
         defaultOpen={activeSection === "uni-controlo"}
       >

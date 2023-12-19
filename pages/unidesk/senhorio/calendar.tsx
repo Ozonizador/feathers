@@ -241,7 +241,7 @@ const AdvertisementPropertiesComponent = ({
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
         <label className="mb-2 mt-2 block text-base lg:mb-0">{t("admin:calendar.minimum_stay")}</label>
         <select
-          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-20 lg:w-60"
+          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
           value={minimumStay}
           onChange={(e) => setMinimumStay(Number(e.target.value))}
         >
@@ -268,7 +268,7 @@ const AdvertisementPropertiesComponent = ({
         </select>
       </div>
 
-      <div className="w-96 pb-4">
+      <div className="w-full max-w-xs pb-4">
         <Button onClick={() => updateTimings(minimumStay, monthsInAdvance)} type="button" loading={timingsLoading}>
           {t("save_changes")}
         </Button>
@@ -303,7 +303,7 @@ const AdvertisementPropertiesComponent = ({
             />
           </div>
         </div>
-        <div className="w-96 pb-4">
+        <div className="w-full max-w-xs pb-4">
           <Button
             onClick={() => updateDiscounts(trimesterDiscount, semesterDiscount)}
             type="button"
