@@ -34,6 +34,10 @@ const SetUserLocationContext = createContext<Dispatch<SetStateAction<GEO | undef
 type UserSearchInfo = {
   location: string;
   startDate: Date;
+  monthRent: string | null;
+  semester_discount: number | null;
+  trimester_discount: number | null;
+  guarantee_value: number | null;
   endDate: Date;
   coordinates: MapCoordinates | null;
 };
@@ -43,6 +47,10 @@ type UserSearchInfo = {
 const UserLocationSearchContext = createContext<UserSearchInfo>({
   location: "",
   startDate: new Date(),
+  monthRent: null,
+  semester_discount: null,
+  trimester_discount: null,
+  guarantee_value: null,
   endDate: new Date(),
   coordinates: null,
 });
@@ -67,6 +75,10 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
   const [userSearch, setUserSearch] = useState<UserSearchInfo>({
     location: "",
     startDate: new Date(),
+    monthRent: null,
+    semester_discount: null,
+    trimester_discount: null,
+    guarantee_value: null,
     endDate: checkMonthsInAdvance(new Date()),
     coordinates: null,
   });
@@ -186,7 +198,7 @@ export const useSetProfileFavouritesInformation = () => {
   const setCurrentInfo = useContext(SetUnihostsWebsiteContext);
   const currentInfo = useContext(UnihostsWebsiteContext);
   let profile: any = null;
-  isArray(currentInfo.profile) ? profile =  currentInfo.profile[0]: profile = currentInfo.profile;
+  isArray(currentInfo.profile) ? (profile = currentInfo.profile[0]) : (profile = currentInfo.profile);
 
   return async (favouriteRooms: string[]): Promise<void> => {
     if (!currentInfo || !currentInfo.profile) return;
@@ -209,6 +221,16 @@ export const useGetUserDates = () => {
   const { startDate, endDate } = useContext(UserLocationSearchContext);
   return { startDate, endDate };
 };
+
+export const useGetUserMonthRent = () => {
+  const { monthRent, semester_discount, trimester_discount } = useContext(UserLocationSearchContext);
+  return { monthRent, semester_discount, trimester_discount };
+};
+
+export const useGetUserGuaranteeValue = () => {
+  const { guarantee_value } = useContext(UserLocationSearchContext);
+  return guarantee_value;
+}
 
 /* SEARCH */
 

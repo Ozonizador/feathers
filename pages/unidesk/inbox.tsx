@@ -1,5 +1,10 @@
 import CaixaCard from "../../components/CaixaEntrada/CaixaCard/CaixaCard";
-import { useCurrentUser, useGetUserType } from "../../context/MainProvider";
+import {
+  useCurrentUser,
+  useGetUserDates,
+  useGetUserType,
+  useSetSearchLocationByProperty,
+} from "../../context/MainProvider";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import useConversationService, { ConversationComplete } from "../../hooks/conversationService";
 import useMessagesService from "../../hooks/messageService";
@@ -7,7 +12,7 @@ import { MessageWithProfile } from "../../models/message";
 import Mensagem from "../../components/CaixaEntrada/Mensagem/Mensagem";
 import { Avatar } from "flowbite-react";
 import { ReservationStatus, ReservationStatusLabel } from "../../models/reservation";
-import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
+import { AdvertisementComplete, TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { ImCross } from "react-icons/im";
 import useReservationService from "../../hooks/reservationService";
 import iconfavorito from "../../public/images/icon-pg37-1.svg";
@@ -48,6 +53,7 @@ import {
   useSetSingleAdvertisement,
 } from "../../context/ShowingSingleAdvertisementProvider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
+import { advertisementsRouter } from "../../server/routers/advertisementsRouter";
 
 {
   /* page 59 XD */
@@ -108,6 +114,7 @@ const CaixaExtradaContent = () => {
     undefined
   );
   const setIsOpen = useSetModalDetalhesPagamento();
+  const setSearchLocationByProperty = useSetSearchLocationByProperty();
   const setAdvertisement = useSetSingleAdvertisement();
   const [selected, setSelected] = useState<boolean>(false);
 
@@ -138,8 +145,14 @@ const CaixaExtradaContent = () => {
     setModalGerarRef(true);
   };
 
-  const openDetailsModal = async (advertisement: any, start_date: string, end_date: string) => {
-    await setAdvertisement(advertisement);
+  const openDetailsModal = (advertisement: any, start_date: string, end_date: string) => {
+    setSearchLocationByProperty("startDate", new Date(start_date));
+    setSearchLocationByProperty("endDate", new Date(end_date));
+    setSearchLocationByProperty("monthRent", advertisement.month_rent);
+    setSearchLocationByProperty("semester_discount", advertisement.semester_discount);
+    setSearchLocationByProperty("trimester_discount", advertisement.trimester_discount);
+    setSearchLocationByProperty("guarantee_value", advertisement.guarantee_value);
+    setAdvertisement(advertisement);
     setIsOpen(true);
   };
 
@@ -331,6 +344,20 @@ const CaixaExtradaContent = () => {
                               <br />
                               {`(${t("common:monthly_rent")})`}
                               <br />
+                              <div>
+                                <span
+                                  className="text-start text-sm text-gray-500 underline"
+                                  onClick={() =>
+                                    openDetailsModal(
+                                      currentConversation.reservation.advertisement,
+                                      currentConversation.reservation.start_date,
+                                      currentConversation.reservation.end_date
+                                    )
+                                  }
+                                >
+                                  Detalhes de Pagamento
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
