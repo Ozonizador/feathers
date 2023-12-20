@@ -290,12 +290,12 @@ const CaixaExtradaContent = () => {
                       </div>
                       <div className="p-2">
                         <div className="popup_div my-4 flex flex-row gap-3">
-                          <div>
+                          <div className="w-10">
                             <Avatar
                               img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
                               rounded={true}
                               status="away"
-                              size="md"
+                              size=""
                               statusPosition="bottom-right"
                             />
                           </div>

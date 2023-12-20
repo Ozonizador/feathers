@@ -78,6 +78,10 @@ export const SearchInputField = () => {
     setSearch({
       startDate,
       endDate,
+      trimester_discount: null,
+      semester_discount: null,
+      guarantee_value: null,
+      monthRent: null,
       coordinates: { type: option.geometry.type, coordinates: { lat, lng } },
       location: option.place_name,
     });

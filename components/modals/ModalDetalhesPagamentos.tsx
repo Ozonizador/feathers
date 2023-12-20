@@ -27,7 +27,7 @@ const ModalDetalhesPagamento = () => {
   const advertisement = useGetSingleAdvertisement();
   let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
-  const { monthRent } = useGetUserMonthRent();
+  const { monthRent, semester_discount, trimester_discount } = useGetUserMonthRent();
   let setIsOpen = useSetModalDetalhesPagamento();
   const guaranteed_value = useGetUserGuaranteeValue()
   const [checkedDates, setCheckedDates] = useState<Boolean>(false);
@@ -128,7 +128,6 @@ const ModalDetalhesPagamento = () => {
   };
 
   const setAdvertPrice = () => {
-    const { monthRent, semester_discount, trimester_discount } = useGetUserMonthRent();
     if (advertisement) {
       const { month_rent, semester_discount, trimester_discount } = advertisement;
 

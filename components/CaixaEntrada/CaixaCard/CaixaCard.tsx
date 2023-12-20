@@ -75,7 +75,7 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
   const avatar = () => {
     if (messages != undefined && messages.length > 0) {
       for (let message of messages) {
-        if (message.id != reservation.advertisement.host_id) {
+        if (message.profile_id != reservation.advertisement.host_id) {
           return (
             <Avatar
               alt="Hóspede"
@@ -93,16 +93,16 @@ const CaixaCard = ({ profile, messagerProfile, reservation, messages }: CaixaCar
 
   const lastMessage = () => {
     if (messages != undefined && messages.length > 0) {
-      if (profile?.id != messages[0].profile_id) {
+      if (profile?.id == messages[messages.length - 1].profile_id) {
         return (
-          <h5>{`${messages[messages.length - 1].profile?.name}: ${messages[messages.length - 1].message.slice(
+          <h5 className="text-sm">{`${profile.name}: ${messages[messages.length - 1].message.slice(
             0,
             20
           )}`}</h5>
         );
       }
 
-      return <h5>{`${t("you")}: ${messages[messages.length - 1].message.slice(0, 20)}`}</h5>;
+      return <h5 className="text-sm">{`${t("you")}: ${messages[messages.length - 1].message.slice(0, 20)}`}</h5>;
     }
   };
 
