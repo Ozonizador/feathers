@@ -11,6 +11,7 @@ import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { CgHome } from "react-icons/cg";
+import { addMonths } from "date-fns";
 
 
 export enum SearchFields {
@@ -119,7 +120,7 @@ export const SearchInputField = () => {
         <div className="flex flex-row gap-2 lg:gap-0">
           <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
             <FeatherDatePicker
-              date={startDate}
+              date={addMonths(startDate, 1)}
               className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
               onChange={(date) => {
                 setSearch({
@@ -128,15 +129,15 @@ export const SearchInputField = () => {
                   endDate: checkIfMonthsAhead(date),
                 });
               }}
-              minDate={new Date()}
+              minDate={addMonths(new Date(), 1)}
             />
           </div>
           <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
             <FeatherDatePicker
               className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
-              date={endDate}
+              date={addMonths(endDate, 1)}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
-              minDate={checkMonthsInAdvance(startDate)}
+              minDate={addMonths(checkMonthsInAdvance(startDate), 1)}
             />
           </div>
         </div>
