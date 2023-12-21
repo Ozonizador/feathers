@@ -147,6 +147,55 @@ export const paymentsRouter = router({
         console.log(error);
       }
     }),
+  checkPayment: isHostProcedure
+    .input(z.object({ reservationId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const { reservationId } = input;
+        const { data, error } = await supabaseAdmin
+          .from<"reservation_payments", ReservationPayment>(RESERVATION_PAYMENTS_TABLE_NAME)
+          .select()
+          .eq("reservation_id", reservationId)
+          .single();
+
+        let response = data as ReservationPayment;
+
+
+        // Check for required environment variables
+        if (!process.env.EUPAGO_API_URL) {
+          throw new TRPCError({ message: "Missing EUPAGO_API_URL", code: "INTERNAL_SERVER_ERROR" });
+        }
+
+        // @ts-ignore
+        const body = {
+          chave: process.env.EUPAGO_API_KEY,
+          // @ts-ignore
+          referencia: response.referencia,
+          entidade: response.entidade,
+        };
+
+        const responseFetch = await fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/info`, {
+          ...options,
+          body: JSON.stringify(body),
+        });
+
+        const responseData = await responseFetch.json();
+
+        const { sucesso, estado_referencia, resposta } = responseData;
+
+        if (!sucesso || resposta !== "OK") {
+          throw new TRPCError({ message: "Erro ao verificar referência", code: "BAD_REQUEST" });
+        }
+
+        const paymentStatus = EU_PAGO_TO_PAYMENT_STATUS[estado_referencia];
+        await updateReservationPayment(reservationId, paymentStatus);
+
+        // Log successful payment information
+        console.log(responseData);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }),
   checkIfPaymentWasMade: isHostProcedure
     .input(z.object({ reference: z.string(), reservationId: z.string() }))
     .query(async ({ input, ctx }) => {
@@ -170,7 +219,7 @@ export const paymentsRouter = router({
 
         const responseData = await response.json();
 
-        const { sucesso, referencia, identificador, estado_referencia, entidade, resposta, arquivada } = responseData;
+        const { sucesso, estado_referencia, resposta } = responseData;
 
         if (!sucesso || resposta !== "OK") {
           throw new TRPCError({ message: "Erro ao verificar referência", code: "BAD_REQUEST" });

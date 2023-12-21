@@ -64,6 +64,7 @@ const ModalGerarReferencia = () => {
         onSettled: () => setLoadingReference(false),
       }
     );
+
     setOpen(true);
 
     if (selectedPayment === "mbway" && !checked) {

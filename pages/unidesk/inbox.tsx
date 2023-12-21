@@ -31,6 +31,7 @@ import { useTranslation } from "next-i18next";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { update } from "lodash";
 import { IoArrowBackOutline, IoSend } from "react-icons/io5";
+import { trpc } from "../../utils/trpc";
 import { formatWithOptions } from "date-fns/fp";
 import { enGB, pt } from "date-fns/locale";
 import Locale from "react-phone-number-input/locale/en.json";
@@ -54,6 +55,7 @@ import {
 } from "../../context/ShowingSingleAdvertisementProvider";
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { advertisementsRouter } from "../../server/routers/advertisementsRouter";
+import { Conversation } from "twilio/lib/twiml/VoiceResponse";
 
 {
   /* page 59 XD */
@@ -117,6 +119,9 @@ const CaixaExtradaContent = () => {
   const setSearchLocationByProperty = useSetSearchLocationByProperty();
   const setAdvertisement = useSetSingleAdvertisement();
   const [selected, setSelected] = useState<boolean>(false);
+  const [hasRunOnce, setHasRunOnce] = useState<boolean>(false);
+  const [getMessages, setGetMessages] = useState<number>(0);
+  const checkPayments = trpc.payments.checkPayment.useMutation();
 
   const getUserConversations = useCallback(async () => {
     if (profile) {
@@ -124,9 +129,22 @@ const CaixaExtradaContent = () => {
       const { data, error } = await getConversationsFromUser(profile[0].id);
       if (!error) {
         setConversations(data as unknown as ConversationComplete[]);
+        setGetMessages(getMessages + 1);
+      }
+
+      if (conversations.length > 0 && !hasRunOnce) {
+        setHasRunOnce(true);
+        for (let conversation of conversations) {
+          if (conversation.reservation.payment_status == "PENDING") {
+            checkPayments.mutateAsync({
+              advertisementId: conversation.reservation.advertisement_id,
+              reservationId: conversation.reservation_id,
+            });
+          }
+        }
       }
     }
-  }, [profile]);
+  }, [profile, conversations]);
 
   const getAllMessages = async () => {
     let messages = [];
@@ -180,9 +198,13 @@ const CaixaExtradaContent = () => {
   };
 
   useEffect(() => {
+    if (getMessages == 0 && profile) {
+      getUserConversations();
+      getConversationsTests();
+    }
     getMessagesFromConversation();
-    getConversationsTests();
-  }, [getMessagesFromConversation, getConversationsTests]);
+    console.log(conversations)
+  }, [getMessagesFromConversation, getConversationsTests, getUserConversations]);
 
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
     event.preventDefault();
@@ -196,10 +218,6 @@ const CaixaExtradaContent = () => {
 
     setCurrentMessage("");
   };
-
-  useEffect(() => {
-    getUserConversations();
-  }, [getUserConversations]);
 
   const getOtherProfile = (conversation: ConversationComplete): Profile | undefined => {
     if (!profile) return;
@@ -537,7 +555,10 @@ const CaixaExtradaContent = () => {
           <div>
             {conversations?.map((conversation, index) => {
               if (allMessages.length < 1) {
-                getAllMessages();
+                if (!hasRunOnce) {
+                  setHasRunOnce(true);
+                  getAllMessages();
+                }
               }
               return (
                 <>

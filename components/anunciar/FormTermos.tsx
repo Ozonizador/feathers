@@ -54,7 +54,9 @@ const FormTermos = () => {
       debugger;
       if (!isValid) return;
 
-      const slugString = `${advertisement.title} ${await checkSlugExists(advertisement.title)}`;
+      const count = await checkSlugExists(advertisement.title)
+
+      const slugString = `${advertisement.title}${count == 0 ? "" : ` ${count}`}`;
 
       advertisement.slug = slugString;
 
