@@ -58,7 +58,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
                   <textarea
                     rows={5}
                     className={classNames(
-                      "mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3 shadow-sm",
+                      "mt-1 block w-full rounded-md border focus:border-primary-500 focus:outline-none focus:ring-0 border-solid border-terciary-500 bg-white px-2 py-3 shadow-sm",
                       { "border-red-700": error }
                     )}
                     placeholder={t("add_advert.description_placeholder")}
@@ -66,7 +66,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
                     value={value}
                     onChange={onChange}
                   />
-                  {error && <small className="text-red-700">{error.message}</small>}
+                  {error && <small className="text-red-700">{t("messages:required")}</small>}
                 </>
               )}
             />

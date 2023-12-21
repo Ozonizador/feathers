@@ -12,6 +12,10 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
   if (!message) return <></>;
 
   const profile = message.profile;
+
+  // @ts-ignore
+  console.log(currentUser[0].id);
+  console.log(message.profile_id);
   return (
     <>
       <div
@@ -23,10 +27,15 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
         })}
       >
         <div className="w-1/2">
-          <div className="flex w-full flex-row items-center align-middle">
+          <div
+            className={`flex w-full items-center align-middle ${
+              //@ts-ignore
+              message.profile_id === currentUser[0]?.id ? "flex-row-reverse" : "flex-row"
+            }`}
+          >
             {previousMessage?.profile_id !== message.profile_id && (
               <div
-                className={classNames("flex w-full flex-row align-middle", {
+                className={classNames("flex flex-row align-middle", {
                   // @ts-ignore
                   "mr-2 justify-end": message.profile_id === currentUser[0]?.id,
                   // @ts-ignore
@@ -37,9 +46,12 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
               </div>
             )}
 
-            {previousMessage && previousMessage.profile_id !== message.profile_id && (
-              <div className="flex w-full flex-row justify-between text-xs flex-wrap md:pr-8  ">
-                <div>{message.profile?.name || ""}</div>
+            {previousMessage?.profile_id !== message.profile_id && (
+              <div className="mx-2 flex flex-col flex-wrap justify-between text-xs">
+                {/* @ts-ignore */}
+                <div className={`${message.profile_id === currentUser[0]?.id ? "text-right" : ""}`}>
+                  {message.profile?.name || ""}
+                </div>
                 <div className="flex flex-shrink-0">{new Date(message.created_at).toDateString()}</div>
               </div>
             )}

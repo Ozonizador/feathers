@@ -26,5 +26,6 @@
   "default_message": "A sua reserva está a ser analisada",
   "reservation_accepted": "A sua reserva foi aceite",
   "reservation_rejected": "A sua reserva foi rejeitada",
-  "payment": "Pagar"
+  "payment": "Pagar",
+  "required": "Este campo é obrigatório"
 }
