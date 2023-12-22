@@ -13,7 +13,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import FeathersSpinner from "../utils/Spinner";
 import Input from "../utils/Input";
 import { AddReservationPaymentProps } from "../../server/helpers/paymentsHelper";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const ModalGerarReferencia = () => {
   const user = useUser();

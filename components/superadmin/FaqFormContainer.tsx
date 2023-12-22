@@ -33,7 +33,15 @@ const FaqFormContainer = ({ onSubmit, children }: FormProps) => {
           control={control}
           name={"answer"}
           render={({ field: { onChange, value } }) => {
-            return <Input onChange={onChange} name="answer" labelText="Resposta" minLength="10" value={value} />;
+            return (
+              <textarea
+                className={
+                  "h-60 block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 focus:border focus:border-primary-500 focus:outline-0 focus:ring-transparent"
+                }
+                onChange={onChange}
+                value={value}
+              ></textarea>
+            );
           }}
         ></Controller>
       </div>

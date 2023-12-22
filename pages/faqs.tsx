@@ -11,13 +11,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const Faqs = () => {
   const { userAppMode } = useGetUserType();
   const [selectedFaq, setSelectedFaq] = useState<UserTypes>(userAppMode);
+  const [ onLoad, setOnLoad ] = useState<boolean>(false)
 
   useEffect(() => {
     const queryString = window.location.search.slice(1);
-    if (queryString == "TENANT" || queryString == "LANDLORD") {
+    if ((queryString == "TENANT" || queryString == "LANDLORD") && !onLoad) {
       setSelectedFaq(queryString as UserTypes);
+      setOnLoad(true);
     }
-  })
+  });
 
   const { data } = trpc.faqs.getFaqs.useQuery(undefined, {
     retry: false,
@@ -33,8 +35,11 @@ const Faqs = () => {
           <h1 className="mt-24 text-center text-6xl font-bold">FAQ</h1>
         </div>
 
-        <div className="flex justify-center cursor-pointer">
-          <Toggle selectedValue={selectedFaq} onChange={setSelectedFaq} />
+        <div className="flex cursor-pointer justify-center">
+          <Toggle
+            selectedValue={selectedFaq}
+            onChange={() => {setSelectedFaq(selectedFaq == "LANDLORD" ? "TENANT" : "LANDLORD");}}
+          />
         </div>
 
         <div className="mb-32">
@@ -81,6 +86,8 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
   const toggleAnswerShown = () => {
     setAnswerShown(!answerShown);
   };
+
+  const splitAnswer = answer.split(/\r?\n|\r|\n/g);
   return (
     <div className="flex flex-col gap-4 rounded-md border p-4">
       <div className="flex">
@@ -97,8 +104,10 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
         </div>
       </div>
       {answerShown && (
-        <div className="flex">
-          <p className="text-justify">{answer}</p>
+        <div className="flex flex-col pr-5">
+          {splitAnswer && splitAnswer.map((line) => {
+            return <p className="text-justify">{line}</p>
+          })}
           <div className="ml-auto mr-4 pr-10"></div>
         </div>
       )}

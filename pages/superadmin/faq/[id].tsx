@@ -6,6 +6,7 @@ import { Faq, Faqs, FAQS_TABLE_NAME } from "../../../models/faq";
 import { SUPERADMIN_FAQS_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { toast } from "react-toastify";
 
 type FaqIdPageProps = {
   faq: Faq;
@@ -19,7 +20,11 @@ const FaqIdPage = ({ faq }: FaqIdPageProps) => {
   });
 
   const updateFaqForm = async (data: any) => {
-    await updateFaq.mutateAsync({ faq: { ...data }, faqId: faq.id });
+    const {error} = await updateFaq.mutateAsync({ faq: { ...data }, faqId: faq.id });
+
+    if (!error) {
+      toast.success("Guardado com sucesso")
+    }
   };
   return (
     <div className="px-5">

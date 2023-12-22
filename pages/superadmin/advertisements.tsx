@@ -6,7 +6,7 @@ import { ProfilesResponse, PROFILE_TABLE_NAME, PROFILE_COLUMNS } from "../../mod
 import { trpc } from "../../utils/trpc";
 import Button from "../../components/utils/Button";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { Advertisement } from "../../models/advertisement";
 import { Pagination } from "flowbite-react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";

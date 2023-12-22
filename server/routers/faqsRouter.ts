@@ -12,7 +12,10 @@ const AddFaqSchema: z.ZodType<Pick<Faq, "answer" | "question" | "type">> = z.obj
 
 export const faqsRouter = router({
   getFaqs: publicProcedure.query(async () => {
-    const { data, error } = await supabaseAdmin.from<"faqs", Faqs>(FAQS_TABLE_NAME).select();
+    const { data, error } = await supabaseAdmin
+      .from<"faqs", Faqs>(FAQS_TABLE_NAME)
+      .select()
+      .order("created_at", { ascending: true });
 
     return { data, error };
   }),

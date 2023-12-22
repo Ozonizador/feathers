@@ -4,7 +4,7 @@ import enLocale from "@fullcalendar/core/locales/en-gb";
 import ptLocale from "@fullcalendar/core/locales/pt";
 import i18next from "i18next";
 import { Reservation, ReservationStatus, ReservationWithTenant } from "../../models/reservation";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 type CalendarComponentProps = {
   reservations: ReservationWithTenant[];

@@ -11,7 +11,7 @@ import Button from "../../components/utils/Button";
 import Link from "next/link";
 import FaqFormContainer, { FaqAdminForm } from "../../components/superadmin/FaqFormContainer";
 import { TfiPlus } from "react-icons/tfi";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const FaqSuperAdminPage = () => {
@@ -95,7 +95,7 @@ const SuperAdminFaqItem = ({ answer, question, id, removerFaq }: SuperAdminFaqIt
     <div className="flex w-full border-b border-t border-neutral-100">
       <div className="flex flex-col gap-1 py-5">
         <h6 className="text-xl font-black">{question}</h6>
-        <p>{answer}</p>
+        <p>{answer.substring(0, 150)}{answer.length > 150 ? "..." : ""}</p>
       </div>
       <div className="my-auto ml-auto flex h-10 gap-3">
         <div className="cursor-pointer rounded-xl border border-primary-500 p-2 px-4 text-primary-500">

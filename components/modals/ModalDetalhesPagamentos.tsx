@@ -132,14 +132,14 @@ const ModalDetalhesPagamento = () => {
       const { month_rent, semester_discount, trimester_discount } = advertisement;
 
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return month_rent;
-      if (advertDiferenceInMonths >= 6) return toNumber(month_rent) * (1 - semester_discount / 100);
-      return month_rent * (1 - trimester_discount / 100);
+      if (advertDiferenceInMonths < 3) return month_rent.toFixed(2);
+      if (advertDiferenceInMonths >= 6) return (toNumber(month_rent) * (1 - semester_discount / 100)).toFixed(2);
+      return (month_rent * (1 - trimester_discount / 100)).toFixed(2);
     } else {
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return monthRent;
-      if (advertDiferenceInMonths >= 6) return toNumber(monthRent) * (1 - semester_discount! / 100);
-      return toNumber(monthRent) * (1 - trimester_discount! / 100);
+      if (advertDiferenceInMonths < 3) return toNumber(monthRent).toFixed(2);
+      if (advertDiferenceInMonths >= 6) return (toNumber(monthRent) * (1 - semester_discount! / 100)).toFixed(2);
+      return (toNumber(monthRent) * (1 - trimester_discount! / 100)).toFixed(2);
     }
   };
 
