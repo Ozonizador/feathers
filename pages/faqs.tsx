@@ -105,8 +105,8 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
       </div>
       {answerShown && (
         <div className="flex flex-col pr-5">
-          {splitAnswer && splitAnswer.map((line) => {
-            return <p className="text-justify">{line}</p>
+          {splitAnswer && splitAnswer.map((line, index) => {
+            return <p className="text-justify" key={index}>{line}</p>
           })}
           <div className="ml-auto mr-4 pr-10"></div>
         </div>
