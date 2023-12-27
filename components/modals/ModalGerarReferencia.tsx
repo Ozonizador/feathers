@@ -41,11 +41,12 @@ const ModalGerarReferencia = () => {
   }
 
   const generateReference = async () => {
+    console.log(reservation, user, value)
     if (!reservation || !user || value == undefined) return;
 
     setLoadingReference(true);
     let checked = false;
-    let payment = await checkIfPaymentWasCreated.mutateAsync(
+    await checkIfPaymentWasCreated.mutateAsync(
       { reservation_id: reservation.id },
       {
         onSuccess: (data: any) => {

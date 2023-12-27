@@ -118,7 +118,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
       <div className="mb-4 mt-10 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
-            <div className="relative h-96 w-full lg:h-56 lg:w-1/3">
+            <div className="relative h-96 w-full lg:h-64 lg:w-1/3">
               {getMainPhoto ? <Image src={getMainPhoto?.url} alt="..." fill className="rounded-tl-xl rounded-bl-xl" style={{ objectFit: "cover" }} /> : <></>}
             </div>
             <div className="xl:px-5 lg:px-3 px-5 lg:w-2/3">

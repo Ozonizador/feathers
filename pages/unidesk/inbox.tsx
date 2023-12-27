@@ -45,6 +45,7 @@ import {
   useSetModalDetalhesPagamento,
   useSetModalGerarReferencia,
   useSetModalGerarReferenciaInfo,
+  useSetModalGerarReferenciaReservation,
 } from "../../context/ModalShowProvider";
 import { truncate } from "fs";
 import { useSetAdvertisement } from "../../context/AdvertisementController";
@@ -87,11 +88,13 @@ const CaixaEntrada = () => {
           </UnideskStructure.Menu>
           {/* DESKTOP */}
           <ModalAnuncioInfoProvider>
-            <>
-              <ModalGerarReferencia />
-              <ModalDetalhesPagamento />
-              <CaixaExtradaContent />
-            </>
+            <ModalGerarReferenciaProvider>
+              <>
+                <ModalGerarReferencia />
+                <ModalDetalhesPagamento />
+                <CaixaExtradaContent />
+              </>
+            </ModalGerarReferenciaProvider>
           </ModalAnuncioInfoProvider>
         </UnideskStructure>
       </>
@@ -203,7 +206,6 @@ const CaixaExtradaContent = () => {
       getConversationsTests();
     }
     getMessagesFromConversation();
-    console.log(conversations)
   }, [getMessagesFromConversation, getConversationsTests, getUserConversations]);
 
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {

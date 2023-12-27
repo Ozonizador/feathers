@@ -101,8 +101,8 @@ export default function ProcurarSection() {
     <>
       <ModalMaisFiltros />
       <div className="mt-5 flex flex-1">
-        <div className={`w-full ${location ? "lg:w-1/2" : ""}`}>
-          <div className="w-full lg:w-full">
+        <div className={`w-full ${location ? "" : ""}`}>
+          <div className="w-3/4 lg:w-full">
             <div className="flex flex-row justify-between">
               <div className="text-sm font-bold lg:text-2xl">
                 <Trans
