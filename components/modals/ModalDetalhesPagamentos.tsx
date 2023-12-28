@@ -74,17 +74,17 @@ const ModalDetalhesPagamento = () => {
         if (getDaysTillEndMonth >= 30) {
           let selectedMonth = addMonths(selectedDate, 1);
           const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-          arrayOfMonths.push({ month: monthLong, price: rent });
+          arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
         } else {
           let priceAdjustment = pricePerDay * getDaysTillEndMonth;
-          arrayOfMonths.push({ month: "Ajuste", price: priceAdjustment });
+          arrayOfMonths.push({ month: "Ajuste", price: priceAdjustment.toFixed(2) });
         }
 
         if (isLastDayOfMonth(endDate)) {
           while (arrayOfMonths.length < monthDiference) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent });
+            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
           }
         } else {
           //TODO: Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
@@ -93,7 +93,7 @@ const ModalDetalhesPagamento = () => {
 
           arrayOfMonths.push({
             month: endDate.toLocaleString("default", { month: "long" }),
-            price: endDay * pricePerDay,
+            price: (endDay * pricePerDay).toFixed(2),
           });
         }
 
@@ -103,20 +103,20 @@ const ModalDetalhesPagamento = () => {
           while (arrayOfMonths.length < monthDiference) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent });
+            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
           }
         } else {
           // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
           while (arrayOfMonths.length < monthDiference - 1) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent });
+            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
 
             let endDay = getDate(endDate);
 
             arrayOfMonths.push({
               month: endDate.toLocaleString("default", { month: "long" }),
-              price: endDay * pricePerDay,
+              price: (endDay * pricePerDay).toFixed(2),
             });
           }
         }
