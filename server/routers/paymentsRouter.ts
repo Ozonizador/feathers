@@ -42,7 +42,7 @@ export const paymentsRouter = router({
         valor: value,
         per_dup: 0,
         contacto: phone || "",
-        id: createRandomUniqWord(),
+        id: createRandomUniqWord()
       };
 
       const response = await fetch(`${process.env.EUPAGO_API_URL}/clientes/rest_api/multibanco/create`, {
@@ -52,7 +52,7 @@ export const paymentsRouter = router({
 
       const responseData = await response.json();
 
-      const { sucesso, entidade, valor, referencia, resposta } = responseData;
+      const { sucesso, entidade, valor, referencia, resposta, identificador	 } = responseData;
       if (!sucesso || resposta !== "OK") {
         throw new TRPCError({ message: "Erro ao criar referência", code: "BAD_REQUEST" });
       }

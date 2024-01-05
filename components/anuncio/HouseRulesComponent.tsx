@@ -20,11 +20,12 @@ interface HouseRulesProps {
 const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
   const { t } = useTranslation();
   const toggleHouseRulesProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { house_rules } = advertisement;
+    let { house_rules } = advertisement;
+    const property = event.target.name
+    house_rules = { ...house_rules, [property]: event.target.checked} 
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
-      ...house_rules,
-      [event.target.name]: event.target.checked,
+      ...house_rules
     });
   };
 
@@ -79,13 +80,14 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
         <div className="flex h-5 items-center">
           <Checkbox
-            onChange={(e) => toggleHouseRulesProperty(e)}
+            onChange={(e) => console.log(e.target.checked)}
             checked={advertisement.house_rules.eventsAllowed || false}
             name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
           />
         </div>
       </div>
 
+      {/*
       <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
         <div className="flex">
           <div>
@@ -103,9 +105,9 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
               onChange={(e) => changeHouseRulesInput(e)}
             />
           </div>
-          <div></div>
         </div>
       </div>
+      */}
 
       <div className="my-8 mb-14 flex flex-col gap-2 lg:flex-row lg:items-center">
         <div className="flex flex-row">
@@ -119,7 +121,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
             <div className="flex h-5 w-full items-center">
               <select
                 name={HOUSE_RULES_NAMING.CLEANING}
-                className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2"
+                className="w-full rounded-md border border-solid border-terciary-500 bg-white py-2 focus:border-primary-500 focus:outline-none focus:ring-0"
                 onChange={changeHouseRulesInput}
               >
                 {Object.keys(TYPE_CLEANING_LABELS).map((type, index) => {

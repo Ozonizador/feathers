@@ -13,6 +13,8 @@ import ExpensesComponent from "../../anuncio/ExpensesComponent";
 import { useTranslation } from "next-i18next";
 import { CONTACTOS_URL } from "../../../models/paths";
 import { TypeExpense } from "../../../models/advertisement"
+import Link from "next/link";
+import { url } from "inspector";
 
 interface AnuncioCardProps {
   advertisement: Advertisement;
@@ -55,7 +57,7 @@ const AnuncioCard = ({ advertisement, refetchAdvertisements }: AnuncioCardProps)
           </div>
           <div className="ml-3 md:w-[60%] sm:w-[100%] py-2 relative   min-h-[184px]">
             <div className="flex flex-row justify-between pr-2 lg:pr-0">
-              <div className="text-xl font-bold">{advertisement.title}</div>
+              <div className="text-xl font-bold"><Link href={`/anuncio/${encodeURIComponent(advertisement.slug)}`}>{advertisement.title}</Link></div>
               <div>
                 <div className="text-right">
                   <Menu as="div" className="relative inline-block text-left">

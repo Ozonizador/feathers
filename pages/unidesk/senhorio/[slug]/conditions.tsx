@@ -41,7 +41,11 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
 
   const changeAdvertisementProperty = (property: string, value: any) => {
     if (!advertisementContext) return;
-    setAdvertisement({ ...advertisementContext, [property]: value });
+    setAdvertisement({[property]: value, ...advertisementContext });
+    advertisement = {...advertisement, [property]: value}
+    setAdvertisementContext(advertisement);
+
+    console.log(advertisement)
   };
 
   useEffect(() => {
@@ -59,7 +63,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
 
         {advertisementContext && (
           <>
-            <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
+            <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
 
             <div className="mb-10 w-1/2">
               <Button onClick={saveChanges} type="button">

@@ -14,6 +14,7 @@ import FeathersSpinner from "../utils/Spinner";
 import Input from "../utils/Input";
 import { AddReservationPaymentProps } from "../../server/helpers/paymentsHelper";
 import { useTranslation } from "next-i18next";
+import { isBefore, subMinutes } from "date-fns";
 
 const ModalGerarReferencia = () => {
   const user = useUser();
@@ -50,16 +51,30 @@ const ModalGerarReferencia = () => {
       { reservation_id: reservation.id },
       {
         onSuccess: (data: any) => {
-          if (data) {
-            setData({
-              reference: data.referencia,
-              entidade: data.entidade,
-              metadata: data.metadata,
-              valor: data.valor,
-              payment_type: data.payment_type,
-            });
-            checked = true;
-            setLoadedReference(true);
+          if (data && selectedPayment.toUpperCase() == data.payment_type) {
+            let compareDate = subMinutes(new Date(), 30);
+            let date = new Date(data.created_at);
+            if (data.payment_type == "MULTIBANCO") {
+              setData({
+                reference: data.referencia,
+                entidade: data.entidade,
+                metadata: data.metadata,
+                valor: data.valor,
+                payment_type: data.payment_type,
+              });
+              checked = true;
+              setLoadedReference(true);
+            } else if (!isBefore(compareDate, date)) {
+              setData({
+                reference: data.referencia,
+                entidade: data.entidade,
+                metadata: data.metadata,
+                valor: data.valor,
+                payment_type: data.payment_type,
+              });
+              checked = true;
+              setLoadedReference(true);
+            }
           }
         },
         onSettled: () => setLoadingReference(false),
