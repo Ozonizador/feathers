@@ -83,7 +83,7 @@ const ModalGerarReferencia = () => {
 
     setOpen(true);
 
-    if (selectedPayment === "mbway" && !checked) {
+    if (selectedPayment === "mbway") {
       let Reference = await addMbWayReference.mutateAsync(
         {
           reservationId: reservation.id,
