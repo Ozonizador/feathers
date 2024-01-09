@@ -21,11 +21,13 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
   const { t } = useTranslation();
   const toggleHouseRulesProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
     let { house_rules } = advertisement;
-    const property = event.target.name
-    house_rules = { ...house_rules, [property]: event.target.checked} 
+    const property = event.target.name;
+    house_rules = { ...house_rules, [property]: event.target.checked};
+
+    console.log(house_rules)
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
-      ...house_rules
+      house_rules
     });
   };
 
@@ -80,7 +82,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         </div>
         <div className="flex h-5 items-center">
           <Checkbox
-            onChange={(e) => console.log(e.target.checked)}
+            onChange={(e) => toggleHouseRulesProperty(e)}
             checked={advertisement.house_rules.eventsAllowed || false}
             name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
           />

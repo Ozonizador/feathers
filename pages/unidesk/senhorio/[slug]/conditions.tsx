@@ -10,7 +10,7 @@ import {
 import HouseRulesComponent from "../../../../components/anuncio/HouseRulesComponent";
 import Button from "../../../../components/utils/Button";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, ADVERTISEMENT_TABLE_NAME } from "../../../../models/advertisement";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UnideskStructure } from "../../../../components/unidesk/UnideskStructure";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -28,29 +28,32 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
   const advertisementContext = useSelectedAnuncioMenuSenhorio();
   const setAdvertisementContext = useSetSelectedAnuncioMenuSenhorio();
   const setAdvertisement = useSetSelectedAnuncioMenuSenhorio();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const saveChanges = async () => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (!error) {
-      toast("messages:success.advert_was_updated");
+      toast.success(t("messages:success.advert_was_updated"));
     } else {
-      toast(t("messages:errors.advert_not_updated"));
+      toast.error(t("messages:errors.advert_not_updated"));
     }
   };
 
   const changeAdvertisementProperty = (property: string, value: any) => {
     if (!advertisementContext) return;
     setAdvertisement({[property]: value, ...advertisementContext });
-    advertisement = {...advertisement, [property]: value}
+    advertisement = {...advertisement, [property]: value.house_rules}
     setAdvertisementContext(advertisement);
-
-    console.log(advertisement)
+    setAdvertisement(advertisement);
   };
 
   useEffect(() => {
-    setAdvertisementContext(advertisement);
-  }, [advertisement, setAdvertisementContext]);
+    if (loading){
+      setAdvertisementContext(advertisement);
+      setLoading(false)
+    }
+  }, [advertisement, setAdvertisementContext, loading, setLoading]);
 
   return (
     <UnideskStructure>
@@ -63,7 +66,7 @@ const Conditions = ({ advertisement }: ConditionsProps) => {
 
         {advertisementContext && (
           <>
-            <HouseRulesComponent advertisement={advertisement} onChange={changeAdvertisementProperty} />
+            <HouseRulesComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
 
             <div className="mb-10 w-1/2">
               <Button onClick={saveChanges} type="button">

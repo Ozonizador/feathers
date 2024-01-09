@@ -72,12 +72,10 @@ const FormAnunciarPhotos = () => {
           toast.error(t("common.file-size", { name: file.name }));
         }
       }
-      console.log(target);
 
       const newFilesUrl = newFiles.map((file) => URL.createObjectURL(file));
       setImagesInfo({ files: [files, ...newFiles].flat(), filesUrl: [filesUrl, ...newFilesUrl].flat() });
       if (target == "main") {
-        console.log(2);
         setCoverImages(newFiles);
       } else if (target == "other") {
         setOtherImages((prevImages) => [...prevImages, ...newFiles]);
