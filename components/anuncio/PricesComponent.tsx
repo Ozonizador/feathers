@@ -11,6 +11,7 @@ import Checkbox from "../utils/Checkbox";
 import Input from "../utils/Input";
 import RadioBox from "../utils/Radiobox";
 import { on } from "process";
+import { useTranslation } from "next-i18next";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -19,6 +20,7 @@ interface PricesComponentProps {
 
 const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
   const [selectedOption, setSelectedOption] = useState<Included>();
+  const { t } = useTranslation();
   // radio yes or no per expense */
 
   const toggleTypeExpenses = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,24 +88,24 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
     if (included == "INCLUDED" || included == "EXCLUDED") {
       const services =
-      expenses &&
-      expenses.services?.map((service) => {
-          return { name: service.name, included: included};
-      });
+        expenses &&
+        expenses.services?.map((service) => {
+          return { name: service.name, included: included };
+        });
 
-    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
-      ...expenses,
-      services,
-    });
+      onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
+        ...expenses,
+        services,
+      });
     }
-  }
+  };
 
   return (
     <>
       <div className="flex flex-col gap-3">
         <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
-            <p className="items-start text-base font-bold">Valor Mensal</p>
+            <p className="items-start text-base font-bold">{t("common:monthly_rent")}</p>
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
@@ -113,13 +115,13 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               value={String(advertisement.month_rent)}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.MONTH_RENT, e.target.value)}
             />
-            <div className="ml-2 text-base font-bold">/mês</div>
+            <div className="ml-2 text-base font-bold">/{t("common:month")}</div>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
-            <p className="items-start text-base font-bold">Preço por pessoa extra</p>
+            <p className="items-start text-base font-bold">{t("common:extra_per_person")}</p>
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
@@ -129,13 +131,13 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
               value={String(advertisement.extra_per_host)}
               onChange={(e) => onChange(ADVERTISEMENT_PROPERTIES.EXTRA_PER_HOST, e.target.value)}
             />
-            <div className="ml-2 text-base font-bold">/mês</div>
+            <div className="ml-2 text-base font-bold">/{t("common:month")}</div>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
-            <p className="items-start text-base font-bold">Caução</p>
+            <p className="items-start text-base font-bold">{t("common:deposit")}</p>
           </div>
           <div className="flex flex-row items-center lg:ml-6 lg:w-fit">
             <Input
@@ -151,7 +153,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
         <section>
           <div>
             <div className="flex items-center gap-2 pb-2">
-              <p className="text-xl font-bold">Despesas</p>
+              <p className="text-xl font-bold">{t("admin:unidesk.student.expenses")}</p>
               <p className="text-sm text-gray-400">{"(Agua, Luz, Internet, Gás)"}</p>
             </div>
             <ul className="flex flex-col gap-2">
@@ -163,7 +165,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     onChange={() => setExpenses("INCLUDED")}
                     checked={selectedOption === "INCLUDED"}
                   />
-                  <p>Totalmente Incluidas</p>
+                  <p>{t("advertisements:expenses_included")}</p>
                 </label>
               </li>
               <li>
@@ -174,7 +176,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     checked={selectedOption === "PARTIALLY"}
                     onChange={() => setExpenses("PARTIALLY")}
                   />
-                  <p>Parcialmente Incluídas</p>
+                  <p>{t("advertisements:expenses_partially_included")}</p>
                 </label>
 
                 {selectedOption == "PARTIALLY" && (
@@ -197,7 +199,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     />
                     <ExpenseSelection
                       expense={"WATER"}
-                      title="Água"
+                      title={t("advertisements:water")}
                       setMaxExpenseValue={setMaxExpenseValue}
                       toggleTypeExpenses={toggleTypeExpenses}
                       getExpenseInfoByInfo={getExpenseInfoByInfo}
@@ -205,7 +207,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     />
                     <ExpenseSelection
                       expense={"LIGHTS"}
-                      title="Luz"
+                      title={t("advertisements:water")}
                       setMaxExpenseValue={setMaxExpenseValue}
                       toggleTypeExpenses={toggleTypeExpenses}
                       getExpenseInfoByInfo={getExpenseInfoByInfo}
@@ -222,7 +224,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     checked={selectedOption === "EXCLUDED"}
                     onChange={() => setExpenses("EXCLUDED")}
                   />
-                  Excluded
+                  {t("advertisements:expenses_not_included")}
                 </label>
               </li>
             </ul>

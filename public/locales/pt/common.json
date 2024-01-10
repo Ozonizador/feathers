@@ -134,5 +134,6 @@
   "on_date": "{{val, datetime}}",
   "file-size": "O ficheiro {{name}} é demasiado grande. (Max. 2Mb)",
   "guest": "1 hóspede",
-  "guests": "{{val}} hóspedes."
+  "guests": "{{val}} hóspedes.",
+  "extra_per_person": "Preço por pessoa extra"
 }
