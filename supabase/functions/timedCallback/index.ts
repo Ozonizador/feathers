@@ -18,15 +18,13 @@ Deno.serve(async (req: Request) => {
     .neq("payment_status", "REFUNDED");
 
   if (data) {
-    data.map(async function (reservation) {
+    data.map(async function (reservation: any) {
       const today = new Date();
       const reservation_date = new Date(reservation.updated_at);
 
       const differenceInMilliseconds = today.valueOf() - reservation_date.valueOf();
 
       const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
-
-      console.log("Date", reservation_date.valueOf())
 
       if (differenceInDays > 3) {
         const { data: updateData, error } = await supabaseClient

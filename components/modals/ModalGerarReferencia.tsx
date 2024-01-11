@@ -41,47 +41,56 @@ const ModalGerarReferencia = () => {
     setModalProperty(false);
   }
 
+  const handlePaymentClick = (payment: string) => {
+    if (payment == "multibanco" || payment == "mbway") {
+      setSelectedPayment(payment);
+    }
+    setData(undefined);
+  }
+
   const generateReference = async () => {
-    console.log(reservation, user, value)
     if (!reservation || !user || value == undefined) return;
 
     setLoadingReference(true);
     let checked = false;
-    await checkIfPaymentWasCreated.mutateAsync(
-      { reservation_id: reservation.id },
-      {
-        onSuccess: (data: any) => {
-          if (data && selectedPayment.toUpperCase() == data.payment_type) {
-            let compareDate = subMinutes(new Date(), 30);
-            let date = new Date(data.created_at);
-            if (data.payment_type == "MULTIBANCO") {
-              setData({
-                reference: data.referencia,
-                entidade: data.entidade,
-                metadata: data.metadata,
-                valor: data.valor,
-                payment_type: data.payment_type,
-              });
-              checked = true;
-              setLoadedReference(true);
-            } else if (!isBefore(compareDate, date)) {
-              setData({
-                reference: data.referencia,
-                entidade: data.entidade,
-                metadata: data.metadata,
-                valor: data.valor,
-                payment_type: data.payment_type,
-              });
-              checked = true;
-              setLoadedReference(true);
-            }
-          }
-        },
-        onSettled: () => setLoadingReference(false),
-      }
-    );
 
-    setOpen(true);
+    if (selectedPayment != "mbway") {
+      await checkIfPaymentWasCreated.mutateAsync(
+        { reservation_id: reservation.id },
+        {
+          onSuccess: (data: any) => {
+            if (data && selectedPayment.toUpperCase() == data.payment_type) {
+              let compareDate = subMinutes(new Date(), 30);
+              let date = new Date(data.created_at);
+              if (data.payment_type == "MULTIBANCO") {
+                setData({
+                  reference: data.referencia,
+                  entidade: data.entidade,
+                  metadata: data.metadata,
+                  valor: data.valor,
+                  payment_type: data.payment_type,
+                });
+                checked = true;
+                setLoadedReference(true);
+              } else if (!isBefore(compareDate, date)) {
+                setData({
+                  reference: data.referencia,
+                  entidade: data.entidade,
+                  metadata: data.metadata,
+                  valor: data.valor,
+                  payment_type: data.payment_type,
+                });
+                checked = true;
+                setLoadedReference(true);
+              }
+            }
+          },
+          onSettled: () => setLoadingReference(false),
+        }
+      );
+  
+      setOpen(true);
+    }
 
     if (selectedPayment === "mbway") {
       let Reference = await addMbWayReference.mutateAsync(
@@ -148,7 +157,7 @@ const ModalGerarReferencia = () => {
                   className="flex gap-3 bg-primary-300 p-5 text-lg font-medium leading-6 text-white"
                 >
                   <Image className="m-2" src="/images/keyboard.png" height={32} width={32} alt="" />
-                  <span className="my-auto">Gerar referencia</span>
+                  <span className="my-auto">{t("advertisements:generate")}</span>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -165,7 +174,7 @@ const ModalGerarReferencia = () => {
                         className={classNames("relative flex cursor-pointer flex-col items-center px-4 py-4", {
                           "border-b border-primary-500": selectedPayment === "multibanco",
                         })}
-                        onClick={() => setSelectedPayment("multibanco")}
+                        onClick={() => handlePaymentClick("multibanco")}
                       >
                         <Image
                           className="py-3"
@@ -178,7 +187,7 @@ const ModalGerarReferencia = () => {
                         <span>Multibanco</span>
                       </div>
                       <div
-                        onClick={() => setSelectedPayment("mbway")}
+                        onClick={() => handlePaymentClick("mbway")}
                         className={classNames("relative flex cursor-pointer flex-col items-center px-4 py-4", {
                           "border-b border-primary-500": selectedPayment === "mbway",
                         })}
@@ -195,7 +204,7 @@ const ModalGerarReferencia = () => {
                     </div>
                     {selectedPayment === "mbway" && (
                       <div className="my-5 flex flex flex-col items-center justify-center">
-                        <span>Telefone:</span>
+                        <span>{t("advertisements:cellphone_number")}</span>
                         <Input onChange={(e) => setPhone(e.target.value)} value={phone} />
                       </div>
                     )}
@@ -203,7 +212,7 @@ const ModalGerarReferencia = () => {
                       <div className="mb-5 flex justify-center">
                         <div className="w-40">
                           <Button type={"button"} disabled={loadingReference} onClick={generateReference}>
-                            {loadingReference ? <FeathersSpinner /> : "Gerar Referencia"}
+                            {loadingReference ? <FeathersSpinner /> : t("advertisements:generate")}
                           </Button>
                         </div>
                       </div>
@@ -212,12 +221,10 @@ const ModalGerarReferencia = () => {
                       <div className="column mb-5 flex w-1/2 flex-col justify-center">
                         {t("advertisements:entity", { entity: data?.entidade })}
                         <span>
-                          {t("advertisements:reference")}
-                          {data?.reference}
+                          {t("advertisements:reference", {reference: data?.reference})}
                         </span>
                         <span>
-                          {t("advertisements:amount")}
-                          {data?.valor}
+                          {t("advertisements:amount", {amount: data?.valor})}
                         </span>
                       </div>
                     )}

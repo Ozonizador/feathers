@@ -125,6 +125,8 @@
   "amenities": "Comodidades",
   "guest_number": "Número de hóspedes",
   "current_reservation": "Reserva Original",
+  "cellphone": "Telefone:",
+  "generate": "Gerar Referencia",
   "entity": "Entidade: {{entity}}",
   "reference": "Referência: {{reference}}",
   "amount": "Valor: {{amount}}",

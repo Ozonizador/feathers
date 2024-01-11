@@ -118,10 +118,12 @@ const CaixaExtradaContent = () => {
   const [currentConversationCompare, setCurrentConversationCompare] = useState<ConversationComplete | undefined>(
     undefined
   );
+  const router = useRouter();
   const setIsOpen = useSetModalDetalhesPagamento();
   const setSearchLocationByProperty = useSetSearchLocationByProperty();
   const setAdvertisement = useSetSingleAdvertisement();
   const [selected, setSelected] = useState<boolean>(false);
+  const [query, setQuery] = useState<boolean>(false);
   const [hasRunOnce, setHasRunOnce] = useState<boolean>(false);
   const [getMessages, setGetMessages] = useState<number>(0);
   const checkPayments = trpc.payments.checkPayment.useMutation();
@@ -200,12 +202,32 @@ const CaixaExtradaContent = () => {
     }
   };
 
+  function clickElementWithId(id: string): void {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.click();
+    } else {
+      console.error(`Element with ID ${id} not found`);
+    }
+
+    setQuery(true);
+  }
+
   useEffect(() => {
     if (getMessages == 0 && profile) {
       getUserConversations();
       getConversationsTests();
     }
     getMessagesFromConversation();
+
+    if (!query) {
+      const { id } = router.query;
+
+      if (id) {
+        clickElementWithId(id as string);
+      }
+    }
   }, [getMessagesFromConversation, getConversationsTests, getUserConversations]);
 
   const sendMessage = async (event: React.FormEvent, conversationId: string) => {
@@ -279,6 +301,7 @@ const CaixaExtradaContent = () => {
                         className={classNames("cursor-pointer p-1", {
                           "bg-primary-100": currentConversation?.id === conversation.id,
                         })}
+                        id={conversation.reservation_id}
                       >
                         <CaixaCard
                           profile={getOtherProfile(conversation)}

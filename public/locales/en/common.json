@@ -125,6 +125,7 @@
   "first_rent": "First Rent",
   "first_rent_description": "Respective to 1 full month of income",
   "first_payment_description": "Advance payment for the month of <1/>",
+  "first_payment_rent_description": "Advance payment for the first month",
   "available_options": "{{count}} <1/>",
   "available": "spaces available",
   "extra_per_person": "Price per extra person",
@@ -140,5 +141,6 @@
   "Guests": "Guests",
   "Transactions": "Transactions",
   "Expenses": "Expenses",
-  "Repairs": "Repairs"
+  "Repairs": "Repairs",
+  "rent_first_rest": "the rest of the month"
 }

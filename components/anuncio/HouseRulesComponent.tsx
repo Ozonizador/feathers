@@ -24,8 +24,6 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
     const property = event.target.name;
     house_rules = { ...house_rules, [property]: event.target.checked};
 
-    console.log(house_rules)
-
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
       house_rules
     });

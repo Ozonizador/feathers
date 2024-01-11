@@ -23,13 +23,13 @@ interface MonthPrice {
 /* PAGINA 7 DO XD */
 
 const ModalDetalhesPagamento = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const advertisement = useGetSingleAdvertisement();
   let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
   const { monthRent, semester_discount, trimester_discount } = useGetUserMonthRent();
   let setIsOpen = useSetModalDetalhesPagamento();
-  const guaranteed_value = useGetUserGuaranteeValue()
+  const guaranteed_value = useGetUserGuaranteeValue();
   const [checkedDates, setCheckedDates] = useState<Boolean>(false);
   const [months, setMonths] = useState<Array<MonthPrice>>([]);
   const [hasRunOnce, setHasRunOnce] = useState<boolean>(false);
@@ -69,56 +69,69 @@ const ModalDetalhesPagamento = () => {
 
       let arrayOfMonths: any[] = [];
       const pricePerDay = rent / 30;
+      let selectedMonth = addMonths(selectedDate, 1);
+      const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
 
       if (getDaysTillEndMonth > 0) {
         if (getDaysTillEndMonth >= 30) {
-          let selectedMonth = addMonths(selectedDate, 1);
-          const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
           arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
         } else {
           let priceAdjustment = pricePerDay * getDaysTillEndMonth;
-          arrayOfMonths.push({ month: "Ajuste", price: priceAdjustment.toFixed(2) });
+
+          arrayOfMonths.push({ month: monthLong, price: priceAdjustment.toFixed(2) });
         }
 
         if (isLastDayOfMonth(endDate)) {
           while (arrayOfMonths.length < monthDiference) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
-          }
-        } else {
-          //TODO: Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
-
-          let endDay = getDate(endDate);
-
-          arrayOfMonths.push({
-            month: endDate.toLocaleString("default", { month: "long" }),
-            price: (endDay * pricePerDay).toFixed(2),
-          });
-        }
-
-        setMonths(arrayOfMonths);
-      } else {
-        if (isLastDayOfMonth(endDate)) {
-          while (arrayOfMonths.length < monthDiference) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
             arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
           }
         } else {
           // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
           while (arrayOfMonths.length < monthDiference - 1) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString("default", { month: "long" });
+            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
             arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+          }
 
-            let endDay = getDate(endDate);
+          let endDay = getDate(endDate);
 
             arrayOfMonths.push({
-              month: endDate.toLocaleString("default", { month: "long" }),
+              month: endDate.toLocaleString(i18n.language, { month: "long" }),
               price: (endDay * pricePerDay).toFixed(2),
             });
+        }
+
+        setMonths(arrayOfMonths);
+      } else {
+        if (isLastDayOfMonth(endDate)) {
+          while (arrayOfMonths.length < monthDiference - 1) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
           }
+
+          let endDay = getDate(endDate);
+
+            arrayOfMonths.push({
+              month: endDate.toLocaleString(i18n.language, { month: "long" }),
+              price: (endDay * pricePerDay).toFixed(2),
+            });
+        } else {
+          // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
+          while (arrayOfMonths.length < monthDiference - 1) {
+            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
+            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
+            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+          }
+
+          let endDay = getDate(endDate);
+
+            arrayOfMonths.push({
+              month: endDate.toLocaleString(i18n.language, { month: "long" }),
+              price: (endDay * pricePerDay).toFixed(2),
+            });
         }
 
         setMonths(arrayOfMonths);
@@ -185,7 +198,7 @@ const ModalDetalhesPagamento = () => {
                     as="h3"
                     className="mb-16 mt-6 text-center text-3xl font-bold leading-6 text-gray-900 lg:text-5xl"
                   >
-                    {t("payment_details")}
+                    {t("common:payment_details")}
                   </Dialog.Title>
 
                   <div className="mt-2">
@@ -194,7 +207,7 @@ const ModalDetalhesPagamento = () => {
                       {/* Unihosts */}
                       <FeathersAccordion>
                         <div className="flex">
-                          <div className="font-bold">{t("first_rent")}</div>
+                          <div className="font-bold">{t("common:first_rent")}</div>
                           <div className="relative my-auto ml-1">
                             <AiOutlineInfoCircle className="peer my-auto" size={14} />
                             <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
@@ -212,7 +225,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex gap-1 text-neutral-600">
                           <p className="text-sm lg:text-base">
                             <Trans
-                              i18nKey="first_payment_description"
+                              i18nKey="first_payment_rent_description"
                               components={{
                                 1: <span className="capitalize">{formatOnlyMonth(selectedDate, {})}</span>,
                               }}

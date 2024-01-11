@@ -13,9 +13,6 @@ const Mensagem = ({ message, previousMessage }: MessageProps) => {
 
   const profile = message.profile;
 
-  // @ts-ignore
-  console.log(currentUser[0].id);
-  console.log(message.profile_id);
   return (
     <>
       <div
