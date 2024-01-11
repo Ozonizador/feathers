@@ -109,18 +109,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (advertisement) {
     const { count: allConversations, error: allConversationsError } = await supabase
       .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-      .select()
-      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host);
+      .select("count", { count: "exact" })
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host_id);
 
-    const { count: repliedConversation, error: repliedConversationError } = await supabase
+    const { data: repliedConversation, error: repliedConversationError } = await supabase
       .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-      .select("id, messages!inner(id)")
-      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host);
+      .select("id, messages!inner(profile_id)")
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host_id);
 
-    const responseRate =
-      (allConversationsError && repliedConversationError) || !allConversations
-        ? 0
-        : repliedConversation || 0 / allConversations;
+    let responseCount = 0;
+
+    repliedConversation?.forEach((conversation) => {
+      conversation.messages.forEach((message) => {
+        if (message.profile_id == advertisement.host_id) {
+          responseCount++;
+        }
+      });
+    });
+
+    const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : responseCount / allConversations * 100;
 
     return {
       props: {
