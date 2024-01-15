@@ -81,6 +81,8 @@ export const SearchInputField = () => {
       semester_discount: null,
       guarantee_value: null,
       monthRent: null,
+      guest_number: null,
+      extra_per_host: null,
       coordinates: { type: option.geometry.type, coordinates: { lat, lng } },
       location: option.place_name,
     });
