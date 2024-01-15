@@ -38,6 +38,8 @@ type UserSearchInfo = {
   semester_discount: number | null;
   trimester_discount: number | null;
   guarantee_value: number | null;
+  extra_per_host: number | null;
+  guest_number: number | null;
   endDate: Date;
   coordinates: MapCoordinates | null;
 };
@@ -51,6 +53,8 @@ const UserLocationSearchContext = createContext<UserSearchInfo>({
   semester_discount: null,
   trimester_discount: null,
   guarantee_value: null,
+  extra_per_host: null,
+  guest_number: null,
   endDate: new Date(),
   coordinates: null,
 });
@@ -79,6 +83,8 @@ export const MainProvider = ({ children }: MainProviderProps): JSX.Element => {
     semester_discount: null,
     trimester_discount: null,
     guarantee_value: null,
+    extra_per_host: null,
+    guest_number: null,
     endDate: checkMonthsInAdvance(new Date()),
     coordinates: null,
   });
@@ -223,14 +229,15 @@ export const useGetUserDates = () => {
 };
 
 export const useGetUserMonthRent = () => {
-  const { monthRent, semester_discount, trimester_discount } = useContext(UserLocationSearchContext);
-  return { monthRent, semester_discount, trimester_discount };
+  const { monthRent, semester_discount, trimester_discount, extra_per_host, guest_number } =
+    useContext(UserLocationSearchContext);
+  return { monthRent, semester_discount, trimester_discount, extra_per_host, guest_number };
 };
 
 export const useGetUserGuaranteeValue = () => {
   const { guarantee_value } = useContext(UserLocationSearchContext);
   return guarantee_value;
-}
+};
 
 /* SEARCH */
 

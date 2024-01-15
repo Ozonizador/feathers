@@ -4,11 +4,13 @@ mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendMail = async (req, res) => {
   const body = JSON.parse(req.body);
+  const dynamicTemplateData = body.data;
   try {
     await mail.send({
       to: body.email,
       from: "notifications@unihosts.pt",
       templateId: body.templateId,
+      dynamicTemplateData: dynamicTemplateData
     });
 
     res.status(200).json({ status: "OK" });

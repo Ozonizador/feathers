@@ -21,6 +21,8 @@ import { Reservation } from "../../../../models/reservation";
 import { trpc } from "../../../../utils/trpc";
 import { Label } from "flowbite-react";
 import { useTranslation } from "next-i18next";
+import { HouseExpenses, Included } from "../../../../models/advertisement";
+import { includes } from "lodash";
 
 type FormReservation = {
   number_guests: number;
@@ -29,15 +31,15 @@ type FormReservation = {
 export const RoomPagamento = () => {
   const { t } = useTranslation();
   const options = [
-    { value: 1, label: 1 +' '+ t("advertisements:person") },
-    { value: 2, label: 2 +' '+ t("advertisements:person") },
+    { value: 1, label: 1 + " " + t("advertisements:person") },
+    { value: 2, label: 2 + " " + t("advertisements:person") },
   ];
   const router = useRouter();
   const profile = useCurrentUser();
 
   let { startDate: userSelectedStartDate, endDate: userSelectedEndDate } = useGetUserDates();
   const setSearchInfoProperty = useSetSearchLocationByProperty();
-  const advertisement = useGetSingleAdvertisement();
+  const advertisement: any = useGetSingleAdvertisement();
   let setIsOpen = useSetModalDetalhesPagamento();
 
   const addReservation = trpc.reservations.addReservation.useMutation();
@@ -89,7 +91,7 @@ export const RoomPagamento = () => {
   const [startDate, setStartDate] = useState(setInicialStartValue());
   const [endDate, setEndDate] = useState(setInicialEndValue());
   const [guests = 1, setGuestsNumber] = useState();
-  
+
   const {
     control,
     handleSubmit,
@@ -123,16 +125,41 @@ export const RoomPagamento = () => {
         if (error || !data) return toast.error(t("messages:errors.making_reservation"));
 
         if (!advertisement) return;
+        let included = "Despesas Incluídas";
+        for (let expense of advertisement.expenses.services!) {
+          if (expense.included == "PARTIALLY" && included == "INCLUDED") included = "Despesas Parcialmente incluídas";
+          if (expense.included == "EXCLUDED") included = "Despesas excluídas";
+        }
+
         let formData = {
           email: advertisement.host.email,
-          templateId: "d-49ee6df771af4f01b4a69997fa02b192",
+          templateId: "d-f01d64f7f9ef4d9ca945f72013114958",
+          data: {
+            first_name: advertisement.host.name,
+            accommodation_name: advertisement.title,
+            reservation_occupation: newReservation.number_guests,
+            accommodation_address: `${advertisement.street} ${advertisement.street_number}, ${advertisement.postal_code} ${advertisement.place}`,
+            entry_date: new Date(newReservation.start_date),
+            departure_date: new Date(newReservation.end_date),
+            monthly_value: advertisement.month_rent + (advertisement.extra_per_host * newReservation.number_guests),
+            bills_conditions: included,
+            link: `unidesk/inbox?id=${data.id}`,
+          },
         };
 
-        /*
         await fetch("/api/mail", {
           method: "POST",
           body: JSON.stringify(formData),
-        });*/
+        });
+
+        formData.templateId = "d-aa6938d1e5784bc1880d920eb812e662";
+        formData.email = profile.email;
+        formData.data.first_name = profile.name;
+
+        await fetch("/api/mail", {
+          method: "POST",
+          body: JSON.stringify(formData),
+        });
 
         toast.success(t("messages:success.reservation_requested"));
       },
@@ -224,10 +251,10 @@ export const RoomPagamento = () => {
                 render={({ field: { onChange } }) => {
                   return (
                     <Input
-                    id="Hóspedes"
-                    options={options}
-                    onChange={(e) => setGuestsNumber(e.target.value)}
-                    value={guests || "1"}
+                      id="Hóspedes"
+                      options={options}
+                      onChange={(e) => setGuestsNumber(e.target.value)}
+                      value={guests || "1"}
                     />
                   );
                 }}

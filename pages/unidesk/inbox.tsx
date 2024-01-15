@@ -168,11 +168,13 @@ const CaixaExtradaContent = () => {
     setModalGerarRef(true);
   };
 
-  const openDetailsModal = (advertisement: any, start_date: string, end_date: string) => {
+  const openDetailsModal = (advertisement: any, start_date: string, end_date: string, guest_number: number) => {
     setSearchLocationByProperty("startDate", new Date(start_date));
     setSearchLocationByProperty("endDate", new Date(end_date));
     setSearchLocationByProperty("monthRent", advertisement.month_rent);
+    setSearchLocationByProperty("extra_per_host", advertisement.extra_per_host);
     setSearchLocationByProperty("semester_discount", advertisement.semester_discount);
+    setSearchLocationByProperty("guest_number", guest_number)
     setSearchLocationByProperty("trimester_discount", advertisement.trimester_discount);
     setSearchLocationByProperty("guarantee_value", advertisement.guarantee_value);
     setAdvertisement(advertisement);
@@ -394,7 +396,8 @@ const CaixaExtradaContent = () => {
                                     openDetailsModal(
                                       currentConversation.reservation.advertisement,
                                       currentConversation.reservation.start_date,
-                                      currentConversation.reservation.end_date
+                                      currentConversation.reservation.end_date,
+                                      currentConversation.reservation.number_guests
                                     )
                                   }
                                 >
@@ -546,7 +549,8 @@ const CaixaExtradaContent = () => {
                     openDetailsModal(
                       currentConversation.reservation.advertisement,
                       currentConversation.reservation.start_date,
-                      currentConversation.reservation.end_date
+                      currentConversation.reservation.end_date,
+                      currentConversation.reservation.number_guests,
                     )
                   }
                 >

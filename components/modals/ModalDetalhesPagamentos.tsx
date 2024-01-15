@@ -27,7 +27,7 @@ const ModalDetalhesPagamento = () => {
   const advertisement = useGetSingleAdvertisement();
   let { detailsModalOpen } = useModaisAnuncioDetalhes();
   let { startDate: selectedDate, endDate } = useGetUserDates();
-  const { monthRent, semester_discount, trimester_discount } = useGetUserMonthRent();
+  const { monthRent, semester_discount, trimester_discount, extra_per_host, guest_number } = useGetUserMonthRent();
   let setIsOpen = useSetModalDetalhesPagamento();
   const guaranteed_value = useGetUserGuaranteeValue();
   const [checkedDates, setCheckedDates] = useState<Boolean>(false);
@@ -58,10 +58,10 @@ const ModalDetalhesPagamento = () => {
       const monthDiference = differenceInMonths(endDate, selectedDate);
       let rent;
       if (advertisement) {
-        const { month_rent } = advertisement;
-        rent = month_rent;
+        const { month_rent, extra_per_host } = advertisement;
+        rent = month_rent + (extra_per_host * (guest_number! - 1));
       } else {
-        rent = toNumber(monthRent);
+        rent = toNumber(monthRent! + (extra_per_host! * (guest_number! - 1)));
       }
 
       const totalDaysOfMonth = getDaysInMonth(addMonths(selectedDate, 1));
@@ -97,10 +97,10 @@ const ModalDetalhesPagamento = () => {
 
           let endDay = getDate(endDate);
 
-            arrayOfMonths.push({
-              month: endDate.toLocaleString(i18n.language, { month: "long" }),
-              price: (endDay * pricePerDay).toFixed(2),
-            });
+          arrayOfMonths.push({
+            month: endDate.toLocaleString(i18n.language, { month: "long" }),
+            price: (endDay * pricePerDay).toFixed(2),
+          });
         }
 
         setMonths(arrayOfMonths);
@@ -114,10 +114,10 @@ const ModalDetalhesPagamento = () => {
 
           let endDay = getDate(endDate);
 
-            arrayOfMonths.push({
-              month: endDate.toLocaleString(i18n.language, { month: "long" }),
-              price: (endDay * pricePerDay).toFixed(2),
-            });
+          arrayOfMonths.push({
+            month: endDate.toLocaleString(i18n.language, { month: "long" }),
+            price: (endDay * pricePerDay).toFixed(2),
+          });
         } else {
           // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
           while (arrayOfMonths.length < monthDiference - 1) {
@@ -128,10 +128,10 @@ const ModalDetalhesPagamento = () => {
 
           let endDay = getDate(endDate);
 
-            arrayOfMonths.push({
-              month: endDate.toLocaleString(i18n.language, { month: "long" }),
-              price: (endDay * pricePerDay).toFixed(2),
-            });
+          arrayOfMonths.push({
+            month: endDate.toLocaleString(i18n.language, { month: "long" }),
+            price: (endDay * pricePerDay).toFixed(2),
+          });
         }
 
         setMonths(arrayOfMonths);
@@ -145,14 +145,14 @@ const ModalDetalhesPagamento = () => {
       const { month_rent, semester_discount, trimester_discount } = advertisement;
 
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return month_rent.toFixed(2);
-      if (advertDiferenceInMonths >= 6) return (toNumber(month_rent) * (1 - semester_discount / 100)).toFixed(2);
-      return (month_rent * (1 - trimester_discount / 100)).toFixed(2);
+      if (advertDiferenceInMonths < 3) return month_rent.toFixed(2) + (extra_per_host! * (guest_number! - 1));
+      if (advertDiferenceInMonths >= 6) return ((toNumber(month_rent) + (extra_per_host! * (guest_number! - 1))) * (1 - semester_discount / 100)).toFixed(2);
+      return ((month_rent + (extra_per_host! * (guest_number! - 1))) * (1 - trimester_discount / 100)).toFixed(2);
     } else {
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return toNumber(monthRent).toFixed(2);
-      if (advertDiferenceInMonths >= 6) return (toNumber(monthRent) * (1 - semester_discount! / 100)).toFixed(2);
-      return (toNumber(monthRent) * (1 - trimester_discount! / 100)).toFixed(2);
+      if (advertDiferenceInMonths < 3) return (toNumber(monthRent).toFixed(2) + (extra_per_host! * (guest_number! - 1)));
+      if (advertDiferenceInMonths >= 6) return ((toNumber(monthRent) + (extra_per_host! * (guest_number! - 1))) * (1 - semester_discount! / 100)).toFixed(2);
+      return ((toNumber(monthRent) + (extra_per_host! * (guest_number! - 1))) * (1 - trimester_discount! / 100)).toFixed(2);
     }
   };
 

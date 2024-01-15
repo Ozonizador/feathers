@@ -15,6 +15,7 @@ import Input from "../utils/Input";
 import { AddReservationPaymentProps } from "../../server/helpers/paymentsHelper";
 import { useTranslation } from "next-i18next";
 import { isBefore, subMinutes } from "date-fns";
+import { toNumber } from "lodash";
 
 const ModalGerarReferencia = () => {
   const user = useUser();
@@ -224,7 +225,7 @@ const ModalGerarReferencia = () => {
                           {t("advertisements:reference", {reference: data?.reference})}
                         </span>
                         <span>
-                          {t("advertisements:amount", {amount: data?.valor})}
+                          {t("advertisements:amount", {amount: toNumber(data?.valor).toFixed(2)})}
                         </span>
                       </div>
                     )}
