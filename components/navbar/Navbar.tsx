@@ -236,13 +236,13 @@ export const Navbar = () => {
                 {!user && (
                   <div className="my-auto flex gap-2">
                     <Link href={REGISTER_URL} className="p-0">
-                      <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                      <div className="flex flex-col h-full justify-center rounded border-2 border-primary-500 px-6 py-2 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                         {t("register")}
                       </div>
                     </Link>
 
                     <Link href={LOGIN_URL} className="p-0">
-                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
                         {t("login")}
                       </div>
                     </Link>
