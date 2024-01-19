@@ -17,6 +17,7 @@ import { PAGE_NUMBER_COUNT } from "../../../hooks/advertisementService";
 import { Conversations, CONVERSATION_PROPERTIES, CONVERSATION_TABLE_NAME } from "../../../models/conversation";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { late } from "zod";
 
 const breadcrumbPaths = [
   { url: UNIDESK_URL, label: "uni-desk" },
@@ -72,39 +73,52 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const user = session.user;
 
   const { data: latestReviews, error: reviewsError } = await supabase
-    .from<"reviews", Reviews>(REVIEWS_TABLE_NAME)
-    .select("*, advertisement:advertisements(id,host_id), tenant:tenant_id(*)")
-    .eq(REVIEW_COLUMNS.HOST_ID, user.id)
+    .from(REVIEWS_TABLE_NAME)
+    .select("*, reservation:reservations(id, tenant_id, advertisement:advertisements(id, host_id), tenant:profiles(id, name, avatar_url))")
     .order(REVIEW_COLUMNS.CREATED_AT, { ascending: false })
-    .range(0, PAGE_NUMBER_COUNT - 1);
 
-  const { count: allConversations, error: allConversationsError } = await supabase
-    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-    .select()
-    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+    let reviewsOfUser: any[] = [];
+    latestReviews?.forEach((review) => {
+      if (review.reservation.advertisement?.host_id == user.id) {
+        reviewsOfUser.push(review)
+      }
+    })
 
-  const { count: repliedConversation, error: repliedConversationError } = await supabase
-    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-    .select("id, messages!inner(id)")
-    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
 
   // adicionar a classificação geral
   const { data: generalClassification, error: classificationError } = await supabase
     .rpc("average_rating_per_host", { hostid: user.id })
     .single();
 
-  const responseRate =
-    (allConversationsError && repliedConversationError) || !allConversations
-      ? 0
-      : repliedConversation || 0 / allConversations;
+    const { count: allConversations, error: allConversationsError } = await supabase
+    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+    .select("count", { count: "exact" })
+    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+
+  const { data: repliedConversation, error: repliedConversationError } = await supabase
+    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+    .select("id, messages!inner(profile_id)")
+    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+
+  let responseCount = 0;
+
+  repliedConversation?.forEach((conversation) => {
+    conversation.messages.forEach((message) => {
+      if (message.profile_id == user.id) {
+        responseCount++;
+      }
+    });
+  });
+
+  const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : responseCount / allConversations * 100;
 
   return {
     props: {
       initialSession: session,
       user: session.user,
-      latestReviews: reviewsError ? [] : latestReviews,
+      latestReviews: reviewsError ? [] : reviewsOfUser,
       generalClassification: classificationError ? 0 : generalClassification,
-      responseRate,
+      responseRate: responseCount,
       ...(await serverSideTranslations(locale ?? "pt")),
     },
   };

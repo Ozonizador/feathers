@@ -17,6 +17,44 @@ const useReviewService = () => {
       .insert({ ...review, reservation_id: reservationId })
       .select()
       .single();
+
+    const { data: updateReservation, error: reservationError } = await supabaseClient
+      .from("reservations")
+      .update({ payment_status: "PAID", status: "ACCEPTED" })
+      .eq("id", reservationId)
+      .select(
+        "*, tenant:tenant_id(*), advertisements(host:host_id(*), street, street_number, postal_code, place, month_rent, extra_per_host, expenses)"
+      );
+
+    if (updateReservation) {
+      // send email
+      let included = "Despesas Incluídas";
+
+      for (let expense of updateReservation[0].advertisements.expenses.services) {
+        if (expense.included == "PARTIALLY" && included == "INCLUDED") included = "Despesas Parcialmente incluídas";
+        if (expense.included == "EXCLUDED") included = "Despesas excluídas";
+      }
+
+      let formData = {
+        email: updateReservation[0].reservation.advertisement.host.email,
+        templateId: "",
+        data: {
+          first_name: updateReservation[0].reservation.advertisement.host.name,
+          accommodation_name: updateReservation[0].advertisements.title,
+          entry_date: new Date(updateReservation[0].start_date).toLocaleDateString(),
+          departure_date: new Date(updateReservation[0].end_date).toLocaleDateString(),
+          private_review: review.private_review,
+          public_review: review.public_review,
+          link: `unidesk/senhorio/reviews`,
+        },
+      };
+
+      await fetch("/api/mail", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+    }
+
     return { data, error };
   };
 

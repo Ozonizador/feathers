@@ -223,7 +223,7 @@ const CaixaExtradaContent = () => {
     }
     getMessagesFromConversation();
 
-    if (!query) {
+    if (!query && conversations.length > 0) {
       const { id } = router.query;
 
       if (id) {

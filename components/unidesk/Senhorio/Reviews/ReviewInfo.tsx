@@ -52,7 +52,7 @@ const ReviewInfo = ({ responseRate, generalClassification, latestReviews }: Revi
 export default ReviewInfo;
 
 interface SingleReviewCardPros {
-  review: ReviewWithTenantAndAdvertisement;
+  review: any;
 }
 
 const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
@@ -60,17 +60,19 @@ const SingleReviewCard = ({ review }: SingleReviewCardPros) => {
   const formattedCreatedDate = new Date(review.created_at);
   const singleDateDisplayOptions = { year: "numeric", month: "long" } as const;
 
+  console.log(review)
+
   return (
     <>
       <div className="mx-auto mb-5 flex w-11/12 flex-col items-center gap-10 rounded-2xl bg-white p-7 lg:mx-0 lg:flex-row">
         <div className="flex w-60 flex-col items-center justify-center align-middle">
           <Avatar
             alt="Default avatar with alt text"
-            img={review?.tenant?.avatar_url || "/icons/user/user.svg"}
+            img={review.reservation.tenant?.avatar_url || "/icons/user/user.svg"}
             rounded={true}
             size="lg"
           />
-          <div className="text-base font-bold">{review.tenant?.name}</div>
+          <div className="text-base font-bold">{review.reservation.tenant?.name}</div>
         </div>
         <div className="text-base text-secondary-500">
           {review.private_review}
