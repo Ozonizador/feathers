@@ -2,6 +2,7 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
+import { addHours } from "date-fns";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 Deno.serve(async (req: Request) => {
@@ -12,7 +13,7 @@ Deno.serve(async (req: Request) => {
   // Database queries will have RLS policies enforced
   const { data, error } = await supabaseClient
     .from("reservations")
-    .select("*")
+    .select("*, advertisement:advertisements(host:host_id(*), title, street, street_number, postal_code, place, month_rent, extra_per_host, expenses)")
     .neq("payment_status", "PAID")
     .neq("payment_status", "CANCELED")
     .neq("payment_status", "REFUNDED");
@@ -25,6 +26,35 @@ Deno.serve(async (req: Request) => {
       const differenceInMilliseconds = today.valueOf() - reservation_date.valueOf();
 
       const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+
+      if (addHours(reservation, 12) <= today && !reservation.reminded) {
+        let included = "Despesas Incluídas";
+
+      for (let expense of data[0].advertisements.expenses.services) {
+        if (expense.included == "PARTIALLY" && included == "Despesas Incluídas") included = "Despesas Parcialmente incluídas";
+        if (expense.included == "EXCLUDED") included = "Despesas excluídas";
+      }
+      
+        let formData = {
+          email: data[0].advertisement.host.email,
+          templateId: "",
+          data: {
+            first_name: data[0].advertisement.host.name,
+            accommodation_name: data[0].advertisements.title,
+            reservation_occupation: data[0].advertisement.number_guests,
+            accommodation_address: `${data[0].advertisements.street} ${data[0].advertisements.street_number}, ${data[0].advertisements.postal_code} ${data[0].advertisements.place}`,
+            entry_date: new Date(data[0].start_date).toLocaleDateString(),
+            departure_date: new Date(data[0].end_date).toLocaleDateString(),
+            monthly_value:
+              data[0].advertisements.month_rent +
+              data[0].advertisements.extra_per_host * data[0].number_guests,
+            bills_conditions: included,
+            link: `unidesk/inbox?id=${data[0].id}`,
+          },
+        };
+
+        //send email and sms
+      }
 
       if (differenceInDays > 3) {
         const { data: updateData, error } = await supabaseClient
