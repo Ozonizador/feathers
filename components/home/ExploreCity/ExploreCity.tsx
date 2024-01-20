@@ -56,9 +56,9 @@ const ExploreCity = () => {
   const { t } = useTranslation("index");
   return (
     <section className="max-width">
-      <div className="bg-terciary-300  lg:block">
+      <div className="lg:block">
         <div className="mx-auto text-center lg:px-8 lg:py-10 xl:p-4">
-          <h2 className="pb-20 text-5xl font-bold">{t("index:explore_city")}</h2>
+          <h2 className="pb-20 text-4xl font-bold">{t("index:explore_city")}</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {CONFIG.map((city, index) => (
               <ExploreCityItem key={index} title={city.title} image={city.image} url={city.url} />
@@ -73,15 +73,14 @@ const ExploreCity = () => {
 const ExploreCityItem = ({ title, url, image }: CityProps) => {
   return (
     <Link href={url}>
-      <article className="group relative mx-auto xl:w-60 xl:h-60 lg:w-52 lg:h-52 w-60 h-60 cursor-pointer rounded-2xl bg-black">
+      <article className="group relative mx-auto h-60 w-60 cursor-pointer rounded-2xl bg-black lg:h-52 lg:w-52 ">
         <Image src={image} alt="tomar" fill className="rounded-2xl" />
-        <div className="break-none absolute flex h-full w-full flex-col justify-center align-middle text-3xl font-bold text-white transition-all group-hover:text-[55px] group-hover:leading-none group-hover:text-neutral-200 group-hover:opacity-40">
+        <div className="break-none absolute flex h-full w-full flex-col justify-center align-middle text-2xl font-bold text-white transition-all group-hover:text-[55px] group-hover:leading-none group-hover:text-neutral-200 group-hover:opacity-40">
           {title}
         </div>
       </article>
     </Link>
   );
 };
-
 
 export default ExploreCity;

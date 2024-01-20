@@ -15,7 +15,7 @@ interface FeatherDatePickerProps {
 
 const FeatherDatePicker = ({ date, onChange, className, minDate }: FeatherDatePickerProps) => {
   return (
-    <div className="w-full relative">
+    <div className="relative w-full">
       <DatePicker
         selected={date}
         onChange={onChange}

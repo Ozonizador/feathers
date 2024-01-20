@@ -129,7 +129,7 @@
 }
 @media only screen and (min-width: 1024px) {
   .test-card{
-    height: 21rem;
+    height: 23rem;
   }
 }
 .icon {
@@ -167,7 +167,7 @@
 /* date pickers */
 
 .react-datepicker__input-container input {
-  border-color: #dfdfdf;
+  /* border-color: #dfdfdf; */
   width: 100%;
 }
 
@@ -196,7 +196,9 @@
   align-items: center;
   justify-content: center;
 }
-
+.react-datepicker-wrapper input[type="text"]{
+  border: none;
+}
 .birth-picker .react-datepicker__input-container input:focus, #nationality-drop select:focus, #phone-input input:focus, #lang-drop:focus{
 border-color: #c48b60;
 --tw-ring-shadow:0
@@ -214,9 +216,21 @@ border-color: #c48b60;
 .table_head{
   font-size: 12px !important;
 }
+img.cursor-pointer.w-1\/4{
+  width: 80% !important;
+}
+/* .search-btn{
+  width: 80%;
+} */
+.testimonial-block > div >div{
+  bottom: 2.25rem !important;
+}
 @media only screen and (min-width: 1023px) and (max-width: 1200px)  {
   .img_div{
     width: 10rem
+  }
+  .img_div img{
+    width: 90% !important;
   }
   .nav_text{
     font-size: 17px;
@@ -224,6 +238,7 @@ border-color: #c48b60;
   .find_text{
     width: 75px;
     text-align: center;
+    font-size: 0.875rem;
   }
   .nav_text > div{
     display: flex;

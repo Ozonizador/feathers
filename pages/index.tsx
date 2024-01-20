@@ -14,14 +14,20 @@ const Home = () => {
   return (
     <div className="">
       <HomeSection1 />
-      <div className="lg:px-8 xl:mx-24 xl:px-5 mx-6 lg:mx-0">
+      <div className="mx-6 lg:mx-0 lg:px-8 xl:mx-32 xl:px-5">
         <HomeSection2 />
         <HomeSection3 />
-        <ExploreCity />
+      </div>
+      <div className="bg-terciary-300">
+        <div className="mx-6 lg:mx-0 lg:p-8 xl:mx-32 xl:px-5">
+          <ExploreCity />
+        </div>
+      </div>
+      <div className="mx-6 lg:mx-0 lg:px-8 xl:mx-32 xl:px-5">
         <HomeSection5 />
       </div>
       <TestemunhosComponent />
-      <div className="lg:px-8 xl:mx-24 xl:px-5 mx-6 lg:mx-0">
+      <div className="mx-6 lg:mx-0 lg:px-8 xl:mx-32 xl:px-5">
         <HomeSection7 />
         <BlogSection />
         {/* <HomeParceiros /> */}
