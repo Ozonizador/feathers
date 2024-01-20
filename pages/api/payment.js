@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       let included = "Despesas Incluídas";
 
       for (let expense of updateReservation[0].advertisements.expenses.services) {
-        if (expense.included == "PARTIALLY" && included == "INCLUDED") included = "Despesas Parcialmente incluídas";
+        if (expense.included == "PARTIALLY" && included == "Despesas Incluídas") included = "Despesas Parcialmente incluídas";
         if (expense.included == "EXCLUDED") included = "Despesas excluídas";
       }
 

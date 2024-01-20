@@ -143,7 +143,7 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               </Link>
             </div>
           </div>
-          <div className="mt-7 rounded-3xl bg-gray-100 px-8 py-4">
+          <div className="mt-7 rounded-3xl bg-gray-100 px-8 py-4 flex flex-col items-center">
             {user && (
               <div className="flex flex-col items-center">
                 {profile != null && // @ts-ignore
@@ -164,14 +164,14 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                   <BsPerson size={32} />
                 )}
 
-                <div className="my-auto py-2 capitalize font-black text-xl mb-2">
+                <div className="my-auto mb-2 py-2 text-xl font-black capitalize">
                   {profile != null && // @ts-ignore
                     profile[0]?.name}
                 </div>
               </div>
             )}
             <div className="flex flex-1">
-              <div className="flex mb-3">
+              <div className="mb-3 flex">
                 <span className="mr-2 self-center">{t("student", { count: 1 })}</span>
                 <Switch
                   checked={false}
@@ -194,6 +194,23 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     {!menuaberto ? <AiOutlineDown size={24} /> : <AiOutlineUp size={24} />}
                   </div>
                 </>
+              )}
+            </div>
+            <div>
+              {!user && (
+                <div className="my-auto flex gap-2">
+                  <Link href={REGISTER_URL} className="p-0">
+                    <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                      {t("register")}
+                    </div>
+                  </Link>
+
+                  <Link href={LOGIN_URL} className="p-0">
+                    <div className="rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
+                      {t("login")}
+                    </div>
+                  </Link>
+                </div>
               )}
             </div>
             <div className={classNames("mb-3 w-full rounded-md bg-gray-200 p-2", { hidden: !menuaberto })}>
