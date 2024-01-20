@@ -1,24 +1,34 @@
 import "react-datepicker/dist/react-datepicker.css";
 import classNames from "classnames";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const DatePicker = dynamic(() => import("react-datepicker"), {
   ssr: false,
 });
 
 interface FeatherDatePickerProps {
-  date: Date;
+  date?: Date;
   onChange: (date: any) => void;
   className?: string;
   minDate?: Date;
+  children?: any;
+  placeholder?: string;
 }
 
-const FeatherDatePicker = ({ date, onChange, className, minDate }: FeatherDatePickerProps) => {
+const FeatherDatePicker = ({ date, onChange, className, minDate, children, placeholder }: FeatherDatePickerProps) => {
+  const [data, setData] = useState<Date | undefined>(undefined)
+
+
   return (
     <div className="relative w-full">
       <DatePicker
-        selected={date}
-        onChange={onChange}
+        selected={data || null}
+        placeholderText={placeholder}
+        onChange={(newDate: Date) => {
+          setData(newDate);
+          onChange(newDate);
+        }}
         dateFormat="yyyy-MM-dd"
         className={classNames(
           `${
@@ -29,6 +39,7 @@ const FeatherDatePicker = ({ date, onChange, className, minDate }: FeatherDatePi
         )}
         minDate={minDate}
       />
+      {children}
     </div>
   );
 };

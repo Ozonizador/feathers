@@ -10,6 +10,8 @@ import { useSetSearchLocation, useSetSearchLocationByProperty, useUserSearch } f
 import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
 
 export enum SearchFields {
   START_DATE = "startDate",
@@ -92,10 +94,11 @@ export const SearchInputField = () => {
     <>
       <div className="flex-row justify-center lg:mt-7 lg:flex">
         <div className="relative my-2 text-sm lg:mx-2">
-          <div>
+          <div className="relative">
+          <FaHouse  className="absolute left-3 top-1/2 transform -translate-y-1/2"/>
             <input
               type="input"
-              className="bg-terciary-50 h-14 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
+              className="bg-terciary-50 h-14 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72 pl-10"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder={placeholderFind}
               value={location}
@@ -119,8 +122,9 @@ export const SearchInputField = () => {
         <div className="flex flex-row gap-2 lg:gap-0">
           <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
+              placeholder={t("advertisements:date_in")}
               date={startDate}
-              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52"
+              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52 pl-10"
               onChange={(date) => {
                 setSearch({
                   ...userSearch,
@@ -129,14 +133,17 @@ export const SearchInputField = () => {
                 });
               }}
               minDate={new Date()}
+              children={<FaArrowAltCircleRight className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
             />
           </div>
           <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
-              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52"
+            placeholder={t("advertisements:date_out")}
+              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52 pl-10"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
               minDate={checkMonthsInAdvance(startDate)}
+              children={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
             />
           </div>
         </div>

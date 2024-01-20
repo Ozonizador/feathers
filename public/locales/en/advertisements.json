@@ -133,5 +133,7 @@
   "cover": "Cover Photo",
   "other": "Other Photos",
   "house_verified": "Verified House",
-  "person": "person"
+  "person": "person",
+  "date_in": "Entry Date",
+  "date_out": "Departure Date"
 }

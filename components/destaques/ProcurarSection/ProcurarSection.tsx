@@ -114,7 +114,7 @@ export default function ProcurarSection() {
                 />
                 {location ? (
                   <>
-                    <span className="font-normal text-gray-400">{t("for")}</span>
+                    <span className="font-normal text-gray-400">{t("in_area")}</span>
                     <span className="font-normal capitalize text-gray-400"> {location.split(",")[0]}</span>
                   </>
                 ) : (
