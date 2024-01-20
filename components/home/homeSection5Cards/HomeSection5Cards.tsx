@@ -9,10 +9,10 @@ interface HomeSection5CardsProps {
 
 const HomeSection5Cards = ({ img, heading, text }: HomeSection5CardsProps) => {
   return (
-    <article className="rounded-2xl border border-solid border-terciary-200 p-9 text-center lg:text-start">
-      <Image src={img} alt="" height={64} width={64} className="mx-auto lg:mx-0" />
-      <h3 className="mb-2 mt-4 text-3xl font-semibold text-secondary-600">{heading}</h3>
-      <p className="text-lg text-secondary-400">{text}</p>
+    <article className="rounded-2xl border border-solid border-terciary-200 p-5 text-center lg:text-start">
+      <Image src={img} alt="" height={55} width={55} className="mx-auto lg:mx-0" />
+      <h3 className="mb-2 mt-4 text-2xl font-semibold text-secondary-600">{heading}</h3>
+      <p className="text-md text-secondary-400">{text}</p>
     </article>
   );
 };

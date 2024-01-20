@@ -11,7 +11,6 @@ import { coordinatesArrayToGeoPoint } from "../../utils/map-services";
 import { checkMonthsInAdvance } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 
-
 export enum SearchFields {
   START_DATE = "startDate",
   END_DATE = "endDate",
@@ -92,11 +91,11 @@ export const SearchInputField = () => {
   return (
     <>
       <div className="flex-row justify-center lg:mt-7 lg:flex">
-        <div className="relative my-2 lg:mx-2">
+        <div className="relative my-2 text-sm lg:mx-2">
           <div>
             <input
               type="input"
-              className="bg-terciary-50 h-16 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
+              className="bg-terciary-50 h-14 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder={placeholderFind}
               value={location}
@@ -118,10 +117,10 @@ export const SearchInputField = () => {
         </div>
 
         <div className="flex flex-row gap-2 lg:gap-0">
-          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
+          <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
               date={startDate}
-              className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
+              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52"
               onChange={(date) => {
                 setSearch({
                   ...userSearch,
@@ -132,18 +131,18 @@ export const SearchInputField = () => {
               minDate={new Date()}
             />
           </div>
-          <div className="z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2 date-parent">
+          <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
-              className="bg-terciary-50 h-full w-full rounded-xl border-none lg:w-52"
+              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
               minDate={checkMonthsInAdvance(startDate)}
             />
           </div>
         </div>
-        <div className="my-2">
-          <button onClick={sendQueryRequest} className="h-16 w-full rounded-lg bg-primary-500 px-6 transition lg:w-32">
-            <Image height={32} width={32} src="/images/icon-search.svg" className="mx-auto my-auto" alt="" />
+        <div className="m-2">
+          <button onClick={sendQueryRequest} className="h-14 w-full rounded-lg bg-primary-500 transition lg:w-[70px]">
+            <Image height={25} width={25} src="/images/icon-search.svg" className="search-btn mx-auto my-auto" alt="" />
           </button>
         </div>
       </div>

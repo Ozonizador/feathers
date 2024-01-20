@@ -23,80 +23,80 @@ const Footer = () => {
       <div>
         <div className="grid grid-cols-1 gap-1 bg-secondary-300 px-12 py-4 lg:grid-cols-5 lg:gap-5 lg:pt-20">
           <div className="relative mb-auto flex pt-5 lg:mx-auto">
-            <Image src="/images/logo2.svg" alt="unihosts" height="200" width="200"></Image>
+            <Image src="/images/logo2.svg" alt="unihosts" height="150" width="150"></Image>
           </div>
           <div className="ml-0 py-5 text-left text-terciary-100 lg:ml-5 lg:text-left">
-            <h3 className="mb-3 text-lg font-bold">Unihosts</h3>
-            <div className="py-1">
+            <h3 className="text-md mb-3 font-bold">Unihosts</h3>
+            <div className="py-1 text-sm">
               <Link href={ABOUT_US_URL} className="fs-300 clr-white">
                 {t("footer:about")}
               </Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={BLOG_URL} className="fs-300 clr-white">
                 {t("footer:blog")}
               </Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={CONTACTOS_URL} className="fs-300 clr-white">
                 {t("footer:be_partner")}
               </Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={TERMS} className="fs-300 clr-white">
                 {t("footer:terms")}
               </Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={POLICIES} className="fs-300 clr-white">
                 {t("footer:cookie_policy")}
               </Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={CONTACTOS_URL} className="fs-300 clr-white">
                 {t("footer:talk_with_us")}
               </Link>
             </div>
           </div>
           <div className="py-5 text-left text-terciary-100 lg:text-left">
-            <h3 className="mb-3 text-lg font-bold">{t("student", { count: 3 })}</h3>
-            <div className="py-1">
+            <h3 className="text-md mb-3 font-bold">{t("student", { count: 3 })}</h3>
+            <div className="py-1 text-sm">
               <Link href={HOME_URL + "#howTo"} className="fs-300 clr-white">
                 {t("footer:student.how_to_rent")}
               </Link>
             </div>
 
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={FAQS_URL + "?TENANT"} className="fs-300 clr-white">
                 {t("footer:student.help")}
               </Link>
             </div>
 
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={LOGIN_URL} className="fs-300 clr-white">
                 {t("login")}
               </Link>
             </div>
           </div>
           <div className="py-5 text-left text-terciary-100 lg:text-left">
-            <h3 className="mb-3 text-lg font-bold">{t("landlord", { count: 2 })}</h3>
+            <h3 className="text-md mb-3 font-bold">{t("landlord", { count: 2 })}</h3>
 
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={COMO_FUNCIONA_URL}>{t("footer:landlord.how_to")}</Link>
             </div>
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={FAQS_URL + "?LANDLORD"} className="fs-300 clr-white">
                 {t("footer:landlord.help")}
               </Link>
             </div>
 
-            <div className="py-1">
+            <div className="py-1 text-sm">
               <Link href={LOGIN_URL} className="fs-300 clr-white">
                 {t("login")}
               </Link>
             </div>
             <Link href={ANUNCIAR_PROP_URL} className="transition">
-              <div className="my-3 mt-7 flex w-fit rounded-full bg-primary-500 p-3 text-center">
+              <div className="my-3 mt-7 flex w-fit rounded-full bg-primary-500 p-3 text-center text-sm">
                 {t("footer:announce")}!
               </div>
             </Link>

@@ -67,7 +67,7 @@ export const Navbar = () => {
 
   const toggleUserMode = () => {
     user && setWebUserMode(userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
-    setCookie('navbar', userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
+    setCookie("navbar", userAppMode !== "TENANT" ? "TENANT" : "LANDLORD");
     if (router.pathname.includes("unidesk/")) {
       router.push(UNIDESK_URL);
     }
@@ -76,24 +76,24 @@ export const Navbar = () => {
   useEffect(() => {
     if (profile != null && profile.type && !hasRunOnce) {
       setWebUserMode("LANDLORD");
-      
+
       setHasRunOnce(true);
     }
-    let navbarState = getCookie('navbar'); 
-    setWebUserMode(navbarState == "LANDLORD" ? "LANDLORD" : "TENANT")
+    let navbarState = getCookie("navbar");
+    setWebUserMode(navbarState == "LANDLORD" ? "LANDLORD" : "TENANT");
   }, [userAppMode, profile, hasRunOnce]);
 
   return (
     <header className="px-5 lg:px-0">
       <nav>
         <div>
-          <div className="border-terciary-400 hidden flex-wrap border-b py-2 lg:flex lg:px-28">
+          <div className="border-terciary-400 hidden flex-wrap border-b lg:flex lg:px-28">
             <div className="flex">
-              <div className="my-auto mr-3 flex">
+              <div className="my-auto mr-3 flex text-sm">
                 <ImPhone className="mr-1 self-center" />
                 <p>+351 914 626 616</p>
               </div>
-              <div className="my-auto flex">
+              <div className="my-auto flex text-sm">
                 <GrMail className="mr-1 self-center" />
                 <p>info@unihost.pt</p>
               </div>
@@ -109,7 +109,7 @@ export const Navbar = () => {
                   <Image src={router.locale === "en" ? ukFlag : ptFlag} alt="" />
                 </div>
                 <select
-                  className="ml-2 border-none focus:border-outline-none focus:border-primary-500 focus:ring-0"
+                  className="focus:border-outline-none ml-2 border-none text-sm focus:border-primary-500 focus:ring-0"
                   onChange={(event) => {
                     router.push(router.asPath, undefined, { locale: event.target.value });
                   }}
@@ -121,18 +121,18 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="border-terciary-400 mt-5 flex h-20 px-3 lg:gap-5 lg:px-28">
+          <div className="border-terciary-400 m-auto flex h-20 px-3 lg:gap-5 lg:px-28">
             <div className="lg:block">
               <Link href={HOME_URL}>
-                <div className="relative h-full w-52 img_div">
+                <div className="img_div relative h-full w-52">
                   <Image
                     src="/images/logo1.png"
                     alt=""
-                    className="cursor-pointer"
+                    className="w-1/4 cursor-pointer"
                     style={{ objectFit: "contain" }}
                     fill
                     priority
-                    sizes="(max-width: 768px) 300px, (max-width: 1200px) 864px, 864px"
+                    // sizes="(max-width: 768px) 300px, (max-width: 1200px) 864px, 864px"
                   ></Image>
                 </div>
               </Link>
@@ -144,22 +144,26 @@ export const Navbar = () => {
               <CgMenuLeft size={28} />
             </div>
 
-            <div className="mx-auto my-auto hidden lg:block xl:px-5">
-              <div className="flex gap-1 nav_text">
-                <div
-                  className={classNames({
-                    "border-b-4 border-primary-500 font-black flex":
-                      checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
-                  })}
-                >
-                  <Link href="/" className="nav_home flex">{t("navbar:home")}</Link>
+            <div className="mx-auto my-auto hidden lg:block xl:px-[15px]">
+              <div className="nav_text flex gap-1">
+                <div className="my-auto flex px-[15px] align-middle">
+                  <div
+                    className={classNames({
+                      "flex border-b-4 border-primary-500 pb-2 font-black":
+                        checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
+                    })}
+                  >
+                    <Link href="/" className="nav_home flex text-sm">
+                      {t("navbar:home")}
+                    </Link>
+                  </div>
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">
                     <Menu as="div" className={classNames("ml-5 w-full")}>
                       <Menu.Button>
                         <div
-                          className={classNames("flex", {
+                          className={classNames("flex text-sm", {
                             "border-b-4 border-primary-500 font-black":
                               checkIfUrlActive([COMO_FUNCIONA_URL, ANUNCIAR_PROP_URL]) == true,
                           })}
@@ -181,12 +185,12 @@ export const Navbar = () => {
                       >
                         <Menu.Items className="absolute z-50 flex w-52 flex-col rounded-lg bg-white p-2 shadow-md">
                           <Menu.Item>
-                            <MyLink customClass="py-1 mt-2 w-full" href={COMO_FUNCIONA_URL}>
+                            <MyLink customClass="py-1 mt-2 w-full text-sm" href={COMO_FUNCIONA_URL}>
                               {t("navbar:how_it_works")}
                             </MyLink>
                           </Menu.Item>
                           <Menu.Item>
-                            <MyLink customClass="py-2 w-full" href={ANUNCIAR_PROP_URL}>
+                            <MyLink customClass="py-2 w-full text-sm" href={ANUNCIAR_PROP_URL}>
                               {t("navbar:announce")}
                             </MyLink>
                           </Menu.Item>
@@ -196,20 +200,20 @@ export const Navbar = () => {
                   </div>
                 )}
                 {userAppMode == "TENANT" && (
-                  <div className="my-auto px-2 flex flex-shrink-0 xl:px-5 nav_text">
+                  <div className="nav_text my-auto px-2 text-sm xl:px-[15px]">
                     <Link
                       href={PROCURAR_ADVERT_URL}
                       className={classNames({
-                        'find_text': true,
-                        'border-b-4 border-primary-500 pb-2 font-black': checkIfUrlActive([PROCURAR_ADVERT_URL]) === true,
+                        find_text: true,
+                        "border-b-4 border-primary-500 pb-2 font-black":
+                          checkIfUrlActive([PROCURAR_ADVERT_URL]) === true,
                       })}
-                      
                     >
                       {t("navbar:find_place")}
                     </Link>
                   </div>
                 )}
-                <div className="my-auto px-2 xl:px-5">
+                <div className="my-auto px-2 text-sm xl:px-[15px]">
                   <Link
                     href={BLOG_URL}
                     className={classNames({
@@ -219,7 +223,7 @@ export const Navbar = () => {
                     {t("navbar:blog")}
                   </Link>
                 </div>
-                <div className="my-auto px-2 xl:px-5">
+                <div className="my-auto px-2 text-sm xl:px-[15px]">
                   <Link
                     href={CONTACTOS_URL}
                     className={classNames({
@@ -250,7 +254,7 @@ export const Navbar = () => {
                 )}
                 {user && (
                   <div className="flex flex-1">
-                    <div className="my-auto flex gap-2 nav_text">
+                    <div className="nav_text my-auto flex gap-2 text-sm">
                       <span className={classNames("mr=2", { "text-primary-500": userAppMode == "TENANT" })}>
                         {t("student", { count: 1 })}
                       </span>
@@ -268,7 +272,7 @@ export const Navbar = () => {
                           })}
                         />
                       </Switch>
-                      <span className={classNames("mr=2", { "text-primary-500": userAppMode == "LANDLORD" })}>
+                      <span className={classNames("mr=2 text-sm", { "text-primary-500": userAppMode == "LANDLORD" })}>
                         {t("landlord", { count: 1 })}
                       </span>
                     </div>
@@ -290,7 +294,7 @@ export const Navbar = () => {
                           ) : (
                             <BsPerson size={28} />
                           )}
-                          <p className="my-auto ml-2">
+                          <p className="my-auto ml-2 text-sm">
                             {profile != null &&
                               // @ts-ignore
                               profile[0]?.name}
@@ -312,22 +316,22 @@ export const Navbar = () => {
                             {userAppMode == "TENANT" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
+                                  <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_URL}>
                                     {t("common:uni-desk")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_STAY_URL}>
+                                  <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_STAY_URL}>
                                     {t("my_stay")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={UNIDESK_STUDENT_FAVOURITES_URL}>
+                                  <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_STUDENT_FAVOURITES_URL}>
                                     {t("favourites", { count: 2 })}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={INBOX_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2 text-sm" href={INBOX_URL}>
                                     <p>{t("inbox")}</p>
                                     {messagesNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
@@ -337,7 +341,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold flex gap-2" href={NOTIFICATIONS_URL}>
+                                  <MyLink customClass="py-1 font-bold flex gap-2 text-sm" href={NOTIFICATIONS_URL}>
                                     <p>{t("notifications")}</p>
                                     {notificationNumber > 0 && (
                                       <h6 className="border-1 my-auto rounded-full border border-black px-[4px] py-[0.5px] text-xs">
@@ -348,17 +352,17 @@ export const Navbar = () => {
                                 </Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={ADMIN_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A] text-sm" href={ADMIN_URL}>
                                     {t("account")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 text-[#8A8A8A]" href={FAQS_URL}>
+                                  <MyLink customClass="py-1 text-[#8A8A8A] text-sm" href={FAQS_URL}>
                                     {t("help")}
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
+                                  <div className="py-1 text-sm text-[#8A8A8A]" onClick={() => logout()}>
                                     {t("leave")}
                                   </div>
                                 </Menu.Item>

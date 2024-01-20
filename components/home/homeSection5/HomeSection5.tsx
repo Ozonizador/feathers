@@ -10,9 +10,9 @@ const HomeSection5 = () => {
   const { t } = useTranslation("index");
   return (
     <section className="max-width" id="howTo">
-      <div className="pt-24 lg:pb-20 xl:pb-36">
-        <h2 className="mb-12 text-3xl font-black lg:text-5xl">{t("section.how_it_works.title")}</h2>
-        <div className="mb-24 grid gap-10 lg:grid-cols-3">
+      <div className="py-24">
+        <h2 className="mb-12 text-3xl font-black lg:text-4xl">{t("section.how_it_works.title")}</h2>
+        <div className="mb-16 grid gap-10 lg:grid-cols-3">
           <HomeSection5Cards
             img="/images/homeSection2-3.svg"
             heading={t("section.how_it_works.search.title")}
@@ -32,7 +32,7 @@ const HomeSection5 = () => {
         <span className="hidden justify-center lg:flex">
           <Link
             href={PROCURAR_ADVERT_URL}
-            className="flex items-center justify-center rounded-xl bg-primary-500 p-5 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
+            className="flex items-center justify-center rounded-xl bg-primary-500 p-4 text-white duration-200 ease-in hover:flex hover:text-white hover:drop-shadow-xl"
           >
             {t("section.how_it_works.find")}{" "}
             <span className="px-1">
