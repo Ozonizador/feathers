@@ -12,11 +12,11 @@ interface FeatherDatePickerProps {
   onChange: (date: any) => void;
   className?: string;
   minDate?: Date;
-  children?: any;
+  icon?: any;
   placeholder?: string;
 }
 
-const FeatherDatePicker = ({ date, onChange, className, minDate, children, placeholder }: FeatherDatePickerProps) => {
+const FeatherDatePicker = ({ date, onChange, className, minDate, icon, placeholder }: FeatherDatePickerProps) => {
   const [data, setData] = useState<Date | undefined>(undefined)
 
 
@@ -39,7 +39,7 @@ const FeatherDatePicker = ({ date, onChange, className, minDate, children, place
         )}
         minDate={minDate}
       />
-      {children}
+      {icon}
     </div>
   );
 };

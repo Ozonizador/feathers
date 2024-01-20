@@ -133,7 +133,7 @@ export const SearchInputField = () => {
                 });
               }}
               minDate={new Date()}
-              children={<FaArrowAltCircleRight className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
+              icon={<FaArrowAltCircleRight className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
             />
           </div>
           <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
@@ -143,7 +143,7 @@ export const SearchInputField = () => {
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
               minDate={checkMonthsInAdvance(startDate)}
-              children={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
+              icon={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
             />
           </div>
         </div>
