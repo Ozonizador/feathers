@@ -101,12 +101,12 @@ const FormAnunciarPhotos = () => {
   return (
     <section className="container mx-auto my-10 w-full lg:w-5/6">
       <div className="w-full">
-        <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left lg:text-2xl">
+        <div className="mb-4 block text-center text-xl  font-bold text-gray-700 lg:text-left  ">
           <Trans i18nKey="advertisements:add_advert.photos_title" components={{ 1: <br /> }} />
         </div>
         <section className="flex flex-col">
           <div className="drop-container w-full pr-2" onDragOver={(event) => event.preventDefault()}>
-            <h2 className="text-bold text-xl pb-2">{t("advertisements:cover")}</h2>
+            <h2 className="text-bold pb-2 text-lg">{t("advertisements:cover")}</h2>
             {coverImages.length == 0 && (
               <div className="mt-5 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-24">
                 <div className="space-y-1 text-center">
@@ -128,7 +128,8 @@ const FormAnunciarPhotos = () => {
                       </svg>
 
                       <p className="px-2 text-base text-neutral-600">
-                        {t("advertisements:add_advert.add_photo")} <span className="text-blue-500">{t("advertisements:zones:main")}</span>
+                        {t("advertisements:add_advert.add_photo")}{" "}
+                        <span className="text-blue-500">{t("advertisements:zones:main")}</span>
                       </p>
                     </label>
                     <input
@@ -162,7 +163,7 @@ const FormAnunciarPhotos = () => {
             ))}
           </div>
           <div className="drop-container" onDragOver={(event) => event.preventDefault()}>
-            <h2 className="mt-5 mb-2 text-bold text-lg">{t("advertisements:zones:other")}</h2>
+            <h2 className="text-bold mb-2 mt-5 text-lg">{t("advertisements:zones:other")}</h2>
             <div className="flex flex-wrap">
               {otherImages.map((file, index) => (
                 <div className="image-box relative h-28 pr-2 pt-2 lg:h-28" key={index}>
@@ -188,7 +189,7 @@ const FormAnunciarPhotos = () => {
                     <div className="flex text-terciary-700">
                       <label htmlFor="test" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
                         <svg
-                          className="mx-auto h-20 w-20 max-sm:h-10 max-sm:w-10 text-gray-400"
+                          className="mx-auto h-20 w-20 text-gray-400 max-sm:h-10 max-sm:w-10"
                           stroke="currentColor"
                           fill="none"
                           viewBox="0 0 48 48"
@@ -202,8 +203,9 @@ const FormAnunciarPhotos = () => {
                           />
                         </svg>
 
-                        <p className="px-2 text-base text-neutral-600 flex flex-col">
-                          {t("advertisements:add_advert.add_photo")} <span className="text-blue-500">{t("advertisements:zones:other")}</span>
+                        <p className="flex flex-col px-2 text-base text-neutral-600">
+                          {t("advertisements:add_advert.add_photo")}{" "}
+                          <span className="text-blue-500">{t("advertisements:zones:other")}</span>
                         </p>
                       </label>
                       <input
@@ -221,13 +223,13 @@ const FormAnunciarPhotos = () => {
           </div>
         </section>
       </div>
-      <div className="mt-10 flex flex-col items-center justify-center gap-5 lg:px-32 xl:flex-row">
-        <div className="w-48">
+      <div className="mt-[50px] flex flex-col items-center gap-5 xl:flex-row">
+        <div className="w-32">
           <Button onClick={decrementStep} type="button">
             {t("go_back")}
           </Button>
         </div>
-        <div className="w-48">
+        <div className="w-32">
           <Button onClick={nextStep} type="button">
             {t("next_step")} &#8594;
           </Button>

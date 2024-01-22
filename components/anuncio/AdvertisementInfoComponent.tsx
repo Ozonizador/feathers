@@ -21,7 +21,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
     <>
       <div className="my-5 flex w-full flex-col gap-6">
         <div>
-          <label className="mb-4 block text-2xl font-bold text-gray-700">{t("add_advert.title_advert")}</label>
+          <label className="mb-4 block text-xl font-bold text-gray-700">{t("add_advert.title_advert")}</label>
           <Controller
             name={ADVERTISEMENT_PROPERTIES.TITLE}
             rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
@@ -39,16 +39,16 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         </div>
         {showInternalName && (
           <div>
-            <label className="mb-4 block text-2xl font-bold text-gray-700">{t("add_advert.internal_name")}</label>
+            <label className="mb-4 block text-xl font-bold text-gray-700">{t("add_advert.internal_name")}</label>
             <Input maxLength={50} disabled value={advertisement.slug} />
           </div>
         )}
 
         <div>
-          <label htmlFor="about" className="text-2xl font-bold text-gray-700">
+          <label htmlFor="about" className="text-xl font-bold text-gray-700">
             {t("add_advert.description_title")}
           </label>
-          <div className="mt-4">
+          <div className="mt-4 text-sm">
             <Controller
               name={ADVERTISEMENT_PROPERTIES.DESCRIPTION}
               control={control}
@@ -58,7 +58,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
                   <textarea
                     rows={5}
                     className={classNames(
-                      "mt-1 block w-full rounded-md border focus:border-primary-500 focus:outline-none focus:ring-0 border-solid border-terciary-500 bg-white px-2 py-3 shadow-sm",
+                      "mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3 text-sm shadow-sm focus:border-primary-500 focus:outline-none focus:ring-0",
                       { "border-red-700": error }
                     )}
                     placeholder={t("add_advert.description_placeholder")}
@@ -74,7 +74,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         </div>
 
         <div className="flex flex-row lg:items-center">
-          <p className="my-auto text-base font-bold lg:w-44">{t("add_advert.owner_lives_property_title")}</p>
+          <p className="my-auto text-sm font-bold lg:w-44">{t("add_advert.owner_lives_property_title")}</p>
           <Controller
             name={ADVERTISEMENT_PROPERTIES.HOST_LIVES_PROPERTY}
             control={control}
@@ -85,7 +85,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         </div>
 
         <div className="flex flex-row lg:items-center">
-          <p className="my-auto text-base font-bold lg:w-44">{t("add_advert.room_count")}</p>
+          <p className="my-auto text-sm font-bold lg:w-44">{t("add_advert.room_count")}</p>
           <div className="w-1/4">
             <Controller
               name={ADVERTISEMENT_PROPERTIES.ROOMS}
@@ -98,10 +98,10 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row lg:items-center">
-          <p className="my-auto text-base font-bold lg:w-44">{t("add_advert.owner_type")}</p>
+          <p className="my-auto text-sm font-bold lg:w-44">{t("add_advert.owner_type")}</p>
 
           <div className="flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 md:ml-7 lg:mb-0 lg:ml-3">
-            <div className="mr-16 text-base">{t("add_advert.private_owner")}</div>
+            <div className="mr-16 text-sm">{t("add_advert.private_owner")}</div>
             <div className="flex h-5 items-center">
               <Controller
                 name={ADVERTISEMENT_PROPERTIES.TYPE_HOST}
@@ -119,7 +119,7 @@ const AdvertisementInfoComponent = ({ advertisement, showInternalName = false }:
           </div>
 
           <div className="ml-0 flex w-60 flex-row items-center justify-between rounded-lg border border-terciary-500 px-3 py-3 lg:ml-6">
-            <div className="mr-16 text-base">{t("add_advert.profissional_owner")}</div>
+            <div className="mr-16 text-sm">{t("add_advert.profissional_owner")}</div>
             <div className="flex h-5 items-center">
               <Controller
                 control={control}

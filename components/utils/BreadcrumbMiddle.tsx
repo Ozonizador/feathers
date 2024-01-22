@@ -9,19 +9,19 @@ interface BreadcrumbMiddleProps {
 const BreadcrumbMiddle = ({ title, icon }: BreadcrumbMiddleProps) => {
   return (
     <>
-      <div className="mx-auto mb-6 mt-12 flex w-5/6 flex-col items-center justify-center align-middle">
+      <div className="mx-auto my-6 flex w-4/5 flex-col items-center justify-center align-middle">
         <div className="flex w-full flex-row items-center justify-center gap-4 align-middle">
           <div className="w-full">
             <hr />
           </div>
           <div>
-            <Image className="" src={icon} alt="breadcrumb-image" height={145} width={145} />
+            <Image className="" src={icon} alt="breadcrumb-image" height={135} width={135} />
           </div>
           <div className="w-full">
             <hr />
           </div>
         </div>
-        <div className="mt-3 text-xl font-bold text-primary-500">{title}</div>
+        <div className="text-md mt-3 font-bold text-primary-500">{title}</div>
       </div>
     </>
   );

@@ -27,7 +27,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">
+          <div className="text-start text-lg font-bold">
             {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.super_flex") })}
           </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
@@ -51,7 +51,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">
+          <div className="text-start text-lg font-bold">
             {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.flex") })}
           </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
@@ -75,7 +75,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">
+          <div className="text-start text-lg font-bold">
             {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.moderate") })}
           </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">
@@ -99,7 +99,7 @@ const HostFlexTypeComponent = ({ advertisement, onChange }: HostFlexTypeComponen
         </div>
 
         <div className="flex flex-col">
-          <div className="text-start text-xl font-bold">
+          <div className="text-start text-lg font-bold">
             {t("advertisements:host_type.compose_host", { type: t("advertisements:host_type.rigid") })}
           </div>
           <div className="mt-2 text-start text-sm text-secondary-300 lg:text-base">

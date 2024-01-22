@@ -23,20 +23,18 @@ const FormTipoHost = () => {
 
   return (
     <section className="container mx-auto my-10 w-5/6">
-      <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
-        {t("advertisements:add_advert.type_host_title")}
-      </div>
+      <div className="my-10 text-xl font-bold text-gray-700">{t("advertisements:add_advert.type_host_title")}</div>
 
       <HostFlexTypeComponent advertisement={advertisement} onChange={changeTypeProperty} />
 
       <div className="mt-10 w-full">
         <div className="flex flex-col items-center gap-2 xl:flex-row">
-          <div className="w-48">
+          <div className="w-32">
             <Button onClick={decrementStep} type="button">
               {t("go_back")}
             </Button>
           </div>
-          <div className="w-48">
+          <div className="w-32">
             <Button onClick={nextStep} type="button">
               {t("next_step", { interpolation: { escapeValue: false } })}
             </Button>

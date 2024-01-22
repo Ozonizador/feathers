@@ -16,9 +16,9 @@ const Breadcrumbs = ({ icon, paths }: BreadcrumbsProps) => {
   const { t } = useTranslation();
   const numberUrls = paths.length;
   return (
-    <div className="mx-auto my-20 mt-24 flex items-center px-5 align-middle lg:my-20 lg:w-full lg:px-28">
-      <div>{icon && <Image src={icon} alt="Favoritos" height={55} width={55} />}</div>
-      <div className="ml-3 flex gap-2 lg:ml-4 lg:text-xl">
+    <div className="mx-auto my-16 flex items-center px-5 align-middle lg:w-full lg:px-32">
+      <div>{icon && <Image src={icon} alt="Favoritos" height={50} width={50} />}</div>
+      <div className="lg:text-md ml-3 flex gap-2 lg:ml-4">
         {paths &&
           paths.map((path, index) => {
             const mainInfo = path.url ? (

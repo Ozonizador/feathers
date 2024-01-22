@@ -11,7 +11,7 @@ interface ButtonProps {
   disabled?: boolean;
   variant?: "primary" | "facebook" | "gmail" | "informative" | "disabled";
   rounded?: "xl" | "full" | "none";
-  padding?: "sm" | "md" | "lg";
+  padding?: "sm" | "md" | "lg" | "custom";
   [x: string]: any;
 }
 
@@ -27,7 +27,7 @@ const buttonProps = variantProps({
       gmail: tw`bg-socials-gmail`,
       primary: tw`bg-primary-500 text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg`,
       informative: tw`text-color border border-black`,
-      disabled: tw`bg-primary-300 text-white shadow-md`
+      disabled: tw`bg-primary-300 text-white shadow-md`,
     },
     rounded: {
       none: tw`rounded-none`,
@@ -39,6 +39,7 @@ const buttonProps = variantProps({
       false: tw`cursor-pointer`,
     },
     padding: {
+      custom: tw`px-3 py-3`,
       sm: tw`px-3 py-2`,
       md: tw`px-4 py-3`,
       lg: tw`px-5 py-4`,
@@ -53,7 +54,7 @@ const buttonProps = variantProps({
     size: "full",
     rounded: "none",
     disabled: false,
-    padding: "sm",
+    padding: "custom",
   },
 });
 
@@ -64,7 +65,7 @@ const Button = ({
   disabled,
   variant = "primary",
   rounded = "xl",
-  padding = "sm",
+  padding = "custom",
   type,
 }: ButtonProps): JSX.Element => {
   return (

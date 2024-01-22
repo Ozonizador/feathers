@@ -95,10 +95,10 @@ export const SearchInputField = () => {
       <div className="flex-row justify-center lg:mt-7 lg:flex">
         <div className="relative my-2 text-sm lg:mx-2">
           <div className="relative">
-          <FaHouse  className="absolute left-3 top-1/2 transform -translate-y-1/2"/>
+            <FaHouse className="absolute left-3 top-1/2 -translate-y-1/2 transform" />
             <input
               type="input"
-              className="bg-terciary-50 h-14 w-full rounded-xl border-2 border-primary-500 p-0 px-2 focus:border-primary-500 focus:outline-none lg:w-72 pl-10"
+              className="bg-terciary-50 h-14 w-full rounded-xl border-2 border-primary-500 p-0 px-2 pl-10 focus:border-primary-500 focus:outline-none lg:w-72"
               onChange={(e) => setAddressByText(e.target.value)}
               placeholder={placeholderFind}
               value={location}
@@ -124,7 +124,7 @@ export const SearchInputField = () => {
             <FeatherDatePicker
               placeholder={t("advertisements:date_in")}
               date={startDate}
-              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52 pl-10"
+              className="bg-terciary-50 h-14 w-full rounded-xl border-none pl-10 text-sm lg:h-full lg:w-52"
               onChange={(date) => {
                 setSearch({
                   ...userSearch,
@@ -133,17 +133,17 @@ export const SearchInputField = () => {
                 });
               }}
               minDate={new Date()}
-              icon={<FaArrowAltCircleRight className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
+              icon={<FaArrowAltCircleRight className="absolute left-3 top-1/2 -translate-y-1/2 transform" />}
             />
           </div>
           <div className="date-parent z-50 my-2 w-1/2 rounded-xl border-2 border-primary-500 lg:mx-2">
             <FeatherDatePicker
-            placeholder={t("advertisements:date_out")}
-              className="bg-terciary-50 h-full w-full rounded-xl border-none text-sm lg:w-52 pl-10"
+              placeholder={t("advertisements:date_out")}
+              className="bg-terciary-50 h-14 w-full rounded-xl border-none pl-10 text-sm lg:h-full lg:w-52"
               date={endDate}
               onChange={(date) => setSearchInfoProperty(SearchFields.END_DATE, date)}
               minDate={checkMonthsInAdvance(startDate)}
-              icon={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 transform -translate-y-1/2"/>}
+              icon={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 -translate-y-1/2 transform" />}
             />
           </div>
         </div>

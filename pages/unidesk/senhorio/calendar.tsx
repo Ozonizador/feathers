@@ -150,8 +150,8 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
           <div>
-            <h2 className="text-2xl font-black text-black">{t("admin:calendar.calendar")}</h2>
-            <h4 className="text-xl text-primary-500">{t("admin:calendar.description_update")}</h4>
+            <h2 className="text-xl font-black text-black">{t("admin:calendar.calendar")}</h2>
+            <h4 className="text-lg text-primary-500">{t("admin:calendar.description_update")}</h4>
             <br />
             <div>
               <PopoverSelect
@@ -163,7 +163,7 @@ const CalendarPage = ({ advertisements }: CalendarPageProps) => {
             </div>
 
             <div className="flex items-center pt-4">
-              <h4 className="pr-4 text-xl">{t("admin:calendar.show_reservation_request")}</h4>
+              <h4 className="text-md pr-4">{t("admin:calendar.show_reservation_request")}</h4>
               <Checkbox
                 name={"calendar"}
                 checked={showRequested as boolean}
@@ -239,9 +239,9 @@ const AdvertisementPropertiesComponent = ({
   return (
     <div className="mt-5 flex flex-col gap-4">
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
-        <label className="mb-2 mt-2 block text-base lg:mb-0">{t("admin:calendar.minimum_stay")}</label>
+        <label className="text-md mb-2 mt-2 block lg:mb-0">{t("admin:calendar.minimum_stay")}</label>
         <select
-          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
+          className="font-md h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
           value={minimumStay}
           onChange={(e) => setMinimumStay(Number(e.target.value))}
         >
@@ -254,9 +254,9 @@ const AdvertisementPropertiesComponent = ({
       </div>
 
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center lg:align-middle">
-        <label className="mb-2 mt-2 block text-base lg:mb-0">{t("admin:calendar.advance_time")}</label>
+        <label className="text-md mb-2 mt-2 block lg:mb-0">{t("admin:calendar.advance_time")}</label>
         <select
-          className="h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
+          className="text-md h-12 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 lg:ml-4 lg:w-60"
           value={monthsInAdvance}
           onChange={(e) => setMonthsInAdvance(Number(e.target.value))}
         >
@@ -275,9 +275,9 @@ const AdvertisementPropertiesComponent = ({
       </div>
 
       <div className="mb-5 mt-4 flex flex-col gap-4">
-        <div className="mt-4 text-2xl font-bold">{t("admin:calendar.discounts")}</div>
+        <div className="mt-4 text-xl font-bold">{t("admin:calendar.discounts")}</div>
         <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
-          <label className="block text-base lg:mb-0">{t("admin:calendar.trimester_discount")}</label>
+          <label className="text-md block lg:mb-0">{t("admin:calendar.trimester_discount")}</label>
           <div className="w-full lg:ml-12 lg:w-20">
             <Input
               name={""}
@@ -291,7 +291,7 @@ const AdvertisementPropertiesComponent = ({
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-center lg:align-middle">
-          <label className="block text-base lg:mb-0">{t("admin:calendar.semester_discount")}</label>
+          <label className="text-md block lg:mb-0">{t("admin:calendar.semester_discount")}</label>
           <div className="w-full lg:ml-12 lg:w-20">
             <Input
               name={""}

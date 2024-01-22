@@ -146,14 +146,25 @@ export const Navbar = () => {
 
             <div className="mx-auto my-auto hidden lg:block xl:px-[15px]">
               <div className="nav_text flex gap-1">
-                <div className="my-auto flex px-[15px] align-middle">
-                  <div
+                <div className="my-auto flex  align-middle">
+                  {/* <div
                     className={classNames({
                       "flex border-b-4 border-primary-500 pb-2 font-black":
                         checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
                     })}
                   >
                     <Link href="/" className="nav_home flex text-sm">
+                      {t("navbar:home")}
+                    </Link>
+                  </div> */}
+                  <div className="nav_home my-auto px-2 text-sm xl:px-[15px]">
+                    <Link
+                      href="/"
+                      className={classNames({
+                        "flex border-b-4 border-primary-500 pb-2 font-black":
+                          checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) === true,
+                      })}
+                    >
                       {t("navbar:home")}
                     </Link>
                   </div>
@@ -240,7 +251,7 @@ export const Navbar = () => {
                 {!user && (
                   <div className="my-auto flex gap-2">
                     <Link href={REGISTER_URL} className="p-0">
-                      <div className="flex flex-col h-full justify-center rounded border-2 border-primary-500 px-6 py-2 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                      <div className="flex h-full flex-col justify-center rounded border-2 border-primary-500 px-6 py-2 text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                         {t("register")}
                       </div>
                     </Link>

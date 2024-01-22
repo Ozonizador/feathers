@@ -35,7 +35,7 @@ export default function Input({
   return (
     <div>
       {name && <label htmlFor={name}>{labelText}</label>}
-      <div className="relative">
+      <div className="relative text-sm">
         {isDropdown ? (
           <select
             placeholder={placeholder}

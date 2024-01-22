@@ -225,6 +225,12 @@ img.cursor-pointer.w-1\/4{
 .testimonial-block > div >div{
   bottom: 2.25rem !important;
 }
+.fc-toolbar-title{
+  font-size: large !important;
+}
+.font-md option{
+  font-size: medium !important;
+}
 @media only screen and (min-width: 1023px) and (max-width: 1200px)  {
   .img_div{
     width: 10rem
@@ -263,6 +269,9 @@ img.cursor-pointer.w-1\/4{
 .table-container {
   max-width: 100%;
   overflow-x: auto;
+}
+.left-unidesk{
+  width: 27% !important;
 }
 .reservas-tab {
   @apply my-2 border-t-0 border-transparent text-lg font-medium uppercase leading-tight hover:border-transparent hover:bg-gray-100 focus:border-transparent;

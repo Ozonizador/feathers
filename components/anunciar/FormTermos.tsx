@@ -38,7 +38,7 @@ const FormTermos = () => {
   const checkSlugExists = async (slug: string) => {
     const { data, error, count } = await supabase
       .from<"advertisements", Advertisement>(ADVERTISEMENT_TABLE_NAME)
-      .select('*', { count: 'exact', head: true })
+      .select("*", { count: "exact", head: true })
       .eq(ADVERTISEMENT_PROPERTIES.SLUG, slug);
 
     return count;
@@ -54,7 +54,7 @@ const FormTermos = () => {
       debugger;
       if (!isValid) return;
 
-      const count = await checkSlugExists(advertisement.title)
+      const count = await checkSlugExists(advertisement.title);
 
       const slugString = `${advertisement.title}${count == 0 ? "" : ` ${count}`}`;
 
@@ -105,7 +105,7 @@ const FormTermos = () => {
     <>
       {!saving ? (
         <form className="container mx-auto flex flex-col lg:w-5/6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="my-10 text-xl font-bold text-gray-700 lg:text-2xl">
+          <div className="my-10 mb-1 text-xl font-bold text-black">
             {t("advertisements:add_advert.final_step_title")}
           </div>
 
@@ -120,7 +120,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-xl capitalize">{t("terms_and_conditions")}</div>
+                <div className="text-md capitalize">{t("terms_and_conditions")}</div>
               </div>
             </div>
 
@@ -135,7 +135,7 @@ const FormTermos = () => {
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
 
-                <div className="text-xl capitalize">{t("privacy_policy")}</div>
+                <div className="text-md capitalize">{t("privacy_policy")}</div>
               </div>
             </div>
 
@@ -149,7 +149,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-xl">{t("advertisements:add_advert.calendar_check_updated")}</div>{" "}
+                <div className="text-md">{t("advertisements:add_advert.calendar_check_updated")}</div>{" "}
               </div>
             </div>
             <div className="flex flex-row items-center align-middle">
@@ -162,13 +162,13 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-xl">{t("advertisements:add_advert.confirm_valid_info")}</div>
+                <div className="text-md">{t("advertisements:add_advert.confirm_valid_info")}</div>
               </div>
             </div>
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-5 pt-5 lg:flex-row xl:flex-row">
-            <div className="w-48">
+            <div className="w-32">
               <Button onClick={decrementStep} type="button">
                 {t("go_back")}
               </Button>

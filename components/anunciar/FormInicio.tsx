@@ -79,12 +79,12 @@ const FormInicio = () => {
             <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
           </section>
           <div className="flex flex-col items-center gap-5 xl:flex-row">
-            <div className="w-48 lg:w-1/3">
+            <div className="w-32 ">
               <Button onClick={checkPossibilites} type="button">
                 {t("update_map")}
               </Button>
             </div>
-            <div className="w-48 lg:w-1/3">
+            <div className="w-32 ">
               <Button type="button" onClick={methods.handleSubmit(nextStep)}>
                 {t("next_step")} &#8594;
               </Button>

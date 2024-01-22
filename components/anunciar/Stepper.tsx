@@ -8,19 +8,20 @@ export default function Stepper() {
   const { t } = useTranslation();
   const currentStep = useCurrentStep();
 
-  const steps = Array.from({ length: 9 }, (_, index) => index +1);
+  const steps = Array.from({ length: 9 }, (_, index) => index + 1);
   function chunkArray(array: number[], size: number) {
-    return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
-      array.slice(i * size, i * size + size)
-    );
+    return Array.from({ length: Math.ceil(array.length / size) }, (v, i) => array.slice(i * size, i * size + size));
   }
-  const chunkSteps = Array.from({ length: 8 }, (_, index) => index +1);
-  const chunk = chunkArray(chunkSteps, 2)
-  let chunkIndex
-  currentStep < 2 ? chunkIndex = 0 : 
-  (currentStep >= 2 && currentStep < 4) ? chunkIndex = 1 : 
-  (currentStep >= 4 && currentStep < 6) ? chunkIndex = 2 : 
-  chunkIndex = 3;
+  const chunkSteps = Array.from({ length: 8 }, (_, index) => index + 1);
+  const chunk = chunkArray(chunkSteps, 2);
+  let chunkIndex;
+  currentStep < 2
+    ? (chunkIndex = 0)
+    : currentStep >= 2 && currentStep < 4
+    ? (chunkIndex = 1)
+    : currentStep >= 4 && currentStep < 6
+    ? (chunkIndex = 2)
+    : (chunkIndex = 3);
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function Stepper() {
             {steps.map((stepNumber) => (
               <React.Fragment key={stepNumber}>
                 {/* PASSO */}
-                <StepIcon stepNumber={stepNumber} text={t("advertisements:add_advert.step", { count: stepNumber  })} />
+                <StepIcon stepNumber={stepNumber} text={t("advertisements:add_advert.step", { count: stepNumber })} />
                 <div
                   className={classNames("flex-auto border-t-2", {
                     "border-terciary-500": currentStep < stepNumber,
@@ -52,7 +53,7 @@ export default function Stepper() {
             {chunk[chunkIndex].map((stepNumber) => (
               <React.Fragment key={stepNumber}>
                 {/* PASSO */}
-                <StepIcon stepNumber={stepNumber} text={t("advertisements:add_advert.step", { count: stepNumber  })} />
+                <StepIcon stepNumber={stepNumber} text={t("advertisements:add_advert.step", { count: stepNumber })} />
                 <div
                   className={classNames("flex-auto border-t-2", {
                     "border-terciary-500": currentStep < stepNumber,
@@ -62,16 +63,12 @@ export default function Stepper() {
               </React.Fragment>
             ))}
             <MdKeyboardDoubleArrowRight />
-            <div
-                  className="flex-auto border-t-2 border-terciary-500"
-            ></div>
-              <React.Fragment >
-                {/* PASSO */}
-                <StepIcon stepNumber={10} text={t("advertisements:add_advert.step", { count: 10  })} />
-                <div
-                 className="flex-auto border-t-2 border-terciary-500"
-                ></div>
-              </React.Fragment>
+            <div className="flex-auto border-t-2 border-terciary-500"></div>
+            <React.Fragment>
+              {/* PASSO */}
+              <StepIcon stepNumber={10} text={t("advertisements:add_advert.step", { count: 10 })} />
+              <div className="flex-auto border-t-2 border-terciary-500"></div>
+            </React.Fragment>
           </div>
         </div>
       </div>
@@ -98,14 +95,17 @@ const StepIcon = ({ stepNumber, text }: StepIconProps) => {
         className={classNames("h-10 w-10 rounded-full py-2 text-center", {
           "bg-black": stepNumber === 10,
           "bg-primary-500": currentStep >= stepNumber,
-          "bg-terciary-200": stepNumber > currentStep && stepNumber < 10
+          "bg-terciary-200": stepNumber > currentStep && stepNumber < 10,
         })}
       >
         &#10004;
       </div>
-      <div className={`absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase ${
-       currentStep >= stepNumber ||stepNumber === 10 ? "text-black" : "text-terciary-200"}`}>
-        {stepNumber===10?"STEP 9":text}
+      <div
+        className={`absolute top-0 -ml-10 mt-14 w-32 text-center text-xs font-medium uppercase ${
+          currentStep >= stepNumber || stepNumber === 10 ? "text-black" : "text-terciary-200"
+        }`}
+      >
+        {stepNumber === 10 ? "STEP 9" : text}
       </div>
     </div>
   );

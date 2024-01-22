@@ -15,7 +15,7 @@ import IconAnuncios from "../../../public/images/icon-pg37-1.svg";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { UNIDESK_URL } from "../../../models/paths";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation, i18n} from "next-i18next";
+import { useTranslation, i18n } from "next-i18next";
 
 const paths = [
   { url: UNIDESK_URL, label: "uni-desk" },
@@ -45,12 +45,11 @@ const Anuncios = () => {
     getUserAdvertisements();
   };
 
-  const now = new Date().toLocaleString(i18n?.language, {dateStyle: "full"});
+  const now = new Date().toLocaleString(i18n?.language, { dateStyle: "full" });
 
   const arr = now.split(" ");
   for (var i = 0; i < arr.length; i++) {
-    if(!(arr[i].charAt(0) == "d" && arr[i].charAt(1) == "e" && arr[i].charAt(3) != " " ))
-    {
+    if (!(arr[i].charAt(0) == "d" && arr[i].charAt(1) == "e" && arr[i].charAt(3) != " ")) {
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
     }
   }
@@ -66,10 +65,8 @@ const Anuncios = () => {
           <MenuSenhorio activeSection="adverts" activeUrl="main_panel" />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
-          <div className="text-3xl font-bold pl-5">
-            {t("date", {date: str2})}
-          </div>
-          <div className="ml-0 p-5">
+          <div className=" text-xl font-bold">{t("date", { date: str2 })}</div>
+          <div className="ml-0 ">
             <div className="my-4">{t("admin:reviews.my_adverts")}</div>
             <div className="flex flex-col gap-4">
               {advertisements.map((advertisement) => {

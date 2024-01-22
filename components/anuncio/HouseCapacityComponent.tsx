@@ -13,7 +13,7 @@ interface HouseCapacityComponentProps {
 const HouseCapacityComponent = ({ advertisement }: HouseCapacityComponentProps) => {
   const { t } = useTranslation("advertisements");
   return (
-    <div className="my-5 flex flex-col gap-5 px-2">
+    <div className="my-5 flex flex-col gap-5 px-2 text-sm">
       <div className="flex gap-2">
         <MdPeopleOutline size={32} />
         <div className="my-auto flex w-3/12 lg:w-2/12">

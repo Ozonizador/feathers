@@ -102,7 +102,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 text-sm">
         <div className="flex flex-col md:flex-row md:gap-2 lg:items-center">
           <div className="md:w-80">
             <p className="items-start text-base font-bold">{t("common:monthly_rent")}</p>
@@ -152,7 +152,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
         <section>
           <div>
-            <div className="flex items-center gap-2 pb-2">
+            <div className="my-5 flex items-center gap-2 pb-2">
               <p className="text-xl font-bold">{t("admin:unidesk.student.expenses")}</p>
               <p className="text-sm text-gray-400">{"(Agua, Luz, Internet, Gás)"}</p>
             </div>
