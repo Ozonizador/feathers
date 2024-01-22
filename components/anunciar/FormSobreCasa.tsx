@@ -42,12 +42,12 @@ const FormSobreCasa = () => {
         <AdvertisementInfoComponent advertisement={advertisement} />
 
         <div className="mt-2 flex flex-col items-center gap-5 xl:flex-row">
-          <div className="w-48">
+          <div className="w-32">
             <Button onClick={decrementStep} type="button">
               {t("go_back")}
             </Button>
           </div>
-          <div className="w-48">
+          <div className="w-32">
             <Button onClick={methods.handleSubmit(nextStep)} type="button">
               {t("next_step")} &#8594;
             </Button>

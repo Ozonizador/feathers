@@ -74,7 +74,7 @@ const CaixaEntrada = () => {
   return (
     <div className="h-full rounded-xl border lg:border-none">
       <>
-        <div className="my-20 rounded-2xl lg:my-20 lg:w-full ">
+        <div className="my-16 rounded-2xl lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
         <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
@@ -174,7 +174,7 @@ const CaixaExtradaContent = () => {
     setSearchLocationByProperty("monthRent", advertisement.month_rent);
     setSearchLocationByProperty("extra_per_host", advertisement.extra_per_host);
     setSearchLocationByProperty("semester_discount", advertisement.semester_discount);
-    setSearchLocationByProperty("guest_number", guest_number)
+    setSearchLocationByProperty("guest_number", guest_number);
     setSearchLocationByProperty("trimester_discount", advertisement.trimester_discount);
     setSearchLocationByProperty("guarantee_value", advertisement.guarantee_value);
     setAdvertisement(advertisement);
@@ -280,7 +280,7 @@ const CaixaExtradaContent = () => {
         {conversations && conversations.length > 0 && (
           <>
             <div className="flex h-20 w-full items-center justify-between border-b border-terciary-500 align-middle">
-              <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-white">{t("admin:messages")}</a>
+              <a className="ml-8 rounded-md bg-primary-500 px-6 py-3 text-sm text-white">{t("admin:messages")}</a>
 
               <div className="mr-8 flex w-full items-center justify-end align-middle"></div>
               {currentConversation && <div className="w-1/3 border-l border-terciary-500 p-2"></div>}
@@ -330,12 +330,12 @@ const CaixaExtradaContent = () => {
                   <div className="popup w-[50%] border-l border-terciary-500 p-2">
                     <>
                       <div className="flex">
-                        <div className="text-xl font-bold text-primary-500">{t("reservation_details")}</div>
+                        <div className="text-md font-bold text-primary-500">{t("reservation_details")}</div>
                         <ImCross className="my-auto ml-auto mr-2" onClick={clearConversation} />
                       </div>
                       <div className="p-2">
-                        <div className="popup_div my-4 flex flex-row gap-3">
-                          <div className="w-10">
+                        <div className="popup_div my-4 flex flex-col gap-3">
+                          <div className="mx-auto my-3 h-fit w-10">
                             <Avatar
                               img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
                               rounded={true}
@@ -452,7 +452,7 @@ const CaixaExtradaContent = () => {
                             )
                         }
 
-                        <div className="mx-auto mt-3 w-fit rounded-md bg-primary-500 px-4 py-2 text-center text-white">
+                        <div className="mx-auto mt-3 w-fit rounded-md bg-primary-500 px-4 py-2 text-center text-sm text-white">
                           {
                             // @ts-ignore
                             profile[0].id == currentConversation.host_id ? (
@@ -550,7 +550,7 @@ const CaixaExtradaContent = () => {
                       currentConversation.reservation.advertisement,
                       currentConversation.reservation.start_date,
                       currentConversation.reservation.end_date,
-                      currentConversation.reservation.number_guests,
+                      currentConversation.reservation.number_guests
                     )
                   }
                 >

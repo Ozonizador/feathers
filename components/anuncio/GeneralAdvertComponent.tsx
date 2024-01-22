@@ -37,9 +37,8 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
 
   return (
     <>
-      <>
-      </>
-      <div className="my-5 flex w-full flex-col justify-between lg:flex-row lg:gap-5">
+      <></>
+      <div className="my-5 flex w-full flex-col justify-between text-sm lg:flex-row lg:gap-5">
         {/* col left */}
         <div className="mt-2 flex w-full flex-col gap-2 lg:mt-0">
           <div>

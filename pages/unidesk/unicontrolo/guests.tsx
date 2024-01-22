@@ -29,17 +29,17 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
     <section className="">
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
 
-      <div className="lg:px-28 my-16 w-full">
+      <div className="my-16 w-full lg:px-32">
         <div className="my-20 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0  lg:my-20 lg:w-full lg:px-0">
-        <div className="flex flex-col lg:flex-row">
-            <div className="mx-auto w-full p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 ">
-            {/* mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 */}
-            <MenuSenhorio activeSection="uni-controlo" activeUrl="guests"/>
-          </div>  
+          <div className="flex flex-col lg:flex-row">
+            <div className="mx-auto w-full p-5 text-sm lg:ml-auto lg:w-[27%] lg:border-r lg:px-6 lg:py-12 ">
+              {/* mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 */}
+              <MenuSenhorio activeSection="uni-controlo" activeUrl="guests" />
+            </div>
 
-            <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5 pb-10">
+            <div className="flex flex-col gap-3 px-3 pb-10 pt-12 lg:mx-auto lg:ml-12 lg:w-4/5">
               <>
-                <div className="mb-7 text-3xl font-semibold">{t("guest", { count: 2 })}</div>
+                <div className="mb-7 text-2xl font-semibold">{t("guest", { count: 2 })}</div>
                 <div className="mb-5 font-bold">{t("admin:guests.current_guests")}</div>
                 {!stays || (stays.length === 0 && <div>{t("admin:guests.no_guests")}</div>)}
                 {stays &&
@@ -75,7 +75,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
 
   const host = session.user;
-  const date = new Date().toISOString().split('T')[0];
+  const date = new Date().toISOString().split("T")[0];
 
   const { data, error } = await supabase
     .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)

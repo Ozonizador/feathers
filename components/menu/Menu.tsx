@@ -29,7 +29,7 @@ const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps
 
   return (
     <div
-      className={classNames("cursor-pointer px-3 py-2", {
+      className={classNames("cursor-pointer px-3 py-2 text-sm", {
         "rounded bg-primary-500 font-black text-white": activeLink,
       })}
       onClick={() => goToUrl()}
@@ -59,15 +59,15 @@ const MenuGrouper = ({ title, children, selectedGroup, isCollapsed, url, default
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
   const goToUrl = (url: string) => {
-    router.push(url)  
+    router.push(url);
   };
 
   return (
     <div
       className={classNames("flex flex-col", {
-        "rounded-xl": selectedGroup || isOpen ,
+        "rounded-xl": selectedGroup || isOpen,
         "bg-primary-500 text-white": !isCollapsed && selectedGroup,
-        "bg-primary-300": isOpen
+        "bg-primary-300": isOpen,
       })}
     >
       <div

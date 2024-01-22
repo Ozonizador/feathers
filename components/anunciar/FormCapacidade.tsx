@@ -26,12 +26,12 @@ const FormCapacidade = () => {
         <HouseCapacityComponent advertisement={advertisement} />
 
         <div className="flex flex-col items-center gap-5 lg:flex-row xl:flex-row">
-          <div className="w-48">
+          <div className="w-32">
             <Button onClick={decrementStep} type="button">
               {t("go_back")}
             </Button>
           </div>
-          <div className="w-48">
+          <div className="w-32">
             <Button type="button" onClick={methods.handleSubmit(nextStep)}>
               {t("next_step")} &#8594;
             </Button>

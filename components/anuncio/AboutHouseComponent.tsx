@@ -71,10 +71,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>{t("advertisements:zones.general")}</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="ml-5 grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.general.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
+                  <div className="mt-5 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
                         {t(TypeAmenityLabel[comodity.type])}
@@ -97,10 +97,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>{t("advertisements:zones.bedroom")}</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="ml-5 grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bedroom.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
+                  <div className="mt-5 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
                         {t(TypeAmenityLabel[comodity.type])}
@@ -123,10 +123,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>{t("advertisements:zones.bathroom")}</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="ml-5 grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.bathroom.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
+                  <div className="mt-5 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
                         {t(TypeAmenityLabel[comodity.type])}
@@ -148,10 +148,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>{t("advertisements:zones.kitchen")}</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="ml-5 grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.kitchen.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
+                  <div className="mt-5 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
                         {t(TypeAmenityLabel[comodity.type])}
@@ -174,10 +174,10 @@ const AboutHouseComponent = ({ advertisement, onChange }: AboutHouseComponentPro
         <Accordion.Panel>
           <Accordion.Title>{t("advertisements:zones.exterior")}</Accordion.Title>
           <Accordion.Content>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            <div className="ml-5 grid grid-cols-1 gap-2 md:grid-cols-2">
               {AboutHouseCommodities.exterior.map((comodity, index) => {
                 return (
-                  <div className="mt-10 flex items-center gap-2 px-1" key={index}>
+                  <div className="mt-5 flex items-center gap-2 px-1" key={index}>
                     <div className="flex">
                       <p className="text-left text-sm font-bold lg:w-40 lg:text-base">
                         {t(TypeAmenityLabel[comodity.type])}

@@ -38,7 +38,7 @@ const PopoverSelect = ({ title, options, selectedOption, onClick, props }: Popov
                 ${open ? "" : "text-opacity-90"}
                 flex w-full justify-between rounded-xl border border-primary-300 p-3`}
             >
-              <span className="text-xl">{title}</span>
+              <span className="text-lg">{title}</span>
               <BsFillCaretDownFill
                 className={`${open ? "" : "text-opacity-70"}
                   my-auto ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}

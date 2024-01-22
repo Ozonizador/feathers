@@ -55,14 +55,14 @@ const Notifications = () => {
 
   return (
     <section>
-        <Breadcrumbs icon={iconfavorito} paths={paths} />
+      <Breadcrumbs icon={iconfavorito} paths={paths} />
+      <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
       <UnideskStructure>
         <UnideskStructure.Menu>
           <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />
         </UnideskStructure.Menu>
 
-        <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto lg:ml-12">
-        <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
+        <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto">
           <div className="container mx-auto w-full">
             <>
               {isLoading && (

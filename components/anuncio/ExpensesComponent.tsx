@@ -26,15 +26,15 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
   return (
     <>
       {containsExpenses() && (
-        <div className="relative mb-2 text-center">
+        <div className="relative my-5 text-center">
           <div
-            className="flex items-center justify-center gap-2 align-middle md:mt-[18px] mt-0"
+            className="mt-0 flex items-center justify-center gap-2 align-middle md:mt-[18px]"
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}
           >
             <div className="group relative flex items-center">
-              <span className="md:text-[20px] text-[16px]">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
-              <BiInfoCircle className="ml-2"/>
+              <span className="text-[16px] md:text-[18px]">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
+              <BiInfoCircle className="ml-2" />
             </div>
           </div>
           <div className={`transition-opacity duration-700 ease-in ${popupState ? "opacity-100" : "opacity-0"}`}>
@@ -69,10 +69,12 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
     return t("advertisements:not_included");
   };
   return (
-    <div className={`absolute xl:right-[11px] lg:right-[-45px] lg:bottom-0 md:right-[7px] md:bottom-[60%] sm:right-[100px] right-[-20px]  z-50 rounded-lg bg-white group-hover:block md:scale-75 2xl:scale-90`}>
+    <div
+      className={`absolute right-[-20px] z-50 rounded-lg bg-white group-hover:block sm:right-[100px] md:bottom-[60%]  md:right-[7px] md:scale-75 lg:bottom-0 lg:right-[-45px] xl:right-[11px] 2xl:scale-90`}
+    >
       <div className="my-2 flex flex-row gap-2 rounded-lg  shadow-2xl md:p-1">
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
-          <FaRegLightbulb className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <FaRegLightbulb className="md:h-8 md:w-8 lg:h-10 lg:w-10 " />
           <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("advertisements:electricity")}
@@ -82,7 +84,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           </div>
         </div>
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
-          <AiOutlineFire className=" lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <AiOutlineFire className=" md:h-8 md:w-8 lg:h-10 lg:w-10 " />
           <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("advertisements:gas")}
@@ -93,7 +95,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
         </div>
 
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
-          <AiOutlineWifi className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <AiOutlineWifi className="md:h-8 md:w-8 lg:h-10 lg:w-10 " />
           <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px] ">
             <>
               {t("amenities:wifi")}
@@ -103,7 +105,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
           </div>
         </div>
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
-          <BsWater className="lg:h-10 lg:w-10 md:h-8 md:w-8 " />
+          <BsWater className="md:h-8 md:w-8 lg:h-10 lg:w-10 " />
           <div className="mt-2 text-[12px] md:text-[17px] lg:text-[16px]  ">
             <>
               {t("advertisements:water")}

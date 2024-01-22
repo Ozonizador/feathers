@@ -19,6 +19,7 @@ import MenuEstudante from "../../../components/unidesk/Menus/MenuEstudante";
 import { UnideskStructure } from "../../../components/unidesk/UnideskStructure";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import BreadcrumbMiddle from "../../../components/utils/BreadcrumbMiddle";
 
 const FavouritesBreadcrumbs = [
   { url: UNIDESK_URL, label: "uni-desk" },
@@ -50,6 +51,8 @@ const UnideskFavoritos = () => {
   return (
     <section className="">
       <Breadcrumbs icon={iconfavorito} paths={FavouritesBreadcrumbs} />
+      <BreadcrumbMiddle title={t("favourites")} icon={iconfavorito} />
+
       <UnideskStructure>
         <UnideskStructure.Menu>
           <MenuEstudante activeSection={"favourites"} activeUrl={"favourites"} />
@@ -57,7 +60,7 @@ const UnideskFavoritos = () => {
         <UnideskStructure.Content>
           <div>
             <div className="flex flex-col items-center justify-center align-middle">
-              <Image src={iconfavorito} alt="Favoritos" height={75} width={75} />
+              {/* <Image src={iconfavorito} alt="Favoritos" height={75} width={75} /> */}
               <div className="mt-9 text-2xl font-bold text-primary-500">{t("favourites", { count: 2 })}</div>
             </div>
 
