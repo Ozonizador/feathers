@@ -7,7 +7,7 @@ const FuncionaUniPackages = () => {
   const { t } = useTranslation("funciona");
   return (
     <section className="mx-5 lg:mx-0">
-      <div className="max-width bg-terciary-300 pb-1 pt-10">
+      <div className="bg-terciary-300 pb-10 pt-10">
         <div className="container mx-auto mt-14 text-center">
           <p className="mb-10 text-primary-500 underline underline-offset-1">{t("uni_packages_title")}</p>
           <h1 className="text-5xl font-bold lg:text-6xl">{t("uni_packages")}</h1>

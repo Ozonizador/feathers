@@ -12,42 +12,42 @@ type CityProps = {
 const CONFIG = [
   {
     title: "Tomar",
-    image: "/images/place-tomar.jpg",
+    image: "/images/tomar.webp",
     url: "/procurar?city=Tomar",
   },
   {
     title: "Peniche",
-    image: "/images/peniche.jpg",
+    image: "/images/peniche.webp",
     url: "/procurar?city=Peniche",
   },
   {
     title: "Leiria",
-    image: "/images/place-leiria.jpg",
+    image: "/images/leiria.webp",
     url: "/procurar?city=Leiria",
   },
   {
     title: "Coimbra",
-    image: "/images/place-santarem.jpg",
+    image: "/images/coimbra.webp",
     url: "/procurar?city=Coimbra",
   },
   {
     title: "Abrantes",
-    image: "/images/place-abrantes.jpg",
+    image: "/images/abrantes.webp",
     url: "/procurar?city=Abrantes",
   },
   {
     title: "Rio Maior",
-    image: "/images/place-brazil.jpg",
+    image: "/images/riomaior.webp",
     url: `/procurar?city=Rio Maior`,
   },
   {
     title: "Porto",
-    image: "/images/place-braga.jpg",
+    image: "/images/porto.webp",
     url: "/procurar?city=Porto",
   },
   {
     title: "Caldas da Rainha",
-    image: "/images/place-setubal.jpg",
+    image: "/images/caldas.webp",
     url: "/procurar?city=Caldas da Rainha",
   },
 ] as CityProps[];
