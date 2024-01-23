@@ -241,8 +241,9 @@ img.cursor-pointer.w-1\/4{
 .find_place_input .find_at input{
   height: 50px;
 }
-.find_place_input .find_btn{
-  height: 46px;margin-top: 2px;
+.find_place_input button{
+  height: 46px !important;
+  margin-top: 2px;
 }
 @media only screen and (min-width: 1023px) and (max-width: 1200px)  {
   .img_div{
