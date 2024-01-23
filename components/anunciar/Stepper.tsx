@@ -92,7 +92,7 @@ const StepIcon = ({ stepNumber, text }: StepIconProps) => {
   return (
     <div className="relative flex items-center text-white">
       <div
-        className={classNames("h-10 w-10 rounded-full py-2 text-center", {
+        className={classNames("h-8 w-8 rounded-full py-1 text-center", {
           "bg-black": stepNumber === 10,
           "bg-primary-500": currentStep >= stepNumber,
           "bg-terciary-200": stepNumber > currentStep && stepNumber < 10,

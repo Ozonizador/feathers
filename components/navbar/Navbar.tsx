@@ -146,8 +146,7 @@ export const Navbar = () => {
 
             <div className="mx-auto my-auto hidden lg:block xl:px-[15px]">
               <div className="nav_text flex gap-1">
-                <div className="my-auto flex  align-middle">
-                  {/* <div
+                {/* <div
                     className={classNames({
                       "flex border-b-4 border-primary-500 pb-2 font-black":
                         checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) == true,
@@ -157,17 +156,24 @@ export const Navbar = () => {
                       {t("navbar:home")}
                     </Link>
                   </div> */}
-                  <div className="nav_home my-auto px-2 text-sm xl:px-[15px]">
-                    <Link
-                      href="/"
-                      className={classNames({
-                        "flex border-b-4 border-primary-500 pb-2 font-black":
-                          checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) === true,
-                      })}
-                    >
-                      {t("navbar:home")}
-                    </Link>
-                  </div>
+                <div className="nav_home my-auto px-2 text-sm xl:px-[15px]">
+                  <Link
+                    href="/"
+                    className={classNames({
+                      "find_text border-b-4 border-primary-500 pb-2 font-black": checkIfUrlActive([HOME_URL]) === true,
+                    })}
+                  >
+                    {t("navbar:home")}
+                  </Link>
+                  {/* <Link
+                    href="/"
+                    className={classNames({
+                      "find_text border-b-4 border-primary-500 pb-2 font-black":
+                        checkIfUrlActive([userAppMode === "TENANT" ? HOME_URL : UNIDESK_URL]) === true,
+                    })}
+                  >
+                    {t("navbar:home")}
+                  </Link> */}
                 </div>
                 {(!user || userAppMode === "LANDLORD") && (
                   <div className="z-700 w-fit">

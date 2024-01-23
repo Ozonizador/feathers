@@ -26,14 +26,14 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
   return (
     <>
       {containsExpenses() && (
-        <div className="relative my-5 text-center">
+        <div className="relative my-2 text-center">
           <div
             className="mt-0 flex items-center justify-center gap-2 align-middle md:mt-[18px]"
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}
           >
             <div className="group relative flex items-center">
-              <span className="text-[16px] md:text-[18px]">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
+              <span className="text-[16px] ">{CheckIfExpensesIncluded(expenses?.services || [])}</span>
               <BiInfoCircle className="ml-2" />
             </div>
           </div>
