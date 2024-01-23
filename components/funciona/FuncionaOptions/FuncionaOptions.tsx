@@ -17,17 +17,17 @@ const FuncionaOptions = () => {
             {optionsCard1.map((option, index) => {
               return (
                 <div key={index} className="my-5 flex flex-row gap-1">
-                  <div className="mb-auto flex w-1/12">
+                  <div className="mb-auto mt-1 flex w-1/12">
                     <Image className="object-scale-down" src="/images/tick.png" alt="" height="25" width="25"></Image>
                   </div>
-                  <p className="my-auto -mt-1 w-9/12 text-xl lg:text-lg">{t(option.text)}</p>
+                  <p className="my-auto w-9/12 text-md lg:text-md">{t(option.text)}</p>
                 </div>
               );
             })}
           </div>
           <hr className="my-6" />
           <div className="mt-auto">
-            <h1 className="mb-8 text-center text-2xl font-bold">{t("funciona:price_under_review")}</h1>
+            <h1 className="mb-8 text-center text-xl font-bold">{t("funciona:price_under_review")}</h1>
 
             <div className="flex flex-1 justify-center">
               <Link href="#" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
@@ -42,22 +42,22 @@ const FuncionaOptions = () => {
             <h1 className="mb-9 mt-4 text-center text-2xl font-bold">{t("funciona:type_management_premium")}</h1>
             <div className="flex flex-1 flex-col items-center align-middle">
               <h2 className="text-xl font-bold">{t("funciona:type_management")}</h2>
-              <div className="text-2xl font-bold">+</div>
+              <div className="text-xl font-bold">+</div>
             </div>
             {optionsCard2.map((option, index) => {
               return (
                 <div key={index} className="my-5 flex flex-row gap-1 px-3">
-                  <div className="mb-auto flex w-1/12">
+                  <div className="mb-auto mt-1 flex w-1/12">
                     <Image className="object-scale-down" src="/images/tick.png" alt="" height="25" width="25"></Image>
                   </div>
-                  <p className="my-auto -mt-1 w-11/12 break-words text-xl lg:text-lg">{t(option.text)}</p>
+                  <p className="my-auto w-11/12 break-words text-md lg:text-md">{t(option.text)}</p>
                 </div>
               );
             })}
           </div>
           <div className="mt-auto">
             <hr className="my-6" />
-            <h1 className="mb-8 text-center text-2xl font-bold">{t("funciona:price_under_review")}</h1>
+            <h1 className="mb-8 text-center text-xl font-bold">{t("funciona:price_under_review")}</h1>
 
             <div className="flex flex-1 justify-center">
               <Link href="#" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
