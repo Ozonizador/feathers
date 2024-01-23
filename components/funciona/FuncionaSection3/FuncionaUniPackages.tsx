@@ -10,7 +10,7 @@ const FuncionaUniPackages = () => {
       <div className="bg-terciary-300 pb-10 pt-10">
         <div className="container mx-auto mt-14 text-center">
           <p className="mb-10 text-primary-500 underline underline-offset-1">{t("uni_packages_title")}</p>
-          <h1 className="text-5xl font-bold lg:text-6xl">{t("uni_packages")}</h1>
+          <h1 className="text-4xl font-bold lg:text-5xl">{t("uni_packages")}</h1>
 
           <div className="mb-5 mt-16 grid grid-cols-1 flex-row gap-10 lg:grid-cols-3">
             <FuncionaSection3Card
