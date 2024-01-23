@@ -29,7 +29,13 @@ const useBlogService = () => {
     return { data, error };
   };
 
-  return { getBlogs, getBlogInfoBySlug, getSimilarBlogPosts };
+  const addToMailingList = async (email: string) => {
+    const { data, error } = await supabaseClient.from("mailing_list").insert({ email });
+
+    return { data, error };
+  };
+
+  return { getBlogs, getBlogInfoBySlug, getSimilarBlogPosts, addToMailingList };
 };
 
 export default useBlogService;
