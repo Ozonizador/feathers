@@ -118,13 +118,23 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
       <div className="mb-4 mt-10 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div className="cards">
           <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
-            <div className="relative h-96 w-full lg:h-64 lg:w-1/3">
-              {getMainPhoto ? <Image src={getMainPhoto?.url} alt="..." fill className="rounded-tl-xl rounded-bl-xl" style={{ objectFit: "cover" }} /> : <></>}
+            <div className="relative h-96 w-full lg:h-60 lg:w-1/3">
+              {getMainPhoto ? (
+                <Image
+                  src={getMainPhoto?.url}
+                  alt="..."
+                  fill
+                  className="rounded-bl-xl rounded-tl-xl"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <></>
+              )}
             </div>
-            <div className="xl:px-5 lg:px-3 px-5 lg:w-2/3">
+            <div className="px-5 lg:w-2/3 lg:px-3 xl:px-5">
               <div className="m-1">
                 <div className="flex flex-1">
-                  <h6 className="mb-0 text-xl font-bold">
+                  <h6 className="mb-0 text-lg font-bold">
                     {t(TYPE_ADVERTISEMENT[advertisement.type])} - {advertisement.title}
                   </h6>
                   <div className="ml-2 flex items-center align-middle">
@@ -176,6 +186,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     <Button
                       type="submit"
                       variant="informative"
+                      padding="sm"
                       onClick={(e) => toggleFavourite(e, advertisement.id, isFavourite())}
                     >
                       <BsHeart className={classNames("inline")} color={isFavourite() == false ? "black" : "red"} />
@@ -183,14 +194,14 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                     </Button>
                   </div>
                   <div className="text-end">
-                    <h3 className="text-xl font-bold text-primary-500">
+                    <h3 className="text-lg font-bold text-primary-500">
                       {t("advertisements:price_month", { price: advertisement.month_rent })}
                     </h3>
                     <div className="d-flex">
                       <p className="mt-1 text-xs lg:text-xl">
                         <ExpensesComponent expenses={advertisement.expenses}></ExpensesComponent>
                       </p>
-                      <i className="fa-solid fa-circle-info m-1"></i>
+                      {/* <i className="fa-solid fa-circle-info m-1"></i> */}
                     </div>
                   </div>
                 </div>

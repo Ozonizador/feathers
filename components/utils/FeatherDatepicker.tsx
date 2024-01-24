@@ -17,11 +17,10 @@ interface FeatherDatePickerProps {
 }
 
 const FeatherDatePicker = ({ date, onChange, className, minDate, icon, placeholder }: FeatherDatePickerProps) => {
-  const [data, setData] = useState<Date | undefined>(undefined)
-
+  const [data, setData] = useState<Date | undefined>(undefined);
 
   return (
-    <div className="relative w-full">
+    <div className="date_parent_sub relative w-full">
       <DatePicker
         selected={data || null}
         placeholderText={placeholder}

@@ -49,7 +49,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               control={control}
               render={({ field: { value, onChange } }) => (
                 <select
-                  className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2"
+                  className="w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-0"
                   value={value}
                   onChange={onChange}
                 >

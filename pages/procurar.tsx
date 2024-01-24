@@ -26,10 +26,10 @@ const Procurar = ({ filter }: ProcurarProps) => {
     <ModalMaisFiltrosProvider>
       <ProcurarAdvertisementsProvider filter={filter}>
         <div>
-          <div className="max-width flex flex-col justify-center px-5 lg:flex-row lg:px-0">
+          <div className="max-width find_place_input flex flex-col justify-center px-5 lg:flex-row lg:px-0">
             <SearchInputField />
           </div>
-          <div className="my-10 lg:px-28">
+          <div className="my-10 lg:px-32 ">
             <ProcurarSection />
           </div>
         </div>

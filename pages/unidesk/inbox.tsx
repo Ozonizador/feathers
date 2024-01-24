@@ -335,7 +335,7 @@ const CaixaExtradaContent = () => {
                       </div>
                       <div className="p-2">
                         <div className="popup_div my-4 flex flex-col gap-3">
-                          <div className="mx-auto my-3 h-fit w-10">
+                          <div className="avatar_div mx-auto my-3 h-fit w-10">
                             <Avatar
                               img={getOtherProfile(currentConversation)?.avatar_url || "/icons/user/user.svg"}
                               rounded={true}

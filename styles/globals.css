@@ -231,6 +231,23 @@ img.cursor-pointer.w-1\/4{
 .font-md option{
   font-size: medium !important;
 }
+.find_place_input input{
+  height: 45px;
+  width: 210px;
+}
+.find_place_input .date-parent{
+  height: fit-content;
+}
+.find_place_input .find_at input{
+  height: 50px;
+}
+.find_place_input button{
+  height: 46px !important;
+  margin-top: 2px;
+}
+.avatar_div img{
+   height: 40px;
+}
 @media only screen and (min-width: 1023px) and (max-width: 1200px)  {
   .img_div{
     width: 10rem
@@ -249,10 +266,10 @@ img.cursor-pointer.w-1\/4{
   .nav_text > div{
     display: flex;
   }
-  .nav_home{
+  /* .nav_home{
     align-self: center;
     display: flex !important;
-  }
+  } */
   .stay_div{
     gap: 0.5rem !important;
   }

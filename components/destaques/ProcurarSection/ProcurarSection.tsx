@@ -104,7 +104,7 @@ export default function ProcurarSection() {
         <div className={`w-full ${location ? "" : ""}`}>
           <div className="w-3/4 lg:w-full">
             <div className="flex flex-row justify-between">
-              <div className="text-sm font-bold lg:text-2xl">
+              <div className="text-sm font-bold lg:text-xl">
                 <Trans
                   i18nKey="available_options"
                   values={{ count: count }}
@@ -129,7 +129,9 @@ export default function ProcurarSection() {
                   id="order-drop"
                 >
                   <option>{t("order_by")}</option>
-                  <option value="price-asc" className="hover:bg-primary-300">{t("order_price_asc")}</option>
+                  <option value="price-asc" className="hover:bg-primary-300">
+                    {t("order_price_asc")}
+                  </option>
                   <option value="price-desc">{t("order_price_desc")}</option>
                   <option value="rating">{t("best_classification")}</option>
                   <option value="time">{t("most_recent")}</option>
@@ -139,9 +141,9 @@ export default function ProcurarSection() {
 
             <div className="mt-4 flex items-center gap-2">
               <PopoverGeneric title={t("advertisements:type_house")}>
-                <div className="grid w-96 grid-cols-2 gap-4 rounded-lg bg-white p-3 text-neutral-500">
+                <div className="grid w-64 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
                   <div
-                    className={classNames("my-auto rounded-xl border p-3 text-xs", {
+                    className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
                       "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
                       "border-neutral-500": currentFilter.placeType !== "ALL",
                     })}
@@ -154,7 +156,7 @@ export default function ProcurarSection() {
                       <div
                         key={index}
                         onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
-                        className={classNames("my-auto rounded-xl border p-3 text-xs", {
+                        className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
                           "border-primary-500 text-primary-500": currentFilter.placeType === type,
                           "border-neutral-500": currentFilter.placeType !== type,
                         })}
@@ -180,7 +182,7 @@ export default function ProcurarSection() {
               </PopoverGeneric>
 
               <div className="ml-auto h-full w-fit">
-                <Button type="button" onClick={() => setModalMaisFiltros(true)} padding="md">
+                <Button type="button" onClick={() => setModalMaisFiltros(true)} padding="sm">
                   {t("more_filters")}
                 </Button>
               </div>
@@ -197,7 +199,11 @@ export default function ProcurarSection() {
                   {advertisements &&
                     advertisements.map((advertisement, index) => {
                       return (
-                        <div className="cursor-pointer" onClick={() => goToAdvert(encodeURI(advertisement.slug))} key={index}>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => goToAdvert(encodeURI(advertisement.slug))}
+                          key={index}
+                        >
                           <RoomCard advertisement={advertisement} />
                         </div>
                       );
@@ -212,8 +218,14 @@ export default function ProcurarSection() {
           {advertisements && advertisements.length !== 0 && count > advertisements.length && (
             <div className="row mb-5">
               <div className="col-md-2"></div>
-              <div className="flex flex-1 justify-around px-5 parent-div">
-                <Pagination previousLabel="<"  nextLabel=">" currentPage={page} totalPages={getTotalPages()} onPageChange={(page) => setPage(page)} />
+              <div className="parent-div flex flex-1 justify-around px-5">
+                <Pagination
+                  previousLabel="<"
+                  nextLabel=">"
+                  currentPage={page}
+                  totalPages={getTotalPages()}
+                  onPageChange={(page) => setPage(page)}
+                />
               </div>
               <div className="col-md-5"></div>
             </div>
