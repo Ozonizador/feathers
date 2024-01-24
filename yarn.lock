@@ -1398,13 +1398,6 @@ axios@^0.26.0:
   dependencies:
     follow-redirects "^1.14.8"
 
-axios@^0.26.1:
-  version "0.26.1"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.26.1.tgz"
-  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
-  dependencies:
-    follow-redirects "^1.14.8"
-
 axios@^0.27.2:
   version "0.27.2"
   resolved "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
@@ -1412,6 +1405,15 @@ axios@^0.27.2:
   dependencies:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
+
+axios@^1.6.0:
+  version "1.6.5"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.6.5.tgz"
+  integrity sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==
+  dependencies:
+    follow-redirects "^1.15.4"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 axobject-query@^3.1.1:
   version "3.2.1"
@@ -2758,10 +2760,10 @@ flowbite@^1.6.6, flowbite@1.6.x:
     "@popperjs/core" "^2.9.3"
     mini-svg-data-uri "^1.4.3"
 
-follow-redirects@^1.14.8, follow-redirects@^1.14.9:
-  version "1.15.2"
-  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
-  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+follow-redirects@^1.14.8, follow-redirects@^1.14.9, follow-redirects@^1.15.4:
+  version "1.15.5"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.5.tgz"
+  integrity sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==
 
 for-each@^0.3.3:
   version "0.3.3"
@@ -4925,6 +4927,11 @@ property-information@^6.0.0:
   resolved "https://registry.npmjs.org/property-information/-/property-information-6.3.0.tgz"
   integrity sha512-gVNZ74nqhRMiIUYWGQdosYetaKc83x8oT41a0LlV3AAFCAZwCpg4vmGkq8t34+cUhp3cnM4XDiU/7xlgK7HGrg==
 
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
+
 psl@^1.1.28:
   version "1.9.0"
   resolved "https://registry.npmjs.org/psl/-/psl-1.9.0.tgz"
@@ -6016,12 +6023,12 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
   integrity sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==
 
-twilio@^4.19.0:
-  version "4.19.0"
-  resolved "https://registry.npmjs.org/twilio/-/twilio-4.19.0.tgz"
-  integrity sha512-4tM1LNM5LeUvnko4kIqIreY6vmjIo5Ag5jMEhjTDPj+GES82MnkfSkJv8N1k5/ZmeSvIdk5hjI87GB/DpDDePQ==
+twilio@^4.20.1:
+  version "4.20.1"
+  resolved "https://registry.npmjs.org/twilio/-/twilio-4.20.1.tgz"
+  integrity sha512-raoK6LKBtpaqPpaMamgQkNHnAgReW0rW3PS1Eow177f9yZV7lLw3UyqGctGcREMeWFLyH2kEDpgZG7vT1ezL9Q==
   dependencies:
-    axios "^0.26.1"
+    axios "^1.6.0"
     dayjs "^1.11.9"
     https-proxy-agent "^5.0.0"
     jsonwebtoken "^9.0.0"

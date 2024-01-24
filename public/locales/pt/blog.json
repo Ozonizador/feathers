@@ -6,5 +6,6 @@
   "notify": "Notifique-me",
   "modal_notifications_title": "Queremos ser uns fiéis mensageiros!",
   "agree_notify": "Ao carregar em Notifique-me aceita a nossa <lnk1>{{policy}}</lnk1>.",
-  "processing_policy": "política de tratamento de dados"
+  "processing_policy": "política de tratamento de dados",
+  "added": "Adicionado à lista de emails"
 }

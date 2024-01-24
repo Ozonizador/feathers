@@ -2,7 +2,6 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
-import { addHours } from "date-fns";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 Deno.serve(async (req: Request) => {
@@ -41,7 +40,7 @@ Deno.serve(async (req: Request) => {
       }
 
       if (
-        addHours(reservation.updated_at, 12) <= today &&
+        new Date(today.getTime() + 12 * 60 * 60 * 1000) <= today &&
         reservation.reminded != "REMIND_HOST" &&
         reservation.status == "REQUESTED"
       ) {
@@ -62,7 +61,13 @@ Deno.serve(async (req: Request) => {
           },
         };
 
+        let messageData = {
+          number: data[0].advertisement.host.name,
+          message: `Unihosts: Aceite ou recuse o seu novo pedido de reserva! Resta-lhe 12 horas para o fazer. Caso contrário a reserva irá expirar e a sua taxa de resposta vai ser prejudicada. http://unihosts/unidesk/inbox?id=${data[0].id}`
+        }
+
         // send email and sms
+
 
         // update table
         const { data: updateData, error } = await supabaseClient
@@ -97,6 +102,11 @@ Deno.serve(async (req: Request) => {
             link: `unidesk/inbox?id=${data[0].id}`,
           },
         };
+
+        let messageData = {
+          number: data[0].advertisement.host.name,
+          message: `Unihosts: Faça o pagamento da primeira renda. Caso contrário a reserva irá ser cancelada automaticamente. Aproveite a oportunidade para ter o seu espaço confirmado: http://unihosts/unidesk/inbox?id=${data[0].id}`
+        }
 
         // send email and sms
 

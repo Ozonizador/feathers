@@ -63,7 +63,7 @@
     "react-select": "^5.4.0",
     "react-select-country-list": "^2.2.3",
     "react-toastify": "^9.0.7",
-    "twilio": "^4.19.0",
+    "twilio": "^4.20.1",
     "uuid": "^9.0.0",
     "yet-another-react-lightbox": "^3.14.0",
     "zod": "^3.21.4"

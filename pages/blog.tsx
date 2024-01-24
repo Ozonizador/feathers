@@ -15,6 +15,8 @@ import { Trans, useTranslation } from "next-i18next";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { supabase } from "../lib/supabaseClient";
+import { toast } from "react-toastify";
 
 {
   /* page 9 XD */
@@ -43,12 +45,12 @@ const Index = () => {
   }, [getBlogPosts]);
 
   return (
-    <section className="mt-36 lg:px-28 mx-6 lg:mx-0">
+    <section className="mx-6 mt-36 lg:mx-0 lg:px-28">
       <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
         <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">{t("blog:title")}</div>
         <div className="flex h-5 w-full items-center lg:w-44 ">
           <select
-            className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white focus:border-primary-500 focus:outline-none focus:ring-0 px-3 py-4 lg:mt-0 lg:w-44"
+            className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 focus:border-primary-500 focus:outline-none focus:ring-0 lg:mt-0 lg:w-44"
             placeholder="Categoria"
             onChange={(e) => setCategory(e.target.value as UserTypes)}
           >
@@ -98,6 +100,25 @@ interface ModalNotificationProps {
 
 const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
   const { t } = useTranslation();
+  const { addToMailingList } = useBlogService();
+  const [email, setEmail] = useState<string>("");
+
+  function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  const addEmail = async () => {
+    if (isValidEmail(email)) {
+      const { data, error } = await addToMailingList(email);
+      
+      if (error) {
+        console.log(error)
+      } else {
+        toast.success(t("blog:added"))
+      }
+    }
+  };
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -120,9 +141,15 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
                 <div className="mx-10 my-20 h-96">
                   <div className="flex h-full flex-col gap-2 rounded-lg bg-white px-10 py-10 lg:w-1/2">
                     <h6 className="mb-8 text-3xl">{t("blog:modal_notifications_title")}</h6>
-                    <Input placeholder="E-mail"></Input>
+                    <Input placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}></Input>
                     <div className="mb-10">
-                      <Button type={"button"} onClick={() => setOpen(false)}>
+                      <Button
+                        type={"button"}
+                        onClick={(e) => {
+                          setOpen(false);
+                          addEmail();
+                        }}
+                      >
                         {t("blog:notify")}
                       </Button>
                     </div>
