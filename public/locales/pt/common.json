@@ -137,5 +137,9 @@
   "file-size": "O ficheiro {{name}} é demasiado grande. (Max. 2Mb)",
   "guest": "1 hóspede",
   "guests": "{{val}} hóspedes.",
-  "extra_per_person": "Preço por pessoa extra"
+  "extra_per_person": "Preço por pessoa extra",
+  "faqs": {
+    "search": "Como podemos ajudar?",
+    "search_label": "Procure nas nossas faqs..."
+  }
 }
