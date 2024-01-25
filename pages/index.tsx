@@ -42,7 +42,6 @@ const Home = () => {
 export default Home;
 
 export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
-  const router = useRouter();
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -50,7 +49,13 @@ export async function getServerSideProps({ locale }: GetServerSidePropsContext) 
   if (session) {
     const { data, error } = await supabase.from("profiles").select().eq("id", session.user.id).single();
     if (data && (!data.name || !data.surname || !data.nationality || !data.town)) {
-      router.push(GENERAL_ADMIN_URL);
+      return {
+        redirect: {
+          destination: `admin/general/`,
+          permanent: false,
+          locale: locale,
+        },
+      };
     } else if (data && !data[0].email) {
       await supabase.from("profiles").update({email: session.user.email}).eq("id", session.user.id);
     }
