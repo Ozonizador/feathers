@@ -7,6 +7,7 @@ interface InputProps {
   customCss?: string;
   labelText?: string;
   name?: string;
+  required?: boolean;
   errorMessage?: string;
   disabled?: boolean;
   icons?: ReactElement;
@@ -23,6 +24,7 @@ export default function Input({
   labelText = "",
   customCss = "",
   errorMessage = "",
+  required = false,
   placeholder = "",
   disabled = false,
   icons,
@@ -69,6 +71,7 @@ export default function Input({
             onChange={onChange}
             name={name}
             value={value}
+            required={required}
             aria-labelledby={name}
             disabled={disabled}
             {...props}
