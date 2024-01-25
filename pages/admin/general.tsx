@@ -341,7 +341,6 @@ const Index = ({ user, profileData }: IndexProps) => {
                       country={(country as CountryCode) || "PT"}
                       placeholder="XXX XXX XXX"
                       value={value}
-                      required={true}
                       onChange={(value) => onChange(value as string)}
                     />
                   </div>
