@@ -2,6 +2,11 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://example.com',
   generateRobotsTxt: true, // (optional)
-  exclude: ['/superadmin/*']
+  exclude: ['/server-sitemap.xml'],
+  robotsTxtOptions: {
+    additionalSitemaps: [
+      `${process.env.SITE_URL}server-sitemap.xml`,
+    ],
+  },
   // ...other options
 }

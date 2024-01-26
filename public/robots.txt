@@ -7,3 +7,4 @@ Host: https://nextjs-docker-image-bnuigqyxoa-ey.a.run.app/
 
 # Sitemaps
 Sitemap: https://nextjs-docker-image-bnuigqyxoa-ey.a.run.app/sitemap.xml
+Sitemap: localhost:3000/server-sitemap.xml

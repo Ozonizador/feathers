@@ -36,7 +36,6 @@ const Faqs = () => {
       setLandlordFaqsState(landlordFaqs);
       setOnLoad(true);
     } else if (!onLoad && data) {
-      console.log(tenantFaqs)
       setTenantFaqsState(tenantFaqs);
       setLandlordFaqsState(landlordFaqs);
       setOnLoad(true);
