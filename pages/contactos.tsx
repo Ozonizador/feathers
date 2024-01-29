@@ -20,22 +20,22 @@ const Contactos = () => {
   };
 
   return (
-    <div className="max-width px-10">
+    <div className="max-width !px-12">
       <div className="my-24 lg:my-20 xl:my-10">
         <div className="flex flex-col lg:flex-row ">
           <div className="flex w-full lg:w-1/3">
             <div className="flex flex-col gap-3 xl:mt-20">
               <div className="py-3">
-                <CgFileDocument className="inline text-2xl" />
+                <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_student")}</div>
               </div>
               <div>
-                <CgFileDocument className="inline text-2xl" />
+                <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_landlord")}</div>
               </div>
 
               <div className="mt-20">
-                <div className="text-3xl font-bold">{t("contacts")}</div>
+                <div className="text-2xl font-bold">{t("contacts")}</div>
                 <div className="mt-5 flex items-center align-middle">
                   <FaPhoneAlt className="mr-2" /> +351 914 626 616
                 </div>
@@ -51,7 +51,7 @@ const Contactos = () => {
           </div>
 
           <div className="mt-10 w-full lg:mt-0 lg:w-2/3">
-            <div className="mb-10 text-3xl font-bold">{t("leave_us_message")}</div>
+            <div className="mb-10 text-2xl font-bold">{t("leave_us_message")}</div>
             <div className="w-90">
               <Input value={name} onChange={(e) => setName(e.target.value)} labelText={t("name")} name="name" />
             </div>
@@ -64,7 +64,7 @@ const Contactos = () => {
               <label htmlFor="about" className=" text-gray-700">
                 {t("message")}
               </label>
-              <div className="mt-1">
+              <div className="mt-2">
                 <textarea
                   rows={5}
                   className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white focus:border-primary-500 focus:outline-none focus:ring-0  px-2 py-3  shadow-sm"
@@ -76,7 +76,7 @@ const Contactos = () => {
               </div>
             </div>
             <div className="w-32">
-              <Button onClick={() => sendToEmail()} type="button" padding="md" rounded="none">
+              <Button onClick={() => sendToEmail()} type="button" padding="md" rounded="medium">
                 {t("common:send")}
               </Button>
             </div>

@@ -28,8 +28,8 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                   />
 
                   <div className="absolute bottom-8 left-4 w-11/12">
-                    <h2 className="bold mb-4 text-xl font-normal capitalize text-white">{blog.title}</h2>
-                    <p className="bold line-clamp-2 text-sm font-normal normal-case text-white">{blog.description}</p>
+                    <h2 className="bold mb-4 text-lg font-normal capitalize text-white">{blog.title}</h2>
+                    <p className="bold line-clamp-2 text-xs font-normal normal-case text-white">{blog.description}</p>
                     <div className="mt-7 flex flex-row justify-between">
                       <div>
                         <p className="normal-case text-gray-300">

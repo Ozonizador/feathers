@@ -10,7 +10,7 @@ interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   variant?: "primary" | "facebook" | "gmail" | "informative" | "disabled";
-  rounded?: "xl" | "full" | "none";
+  rounded?: "xl" | "full" | "none" | "small" | "medium";
   padding?: "sm" | "md" | "lg" | "custom";
   [x: string]: any;
 }
@@ -33,6 +33,8 @@ const buttonProps = variantProps({
       none: tw`rounded-none`,
       xl: tw`rounded-xl`,
       full: tw`rounded-full`,
+      small: tw`rounded-sm`,
+      medium: tw`rounded-md`
     },
     disabled: {
       true: tw`opacity-60 cursor-none`,
