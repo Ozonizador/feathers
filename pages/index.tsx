@@ -52,7 +52,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   if (session) {
     const { data, error } = await supabase.from("profiles").select().eq("id", session.user.id).single();
 
-    if (data && (!data.name || !data.surname || !data.nationality || !data.town)) {
+    if (data && (data.name || data.surname || data.nationality || data.town)) {
       return {
         redirect: {
           destination: `/admin/general/`,
@@ -60,7 +60,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
           locale: locale,
         },
       };
-    } else if (data && !data[0].email) {
+    } else if (data && data[0].email) {
       await supabase.from("profiles").update({email: session.user.email}).eq("id", session.user.id);
     }
   }
