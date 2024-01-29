@@ -3,7 +3,7 @@ import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
 import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import countryList from "react-select-country-list";
 import { toast } from "react-toastify";
@@ -63,6 +63,13 @@ const Index = ({ user, profileData }: IndexProps) => {
   const { addAvatar, updateUserProfile } = useProfileService();
   const [profile, setProfile] = useState<Profile>(profileData);
   const [country, setCountry] = useState((phoneNumber && phoneNumber.country) || "PT");
+  const [ onLoad, setOnLoad ] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if (!onLoad && profile) {
+      if (profile.name && profile.surname)
+    }
+  })
 
   const {
     register,
