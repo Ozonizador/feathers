@@ -63,13 +63,23 @@ const Index = ({ user, profileData }: IndexProps) => {
   const { addAvatar, updateUserProfile } = useProfileService();
   const [profile, setProfile] = useState<Profile>(profileData);
   const [country, setCountry] = useState((phoneNumber && phoneNumber.country) || "PT");
-  const [ onLoad, setOnLoad ] = useState<boolean>(false);
-  
+
   useEffect(() => {
-    if (!onLoad && profile) {
-      if (profile.name && profile.surname)
-    }
-  })
+
+    const handleLoad = () => {
+      if (!(profile.name && profile.surname && profile.town && profile.phone)) {
+        toast.warning(t("account:fill"));
+      }
+    };
+
+    // Add event listener for onLoad
+    window.addEventListener('load', handleLoad);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
 
   const {
     register,
@@ -212,7 +222,11 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <FeatherDatePicker date={value} onChange={onChange} className="w-full rounded-md !border-solid border border-solid border-terciary-500" />
+                    <FeatherDatePicker
+                      date={value}
+                      onChange={onChange}
+                      className="w-full rounded-md border !border-solid border-solid border-terciary-500"
+                    />
                   )}
                   name="birth_date"
                 ></Controller>
