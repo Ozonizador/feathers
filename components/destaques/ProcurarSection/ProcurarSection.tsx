@@ -102,8 +102,8 @@ export default function ProcurarSection() {
       <ModalMaisFiltros />
       <div className="mt-5 flex flex-1">
         <div className={`w-full ${location ? "" : ""}`}>
-          <div className="w-3/4 lg:w-full">
-            <div className="flex flex-row justify-between">
+          <div className="w-3/4 mx-auto lg:w-full">
+            <div className="flex items-center flex-row justify-between">
               <div className="text-sm font-bold lg:text-xl">
                 <Trans
                   i18nKey="available_options"
@@ -121,7 +121,7 @@ export default function ProcurarSection() {
                   <>{t("in_area")}</>
                 )}
               </div>
-              <div className="mb-2">
+              <div className="mb-2 max-sm:mt-2">
                 <select
                   className="w-fit rounded-md border border-solid border-terciary-500 bg-white  px-3 text-sm focus:border-primary-500 focus:outline-none focus:ring-0 "
                   onChange={changeOrderFilter}
@@ -167,7 +167,7 @@ export default function ProcurarSection() {
                   })}
                 </div>
               </PopoverGeneric>
-              <PopoverGeneric title={t("advertisements:price", { count: 1 })}>
+              <PopoverGeneric title={t("advertisements:price", { count: 1 })} className="h-full">
                 <div className="w-fit">
                   <Slider
                     range

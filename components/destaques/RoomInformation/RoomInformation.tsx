@@ -13,10 +13,10 @@ export default function RoomInformation() {
   return (
     <div>
       <div className="mb-8 flex flex-wrap font-bold">
-        <div className="break-words break-all pr-2 text-5xl">{advertisement?.title || ""} </div>
+        <div className="break-words break-all pr-2 text-5xl max-sm:text-xl">{advertisement?.title || ""} </div>
         {advertisement?.verified && (
           <div className="text-md flex items-end">
-            <p className="text-md">{t("advertisements:house_verified")}</p>
+            <p className="text-md max-sm:text-sm">{t("advertisements:house_verified")}</p>
             <img className="h-10" src="/images/homeSection new-1.png" alt="House Verified" />
           </div>
         )}

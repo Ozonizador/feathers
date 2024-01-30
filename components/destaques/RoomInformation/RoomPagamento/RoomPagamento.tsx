@@ -232,6 +232,7 @@ export const RoomPagamento = () => {
                 </div>
                 <FeatherDatePicker
                   date={endDate}
+                  className="border border-terciary-700"
                   onChange={(date) => {
                     setEndDate(date);
                     setSearchInfoProperty(SearchFields.END_DATE, date);

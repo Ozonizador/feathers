@@ -6,11 +6,12 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 interface PopoverSelectProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
-const PopoverGeneric = ({ title, children }: PopoverSelectProps) => {
+const PopoverGeneric = ({ title, children, className }: PopoverSelectProps) => {
   return (
-    <div>
+    <div className={className}>
       <Popover className="relative z-700 w-full">
         {({ open }) => (
           <>

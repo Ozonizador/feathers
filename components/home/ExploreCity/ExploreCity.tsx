@@ -57,7 +57,7 @@ const ExploreCity = () => {
   return (
     <section className="max-width">
       <div className="lg:block">
-        <div className="mx-auto text-center lg:px-8 lg:py-10 xl:p-4">
+        <div className="mx-auto text-center lg:px-8 lg:py-10 max-sm:py-4 xl:p-4">
           <h2 className="pb-20 text-4xl font-bold">{t("index:explore_city")}</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {CONFIG.map((city, index) => (
