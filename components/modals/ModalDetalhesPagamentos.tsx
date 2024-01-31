@@ -10,6 +10,7 @@ import addMonths from "date-fns/addMonths";
 import { Trans, useTranslation } from "next-i18next";
 import { getDate, getDaysInMonth, isLastDayOfMonth, isToday } from "date-fns";
 import { has, isString, toNumber } from "lodash";
+import { IoMdClose } from "react-icons/io";
 
 interface formatOpts {
   monthsAhead?: number;
@@ -59,9 +60,9 @@ const ModalDetalhesPagamento = () => {
       let rent;
       if (advertisement) {
         const { month_rent, extra_per_host } = advertisement;
-        rent = month_rent + (extra_per_host * (guest_number! - 1));
+        rent = month_rent + extra_per_host * (guest_number! - 1);
       } else {
-        rent = toNumber(monthRent! + (extra_per_host! * (guest_number! - 1)));
+        rent = toNumber(monthRent! + extra_per_host! * (guest_number! - 1));
       }
 
       const totalDaysOfMonth = getDaysInMonth(addMonths(selectedDate, 1));
@@ -145,14 +146,22 @@ const ModalDetalhesPagamento = () => {
       const { month_rent, semester_discount, trimester_discount } = advertisement;
 
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return month_rent.toFixed(2) + (extra_per_host! * (guest_number! - 1));
-      if (advertDiferenceInMonths >= 6) return ((toNumber(month_rent) + (extra_per_host! * (guest_number! - 1))) * (1 - semester_discount / 100)).toFixed(2);
-      return ((month_rent + (extra_per_host! * (guest_number! - 1))) * (1 - trimester_discount / 100)).toFixed(2);
+      if (advertDiferenceInMonths < 3) return month_rent.toFixed(2) + extra_per_host! * (guest_number! - 1);
+      if (advertDiferenceInMonths >= 6)
+        return ((toNumber(month_rent) + extra_per_host! * (guest_number! - 1)) * (1 - semester_discount / 100)).toFixed(
+          2
+        );
+      return ((month_rent + extra_per_host! * (guest_number! - 1)) * (1 - trimester_discount / 100)).toFixed(2);
     } else {
       const advertDiferenceInMonths = differenceInMonths(endDate, selectedDate);
-      if (advertDiferenceInMonths < 3) return (toNumber(monthRent).toFixed(2) + (extra_per_host! * (guest_number! - 1)));
-      if (advertDiferenceInMonths >= 6) return ((toNumber(monthRent) + (extra_per_host! * (guest_number! - 1))) * (1 - semester_discount! / 100)).toFixed(2);
-      return ((toNumber(monthRent) + (extra_per_host! * (guest_number! - 1))) * (1 - trimester_discount! / 100)).toFixed(2);
+      if (advertDiferenceInMonths < 3) return toNumber(monthRent).toFixed(2) + extra_per_host! * (guest_number! - 1);
+      if (advertDiferenceInMonths >= 6)
+        return ((toNumber(monthRent) + extra_per_host! * (guest_number! - 1)) * (1 - semester_discount! / 100)).toFixed(
+          2
+        );
+      return ((toNumber(monthRent) + extra_per_host! * (guest_number! - 1)) * (1 - trimester_discount! / 100)).toFixed(
+        2
+      );
     }
   };
 
@@ -196,9 +205,10 @@ const ModalDetalhesPagamento = () => {
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="mb-16 mt-6 text-center text-3xl font-bold leading-6 text-gray-900 lg:text-5xl"
+                    className="mb-16 mt-6 text-center text-2xl font-bold leading-6 text-gray-900 lg:text-4xl ml-2"
                   >
                     {t("common:payment_details")}
+                    <IoMdClose className=" ml-2 h-8 w-8" onClick={() => closeModal()}/>
                   </Dialog.Title>
 
                   <div className="mt-2">
@@ -206,20 +216,21 @@ const ModalDetalhesPagamento = () => {
                       <div className="padding-2 my-6 text-xl font-bold text-primary-500 lg:text-2xl">Via Unihosts</div>
                       {/* Unihosts */}
                       <FeathersAccordion>
-                        <div className="flex">
-                          <div className="font-bold">{t("common:first_rent")}</div>
-                          <div className="relative my-auto ml-1">
-                            <AiOutlineInfoCircle className="peer my-auto" size={14} />
-                            <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
-                              <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
-                                <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
-                                <p>{t("first_rent_description")}</p>
+                        <div className="flex max-sm:flex-col">
+                          <div className="max-sm:flex max-sm:flex-row">
+                            <div className="font-bold">{t("common:first_rent")}</div>
+                            <div className="relative my-auto ml-1">
+                              <AiOutlineInfoCircle className="peer my-auto" size={14} />
+                              <div className="-bottom-10 -right-60 hidden peer-hover:absolute peer-hover:block">
+                                <div className="relative w-56 rounded-lg bg-primary-500 p-2 text-white">
+                                  <div className="absolute -left-2 h-0 w-0 border-b-[10px] border-r-[10px] border-t-[10px] border-b-transparent border-r-primary-500 border-t-transparent"></div>
+                                  <p>{t("first_rent_description")}</p>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="ml-auto flex">
+                          <div className="ml-auto flex max-sm:ml-0">
                             <div className="font-bold">{setAdvertPrice()}€</div>
-                            <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
                         <div className="flex gap-1 text-neutral-600">
@@ -236,11 +247,10 @@ const ModalDetalhesPagamento = () => {
                       {/* SENHORIO */}
                       <div className="my-6 text-xl font-bold text-primary-500 lg:text-2xl">{t("to_landlord")}</div>
                       <FeathersAccordion>
-                        <div className="flex">
+                        <div className="flex max-sm:flex-col">
                           <h6 className="font-bold">{t("on_check_day")}</h6>
-                          <div className="ml-auto flex">
+                          <div className="ml-auto flex max-sm:ml-0">
                             <div className="font-bold">{setAdvertPrice()}€</div>
-                            <MdOutlineKeyboardArrowUp className="my-auto text-primary-500" size={24} />
                           </div>
                         </div>
                         <div className="flex">

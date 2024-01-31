@@ -141,7 +141,7 @@ export const RoomPagamento = () => {
             accommodation_address: `${advertisement.street} ${advertisement.street_number}, ${advertisement.postal_code} ${advertisement.place}`,
             entry_date: new Date(newReservation.start_date).toLocaleDateString(),
             departure_date: new Date(newReservation.end_date).toLocaleDateString(),
-            monthly_value: advertisement.month_rent + (advertisement.extra_per_host * newReservation.number_guests),
+            monthly_value: advertisement.month_rent + advertisement.extra_per_host * newReservation.number_guests,
             bills_conditions: included,
             link: `unidesk/inbox?id=${data.id}`,
           },
@@ -311,7 +311,11 @@ export const RoomPagamento = () => {
 
             <div
               className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setSearchInfoProperty(SearchFields.START_DATE, startDate);
+                setSearchInfoProperty(SearchFields.END_DATE, endDate);
+                setAdvertDatesOpenModal();
+              }}
             >
               {t("payment_details")}
             </div>
