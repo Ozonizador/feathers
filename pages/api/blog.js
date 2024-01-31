@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         }
 
         let formData = {
-          templateId: "",
+          templateId: "d-e44d8d1d419f4cea99929a8b57d1e8a4",
           data: {
             title: blogPost.title,
             link: `/blog/${blogPost.slug}`,

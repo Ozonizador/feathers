@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       // Email for tenant
       let formData = {
         email: updateReservation[0].tenant.email,
-        templateId: "",
+        templateId: "d-86d7469545774a7aa08be8951e49c71c",
         data: {
           first_name: updateReservation[0].tenant.name,
           accommodation_name: updateReservation[0].advertisements.title,
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
       // Email for landlord
       formData.email = updateReservation.advertisements.host.email;
-      formData.templateId = ""
+      formData.templateId = "d-4c4d36e725c54d9fba4a12be19e6ec16"
       formData.data.first_name = updateReservation.advertisements.host.name;
 
       await fetch("/api/mail", {

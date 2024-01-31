@@ -46,7 +46,7 @@ Deno.serve(async (req: Request) => {
       ) {
         let formData = {
           email: data[0].advertisement.host.email,
-          templateId: "",
+          templateId: "d-f500f512a48a455c9c360748c33765b2 ",
           data: {
             first_name: data[0].advertisement.host.name,
             accommodation_name: data[0].advertisements.title,
@@ -62,11 +62,20 @@ Deno.serve(async (req: Request) => {
         };
 
         let messageData = {
-          number: data[0].advertisement.host.name,
+          number: data[0].advertisement.host.number,
           message: `Unihosts: Aceite ou recuse o seu novo pedido de reserva! Resta-lhe 12 horas para o fazer. Caso contrário a reserva irá expirar e a sua taxa de resposta vai ser prejudicada. http://unihosts/unidesk/inbox?id=${data[0].id}`
         }
 
         // send email and sms
+        await fetch("/api/mail", {
+          method: "POST",
+          body: JSON.stringify(formData),
+        });
+
+        await fetch("/api/sms", {
+          method: "POST",
+          body: JSON.stringify(messageData),
+        });
 
 
         // update table
@@ -81,14 +90,14 @@ Deno.serve(async (req: Request) => {
           console.log(`Updated reservation ID: ${reservation.id}`);
         }
       } else if (
-        addHours(reservation.updated_at, 12) <= today &&
+        new Date(today.getTime() + 12 * 60 * 60 * 1000) <= today &&
         reservation.reminded != "REMIND_TENANT" &&
         reservation.status == "ACCEPTED"
       ) {
 
         let formData = {
           email: data[0].tenant.email,
-          templateId: "",
+          templateId: "d-2e421f5bb2c8458688f00482cacaba9e",
           data: {
             first_name: data[0].tenant.name,
             accommodation_name: data[0].advertisements.title,
@@ -104,11 +113,20 @@ Deno.serve(async (req: Request) => {
         };
 
         let messageData = {
-          number: data[0].advertisement.host.name,
+          number: data[0].advertisement.host.number,
           message: `Unihosts: Faça o pagamento da primeira renda. Caso contrário a reserva irá ser cancelada automaticamente. Aproveite a oportunidade para ter o seu espaço confirmado: http://unihosts/unidesk/inbox?id=${data[0].id}`
         }
 
         // send email and sms
+        await fetch("/api/mail", {
+          method: "POST",
+          body: JSON.stringify(formData),
+        });
+
+        await fetch("/api/sms", {
+          method: "POST",
+          body: JSON.stringify(messageData),
+        });
 
         // update table
         const { data: updateData, error } = await supabaseClient
