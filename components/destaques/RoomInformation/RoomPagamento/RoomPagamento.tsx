@@ -302,7 +302,7 @@ export const RoomPagamento = () => {
           </button>
         </div>
         {/* MOBILE STYLES */}
-        <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
+        <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 pt-7 drop-shadow-2xl lg:hidden">
           <div className="flex flex-col text-left">
             <h1 className="mt-2 text-2xl font-bold text-black">
               {t("advertisements:price_month", { price: setAdvertPrice() })}
