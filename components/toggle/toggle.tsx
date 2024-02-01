@@ -10,7 +10,7 @@ interface ToggleProps {
 export default function Toggle({ selectedValue, onChange }: ToggleProps) {
   const { t } = useTranslation();
   return (
-    <div className="mx-auto mb-20 py-10">
+    <div className="mx-auto py-10">
       <div className="relative flex w-80 items-center rounded-full bg-primary-100 p-1 lg:w-96">
         <div
           className={classNames("z-50 h-full flex-1 rounded-full", {

@@ -57,6 +57,7 @@ import {
 import ModalDetalhesPagamento from "../../components/modals/ModalDetalhesPagamentos";
 import { advertisementsRouter } from "../../server/routers/advertisementsRouter";
 import { Conversation } from "twilio/lib/twiml/VoiceResponse";
+import { supabaseAdmin } from "../../lib/supabaseAdminClient";
 
 {
   /* page 59 XD */
@@ -256,6 +257,35 @@ const CaixaExtradaContent = () => {
     if (!reservation || !reservation.id || !currentConversation) return;
 
     const { error } = await acceptReservation(reservation.id, status);
+
+    const { data: tenant } = await supabaseAdmin.from("profiles").select("*").eq("id", reservation.tenant_id).single();
+
+    let included = "Despesas Incluídas";
+    for (let expense of reservation.advertisement.expenses.services!) {
+      if (expense.included == "PARTIALLY" && included == "INCLUDED") included = "Despesas Parcialmente incluídas";
+      if (expense.included == "EXCLUDED") included = "Despesas excluídas";
+    }
+    
+    let formData = {
+      email: tenant.email,
+      templateId: "d-f01d64f7f9ef4d9ca945f72013114958",
+      data: {
+        first_name: tenant.name,
+        accommodation_name: reservation.advertisement.title,
+        reservation_occupation: reservation.number_guests,
+        accommodation_address: `${reservation.advertisement.street} ${reservation.advertisement.street_number}, ${reservation.advertisement.postal_code} ${reservation.advertisement.place}`,
+        entry_date: new Date(reservation.start_date).toLocaleDateString(),
+        departure_date: new Date(reservation.end_date).toLocaleDateString(),
+        monthly_value: reservation.advertisement.month_rent + reservation.advertisement.extra_per_host * reservation.number_guests,
+        bills_conditions: included,
+        link: `unidesk/inbox?id=${reservation.id}`,
+      },
+    };
+
+    await fetch("/api/mail", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
 
     if (!error) {
       setCurrentConversation({

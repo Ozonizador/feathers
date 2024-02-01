@@ -7,6 +7,7 @@ interface InputProps {
   customCss?: string;
   labelText?: string;
   name?: string;
+  required?: boolean;
   errorMessage?: string;
   disabled?: boolean;
   icons?: ReactElement;
@@ -23,6 +24,7 @@ export default function Input({
   labelText = "",
   customCss = "",
   errorMessage = "",
+  required = false,
   placeholder = "",
   disabled = false,
   icons,
@@ -35,7 +37,7 @@ export default function Input({
   return (
     <div>
       {name && <label htmlFor={name}>{labelText}</label>}
-      <div className="relative text-sm">
+      <div className="relative text-sm pt-2">
         {isDropdown ? (
           <select
             placeholder={placeholder}
@@ -69,6 +71,7 @@ export default function Input({
             onChange={onChange}
             name={name}
             value={value}
+            required={required}
             aria-labelledby={name}
             disabled={disabled}
             {...props}

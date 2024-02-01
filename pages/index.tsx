@@ -9,6 +9,10 @@ import TestemunhosComponent from "../components/home/TestemunhosComponent/Testem
 import HomeSection7 from "../components/home/HomeSection7/HomeSection7";
 import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { supabase } from "../lib/supabaseClient";
+import { useRouter } from "next/router";
+import { GENERAL_ADMIN_URL } from "../models/paths";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 const Home = () => {
   return (
@@ -38,7 +42,29 @@ const Home = () => {
 
 export default Home;
 
-export async function getServerSideProps({ locale }: GetServerSidePropsContext) {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const locale = ctx.locale;
+  const supabase = createPagesServerClient(ctx);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session) {
+    const { data, error } = await supabase.from("profiles").select().eq("id", session.user.id).single();
+
+    if (data && (!data.name || !data.surname || !data.nationality || !data.town)) {
+      return {
+        redirect: {
+          destination: `/admin/general/`,
+          permanent: false,
+          locale: locale,
+        },
+      };
+    } else if (data && !data.email) {
+      await supabase.from("profiles").update({ email: session.user.email }).eq("id", session.user.id);
+    }
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(locale ?? "pt")),

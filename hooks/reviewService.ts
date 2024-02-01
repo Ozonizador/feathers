@@ -37,7 +37,7 @@ const useReviewService = () => {
 
       let formData = {
         email: updateReservation[0].reservation.advertisement.host.email,
-        templateId: "",
+        templateId: "d-237977e400ef4a6d91f31e134d1abbdc",
         data: {
           first_name: updateReservation[0].reservation.advertisement.host.name,
           accommodation_name: updateReservation[0].advertisements.title,

@@ -117,17 +117,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       .select("id, messages!inner(profile_id)")
       .eq(CONVERSATION_PROPERTIES.HOST_ID, advertisement.host_id);
 
-    let responseCount = 0;
-
-    repliedConversation?.forEach((conversation) => {
-      conversation.messages.forEach((message) => {
-        if (message.profile_id == advertisement.host_id) {
-          responseCount++;
-        }
-      });
-    });
-
-    const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : responseCount / allConversations * 100;
+    const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : (repliedConversation?.length! / allConversations * 100).toFixed(2);
 
     return {
       props: {

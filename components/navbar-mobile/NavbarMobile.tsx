@@ -143,9 +143,28 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
               </Link>
             </div>
           </div>
-          <div className="mt-7 rounded-3xl bg-gray-100 px-8 py-4 flex flex-col items-center">
+          <div className="mt-7 flex flex-col rounded-3xl bg-gray-100 px-8 py-4">
+            <div className="flex mx-auto flex-1">
+              <div className="mb-3 flex">
+                <span className="mr-2 self-center">{t("student", { count: 1 })}</span>
+                <Switch
+                  checked={false}
+                  onClick={() => toggleUserMode()}
+                  className={classNames(
+                    "relative mx-1 inline-flex h-8 w-16 cursor-default items-center rounded-full bg-primary-500"
+                  )}
+                >
+                  <span
+                    className={` ${
+                      userAppMode === "LANDLORD" ? "translate-x-11" : "translate-x-1"
+                    } inline-block h-4 w-4 transform rounded-full bg-white`}
+                  />
+                </Switch>
+                <span className="ml-2 self-center">{t("landlord", { count: 1 })}</span>
+              </div>
+            </div>
             {user && (
-              <div className="flex flex-col items-center">
+              <div className="flex items-center px-2">
                 {profile != null && // @ts-ignore
                 profile[0]?.avatar_url ? (
                   <Image
@@ -157,55 +176,37 @@ export const NavbarMobile = ({ open, setOpenMobile }: NavbarMobileProps) => {
                     height={36}
                     width={36}
                     alt="profile-avatar"
-                    className="rounded-full"
-                    style={{ maxWidth: "none", width: "80px", height: "80px" }}
+                    className="my-2 mr-2 rounded-full"
+                    style={{ maxWidth: "none", height: "20", width: "36" }}
                   />
                 ) : (
                   <BsPerson size={32} />
                 )}
 
-                <div className="my-auto mb-2 py-2 text-xl font-black capitalize">
+                <div className="text-md my-auto py-2 font-black capitalize">
                   {profile != null && // @ts-ignore
                     profile[0]?.name}
                 </div>
+
+                {user && (
+                  <>
+                    <div className="ml-auto mt-1" onClick={() => setMenuaberto(!menuaberto)}>
+                      {!menuaberto ? <AiOutlineDown size={24} /> : <AiOutlineUp size={24} />}
+                    </div>
+                  </>
+                )}
               </div>
             )}
-            <div className="flex flex-1">
-              <div className="mb-3 flex">
-                <span className="mr-2 self-center">{t("student", { count: 1 })}</span>
-                <Switch
-                  checked={false}
-                  onClick={() => toggleUserMode()}
-                  className={classNames(
-                    "relative mx-5 inline-flex h-8 w-16 cursor-default items-center rounded-full bg-primary-500"
-                  )}
-                >
-                  <span
-                    className={` ${
-                      userAppMode === "LANDLORD" ? "translate-x-11" : "translate-x-1"
-                    } inline-block h-4 w-4 transform rounded-full bg-white`}
-                  />
-                </Switch>
-                <span className="ml-2 self-center">{t("landlord", { count: 1 })}</span>
-              </div>
-              {user && (
-                <>
-                  <div className="ml-auto mt-1" onClick={() => setMenuaberto(!menuaberto)}>
-                    {!menuaberto ? <AiOutlineDown size={24} /> : <AiOutlineUp size={24} />}
-                  </div>
-                </>
-              )}
-            </div>
-            <div>
+            <div className="flex items-center justify-center flex-wrap">
               {!user && (
                 <div className="my-auto flex gap-2">
-                  <Link href={REGISTER_URL} className="p-0">
-                    <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-6 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
+                  <Link href={REGISTER_URL} className="p-0 w-1/2">
+                    <div className="flex flex-col justify-center rounded border-2 border-primary-500 px-4 py-2  text-center text-sm text-primary-500 duration-200 ease-in hover:bg-primary-500 hover:text-white hover:drop-shadow-xl">
                       {t("register")}
                     </div>
                   </Link>
 
-                  <Link href={LOGIN_URL} className="p-0">
+                  <Link href={LOGIN_URL} className="p-0 w-1/2">
                     <div className="rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl lg:py-2">
                       {t("login")}
                     </div>

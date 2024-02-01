@@ -141,7 +141,7 @@ export const RoomPagamento = () => {
             accommodation_address: `${advertisement.street} ${advertisement.street_number}, ${advertisement.postal_code} ${advertisement.place}`,
             entry_date: new Date(newReservation.start_date).toLocaleDateString(),
             departure_date: new Date(newReservation.end_date).toLocaleDateString(),
-            monthly_value: advertisement.month_rent + (advertisement.extra_per_host * newReservation.number_guests),
+            monthly_value: advertisement.month_rent + advertisement.extra_per_host * newReservation.number_guests,
             bills_conditions: included,
             link: `unidesk/inbox?id=${data.id}`,
           },
@@ -232,6 +232,7 @@ export const RoomPagamento = () => {
                 </div>
                 <FeatherDatePicker
                   date={endDate}
+                  className="border border-terciary-700"
                   onChange={(date) => {
                     setEndDate(date);
                     setSearchInfoProperty(SearchFields.END_DATE, date);
@@ -301,7 +302,7 @@ export const RoomPagamento = () => {
           </button>
         </div>
         {/* MOBILE STYLES */}
-        <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 py-7 drop-shadow-2xl lg:hidden">
+        <div className="fixed bottom-0 left-0 z-900 flex w-full flex-row items-center justify-between border  border-t-2 bg-white px-5 pt-7 drop-shadow-2xl lg:hidden">
           <div className="flex flex-col text-left">
             <h1 className="mt-2 text-2xl font-bold text-black">
               {t("advertisements:price_month", { price: setAdvertPrice() })}
@@ -310,7 +311,11 @@ export const RoomPagamento = () => {
 
             <div
               className="mb-7 cursor-pointer text-base text-[#8A8A8A] underline underline-offset-8"
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setSearchInfoProperty(SearchFields.START_DATE, startDate);
+                setSearchInfoProperty(SearchFields.END_DATE, endDate);
+                setAdvertDatesOpenModal();
+              }}
             >
               {t("payment_details")}
             </div>

@@ -21,7 +21,7 @@ const TestemunhosComponent = () => {
       <div className="max-width" style={{ maxWidth: "75rem" }}>
         <div className="w-full">
           <h6 className="pt-8 text-center text-3xl font-black">{t("index:section.testemonials.title")}</h6>
-          <div className="testimonial-block hidden h-[480px] lg:flex">
+          <div className="testimonial-block hidden h-[480px] max-sm:h-[500px] lg:flex">
             <Carousel
               leftControl={<BsArrowLeft className="h-[20px] w-[20px]" />}
               rightControl={<BsArrowRight className="h-[20px] w-[20px]" />}
@@ -47,7 +47,7 @@ const TestemunhosComponent = () => {
             </Carousel>
           </div>
 
-          <div className="flex h-96 lg:hidden">
+          <div className="flex h-[26rem] lg:hidden">
             <Carousel
               leftControl={
                 <BsFillArrowLeftCircleFill size={32} className="hidden text-5xl text-white drop-shadow-xl lg:block" />

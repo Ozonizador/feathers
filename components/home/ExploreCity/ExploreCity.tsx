@@ -57,7 +57,7 @@ const ExploreCity = () => {
   return (
     <section className="max-width">
       <div className="lg:block">
-        <div className="mx-auto text-center lg:px-8 lg:py-10 xl:p-4">
+        <div className="mx-auto text-center lg:px-8 lg:py-10 max-sm:py-4 xl:p-4">
           <h2 className="pb-20 text-4xl font-bold">{t("index:explore_city")}</h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {CONFIG.map((city, index) => (
@@ -75,7 +75,7 @@ const ExploreCityItem = ({ title, url, image }: CityProps) => {
     <Link href={url}>
       <article className="group relative mx-auto h-60 w-60 cursor-pointer rounded-2xl bg-black lg:h-52 lg:w-52 ">
         <Image src={image} alt="tomar" fill className="rounded-2xl" />
-        <div className="break-none absolute flex h-full w-full flex-col justify-center align-middle text-2xl font-bold text-white transition-all group-hover:text-[50px] group-hover:leading-none group-hover:text-neutral-200 group-hover:opacity-40">
+        <div className="break-none bg-black bg-opacity-50 rounded-2xl absolute flex h-full w-full flex-col justify-center align-middle text-2xl font-bold text-white transition-all group-hover:text-[50px] group-hover:leading-none group-hover:text-neutral-200 group-hover:opacity-40">
           {title}
         </div>
       </article>

@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <CookiesProvider>
-        {router.asPath == "/joaotest" || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" || cookies.test ? (
+        {router.asPath == "/joaotest" || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
           <SessionContextProvider supabaseClient={supabaseClient}>
             <MainProvider>
               <MenuSenhorioProvider>

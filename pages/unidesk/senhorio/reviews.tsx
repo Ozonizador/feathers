@@ -91,26 +91,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .single();
 
     const { count: allConversations, error: allConversationsError } = await supabase
-    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-    .select("count", { count: "exact" })
-    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+      .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+      .select("count", { count: "exact" })
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
 
-  const { data: repliedConversation, error: repliedConversationError } = await supabase
-    .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
-    .select("id, messages!inner(profile_id)")
-    .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
+    const { data: repliedConversation, error: repliedConversationError } = await supabase
+      .from<"conversations", Conversations>(CONVERSATION_TABLE_NAME)
+      .select("id, messages!inner(profile_id)")
+      .eq(CONVERSATION_PROPERTIES.HOST_ID, user.id);
 
-  let responseCount = 0;
-
-  repliedConversation?.forEach((conversation) => {
-    conversation.messages.forEach((message) => {
-      if (message.profile_id == user.id) {
-        responseCount++;
-      }
-    });
-  });
-
-  const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : responseCount / allConversations * 100;
+    const responseRate = (allConversationsError && repliedConversationError) || !allConversations ? 0 : (repliedConversation?.length! / allConversations * 100).toFixed(2);
 
   return {
     props: {
@@ -118,7 +108,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       user: session.user,
       latestReviews: reviewsError ? [] : reviewsOfUser,
       generalClassification: classificationError ? 0 : generalClassification,
-      responseRate: responseCount,
+      responseRate: responseRate,
       ...(await serverSideTranslations(locale ?? "pt")),
     },
   };

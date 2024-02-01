@@ -3,7 +3,7 @@ import { Session, User } from "@supabase/auth-helpers-react";
 import classNames from "classnames";
 import { Avatar, Select } from "flowbite-react";
 import { GetServerSidePropsContext } from "next";
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import countryList from "react-select-country-list";
 import { toast } from "react-toastify";
@@ -63,6 +63,23 @@ const Index = ({ user, profileData }: IndexProps) => {
   const { addAvatar, updateUserProfile } = useProfileService();
   const [profile, setProfile] = useState<Profile>(profileData);
   const [country, setCountry] = useState((phoneNumber && phoneNumber.country) || "PT");
+
+  useEffect(() => {
+
+    const handleLoad = () => {
+      if (!(profile.name && profile.surname && profile.town && profile.phone)) {
+        toast.warning(t("account:fill"));
+      }
+    };
+
+    // Add event listener for onLoad
+    window.addEventListener('load', handleLoad);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
 
   const {
     register,
@@ -189,17 +206,27 @@ const Index = ({ user, profileData }: IndexProps) => {
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <FeathersInput value={value} onChange={onChange} name="nome" labelText={t("admin:config.name")} />
+                    <FeathersInput
+                      value={value}
+                      required={true}
+                      onChange={onChange}
+                      name="nome"
+                      labelText={t("admin:config.name")}
+                    />
                   )}
                   name="name"
                 ></Controller>
               </div>
               <div className="mb-1">{t("admin:config.birth_date")}</div>
-              <div className="flex flex-row gap-4 birth-picker">
+              <div className="birth-picker flex flex-row gap-4">
                 <Controller
                   control={control}
                   render={({ field: { onChange, value } }) => (
-                    <FeatherDatePicker date={value} onChange={onChange} className="w-full" />
+                    <FeatherDatePicker
+                      date={value}
+                      onChange={onChange}
+                      className="w-full rounded-md border !border-solid border-solid border-terciary-500"
+                    />
                   )}
                   name="birth_date"
                 ></Controller>
@@ -235,6 +262,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                     <FeathersInput
                       value={value}
                       onChange={onChange}
+                      required={true}
                       name="Apelido"
                       labelText={t("admin:config.surname")}
                     />
@@ -265,6 +293,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                   <FeathersInput
                     onChange={onChange}
                     value={value}
+                    required={true}
                     name="localidade"
                     labelText={t("admin:config.location")}
                   />
@@ -278,7 +307,7 @@ const Index = ({ user, profileData }: IndexProps) => {
           <textarea
             {...register("description")}
             rows={5}
-            className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  focus:border-primary-500 focus:outline-none focus:ring-0 shadow-sm"
+            className="mb-6 mt-1 block w-full rounded-md border border-solid border-terciary-500 bg-white px-2 py-3  shadow-sm focus:border-primary-500 focus:outline-none focus:ring-0"
             placeholder="Escreva aqui..."
           />
 
@@ -298,7 +327,7 @@ const Index = ({ user, profileData }: IndexProps) => {
                     onChange={(val) => onChange(val.map((c) => c.value))}
                     isMulti
                     options={options}
-                    className="bg-white-100 mr-3 flex w-full items-center rounded-xl border border-gray-200 focus:border-primary-500 px-3 py-2"
+                    className="bg-white-100 mr-3 flex w-full items-center rounded-xl border border-gray-200 px-3 py-2 focus:border-primary-500"
                     styles={customStyles}
                     id="lang-drop"
                   />
@@ -352,7 +381,6 @@ const Index = ({ user, profileData }: IndexProps) => {
                     "mt-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9 py-4 text-center uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-44",
                     { "opacity-50": !isDirty }
                   )}
-                  onSubmit={handleSubmit(onSubmit)}
                 >
                   {t("save")}
                 </button>

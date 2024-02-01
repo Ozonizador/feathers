@@ -4,7 +4,7 @@ import React, { Suspense, useState } from "react";
 import { SiFacebook, SiGmail } from "react-icons/si";
 import { toast } from "react-toastify";
 import Input from "../../components/utils/Input";
-import { HOME_URL, LOGIN_URL } from "../../models/paths";
+import { HOME_URL, LOGIN_URL, GENERAL_ADMIN_URL } from "../../models/paths";
 import useUserService from "../../hooks/userService";
 import Button from "../../components/utils/Button";
 import { Trans, useTranslation } from "next-i18next";
@@ -41,7 +41,7 @@ const Register = () => {
       return;
     } else {
       toast.success(t("messages:success.register_done"));
-      router.push(HOME_URL);
+      router.push(GENERAL_ADMIN_URL);
     }
   };
 

@@ -142,5 +142,9 @@
   "Transactions": "Transactions",
   "Expenses": "Expenses",
   "Repairs": "Repairs",
-  "rent_first_rest": "the rest of the month"
+  "rent_first_rest": "the rest of the month",
+  "faqs": {
+    "search": "How can we help you?",
+    "search_label": "Search help articles..."
+  }
 }
