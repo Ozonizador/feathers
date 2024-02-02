@@ -93,7 +93,7 @@ export const SearchInputField = () => {
   return (
     <>
       <div className="flex-row justify-center lg:mt-7 lg:flex">
-        <div className="relative my-2 max-sm:mx-2 max-sm:w-full text-sm lg:mx-2">
+        <div className="relative my-2 text-sm max-sm:mx-2 max-sm:w-full lg:mx-2">
           <div className="relative max-sm:mr-4">
             <FaHouse className="absolute left-3 top-1/2 -translate-y-1/2 transform" />
             <input
@@ -119,8 +119,8 @@ export const SearchInputField = () => {
           )}
         </div>
 
-        <div className="flex flex-row gap-2 max-sm:flex-col lg:gap-0 mr-4">
-          <div className="date-parent z-50 my-2 max-sm:mx-2 max-sm:w-full w-1/2 rounded-[14px] border-2 border-primary-500 lg:mx-2">
+        <div className="flex flex-row gap-2 lg:mr-4 lg:gap-0">
+          <div className="date-parent z-50 my-2 w-1/2 rounded-[14px] border-2 border-primary-500 max-sm:mx-2 lg:mx-2">
             <FeatherDatePicker
               placeholder={t("advertisements:date_in")}
               date={startDate}
@@ -136,7 +136,7 @@ export const SearchInputField = () => {
               icon={<FaArrowAltCircleRight className="absolute left-3 top-1/2 -translate-y-1/2 transform" />}
             />
           </div>
-          <div className="date-parent z-50 my-2 max-sm:mx-2 max-sm:w-full w-1/2 rounded-[14px] border-2 border-primary-500 lg:mx-2">
+          <div className="date-parent z-50 my-2 w-1/2 rounded-[14px] border-2 border-primary-500 max-sm:mx-2 lg:mx-2">
             <FeatherDatePicker
               placeholder={t("advertisements:date_out")}
               className="bg-terciary-50 h-14 w-full rounded-xl border-none pl-10 text-sm lg:h-full lg:w-52"
@@ -147,7 +147,7 @@ export const SearchInputField = () => {
             />
           </div>
         </div>
-        <div className="m-2">
+        <div className="m-2 sm:mx-0 lg:m-2">
           <button onClick={sendQueryRequest} className="h-14 w-full rounded-lg bg-primary-500 transition lg:w-[70px]">
             <Image height={25} width={25} src="/images/icon-search.svg" className="search-btn mx-auto my-auto" alt="" />
           </button>

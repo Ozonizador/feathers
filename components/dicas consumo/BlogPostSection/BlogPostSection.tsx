@@ -16,7 +16,7 @@ interface BlogPostSectionProps {
 const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   const router = useRouter();
   const { t } = useTranslation();
-  const renderers = {
+    const renderers = {
     p: (props: any) => <p className={"leading-8 " + (isString(props.children[0]) ? "mb-2": "mt-8 mb-2")}>{props.children}</p>,
     h1: (props: any) => <h1 className="text-primary-500">{props.children}</h1>,
     strong: (props: any) => <strong className="font-extrabold text-xl my-5">{props.children}</strong>
