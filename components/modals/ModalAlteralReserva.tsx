@@ -41,14 +41,14 @@ const ModalAlterarReserva = () => {
     setIsOpen(false);
   }
 
-  useEffect(()=> {
-    if(isSameDay(newReservationStartDate, new Date())) {
+  useEffect(() => {
+    if (isSameDay(newReservationStartDate, new Date())) {
       if (reservation) {
-        setNewReservationStartDate(new Date(reservation.start_date))
-        setNewReservationEndDate(addMonths(newReservationStartDate, reservation.advertisement.minimum_stay))
+        setNewReservationStartDate(new Date(reservation.start_date));
+        setNewReservationEndDate(addMonths(newReservationStartDate, reservation.advertisement.minimum_stay));
       }
     }
-  })
+  });
 
   const changeNewReservationProperty = (property: string, value: any) => {
     setNewReservation({ ...newReservation, [property]: value });

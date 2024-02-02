@@ -102,8 +102,8 @@ export default function ProcurarSection() {
       <ModalMaisFiltros />
       <div className="mt-5 flex flex-1">
         <div className={`w-full ${location ? "" : ""}`}>
-          <div className="w-3/4 mx-auto lg:w-full">
-            <div className="flex items-center flex-row justify-between">
+          <div className="mx-auto w-3/4 max-md:w-[83%] lg:w-full">
+            <div className="flex flex-row items-center justify-between">
               <div className="text-sm font-bold lg:text-xl">
                 <Trans
                   i18nKey="available_options"
@@ -139,49 +139,51 @@ export default function ProcurarSection() {
               </div>
             </div>
 
-            <div className="mt-4 flex items-center gap-2">
-              <PopoverGeneric title={t("advertisements:type_house")}>
-                <div className="grid w-64 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
-                  <div
-                    className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
-                      "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
-                      "border-neutral-500": currentFilter.placeType !== "ALL",
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <div className="find_filter flex w-full gap-2 max-lg:mb-[5px] lg:w-fit">
+                <PopoverGeneric title={t("advertisements:type_house")}>
+                  <div className="grid w-64 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
+                    <div
+                      className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
+                        "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
+                        "border-neutral-500": currentFilter.placeType !== "ALL",
+                      })}
+                      onClick={() => setFilters({ placeType: "ALL" as TypeAdvertisement })}
+                    >
+                      {t("any_space")}
+                    </div>
+                    {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
+                          className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
+                            "border-primary-500 text-primary-500": currentFilter.placeType === type,
+                            "border-neutral-500": currentFilter.placeType !== type,
+                          })}
+                        >
+                          {t(TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT])}
+                        </div>
+                      );
                     })}
-                    onClick={() => setFilters({ placeType: "ALL" as TypeAdvertisement })}
-                  >
-                    {t("any_space")}
                   </div>
-                  {Object.keys(TYPE_ADVERTISEMENT).map((type, index) => {
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
-                        className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
-                          "border-primary-500 text-primary-500": currentFilter.placeType === type,
-                          "border-neutral-500": currentFilter.placeType !== type,
-                        })}
-                      >
-                        {t(TYPE_ADVERTISEMENT[type as keyof typeof TYPE_ADVERTISEMENT])}
-                      </div>
-                    );
-                  })}
-                </div>
-              </PopoverGeneric>
-              <PopoverGeneric title={t("advertisements:price", { count: 1 })} className="h-full">
-                <div className="w-fit">
-                  <Slider
-                    range
-                    marks={{ 0: "0€", 1000: "1000€", 3000: "3000€" }}
-                    defaultValue={[0, 3000]}
-                    onChange={setPriceChange}
-                    min={0}
-                    max={3000}
-                    className="mx-5 my-auto w-64 py-10"
-                  ></Slider>
-                </div>
-              </PopoverGeneric>
+                </PopoverGeneric>
+                <PopoverGeneric title={t("advertisements:price", { count: 1 })} className="lg:flex-0 h-full flex-1">
+                  <div className="w-fit">
+                    <Slider
+                      range
+                      marks={{ 0: "0€", 1000: "1000€", 3000: "3000€" }}
+                      defaultValue={[0, 3000]}
+                      onChange={setPriceChange}
+                      min={0}
+                      max={3000}
+                      className="mx-5 my-auto w-64 py-10"
+                    ></Slider>
+                  </div>
+                </PopoverGeneric>
+              </div>
 
-              <div className="ml-auto h-full w-fit">
+              <div className="h-full w-fit lg:ml-auto">
                 <Button type="button" onClick={() => setModalMaisFiltros(true)} padding="sm">
                   {t("more_filters")}
                 </Button>

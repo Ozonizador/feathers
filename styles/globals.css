@@ -248,6 +248,18 @@ img.cursor-pointer.w-1\/4{
 .avatar_div img{
    height: 40px;
 }
+.date_parent_sub input{
+border-radius: 12px;
+width: inherit;
+}
+.home_img{
+ position: unset !important;
+ aspect-ratio: 1/1;
+}
+.find_date_picker input::placeholder{
+margin-left: 10px;
+}
+
 @media only screen and (min-width: 1023px) and (max-width: 1200px)  {
   .img_div{
     width: 10rem
@@ -282,6 +294,28 @@ img.cursor-pointer.w-1\/4{
   .popup_div{
     flex-direction: column !important;
   }
+}
+@media only screen and (max-width: 300px){
+  .date_parent_sub{
+    overflow: hidden;
+    border-radius: 12px;
+  }
+}
+@media only screen and (min-width: 515px) and (max-width: 1023px){
+ .find_filter> div{
+  width: 50% !important ;
+ }
+ .home_img{
+  aspect-ratio: unset;
+ }
+}
+@media only screen and (max-width: 1023px){
+  .home_img{
+    height: 100%  !important;
+  }
+  .find_filter> div{
+    width: fit-content;
+   }
 }
 .table-container {
   max-width: 100%;

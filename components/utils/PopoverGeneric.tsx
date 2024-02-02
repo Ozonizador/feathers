@@ -12,7 +12,7 @@ interface PopoverSelectProps {
 const PopoverGeneric = ({ title, children, className }: PopoverSelectProps) => {
   return (
     <div className={className}>
-      <Popover className="relative z-700 w-full">
+      <Popover className="relative w-full">
         {({ open }) => (
           <>
             <Popover.Button
@@ -20,7 +20,9 @@ const PopoverGeneric = ({ title, children, className }: PopoverSelectProps) => {
                 ${open ? "" : "text-opacity-90"}
                 flex w-full justify-between rounded-xl border border-primary-300 p-2`}
             >
-              <span className="text-md">{title}</span>
+              <span className="text-md" style={{ whiteSpace: "nowrap" }}>
+                {title}
+              </span>
               <BsFillCaretDownFill
                 className={`${open ? "" : "text-opacity-70"}
                   my-auto ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}

@@ -23,6 +23,7 @@ import { Label } from "flowbite-react";
 import { useTranslation } from "next-i18next";
 import { HouseExpenses, Included } from "../../../../models/advertisement";
 import { includes } from "lodash";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
 type FormReservation = {
   number_guests: number;
@@ -211,34 +212,43 @@ export const RoomPagamento = () => {
             <ExpensesComponent expenses={advertisement?.expenses || {}} />
             <hr />
 
-            <div className="mt-5 grid grid-cols-2 gap-4">
+            <div className="find_date_picker mt-5 grid grid-cols-2 gap-4">
               <div className="mb-2 block w-full">
                 <div className="mb-2 block">
                   <Label htmlFor="Entrada" value={t("start")} />
                 </div>
-                <FeatherDatePicker
-                  minDate={checkMonthsInAdvance()}
-                  date={startDate}
-                  onChange={(date) => {
-                    setStartDate(date);
-                    setSearchInfoProperty(SearchFields.START_DATE, date);
-                  }}
-                />
+                <div className="rounded-[14px] border-2 border-primary-500">
+                  <FeatherDatePicker
+                    placeholder={t("advertisements:date_in")}
+                    minDate={checkMonthsInAdvance()}
+                    className="pl-8"
+                    date={startDate}
+                    onChange={(date) => {
+                      setStartDate(date);
+                      setSearchInfoProperty(SearchFields.START_DATE, date);
+                    }}
+                    icon={<FaArrowAltCircleRight className="absolute left-3 top-1/2 -translate-y-1/2 transform" />}
+                  />
+                </div>
               </div>
 
               <div className="mb-2 block w-full">
                 <div className="mb-2 block">
                   <Label htmlFor="Saida" value="Saida" />
                 </div>
-                <FeatherDatePicker
-                  date={endDate}
-                  className="border border-terciary-700"
-                  onChange={(date) => {
-                    setEndDate(date);
-                    setSearchInfoProperty(SearchFields.END_DATE, date);
-                  }}
-                  minDate={checkMinimumStay()}
-                />
+                <div className="rounded-[14px] border-2 border-primary-500">
+                  <FeatherDatePicker
+                    placeholder={t("advertisements:date_out")}
+                    date={endDate}
+                    className="border border-terciary-700 pl-8"
+                    onChange={(date) => {
+                      setEndDate(date);
+                      setSearchInfoProperty(SearchFields.END_DATE, date);
+                    }}
+                    minDate={checkMinimumStay()}
+                    icon={<FaArrowAltCircleLeft className="absolute left-3 top-1/2 -translate-y-1/2 transform" />}
+                  />
+                </div>
               </div>
             </div>
 
