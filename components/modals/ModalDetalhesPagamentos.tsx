@@ -208,7 +208,7 @@ const ModalDetalhesPagamento = () => {
                     className="mb-16 mt-6 text-center text-2xl font-bold leading-6 text-gray-900 lg:text-4xl ml-2"
                   >
                     {t("common:payment_details")}
-                    <IoMdClose className=" ml-2 h-8 w-8" onClick={() => closeModal()}/>
+                    <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 max-sm:top-11" onClick={() => closeModal()}/>
                   </Dialog.Title>
 
                   <div className="mt-2">

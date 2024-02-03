@@ -134,6 +134,6 @@
   "other": "Other Photos",
   "house_verified": "Verified House",
   "person": "person",
-  "date_in": "Entry Date",
-  "date_out": "Departure Date"
+  "date_in": "Entry",
+  "date_out": "Departure"
 }

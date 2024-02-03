@@ -217,7 +217,7 @@ export const RoomPagamento = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="Entrada" value={t("start")} />
                 </div>
-                <div className="rounded-[14px] border-2 border-primary-500">
+                <div className="rounded-[14px] border-2 border-terciary-700">
                   <FeatherDatePicker
                     placeholder={t("advertisements:date_in")}
                     minDate={checkMonthsInAdvance()}
@@ -236,7 +236,7 @@ export const RoomPagamento = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="Saida" value="Saida" />
                 </div>
-                <div className="rounded-[14px] border-2 border-primary-500">
+                <div className="rounded-[14px] border-2 border-terciary-700">
                   <FeatherDatePicker
                     placeholder={t("advertisements:date_out")}
                     date={endDate}
