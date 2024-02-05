@@ -23,12 +23,9 @@ type BankTransfer = {
   swift: string;
 };
 
-interface PaymentsProps {
-  user: User;
-  payment_method: PaymentMethod;
-}
-
-const Index = ({ user, payment_method }: PaymentsProps) => {
+const Index = (props: any) => {
+  const user = props.user;
+  const payment_method = props.payment_method;
   const [state, setState] = useState<string>("Recebimentos");
   const { t } = useTranslation();
   const {

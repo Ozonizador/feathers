@@ -13,6 +13,7 @@ import {
   PAYMENT_METHODS_TABLE_NAME,
 } from "../models/profile";
 import { createRandomUniqWord } from "../utils/utils";
+import { supabaseAdmin } from "../lib/supabaseAdminClient";
 
 const useProfileService = () => {
   const supabaseClient = useSupabaseClient();
@@ -123,24 +124,35 @@ const useProfileService = () => {
 
   /* Paymenth Methods*/
   const addPaymentMethods = async (userId: string, iban: string, swift: string) => {
-    const {data, error} = await supabaseClient
-    .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
-    .insert({profile_id: userId, iban, swift})
-    .select()
-    .single()
+    const {data:test, error} = await getUserPaymentMethods(userId);
+    if (test == null) {
+      const { data, error } = await supabaseClient
+        .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
+        .insert({ profile_id: userId, iban, swift })
+        .select()
+        .single();
 
-    return {data, error}
+        return { data, error };
+    } else {
+      const { data, error } = await supabaseAdmin
+        .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
+        .update({...test, iban: iban, swift: swift })
+        .eq('profile_id', userId)
+        .select();
+
+        return { data, error };
+    }
   };
 
   const getUserPaymentMethods = async (userId: string) => {
     const { data, error } = await supabaseClient
-    .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
-    .select()
-    .eq("profile_id", userId)
-    .single()
+      .from<"payment_methods", PaymentMethods>(PAYMENT_METHODS_TABLE_NAME)
+      .select()
+      .eq("profile_id", userId)
+      .single();
 
-    return {data, error};
-  }
+    return { data, error };
+  };
 
   /* Messages */
 
