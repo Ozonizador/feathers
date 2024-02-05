@@ -230,7 +230,7 @@ const ModalDetalhesPagamento = () => {
                             </div>
                           </div>
                           <div className="ml-auto flex max-sm:ml-0">
-                            <div className="font-bold">{setAdvertPrice()}€</div>
+                            <div className="font-bold">{setAdvertPrice().toLocaleString()}€</div>
                           </div>
                         </div>
                         <div className="flex gap-1 text-neutral-600">
@@ -250,7 +250,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex max-sm:flex-col">
                           <h6 className="font-bold">{t("on_check_day")}</h6>
                           <div className="ml-auto flex max-sm:ml-0">
-                            <div className="font-bold">{setAdvertPrice()}€</div>
+                            <div className="font-bold">{setAdvertPrice().toLocaleString()}€</div>
                           </div>
                         </div>
                         <div className="flex">
@@ -267,7 +267,7 @@ const ModalDetalhesPagamento = () => {
                             </div>
                           </div>
                           <div className="ml-auto mr-6 text-neutral-500">
-                            {advertisement?.guarantee_value || guaranteed_value}€
+                            {advertisement?.guarantee_value.toLocaleString() || guaranteed_value?.toLocaleString()}€
                           </div>
                         </div>
                       </FeathersAccordion>
