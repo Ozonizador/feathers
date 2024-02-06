@@ -11,7 +11,9 @@
     "sitemap": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "dev:inspect": "NODE_OPTIONS='--inspect' next dev"
+    "dev:inspect": "NODE_OPTIONS='--inspect' next dev",
+    "cloud dev": "gcloud run deploy --image=europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1 --region=europe-west1",
+    "cloud docker": "gcloud run deploy --image=europe-west3-docker.pkg.dev/projectbuild-398321/feathers-docker-image/nextjs-docker-image:tag1 "
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
