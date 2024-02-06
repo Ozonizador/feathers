@@ -8,6 +8,7 @@ import CardLineChart from "../../components/notus/Cards/CardLineChart.js";
 import CardBarChart from "../../components/notus/Cards/CardBarChart.js";
 import CardPageVisits from "../../components/notus/Cards/CardPageVisits.js";
 import CardSocialTraffic from "../../components/notus/Cards/CardSocialTraffic.js";
+import Sidebar from "../../components/notus/Sidebar/Sidebar";
 
 // layout for page
 
@@ -22,17 +23,22 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <div className="flex flex-wrap">
-        <div className="mb-12 w-full px-4 xl:mb-0 xl:w-8/12">
-          <CardLineChart data={reservationCount} />
-        </div>
-        <div className="w-full px-4 xl:w-4/12">
-          <CardBarChart data={last12MonthsCount} date={last12MonthsDate} title={"Reservas"}/>
-        </div>
-      </div>
-      <div className="mt-4 flex flex-wrap">
-        <div className="mb-12 w-full px-4 xl:mb-0 xl:w-full">
-          <CardPageVisits data={reservations} />
+      <div>
+        <Sidebar />
+        <div className="ml-64 mt-10">
+          <div className="flex flex-wrap">
+            <div className="mb-12 w-full px-4 xl:mb-0 xl:w-8/12">
+              <CardLineChart data={reservationCount} />
+            </div>
+            <div className="w-full px-4 xl:w-4/12">
+              <CardBarChart data={last12MonthsCount} date={last12MonthsDate} title={"Reservas"} />
+            </div>
+          </div>
+          <div className="mt-4 flex flex-wrap">
+            <div className="mb-12 w-full px-4 xl:mb-0 xl:w-full">
+              <CardPageVisits data={reservations} />
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -135,7 +141,8 @@ export const getServerSideProps = async (ctx) => {
         return (
           createdAtDate >= currentMonthDate &&
           createdAtDate < new Date(currentMonthDate.getFullYear(), currentMonthDate.getMonth() + 1, 1) &&
-          entry.status === "ACCEPTED" && entry.payment_status == "PAID"
+          entry.status === "ACCEPTED" &&
+          entry.payment_status == "PAID"
         );
       });
 

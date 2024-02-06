@@ -40,7 +40,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <CookiesProvider>
-        {router.asPath == "/joaotest" || process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+        {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true" ? (
+          <Maintenance />
+        ) : router.asPath.includes("/superadmin") ? (
           <SessionContextProvider supabaseClient={supabaseClient}>
             <MainProvider>
               <MenuSenhorioProvider>
@@ -52,7 +54,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   ></meta>
                   <meta name="viewport" content="width=device-width, initial-scale=1" />
                 </Head>
-                <Navbar />
                 <div className="min-h-screen">
                   <Flowbite theme={{ theme }}>
                     <NextNProgress />
@@ -60,12 +61,33 @@ function MyApp({ Component, pageProps }: AppProps) {
                   </Flowbite>
                   <ToastContainer />
                 </div>
-                <Footer />
               </MenuSenhorioProvider>
             </MainProvider>
           </SessionContextProvider>
         ) : (
-          <Maintenance />
+          <SessionContextProvider supabaseClient={supabaseClient}>
+          <MainProvider>
+            <MenuSenhorioProvider>
+              <Head>
+                <title>Unihosts</title>
+                <meta
+                  name="description"
+                  content="A UniHosts nasceu da necessidade de organizar e modernizar o processo de gestão de alojamento"
+                ></meta>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+              </Head>
+              <Navbar/>
+              <div className="min-h-screen">
+                <Flowbite theme={{ theme }}>
+                  <NextNProgress />
+                  <Component {...pageProps} />
+                </Flowbite>
+                <ToastContainer />
+              </div>
+              <Footer/>
+            </MenuSenhorioProvider>
+          </MainProvider>
+        </SessionContextProvider>
         )}
       </CookiesProvider>
     </>
