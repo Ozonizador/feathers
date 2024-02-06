@@ -51,7 +51,9 @@ const Faqs = () => {
         faq.answer.toLowerCase().includes(value.toLowerCase())
     );
     const newFilteredFaqsLandlord = landlordFaqs?.filter(
-      (faq) => faq.question.includes(value) || faq.answer.includes(value)
+      (faq) =>
+        faq.question.toLowerCase().includes(value.toLowerCase()) ||
+        faq.answer.toLowerCase().includes(value.toLowerCase())
     );
 
     setTenantFaqsState(newFilteredFaqs);
