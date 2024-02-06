@@ -45,13 +45,17 @@ const Faqs = () => {
   const handleQuery = (value: string) => {
     setQuery(value);
 
-    const newFilteredFaqs = tenantFaqs?.filter((faq) => faq.question.includes(value) || faq.answer.includes(value));
+    const newFilteredFaqs = tenantFaqs?.filter(
+      (faq) =>
+        faq.question.toLowerCase().includes(value.toLowerCase()) ||
+        faq.answer.toLowerCase().includes(value.toLowerCase())
+    );
     const newFilteredFaqsLandlord = landlordFaqs?.filter(
       (faq) => faq.question.includes(value) || faq.answer.includes(value)
     );
 
     setTenantFaqsState(newFilteredFaqs);
-    setLandlordFaqsState(newFilteredFaqsLandlord)
+    setLandlordFaqsState(newFilteredFaqsLandlord);
   };
 
   return (
@@ -71,7 +75,11 @@ const Faqs = () => {
 
           <div className="mb-10 w-1/3">
             <h3 className="mb-2 text-3xl">{t("common:faqs.search")}</h3>
-            <Input placeholder={t("common:faqs.search_label")} name="faqs_query" onChange={(e) => handleQuery(e.target.value)}></Input>
+            <Input
+              placeholder={t("common:faqs.search_label")}
+              name="faqs_query"
+              onChange={(e) => handleQuery(e.target.value)}
+            ></Input>
           </div>
         </div>
 
