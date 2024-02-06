@@ -26,7 +26,6 @@ type BankTransfer = {
 const Index = (props: any) => {
   const user = props.user;
   const payment_method = props.payment_method;
-  console.log(payment_method)
   const [state, setState] = useState<string>("Recebimentos");
   const { t } = useTranslation();
   const {

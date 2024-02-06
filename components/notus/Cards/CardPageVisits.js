@@ -4,7 +4,6 @@ import React from "react";
 
 export default function CardPageVisits(data) {
   const reservations = data.data;
-  console.log(reservations);
   return (
     <>
       <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
