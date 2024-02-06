@@ -1,3 +1,4 @@
+import { tr } from "date-fns/locale";
 import React from "react";
 
 // components
@@ -65,7 +66,22 @@ export default function CardPageVisits(data) {
                   {reservations[0].number_guests}
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-                  {reservations[0].status}
+                  {(reservations[0].status == "ACCEPTED" || reservations[0].status == "CHANGE_ACCEPTED") &&
+                  reservations[0].payment_status == "PAID"
+                    ? "Reserva Confirmada"
+                    : (reservations[0].status == "ACCEPTED" || reservations[0].status == "CHANGE_ACCEPTED") &&
+                      reservations[0].payment_status == "PENDING"
+                    ? "Esperando Pagamanento"
+                    : (reservations[0].status == "ACCEPTED" || reservations[0].status == "CHANGE_ACCEPTED") &&
+                      reservations[0].payment_status == "NOT_GENERATED"
+                    ? "Reserva Aceite"
+                    : reservations[0].status == "REQUESTED" || reservations[0].status == "CHANGE_REQUESTED"
+                    ? "Pedido de Reserva enviado"
+                    : reservations[0].status == "REJECTED" || reservations[0].status == "CHANGE_REJECTED"
+                    ? "Reserva Rejeitada"
+                    : reservations[0].status == "EXPIRED"
+                    ? "Reserva Expirada"
+                    : ""}
                 </td>
               </tr>
               <tr>
@@ -85,7 +101,22 @@ export default function CardPageVisits(data) {
                   {reservations[1].number_guests}
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-                  {reservations[1].status}
+                  {(reservations[1].status == "ACCEPTED" || reservations[1].status == "CHANGE_ACCEPTED") &&
+                  reservations[1].payment_status == "PAID"
+                    ? "Reserva Confirmada"
+                    : (reservations[1].status == "ACCEPTED" || reservations[1].status == "CHANGE_ACCEPTED") &&
+                      reservations[1].payment_status == "PENDING"
+                    ? "Esperando Pagamanento"
+                    : (reservations[1].status == "ACCEPTED" || reservations[1].status == "CHANGE_ACCEPTED") &&
+                      reservations[1].payment_status == "NOT_GENERATED"
+                    ? "Reserva Aceite"
+                    : reservations[1].status == "REQUESTED" || reservations[1].status == "CHANGE_REQUESTED"
+                    ? "Pedido de Reserva enviado"
+                    : reservations[1].status == "REJECTED" || reservations[1].status == "CHANGE_REJECTED"
+                    ? "Reserva Rejeitada"
+                    : reservations[1].status == "EXPIRED"
+                    ? "Reserva Expirada"
+                    : ""}
                 </td>
               </tr>
               <tr>
@@ -105,7 +136,22 @@ export default function CardPageVisits(data) {
                   {reservations[2].number_guests}
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-                  {reservations[2].status}
+                  {(reservations[2].status == "ACCEPTED" || reservations[2].status == "CHANGE_ACCEPTED") &&
+                  reservations[2].payment_status == "PAID"
+                    ? "Reserva Confirmada"
+                    : (reservations[2].status == "ACCEPTED" || reservations[2].status == "CHANGE_ACCEPTED") &&
+                      reservations[2].payment_status == "PENDING"
+                    ? "Esperando Pagamanento"
+                    : (reservations[2].status == "ACCEPTED" || reservations[2].status == "CHANGE_ACCEPTED") &&
+                      reservations[2].payment_status == "NOT_GENERATED"
+                    ? "Reserva Aceite"
+                    : reservations[2].status == "REQUESTED" || reservations[2].status == "CHANGE_REQUESTED"
+                    ? "Pedido de Reserva enviado"
+                    : reservations[2].status == "REJECTED" || reservations[2].status == "CHANGE_REJECTED"
+                    ? "Reserva Rejeitada"
+                    : reservations[2].status == "EXPIRED"
+                    ? "Reserva Expirada"
+                    : ""}
                 </td>
               </tr>
               <tr>
@@ -125,7 +171,22 @@ export default function CardPageVisits(data) {
                   {reservations[3].number_guests}
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-                  {reservations[3].status}
+                  {(reservations[3].status == "ACCEPTED" || reservations[3].status == "CHANGE_ACCEPTED") &&
+                  reservations[3].payment_status == "PAID"
+                    ? "Reserva Confirmada"
+                    : (reservations[3].status == "ACCEPTED" || reservations[3].status == "CHANGE_ACCEPTED") &&
+                      reservations[3].payment_status == "PENDING"
+                    ? "Esperando Pagamanento"
+                    : (reservations[3].status == "ACCEPTED" || reservations[3].status == "CHANGE_ACCEPTED") &&
+                      reservations[3].payment_status == "NOT_GENERATED"
+                    ? "Reserva Aceite"
+                    : reservations[3].status == "REQUESTED" || reservations[3].status == "CHANGE_REQUESTED"
+                    ? "Pedido de Reserva enviado"
+                    : reservations[3].status == "REJECTED" || reservations[3].status == "CHANGE_REJECTED"
+                    ? "Reserva Rejeitada"
+                    : reservations[3].status == "EXPIRED"
+                    ? "Reserva Expirada"
+                    : ""}
                 </td>
               </tr>
               <tr>
@@ -141,11 +202,26 @@ export default function CardPageVisits(data) {
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[4].tenant.name + " " + reservations[4].tenant.surname}
                 </td>
-                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                <td className="whitespxwace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[4].number_guests}
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-                  {reservations[4].status}
+                  {(reservations[4].status == "ACCEPTED" || reservations[4].status == "CHANGE_ACCEPTED") &&
+                  reservations[4].payment_status == "PAID"
+                    ? "Reserva Confirmada"
+                    : (reservations[4].status == "ACCEPTED" || reservations[4].status == "CHANGE_ACCEPTED") &&
+                      reservations[4].payment_status == "PENDING"
+                    ? "Esperando Pagamanento"
+                    : (reservations[4].status == "ACCEPTED" || reservations[4].status == "CHANGE_ACCEPTED") &&
+                      reservations[4].payment_status == "NOT_GENERATED"
+                    ? "Reserva Aceite"
+                    : reservations[4].status == "REQUESTED" || reservations[4].status == "CHANGE_REQUESTED"
+                    ? "Pedido de Reserva enviado"
+                    : reservations[4].status == "REJECTED" || reservations[4].status == "CHANGE_REJECTED"
+                    ? "Reserva Rejeitada"
+                    : reservations[4].status == "EXPIRED"
+                    ? "Reserva Expirada"
+                    : ""}
                 </td>
               </tr>
             </tbody>
