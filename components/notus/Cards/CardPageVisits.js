@@ -43,6 +43,9 @@ export default function CardPageVisits(data) {
                 <th className="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
                   Qtd. hóspedes
                 </th>
+                <th className="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+                  Estado
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +65,9 @@ export default function CardPageVisits(data) {
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[0].number_guests}
                 </td>
+                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                  {reservations[0].status}
+                </td>
               </tr>
               <tr>
                 <th className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
@@ -78,6 +84,9 @@ export default function CardPageVisits(data) {
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[1].number_guests}
+                </td>
+                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                  {reservations[1].status}
                 </td>
               </tr>
               <tr>
@@ -96,6 +105,9 @@ export default function CardPageVisits(data) {
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[2].number_guests}
                 </td>
+                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                  {reservations[2].status}
+                </td>
               </tr>
               <tr>
                 <th className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
@@ -113,6 +125,9 @@ export default function CardPageVisits(data) {
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[3].number_guests}
                 </td>
+                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                  {reservations[3].status}
+                </td>
               </tr>
               <tr>
                 <th className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
@@ -129,6 +144,9 @@ export default function CardPageVisits(data) {
                 </td>
                 <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                   {reservations[4].number_guests}
+                </td>
+                <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                  {reservations[4].status}
                 </td>
               </tr>
             </tbody>
