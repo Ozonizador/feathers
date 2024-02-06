@@ -32,7 +32,12 @@ const Index = (props: any) => {
     control,
     handleSubmit,
     formState: { isDirty },
-  } = useForm<BankTransfer>({ defaultValues: {swift: payment_method.swift, iban: payment_method.iban} });
+  } = useForm<BankTransfer>({
+    defaultValues: {
+      swift: payment_method.swift ?? "",
+      iban: payment_method.iban ?? ""
+    }
+  });
   const { addPaymentMethods } = useProfileService();
 
   const onSubmit = async ({ iban, swift }: BankTransfer) => {
