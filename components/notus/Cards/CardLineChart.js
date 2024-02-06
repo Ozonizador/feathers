@@ -20,22 +20,7 @@ export default function CardLineChart(data) {
           "November",
           "December"
         ],
-        datasets: [
-          {
-            label: new Date().getFullYear(),
-            backgroundColor: "rgb(196 139 96)",
-            borderColor: "rgb(196 139 96)",
-            data: [65, 78, 66, 44, 56, 67, 75],
-            fill: false,
-          },
-          {
-            label: new Date().getFullYear() - 1,
-            fill: false,
-            backgroundColor: "gray",
-            borderColor: "gray",
-            data: [40, 68, 86, 74, 56, 60, 87],
-          },
-        ],
+        datasets: data.data
       },
       options: {
         maintainAspectRatio: false,
