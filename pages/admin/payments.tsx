@@ -26,6 +26,7 @@ type BankTransfer = {
 const Index = (props: any) => {
   const user = props.user;
   const payment_method = props.payment_method;
+  console.log(payment_method)
   const [state, setState] = useState<string>("Recebimentos");
   const { t } = useTranslation();
   const {
@@ -34,8 +35,8 @@ const Index = (props: any) => {
     formState: { isDirty },
   } = useForm<BankTransfer>({
     defaultValues: {
-      swift: payment_method.swift ?? "",
-      iban: payment_method.iban ?? ""
+      swift: payment_method?.swift ?? "",
+      iban: payment_method?.iban ?? ""
     }
   });
   const { addPaymentMethods } = useProfileService();

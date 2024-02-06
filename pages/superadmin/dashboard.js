@@ -44,6 +44,32 @@ export const getServerSideProps = async (ctx) => {
     data: { session },
   } = await supabase.auth.getSession();
 
+  if (!session)
+    return {
+      redirect: {
+        destination: "/faqs",
+        permanent: false,
+        locale: locale,
+      },
+    };
+
+  const user = session.user;
+  const { data: profile, error: errorProfile } = await supabaseAdmin
+    .from("profiles")
+    .select("id, user_type")
+    .eq("id", user.id)
+    .single();
+
+
+  if (errorProfile || !profile || profile.user_type !== "ADMIN")
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+        locale: locale,
+      },
+    };
+
   const { data, count, error } = await supabaseAdmin
     .from("reservations")
     .select('*, advertisement:advertisement_id(*), tenant:tenant_id(*)')
