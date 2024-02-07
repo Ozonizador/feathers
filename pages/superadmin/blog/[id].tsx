@@ -8,6 +8,7 @@ import { trpc } from "../../../utils/trpc";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { toast } from "react-toastify";
 import { er } from "@fullcalendar/core/internal-common";
+import Sidebar from "../../../components/notus/Sidebar/Sidebar";
 
 type BlogIdPageProps = {
   blog: Blog;
@@ -38,13 +39,16 @@ const BlogIdPage = ({ blog }: BlogIdPageProps) => {
   };
 
   return (
-    <div className="px-5">
-      <FormProvider {...methods}>
-        <BlogFormContainer onSubmit={updateFaqForm}>
-          <div className="rounded-full border border-primary-500 p-2 text-primary-500">Guardar</div>
-        </BlogFormContainer>
-      </FormProvider>
-    </div>
+    <>
+      <Sidebar />
+      <div className="ml-64 px-5">
+        <FormProvider {...methods}>
+          <BlogFormContainer onSubmit={updateFaqForm}>
+            <div className="rounded-full border border-primary-500 p-2 text-primary-500">Guardar</div>
+          </BlogFormContainer>
+        </FormProvider>
+      </div>
+    </>
   );
 };
 

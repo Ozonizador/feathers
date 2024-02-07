@@ -7,6 +7,7 @@ import { SUPERADMIN_FAQS_URL } from "../../../models/paths";
 import { trpc } from "../../../utils/trpc";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { toast } from "react-toastify";
+import Sidebar from "../../../components/notus/Sidebar/Sidebar";
 
 type FaqIdPageProps = {
   faq: Faq;
@@ -20,20 +21,23 @@ const FaqIdPage = ({ faq }: FaqIdPageProps) => {
   });
 
   const updateFaqForm = async (data: any) => {
-    const {error} = await updateFaq.mutateAsync({ faq: { ...data }, faqId: faq.id });
+    const { error } = await updateFaq.mutateAsync({ faq: { ...data }, faqId: faq.id });
 
     if (!error) {
-      toast.success("Guardado com sucesso")
+      toast.success("Guardado com sucesso");
     }
   };
   return (
-    <div className="px-5">
-      <FormProvider {...methods}>
-        <FaqFormContainer onSubmit={updateFaqForm}>
-          <div className="rounded-full border border-primary-500 p-2 text-primary-500">Guardar</div>
-        </FaqFormContainer>
-      </FormProvider>
-    </div>
+    <>
+      <Sidebar/>
+      <div className=" ml-64 px-5">
+        <FormProvider {...methods}>
+          <FaqFormContainer onSubmit={updateFaqForm}>
+            <div className="rounded-full border border-primary-500 p-2 text-primary-500">Guardar</div>
+          </FaqFormContainer>
+        </FormProvider>
+      </div>
+    </>
   );
 };
 

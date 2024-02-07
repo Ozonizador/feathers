@@ -13,6 +13,7 @@ import { Blog } from "../../models/blog";
 import { toast } from "react-toastify";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Sidebar from "../../components/notus/Sidebar/Sidebar";
 
 const FaqSuperAdminPage = () => {
   const [selectedFaq, setSelectedFaq] = useState<"TENANT" | "LANDLORD">("LANDLORD");
@@ -44,44 +45,47 @@ const FaqSuperAdminPage = () => {
   };
 
   return (
-    <div className="max-width flex flex-col px-10 pt-5">
-      <div className="mb-3 flex items-center gap-2">
-        <div
-          onClick={() => setSelectedFaq("TENANT")}
-          className={classNames({ "text-primary-500": selectedFaq === "TENANT" })}
-        >
-          Estudante
-        </div>
-        <div
-          onClick={() => setSelectedFaq("LANDLORD")}
-          className={classNames({ "text-primary-500": selectedFaq === "LANDLORD" })}
-        >
-          Senhorio
-        </div>
-      </div>
-      <div className="flex flex-col">
-        {selectedFaq === "LANDLORD" &&
-          (landlordBlogs ? (
-            landlordBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
-          ) : (
-            <p>Não tem faqs.</p>
-          ))}
-        {selectedFaq === "TENANT" &&
-          (tenantBlogs ? (
-            tenantBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
-          ) : (
-            <p>Não tem faqs.</p>
-          ))}
-      </div>
-      <div className="my-5 text-primary-500">Adicionar Blog Post</div>
-      <FormProvider {...methods}>
-        <BlogFormContainer onSubmit={addFormSubmit}>
-          <div className="rounded-full border border-primary-500 p-2">
-            <TfiPlus size={32} className="text-primary-500" />
+    <>
+      <Sidebar />
+      <div className="ml-64 flex flex-col px-10 pt-5">
+        <div className="mb-3 flex items-center gap-2">
+          <div
+            onClick={() => setSelectedFaq("TENANT")}
+            className={classNames({ "text-primary-500": selectedFaq === "TENANT" })}
+          >
+            Estudante
           </div>
-        </BlogFormContainer>
-      </FormProvider>
-    </div>
+          <div
+            onClick={() => setSelectedFaq("LANDLORD")}
+            className={classNames({ "text-primary-500": selectedFaq === "LANDLORD" })}
+          >
+            Senhorio
+          </div>
+        </div>
+        <div className="flex flex-col">
+          {selectedFaq === "LANDLORD" &&
+            (landlordBlogs ? (
+              landlordBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
+            ) : (
+              <p>Não tem faqs.</p>
+            ))}
+          {selectedFaq === "TENANT" &&
+            (tenantBlogs ? (
+              tenantBlogs.map((blog) => <SuperAdminBlogItem key={blog.id} {...blog} />)
+            ) : (
+              <p>Não tem faqs.</p>
+            ))}
+        </div>
+        <div className="my-5 text-primary-500">Adicionar Blog Post</div>
+        <FormProvider {...methods}>
+          <BlogFormContainer onSubmit={addFormSubmit}>
+            <div className="rounded-full border border-primary-500 p-2">
+              <TfiPlus size={32} className="text-primary-500" />
+            </div>
+          </BlogFormContainer>
+        </FormProvider>
+      </div>
+    </>
   );
 };
 
@@ -123,7 +127,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/auth/login",
         permanent: false,
-        locale: locale
+        locale: locale,
       },
     };
 
@@ -139,7 +143,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/blog",
         permanent: false,
-        locale: locale
+        locale: locale,
       },
     };
 

@@ -10,6 +10,7 @@ import { useTranslation } from "next-i18next";
 import { Advertisement } from "../../models/advertisement";
 import { Pagination } from "flowbite-react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Sidebar from "../../components/notus/Sidebar/Sidebar";
 
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.advertisements.getAdvertisements.useQuery();
@@ -39,40 +40,43 @@ const FaqSuperAdminPage = () => {
   };
 
   return (
-    <div className="max-width flex flex-col px-10 pt-5">
-      <div className="mt-5 text-2xl">Anuncios:</div>
-      {advertisements &&
-        advertisements.map((advertisement, index) => {
-          if ((currentPage - 1) * totalPerPage < index && index < currentPage * totalPerPage) {
-            return (
-              <div
-                key={index}
-                className={
-                  index != totalPerPage - 1 + (currentPage - 1) * totalPerPage
-                    ? "gap-1 border-b border-neutral-100"
-                    : ""
-                }
-              >
-                <SuperAdminAdvertisementItem
-                  key={advertisement.id}
-                  id={advertisement.id}
-                  title={advertisement.title}
-                  place={advertisement.place}
-                  street={advertisement.street}
-                  postal_code={advertisement.postal_code}
-                  street_number={advertisement.street_number}
-                  verified={advertisement.verified}
-                  removerAdvertisement={removerAdvertisement}
-                  verifyAdvertisement={validarAdvertisement}
-                />
-              </div>
-            );
-          }
-        })}
-      <div className="flex justify-center pb-5">
-        <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPages={totalPages} showIcons={true} />
+    <>
+      <Sidebar />
+      <div className="ml-64 flex flex-col px-10 pt-5">
+        <div className="mt-5 text-2xl">Anuncios:</div>
+        {advertisements &&
+          advertisements.map((advertisement, index) => {
+            if ((currentPage - 1) * totalPerPage < index && index < currentPage * totalPerPage) {
+              return (
+                <div
+                  key={index}
+                  className={
+                    index != totalPerPage - 1 + (currentPage - 1) * totalPerPage
+                      ? "gap-1 border-b border-neutral-100"
+                      : ""
+                  }
+                >
+                  <SuperAdminAdvertisementItem
+                    key={advertisement.id}
+                    id={advertisement.id}
+                    title={advertisement.title}
+                    place={advertisement.place}
+                    street={advertisement.street}
+                    postal_code={advertisement.postal_code}
+                    street_number={advertisement.street_number}
+                    verified={advertisement.verified}
+                    removerAdvertisement={removerAdvertisement}
+                    verifyAdvertisement={validarAdvertisement}
+                  />
+                </div>
+              );
+            }
+          })}
+        <div className="flex justify-center pb-5">
+          <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPages={totalPages} showIcons={true} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -102,7 +106,10 @@ const SuperAdminAdvertisementItem = ({
   return (
     <div className="flex w-full">
       <div className="flex flex-col gap-1 py-5">
-        <h6 className="text-xl font-black">{title}{ verified == true ? "test ": "test "}</h6>
+        <h6 className="text-xl font-black">
+          {title}
+          {verified == true ? "test " : "test "}
+        </h6>
         <p>{`${street} ${street_number != undefined ? street_number : ""}, ${postal_code} ${place}`}</p>
       </div>
       <div className="my-auto ml-auto flex h-10 gap-3">
@@ -139,7 +146,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/faqs",
         permanent: false,
-        locale: locale
+        locale: locale,
       },
     };
 
@@ -155,7 +162,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       redirect: {
         destination: "/",
         permanent: false,
-        locale: locale
+        locale: locale,
       },
     };
 
