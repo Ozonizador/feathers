@@ -10,6 +10,10 @@ import { Pagination } from "flowbite-react";
 import Button from "../../components/utils/Button";
 import { FaUser } from "react-icons/fa6";
 
+// Components
+import Sidebar from "../../components/notus/Sidebar/Sidebar";
+import CardTable from "../../components/notus/Cards/CardTable";
+
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.profile.getAllProfiles.useQuery();
   const profiles = data && data.data;
@@ -24,39 +28,22 @@ const FaqSuperAdminPage = () => {
   };
 
   return (
-    <div className="max-width flex flex-col px-10 pt-5">
-      <div className="mt-5 text-2xl">Perfis:</div>
-      <div className="mt-5"></div>
-      {profiles &&
-        profiles.map((profile, index) => {
-          if ((currentPage - 1) * totalPerPage < index && index < currentPage * totalPerPage) {
-            return (
-              <div
-                key={index}
-                className={
-                  index != totalPerPage - 1 + (currentPage - 1) * totalPerPage
-                    ? "gap-1 border-b border-neutral-100"
-                    : ""
-                }
-              >
-                <SuperAdminProfileItem
-                  key={profile.id}
-                  id={profile.id}
-                  name={profile.name}
-                  avatar_url={profile.avatar_url}
-                  surname={profile.surname}
-                  birth_date={profile.birth_date}
-                  nationality={profile.nationality}
-                  email={profile.email}
-                />
-              </div>
-            );
-          }
-        })}
-      <div className="flex justify-center pb-5">
-        <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPages={totalPages} showIcons={true} />
+    <>
+      <Sidebar />
+      <div className="ml-64 flex flex-col px-5 pt-5">
+        <div className="mt-5 text-2xl">Perfis:</div>
+        <div className="mt-5"></div>
+        <CardTable
+          title={"Perfis"}
+          first_col_name={"Nome"}
+          second_col_name={"Town"}
+          third_col_name={"Sexo"}
+          fourth_col_name="Tipo"
+          fifth_col_name="Data de Nascimento"
+          profiles={profiles}
+        />
       </div>
-    </div>
+    </>
   );
 };
 
@@ -80,30 +67,34 @@ const SuperAdminProfileItem = ({
 }: SuperAdminProfileItemProps) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
   return (
-    <div className="flex w-full">
-      <div className="flex flex-col gap-1 py-5">
-        <div className="flex">
-          {avatar_url != null && avatar_url != undefined && avatar_url != "" ? (
-            <img src={avatar_url!} alt="Foto de Perfil" className="h-10 w-10 rounded-full bg-cover" />
-          ) : (
-            <div className="h-10 w-10 border rounded-full flex items-center justify-center"><FaUser color="gray"/></div>
-          )}
-          <h6 className="ml-4 flex items-center text-xl font-black">{name + " " + surname}</h6>
-        </div>
-        {showInfo && (
-          <div className="">
-            {birth_date != null ? <h6>Data de nascimento: {nationality}</h6> : ""}
-            {nationality != null ? <h6>Nacionalidade: {nationality}</h6> : ""}
-            {email != null ? <h6>Email: {email}</h6> : ""}
+    <>
+      <div className="flex w-full">
+        <div className="flex flex-col gap-1 py-5">
+          <div className="flex">
+            {avatar_url != null && avatar_url != undefined && avatar_url != "" ? (
+              <img src={avatar_url!} alt="Foto de Perfil" className="h-10 w-10 rounded-full bg-cover" />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border">
+                <FaUser color="gray" />
+              </div>
+            )}
+            <h6 className="ml-4 flex items-center text-xl font-black">{name + " " + surname}</h6>
           </div>
-        )}
+          {showInfo && (
+            <div className="">
+              {birth_date != null ? <h6>Data de nascimento: {nationality}</h6> : ""}
+              {nationality != null ? <h6>Nacionalidade: {nationality}</h6> : ""}
+              {email != null ? <h6>Email: {email}</h6> : ""}
+            </div>
+          )}
+        </div>
+        <div className="ml-auto mt-5 flex h-10 gap-3">
+          <Button type={"button"} onClick={() => setShowInfo(!showInfo)}>
+            {showInfo ? "Esconder Info" : "Mostrar Info"}
+          </Button>
+        </div>
       </div>
-      <div className="ml-auto mt-5 flex h-10 gap-3">
-        <Button type={"button"} onClick={() => setShowInfo(!showInfo)}>
-          {showInfo ? "Esconder Info" : "Mostrar Info"}
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 
