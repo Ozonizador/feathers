@@ -1,6 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { PostgrestError } from "@supabase/supabase-js";
-import imageCompression from 'browser-image-compression';
+import imageCompression from "browser-image-compression";
 
 import {
   Advertisement,
@@ -10,6 +10,7 @@ import {
   ADVERTISEMENT_TABLE_NAME,
   CLOSE_ADVERTISEMENTS_TABLE_NAME,
 } from "../models/advertisement";
+import { supabase } from "../lib/supabaseClient";
 export const PAGE_NUMBER_COUNT = 10 as number;
 
 const useAdvertisementService = () => {
@@ -34,6 +35,25 @@ const useAdvertisementService = () => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .update({ ...advertisement, updated_at: new Date().toDateString() })
+      .eq(ADVERTISEMENT_PROPERTIES.ID, id)
+      .select()
+      .single();
+
+    return { data, error };
+  };
+
+  const disableAdvertisement = async (
+    id: string
+  ): Promise<{ data: Advertisement | null; error: PostgrestError | null }> => {
+    const { data: advertisement, error: errorAd } = await supabaseClient
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .select()
+      .eq(ADVERTISEMENT_PROPERTIES.ID, id)
+      .single();
+
+    const { data, error } = await supabaseClient
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .update({ ...advertisement, available: "DISABLED", updated_at: new Date().toDateString() })
       .eq(ADVERTISEMENT_PROPERTIES.ID, id)
       .select()
       .single();
@@ -87,10 +107,10 @@ const useAdvertisementService = () => {
 
   const getAllAdvertisements = async () => {
     const { data, error } = await supabaseClient
-    .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-    .select();
-    return {data, error};
-  }
+      .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
+      .select();
+    return { data, error };
+  };
 
   const getAdvertisementsForMainPage = async (lat: number, lng: number) => {
     let query = supabaseClient.rpc(CLOSE_ADVERTISEMENTS_TABLE_NAME, { lat, lng }).limit(4);
@@ -107,11 +127,11 @@ const useAdvertisementService = () => {
   /* IMAGE */
 
   const saveImage = async (advertisementID: string, fileName: string, file: File) => {
-    fileName = fileName.replace(/([^a-z0-9 ]+)/gi, '-');
+    fileName = fileName.replace(/([^a-z0-9 ]+)/gi, "-");
 
     const options = {
-      maxSizeMB: 1
-    }
+      maxSizeMB: 1,
+    };
     try {
       file = await imageCompression(file, options);
     } catch (error) {
@@ -125,8 +145,8 @@ const useAdvertisementService = () => {
     if (error) {
       if (error.name == "Duplicate") {
         await supabaseClient.storage
-      .from(ADVERTISEMENT_STORAGE_BUCKET)
-      .upload(`${advertisementID}/${fileName}`, file, { cacheControl: "3600", upsert: false });
+          .from(ADVERTISEMENT_STORAGE_BUCKET)
+          .upload(`${advertisementID}/${fileName}`, file, { cacheControl: "3600", upsert: false });
       }
       return { data: null, error };
     }
@@ -162,6 +182,7 @@ const useAdvertisementService = () => {
     getPublicUrlFromImage,
     removePicture,
     removeAdvertisement,
+    disableAdvertisement,
   };
 };
 

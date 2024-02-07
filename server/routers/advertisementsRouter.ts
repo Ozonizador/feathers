@@ -59,7 +59,7 @@ export const advertisementsRouter = router({
   getAdvertisements: publicProcedure.query(async () => {
     const { data, error } = await supabaseAdmin
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select();
+      .select("*, host:host_id(*)");
 
     return { data, error };
   }),

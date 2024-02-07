@@ -35,11 +35,8 @@ const FaqSuperAdminPage = () => {
         <div className="mt-5"></div>
         <CardTable
           title={"Perfis"}
-          first_col_name={"Nome"}
-          second_col_name={"Town"}
-          third_col_name={"Sexo"}
-          fourth_col_name="Tipo"
-          fifth_col_name="Data de Nascimento"
+          labels={["Nome", "Lugar", "Sexo", "Tipo", "Data de Nascimento"]}
+          // @ts-ignore
           profiles={profiles}
         />
       </div>

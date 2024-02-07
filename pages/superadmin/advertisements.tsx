@@ -11,6 +11,7 @@ import { Advertisement } from "../../models/advertisement";
 import { Pagination } from "flowbite-react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Sidebar from "../../components/notus/Sidebar/Sidebar";
+import CardTable from "../../components/notus/Cards/CardTable";
 
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.advertisements.getAdvertisements.useQuery();
@@ -44,37 +45,10 @@ const FaqSuperAdminPage = () => {
       <Sidebar />
       <div className="ml-64 flex flex-col px-10 pt-5">
         <div className="mt-5 text-2xl">Anuncios:</div>
-        {advertisements &&
-          advertisements.map((advertisement, index) => {
-            if ((currentPage - 1) * totalPerPage < index && index < currentPage * totalPerPage) {
-              return (
-                <div
-                  key={index}
-                  className={
-                    index != totalPerPage - 1 + (currentPage - 1) * totalPerPage
-                      ? "gap-1 border-b border-neutral-100"
-                      : ""
-                  }
-                >
-                  <SuperAdminAdvertisementItem
-                    key={advertisement.id}
-                    id={advertisement.id}
-                    title={advertisement.title}
-                    place={advertisement.place}
-                    street={advertisement.street}
-                    postal_code={advertisement.postal_code}
-                    street_number={advertisement.street_number}
-                    verified={advertisement.verified}
-                    removerAdvertisement={removerAdvertisement}
-                    verifyAdvertisement={validarAdvertisement}
-                  />
-                </div>
-              );
-            }
-          })}
-        <div className="flex justify-center pb-5">
-          <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPages={totalPages} showIcons={true} />
-        </div>
+        {advertisements && (
+          // @ts-ignore
+          <CardTable title="Anúncios" labels={["Título", "Senhorio", "Morada", "Disponibilidade", ""]} advertisements={advertisements} />
+        )}
       </div>
     </>
   );
@@ -144,7 +118,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (!session)
     return {
       redirect: {
-        destination: "/faqs",
+        destination: "/",
         permanent: false,
         locale: locale,
       },
