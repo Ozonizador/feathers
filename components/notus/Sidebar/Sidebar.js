@@ -9,6 +9,7 @@ import UserDropdown from "../Dropdowns/UserDropdown.js";
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
+
   return (
     <>
       <nav className="relative z-10 flex flex-wrap items-center justify-between bg-white px-6 py-4 shadow-xl md:fixed md:bottom-0 md:left-0 md:top-0 md:block md:w-64 md:flex-row md:flex-nowrap md:overflow-hidden md:overflow-y-auto">
@@ -87,26 +88,46 @@ export default function Sidebar() {
 
             <ul className="flex list-none flex-col md:min-w-full md:flex-col">
               <li className="items-center">
-                <Link href="/superadmin/dashboard" className={"block py-3 pl-2 text-xs font-bold"}>
-                  Dashboard
+                <Link href="/superadmin/dashboard" className={`block py-3 pl-2 text-xs font-bold`}>
+                  <span className={`${router.asPath.includes("dashboard") ? "border-b-2 border-primary-500" : ""}`}>
+                    Dashboard
+                  </span>
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link href="/superadmin/faqs" className={"block py-3 pl-2 text-xs font-bold"}>
-                  Faqs
+                  <span className={`${router.asPath.includes("faqs") ? "border-b-2 border-primary-500" : ""}`}>
+                    Faqs
+                  </span>
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link href="/superadmin/blogs" className={"block py-3 pl-2 text-xs font-bold"}>
+                  <span
+                    className={`${router.asPath.includes("blogs") ? "border-b-2 border-primary-500" : ""}`}
+                  >
+                    Blogs
+                  </span>
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link href="/superadmin/profiles" className={"block py-3 pl-2 text-xs font-bold"}>
-                  Tables
+                  <span className={`${router.asPath.includes("profiles") ? "border-b-2 border-primary-500" : ""}`}>
+                    Perfis
+                  </span>
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/admin/maps" className={"block py-3 pl-2 text-xs font-bold"}>
-                  Maps
+                <Link href="/superadmin/advertisements" className={"block py-3 pl-2 text-xs font-bold"}>
+                  <span
+                    className={`${router.asPath.includes("advertisements") ? "border-b-2 border-primary-500" : ""}`}
+                  >
+                    Advertisements
+                  </span>
                 </Link>
               </li>
             </ul>
@@ -114,7 +135,10 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <Link href={"/"} className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full">
+            <Link
+              href={"/"}
+              className="text-blueGray-500 block pb-4 pt-1 text-xs font-bold uppercase no-underline md:min-w-full"
+            >
               Ir para site
             </Link>
           </div>
