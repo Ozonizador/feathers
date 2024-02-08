@@ -34,21 +34,20 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
       <div className="flex w-full flex-col gap-8 lg:w-11/12 lg:flex-row lg:items-end">
         <div>
           <div className="w-full lg:w-64">
-            <Card>
-              <div className="flex justify-end px-4 pt-4"></div>
+            <Card href={`/perfil/${advertisement?.host.slug}`}>
+              <div className="flex justify-end px-4 pt-4 cursor-pointer"></div>
               <div className="flex flex-col items-center pb-10">
-              <div className="rounded-full shadow-md" style={{ height: '96px', width: '96px' }}>
-  <Image
-    className="mb-3 rounded-full object-cover"
-    src={advertisement?.host?.avatar_url || "/icons/user/user.svg"}
+                <div className="rounded-full shadow-md" style={{ height: "96px", width: "96px" }}>
+                  <Image
+                    className="mb-3 rounded-full object-cover"
+                    src={advertisement?.host?.avatar_url || "/icons/user/user.svg"}
                     alt="host"
                     width={0}
                     height={0}
-                
-                    style={{ height: '100%', width: '100%' }}
-    unoptimized={true}
-  />
-</div>
+                    style={{ height: "100%", width: "100%" }}
+                    unoptimized={true}
+                  />
+                </div>
                 <h5 className="my-1 text-xl font-medium text-gray-900 dark:text-white">
                   {advertisement?.host.name || ""}
                 </h5>
