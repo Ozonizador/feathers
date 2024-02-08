@@ -2,7 +2,7 @@ import React from "react";
 import { createPopper } from "@popperjs/core";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/router";
-import { trpc } from "../../utils/trpc";
+import { trpc } from "../../../utils/trpc";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 
