@@ -131,10 +131,10 @@ export default function ProcurarSection() {
                 <select
                   className="w-fit rounded-md border border-solid border-terciary-500 bg-white  px-3 text-sm focus:border-primary-500 focus:outline-none focus:ring-0 "
                   onChange={changeOrderFilter}
-                  value={currentOrder.byColumn}
+                  value={`${currentOrder.byColumn}${currentOrder.byColumn == "price" ? "-" + currentOrder.type : ""}`}
                   id="order-drop"
                 >
-                  <option>{t("order_by")}</option>
+                  <option disabled>{t("order_by")}</option>
                   <option value="price-asc" className="hover:bg-primary-300">
                     {t("order_price_asc")}
                   </option>
