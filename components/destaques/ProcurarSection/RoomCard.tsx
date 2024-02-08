@@ -117,7 +117,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     <div>
       <div className="mb-4 mt-10 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div className="cards">
-          <div className="flex-col items-center gap-1 lg:h-60 lg:flex lg:flex-row">
+          <div className="flex-col items-center gap-1 lg:flex lg:h-60 lg:flex-row">
             <div className="relative h-96 w-full lg:h-60 lg:w-1/3">
               {getMainPhoto ? (
                 <Image
@@ -137,12 +137,14 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   <h6 className="mb-0 text-lg font-bold">
                     {t(TYPE_ADVERTISEMENT[advertisement.type])} - {advertisement.title}
                   </h6>
-                  <div className="ml-2 flex items-center align-middle">
-                    <Rating className="">
-                      <Rating.Star filled={true} />
-                    </Rating>
-                    <p className="text-sm text-yellow-400">{advertisementOverallRating}</p>
-                  </div>
+                  {advertisementOverallRating != "-" && (
+                    <div className="ml-2 flex items-center align-middle">
+                      <Rating className="">
+                        <Rating.Star filled={true} />
+                      </Rating>
+                      <p className="text-sm text-yellow-400">{advertisementOverallRating}</p>
+                    </div>
+                  )}
                 </div>
                 {/* icon with images */}
                 <div className="mb-2 mt-3 flex flex-1 gap-2 text-gray-500">
