@@ -6,7 +6,7 @@ import { trpc } from "../../../utils/trpc";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
 
-const NotificationDropdown = ({ profile_id = null, options = [] }) => {
+const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) => {
   const { removeAdvertisement, disableAdvertisement } = useAdvertisementService();
   const router = useRouter();
   // dropdown props
