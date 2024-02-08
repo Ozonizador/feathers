@@ -87,6 +87,7 @@ export default function ProcurarSection() {
   const changeOrderFilter = (event: React.ChangeEvent<any>) => {
     const optionValue = event.target.value as string;
     const arr = optionValue.split("-");
+    console.log(advertisements)
 
     let ascending = arr[0] === "price" ? arr[1] : arr[0] === "rating" ? "desc" : "asc";
     setOrderFilter({

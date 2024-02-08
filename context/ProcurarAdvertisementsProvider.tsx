@@ -4,6 +4,7 @@ import { AdvertisementWithReviewAverage, TypeAmenity } from "../models/advertise
 import { FilterAdvertisements, AdvertisementsFilterOptions, AdvertisementOrder } from "../server/types/advertisement";
 
 import { trpc } from "../utils/trpc";
+import { isArray } from "lodash";
 
 /* FILTERS */
 
@@ -83,12 +84,45 @@ export const ProcurarAdvertisementsProvider = ({
   useEffect(() => {
     if (error || !data) return;
 
-    setAdvertisementsInfo((oldState) => ({
-      ...oldState,
-      advertisements: (data && (data.data as unknown as AdvertisementWithReviewAverage[])) || [],
-      count: data.count || 0,
-      loading: false,
-    }));
+    if (currentFilter.order.byColumn == "rating") {
+      data.data.forEach((ad) => {
+        // @ts-ignore
+        if (ad.overall_average.length == 0) {
+          // @ts-ignore
+          ad.overall_average = 0;
+          // @ts-ignore
+        } else if (isArray(ad.overall_average)) {
+          // @ts-ignore
+          ad.overall_average =
+          // @ts-ignore
+            ad.overall_average.reduce((sum, item) => sum + (item.overall_average || 0), 0) / ad.overall_average.length;
+        }
+      });
+  
+      const array = data.data
+        // @ts-ignore
+        .sort((a, b) => parseFloat(a.overall_average) - parseFloat(b.overall_average))
+        .reverse()
+        .slice(0, 10);
+
+        setAdvertisementsInfo((oldState) => ({
+          ...oldState,
+          advertisements:
+            (array && (array as unknown as AdvertisementWithReviewAverage[])) ||
+            [],
+          count: data.count || 0,
+          loading: false,
+        }));
+    } else {
+      setAdvertisementsInfo((oldState) => ({
+        ...oldState,
+        advertisements:
+          (data && (data.data as unknown as AdvertisementWithReviewAverage[])) ||
+          [],
+        count: data.count || 0,
+        loading: false,
+      }));
+    }
   }, [data]);
 
   return (

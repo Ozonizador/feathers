@@ -106,7 +106,10 @@ export const advertisementsRouter = router({
     } else {
       query = supabaseAdmin
         .from<"advertisements_agg_amenities", AdvertisementAggregateView>(ADVERTISEMENT_TABLE_AGREGATED_AMENITIES_NAME)
-        .select("*, reservations!left(id), averages:reviewsPerAdvertisement!left(*)", { count: "exact" })
+        .select(
+          "*, reservations!left(id), averages:reviewsPerAdvertisement!left(*), overall_average:reviewsPerAdvertisement!left(overall_average)",
+          { count: "exact" }
+        )
         .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
 
       query = addFilterToSearchAdvertisement(query, filter);
