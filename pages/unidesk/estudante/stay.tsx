@@ -59,7 +59,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                   <ModalAvaliarExperiencia />
                   <ModalAlterarReserva />
                   {/* Logica visivel */}
-                  <div className="flex flex-col gap-7 px-0 lg:flex-row lg:gap-10">
+                  <div className="flex md:flex-wrap flex-col gap-7 px-0 lg:flex-row lg:gap-10">
                     {currentStay && (
                       <>
                         <StayCard stay={currentStay} />
@@ -74,7 +74,7 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                       {nextStays &&
                         nextStays.map((stay) => {
                           return (
-                            <div className="flex flex-col gap-7 lg:flex-row lg:gap-10 stay_div" key={stay.id}>
+                            <div className="flex md:flex-wrap flex-col gap-7 lg:flex-row lg:gap-10 stay_div" key={stay.id}>
                               <StayCard stay={stay} />
                               <StayInfo reservation={stay} options={{ isNextStay: true }} />
                             </div>
