@@ -18,7 +18,7 @@ const PopoverGeneric = ({ title, children, className }: PopoverSelectProps) => {
             <Popover.Button
               className={`
                 ${open ? "" : "text-opacity-90"}
-                flex w-full justify-between rounded-xl border border-primary-300 p-2`}
+                flex w-full justify-between rounded-xl border border-primary-300 p-2 focus:outline-none !focus:shadow-none`}
             >
               <span className="text-md" style={{ whiteSpace: "nowrap" }}>
                 {title}

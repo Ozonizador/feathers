@@ -147,9 +147,9 @@ export default function ProcurarSection() {
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <div className="find_filter flex w-full gap-2 max-lg:mb-[5px] lg:w-fit">
                 <PopoverGeneric title={t("advertisements:type_house")}>
-                  <div className="grid w-64 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
+                  <div className="grid w-80 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
                     <div
-                      className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
+                      className={classNames("my-auto w-full rounded-xl border p-3 text-xs", {
                         "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
                         "border-neutral-500": currentFilter.placeType !== "ALL",
                       })}
@@ -162,7 +162,7 @@ export default function ProcurarSection() {
                         <div
                           key={index}
                           onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
-                          className={classNames("my-auto w-fit rounded-xl border p-3 text-xs", {
+                          className={classNames("my-auto w-full rounded-xl border p-3 text-xs", {
                             "border-primary-500 text-primary-500": currentFilter.placeType === type,
                             "border-neutral-500": currentFilter.placeType !== type,
                           })}
