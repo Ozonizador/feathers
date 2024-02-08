@@ -47,7 +47,7 @@ const FaqSuperAdminPage = () => {
   return (
     <>
       <Sidebar />
-      <div className="ml-64 flex flex-col px-10 pt-5">
+      <div className="ml-64 flex flex-col px-10 py-5">
         <div className="mb-3 flex items-center gap-2">
           <div
             onClick={() => setSelectedFaq("TENANT")}

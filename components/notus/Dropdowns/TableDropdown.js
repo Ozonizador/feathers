@@ -52,6 +52,7 @@ const NotificationDropdown = ({ profile_id = null, options = [] }) => {
             return (
               <a
                 href="#pablo"
+                key={index}
                 className={
                   "text-blueGray-700 block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal"
                 }

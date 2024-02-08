@@ -30,9 +30,10 @@ export default function CardTable({ color, title, labels = [], profiles = null, 
             <thead>
               <tr className="border border-x-0 ">
                 {labels.length >= 1 &&
-                  labels.map((label) => {
+                  labels.map((label, index) => {
                     return (
                       <th
+                        key={index}
                         className={
                           "whitespace-nowrap px-6 py-3 text-left align-middle text-xs font-semibold uppercase " +
                           (color === "light"
