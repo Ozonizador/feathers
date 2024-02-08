@@ -9,6 +9,7 @@ import {
 } from "../../context/ProcurarAdvertisementsProvider";
 import { TypeAmenity } from "../../models/advertisement";
 import { useTranslation } from "next-i18next";
+import { IoMdClose } from "react-icons/io";
 
 const ModalMaisFiltros = () => {
   const { t } = useTranslation();
@@ -81,9 +82,10 @@ const ModalMaisFiltros = () => {
               <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-b-3xl rounded-t-3xl bg-white text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="flex gap-3 border-b-2 border-primary-400 p-5 text-lg font-medium leading-6"
+                  className="flex gap-3 border-b-2 justify-between border-primary-400 p-5 text-lg font-medium leading-6"
                 >
                   <span className="my-auto">{t("more_filters")}</span>
+                  <IoMdClose className=" ml-2 h-8 w-8 cursor-pointer" onClick={() => closeModal()}/>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -96,7 +98,7 @@ const ModalMaisFiltros = () => {
                 >
                   <div className="flex flex-col gap-3">
                     <div className="mt-5 text-2xl text-primary-500">{t("advertisements:house_characteristcs")}</div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-1">
                       <GridItem
                         onChange={() => toggleComodityChecked("WIFI")}
                         label={t("amenities:wifi")}
@@ -141,7 +143,7 @@ const ModalMaisFiltros = () => {
                   </div>
                   <div className="flex flex-col gap-3">
                     <div className="mt-5 text-2xl text-primary-500">{t("advertisements:amenities")}</div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-1">
                       <GridItem
                         onChange={() => toggleComodityChecked("PRIVATE_BATHROOM")}
                         label={t("amenities:private_bathroom")}
@@ -186,7 +188,7 @@ const ModalMaisFiltros = () => {
                   </div>
                   <div className="flex flex-col gap-3">
                     <div className="mt-5 text-2xl text-primary-500">{t("advertisements:conditions_and_rules")}</div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-1">
                       <GridItem
                         onChange={() => toggleFiltersProperty("smokingAllowed", !smokingAllowed)}
                         label={t("advertisements:smoking_allowed")}
