@@ -31,7 +31,7 @@ const RoomRating = () => {
   }, [getRoomAverages]);
 
   return (
-    <section className="mb-8">
+    <section className="">
       <RoomAveragesSection averageRatings={roomAverages} />
       {stays && stays.length > 0 && (
         <div className="my-5 flex flex-col gap-5">
@@ -177,7 +177,6 @@ export const RoomAveragesSection = ({ averageRatings, showTopSection = true }: R
       )}
       {!averageRatings && (
         <>
-          <div>{t("no_reviews")}</div>
         </>
       )}
     </div>

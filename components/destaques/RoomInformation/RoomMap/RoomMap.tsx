@@ -18,11 +18,11 @@ export default function RoomMap() {
   const geoCoordinates = (geom && coordinatesArrayToGeoPoint(geom.coordinates)) || null;
 
   return (
-    <section className="my-32">
+    <section className="my-16">
       {geom !== null && geom?.coordinates !== null && (
         <>
           <div className="mb-5 text-2xl font-bold">{t("where_space_is")}</div>
-          <div className="h-72 w-full rounded-md lg:h-64 lg:w-3/5">
+          <div className="h-72 w-full rounded-md lg:h-72">
             <MapWithNoSSR currentMapCoords={geoCoordinates} showCenterMarker={true} />
           </div>
         </>

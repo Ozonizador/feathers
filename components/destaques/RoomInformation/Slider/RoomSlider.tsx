@@ -71,7 +71,7 @@ export default function RoomSlider() {
 
 
   return (
-    <div className="mb-32 mt-10 h-48 min-h-[400px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[200px] rounded-xl border lg:mt-10">
+    <div className="mb-16 mt-10 h-48 min-h-[400px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[200px] rounded-xl border lg:mt-10">
       <Comodities />
     </div>
   );
