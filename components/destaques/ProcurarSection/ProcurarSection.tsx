@@ -4,7 +4,6 @@ import { TYPE_ADVERTISEMENT, TypeAdvertisement } from "../../../models/advertise
 import { Pagination, Spinner } from "flowbite-react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import Slider from "rc-slider";
 import _ from "lodash";
 import {
   useAdvertisementInfo,
@@ -26,12 +25,16 @@ import classNames from "classnames";
 import { Trans, useTranslation } from "next-i18next";
 import { IoIosArrowBack } from "react-icons/io";
 
+import Slider from "rc-slider";
+
 const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
   ssr: false,
 });
 
 export default function ProcurarSection() {
   const { t } = useTranslation();
+  const [ startPrice, setStartPrice] = useState<number>(0);
+  const [ endPrice, setEndPrice ] = useState<number>(3000);
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
   const { location, coordinates } = useUserSearch();
@@ -53,6 +56,8 @@ export default function ProcurarSection() {
 
   const setPriceChange = _.debounce((value) => {
     const [startRange, endRange] = value;
+    setStartPrice(startRange);
+    setEndPrice(endRange);
     setFilters({ price: { startRange, endRange } });
   }, 400);
 
@@ -172,8 +177,8 @@ export default function ProcurarSection() {
                   <div className="w-fit">
                     <Slider
                       range
-                      marks={{ 0: "0€", 1000: "1000€", 3000: "3000€" }}
-                      defaultValue={[0, 3000]}
+                      marks={{ 0: "0€", 3000: "3000€" }}
+                      defaultValue={[startPrice, endPrice]}
                       onChange={setPriceChange}
                       min={0}
                       max={3000}

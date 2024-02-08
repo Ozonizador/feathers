@@ -117,7 +117,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
     <div>
       <div className="mb-4 mt-10 bg-white lg:rounded-xl lg:drop-shadow-2xl">
         <div className="cards">
-          <div className="flex-col items-center gap-1 lg:flex lg:flex-row">
+          <div className="flex-col items-center gap-1 lg:h-60 lg:flex lg:flex-row">
             <div className="relative h-96 w-full lg:h-60 lg:w-1/3">
               {getMainPhoto ? (
                 <Image
