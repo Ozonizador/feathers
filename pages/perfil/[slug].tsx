@@ -17,10 +17,9 @@ interface IndexProps {
 const Index = ({ profile }: IndexProps) => {
   return (
     <>
-      <div className="lg_px-0 mx-auto mt-24 w-full px-6 lg:w-1/2 ">
+      <div className="lg_px-0 mx-auto mt-24 w-full px-6 lg:w-2/3 ">
         <PicAbout profile={profile} />
         <AccordionPerfil profile={profile} />
-        <PerfilInfo profile={profile} />
       </div>
     </>
   );
