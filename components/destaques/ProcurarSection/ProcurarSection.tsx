@@ -33,8 +33,8 @@ const MapWithNoSSR = dynamic(() => import("../../maps/MainMap"), {
 
 export default function ProcurarSection() {
   const { t } = useTranslation();
-  const [ startPrice, setStartPrice] = useState<number>(0);
-  const [ endPrice, setEndPrice ] = useState<number>(3000);
+  const [startPrice, setStartPrice] = useState<number>(0);
+  const [endPrice, setEndPrice] = useState<number>(3000);
   const { advertisements, count, page, loading } = useAdvertisementInfo();
   const { filter: currentFilter, order: currentOrder } = useCurrentProcurarAdvertisementContext();
   const { location, coordinates } = useUserSearch();
@@ -87,7 +87,7 @@ export default function ProcurarSection() {
   const changeOrderFilter = (event: React.ChangeEvent<any>) => {
     const optionValue = event.target.value as string;
     const arr = optionValue.split("-");
-    console.log(advertisements)
+    console.log(advertisements);
 
     let ascending = arr[0] === "price" ? arr[1] : arr[0] === "rating" ? "desc" : "asc";
     setOrderFilter({
@@ -175,6 +175,7 @@ export default function ProcurarSection() {
                   </div>
                 </PopoverGeneric>
                 <PopoverGeneric title={t("advertisements:price", { count: 1 })} className="lg:flex-0 h-full flex-1">
+                  <p className="pt-2 pl-4 text-gray-900">{t("advertisements:active_filter")}</p>
                   <div className="w-fit">
                     <Slider
                       range
@@ -183,8 +184,18 @@ export default function ProcurarSection() {
                       onChange={setPriceChange}
                       min={0}
                       max={3000}
-                      className="mx-5 my-auto w-64 py-10"
+                      className="mx-5 my-auto w-64 pb-4 pt-10"
                     ></Slider>
+                  </div>
+                  <div className="pb-2 pl-4">
+                    <p className="pb-2 text-gray-400">
+                      {t("advertisements:from")}
+                      {startPrice}€
+                    </p>
+                    <p className="text-gray-400">
+                      {t("advertisements:to")}
+                      {endPrice}€
+                    </p>
                   </div>
                 </PopoverGeneric>
               </div>

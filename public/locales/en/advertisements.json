@@ -135,5 +135,8 @@
   "house_verified": "Verified House",
   "person": "person",
   "date_in": "Entry",
-  "date_out": "Departure"
+  "date_out": "Departure",
+  "from": "From: ",
+  "to": "To: ",
+  "active_filter": "Active filter"
 }
