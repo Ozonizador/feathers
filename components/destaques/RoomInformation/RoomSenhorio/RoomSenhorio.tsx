@@ -28,7 +28,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
               })}
             </h1>
           )}
-          <p className="text-secondary-400">{advertisement && advertisement.host.description}</p>
+          <p className="text-secondary-400">{advertisement && advertisement.host.description?.slice(0, 200)}</p>
         </div>
       </div>
       <div className="flex w-full flex-col gap-8 lg:w-11/12 lg:flex-row lg:items-end">
