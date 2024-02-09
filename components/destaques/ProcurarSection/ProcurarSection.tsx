@@ -87,7 +87,6 @@ export default function ProcurarSection() {
   const changeOrderFilter = (event: React.ChangeEvent<any>) => {
     const optionValue = event.target.value as string;
     const arr = optionValue.split("-");
-    console.log(advertisements);
 
     let ascending = arr[0] === "price" ? arr[1] : arr[0] === "rating" ? "desc" : "asc";
     setOrderFilter({
@@ -134,7 +133,7 @@ export default function ProcurarSection() {
                   value={`${currentOrder.byColumn}${currentOrder.byColumn == "price" ? "-" + currentOrder.type : ""}`}
                   id="order-drop"
                 >
-                  <option disabled>{t("order_by")}</option>
+                  <option value="price-asc" hidden>{t("order_by")}</option>
                   <option value="price-asc" className="hover:bg-primary-300">
                     {t("order_price_asc")}
                   </option>
