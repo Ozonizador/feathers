@@ -268,7 +268,7 @@ const CaixaExtradaContent = () => {
     
     let formData = {
       email: tenant.email,
-      templateId: "d-f01d64f7f9ef4d9ca945f72013114958",
+      templateId: "d-df463b2a9a50409d842a761fc8b2b463",
       data: {
         first_name: tenant.name,
         accommodation_name: reservation.advertisement.title,
