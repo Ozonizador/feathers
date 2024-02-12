@@ -84,6 +84,12 @@ export default function CardTable({ color, title, labels = [], profiles = null, 
                       <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
                         {profile.birth_date}
                       </td>
+                      <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                        {profile.payment_methods?.swift ? profile.payment_methods?.swift : ""}
+                      </td>
+                      <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                        {profile.payment_methods?.iban ? profile.payment_methods?.iban : ""}
+                      </td>
                       <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-right align-middle text-xs">
                         <TableDropdown options={["Visitar Perfil"]} paths={[`/perfil/${profile.slug}`]}/>
                       </td>
