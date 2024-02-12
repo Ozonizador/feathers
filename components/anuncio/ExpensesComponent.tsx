@@ -28,7 +28,7 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
       {containsExpenses() && (
         <div className="relative my-2 text-center">
           <div
-            className="mt-0 flex items-center justify-center gap-2 align-middle md:mt-[18px]"
+            className="mt-0 flex items-center justify-center gap-2 align-middle"
             onMouseEnter={() => setPopupState(true)}
             onMouseLeave={() => setPopupState(false)}
           >

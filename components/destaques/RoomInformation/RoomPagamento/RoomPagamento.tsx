@@ -204,7 +204,7 @@ export const RoomPagamento = () => {
     <>
       <form className="w-full" id="reserva" onSubmit={handleSubmit(makeReservation)}>
         <div className="w-full rounded-2xl border-0 px-4 lg:border lg:border-terciary-700">
-          <div className="flex flex-col justify-center gap-4 ">
+          <div className="flex flex-col justify-center gap-2 ">
             <div className="mt-2 text-center text-2xl font-bold text-primary-500">
               {t("advertisements:price_month", { price: setAdvertPrice() })}
             </div>
