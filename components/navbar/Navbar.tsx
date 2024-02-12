@@ -348,7 +348,7 @@ export const Navbar = () => {
                             {userAppMode == "TENANT" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={SUPERADMIN_DASHBOARD}>
+                                  <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
                                     Dashboard Admin
                                   </MyLink>
                                 </Menu.Item>
@@ -387,7 +387,6 @@ export const Navbar = () => {
                                     )}
                                   </MyLink>
                                 </Menu.Item>
-                                <Menu.Item></Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A] text-sm" href={ADMIN_URL}>
@@ -409,7 +408,7 @@ export const Navbar = () => {
                             {userAppMode == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold" href={SUPERADMIN_DASHBOARD}>
+                                  <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
                                     Dashboard Admin
                                   </MyLink>
                                 </Menu.Item>
