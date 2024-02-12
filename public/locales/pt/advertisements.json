@@ -4,7 +4,7 @@
   "included": "Incluído",
   "not_included": "Não Incluído",
   "expenses_included": "Despesas Incluídas",
-  "expenses_partially_included": "Despesas Partialmente Incluídas",
+  "expenses_partially_included": "Despesas Parcialmente Incluídas",
   "expenses_not_included": "Despesas Excluídas",
   "no_expenses_information": "Sem Informação Despesas",
   "expenses_up_to": "Despesas até {{value}}€",

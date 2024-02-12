@@ -63,13 +63,13 @@ const FormAnunciarPhotos = () => {
     if (event.target.files) {
       let newFiles: any[] = [];
       for (let file of event.target.files) {
-        if (file.size < 2097152) {
+        if (file.size <= 4194304) {
           if (newFiles.find((element) => element.name == file.name)) {
             file.name = file.name + newFiles.length.toString();
           }
           newFiles.push(file);
         } else {
-          toast.error(t("common.file-size", { name: file.name }));
+          toast.error(t("common:file-size", { name: file.name }));
         }
       }
 

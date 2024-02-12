@@ -84,14 +84,12 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                   })}
                 </h1>
               )}
-              <p className="mb-4 text-secondary-400">{advertisement?.host.description || ""}</p>
             </div>
           </div>
 
           <div className="w-full">
             <Card>
               <h1 className="text-xl font-bold">{t("advertisements:add_advert.cancellation_policy")}</h1>
-
               <div className="flex flex-row items-start justify-start gap-4 align-top">
                 <div
                   className={classNames("h-5 w-12 rounded-full ", {

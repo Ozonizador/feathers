@@ -56,7 +56,6 @@ const Notifications = () => {
   return (
     <section>
       <Breadcrumbs icon={iconfavorito} paths={paths} />
-      <BreadcrumbMiddle icon={IconNotification} title={t("notifications")} />
       <UnideskStructure>
         <UnideskStructure.Menu>
           <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />

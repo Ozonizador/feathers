@@ -26,7 +26,7 @@ const paths = [
 const ReservasSection = () => {
   const { t } = useTranslation();
   return (
-    <section className="px-5">
+    <section className="">
       <Breadcrumbs icon={IconAnuncios} paths={paths} />
       <UnideskStructure>
         <UnideskStructure.Menu>

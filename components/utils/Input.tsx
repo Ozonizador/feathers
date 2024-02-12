@@ -44,7 +44,7 @@ export default function Input({
             className={classNames(
               "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 focus:border focus:border-primary-500 focus:outline-0 focus:ring-transparent",
               { "border-red-700": errorMessage },
-              { "bg-gray-100": disabled }
+              { "bg-gray-200": disabled }
             )}
             onChange={onChange}
             name={name}
@@ -66,7 +66,7 @@ export default function Input({
               "block w-full rounded-md border border-solid border-terciary-500 px-5 py-2 focus:border-primary-500 focus:outline-none focus:ring-0",
               `${customCss}`,
               { "border-red-700": errorMessage },
-              { "bg-gray-100": disabled }
+              { "!bg-gray-200": disabled }
             )}
             onChange={onChange}
             name={name}

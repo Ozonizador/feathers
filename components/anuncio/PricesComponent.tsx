@@ -183,7 +183,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                   <div className="relative left-2">
                     <ExpenseSelection
                       expense={"GAS"}
-                      title="Gás"
+                      title={t("advertisements:gas")}
                       setMaxExpenseValue={setMaxExpenseValue}
                       toggleTypeExpenses={toggleTypeExpenses}
                       getExpenseInfoByInfo={getExpenseInfoByInfo}
@@ -207,7 +207,7 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
                     />
                     <ExpenseSelection
                       expense={"LIGHTS"}
-                      title={t("advertisements:water")}
+                      title={t("advertisements:electricity")}
                       setMaxExpenseValue={setMaxExpenseValue}
                       toggleTypeExpenses={toggleTypeExpenses}
                       getExpenseInfoByInfo={getExpenseInfoByInfo}
@@ -291,17 +291,13 @@ const ExpenseSelection = ({
                     <label className="my-auto w-1/2 text-base" htmlFor="max_value">
                       Incluído até:
                     </label>
-                    <input
-                      name="max_value"
-                      data-expense={expense}
-                      type="number"
-                      value={expenseInfo?.max || 0}
+                    <Input
+                      labelText=""
+                      customCss="euro"
+                      defaultValue={expenseInfo?.max || 0}
                       disabled={!expenseInfo || (expenseInfo && expenseInfo.included === "INCLUDED")}
                       onChange={setMaxExpenseValue}
-                      className={classNames("w-1/2 rounded border border-terciary-500 lg:ml-4", {
-                        "bg-gray-200": !expenseInfo || expenseInfo?.included === "INCLUDED",
-                      })}
-                    ></input>
+                    />
                   </div>
                 </div>
               )}

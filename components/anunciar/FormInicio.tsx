@@ -48,6 +48,7 @@ const FormInicio = () => {
 
   const nextStep = async (data: any) => {
     setAdvertisement({ ...advertisement, ...data });
+    await checkPossibilites();
     incrementStep();
   };
 
@@ -79,11 +80,6 @@ const FormInicio = () => {
             <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
           </section>
           <div className="flex flex-col items-center gap-5 xl:flex-row">
-            <div className="w-32 max-width flex justify-center px-5">
-              <Button onClick={checkPossibilites} type="button">
-                {t("update_map")}
-              </Button>
-            </div>
             <div className="w-32 ">
               <Button type="button" onClick={methods.handleSubmit(nextStep)}>
                 {t("next_step")} &#8594;

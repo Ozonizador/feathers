@@ -78,7 +78,6 @@ const CaixaEntrada = () => {
         <div className="my-16 rounded-2xl lg:w-full ">
           <Breadcrumbs icon={iconfavorito} paths={paths} />
         </div>
-        <BreadcrumbMiddle title={t("inbox")} icon={IconCaixa} />
         <UnideskStructure>
           <UnideskStructure.Menu>
             {userAppMode === "TENANT" ? (

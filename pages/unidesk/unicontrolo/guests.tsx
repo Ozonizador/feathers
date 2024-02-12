@@ -26,11 +26,10 @@ interface UniControloHospedesProps {
 const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
   const { t } = useTranslation();
   return (
-    <section className="">
+    <div>
       <Breadcrumbs icon={IconAHospedes} paths={paths} />
-
-      <div className="my-16 w-full lg:px-32">
-        <div className="my-20 rounded-2xl border border-terciary-700 bg-terciary-300 pl-0  lg:my-20 lg:w-full lg:px-0">
+      <div className="w-full lg:px-32">
+        <div className="rounded-2xl border border-terciary-700 bg-terciary-300 pl-0 lg:w-full lg:px-0">
           <div className="flex flex-col lg:flex-row">
             <div className="mx-auto w-full p-5 text-sm lg:ml-auto lg:w-[27%] lg:border-r lg:px-6 lg:py-12 ">
               {/* mx-auto w-2/3 p-5 lg:ml-auto lg:w-1/3 lg:border-r lg:px-6 lg:py-12 */}
@@ -51,7 +50,7 @@ const UniControloHospedes = ({ stays }: UniControloHospedesProps) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
