@@ -31,25 +31,25 @@ const AboutUs = () => {
 
         <div className="mt-10 px-3">
           <div className="mb-5 px-4">
-            <h4 className="text-left text-3xl font-bold">{t("about_us")}</h4>
+            <h4 className="text-left text-4xl font-bold">{t("about_us")}</h4>
             <h6 className="mb-10 mt-2 text-2xl lg:mb-11">{t("title")}</h6>
-            <p className="mb-12 mt-5 text-justify">{t("about_us_description")}</p>
+            <p className="mb-12 mt-3 text-justify">{t("about_us_description")}</p>
           </div>
-          <div className=" my-5 grid grid-cols-1 gap-2 px-4 lg:grid-cols-2">
+          <div className="my-5 grid grid-cols-1 gap-2 px-4 lg:grid-cols-2">
             <div className="order-first rounded-lg p-5 lg:order-first">
               <Image layout="intrinsic" src={ownerImage} alt="Sobre Nos" className=" rounded-xl"></Image>
             </div>
-            <div className="p-3">
-              <h6 className="ml-2 mt-0 pt-6 text-left text-xl font-bold lg:ml-0">{t("our_history")}</h6>
-              <p className="mt-5 text-justify font-medium">{t("our_history_description")}</p>
+            <div className=" rounded-lg flex flex-col content-center p-5">
+              <h6 className="ml-2 mt-0 text-left text-4xl font-bold lg:ml-0">{t("our_history")}</h6>
+              <p className="mt-5 mr-10 text-justify text-lg tracking-wide font-normal">{t("our_history_description")}</p>
             </div>
           </div>
 
           <div className="my-5 grid grid-cols-1 gap-2 lg:grid-cols-2">
-            <div className="order-last  p-5 lg:order-first">
-              <div>
-                <h6 className="text-left text-xl font-bold lg:mt-10">{t("mission")}</h6>
-                <p className="mt-5 text-justify text-base font-normal">{t("mission_decription")}</p>
+            <div className="order-last p-5 lg:order-first flex flex-col content-center ml-5">
+              <div className="">
+                <h6 className="text-left text-4xl font-bold">{t("mission")}</h6>
+                <p className="mt-5 text-justify text-lg tracking-wide font-normal">{t("mission_decription")}</p>
               </div>
             </div>
             <div className="rounded-lg p-5 ">
@@ -61,9 +61,9 @@ const AboutUs = () => {
             <div className="order-first p-5 lg:order-first">
               <Image layout="intrinsic" src={valoresImage} alt="Valores"></Image>
             </div>
-            <div className="rounded-lg p-5">
-              <h6 className="text-left text-xl font-bold lg:mt-10">{t("values")}</h6>
-              <p className="mt-5 text-justify text-base font-normal">{t("values_description")}</p>
+            <div className="rounded-lg flex flex-col content-center p-5">
+              <h6 className="text-left text-4xl font-bold">{t("values")}</h6>
+              <p className="mt-5 mr-10 text-justify text-lg tracking-wide font-normal">{t("values_description")}</p>
             </div>
           </div>
         </div>
