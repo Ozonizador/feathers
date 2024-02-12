@@ -31,11 +31,10 @@ const FaqSuperAdminPage = () => {
     <>
       <Sidebar />
       <div className="ml-64 flex flex-col px-5 pt-5">
-        <div className="mt-5 text-2xl">Perfis:</div>
         <div className="mt-5"></div>
         <CardTable
           title={"Perfis"}
-          labels={["Nome", "Lugar", "Sexo", "Tipo", "Data de Nascimento"]}
+          labels={["Nome", "Lugar", "Sexo", "Tipo", "Data de Nascimento", "Swift", "Iban"]}
           // @ts-ignore
           profiles={profiles}
         />

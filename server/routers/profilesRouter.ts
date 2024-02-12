@@ -34,7 +34,7 @@ export const profilesRouter = router({
   getAllProfiles: superAdminProcedure.query(async () => {
     const {data, error} = await supabaseAdmin
     .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-    .select("*");
+    .select("*, payment_methods:payment_methods!left(*)");
 
     return {data, error};
   }),
