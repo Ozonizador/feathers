@@ -31,6 +31,7 @@ import {
   NOTIFICATIONS_URL,
   PROCURAR_ADVERT_URL,
   REGISTER_URL,
+  SUPERADMIN_DASHBOARD,
   UNICONTROLO_GUESTS_URL,
   UNIDESK_SENHORIO_PAINEL_URL,
   UNIDESK_STAY_URL,
@@ -230,6 +231,20 @@ export const Navbar = () => {
                     </Link>
                   </div>
                 )}
+                {profile && profile.user_type == "ADMIN" && (
+                  <div className="nav_text my-auto px-2 text-sm xl:px-[15px]">
+                    <Link
+                      href={SUPERADMIN_DASHBOARD}
+                      className={classNames({
+                        find_text: true,
+                        "border-b-4 border-primary-500 pb-2 font-black":
+                          checkIfUrlActive([SUPERADMIN_DASHBOARD]) === true,
+                      })}
+                    >
+                      Dashboard Admin
+                    </Link>
+                  </div>
+                )}
                 <div className="my-auto px-2 text-sm xl:px-[15px]">
                   <Link
                     href={BLOG_URL}
@@ -333,6 +348,11 @@ export const Navbar = () => {
                             {userAppMode == "TENANT" && (
                               <>
                                 <Menu.Item>
+                                  <MyLink customClass="py-1 font-bold" href={SUPERADMIN_DASHBOARD}>
+                                    Dashboard Admin
+                                  </MyLink>
+                                </Menu.Item>
+                                <Menu.Item>
                                   <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_URL}>
                                     {t("common:uni-desk")}
                                   </MyLink>
@@ -367,6 +387,7 @@ export const Navbar = () => {
                                     )}
                                   </MyLink>
                                 </Menu.Item>
+                                <Menu.Item></Menu.Item>
                                 <div className="h-[1px] w-full bg-neutral-600 px-1"></div>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 text-[#8A8A8A] text-sm" href={ADMIN_URL}>
@@ -387,6 +408,11 @@ export const Navbar = () => {
                             )}
                             {userAppMode == "LANDLORD" && (
                               <>
+                                <Menu.Item>
+                                  <MyLink customClass="py-1 font-bold" href={SUPERADMIN_DASHBOARD}>
+                                    Dashboard Admin
+                                  </MyLink>
+                                </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
                                     {t("uni-desk")}

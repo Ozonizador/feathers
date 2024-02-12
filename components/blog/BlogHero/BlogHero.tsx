@@ -11,7 +11,7 @@ interface BlogHeroProps {
 export default function BlogHero({ blogs }: BlogHeroProps) {
   const router = useRouter();
   return (
-    <section className="mx-auto py-20">
+    <section className="mx-10 pt-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
         {!blogs || (blogs.length === 0 && <div>Sem blog posts</div>)}
         {blogs &&
@@ -28,7 +28,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                   />
 
                   <div className="absolute bottom-8 left-4 w-11/12">
-                    <h2 className="bold mb-4 text-lg font-normal capitalize text-white">{blog.title}</h2>
+                    <h3 className="bold mb-4 text-md text-bold font-normal capitalize text-white">{blog.title}</h3>
                     <p className="bold line-clamp-2 text-xs font-normal normal-case text-white">{blog.description}</p>
                     <div className="mt-7 flex flex-row justify-between">
                       <div>

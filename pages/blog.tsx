@@ -45,9 +45,9 @@ const Index = () => {
   }, [getBlogPosts]);
 
   return (
-    <section className="mx-6 mt-36 lg:mx-0 lg:px-28">
+    <section className="mx-6 mt-12 lg:mx-0 lg:px-28">
       <div className="flex flex-col items-center align-middle lg:flex-row lg:justify-between">
-        <div className="text-center text-3xl font-black lg:text-left lg:text-6xl">{t("blog:title")}</div>
+        <div className="text-center text-2xl font-black lg:text-left lg:text-4xl">{t("blog:title")}</div>
         <div className="flex h-5 w-full items-center lg:w-44 ">
           <select
             className="mt-24 w-full rounded-md border border-solid border-terciary-500 bg-white px-3 py-4 focus:border-primary-500 focus:outline-none focus:ring-0 lg:mt-0 lg:w-44"
@@ -76,7 +76,7 @@ const Index = () => {
         </>
       )}
       <>
-        <div className="mx-auto py-6">
+        <div className="mx-auto flex content-center py-6">
           <div className="mx-auto mb-44 mt-14 flex flex-col items-center justify-center rounded-2xl  bg-primary-100 py-5 text-center align-middle  lg:w-4/6 lg:flex-row lg:text-left">
             <div className="alert alert-warning con ml-3" role="alert">
               <Image height="40" src={notification} alt="" />

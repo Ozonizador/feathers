@@ -44,3 +44,4 @@ export const UNICONTROLO_GUESTS_URL = "/unidesk/unicontrolo/guests" as const;
 export const SUPERADMIN_BLOGS_URL = "/superadmin/blogs" as const;
 export const SUPERADMIN_FAQS_URL = "/superadmin/faqs" as const;
 export const SUPERADMIN_PROFILES_URL = "/superadmin" as const;
+export const SUPERADMIN_DASHBOARD = "/superadmin/dashboard" as const;

@@ -18,7 +18,6 @@ import { CookiesProvider, useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import NextNProgress from "nextjs-progressbar";
-
 import { trpc } from "../utils/trpc";
 
 const theme: CustomFlowbiteTheme = {
