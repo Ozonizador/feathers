@@ -67,12 +67,12 @@ Deno.serve(async (req: Request) => {
         }
 
         // send email and sms
-        await fetch("/api/mail", {
+        await fetch("www.dev.unihosts.pt/api/mail", {
           method: "POST",
           body: JSON.stringify(formData),
         });
 
-        await fetch("/api/sms", {
+        await fetch("www.dev.unihosts.pt/api/sms", {
           method: "POST",
           body: JSON.stringify(messageData),
         });
@@ -118,12 +118,12 @@ Deno.serve(async (req: Request) => {
         }
 
         // send email and sms
-        await fetch("/api/mail", {
+        await fetch("www.dev.unihosts.pt/api/mail", {
           method: "POST",
           body: JSON.stringify(formData),
         });
 
-        await fetch("/api/sms", {
+        await fetch("www.dev.unihosts.pt/api/sms", {
           method: "POST",
           body: JSON.stringify(messageData),
         });

@@ -8,6 +8,7 @@ import Button from "../components/utils/Button";
 import { GetStaticPropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
 const Contactos = () => {
   const [name, setName] = useState<string>("");
@@ -25,14 +26,14 @@ const Contactos = () => {
         <div className="flex flex-col lg:flex-row ">
           <div className="flex w-full lg:w-1/3">
             <div className="flex flex-col gap-3 xl:mt-20">
-              <a href="/faqs?TENANT" className="py-3 cursor-pointer">
+              <Link href="/faqs?TENANT" className="py-3 cursor-pointer">
                 <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_student")}</div>
-              </a>
-              <a href="/faqs?LANDLORD" className="cursor-pointer"> 
+              </Link>
+              <Link href="/faqs?LANDLORD" className="cursor-pointer"> 
                 <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_landlord")}</div>
-              </a>
+              </Link>
 
               <div className="mt-20">
                 <div className="text-2xl font-bold">{t("contacts")}</div>

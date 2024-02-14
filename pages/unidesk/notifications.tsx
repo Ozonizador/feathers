@@ -17,6 +17,8 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { UnideskStructure } from "../../components/unidesk/UnideskStructure";
 import MenuSenhorio from "../../components/unidesk/Menus/MenuSenhorio";
+import { getCookie } from "cookies-next";
+import MenuEstudante from "../../components/unidesk/Menus/MenuEstudante";
 
 const paths = [
   { url: UNIDESK_URL, label: "Unidesk" },
@@ -30,6 +32,7 @@ const Notifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const clearNotifications = useClearNotifications();
   const profile = useCurrentUser();
+  const state = getCookie("navbar");
 
   const getUserNotifications = useCallback(async () => {
     setIsLoading(true);
@@ -58,10 +61,14 @@ const Notifications = () => {
       <Breadcrumbs icon={iconfavorito} paths={paths} />
       <UnideskStructure>
         <UnideskStructure.Menu>
-          <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />
+          {state == "TENANT" ? (
+            <MenuEstudante activeSection="notifications" activeUrl="general" />
+          ) : (
+            <MenuSenhorio activeSection="notifications" activeUrl="main_panel" />
+          )}
         </UnideskStructure.Menu>
 
-        <div className="flex flex-col gap-3 px-3 pt-12 lg:mx-auto">
+        <div className="flex w-5/6 flex-col gap-3 px-3 pt-12 lg:mx-auto">
           <div className="container mx-auto w-full">
             <>
               {isLoading && (
