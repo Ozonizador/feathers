@@ -25,14 +25,14 @@ const Contactos = () => {
         <div className="flex flex-col lg:flex-row ">
           <div className="flex w-full lg:w-1/3">
             <div className="flex flex-col gap-3 xl:mt-20">
-              <div className="py-3">
+              <a href="/faqs?TENANT" className="py-3 cursor-pointer">
                 <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_student")}</div>
-              </div>
-              <div>
+              </a>
+              <a href="/faqs?LANDLORD" className="cursor-pointer"> 
                 <CgFileDocument className="inline text-xl" />
                 <div className="my-auto ml-3 inline">{t("help_landlord")}</div>
-              </div>
+              </a>
 
               <div className="mt-20">
                 <div className="text-2xl font-bold">{t("contacts")}</div>
@@ -40,7 +40,7 @@ const Contactos = () => {
                   <FaPhoneAlt className="mr-2" /> +351 914 626 616
                 </div>
                 <div className="mb-3 mt-5 flex items-center align-middle">
-                  <MdEmail className="mr-2" /> info@unihosts.pt
+                  <MdEmail className="mr-2"/> info@unihosts.pt
                 </div>
               </div>
 

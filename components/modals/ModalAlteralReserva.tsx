@@ -8,6 +8,7 @@ import { Reservation, RESERVATION_TABLE } from "../../models/reservation";
 import Input from "../utils/Input";
 import { useTranslation } from "next-i18next";
 import { addMonths, isSameDay } from "date-fns";
+import { IoMdClose } from "react-icons/io";
 
 /**
  * PAGINA 23 DO XD
@@ -87,6 +88,7 @@ const ModalAlterarReserva = () => {
                 >
                   <Image className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
                   <span className="ml-3 text-3xl font-bold">{t("change_reservation")}</span>
+                  <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 cursor-pointer max-sm:top-11" onClick={() => closeModal()}/>
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}

@@ -459,7 +459,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1 text-[#8A8A8A]" onClick={() => logout()}>
+                                  <div className="py-1 text-[#8A8A8A] cursor-pointer" onClick={() => logout()}>
                                     {t("leave")}
                                   </div>
                                 </Menu.Item>

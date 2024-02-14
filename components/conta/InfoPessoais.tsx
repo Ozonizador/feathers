@@ -22,7 +22,7 @@ const InfoPessoais = () => {
         <div className="flex flex-1 justify-center">
           <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-10">
             <div className="my-4 flex flex-row gap-7">
-              <div className="w-2/6 ">
+              <div className="w-1/6 ">
                 {/* <Menu /> */}
                 <MenuEstudante activeSection={"stay"} activeUrl={"general"} />
               </div>

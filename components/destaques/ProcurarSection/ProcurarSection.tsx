@@ -128,7 +128,7 @@ export default function ProcurarSection() {
               </div>
               <div className="mb-2 max-sm:mt-2">
                 <select
-                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white  px-3 text-sm focus:border-primary-500 focus:outline-none focus:ring-0 "
+                  className="w-fit rounded-md border border-solid border-terciary-500 bg-white cursor-pointer px-3 text-sm focus:border-primary-500 focus:outline-none focus:ring-0 "
                   onChange={changeOrderFilter}
                   value={`${currentOrder.byColumn}${currentOrder.byColumn == "price" ? "-" + currentOrder.type : ""}`}
                   id="order-drop"
@@ -149,7 +149,7 @@ export default function ProcurarSection() {
                 <PopoverGeneric title={t("advertisements:type_house")}>
                   <div className="grid w-80 grid-cols-2 gap-4 rounded-xl bg-white p-3 text-neutral-500">
                     <div
-                      className={classNames("my-auto w-full rounded-xl border p-3 text-xs", {
+                      className={classNames("my-auto w-full rounded-xl border p-3 text-xs cursor-pointer", {
                         "border-primary-500 text-primary-500": currentFilter.placeType === "ALL",
                         "border-neutral-500": currentFilter.placeType !== "ALL",
                       })}
@@ -162,7 +162,7 @@ export default function ProcurarSection() {
                         <div
                           key={index}
                           onClick={() => setFilters({ placeType: type as TypeAdvertisement })}
-                          className={classNames("my-auto w-full rounded-xl border p-3 text-xs", {
+                          className={classNames("my-auto w-full rounded-xl border p-3 text-xs cursor-pointer", {
                             "border-primary-500 text-primary-500": currentFilter.placeType === type,
                             "border-neutral-500": currentFilter.placeType !== type,
                           })}

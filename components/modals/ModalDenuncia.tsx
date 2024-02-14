@@ -12,6 +12,7 @@ import { useCurrentUser } from "../../context/MainProvider";
 import useReportService from "../../hooks/reportService";
 import FeathersSpinner from "../utils/Spinner";
 import { Trans, useTranslation } from "next-i18next";
+import { IoMdClose } from "react-icons/io";
 
 /* PAGINA 21-22 DO XD */
 
@@ -81,6 +82,7 @@ const ModalDenuncia = () => {
                 <Dialog.Title as="h3" className="flex bg-primary-100 p-5 text-lg font-medium leading-6 text-gray-900">
                   <Image src="/images/flag.png" alt="" width="40" height="30" />
                   <span className="my-auto ml-5  text-xl font-bold lg:text-3xl">{t("report_advert")}</span>
+                  <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 cursor-pointer max-sm:top-11" onClick={() => closeModal()}/>
                 </Dialog.Title>
                 {step === 1 && (
                   <>

@@ -13,6 +13,7 @@ import {
 } from "../../context/ModalShowProvider";
 import { TYPE_ADVERTISEMENT } from "../../models/advertisement";
 import { useTranslation } from "next-i18next";
+import { IoMdClose } from "react-icons/io";
 /* PAGINA 24-26 DO XD 
 
 para chamar na pagina => <ModalAvaliarExperiencia defaultOpen={false} /> 
@@ -88,6 +89,7 @@ const ModalAvaliarExperiencia = () => {
               >
                 <Image className="" src="/images/feeedback.png" alt="Avaliar experiência" width="32" height="32" />{" "}
                 <span className="ml-3 text-3xl font-bold">{t("evaluate_experience")}</span>
+                <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 cursor-pointer max-sm:top-11" onClick={() => closeModal()}/>
               </Dialog.Title>
               {step === 1 && (
                 <>

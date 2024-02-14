@@ -52,48 +52,55 @@ const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => 
                   <MenuEstudante activeSection={"stay"} activeUrl={"general"} />
                 </UnideskStructure.Menu>
                 <UnideskStructure.Content>
-                  <div className="mb-4 text-2xl font-semibold">{t("admin:unidesk.student.general")}</div>
-                  <h6 className="text-left text-xl text-gray-600">{t("admin:unidesk.student.current_stay")}</h6>
-                  {/* Modais */}
-                  <ModalDenuncia />
-                  <ModalAvaliarExperiencia />
-                  <ModalAlterarReserva />
-                  {/* Logica visivel */}
-                  <div className="flex md:flex-wrap flex-col gap-7 px-0 lg:flex-row lg:gap-10">
-                    {currentStay && (
+                  <div className="w-5/6">
+                    <div className="mb-4 text-2xl font-semibold">{t("admin:unidesk.student.general")}</div>
+                    <h6 className="text-left text-xl text-gray-600">{t("admin:unidesk.student.current_stay")}</h6>
+                    {/* Modais */}
+                    <ModalDenuncia />
+                    <ModalAvaliarExperiencia />
+                    <ModalAlterarReserva />
+                    {/* Logica visivel */}
+                    <div className="flex flex-col gap-7 px-0 md:flex-wrap lg:flex-row lg:gap-10">
+                      {currentStay && (
+                        <>
+                          <StayCard stay={currentStay} />
+                          <StayInfo reservation={currentStay} options={{ isNextStay: false }} />
+                        </>
+                      )}
+                      {!currentStay && <div>{t("admin:unidesk.student.no_stay")}</div>}
+                    </div>
+                    <div className="mt-5 flex flex-col gap-3">
+                      <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_stays")}</h6>
                       <>
-                        <StayCard stay={currentStay} />
-                        <StayInfo reservation={currentStay} options={{ isNextStay: false }} />
+                        {nextStays &&
+                          nextStays.map((stay) => {
+                            return (
+                              <div
+                                className="stay_div flex flex-col gap-7 md:flex-wrap lg:flex-row lg:gap-10"
+                                key={stay.id}
+                              >
+                                <StayCard stay={stay} />
+                                <StayInfo reservation={stay} options={{ isNextStay: true }} />
+                              </div>
+                            );
+                          })}
+                        <div className="mt-12 text-center text-base text-primary-500">
+                          {t("admin:unidesk.student.no_next_stay")}
+                        </div>
                       </>
-                    )}
-                    {!currentStay && <div>{t("admin:unidesk.student.no_stay")}</div>}
-                  </div>
-                  <div className="mt-5 flex flex-col gap-3">
-                    <h6 className="text-xl text-gray-600">{t("admin:unidesk.student.next_stays")}</h6>
-                    <>
-                      {nextStays &&
-                        nextStays.map((stay) => {
-                          return (
-                            <div className="flex md:flex-wrap flex-col gap-7 lg:flex-row lg:gap-10 stay_div" key={stay.id}>
-                              <StayCard stay={stay} />
-                              <StayInfo reservation={stay} options={{ isNextStay: true }} />
-                            </div>
-                          );
-                        })}
-                      <div className="mt-12 text-center text-base text-primary-500">{t("admin:unidesk.student.no_next_stay")}</div>
-                    </>
 
-                    <div className="flex justify-center">
-                      <Link
-                        href={PROCURAR_ADVERT_URL}
-                        className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
-                      >
-                        {t("find")}
-                        <span className="px-1">
-                          <CgHome />
-                        </span>
-                        {t("at")}
-                      </Link>
+                      <div className="flex justify-center">
+                        <Link
+                          href={PROCURAR_ADVERT_URL}
+                          className="my-10 flex w-full items-center justify-center rounded-md bg-primary-500 px-9  py-4 text-center leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg lg:w-56"
+                        >
+                          {t("find")}
+                          <span className="px-1">
+                            <CgHome />
+                          </span>
+                          {t("at")}
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </UnideskStructure.Content>
@@ -158,7 +165,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { data: currentStay, error: currentStayError } = currentUserStay;
   const { data: nextStays, error: nextStaysError } = nextUserStays;
 
-  
   return {
     props: {
       initialSession: session,
