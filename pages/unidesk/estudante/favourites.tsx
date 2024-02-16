@@ -51,7 +51,6 @@ const UnideskFavoritos = () => {
   return (
     <section className="">
       <Breadcrumbs icon={iconfavorito} paths={FavouritesBreadcrumbs} />
-      <BreadcrumbMiddle title={t("favourites")} icon={iconfavorito} />
 
       <UnideskStructure>
         <UnideskStructure.Menu>

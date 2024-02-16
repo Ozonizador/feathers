@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { ZodString, z } from "zod";
 import { authorizedProcedure, superAdminProcedure } from "../procedure";
 import { router } from "../trpc";
 import { PROFILE_COLUMNS, PROFILE_TABLE_NAME, Profile, ProfilesResponse, UserTypes } from "../../models/profile";
@@ -13,6 +13,8 @@ const ProfileConfigSchema: z.ZodType<
   accepts_notification_message: z.boolean(),
   prefered_unidesk_state: z.enum(["LANDLORD", "TENANT"]),
 });
+
+const user_id: z.ZodString = z.string();
 
 export const profilesRouter = router({
   updateProfileConfigurations: authorizedProcedure.input(ProfileConfigSchema).mutation(async ({ input, ctx }) => {
@@ -56,6 +58,9 @@ export const profilesRouter = router({
 
     return data;
   }),
+  deleteProfile:  superAdminProcedure.input(user_id).mutation(async ({ input, ctx}) => {
+    await supabaseAdmin.rpc('delete_user_data', user_id);
+  })
 });
 
 // export type definition of API

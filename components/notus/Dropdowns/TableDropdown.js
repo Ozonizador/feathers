@@ -14,6 +14,7 @@ const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) =
   const [eliminar, setEliminar] = React.useState(false);
   const [validar, setValidar] = React.useState(false);
   const verifyAd = trpc.advertisements.verifyAdvertisement.useMutation();
+  const deleteUser = trpc.profile.deleteProfile.useMutation();
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
@@ -63,7 +64,17 @@ const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) =
                       router.push(paths[index]);
                       break;
                     case 1:
-                      disableAdvertisement(paths[index]);
+                      if (toString(option).includes('Perfil')) {
+                        const ad = paths[index];
+                        if (!validar) {
+                          setValidar(true);
+                          toast.warning("Tem a certeza que quer validar?")
+                        } else {
+                          //deleteUser({ad})
+                        }
+                      } else {
+                        disableAdvertisement(paths[index]);
+                      }
                       break;
                     case 2:
                       let ad = paths[index];
