@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { trpc } from "../../../utils/trpc";
 import useAdvertisementService from "../../../hooks/advertisementService";
 import { toast } from "react-toastify";
+import { useSetModalSimpleConfirmation, useModalSimpleConfirmation } from "../../../context/ModalShowProvider";
 
 const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) => {
   const { removeAdvertisement, disableAdvertisement } = useAdvertisementService();
@@ -17,6 +18,15 @@ const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) =
   const deleteUser = trpc.profile.deleteProfile.useMutation();
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
+  
+  // Modal for confirmations
+  const modalSimpleConfirmationInfo = useModalSimpleConfirmation();
+  const setSimpleConfirmation = useSetModalSimpleConfirmation();
+
+  const openModalSimpleConfirmationProfiles = (user_id) => {
+    setSimpleConfirmation({ ...modalSimpleConfirmationInfo, isOpen: true, type: "profile", user_id: user_id });
+  };
+  
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
@@ -64,14 +74,9 @@ const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) =
                       router.push(paths[index]);
                       break;
                     case 1:
-                      if (toString(option).includes('Perfil')) {
-                        const ad = paths[index];
-                        if (!validar) {
-                          setValidar(true);
-                          toast.warning("Tem a certeza que quer validar?")
-                        } else {
-                          //deleteUser({ad})
-                        }
+                      if (option.includes('Perfil')) {
+                        const profile_id = paths[index];
+                        openModalSimpleConfirmationProfiles(profile_id);
                       } else {
                         disableAdvertisement(paths[index]);
                       }

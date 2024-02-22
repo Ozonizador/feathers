@@ -59,7 +59,10 @@ export const profilesRouter = router({
     return data;
   }),
   deleteProfile:  superAdminProcedure.input(user_id).mutation(async ({ input, ctx}) => {
-    await supabaseAdmin.rpc('delete_user_data', user_id);
+    const user_id = parseInt(input);
+    const {data, error} = await supabaseAdmin.rpc('delete_test3', {user_id});
+
+    return {data, error};
   })
 });
 

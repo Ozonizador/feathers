@@ -91,7 +91,7 @@ export default function CardTable({ color, title, labels = [], profiles = null, 
                         {profile.payment_methods?.iban ? profile.payment_methods?.iban : ""}
                       </td>
                       <td className="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-right align-middle text-xs">
-                        <TableDropdown options={["Visitar Perfil", "Eliminar Perfil"]} paths={[`/perfil/${profile.slug}`]}/>
+                        <TableDropdown options={["Visitar Perfil", "Eliminar Perfil"]} paths={[`/perfil/${profile.slug}`, profile.id]}/>
                       </td>
                     </tr>
                   );

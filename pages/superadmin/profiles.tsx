@@ -13,6 +13,12 @@ import { FaUser } from "react-icons/fa6";
 // Components
 import Sidebar from "../../components/notus/Sidebar/Sidebar";
 import CardTable from "../../components/notus/Cards/CardTable";
+import {
+  ModalSimpleConfirmationProvider,
+  useModalSimpleConfirmation,
+  useSetModalSimpleConfirmation,
+} from "../../context/ModalShowProvider";
+import ModalSimpleConfirmation from "../../components/modals/ModalSimpleConfirmation";
 
 const FaqSuperAdminPage = () => {
   const { data, refetch } = trpc.profile.getAllProfiles.useQuery();
@@ -29,16 +35,21 @@ const FaqSuperAdminPage = () => {
 
   return (
     <>
-      <Sidebar />
-      <div className="ml-64 flex flex-col px-5 pt-5">
-        <div className="mt-5"></div>
-        <CardTable
-          title={"Perfis"}
-          labels={["Nome", "Lugar", "Sexo", "Tipo", "Data de Nascimento", "Swift", "Iban"]}
-          // @ts-ignore
-          profiles={profiles}
-        />
-      </div>
+      <ModalSimpleConfirmationProvider>
+        <div>
+          <ModalSimpleConfirmation/>
+          <Sidebar />
+          <div className="ml-64 flex flex-col px-5 pt-5">
+            <div className="mt-5"></div>
+            <CardTable
+              title={"Perfis"}
+              labels={["Nome", "Lugar", "Sexo", "Tipo", "Data de Nascimento", "Swift", "Iban"]}
+              // @ts-ignore
+              profiles={profiles}
+            />
+          </div>
+        </div>
+      </ModalSimpleConfirmationProvider>
     </>
   );
 };

@@ -242,6 +242,63 @@ export function useSetModalAlterarReserva() {
   };
 }
 
+/*
+  Modal Simple
+*/
+interface ModalSimpleConfirmationProps {
+  children: ReactElement;
+}
+
+interface ModalSimpleConfirmationElements {
+  isOpen: boolean;
+  step: number;
+  type: string;
+  user_id: string;
+}
+
+const ModalSimpleConfirmationContext = createContext<ModalSimpleConfirmationElements>({
+  isOpen: false,
+  step: 1,
+  type: "",
+  user_id: ""
+});
+const SetModalSimpleConfirmationContext = createContext<Dispatch<SetStateAction<ModalSimpleConfirmationElements>>>(() => {});
+
+export const ModalSimpleConfirmationProvider = ({ children }: ModalSimpleConfirmationProps): JSX.Element => {
+  const [modalInfo, setModalInfo] = useState<ModalSimpleConfirmationElements>({
+    isOpen: false,
+    step: 1,
+    type: "",
+    user_id: ""
+  });
+
+  return (
+    <ModalSimpleConfirmationContext.Provider value={modalInfo}>
+      <SetModalSimpleConfirmationContext.Provider value={setModalInfo}>{children}</SetModalSimpleConfirmationContext.Provider>
+    </ModalSimpleConfirmationContext.Provider>
+  );
+};
+
+export function useModalSimpleConfirmation() {
+  const modalApplyOpen = useContext(ModalSimpleConfirmationContext);
+  return modalApplyOpen;
+}
+
+export function useSetOpenModalSimpleConfirmation() {
+  const changeReservationModal = useContext(ModalSimpleConfirmationContext);
+  const setModalApplyOpen = useContext(SetModalSimpleConfirmationContext);
+  return (value: boolean) => {
+    setModalApplyOpen({ ...changeReservationModal, isOpen: value });
+  };
+}
+
+export function useSetModalSimpleConfirmation() {
+  const setModalReport = useContext(SetModalSimpleConfirmationContext);
+  return (report: ModalSimpleConfirmationElements) => {
+    setModalReport(report);
+  };
+}
+
 /**
  * Modal Gerar Referencia
  */
