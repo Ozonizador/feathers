@@ -7,8 +7,10 @@ import { useState } from "react";
 import { useCurrentReason, useIncrementStep, useDecrementStep } from "../../context/DesativarProvider";
 import useUserService from "../../hooks/userService";
 import { BiCheckCircle } from "react-icons/bi";
+import { trpc } from "../../utils/trpc";
+import { useRouter } from "next/router";
 
-const DesativarContaPoliciesForm = () => {
+const DesativarContaPoliciesForm = (profile: any) => {
   const { t } = useTranslation();
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
@@ -48,7 +50,11 @@ const DesativarContaPoliciesForm = () => {
             <div className="w-1/6">
               <Button
                 onClick={(e) => {
-                  toast.error(currentReason);
+                  trpc.profile.deleteProfilebyId.useQuery(profile);
+                  toast.success(currentReason);
+                  setTimeout(() => {
+                    useRouter().push("/")
+                  }, 10000);
                 }}
                 type={"button"}
               >
