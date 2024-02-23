@@ -278,7 +278,7 @@ export const Navbar = () => {
                     </Link>
 
                     <Link href={LOGIN_URL} className="p-0">
-                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl hover:border-primary-500 hover:bg-white hover:text-primary-500 hover:drop-shadow-xl">
                         {t("login")}
                       </div>
                     </Link>
