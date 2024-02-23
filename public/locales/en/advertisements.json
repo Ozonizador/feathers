@@ -129,7 +129,7 @@
   "current_reservation": "Current Reservation",
   "entity": "Entity: {{entity}}",
   "reference": "Reference: {{reference}}",
-  "amount": "Amount: {{amount}}",
+  "amount": "Amount: {{amount}}€",
   "cover": "Cover Photo",
   "other": "Other Photos",
   "house_verified": "Verified House",

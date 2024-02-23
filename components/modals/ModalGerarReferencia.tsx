@@ -205,8 +205,17 @@ const ModalGerarReferencia = () => {
                     </div>
                     {selectedPayment === "mbway" && (
                       <div className="my-5 flex flex flex-col items-center justify-center">
-                        <span>{t("advertisements:cellphone_number")}</span>
+                        <span>{t("advertisements:cellphone")}</span>
                         <Input onChange={(e) => setPhone(e.target.value)} value={phone} />
+                        <div className="column mb-5 flex w-1/2 flex-col justify-center">
+                        {t("advertisements:entity", { entity: data?.entidade })}
+                        <span>
+                          {t("advertisements:reference", {reference: data?.reference})}
+                        </span>
+                        <span>
+                          {t("advertisements:amount", {amount: toNumber(data?.valor).toFixed(2)})}
+                        </span>
+                      </div>
                       </div>
                     )}
                     {!loadedReference && (
