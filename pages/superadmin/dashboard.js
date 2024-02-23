@@ -71,7 +71,7 @@ export const getServerSideProps = async (ctx) => {
     .eq("id", user.id)
     .single();
 
-  if (errorProfile || !profile || profile.user_type !== "ADMIN")
+  if (errorProfile || !profile || profile.user_type != "ADMIN")
     return {
       redirect: {
         destination: "/",

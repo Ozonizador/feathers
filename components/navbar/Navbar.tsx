@@ -278,7 +278,7 @@ export const Navbar = () => {
                     </Link>
 
                     <Link href={LOGIN_URL} className="p-0">
-                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:drop-shadow-xl hover:border-primary-500 hover:bg-white hover:text-primary-500 hover:drop-shadow-xl">
+                      <div className="mr-2 rounded border-2 border-primary-500 bg-primary-500 px-6 py-2 text-center text-sm text-white duration-200 ease-in hover:border-primary-500 hover:bg-white hover:text-primary-500 hover:drop-shadow-xl hover:drop-shadow-xl">
                         {t("login")}
                       </div>
                     </Link>
@@ -348,9 +348,11 @@ export const Navbar = () => {
                             {userAppMode == "TENANT" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
-                                    Dashboard Admin
-                                  </MyLink>
+                                  {profile?.user_type == "ADMIN" && (
+                                    <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
+                                      Dashboard Admin
+                                    </MyLink>
+                                  )}
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_URL}>
@@ -408,9 +410,11 @@ export const Navbar = () => {
                             {userAppMode == "LANDLORD" && (
                               <>
                                 <Menu.Item>
-                                  <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
-                                    Dashboard Admin
-                                  </MyLink>
+                                  {profile?.user_type == "ADMIN" && (
+                                    <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
+                                      Dashboard Admin
+                                    </MyLink>
+                                  )}
                                 </Menu.Item>
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
@@ -459,7 +463,7 @@ export const Navbar = () => {
                                   </MyLink>
                                 </Menu.Item>
                                 <Menu.Item>
-                                  <div className="py-1 text-[#8A8A8A] cursor-pointer" onClick={() => logout()}>
+                                  <div className="cursor-pointer py-1 text-[#8A8A8A]" onClick={() => logout()}>
                                     {t("leave")}
                                   </div>
                                 </Menu.Item>
