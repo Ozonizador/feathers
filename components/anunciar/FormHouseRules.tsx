@@ -9,7 +9,7 @@ const FormHouseRules = () => {
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
 
-  const advertisement = useAdvertisement();
+  let advertisement = useAdvertisement();
   const setAdvertisementProperty = useSetAdvertisementProperty();
 
   const nextStep = async (e: React.MouseEvent) => {

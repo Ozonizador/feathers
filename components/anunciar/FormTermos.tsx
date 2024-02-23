@@ -18,6 +18,7 @@ import Checkbox from "../utils/Checkbox";
 import FeathersSpinner from "../utils/Spinner";
 import { useTranslation } from "next-i18next";
 import { supabase } from "../../lib/supabaseClient";
+import Link from "next/link";
 
 const FormTermos = () => {
   const { t } = useTranslation();
@@ -120,7 +121,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <div className="text-md capitalize">{t("terms_and_conditions")}</div>
+                <Link href={"/terms"} className="text-md capitalize">{t("terms_and_conditions")}</Link>
               </div>
             </div>
 
@@ -135,7 +136,7 @@ const FormTermos = () => {
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
 
-                <div className="text-md capitalize">{t("privacy_policy")}</div>
+                <Link href={"/policies"} className="text-md capitalize">{t("privacy_policy")}</Link>
               </div>
             </div>
 

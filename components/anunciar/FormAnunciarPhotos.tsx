@@ -211,6 +211,7 @@ const FormAnunciarPhotos = () => {
                       </label>
                       <input
                         type="file"
+                        multiple
                         id="test"
                         onChange={(e) => uploadToClient(e, "other")}
                         accept="image/png, image/gif, image/jpeg, image/webp"

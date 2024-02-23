@@ -119,6 +119,7 @@
   "value_retained_description": "Amount to be retained by the Landlord and returned at the end of the stay depending on the house conditions.",
   "rent_month_paid": "Monthly fee payable",
   "rent_of_month": "Rent of {{month}} Month",
+  "month": "month",
   "deposit": "Deposit",
   "on_check_day": " On the day of check-in",
   "monthly_rent": "Monthly rent",

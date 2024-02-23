@@ -6,6 +6,7 @@ import {
   Advertisement,
   ADVERTISEMENT_PROPERTIES,
   HOUSE_RULES_NAMING,
+  HouseRules,
   TYPE_CLEANING_LABELS,
 } from "../../models/advertisement";
 import Checkbox from "../utils/Checkbox";
@@ -21,12 +22,15 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
   const { t } = useTranslation();
   const toggleHouseRulesProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
     let { house_rules } = advertisement;
-    const property = event.target.name;
+    const property: keyof HouseRules = event.target.name as keyof HouseRules;
     house_rules = { ...house_rules, [property]: event.target.checked};
 
     onChange(ADVERTISEMENT_PROPERTIES.HOUSE_RULES, {
       house_rules
     });
+
+    //@ts-ignore
+    advertisement.house_rules[property] = event.target.checked;
   };
 
   const changeHouseRulesInput = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,7 +54,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         <div className="flex h-5 items-center">
           <Checkbox
             onChange={(e) => toggleHouseRulesProperty(e)}
-            checked={advertisement.house_rules.animalsAllowed || false}
+            defaultChecked={advertisement.house_rules.animalsAllowed || false}
             name={HOUSE_RULES_NAMING.ANIMALS_ALLOWED}
           />
         </div>
@@ -65,7 +69,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         <div className="flex h-5 items-center">
           <Checkbox
             onChange={(e) => toggleHouseRulesProperty(e)}
-            checked={advertisement.house_rules.smokeAllowed || false}
+            defaultChecked={advertisement.house_rules.smokeAllowed || false}
             name={HOUSE_RULES_NAMING.SMOKE_ALLOWED}
           />
         </div>
@@ -81,7 +85,7 @@ const HouseRulesComponent = ({ advertisement, onChange }: HouseRulesProps) => {
         <div className="flex h-5 items-center">
           <Checkbox
             onChange={(e) => toggleHouseRulesProperty(e)}
-            checked={advertisement.house_rules.eventsAllowed || false}
+            defaultChecked={advertisement.house_rules.eventsAllowed || false}
             name={HOUSE_RULES_NAMING.EVENTS_ALLOWED}
           />
         </div>

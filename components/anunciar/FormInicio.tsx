@@ -81,7 +81,13 @@ const FormInicio = () => {
           </section>
           <div className="flex flex-col items-center gap-5 xl:flex-row">
             <div className="w-32 ">
-              <Button type="button" onClick={methods.handleSubmit(nextStep)}>
+              <Button
+                type="button"
+                onClick={() => {
+                  checkPossibilites();
+                  methods.handleSubmit(nextStep);
+                }}
+              >
                 {t("next_step")} &#8594;
               </Button>
             </div>
