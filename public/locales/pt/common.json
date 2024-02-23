@@ -141,5 +141,6 @@
   "faqs": {
     "search": "Como podemos ajudar?",
     "search_label": "Procure nas nossas faqs..."
-  }
+  },
+  "recover_title": "Introduza o seu endereço de email associado à conta, e iremos enviar-lhe uma ligação para redefinir a sua palavra-passe."
 }

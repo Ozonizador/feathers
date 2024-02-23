@@ -44,7 +44,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
           </div>
           <h1 className="w-full text-center text-2xl font-bold text-white lg:w-3/4 lg:text-5xl">{blog.title}</h1>
           <p className="text-x1 mt-6  text-center text-white lg:mt-14 lg:text-2xl">
-            By Unihosts at{" "}
+            {" "}
             <span className="capitalize">
               {format(parseISO(blog.created_at), "dd MMMM yyyy", {
                 locale: router.locale === "pt" ? pt : enGB,

@@ -4,6 +4,7 @@ import { pt, enGB } from "date-fns/locale";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import { useRouter } from "next/router";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 interface BlogHeroProps {
   blogs: Blog[];
 }
@@ -28,8 +29,8 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
                   />
 
                   <div className="absolute bottom-8 left-4 w-11/12">
-                    <h3 className="bold mb-4 text-md text-bold font-normal capitalize text-white">{blog.title}</h3>
-                    <p className="bold line-clamp-2 text-xs font-normal normal-case text-white">{blog.description}</p>
+                    <h3 className="bold mb-4 text-md text-bold font-normal capitalize text-white"><ReactMarkdown>{blog.title}</ReactMarkdown></h3>
+                    <p className="bold line-clamp-2 text-xs font-normal normal-case text-white"><ReactMarkdown>{blog.description}</ReactMarkdown></p>
                     <div className="mt-7 flex flex-row justify-between">
                       <div>
                         <p className="normal-case text-gray-300">
