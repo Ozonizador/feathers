@@ -47,7 +47,7 @@ const ModalGerarReferencia = () => {
       setSelectedPayment(payment);
     }
     setData(undefined);
-  }
+  };
 
   const generateReference = async () => {
     if (!reservation || !user || value == undefined) return;
@@ -89,7 +89,7 @@ const ModalGerarReferencia = () => {
           onSettled: () => setLoadingReference(false),
         }
       );
-  
+
       setOpen(true);
     }
 
@@ -207,15 +207,6 @@ const ModalGerarReferencia = () => {
                       <div className="my-5 flex flex flex-col items-center justify-center">
                         <span>{t("advertisements:cellphone")}</span>
                         <Input onChange={(e) => setPhone(e.target.value)} value={phone} />
-                        <div className="column mb-5 flex w-1/2 flex-col justify-center">
-                        {t("advertisements:entity", { entity: data?.entidade })}
-                        <span>
-                          {t("advertisements:reference", {reference: data?.reference})}
-                        </span>
-                        <span>
-                          {t("advertisements:amount", {amount: toNumber(data?.valor).toFixed(2)})}
-                        </span>
-                      </div>
                       </div>
                     )}
                     {!loadedReference && (
@@ -229,13 +220,13 @@ const ModalGerarReferencia = () => {
                     )}
                     {loadedReference && open && (
                       <div className="column mb-5 flex w-1/2 flex-col justify-center">
-                        {t("advertisements:entity", { entity: data?.entidade })}
-                        <span>
-                          {t("advertisements:reference", {reference: data?.reference})}
-                        </span>
-                        <span>
-                          {t("advertisements:amount", {amount: toNumber(data?.valor).toFixed(2)})}
-                        </span>
+                        {selectedPayment == "multibanco" && (
+                          <>
+                            <span>{t("advertisements:entity", { entity: data?.entidade })}</span>
+                            <span>{t("advertisements:reference", { reference: data?.reference })}</span>
+                          </>
+                        )}
+                        <span>{t("advertisements:amount", { amount: toNumber(data?.valor).toFixed(2) })}</span>
                       </div>
                     )}
                   </div>
