@@ -15,7 +15,7 @@ const ModalSimpleConfirmation = () => {
   const { isOpen, type, user_id } = useModalSimpleConfirmation();
   const setIsOpen = useSetOpenModalSimpleConfirmation();
   const [confirmation, setConfirmation] = useState<boolean>(false);
-  const deleteUser = trpc.profile.deleteProfile.useMutation();
+
 
   function closeModal() {
     setIsOpen(false);
@@ -89,7 +89,10 @@ const ModalSimpleConfirmation = () => {
                               role="button"
                               id="modal-btn"
                               onClick={async () => {
-                                type == "profile" ? console.log( await deleteUser.mutateAsync(user_id)) : ""
+                                if (type === "profile") {
+                                  trpc.profile.deleteProfilebyId.useQuery(user_id);
+                                  closeModal();
+                                }
                               }}
                             >
                                {type == "profile" ? "Eliminar" : ""}

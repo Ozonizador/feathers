@@ -15,7 +15,6 @@ const NotificationDropdown = ({ profile_id = null, options = [], paths = [] }) =
   const [eliminar, setEliminar] = React.useState(false);
   const [validar, setValidar] = React.useState(false);
   const verifyAd = trpc.advertisements.verifyAdvertisement.useMutation();
-  const deleteUser = trpc.profile.deleteProfile.useMutation();
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   

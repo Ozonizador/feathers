@@ -40,8 +40,8 @@ export const profilesRouter = router({
 
     return {data, error};
   }),
-  getProfileConfigurations: authorizedProcedure.query(async ({ input, ctx }) => {
-    const { userId } = ctx;
+  getProfileConfigurations: authorizedProcedure.input(user_id).query(async ({ input, ctx }) => {
+    const userId = input;
 
     const { data, error } = await supabaseAdmin
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
@@ -63,6 +63,14 @@ export const profilesRouter = router({
     const {data, error} = await supabaseAdmin.rpc('delete_test3', {user_id});
 
     return {data, error};
+  }),
+  deleteProfilebyId: superAdminProcedure.input(user_id).query(async ({input,ctx}) => {
+    const userId = input;
+
+    const {data, error} = await supabaseAdmin.from("profiles").delete().eq("id", userId)
+    const {data: authData, error: authError} = await supabaseAdmin.auth.admin.deleteUser(userId)
+
+    return {data, error, authData, authError};
   })
 });
 

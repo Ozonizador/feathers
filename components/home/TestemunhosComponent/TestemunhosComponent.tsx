@@ -26,6 +26,7 @@ const TestemunhosComponent = () => {
               leftControl={<BsArrowLeft className="h-[20px] w-[20px]" />}
               rightControl={<BsArrowRight className="h-[20px] w-[20px]" />}
               indicators={true}
+              slideInterval={10000}
             >
               {group(Testemunhos, 3).map((children: TestemunhoInfo[], index: number) => {
                 return (

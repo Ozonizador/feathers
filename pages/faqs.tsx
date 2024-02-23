@@ -132,7 +132,7 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
 
   const splitAnswer = answer.split(/\r?\n|\r|\n/g);
   return (
-    <div className="flex flex-col gap-4 rounded-md border p-4">
+    <div className="flex flex-col gap-4 rounded-md border p-4 cursor-pointer" onClick={() => toggleAnswerShown()}>
       <div className="flex">
         <h6
           className={classNames("text-lg", {
@@ -142,7 +142,7 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
         >
           {question}
         </h6>
-        <div className="ml-auto mr-4" onClick={() => toggleAnswerShown()}>
+        <div className="ml-auto mr-4">
           {!answerShown ? <TiPlus size={24} /> : <TiMinus size={24} />}
         </div>
       </div>
