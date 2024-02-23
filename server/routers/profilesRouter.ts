@@ -40,8 +40,8 @@ export const profilesRouter = router({
 
     return {data, error};
   }),
-  getProfileConfigurations: authorizedProcedure.input(user_id).query(async ({ input, ctx }) => {
-    const userId = input;
+  getProfileConfigurations: authorizedProcedure.query(async ({ input, ctx }) => {
+    const {userId} = ctx;
 
     const { data, error } = await supabaseAdmin
       .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
