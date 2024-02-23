@@ -416,7 +416,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const user = session.user;
   const { data: profile, error } = await supabase
     .from<"profiles", ProfilesResponse>(PROFILE_TABLE_NAME)
-    .select()
+    .select("*")
     .eq(PROFILE_COLUMNS.ID, user.id)
     .single();
 
