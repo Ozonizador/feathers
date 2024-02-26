@@ -23,8 +23,8 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
           {advertisement && (
             <h1 className="mb-4 text-2xl font-bold">
               {t("hello_im", {
-                context: advertisement.host.gender == 2 ? "female" : "male",
-                name: advertisement.host.name,
+                context: advertisement.host?.gender == 2 ? "female" : "male",
+                name: advertisement.host?.name,
               })}
             </h1>
           )}
@@ -33,7 +33,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
       <div className="flex w-full flex-col gap-8 lg:w-11/12 lg:flex-row lg:items-end">
         <div>
           <div className="w-full lg:w-64">
-            <Card href={`/perfil/${advertisement?.host.slug}`}>
+            <Card href={`/perfil/${advertisement?.host?.slug}`}>
               <div className="flex justify-end px-4 pt-4 cursor-pointer"></div>
               <div className="flex flex-col items-center pb-10">
                 <div className="rounded-full shadow-md" style={{ height: "96px", width: "96px" }}>
@@ -48,13 +48,13 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                   />
                 </div>
                 <h5 className="my-1 text-xl font-medium text-gray-900 dark:text-white">
-                  {advertisement?.host.name || ""}
+                  {advertisement?.host?.name || ""}
                 </h5>
                 {advertisement && (
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     {t("landlord_since", {
-                      year: new Date(advertisement.host.created_at).getFullYear(),
-                      context: advertisement.host.gender === Gender.female ? "female" : "male",
+                      year: new Date(advertisement.host?.created_at).getFullYear(),
+                      context: advertisement.host?.gender === Gender.female ? "female" : "male",
                     })}
                   </span>
                 )}
@@ -79,8 +79,8 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
               {advertisement && (
                 <h1 className="mb-4 text-2xl font-bold">
                   {t("hello_im", {
-                    context: advertisement.host.gender == 2 ? "female" : "male",
-                    name: advertisement.host.name,
+                    context: advertisement.host?.gender == 2 ? "female" : "male",
+                    name: advertisement.host?.name,
                   })}
                 </h1>
               )}

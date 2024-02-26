@@ -68,6 +68,7 @@ const useAdvertisementService = () => {
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
       .select()
       .eq(ADVERTISEMENT_PROPERTIES.ID, id)
+      .neq(ADVERTISEMENT_PROPERTIES.HOST_ID, null)
       .single();
 
     return { data, error };
@@ -108,7 +109,8 @@ const useAdvertisementService = () => {
   const getAllAdvertisements = async () => {
     const { data, error } = await supabaseClient
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select();
+      .select()
+      .neq("host_id", null);
     return { data, error };
   };
 

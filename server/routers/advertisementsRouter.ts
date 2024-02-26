@@ -59,7 +59,7 @@ export const advertisementsRouter = router({
   getAdvertisements: publicProcedure.query(async () => {
     const { data, error } = await supabaseAdmin
       .from<"advertisements", Advertisements>(ADVERTISEMENT_TABLE_NAME)
-      .select("*, host:host_id(*)");
+      .select("*, host:host_id(*)").neq("host_id", null);
 
     return { data, error };
   }),
@@ -110,7 +110,7 @@ export const advertisementsRouter = router({
           "*, reservations!left(id), averages:reviewsPerAdvertisement!left(*), overall_average:reviewsPerAdvertisement!left(overall_average)",
           { count: "exact" }
         )
-        .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE");
+        .eq(ADVERTISEMENT_PROPERTIES.AVAILABLE, "AVAILABLE").not(ADVERTISEMENT_PROPERTIES.HOST_ID, 'is',null);
 
       query = addFilterToSearchAdvertisement(query, filter);
       query = addOrderToSearchAdvertisement(query, order);
