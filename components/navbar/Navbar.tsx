@@ -42,6 +42,7 @@ import { BsPerson } from "react-icons/bs";
 import classNames from "classnames";
 import { useTranslation } from "next-i18next";
 import { setCookie, getCookie } from "cookies-next";
+import { isArray } from "lodash";
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -55,6 +56,7 @@ export const Navbar = () => {
 
   const { userAppMode, messagesNumber, notificationNumber } = useGetUserType();
   const setWebUserMode = useToggleAppUserMode();
+  console.log(profile);
 
   const logout = async () => {
     await supabaseClient.auth.signOut();
@@ -347,13 +349,20 @@ export const Navbar = () => {
                           <Menu.Items className="absolute z-50 flex flex-col rounded-lg bg-white p-2 px-4 shadow-md">
                             {userAppMode == "TENANT" && (
                               <>
-                                <Menu.Item>
-                                  {profile?.user_type == "ADMIN" && (
-                                    <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
+                                {profile && isArray(profile) && profile[0].user_type == "ADMIN" && (
+                                  <Menu.Item>
+                                    <MyLink customClass="py-1 font-bold text-md" href={SUPERADMIN_DASHBOARD}>
                                       Dashboard Admin
                                     </MyLink>
-                                  )}
-                                </Menu.Item>
+                                  </Menu.Item>
+                                )}
+                                {profile && !isArray(profile) && profile.user_type == "ADMIN" && (
+                                  <Menu.Item>
+                                    <MyLink customClass="py-1 font-bold text-md" href={SUPERADMIN_DASHBOARD}>
+                                      Dashboard Admin
+                                    </MyLink>
+                                  </Menu.Item>
+                                )}
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold text-sm" href={UNIDESK_URL}>
                                     {t("common:uni-desk")}
@@ -409,13 +418,20 @@ export const Navbar = () => {
                             )}
                             {userAppMode == "LANDLORD" && (
                               <>
-                                <Menu.Item>
-                                  {profile?.user_type == "ADMIN" && (
-                                    <MyLink customClass="py-1 font-bold text-sm" href={SUPERADMIN_DASHBOARD}>
+                                {profile && isArray(profile) && profile[0].user_type == "ADMIN" && (
+                                  <Menu.Item>
+                                    <MyLink customClass="py-1 font-bold text-md" href={SUPERADMIN_DASHBOARD}>
                                       Dashboard Admin
                                     </MyLink>
-                                  )}
-                                </Menu.Item>
+                                  </Menu.Item>
+                                )}
+                                {profile && !isArray(profile) && profile.user_type == "ADMIN" && (
+                                  <Menu.Item>
+                                    <MyLink customClass="py-1 font-bold text-md" href={SUPERADMIN_DASHBOARD}>
+                                      Dashboard Admin
+                                    </MyLink>
+                                  </Menu.Item>
+                                )}
                                 <Menu.Item>
                                   <MyLink customClass="py-1 font-bold" href={UNIDESK_URL}>
                                     {t("uni-desk")}
