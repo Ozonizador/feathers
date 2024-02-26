@@ -35,26 +35,30 @@ const Index = (props: any) => {
   } = useForm<BankTransfer>({
     defaultValues: {
       swift: payment_method?.swift ?? "",
-      iban: payment_method?.iban ?? ""
-    }
+      iban: payment_method?.iban ?? "",
+    },
   });
   const { addPaymentMethods } = useProfileService();
 
   const onSubmit = async ({ iban, swift }: BankTransfer) => {
+    const { t } = useTranslation()
     const { data, error } = await addPaymentMethods(user.id, iban, swift);
 
     if (error) {
       return toast.error(t("messages:errors.editing_info"));
     }
+
+    return toast.success(t("messages:success.saved_success"));
   };
+
   return (
     <div className="max-width mb-20">
       <Breadcrumbs paths={paths} />
 
       <div className="flex flex-1 justify-center">
         <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-5 lg:px-32">
-          <div className="mb-5 text-3xl font-bold">Pagamentos e Recebimentos</div>
-          <p>Adicione e faça gestão dos seus métodos de pagamento e recebimento.</p>
+          <div className="mb-5 text-3xl font-bold">{t("payments:title")}</div>
+          <p>{t("payments:description")}</p>
 
           {/* BOTÕES*/}
           <div className=" mb-20 mt-10 flex flex-col gap-4 lg:my-20 lg:flex-row">
@@ -138,7 +142,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
 
-  const {data, error} = await supabase
+  const { data, error } = await supabase
     .from<"payment_methods", PaymentMethod>(PAYMENT_METHODS_TABLE_NAME)
     .select()
     .eq("profile_id", session.user.id)
