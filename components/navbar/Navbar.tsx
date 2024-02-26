@@ -312,7 +312,7 @@ export const Navbar = () => {
                     </div>
                     <div>
                       <Menu as="div" className="ml-5">
-                        <Menu.Button className="flex flex-1">
+                        <Menu.Button className="flex flex-1" id="profile-img">
                           {profile != null &&
                           // @ts-ignore
                           profile[0]?.avatar_url ? (
