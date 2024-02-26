@@ -68,7 +68,7 @@ const Index = (props: any) => {
               }`}
               onClick={() => setState("Pagamentos")}
             >
-              Pagamentos
+              {t("payments:payments")}
             </button>
             <button
               className={`rounded-xl px-12 py-4 text-xl ${
@@ -76,13 +76,13 @@ const Index = (props: any) => {
               }`}
               onClick={() => setState("Recebimentos")}
             >
-              Recebimentos
+              {t("payments:receivement")}
             </button>
           </div>
 
           {state == "Recebimentos" && (
             <div>
-              <h4 className="text-xl">Transferencia Bancaria</h4>
+              <h4 className="text-xl">{t("payments:bank")}</h4>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4 mt-2">
                   <Controller
