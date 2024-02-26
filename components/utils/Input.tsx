@@ -36,7 +36,7 @@ export default function Input({
 
   return (
     <div>
-      {name && <label htmlFor={name}>{labelText}</label>}
+      {name && <label htmlFor={name}>{labelText}{required && <span>*</span>}</label>}
       <div className="relative text-sm pt-2">
         {isDropdown ? (
           <select

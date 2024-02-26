@@ -65,7 +65,6 @@ const Index = ({ user, profileData }: IndexProps) => {
   const [country, setCountry] = useState((phoneNumber && phoneNumber.country) || "PT");
 
   useEffect(() => {
-
     const handleLoad = () => {
       if (!(profile.name && profile.surname && profile.town && profile.phone)) {
         toast.warning(t("account:fill"));
@@ -73,11 +72,11 @@ const Index = ({ user, profileData }: IndexProps) => {
     };
 
     // Add event listener for onLoad
-    window.addEventListener('load', handleLoad);
+    window.addEventListener("load", handleLoad);
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
@@ -167,6 +166,9 @@ const Index = ({ user, profileData }: IndexProps) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="text-center text-2xl font-bold lg:text-left lg:text-3xl">{t("admin:config.general")}</div>
+          {profile && !profile.name && !profile.surname && !profile.birth_date && !profile.town && (
+            <div className="text-red-500 flex">{t("common:warning")}</div>
+          )}
           <div className="mb-5 mt-5">
             <div className="flex items-center justify-center lg:justify-start" id="profile">
               <label
@@ -233,12 +235,12 @@ const Index = ({ user, profileData }: IndexProps) => {
               </div>
 
               <div className="my-10" id="nationality-drop">
-                <label className="mt-2 block">{t("admin:config.nationality")}</label>
+                <label className="mt-2 block">{t("admin:config.nationality")} {<span>*</span>}</label>
                 <Controller
                   control={control}
                   name="nationality"
                   render={({ field: { onChange, value } }) => (
-                    <Select value={value} onChange={onChange}>
+                    <Select value={value} onChange={onChange} required>
                       <option value="">{t("admin:config.select_nationality")}</option>
                       {options.map((option, index) => {
                         return (

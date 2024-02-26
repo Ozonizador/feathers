@@ -85,7 +85,7 @@ const Contactos = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                labelText={t("name") + "*"}
+                labelText={t("name")}
                 name="name"
               />
             </div>
@@ -95,14 +95,14 @@ const Contactos = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                labelText={"Email" + "*"}
+                labelText={"Email"}
                 name="email"
               />
             </div>
 
             <div>
               <label htmlFor="about" className=" text-gray-700">
-                {t("message") + "*"}
+                {t("message")}
               </label>
               <div className="mt-2">
                 <textarea

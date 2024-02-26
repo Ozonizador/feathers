@@ -148,5 +148,6 @@
     "search": "How can we help you?",
     "search_label": "Search help articles..."
   },
-  "recover_title": "Enter your email address associated with the account, and we'll send you a link to reset your password."
+  "recover_title": "Enter your email address associated with the account, and we'll send you a link to reset your password.",
+  "warning": "Please fill in the form."
 }
