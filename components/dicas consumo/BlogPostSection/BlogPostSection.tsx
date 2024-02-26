@@ -9,6 +9,7 @@ import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { isString } from "lodash";
+import { Helmet } from 'react-helmet';
 interface BlogPostSectionProps {
   blog: Blog;
 }
@@ -29,12 +30,19 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   };
 
   const shareOnFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}${router.asPath}&quote=${encodeURI(blog.description.slice(0, 100))}&title=${encodeURI(blog.title)}`;
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}${router.asPath}`;
 
     window.open(url, "_blank")?.focus();
   };
   return (
     <section>
+      <Helmet>
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:description" content={blog.description} />
+        <meta property="og:image" content={blog.image} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="relative h-[650px] bg-black">
         <Image fill src={blog.image} alt="blog" className="opacity-50" style={{ objectFit: "cover" }} />
 
