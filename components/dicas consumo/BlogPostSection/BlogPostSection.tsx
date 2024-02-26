@@ -29,7 +29,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   };
 
   const shareOnFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}${router.asPath}`;
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}${router.asPath}&quote=${encodeURI(blog.description.slice(0, 100))}&title=${encodeURI(blog.title)}`;
 
     window.open(url, "_blank")?.focus();
   };
