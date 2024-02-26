@@ -15,10 +15,19 @@ const DesativarContaPoliciesForm = (profile: any) => {
   const incrementStep = useIncrementStep();
   const decrementStep = useDecrementStep();
   const currentReason = useCurrentReason();
+  const router = useRouter();
   const { deleteUserAccount } = useUserService();
 
   const deactivateAccount = async () => {
     await deleteUserAccount(currentReason);
+  };
+
+  const handleSubmit = () => {
+    trpc.profile.deleteProfilebyId.useQuery(profile);
+    toast.success(currentReason);
+    setTimeout(() => {
+      router.push("/");
+    }, 10000);
   };
 
   return (
@@ -48,16 +57,7 @@ const DesativarContaPoliciesForm = (profile: any) => {
               </Button>
             </div>
             <div className="w-1/6">
-              <Button
-                onClick={(e) => {
-                  trpc.profile.deleteProfilebyId.useQuery(profile);
-                  toast.success(currentReason);
-                  setTimeout(() => {
-                    useRouter().push("/")
-                  }, 10000);
-                }}
-                type={"button"}
-              >
+              <Button onClick={(e) => handleSubmit()} type={"button"}>
                 {t("account:title")}
               </Button>
             </div>
