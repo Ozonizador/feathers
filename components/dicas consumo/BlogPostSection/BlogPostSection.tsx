@@ -9,7 +9,6 @@ import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { isString } from "lodash";
-import { Helmet } from 'react-helmet';
 interface BlogPostSectionProps {
   blog: Blog;
 }
@@ -36,12 +35,6 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
   };
   return (
     <section>
-      <Helmet>
-        <meta property="og:title" key="og:title" content={blog.title}/>
-        <meta property="og:description" key="og:description" content={blog.description} />
-        <meta property="og:image" key="og:image" content={blog.image} />
-        <meta property="og:type" content="website" />
-      </Helmet>
       <div className="relative h-[650px] bg-black">
         <Image fill src={blog.image} alt="blog" className="opacity-50" style={{ objectFit: "cover" }} />
 
