@@ -7,6 +7,7 @@ import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import { pt, enGB } from "date-fns/locale";
 import { useRouter } from "next/router";
+import ReactMarkdown from "react-markdown";
 interface UltimosArtigosProps {
   slug: string;
   category: UserTypes;
@@ -41,7 +42,9 @@ const UltimosArtigos = ({ slug, category }: UltimosArtigosProps) => {
                     <Image className="rounded-lg" src={blog.image} alt="" fill style={{ objectFit: "cover" }}></Image>
                   </div>
                   <div className="my-4 w-full  text-xl lg:w-full lg:text-xl">{blog.title}</div>
-                  <div className="line-clamp-5 w-full lg:w-full  lg:text-base">{blog.description}</div>
+                  <div className="line-clamp-5 w-full lg:w-full  lg:text-base">
+                    <ReactMarkdown>{blog.description}</ReactMarkdown>
+                  </div>
 
                   <div className="mb-10 mt-5 flex w-full justify-between text-sm text-gray-400 lg:mb-0 lg:mt-10 lg:w-full">
                     <div className="capitalize">

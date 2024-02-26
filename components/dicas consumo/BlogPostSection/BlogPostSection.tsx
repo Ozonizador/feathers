@@ -38,7 +38,7 @@ const BlogPostSection = ({ blog }: BlogPostSectionProps) => {
     <section>
       <Helmet>
         {/* Open Graph meta tags */}
-        <meta property="og:title" content={blog.title} />
+        <title property="og:title" content={blog.title}>Unihosts | {blog.title}</title>
         <meta property="og:description" content={blog.description} />
         <meta property="og:image" content={blog.image} />
         <meta property="og:type" content="website" />
