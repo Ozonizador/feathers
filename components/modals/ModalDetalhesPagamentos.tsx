@@ -217,7 +217,7 @@ const ModalDetalhesPagamento = () => {
                       {/* Unihosts */}
                       <FeathersAccordion>
                         <div className="flex max-sm:flex-col">
-                          <div className="max-sm:flex max-sm:flex-row">
+                          <div className="flex max-sm:flex-row">
                             <div className="font-bold">{t("common:first_rent")}</div>
                             <div className="relative my-auto ml-1">
                               <AiOutlineInfoCircle className="peer my-auto" size={14} />
@@ -267,7 +267,7 @@ const ModalDetalhesPagamento = () => {
                             </div>
                           </div>
                           <div className="ml-auto mr-6 text-neutral-500">
-                            {advertisement?.guarantee_value.toLocaleString() || guaranteed_value?.toLocaleString()}€
+                            {advertisement?.guarantee_value.toFixed(2).toLocaleString() || guaranteed_value?.toFixed(2).toLocaleString()}€
                           </div>
                         </div>
                       </FeathersAccordion>
@@ -287,7 +287,7 @@ const ModalDetalhesPagamento = () => {
                               return (
                                 <div className="flex text-sm text-neutral-500" key={index}>
                                   <div>{t("rent_of_month", { month: value.month })}</div>
-                                  <div className="ml-auto mr-6">{value.price}€</div>
+                                  <div className="ml-auto mr-6">{value.price.toLocaleString()}€</div>
                                 </div>
                               );
                             })}
