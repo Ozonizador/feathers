@@ -30,7 +30,7 @@ const FuncionaOptions = () => {
             <h1 className="mb-8 text-center text-xl font-bold">{t("funciona:price_under_review")}</h1>
 
             <div className="flex flex-1 justify-center">
-              <Link href="#" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
+              <Link href="/contactos" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
                 {t("index:know_more")}
               </Link>
             </div>
@@ -60,7 +60,7 @@ const FuncionaOptions = () => {
             <h1 className="mb-8 text-center text-xl font-bold">{t("funciona:price_under_review")}</h1>
 
             <div className="flex flex-1 justify-center">
-              <Link href="#" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
+              <Link href="/contactos" className="w-full rounded-md bg-primary-500 px-7 py-2 text-center text-white">
                 {t("index:know_more")}
               </Link>
             </div>

@@ -45,7 +45,7 @@ const FuncionaOndeEstamos = () => {
                 </div>
 
                 <Link
-                  href="#"
+                  href="/contactos"
                   className="w-fit rounded-md bg-primary-500 px-11 py-3 text-center text-white duration-200 ease-in hover:text-white hover:drop-shadow-xl"
                 >
                   {t("index:know_more")}
