@@ -12,9 +12,10 @@ import { UNIDESK_URL } from "../../models/paths";
 import IconAnuncios from "../../public/images/icon-pg37-1.svg";
 import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 import { useTranslation } from "next-i18next";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import { TableCell } from "flowbite-react/lib/esm/components/Table/TableCell";
 
-const DynamicTabPanels = dynamic(() => import('@headlessui/react').then((headlessui) => headlessui.Tab.Panels), {
+const DynamicTabPanels = dynamic(() => import("@headlessui/react").then((headlessui) => headlessui.Tab.Panels), {
   ssr: false,
 });
 
@@ -36,12 +37,10 @@ const ReservasSection = () => {
           <Tab.Group>
             <Tab.List className="mb-5 flex gap-5 border-b border-primary-200">
               <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("active")}</Tab>
-              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">
-                {t("incoming")}
-              </Tab>
+              <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("next")}</Tab>
               <Tab className="reservas-tab ui-selected:text-primary-500 ui-not-selected:text-black">{t("all")}</Tab>
             </Tab.List>
-            <Tab.Panels as={DynamicTabPanels}  className="w-full overflow-x-auto" suppressHydrationWarning>
+            <Tab.Panels as={DynamicTabPanels} className="w-full overflow-x-auto" suppressHydrationWarning>
               <Tab.Panel>
                 <CurrentReservationsSection />
               </Tab.Panel>
@@ -83,9 +82,9 @@ const CurrentReservationsSection = () => {
 
   return (
     <>
-      <Table className="w-full" >
+      <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-5 text-md font-normal text-gray-900">
+          <Table.HeadCell className="text-md mb-5 font-normal text-gray-900">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
           <Table.HeadCell className="text-md font-normal text-gray-900">{t("guest", { count: 2 })}</Table.HeadCell>
@@ -94,8 +93,7 @@ const CurrentReservationsSection = () => {
           <Table.HeadCell className="text-md font-normal text-gray-900">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
-
-          <Table.HeadCell></Table.HeadCell>
+          <Table.HeadCell className="text-md font-normal text-gray-900">{t("details")}</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {loading && (
@@ -111,19 +109,19 @@ const CurrentReservationsSection = () => {
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
+                  <Table.Cell className="text-md text-gray-700 dark:text-white">
                     {t("admin:guests.currently_hosting")}
                   </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                  <Table.Cell className="whitespace-nowrap text-md capitalize text-gray-700 dark:text-white">
+                    {reservation.tenant?.name}
                   </Table.Cell>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
+                  <Table.Cell className="text-md text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">
+                  <Table.Cell className="text-md text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{`${t(
+                  <Table.Cell className="text-md text-gray-700 dark:text-white">{`${t(
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   )} ${t("in")} ${reservation.advertisement.place}`}</Table.Cell>
                 </Table.Row>
@@ -161,13 +159,19 @@ const NextReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-10 text-md font-normal text-gray-900 table_head">
+          <Table.HeadCell className="text-md table_head mb-10 font-normal text-gray-900">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
-          <Table.HeadCell className=" lg:text-base text-[14px] font-normal text-gray-900 table_head">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">{t("start")}</Table.HeadCell>
-          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">{t("end")}</Table.HeadCell>
-          <Table.HeadCell className=" lg:text-base text-xs font-normal text-gray-900 table_head">
+          <Table.HeadCell className=" table_head text-[14px] font-normal text-gray-900 lg:text-base">
+            {t("guest", { count: 2 })}
+          </Table.HeadCell>
+          <Table.HeadCell className=" table_head text-xs font-normal text-gray-900 lg:text-base">
+            {t("start")}
+          </Table.HeadCell>
+          <Table.HeadCell className=" table_head text-xs font-normal text-gray-900 lg:text-base">
+            {t("end")}
+          </Table.HeadCell>
+          <Table.HeadCell className=" table_head text-xs font-normal text-gray-900 lg:text-base">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
 
@@ -189,7 +193,7 @@ const NextReservationsSection = () => {
                 <Table.Row className="bg-white" key={index}>
                   <Table.Cell className="text-lg text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                    {reservation.tenant?.name}
                   </Table.Cell>
                   <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
@@ -248,13 +252,19 @@ const AllReservationsSection = () => {
     <>
       <Table className="w-full">
         <Table.Head>
-          <Table.HeadCell className="mb-5 text-md font-normal text-gray-900 table_head">
+          <Table.HeadCell className="text-md table_head mb-5 font-normal text-gray-900">
             <div className="my-5">{t("state")}</div>
           </Table.HeadCell>
-          <Table.HeadCell className="md:text-base text-[14px] font-normal text-gray-900 table_head">{t("guest", { count: 2 })}</Table.HeadCell>
-          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">{t("start")}</Table.HeadCell>
-          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">{t("end")}</Table.HeadCell>
-          <Table.HeadCell className="md:text-base text-sm font-normal text-gray-900 table_head">
+          <Table.HeadCell className="table_head text-[14px] font-normal text-gray-900 md:text-base">
+            {t("guest", { count: 2 })}
+          </Table.HeadCell>
+          <Table.HeadCell className="table_head text-sm font-normal text-gray-900 md:text-base">
+            {t("start")}
+          </Table.HeadCell>
+          <Table.HeadCell className="table_head text-sm font-normal text-gray-900 md:text-base">
+            {t("end")}
+          </Table.HeadCell>
+          <Table.HeadCell className="table_head text-sm font-normal text-gray-900 md:text-base">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
 
@@ -278,7 +288,7 @@ const AllReservationsSection = () => {
                     {checkIntervalForDate(reservation)}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
-                    {reservation.tenant.name}
+                    {reservation.tenant?.name}
                   </Table.Cell>
                   <Table.Cell className="text-lg text-gray-700 dark:text-white">
                     {reservation?.start_date || ""}
