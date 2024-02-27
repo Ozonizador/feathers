@@ -56,7 +56,6 @@ export const Navbar = () => {
 
   const { userAppMode, messagesNumber, notificationNumber } = useGetUserType();
   const setWebUserMode = useToggleAppUserMode();
-  console.log(profile);
 
   const logout = async () => {
     await supabaseClient.auth.signOut();

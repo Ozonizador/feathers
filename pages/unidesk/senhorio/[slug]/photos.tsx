@@ -54,7 +54,8 @@ const Photos = ({ advertisement }: PhotosProps) => {
   const saveChanges = async () => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
-    if (!error) toast.error(t("messages:errors.saving_photos"));
+    if (error) toast.error(t("messages:errors.saving_photos"));
+    toast.success(t("messages:success.saved_success"))
   };
 
   const uploadToClient = async (event: any) => {
@@ -198,7 +199,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                     </div>
                     {photos[0].zone !== "other" && (
                       <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                        {HouseZonesLabel[photos[0].zone]}
+                        {t(HouseZonesLabel[photos[0].zone])}
                       </div>
                     )}
 
@@ -231,7 +232,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                           </div>
                           {photo.zone !== "other" && (
                             <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                              {HouseZonesLabel[photo.zone]}
+                              {t(HouseZonesLabel[photo.zone])}
                             </div>
                           )}
 

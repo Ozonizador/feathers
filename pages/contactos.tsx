@@ -33,8 +33,6 @@ const Contactos = () => {
     console.log(responseData["message"]);
     try {
       if (!response.ok) {
-        console.log(response);
-        console.log("falling over");
         throw new Error(`response status: ${response.status}`);
       }
       toast.success("Message successfully sent");

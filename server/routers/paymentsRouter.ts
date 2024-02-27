@@ -190,8 +190,6 @@ export const paymentsRouter = router({
         const paymentStatus = EU_PAGO_TO_PAYMENT_STATUS[estado_referencia];
         await updateReservationPayment(reservationId, paymentStatus);
 
-        // Log successful payment information
-        console.log(responseData);
       } catch (error: any) {
         console.log(error);
       }
@@ -228,8 +226,6 @@ export const paymentsRouter = router({
         const paymentStatus = EU_PAGO_TO_PAYMENT_STATUS[estado_referencia];
         await updateReservationPayment(reservationId, paymentStatus);
 
-        // Log successful payment information
-        console.log(responseData);
       } catch (err: any) {
         // Log the error
         console.error(err.message);

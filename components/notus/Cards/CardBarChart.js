@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "chart.js/auto";
 
 export default function CardBarChart(data) {
-  console.log(data.data)
   React.useEffect(() => {
     let config = {
       type: "bar",
