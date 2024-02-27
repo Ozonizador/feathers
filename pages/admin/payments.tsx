@@ -41,7 +41,6 @@ const Index = (props: any) => {
   const { addPaymentMethods } = useProfileService();
 
   const onSubmit = async ({ iban, swift }: BankTransfer) => {
-    const { t } = useTranslation()
     const { data, error } = await addPaymentMethods(user.id, iban, swift);
 
     if (error) {
