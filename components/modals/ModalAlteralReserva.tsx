@@ -9,6 +9,8 @@ import Input from "../utils/Input";
 import { useTranslation } from "next-i18next";
 import { addMonths, isSameDay } from "date-fns";
 import { IoMdClose } from "react-icons/io";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 /**
  * PAGINA 23 DO XD
@@ -18,6 +20,7 @@ const ModalAlterarReserva = () => {
   const { t } = useTranslation();
   const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
+  const router = useRouter();
 
   const [newReservation, setNewReservation] = useState<
     Omit<
@@ -55,6 +58,14 @@ const ModalAlterarReserva = () => {
     setNewReservation({ ...newReservation, [property]: value });
   };
 
+  const handleSubmit = (() => {
+    toast.success(t("messages:success:saved_success"))
+    setTimeout(() => {
+      closeModal();
+      router.reload();
+    }, 2000)
+  })
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-900" onClose={closeModal}>
@@ -88,7 +99,10 @@ const ModalAlterarReserva = () => {
                 >
                   <Image className="m-2" src="/images/doublearrow.png" alt="" width="40" height="40" />
                   <span className="ml-3 text-3xl font-bold">{t("change_reservation")}</span>
-                  <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 cursor-pointer max-sm:top-11" onClick={() => closeModal()}/>
+                  <IoMdClose
+                    className=" absolute right-10 top-14 ml-2 h-8 w-8 cursor-pointer max-sm:top-11"
+                    onClick={() => closeModal()}
+                  />
                 </Dialog.Title>
 
                 {/* <!-- Modal --> */}
@@ -138,11 +152,13 @@ const ModalAlterarReserva = () => {
                                 <label htmlFor="exampleInputEmail1" className="form-label  text-base">
                                   {t("start")}
                                 </label>
-                                <FeatherDatePicker
-                                  date={newReservationStartDate}
-                                  onChange={(e) => setNewReservationStartDate(e)}
-                                  minDate={new Date()}
-                                />
+                                <div className="rounded-[14px] border-2 border-terciary-700">
+                                  <FeatherDatePicker
+                                    date={newReservationStartDate}
+                                    onChange={(e) => setNewReservationStartDate(e)}
+                                    minDate={new Date()}
+                                  />
+                                </div>
                               </div>
 
                               <div>
@@ -154,14 +170,16 @@ const ModalAlterarReserva = () => {
                                   {t("end")}
                                 </label>
 
-                                <FeatherDatePicker
-                                  date={newReservationEndDate}
-                                  onChange={(e) => setNewReservationEndDate(e)}
-                                  minDate={addMonths(
-                                    newReservationStartDate,
-                                    reservation?.advertisement?.minimum_stay as number
-                                  )}
-                                />
+                                <div className="rounded-[14px] border-2 border-terciary-700">
+                                  <FeatherDatePicker
+                                    date={newReservationEndDate}
+                                    onChange={(e) => setNewReservationEndDate(e)}
+                                    minDate={addMonths(
+                                      newReservationStartDate,
+                                      reservation?.advertisement?.minimum_stay as number
+                                    )}
+                                  />
+                                </div>
                               </div>
                             </div>
                           )}
