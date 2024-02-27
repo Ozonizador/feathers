@@ -120,7 +120,7 @@ const ModalAlterarReserva = () => {
                           <p className="mb-8 text-xl font-semibold">{t("reason_change_reservation")}</p>
                           <div className="mb-3 bg-slate-200">
                             <textarea
-                              className="form-control w-full rounded-md border border-solid bg-white focus:border-primary-500"
+                              className="form-control w-full rounded-md border border-solid bg-white focus:border-primary-500 focus:outline-none focus:ring-0"
                               id="exampleFormControlTextarea1"
                               rows={3}
                             ></textarea>
