@@ -41,7 +41,7 @@ const Register = () => {
       return;
     } else {
       toast.success(t("messages:success.register_done"));
-      router.push(GENERAL_ADMIN_URL);
+      router.push(HOME_URL);
     }
   };
 
