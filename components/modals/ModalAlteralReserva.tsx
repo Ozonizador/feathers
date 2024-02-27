@@ -239,7 +239,7 @@ const ModalAlterarReserva = () => {
                           <div className="flex justify-center">
                             <a
                               className="mx-auto mb-6 mt-10 rounded-md bg-primary-300 px-6 py-3 text-white"
-                              href="#"
+                              onClick={handleSubmit}
                               role="button"
                               id="modal-btn"
                             >
