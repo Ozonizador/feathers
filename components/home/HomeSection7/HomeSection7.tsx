@@ -10,12 +10,12 @@ const HomeSection7 = () => {
     <section className="max-width">
       <div className="my-24 rounded-3xl bg-terciary-300 lg:w-full">
         <div className="flex flex-col-reverse lg:h-96 lg:flex-row">
-          <div className="items-center p-0 text-center align-middle lg:ml-12 lg:basis-2/4 lg:p-0 lg:text-left">
-            <h2 className="mt-8 whitespace-pre-line py-8 text-2xl font-bold text-secondary-500 lg:ml-6 lg:mt-8 lg:text-4xl">
+          <div className="flex flex-col items-start justify-center p-0 text-center align-middle lg:ml-12 lg:basis-2/4 lg:p-0 lg:text-left">
+            <h2 className="mt-8 py-8 text-2xl font-bold text-secondary-500 lg:ml-6 lg:mt-8 lg:text-4xl">
               {t("index:section.have_property.title")}
             </h2>
             <div className="text-md -mb-6 text-secondary-600 lg:pb-0">
-              <div className="mb-20 block whitespace-pre-line max-sm:mx-3 lg:mb-0 lg:ml-6 lg:mt-2 lg:block">
+              <div className="mb-20 block max-sm:mx-3 lg:mb-0 lg:ml-6 lg:mt-2 lg:block">
                 {t("index:section.have_property.description")}
               </div>
             </div>
