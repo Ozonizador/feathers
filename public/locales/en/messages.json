@@ -20,7 +20,7 @@
     "success": "Success",
     "advert_was_updated": "Advert Updated",
     "updated_password": "Password changed",
-    "register_done": "Registration Successful",
+    "register_done": "Registration successful, please verify your email.",
     "reservation_requested": "Reservation request created",
     "saved_success": "Successfully saved"
   },

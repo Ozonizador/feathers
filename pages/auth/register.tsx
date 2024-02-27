@@ -41,7 +41,9 @@ const Register = () => {
       return;
     } else {
       toast.success(t("messages:success.register_done"));
-      router.push(HOME_URL);
+      setTimeout(() => {
+        router.push(HOME_URL);
+      }, 10000)
     }
   };
 
