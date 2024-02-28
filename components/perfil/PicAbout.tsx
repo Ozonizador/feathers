@@ -15,7 +15,7 @@ const PicAbout = ({ profile }: PicAboutProps) => {
     <>
       <section className="mb-10">
         <div className="flex w-full items-center justify-center  align-middle lg:flex-row lg:justify-between">
-          <div className="flex">
+          <div className="flex" id="profile-img">
             <label htmlFor="files" className="relative cursor-pointer rounded-md bg-white">
               <Avatar
                 img={profile?.avatar_url || "/images/profile-pic.png"}
