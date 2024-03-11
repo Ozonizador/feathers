@@ -4,7 +4,7 @@ import { BsWater } from "react-icons/bs";
 import { FaRegLightbulb } from "react-icons/fa";
 import { ExpenseName, HouseExpenses, TypeExpense } from "../../models/advertisement";
 import { useTranslation } from "next-i18next";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, MouseEventHandler } from "react";
 
 /**
  * Expenses Logic
@@ -17,6 +17,7 @@ interface ExpensesComponentProps {
 
 const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
   const [popupState, setPopupState] = useState<boolean>(false);
+  const [inPopup, setInPopup] = useState<boolean>(false);
 
   const containsExpenses = () => {
     if (!expenses || !expenses.services) return false;
@@ -37,7 +38,11 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
               <BiInfoCircle className="ml-2" />
             </div>
           </div>
-          <div className={`transition-opacity duration-700 ease-in ${popupState ? "opacity-100" : "opacity-0"}`}>
+          <div
+            className={`transition-opacity duration-700 ease-in ${popupState || inPopup ? "opacity-100" : "opacity-0"}`}
+            onMouseEnter={() => setInPopup(true)}
+            onMouseLeave={() => setInPopup(false)}
+          >
             <RoomUtilitesPopover expenses={expenses!} />
           </div>
         </div>
