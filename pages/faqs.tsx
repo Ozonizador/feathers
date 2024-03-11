@@ -130,9 +130,11 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
     setAnswerShown(!answerShown);
   };
 
+  console.log(answer);
+
   const splitAnswer = answer.split(/\r?\n|\r|\n/g);
   return (
-    <div className="flex flex-col gap-4 rounded-md border p-4 cursor-pointer" onClick={() => toggleAnswerShown()}>
+    <div className="flex cursor-pointer flex-col gap-4 rounded-md border p-4" onClick={() => toggleAnswerShown()}>
       <div className="flex">
         <h6
           className={classNames("text-lg", {
@@ -142,19 +144,25 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
         >
           {question}
         </h6>
-        <div className="ml-auto mr-4">
-          {!answerShown ? <TiPlus size={24} /> : <TiMinus size={24} />}
-        </div>
+        <div className="ml-auto mr-4">{!answerShown ? <TiPlus size={24} /> : <TiMinus size={24} />}</div>
       </div>
       {answerShown && (
         <div className="flex flex-col pr-5">
           {splitAnswer &&
             splitAnswer.map((line, index) => {
-              return (
-                <p className="text-justify" key={index}>
-                  {line}
-                </p>
-              );
+              if (line) {
+                return (
+                  <p className="text-justify" key={index}>
+                    {line}
+                  </p>
+                );
+              } else {
+                return (
+                  <p className="text-justify h-6" key={index}>
+                    {line}
+                  </p>
+                );
+              }
             })}
           <div className="ml-auto mr-4 pr-10"></div>
         </div>
