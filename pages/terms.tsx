@@ -13,40 +13,40 @@ const Terms = () => {
       </div>
       <div className="mx-auto py-6">
         <section className="rounded-md border border-gray-200 p-4">
-          <div className="mb-2">{t("terms:number_1")}</div>
-          <div className="mb-2">{t("terms:number_2")}</div>
-          <div className="mb-2">{t("terms:number_3")}</div>
-          <div className="mb-2">
+          <div className="mb-2 text-justify">{t("terms:number_1")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_2")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_3")}</div>
+          <div className="mb-2 text-justify">
             {t("terms:number_4:title")}
-            <p className="ml-2">{t("terms:number_4:part_1")}</p>
-            <p className="ml-2">{t("terms:number_4:part_2")}</p>
-            <p className="ml-2">{t("terms:number_4:part_3")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_4:part_1")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_4:part_2")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_4:part_3")}</p>
           </div>
-          <div className="mb-2">{t("terms:number_5")}</div>
-          <div className="mb-2">
+          <div className="mb-2 text-justify">{t("terms:number_5")}</div>
+          <div className="mb-2 text-justify">
             {t("terms:number_6:title")}
-            <p className="ml-2">{t("terms:number_6:part_1")}</p>
-            <p className="ml-2">{t("terms:number_6:part_2")}</p>
-            <p className="ml-2">{t("terms:number_6:part_3")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_6:part_1")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_6:part_2")}</p>
+            <p className="ml-4 text-justify">{t("terms:number_6:part_3")}</p>
           </div>
-          <div className="mb-2">{t("terms:number_7")}</div>
-          <div className="mb-2">{t("terms:number_8")}</div>
-          <div className="mb-2">{t("terms:number_9")}</div>
-          <div className="mb-2">{t("terms:number_10")}</div>
-          <div className="mb-2">{t("terms:number_11")}</div>
-          <div className="mb-2">{t("terms:number_12")}</div>
-          <div className="mb-2">{t("terms:number_13")}</div>
-          <div className="mb-2">{t("terms:number_14")}</div>
-          <div className="mb-2">{t("terms:number_15")}</div>
-          <div className="mb-2">{t("terms:number_16")}</div>
-          <div className="mb-2">{t("terms:number_17")}</div>
-          <div className="mb-2">{t("terms:number_18")}</div>
-          <div className="mb-2">{t("terms:number_19")}</div>
-          <div className="mb-2">{t("terms:number_20")}</div>
-          <div className="mb-2">{t("terms:number_21")}</div>
-          <div className="mb-2">{t("terms:number_22")}</div>
-          <div className="mb-2">{t("terms:number_23")}</div>
-          <div className="mb-2">{t("terms:number_24")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_7")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_8")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_9")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_10")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_11")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_12")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_13")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_14")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_15")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_16")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_17")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_18")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_19")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_20")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_21")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_22")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_23")}</div>
+          <div className="mb-2 text-justify">{t("terms:number_24")}</div>
         </section>
       </div>
     </section>
