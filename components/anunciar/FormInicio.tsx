@@ -47,8 +47,8 @@ const FormInicio = () => {
   });
 
   const nextStep = async (data: any) => {
+    await checkPossibilites()
     setAdvertisement({ ...advertisement, ...data });
-    await checkPossibilites();
     incrementStep();
   };
 
@@ -75,24 +75,26 @@ const FormInicio = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <div className="px-10">
-          <section className="mt-10 flex w-full flex-col justify-center gap-8 lg:my-5">
-            <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
-          </section>
-          <div className="flex flex-col items-center gap-5 xl:flex-row">
-            <div className="w-32 ">
-              <Button
-                type="button"
-                onClick={() => {
-                  checkPossibilites();
-                  methods.handleSubmit(nextStep);
-                }}
-              >
-                {t("next_step")} &#8594;
-              </Button>
+        <form onSubmit={methods.handleSubmit(nextStep)}>
+          <div className="px-10">
+            <section className="mt-10 flex w-full flex-col justify-center gap-8 lg:my-5">
+              <GeneralAdvertComponent advertisement={advertisement} onChangeMarker={onChangeMarker} />
+            </section>
+            <div className="flex flex-col items-center gap-5 xl:flex-row">
+              <div className="w-32 ">
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    methods.handleSubmit(nextStep);
+                    nextStep;
+                  }}
+                >
+                  {t("next_step")} &#8594;
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </FormProvider>
     </>
   );

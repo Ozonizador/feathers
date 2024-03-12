@@ -59,7 +59,7 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-hook-form": "^7.39.x",
+    "react-hook-form": "^7.51.0",
     "react-i18next": "^13.0.2",
     "react-icons": "^4.4.0",
     "react-leaflet": "^4.0.1",
