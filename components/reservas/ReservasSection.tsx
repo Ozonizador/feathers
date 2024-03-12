@@ -14,6 +14,8 @@ import MenuSenhorio from "../unidesk/Menus/MenuSenhorio";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import { TableCell } from "flowbite-react/lib/esm/components/Table/TableCell";
+import Button from "../utils/Button";
+import { useRouter } from "next/router";
 
 const DynamicTabPanels = dynamic(() => import("@headlessui/react").then((headlessui) => headlessui.Tab.Panels), {
   ssr: false,
@@ -62,6 +64,7 @@ const CurrentReservationsSection = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
+  const router = useRouter();
   const { getCurrentStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
@@ -112,7 +115,7 @@ const CurrentReservationsSection = () => {
                   <Table.Cell className="text-md text-gray-700 dark:text-white">
                     {t("admin:guests.currently_hosting")}
                   </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-md capitalize text-gray-700 dark:text-white">
+                  <Table.Cell className="text-md whitespace-nowrap capitalize text-gray-700 dark:text-white">
                     {reservation.tenant?.name}
                   </Table.Cell>
                   <Table.Cell className="text-md text-gray-700 dark:text-white">
@@ -124,6 +127,15 @@ const CurrentReservationsSection = () => {
                   <Table.Cell className="text-md text-gray-700 dark:text-white">{`${t(
                     TYPE_ADVERTISEMENT[reservation.advertisement.type]
                   )} ${t("in")} ${reservation.advertisement.place}`}</Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      type="button"
+                      onClick={() => router.push(`/unidesk/inbox?id=${reservation.id}`)}
+                      className="bg-none"
+                    >
+                      {t("details")}
+                    </Button>
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
@@ -137,6 +149,7 @@ const NextReservationsSection = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
+  const router = useRouter();
   const { getNextStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
@@ -174,10 +187,11 @@ const NextReservationsSection = () => {
           <Table.HeadCell className=" table_head text-xs font-normal text-gray-900 lg:text-base">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
-
-          <Table.HeadCell></Table.HeadCell>
+          <Table.HeadCell className="table_head text-xs font-normal text-gray-900 lg:text-base">
+            {t("details")}
+          </Table.HeadCell>
         </Table.Head>
-        <Table.Body className="divide-y">
+        <Table.Body className="divide-y bg-white">
           {loading && (
             <Table.Row className="flex justify-center">
               <Table.Cell>
@@ -204,6 +218,15 @@ const NextReservationsSection = () => {
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     t(TYPE_ADVERTISEMENT[reservation.advertisement?.type]) || ""
                   } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      type="button"
+                      onClick={() => router.push(`/unidesk/inbox?id=${reservation.id}`)}
+                      className="bg-none"
+                    >
+                      {t("details")}
+                    </Button>
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
@@ -217,6 +240,7 @@ const AllReservationsSection = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
+  const router = useRouter();
   const { getAllStaysByHostId } = useStayService();
   const [reservations, setReservations] = useState<ReservationGuest[]>([]);
 
@@ -267,8 +291,9 @@ const AllReservationsSection = () => {
           <Table.HeadCell className="table_head text-sm font-normal text-gray-900 md:text-base">
             {t("advertisement", { count: 1 })}
           </Table.HeadCell>
-
-          <Table.HeadCell></Table.HeadCell>
+          <Table.HeadCell className="table_head text-sm font-normal text-gray-900 md:text-base">
+            {t("details")}
+          </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {loading && (
@@ -299,6 +324,15 @@ const AllReservationsSection = () => {
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
                     reservation.advertisement ? t(TYPE_ADVERTISEMENT[reservation.advertisement.type]) : ""
                   } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      type="button"
+                      onClick={() => router.push(`/unidesk/inbox?id=${reservation.id}`)}
+                      className="bg-none"
+                    >
+                      {t("details")}
+                    </Button>
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
