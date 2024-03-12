@@ -40,10 +40,10 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
           </div>
           <div
             className={`transition-opacity duration-700 ease-in ${popupState || inPopup ? "opacity-100" : "opacity-0"}`}
-            onMouseEnter={() => setInPopup(true)}
+            onMouseEnter={() => popupState && setInPopup(true)}
             onMouseLeave={() => setInPopup(false)}
           >
-            <RoomUtilitesPopover expenses={expenses!} />
+            <RoomUtilitesPopover expenses={expenses!} hidden={!(popupState)}/>
           </div>
         </div>
       )}
@@ -57,9 +57,10 @@ const ExpensesComponent = ({ expenses }: ExpensesComponentProps) => {
 
 interface RoomExpensesPopover {
   expenses: HouseExpenses;
+  hidden: boolean
 }
 
-const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
+const RoomUtilitesPopover = ({ expenses, hidden }: RoomExpensesPopover) => {
   const { t } = useTranslation();
   const checkIfIncluded = (type: ExpenseName) => {
     if (!expenses || !expenses.services || expenses.services.length === 0) return false;
@@ -76,6 +77,7 @@ const RoomUtilitesPopover = ({ expenses }: RoomExpensesPopover) => {
   return (
     <div
       className={`absolute right-[-20px] z-50 rounded-lg bg-white group-hover:block sm:right-[100px] md:bottom-[60%]  md:right-[7px] md:scale-75 lg:bottom-0 lg:right-[-45px] xl:right-[11px] 2xl:scale-90`}
+      aria-hidden={hidden}
     >
       <div className="my-2 flex flex-row gap-2 rounded-lg  shadow-2xl md:p-1">
         <div className="mx-2 flex flex-col items-center justify-center px-0 align-middle text-secondary-500 lg:mx-1 lg:px-1">
