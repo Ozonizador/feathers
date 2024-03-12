@@ -205,7 +205,7 @@ const NextReservationsSection = () => {
             reservations.map((reservation, index) => {
               return (
                 <Table.Row className="bg-white" key={index}>
-                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{"Próximas"}</Table.Cell>
+                  <Table.Cell className="text-lg text-gray-700 dark:text-white">{t("confirmed")}</Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-lg capitalize text-gray-700 dark:text-white">
                     {reservation.tenant?.name}
                   </Table.Cell>
@@ -263,11 +263,11 @@ const AllReservationsSection = () => {
     const currentDate = new Date();
 
     if (new Date(reservation?.start_date) < currentDate && new Date(reservation?.end_date) >= currentDate)
-      return "A decorrer estadia";
+      return t("ongoing_stay");
     if (new Date(reservation?.start_date) < currentDate && new Date(reservation?.end_date) < currentDate)
-      return "Finalizado";
+      return t("finished");
     if (new Date(reservation?.start_date) > currentDate && new Date(reservation?.end_date) > currentDate)
-      return "Próxima";
+      return t("confirmed");
 
     return "";
   };
