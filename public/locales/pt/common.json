@@ -5,6 +5,8 @@
   "forgot_pw": "Esqueci-me da palavra-passe",
   "or": "ou",
   "password": "Palavra-passe",
+  "new_password": "Repita a Palavra-passe",
+  "password_title": "Por favor introduza uma nova palavra-passe",
   "welcome_to": "Bem-vindo à",
   "continue_with": "Continue com o",
   "send": "Enviar",

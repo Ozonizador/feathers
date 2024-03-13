@@ -5,6 +5,8 @@
   "forgot_pw": "Forgot password",
   "or": "or",
   "password": "Password",
+  "new_password": "Insert the new password again",
+  "password_title": "Please introduce a new password",
   "welcome_to": "Welcome to",
   "continue_with": "Continue with",
   "send": "Send",

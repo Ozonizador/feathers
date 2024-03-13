@@ -36,14 +36,16 @@ const Recover = () => {
     <div className="my-10 flex justify-center">
       <div className="my-5 w-6/12 rounded-lg border border-terciary-100">
         <div className="p-3">
-          <div className="font-bold">{t("common:recover_title")}</div>
+          <div className="font-bold">{t("common:password_title")}</div>
           <div className="mt-3">
             <div className="mt-2">
+              <h3>{t("common:password")}</h3>
               <Input
                 customCss="w-full rounded-sm border border-terciary-100 py-1"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></Input>
+              <h3>{t("common:new_password")}</h3>
               <Input
                 customCss="w-full rounded-sm border border-terciary-100 py-1"
                 value={password}
@@ -53,6 +55,7 @@ const Recover = () => {
           </div>
 
           <div className="my-5">
+            <h3></h3>
             <Button
               type="button"
               onClick={async () => {
