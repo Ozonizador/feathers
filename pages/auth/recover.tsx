@@ -22,6 +22,9 @@ const Recover = () => {
     const { data, error } = await recoverPasswordViaEmail(email);
     setLoading(false);
     if (!error) {
+      setTimeout(() => {
+        alert("Por favor verifique o seu email");
+      }, 2000);
       router.push(HOME_URL);
     }
   };
@@ -44,9 +47,8 @@ const Recover = () => {
           <div className="my-5">
             <Button
               type="button"
-              onClick={() => {
-                recoverPassword;
-                alert("Por favor verifique o seu email")
+              onClick={async () => {
+                recoverPassword();
               }}
               loading={loading}
             >
