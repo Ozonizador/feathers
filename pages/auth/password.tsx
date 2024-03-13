@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
+import { isString } from "lodash";
 
 const Recover = () => {
   const { t } = useTranslation();
@@ -76,17 +77,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.exchangeCodeForSession(code as string);
+  if (isString(code)) {
+    const {
+      data: { session },
+    } = await supabase.auth.exchangeCodeForSession(code as string);
+  
+    return {
+      props: {
+        initialSession: session,
+        user: session?.user,
+        ...(await serverSideTranslations(locale ?? "pt")),
+      },
+    };
+  }
 
   return {
     props: {
-      initialSession: session,
-      user: session?.user,
       ...(await serverSideTranslations(locale ?? "pt")),
-    },
-  };
+    }
+  }
 };
 
 export default Recover;
