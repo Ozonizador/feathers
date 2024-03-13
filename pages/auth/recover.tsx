@@ -48,7 +48,7 @@ const Recover = () => {
             <Button
               type="button"
               onClick={async () => {
-                recoverPassword();
+                await recoverPassword();
               }}
               loading={loading}
             >
