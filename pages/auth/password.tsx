@@ -13,19 +13,21 @@ import { GetServerSidePropsContext } from "next";
 const Recover = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { recoverPasswordViaEmail } = useUserService();
-  const [email, setEmail] = useState("");
+  const { updateUserPassword } = useUserService();
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
 
   const recoverPassword = async () => {
-    setLoading(true);
-    const { data, error } = await recoverPasswordViaEmail(email);
-    setLoading(false);
-    if (!error) {
-      alert("Por favor verifique o seu email");
-      setTimeout(() => {
-        router.push(HOME_URL);
-      }, 2000);
+    if (password == password2) {
+      setLoading(true);
+      const {error } = await updateUserPassword(password);
+      setLoading(false);
+      if (!error) {
+        setTimeout(() => {
+          router.push(HOME_URL);
+        }, 2000);
+      }
     }
   };
 
@@ -38,8 +40,13 @@ const Recover = () => {
             <div className="mt-2">
               <Input
                 customCss="w-full rounded-sm border border-terciary-100 py-1"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Input>
+              <Input
+                customCss="w-full rounded-sm border border-terciary-100 py-1"
+                value={password}
+                onChange={(e) => setPassword2(e.target.value)}
               ></Input>
             </div>
           </div>
@@ -63,16 +70,20 @@ const Recover = () => {
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const locale = ctx.locale;
+  const query = ctx.query;
+
+  const code = query.code;
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await supabase.auth.exchangeCodeForSession(code as string);
 
   return {
     props: {
       initialSession: session,
+      user: session?.user,
       ...(await serverSideTranslations(locale ?? "pt")),
     },
   };
