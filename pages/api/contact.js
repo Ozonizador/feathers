@@ -41,7 +41,7 @@ export default async function POST(request, res) {
   try {
     const mail = await transporter.sendMail({
       from: {name: name, address: email},
-      to: "rnrfnorte@hotmail.com",
+      to: "info@unihosts.pt",
       subject: `Unihosts: Contacto de ${name}`,
       html: `
             <p>${message}</p>
