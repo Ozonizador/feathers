@@ -1,5 +1,7 @@
+import { er } from "@fullcalendar/core/internal-common";
 import classNames from "classnames";
 import React, { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 interface InputProps {
   onChange?: (e: any) => void;
@@ -33,11 +35,17 @@ export default function Input({
   ...props
 }: InputProps) {
   const isDropdown = options && options.length > 0;
+  const { t } = useTranslation();
 
   return (
     <div>
-      {name && <label htmlFor={name}>{labelText}{required && <span>*</span>}</label>}
-      <div className="relative text-sm pt-2">
+      {name && (
+        <label htmlFor={name}>
+          {labelText}
+          {required && <span>*</span>}
+        </label>
+      )}
+      <div className="relative pt-2 text-sm">
         {isDropdown ? (
           <select
             placeholder={placeholder}
@@ -78,7 +86,11 @@ export default function Input({
           ></input>
         )}
         {icons}
-        {errorMessage && <small className="text-red-700">{errorMessage}</small>}
+        {errorMessage && errorMessage.includes("required") ? (
+          <small className="text-red-700">{t("form:validations.required")}</small>
+        ) : (
+          <small className="text-red-700">{errorMessage}</small>
+        )}
       </div>
     </div>
   );
