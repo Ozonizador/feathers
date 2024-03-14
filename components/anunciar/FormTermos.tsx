@@ -121,7 +121,7 @@ const FormTermos = () => {
                   }}
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
-                <Link href={"/terms"} className="text-md capitalize">{t("terms_and_conditions")}</Link>
+                <Link href={"/terms"} className="text-md capitalize underline">{t("terms_and_conditions")}</Link>
               </div>
             </div>
 
@@ -136,7 +136,7 @@ const FormTermos = () => {
                   rules={{ validate: (value) => value === true || "error" }}
                 ></Controller>
 
-                <Link href={"/policies"} className="text-md capitalize">{t("privacy_policy")}</Link>
+                <Link href={"/policies"} className="text-md capitalize underline">{t("privacy_policy")}</Link>
               </div>
             </div>
 
