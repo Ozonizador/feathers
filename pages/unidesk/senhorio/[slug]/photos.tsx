@@ -55,7 +55,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
     if (!advertisementContext) return;
     const { error } = await updateAdvertisement(advertisementContext, advertisementContext.id);
     if (error) toast.error(t("messages:errors.saving_photos"));
-    toast.success(t("messages:success.saved_success"))
+    toast.success(t("messages:success.saved_success"));
   };
 
   const uploadToClient = async (event: any) => {
@@ -139,6 +139,8 @@ const Photos = ({ advertisement }: PhotosProps) => {
       let newImages = photos.map((photo) => {
         if (checkIfImageInSelected(photo.url)) {
           return { url: photo.url, zone: value } as AdvertisementPhoto;
+        } else if (photo.zone == "main") {
+          return {url: photo.url, zone: "other"} as AdvertisementPhoto;
         } else {
           return photo;
         }
@@ -160,6 +162,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
   };
 
   useEffect(() => {
+    console.log(photos)
     setAdvertisementContext(advertisement);
   }, [advertisement]);
 
@@ -178,42 +181,13 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
           <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
             <>
-              {photos && photos.length > 0 && (
-                <div>
-                  <p>{t("advertisements:cover")}</p>
-                  <div
-                    className={classNames(
-                      "relative h-64 w-64 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
-                      {
-                        "border-4 border-primary-500": isImageSelected(photos[0].url),
-                      }
-                    )}
-                    key={0}
-                    onClick={(e) => toggleImageSelection(photos[0])}
-                  >
-                    <div
-                      className="text-black-900 absolute right-0 top-0 z-50 cursor-pointer rounded-full bg-primary-500 p-1 font-bold"
-                      onClick={(e) => deletePhoto(e, photos[0].url)}
-                    >
-                      x
-                    </div>
-                    {photos[0].zone !== "other" && (
-                      <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                        {t(HouseZonesLabel[photos[0].zone])}
-                      </div>
-                    )}
-
-                    <Image src={photos[0].url} fill alt="photo" />
-                  </div>
-                </div>
-              )}
-              <div className="flex flex-wrap">
-                <p className="w-full">{t("advertisements:other")}</p>
-                <div className="flex flex-wrap">
-                  {photos &&
-                    photos.length > 0 &&
-                    photos.slice(1).map((photo, index) => {
-                      return (
+              {photos &&
+                photos.length > 0 &&
+                photos.map((photo, index) => {
+                  if (photo.zone == "main") {
+                    return (
+                      <div>
+                        <p>{t("advertisements:cover")}</p>
                         <div
                           className={classNames(
                             "relative mb-2 mr-2 h-64 w-1/4 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
@@ -230,15 +204,47 @@ const Photos = ({ advertisement }: PhotosProps) => {
                           >
                             x
                           </div>
-                          {photo.zone !== "other" && (
-                            <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
-                              {t(HouseZonesLabel[photo.zone])}
-                            </div>
-                          )}
 
                           <Image src={photo.url} fill alt="photo" />
                         </div>
-                      );
+                      </div>
+                    );
+                  }
+                })}
+              <div className="flex flex-wrap">
+                <p className="w-full">{t("advertisements:other")}</p>
+                <div className="flex flex-wrap">
+                  {photos &&
+                    photos.length > 0 &&
+                    photos.map((photo, index) => {
+                      if (photo.zone != "main") {
+                        return (
+                          <div
+                            className={classNames(
+                              "relative mb-2 mr-2 h-64 w-1/4 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
+                              {
+                                "border-4 border-primary-500": isImageSelected(photo.url),
+                              }
+                            )}
+                            key={index}
+                            onClick={(e) => toggleImageSelection(photo)}
+                          >
+                            <div
+                              className="text-black-900 absolute right-0 top-0 z-50 cursor-pointer rounded-full bg-primary-500 p-1 font-bold"
+                              onClick={(e) => deletePhoto(e, photo.url)}
+                            >
+                              x
+                            </div>
+                            {photo.zone !== "other" && (
+                              <div className="absolute left-2 top-2 z-50 rounded-full bg-primary-500 px-3 py-1 text-xs text-white">
+                                {t(HouseZonesLabel[photo.zone])}
+                              </div>
+                            )}
+
+                            <Image src={photo.url} fill alt="photo" />
+                          </div>
+                        );
+                      }
                     })}
                 </div>
               </div>
