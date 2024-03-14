@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useGetUserCoordinates } from "../../context/MainProvider";
 import { Advertisement, ADVERTISEMENT_PROPERTIES, TYPE_ADVERTISEMENT } from "../../models/advertisement";
@@ -70,7 +70,7 @@ const GeneralAdvertComponent = ({ advertisement, onChangeMarker }: GeneralAdvert
               name={ADVERTISEMENT_PROPERTIES.STREET}
               rules={{ required: { message: REQUIRED_ERROR_MESSAGE, value: true } }}
               control={control}
-              defaultValue=""
+              defaultValue={advertisement.street}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="street"

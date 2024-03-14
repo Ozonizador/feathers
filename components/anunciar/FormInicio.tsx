@@ -14,6 +14,7 @@ import { MapCoordinates } from "../../models/utils";
 import { coordinatesObjectToArray } from "../../utils/map-services";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../utils/Button";
+import { toast } from "react-toastify";
 
 type FormInicioProps = {
   street: string;
@@ -47,9 +48,13 @@ const FormInicio = () => {
   });
 
   const nextStep = async (data: any) => {
-    await checkPossibilites()
-    setAdvertisement({ ...advertisement, ...data });
-    incrementStep();
+    const error = await checkPossibilites()
+    if (error) {
+      toast.error(t("advertisements:location_error"));
+    } else {
+      setAdvertisement({ ...advertisement, ...data });
+      incrementStep();
+    }
   };
 
   const checkPossibilites = async () => {
@@ -63,6 +68,8 @@ const FormInicio = () => {
       if (geometry) {
         changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
       }
+    } else {
+      return error
     }
   };
 

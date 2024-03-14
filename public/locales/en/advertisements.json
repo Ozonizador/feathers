@@ -1,5 +1,6 @@
 {
   "type_house": "Advertisement Type",
+  "location_error": "Address not Found. If this is a mistake, please contact us.",
   "included": "Included",
   "not_included": "Not Included",
   "expenses_included": "Expenses Included",

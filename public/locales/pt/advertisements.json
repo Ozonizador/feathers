@@ -1,6 +1,7 @@
 {
 
   "type_house": "Tipo de Espaço",
+  "location_error": "Morada não encontrada. Se isto for um erro, por favor contacte-nos.",
   "included": "Incluído",
   "not_included": "Não Incluído",
   "expenses_included": "Despesas Incluídas",
