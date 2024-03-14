@@ -42,6 +42,7 @@ export type AdvertisementComplete = Advertisement & {
  * EXPENSES
  */
 export interface HouseExpenses {
+  inclusive: Included;
   services?: TypeExpense[];
 }
 

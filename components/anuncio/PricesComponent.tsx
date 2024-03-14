@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ChangeEvent, SetStateAction, useCallback, useState } from "react";
+import { ChangeEvent, SetStateAction, useCallback, useEffect, useState } from "react";
 import {
   Advertisement,
   ADVERTISEMENT_PROPERTIES,
@@ -12,6 +12,8 @@ import Input from "../utils/Input";
 import RadioBox from "../utils/Radiobox";
 import { on } from "process";
 import { useTranslation } from "next-i18next";
+import { aD } from "@fullcalendar/core/internal-common";
+import { includes } from "lodash";
 
 interface PricesComponentProps {
   advertisement: Advertisement;
@@ -68,17 +70,22 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     const services =
       expenses &&
       expenses.services?.map((service) => {
+        console.log(service.name, expenseType)
         if (service.name === expenseType) {
           return { ...service, max: parseInt(event.target.value) };
         } else {
           return service;
         }
       });
+    console.log(services);
 
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
       services,
+      inclusive: selectedOption,
     });
+
+    console.log(advertisement.expenses.services);
   };
 
   const setExpenses = (included: Included) => {
@@ -86,19 +93,38 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
     setSelectedOption(included);
 
-    if (included == "INCLUDED" || included == "EXCLUDED") {
-      const services =
-        expenses &&
-        expenses.services?.map((service) => {
+    const services =
+      expenses &&
+      expenses.services?.map((service) => {
+        if (service.max != 0 || service.max != null) {
           return { name: service.name, included: included };
-        });
-
-      onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
-        ...expenses,
-        services,
+        }
       });
-    }
+
+    onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
+      ...expenses,
+      services,
+      inclusive: included,
+    });
   };
+
+  useEffect(() => {
+    if (selectedOption == null) {
+      console.log(advertisement.expenses);
+      switch (advertisement.expenses.inclusive) {
+        case "INCLUDED":
+          setSelectedOption("INCLUDED");
+          break;
+        case "PARTIALLY":
+          setSelectedOption("PARTIALLY");
+          console.log(advertisement.expenses.services);
+          break;
+        case "EXCLUDED":
+          setSelectedOption("EXCLUDED");
+          break;
+      }
+    }
+  });
 
   return (
     <>
@@ -294,6 +320,7 @@ const ExpenseSelection = ({
                     <Input
                       labelText=""
                       customCss="euro"
+                      data-expense={expenseInfo?.name}
                       defaultValue={expenseInfo?.max || 0}
                       disabled={!expenseInfo || (expenseInfo && expenseInfo.included === "INCLUDED")}
                       onChange={setMaxExpenseValue}
