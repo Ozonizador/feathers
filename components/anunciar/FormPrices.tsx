@@ -19,7 +19,6 @@ const FormPrices = () => {
   };
 
   const changeTypeProperty = (label: string, value: any) => {
-    console.log(advertisement.expenses)
     setAdvertisementProperty(label, value);
   };
 

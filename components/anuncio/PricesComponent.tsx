@@ -70,22 +70,18 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
     const services =
       expenses &&
       expenses.services?.map((service) => {
-        console.log(service.name, expenseType)
         if (service.name === expenseType) {
           return { ...service, max: parseInt(event.target.value) };
         } else {
           return service;
         }
       });
-    console.log(services);
 
     onChange(ADVERTISEMENT_PROPERTIES.EXPENSES, {
       ...expenses,
       services,
       inclusive: selectedOption,
     });
-
-    console.log(advertisement.expenses.services);
   };
 
   const setExpenses = (included: Included) => {
@@ -110,14 +106,12 @@ const PricesComponent = ({ advertisement, onChange }: PricesComponentProps) => {
 
   useEffect(() => {
     if (selectedOption == null) {
-      console.log(advertisement.expenses);
       switch (advertisement.expenses.inclusive) {
         case "INCLUDED":
           setSelectedOption("INCLUDED");
           break;
         case "PARTIALLY":
           setSelectedOption("PARTIALLY");
-          console.log(advertisement.expenses.services);
           break;
         case "EXCLUDED":
           setSelectedOption("EXCLUDED");
