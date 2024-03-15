@@ -186,7 +186,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                 photos.map((photo, index) => {
                   if (photo.zone == "main") {
                     return (
-                      <div>
+                      <div key={index}>
                         <p>{t("advertisements:cover")}</p>
                         <div
                           className={classNames(
