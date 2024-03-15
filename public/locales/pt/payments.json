@@ -3,5 +3,6 @@
     "description": "Adicione e faça gestão dos seus métodos de pagamento e recebimento.",
     "payments": "Pagamentos",
     "receivement": "Recebimentos",
-    "bank": "Transferencia Bancária"
+    "bank": "Transferencia Bancária",
+    "bank_description": "Esta informação é usada para transferir o dinheiro das reservas dos seus anúncios."
 }

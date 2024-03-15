@@ -60,15 +60,7 @@ const Index = (props: any) => {
           <p>{t("payments:description")}</p>
 
           {/* BOTÕES*/}
-          <div className=" mb-20 mt-10 flex flex-col gap-4 lg:my-20 lg:flex-row">
-            <button
-              className={`rounded-xl px-12 py-4 text-xl ${
-                state == "Pagamentos" ? "bg-primary-500 text-white" : "bg-terciary-500 text-secondary-400"
-              }`}
-              onClick={() => setState("Pagamentos")}
-            >
-              {t("payments:payments")}
-            </button>
+          <div className=" mb-10 mt-10 flex flex-col gap-4 lg:flex-row">
             <button
               className={`rounded-xl px-12 py-4 text-xl ${
                 state == "Recebimentos" ? "bg-primary-500 text-white" : "bg-terciary-500 text-secondary-400"
@@ -81,7 +73,8 @@ const Index = (props: any) => {
 
           {state == "Recebimentos" && (
             <div>
-              <h4 className="text-xl">{t("payments:bank")}</h4>
+              <h3 className="text-xl">{t("payments:bank")}</h3>
+              <h4 className="text-md">{t("payments:bank_description")}</h4>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4 mt-2">
                   <Controller

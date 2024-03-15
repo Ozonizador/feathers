@@ -3,5 +3,6 @@
     "description": "Add and manage your payment and receipt methods.",
     "payments": "Payments",
     "receivement": "Receivements",
-    "bank": "Bank Transfer"
+    "bank": "Bank Transfer",
+    "bank_description": "This information is kept so we can transfer you the money of the reservations of your advertisements."
 }
