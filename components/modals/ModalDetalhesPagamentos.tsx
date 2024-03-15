@@ -266,7 +266,7 @@ const ModalDetalhesPagamento = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="ml-auto mr-6 text-neutral-500">
+                          <div className="ml-auto text-neutral-500">
                             {advertisement?.guarantee_value.toFixed(2).toLocaleString() || guaranteed_value?.toFixed(2).toLocaleString()}€
                           </div>
                         </div>
