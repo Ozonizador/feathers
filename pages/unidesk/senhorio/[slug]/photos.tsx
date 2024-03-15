@@ -162,8 +162,8 @@ const Photos = ({ advertisement }: PhotosProps) => {
   };
 
   useEffect(() => {
-    console.log(photos)
     setAdvertisementContext(advertisement);
+    console.log(photos)
   }, [advertisement]);
 
   return (
@@ -277,7 +277,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
                   <h3 className="text-xl text-neutral-400">{t("admin:associate_photos")}</h3>
                   {Object.keys(HouseZonesLabel).map((zone, index) => {
                     return (
-                      <div key={index} className="py-1" onChange={(e) => setImagesZone(e)}>
+                      <div key={index} className="py-1 my-2" onClick={(e) => setImagesZone(e)}>
                         <input type="radio" id="scales" name="type" value={zone} />
                         <label htmlFor="scales" className="my-auto ml-1">
                           {t(HouseZonesLabel[zone as keyof typeof HouseZonesLabel])}

@@ -130,6 +130,7 @@ const Details = ({ advertisement }: DetailsProps) => {
           {advertisementContext && (
             <>
               <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(saveChanges)}>
                 <div className="flex flex-col gap-5 px-3">
                   <h5 className="font-bold">{advertisementContext.title}</h5>
                   <AdvertisementInfoComponent advertisement={advertisementContext} showInternalName={true} />
@@ -150,11 +151,12 @@ const Details = ({ advertisement }: DetailsProps) => {
                   <HostFlexTypeComponent advertisement={advertisementContext} onChange={changeAdvertisementProperty} />
                   <AnuncioDisponivel advertisement={advertisementContext} />
                   <div className="mx-auto my-5 w-1/2 px-6">
-                    <Button onClick={methods.handleSubmit(saveChanges)} type="button">
+                    <Button onClick={methods.handleSubmit(saveChanges)} type="submit">
                       {t("save_changes")} &#10230;
                     </Button>
                   </div>
                 </div>
+                </form>
               </FormProvider>
             </>
           )}
