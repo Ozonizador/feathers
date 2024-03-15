@@ -105,7 +105,7 @@ export const SearchInputField = () => {
             />
           </div>
           {addressOptions && addressOptions.length > 0 && (
-            <div className="absolute -left-2 z-900 mx-2 mt-2 w-full rounded border bg-white p-2">
+            <div className="absolute cursor-pointer -left-2 z-900 mx-2 mt-2 w-full rounded border bg-white p-2">
               <div className="flex flex-col gap-2">
                 {addressOptions.map((addressOption, index) => {
                   return (
