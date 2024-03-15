@@ -5,10 +5,11 @@ import { createRandomUniqWord } from "../../utils/utils";
 import { superAdminProcedure } from "../procedure";
 import { publicProcedure, router } from "../trpc";
 
-const AddBlogSchema: z.ZodType<Pick<Blog, "category" | "title" | "description">> = z.object({
+const AddBlogSchema: z.ZodType<Pick<Blog, "category" | "title" | "description" | "image">> = z.object({
   description: z.string(),
   title: z.string(),
   category: z.enum(["LANDLORD", "TENANT"]),
+  image: z.string()
 });
 
 export const blogsRouter = router({

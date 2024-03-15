@@ -3,12 +3,12 @@ import "@uiw/react-markdown-preview/markdown.css";
 
 import classNames from "classnames";
 import dynamic from "next/dynamic";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import { Blog } from "../../models/blog";
 import Input from "../utils/Input";
 
-export type BlogAdminForm = Pick<Blog, "title" | "description" | "category">;
+export type BlogAdminForm = Pick<Blog, "title" | "description" | "category" | "image">;
 
 type FormProps = {
   onSubmit: (data: any) => void;
@@ -21,8 +21,10 @@ const BlogFormContainer = ({ onSubmit, children }: FormProps) => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { isDirty },
   } = useFormContext();
+  const [imageUrl, setImageUrl] = useState<any>(null);
   return (
     <form className="mt-5 flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -35,13 +37,37 @@ const BlogFormContainer = ({ onSubmit, children }: FormProps) => {
         ></Controller>
       </div>
       <div>
+        <h3 className="mb-2">Imagem</h3>
+      {imageUrl && <img className="h-60 mb-2" src={URL.createObjectURL(imageUrl[0])} alt="Uploaded" />}
+        <Controller
+          control={control}
+          name=""
+          render={({ field: { onChange } }) => {
+            return (
+              <div>
+                <input
+                  type="file"
+                  {...register("image")}
+                  onChange={(e) => {
+                    setImageUrl(e.target.files);
+                  }}
+                  id="cover"
+                  accept="image/png, image/gif, image/jpeg, image/webp"
+                />
+              </div>
+            );
+          }}
+        ></Controller>
+
+      </div>
+      <div>
         <Controller
           control={control}
           name={"description"}
           render={({ field: { onChange, value } }) => {
             return (
               <div data-color-mode="light">
-                <MDEditor value={value} onChange={onChange} height={400}/>
+                <MDEditor value={value} onChange={onChange} height={400} />
               </div>
             );
           }}
