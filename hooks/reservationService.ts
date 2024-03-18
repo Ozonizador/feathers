@@ -2,6 +2,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import {
   MODIFY_RESERVATION_FUNCTION,
   Reservation,
+  RESERVATION_TABLE_NAME,
   Reservations,
   ReservationStatus,
 } from "../models/reservation";
@@ -23,14 +24,14 @@ const useReservationService = () => {
   };
 
   const requestChangeReservation = async (reservation_id: string, reservation: Partial<Reservation>) => {
-    const { data, error } = await supabaseClient.rpc<"modify_reservation", Reservations>(MODIFY_RESERVATION_FUNCTION, {
-      reservation_id,
-      ...reservation
-    })
+    const { data, error } = await supabaseClient
+      .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
+      .update(reservation)
+      .eq("reservation_id", reservation_id);
 
-    return { data, error};
-  }
-  
+    return { data, error };
+  };
+
   return { acceptReservation, requestChangeReservation };
 };
 
