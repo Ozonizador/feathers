@@ -27,7 +27,7 @@ const useReservationService = () => {
     const { data, error } = await supabaseClient
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .update(reservation)
-      .eq("reservation_id", reservation_id);
+      .eq("id", reservation_id);
 
     return { data, error };
   };
