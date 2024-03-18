@@ -11,6 +11,8 @@ import { addMonths, isSameDay } from "date-fns";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import useAdvertisementService from "../../hooks/advertisementService";
+import useReservationService from "../../hooks/reservationService";
 
 /**
  * PAGINA 23 DO XD
@@ -21,6 +23,7 @@ const ModalAlterarReserva = () => {
   const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
   const router = useRouter();
+  const { requestChangeReservation } = useReservationService();
 
   const [newReservation, setNewReservation] = useState<
     Omit<
@@ -58,13 +61,19 @@ const ModalAlterarReserva = () => {
     setNewReservation({ ...newReservation, [property]: value });
   };
 
-  const handleSubmit = (() => {
-    toast.success(t("messages:success:saved_success"))
-    setTimeout(() => {
-      closeModal();
-      router.reload();
-    }, 2000)
-  })
+  const handleSubmit = async () => {
+    const { data, error } = await requestChangeReservation(reservation!.id, newReservation);
+
+    if (!error) {
+      toast.success(t("messages:success:saved_success"));
+      setTimeout(() => {
+        closeModal();
+        router.reload();
+      }, 2000);
+    } else {
+      toast.error(t("messages:errors:editing_info"));
+    }
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
