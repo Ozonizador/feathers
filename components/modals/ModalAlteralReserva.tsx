@@ -23,7 +23,7 @@ const ModalAlterarReserva = () => {
   const { isOpen, reservation } = useModalAlterarReserva();
   const setIsOpen = useSetOpenModalAlterarReserva();
   const router = useRouter();
-  const { requestChangeReservation } = useReservationService();
+  const { requestChangeReservation, acceptReservation } = useReservationService();
 
   const [newReservation, setNewReservation] = useState<
     Omit<
@@ -63,6 +63,7 @@ const ModalAlterarReserva = () => {
 
   const handleSubmit = async () => {
     const { data, error } = await requestChangeReservation(reservation!.id, newReservation);
+    await acceptReservation(reservation!.id, "CHANGE_REQUESTED");
 
     if (!error) {
       toast.success(t("messages:success:saved_success"));

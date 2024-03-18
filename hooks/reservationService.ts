@@ -6,6 +6,7 @@ import {
   Reservations,
   ReservationStatus,
 } from "../models/reservation";
+import { supabaseAdmin } from "../lib/supabaseAdminClient";
 
 const useReservationService = () => {
   const supabaseClient = useSupabaseClient();
@@ -24,7 +25,7 @@ const useReservationService = () => {
   };
 
   const requestChangeReservation = async (reservation_id: string, reservation: Partial<Reservation>) => {
-    const { data, error } = await supabaseClient
+    const { data, error } = await supabaseAdmin
       .from<"reservations", Reservations>(RESERVATION_TABLE_NAME)
       .update(reservation)
       .eq("id", reservation_id);
