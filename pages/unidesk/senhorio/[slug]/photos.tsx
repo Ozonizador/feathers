@@ -128,19 +128,47 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
   const setImagesZone = async (event: React.FormEvent<HTMLDivElement>) => {
     if (!advertisementContext) return;
-    const value = (event.target as HTMLInputElement).value;
 
+    let value = '';
+
+    if ((event.target as HTMLElement).tagName.toLocaleLowerCase() == "div") {
+      const divElement = event.target as HTMLDivElement;
+      value = divElement.querySelector('input')?.value || '';
+    } else if ((event.target as HTMLElement).tagName.toLowerCase() === 'input') {
+      value = (event.target as HTMLInputElement).value;
+    }
+
+    console.log(value)
+    
     if (value === "main" && selectedImages.length !== 1) {
       toast.error(t("messages:errors.only_one_main_photo"));
       return;
+    } else if (value === "main") {
+      let { photos } = advertisementContext || { photos: [] };
+
+      let newImages = photos.map((photo) => {
+        if (checkIfImageInSelected(photo.url)) {
+          return { url: photo.url, zone: value } as AdvertisementPhoto;
+        } else if (photo.zone === "main") {
+          return { url: photo.url, zone: "other" } as AdvertisementPhoto;
+        } else {
+          return photo;
+        }
+      });
+      
+      const { data, error } = await updateAdvertisement(
+        { ...advertisementContext, photos: newImages },
+        advertisementContext.id
+      );
+
+      if (error) return toast.error(error.message);
+      data && setAdvertisement(data);
     } else {
       let { photos } = advertisementContext || { photos: [] };
 
       let newImages = photos.map((photo) => {
         if (checkIfImageInSelected(photo.url)) {
           return { url: photo.url, zone: value } as AdvertisementPhoto;
-        } else if (photo.zone == "main") {
-          return {url: photo.url, zone: "other"} as AdvertisementPhoto;
         } else {
           return photo;
         }
@@ -163,7 +191,7 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
   useEffect(() => {
     setAdvertisementContext(advertisement);
-    console.log(photos)
+    console.log(photos);
   }, [advertisement]);
 
   return (
@@ -181,36 +209,38 @@ const Photos = ({ advertisement }: PhotosProps) => {
 
           <div className="mx-auto grid grid-cols-2 gap-6 lg:flex lg:w-full lg:flex-row lg:flex-wrap lg:items-center">
             <>
-              {photos &&
-                photos.length > 0 &&
-                photos.map((photo, index) => {
-                  if (photo.zone == "main") {
-                    return (
-                      <div key={index}>
-                        <p>{t("advertisements:cover")}</p>
-                        <div
-                          className={classNames(
-                            "relative mb-2 mr-2 h-64 w-1/4 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
-                            {
-                              "border-4 border-primary-500": isImageSelected(photo.url),
-                            }
-                          )}
-                          key={index}
-                          onClick={(e) => toggleImageSelection(photo)}
-                        >
+              <div className="w-full">
+                <p>{t("advertisements:cover")}</p>
+                {photos &&
+                  photos.length > 0 &&
+                  photos.map((photo, index) => {
+                    if (photo.zone == "main") {
+                      return (
+                        <div key={index}>
                           <div
-                            className="text-black-900 absolute right-0 top-0 z-50 cursor-pointer rounded-full bg-primary-500 p-1 font-bold"
-                            onClick={(e) => deletePhoto(e, photo.url)}
+                            className={classNames(
+                              "relative mb-2 mr-2 h-64 w-1/4 rounded-lg bg-black bg-cover bg-no-repeat lg:h-32 lg:w-32",
+                              {
+                                "border-4 border-primary-500": isImageSelected(photo.url),
+                              }
+                            )}
+                            key={index}
+                            onClick={(e) => toggleImageSelection(photo)}
                           >
-                            x
-                          </div>
+                            <div
+                              className="text-black-900 absolute right-0 top-0 z-50 cursor-pointer rounded-full bg-primary-500 p-1 font-bold"
+                              onClick={(e) => deletePhoto(e, photo.url)}
+                            >
+                              x
+                            </div>
 
-                          <Image src={photo.url} fill alt="photo" />
+                            <Image src={photo.url} fill alt="photo" />
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }
-                })}
+                      );
+                    }
+                  })}
+              </div>
               <div className="flex flex-wrap">
                 <p className="w-full">{t("advertisements:other")}</p>
                 <div className="flex flex-wrap">
@@ -277,9 +307,15 @@ const Photos = ({ advertisement }: PhotosProps) => {
                   <h3 className="text-xl text-neutral-400">{t("admin:associate_photos")}</h3>
                   {Object.keys(HouseZonesLabel).map((zone, index) => {
                     return (
-                      <div key={index} className="py-1 my-2" onClick={(e) => setImagesZone(e)}>
-                        <input type="radio" id="scales" name="type" value={zone} />
-                        <label htmlFor="scales" className="my-auto ml-1">
+                      <div key={index} className="my-2 py-1" onClick={(e) => console.log(e)}>
+                        <input
+                          type="radio"
+                          id={`scales-${zone}`}
+                          name="type"
+                          value={zone}
+                          defaultChecked={selectedImages[0].zone == zone}
+                        />
+                        <label htmlFor={`scales-${zone}`} className="my-auto ml-1">
                           {t(HouseZonesLabel[zone as keyof typeof HouseZonesLabel])}
                         </label>
                       </div>
