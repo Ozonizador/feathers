@@ -32,8 +32,8 @@ const ModalAlterarReserva = () => {
     >
   >({
     status: "CHANGE_REQUESTED",
-    advertisement_id: (reservation && reservation.advertisement && reservation.advertisement_id) || "",
-    tenant_id: (reservation && reservation.advertisement && reservation.tenant_id) || "",
+    advertisement_id: (reservation && reservation.advertisement_id) || "",
+    tenant_id: (reservation && reservation.tenant_id) || "",
     number_guests: (reservation && reservation.number_guests) || 1,
   });
 
