@@ -28,12 +28,10 @@ const ModalAlterarReserva = () => {
   const [newReservation, setNewReservation] = useState<
     Omit<
       Reservation,
-      "id" | "created_at" | "updated_at" | "start_date" | "end_date" | "payment_status" | "previous_stay"
+      "id" | "created_at" | "updated_at" | "start_date" | "end_date" | "payment_status" | "previous_stay" | "advertisement_id" | "tenant_id"
     >
   >({
     status: "CHANGE_REQUESTED",
-    advertisement_id: (reservation && reservation.advertisement_id) || "",
-    tenant_id: (reservation && reservation.tenant_id) || "",
     number_guests: (reservation && reservation.number_guests) || 1,
   });
 
