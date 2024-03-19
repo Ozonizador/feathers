@@ -62,8 +62,8 @@ const ModalAlterarReserva = () => {
   };
 
   const handleSubmit = async () => {
-    newReservation.start_date = newReservationStartDate.toLocaleDateString();
-    newReservation.end_date = newReservationEndDate.toLocaleDateString();
+    newReservation.start_date = newReservationStartDate.toISOString();
+    newReservation.end_date = newReservationEndDate.toISOString();
 
     const { data, error } = await requestChangeReservation(reservation!.id, newReservation);
 
