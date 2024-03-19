@@ -63,9 +63,9 @@ const ModalAlterarReserva = () => {
 
   const handleSubmit = async () => {
     const { data, error } = await requestChangeReservation(reservation!.id, newReservation);
-    await acceptReservation(reservation!.id, "CHANGE_REQUESTED");
 
     if (!error) {
+      await acceptReservation(reservation!.id, "CHANGE_REQUESTED");
       toast.success(t("messages:success:saved_success"));
       setTimeout(() => {
         closeModal();

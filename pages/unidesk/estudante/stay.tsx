@@ -24,6 +24,7 @@ import { ReservationComplete, Reservations, RESERVATION_TABLE_NAME } from "../..
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { useEffect } from "react";
 
 /* PAGINA 21 do xd */
 
@@ -39,6 +40,10 @@ interface EstadiaComponentProps {
 
 const EstadiaComponent = ({ currentStay, nextStays }: EstadiaComponentProps) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    console.log(nextStays)
+  })
 
   return (
     <ModalApplyShowProvider>
