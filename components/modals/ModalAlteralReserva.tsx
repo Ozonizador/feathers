@@ -28,11 +28,13 @@ const ModalAlterarReserva = () => {
   const [newReservation, setNewReservation] = useState<
     Omit<
       Reservation,
-      "id" | "created_at" | "updated_at" | "start_date" | "end_date" | "payment_status" | "previous_stay" | "advertisement_id" | "tenant_id"
+      "id" | "created_at" | "updated_at" | "payment_status" | "previous_stay" | "advertisement_id" | "tenant_id"
     >
   >({
     status: "CHANGE_REQUESTED",
     number_guests: (reservation && reservation.number_guests) || 1,
+    start_date: (reservation && reservation.start_date) || "",
+    end_date: (reservation && reservation.end_date) || "",
   });
 
   const [newReservationStartDate, setNewReservationStartDate] = useState<Date>(
@@ -60,6 +62,9 @@ const ModalAlterarReserva = () => {
   };
 
   const handleSubmit = async () => {
+    newReservation.start_date = newReservationStartDate.toLocaleDateString();
+    newReservation.end_date = newReservationEndDate.toLocaleDateString();
+
     const { data, error } = await requestChangeReservation(reservation!.id, newReservation);
 
     if (!error) {
