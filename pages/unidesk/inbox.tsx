@@ -377,8 +377,8 @@ const CaixaExtradaContent = () => {
                             <div
                               className={classNames("font-bold", {
                                 "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
-                                "text-green-500": currentConversation.reservation.status === "ACCEPTED",
-                                "text-red-500": currentConversation.reservation.status === "REJECTED",
+                                "text-green-500": currentConversation.reservation.status === "ACCEPTED" || currentConversation.reservation.status === "CHANGE_ACCEPTED",
+                                "text-red-500": currentConversation.reservation.status === "REJECTED" || currentConversation.reservation.status === "CHANGE_REJECTED",
                                 "text-gray-400": currentConversation.reservation.status === "EXPIRED",
                               })}
                             >
@@ -541,8 +541,8 @@ const CaixaExtradaContent = () => {
               <div
                 className={classNames("font-bold", {
                   "text-yellow-500": currentConversation.reservation.status === "REQUESTED",
-                  "text-green-500": currentConversation.reservation.status === "ACCEPTED",
-                  "text-red-500": currentConversation.reservation.status === "REJECTED",
+                  "text-green-500": currentConversation.reservation.status === "ACCEPTED" || currentConversation.reservation.status === "CHANGE_ACCEPTED",
+                  "text-red-500": currentConversation.reservation.status === "REJECTED" || currentConversation.reservation.status === "CHANGE_REJECTED",
                   "text-gray-400": currentConversation.reservation.status === "EXPIRED",
                 })}
               >
