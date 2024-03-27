@@ -19,8 +19,8 @@ const Payments = () => {
 
       <div className="flex flex-1 justify-center">
         <div className="w-full rounded-2xl border border-terciary-700 bg-terciary-300 p-10 px-5 lg:px-32">
-          <div className="mb-5 text-3xl font-bold">Pagamentos e Recebimentos</div>
-          <p>Adicione e faça gestão dos seus métodos de pagamento e recebimento.</p>
+          <div className="mb-5 text-3xl font-bold">Recebimentos</div>
+          <p>Adicione e faça gestão dos seus métodos de recebimento.</p>
 
           {/* BOTÕES*/}
           <div className=" mb-20 mt-10 flex flex-col gap-4 lg:my-20 lg:flex-row">
