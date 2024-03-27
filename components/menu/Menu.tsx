@@ -4,10 +4,12 @@ import { TiLockClosed } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { Tooltip } from "react-tooltip";
 
 type MenuProps = {
   children: ReactNode;
 };
+
 
 const Menu = ({ children }: MenuProps) => {
   return <div className="flex w-full flex-col gap-1 rounded-2xl bg-primary-200 p-4 lg:w-full">{children}</div>;
@@ -35,10 +37,19 @@ const MenuOption = ({ label, activeLink = false, url, blocked }: MenuOptionProps
       onClick={() => goToUrl()}
     >
       {blocked ? (
-        <div className="flex">
-          <TiLockClosed className="my-auto" />
-          <span className="ml-2">{t(label)}</span>
-        </div>
+        <>
+          <div
+            className="flex"
+            data-tooltip-id="blocked"
+            data-tooltip-content={t("common:tooltip")}
+            data-tooltip-place="top"
+            data-tooltip-variant="light"
+          >
+            <TiLockClosed className="my-auto" />
+            <span className="ml-2">{t(label)}</span>
+          </div>
+          <Tooltip id="blocked" />
+        </>
       ) : (
         t(label)
       )}

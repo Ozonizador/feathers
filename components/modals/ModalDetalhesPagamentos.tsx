@@ -49,6 +49,26 @@ const ModalDetalhesPagamento = () => {
     });
   };
 
+  function formatStringToLocaleString(str: string) {
+    // Convert the string to a number
+    let num = parseFloat(str);
+
+    // Check if the conversion was successful and the number is not NaN
+    if (!isNaN(num)) {
+      // Check if the number is an integer (has no decimal part)
+      if (Number.isInteger(num)) {
+        // If it's an integer, convert it to locale string without any decimal places
+        return num.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      } else {
+        // If it's not an integer, convert it to locale string with default formatting
+        return num.toLocaleString();
+      }
+    } else {
+      // If the conversion fails, return the original string
+      return str;
+    }
+  }
+
   const closeModal = () => {
     setCheckedDates(false);
     setIsOpen(false);
@@ -75,32 +95,32 @@ const ModalDetalhesPagamento = () => {
 
       if (getDaysTillEndMonth > 0) {
         if (getDaysTillEndMonth >= 30) {
-          arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+          arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
         } else {
           let priceAdjustment = pricePerDay * getDaysTillEndMonth;
 
-          arrayOfMonths.push({ month: monthLong, price: priceAdjustment.toFixed(2) });
+          arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(priceAdjustment.toFixed(2)) });
         }
 
         if (isLastDayOfMonth(endDate)) {
           while (arrayOfMonths.length < monthDiference) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
           }
         } else {
           // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
           while (arrayOfMonths.length < monthDiference - 1) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
           }
 
           let endDay = getDate(endDate);
 
           arrayOfMonths.push({
             month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: (endDay * pricePerDay).toFixed(2),
+            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
           });
         }
 
@@ -110,28 +130,28 @@ const ModalDetalhesPagamento = () => {
           while (arrayOfMonths.length < monthDiference - 1) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
           }
 
           let endDay = getDate(endDate);
 
           arrayOfMonths.push({
             month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: (endDay * pricePerDay).toFixed(2),
+            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
           });
         } else {
           // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
           while (arrayOfMonths.length < monthDiference - 1) {
             let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
             const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: rent.toFixed(2) });
+            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
           }
 
           let endDay = getDate(endDate);
 
           arrayOfMonths.push({
             month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: (endDay * pricePerDay).toFixed(2),
+            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
           });
         }
 
@@ -205,10 +225,13 @@ const ModalDetalhesPagamento = () => {
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="mb-16 mt-6 text-center text-2xl font-bold leading-6 text-gray-900 lg:text-4xl ml-2"
+                    className="mb-16 ml-2 mt-6 text-center text-2xl font-bold leading-6 text-gray-900 lg:text-4xl"
                   >
                     {t("common:payment_details")}
-                    <IoMdClose className=" ml-2 h-8 w-8 absolute right-10 top-14 cursor-pointer max-sm:top-11" onClick={() => closeModal()}/>
+                    <IoMdClose
+                      className=" absolute right-10 top-14 ml-2 h-8 w-8 cursor-pointer max-sm:top-11"
+                      onClick={() => closeModal()}
+                    />
                   </Dialog.Title>
 
                   <div className="mt-2">
@@ -230,7 +253,7 @@ const ModalDetalhesPagamento = () => {
                             </div>
                           </div>
                           <div className="ml-auto flex max-sm:ml-0">
-                            <div className="font-bold">{setAdvertPrice().toLocaleString()}€</div>
+                            <div className="font-bold">{formatStringToLocaleString(setAdvertPrice())}€</div>
                           </div>
                         </div>
                         <div className="flex gap-1 text-neutral-600">
@@ -250,7 +273,7 @@ const ModalDetalhesPagamento = () => {
                         <div className="flex max-sm:flex-col">
                           <h6 className="font-bold">{t("on_check_day")}</h6>
                           <div className="ml-auto flex max-sm:ml-0">
-                            <div className="font-bold">{setAdvertPrice().toLocaleString()}€</div>
+                            <div className="font-bold">{formatStringToLocaleString(setAdvertPrice())}€</div>
                           </div>
                         </div>
                         <div className="flex">
@@ -267,7 +290,10 @@ const ModalDetalhesPagamento = () => {
                             </div>
                           </div>
                           <div className="ml-auto text-neutral-500">
-                            {advertisement?.guarantee_value.toFixed(2).toLocaleString() || guaranteed_value?.toFixed(2).toLocaleString()}€
+                            {(advertisement?.guarantee_value &&
+                              formatStringToLocaleString(advertisement?.guarantee_value.toString())) ||
+                              formatStringToLocaleString(guaranteed_value!.toString())}
+                            €
                           </div>
                         </div>
                       </FeathersAccordion>
@@ -287,7 +313,7 @@ const ModalDetalhesPagamento = () => {
                               return (
                                 <div className="flex text-sm text-neutral-500" key={index}>
                                   <div>{t("rent_of_month", { month: value.month })}</div>
-                                  <div className="ml-auto mr-6">{value.price.toLocaleString()}€</div>
+                                  <div className="ml-auto mr-6">{formatStringToLocaleString(value.price.toString())}€</div>
                                 </div>
                               );
                             })}
