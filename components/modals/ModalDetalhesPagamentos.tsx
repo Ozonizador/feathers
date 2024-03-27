@@ -292,7 +292,7 @@ const ModalDetalhesPagamento = () => {
                           <div className="ml-auto text-neutral-500">
                             {(advertisement?.guarantee_value &&
                               formatStringToLocaleString(advertisement?.guarantee_value.toString())) ||
-                              formatStringToLocaleString(guaranteed_value!.toString())}
+                              (guaranteed_value && formatStringToLocaleString(guaranteed_value.toString()))}
                             €
                           </div>
                         </div>
@@ -313,7 +313,9 @@ const ModalDetalhesPagamento = () => {
                               return (
                                 <div className="flex text-sm text-neutral-500" key={index}>
                                   <div>{t("rent_of_month", { month: value.month })}</div>
-                                  <div className="ml-auto mr-6">{formatStringToLocaleString(value.price.toString())}€</div>
+                                  <div className="ml-auto mr-6">
+                                    {formatStringToLocaleString(value.price.toString())}€
+                                  </div>
                                 </div>
                               );
                             })}

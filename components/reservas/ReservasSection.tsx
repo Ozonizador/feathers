@@ -124,9 +124,9 @@ const CurrentReservationsSection = () => {
                   <Table.Cell className="text-md text-gray-700 dark:text-white">
                     {reservation?.end_date || ""}
                   </Table.Cell>
-                  <Table.Cell className="text-md text-gray-700 dark:text-white">{`${t(
-                    TYPE_ADVERTISEMENT[reservation.advertisement.type]
-                  )} ${t("in")} ${reservation.advertisement.place}`}</Table.Cell>
+                  <Table.Cell className="text-md text-gray-700 dark:text-white">{`${
+                    reservation.advertisement.place || reservation.advertisement?.title || ""
+                  }`}</Table.Cell>
                   <Table.Cell>
                     <Button
                       type="button"
@@ -216,8 +216,8 @@ const NextReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
-                    t(TYPE_ADVERTISEMENT[reservation.advertisement?.type]) || ""
-                  } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                    reservation.advertisement.place || reservation.advertisement?.title || ""
+                  }`}</Table.Cell>
                   <Table.Cell>
                     <Button
                       type="button"
@@ -322,8 +322,8 @@ const AllReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
-                    reservation.advertisement ? t(TYPE_ADVERTISEMENT[reservation.advertisement.type]) : ""
-                  } ${t("in")} ${reservation.advertisement?.place || ""}`}</Table.Cell>
+                    reservation.advertisement?.place || reservation.advertisement?.title || ""
+                  }`}</Table.Cell>
                   <Table.Cell>
                     <Button
                       type="button"
