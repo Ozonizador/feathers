@@ -57,7 +57,7 @@ const UnideskFavoritos = () => {
           <MenuEstudante activeSection={"favourites"} activeUrl={"favourites"} />
         </UnideskStructure.Menu>
         <UnideskStructure.Content>
-          <div className="w-5/6">
+          <div className="w-5/6 max-[1025px]:mx-auto">
             <div className="flex flex-col items-center justify-center align-middle">
               {/* <Image src={iconfavorito} alt="Favoritos" height={75} width={75} /> */}
               <div className="mt-9 text-2xl font-bold text-primary-500">{t("favourites", { count: 2 })}</div>
