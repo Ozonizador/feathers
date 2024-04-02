@@ -83,7 +83,7 @@ const Notifications = () => {
                   })}
                   {!notifications ||
                     (notifications.length == 0 && (
-                      <div className="flex justify-center text-xl">{t("adimn:unidesk.no_notifications")}</div>
+                      <div className="flex justify-center text-xl">{t("adimn:unidesk.general.no_notifications")}</div>
                     ))}
                 </div>
               )}
