@@ -19,14 +19,14 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
     ),
   };
   return (
-    <section className="mx-auto pb-5 xl:pt-20">
+    <section className="mx-auto pt-10 xl:pt-20">
       <div className="flex flex-col justify-between gap-14 lg:flex-row">
         <div className="flex flex-col gap-8 lg:flex-row ">
           {blogs &&
             blogs.map((blog) => {
               return (
                 <Link href={`/blog/${blog.slug}`} key={blog.id}>
-                  <div className="w-full cursor-pointer lg:w-1/2">
+                  <div className="w-full cursor-pointer mx-auto lg:w-1/2">
                     <div className="flex-1 rounded-3xl bg-white p-5 drop-shadow-xl">
                       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-8 lg:align-middle">
                         <div className="relative h-40 w-full rounded-3xl lg:w-80">
