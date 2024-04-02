@@ -68,7 +68,7 @@ const Notifications = () => {
           )}
         </UnideskStructure.Menu>
 
-        <div className="flex w-5/6 flex-col gap-3 px-3 pt-12 lg:mx-auto">
+        <div className="flex min-[1020px]:w-5/6 flex-col gap-3 px-3 pt-12 lg:mx-auto">
           <div className="container mx-auto w-full">
             <>
               {isLoading && (
