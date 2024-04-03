@@ -73,6 +73,7 @@ const FormTermos = () => {
       // adding advertisements
       const { error } = await addAdvertisement({
         ...advertisement,
+        available: "AVAILABLE",
         agreementsinfo: { terms, politica, trustInformation, calendarUpdated },
       });
       if (error) return toast.error(error.message);
