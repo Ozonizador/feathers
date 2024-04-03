@@ -52,7 +52,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   if (session) {
     const { data, error } = await supabase.from("profiles").select().eq("id", session.user.id).single();
 
-    if (data && (!data.name || !data.surname || !data.nationality || !data.town)) {
+    if (data && (!data.name)) {
       return {
         redirect: {
           destination: `/admin/general/`,
