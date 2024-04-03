@@ -8,6 +8,8 @@ export const config = {
     bodyParser: false,
   },
 };
+const mail = require("@sendgrid/mail");
+mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Handles POST requests to /api
 export default async function POST(request, res) {
@@ -26,39 +28,27 @@ export default async function POST(request, res) {
   const name = data.fields.name;
   const message = data.fields.message;
 
-  // create transporter object
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
-
   const mailData = {
-    from: { name: name, address: email },
+    from: "info@unihosts.pt",
     to: "info@unihosts.pt",
     subject: `Unihosts: Contacto de ${name}`,
     html: `
+          <p>Email: ${email}</p>
           <p>${message}</p>
           `,
   };
 
-  await new Promise((resolve, reject) => {
-    // send mail
-    transporter.sendMail(mailData, (err, info) => {
-      if (err) {
-        console.error(err);
-        reject(err);
-        res.status(500).json({ message: "COULD NOT SEND MESSAGE" });
-      } else {
-        console.log(info);
-        resolve(info);
-      }
-    });
-  });
+  try {
+    await mail.send(mailData);
+
+    res.status(200).json({ message: "Success: email was sent" });
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      console.log(error.response.body);
+    }
+    res.status(400).json({ status: "ERROR", message: error.message });
+  }
 
   return res.json({ message: "Success: email was sent" });
 }
