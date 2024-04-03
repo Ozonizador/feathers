@@ -8,9 +8,20 @@ import { useGetUserDates, useGetUserGuaranteeValue, useGetUserMonthRent } from "
 import differenceInMonths from "date-fns/differenceInMonths";
 import addMonths from "date-fns/addMonths";
 import { Trans, useTranslation } from "next-i18next";
-import { getDate, getDaysInMonth, isLastDayOfMonth, isToday } from "date-fns";
+import {
+  differenceInCalendarDays,
+  endOfMonth,
+  format,
+  getDate,
+  getDaysInMonth,
+  getMonth,
+  isLastDayOfMonth,
+  isToday,
+  startOfMonth,
+} from "date-fns";
 import { has, isString, toNumber } from "lodash";
 import { IoMdClose } from "react-icons/io";
+import { fr, enUS, pt } from "date-fns/locale";
 
 interface formatOpts {
   monthsAhead?: number;
@@ -74,89 +85,76 @@ const ModalDetalhesPagamento = () => {
     setIsOpen(false);
   };
 
-  const getMonths = () => {
+
+  const monthToLocaleString = (monthNumber: number) => {
+    // Create a new Date object with the desired month number
+    const date = new Date(2000, monthNumber, 1); // -1 because month indices start from 0
+
+    // Use format function from date-fns to get the locale string representation of the month
+    return format(date, "MMMM", { locale: pt });
+  };
+
+  const newGetMonths = () => {
     if (!checkedDates && !isToday(selectedDate)) {
-      const monthDiference = differenceInMonths(endDate, selectedDate);
+      let array: MonthPrice[] = [];
+      const startDate = selectedDate;
+
       let rent;
       if (advertisement) {
         const { month_rent, extra_per_host } = advertisement;
-        rent = month_rent + extra_per_host * (guest_number! - 1);
+        rent = month_rent + extra_per_host * (guest_number ? guest_number - 1 : 0);
       } else {
-        rent = toNumber(monthRent! + extra_per_host! * (guest_number! - 1));
+        rent = toNumber(monthRent! + extra_per_host! * (guest_number ? guest_number - 1 : 0));
       }
 
-      const totalDaysOfMonth = getDaysInMonth(addMonths(selectedDate, 1));
-      const getDaysTillEndMonth = totalDaysOfMonth - getDate(selectedDate);
+      // date after the first month paid
+      const dateMonthAhead = addMonths(startDate, 1);
 
-      let arrayOfMonths: any[] = [];
-      const pricePerDay = rent / 30;
-      let selectedMonth = addMonths(selectedDate, 1);
-      const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
+      // get Amount to be paid in the first Month
+      const dateEndMonth = endOfMonth(dateMonthAhead);
 
-      if (getDaysTillEndMonth > 0) {
-        if (getDaysTillEndMonth >= 30) {
-          arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
-        } else {
-          let priceAdjustment = pricePerDay * getDaysTillEndMonth;
+      if (endDate >= dateEndMonth) {
+        // Get days to pay in month and total month days
+        const daysToPay = differenceInCalendarDays(dateEndMonth, dateMonthAhead);
+        const totalDays = getDaysInMonth(dateEndMonth);
 
-          arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(priceAdjustment.toFixed(2)) });
-        }
+        array.push({
+          month: monthToLocaleString(getMonth(dateMonthAhead)),
+          price: daysToPay * Math.floor(rent / totalDays),
+        });
 
-        if (isLastDayOfMonth(endDate)) {
-          while (arrayOfMonths.length < monthDiference) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
-          }
-        } else {
-          // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
-          while (arrayOfMonths.length < monthDiference - 1) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
-          }
-
-          let endDay = getDate(endDate);
-
-          arrayOfMonths.push({
-            month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
+        // Get Rent of full months
+        for (let i = 2; endDate > endOfMonth(addMonths(startDate, i)); i++) {
+          array.push({
+            month: monthToLocaleString(getMonth(addMonths(startDate, i))),
+            price: rent,
           });
         }
 
-        setMonths(arrayOfMonths);
+        // Calculate the rest of the rent
+        // TODO: At this moment the only method is day by day. Add others as price per month, week or others
+        const firstDayOfLastMonth = startOfMonth(endDate);
+        const totalDaysEndMonth = getDaysInMonth(dateEndMonth);
+        const differenceInDays = differenceInCalendarDays(endDate, firstDayOfLastMonth);
+
+        array.push({
+          month: monthToLocaleString(getMonth(endDate)),
+          price: (differenceInDays + 1) * Math.floor(rent / totalDaysEndMonth),
+        });
+
+        setMonths(array);
       } else {
-        if (isLastDayOfMonth(endDate)) {
-          while (arrayOfMonths.length < monthDiference - 1) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
-          }
+        const daysUntilEnd = differenceInCalendarDays(endDate, dateMonthAhead);
+        const daysInMonth = getDaysInMonth(endDate);
 
-          let endDay = getDate(endDate);
+        array.push({
+          month: monthToLocaleString(getMonth(endDate)),
+          price: daysUntilEnd * Math.floor(rent / daysInMonth),
+        });
 
-          arrayOfMonths.push({
-            month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
-          });
-        } else {
-          // Fazer o Resto da codigo com preco feito por dia/quinzena ou mes
-          while (arrayOfMonths.length < monthDiference - 1) {
-            let selectedMonth = addMonths(selectedDate, arrayOfMonths.length + 1);
-            const monthLong = selectedMonth.toLocaleString(i18n.language, { month: "long" });
-            arrayOfMonths.push({ month: monthLong, price: formatStringToLocaleString(rent.toFixed(2)) });
-          }
-
-          let endDay = getDate(endDate);
-
-          arrayOfMonths.push({
-            month: endDate.toLocaleString(i18n.language, { month: "long" }),
-            price: formatStringToLocaleString((endDay * pricePerDay).toFixed(2)),
-          });
-        }
-
-        setMonths(arrayOfMonths);
+        setMonths(array);
       }
+
       setCheckedDates(true);
     }
   };
@@ -188,11 +186,11 @@ const ModalDetalhesPagamento = () => {
   useEffect(() => {
     if (!hasRunOnce) {
       if (!isToday(selectedDate)) {
-        getMonths();
+        newGetMonths();
         setHasRunOnce(true);
       }
     }
-  }, [checkedDates, selectedDate, endDate, advertisement, months, getMonths, hasRunOnce, setMonths]);
+  }, [checkedDates, selectedDate, endDate, advertisement, months, newGetMonths, hasRunOnce, setMonths]);
 
   return (
     <>
@@ -211,7 +209,7 @@ const ModalDetalhesPagamento = () => {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <>{getMonths()}</>
+            <>{newGetMonths()}</>
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
