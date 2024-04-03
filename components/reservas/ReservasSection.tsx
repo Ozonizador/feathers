@@ -216,7 +216,7 @@ const NextReservationsSection = () => {
                     {reservation?.end_date || ""}
                   </Table.Cell>
                   <Table.Cell className=" text-lg text-gray-700 dark:text-white">{`${
-                    reservation.advertisement.place || reservation.advertisement?.title || ""
+                    reservation.advertisement?.place || reservation.advertisement?.title || ""
                   }`}</Table.Cell>
                   <Table.Cell>
                     <Button
