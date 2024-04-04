@@ -56,8 +56,8 @@ const FormTermos = () => {
       if (!isValid) return;
 
       const count = await checkSlugExists(advertisement.title);
-
-      const slugString = `${advertisement.title}${count == 0 ? "" : ` ${count}`}`;
+      const today = new Date()
+      const slugString = `${advertisement.title}${count == 0 ? "" : `${count}`}${today.getDate()}`;
 
       advertisement.slug = slugString;
 
