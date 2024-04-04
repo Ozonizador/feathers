@@ -124,6 +124,7 @@ export default function RoomCard({ advertisement }: RoomCardProps) {
                   src={getMainPhoto?.url}
                   alt="..."
                   fill
+                  loading="lazy"
                   className="rounded-bl-xl rounded-tl-xl max-sm:rounded-xl"
                   style={{ objectFit: "cover" }}
                 />

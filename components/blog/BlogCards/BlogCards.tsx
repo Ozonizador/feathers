@@ -34,6 +34,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                             src={blog.image}
                             fill
                             alt=""
+                            loading="lazy"
                             style={{ objectFit: "cover" }}
                             className="rounded-3xl"
                           ></Image>
