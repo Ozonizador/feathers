@@ -48,8 +48,9 @@ const FormInicio = () => {
   });
 
   const nextStep = async (data: any) => {
-    const error = await checkPossibilites()
-    if (error) {
+    const error = await checkPossibilites();
+
+    if (error == null) {
       toast.error(t("advertisements:location_error"));
     } else {
       setAdvertisement({ ...advertisement, ...data });
@@ -68,7 +69,11 @@ const FormInicio = () => {
       if (geometry) {
         changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
       }
-    } else {
+
+      console.log(data)
+      return data[0];
+    } 
+    else {
       return error
     }
   };
@@ -91,9 +96,9 @@ const FormInicio = () => {
               <div className="w-32 ">
                 <Button
                   type="submit"
-                  onClick={() => {
-                    methods.handleSubmit(nextStep);
-                    nextStep;
+                  onClick={async () => {
+                    await methods.handleSubmit(nextStep);
+                    
                   }}
                 >
                   {t("next_step")} &#8594;
