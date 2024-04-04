@@ -30,7 +30,7 @@ export default function BlogHero({ blogs }: BlogHeroProps) {
 
                   <div className="absolute bottom-8 left-4 w-11/12">
                     <h3 className="bold mb-4 text-md text-bold font-normal capitalize text-white"><ReactMarkdown>{blog.title}</ReactMarkdown></h3>
-                    <p className="bold line-clamp-2 text-xs font-normal normal-case text-white"><ReactMarkdown>{blog.description}</ReactMarkdown></p>
+                    <p className="bold line-clamp-2 text-xs font-normal normal-case text-white"><ReactMarkdown>{blog.description.slice(0, 200)}</ReactMarkdown></p>
                     <div className="mt-7 flex flex-row justify-between">
                       <div>
                         <p className="normal-case text-gray-300">
