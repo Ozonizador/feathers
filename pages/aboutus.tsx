@@ -41,15 +41,15 @@ const AboutUs = () => {
             </div>
             <div className=" rounded-lg flex flex-col content-center p-5">
               <h6 className="ml-2 mt-0 text-left text-4xl font-bold lg:ml-0">{t("our_history")}</h6>
-              <p className="mt-5 mr-10 text-justify text-lg tracking-wide font-normal">{t("our_history_description")}</p>
+              <p className="mt-5 mr-10 text-justify text-lg lg:tracking-wide font-normal">{t("our_history_description")}</p>
             </div>
           </div>
 
           <div className="my-5 grid grid-cols-1 gap-2 lg:grid-cols-2">
             <div className="order-last p-5 lg:order-first flex flex-col content-center ml-5">
               <div className="">
-                <h6 className="text-left text-4xl font-bold">{t("mission")}</h6>
-                <p className="mt-5 text-justify text-lg tracking-wide font-normal">{t("mission_decription")}</p>
+                <h6 className="text-left pt-5 text-4xl font-bold">{t("mission")}</h6>
+                <p className="mt-5 text-justify text-lg lg:tracking-wide font-normal">{t("mission_decription")}</p>
               </div>
             </div>
             <div className="rounded-lg p-5 ">
@@ -63,7 +63,7 @@ const AboutUs = () => {
             </div>
             <div className="rounded-lg flex flex-col content-center p-5">
               <h6 className="text-left text-4xl font-bold">{t("values")}</h6>
-              <p className="mt-5 mr-10 text-justify text-lg tracking-wide font-normal">{t("values_description")}</p>
+              <p className="mt-5 mr-10 text-justify lg:tracking-wide text-lg font-normal">{t("values_description")}</p>
             </div>
           </div>
         </div>
