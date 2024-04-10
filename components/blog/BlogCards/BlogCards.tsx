@@ -44,7 +44,7 @@ export default function BlogCards({ blogs }: BlogCardsProps) {
                           <div className="mb-2 mt-3 text-md font-extrabold lg:mt-0">{blog.title}</div>
                           <div className="mt-1 line-clamp-2 text-xs">
                             {" "}
-                            <ReactMarkdown components={renderers}>{blog.description}</ReactMarkdown>
+                            <ReactMarkdown components={renderers}>{blog.description.slice(0, 200)}</ReactMarkdown>
                           </div>
 
                           <div className="mt-5 flex w-11/12 flex-row justify-between gap-0 lg:w-full">

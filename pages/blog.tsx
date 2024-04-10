@@ -139,7 +139,7 @@ const ModalNotification = ({ isOpen, setOpen }: ModalNotificationProps) => {
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Dialog.Panel className="bg-notification w-full transform overflow-hidden rounded-3xl bg-black text-left align-middle shadow-xl transition-all lg:h-4/5 lg:w-2/3">
                 <div className="mx-10 my-20 h-96">
-                  <div className="flex h-full flex-col gap-2 rounded-lg bg-white px-10 py-10 lg:w-1/2">
+                  <div className="flex min-[430px]:h-full flex-col gap-2 rounded-lg bg-white max-[430px]:pb-0 px-10 py-10 lg:w-1/2">
                     <h6 className="mb-8 text-3xl">{t("blog:modal_notifications_title")}</h6>
                     <Input placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}></Input>
                     <div className="mb-10">
