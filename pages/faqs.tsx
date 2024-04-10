@@ -75,8 +75,8 @@ const Faqs = () => {
             }}
           />
 
+          <h3 className="mb-2 text-3xl">{t("common:faqs.search")}</h3>
           <div className="mb-10 w-1/3">
-            <h3 className="mb-2 text-3xl">{t("common:faqs.search")}</h3>
             <Input
               placeholder={t("common:faqs.search_label")}
               name="faqs_query"
@@ -158,7 +158,7 @@ const FaqQuestion = ({ question, answer }: FaqQuestionProps) => {
                 );
               } else {
                 return (
-                  <p className="text-justify h-6" key={index}>
+                  <p className="h-6 text-justify" key={index}>
                     {line}
                   </p>
                 );
