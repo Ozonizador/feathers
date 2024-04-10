@@ -11,8 +11,8 @@ export default function FuncionaSection1() {
           <p className="text-xl text-white">
             <Trans>
               {t("description_first_phrase")}
-              <br />
-              {t("description_second_phrase")}
+              
+              {` ${t("description_second_phrase")}`}
             </Trans>
           </p>
         </div>
