@@ -10,6 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import { isString } from "lodash";
+import { toast } from "react-toastify";
 
 const Recover = () => {
   const { t } = useTranslation();
@@ -22,13 +23,15 @@ const Recover = () => {
   const recoverPassword = async () => {
     if (password == password2) {
       setLoading(true);
-      const {error } = await updateUserPassword(password);
+      const { error } = await updateUserPassword(password);
       setLoading(false);
       if (!error) {
-        setTimeout(() => {
-          router.push(HOME_URL);
-        }, 2000);
+        router.push(HOME_URL);
+      } else {
+        toast.error(t("messages:errors.editing_info"));
       }
+    } else {
+      toast.error("A palavra-passe não é a mesma.");
     }
   };
 
@@ -84,7 +87,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const {
       data: { session },
     } = await supabase.auth.exchangeCodeForSession(code as string);
-  
+
     return {
       props: {
         initialSession: session,
@@ -97,8 +100,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? "pt")),
-    }
-  }
+    },
+  };
 };
 
 export default Recover;
