@@ -38,6 +38,7 @@ export default function RoomSlider() {
       <Carousel
       leftControl={<IoIosArrowDropleft className="h-7 w-7" />}
       rightControl={<IoIosArrowDropright className="h-7 w-7" />}
+      slideInterval={3}
     >
       {zones.map((zone, zoneIndex) => {
         const amenitiesChunks = zone.amenities
