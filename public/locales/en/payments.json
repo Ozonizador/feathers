@@ -1,6 +1,6 @@
 {
-    "title": "Payments and Receivements",
-    "description": "Add and manage your payment and receipt methods.",
+    "title": "Receivements",
+    "description": "Add and manage your receipt methods.",
     "payments": "Payments",
     "receivement": "Receivements",
     "bank": "Bank Transfer",
