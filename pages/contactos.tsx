@@ -16,6 +16,7 @@ const Contactos = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const { t } = useTranslation(["contacts", "common"]);
 
   async function handleSubmit(event: any) {
@@ -35,7 +36,7 @@ const Contactos = () => {
       if (!response.ok) {
         throw new Error(`response status: ${response.status}`);
       }
-      toast.success("Message successfully sent");
+      toast.success(t("form:success.sent"));
       setName("");
       setEmail("");
       setMessage("");
@@ -95,6 +96,15 @@ const Contactos = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 labelText={"Email"}
                 name="email"
+              />
+            </div>
+
+            <div className="w-90 my-10">
+              <Input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                labelText={t("advertisements:cellphone")}
+                name="phoneNumber"
               />
             </div>
 

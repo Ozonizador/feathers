@@ -1,5 +1,8 @@
 {
   "validations": {
     "required": "This field is required"
+  },
+  "success": {
+    "sent": "Message successfully sent"
   }
 }

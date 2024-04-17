@@ -1,6 +1,9 @@
 {
     "validations": {
       "required": "Este campo é obrigatório"
+    },
+    "success": {
+      "sent": "Mensagem enviada com sucesso"
     }
   }
   
