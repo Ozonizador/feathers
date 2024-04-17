@@ -65,14 +65,17 @@ const FormInicio = () => {
 
     if (!error && data && data.length > 0) {
       const feature = data[0];
+
+      console.log(data[0].context[0].text);
       const geometry = feature.geometry as MapCoordinates;
       if (geometry) {
         changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
       }
 
-      if (data[0]) {
-        
+      if (data[0].context[0].text != postal_code) {
+        return error;
       }
+
       return data[0];
     } 
     else {
