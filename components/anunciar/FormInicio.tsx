@@ -70,7 +70,9 @@ const FormInicio = () => {
         changeAdvertisementProperty(ADVERTISEMENT_PROPERTIES.GEOM, geometry);
       }
 
-      console.log(data)
+      if (data[0]) {
+        
+      }
       return data[0];
     } 
     else {
