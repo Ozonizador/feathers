@@ -37,7 +37,7 @@ const Contactos = () => {
       if (!response.ok) {
         throw new Error(`response status: ${response.status}`);
       }
-      toast.success(t("form:success.sent"));
+      toast.success(t("form:success:sent"));
       setName("");
       setEmail("");
       setMessage("");

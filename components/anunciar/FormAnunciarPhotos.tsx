@@ -108,7 +108,7 @@ const FormAnunciarPhotos = () => {
           <div className="drop-container w-full pr-2" onDragOver={(event) => event.preventDefault()}>
             <h2 className="text-bold pb-2 text-lg">{t("advertisements:cover")}</h2>
             {coverImages.length == 0 && (
-              <div className="mt-5 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-24">
+              <div className="mt-5 w-1/2 flex justify-center rounded-md border-2 border-dashed border-terciary-500 py-12">
                 <div className="space-y-1 text-center">
                   <div className="flex text-terciary-700">
                     <label htmlFor="cover" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
@@ -134,7 +134,6 @@ const FormAnunciarPhotos = () => {
                     </label>
                     <input
                       type="file"
-                      multiple
                       id="cover"
                       onChange={(e) => uploadToClient(e, "main")}
                       accept="image/png, image/gif, image/jpeg, image/webp"
@@ -164,28 +163,9 @@ const FormAnunciarPhotos = () => {
             ))}
           </div>
           <div className="drop-container" onDragOver={(event) => event.preventDefault()}>
-            <h2 className="text-bold mb-2 mt-5 text-lg">{t("advertisements:zones:other")}</h2>
-            <div className="flex flex-wrap">
-              {otherImages.map((file, index) => (
-                <div className="image-box relative h-28 pr-2 pt-2 lg:h-28" key={index}>
-                  <div
-                    className="absolute right-3 top-3 z-50 flex h-5 w-5 items-center justify-center rounded-full border border-primary-500 bg-primary-500 font-bold text-white"
-                    onClick={(e) => removeImageFromSelection(index, otherImages, "other")}
-                  >
-                    x
-                  </div>
-                  <Image
-                    width={80}
-                    height={80}
-                    className="image h-full w-full"
-                    src={URL.createObjectURL(file)}
-                    alt={`Image ${index}`}
-                    id={`${file.name}`}
-                  />
-                </div>
-              ))}
-              <div className="image-box relative h-28 pr-2 pt-2 lg:h-28">
-                <div className="flex justify-center rounded-md border-2 border-dashed border-terciary-500">
+            <h2 className="text-bold mb-2 mt-5 text-lg">{t("advertisements:other")}</h2>
+            <div className="image-box relative pr-2 pt-2">
+                <div className="flex justify-center px-[12rem] py-[3rem] rounded-md border-2 border-dashed border-terciary-500">
                   <div className="space-y-1 text-center">
                     <div className="flex text-terciary-700">
                       <label htmlFor="test" className="relative cursor-pointer rounded-md bg-white text-indigo-500">
@@ -206,7 +186,6 @@ const FormAnunciarPhotos = () => {
 
                         <p className="flex flex-col px-2 text-base text-neutral-600">
                           {t("advertisements:add_advert.add_photo")}{" "}
-                          <span className="text-blue-500">{t("advertisements:zones:other")}</span>
                         </p>
                       </label>
                       <input
@@ -221,6 +200,25 @@ const FormAnunciarPhotos = () => {
                   </div>
                 </div>
               </div>
+            <div className="flex flex-wrap">
+              {otherImages.map((file, index) => (
+                <div className="image-box relative h-28 pr-2 pt-2 lg:h-28" key={index}>
+                  <div
+                    className="absolute right-3 top-3 z-50 flex h-5 w-5 items-center justify-center rounded-full border border-primary-500 bg-primary-500 font-bold text-white"
+                    onClick={() => removeImageFromSelection(index, otherImages, "other")}
+                  >
+                    x
+                  </div>
+                  <Image
+                    width={80}
+                    height={80}
+                    className="image h-full w-full"
+                    src={URL.createObjectURL(file)}
+                    alt={`Image ${index}`}
+                    id={`${file.name}`}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </section>

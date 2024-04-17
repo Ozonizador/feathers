@@ -95,7 +95,7 @@
     "title_start": "Anunciar a sua propriedade é rápido e fácil!",
     "floor": "Andar",
     "street": "Rua",
-    "place": "Lugar",
+    "place": "Localidade",
     "street_number": "Número Porta",
     "postal_code": "Código Postal",
     "title_advert": "Título do Anúncio",
@@ -118,7 +118,7 @@
     "confirm_valid_info": "As informações que providencio são verdadeiras",
     "type_host_title": "Azares acontecem e temos de estar preparados. Estabeleça a sua política de cancelamento.",
     "photos_title": "Carregue fotos para o seu anúncio ser mais apelativo e o estudante saber exatamente o que esperar.<1/> (min 5 fotos)",
-    "add_photo": "Adicionar Foto"
+    "add_photo": "Adicionar Fotografias"
   },
   "house_conditions": "Condições da casa",
   "house_characteristcs": "Características da Casa",
