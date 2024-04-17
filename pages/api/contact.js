@@ -27,6 +27,7 @@ export default async function POST(request, res) {
   const email = data.fields.email;
   const name = data.fields.name;
   const message = data.fields.message;
+  const phone = data.fields.phone;
 
   const mailData = {
     from: "info@unihosts.pt",
@@ -34,6 +35,7 @@ export default async function POST(request, res) {
     subject: `Unihosts: Contacto de ${name}`,
     html: `
           <p>Email: ${email}</p>
+          <p>Telemóvel: ${phone}<p>
           <p>${message}</p>
           `,
   };

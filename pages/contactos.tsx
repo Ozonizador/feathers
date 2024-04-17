@@ -24,6 +24,7 @@ const Contactos = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    formData.append("phone", phoneNumber);
     formData.append("message", message);
     const response = await fetch("/api/contact", {
       method: "POST",
