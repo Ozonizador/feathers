@@ -34,7 +34,7 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
         <div>
           <div className="w-full lg:w-64">
             <Card href={`/perfil/${advertisement?.host?.slug}`}>
-              <div className="flex justify-end px-4 pt-4 cursor-pointer"></div>
+              <div className="flex cursor-pointer justify-end px-4 pt-4"></div>
               <div className="flex flex-col items-center pb-10">
                 <div className="rounded-full shadow-md" style={{ height: "96px", width: "96px" }}>
                   <Image
@@ -51,12 +51,20 @@ export default function RoomSenhorio({ responseRate }: RoomSenhorioProps) {
                   {advertisement?.host?.name || ""}
                 </h5>
                 {advertisement && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {t("landlord_since", {
-                      year: new Date(advertisement.host?.created_at).getFullYear(),
-                      context: advertisement.host?.gender === Gender.female ? "female" : "male",
-                    })}
-                  </span>
+                  <>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {t("landlord_since", {
+                        year: new Date(advertisement.host?.created_at).getFullYear(),
+                        context: advertisement.host?.gender === Gender.female ? "female" : "male",
+                      })}
+                    </span>
+                    <span className="text-sm">
+                      {t("advertisements:landlord")}{" "}
+                      {advertisement.type_host == "PROFISSIONAL"
+                        ? t("advertisements:add_advert.profissional_owner")
+                        : t("advertisements:add_advert.private_owner")}
+                    </span>
+                  </>
                 )}
                 <hr />
                 <div className="mt-4 flex items-center space-x-3 lg:mt-6">

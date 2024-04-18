@@ -140,5 +140,6 @@
   "from": "Desde: ",
   "to": "Até: ",
   "active_filter": "Filtro ativo",
-  "lives_in_property": "Senhorio vive na propriadade."
+  "lives_in_property": "Senhorio vive na propriadade.",
+  "landlord": "Senhorio"
 }

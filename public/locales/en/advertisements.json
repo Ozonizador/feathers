@@ -140,5 +140,6 @@
   "from": "From: ",
   "to": "To: ",
   "active_filter": "Active filter",
-  "lives_in_property": "Landlord lives in property."
+  "lives_in_property": "Landlord lives in property.",
+  "landlord": "Landlord"
 }
