@@ -139,5 +139,6 @@
   "date_out": "Departure",
   "from": "From: ",
   "to": "To: ",
-  "active_filter": "Active filter"
+  "active_filter": "Active filter",
+  "lives_in_property": "Landlord lives in property."
 }

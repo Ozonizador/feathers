@@ -79,7 +79,7 @@ const Notifications = () => {
               {!isLoading && (
                 <div className="flex flex-col gap-1">
                   {notifications.map((notification, index) => {
-                    return <NotificationCard key={index} notification={notification} />;
+                    return <NotificationCard key={index} notification={notification} username={profile?.name as string}/>;
                   })}
                   {!notifications ||
                     (notifications.length == 0 && (

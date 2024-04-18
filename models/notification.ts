@@ -77,7 +77,7 @@ export const NOTIFICATION_TYPES_INFORMATION = {
     description: "Os comentários/pontuações são importantes para os futuros estudantes.",
   } as NotificationInformation,
   LANDLORD_RESERVATION_RECEIVED: {
-    title: "Tens uma novo pedido de reserva!",
+    title: "Tens um novo pedido de reserva!",
     description: "Responde à consulta nas próximas 24 horas!",
   } as NotificationInformation,
   LANDLORD_UNIHOSTS_SUPPORT: {

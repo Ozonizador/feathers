@@ -10,9 +10,10 @@ import { useCallback } from "react";
 import useProfileService from "../../../hooks/useProfileService";
 interface NotificationCardProps {
   notification: Notification;
+  username: string;
 }
 
-export const NotificationCard = ({ notification }: NotificationCardProps) => {
+export const NotificationCard = ({ notification, username }: NotificationCardProps) => {
   const profileService = useProfileService();
 
   const handleClick = useCallback(() => {
@@ -22,7 +23,7 @@ export const NotificationCard = ({ notification }: NotificationCardProps) => {
     <>
       <div className="mb-5 flex w-full flex-col justify-between gap-5 rounded-md border border-gray-200 p-4 lg:flex-row lg:items-center">
         <div className="lg:flex lg:flex-col">
-          <h1 className="mb-1 text-lg font-bold">{NOTIFICATION_TYPES_INFORMATION[notification.type].title}</h1>
+          <h1 className="mb-1 text-lg font-bold">{username}, {NOTIFICATION_TYPES_INFORMATION[notification.type].title}</h1>
           <p className="text-base text-gray-400 ">{NOTIFICATION_TYPES_INFORMATION[notification.type].description}</p>
         </div>
 
