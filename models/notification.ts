@@ -57,15 +57,15 @@ export interface NotificationInformation {
 
 export const NOTIFICATION_TYPES_INFORMATION = {
   STUDENT_RESERVATION_DECLINED: {
-    title: "Más Notícias, Reserva Recusada",
-    description: "Infelizmente o pedido de reserva foi recusado.",
+    title: "más notícias",
+    description: "Infelizmente o senhorio recusou o teu pedido de reserva.",
   } as NotificationInformation,
   STUDENT_RESERVATION_ACCEPTED: {
-    title: "Boas Notícias, Reserva Aceite",
-    description: "O teu pedido de reserva foi aceite!",
+    title: "Boas notícias",
+    description: "O ssenhorio aceitou o teu pedido de reserva!",
   } as NotificationInformation,
   STUDENT_UNIHOSTS_SUPPORT: {
-    title: "Novidades da equipa de suporte estudante",
+    title: "novidades do Apoio ao Estudante",
     description: "Tens novas mensagens por ler da tua equipa Unihosts!",
   } as NotificationInformation,
   STUDENT_COMPLETE_PROFILE: {
@@ -78,7 +78,7 @@ export const NOTIFICATION_TYPES_INFORMATION = {
   } as NotificationInformation,
   LANDLORD_RESERVATION_RECEIVED: {
     title: "Tens um novo pedido de reserva!",
-    description: "Responde à consulta nas próximas 24 horas!",
+    description: "Um estudante quer hospedar-se no teu espaço. Responde à consulta nas próximas 24 horas!",
   } as NotificationInformation,
   LANDLORD_UNIHOSTS_SUPPORT: {
     title: "Novidades do apoio ao Senhorio",
@@ -98,6 +98,6 @@ export const NOTIFICATION_TYPES_INFORMATION = {
   } as NotificationInformation,
   BLOG: {
     title: "Lançámos um novo artigo de blog!",
-    description: "Confere já na categoria do Estudante as últimas novidades!",
+    description: "Confere já as últimas novidades!",
   } as NotificationInformation,
 };
